@@ -96,7 +96,7 @@
 <aside id="panel" hidden></aside>
 <script>
 let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most recent first
-let openImg = null;
+let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
 
 const hasDetail = d => !!d.img;
 
@@ -116,7 +116,7 @@ function titleCell(d) {
 function render() {
   const tb = document.getElementById('rows');
   tb.innerHTML = view.map((d, i) =>
-    '<tr' + (hasDetail(d) ? ' class="has-detail' + (d.img === openImg ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
+    '<tr' + (hasDetail(d) ? ' class="has-detail' + (d === openRow ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
     '<td>' + titleCell(d) + '</td>' +
     '<td class="type">' + esc(typeLabel(d)) + '</td>' +
     '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
@@ -187,7 +187,7 @@ function detailHTML(d) {
 
 function openPanel(d) {
   if (!d || !hasDetail(d)) return;
-  openImg = d.img;
+  openRow = d;
   panel.innerHTML = detailHTML(d);
   panel.scrollTop = 0;
   panel.hidden = false;
@@ -200,7 +200,7 @@ function openPanel(d) {
 
 function closePanel() {
   document.body.classList.remove('panel-open');
-  openImg = null;
+  openRow = null;
   markOpenRow();
   const onEnd = () => { panel.hidden = true; panel.removeEventListener('transitionend', onEnd); };
   panel.addEventListener('transitionend', onEnd);
@@ -208,8 +208,8 @@ function closePanel() {
 
 function markOpenRow() {
   document.querySelectorAll('#rows tr.open').forEach(tr => tr.classList.remove('open'));
-  if (openImg == null) return;
-  const i = view.findIndex(d => d.img === openImg);
+  if (openRow == null) return;
+  const i = view.findIndex(d => d === openRow);
   if (i >= 0) { const tr = document.querySelector('#rows tr[data-i="' + i + '"]'); if (tr) tr.classList.add('open'); }
 }
 
@@ -226,7 +226,7 @@ function selectableIndices() {
   return out;
 }
 function currentIndex() {
-  return openImg == null ? -1 : view.findIndex(d => d.img === openImg);
+  return openRow == null ? -1 : view.findIndex(d => d === openRow);
 }
 function firstVisibleSelectableIdx(fromBottom) {
   const rows = [...document.querySelectorAll('#rows tr.has-detail')];

@@ -25,6 +25,19 @@
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: #8881; }
   .build { color: #888; }
+  /* screenshot popup */
+  .shot { cursor: zoom-in; border-bottom: 1px dotted #8886; }
+  #popup { position: fixed; z-index: 50; display: none; padding: .5rem;
+           background: Canvas; border: 1px solid #8888; border-radius: 6px;
+           box-shadow: 0 6px 24px #0007; }
+  #popup .shots { display: flex; gap: .5rem; }
+  #popup img { height: 220px; width: auto; image-rendering: pixelated;
+               background: #000; border-radius: 3px; display: block; }
+  #popup .cap { margin-top: .4rem; font-size: .8rem; color: #888; max-width: 40rem; }
+  @media (max-width: 640px) {
+    #popup img { height: 132px; }
+    #popup .shots { flex-wrap: wrap; }
+  }
 </style>
 </head>
 <body>
@@ -55,6 +68,7 @@
   </tr></thead>
   <tbody id="rows"></tbody>
 </table>
+<div id="popup"></div>
 <script>
 let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most recent first
 
@@ -63,10 +77,18 @@ function typeLabel(d) {
   return d.base + ' core' + (d.deprecated ? ' (deprecated)' : '');
 }
 
+function titleCell(d) {
+  if (!d.img) return esc(d.title);
+  const cap = d.title + (d.year ? ' (' + d.year + ')' : '') +
+    (d.manufacturer ? ' — ' + d.manufacturer : '') + (d.genre ? ' • ' + d.genre : '');
+  return '<span class="shot" data-img="' + escA(d.img) + '" data-slots="' +
+    d.img_slots.join(',') + '" data-cap="' + escA(cap) + '">' + esc(d.title) + '</span>';
+}
+
 function render() {
   const tb = document.getElementById('rows');
   tb.innerHTML = view.map(d =>
-    '<tr><td>' + esc(d.title) + '</td>' +
+    '<tr><td>' + titleCell(d) + '</td>' +
     '<td class="type">' + esc(typeLabel(d)) + '</td>' +
     '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
     '<td>' + esc(d.year) + '</td>' +
@@ -76,6 +98,7 @@ function render() {
 }
 
 function esc(s) { return (s || '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
 
 function apply() {
   const q = document.getElementById('q').value.toLowerCase().trim();
@@ -105,6 +128,47 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', () =>
   th.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
   apply();
 }));
+
+// --- screenshot popup (hover on desktop, tap-to-pin on touch) ---
+const pop = document.getElementById('popup');
+const rowsEl = document.getElementById('rows');
+let pinned = false, showT, hideT;
+
+function showPop(el) {
+  clearTimeout(hideT);
+  const img = el.dataset.img;
+  pop.innerHTML = '<div class="shots">' +
+    el.dataset.slots.split(',').map(s =>
+      '<img loading="lazy" src="../images/' + s + '/' + img + '.png" onerror="this.remove()">').join('') +
+    '</div><div class="cap">' + esc(el.dataset.cap) + '</div>';
+  pop.style.display = 'block';
+  const r = el.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
+  let x = r.right + 8; if (x + pw > innerWidth) x = r.left - pw - 8;
+  x = Math.max(8, Math.min(x, innerWidth - pw - 8));
+  let y = Math.max(8, Math.min(r.top, innerHeight - ph - 8));
+  pop.style.left = x + 'px'; pop.style.top = y + 'px';
+}
+function hidePop() { pop.style.display = 'none'; }
+
+rowsEl.addEventListener('mouseover', e => {
+  const el = e.target.closest('.shot'); if (!el || pinned) return;
+  clearTimeout(hideT); clearTimeout(showT);
+  showT = setTimeout(() => showPop(el), 140);
+});
+rowsEl.addEventListener('mouseout', e => {
+  if (pinned || !e.target.closest('.shot')) return;
+  clearTimeout(showT); hideT = setTimeout(hidePop, 120);
+});
+rowsEl.addEventListener('click', e => {
+  const el = e.target.closest('.shot'); if (!el) return;
+  e.preventDefault(); pinned = true; showPop(el);
+});
+pop.addEventListener('mouseover', () => { if (!pinned) clearTimeout(hideT); });
+pop.addEventListener('mouseout', () => { if (!pinned) hideT = setTimeout(hidePop, 120); });
+document.addEventListener('click', e => {
+  if (pinned && !e.target.closest('.shot') && !e.target.closest('#popup')) { pinned = false; hidePop(); }
+});
+window.addEventListener('scroll', () => { if (!pinned) hidePop(); }, true);
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

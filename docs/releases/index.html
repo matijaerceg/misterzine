@@ -32,7 +32,7 @@
   .dv-icon { margin-left: .4rem; color: #888; vertical-align: -1px; }
 
   /* --- detail panel: slides in from the left --- */
-  #panel { position: fixed; top: 0; left: 0; height: 100vh; width: 50vw;
+  #panel { position: fixed; top: 0; left: 0; height: 100vh; width: calc(100vw / 3);
            transform: translateX(-100%); transition: transform .28s ease;
            overflow-y: auto; z-index: 100; background: Canvas;
            border-right: 1px solid #8884; box-shadow: 4px 0 24px #0006; padding: 1rem;
@@ -50,11 +50,11 @@
   #panel .frame img { width: 100%; height: 100%; object-fit: fill;
                       image-rendering: pixelated; display: block; }
 
-  @media (min-aspect-ratio: 3/2) {   /* wide → reflow table into the right half */
+  @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
     main { transition: margin-left .28s ease; }
-    body.panel-open main { margin-left: 50vw; }
+    body.panel-open main { margin-left: calc(100vw / 3); }
   }
-  @media (max-aspect-ratio: 3/2) {   /* narrow/tall → overlay full screen */
+  @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen */
     #panel { width: 100vw; }
     body.panel-open { overflow: hidden; }
   }
@@ -170,7 +170,9 @@ function detailHTML(d) {
 
   const dl = '<dl>' + rows.map(([k, v]) => '<dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd>').join('') + '</dl>';
   const prose = d.detail ? '<p class="detail">' + esc(d.detail) + '</p>' : '';
-  const ratio = (d.img_w >= d.img_h) ? '4 / 3' : '3 / 4';
+  // dual-screen games (Sagaia, Darius, …) are superwide → 8:3; else 4:3 / 3:4
+  const aspect = d.img_h ? d.img_w / d.img_h : 1;
+  const ratio = aspect >= 2 ? '8 / 3' : (d.img_w >= d.img_h ? '4 / 3' : '3 / 4');
   const shots = (d.img_slots || []).map(s =>
     '<div class="frame" style="aspect-ratio:' + ratio + '">' +
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
@@ -187,8 +189,10 @@ function openPanel(d) {
   panel.innerHTML = detailHTML(d);
   panel.scrollTop = 0;
   panel.hidden = false;
-  // next frame so the un-hide is painted before the slide-in transition starts
-  requestAnimationFrame(() => document.body.classList.add('panel-open'));
+  // force a reflow so the off-screen start position is committed before the
+  // transition; otherwise the display:none→block toggle swallows the slide-in
+  void panel.offsetWidth;
+  document.body.classList.add('panel-open');
   markOpenRow();
 }
 

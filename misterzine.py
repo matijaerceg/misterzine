@@ -497,6 +497,31 @@ CORE_FROZEN_DATES = {
     "NeoGeoPocket":  "2024-01-05",  # public beta release (Time Extension/RetroRGB)
     "SCV":           "2024-07-24",  # MiSTer-devel/SuperCassetteVision_MiSTer first commit
     "Atari5200":     "2017-10-08",  # ships from the Atari800 core (Atari800_MiSTer debut)
+
+    # --- corrections: repos exist & are crawled, but the first-commit date is
+    # wrong because the repo carries imported/WIP/pre-MiSTer history, was forked
+    # from another core, or prunes old releases. The value below is the build-date
+    # suffix of the EARLIEST surviving `<core>_YYYYMMDD.rbf` in the repo's git
+    # history (immune to both imported history and release pruning), verified by
+    # blobless-cloning each repo. These override the crawled date.
+    "Minimig":       "2017-06-15",  # repo had pre-MiSTer Minimig history back to 2011
+    "Ti994a":        "2018-05-27",  # repo recycled from ColecoVision (early commits are CV)
+    "C128":          "2022-05-20",  # forked from C64_MiSTer (carried C64's 2017 history)
+    "Atari7800":     "2021-04-17",  # imported history dated 2019
+    "MSX1":          "2022-01-05",  # forked from MSX
+    "SuperVision":   "2022-06-11",  # imported history dated 2020
+    "TRS-80":        "2020-05-22",  # repo also holds the older ht1080z core (2019)
+    "PSX":           "2022-05-11",  # long WIP; first public build 2022-05 (commits from 2021)
+    "PC88":          "2022-01-07",  # WIP commits from 2021
+    "VC4000":        "2021-09-14",  # WIP commits from early 2021
+    "ChannelF":      "2021-10-26",  # WIP commits from early 2021
+    "CDi":           "2025-02-14",  # WIP commits from 2024
+    "VT52":          "2024-11-14",  # WIP commits from Sep 2024
+    "Altair8800":    "2018-11-13",  # WIP commits from Aug 2018
+    "NeoGeo":        "2019-09-07",  # first release ~7 weeks after first commit
+    "Jaguar":        "2026-05-26",  # years of WIP; actually launched May 2026
+    "GameAndWatch":  "2026-05-10",  # new core; repo had imported dev history from 2023
+    "Tamagotchi":    "2026-05-15",  # new core; repo had imported dev history from 2023
 }
 
 
@@ -1075,7 +1100,7 @@ SITE_HTML = """<!DOCTYPE html>
   <tbody id="rows"></tbody>
 </table>
 <script>
-let DATA = [], view = [], sortKey = null, sortDir = 1;
+let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most recent first
 
 function typeLabel(d) {
   if (d.base === 'Arcade') return d.genre ? 'Arcade, ' + d.genre : 'Arcade';
@@ -1125,7 +1150,12 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', () =>
   apply();
 }));
 
-fetch('./data.json').then(r => r.json()).then(d => { DATA = d; view = d; render(); });
+fetch('./data.json').then(r => r.json()).then(d => {
+  DATA = d;
+  const th = document.querySelector('th[data-k="date"]');
+  if (th) th.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
+  apply();
+});
 </script>
 </body>
 </html>

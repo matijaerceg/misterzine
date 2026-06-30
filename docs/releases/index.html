@@ -31,7 +31,7 @@
            background: Canvas; border: 1px solid #8888; border-radius: 6px;
            box-shadow: 0 6px 24px #0007; }
   #popup .shots { display: flex; gap: .5rem; align-items: flex-start; }
-  #popup img { height: 220px; width: auto; image-rendering: pixelated;
+  #popup img { height: 220px; width: auto; flex: 0 0 auto; image-rendering: pixelated;
                background: #000; border-radius: 3px; display: block; }
   #popup .cap { margin-top: .4rem; font-size: .8rem; color: #888; max-width: 40rem; }
   @media (max-width: 640px) {
@@ -174,7 +174,10 @@ function showPop(el) {
     const sumAR = imgs.reduce((a, i) => a + i.naturalWidth / i.naturalHeight, 0);
     const maxH = innerHeight - 16 - 40;           // leave room for caption + margins
     let h = Math.max(220, Math.min(budget / sumAR, maxH));
-    imgs.forEach(i => i.style.height = h + 'px');
+    imgs.forEach(i => {                           // set width from aspect ratio so
+      i.style.height = h + 'px';                  // scaling stays uniform (no stretch)
+      i.style.width = (h * i.naturalWidth / i.naturalHeight) + 'px';
+    });
     place();
   };
   const imgs = [...pop.querySelectorAll('img')];

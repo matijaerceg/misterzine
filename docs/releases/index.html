@@ -32,7 +32,7 @@
   .dv-icon { margin-left: .4rem; color: #888; vertical-align: -1px; }
 
   /* --- detail panel: slides in from the left --- */
-  #panel { position: fixed; top: 0; left: 0; height: 100vh; width: calc(100vw / 3);
+  #panel { position: fixed; top: 0; left: 0; height: 100vh; width: var(--pw, calc(100vw / 3));
            transform: translateX(-100%); transition: transform .28s ease;
            overflow-y: auto; z-index: 100; background: Canvas;
            border-right: 1px solid #8884; box-shadow: 4px 0 24px #0006; padding: 1rem;
@@ -50,13 +50,24 @@
   #panel .frame img { width: 100%; height: 100%; object-fit: fill;
                       image-rendering: pixelated; display: block; }
 
+  /* draggable edge: resize the panel / flick left to close (reflow mode only) */
+  #resizer { position: fixed; top: 0; height: 100vh; width: 12px; z-index: 101;
+             left: var(--pw, calc(100vw / 3)); margin-left: -6px;
+             cursor: ew-resize; display: none; touch-action: none; }
+  body.panel-open #resizer { display: block; }
+  #resizer::before { content: ""; position: absolute; top: 0; bottom: 0; left: 5px; width: 2px; background: transparent; }
+  #resizer:hover::before, body.resizing #resizer::before { background: #06caa; }
+  body.resizing { cursor: ew-resize; user-select: none; }
+  body.resizing #panel, body.resizing main { transition: none; }
+
   @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
     main { transition: margin-left .28s ease; }
-    body.panel-open main { margin-left: calc(100vw / 3); }
+    body.panel-open main { margin-left: var(--pw, calc(100vw / 3)); }
   }
-  @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen */
+  @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen, no resize */
     #panel { width: 100vw; }
     body.panel-open { overflow: hidden; }
+    body.panel-open #resizer { display: none; }
   }
 </style>
 </head>
@@ -292,6 +303,41 @@ function endSwipe() {
 }
 panel.addEventListener('pointerup', endSwipe);
 panel.addEventListener('pointercancel', endSwipe);
+
+// --- draggable edge: resize within bounds, flick left past CLOSEW to close ---
+const MINW = 240, CLOSEW = 150, maxW = () => innerWidth * 0.8;
+const resizer = document.createElement('div');
+resizer.id = 'resizer';
+document.body.appendChild(resizer);
+function setPanelW(px) { document.documentElement.style.setProperty('--pw', Math.min(px, maxW()) + 'px'); }
+let committedW = +localStorage.getItem('mz-panel-w') || 0;
+if (committedW) setPanelW(committedW);
+
+let resizing = false;
+resizer.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  resizing = true;
+  resizer.setPointerCapture(e.pointerId);
+  document.body.classList.add('resizing');
+});
+resizer.addEventListener('pointermove', e => {
+  if (resizing) setPanelW(Math.max(40, e.clientX));  // follow the cursor; let it visibly shrink toward close
+});
+function endResize(e) {
+  if (!resizing) return;
+  resizing = false;
+  document.body.classList.remove('resizing');
+  if (e.clientX < CLOSEW) {                            // flicked/dragged past the edge → close
+    if (committedW) setPanelW(committedW); else document.documentElement.style.removeProperty('--pw');
+    closePanel();
+    return;
+  }
+  committedW = Math.round(Math.min(Math.max(e.clientX, MINW), maxW()));
+  setPanelW(committedW);
+  localStorage.setItem('mz-panel-w', committedW);
+}
+resizer.addEventListener('pointerup', endResize);
+resizer.addEventListener('pointercancel', endResize);
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

@@ -59,7 +59,7 @@ let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most rece
 
 function typeLabel(d) {
   if (d.base === 'Arcade') return d.genre ? 'Arcade, ' + d.genre : 'Arcade';
-  return d.base + ' core';
+  return d.base + ' core' + (d.deprecated ? ' (deprecated)' : '');
 }
 
 function render() {

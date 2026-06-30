@@ -27,7 +27,16 @@
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   td.type { white-space: nowrap; }
-  td.core { white-space: nowrap; color: #888; font-size: .92em; }
+  .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
+           font-weight: 600; white-space: nowrap; line-height: 1.5;
+           background: color-mix(in srgb, var(--h) 20%, Canvas);
+           color: color-mix(in srgb, var(--h) 72%, CanvasText); }
+  .t-arcade   { --h: #e8a317; }
+  .t-console  { --h: #3aa0ff; }
+  .t-computer { --h: #2bbf6e; }
+  .t-other    { --h: #b07cff; }
+  .type .dep { color: #888; font-size: .82em; margin-left: .35rem; }
+  td.core { white-space: nowrap; color: #888; font-size: .92em; cursor: default; }
   .titlebar { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
   .theme { display: inline-flex; flex: none; border: 1px solid #8884; border-radius: 6px; overflow: hidden; }
   .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
@@ -133,9 +142,85 @@ const DV_ICON = '<svg class="dv-icon" width="13" height="13" viewBox="0 0 16 16"
   'fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">' +
   '<rect x="1.5" y="2" width="13" height="9" rx="1"/><path d="M5.5 14h5M8 11v3"/></svg>';
 
+// Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
+// the raw value stays visible as a tooltip. Only multi-game hardware families
+// are listed here — single-game cores fall back to the game's own title (see
+// coreLabel), and anything unrecognised is shown cosmetically de-camelCased.
+const CORE_NAMES = {
+  // Capcom
+  'jtcps1': 'Capcom CPS-1', 'jtcps15': 'Capcom CPS-1.5', 'jtcps2': 'Capcom CPS-2', 'jtcps3': 'Capcom CPS-3',
+  'jt1942': 'Capcom (1942)', 'jt1943': 'Capcom (1943)', 'jttora': 'Capcom (Tiger Road)',
+  'jttrojan': 'Capcom (Trojan)', 'jtsectnz': 'Capcom (Section Z)', 'jtpang': 'Mitchell (Pang)',
+  // Sega
+  'ST-V': 'Sega ST-V', 'jts16': 'Sega System 16A', 'jts16b': 'Sega System 16B', 'jts18': 'Sega System 18',
+  'segasys1': 'Sega System 1', 'SMS': 'Sega System E', 'jtoutrun': 'Sega (Out Run)',
+  'jtshanon': 'Sega (Super Hang-On)', 'zaxxon': 'Sega (Zaxxon)', 'bankpanic': 'Sega (Bank Panic)',
+  'CongoBongo': 'Sega (Congo Bongo)', 'SegaVICZ80': 'Sega VIC Dual',
+  // Namco
+  'pacman': 'Namco (Pac-Man HW)', 'galaxian': 'Galaxian HW', 'druaga': 'Namco (Super Pac-Man HW)',
+  'jtshouse': 'Namco System 1', 'jtthundr': 'Namco System 86', 'rallyx': 'Namco (Rally-X)', 'xevious': 'Namco (Xevious)',
+  // Konami
+  'scramble': 'Konami (Scramble HW)', 'jtaliens': 'Konami (Aliens HW)', 'jtriders': 'Konami (Sunset Riders HW)',
+  'jttmnt': 'Konami (TMNT HW)', 'jtsimson': 'Konami (Simpsons HW)', 'jttwin16': 'Konami Twin16',
+  'jtparoda': 'Konami (Parodius)', 'jtroadf': 'Konami (Road Fighter)', 'Salamander': 'Konami (Salamander)',
+  'rshnatk': "Konami (Rush'n Attack)", 'BubSysROM': 'Konami Bubble System', 'BubSys': 'Konami Bubble System',
+  // Taito
+  'TaitoF2': 'Taito F2', 'TaitoSJ': 'Taito SJ', 'jtkiwi': 'Taito (TNZS HW)', 'jtflstory': 'Taito (Fairyland Story HW)',
+  'jtbubl': 'Taito (Bubble Bobble HW)', 'spaceinvaders': 'Taito 8080 (Space Invaders)', 'Qix': 'Taito (Qix HW)',
+  'Darius': 'Taito (Darius)', 'Darius2WarriorBlade': 'Taito (Darius II)', 'Darius2NinjaWarriors': 'Taito (Ninja Warriors)',
+  // Irem
+  'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
+  'traverseusa': 'Irem (Traverse USA)',
+  // Data East
+  'jtkarnov': 'Data East (Karnov HW)', 'jtcop': 'Data East (RoboCop HW)', 'jtninja': 'Data East (Dragonninja HW)',
+  'jtslyspy': 'Data East (Sly Spy HW)', 'Deco16': 'Data East DECO-16', 'expressraider': 'Data East (Express Raider)',
+  // Tecmo / Tehkan
+  'jtgaiden': 'Tecmo (Ninja Gaiden HW)', 'Tecmo': 'Tecmo (Silkworm HW)', 'jtwc': 'Tehkan (World Cup)',
+  'starforce': 'Tehkan (Star Force)',
+  // Technos
+  'jtkchamp': 'Technos (Karate Champ)',
+  // IGS / Cave / Toaplan
+  'IGSPGM': 'IGS PGM', 'cave': 'Cave 68000', 'CaveBanpresto': 'Cave (Banpresto)', 'SlapFight': 'Toaplan (Slap Fight HW)',
+  // Williams / Midway / Bally
+  'robotron': 'Williams 6809', 'defender': 'Williams (Defender)',
+  'mcr1': 'Midway MCR 1', 'mcr2': 'Midway MCR 2', 'mcr3': 'Midway MCR 3', 'mcr3mono': 'Midway MCR 3 (mono)',
+  'mcr3scroll': 'Midway MCR 3 (scroll)', 'astrocade': 'Bally Astrocade', 'BluePrint': 'Bally Midway (Blue Print)',
+  // Atari
+  'atarisys1': 'Atari System 1', 'BattleZone': 'Atari (Battlezone HW)', 'blackwidow': 'Atari (Black Widow HW)',
+  'gauntlet': 'Atari (Gauntlet HW)', 'StarWars': 'Atari (Star Wars HW)',
+  // SNK
+  'SNK6502': 'SNK 6502', 'Athena': 'SNK (Athena HW)', 'IkariWarriors': 'SNK (Ikari Warriors)', 'TNKIII': 'SNK (T.A.N.K III)',
+  // other hardware families
+  'tiamc1': 'TIA-MC-1 (Soviet)', 'bagman': 'Stern (Bagman HW)', 'qbert': 'Gottlieb (Q*bert HW)',
+  'cosmic': 'Universal (Cosmic HW)', 'ladybug': 'Universal (Lady Bug HW)', 'Exidy2': 'Exidy',
+  'ninjakun': 'UPL (Ninja-Kun HW)', 'blockade': 'Gremlin (Blockade HW)', 'Kangaroo': 'Sun Electronics (Kangaroo)',
+  'galivan': 'Nichibutsu (Galivan)', 'naughtyboy': 'Jaleco (Naughty Boy)', 'polyplay': 'VEB Poly-Play',
+  'phoenix': 'Amstar (Phoenix HW)', 'crazykong': 'Crazy Kong', 'donkeykong': 'Nintendo (Donkey Kong)',
+  'popeye': 'Nintendo (Popeye)',
+};
+
+// core (rbf) -> the game's title, but only for cores that map to exactly ONE
+// title in our data. Built once from DATA so single-game cores read nicely
+// without us hard-coding each. Multi-title cores resolve via CORE_NAMES instead.
+const coreSoleTitle = {};
+
+function coreLabel(core) {
+  if (!core) return '';
+  if (CORE_NAMES[core]) return CORE_NAMES[core];
+  if (coreSoleTitle[core]) return coreSoleTitle[core];
+  // unrecognised multi-title core: split camelCase + capitalise (cosmetic only)
+  return core.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, c => c.toUpperCase());
+}
+
 function typeLabel(d) {
-  if (d.base === 'Arcade') return d.genre ? 'Arcade, ' + d.genre : 'Arcade';
+  if (d.base === 'Arcade') return 'Arcade';
   return d.base + ' core' + (d.deprecated ? ' (deprecated)' : '');
+}
+
+function typeBadge(d) {
+  const cls = 't-' + (d.base || 'other').toLowerCase();
+  const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
+  return '<span class="badge ' + cls + '">' + esc(d.base) + '</span>' + dep;
 }
 
 function titleCell(d) {
@@ -147,11 +232,11 @@ function render() {
   tb.innerHTML = view.map((d, i) =>
     '<tr' + (hasDetail(d) ? ' class="has-detail' + (d === openRow ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
     '<td>' + titleCell(d) + '</td>' +
-    '<td class="type">' + esc(typeLabel(d)) + '</td>' +
+    '<td class="type">' + typeBadge(d) + '</td>' +
     '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
     '<td>' + esc(d.year) + '</td>' +
     '<td>' + esc(d.manufacturer) + '</td>' +
-    '<td class="core">' + esc(d.core) + '</td></tr>'
+    '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + esc(coreLabel(d.core)) + '</td></tr>'
   ).join('');
   document.getElementById('count').textContent = view.length + ' of ' + DATA.length;
 }
@@ -165,12 +250,15 @@ function apply() {
   view = DATA.filter(d => {
     if (t && d.base !== t) return false;
     if (!q) return true;
-    return (d.title + ' ' + typeLabel(d) + ' ' + d.manufacturer + ' ' + d.year + ' ' + (d.core || '')).toLowerCase().includes(q);
+    return (d.title + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
+            d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core)).toLowerCase().includes(q);
   });
   if (sortKey) {
+    const keyOf = x => sortKey === 'typesort' ? typeLabel(x)
+      : sortKey === 'core' ? coreLabel(x.core)
+      : (x[sortKey] || '');
     view.sort((a, b) => {
-      const av = sortKey === 'typesort' ? typeLabel(a) : (a[sortKey] || '');
-      const bv = sortKey === 'typesort' ? typeLabel(b) : (b[sortKey] || '');
+      const av = keyOf(a), bv = keyOf(b);
       return av < bv ? -sortDir : av > bv ? sortDir : 0;
     });
   }
@@ -193,8 +281,9 @@ const panel = document.getElementById('panel');
 
 function detailHTML(d) {
   const rows = [['Type', typeLabel(d)]];
+  if (d.genre) rows.push(['Genre', d.genre]);
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
-  if (d.core) rows.push(['Core', d.core]);
+  if (d.core) rows.push(['Core', coreLabel(d.core) + (coreLabel(d.core) !== d.core ? ' (' + d.core + ')' : '')]);
   if (d.year) rows.push(['Original year', d.year]);
   rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build — debut unknown)')]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
@@ -211,9 +300,10 @@ function detailHTML(d) {
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
   ).join('');
 
+  // screenshots first so they own the viewport on open; derived detail text below.
   return '<button class="close" aria-label="Close">×</button>' +
     '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') + '</h2>' +
-    dl + prose + shots;
+    shots + dl + prose;
 }
 
 function openPanel(d) {
@@ -374,6 +464,15 @@ applyTheme(localStorage.getItem('mz-theme') || 'auto');
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;
+  // index cores that map to exactly one title, so single-game cores read as
+  // the game name without hard-coding each (see coreLabel / CORE_NAMES).
+  const seen = {};
+  for (const r of DATA) {
+    if (!r.core) continue;
+    if (!(r.core in seen)) seen[r.core] = r.title;
+    else if (seen[r.core] !== r.title) seen[r.core] = null;  // more than one distinct title
+  }
+  for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
   const th = document.querySelector('th[data-k="date"]');
   if (th) th.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
   apply();

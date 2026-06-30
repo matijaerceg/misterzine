@@ -60,7 +60,8 @@
            touch-action: pan-y; }
   body.panel-open #panel { transform: translateX(0); }
   #panel[hidden] { display: none; }
-  #panel .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 1rem; }
+  #panel .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 1rem; scrollbar-width: none; -ms-overflow-style: none; }
+  #panel .body::-webkit-scrollbar { display: none; }
   #panel .close { position: sticky; top: 0; float: right; font-size: 1.4rem; line-height: 1;
                   border: 0; background: transparent; color: inherit; cursor: pointer; padding: .1rem .3rem; }
   #panel h2 { font-size: 1.1rem; margin: 0 1.5rem .5rem 0; }

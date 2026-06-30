@@ -4,8 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>misterzine — MiSTer FPGA core &amp; title index</title>
+<script>/* apply saved theme before first paint to avoid a flash */
+  try { var t = localStorage.getItem('mz-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <style>
-  :root { color-scheme: light dark; }
+  :root { color-scheme: light dark; }            /* auto — follows the OS */
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"]  { color-scheme: dark; }
   * { box-sizing: border-box; }
   body { font: 14px/1.4 system-ui, sans-serif; margin: 0; }
   main { padding: 1rem; }
@@ -22,7 +26,12 @@
   th { position: sticky; top: 0; background: Canvas; cursor: pointer; user-select: none; white-space: nowrap; }
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
-  td.type { white-space: nowrap; color: #06c; }
+  td.type { white-space: nowrap; }
+  .titlebar { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+  .theme { display: inline-flex; flex: none; border: 1px solid #8884; border-radius: 6px; overflow: hidden; }
+  .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
+  .theme button + button { border-left: 1px solid #8884; }
+  .theme button[aria-pressed="true"] { background: #8883; font-weight: 600; }
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: #8881; }
   .build { color: #888; }
@@ -74,7 +83,14 @@
 <body>
 <main>
 <header>
-  <h1>misterzine — MiSTer FPGA core &amp; title index</h1>
+  <div class="titlebar">
+    <h1>misterzine — MiSTer FPGA core &amp; title index</h1>
+    <div class="theme" id="theme" role="group" aria-label="Color theme">
+      <button type="button" data-set="auto">Auto</button>
+      <button type="button" data-set="light">Light</button>
+      <button type="button" data-set="dark">Dark</button>
+    </div>
+  </div>
   <p class="legend">MiSTer release date = core's MiSTer debut where known, otherwise its latest
     build date (<span class="build">grey</span>). Original Year = the real hardware's release year.
     Genre via MAME catver.ini. Rows with a
@@ -338,6 +354,19 @@ function endResize(e) {
 }
 resizer.addEventListener('pointerup', endResize);
 resizer.addEventListener('pointercancel', endResize);
+
+// --- theme toggle (auto / light / dark; persisted) ---
+const themeBtns = [...document.querySelectorAll('#theme button')];
+function applyTheme(t) {
+  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+  else { document.documentElement.removeAttribute('data-theme'); t = 'auto'; }
+  themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.set === t));
+}
+themeBtns.forEach(b => b.addEventListener('click', () => {
+  localStorage.setItem('mz-theme', b.dataset.set);
+  applyTheme(b.dataset.set);
+}));
+applyTheme(localStorage.getItem('mz-theme') || 'auto');
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

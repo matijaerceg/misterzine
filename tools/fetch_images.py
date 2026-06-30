@@ -7,7 +7,7 @@ keyed by a stable slug, and image keys are written back into data.json.
 
 Stdlib + 7z.exe. Re-runnable: downloaded zips and existing outputs are skipped.
 """
-import json, os, re, subprocess, sys, urllib.request, urllib.parse, zipfile, shutil
+import json, os, re, struct, subprocess, sys, urllib.request, urllib.parse, zipfile, shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = os.path.join(ROOT, "data/cache/image_manifest.json")
@@ -32,6 +32,16 @@ SLOT = {"titles": "title", "snap": "snap", "gameover": "ingame", "scores": "inga
 
 def slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def png_dims(path):
+    """(width, height) from a PNG's IHDR header, or None if unreadable."""
+    try:
+        with open(path, "rb") as f:
+            f.read(16)  # 8-byte signature + 4-byte length + 'IHDR'
+            return struct.unpack(">II", f.read(8))
+    except Exception:
+        return None
 
 
 def download(url, path):
@@ -135,9 +145,17 @@ def update_data(manifest):
         if slots:
             r["img"] = key
             r["img_slots"] = slots
+            # all slots of a game share one native resolution; tag w/h so the
+            # popup can integer-scale and size itself before the PNG loads.
+            for s in slots:
+                d = png_dims(os.path.join(IMGROOT, s, key + ".png"))
+                if d:
+                    r["img_w"], r["img_h"] = int(d[0]), int(d[1])
+                    break
     json.dump(rows, open(DATA, "w", encoding="utf-8"), ensure_ascii=False,
               separators=(",", ":"))
-    print(f"data.json updated: {sum(1 for r in rows if r.get('img'))} rows tagged")
+    print(f"data.json updated: {sum(1 for r in rows if r.get('img'))} rows tagged, "
+          f"{sum(1 for r in rows if r.get('img_w'))} with dims")
 
 
 def main():

@@ -29,15 +29,11 @@
   .shot { cursor: zoom-in; border-bottom: 1px dotted #8886; }
   #popup { position: fixed; z-index: 50; display: none; padding: .5rem;
            background: Canvas; border: 1px solid #8888; border-radius: 6px;
-           box-shadow: 0 6px 24px #0007; }
-  #popup .shots { display: flex; gap: .5rem; }
-  #popup img { height: 220px; width: auto; image-rendering: pixelated;
-               background: #000; border-radius: 3px; display: block; }
+           box-shadow: 0 6px 24px #0007; max-height: 96vh; overflow-y: auto; }
+  #popup .shots { display: flex; gap: .5rem; flex-wrap: wrap; }
+  #popup img { image-rendering: pixelated; background: #000;
+               border-radius: 3px; display: block; }  /* w/h set inline by JS (integer scale) */
   #popup .cap { margin-top: .4rem; font-size: .8rem; color: #888; max-width: 40rem; }
-  @media (max-width: 640px) {
-    #popup img { height: 132px; }
-    #popup .shots { flex-wrap: wrap; }
-  }
 </style>
 </head>
 <body>
@@ -82,7 +78,8 @@ function titleCell(d) {
   const cap = d.title + (d.year ? ' (' + d.year + ')' : '') +
     (d.manufacturer ? ' — ' + d.manufacturer : '') + (d.genre ? ' • ' + d.genre : '');
   return '<span class="shot" data-img="' + escA(d.img) + '" data-slots="' +
-    d.img_slots.join(',') + '" data-cap="' + escA(cap) + '">' + esc(d.title) + '</span>';
+    d.img_slots.join(',') + '" data-w="' + (d.img_w || '') + '" data-h="' + (d.img_h || '') +
+    '" data-cap="' + escA(cap) + '">' + esc(d.title) + '</span>';
 }
 
 function render() {
@@ -134,19 +131,42 @@ const pop = document.getElementById('popup');
 const rowsEl = document.getElementById('rows');
 let pinned = false, showT, hideT;
 
-function showPop(el) {
-  clearTimeout(hideT);
-  const img = el.dataset.img;
-  pop.innerHTML = '<div class="shots">' +
-    el.dataset.slots.split(',').map(s =>
-      '<img loading="lazy" src="../images/' + s + '/' + img + '.png" onerror="this.remove()">').join('') +
-    '</div><div class="cap">' + esc(el.dataset.cap) + '</div>';
-  pop.style.display = 'block';
+// largest integer multiple of native res that fits a viewport budget (crisp
+// pixel-art upscale); only downscales below 1x when a screen is too small to fit 1x.
+function popSize(nw, nh) {
+  const Hb = Math.round(0.80 * innerHeight), Wb = Math.round(0.62 * innerWidth);
+  const k = Math.min(Math.floor(Hb / nh), Math.floor(Wb / nw), 4);
+  if (k >= 1) return [nw * k, nh * k];
+  const f = Math.min(Wb / nw, Hb / nh);
+  return [Math.round(nw * f), Math.round(nh * f)];
+}
+
+function place(el) {
   const r = el.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
   let x = r.right + 8; if (x + pw > innerWidth) x = r.left - pw - 8;
   x = Math.max(8, Math.min(x, innerWidth - pw - 8));
   let y = Math.max(8, Math.min(r.top, innerHeight - ph - 8));
   pop.style.left = x + 'px'; pop.style.top = y + 'px';
+}
+
+function showPop(el) {
+  clearTimeout(hideT);
+  const img = el.dataset.img;
+  const nw = +el.dataset.w, nh = +el.dataset.h;
+  let dim = '';
+  if (nw && nh) { const [w, h] = popSize(nw, nh); dim = ' width="' + w + '" height="' + h + '"'; }
+  pop.innerHTML = '<div class="shots">' +
+    el.dataset.slots.split(',').map(s =>
+      '<img' + dim + ' src="../images/' + s + '/' + img + '.png" onerror="this.remove()">').join('') +
+    '</div><div class="cap">' + esc(el.dataset.cap) + '</div>';
+  pop.style.display = 'block';
+  place(el);  // dims known up front -> correct measurement, no load race
+  if (!(nw && nh)) {  // fallback: no embedded dims -> size from natural res on load, then re-place
+    pop.querySelectorAll('img').forEach(im => im.addEventListener('load', () => {
+      const [w, h] = popSize(im.naturalWidth, im.naturalHeight);
+      im.width = w; im.height = h; place(el);
+    }));
+  }
 }
 function hidePop() { pop.style.display = 'none'; }
 

@@ -435,9 +435,32 @@ def cmd_repos(args):
             log(f"  [{i}/{len(repos)}] {full}  debut={first[:10] if first else '?'}  updated={last[:10] if last else '?'}")
     con.commit()
     join_repos_to_catalog(con)
+    apply_frozen_arcade_core_dates(con)
     con.commit()
     con.close()
     log("repos crawl done.")
+
+
+# MRA <rbf> core names that don't normalize to their repo's core name
+# (abbreviations/spelling differences). Maps normalized <rbf> -> normalized repo
+# core name. The _MiSTer-suffix case bug is handled by _repo_key, not here.
+ARCADE_RBF_ALIASES = {
+    "taitosj": "taitosystemsj",   # Arcade-TaitoSystemSJ
+    "atarisys1": "atarisystem1",  # Arcade-Atari-system1
+    "sdgundamps": "gundamsd",     # Arcade-GundamSD
+    "ataritetris": "atetris",     # Arcade-ATetris
+    "rshnatk": "rushnattack",     # Arcade-RushnAttack
+}
+
+
+def _repo_key(name):
+    """Normalized join key for a repo core name, tolerant of a trailing _MiSTer
+    suffix that appears as _MISTer/_Mister in some repos and slips past a
+    case-sensitive strip (e.g. Arcade-Arkanoid_MISTer)."""
+    k = norm_key(name)
+    if k.endswith("mister"):
+        k = k[: -len("mister")]
+    return k
 
 
 def join_repos_to_catalog(con):
@@ -448,7 +471,7 @@ def join_repos_to_catalog(con):
     repos = con.execute("SELECT repo, core, first_commit, last_commit FROM arcade_repos").fetchall()
     by_key = {}
     for r in repos:
-        key = norm_key(r["core"].replace("Arcade-", ""))
+        key = _repo_key(r["core"].replace("Arcade-", ""))
         by_key.setdefault(key, r)  # first wins
     n = 0
     for row in con.execute(
@@ -456,9 +479,10 @@ def join_repos_to_catalog(con):
     ).fetchall():
         r = None
         if row["rbf"]:
-            r = by_key.get(norm_key(row["rbf"]))
+            rk = norm_key(row["rbf"])
+            r = by_key.get(rk) or by_key.get(ARCADE_RBF_ALIASES.get(rk, ""))
         if r is None:
-            r = by_key.get(norm_key(row["title"]))
+            r = by_key.get(_repo_key(row["title"]))
         if r:
             con.execute(
                 "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",
@@ -466,6 +490,40 @@ def join_repos_to_catalog(con):
             )
             n += 1
     log(f"  joined {n} arcade titles to a core repo (release dates attached)")
+
+
+# Multi-game arcade cores that have NO per-core repo to date from (so the rbf
+# join above can't reach them). Every title on the core debuts when the core
+# does, so we pin one known public-availability date per <rbf>. Keyed by the
+# normalized <rbf>. Dates are hand-verified (MiSTer forums / RetroRGB / repo).
+ARCADE_CORE_FROZEN_DATES = {
+    "stv":        "2025-02-14",  # Sega ST-V (Titan) — public in Saturn core Feb 2025
+    "sms":        "2021-08-30",  # Sega System E arcade support added to SMS core
+    "skysmasher": "2026-05-01",  # rmonic79 Arcade_SkySmasher v1.0, May 2026
+    "jtngp":      "2024-06-16",  # Jotego NeoGeo Pocket core
+}
+
+
+def apply_frozen_arcade_core_dates(con):
+    """Date repo-less multi-game arcade cores from ARCADE_CORE_FROZEN_DATES.
+
+    Only fills rows still missing a date, keyed by the normalized <rbf>, so it
+    never overrides a date a real repo/Coin-Op match already supplied.
+    """
+    n = 0
+    for row in con.execute(
+        "SELECT source_id, path, rbf FROM catalog "
+        "WHERE system='arcade' AND rbf IS NOT NULL AND release_date IS NULL"
+    ).fetchall():
+        d = ARCADE_CORE_FROZEN_DATES.get(norm_key(row["rbf"]))
+        if d:
+            con.execute(
+                "UPDATE catalog SET release_date=? WHERE source_id=? AND path=?",
+                (d, row["source_id"], row["path"]),
+            )
+            n += 1
+    if n:
+        log(f"  pinned {n} titles on repo-less cores to a frozen debut date")
 
 
 # --- command: core-repos (debut dates for console/computer/other cores) ---
@@ -783,7 +841,12 @@ def join_jt_to_catalog(con):
 # --- command: coinop (Coin-Op release dates from commit messages) ---------
 
 COINOP_REPO = "Coin-OpCollection/Distribution-MiSTerFPGA"
-COINOP_RE = re.compile(r"^(.+?)\s+Release\s+(\d{8})", re.IGNORECASE)
+# Coin-Op commit subjects look like "<Title> Release|Update|Beta|Alpha YYYYMMDD".
+# Beta/Alpha are often a game's first public appearance, so they count as debuts;
+# we keep the EARLIEST date per title. Some commits bundle several games
+# ("Hachoo!, E.D.F, In Your Face Beta ...") so the title part is split.
+COINOP_RE = re.compile(r"^(.+?)\s+(?:Release|Update|Beta|Alpha)\s+(\d{8})", re.IGNORECASE)
+COINOP_SPLIT = re.compile(r"\s*(?:,|/|&|\band\b)\s*", re.IGNORECASE)
 
 
 def cmd_coinop(args):
@@ -801,17 +864,21 @@ def cmd_coinop(args):
             msg = c["commit"]["message"].splitlines()[0]
             m = COINOP_RE.match(msg)
             if m:
-                title = m.group(1).strip()
                 ymd = m.group(2)
                 rel_date = f"{ymd[0:4]}-{ymd[4:6]}-{ymd[6:8]}"
                 cdate = c["commit"]["committer"]["date"]
-                # keep the most recent commit per title
-                if title not in found or cdate > found[title][1]:
-                    found[title] = (rel_date, cdate)
+                for raw in COINOP_SPLIT.split(m.group(1).strip()):
+                    title = raw.strip(" !")
+                    key = norm_key(title)
+                    if len(key) < 4:
+                        continue
+                    # keep the EARLIEST date per title (a game's MiSTer debut)
+                    if key not in found or rel_date < found[key][0]:
+                        found[key] = (rel_date, cdate, title)
         if 'rel="next"' not in hdrs.get("Link", ""):
             break
         page += 1
-    for title, (rel_date, cdate) in found.items():
+    for key, (rel_date, cdate, title) in found.items():
         con.execute(
             "INSERT INTO coinop_releases(title,release_date,commit_date) VALUES(?,?,?) "
             "ON CONFLICT(title) DO UPDATE SET release_date=excluded.release_date, commit_date=excluded.commit_date",
@@ -827,17 +894,22 @@ def cmd_coinop(args):
 def join_coinop_to_catalog(con):
     """Attach Coin-Op release dates to coinop catalog titles by normalized prefix."""
     rels = con.execute("SELECT title, release_date, commit_date FROM coinop_releases").fetchall()
-    # index by normalized key; release titles are the short/canonical form
+    # index by normalized key; release titles are the short/canonical form.
+    # Sort keys longest-first so the most specific release name wins (e.g.
+    # "snowbros2" is preferred over "snowbros" for "Snow Bros. 2 ...").
     by_key = {norm_key(r["title"]): r for r in rels}
+    keys = sorted(by_key, key=len, reverse=True)
     n = 0
     for row in con.execute(
         "SELECT source_id, path, title FROM catalog WHERE source_id='coinop'"
     ).fetchall():
         ck = norm_key(row["title"])
         match = None
-        for rk, r in by_key.items():
-            if ck == rk or ck.startswith(rk):  # "snowbrosnicktom" startswith "snowbros"
-                match = r
+        for rk in keys:
+            # catalog title carries region/version suffixes the release name lacks,
+            # so match if either is a prefix of the other (min length guards noise).
+            if ck == rk or ck.startswith(rk) or (rk.startswith(ck) and len(ck) >= 5):
+                match = by_key[rk]
                 break
         if match:
             con.execute(
@@ -1067,6 +1139,53 @@ CORE_YEAR = {
 }
 
 
+# Original arcade release years for titles whose MRA carries no <year> and which
+# MAME 0.78-era data is too old to cover. The IGS PGM years are MAME-accurate
+# (web-verified); the rest are well-documented arcade debut years. Frozen so they
+# never drift. Keyed by MAME setname where one exists.
+ARCADE_YEAR_BY_SETNAME = {
+    "dmnfrnt": "2002",
+    "ddp2": "2001", "ddp3": "2002", "dw2001": "2001", "drgw3": "1998", "dwex": "2000",
+    "espgal": "2003", "ket": "2003", "kov2": "2000", "kovsh": "1999", "martmast": "1999",
+    "orlegend": "1997", "photoy2k": "1999", "svg": "2005", "theglad": "2003",
+    "killbld": "1998", "killbldp": "2005", "olds103t": "1998", "sonson": "1984",
+}
+
+# Same, for titles with no setname (mostly Coin-Op). Keyed by game name; matched
+# via norm_key so region/version suffixes on the catalog title don't matter.
+ARCADE_YEAR_BY_NAME = {
+    "Space Demon": "1981", "Space Firebird": "1980", "Armed F": "1988",
+    "Armed Police Batrider": "1998", "Battle Bakraid - Unlimited Version": "1999",
+    "Battle Garegga": "1996", "Chouji Meikyuu Legion": "1987", "Cobra-Command": "1984",
+    "Crazy Climber 2": "1984", "Demon's World - Horror Story": "1989", "Gang Wars": "1989",
+    "Hachoo": "1989", "Hellfire": "1989", "Hishou Zame": "1987", "Iga Ninjyutsuden": "1988",
+    "Ikari III - The Rescue": "1989", "In Your Face": "1991", "Jitsuryoku!! Pro Yakyuu": "1989",
+    "Kid no Hore Hore Daisakusen": "1987", "Kozure Ookami": "1987", "Kyukyoku Tiger": "1987",
+    "Mahou Daisakusen": "1993", "Mania Challenge": "1986", "Mat Mania": "1985",
+    "Out Zone": "1990", "P-47 - The Freedom Fighter": "1990", "P.O.W. - Prisoners of War": "1988",
+    "Paddle Mania": "1988", "Pipi & Bibis - Whoopee!!": "1991", "Plus Alpha": "1989",
+    "Prehistoric Isle in 1930": "1989", "Psycho-Nics Oscar": "1987",
+    "Rally Bike - Dash Yarou": "1988", "Rod-Land": "1990", "SAR - Search And Rescue": "1990",
+    "Saint Dragon": "1989", "Same! Same! Same!": "1989", "Sei Senshi Amatelass": "1986",
+    "Shippu Mahou Daisakusen": "1994", "Sky Adventure": "1989", "Sky Soldiers": "1988",
+    "Snow Bros. - Nick & Tom": "1990", "Snow Bros. 2 - With New Elves - Otenki Paradise": "1992",
+    "Soldam": "1992", "Street Smart": "1989", "Tatakae! Big Fighter": "1989",
+    "Teenage Mutant Ninja Turtles - Turtles in Time": "1991", "Teki Paki": "1991",
+    "Terra Cresta": "1985", "Terra Force": "1987", "The Lord of King": "1989",
+    "The Next Space": "1989", "Time Soldiers": "1987", "Truxton - Tatsujin": "1987",
+    "Truxton II - Tatsujin Oh": "1992", "Tumble Pop": "1991", "Vimana": "1991",
+    "Zero Wing": "1989",
+}
+_ARCADE_YEAR_BY_NAME_NORM = {norm_key(k): v for k, v in ARCADE_YEAR_BY_NAME.items()}
+
+
+def arcade_year(setname, title):
+    """Frozen original-release year for an arcade title with no MRA <year>."""
+    if setname and ARCADE_YEAR_BY_SETNAME.get(setname.lower()):
+        return ARCADE_YEAR_BY_SETNAME[setname.lower()]
+    return _ARCADE_YEAR_BY_NAME_NORM.get(norm_key(title), "")
+
+
 def core_build_date(title):
     """Pull a console/computer core's build date from its `_YYYYMMDD` filename suffix.
 
@@ -1115,6 +1234,8 @@ def _web_row(r, arcade_titles=None):
     year = r["year"] or ""
     if not year and system in ("console", "computer"):
         year = CORE_YEAR.get(core_name(r["title"]), "")
+    if not year and system == "arcade":
+        year = arcade_year(r["setname"], title)
     return {
         "title": title,
         "base": base,
@@ -1146,6 +1267,7 @@ def cmd_export_web(args):
     outdir = DOCSDIR / "releases"
     outdir.mkdir(parents=True, exist_ok=True)
     apply_frozen_core_dates(con)  # always pin hand-verified core debuts before publishing
+    apply_frozen_arcade_core_dates(con)  # and repo-less multi-game arcade cores
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
     con.close()

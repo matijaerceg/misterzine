@@ -1336,7 +1336,13 @@ def _web_row(r, arcade_titles=None):
         date = (r["release_date"] or "")[:10]
         date_kind = "debut" if date else ""
         genre = r["genre"] or ""
+        # the FPGA core (rbf) the game runs on. Multi-game cores (jtcps2, ST-V,
+        # Neogeo, …) are why many titles share one MiSTer date — surfacing it
+        # explains/disambiguates those clumps. Blank for the ~58 setname-less
+        # Toaplan/SNK titles whose catalog row never captured an rbf.
+        core = (r["rbf"] or "").strip()
     else:
+        core = ""
         # cores: strip the date suffix from the display name (date has its own column)
         title = _CORE_DATE_RE.sub("", r["title"]).rstrip("_ ")
         # prefer the real MiSTer debut (per-core repo) over the build-date suffix
@@ -1366,6 +1372,7 @@ def _web_row(r, arcade_titles=None):
         "date_kind": date_kind,
         "year": year,
         "manufacturer": manufacturer,
+        "core": core,
         "deprecated": False,
     }
 
@@ -1377,7 +1384,7 @@ EXTRA_WEB_ROWS = [
     {
         "title": "Genesis", "base": "Console", "genre": "",
         "date": "2018-06-02", "date_kind": "debut", "year": "1988",
-        "manufacturer": "Sega", "deprecated": True,
+        "manufacturer": "Sega", "core": "", "deprecated": True,
     },
 ]
 

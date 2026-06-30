@@ -27,6 +27,7 @@
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   td.type { white-space: nowrap; }
+  td.core { white-space: nowrap; color: #888; font-size: .92em; }
   .titlebar { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
   .theme { display: inline-flex; flex: none; border: 1px solid #8884; border-radius: 6px; overflow: hidden; }
   .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
@@ -99,7 +100,7 @@
       <path d="M5.5 14h5M8 11v3"/></svg> open a detail view.</p>
 </header>
 <div class="controls">
-  <input type="search" id="q" placeholder="Search title, type, manufacturer…" autofocus>
+  <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>
   <select id="type">
     <option value="">All types</option>
     <option value="Arcade">Arcade</option>
@@ -116,6 +117,7 @@
     <th data-k="date">MiSTer release date</th>
     <th data-k="year">Original Year</th>
     <th data-k="manufacturer">Manufacturer</th>
+    <th data-k="core">Core</th>
   </tr></thead>
   <tbody id="rows"></tbody>
 </table>
@@ -148,7 +150,8 @@ function render() {
     '<td class="type">' + esc(typeLabel(d)) + '</td>' +
     '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
     '<td>' + esc(d.year) + '</td>' +
-    '<td>' + esc(d.manufacturer) + '</td></tr>'
+    '<td>' + esc(d.manufacturer) + '</td>' +
+    '<td class="core">' + esc(d.core) + '</td></tr>'
   ).join('');
   document.getElementById('count').textContent = view.length + ' of ' + DATA.length;
 }
@@ -162,7 +165,7 @@ function apply() {
   view = DATA.filter(d => {
     if (t && d.base !== t) return false;
     if (!q) return true;
-    return (d.title + ' ' + typeLabel(d) + ' ' + d.manufacturer + ' ' + d.year).toLowerCase().includes(q);
+    return (d.title + ' ' + typeLabel(d) + ' ' + d.manufacturer + ' ' + d.year + ' ' + (d.core || '')).toLowerCase().includes(q);
   });
   if (sortKey) {
     view.sort((a, b) => {
@@ -191,6 +194,7 @@ const panel = document.getElementById('panel');
 function detailHTML(d) {
   const rows = [['Type', typeLabel(d)]];
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
+  if (d.core) rows.push(['Core', d.core]);
   if (d.year) rows.push(['Original year', d.year]);
   rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build — debut unknown)')]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);

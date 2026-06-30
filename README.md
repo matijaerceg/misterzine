@@ -128,8 +128,9 @@ then `jtcores` and `genre`.)
   **MiSTer release date**. Console and computer cores carry their hardware maker
   (Nintendo/Sega/Commodore/Sinclair/…) from the `CONSOLE_MANUFACTURER` / `COMPUTER_MANUFACTURER`
   maps, and the original hardware's release year (column **Original Year**) from the `CORE_YEAR`
-  map (obscure/DIY makers and years web-verified). A few modern/clone cores (`ao486`, `MultiComp`,
-  `TSConf`) have no meaningful vintage year and are left blank.
+  map (obscure/DIY makers and years web-verified). Every console/computer core has a year; a few
+  modern/clone cores with no single vintage machine (`ao486`, `MultiComp`, `TSConf`) use a
+  best-effort year (i486 era / their FPGA-design creation year).
 
 The retired **Sega Genesis** core (replaced by MegaDrive — same console) is no longer in any DB,
 so it's injected for the record via `EXTRA_WEB_ROWS`, dated from its archived repo.

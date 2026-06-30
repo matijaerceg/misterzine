@@ -1060,6 +1060,9 @@ CORE_YEAR = {
     "MSX": "1983", "MSX1": "1983", "TK2000": "1984", "Galaksija": "1983", "Homelab": "1983",
     "Specialist": "1985", "Ondra_SPO186": "1985", "PMD85": "1985", "IQ151": "1985",
     "BK0011M": "1990", "Vector-06C": "1987", "Apogee": "1988", "ORAO": "1984",
+    # best-effort years for cores with no single vintage machine: ao486 = i486 era,
+    # MultiComp/TSConf = modern FPGA/clone designs (their actual creation year).
+    "ao486": "1989", "MultiComp": "2013", "TSConf": "2014",
 }
 
 

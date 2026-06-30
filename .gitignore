@@ -1,0 +1,11 @@
+# Regenerable data
+data/repos/
+data/snapshots/
+data/cache/
+__pycache__/
+*.pyc
+
+# Keep the db and exports? They're regenerable but useful to commit for history.
+# Uncomment to ignore:
+# data/misterzine.sqlite
+# data/exports/

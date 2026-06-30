@@ -170,9 +170,11 @@ function detailHTML(d) {
 
   const dl = '<dl>' + rows.map(([k, v]) => '<dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd>').join('') + '</dl>';
   const prose = d.detail ? '<p class="detail">' + esc(d.detail) + '</p>' : '';
-  // dual-screen games (Sagaia, Darius, …) are superwide → 8:3; else 4:3 / 3:4
+  // already-superwide screenshots (dual/triple-screen: Sagaia, Darius, …) → 8:3.
+  // 2.4 sits below the dual-screen cluster (2.67+) but above wide single screens
+  // like the PGM 448x224 games (2.0), which stay 4:3.
   const aspect = d.img_h ? d.img_w / d.img_h : 1;
-  const ratio = aspect >= 2 ? '8 / 3' : (d.img_w >= d.img_h ? '4 / 3' : '3 / 4');
+  const ratio = aspect >= 2.4 ? '8 / 3' : (d.img_w >= d.img_h ? '4 / 3' : '3 / 4');
   const shots = (d.img_slots || []).map(s =>
     '<div class="frame" style="aspect-ratio:' + ratio + '">' +
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
@@ -216,7 +218,51 @@ document.getElementById('rows').addEventListener('click', e => {
   if (tr) openPanel(view[+tr.dataset.i]);
 });
 panel.addEventListener('click', e => { if (e.target.closest('.close')) closePanel(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('panel-open')) closePanel(); });
+
+// --- arrow-key row navigation (Up/Down = click prev/next detail row) ---
+function selectableIndices() {
+  const out = [];
+  for (let i = 0; i < view.length; i++) if (hasDetail(view[i])) out.push(i);
+  return out;
+}
+function currentIndex() {
+  return openImg == null ? -1 : view.findIndex(d => d.img === openImg);
+}
+function firstVisibleSelectableIdx(fromBottom) {
+  const rows = [...document.querySelectorAll('#rows tr.has-detail')];
+  if (fromBottom) rows.reverse();
+  for (const tr of rows) {
+    const r = tr.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) return +tr.dataset.i;  // first row in/below the viewport top
+  }
+  return -1;
+}
+function navigate(dir) {  // dir: +1 down, -1 up
+  const sel = selectableIndices();
+  if (!sel.length) return;
+  const cur = currentIndex();
+  let target;
+  if (cur < 0) {                                   // nothing selected → top (or bottom) visible row
+    target = firstVisibleSelectableIdx(dir < 0);
+    if (target < 0) target = dir > 0 ? sel[0] : sel[sel.length - 1];
+  } else {
+    const npos = sel.indexOf(cur) + dir;
+    if (npos < 0 || npos >= sel.length) return;    // clamp at the ends
+    target = sel[npos];
+  }
+  openPanel(view[target]);
+  const tr = document.querySelector('#rows tr[data-i="' + target + '"]');
+  if (tr) tr.scrollIntoView({ block: 'nearest' });
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if (document.body.classList.contains('panel-open')) closePanel(); return; }
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (document.activeElement && document.activeElement.tagName === 'SELECT') return;  // let the type dropdown use arrows
+    e.preventDefault();
+    navigate(e.key === 'ArrowDown' ? 1 : -1);
+  }
+});
 
 // swipe-left to close
 let sx = 0, sy = 0, axis = null, dx = 0;

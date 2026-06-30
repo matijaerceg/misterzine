@@ -55,7 +55,7 @@
   <tbody id="rows"></tbody>
 </table>
 <script>
-let DATA = [], view = [], sortKey = null, sortDir = 1;
+let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most recent first
 
 function typeLabel(d) {
   if (d.base === 'Arcade') return d.genre ? 'Arcade, ' + d.genre : 'Arcade';
@@ -105,7 +105,12 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', () =>
   apply();
 }));
 
-fetch('./data.json').then(r => r.json()).then(d => { DATA = d; view = d; render(); });
+fetch('./data.json').then(r => r.json()).then(d => {
+  DATA = d;
+  const th = document.querySelector('th[data-k="date"]');
+  if (th) th.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
+  apply();
+});
 </script>
 </body>
 </html>

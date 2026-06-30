@@ -482,6 +482,28 @@ CORE_REPO_OVERRIDES = {
     "GameOfLife": "Life",
 }
 
+# Hand-verified MiSTer debut dates for cores the repo crawl can't reach via the
+# `<core>_MiSTer` convention (repos under odd names, or no repo at all). These are
+# FROZEN: each is the first-commit date of the core's real repo (or, for NeoGeo
+# Pocket, its public beta release), looked up once and pinned so the displayed
+# date never drifts as upstream rebuilds the core. Source repo noted per line.
+CORE_FROZEN_DATES = {
+    "SAMCoupe":      "2017-06-13",  # MiSTer-devel/SAM-Coupe_MiSTer first commit
+    "Intellivision": "2019-09-02",  # MiSTer-devel/Intv_MiSTer first commit
+    "AY-3-8500":     "2020-01-04",  # MiSTer-devel/AY-3-8500-MiSTer first commit
+    "EpochGalaxyII": "2020-07-28",  # MiSTer-devel/EpochGalaxy2_MiSTer first commit
+    "Ondra_SPO186":  "2021-10-18",  # MiSTer-devel/OndraSPO186_MiSTer first commit
+    "Homelab":       "2022-12-15",  # MiSTer-devel/Homelab-MiSTer first commit
+    "NeoGeoPocket":  "2024-01-05",  # public beta release (Time Extension/RetroRGB)
+    "SCV":           "2024-07-24",  # MiSTer-devel/SuperCassetteVision_MiSTer first commit
+    "Atari5200":     "2017-10-08",  # ships from the Atari800 core (Atari800_MiSTer debut)
+}
+
+
+def core_name(title):
+    """Core name = the .rbf stem with the `_YYYYMMDD` build-date suffix stripped."""
+    return _CORE_DATE_RE.sub("", title or "").rstrip("_ ")
+
 
 def core_repo_base(title):
     """Repo base name for a console/computer/other core title.
@@ -490,8 +512,30 @@ def core_repo_base(title):
     `_YYYYMMDD` build-date suffix to get the core name, which maps to the
     per-core repo `MiSTer-devel/<core>_MiSTer`.
     """
-    core = _CORE_DATE_RE.sub("", title or "").rstrip("_ ")
+    core = core_name(title)
     return CORE_REPO_OVERRIDES.get(core, core)
+
+
+def apply_frozen_core_dates(con):
+    """Set release_date from CORE_FROZEN_DATES for cores the crawl can't reach.
+
+    These hand-verified debut dates win for their cores regardless of any
+    build-date suffix, and never change on re-export (the values are pinned in
+    code), so old cores can't drift to look newly released.
+    """
+    n = 0
+    for row in con.execute(
+        "SELECT source_id, path, title FROM catalog WHERE system IN ('console','computer','other')"
+    ).fetchall():
+        d = CORE_FROZEN_DATES.get(core_name(row["title"]))
+        if d:
+            con.execute(
+                "UPDATE catalog SET release_date=? WHERE source_id=? AND path=?",
+                (d, row["source_id"], row["path"]),
+            )
+            n += 1
+    if n:
+        log(f"  applied {n} frozen core debut dates")
 
 
 def cmd_core_repos(args):
@@ -540,6 +584,7 @@ def cmd_core_repos(args):
             log(f"  [{i}/{len(bases)}] {full}  debut={first[:10]}  updated={last[:10] if last else '?'}")
     con.commit()
     join_core_repos_to_catalog(con)
+    apply_frozen_core_dates(con)
     con.commit()
     con.close()
     log(f"core repos crawl done. {hit} resolved, {miss} unresolved.")
@@ -941,6 +986,8 @@ def cmd_export_web(args):
     # just redirects there so the bare URL keeps working.
     outdir = DOCSDIR / "releases"
     outdir.mkdir(parents=True, exist_ok=True)
+    apply_frozen_core_dates(con)  # always pin hand-verified core debuts before publishing
+    con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
     con.close()
     data = [_web_row(r) for r in rows]

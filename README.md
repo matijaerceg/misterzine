@@ -58,8 +58,12 @@ to 2017. So:
 > **Why `core-repos` matters:** console/computer/other cores ship as a single `.rbf` whose
 > filename carries a `_YYYYMMDD` *build-date* suffix — **not** a debut date. An upstream mass
 > rebuild restamps dozens of old cores with the same recent date (e.g. C64 looked like a
-> 2026 release). `core-repos` replaces that with the real first-commit debut; cores with no
-> `MiSTer-devel` repo (community cores) fall back to the build date, shown greyed on the site.
+> 2026 release). `core-repos` replaces that with the real first-commit debut. The handful of
+> cores whose repo doesn't follow the `<core>_MiSTer` naming (odd repo names, or no repo at all)
+> are pinned in the hand-verified `CORE_FROZEN_DATES` table in `misterzine.py` — looked up once
+> and frozen so they can never drift to look newly released. Every console/computer/other core
+> now carries a real debut date (the `_YYYYMMDD` build-date suffix is only a last-resort fallback
+> for a brand-new core not yet dated, shown greyed).
 
 Jotego and Coin-Op keep their history elsewhere, and both are now backfilled too:
 

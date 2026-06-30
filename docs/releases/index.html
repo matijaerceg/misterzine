@@ -25,15 +25,21 @@
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: #8881; }
   .build { color: #888; }
-  /* screenshot popup */
+  /* screenshot popup — right-docked, vertically centered card (bottom-docked on mobile) */
   .shot { cursor: zoom-in; border-bottom: 1px dotted #8886; }
-  #popup { position: fixed; z-index: 50; display: none; padding: .5rem;
-           background: Canvas; border: 1px solid #8888; border-radius: 6px;
-           box-shadow: 0 6px 24px #0007; max-height: 96vh; overflow-y: auto; }
-  #popup .shots { display: flex; gap: .5rem; flex-wrap: wrap; }
+  #popup { position: fixed; z-index: 50; display: none;
+           right: 16px; top: 50%; transform: translateY(-50%);
+           max-width: min(42vw, 576px); padding: .5rem; background: Canvas;
+           border: 1px solid #8888; border-radius: 6px; box-shadow: 0 6px 24px #0007; }
+  #popup .shots { display: flex; gap: .5rem; justify-content: center; }
+  #popup.stacked .shots { flex-direction: column; align-items: center; }
   #popup img { image-rendering: pixelated; background: #000;
-               border-radius: 3px; display: block; }  /* w/h set inline by JS (integer scale) */
-  #popup .cap { margin-top: .4rem; font-size: .8rem; color: #888; max-width: 40rem; }
+               border-radius: 3px; display: block; }  /* w/h set inline by JS */
+  #popup .cap { margin-top: .4rem; font-size: .8rem; color: #888; text-align: center; }
+  @media (max-width: 640px) {
+    /* bottom-docked so it never crowds the (also narrow) title column */
+    #popup { right: 8px; left: 8px; top: auto; bottom: 8px; transform: none; max-width: none; }
+  }
 </style>
 </head>
 <body>
@@ -131,47 +137,60 @@ const pop = document.getElementById('popup');
 const rowsEl = document.getElementById('rows');
 let pinned = false, showT, hideT;
 
-// largest integer multiple of native res that fits a viewport budget (crisp
-// pixel-art upscale); only downscales below 1x when a screen is too small to fit 1x.
-function popSize(nw, nh) {
-  const Hb = Math.round(0.80 * innerHeight), Wb = Math.round(0.62 * innerWidth);
-  const k = Math.min(Math.floor(Hb / nh), Math.floor(Wb / nw), 4);
-  if (k >= 1) return [nw * k, nh * k];
-  const f = Math.min(Wb / nw, Hb / nh);
-  return [Math.round(nw * f), Math.round(nh * f)];
+// --- sizing: pick side-by-side vs stacked, whichever makes the two shots bigger ---
+const PAD = 8, GAP = 8, CAPH = 26;  // card padding, inter-shot gap, caption strip
+
+function box() {  // content box the shots must fit inside; capped + margined so titles stay clear
+  if (innerWidth <= 640)
+    return { w: innerWidth - 16 - 2 * PAD, h: Math.round(0.42 * innerHeight) - 2 * PAD - CAPH };
+  return { w: Math.min(0.42 * innerWidth, 560) - 2 * PAD,
+           h: Math.min(0.78 * innerHeight, 680) - 2 * PAD - CAPH };
 }
 
-function place(el) {
-  const r = el.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
-  let x = r.right + 8; if (x + pw > innerWidth) x = r.left - pw - 8;
-  x = Math.max(8, Math.min(x, innerWidth - pw - 8));
-  let y = Math.max(8, Math.min(r.top, innerHeight - ph - 8));
-  pop.style.left = x + 'px'; pop.style.top = y + 'px';
+function layout(nw, nh, n) {
+  const b = box();
+  if (n <= 1) { const s = Math.min(b.w / nw, b.h / nh);
+    return { stacked: false, w: Math.round(nw * s), h: Math.round(nh * s) }; }
+  const sSide = Math.min((b.w - GAP) / (2 * nw), b.h / nh);   // two across
+  const sStack = Math.min(b.w / nw, (b.h - GAP) / (2 * nh));  // two down
+  const stacked = sStack > sSide, s = Math.max(sSide, sStack);
+  return { stacked, w: Math.max(1, Math.round(nw * s)), h: Math.max(1, Math.round(nh * s)) };
 }
 
-function showPop(el) {
-  clearTimeout(hideT);
+// --- loading: decode every shot before revealing, so the card never flickers in ---
+const decoded = new Set();
+function loadImg(src) {
+  if (decoded.has(src)) { const im = new Image(); im.src = src; return Promise.resolve(im); }
+  const im = new Image(); im.src = src;
+  return im.decode().then(() => { decoded.add(src); return im; }).catch(() => null);
+}
+function shotSrcs(el) {  // title + gameplay only (drop the game-over/state shot)
   const img = el.dataset.img;
-  const nw = +el.dataset.w, nh = +el.dataset.h;
-  let dim = '';
-  if (nw && nh) { const [w, h] = popSize(nw, nh); dim = ' width="' + w + '" height="' + h + '"'; }
+  return el.dataset.slots.split(',').filter(s => s === 'title' || s === 'snap')
+    .map(s => '../images/' + s + '/' + img + '.png');
+}
+function prefetch(el) { shotSrcs(el).forEach(loadImg); }  // warm cache on hover-intent
+
+let token = 0;
+async function showPop(el) {
+  clearTimeout(hideT);
+  const my = ++token;
+  const imgs = (await Promise.all(shotSrcs(el).map(loadImg))).filter(Boolean);
+  if (my !== token || !imgs.length) return;  // superseded by a newer hover, or all missing
+  const nw = +el.dataset.w || imgs[0].naturalWidth;
+  const nh = +el.dataset.h || imgs[0].naturalHeight;
+  const lay = layout(nw, nh, imgs.length);
+  pop.classList.toggle('stacked', lay.stacked);
   pop.innerHTML = '<div class="shots">' +
-    el.dataset.slots.split(',').map(s =>
-      '<img' + dim + ' src="../images/' + s + '/' + img + '.png" onerror="this.remove()">').join('') +
+    imgs.map(im => '<img width="' + lay.w + '" height="' + lay.h + '" src="' + im.src + '">').join('') +
     '</div><div class="cap">' + esc(el.dataset.cap) + '</div>';
   pop.style.display = 'block';
-  place(el);  // dims known up front -> correct measurement, no load race
-  if (!(nw && nh)) {  // fallback: no embedded dims -> size from natural res on load, then re-place
-    pop.querySelectorAll('img').forEach(im => im.addEventListener('load', () => {
-      const [w, h] = popSize(im.naturalWidth, im.naturalHeight);
-      im.width = w; im.height = h; place(el);
-    }));
-  }
 }
-function hidePop() { pop.style.display = 'none'; }
+function hidePop() { token++; pop.style.display = 'none'; }  // bump token to cancel a pending reveal
 
 rowsEl.addEventListener('mouseover', e => {
   const el = e.target.closest('.shot'); if (!el || pinned) return;
+  prefetch(el);
   clearTimeout(hideT); clearTimeout(showT);
   showT = setTimeout(() => showPop(el), 140);
 });

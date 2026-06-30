@@ -891,6 +891,60 @@ def cmd_coinop(args):
     log("coinop backfill done.")
 
 
+# Debut dates for Coin-Op games that the commit-message parser can't reach
+# (added in dateless bulk commits or under a system name). Derived objectively
+# from each MRA's first-add commit in the Coin-Op repo git history (blobless
+# clone + `git log --diff-filter=A`), which is the game's debut in the
+# distribution; the ~2022-09-22 cluster is the repo's initial import seed (the
+# armedf/terracresta cores were already built by then, so those games were
+# genuinely playable). Frozen here so they never drift. Keyed by game name.
+COINOP_FROZEN_DATES = {
+    'Armed F': '2022-09-22',
+    'Armed Police Batrider': '2025-03-31',
+    'Battle Bakraid - Unlimited Version': '2025-03-31',
+    'Battle Garegga': '2023-09-10',
+    'Chouji Meikyuu Legion': '2022-09-22',
+    'Crazy Climber 2': '2022-09-22',
+    "Demon's World - Horror Story": '2023-06-10',
+    'Gang Wars': '2022-11-16',
+    'Hellfire': '2023-05-22',
+    'Hishou Zame': '2025-12-14',
+    'Iga Ninjyutsuden': '2023-09-23',
+    'Ikari III - The Rescue': '2022-10-19',
+    'Kid no Hore Hore Daisakusen': '2022-09-22',
+    'Kozure Ookami': '2022-09-22',
+    'Kyukyoku Tiger': '2025-12-14',
+    'Mahou Daisakusen': '2025-03-31',
+    'Out Zone': '2022-09-22',
+    'P.O.W. - Prisoners of War': '2022-09-28',
+    'Paddle Mania': '2023-03-30',
+    'Pipi & Bibis - Whoopee!!': '2022-12-25',
+    'Prehistoric Isle in 1930': '2022-09-25',
+    'Rally Bike - Dash Yarou': '2023-06-02',
+    'Rod-Land': '2023-05-13',
+    'SAR - Search And Rescue': '2022-09-28',
+    'Same! Same! Same!': '2023-05-26',
+    'Sei Senshi Amatelass': '2022-09-22',
+    'Shippu Mahou Daisakusen': '2025-03-31',
+    'Sky Adventure': '2022-11-16',
+    'Sky Soldiers': '2022-12-23',
+    'Soldam': '2023-05-19',
+    'Street Smart': '2022-09-28',
+    'Tatakae! Big Fighter': '2022-09-22',
+    'Teenage Mutant Ninja Turtles - Turtles in Time': '2025-04-17',
+    'Terra Cresta': '2022-09-22',
+    'Terra Force': '2022-09-22',
+    'The Lord of King': '2023-07-01',
+    'The Next Space': '2023-03-30',
+    'Time Soldiers': '2022-12-23',
+    'Truxton - Tatsujin': '2022-09-22',
+    'Truxton II - Tatsujin Oh': '2022-09-22',
+    'Vimana': '2023-05-26',
+    'Zero Wing': '2023-05-22',
+}
+_COINOP_FROZEN_NORM = {norm_key(k): v for k, v in COINOP_FROZEN_DATES.items()}
+
+
 def join_coinop_to_catalog(con):
     """Attach Coin-Op release dates to coinop catalog titles by normalized prefix."""
     rels = con.execute("SELECT title, release_date, commit_date FROM coinop_releases").fetchall()
@@ -916,6 +970,12 @@ def join_coinop_to_catalog(con):
                 "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",
                 (COINOP_REPO, match["release_date"], match["commit_date"],
                  row["source_id"], row["path"]),
+            )
+            n += 1
+        elif _COINOP_FROZEN_NORM.get(ck):
+            con.execute(
+                "UPDATE catalog SET repo=?, release_date=? WHERE source_id=? AND path=?",
+                (COINOP_REPO, _COINOP_FROZEN_NORM[ck], row["source_id"], row["path"]),
             )
             n += 1
     log(f"  joined {n} Coin-Op titles to release dates")

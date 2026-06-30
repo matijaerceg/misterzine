@@ -960,6 +960,39 @@ _CORE_DATE_RE = re.compile(r"_(20\d{6})\b")
 # Pretty base label per catalog `system` value.
 _BASE_LABEL = {"arcade": "Arcade", "console": "Console", "computer": "Computer", "other": "Other"}
 
+# Hardware maker per console core (keyed by core_name). Console cores have no MRA
+# XML, so manufacturer isn't auto-derived; these are the original console makers.
+CONSOLE_MANUFACTURER = {
+    "NES": "Nintendo", "SNES": "Nintendo", "N64": "Nintendo", "Gameboy": "Nintendo",
+    "Gameboy2P": "Nintendo", "GBA": "Nintendo", "GBA2P": "Nintendo", "SGB": "Nintendo",
+    "PokemonMini": "Nintendo", "GameAndWatch": "Nintendo", "GnW": "Nintendo",
+    "SMS": "Sega", "GameGear2P": "Sega", "MegaDrive": "Sega", "MegaCD": "Sega",
+    "S32X": "Sega", "Saturn": "Sega",
+    "Atari5200": "Atari", "Atari7800": "Atari", "AtariLynx": "Atari", "Jaguar": "Atari",
+    "NeoGeo": "SNK", "NeoGeoPocket": "SNK",
+    "TurboGrafx16": "NEC",
+    "PSX": "Sony",
+    "CDi": "Philips",
+    "Intellivision": "Mattel",
+    "ColecoVision": "Coleco",
+    "Odyssey2": "Magnavox",
+    "ChannelF": "Fairchild",
+    "Astrocade": "Bally",
+    "Arcadia": "Emerson",
+    "Vectrex": "GCE",
+    "WonderSwan": "Bandai", "Super_Vision_8000": "Bandai",
+    "SuperVision": "Watara",
+    "SCV": "Epoch",
+    "CreatiVision": "VTech",
+    "Casio_PV-1000": "Casio",
+    "VC4000": "Interton",
+    "AdventureVision": "Entex",
+    "Gamate": "Bit Corporation",
+    "AY-3-8500": "General Instrument",
+    "MyVision": "Nichibutsu",
+    "BBCBridgeCompanion": "BBC Enterprises",
+}
+
 
 def core_build_date(title):
     """Pull a console/computer core's build date from its `_YYYYMMDD` filename suffix.
@@ -978,6 +1011,7 @@ def _web_row(r):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
+    manufacturer = r["manufacturer"] or ""
     if system == "arcade":
         title = r["title"]
         date = (r["release_date"] or "")[:10]
@@ -994,6 +1028,8 @@ def _web_row(r):
             date = core_build_date(r["title"]) or ""
             date_kind = "build" if date else ""
         genre = ""
+        if system == "console" and not manufacturer:
+            manufacturer = CONSOLE_MANUFACTURER.get(core_name(r["title"]), "")
     return {
         "title": title,
         "base": base,
@@ -1001,8 +1037,21 @@ def _web_row(r):
         "date": date,
         "date_kind": date_kind,
         "year": r["year"] or "",
-        "manufacturer": r["manufacturer"] or "",
+        "manufacturer": manufacturer,
+        "deprecated": False,
     }
+
+
+# Cores no longer in any current DB but worth showing for the record. The Sega
+# Genesis core was retired and replaced by the MegaDrive core (same console);
+# dates from its archived repo (MiSTer-devel/Genesis_MiSTer, earliest..last rbf).
+EXTRA_WEB_ROWS = [
+    {
+        "title": "Genesis", "base": "Console", "genre": "",
+        "date": "2018-06-02", "date_kind": "debut", "year": "",
+        "manufacturer": "Sega", "deprecated": True,
+    },
+]
 
 
 def cmd_export_web(args):
@@ -1016,6 +1065,7 @@ def cmd_export_web(args):
     rows = con.execute("SELECT * FROM catalog").fetchall()
     con.close()
     data = [_web_row(r) for r in rows]
+    data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
     (outdir / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
@@ -1104,7 +1154,7 @@ let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most rece
 
 function typeLabel(d) {
   if (d.base === 'Arcade') return d.genre ? 'Arcade, ' + d.genre : 'Arcade';
-  return d.base + ' core';
+  return d.base + ' core' + (d.deprecated ? ' (deprecated)' : '');
 }
 
 function render() {

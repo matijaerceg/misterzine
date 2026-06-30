@@ -121,10 +121,14 @@ then `jtcores` and `genre`.)
 - `docs/releases/data.json` — one slim record per release unit (~2,010): `title`, `base`
   (Arcade/Console/Computer/Other), `genre`, `date`, `date_kind`, `year`, `manufacturer`.
 - `docs/releases/index.html` — a single dependency-free page (vanilla JS) rendering a searchable,
-  sortable, type-filterable table. The **Type** column reads `Arcade, <genre>` for arcade
-  titles and `Console core` / `Computer core` / `Other core` for cores. The **Date** column is
-  the MiSTer debut where known, otherwise the core's latest build date (parsed from its
-  `_YYYYMMDD` filename suffix, shown greyed).
+  sortable, type-filterable table, **sorted most-recent-first by default**. The **Type** column
+  reads `Arcade, <genre>` for arcade titles and `Console core` / `Computer core` / `Other core`
+  for cores (a retired core reads `… core (deprecated)`). The **Date** column is the MiSTer debut
+  where known, otherwise the core's latest build date (`_YYYYMMDD` suffix, greyed). Console cores
+  carry their hardware maker (Nintendo/Sega/…) from the `CONSOLE_MANUFACTURER` map.
+
+The retired **Sega Genesis** core (replaced by MegaDrive — same console) is no longer in any DB,
+so it's injected for the record via `EXTRA_WEB_ROWS`, dated from its archived repo.
 
 Genre comes from MAME's **catver.ini** (fetched at build time, cached under `data/cache/`),
 joined to each title by its MRA `<setname>`. ~708 arcade titles are genred; the rest

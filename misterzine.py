@@ -157,6 +157,10 @@ CREATE TABLE IF NOT EXISTS arcade_repos (
     repo TEXT PRIMARY KEY, core TEXT, html_url TEXT,
     first_commit TEXT, last_commit TEXT, commits INTEGER, crawled_at TEXT
 );
+CREATE TABLE IF NOT EXISTS core_repos (
+    repo TEXT PRIMARY KEY, core TEXT, html_url TEXT,
+    first_commit TEXT, last_commit TEXT, commits INTEGER, crawled_at TEXT
+);
 CREATE TABLE IF NOT EXISTS jt_cores (
     folder TEXT PRIMARY KEY, rbf TEXT,
     first_commit TEXT, last_commit TEXT, commits INTEGER, crawled_at TEXT
@@ -461,6 +465,102 @@ def join_repos_to_catalog(con):
             )
             n += 1
     log(f"  joined {n} arcade titles to a core repo (release dates attached)")
+
+
+# --- command: core-repos (debut dates for console/computer/other cores) ---
+
+# Hand-mapped overrides where the catalog core name doesn't equal the repo base
+# name (repo = MiSTer-devel/<base>_MiSTer). Add entries here as misses surface.
+CORE_REPO_OVERRIDES = {
+    # "CatalogCoreName": "RepoBaseName",
+    "GBA2P": "GBA",            # 2-player variant ships from the base core repo
+    "GameGear2P": "SMS",       # Game Gear lives in the SMS core
+    "Gameboy2P": "Gameboy",
+    "Minimig": "Minimig-AGA",  # Amiga
+    "Ti994a": "TI-99_4A",
+    "RX78": "RX-78",
+    "GameOfLife": "Life",
+}
+
+
+def core_repo_base(title):
+    """Repo base name for a console/computer/other core title.
+
+    The catalog title is the .rbf stem (e.g. `C64_20260603`); strip the
+    `_YYYYMMDD` build-date suffix to get the core name, which maps to the
+    per-core repo `MiSTer-devel/<core>_MiSTer`.
+    """
+    core = _CORE_DATE_RE.sub("", title or "").rstrip("_ ")
+    return CORE_REPO_OVERRIDES.get(core, core)
+
+
+def cmd_core_repos(args):
+    con = connect()
+    rows = con.execute(
+        "SELECT DISTINCT title FROM catalog WHERE system IN ('console','computer','other')"
+    ).fetchall()
+    # de-dupe by repo base name (a core can appear under multiple sources)
+    bases = {}
+    for r in rows:
+        base = core_repo_base(r["title"])
+        if base:
+            bases.setdefault(base, r["title"])
+    bases = dict(sorted(bases.items()))
+    if args.limit:
+        bases = dict(list(bases.items())[: args.limit])
+    log(f"crawling {len(bases)} console/computer/other core repos ...")
+    hit = miss = 0
+    for i, base in enumerate(bases, 1):
+        full = f"{ARCADE_REPO_ORG}/{base}_MiSTer"
+        try:
+            first, last, count = repo_commit_bounds(full)
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                miss += 1
+                log(f"  [{i}/{len(bases)}] {full}: no repo (404)")
+                continue
+            log(f"  [{i}/{len(bases)}] {full}: ERROR {e}")
+            continue
+        except Exception as e:
+            log(f"  [{i}/{len(bases)}] {full}: ERROR {e}")
+            continue
+        if not first:
+            miss += 1
+            continue
+        hit += 1
+        con.execute(
+            "INSERT INTO core_repos(repo,core,html_url,first_commit,last_commit,commits,crawled_at) "
+            "VALUES(?,?,?,?,?,?,?) ON CONFLICT(repo) DO UPDATE SET "
+            "first_commit=excluded.first_commit, last_commit=excluded.last_commit, "
+            "commits=excluded.commits, crawled_at=excluded.crawled_at",
+            (full, base, f"https://github.com/{full}", first, last, count, now_iso()),
+        )
+        if i % 20 == 0 or i == len(bases):
+            con.commit()
+            log(f"  [{i}/{len(bases)}] {full}  debut={first[:10]}  updated={last[:10] if last else '?'}")
+    con.commit()
+    join_core_repos_to_catalog(con)
+    con.commit()
+    con.close()
+    log(f"core repos crawl done. {hit} resolved, {miss} unresolved.")
+
+
+def join_core_repos_to_catalog(con):
+    """Attach per-core repo debut dates to console/computer/other catalog rows."""
+    repos = con.execute("SELECT repo, core, first_commit, last_commit FROM core_repos").fetchall()
+    by_base = {r["core"]: r for r in repos}
+    n = 0
+    for row in con.execute(
+        "SELECT source_id, path, title FROM catalog WHERE system IN ('console','computer','other')"
+    ).fetchall():
+        r = by_base.get(core_repo_base(row["title"]))
+        if r:
+            con.execute(
+                "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",
+                (r["repo"], r["first_commit"], r["last_commit"], row["source_id"], row["path"]),
+            )
+            n += 1
+    log(f"  joined {n} console/computer/other titles to a core repo (debut dates attached)")
 
 
 # --- command: enrich-mra (year / manufacturer from MRA XML) ---------------
@@ -816,8 +916,13 @@ def _web_row(r):
     else:
         # cores: strip the date suffix from the display name (date has its own column)
         title = _CORE_DATE_RE.sub("", r["title"]).rstrip("_ ")
-        date = core_build_date(r["title"]) or ""
-        date_kind = "build" if date else ""
+        # prefer the real MiSTer debut (per-core repo) over the build-date suffix
+        debut = (r["release_date"] or "")[:10]
+        if debut:
+            date, date_kind = debut, "debut"
+        else:
+            date = core_build_date(r["title"]) or ""
+            date_kind = "build" if date else ""
         genre = ""
     return {
         "title": title,
@@ -832,21 +937,38 @@ def _web_row(r):
 
 def cmd_export_web(args):
     con = connect()
-    DOCSDIR.mkdir(parents=True, exist_ok=True)
+    # The site lives at /releases (Pages still serves from docs/); the docs root
+    # just redirects there so the bare URL keeps working.
+    outdir = DOCSDIR / "releases"
+    outdir.mkdir(parents=True, exist_ok=True)
     rows = con.execute("SELECT * FROM catalog").fetchall()
     con.close()
     data = [_web_row(r) for r in rows]
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
-    (DOCSDIR / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
-    (DOCSDIR / "index.html").write_text(SITE_HTML, encoding="utf-8")
-    log(f"web export written to {DOCSDIR}")
+    (outdir / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    (outdir / "index.html").write_text(SITE_HTML, encoding="utf-8")
+    (DOCSDIR / "index.html").write_text(ROOT_REDIRECT_HTML, encoding="utf-8")
+    log(f"web export written to {outdir}")
     log(f"  data.json: {len(data)} rows")
     by_base = {}
     for d in data:
         by_base[d["base"]] = by_base.get(d["base"], 0) + 1
     log(f"  by type: {by_base}")
     log(f"  arcade with genre: {sum(1 for d in data if d['genre'])}")
+
+
+ROOT_REDIRECT_HTML = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>misterzine</title>
+<link rel="canonical" href="./releases/">
+<meta http-equiv="refresh" content="0; url=./releases/">
+</head>
+<body><p>Redirecting to <a href="./releases/">releases</a> &hellip;</p></body>
+</html>
+"""
 
 
 SITE_HTML = """<!DOCTYPE html>
@@ -1011,6 +1133,7 @@ def cmd_build(args):
     cmd_snapshot(args)
     if args.with_repos:
         cmd_repos(args)
+        cmd_core_repos(args)
         cmd_jtcores(args)
         cmd_coinop(args)
     cmd_export(args)
@@ -1025,9 +1148,13 @@ def main():
     sp = sub.add_parser("snapshot", help="fetch DBs, diff vs last snapshot, log dated events")
     sp.set_defaults(func=cmd_snapshot)
 
-    rp = sub.add_parser("repos", help="crawl per-core repos for real release dates")
+    rp = sub.add_parser("repos", help="crawl per-core arcade repos for real release dates")
     rp.add_argument("--limit", type=int, default=0, help="limit number of repos (testing)")
     rp.set_defaults(func=cmd_repos)
+
+    crp = sub.add_parser("core-repos", help="crawl console/computer/other per-core repos for debut dates")
+    crp.add_argument("--limit", type=int, default=0, help="limit number of repos (testing)")
+    crp.set_defaults(func=cmd_core_repos)
 
     mp = sub.add_parser("enrich-mra", help="add year/manufacturer/rbf from MRA XML")
     mp.set_defaults(func=cmd_enrich_mra)

@@ -46,12 +46,20 @@ files are force-squashed (each lives in exactly **one** commit), and the Distrib
 also wholesale-recommits its core files, so per-file git lineage is destroyed.
 
 The **only** source of true historical MiSTer release dates is the **per-core GitHub repos**
-(`MiSTer-devel/Arcade-*`). Each repo's *first commit* is that core's MiSTer debut, and that
-history is intact going back to 2017. So:
+(`MiSTer-devel/Arcade-*` for arcade, `MiSTer-devel/<core>_MiSTer` for console/computer/other).
+Each repo's *first commit* is that core's MiSTer debut, and that history is intact going back
+to 2017. So:
 
-- **Retrospective dates** come from crawling those ~156 arcade repos (`repos` command).
+- **Retrospective dates** come from crawling those ~156 arcade repos (`repos` command) and the
+  console/computer/other per-core repos (`core-repos` command).
 - **The current catalog** comes from the 3 `db.json.zip` files (`snapshot` command).
 - **Going-forward dates** come from snapshotting those DBs and diffing hashes over time.
+
+> **Why `core-repos` matters:** console/computer/other cores ship as a single `.rbf` whose
+> filename carries a `_YYYYMMDD` *build-date* suffix — **not** a debut date. An upstream mass
+> rebuild restamps dozens of old cores with the same recent date (e.g. C64 looked like a
+> 2026 release). `core-repos` replaces that with the real first-commit debut; cores with no
+> `MiSTer-devel` repo (community cores) fall back to the build date, shown greyed on the site.
 
 Jotego and Coin-Op keep their history elsewhere, and both are now backfilled too:
 
@@ -84,6 +92,7 @@ python misterzine.py export               # regenerate JSON/JSONL exports
 python misterzine.py export-web           # regenerate the static site in docs/ (GitHub Pages)
 python misterzine.py stats                # summary
 python misterzine.py repos                # MiSTer-devel arcade release dates (occasional)
+python misterzine.py core-repos           # console/computer/other core debut dates (occasional)
 python misterzine.py jtcores              # Jotego release dates from jtcores monorepo
 python misterzine.py coinop               # Coin-Op release dates from develop commit messages
 python misterzine.py genre                # arcade genre from MAME catver.ini (joined on setname)
@@ -91,7 +100,7 @@ python misterzine.py genre                # arcade genre from MAME catver.ini (j
 
 Typical first-time setup (full retrospective):
 ```bash
-python misterzine.py build --with-repos   # snapshot + all three date backfills + export
+python misterzine.py build --with-repos   # snapshot + all four date backfills + export
 python misterzine.py enrich-mra           # year/manufacturer/rbf/setname (also re-enables Jotego join)
 python misterzine.py jtcores              # re-run so the rbf join now attaches Jotego dates
 python misterzine.py genre                # arcade genre from catver.ini (needs setname from enrich-mra)
@@ -103,10 +112,11 @@ then `jtcores` and `genre`.)
 
 ## The website (`docs/` → GitHub Pages)
 
-`export-web` writes a self-contained static site to `docs/`:
-- `docs/data.json` — one slim record per release unit (~2,010): `title`, `base`
+`export-web` writes a self-contained static site under `docs/releases/` (served at
+`/misterzine/releases/`); `docs/index.html` is just a redirect to it so the bare URL still works:
+- `docs/releases/data.json` — one slim record per release unit (~2,010): `title`, `base`
   (Arcade/Console/Computer/Other), `genre`, `date`, `date_kind`, `year`, `manufacturer`.
-- `docs/index.html` — a single dependency-free page (vanilla JS) rendering a searchable,
+- `docs/releases/index.html` — a single dependency-free page (vanilla JS) rendering a searchable,
   sortable, type-filterable table. The **Type** column reads `Arcade, <genre>` for arcade
   titles and `Console core` / `Computer core` / `Other core` for cores. The **Date** column is
   the MiSTer debut where known, otherwise the core's latest build date (parsed from its
@@ -133,7 +143,8 @@ On Windows, schedule with Task Scheduler, or use the Claude Code `/schedule` ski
 - `sources` — the 3 DBs and their last-seen timestamps.
 - `catalog` — one row per (source, path) release unit: system, title, hash, year,
   manufacturer, rbf, repo, release_date, last_update, first_seen/last_seen/last_changed.
-- `arcade_repos` — per-core repo: first_commit, last_commit, commit count.
+- `arcade_repos` — per-core arcade repo: first_commit, last_commit, commit count.
+- `core_repos` — per-core console/computer/other repo (debut dates): first_commit, last_commit, commit count.
 - `events` — dated change log (the going-forward feed).
 
 ## Layout

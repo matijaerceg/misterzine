@@ -1436,7 +1436,7 @@ ROOT_REDIRECT_HTML = """<!DOCTYPE html>
 """
 
 
-SITE_HTML = """<!DOCTYPE html>
+SITE_HTML = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -1445,7 +1445,8 @@ SITE_HTML = """<!DOCTYPE html>
 <style>
   :root { color-scheme: light dark; }
   * { box-sizing: border-box; }
-  body { font: 14px/1.4 system-ui, sans-serif; margin: 0; padding: 1rem; }
+  body { font: 14px/1.4 system-ui, sans-serif; margin: 0; }
+  main { padding: 1rem; }
   header { margin-bottom: .75rem; }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
@@ -1457,35 +1458,67 @@ SITE_HTML = """<!DOCTYPE html>
   table { border-collapse: collapse; width: 100%; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top; }
   th { position: sticky; top: 0; background: Canvas; cursor: pointer; user-select: none; white-space: nowrap; }
-  th[aria-sort=ascending]::after { content: " \\2191"; }
-  th[aria-sort=descending]::after { content: " \\2193"; }
+  th[aria-sort=ascending]::after { content: " \2191"; }
+  th[aria-sort=descending]::after { content: " \2193"; }
   td.type { white-space: nowrap; color: #06c; }
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: #8881; }
   .build { color: #888; }
-  /* screenshot popup — right-docked, vertically centered card (bottom-docked on mobile) */
-  .shot { cursor: zoom-in; border-bottom: 1px dotted #8886; }
-  #popup { position: fixed; z-index: 50; display: none;
-           right: 16px; top: 50%; transform: translateY(-50%);
-           max-width: min(42vw, 576px); padding: .5rem; background: Canvas;
-           border: 1px solid #8888; border-radius: 6px; box-shadow: 0 6px 24px #0007; }
-  #popup .shots { display: flex; gap: .5rem; justify-content: center; }
-  #popup.stacked .shots { flex-direction: column; align-items: center; }
-  #popup img { image-rendering: pixelated; background: #000;
-               border-radius: 3px; display: block; }  /* w/h set inline by JS */
-  #popup .cap { margin-top: .4rem; font-size: .8rem; color: #888; text-align: center; }
-  @media (max-width: 640px) {
-    /* bottom-docked so it never crowds the (also narrow) title column */
-    #popup { right: 8px; left: 8px; top: auto; bottom: 8px; transform: none; max-width: none; }
+  /* clickable rows that have a detail view */
+  tr.has-detail { cursor: pointer; }
+  tr.open td { background: #06c3; }
+  .dv-icon { margin-left: .4rem; color: #888; vertical-align: -1px; }
+
+  /* --- detail panel: slides in from the left --- */
+  #panel { position: fixed; top: 0; left: 0; height: 100vh; width: var(--pw, calc(100vw / 3));
+           transform: translateX(-100%); transition: transform .28s ease;
+           overflow-y: auto; z-index: 100; background: Canvas;
+           border-right: 1px solid #8884; box-shadow: 4px 0 24px #0006; padding: 1rem;
+           touch-action: pan-y; }
+  body.panel-open #panel { transform: translateX(0); }
+  #panel[hidden] { display: none; }
+  #panel .close { position: sticky; top: 0; float: right; font-size: 1.4rem; line-height: 1;
+                  border: 0; background: transparent; color: inherit; cursor: pointer; padding: .1rem .3rem; }
+  #panel h2 { font-size: 1.1rem; margin: 0 1.5rem .5rem 0; }
+  #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
+  #panel dt { color: #888; }
+  #panel dd { margin: 0; }
+  #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
+  #panel .frame { width: 100%; background: #000; margin: .5rem 0; }
+  #panel .frame img { width: 100%; height: 100%; object-fit: fill;
+                      image-rendering: pixelated; display: block; }
+
+  /* draggable edge: resize the panel / flick left to close (reflow mode only) */
+  #resizer { position: fixed; top: 0; height: 100vh; width: 12px; z-index: 101;
+             left: var(--pw, calc(100vw / 3)); margin-left: -6px;
+             cursor: ew-resize; display: none; touch-action: none; }
+  body.panel-open #resizer { display: block; }
+  #resizer::before { content: ""; position: absolute; top: 0; bottom: 0; left: 5px; width: 2px; background: transparent; }
+  #resizer:hover::before, body.resizing #resizer::before { background: #06caa; }
+  body.resizing { cursor: ew-resize; user-select: none; }
+  body.resizing #panel, body.resizing main { transition: none; }
+
+  @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
+    main { transition: margin-left .28s ease; }
+    body.panel-open main { margin-left: var(--pw, calc(100vw / 3)); }
+  }
+  @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen, no resize */
+    #panel { width: 100vw; }
+    body.panel-open { overflow: hidden; }
+    body.panel-open #resizer { display: none; }
   }
 </style>
 </head>
 <body>
+<main>
 <header>
   <h1>misterzine — MiSTer FPGA core &amp; title index</h1>
   <p class="legend">MiSTer release date = core's MiSTer debut where known, otherwise its latest
     build date (<span class="build">grey</span>). Original Year = the real hardware's release year.
-    Genre via MAME catver.ini.</p>
+    Genre via MAME catver.ini. Rows with a
+    <svg class="dv-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+      stroke-width="1.3" aria-hidden="true"><rect x="1.5" y="2" width="13" height="9" rx="1"/>
+      <path d="M5.5 14h5M8 11v3"/></svg> open a detail view.</p>
 </header>
 <div class="controls">
   <input type="search" id="q" placeholder="Search title, type, manufacturer…" autofocus>
@@ -1508,9 +1541,17 @@ SITE_HTML = """<!DOCTYPE html>
   </tr></thead>
   <tbody id="rows"></tbody>
 </table>
-<div id="popup"></div>
+</main>
+<aside id="panel" hidden></aside>
 <script>
 let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most recent first
+let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
+
+const hasDetail = d => !!d.img;
+
+const DV_ICON = '<svg class="dv-icon" width="13" height="13" viewBox="0 0 16 16" ' +
+  'fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">' +
+  '<rect x="1.5" y="2" width="13" height="9" rx="1"/><path d="M5.5 14h5M8 11v3"/></svg>';
 
 function typeLabel(d) {
   if (d.base === 'Arcade') return d.genre ? 'Arcade, ' + d.genre : 'Arcade';
@@ -1518,18 +1559,14 @@ function typeLabel(d) {
 }
 
 function titleCell(d) {
-  if (!d.img) return esc(d.title);
-  const cap = d.title + (d.year ? ' (' + d.year + ')' : '') +
-    (d.manufacturer ? ' — ' + d.manufacturer : '') + (d.genre ? ' • ' + d.genre : '');
-  return '<span class="shot" data-img="' + escA(d.img) + '" data-slots="' +
-    d.img_slots.join(',') + '" data-w="' + (d.img_w || '') + '" data-h="' + (d.img_h || '') +
-    '" data-cap="' + escA(cap) + '">' + esc(d.title) + '</span>';
+  return esc(d.title) + (hasDetail(d) ? ' ' + DV_ICON : '');
 }
 
 function render() {
   const tb = document.getElementById('rows');
-  tb.innerHTML = view.map(d =>
-    '<tr><td>' + titleCell(d) + '</td>' +
+  tb.innerHTML = view.map((d, i) =>
+    '<tr' + (hasDetail(d) ? ' class="has-detail' + (d === openRow ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
+    '<td>' + titleCell(d) + '</td>' +
     '<td class="type">' + esc(typeLabel(d)) + '</td>' +
     '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
     '<td>' + esc(d.year) + '</td>' +
@@ -1538,7 +1575,7 @@ function render() {
   document.getElementById('count').textContent = view.length + ' of ' + DATA.length;
 }
 
-function esc(s) { return (s || '').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+function esc(s) { return (s == null ? '' : '' + s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
 function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
 
 function apply() {
@@ -1570,82 +1607,175 @@ document.querySelectorAll('th').forEach(th => th.addEventListener('click', () =>
   apply();
 }));
 
-// --- screenshot popup (hover on desktop, tap-to-pin on touch) ---
-const pop = document.getElementById('popup');
-const rowsEl = document.getElementById('rows');
-let pinned = false, showT, hideT;
+// --- detail panel ---
+const panel = document.getElementById('panel');
 
-// --- sizing: pick side-by-side vs stacked, whichever makes the two shots bigger ---
-const PAD = 8, GAP = 8, CAPH = 26;  // card padding, inter-shot gap, caption strip
+function detailHTML(d) {
+  const rows = [['Type', typeLabel(d)]];
+  if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
+  if (d.year) rows.push(['Original year', d.year]);
+  rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build — debut unknown)')]);
+  if (d.deprecated) rows.push(['Status', 'Deprecated']);
 
-function box() {  // content box the shots must fit inside; capped + margined so titles stay clear
-  if (innerWidth <= 640)
-    return { w: innerWidth - 16 - 2 * PAD, h: Math.round(0.42 * innerHeight) - 2 * PAD - CAPH };
-  return { w: Math.min(0.42 * innerWidth, 560) - 2 * PAD,
-           h: Math.min(0.78 * innerHeight, 680) - 2 * PAD - CAPH };
+  const dl = '<dl>' + rows.map(([k, v]) => '<dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd>').join('') + '</dl>';
+  const prose = d.detail ? '<p class="detail">' + esc(d.detail) + '</p>' : '';
+  // already-superwide screenshots (dual/triple-screen: Sagaia, Darius, …) → 8:3.
+  // 2.4 sits below the dual-screen cluster (2.67+) but above wide single screens
+  // like the PGM 448x224 games (2.0), which stay 4:3.
+  const aspect = d.img_h ? d.img_w / d.img_h : 1;
+  const ratio = aspect >= 2.4 ? '8 / 3' : (d.img_w >= d.img_h ? '4 / 3' : '3 / 4');
+  const shots = (d.img_slots || []).map(s =>
+    '<div class="frame" style="aspect-ratio:' + ratio + '">' +
+    '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
+  ).join('');
+
+  return '<button class="close" aria-label="Close">×</button>' +
+    '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') + '</h2>' +
+    dl + prose + shots;
 }
 
-function layout(nw, nh, n) {
-  const b = box();
-  if (n <= 1) { const s = Math.min(b.w / nw, b.h / nh);
-    return { stacked: false, w: Math.round(nw * s), h: Math.round(nh * s) }; }
-  const sSide = Math.min((b.w - GAP) / (2 * nw), b.h / nh);   // two across
-  const sStack = Math.min(b.w / nw, (b.h - GAP) / (2 * nh));  // two down
-  const stacked = sStack > sSide, s = Math.max(sSide, sStack);
-  return { stacked, w: Math.max(1, Math.round(nw * s)), h: Math.max(1, Math.round(nh * s)) };
+function openPanel(d) {
+  if (!d || !hasDetail(d)) return;
+  openRow = d;
+  panel.innerHTML = detailHTML(d);
+  panel.scrollTop = 0;
+  panel.hidden = false;
+  // force a reflow so the off-screen start position is committed before the
+  // transition; otherwise the display:none→block toggle swallows the slide-in
+  void panel.offsetWidth;
+  document.body.classList.add('panel-open');
+  markOpenRow();
 }
 
-// --- loading: decode every shot before revealing, so the card never flickers in ---
-const decoded = new Set();
-function loadImg(src) {
-  if (decoded.has(src)) { const im = new Image(); im.src = src; return Promise.resolve(im); }
-  const im = new Image(); im.src = src;
-  return im.decode().then(() => { decoded.add(src); return im; }).catch(() => null);
+function closePanel() {
+  document.body.classList.remove('panel-open');
+  openRow = null;
+  markOpenRow();
+  const onEnd = () => { panel.hidden = true; panel.removeEventListener('transitionend', onEnd); };
+  panel.addEventListener('transitionend', onEnd);
 }
-function shotSrcs(el) {  // title + gameplay only (drop the game-over/state shot)
-  const img = el.dataset.img;
-  return el.dataset.slots.split(',').filter(s => s === 'title' || s === 'snap')
-    .map(s => '../images/' + s + '/' + img + '.png');
-}
-function prefetch(el) { shotSrcs(el).forEach(loadImg); }  // warm cache on hover-intent
 
-let token = 0;
-async function showPop(el) {
-  clearTimeout(hideT);
-  const my = ++token;
-  const imgs = (await Promise.all(shotSrcs(el).map(loadImg))).filter(Boolean);
-  if (my !== token || !imgs.length) return;  // superseded by a newer hover, or all missing
-  const nw = +el.dataset.w || imgs[0].naturalWidth;
-  const nh = +el.dataset.h || imgs[0].naturalHeight;
-  const lay = layout(nw, nh, imgs.length);
-  pop.classList.toggle('stacked', lay.stacked);
-  pop.innerHTML = '<div class="shots">' +
-    imgs.map(im => '<img width="' + lay.w + '" height="' + lay.h + '" src="' + im.src + '">').join('') +
-    '</div><div class="cap">' + esc(el.dataset.cap) + '</div>';
-  pop.style.display = 'block';
+function markOpenRow() {
+  document.querySelectorAll('#rows tr.open').forEach(tr => tr.classList.remove('open'));
+  if (openRow == null) return;
+  const i = view.findIndex(d => d === openRow);
+  if (i >= 0) { const tr = document.querySelector('#rows tr[data-i="' + i + '"]'); if (tr) tr.classList.add('open'); }
 }
-function hidePop() { token++; pop.style.display = 'none'; }  // bump token to cancel a pending reveal
 
-rowsEl.addEventListener('mouseover', e => {
-  const el = e.target.closest('.shot'); if (!el || pinned) return;
-  prefetch(el);
-  clearTimeout(hideT); clearTimeout(showT);
-  showT = setTimeout(() => showPop(el), 140);
+document.getElementById('rows').addEventListener('click', e => {
+  const tr = e.target.closest('tr.has-detail');
+  if (tr) openPanel(view[+tr.dataset.i]);
 });
-rowsEl.addEventListener('mouseout', e => {
-  if (pinned || !e.target.closest('.shot')) return;
-  clearTimeout(showT); hideT = setTimeout(hidePop, 120);
+panel.addEventListener('click', e => { if (e.target.closest('.close')) closePanel(); });
+
+// --- arrow-key row navigation (Up/Down = click prev/next detail row) ---
+function selectableIndices() {
+  const out = [];
+  for (let i = 0; i < view.length; i++) if (hasDetail(view[i])) out.push(i);
+  return out;
+}
+function currentIndex() {
+  return openRow == null ? -1 : view.findIndex(d => d === openRow);
+}
+function firstVisibleSelectableIdx(fromBottom) {
+  const rows = [...document.querySelectorAll('#rows tr.has-detail')];
+  if (fromBottom) rows.reverse();
+  for (const tr of rows) {
+    const r = tr.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) return +tr.dataset.i;  // first row in/below the viewport top
+  }
+  return -1;
+}
+function navigate(dir) {  // dir: +1 down, -1 up
+  const sel = selectableIndices();
+  if (!sel.length) return;
+  const cur = currentIndex();
+  let target;
+  if (cur < 0) {                                   // nothing selected → top (or bottom) visible row
+    target = firstVisibleSelectableIdx(dir < 0);
+    if (target < 0) target = dir > 0 ? sel[0] : sel[sel.length - 1];
+  } else {
+    const npos = sel.indexOf(cur) + dir;
+    if (npos < 0 || npos >= sel.length) return;    // clamp at the ends
+    target = sel[npos];
+  }
+  openPanel(view[target]);
+  const tr = document.querySelector('#rows tr[data-i="' + target + '"]');
+  if (tr) tr.scrollIntoView({ block: 'nearest' });
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { if (document.body.classList.contains('panel-open')) closePanel(); return; }
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (document.activeElement && document.activeElement.tagName === 'SELECT') return;  // let the type dropdown use arrows
+    e.preventDefault();
+    navigate(e.key === 'ArrowDown' ? 1 : -1);
+  }
 });
-rowsEl.addEventListener('click', e => {
-  const el = e.target.closest('.shot'); if (!el) return;
-  e.preventDefault(); pinned = true; showPop(el);
+
+// swipe-left to close
+let sx = 0, sy = 0, axis = null, dx = 0;
+panel.addEventListener('pointerdown', e => {
+  if (e.target.closest('.close')) return;
+  sx = e.clientX; sy = e.clientY; axis = null; dx = 0;
 });
-pop.addEventListener('mouseover', () => { if (!pinned) clearTimeout(hideT); });
-pop.addEventListener('mouseout', () => { if (!pinned) hideT = setTimeout(hidePop, 120); });
-document.addEventListener('click', e => {
-  if (pinned && !e.target.closest('.shot') && !e.target.closest('#popup')) { pinned = false; hidePop(); }
+panel.addEventListener('pointermove', e => {
+  if (!e.buttons && e.pointerType === 'mouse') return;
+  if (sx === 0 && sy === 0) return;
+  const mx = e.clientX - sx, my = e.clientY - sy;
+  if (!axis) {
+    if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+    axis = Math.abs(mx) > Math.abs(my) ? 'x' : 'y';
+    if (axis === 'y') { sx = sy = 0; return; }  // vertical → let it scroll
+    panel.style.transition = 'none';
+  }
+  if (axis === 'x') { dx = Math.min(0, mx); panel.style.transform = 'translateX(' + dx + 'px)'; }
 });
-window.addEventListener('scroll', () => { if (!pinned) hidePop(); }, true);
+function endSwipe() {
+  if (axis === 'x') {
+    panel.style.transition = '';
+    panel.style.transform = '';
+    if (dx < -80) closePanel();
+  }
+  sx = sy = 0; axis = null; dx = 0;
+}
+panel.addEventListener('pointerup', endSwipe);
+panel.addEventListener('pointercancel', endSwipe);
+
+// --- draggable edge: resize within bounds, flick left past CLOSEW to close ---
+const MINW = 240, CLOSEW = 150, maxW = () => innerWidth * 0.8;
+const resizer = document.createElement('div');
+resizer.id = 'resizer';
+document.body.appendChild(resizer);
+function setPanelW(px) { document.documentElement.style.setProperty('--pw', Math.min(px, maxW()) + 'px'); }
+let committedW = +localStorage.getItem('mz-panel-w') || 0;
+if (committedW) setPanelW(committedW);
+
+let resizing = false;
+resizer.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  resizing = true;
+  resizer.setPointerCapture(e.pointerId);
+  document.body.classList.add('resizing');
+});
+resizer.addEventListener('pointermove', e => {
+  if (resizing) setPanelW(Math.max(40, e.clientX));  // follow the cursor; let it visibly shrink toward close
+});
+function endResize(e) {
+  if (!resizing) return;
+  resizing = false;
+  document.body.classList.remove('resizing');
+  if (e.clientX < CLOSEW) {                            // flicked/dragged past the edge → close
+    if (committedW) setPanelW(committedW); else document.documentElement.style.removeProperty('--pw');
+    closePanel();
+    return;
+  }
+  committedW = Math.round(Math.min(Math.max(e.clientX, MINW), maxW()));
+  setPanelW(committedW);
+  localStorage.setItem('mz-panel-w', committedW);
+}
+resizer.addEventListener('pointerup', endResize);
+resizer.addEventListener('pointercancel', endResize);
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

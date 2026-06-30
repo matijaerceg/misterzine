@@ -1083,16 +1083,81 @@ def parse_catver(text):
     return cats
 
 
+# The MAME arcade DAT (cached by the image pipeline) carries year, manufacturer
+# and cloneof per setname for every arcade machine — a far richer, newer source
+# than catver. We mine it to (a) fill arcade rows whose MRA shipped no year /
+# manufacturer and (b) supply the parent setname so clone rows can inherit a
+# parent's genre/year/manufacturer. Loaded lazily, guarded: on a fresh checkout
+# the DAT may not be cached yet, in which case these fills simply no-op.
+MAME_DAT = CACHEDIR / "MAME_arcade.dat"
+_DAT_MACHINE = re.compile(r'<machine\s+name="([^"]+)"([^>]*)>(.*?)</machine>', re.S)
+
+
+def load_arcade_dat_meta():
+    """{setname_lower: {'year','manufacturer','parent'}} from the MAME arcade DAT.
+
+    Returns {} if the DAT isn't cached (keeps export/build offline-safe)."""
+    if not MAME_DAT.exists():
+        return {}
+    import html
+    txt = MAME_DAT.read_text(encoding="utf-8", errors="ignore")
+    meta = {}
+    for m in _DAT_MACHINE.finditer(txt):
+        name, attrs, body = m.group(1).lower(), m.group(2), m.group(3)
+        co = re.search(r'cloneof="([^"]+)"', attrs)
+        yr = re.search(r"<year>([^<]*)</year>", body)
+        mf = re.search(r"<manufacturer>([^<]*)</manufacturer>", body)
+        meta[name] = {
+            "year": (yr.group(1).strip() if yr and yr.group(1).strip() not in ("", "????") else ""),
+            "manufacturer": (html.unescape(mf.group(1)).strip() if mf else ""),
+            "parent": (co.group(1).lower() if co else None),
+        }
+    return meta
+
+
+def load_manifest_setnames():
+    """{display_title: setname} from the image manifest. Many backfilled arcade
+    rows have a setname only here (resolved by the image pipeline), not in
+    catalog.setname, so this recovers genre/manufacturer/year for them. {} if absent."""
+    mf = CACHEDIR / "image_manifest.json"
+    if not mf.exists():
+        return {}
+    data = json.loads(mf.read_text(encoding="utf-8"))
+    return {e["title"]: e["setname"] for e in data if e.get("setname")}
+
+
+def local_catver():
+    """catver genre map from the local cache only (no network); {} if absent."""
+    cache = CACHEDIR / "catver.ini"
+    if not cache.exists():
+        return {}
+    return parse_catver(cache.read_text(encoding="utf-8", errors="ignore"))
+
+
+def genre_for(setname, cats, dat):
+    """catver genre for a setname, falling back to its DAT parent's genre."""
+    if not setname:
+        return ""
+    sl = setname.lower()
+    g = cats.get(sl)
+    if g:
+        return g
+    parent = (dat.get(sl) or {}).get("parent")
+    return cats.get(parent, "") if parent else ""
+
+
 def cmd_genre(args):
     con = connect()
     cats = parse_catver(fetch_catver())
-    log(f"genre: {len(cats)} setname->genre entries from catver.ini")
+    dat = load_arcade_dat_meta()
+    log(f"genre: {len(cats)} setname->genre entries from catver.ini"
+        + (f"; {len(dat)} DAT machines for parent fallback" if dat else ""))
     rows = con.execute(
         "SELECT source_id, path, setname FROM catalog WHERE system='arcade' AND setname IS NOT NULL"
     ).fetchall()
     n = 0
     for row in rows:
-        g = cats.get(row["setname"].lower())
+        g = genre_for(row["setname"], cats, dat)
         if g:
             con.execute(
                 "UPDATE catalog SET genre=? WHERE source_id=? AND path=?",
@@ -1149,6 +1214,10 @@ def cmd_export(args):
 
 
 # --- command: export-web (static site for GitHub Pages) -------------------
+
+# Arcade rows that are BIOS/placeholders, not games — excluded from the site.
+# Keyed by MAME setname. The IGS "PGM" entry is just the PGM motherboard BIOS.
+ARCADE_EXCLUDE_SETNAMES = {"pgm"}
 
 _CORE_DATE_RE = re.compile(r"_(20\d{6})\b")
 
@@ -1326,16 +1395,37 @@ def _arcade_base(title):
     return re.sub(r"\s*[\(\[].*$", "", title).strip()
 
 
-def _web_row(r, arcade_titles=None):
+def _dat_field(setname, dat, field):
+    """A DAT field for a setname, falling back to its parent setname."""
+    if not setname or not dat:
+        return ""
+    sl = setname.lower()
+    v = (dat.get(sl) or {}).get(field) or ""
+    if v:
+        return v
+    parent = (dat.get(sl) or {}).get("parent")
+    return (dat.get(parent) or {}).get(field) or "" if parent else ""
+
+
+def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
     manufacturer = r["manufacturer"] or ""
+    sn = ""
     if system == "arcade":
         title = (arcade_titles or {}).get((r["source_id"], r["path"]), r["title"])
         date = (r["release_date"] or "")[:10]
         date_kind = "debut" if date else ""
-        genre = r["genre"] or ""
+        # setname for metadata joins: prefer catalog.setname, else the image
+        # manifest's resolved setname (backfilled rows have it only there).
+        sn = r["setname"] or (arcade_setnames or {}).get(title) or ""
+        # genre from catver (DB) → catver-by-parent; manufacturer from the MRA
+        # (DB) → MAME DAT by setname → by parent. Fills the clone-setname genre
+        # gaps and the Toaplan/Nichibutsu/UPL manufacturer gaps.
+        genre = r["genre"] or genre_for(sn, arcade_cats or {}, arcade_meta or {})
+        if not manufacturer:
+            manufacturer = _dat_field(sn, arcade_meta, "manufacturer")
         # the FPGA core (rbf) the game runs on. Multi-game cores (jtcps2, ST-V,
         # Neogeo, …) are why many titles share one MiSTer date — surfacing it
         # explains/disambiguates those clumps. Blank for the ~58 setname-less
@@ -1363,7 +1453,7 @@ def _web_row(r, arcade_titles=None):
     if not year and system in ("console", "computer"):
         year = CORE_YEAR.get(core_name(r["title"]), "")
     if not year and system == "arcade":
-        year = arcade_year(r["setname"], title)
+        year = arcade_year(sn, title) or _dat_field(sn, arcade_meta, "year")
     return {
         "title": title,
         "base": base,
@@ -1405,6 +1495,16 @@ def cmd_export_web(args):
     # _Arcade/_alternatives/); the site shows only the mainline title per game.
     rows = [r for r in rows if not (
         r["system"] == "arcade" and "/_alternatives/" in r["path"].replace("\\", "/"))]
+    # Drop arcade BIOS/placeholder rows that aren't games (e.g. the IGS PGM BIOS,
+    # which has no year/screenshot and just clutters the list).
+    rows = [r for r in rows if not (
+        r["system"] == "arcade" and (r["setname"] or "").lower() in ARCADE_EXCLUDE_SETNAMES)]
+    # arcade fill sources (cached; no-op if absent): DAT for year/manufacturer/
+    # parent, catver for genre, and the image manifest's resolved setnames (many
+    # backfilled rows carry a setname only there, not in catalog.setname).
+    arcade_meta = load_arcade_dat_meta()
+    arcade_cats = local_catver()
+    arcade_setnames = load_manifest_setnames()
     # Display the clean mainline name, but keep the qualifier where the stripped
     # base name collides among kept rows (genuinely distinct hardware/publisher
     # versions that share a base, e.g. Kangaroo / Kangaroo (Atari) / (Bootleg)).
@@ -1414,7 +1514,7 @@ def cmd_export_web(args):
         if r["system"] == "arcade":
             b = _arcade_base(r["title"])
             arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
-    data = [_web_row(r, arcade_titles) for r in rows]
+    data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames) for r in rows]
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
@@ -1426,6 +1526,7 @@ def cmd_export_web(args):
     # fully data-driven (fetches data.json at runtime), so only data.json needs
     # regenerating.
     (DOCSDIR / "index.html").write_text(ROOT_REDIRECT_HTML, encoding="utf-8")
+    _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
     log(f"web export written to {outdir}")
     log(f"  data.json: {len(data)} rows")
     by_base = {}
@@ -1433,6 +1534,23 @@ def cmd_export_web(args):
         by_base[d["base"]] = by_base.get(d["base"], 0) + 1
     log(f"  by type: {by_base}")
     log(f"  arcade with genre: {sum(1 for d in data if d['genre'])}")
+
+
+def _retag_image_dims():
+    """Re-apply the self-hosted screenshot keys (img / img_slots / img_w / img_h)
+    that live only in data.json and are dropped every time export-web regenerates
+    it. Runs tools/fetch_images.py in re-tag mode (no downloads, no 7z: it just
+    reads the cached manifest + the PNG headers already on disk). Guarded so a
+    checkout without the image cache still exports cleanly."""
+    tool = ROOT / "tools" / "fetch_images.py"
+    manifest = CACHEDIR / "image_manifest.json"
+    if not (tool.exists() and manifest.exists()):
+        log("  (skipping image re-tag: tools/fetch_images.py or manifest missing)")
+        return
+    try:
+        subprocess.run([sys.executable, str(tool), "data"], check=True)
+    except Exception as e:
+        log(f"  WARNING: image re-tag failed ({e}); data.json has no screenshot keys")
 
 
 ROOT_REDIRECT_HTML = """<!DOCTYPE html>
@@ -1499,8 +1617,10 @@ def cmd_build(args):
         cmd_core_repos(args)
         cmd_jtcores(args)
         cmd_coinop(args)
+        cmd_enrich_mra(args)   # year/manufacturer/rbf/setname from MRA XML (clones repos)
+    cmd_genre(args)            # arcade genre from cached catver + DAT parent fallback (offline)
     cmd_export(args)
-    cmd_export_web(args)
+    cmd_export_web(args)       # also re-tags screenshot dims via _retag_image_dims()
     cmd_stats(args)
 
 

@@ -55,11 +55,12 @@
   /* --- detail panel: slides in from the left --- */
   #panel { position: fixed; top: 0; left: 0; height: 100vh; width: var(--pw, calc(100vw / 3));
            transform: translateX(-100%); transition: transform .28s ease;
-           overflow-y: auto; z-index: 100; background: Canvas;
-           border-right: 1px solid #8884; box-shadow: 4px 0 24px #0006; padding: 1rem;
+           overflow: hidden; z-index: 100; background: Canvas; display: flex; flex-direction: column;
+           border-right: 1px solid #8884; box-shadow: 4px 0 24px #0006;
            touch-action: pan-y; }
   body.panel-open #panel { transform: translateX(0); }
   #panel[hidden] { display: none; }
+  #panel .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 1rem; }
   #panel .close { position: sticky; top: 0; float: right; font-size: 1.4rem; line-height: 1;
                   border: 0; background: transparent; color: inherit; cursor: pointer; padding: .1rem .3rem; }
   #panel h2 { font-size: 1.1rem; margin: 0 1.5rem .5rem 0; }
@@ -67,8 +68,9 @@
   #panel dt { color: #888; }
   #panel dd { margin: 0; }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
-  #panel .hint { margin: 1.25rem 0 .25rem; padding-top: .75rem; border-top: 1px solid #8883;
-                 color: #888; font-size: .78rem; }
+  /* footer is docked to the bottom of the panel (outside the scrolling .body) */
+  #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid #8883;
+                 background: Canvas; color: #888; font-size: .78rem; }
   #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid #8886; border-radius: 3px; }
   #panel .frame { width: 100%; background: #000; margin: .5rem 0; }
   #panel .frame img { width: 100%; height: 100%; object-fit: fill;
@@ -79,14 +81,13 @@
              left: var(--pw, calc(100vw / 3)); margin-left: -6px;
              cursor: ew-resize; display: none; touch-action: none; }
   body.panel-open #resizer { display: block; }
-  #resizer::before { content: ""; position: absolute; top: 0; bottom: 0; left: 5px; width: 2px; background: transparent; }
-  #resizer:hover::before, body.resizing #resizer::before { background: #06caa; }
-  /* always-visible grip pill (common splitter convention) so the edge reads as draggable */
-  #resizer::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                    width: 9px; height: 40px; border-radius: 6px; background:
-                      radial-gradient(circle, #8889 1px, transparent 1.4px) center / 4px 7px repeat-y, Canvas;
-                    border: 1px solid #8887; box-shadow: 0 1px 4px #0005; }
-  #resizer:hover::after, body.resizing #resizer::after { border-color: #06c; box-shadow: 0 1px 5px #0007; }
+  /* ribbed grip: three vertical lines running the whole edge so it reads as a draggable seam */
+  #resizer { --rib: #8889; }
+  #resizer:hover, body.resizing #resizer { --rib: #06c; }
+  #resizer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right,
+      transparent 0 1.25px, var(--rib) 1.25px 2.75px, transparent 2.75px 5.25px,
+      var(--rib) 5.25px 6.75px, transparent 6.75px 9.25px, var(--rib) 9.25px 10.75px,
+      transparent 10.75px 12px); }
   body.resizing { cursor: ew-resize; user-select: none; }
   body.resizing #panel, body.resizing main { transition: none; }
 
@@ -321,16 +322,17 @@ function detailHTML(d) {
     (canResize ? 'drag the edge to resize · ' : '') + '<kbd>Esc</kbd> to close</p>';
 
   // screenshots first so they own the viewport on open; derived detail text below.
-  return '<button class="close" aria-label="Close">×</button>' +
+  // .body scrolls; .hint is docked below it (built as a sibling, outside .body).
+  return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') + '</h2>' +
-    shots + dl + prose + hint;
+    shots + dl + prose + '</div>' + hint;
 }
 
 function openPanel(d) {
   if (!d || !hasDetail(d)) return;
   openRow = d;
   panel.innerHTML = detailHTML(d);
-  panel.scrollTop = 0;
+  const body = panel.querySelector('.body'); if (body) body.scrollTop = 0;
   panel.hidden = false;
   // force a reflow so the off-screen start position is committed before the
   // transition; otherwise the display:none→block toggle swallows the slide-in

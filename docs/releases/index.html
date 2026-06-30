@@ -150,8 +150,14 @@ function showPop(el) {
   const r = el.getBoundingClientRect();
   const place = () => {
     const pw = pop.offsetWidth, ph = pop.offsetHeight;
-    let x = r.right + 8; if (x + pw > innerWidth) x = r.left - pw - 8;
-    x = Math.max(8, Math.min(x, innerWidth - pw - 8));
+    // Prefer the right of the name. If it won't fit, flip fully to the left of
+    // the name; otherwise keep it on the right (may clip off-screen, but never
+    // slide partially over the game name). Never a partial slide that covers it.
+    let x = r.right + 8;
+    if (x + pw > innerWidth - 8) {
+      const left = r.left - pw - 8;
+      x = left >= 8 ? left : r.right + 8;
+    }
     let y = Math.max(8, Math.min(r.top, innerHeight - ph - 8));
     pop.style.left = x + 'px'; pop.style.top = y + 'px';
   };

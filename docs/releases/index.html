@@ -30,7 +30,7 @@
   #popup { position: fixed; z-index: 50; display: none; padding: .5rem;
            background: Canvas; border: 1px solid #8888; border-radius: 6px;
            box-shadow: 0 6px 24px #0007; }
-  #popup .shots { display: flex; gap: .5rem; }
+  #popup .shots { display: flex; gap: .5rem; align-items: flex-start; }
   #popup img { height: 220px; width: auto; image-rendering: pixelated;
                background: #000; border-radius: 3px; display: block; }
   #popup .cap { margin-top: .4rem; font-size: .8rem; color: #888; max-width: 40rem; }
@@ -142,11 +142,32 @@ function showPop(el) {
       '<img loading="lazy" src="../images/' + s + '/' + img + '.png" onerror="this.remove()">').join('') +
     '</div><div class="cap">' + esc(el.dataset.cap) + '</div>';
   pop.style.display = 'block';
-  const r = el.getBoundingClientRect(), pw = pop.offsetWidth, ph = pop.offsetHeight;
-  let x = r.right + 8; if (x + pw > innerWidth) x = r.left - pw - 8;
-  x = Math.max(8, Math.min(x, innerWidth - pw - 8));
-  let y = Math.max(8, Math.min(r.top, innerHeight - ph - 8));
-  pop.style.left = x + 'px'; pop.style.top = y + 'px';
+  const r = el.getBoundingClientRect();
+  const place = () => {
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    let x = r.right + 8; if (x + pw > innerWidth) x = r.left - pw - 8;
+    x = Math.max(8, Math.min(x, innerWidth - pw - 8));
+    let y = Math.max(8, Math.min(r.top, innerHeight - ph - 8));
+    pop.style.left = x + 'px'; pop.style.top = y + 'px';
+  };
+  // Scale images up to fill the space from the cursor toward the right edge of
+  // the window (capped by viewport height). Helps tall TATE-mode shots most;
+  // wide/horizontal shots stay near their default 220px height.
+  const fill = () => {
+    if (innerWidth <= 640) { place(); return; }
+    const imgs = [...pop.querySelectorAll('img')].filter(i => i.naturalWidth);
+    if (!imgs.length) { place(); return; }
+    const x0 = r.right + 8;                       // popup left when shown at right
+    const budget = innerWidth - 8 - x0 - 16       // toward right edge, minus padding
+                   - (imgs.length - 1) * 8;        // minus inter-image gaps
+    const sumAR = imgs.reduce((a, i) => a + i.naturalWidth / i.naturalHeight, 0);
+    const maxH = innerHeight - 16 - 40;           // leave room for caption + margins
+    let h = Math.max(220, Math.min(budget / sumAR, maxH));
+    imgs.forEach(i => i.style.height = h + 'px');
+    place();
+  };
+  fill();
+  pop.querySelectorAll('img').forEach(i => i.addEventListener('load', fill));
 }
 function hidePop() { pop.style.display = 'none'; }
 

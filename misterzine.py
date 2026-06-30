@@ -812,6 +812,7 @@ def cmd_jtcores(args):
             log(f"  [{i}/{len(items)}] {rbf}  debut={first[:10] if first else '?'}  updated={last[:10] if last else '?'}")
     con.commit()
     join_jt_to_catalog(con)
+    apply_jt_frozen_dates(con)
     con.commit()
     con.close()
     log("jtcores crawl done.")
@@ -829,13 +830,74 @@ def join_jt_to_catalog(con):
         folder = rbf[2:] if rbf.startswith("jt") else rbf
         r = jt.get(folder)
         if r:
+            debut = JT_CORE_FROZEN_DATES.get(folder, r["first_commit"])
             con.execute(
                 "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",
-                (JT_REPO + f" (cores/{folder})", r["first_commit"], r["last_commit"],
+                (JT_REPO + f" (cores/{folder})", debut, r["last_commit"],
                  row["source_id"], row["path"]),
             )
             n += 1
     log(f"  joined {n} Jotego arcade titles to release dates")
+
+
+# The jtcores monorepo dates a core by the first commit that touched its
+# cores/<folder>/ path — but Jotego MERGED dozens of long-standing standalone
+# cores into that folder layout in a big Feb-2023 reorg (and the GitHub commits
+# API doesn't follow the rename), so every pre-existing core inherited a bogus
+# 2023-02-04/05/12/15 "debut". The monorepo did NOT preserve those cores' own
+# history on merge, so the real dates come from the surviving archived standalone
+# repos (created_at) or Jotego's documented public-release announcements. The
+# folder date is wrong in BOTH directions: too-new for old cores merged in, and
+# too-OLD for cps3 (its dev folder predates the actual 2026 release by 3 years).
+# Each entry below is frozen to the core's real first MiSTer appearance; basis +
+# confidence noted per line. Folders deliberately left at their ~Feb-2023 monorepo
+# date because that IS ~their real debut: s18, outrun, shanon (Sega, ~2023 dev),
+# karnov/contra/castle (public early Feb 2023), bubl (Taito, ~2023).
+JT_CORE_FROZEN_DATES = {
+    # Capcom CPS
+    "cps1":  "2020-01-12",  # jtcps repo created_at (CPS1 origin); HIGH
+    "cps15": "2020-01-12",  # CPS1.5 = same CPS1 hardware/core; HIGH
+    "cps2":  "2021-01-29",  # CPS2 public beta ("CPS2 is here!", RetroRGB); HIGH
+    "cps3":  "2026-06-10",  # JTCPS3 first release (SF III / Red Earth), Jun 2026; HIGH
+    # Sega System 16
+    "s16":   "2022-01-17",  # jts16 repo created_at (public Mar 2022); HIGH
+    "s16b":  "2022-01-17",  # System 16B = same jts16 core; HIGH
+    # Konami pre-/System-1 wave — jtkicker repo (2021-11-13) = dev origin of the
+    # wave; individual games went public across 2022. Anchored to the earliest
+    # (anti-inflation). MEDIUM for the non-kicker members.
+    "kicker": "2021-11-13", "track": "2021-11-13", "mikie": "2021-11-13",
+    "roc":    "2021-11-13", "sbaskt": "2021-11-13", "pinpon": "2021-11-13",
+    "yiear":  "2021-11-13", "labrun": "2021-11-13", "roadf":  "2021-11-13",
+    "comsc":  "2021-11-13", "flane":  "2021-11-13", "mx5k":   "2021-11-13",
+    # Data East DEC0 — public April 2022 batch (Robocop/Bad Dudes/Heavy Barrel/
+    # Midnight Resistance/Sly Spy/Hippodrome). HIGH (batch), MEDIUM per-title.
+    "cop":    "2022-04-08", "ninja": "2022-04-08",
+    "midres": "2022-04-08", "slyspy": "2022-04-08",
+    # Technos — public Dec 2 2022 batch. HIGH for dd/dd2/kunio, MEDIUM kchamp.
+    "dd":   "2022-12-02", "dd2": "2022-12-02",
+    "kunio": "2022-12-02", "kchamp": "2022-12-02",
+    # Singles
+    "rastan": "2022-04-01",  # Taito Rastan, beta Apr 2022; MEDIUM
+    "vigil":  "2022-07-01",  # Irem Vigilante, public Jul 2022; HIGH
+    "pang":   "2022-08-05",  # Mitchell Pang!, public Aug 5 2022; HIGH
+    "kiwi":   "2022-11-12",  # Taito New Zealand Story, beta Nov 12 2022; HIGH
+}
+
+
+def apply_jt_frozen_dates(con):
+    """Override the bogus Feb-2023 jtcores-monorepo-migration dates with each
+    Jotego core's real debut from JT_CORE_FROZEN_DATES. Unlike the other frozen
+    helpers this REPLACES the existing value (the migration date is wrong, not
+    merely missing), keyed by the monorepo folder (rbf = jt<folder>)."""
+    n = 0
+    for folder, debut in JT_CORE_FROZEN_DATES.items():
+        cur = con.execute(
+            "UPDATE catalog SET release_date=? WHERE system='arcade' AND lower(rbf)=?",
+            (debut, "jt" + folder),
+        )
+        n += cur.rowcount
+    if n:
+        log(f"  corrected {n} Jotego arcade titles off the Feb-2023 migration date")
 
 
 # --- command: coinop (Coin-Op release dates from commit messages) ---------
@@ -1328,6 +1390,7 @@ def cmd_export_web(args):
     outdir.mkdir(parents=True, exist_ok=True)
     apply_frozen_core_dates(con)  # always pin hand-verified core debuts before publishing
     apply_frozen_arcade_core_dates(con)  # and repo-less multi-game arcade cores
+    apply_jt_frozen_dates(con)  # correct Jotego cores off the Feb-2023 monorepo-migration date
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
     con.close()

@@ -31,6 +31,7 @@ import time
 import urllib.request
 import urllib.error
 import zipfile
+from collections import Counter
 from io import BytesIO
 from pathlib import Path
 
@@ -1079,13 +1080,18 @@ def core_build_date(title):
     return f"{y[0:4]}-{y[4:6]}-{y[6:8]}"
 
 
-def _web_row(r):
+def _arcade_base(title):
+    """Mainline display name: drop trailing (region/rev) and [protection] qualifiers."""
+    return re.sub(r"\s*[\(\[].*$", "", title).strip()
+
+
+def _web_row(r, arcade_titles=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
     manufacturer = r["manufacturer"] or ""
     if system == "arcade":
-        title = r["title"]
+        title = (arcade_titles or {}).get((r["source_id"], r["path"]), r["title"])
         date = (r["release_date"] or "")[:10]
         date_kind = "debut" if date else ""
         genre = r["genre"] or ""
@@ -1143,7 +1149,20 @@ def cmd_export_web(args):
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
     con.close()
-    data = [_web_row(r) for r in rows]
+    # Drop arcade region/revision/bootleg variants (MiSTer files them under
+    # _Arcade/_alternatives/); the site shows only the mainline title per game.
+    rows = [r for r in rows if not (
+        r["system"] == "arcade" and "/_alternatives/" in r["path"].replace("\\", "/"))]
+    # Display the clean mainline name, but keep the qualifier where the stripped
+    # base name collides among kept rows (genuinely distinct hardware/publisher
+    # versions that share a base, e.g. Kangaroo / Kangaroo (Atari) / (Bootleg)).
+    counts = Counter(_arcade_base(r["title"]) for r in rows if r["system"] == "arcade")
+    arcade_titles = {}
+    for r in rows:
+        if r["system"] == "arcade":
+            b = _arcade_base(r["title"])
+            arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
+    data = [_web_row(r, arcade_titles) for r in rows]
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))

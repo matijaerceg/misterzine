@@ -21,12 +21,14 @@
   select, input[type=search] { font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
   .count { color: #888; font-size: .8rem; }
-  table { border-collapse: collapse; width: 100%; }
-  th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top; }
-  th { position: sticky; top: 0; background: Canvas; cursor: pointer; user-select: none; white-space: nowrap; }
+  table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+  col.c-title { width: 24%; } col.c-type { width: 8%; } col.c-date { width: 11%; }
+  col.c-year { width: 8%; } col.c-manuf { width: 22%; } col.c-core { width: 27%; }
+  th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
+           overflow-wrap: break-word; }
+  th { position: sticky; top: 0; background: Canvas; cursor: pointer; user-select: none; }
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
-  td.type { white-space: nowrap; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
            font-weight: 600; white-space: nowrap; line-height: 1.5;
            background: color-mix(in srgb, var(--h) 20%, Canvas);
@@ -36,7 +38,7 @@
   .t-computer { --h: #2bbf6e; }
   .t-other    { --h: #b07cff; }
   .type .dep { color: #888; font-size: .82em; margin-left: .35rem; }
-  td.core { white-space: nowrap; color: #888; font-size: .92em; cursor: default; }
+  td.core { color: #888; font-size: .92em; cursor: default; }
   .titlebar { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
   .theme { display: inline-flex; flex: none; border: 1px solid #8884; border-radius: 6px; overflow: hidden; }
   .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
@@ -120,6 +122,10 @@
   <span class="count" id="count"></span>
 </div>
 <table>
+  <colgroup>
+    <col class="c-title"><col class="c-type"><col class="c-date">
+    <col class="c-year"><col class="c-manuf"><col class="c-core">
+  </colgroup>
   <thead><tr>
     <th data-k="title">Title</th>
     <th data-k="typesort">Type</th>

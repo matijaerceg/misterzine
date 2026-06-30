@@ -141,6 +141,11 @@ function showPop(el) {
     el.dataset.slots.split(',').map(s =>
       '<img loading="lazy" src="../images/' + s + '/' + img + '.png" onerror="this.remove()">').join('') +
     '</div><div class="cap">' + esc(el.dataset.cap) + '</div>';
+  // Measure while hidden (layout still computes under visibility:hidden) and
+  // only reveal once images are sized, so the popup never paints at the default
+  // size and then jumps. Cached images are already complete, so repeat hovers
+  // reveal instantly.
+  pop.style.visibility = 'hidden';
   pop.style.display = 'block';
   const r = el.getBoundingClientRect();
   const place = () => {
@@ -166,8 +171,13 @@ function showPop(el) {
     imgs.forEach(i => i.style.height = h + 'px');
     place();
   };
-  fill();
-  pop.querySelectorAll('img').forEach(i => i.addEventListener('load', fill));
+  const imgs = [...pop.querySelectorAll('img')];
+  let revealed = false;
+  const reveal = () => { if (revealed) return; revealed = true; fill(); pop.style.visibility = 'visible'; };
+  const check = () => { fill(); if (imgs.every(i => !i.isConnected || i.complete)) reveal(); };
+  imgs.forEach(i => { i.addEventListener('load', check); i.addEventListener('error', check); });
+  check();                       // sizes & reveals immediately when images are cached
+  setTimeout(reveal, 500);       // fallback so slow/broken loads still show
 }
 function hidePop() { pop.style.display = 'none'; }
 

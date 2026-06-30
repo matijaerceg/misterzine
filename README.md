@@ -124,8 +124,12 @@ then `jtcores` and `genre`.)
   sortable, type-filterable table, **sorted most-recent-first by default**. The **Type** column
   reads `Arcade, <genre>` for arcade titles and `Console core` / `Computer core` / `Other core`
   for cores (a retired core reads `… core (deprecated)`). The **Date** column is the MiSTer debut
-  where known, otherwise the core's latest build date (`_YYYYMMDD` suffix, greyed). Console cores
-  carry their hardware maker (Nintendo/Sega/…) from the `CONSOLE_MANUFACTURER` map.
+  where known, otherwise the core's latest build date (`_YYYYMMDD` suffix, greyed) — column titled
+  **MiSTer release date**. Console and computer cores carry their hardware maker
+  (Nintendo/Sega/Commodore/Sinclair/…) from the `CONSOLE_MANUFACTURER` / `COMPUTER_MANUFACTURER`
+  maps, and the original hardware's release year (column **Original Year**) from the `CORE_YEAR`
+  map (obscure/DIY makers and years web-verified). A few modern/clone cores (`ao486`, `MultiComp`,
+  `TSConf`) have no meaningful vintage year and are left blank.
 
 The retired **Sega Genesis** core (replaced by MegaDrive — same console) is no longer in any DB,
 so it's injected for the record via `EXTRA_WEB_ROWS`, dated from its archived repo.

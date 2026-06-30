@@ -993,6 +993,75 @@ CONSOLE_MANUFACTURER = {
     "BBCBridgeCompanion": "BBC Enterprises",
 }
 
+# Hardware maker per computer core (keyed by core_name); same rationale as above.
+# DIY/kit machines and obscure Eastern-bloc makers were web-verified.
+COMPUTER_MANUFACTURER = {
+    "C64": "Commodore", "C128": "Commodore", "C16": "Commodore", "VIC20": "Commodore",
+    "PET2001": "Commodore", "Minimig": "Commodore",
+    "Apple-I": "Apple", "Apple-II": "Apple", "MacPlus": "Apple",
+    "ZX-Spectrum": "Sinclair", "ZX81": "Sinclair", "QL": "Sinclair",
+    "ZXNext": "SpecNext", "SAMCoupe": "MGT", "TSConf": "TS-Labs",
+    "AcornAtom": "Acorn", "AcornElectron": "Acorn", "BBCMicro": "Acorn", "Archie": "Acorn",
+    "Amstrad": "Amstrad", "Amstrad-PCW": "Amstrad",
+    "Atari800": "Atari", "AtariST": "Atari",
+    "CoCo2": "Tandy", "CoCo3": "Tandy", "TRS-80": "Tandy", "Tandy1000": "Tandy",
+    "AliceMC10": "Tandy / Matra",
+    "PCXT": "IBM", "PCjr": "IBM",
+    "PDP1": "DEC", "VT52": "DEC",
+    "SharpMZ": "Sharp", "X68000": "Sharp",
+    "PC88": "NEC",
+    "Ti994a": "Texas Instruments",
+    "ColecoAdam": "Coleco", "Aquarius": "Mattel", "TomyTutor": "Tomy",
+    "Casio_PV-2000": "Casio", "SordM5": "Sord", "Svi328": "Spectravideo",
+    "Laser310": "VTech", "eg2000": "EACA", "RX78": "Bandai",
+    "TatungEinstein": "Tatung", "Lynx48": "Camputers", "Oric": "Oric",
+    "Jupiter": "Jupiter Cantab", "Enterprise": "Enterprise Computers",
+    "Interact": "Interact Electronics", "Altair8800": "MITS",
+    "UK101": "Compukit", "EDSAC": "University of Cambridge",
+    "MSX": "ASCII/Microsoft", "MSX1": "ASCII/Microsoft",
+    "TK2000": "Microdigital",
+    "MultiComp": "DIY (Grant Searle)",
+    "Galaksija": "DIY (Yugoslavia)", "Homelab": "DIY (Hungary)", "Specialist": "DIY (Soviet)",
+    "Ondra_SPO186": "Tesla", "PMD85": "Tesla", "IQ151": "ZPA",
+    "BK0011M": "Elektronika", "Vector-06C": "Schetmash", "Apogee": "Soviet",
+    "ORAO": "PEL Varaždin",
+}
+
+# Original-hardware release year per core (keyed by core_name). The year the real
+# machine/console first shipped (not the MiSTer core). Obscure/Eastern-bloc years
+# web-verified; a few modern DIY/clone cores and generic PC clones are left blank.
+CORE_YEAR = {
+    # consoles
+    "NES": "1983", "SNES": "1990", "N64": "1996", "Gameboy": "1989", "Gameboy2P": "1989",
+    "GBA": "2001", "GBA2P": "2001", "SGB": "1994", "PokemonMini": "2001",
+    "GameAndWatch": "1980", "GnW": "1980",
+    "SMS": "1985", "GameGear2P": "1990", "MegaDrive": "1988", "MegaCD": "1991",
+    "S32X": "1994", "Saturn": "1994",
+    "Atari5200": "1982", "Atari7800": "1986", "AtariLynx": "1989", "Jaguar": "1993",
+    "NeoGeo": "1990", "NeoGeoPocket": "1998", "TurboGrafx16": "1987", "PSX": "1994",
+    "CDi": "1991", "Intellivision": "1979", "ColecoVision": "1982", "Odyssey2": "1978",
+    "ChannelF": "1976", "Astrocade": "1978", "Arcadia": "1982", "Vectrex": "1982",
+    "WonderSwan": "1999", "Super_Vision_8000": "1979", "SuperVision": "1992", "SCV": "1984",
+    "CreatiVision": "1982", "Casio_PV-1000": "1983", "VC4000": "1978", "AdventureVision": "1982",
+    "Gamate": "1990", "AY-3-8500": "1976", "MyVision": "1983", "BBCBridgeCompanion": "1985",
+    # computers
+    "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
+    "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "MacPlus": "1986",
+    "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
+    "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
+    "Amstrad": "1984", "Amstrad-PCW": "1985", "Atari800": "1979", "AtariST": "1985",
+    "CoCo2": "1983", "CoCo3": "1986", "TRS-80": "1977", "Tandy1000": "1984", "AliceMC10": "1983",
+    "PCXT": "1983", "PCjr": "1984", "PDP1": "1959", "VT52": "1975", "SharpMZ": "1978",
+    "X68000": "1987", "PC88": "1981", "Ti994a": "1981", "ColecoAdam": "1983", "Aquarius": "1983",
+    "TomyTutor": "1982", "Casio_PV-2000": "1983", "SordM5": "1982", "Svi328": "1983",
+    "Laser310": "1983", "eg2000": "1982", "RX78": "1983", "TatungEinstein": "1984",
+    "Lynx48": "1983", "Oric": "1983", "Jupiter": "1982", "Enterprise": "1985",
+    "Interact": "1978", "Altair8800": "1975", "UK101": "1979", "EDSAC": "1949",
+    "MSX": "1983", "MSX1": "1983", "TK2000": "1984", "Galaksija": "1983", "Homelab": "1983",
+    "Specialist": "1985", "Ondra_SPO186": "1985", "PMD85": "1985", "IQ151": "1985",
+    "BK0011M": "1990", "Vector-06C": "1987", "Apogee": "1988", "ORAO": "1984",
+}
+
 
 def core_build_date(title):
     """Pull a console/computer core's build date from its `_YYYYMMDD` filename suffix.
@@ -1028,15 +1097,22 @@ def _web_row(r):
             date = core_build_date(r["title"]) or ""
             date_kind = "build" if date else ""
         genre = ""
-        if system == "console" and not manufacturer:
-            manufacturer = CONSOLE_MANUFACTURER.get(core_name(r["title"]), "")
+        cn = core_name(r["title"])
+        if not manufacturer:
+            if system == "console":
+                manufacturer = CONSOLE_MANUFACTURER.get(cn, "")
+            elif system == "computer":
+                manufacturer = COMPUTER_MANUFACTURER.get(cn, "")
+    year = r["year"] or ""
+    if not year and system in ("console", "computer"):
+        year = CORE_YEAR.get(core_name(r["title"]), "")
     return {
         "title": title,
         "base": base,
         "genre": genre,
         "date": date,
         "date_kind": date_kind,
-        "year": r["year"] or "",
+        "year": year,
         "manufacturer": manufacturer,
         "deprecated": False,
     }
@@ -1048,7 +1124,7 @@ def _web_row(r):
 EXTRA_WEB_ROWS = [
     {
         "title": "Genesis", "base": "Console", "genre": "",
-        "date": "2018-06-02", "date_kind": "debut", "year": "",
+        "date": "2018-06-02", "date_kind": "debut", "year": "1988",
         "manufacturer": "Sega", "deprecated": True,
     },
 ]
@@ -1125,8 +1201,9 @@ SITE_HTML = """<!DOCTYPE html>
 <body>
 <header>
   <h1>misterzine — MiSTer FPGA core &amp; title index</h1>
-  <p class="legend">Date = MiSTer debut where known, otherwise the core's latest build date
-    (<span class="build">grey</span>). Genre via MAME catver.ini.</p>
+  <p class="legend">MiSTer release date = core's MiSTer debut where known, otherwise its latest
+    build date (<span class="build">grey</span>). Original Year = the real hardware's release year.
+    Genre via MAME catver.ini.</p>
 </header>
 <div class="controls">
   <input type="search" id="q" placeholder="Search title, type, manufacturer…" autofocus>
@@ -1143,8 +1220,8 @@ SITE_HTML = """<!DOCTYPE html>
   <thead><tr>
     <th data-k="title">Title</th>
     <th data-k="typesort">Type</th>
-    <th data-k="date">Date</th>
-    <th data-k="year">Year</th>
+    <th data-k="date">MiSTer release date</th>
+    <th data-k="year">Original Year</th>
     <th data-k="manufacturer">Manufacturer</th>
   </tr></thead>
   <tbody id="rows"></tbody>

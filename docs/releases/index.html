@@ -67,6 +67,9 @@
   #panel dt { color: #888; }
   #panel dd { margin: 0; }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
+  #panel .hint { margin: 1.25rem 0 .25rem; padding-top: .75rem; border-top: 1px solid #8883;
+                 color: #888; font-size: .78rem; }
+  #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid #8886; border-radius: 3px; }
   #panel .frame { width: 100%; background: #000; margin: .5rem 0; }
   #panel .frame img { width: 100%; height: 100%; object-fit: fill;
                       image-rendering: pixelated; display: block; }
@@ -78,6 +81,12 @@
   body.panel-open #resizer { display: block; }
   #resizer::before { content: ""; position: absolute; top: 0; bottom: 0; left: 5px; width: 2px; background: transparent; }
   #resizer:hover::before, body.resizing #resizer::before { background: #06caa; }
+  /* always-visible grip pill (common splitter convention) so the edge reads as draggable */
+  #resizer::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    width: 9px; height: 40px; border-radius: 6px; background:
+                      radial-gradient(circle, #8889 1px, transparent 1.4px) center / 4px 7px repeat-y, Canvas;
+                    border: 1px solid #8887; box-shadow: 0 1px 4px #0005; }
+  #resizer:hover::after, body.resizing #resizer::after { border-color: #06c; box-shadow: 0 1px 5px #0007; }
   body.resizing { cursor: ew-resize; user-select: none; }
   body.resizing #panel, body.resizing main { transition: none; }
 
@@ -306,10 +315,15 @@ function detailHTML(d) {
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
   ).join('');
 
+  // overlay (very narrow/tall) mode disables drag-resize, so omit that clause there.
+  const canResize = !window.matchMedia('(max-aspect-ratio: 3/5)').matches;
+  const hint = '<p class="hint"><kbd>↑</kbd> <kbd>↓</kbd> browse rows · ' +
+    (canResize ? 'drag the edge to resize · ' : '') + '<kbd>Esc</kbd> to close</p>';
+
   // screenshots first so they own the viewport on open; derived detail text below.
   return '<button class="close" aria-label="Close">×</button>' +
     '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') + '</h2>' +
-    shots + dl + prose;
+    shots + dl + prose + hint;
 }
 
 function openPanel(d) {

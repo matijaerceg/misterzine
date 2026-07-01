@@ -253,6 +253,13 @@ const ASPECT_OVERRIDE = {
   bankp:    '4 / 3',  // Bank Panic (Sanritsu/Sega, 240x240) — horizontal game
 };
 
+// Cosmetic title fixes for upstream MRA filenames that are misspaced. The title
+// comes verbatim from the .mra filename stem; almost all are spaced correctly,
+// but a few upstream files aren't (e.g. BankPanic.mra). Keyed by setname (d.img).
+const TITLE_OVERRIDE = {
+  bankp: 'Bank Panic',  // upstream file is BankPanic.mra (no space)
+};
+
 // core (rbf) -> the game's title, but only for cores that map to exactly ONE
 // title in our data. Built once from DATA so single-game cores read nicely
 // without us hard-coding each. Multi-title cores resolve via CORE_NAMES instead.
@@ -590,6 +597,9 @@ fetch('./meta.json').then(r => r.json()).then(m => {
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;
+  // fix misspaced upstream titles before anything reads d.title (cell, panel,
+  // search, sort, single-game core labels all derive from it).
+  for (const r of DATA) if (TITLE_OVERRIDE[r.img]) r.title = TITLE_OVERRIDE[r.img];
   // index cores that map to exactly one title, so single-game cores read as
   // the game name without hard-coding each (see coreLabel / CORE_NAMES).
   const seen = {};

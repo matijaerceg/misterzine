@@ -30,6 +30,11 @@ SETNAME_OVERRIDES = {
     # Coin-Op core is Data East's 1988 pixel-art shooter, MAME set `cobracom`.
     # Without this pin the alphabetical tiebreak picks `cobra` (wrong game).
     "cobra command": "cobracom",
+    # MiSTer's "Omega [bl]" (1981 Nihon, Galaxian bootleg) is MAME set `omegab`
+    # (cloneof theend). But the cleaned site title "Omega" normalizes to `omega`,
+    # which the description index resolves to the unrelated parent set `omega` =
+    # "Omega" (1986 Nihon System, freekick.cpp). Pin to the galaxian bootleg.
+    "omega": "omegab",
 }
 
 # Non-arcade machine families whose setnames collide with real arcade titles:

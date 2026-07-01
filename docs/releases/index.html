@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>misterzine — MiSTer FPGA core &amp; title index</title>
+<title>MiSTer FPGA Core &amp; Arcade Index</title>
 <script>/* apply saved theme before first paint to avoid a flash */
   try { var t = localStorage.getItem('mz-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <style>
@@ -12,8 +12,8 @@
   :root[data-theme="dark"]  { color-scheme: dark; }
   * { box-sizing: border-box; }
   body { font: 14px/1.4 system-ui, sans-serif; margin: 0; }
-  main { padding: 1rem; }
-  header { margin-bottom: .75rem; }
+  main { padding: 0 1rem 1rem; }
+  header { position: sticky; top: 0; z-index: 20; background: Canvas; margin: 0; padding: 1rem 0 .75rem; }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .75rem 0; }
@@ -34,7 +34,7 @@
   }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
-  th { position: sticky; top: 0; background: Canvas; cursor: pointer; user-select: none; }
+  th { position: sticky; top: 3.5rem; background: Canvas; cursor: pointer; user-select: none; }
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
@@ -120,20 +120,13 @@
 <main>
 <header>
   <div class="titlebar">
-    <h1>misterzine — MiSTer FPGA core &amp; title index</h1>
+    <h1>MiSTer FPGA Core &amp; Arcade Index</h1>
     <div class="theme" id="theme" role="group" aria-label="Color theme">
       <button type="button" data-set="auto">Auto</button>
       <button type="button" data-set="light">Light</button>
       <button type="button" data-set="dark">Dark</button>
     </div>
   </div>
-  <p class="legend">MiSTer Debut = core's first MiSTer release where known, otherwise its latest
-    build date (<span class="build">grey</span>); hover the date for the core's latest update.
-    Original Year = the real hardware's release year.
-    Genre via MAME catver.ini. Rows with a
-    <svg class="dv-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor"
-      stroke-width="1.3" aria-hidden="true"><rect x="1.5" y="2" width="13" height="9" rx="1"/>
-      <path d="M5.5 14h5M8 11v3"/></svg> open a detail view.</p>
 </header>
 <div class="controls">
   <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>

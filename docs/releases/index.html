@@ -315,7 +315,9 @@ function apply() {
       : (x[sortKey] || '');
     view.sort((a, b) => {
       const av = keyOf(a), bv = keyOf(b);
-      return av < bv ? -sortDir : av > bv ? sortDir : 0;
+      // Case- and accent-insensitive so "ASO" sorts next to "Ace", not ahead of
+      // it; numeric:true gives natural ordering for any number runs in titles.
+      return sortDir * av.localeCompare(bv, undefined, { numeric: true, sensitivity: 'base' });
     });
   }
   render();

@@ -554,7 +554,8 @@ fetch('./meta.json').then(r => r.json()).then(m => {
   if (!el || !m.updated) return;
   const dt = new Date(m.updated);
   const s = isNaN(dt) ? m.updated : dt.toLocaleString(undefined, {
-    year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+    year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
+    timeZoneName: 'short'  // append the viewer's tz (e.g. "GMT+2") so it's clearly local
   });
   el.textContent = 'Last updated: ' + s;
 }).catch(() => {});

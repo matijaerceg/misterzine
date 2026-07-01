@@ -244,6 +244,12 @@ const ASPECT_OVERRIDE = {
   mpatrol:  '4 / 3',  // Moon Patrol raster is 240x252 (near-square) but the game is landscape 4:3
   travrusa: '3 / 4',  // Traverse USA is a vertical/TATE game stored in a 256x240 landscape raster
   shtrider: '3 / 4',  // Shot Rider — same: vertical/TATE racer in a 256x240 landscape raster
+  // Horizontal games stored in a square raster — the 1:1→3:4 default would wrongly
+  // stretch these tall, so pin them back to 4:3.
+  kungfum:  '4 / 3',  // Kung-Fu Master (Irem M62 256x256)
+  vigilant: '4 / 3',  // Vigilante (256x256)
+  exprraid: '4 / 3',  // Express Raider (240x240)
+  wexpress: '4 / 3',  // Western Express (240x240)
 };
 
 // core (rbf) -> the game's title, but only for cores that map to exactly ONE

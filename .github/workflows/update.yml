@@ -53,10 +53,15 @@ jobs:
         run: |
           git config user.name "misterzine-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/misterzine.sqlite data/exports docs
+          # Gate on the *published outputs*, not the sqlite: `snapshot` rewrites
+          # sources.last_fetch every run, so the DB always shows a diff even on a
+          # quiet day. Only when exports/site actually change do we also commit
+          # the DB (which then carries the new events/dates worth persisting).
+          git add data/exports docs
           if git diff --cached --quiet; then
-            echo "No changes today — nothing to publish."
+            echo "No new or updated releases today — nothing to publish."
           else
+            git add data/misterzine.sqlite
             git commit -m "Daily update: refresh releases ($(date -u +%Y-%m-%d))"
             git push
           fi

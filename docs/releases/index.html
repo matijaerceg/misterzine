@@ -13,11 +13,12 @@
   * { box-sizing: border-box; }
   body { font: 14px/1.4 system-ui, sans-serif; margin: 0; }
   main { padding: 0 1rem 1rem; }
-  header { position: sticky; top: 0; z-index: 20; background: Canvas; margin: 0; padding: 1rem 0 .75rem; }
+  .topbar { position: sticky; top: 0; z-index: 20; background: Canvas; }
+  header { margin: 0; padding: 1rem 0 0; }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
   .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
-  .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .75rem 0; }
+  .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
   select, input[type=search] { font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
@@ -35,7 +36,7 @@
   }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
-  th { position: sticky; top: 4.4rem; background: Canvas; cursor: pointer; user-select: none; }
+  th { position: sticky; top: var(--topbar-h, 6.6rem); z-index: 10; background: Canvas; cursor: pointer; user-select: none; }
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
@@ -119,6 +120,7 @@
 </head>
 <body>
 <main>
+<div class="topbar">
 <header>
   <div class="titlebar">
     <div>
@@ -143,6 +145,7 @@
     <option value="Other">Other</option>
   </select>
   <span class="count" id="count"></span>
+</div>
 </div>
 <div class="tablewrap">
 <table>
@@ -545,6 +548,19 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
 matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
   if (e.matches && openRow == null && document.body.classList.contains('panel-open')) closePanel();
 });
+
+// Keep the sticky <th> offset glued to the actual height of the sticky topbar
+// (title + last-updated + theme + search/filter row). Measured live so it stays
+// correct when the controls wrap on narrow screens — no hardcoded magic number.
+(function () {
+  const bar = document.querySelector('.topbar');
+  if (!bar) return;
+  const sync = () => document.documentElement.style
+    .setProperty('--topbar-h', bar.offsetHeight + 'px');
+  sync();
+  if (window.ResizeObserver) new ResizeObserver(sync).observe(bar);
+  else window.addEventListener('resize', sync);
+})();
 
 // "Last updated" stamp — meta.json.updated is bumped by export-web only when the
 // served data actually changes (see _write_site_meta), so this date/time is stable

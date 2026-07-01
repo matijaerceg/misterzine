@@ -15,6 +15,7 @@
   main { padding: 0 1rem 1rem; }
   header { position: sticky; top: 0; z-index: 20; background: Canvas; margin: 0; padding: 1rem 0 .75rem; }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
+  .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .75rem 0; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
@@ -34,7 +35,7 @@
   }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
-  th { position: sticky; top: 3.5rem; background: Canvas; cursor: pointer; user-select: none; }
+  th { position: sticky; top: 4.4rem; background: Canvas; cursor: pointer; user-select: none; }
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
@@ -120,7 +121,10 @@
 <main>
 <header>
   <div class="titlebar">
-    <h1>MiSTer FPGA Core &amp; Arcade Index</h1>
+    <div>
+      <h1>MiSTer FPGA Core &amp; Arcade Index</h1>
+      <p class="updated" id="updated"></p>
+    </div>
     <div class="theme" id="theme" role="group" aria-label="Color theme">
       <button type="button" data-set="auto">Auto</button>
       <button type="button" data-set="light">Light</button>
@@ -541,6 +545,19 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
 matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
   if (e.matches && openRow == null && document.body.classList.contains('panel-open')) closePanel();
 });
+
+// "Last updated" stamp — meta.json.updated is bumped by export-web only when the
+// served data actually changes (see _write_site_meta), so this date/time is stable
+// across no-op rebuilds. Stored as an ISO minute-precision UTC string.
+fetch('./meta.json').then(r => r.json()).then(m => {
+  const el = document.getElementById('updated');
+  if (!el || !m.updated) return;
+  const dt = new Date(m.updated);
+  const s = isNaN(dt) ? m.updated : dt.toLocaleString(undefined, {
+    year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+  el.textContent = 'Last updated: ' + s;
+}).catch(() => {});
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

@@ -21,6 +21,7 @@ Stdlib only. Uses the `gh` CLI just to borrow an auth token for the GitHub API.
 
 import argparse
 import datetime as dt
+import hashlib
 import json
 import os
 import re
@@ -1535,6 +1536,7 @@ def cmd_export_web(args):
     # regenerating.
     (DOCSDIR / "index.html").write_text(ROOT_REDIRECT_HTML, encoding="utf-8")
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
+    _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
     log(f"web export written to {outdir}")
     log(f"  data.json: {len(data)} rows")
     by_base = {}
@@ -1542,6 +1544,30 @@ def cmd_export_web(args):
         by_base[d["base"]] = by_base.get(d["base"], 0) + 1
     log(f"  by type: {by_base}")
     log(f"  arcade with genre: {sum(1 for d in data if d['genre'])}")
+
+
+def _write_site_meta(outdir):
+    """Write releases/meta.json with a 'last updated' timestamp that advances
+    ONLY when the served data.json content actually changes. We hash the final
+    data.json bytes (after the image re-tag) and compare to the hash recorded on
+    the previous export; if identical, we keep the old timestamp so re-running
+    the pipeline with no real change doesn't move the displayed date/time."""
+    data_path = outdir / "data.json"
+    meta_path = outdir / "meta.json"
+    digest = hashlib.sha256(data_path.read_bytes()).hexdigest()
+    prev = {}
+    if meta_path.exists():
+        try:
+            prev = json.loads(meta_path.read_text(encoding="utf-8"))
+        except Exception:
+            prev = {}
+    if prev.get("hash") == digest and prev.get("updated"):
+        updated = prev["updated"]
+    else:
+        updated = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+    meta_path.write_text(
+        json.dumps({"updated": updated, "hash": digest}), encoding="utf-8")
+    log(f"  meta.json: updated={updated} ({'unchanged' if prev.get('hash') == digest else 'bumped'})")
 
 
 def _retag_image_dims():

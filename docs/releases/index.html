@@ -29,11 +29,8 @@
   table { border-collapse: collapse; width: 100%; table-layout: fixed; }
   col.c-title { width: 24%; } col.c-type { width: 8%; } col.c-date { width: 11%; }
   col.c-year { width: 8%; } col.c-manuf { width: 22%; } col.c-core { width: 27%; }
-  .tablewrap { overflow-x: visible; }
-  @media (max-width: 48rem) {                    /* phones/narrow: scroll sideways, don't crush columns */
-    .tablewrap { overflow-x: auto; }
-    table { min-width: 44rem; }
-  }
+  .tablewrap { overflow-x: auto; }               /* scroll sideways rather than crush columns */
+  table { min-width: 44rem; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
   th { position: sticky; top: var(--topbar-h, 6.6rem); z-index: 10; background: Canvas; cursor: pointer; user-select: none; }

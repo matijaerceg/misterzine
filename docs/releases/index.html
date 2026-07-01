@@ -127,8 +127,9 @@
       <button type="button" data-set="dark">Dark</button>
     </div>
   </div>
-  <p class="legend">MiSTer release date = core's MiSTer debut where known, otherwise its latest
-    build date (<span class="build">grey</span>). Original Year = the real hardware's release year.
+  <p class="legend">MiSTer Debut = core's first MiSTer release where known, otherwise its latest
+    build date (<span class="build">grey</span>); hover the date for the core's latest update.
+    Original Year = the real hardware's release year.
     Genre via MAME catver.ini. Rows with a
     <svg class="dv-icon" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor"
       stroke-width="1.3" aria-hidden="true"><rect x="1.5" y="2" width="13" height="9" rx="1"/>
@@ -155,7 +156,7 @@
   <thead><tr>
     <th data-k="title">Title</th>
     <th data-k="typesort">Type</th>
-    <th data-k="date">MiSTer release date</th>
+    <th data-k="date">MiSTer Debut</th>
     <th data-k="year">Original Year</th>
     <th data-k="manufacturer">Manufacturer</th>
     <th data-k="core">Core</th>
@@ -232,6 +233,17 @@ const CORE_NAMES = {
   'popeye': 'Nintendo (Popeye)',
 };
 
+// Per-setname display-aspect overrides for games whose stored pixel dimensions
+// don't match how the hardware actually displays them (non-square pixels or a
+// TATE/vertical game captured in a landscape raster). Keyed by setname (d.img);
+// value is the forced CSS aspect-ratio. Without these the auto w/h heuristic
+// picks the wrong frame and object-fit:fill stretches the shot incorrectly.
+const ASPECT_OVERRIDE = {
+  findlove: '4 / 3',  // Sega ST-V hi-res 640x224 (non-square pixels) → 4:3, not 8:3
+  mpatrol:  '4 / 3',  // Moon Patrol raster is 240x252 (near-square) but the game is landscape 4:3
+  travrusa: '3 / 4',  // Traverse USA is a vertical/TATE game stored in a 256x240 landscape raster
+};
+
 // core (rbf) -> the game's title, but only for cores that map to exactly ONE
 // title in our data. Built once from DATA so single-game cores read nicely
 // without us hard-coding each. Multi-title cores resolve via CORE_NAMES instead.
@@ -266,7 +278,8 @@ function render() {
     '<tr' + (hasDetail(d) ? ' class="has-detail' + (d === openRow ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
     '<td>' + titleCell(d) + '</td>' +
     '<td class="type">' + typeBadge(d) + '</td>' +
-    '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
+    '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '"' +
+      (d.updated ? ' title="Latest update: ' + escA(d.updated) + '"' : '') + '>' + esc(d.date) + '</td>' +
     '<td>' + esc(d.year) + '</td>' +
     '<td>' + esc(d.manufacturer) + '</td>' +
     '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + esc(coreLabel(d.core)) + '</td></tr>'
@@ -325,6 +338,7 @@ function detailHTML(d) {
   if (d.core) rows.push(['Core', coreLabel(d.core) + (coreLabel(d.core) !== d.core ? ' (' + d.core + ')' : '')]);
   if (d.year) rows.push(['Original year', d.year]);
   rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build — debut unknown)')]);
+  if (d.updated) rows.push(['Latest update', d.updated]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
 
   const dl = '<dl>' + rows.map(([k, v]) => '<dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd>').join('') + '</dl>';
@@ -332,8 +346,13 @@ function detailHTML(d) {
   // already-superwide screenshots (dual/triple-screen: Sagaia, Darius, …) → 8:3.
   // 2.4 sits below the dual-screen cluster (2.67+) but above wide single screens
   // like the PGM 448x224 games (2.0), which stay 4:3.
+  // ASPECT_OVERRIDE first: some games store non-square pixels whose raw w/h is
+  // misleading (ST-V hi-res 640x224, Irem M62 240x252, vertical/TATE games in a
+  // landscape raster), so the auto heuristic picks the wrong frame. Keyed by
+  // setname (d.img). Durable — index.html is the single source of truth.
   const aspect = d.img_h ? d.img_w / d.img_h : 1;
-  const ratio = aspect >= 2.4 ? '8 / 3' : (d.img_w >= d.img_h ? '4 / 3' : '3 / 4');
+  const ratio = ASPECT_OVERRIDE[d.img] ||
+    (aspect >= 2.4 ? '8 / 3' : (d.img_w >= d.img_h ? '4 / 3' : '3 / 4'));
   const shots = (d.img_slots || []).map(s =>
     '<div class="frame" style="aspect-ratio:' + ratio + '">' +
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
@@ -429,7 +448,7 @@ function navigate(dir) {  // dir: +1 down, -1 up
   }
   openPanel(view[target]);
   const tr = document.querySelector('#rows tr[data-i="' + target + '"]');
-  if (tr) tr.scrollIntoView({ block: 'nearest' });
+  if (tr) tr.scrollIntoView({ block: 'center' });  // keep the selected row centered as you arrow through
 }
 
 document.addEventListener('keydown', e => {

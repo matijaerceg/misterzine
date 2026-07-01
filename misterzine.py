@@ -1454,7 +1454,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         year = CORE_YEAR.get(core_name(r["title"]), "")
     if not year and system == "arcade":
         year = arcade_year(sn, title) or _dat_field(sn, arcade_meta, "year")
-    return {
+    # the core's latest commit date (its most recent update). `date` above is the
+    # MiSTer *debut* (first commit); this is the newest build. Surface it as a
+    # tooltip so a years-old debut date doesn't imply the core is stale.
+    updated = (r["last_update"] or "")[:10] if "last_update" in r.keys() else ""
+    row = {
         "title": title,
         "base": base,
         "genre": genre,
@@ -1465,6 +1469,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         "core": core,
         "deprecated": False,
     }
+    # only emit when it adds information (differs from the shown debut/build date)
+    if updated and updated != date:
+        row["updated"] = updated
+    return row
 
 
 # Cores no longer in any current DB but worth showing for the record. The Sega

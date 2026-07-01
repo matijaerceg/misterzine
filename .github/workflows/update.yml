@@ -61,7 +61,10 @@ jobs:
           if git diff --cached --quiet; then
             echo "No new or updated releases today — nothing to publish."
           else
-            git add data/misterzine.sqlite
+            # Persist alongside the published outputs: the sqlite carries the new
+            # events/dates, and image_manifest.json records the libretro backfill
+            # (matches AND misses) so tomorrow's run doesn't re-resolve them.
+            git add data/misterzine.sqlite data/cache/image_manifest.json
             git commit -m "Daily update: refresh releases ($(date -u +%Y-%m-%d))"
             git push
           fi

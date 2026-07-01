@@ -21,9 +21,17 @@
   select, input[type=search] { font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
   .count { color: #888; font-size: .8rem; }
+  button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; border: 1px solid #8884;
+                 border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
+  button.clear:hover { background: #8882; }
   table { border-collapse: collapse; width: 100%; table-layout: fixed; }
   col.c-title { width: 24%; } col.c-type { width: 8%; } col.c-date { width: 11%; }
   col.c-year { width: 8%; } col.c-manuf { width: 22%; } col.c-core { width: 27%; }
+  .tablewrap { overflow-x: visible; }
+  @media (max-width: 48rem) {                    /* phones/narrow: scroll sideways, don't crush columns */
+    .tablewrap { overflow-x: auto; }
+    table { min-width: 44rem; }
+  }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
   th { position: sticky; top: 0; background: Canvas; cursor: pointer; user-select: none; }
@@ -69,6 +77,10 @@
   #panel dt { color: #888; }
   #panel dd { margin: 0; }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
+  /* empty state shown before any title is selected */
+  #panel .body.empty { display: flex; align-items: center; justify-content: center; text-align: center; position: relative; }
+  #panel .body.empty .close { position: absolute; top: .4rem; right: .6rem; float: none; }
+  #panel .pick { color: #888; font-size: .95rem; margin: 0; }
   /* footer is docked to the bottom of the panel (outside the scrolling .body) */
   #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid #8883;
                  background: Canvas; color: #888; font-size: .78rem; }
@@ -90,7 +102,8 @@
       var(--rib) 5.25px 6.75px, transparent 6.75px 9.25px, var(--rib) 9.25px 10.75px,
       transparent 10.75px 12px); }
   body.resizing { cursor: ew-resize; user-select: none; }
-  body.resizing #panel, body.resizing main { transition: none; }
+  body.resizing #panel, body.resizing main,
+  body.no-anim #panel, body.no-anim main { transition: none; }
 
   @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
     main { transition: margin-left .28s ease; }
@@ -123,6 +136,7 @@
 </header>
 <div class="controls">
   <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>
+  <button type="button" id="clear" class="clear" hidden>Clear</button>
   <select id="type">
     <option value="">All types</option>
     <option value="Arcade">Arcade</option>
@@ -132,6 +146,7 @@
   </select>
   <span class="count" id="count"></span>
 </div>
+<div class="tablewrap">
 <table>
   <colgroup>
     <col class="c-title"><col class="c-type"><col class="c-date">
@@ -147,6 +162,7 @@
   </tr></thead>
   <tbody id="rows"></tbody>
 </table>
+</div>
 </main>
 <aside id="panel" hidden></aside>
 <script>
@@ -262,7 +278,9 @@ function esc(s) { return (s == null ? '' : '' + s).replace(/[&<>]/g, c => ({'&':
 function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
 
 function apply() {
-  const q = document.getElementById('q').value.toLowerCase().trim();
+  const qEl = document.getElementById('q');
+  const q = qEl.value.toLowerCase().trim();
+  document.getElementById('clear').hidden = !qEl.value;
   const t = document.getElementById('type').value;
   view = DATA.filter(d => {
     if (t && d.base !== t) return false;
@@ -284,6 +302,10 @@ function apply() {
 
 document.getElementById('q').addEventListener('input', apply);
 document.getElementById('type').addEventListener('change', apply);
+document.getElementById('clear').addEventListener('click', () => {
+  const q = document.getElementById('q');
+  q.value = ''; apply(); q.focus();
+});
 document.querySelectorAll('th').forEach(th => th.addEventListener('click', () => {
   const k = th.dataset.k;
   sortDir = (sortKey === k) ? -sortDir : 1;
@@ -355,6 +377,17 @@ function markOpenRow() {
   if (openRow == null) return;
   const i = view.findIndex(d => d === openRow);
   if (i >= 0) { const tr = document.querySelector('#rows tr[data-i="' + i + '"]'); if (tr) tr.classList.add('open'); }
+}
+
+// empty "Select a title" state — the panel's default on wide screens before anything is clicked
+function openPlaceholder() {
+  openRow = null;
+  panel.innerHTML = '<div class="body empty"><button class="close" aria-label="Close">×</button>' +
+    '<p class="pick">Select a title</p></div>';
+  panel.hidden = false;
+  void panel.offsetWidth;
+  document.body.classList.add('panel-open');
+  markOpenRow();
 }
 
 document.getElementById('rows').addEventListener('click', e => {
@@ -484,6 +517,17 @@ themeBtns.forEach(b => b.addEventListener('click', () => {
   applyTheme(b.dataset.set);
 }));
 applyTheme(localStorage.getItem('mz-theme') || 'auto');
+
+// wide screens: dock the panel with the empty state by default (no slide-in on first paint)
+if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
+  document.body.classList.add('no-anim');
+  openPlaceholder();
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('no-anim')));
+}
+// turning portrait while only the empty state shows → hide it so it doesn't cover the list
+matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
+  if (e.matches && openRow == null && document.body.classList.contains('panel-open')) closePanel();
+});
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

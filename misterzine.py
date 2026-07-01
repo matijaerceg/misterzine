@@ -1347,7 +1347,7 @@ ARCADE_YEAR_BY_SETNAME = {
 ARCADE_YEAR_BY_NAME = {
     "Space Demon": "1981", "Space Firebird": "1980", "Armed F": "1988",
     "Armed Police Batrider": "1998", "Battle Bakraid - Unlimited Version": "1999",
-    "Battle Garegga": "1996", "Chouji Meikyuu Legion": "1987", "Cobra-Command": "1984",
+    "Battle Garegga": "1996", "Chouji Meikyuu Legion": "1987", "Cobra-Command": "1988",
     "Crazy Climber 2": "1984", "Demon's World - Horror Story": "1989", "Gang Wars": "1989",
     "Hachoo": "1989", "Hellfire": "1989", "Hishou Zame": "1987", "Iga Ninjyutsuden": "1988",
     "Ikari III - The Rescue": "1989", "In Your Face": "1991", "Jitsuryoku!! Pro Yakyuu": "1989",

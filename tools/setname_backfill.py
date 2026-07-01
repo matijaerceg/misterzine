@@ -21,6 +21,17 @@ def load_desc_index():
     return idx
 
 
+# Manual setname pins for titles whose normalized name collides with a DIFFERENT
+# MAME set that would otherwise win. Keyed by norm(title) (see match.norm).
+# These override the description-index match, so they survive every rebuild.
+SETNAME_OVERRIDES = {
+    # "Cobra-Command" normalizes identically to the 1984 Data East LaserDisc
+    # game "Cobra Command" (set `cobra`, blurry FMV video frames). The MiSTer /
+    # Coin-Op core is Data East's 1988 pixel-art shooter, MAME set `cobracom`.
+    # Without this pin the alphabetical tiebreak picks `cobra` (wrong game).
+    "cobra command": "cobracom",
+}
+
 # Non-arcade machine families whose setnames collide with real arcade titles:
 # fruit machines (m1*/m4*/m5*/j2*/j6*...), Mega-Tech (mt_), PlayChoice (pc_),
 # Nintendo Super System (nss_), SkillsPin/Scorpion (sp_), etc. They use an
@@ -38,6 +49,8 @@ def resolve_setname(title, desc_idx, prefer=None):
     then parents over clones, then membership in `prefer` (pS snap inventory)."""
     prefer = prefer or set()
     for key in match.title_keys(title):
+        if key in SETNAME_OVERRIDES:
+            return SETNAME_OVERRIDES[key]
         cands = desc_idx.get(key)
         if not cands:
             continue

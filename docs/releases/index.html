@@ -353,8 +353,10 @@ function detailHTML(d) {
   // landscape raster), so the auto heuristic picks the wrong frame. Keyed by
   // setname (d.img). Durable — index.html is the single source of truth.
   const aspect = d.img_h ? d.img_w / d.img_h : 1;
+  // Square (1:1) rasters — e.g. DECO Cassette games stored 240x240 — default to
+  // the tall 3:4 frame, not 4:3: only a strictly-landscape shot (w > h) gets 4:3.
   const ratio = ASPECT_OVERRIDE[d.img] ||
-    (aspect >= 2.4 ? '8 / 3' : (d.img_w >= d.img_h ? '4 / 3' : '3 / 4'));
+    (aspect >= 2.4 ? '8 / 3' : (d.img_w > d.img_h ? '4 / 3' : '3 / 4'));
   const shots = (d.img_slots || []).map(s =>
     '<div class="frame" style="aspect-ratio:' + ratio + '">' +
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'

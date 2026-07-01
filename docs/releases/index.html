@@ -29,7 +29,11 @@
   table { border-collapse: collapse; width: 100%; table-layout: fixed; }
   col.c-title { width: 24%; } col.c-type { width: 8%; } col.c-date { width: 11%; }
   col.c-year { width: 8%; } col.c-manuf { width: 22%; } col.c-core { width: 27%; }
-  .tablewrap { overflow-x: auto; }               /* scroll sideways rather than crush columns */
+  /* min-width keeps columns from crushing; overflow-x stays VISIBLE so an over-wide
+     table scrolls the whole page horizontally rather than becoming its own scroll
+     container — a scroll container here (overflow-x:auto forces overflow-y:auto too)
+     would re-anchor the sticky <th> to the wrap box instead of the viewport. */
+  .tablewrap { overflow-x: visible; }
   table { min-width: 44rem; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }

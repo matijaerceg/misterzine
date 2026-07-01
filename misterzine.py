@@ -25,7 +25,9 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import sqlite3
+import stat
 import subprocess
 import sys
 import time
@@ -94,10 +96,15 @@ _token_cache = None
 def gh_token():
     global _token_cache
     if _token_cache is None:
-        try:
-            _token_cache = subprocess.check_output(["gh", "auth", "token"], text=True).strip()
-        except Exception:
-            _token_cache = ""
+        # Prefer an env token (GitHub Actions sets GITHUB_TOKEN; we also honour
+        # GH_TOKEN) so the pipeline authenticates in CI without `gh auth login`.
+        tok = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+        if not tok:
+            try:
+                tok = subprocess.check_output(["gh", "auth", "token"], text=True).strip()
+            except Exception:
+                tok = ""
+        _token_cache = tok
     return _token_cache
 
 
@@ -266,6 +273,18 @@ def latest_snapshot(source_id):
     return json.loads(snaps[-1].read_text(encoding="utf-8"))
 
 
+def catalog_files(con, source_id):
+    """Reconstruct the previous {path: {'hash': ...}} baseline from the committed
+    catalog table. Used when no snapshot file is present — e.g. a fresh checkout
+    on CI, where data/snapshots/ is gitignored but the sqlite (which carries the
+    last-seen hash per path) IS committed. Without this the diff engine would see
+    no prior state, re-seed every run, and never log a going-forward event."""
+    rows = con.execute(
+        "SELECT path, hash FROM catalog WHERE source_id=?", (source_id,)
+    ).fetchall()
+    return {r["path"]: {"hash": r["hash"]} for r in rows}
+
+
 def write_snapshot(source_id, timestamp, files):
     sd = SNAPDIR / source_id
     sd.mkdir(parents=True, exist_ok=True)
@@ -293,9 +312,16 @@ def cmd_snapshot(args):
             (source["id"], source["name"], source["db_url"], ts, ts_iso, now_iso()),
         )
 
-        seed = prev is None
+        if prev is not None:
+            old_files = prev["files"]
+            seed = False
+        else:
+            # No snapshot file on disk (fresh CI checkout — snapshots/ is
+            # gitignored). Fall back to the committed catalog table so the diff
+            # still works; only a genuinely empty catalog is a true first seed.
+            old_files = catalog_files(con, source["id"])
+            seed = not old_files
         events = []
-        old_files = prev["files"] if prev else {}
 
         for path, meta in files.items():
             system, kind, is_unit = classify(path)
@@ -351,11 +377,17 @@ def upsert_catalog(con, source_id, files, ts_iso, seed):
             (source_id, path),
         ).fetchone()
         if row is None:
+            # A title first seen via the going-forward diff (not the initial
+            # seed) is genuinely debuting now, so its detection time IS its real
+            # MiSTer release date — stamp it. Seed-time inserts leave it NULL so
+            # the retrospective repo crawls supply the true historical debut and
+            # old undated titles are never inflated to the cold-build date.
+            release_date = None if seed else ts_iso
             con.execute(
-                "INSERT INTO catalog(source_id,path,system,kind,title,hash,size,first_seen,last_seen,last_changed) "
-                "VALUES(?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO catalog(source_id,path,system,kind,title,hash,size,release_date,first_seen,last_seen,last_changed) "
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
                 (source_id, path, system, kind, title, meta.get("hash"), meta.get("size"),
-                 ts_iso, ts_iso, ts_iso),
+                 release_date, ts_iso, ts_iso, ts_iso),
             )
         else:
             changed = row["hash"] != meta.get("hash")
@@ -721,8 +753,27 @@ def _sparse_arcade_clone(full_name, branch):
         # excluded subdirs (e.g. _alternatives/_M.I.A./); sparse skips writing them.
         subprocess.check_call(["git", "-C", str(repodir), "-c", "core.protectNTFS=false", "checkout"])
     else:
-        subprocess.run(["git", "-C", str(repodir), "pull", "--ff-only"], check=False)
+        # Refresh a cached clone. Distribution force-pushes (rewrites history),
+        # so --ff-only aborts and would silently leave a stale checkout missing
+        # newly-added MRAs. On failure, wipe and re-clone so enrichment always
+        # sees the current MRAs. (On CI the dir never exists, so this is only for
+        # a warm cache, e.g. local runs.)
+        pull = subprocess.run(["git", "-C", str(repodir), "pull", "--ff-only"])
+        if pull.returncode != 0:
+            log(f"  {full_name}: ff-only pull failed (force-push?); re-cloning fresh")
+            _rmtree_force(repodir)
+            return _sparse_arcade_clone(full_name, branch)
     return repodir
+
+
+def _rmtree_force(path):
+    """rmtree that survives Windows' read-only .git pack files: on a permission
+    error, clear the read-only bit and retry so the delete actually completes
+    (a plain rmtree leaves a half-removed dir that breaks the next clone)."""
+    def on_error(func, p, exc_info):
+        os.chmod(p, stat.S_IWRITE)
+        func(p)
+    shutil.rmtree(path, onerror=on_error)
 
 
 def cmd_enrich_mra(args):

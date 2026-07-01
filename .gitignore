@@ -1,7 +1,11 @@
 # Regenerable data
 data/repos/
 data/snapshots/
-data/cache/
+data/cache/*
+# ...but keep the screenshot manifest: export-web's image re-tag needs it, and
+# the daily CI job has no other way to recover it (the PNGs it maps are committed
+# under docs/images/, but this manifest is what ties them to each row + its dims).
+!data/cache/image_manifest.json
 __pycache__/
 *.pyc
 
@@ -9,3 +13,6 @@ __pycache__/
 # Uncomment to ignore:
 # data/misterzine.sqlite
 # data/exports/
+
+# Claude Code local state
+.claude/

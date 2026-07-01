@@ -252,16 +252,31 @@ def norm_key(title):
 # --- fetch + normalize ----------------------------------------------------
 
 def fetch_db(source):
-    """Download a db.json.zip, return (timestamp, {path: {hash,size}})."""
+    """Download a db.json.zip, return (timestamp, {path: {hash,size}}, [beta_paths]).
+
+    Jotego marks Patreon-only cores with the 'jtbeta' tag in the db's
+    tag_dictionary: the MRA ships in the public db but the core requires the
+    beta.bin key (a Patreon reward), so it's effectively paywalled. The site is
+    public-only, so we drop those files here and return their paths so the caller
+    can purge any rows ingested before this filter existed. When such a core
+    later graduates to free, Jotego removes the tag and it flows back in with its
+    real (graduation-day) debut date — no manual list to maintain."""
     log(f"  fetching {source['name']} ...")
     raw = http_get(source["db_url"])
     z = zipfile.ZipFile(BytesIO(raw))
     inner = z.read(z.namelist()[0])
     d = json.loads(inner)
+    beta_tag = d.get("tag_dictionary", {}).get("jtbeta")
     files = {}
+    beta_paths = []
     for path, meta in d.get("files", {}).items():
+        if beta_tag is not None and beta_tag in meta.get("tags", []):
+            beta_paths.append(path)
+            continue
         files[path] = {"hash": meta.get("hash"), "size": meta.get("size")}
-    return d.get("timestamp"), files
+    if beta_paths:
+        log(f"    excluded {len(beta_paths)} jtbeta (Patreon-gated) files")
+    return d.get("timestamp"), files, beta_paths
 
 
 def latest_snapshot(source_id):
@@ -301,9 +316,18 @@ def cmd_snapshot(args):
     con = connect()
     total_events = 0
     for source in SOURCES:
-        ts, files = fetch_db(source)
+        ts, files, beta_paths = fetch_db(source)
         prev = latest_snapshot(source["id"])
         ts_iso = epoch_to_iso(ts) or now_iso()
+
+        # Purge any Patreon-gated (jtbeta) rows that were ingested before the
+        # fetch_db filter existed. These were never legitimately public, so we
+        # delete the catalog rows outright rather than leaving stale entries the
+        # export would keep serving forever (SELECT * FROM catalog).
+        beta_set = set(beta_paths)
+        for path in beta_paths:
+            con.execute("DELETE FROM catalog WHERE source_id=? AND path=?",
+                        (source["id"], path))
 
         con.execute(
             "INSERT INTO sources(id,name,db_url,last_timestamp,last_timestamp_iso,last_fetch) "
@@ -338,10 +362,12 @@ def cmd_snapshot(args):
             if etype:
                 events.append((ts_iso, source["id"], path, title_from_path(path), system, etype, meta.get("hash")))
 
-        # removals (only meaningful after seed)
+        # removals (only meaningful after seed). Skip jtbeta paths: they're being
+        # purged as never-legitimately-public, not organically removed upstream,
+        # so a "removed" event would misrepresent the history.
         if not seed:
             for path in old_files:
-                if path not in files:
+                if path not in files and path not in beta_set:
                     system, kind, is_unit = classify(path)
                     if not is_unit:
                         continue

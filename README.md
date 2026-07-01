@@ -39,6 +39,12 @@ Example record (`arcade.json`):
 
 All three publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser handles them.
 
+Note: jtbindb also lists some cores that are still Patreon betas — their MRA ships
+publicly but the core needs the `beta.bin` key, so they're effectively paywalled.
+Jotego tags these `jtbeta` in the db's `tag_dictionary`; `fetch_db()` drops any
+file carrying that tag (and purges rows ingested before the filter). When a core
+graduates to free the tag is removed and it flows back in on its own.
+
 ## Why it's built this way (important)
 
 The obvious plan — "diff the git history of `db.json.zip`" — **does not work**. All three DB

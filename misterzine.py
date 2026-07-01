@@ -33,6 +33,7 @@ import sys
 import time
 import urllib.request
 import urllib.error
+import urllib.parse
 import zipfile
 from collections import Counter
 from io import BytesIO
@@ -1586,6 +1587,7 @@ def cmd_export_web(args):
     # fully data-driven (fetches data.json at runtime), so only data.json needs
     # regenerating.
     (DOCSDIR / "index.html").write_text(ROOT_REDIRECT_HTML, encoding="utf-8")
+    _backfill_libretro_images(data)  # give brand-new arcade titles a libretro shot
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
     _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
     log(f"web export written to {outdir}")
@@ -1619,6 +1621,108 @@ def _write_site_meta(outdir):
     meta_path.write_text(
         json.dumps({"updated": updated, "hash": digest}), encoding="utf-8")
     log(f"  meta.json: updated={updated} ({'unchanged' if prev.get('hash') == digest else 'bumped'})")
+
+
+LIBRETRO_RAW = "https://raw.githubusercontent.com/libretro-thumbnails/MAME/master/{}"
+LIBRETRO_TREE_API = "/repos/libretro-thumbnails/MAME/git/trees/master?recursive=1"
+
+
+def _libretro_slug(s):
+    """The on-disk image key for a title. MUST match tools/fetch_images.py slug()
+    so the re-tag step (which recomputes it) finds the PNG we just saved."""
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def _fetch_libretro_png(ref, dest):
+    """Download one libretro thumbnail (ref like 'Named_Titles/Dig Dug.png') to
+    dest. Returns True on a valid PNG. Skips if a non-empty file is already there."""
+    if dest.exists() and dest.stat().st_size > 0:
+        return True
+    url = LIBRETRO_RAW.format(urllib.parse.quote(ref))
+    try:
+        body = http_get(url)
+    except Exception as e:
+        log(f"    libretro miss {ref}: {e}")
+        return False
+    if not body or body[:8] != b"\x89PNG\r\n\x1a\n":
+        return False
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_bytes(body)
+    return True
+
+
+def _backfill_libretro_images(data):
+    """Give arcade titles that debuted since the last manifest build a screenshot
+    from libretro-thumbnails (per-file GitHub raw — CI-friendly: no 7z, no giant
+    progettoSNAPS packs, no MAME DAT).
+
+    Native-res progettoSNAPS remains a manual local pass; this just stops brand-new
+    titles from landing on the daily site with no image. Each candidate is recorded
+    in the manifest exactly once (with refs if matched, empty if not) so it's never
+    re-resolved, and the following _retag_image_dims() stamps the refs onto data.json.
+    A later local build_manifest run rebuilds the whole manifest and upgrades any of
+    these to native-res progettoSNAPS where available."""
+    manifest_path = CACHEDIR / "image_manifest.json"
+    if not manifest_path.exists():
+        return  # no manifest to extend (cold checkout); nothing to do
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except Exception:
+        return
+    known = {e["title"] for e in manifest}
+    todo = [r for r in data
+            if r.get("base") == "Arcade" and not r.get("deprecated")
+            and r["title"] not in known]
+    if not todo:
+        return  # steady state: no new titles since the last manifest build
+
+    # The repo file tree, fetched once (cached; gitignored so re-fetched per CI run).
+    tree_path = CACHEDIR / "libretro_mame_tree.json"
+    if tree_path.exists():
+        tree = json.loads(tree_path.read_text(encoding="utf-8"))
+    else:
+        try:
+            tree = gh_api(LIBRETRO_TREE_API)
+            CACHEDIR.mkdir(parents=True, exist_ok=True)
+            tree_path.write_text(json.dumps(tree), encoding="utf-8")
+        except Exception as e:
+            log(f"  libretro backfill skipped: tree fetch failed ({e})")
+            return
+
+    sys.path.insert(0, str(ROOT / "tools"))
+    try:
+        import match  # normalization + region-aware candidate picking
+    except Exception as e:
+        log(f"  libretro backfill skipped: match module unavailable ({e})")
+        return
+    idx = {f: match.build_index(tree, f) for f in ("Named_Titles", "Named_Snaps")}
+
+    hits = 0
+    for r in todo:
+        title = r["title"]
+        res = match.resolve(title, idx)  # {folder: filename stem or None}
+        entry = {"title": title, "setname": None, "source": None,
+                 "title_img": None, "snap_img": None,
+                 "third_img": None, "third_pack": None}
+        got = False
+        for folder, field, slot in (("Named_Titles", "title_img", "title"),
+                                    ("Named_Snaps", "snap_img", "snap")):
+            stem = res.get(folder)
+            if not stem:
+                continue
+            ref = f"{folder}/{stem}.png"
+            dest = DOCSDIR / "images" / slot / (_libretro_slug(title) + ".png")
+            if _fetch_libretro_png(ref, dest):
+                entry[field] = ref
+                entry["source"] = "libretro"
+                got = True
+        if got:
+            hits += 1
+        manifest.append(entry)  # record even misses so they aren't re-resolved
+
+    manifest_path.write_text(json.dumps(manifest, indent=1, ensure_ascii=False),
+                             encoding="utf-8")
+    log(f"  libretro backfill: {hits}/{len(todo)} new arcade titles matched a screenshot")
 
 
 def _retag_image_dims():

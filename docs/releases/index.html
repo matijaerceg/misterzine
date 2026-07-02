@@ -27,17 +27,18 @@
                  border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
   button.clear:hover { background: #8882; }
   table { border-collapse: collapse; width: 100%; table-layout: fixed; }
-  col.c-title { width: 24%; } col.c-type { width: 8%; } col.c-date { width: 11%; }
-  col.c-year { width: 8%; } col.c-manuf { width: 22%; } col.c-core { width: 27%; }
+  col.c-title { width: 21%; } col.c-type { width: 7%; } col.c-date { width: 10%; }
+  col.c-upd { width: 10%; } col.c-year { width: 9%; } col.c-manuf { width: 19%; } col.c-core { width: 24%; }
   /* min-width keeps columns from crushing; overflow-x stays VISIBLE so an over-wide
      table scrolls the whole page horizontally rather than becoming its own scroll
      container — a scroll container here (overflow-x:auto forces overflow-y:auto too)
      would re-anchor the sticky <th> to the wrap box instead of the viewport. */
   .tablewrap { overflow-x: visible; }
-  table { min-width: 44rem; }
+  table { min-width: 49rem; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
-  th { position: sticky; top: var(--topbar-h, 6.6rem); z-index: 10; background: Canvas; cursor: pointer; user-select: none; }
+  th { position: sticky; top: var(--topbar-h, 6.6rem); z-index: 10; background: Canvas; cursor: pointer; user-select: none;
+       overflow-wrap: normal; }  /* headers wrap at spaces, never mid-word */
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
@@ -151,13 +152,14 @@
 <div class="tablewrap">
 <table>
   <colgroup>
-    <col class="c-title"><col class="c-type"><col class="c-date">
+    <col class="c-title"><col class="c-type"><col class="c-date"><col class="c-upd">
     <col class="c-year"><col class="c-manuf"><col class="c-core">
   </colgroup>
   <thead><tr>
     <th data-k="title">Title</th>
     <th data-k="typesort">Type</th>
     <th data-k="date">MiSTer Debut</th>
+    <th data-k="updated">Last Updated</th>
     <th data-k="year">Original Year</th>
     <th data-k="manufacturer">Manufacturer</th>
     <th data-k="core">Core</th>
@@ -296,8 +298,8 @@ function render() {
     '<tr' + (hasDetail(d) ? ' class="has-detail' + (d === openRow ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
     '<td>' + titleCell(d) + '</td>' +
     '<td class="type">' + typeBadge(d) + '</td>' +
-    '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '"' +
-      (d.updated ? ' title="Latest update: ' + escA(d.updated) + '"' : '') + '>' + esc(d.date) + '</td>' +
+    '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
+    '<td class="date">' + esc(d.updated || '') + '</td>' +
     '<td>' + esc(d.year) + '</td>' +
     '<td>' + esc(d.manufacturer) + '</td>' +
     '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + esc(coreLabel(d.core)) + '</td></tr>'

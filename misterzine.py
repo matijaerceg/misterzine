@@ -80,6 +80,12 @@ def now_iso():
     return dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat()
 
 
+def iso_z(s):
+    """Normalize an ISO-8601 UTC timestamp to the trailing-Z form so values
+    from GitHub (…Z) and now_iso() (…+00:00) compare lexically."""
+    return (s or "").replace("+00:00", "Z")
+
+
 def epoch_to_iso(ts):
     try:
         return dt.datetime.fromtimestamp(int(ts), dt.timezone.utc).replace(microsecond=0).isoformat()
@@ -428,8 +434,19 @@ def upsert_catalog(con, source_id, files, ts_iso, seed):
 
 # --- command: repos (retrospective release dates) -------------------------
 
-def list_arcade_repos():
-    repos = []
+_org_repos_cache = None
+
+
+def list_org_repos():
+    """All public repos in ARCADE_REPO_ORG, keyed by lowercased name (GitHub
+    repo lookups are case-insensitive; some repos vary the _MiSTer suffix case).
+    One paginated listing serves both the arcade and console/computer crawls,
+    and each repo object's pushed_at lets them skip repos untouched since the
+    last crawl."""
+    global _org_repos_cache
+    if _org_repos_cache is not None:
+        return _org_repos_cache
+    repos = {}
     page = 1
     while True:
         data, hdrs = gh_api(
@@ -438,13 +455,20 @@ def list_arcade_repos():
         if not data:
             break
         for r in data:
-            if r["name"].startswith(ARCADE_REPO_PREFIX) and not r.get("archived", False):
-                repos.append(r)
+            repos[r["name"].lower()] = r
         link = hdrs.get("Link", "")
         if 'rel="next"' not in link:
             break
         page += 1
+    _org_repos_cache = repos
     return repos
+
+
+def list_arcade_repos():
+    return [
+        r for r in list_org_repos().values()
+        if r["name"].startswith(ARCADE_REPO_PREFIX) and not r.get("archived", False)
+    ]
 
 
 def repo_commit_bounds(full_name, path=None):
@@ -475,8 +499,19 @@ def cmd_repos(args):
     log(f"  found {len(repos)} {ARCADE_REPO_PREFIX}* repos")
     if args.limit:
         repos = repos[: args.limit]
+    crawled = {
+        r["repo"]: r["crawled_at"]
+        for r in con.execute("SELECT repo, crawled_at FROM arcade_repos").fetchall()
+    }
+    skipped = 0
     for i, r in enumerate(repos, 1):
         full = r["full_name"]
+        # incremental: a repo's first/last commit can't change without a push,
+        # so skip anything not pushed since we last crawled it (--force overrides)
+        prev = crawled.get(full)
+        if prev and not getattr(args, "force", False) and iso_z(r.get("pushed_at")) <= iso_z(prev):
+            skipped += 1
+            continue
         try:
             first, last, count = repo_commit_bounds(full)
         except Exception as e:
@@ -493,6 +528,8 @@ def cmd_repos(args):
         if i % 20 == 0 or i == len(repos):
             con.commit()
             log(f"  [{i}/{len(repos)}] {full}  debut={first[:10] if first else '?'}  updated={last[:10] if last else '?'}")
+    if skipped:
+        log(f"  skipped {skipped} repos unchanged since last crawl")
     con.commit()
     join_repos_to_catalog(con)
     apply_frozen_arcade_core_dates(con)
@@ -697,18 +734,32 @@ def cmd_core_repos(args):
     if args.limit:
         bases = dict(list(bases.items())[: args.limit])
     log(f"crawling {len(bases)} console/computer/other core repos ...")
-    hit = miss = 0
+    org = list_org_repos()
+    crawled = {
+        r["repo"]: r["crawled_at"]
+        for r in con.execute("SELECT repo, crawled_at FROM core_repos").fetchall()
+    }
+    hit = miss = skipped = 0
     for i, base in enumerate(bases, 1):
+        # resolve the real repo name from the org listing (case-insensitive,
+        # like GitHub's own repo lookup — some repos spell the suffix _MISTer)
+        meta = org.get(f"{base}_MiSTer".lower())
+        if meta is None:
+            # not in the org: either it never existed (the old code burned a
+            # 404 here every run) or it went private/archived-and-hidden —
+            # keep any previously-crawled row, there's nothing new to fetch
+            miss += 1
+            continue
+        # keep the constructed name as the storage key (what earlier crawls
+        # wrote); GitHub's API accepts it case-insensitively either way
         full = f"{ARCADE_REPO_ORG}/{base}_MiSTer"
+        prev = crawled.get(full)
+        if prev and not getattr(args, "force", False) and iso_z(meta.get("pushed_at")) <= iso_z(prev):
+            hit += 1
+            skipped += 1
+            continue
         try:
             first, last, count = repo_commit_bounds(full)
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                miss += 1
-                log(f"  [{i}/{len(bases)}] {full}: no repo (404)")
-                continue
-            log(f"  [{i}/{len(bases)}] {full}: ERROR {e}")
-            continue
         except Exception as e:
             log(f"  [{i}/{len(bases)}] {full}: ERROR {e}")
             continue
@@ -871,6 +922,18 @@ def cmd_jtcores(args):
     items = sorted(cores.items())
     if args.limit:
         items = items[: args.limit]
+    # incremental: one pushed_at check on the monorepo gates the whole folder
+    # crawl — no push since the last crawl means no folder's bounds moved. A
+    # core newly graduated to public (jtbindb change, not a jtcores push) can
+    # still appear without a push, so never-crawled folders are always fetched.
+    last_crawl = con.execute("SELECT MAX(crawled_at) FROM jt_cores").fetchone()[0]
+    if last_crawl and not getattr(args, "force", False):
+        meta = gh_api(f"/repos/{JT_REPO}")
+        if iso_z(meta.get("pushed_at")) <= iso_z(last_crawl):
+            known = {r["folder"] for r in con.execute("SELECT folder FROM jt_cores").fetchall()}
+            skipped = sum(1 for f, _ in items if f in known)
+            items = [(f, r) for f, r in items if f not in known]
+            log(f"  {JT_REPO} unchanged since last crawl — skipping {skipped} known folders")
     for i, (folder, rbf) in enumerate(items, 1):
         try:
             first, last, count = repo_commit_bounds(JT_REPO, path=f"cores/{folder}")
@@ -898,17 +961,24 @@ def cmd_jtcores(args):
 
 
 def join_jt_to_catalog(con):
-    """Attach Jotego dates to arcade catalog rows whose rbf is jt<folder>."""
+    """Attach Jotego dates to arcade catalog rows whose rbf is jt<folder>.
+
+    Undated rows get repo + debut + last_update. Rows already dated BY A
+    PREVIOUS JT JOIN (repo points at the monorepo) get only last_update
+    refreshed — debuts stay frozen while the "latest update" signal tracks the
+    daily crawl. Rows dated by another source keep that source's dates."""
     jt = {r["folder"]: r for r in con.execute("SELECT * FROM jt_cores").fetchall()}
-    n = 0
+    n = m = 0
     for row in con.execute(
-        "SELECT source_id, path, rbf, release_date FROM catalog "
-        "WHERE system='arcade' AND rbf IS NOT NULL AND release_date IS NULL"
+        "SELECT source_id, path, rbf, release_date, repo FROM catalog "
+        "WHERE system='arcade' AND rbf IS NOT NULL"
     ).fetchall():
         rbf = row["rbf"].lower()
         folder = rbf[2:] if rbf.startswith("jt") else rbf
         r = jt.get(folder)
-        if r:
+        if not r:
+            continue
+        if row["release_date"] is None:
             debut = JT_CORE_FROZEN_DATES.get(folder, r["first_commit"])
             con.execute(
                 "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",
@@ -916,7 +986,13 @@ def join_jt_to_catalog(con):
                  row["source_id"], row["path"]),
             )
             n += 1
-    log(f"  joined {n} Jotego arcade titles to release dates")
+        elif (row["repo"] or "").startswith(JT_REPO):
+            con.execute(
+                "UPDATE catalog SET last_update=? WHERE source_id=? AND path=?",
+                (r["last_commit"], row["source_id"], row["path"]),
+            )
+            m += 1
+    log(f"  joined {n} Jotego arcade titles to release dates; refreshed last_update on {m}")
 
 
 # The jtcores monorepo dates a core by the first commit that touched its
@@ -1534,8 +1610,8 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     if not year and system == "arcade":
         year = arcade_year(sn, title) or _dat_field(sn, arcade_meta, "year")
     # the core's latest commit date (its most recent update). `date` above is the
-    # MiSTer *debut* (first commit); this is the newest build. Surface it as a
-    # tooltip so a years-old debut date doesn't imply the core is stale.
+    # MiSTer *debut* (first commit); this is the newest build. Shown in its own
+    # sortable column so a years-old debut date doesn't imply the core is stale.
     updated = (r["last_update"] or "")[:10] if "last_update" in r.keys() else ""
     row = {
         "title": title,
@@ -1548,8 +1624,8 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         "core": core,
         "deprecated": False,
     }
-    # only emit when it adds information (differs from the shown debut/build date)
-    if updated and updated != date:
+    # updated == date just means "never touched since debut" — still worth a cell
+    if updated:
         row["updated"] = updated
     return row
 
@@ -1848,10 +1924,12 @@ def main():
 
     rp = sub.add_parser("repos", help="crawl per-core arcade repos for real release dates")
     rp.add_argument("--limit", type=int, default=0, help="limit number of repos (testing)")
+    rp.add_argument("--force", action="store_true", help="re-crawl even repos not pushed since last crawl")
     rp.set_defaults(func=cmd_repos)
 
     crp = sub.add_parser("core-repos", help="crawl console/computer/other per-core repos for debut dates")
     crp.add_argument("--limit", type=int, default=0, help="limit number of repos (testing)")
+    crp.add_argument("--force", action="store_true", help="re-crawl even repos not pushed since last crawl")
     crp.set_defaults(func=cmd_core_repos)
 
     mp = sub.add_parser("enrich-mra", help="add year/manufacturer/rbf from MRA XML")
@@ -1859,6 +1937,7 @@ def main():
 
     jp = sub.add_parser("jtcores", help="backfill Jotego release dates from jtcores monorepo")
     jp.add_argument("--limit", type=int, default=0)
+    jp.add_argument("--force", action="store_true", help="re-crawl even if the monorepo wasn't pushed since last crawl")
     jp.set_defaults(func=cmd_jtcores)
 
     cp = sub.add_parser("coinop", help="backfill Coin-Op release dates from develop commit messages")

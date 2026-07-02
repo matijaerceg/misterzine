@@ -40,6 +40,19 @@ jobs:
       - name: Enrich new arcade titles (year/manufacturer/rbf/setname)
         run: python misterzine.py enrich-mra
 
+      - name: Refresh debut/last-update dates (incremental repo crawls)
+        # Feeds the site's "Last Updated" column (each core repo's newest
+        # commit). The crawls skip every repo not pushed since its last crawl
+        # (one org listing + one jtcores pushed_at check), so a typical day
+        # costs a handful of API calls, well inside GITHUB_TOKEN's rate limit.
+        # A crawl hiccup shouldn't block the daily publish, hence non-fatal.
+        continue-on-error: true
+        run: |
+          python misterzine.py repos
+          python misterzine.py core-repos
+          python misterzine.py jtcores
+          python misterzine.py coinop
+
       - name: Genre (MAME catver.ini)
         run: python misterzine.py genre
 

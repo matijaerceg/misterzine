@@ -129,9 +129,10 @@ then `jtcores` and `genre`.)
 - `docs/releases/index.html` — a single dependency-free page (vanilla JS) rendering a searchable,
   sortable, type-filterable table, **sorted most-recent-first by default**. The **Type** column
   reads `Arcade, <genre>` for arcade titles and `Console core` / `Computer core` / `Other core`
-  for cores (a retired core reads `… core (deprecated)`). The **Date** column is the MiSTer debut
-  where known, otherwise the core's latest build date (`_YYYYMMDD` suffix, greyed) — column titled
-  **MiSTer release date**. Console and computer cores carry their hardware maker
+  for cores (a retired core reads `… core (deprecated)`). The **MiSTer Debut** column is the
+  MiSTer debut where known, otherwise the core's latest build date (`_YYYYMMDD` suffix, greyed);
+  the **Last Updated** column is the core repo's newest commit, refreshed daily by the CI's
+  incremental repo crawls. Console and computer cores carry their hardware maker
   (Nintendo/Sega/Commodore/Sinclair/…) from the `CONSOLE_MANUFACTURER` / `COMPUTER_MANUFACTURER`
   maps, and the original hardware's release year (column **Original Year**) from the `CORE_YEAR`
   map (obscure/DIY makers and years web-verified). Every console/computer core has a year; a few
@@ -153,7 +154,10 @@ folder. Re-run `export-web` and push to update the live site.
 Run `python misterzine.py snapshot` on a schedule (daily is plenty — cores ship every few
 days). Each run diffs the freshly-fetched DBs against the previous snapshot and appends
 dated `new`/`updated` events to the `events` table and `timeline.jsonl`. Re-run `export`
-after. Occasionally re-run `repos` to pick up brand-new arcade core repos.
+after. The repo crawls (`repos`, `core-repos`, `jtcores`, `coinop`) are incremental — they
+skip every repo not pushed since its last crawl (`--force` overrides) — so the daily GitHub
+Actions workflow runs them too, keeping debut dates for brand-new cores and the site's
+**Last Updated** column fresh for a handful of API calls a day.
 
 On Windows, schedule with Task Scheduler, or use the Claude Code `/schedule` skill.
 

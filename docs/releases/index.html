@@ -26,7 +26,10 @@
   button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; border: 1px solid #8884;
                  border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
   button.clear:hover { background: #8882; }
-  table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+  /* separate (not collapse): collapsed borders are painted by the table, so they
+     don't travel with the sticky <th>s — rows show through 1px seams while scrolling.
+     With separate+spacing:0 each cell owns its border and it sticks along with it. */
+  table { border-collapse: separate; border-spacing: 0; width: 100%; table-layout: fixed; }
   col.c-title { width: 21%; } col.c-type { width: 7%; } col.c-date { width: 10%; }
   col.c-upd { width: 10%; } col.c-year { width: 9%; } col.c-manuf { width: 19%; } col.c-core { width: 24%; }
   /* min-width keeps columns from crushing; overflow-x stays VISIBLE so an over-wide
@@ -578,8 +581,10 @@ matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
 (function () {
   const bar = document.querySelector('.topbar');
   if (!bar) return;
+  // floor the fractional height so the <th> tucks *under* the topbar (which is
+  // opaque and higher z-index) instead of leaving a subpixel scroll-through seam
   const sync = () => document.documentElement.style
-    .setProperty('--topbar-h', bar.offsetHeight + 'px');
+    .setProperty('--topbar-h', Math.floor(bar.getBoundingClientRect().height) + 'px');
   sync();
   if (window.ResizeObserver) new ResizeObserver(sync).observe(bar);
   else window.addEventListener('resize', sync);

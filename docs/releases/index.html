@@ -11,9 +11,14 @@
   :root[data-theme="light"] { color-scheme: light; }
   :root[data-theme="dark"]  { color-scheme: dark; }
   * { box-sizing: border-box; }
+  /* app shell: the page itself never scrolls — .tablewrap is the only scroll
+     container. This keeps the fixed detail panel and every native scroll
+     behavior (scrollbars, scrollIntoView, find-in-page) framed to the table
+     region instead of the full viewport. */
+  html, body { height: 100%; overflow: hidden; }
   body { font: 14px/1.4 system-ui, sans-serif; margin: 0; }
-  main { padding: 0 1rem 1rem; }
-  .topbar { position: sticky; top: 0; z-index: 20; background: Canvas; }
+  main { height: 100vh; height: 100dvh; display: flex; flex-direction: column; padding: 0 1rem; }
+  .topbar { flex: none; position: relative; z-index: 20; background: Canvas; }
   header { margin: 0; padding: 1rem 0 0; }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
   .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
@@ -45,15 +50,16 @@
   table { border-collapse: separate; border-spacing: 0; width: 100%; table-layout: fixed; }
   /* col widths are computed in JS from the COLUMNS config (they re-balance when
      columns are toggled) — see buildHeader() */
-  /* min-width keeps columns from crushing; overflow-x stays VISIBLE so an over-wide
-     table scrolls the whole page horizontally rather than becoming its own scroll
-     container — a scroll container here (overflow-x:auto forces overflow-y:auto too)
-     would re-anchor the sticky <th> to the wrap box instead of the viewport. */
-  .tablewrap { overflow-x: visible; }
+  /* min-width keeps columns from crushing; .tablewrap owns BOTH scroll axes
+     (the page never scrolls), so the sticky <th> anchor to it and an over-wide
+     table scrolls inside the table region only. min-height:0 is load-bearing:
+     without it the flex child refuses to shrink below its content height and
+     nothing scrolls. */
+  .tablewrap { flex: 1 1 auto; min-height: 0; overflow: auto; }
   table { min-width: 49rem; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
-  th { position: sticky; top: var(--topbar-h, 6.6rem); z-index: 10; background: Canvas; cursor: pointer; user-select: none;
+  th { position: sticky; top: 0; z-index: 10; background: Canvas; cursor: pointer; user-select: none;
        overflow-wrap: normal; }  /* headers wrap at spaces, never mid-word */
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
@@ -85,7 +91,7 @@
   .dv-icon { margin-left: .4rem; color: #888; vertical-align: -1px; }
 
   /* --- detail panel: slides in from the left --- */
-  #panel { position: fixed; top: 0; left: 0; height: 100vh; width: var(--pw, calc(100vw / 3));
+  #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, calc(100vw / 3));
            transform: translateX(-100%); transition: transform .28s ease;
            overflow: hidden; z-index: 100; background: Canvas; display: flex; flex-direction: column;
            border-right: 1px solid #8884; box-shadow: 4px 0 24px #0006;
@@ -114,7 +120,7 @@
                       image-rendering: pixelated; display: block; }
 
   /* draggable edge: resize the panel / flick left to close (reflow mode only) */
-  #resizer { position: fixed; top: 0; height: 100vh; width: 12px; z-index: 101;
+  #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; width: 12px; z-index: 101;
              left: var(--pw, calc(100vw / 3)); margin-left: -6px;
              cursor: ew-resize; display: none; touch-action: none; }
   body.panel-open #resizer { display: block; }
@@ -135,8 +141,14 @@
   }
   @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen, no resize */
     #panel { width: 100vw; }
-    body.panel-open { overflow: hidden; }
     body.panel-open #resizer { display: none; }
+  }
+  /* printing: undo the fixed-height app shell so the full row list paginates
+     instead of clipping to one screen of the scroller */
+  @media print {
+    html, body { height: auto; overflow: visible; }
+    main { height: auto; display: block; }
+    .tablewrap { overflow: visible; }
   }
 </style>
 </head>
@@ -367,8 +379,8 @@ function buildHeader() {
     '>' + c.label + '</th>').join('');
   // each column contributes its mw to the table's width floor so cells don't
   // crush (the 5rem on the metadata columns keeps the nowrap date columns from
-  // colliding with all 6 on); an over-wide table scrolls the page horizontally
-  // (never .tablewrap — a scroll container there would break the sticky headers)
+  // colliding with all 6 on); an over-wide table scrolls horizontally inside
+  // .tablewrap, the page's only scroll container (the sticky <th> anchor to it)
   document.querySelector('table').style.minWidth = cols.reduce((s, c) => s + c.mw, 0) + 'rem';
 }
 
@@ -420,7 +432,7 @@ document.getElementById('clear').addEventListener('click', () => {
   // the full list just replaced the filtered one; keep the user's place by
   // re-centering on the still-selected row instead of stranding it off-screen
   const tr = document.querySelector('#rows tr.open');
-  if (tr) tr.scrollIntoView({ block: 'center' });
+  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
 });
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {
@@ -607,9 +619,14 @@ function currentIndex() {
 function firstVisibleSelectableIdx(fromBottom) {
   const rows = [...document.querySelectorAll('#rows tr.has-detail')];
   if (fromBottom) rows.reverse();
+  // visibility is judged against the scroller, not the window — and rows tucked
+  // under the sticky header row don't count, so the top boundary is the thead's
+  // bottom edge rather than the scroller's own top
+  const wrap = document.querySelector('.tablewrap').getBoundingClientRect();
+  const top = document.querySelector('thead').getBoundingClientRect().bottom;
   for (const tr of rows) {
     const r = tr.getBoundingClientRect();
-    if (r.bottom > 0 && r.top < innerHeight) return +tr.dataset.i;  // first row in/below the viewport top
+    if (r.bottom > top && r.top < wrap.bottom) return +tr.dataset.i;  // first row inside the visible scroll area
   }
   return -1;
 }
@@ -628,7 +645,7 @@ function navigate(dir) {  // dir: +1 down, -1 up
   }
   openPanel(view[target]);
   const tr = document.querySelector('#rows tr[data-i="' + target + '"]');
-  if (tr) tr.scrollIntoView({ block: 'center' });  // keep the selected row centered as you arrow through
+  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });  // keep the selected row centered as you arrow through
 }
 
 document.addEventListener('keydown', e => {
@@ -726,21 +743,6 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
 matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
   if (e.matches && openRow == null && document.body.classList.contains('panel-open')) closePanel();
 });
-
-// Keep the sticky <th> offset glued to the actual height of the sticky topbar
-// (title + last-updated + theme + search/filter row). Measured live so it stays
-// correct when the controls wrap on narrow screens — no hardcoded magic number.
-(function () {
-  const bar = document.querySelector('.topbar');
-  if (!bar) return;
-  // floor the fractional height so the <th> tucks *under* the topbar (which is
-  // opaque and higher z-index) instead of leaving a subpixel scroll-through seam
-  const sync = () => document.documentElement.style
-    .setProperty('--topbar-h', Math.floor(bar.getBoundingClientRect().height) + 'px');
-  sync();
-  if (window.ResizeObserver) new ResizeObserver(sync).observe(bar);
-  else window.addEventListener('resize', sync);
-})();
 
 // "Last updated" stamp — meta.json.updated is bumped by export-web only when the
 // served data actually changes (see _write_site_meta), so this date/time is stable

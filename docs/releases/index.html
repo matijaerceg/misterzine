@@ -466,6 +466,9 @@ document.getElementById('hrow').addEventListener('click', e => {
   sortKey = k;
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
   apply();
+  // re-sorting moves the selected row to a new position — follow it there
+  const tr = document.querySelector('#rows tr.open');
+  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
 });
 
 // --- "Types" dropdown: multi-select filter over the four base types ---
@@ -518,6 +521,10 @@ colsMenu.addEventListener('change', e => {
   }
   buildHeader();
   apply();
+  // adding/removing columns changes row heights (in-cell wrapping), which can
+  // strand the selected row off-screen — keep it centered like the clear button does
+  const tr = document.querySelector('#rows tr.open');
+  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
 });
 // click outside closes any open dropdown (Types + Columns)
 function closeDropdowns(except) {

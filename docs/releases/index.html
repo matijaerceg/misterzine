@@ -445,6 +445,9 @@ function apply() {
 }
 
 document.getElementById('q').addEventListener('input', apply);
+// keyboard-first devices get told about type-anywhere; touch keeps the plain hint
+if (matchMedia('(hover: hover) and (pointer: fine)').matches)
+  document.getElementById('q').placeholder = 'Type anywhere to search title, type, manufacturer, core…';
 document.getElementById('clear').addEventListener('click', () => {
   const q = document.getElementById('q');
   q.value = ''; apply(); q.focus({ preventScroll: true });
@@ -516,10 +519,13 @@ colsMenu.addEventListener('change', e => {
   apply();
 });
 // click outside closes any open dropdown (Types + Columns)
-document.addEventListener('click', e => {
+function closeDropdowns(except) {
   for (const dd of document.querySelectorAll('details.cols')) {
-    if (dd.open && !dd.contains(e.target)) dd.open = false;
+    if (dd.open && dd !== except) dd.open = false;
   }
+}
+document.addEventListener('click', e => {
+  closeDropdowns(e.target.closest('details.cols'));
 });
 
 buildHeader();  // header renders immediately; rows follow once data.json loads
@@ -683,6 +689,25 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
     e.preventDefault();
     navigate(e.key === 'ArrowDown' ? 1 : -1);
+    return;
+  }
+  // type anywhere to filter: printable keys and Backspace route to the search box.
+  // Space is deliberately excluded (no leading-space queries; it works normally
+  // once focus is in the field), as are modified keys (browser shortcuts).
+  const printable = e.key.length === 1 && e.key !== ' ';
+  if ((printable || e.key === 'Backspace')
+      && !e.ctrlKey && !e.metaKey && !e.altKey && !e.isComposing
+      && !e.target.closest('input, textarea, select')
+      && !(e.target instanceof HTMLElement && e.target.isContentEditable)) {
+    closeDropdowns();  // typing means "filter now"
+    const q = document.getElementById('q');
+    q.focus();
+    // a stale query gets replaced, not appended to: select it so the incoming
+    // keystroke overwrites (address-bar convention). Backspace instead deletes
+    // one char from the end. No preventDefault — the browser delivers the key
+    // to the now-focused field, so the normal input/filter pipeline fires.
+    if (printable && q.value) q.select();
+    if (e.key === 'Backspace') q.setSelectionRange(q.value.length, q.value.length);
   }
 });
 

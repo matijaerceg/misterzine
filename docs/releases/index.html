@@ -159,13 +159,10 @@
 <div class="controls">
   <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>
   <button type="button" id="clear" class="clear" hidden>Clear</button>
-  <select id="type">
-    <option value="">All types</option>
-    <option value="Arcade">Arcade</option>
-    <option value="Console">Console</option>
-    <option value="Computer">Computer</option>
-    <option value="Other">Other</option>
-  </select>
+  <details class="cols" id="typedd">
+    <summary id="typesummary">All Types</summary>
+    <div class="menu" id="typemenu"></div>
+  </details>
   <details class="cols" id="cols">
     <summary>Columns</summary>
     <div class="menu" id="colsmenu"></div>
@@ -391,9 +388,10 @@ function apply() {
   const qEl = document.getElementById('q');
   const q = qEl.value.toLowerCase().trim();
   document.getElementById('clear').hidden = !qEl.value;
-  const t = document.getElementById('type').value;
+  // Types filter: an empty set means "no filter" (show all) — which coincides
+  // with every type being checked. Any partial selection narrows to those bases.
   view = DATA.filter(d => {
-    if (t && d.base !== t) return false;
+    if (enabledTypes.size && !enabledTypes.has(d.base)) return false;
     if (!q) return true;
     return (d.title + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
@@ -415,7 +413,6 @@ function apply() {
 }
 
 document.getElementById('q').addEventListener('input', apply);
-document.getElementById('type').addEventListener('change', apply);
 document.getElementById('clear').addEventListener('click', () => {
   const q = document.getElementById('q');
   q.value = ''; apply(); q.focus();
@@ -430,6 +427,37 @@ document.getElementById('hrow').addEventListener('click', e => {
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
   apply();
 });
+
+// --- "Types" dropdown: multi-select filter over the four base types ---
+// enabledTypes holds the checked bases; an empty set is "no filter" (all rows),
+// which is intentionally the same result as every box checked. Persisted so a
+// visitor's filter survives reload; the pre-checkbox site had no type memory.
+const TYPES = ['Arcade', 'Console', 'Computer', 'Other'];
+let enabledTypes;
+try {
+  const saved = localStorage.getItem('mz-types');
+  enabledTypes = new Set(saved !== null ? JSON.parse(saved) : []);
+} catch (e) { enabledTypes = new Set(); }
+
+const typeMenu = document.getElementById('typemenu');
+const typeSummary = document.getElementById('typesummary');
+typeMenu.innerHTML = TYPES.map(t =>
+  '<label><input type="checkbox" data-t="' + t + '"' +
+  (enabledTypes.has(t) ? ' checked' : '') + '> ' + t + '</label>').join('');
+function syncTypeSummary() {
+  // empty (= no filter) and full both read as "All Types"; partial shows the count
+  typeSummary.textContent = (enabledTypes.size === 0 || enabledTypes.size === TYPES.length)
+    ? 'All Types' : 'Types (' + enabledTypes.size + ')';
+}
+typeMenu.addEventListener('change', e => {
+  const t = e.target.dataset.t;
+  if (!t) return;
+  if (e.target.checked) enabledTypes.add(t); else enabledTypes.delete(t);
+  localStorage.setItem('mz-types', JSON.stringify([...enabledTypes]));
+  syncTypeSummary();
+  apply();
+});
+syncTypeSummary();
 
 // --- "Columns" dropdown: toggle any column (Title stays locked on) ---
 const colsMenu = document.getElementById('colsmenu');
@@ -451,10 +479,11 @@ colsMenu.addEventListener('change', e => {
   buildHeader();
   apply();
 });
-// click outside closes the dropdown
+// click outside closes any open dropdown (Types + Columns)
 document.addEventListener('click', e => {
-  const dd = document.getElementById('cols');
-  if (dd.open && !dd.contains(e.target)) dd.open = false;
+  for (const dd of document.querySelectorAll('details.cols')) {
+    if (dd.open && !dd.contains(e.target)) dd.open = false;
+  }
 });
 
 buildHeader();  // header renders immediately; rows follow once data.json loads
@@ -600,7 +629,6 @@ function navigate(dir) {  // dir: +1 down, -1 up
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { if (document.body.classList.contains('panel-open')) closePanel(); return; }
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-    if (document.activeElement && document.activeElement.tagName === 'SELECT') return;  // let the type dropdown use arrows
     e.preventDefault();
     navigate(e.key === 'ArrowDown' ? 1 : -1);
   }

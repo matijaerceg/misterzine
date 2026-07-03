@@ -26,12 +26,25 @@
   button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; border: 1px solid #8884;
                  border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
   button.clear:hover { background: #8882; }
+  /* "Columns" dropdown: opt-in arcade metadata columns (default all off) */
+  details.cols { position: relative; }
+  details.cols summary { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
+                         padding: .4rem .7rem; border: 1px solid #8884; border-radius: 4px; }
+  details.cols summary::-webkit-details-marker { display: none; }
+  details.cols summary::after { content: " ▾"; color: #888; }
+  details.cols summary:hover, details.cols[open] summary { background: #8882; }
+  details.cols .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30;
+                       background: Canvas; border: 1px solid #8884; border-radius: 6px;
+                       padding: .55rem .8rem; box-shadow: 0 4px 16px #0004;
+                       display: grid; gap: .35rem; min-width: 10rem; }
+  details.cols .menu label { display: flex; gap: .45rem; align-items: center;
+                             font-size: .9rem; white-space: nowrap; cursor: pointer; }
   /* separate (not collapse): collapsed borders are painted by the table, so they
      don't travel with the sticky <th>s — rows show through 1px seams while scrolling.
      With separate+spacing:0 each cell owns its border and it sticks along with it. */
   table { border-collapse: separate; border-spacing: 0; width: 100%; table-layout: fixed; }
-  col.c-title { width: 21%; } col.c-type { width: 7%; } col.c-date { width: 10%; }
-  col.c-upd { width: 10%; } col.c-year { width: 9%; } col.c-manuf { width: 19%; } col.c-core { width: 24%; }
+  /* col widths are computed in JS from the COLUMNS config (they re-balance when
+     optional columns are toggled on) — see buildHeader() */
   /* min-width keeps columns from crushing; overflow-x stays VISIBLE so an over-wide
      table scrolls the whole page horizontally rather than becoming its own scroll
      container — a scroll container here (overflow-x:auto forces overflow-y:auto too)
@@ -153,24 +166,17 @@
     <option value="Computer">Computer</option>
     <option value="Other">Other</option>
   </select>
+  <details class="cols" id="cols">
+    <summary>Columns</summary>
+    <div class="menu" id="colsmenu"></div>
+  </details>
   <span class="count" id="count"></span>
 </div>
 </div>
 <div class="tablewrap">
 <table>
-  <colgroup>
-    <col class="c-title"><col class="c-type"><col class="c-date"><col class="c-upd">
-    <col class="c-year"><col class="c-manuf"><col class="c-core">
-  </colgroup>
-  <thead><tr>
-    <th data-k="title">Title</th>
-    <th data-k="typesort">Type</th>
-    <th data-k="date">MiSTer Debut</th>
-    <th data-k="updated">Last Updated</th>
-    <th data-k="year">Original Year</th>
-    <th data-k="manufacturer">Manufacturer</th>
-    <th data-k="core">Core</th>
-  </tr></thead>
+  <colgroup id="cg"></colgroup>
+  <thead><tr id="hrow"></tr></thead>
   <tbody id="rows"></tbody>
 </table>
 </div>
@@ -302,23 +308,66 @@ function titleCell(d) {
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
 
 function coreCell(d) {
-  const label = esc(coreLabel(d.core));
-  if (!d.repo) return label;
+  let label = coreLabel(d.core);
+  if (!d.repo) return esc(label);
+  // rows whose catalog never captured an rbf: name the link after the repo
+  if (!label) label = d.repo.split('/')[1].replace(/^Arcade[-_]/i, '').replace(/[-_]MiSTer$/i, '');
   return '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
-    label + '<span class="ext">↗</span></a>';
+    esc(label) + '<span class="ext">↗</span></a>';
+}
+
+// The table's columns. Optional ones (arcade metadata from the MiSTer Arcade
+// Database) are off by default and toggled via the "Columns" dropdown; the
+// enabled set persists in localStorage. Widths are weights, normalized to 100%
+// over whichever columns are enabled (the table uses table-layout:fixed).
+// Optional columns without a cell() render their data key as plain text.
+const COLUMNS = [
+  { k: 'title', label: 'Title', w: 21, cell: d => '<td>' + titleCell(d) + '</td>' },
+  { k: 'typesort', label: 'Type', w: 7, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
+  { k: 'date', label: 'MiSTer Debut', w: 10,
+    cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' },
+  { k: 'updated', label: 'Last Updated', w: 10, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },
+  { k: 'year', label: 'Original Year', w: 9, cell: d => '<td>' + esc(d.year) + '</td>' },
+  { k: 'manufacturer', label: 'Manufacturer', w: 19, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
+  { k: 'core', label: 'Core', w: 24,
+    cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
+  { k: 'rot',  label: 'Rotation',   w: 10, opt: true },
+  { k: 'res',  label: 'Resolution', w: 10, opt: true },
+  { k: 'plr',  label: 'Players',    w: 13, opt: true },
+  { k: 'ctl',  label: 'Controls',   w: 13, opt: true },
+  { k: 'spc',  label: 'Special Controls', w: 10, opt: true },
+  { k: 'flip', label: 'Flip', w: 6, opt: true },
+];
+for (const c of COLUMNS) if (!c.cell) c.cell = d => '<td>' + esc(d[c.k] || '') + '</td>';
+
+let enabledCols;
+try { enabledCols = new Set(JSON.parse(localStorage.getItem('mz-cols') || '[]')); }
+catch (e) { enabledCols = new Set(); }
+
+const activeColumns = () => COLUMNS.filter(c => !c.opt || enabledCols.has(c.k));
+
+function buildHeader() {
+  const cols = activeColumns();
+  const total = cols.reduce((s, c) => s + c.w, 0);
+  document.getElementById('cg').innerHTML = cols.map(c =>
+    '<col style="width:' + (c.w / total * 100).toFixed(2) + '%">').join('');
+  document.getElementById('hrow').innerHTML = cols.map(c =>
+    '<th data-k="' + c.k + '"' + (c.k === sortKey
+      ? ' aria-sort="' + (sortDir === 1 ? 'ascending' : 'descending') + '"' : '') +
+    '>' + c.label + '</th>').join('');
+  // each extra column raises the table's width floor so cells don't crush
+  // (5rem/col keeps the nowrap date columns from colliding with all 6 on);
+  // an over-wide table scrolls the page horizontally (never .tablewrap — a
+  // scroll container there would break the sticky headers)
+  document.querySelector('table').style.minWidth = (49 + 5 * (cols.length - 7)) + 'rem';
 }
 
 function render() {
   const tb = document.getElementById('rows');
+  const cols = activeColumns();
   tb.innerHTML = view.map((d, i) =>
     '<tr' + (hasDetail(d) ? ' class="has-detail' + (d === openRow ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
-    '<td>' + titleCell(d) + '</td>' +
-    '<td class="type">' + typeBadge(d) + '</td>' +
-    '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' +
-    '<td class="date">' + esc(d.updated || '') + '</td>' +
-    '<td>' + esc(d.year) + '</td>' +
-    '<td>' + esc(d.manufacturer) + '</td>' +
-    '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td></tr>'
+    cols.map(c => c.cell(d)).join('') + '</tr>'
   ).join('');
   document.getElementById('count').textContent = view.length + ' of ' + DATA.length;
 }
@@ -335,7 +384,9 @@ function apply() {
     if (t && d.base !== t) return false;
     if (!q) return true;
     return (d.title + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
-            d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core)).toLowerCase().includes(q);
+            d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
+            (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
+            (d.ctl || '') + ' ' + (d.spc || '')).toLowerCase().includes(q);
   });
   if (sortKey) {
     const keyOf = x => sortKey === 'typesort' ? typeLabel(x)
@@ -357,14 +408,39 @@ document.getElementById('clear').addEventListener('click', () => {
   const q = document.getElementById('q');
   q.value = ''; apply(); q.focus();
 });
-document.querySelectorAll('th').forEach(th => th.addEventListener('click', () => {
+// delegated: the header row is rebuilt whenever columns are toggled
+document.getElementById('hrow').addEventListener('click', e => {
+  const th = e.target.closest('th');
+  if (!th) return;
   const k = th.dataset.k;
   sortDir = (sortKey === k) ? -sortDir : 1;
   sortKey = k;
-  document.querySelectorAll('th').forEach(o => o.removeAttribute('aria-sort'));
-  th.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
+  buildHeader();  // re-stamps aria-sort from sortKey/sortDir
   apply();
-}));
+});
+
+// --- "Columns" dropdown: toggle the optional metadata columns ---
+const colsMenu = document.getElementById('colsmenu');
+colsMenu.innerHTML = COLUMNS.filter(c => c.opt).map(c =>
+  '<label><input type="checkbox" data-k="' + c.k + '"' +
+  (enabledCols.has(c.k) ? ' checked' : '') + '> ' + c.label + '</label>').join('');
+colsMenu.addEventListener('change', e => {
+  const k = e.target.dataset.k;
+  if (!k) return;
+  if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
+  localStorage.setItem('mz-cols', JSON.stringify([...enabledCols]));
+  // sorting by a column that was just hidden would be invisible — fall back
+  if (!activeColumns().some(c => c.k === sortKey)) { sortKey = 'date'; sortDir = -1; }
+  buildHeader();
+  apply();
+});
+// click outside closes the dropdown
+document.addEventListener('click', e => {
+  const dd = document.getElementById('cols');
+  if (dd.open && !dd.contains(e.target)) dd.open = false;
+});
+
+buildHeader();  // header renders immediately; rows follow once data.json loads
 
 // --- detail panel ---
 const panel = document.getElementById('panel');
@@ -375,6 +451,14 @@ function detailHTML(d) {
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
   if (d.core) rows.push(['Core', coreLabel(d.core) + (coreLabel(d.core) !== d.core ? ' (' + d.core + ')' : '')]);
   if (d.year) rows.push(['Original year', d.year]);
+  // arcade hardware metadata (MiSTer Arcade Database) — always shown here,
+  // even when the matching table columns are toggled off
+  if (d.rot) rows.push(['Rotation', d.rot]);
+  if (d.res) rows.push(['Resolution', d.res]);
+  if (d.plr) rows.push(['Players', d.plr]);
+  if (d.ctl) rows.push(['Controls', d.ctl]);
+  if (d.spc) rows.push(['Special controls', d.spc]);
+  if (d.flip) rows.push(['Screen flip', d.flip]);
   rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build — debut unknown)')]);
   if (d.updated) rows.push(['Latest update', d.updated]);
   // show the repo slug (jtcores deep links keep the full path in the href only)
@@ -636,8 +720,7 @@ fetch('./data.json').then(r => r.json()).then(d => {
     else if (seen[r.core] !== r.title) seen[r.core] = null;  // more than one distinct title
   }
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
-  const th = document.querySelector('th[data-k="date"]');
-  if (th) th.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
+  buildHeader();
   apply();
 });
 </script>

@@ -6,6 +6,10 @@ data/cache/*
 # the daily CI job has no other way to recover it (the PNGs it maps are committed
 # under docs/images/, but this manifest is what ties them to each row + its dims).
 !data/cache/image_manifest.json
+# ...and the MAD CSV (arcade rotation/players/controls): committed so a failed
+# daily fetch falls back to the last good copy instead of publishing a
+# data.json with the arcade metadata columns wiped.
+!data/cache/ArcadeDatabase.csv
 __pycache__/
 *.pyc
 

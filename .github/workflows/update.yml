@@ -56,6 +56,13 @@ jobs:
       - name: Genre (MAME catver.ini)
         run: python misterzine.py genre
 
+      - name: Arcade metadata (MiSTer Arcade Database)
+        # Refreshes the committed MAD CSV (rotation/resolution/players/controls
+        # per setname) feeding the site's opt-in arcade columns. Non-fatal: on a
+        # fetch hiccup export-web falls back to the checked-out copy.
+        continue-on-error: true
+        run: python misterzine.py mad
+
       - name: Regenerate JSON exports
         run: python misterzine.py export
 
@@ -75,9 +82,10 @@ jobs:
             echo "No new or updated releases today — nothing to publish."
           else
             # Persist alongside the published outputs: the sqlite carries the new
-            # events/dates, and image_manifest.json records the libretro backfill
-            # (matches AND misses) so tomorrow's run doesn't re-resolve them.
-            git add data/misterzine.sqlite data/cache/image_manifest.json
+            # events/dates, image_manifest.json records the libretro backfill
+            # (matches AND misses) so tomorrow's run doesn't re-resolve them, and
+            # the MAD CSV is the fetch-failure fallback for the arcade metadata.
+            git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv
             git commit -m "Daily update: refresh releases ($(date -u +%Y-%m-%d))"
             git push
           fi

@@ -1324,6 +1324,101 @@ def cmd_genre(args):
     log(f"  joined {n}/{len(rows)} arcade titles (with a setname) to a genre")
 
 
+# --- command: mad (arcade metadata from the MiSTer Arcade Database) --------
+
+# Toryalai1's MiSTer Arcade Database, joined on MAME setname: rotation, flip,
+# resolution, players, controls. The source CSV on main, NOT the compiled
+# mad_db.json.zip — the compiled db drops rotation from nearly every entry
+# (8 of ~1965 carry it), while the CSV has it for all rows.
+MAD_URL = ("https://raw.githubusercontent.com/Toryalai1/MiSTer_ArcadeDatabase"
+           "/main/ArcadeDatabase.csv")
+
+_MAD_ROTATION = {
+    "horizontal": "Horizontal", "horizontal (180)": "Horizontal (180)",
+    "vertical (cw)": "Vertical (CW)", "vertical (ccw)": "Vertical (CCW)",
+}
+
+
+def fetch_mad(refresh=False):
+    """Return the MAD CSV text, caching the download under data/cache/."""
+    CACHEDIR.mkdir(parents=True, exist_ok=True)
+    cache = CACHEDIR / "ArcadeDatabase.csv"
+    if cache.exists() and not refresh:
+        return cache.read_text(encoding="utf-8", errors="ignore")
+    log(f"  fetching ArcadeDatabase.csv (MAD) ...")
+    text = http_get(MAD_URL).decode("utf-8", errors="ignore")
+    cache.write_text(text, encoding="utf-8")
+    return text
+
+
+def parse_mad(text):
+    """{setname_lower: {rot,res,plr,ctl,spc,flip}} — display-ready values.
+
+    The CSV vocabulary is uneven ('n-a'/'' blanks, '15 kHz' vs '15kHz',
+    'trackball' vs 'Trackball'), so values are normalized here once; the
+    export and site use them verbatim. Absent fields are omitted entirely.
+    """
+    import csv, io
+    out = {}
+    for r in csv.DictReader(io.StringIO(text)):
+        sn = (r.get("setname") or "").strip().lower()
+        if not sn or sn in out:  # a few dupe setnames — first row wins
+            continue
+        def val(k):
+            v = (r.get(k) or "").strip()
+            return "" if v.lower() == "n-a" else v
+        e = {}
+        rot = val("rotation").lower()
+        if rot:
+            e["rot"] = _MAD_ROTATION.get(rot, rot.title())
+        res = val("resolution").replace(" ", "")
+        if res:
+            e["res"] = res
+        if val("players"):
+            e["plr"] = val("players")
+        # combined controls: move inputs + button count ('8-way · 3 buttons');
+        # 0 buttons just means no fire button — showing the stick alone reads best
+        move, btn = val("move_inputs"), val("num_buttons")
+        ctl = [move] if move else []
+        if btn and btn != "0":
+            ctl.append(btn + (" button" if btn == "1" else " buttons"))
+        if ctl:
+            e["ctl"] = " · ".join(ctl)
+        spc = val("special_controls")
+        if spc:
+            e["spc"] = spc[0].upper() + spc[1:]
+        if val("flip").lower() == "yes":
+            e["flip"] = "Yes"
+        if e:
+            out[sn] = e
+    return out
+
+
+def local_mad():
+    """MAD metadata map from the local cache only (no network); {} if absent."""
+    cache = CACHEDIR / "ArcadeDatabase.csv"
+    if not cache.exists():
+        return {}
+    return parse_mad(cache.read_text(encoding="utf-8", errors="ignore"))
+
+
+def mad_for(setname, mad, dat):
+    """MAD entry for a setname, falling back to its DAT parent's entry."""
+    if not setname:
+        return {}
+    sl = setname.lower()
+    e = mad.get(sl)
+    if e:
+        return e
+    parent = (dat.get(sl) or {}).get("parent")
+    return mad.get(parent, {}) if parent else {}
+
+
+def cmd_mad(args):
+    mad = parse_mad(fetch_mad(refresh=True))
+    log(f"mad: {len(mad)} setname->metadata entries from ArcadeDatabase.csv")
+
+
 # --- command: export ------------------------------------------------------
 
 def cmd_export(args):
@@ -1563,7 +1658,7 @@ def _dat_field(setname, dat, field):
 
 
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
-             repo_maps=None):
+             repo_maps=None, arcade_mad=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -1632,6 +1727,9 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         row["updated"] = updated
     if repo:
         row["repo"] = repo
+    if system == "arcade":
+        # MAD metadata (rotation/resolution/players/controls/flip), display-ready
+        row.update(mad_for(sn, arcade_mad or {}, arcade_meta or {}))
     return row
 
 
@@ -1738,6 +1836,7 @@ def cmd_export_web(args):
     arcade_meta = load_arcade_dat_meta()
     arcade_cats = local_catver()
     arcade_setnames = load_manifest_setnames()
+    arcade_mad = local_mad()
     # Display the clean mainline name, but keep the qualifier where the stripped
     # base name collides among kept rows (genuinely distinct hardware/publisher
     # versions that share a base, e.g. Kangaroo / Kangaroo (Atari) / (Bootleg)).
@@ -1747,8 +1846,8 @@ def cmd_export_web(args):
         if r["system"] == "arcade":
             b = _arcade_base(r["title"])
             arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
-    data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps)
-            for r in rows]
+    data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
+                     arcade_mad) for r in rows]
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
@@ -1775,6 +1874,8 @@ def cmd_export_web(args):
     if norepo:
         sample = ", ".join(f"{d['title']} [{d['core'] or '-'}]" for d in norepo[:8])
         log(f"    e.g. {sample}")
+    n_mad = sum(1 for d in data if d.get("rot"))
+    log(f"  arcade with MAD metadata: {n_mad}/{by_base.get('Arcade', 0)}")
 
 
 def _write_site_meta(outdir):
@@ -1986,6 +2087,7 @@ def cmd_build(args):
         cmd_coinop(args)
         cmd_enrich_mra(args)   # year/manufacturer/rbf/setname from MRA XML (clones repos)
     cmd_genre(args)            # arcade genre from cached catver + DAT parent fallback (offline)
+    cmd_mad(args)              # arcade metadata (rotation/players/controls) from MAD
     cmd_export(args)
     cmd_export_web(args)       # also re-tags screenshot dims via _retag_image_dims()
     cmd_stats(args)
@@ -2021,6 +2123,9 @@ def main():
 
     gp = sub.add_parser("genre", help="add arcade genre from MAME catver.ini (joined on setname)")
     gp.set_defaults(func=cmd_genre)
+
+    mp = sub.add_parser("mad", help="fetch arcade metadata (rotation/players/controls) from the MiSTer Arcade Database")
+    mp.set_defaults(func=cmd_mad)
 
     ep = sub.add_parser("export", help="write JSON/JSONL exports from the db")
     ep.set_defaults(func=cmd_export)

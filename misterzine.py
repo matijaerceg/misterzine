@@ -1387,8 +1387,13 @@ def parse_mad(text):
         spc = val("special_controls")
         if spc:
             e["spc"] = spc[0].upper() + spc[1:]
-        if val("flip").lower() == "yes":
+        # blank flip = unverified (leave the cell empty); an explicit 'no'
+        # is a verified result and worth showing distinctly from unknown
+        flip = val("flip").lower()
+        if flip == "yes":
             e["flip"] = "Yes"
+        elif flip == "no":
+            e["flip"] = "No"
         if e:
             out[sn] = e
     return out

@@ -54,6 +54,10 @@
   .t-other    { --h: #b07cff; }
   .type .dep { color: #888; font-size: .82em; margin-left: .35rem; }
   td.core { color: #888; font-size: .92em; cursor: default; }
+  /* repo links keep the column's muted look; underline only on hover */
+  td.core a { color: inherit; text-decoration: none; }
+  td.core a:hover { text-decoration: underline; }
+  .ext { color: #888; margin-left: .25rem; font-size: .85em; text-decoration: none; display: inline-block; }
   .titlebar { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
   .theme { display: inline-flex; flex: none; border: 1px solid #8884; border-radius: 6px; overflow: hidden; }
   .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
@@ -295,6 +299,15 @@ function titleCell(d) {
   return esc(d.title) + (hasDetail(d) ? ' ' + DV_ICON : '');
 }
 
+function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
+
+function coreCell(d) {
+  const label = esc(coreLabel(d.core));
+  if (!d.repo) return label;
+  return '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
+    label + '<span class="ext">↗</span></a>';
+}
+
 function render() {
   const tb = document.getElementById('rows');
   tb.innerHTML = view.map((d, i) =>
@@ -305,7 +318,7 @@ function render() {
     '<td class="date">' + esc(d.updated || '') + '</td>' +
     '<td>' + esc(d.year) + '</td>' +
     '<td>' + esc(d.manufacturer) + '</td>' +
-    '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + esc(coreLabel(d.core)) + '</td></tr>'
+    '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td></tr>'
   ).join('');
   document.getElementById('count').textContent = view.length + ' of ' + DATA.length;
 }
@@ -364,9 +377,13 @@ function detailHTML(d) {
   if (d.year) rows.push(['Original year', d.year]);
   rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build — debut unknown)')]);
   if (d.updated) rows.push(['Latest update', d.updated]);
+  // show the repo slug (jtcores deep links keep the full path in the href only)
+  if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
+    esc(d.repo.split('/').slice(0, 2).join('/')) + '<span class="ext">↗</span></a>', true]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
 
-  const dl = '<dl>' + rows.map(([k, v]) => '<dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd>').join('') + '</dl>';
+  // a row's third element marks the value as pre-built HTML (links); default is plain text
+  const dl = '<dl>' + rows.map(([k, v, html]) => '<dt>' + esc(k) + '</dt><dd>' + (html ? v : esc(v)) + '</dd>').join('') + '</dl>';
   const prose = d.detail ? '<p class="detail">' + esc(d.detail) + '</p>' : '';
   // already-superwide screenshots (dual/triple-screen: Sagaia, Darius, …) → 8:3.
   // 2.4 sits below the dual-screen cluster (2.67+) but above wide single screens
@@ -437,6 +454,7 @@ function openPlaceholder() {
 }
 
 document.getElementById('rows').addEventListener('click', e => {
+  if (e.target.closest('a')) return;  // repo links navigate; don't also open the panel
   const tr = e.target.closest('tr.has-detail');
   if (tr) openPanel(view[+tr.dataset.i]);
 });

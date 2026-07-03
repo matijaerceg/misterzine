@@ -1562,7 +1562,8 @@ def _dat_field(setname, dat, field):
     return (dat.get(parent) or {}).get(field) or "" if parent else ""
 
 
-def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None):
+def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
+             repo_maps=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -1587,7 +1588,8 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # Toaplan/SNK titles whose catalog row never captured an rbf.
         core = (r["rbf"] or "").strip()
     else:
-        core = ""
+        # the Core column shows (and links) the core name for non-arcade rows too
+        core = core_name(r["title"])
         # cores: strip the date suffix from the display name (date has its own column)
         title = _CORE_DATE_RE.sub("", r["title"]).rstrip("_ ")
         # prefer the real MiSTer debut (per-core repo) over the build-date suffix
@@ -1613,6 +1615,7 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # MiSTer *debut* (first commit); this is the newest build. Shown in its own
     # sortable column so a years-old debut date doesn't imply the core is stale.
     updated = (r["last_update"] or "")[:10] if "last_update" in r.keys() else ""
+    repo = _repo_for(r, core, repo_maps or {})
     row = {
         "title": title,
         "base": base,
@@ -1627,7 +1630,64 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # updated == date just means "never touched since debut" — still worth a cell
     if updated:
         row["updated"] = updated
+    if repo:
+        row["repo"] = repo
     return row
+
+
+# Rows the repo resolvers can't reach, keyed by lowercase core/rbf: cores whose
+# repo doesn't follow the MiSTer-devel/<core>_MiSTer naming the crawls expect
+# (so catalog.repo stayed empty), multi-game arcade cores with no Arcade-<rbf>
+# repo, and third-party cores. Pinned in code, same philosophy as the
+# frozen-date maps; hand-verified against GitHub.
+FROZEN_REPOS = {
+    "st-v": "MiSTer-devel/Saturn_MiSTer",          # ST-V rbf is built from the Saturn repo
+    "sms": "MiSTer-devel/SMS_MiSTer",              # Sega System E arcade rows run on the SMS core
+    "jtngp": "jotego/jtcores/tree/master/cores/ngp",
+    "neogeopocket": "jotego/jtcores/tree/master/cores/ngp",
+    "skysmasher": "rmonic79/Arcade_SkySmasher_MiSTer",  # third-party, no MiSTer-devel repo
+    "atari5200": "MiSTer-devel/Atari800_MiSTer",   # 5200 rbf is built from the Atari800 repo
+    "intellivision": "MiSTer-devel/Intv_MiSTer",
+    "ay-3-8500": "MiSTer-devel/AY-3-8500-MiSTer",
+    "scv": "MiSTer-devel/SuperCassetteVision_MiSTer",
+    "epochgalaxyii": "MiSTer-devel/EpochGalaxy2_MiSTer",
+    "samcoupe": "MiSTer-devel/SAM-Coupe_MiSTer",
+    "ondra_spo186": "MiSTer-devel/OndraSPO186_MiSTer",
+    "homelab": "MiSTer-devel/Homelab-MiSTer",
+}
+# Arcade rows whose catalog row has no rbf at all (pre-enrich rows); the live
+# MRAs declare the rbf, hand-resolved here by exact catalog title.
+FROZEN_TITLE_REPOS = {
+    "Flash Boy (DECO)": "MiSTer-devel/Arcade-DECOCassette_MiSTer",
+    "Ocean to Ocean (DECO)": "MiSTer-devel/Arcade-DECOCassette_MiSTer",
+    "Space Demon": "MiSTer-devel/Arcade-SpaceFirebird_MiSTer",
+}
+
+
+def _repo_for(r, core, repo_maps):
+    """GitHub path (after github.com/) for a catalog row's core repo, or ''.
+
+    catalog.repo (set by the DB snapshot / repo crawls) wins; arcade rows it
+    missed fall back on the rbf: Jotego rbfs deep-link into the jtcores
+    monorepo, others match arcade_repos by core name, then the frozen maps.
+    """
+    repo = (r["repo"] or "").strip() if "repo" in r.keys() else ""
+    if repo:
+        # catalog stores Jotego rows as 'jotego/jtcores (cores/<x>)' — turn the
+        # display form into a browsable monorepo path
+        m = re.fullmatch(r"(\S+) \((\S+)\)", repo)
+        return f"{m.group(1)}/tree/master/{m.group(2)}" if m else repo
+    lc = (core or "").lower()
+    if lc:
+        folder = (repo_maps.get("jt") or {}).get(lc)
+        if folder:
+            return f"jotego/jtcores/tree/master/cores/{folder}"
+        repo = (repo_maps.get("arcade") or {}).get(lc)
+        if repo:
+            return repo
+        if lc in FROZEN_REPOS:
+            return FROZEN_REPOS[lc]
+    return FROZEN_TITLE_REPOS.get((r["title"] or "").strip(), "")
 
 
 # Cores no longer in any current DB but worth showing for the record. The Sega
@@ -1637,7 +1697,8 @@ EXTRA_WEB_ROWS = [
     {
         "title": "Genesis", "base": "Console", "genre": "",
         "date": "2018-06-02", "date_kind": "debut", "year": "1988",
-        "manufacturer": "Sega", "core": "", "deprecated": True,
+        "manufacturer": "Sega", "core": "Genesis", "deprecated": True,
+        "repo": "MiSTer-devel/Genesis_MiSTer",
     },
 ]
 
@@ -1653,6 +1714,15 @@ def cmd_export_web(args):
     apply_jt_frozen_dates(con)  # correct Jotego cores off the Feb-2023 monorepo-migration date
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
+    # repo-link fallbacks for arcade rows whose catalog.repo is empty: Jotego
+    # rbf -> jtcores monorepo folder, and rbf -> arcade_repos by core name
+    # (arcade_repos.core is 'Arcade-<Name>'; the rbf is usually '<name>').
+    repo_maps = {
+        "jt": {("jt" + f[0]).lower() if not (f[1] or "").strip() else f[1].strip().lower(): f[0]
+               for f in con.execute("SELECT folder, rbf FROM jt_cores")},
+        "arcade": {(c or "").lower().replace("arcade-", "", 1): repo
+                   for repo, c in con.execute("SELECT repo, core FROM arcade_repos")},
+    }
     con.close()
     # Drop arcade region/revision/bootleg variants (MiSTer files them under
     # _Arcade/_alternatives/); the site shows only the mainline title per game.
@@ -1677,7 +1747,8 @@ def cmd_export_web(args):
         if r["system"] == "arcade":
             b = _arcade_base(r["title"])
             arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
-    data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames) for r in rows]
+    data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps)
+            for r in rows]
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
@@ -1699,6 +1770,11 @@ def cmd_export_web(args):
         by_base[d["base"]] = by_base.get(d["base"], 0) + 1
     log(f"  by type: {by_base}")
     log(f"  arcade with genre: {sum(1 for d in data if d['genre'])}")
+    norepo = [d for d in data if not d.get("repo")]
+    log(f"  repo link: {len(data) - len(norepo)} resolved, {len(norepo)} without")
+    if norepo:
+        sample = ", ".join(f"{d['title']} [{d['core'] or '-'}]" for d in norepo[:8])
+        log(f"    e.g. {sample}")
 
 
 def _write_site_meta(outdir):

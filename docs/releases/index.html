@@ -128,8 +128,9 @@
   #panel dd { margin: 0; }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
   /* empty state shown before any title is selected */
-  #panel .body.empty { display: flex; align-items: center; justify-content: center; text-align: center; position: relative; }
+  #panel .body.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; gap: 1rem; }
   #panel .body.empty .close { position: absolute; top: .4rem; right: .6rem; float: none; }
+  #panel .body.empty .logo { width: 60%; max-width: 220px; height: auto; opacity: .2; }
   #panel .pick { color: #888; font-size: .95rem; margin: 0; }
   /* footer is docked to the bottom of the panel (outside the scrolling .body) */
   #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid #8883;
@@ -628,6 +629,7 @@ function markOpenRow() {
 function openPlaceholder() {
   openRow = null;
   panel.innerHTML = '<div class="body empty"><button class="close" aria-label="Close">×</button>' +
+    '<img class="logo" src="../images/misterzine-logo1.png" alt="MiSTerZine">' +
     '<p class="pick">Select a title</p></div>';
   panel.hidden = false;
   void panel.offsetWidth;

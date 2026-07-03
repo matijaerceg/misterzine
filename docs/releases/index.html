@@ -415,7 +415,11 @@ function apply() {
 document.getElementById('q').addEventListener('input', apply);
 document.getElementById('clear').addEventListener('click', () => {
   const q = document.getElementById('q');
-  q.value = ''; apply(); q.focus();
+  q.value = ''; apply(); q.focus({ preventScroll: true });
+  // the full list just replaced the filtered one; keep the user's place by
+  // re-centering on the still-selected row instead of stranding it off-screen
+  const tr = document.querySelector('#rows tr.open');
+  if (tr) tr.scrollIntoView({ block: 'center' });
 });
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {

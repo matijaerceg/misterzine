@@ -7,6 +7,13 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   try { var t = localStorage.getItem('mz-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <style>
+  /* self-hosted variable fonts (latin subset) — one file per family covers
+     every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
+     the system-ui fallback readable while they load. */
+  @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
+               font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Roboto Condensed'; src: url(../fonts/roboto-condensed-latin-var.woff2) format('woff2');
+               font-weight: 100 900; font-display: swap; }
   :root { color-scheme: light dark; }            /* auto — follows the OS */
   :root[data-theme="light"] { color-scheme: light; }
   :root[data-theme="dark"]  { color-scheme: dark; }
@@ -16,7 +23,7 @@
      behavior (scrollbars, scrollIntoView, find-in-page) framed to the table
      region instead of the full viewport. */
   html, body { height: 100%; overflow: hidden; }
-  body { font: 14px/1.4 system-ui, sans-serif; margin: 0; }
+  body { font: 14px/1.4 Roboto, system-ui, sans-serif; margin: 0; }
   main { height: 100vh; height: 100dvh; display: flex; flex-direction: column; padding: 0 1rem; }
   .topbar { flex: none; position: relative; z-index: 20; background: Canvas; }
   header { margin: 0; padding: 1rem 0 0; }
@@ -25,7 +32,7 @@
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
-  select, input[type=search] { font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
+  select, input[type=search] { font-family: inherit; font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
   .count { color: #888; font-size: .8rem; }
   button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; border: 1px solid #8884;
@@ -63,6 +70,8 @@
        overflow-wrap: normal; }  /* headers wrap at spaces, never mid-word */
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
+  /* every column after Title is condensed — denser metadata, more room for titles */
+  th + th, td + td { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
            font-weight: 600; white-space: nowrap; line-height: 1.5;
            background: color-mix(in srgb, var(--h) 20%, Canvas);

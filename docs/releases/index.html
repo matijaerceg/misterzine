@@ -568,10 +568,11 @@ function detailHTML(d) {
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
   ).join('');
 
-  // overlay (very narrow/tall) mode disables drag-resize, so omit that clause there.
-  const canResize = !window.matchMedia('(max-aspect-ratio: 3/5)').matches;
-  const hint = '<p class="hint"><kbd>↑</kbd> <kbd>↓</kbd> browse rows · ' +
-    (canResize ? 'drag the edge to resize · ' : '') + '<kbd>Esc</kbd> to close</p>';
+  // overlay (very narrow/tall) mode: no keyboard, no resizer — swipe is the only gesture
+  const overlay = window.matchMedia('(max-aspect-ratio: 3/5)').matches;
+  const hint = overlay
+    ? '<p class="hint">Swipe left to close</p>'
+    : '<p class="hint"><kbd>↑</kbd> <kbd>↓</kbd> browse rows · drag the edge to resize · <kbd>Esc</kbd> to close</p>';
 
   // screenshots first so they own the viewport on open; derived detail text below.
   // .body scrolls; .hint is docked below it (built as a sibling, outside .body).

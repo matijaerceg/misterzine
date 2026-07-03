@@ -97,6 +97,16 @@
   /* clickable rows that have a detail view */
   tr.has-detail { cursor: pointer; }
   tr.open td { background: #06c3; }
+  /* Title column pins to the scroller's left edge. It needs its own opaque
+     paint: row backgrounds don't travel with a sticky cell, and the hover/open
+     tints above are translucent — content scrolling beneath would bleed
+     through — so the :first-child overrides remix them opaquely over Canvas
+     (they also need the extra specificity to beat `tr:hover td`/`tr.open td`). */
+  td:first-child { position: sticky; left: 0; z-index: 2; background: Canvas; }
+  th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
+  td:first-child, th:first-child { border-right: 1px solid #8883; }
+  tr:hover td:first-child { background: color-mix(in srgb, #888 7%, Canvas); }
+  tr.open td:first-child  { background: color-mix(in srgb, #06c 20%, Canvas); }
   .dv-icon { margin-left: .4rem; color: #888; vertical-align: -1px; }
 
   /* --- detail panel: slides in from the left --- */

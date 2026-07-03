@@ -44,7 +44,7 @@
      With separate+spacing:0 each cell owns its border and it sticks along with it. */
   table { border-collapse: separate; border-spacing: 0; width: 100%; table-layout: fixed; }
   /* col widths are computed in JS from the COLUMNS config (they re-balance when
-     optional columns are toggled on) — see buildHeader() */
+     columns are toggled) — see buildHeader() */
   /* min-width keeps columns from crushing; overflow-x stays VISIBLE so an over-wide
      table scrolls the whole page horizontally rather than becoming its own scroll
      container — a scroll container here (overflow-x:auto forces overflow-y:auto too)
@@ -316,35 +316,47 @@ function coreCell(d) {
     esc(label) + '<span class="ext">↗</span></a>';
 }
 
-// The table's columns. Optional ones (arcade metadata from the MiSTer Arcade
-// Database) are off by default and toggled via the "Columns" dropdown; the
-// enabled set persists in localStorage. Widths are weights, normalized to 100%
-// over whichever columns are enabled (the table uses table-layout:fixed).
+// The table's columns, all toggleable via the "Columns" dropdown except Title
+// (lock: true — a table without titles is meaningless, and row-click/detail
+// live in that cell). The base seven default on, the arcade-metadata six
+// (opt: true, from the MiSTer Arcade Database) default off; the visible set
+// persists in localStorage. Widths are weights, normalized to 100% over
+// whichever columns are enabled (the table uses table-layout:fixed); mw is
+// each column's contribution (rem) to the table's min-width floor.
 // Optional columns without a cell() render their data key as plain text.
 const COLUMNS = [
-  { k: 'title', label: 'Title', w: 21, cell: d => '<td>' + titleCell(d) + '</td>' },
-  { k: 'typesort', label: 'Type', w: 7, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
-  { k: 'date', label: 'MiSTer Debut', w: 10,
+  { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
+  { k: 'typesort', label: 'Type', w: 7, mw: 4, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
+  { k: 'date', label: 'MiSTer Debut', w: 10, mw: 5.5,
     cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' },
-  { k: 'updated', label: 'Last Updated', w: 10, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },
-  { k: 'year', label: 'Original Year', w: 9, cell: d => '<td>' + esc(d.year) + '</td>' },
-  { k: 'manufacturer', label: 'Manufacturer', w: 19, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
-  { k: 'core', label: 'Core', w: 24,
+  { k: 'updated', label: 'Last Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },
+  { k: 'year', label: 'Original Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
+  { k: 'manufacturer', label: 'Manufacturer', w: 19, mw: 8.5, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
+  { k: 'core', label: 'Core', w: 24, mw: 10,
     cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
-  { k: 'rot',  label: 'Rotation',   w: 10, opt: true },
-  { k: 'res',  label: 'Resolution', w: 10, opt: true },
-  { k: 'plr',  label: 'Players',    w: 13, opt: true },
-  { k: 'ctl',  label: 'Controls',   w: 13, opt: true },
-  { k: 'spc',  label: 'Special Controls', w: 10, opt: true },
-  { k: 'flip', label: 'Flip', w: 6, opt: true },
+  { k: 'rot',  label: 'Rotation',   w: 10, mw: 5, opt: true },
+  { k: 'res',  label: 'Resolution', w: 10, mw: 5, opt: true },
+  { k: 'plr',  label: 'Players',    w: 13, mw: 5, opt: true },
+  { k: 'ctl',  label: 'Controls',   w: 13, mw: 5, opt: true },
+  { k: 'spc',  label: 'Special Controls', w: 10, mw: 5, opt: true },
+  { k: 'flip', label: 'Flip', w: 6, mw: 5, opt: true },
 ];
 for (const c of COLUMNS) if (!c.cell) c.cell = d => '<td>' + esc(d[c.k] || '') + '</td>';
 
+const defaultCols = () => new Set(COLUMNS.filter(c => !c.opt).map(c => c.k));
+// 'mz-cols2' holds the full visible set. The pre-2026-07 'mz-cols' key held
+// only the enabled *optional* columns (base ones weren't toggleable) — migrate
+// it by unioning with the base defaults, or a returning visitor would load a
+// table stripped to their optional picks.
 let enabledCols;
-try { enabledCols = new Set(JSON.parse(localStorage.getItem('mz-cols') || '[]')); }
-catch (e) { enabledCols = new Set(); }
+try {
+  const v2 = localStorage.getItem('mz-cols2');
+  if (v2 !== null) enabledCols = new Set(JSON.parse(v2));
+  else enabledCols = new Set([...defaultCols(),
+    ...JSON.parse(localStorage.getItem('mz-cols') || '[]')]);
+} catch (e) { enabledCols = defaultCols(); }
 
-const activeColumns = () => COLUMNS.filter(c => !c.opt || enabledCols.has(c.k));
+const activeColumns = () => COLUMNS.filter(c => c.lock || enabledCols.has(c.k));
 
 function buildHeader() {
   const cols = activeColumns();
@@ -355,11 +367,11 @@ function buildHeader() {
     '<th data-k="' + c.k + '"' + (c.k === sortKey
       ? ' aria-sort="' + (sortDir === 1 ? 'ascending' : 'descending') + '"' : '') +
     '>' + c.label + '</th>').join('');
-  // each extra column raises the table's width floor so cells don't crush
-  // (5rem/col keeps the nowrap date columns from colliding with all 6 on);
-  // an over-wide table scrolls the page horizontally (never .tablewrap — a
-  // scroll container there would break the sticky headers)
-  document.querySelector('table').style.minWidth = (49 + 5 * (cols.length - 7)) + 'rem';
+  // each column contributes its mw to the table's width floor so cells don't
+  // crush (the 5rem on the metadata columns keeps the nowrap date columns from
+  // colliding with all 6 on); an over-wide table scrolls the page horizontally
+  // (never .tablewrap — a scroll container there would break the sticky headers)
+  document.querySelector('table').style.minWidth = cols.reduce((s, c) => s + c.mw, 0) + 'rem';
 }
 
 function render() {
@@ -419,18 +431,23 @@ document.getElementById('hrow').addEventListener('click', e => {
   apply();
 });
 
-// --- "Columns" dropdown: toggle the optional metadata columns ---
+// --- "Columns" dropdown: toggle any column (Title stays locked on) ---
 const colsMenu = document.getElementById('colsmenu');
-colsMenu.innerHTML = COLUMNS.filter(c => c.opt).map(c =>
+colsMenu.innerHTML = COLUMNS.map(c =>
   '<label><input type="checkbox" data-k="' + c.k + '"' +
-  (enabledCols.has(c.k) ? ' checked' : '') + '> ' + c.label + '</label>').join('');
+  (c.lock ? ' checked disabled' : (enabledCols.has(c.k) ? ' checked' : '')) +
+  '> ' + c.label + '</label>').join('');
 colsMenu.addEventListener('change', e => {
   const k = e.target.dataset.k;
   if (!k) return;
   if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
-  localStorage.setItem('mz-cols', JSON.stringify([...enabledCols]));
-  // sorting by a column that was just hidden would be invisible — fall back
-  if (!activeColumns().some(c => c.k === sortKey)) { sortKey = 'date'; sortDir = -1; }
+  localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
+  // sorting by a column that was just hidden would be invisible — fall back to
+  // debut date if it's visible, else the always-on title column
+  if (!activeColumns().some(c => c.k === sortKey)) {
+    if (activeColumns().some(c => c.k === 'date')) { sortKey = 'date'; sortDir = -1; }
+    else { sortKey = 'title'; sortDir = 1; }
+  }
   buildHeader();
   apply();
 });

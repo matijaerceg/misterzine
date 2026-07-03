@@ -669,7 +669,17 @@ function navigate(dir) {  // dir: +1 down, -1 up
 }
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { if (document.body.classList.contains('panel-open')) closePanel(); return; }
+  if (e.key === 'Escape') {
+    // an active search filter absorbs the first Esc (clear it, keep the panel);
+    // a second Esc — filter now empty — closes the panel as before
+    if (document.getElementById('q').value) {
+      e.preventDefault();
+      document.getElementById('clear').click();  // clears + re-centers on the selected row
+      return;
+    }
+    if (document.body.classList.contains('panel-open')) closePanel();
+    return;
+  }
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
     e.preventDefault();
     navigate(e.key === 'ArrowDown' ? 1 : -1);

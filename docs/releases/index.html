@@ -30,6 +30,8 @@
   header { margin: 0; padding: 1rem 0 0; }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
   .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
+  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .updated a:hover { color: #06c; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
@@ -824,7 +826,8 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
     timeZoneName: 'short'  // append the viewer's tz (e.g. "GMT+2") so it's clearly local
   });
-  el.textContent = 'Last updated: ' + s;
+  el.innerHTML = 'Last updated: ' + esc(s) +
+    ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats</a>';
 }).catch(() => {});
 
 fetch('./data.json').then(r => r.json()).then(d => {

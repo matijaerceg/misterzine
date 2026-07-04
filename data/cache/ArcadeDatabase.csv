@@ -292,6 +292,7 @@ caractn,Car Action (Set 1),World,Set 1,yes,Burning Rubber,Data East Burger Time 
 caractn2,Car Action (Set 2),World,Set 2,yes,Burning Rubber,Data East Burger Time hardware,,no,no,1982,,Driving - Race,,15kHz,vertical (cw),no,,2 (alternating),8-way,,1
 catacomb,Catacomb,World,,no,Catacomb,Namco Galaga based,,no,no,1982,MTM Games,Shooter - Flying Vertical,,15kHz,vertical (cw),yes,,2 (alternating),2-way horizontal,,1
 caterpil,Caterpillar [hb],World,,yes,Pac-Man,Namco Pac-Man hardware,,yes,no,1980,Phi,Maze - Collect,,15kHz,vertical (cw),yes,,2 (alternating),4-way,,0
+cavelon,Cavelon,World,,no,,Konami Scramble based,,no,no,1983,Jetsoft,Maze - Horizontal,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,2
 cavenger,Cosmic Avenger,World,,no,,Universal Lady Bug,,no,no,1981,Universal,Shooter - Flying Horizontal,,15kHz,horizontal,,,2 (alternating),8-way,,2
 cawing,"Carrier Air Wing (W, 901012)",World,901012,no,Carrier Air Wing,Capcom CPS-1,U.N. Squadron,no,no,1990,Capcom,Shooter - Flying Horizontal,,15kHz,horizontal,n-a,,2 (simultaneous),8-way,,3
 cawingj,"U.S. Navy (JP, 901012)",Japan,901012,yes,Carrier Air Wing,Capcom CPS-1,U.N. Squadron,no,no,1990,Capcom,Shooter - Flying Horizontal,,15kHz,horizontal,n-a,,2 (simultaneous),8-way,,3
@@ -2353,12 +2354,12 @@ pacmaniaj,Pac-Mania (JP),Japan,,no,Pac-Mania,Namco System-1,Pac-Man,no,no,1987,N
 shadowld,Shadowland (YD3),World,YD3,no,,Namco System-1,,no,no,1987,Namco,Platform - Shooter Scrolling,,15kHz,horizontal,,,2 (alternating),8-way,,3
 youkaidk2,"Youkai Douchuuki (JP, New Ver. (YD2, Rev B))",Japan,"New Ver. (YD2, Rev B)",no,Shadowland,Namco System-1,,no,no,1987,Namco,Platform - Shooter Scrolling,,15kHz,horizontal,,,2 (alternating),8-way,,3
 youkaidk1,"Youkai Douchuuki (JP, Old Ver. (YD1))",Japan,Old Ver. (YD1),yes,Shadowland,Namco System-1,,no,no,1987,Namco,Platform - Shooter Scrolling,,15kHz,horizontal,,,2 (alternating),8-way,,3
-dspirit,Dragon Spirit (New Ver. (DS3)),World,New Ver. (DS3),no,,Namco System-1,Dragon Spirit,no,no,1987,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
-dspirit2,Dragon Spirit (DS2),World,DS2,yes,Dragon Spirit,Namco System-1,Dragon Spirit,no,no,1987,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
-dspirit1,Dragon Spirit (Old Ver. (DS1)),World,Old Ver. (DS1),yes,Dragon Spirit,Namco System-1,Dragon Spirit,no,no,1987,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
-blazer,Blazer (JP),Japan,,no,,Namco System-1,,no,no,1987,Namco,Shooter - Driving Diagonal,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
-quester,Quester (JP),Japan,,no,,Namco System-1,,no,no,1987,Namco,Ball &amp; Paddle - Breakout,,15kHz,vertical (cw),,,2 (alternating),Dial,Dial,1
-questers,Quester Special Edition (JP),Japan,,no,Quester,Namco System-1,,no,no,1987,Namco,Ball &amp; Paddle - Breakout,,15kHz,vertical (cw),,,2 (alternating),Dial,Dial,1
+dspirit,Dragon Spirit (New Ver. (DS3)),World,New Ver. (DS3),no,,Namco System-1,Dragon Spirit,no,no,1987,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,3
+dspirit2,Dragon Spirit (DS2),World,DS2,yes,Dragon Spirit,Namco System-1,Dragon Spirit,no,no,1987,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,3
+dspirit1,Dragon Spirit (Old Ver. (DS1)),World,Old Ver. (DS1),yes,Dragon Spirit,Namco System-1,Dragon Spirit,no,no,1987,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,3
+blazer,Blazer (JP),Japan,,no,,Namco System-1,,no,no,1987,Namco,Shooter - Driving Diagonal,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,3
+quester,Quester (JP),Japan,,no,,Namco System-1,,no,no,1987,Namco,Ball &amp; Paddle - Breakout,,15kHz,vertical (cw),yes,,2 (alternating),Dial,Dial,1
+questers,Quester Special Edition (JP),Japan,,no,Quester,Namco System-1,,no,no,1987,Namco,Ball &amp; Paddle - Breakout,,15kHz,vertical (cw),yes,,2 (alternating),Dial,Dial,1
 ws,Pro Yakyuu World Stadium (JP),Japan,,no,,Namco System-1,World Stadium,no,no,1988,Namco,Sports - Baseball,,15kHz,horizontal,,,2 (simultaneous),8-way,,3
 ws89,Pro Yakyuu World Stadium '89 (JP),Japan,,no,Pro Yakyuu World Stadium,Namco System-1,World Stadium,no,no,1988,Namco,Sports - Baseball,,15kHz,horizontal,,,2 (simultaneous),8-way,,3
 ws90,Pro Yakyuu World Stadium '90 (JP),Japan,,no,Pro Yakyuu World Stadium,Namco System-1,World Stadium,no,no,1988,Namco,Sports - Baseball,,15kHz,horizontal,,,2 (simultaneous),8-way,,3
@@ -2369,10 +2370,10 @@ mmaze2,"Marchen Maze (JP, Hack)",Japan,Hack,yes,Marchen Maze,Namco System-1,,no,
 bakutotu,Bakutotsu Kijuutei,Japan,,no,,Namco System-1,Baraduke,no,no,1988,Namco,Shooter - Flying Horizontal,,15kHz,horizontal,,,2 (alternating),8-way,,3
 wldcourt,Pro Tennis World Court (JP),Japan,,no,,Namco System-1,World Court,no,no,1988,Namco,Sports - Tennis,,15kHz,horizontal,,,2 (simultaneous),8-way,,3
 faceoff,"Face Off (JP, 2P)",Japan,,no,,Namco System-1,,no,no,1988,Namco,Sports - Hockey,,15kHz,horizontal,,,2 (simultaneous),8-way double,Double joystick,2
-rompers,"Rompers (JP, New Ver. (Rev B))",Japan,Rev B,no,,Namco System-1,,no,no,1989,Namco,Maze - Collect,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
-romperso,"Rompers (JP, Old Ver.)",Japan,Old ver,yes,Rompers,Namco System-1,,no,no,1989,Namco,Maze - Collect,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
+rompers,"Rompers (JP, New Ver. (Rev B))",Japan,Rev B,no,,Namco System-1,,no,no,1989,Namco,Maze - Collect,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,3
+romperso,"Rompers (JP, Old Ver.)",Japan,Old ver,yes,Rompers,Namco System-1,,no,no,1989,Namco,Maze - Collect,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,3
 blastoff,Blast Off (JP),Japan,,no,,Namco System-1,Bosconian,no,no,1989,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
-dangseed,Dangerous Seed (JP),Japan,,no,,Namco System-1,,no,no,1989,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),,,2 (alternating),8-way,,3
+dangseed,Dangerous Seed (JP),Japan,,no,,Namco System-1,,no,no,1989,Namco,Shooter - Flying Vertical,,15kHz,vertical (cw),yes,,2 (alternating),8-way,,3
 pistoldm,Pistol Daimyo no Bouken (JP),Japan,,no,,Namco System-1,,no,no,1990,Namco,Shooter - Flying Horizontal,,15kHz,horizontal,,,2 (alternating),8-way,,3
 boxyboy,"Boxy Boy (W, SB2)",World,SB2,no,,Namco System-1,,no,no,1990,Namco,Maze - Blocks,,15kHz,horizontal,,,2 (alternating),8-way,,3
 boxyboya,Boxy Boy (SB-),World,SB2,yes,Boxy Boy,Namco System-1,,no,no,1990,Namco,Maze - Blocks,,15kHz,horizontal,,,2 (alternating),8-way,,3

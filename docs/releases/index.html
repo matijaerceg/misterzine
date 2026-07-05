@@ -444,6 +444,11 @@ function apply() {
       : (x[sortKey] || '');
     view.sort((a, b) => {
       const av = keyOf(a), bv = keyOf(b);
+      // Blank cells always sink to the bottom, regardless of sort direction, so
+      // "no data" never heads the list (e.g. sorting Players ascending still
+      // shows 1,2,4… first and the unknowns last).
+      const ae = av === '', be = bv === '';
+      if (ae !== be) return ae ? 1 : -1;
       // Case- and accent-insensitive so "ASO" sorts next to "Ace", not ahead of
       // it; numeric:true gives natural ordering for any number runs in titles.
       return sortDir * av.localeCompare(bv, undefined, { numeric: true, sensitivity: 'base' });
@@ -469,7 +474,11 @@ document.getElementById('hrow').addEventListener('click', e => {
   const th = e.target.closest('th');
   if (!th) return;
   const k = th.dataset.k;
-  sortDir = (sortKey === k) ? -sortDir : 1;
+  // Date columns default to descending (most recent first) when first selected;
+  // every other column defaults to ascending. A click on the already-active
+  // column always just flips the current direction.
+  const DATE_COLS = new Set(['date', 'updated']);
+  sortDir = (sortKey === k) ? -sortDir : (DATE_COLS.has(k) ? -1 : 1);
   sortKey = k;
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
   apply();

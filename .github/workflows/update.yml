@@ -1,13 +1,15 @@
-name: Daily release update
+name: Release update
 
-# Checks the three upstream MiSTer DBs once a day, records any new/updated
+# Checks the three upstream MiSTer DBs twice a day, records any new/updated
 # releases (dated), enriches + regenerates the site, and commits the result.
 # Pages serves from main /docs, so the push publishes the refreshed site.
 
 on:
   schedule:
-    # 06:12 UTC daily (odd minute to avoid the top-of-hour scheduler crush).
+    # Twice daily, 06:12 and 18:12 UTC (odd minute to avoid the top-of-hour
+    # scheduler crush). A quiet run simply publishes nothing.
     - cron: "12 6 * * *"
+    - cron: "12 18 * * *"
   workflow_dispatch: {}   # allow manual runs from the Actions tab
 
 # Prevent overlapping runs from racing on the same commit/push.
@@ -86,6 +88,6 @@ jobs:
             # (matches AND misses) so tomorrow's run doesn't re-resolve them, and
             # the MAD CSV is the fetch-failure fallback for the arcade metadata.
             git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv
-            git commit -m "Daily update: refresh releases ($(date -u +%Y-%m-%d))"
+            git commit -m "Update: refresh releases ($(date -u +'%Y-%m-%d %H:%M') UTC)"
             git push
           fi

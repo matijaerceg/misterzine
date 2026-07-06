@@ -10,6 +10,10 @@ data/cache/*
 # daily fetch falls back to the last good copy instead of publishing a
 # data.json with the arcade metadata columns wiped.
 !data/cache/ArcadeDatabase.csv
+# ...and the derived MAME metadata (setname → year/manufacturer/parent/desc):
+# the raw 71 MB DAT stays local, but this 0.5 MB gz gives the daily CI build the
+# same data, so arcade year/manufacturer/genre fill on the live site too.
+!data/cache/mame_meta.json.gz
 __pycache__/
 *.pyc
 

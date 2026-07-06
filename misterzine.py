@@ -1245,29 +1245,77 @@ def parse_catver(text):
 # parent's genre/year/manufacturer. Loaded lazily, guarded: on a fresh checkout
 # the DAT may not be cached yet, in which case these fills simply no-op.
 MAME_DAT = CACHEDIR / "MAME_arcade.dat"
+# The DAT is 71 MB and gitignored, so it's absent on CI. We derive a slim
+# {setname: year/manufacturer/parent/desc} map from it and commit that (0.5 MB
+# gzipped) so the daily build has the same data. Regenerated locally via
+# `mame-meta` whenever a new DAT is dropped (the raw DAT is a manual local pass).
+MAME_META_GZ = CACHEDIR / "mame_meta.json.gz"
 _DAT_MACHINE = re.compile(r'<machine\s+name="([^"]+)"([^>]*)>(.*?)</machine>', re.S)
 
 
-def load_arcade_dat_meta():
-    """{setname_lower: {'year','manufacturer','parent'}} from the MAME arcade DAT.
-
-    Returns {} if the DAT isn't cached (keeps export/build offline-safe)."""
-    if not MAME_DAT.exists():
-        return {}
+def parse_dat_meta(txt):
+    """{setname_lower: {'year','manufacturer','parent','desc'}} from DAT XML text."""
     import html
-    txt = MAME_DAT.read_text(encoding="utf-8", errors="ignore")
     meta = {}
     for m in _DAT_MACHINE.finditer(txt):
         name, attrs, body = m.group(1).lower(), m.group(2), m.group(3)
         co = re.search(r'cloneof="([^"]+)"', attrs)
         yr = re.search(r"<year>([^<]*)</year>", body)
         mf = re.search(r"<manufacturer>([^<]*)</manufacturer>", body)
+        de = re.search(r"<description>([^<]*)</description>", body)
         meta[name] = {
             "year": (yr.group(1).strip() if yr and yr.group(1).strip() not in ("", "????") else ""),
             "manufacturer": (html.unescape(mf.group(1)).strip() if mf else ""),
             "parent": (co.group(1).lower() if co else None),
+            "desc": (html.unescape(de.group(1)).strip() if de else ""),
         }
     return meta
+
+
+def load_arcade_dat_meta():
+    """{setname_lower: {'year','manufacturer','parent','desc'}} for arcade fills.
+
+    Prefers the raw DAT when cached locally (always current); else falls back to
+    the committed derived artifact so CI has the same data. {} if neither exists."""
+    if MAME_DAT.exists():
+        return parse_dat_meta(MAME_DAT.read_text(encoding="utf-8", errors="ignore"))
+    if MAME_META_GZ.exists():
+        import gzip
+        return json.loads(gzip.decompress(MAME_META_GZ.read_bytes()).decode("utf-8"))
+    return {}
+
+
+def _norm_arcade_title(s):
+    """Normalize a title/description for setname reverse-matching: drop any
+    parentheticals (region/rev/board qualifiers) and keep only alphanumerics."""
+    return re.sub(r"[^a-z0-9]", "", re.sub(r"\s*\([^)]*\)", "", s or "").lower())
+
+
+def build_dat_desc_index(dat):
+    """{normalized_description: setname} for recovering a setname from a title
+    when no join key exists (e.g. coinop/libretro rows). Prefers the parent set
+    when several region/rev variants share a normalized description — they all
+    carry the same year/manufacturer, so the choice only affects the join key."""
+    index = {}
+    for sn, e in (dat or {}).items():
+        key = _norm_arcade_title(e.get("desc", ""))
+        if not key:
+            continue
+        if key not in index or e.get("parent") is None:
+            index[key] = sn
+    return index
+
+
+def cmd_mame_meta(args):
+    """Derive the committed mame_meta.json.gz from the local raw MAME DAT."""
+    import gzip
+    if not MAME_DAT.exists():
+        log(f"mame-meta: {MAME_DAT} not found — nothing to derive (raw DAT is a local pass).")
+        return
+    meta = parse_dat_meta(MAME_DAT.read_text(encoding="utf-8", errors="ignore"))
+    blob = json.dumps(meta, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    MAME_META_GZ.write_bytes(gzip.compress(blob, mtime=0))
+    log(f"mame-meta: wrote {MAME_META_GZ} ({len(meta)} machines, {MAME_META_GZ.stat().st_size/1048576:.1f} MB gz)")
 
 
 def load_manifest_setnames():
@@ -1663,7 +1711,7 @@ def _dat_field(setname, dat, field):
 
 
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
-             repo_maps=None, arcade_mad=None):
+             repo_maps=None, arcade_mad=None, dat_desc_index=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -1674,8 +1722,12 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         date = (r["release_date"] or "")[:10]
         date_kind = "debut" if date else ""
         # setname for metadata joins: prefer catalog.setname, else the image
-        # manifest's resolved setname (backfilled rows have it only there).
+        # manifest's resolved setname (backfilled rows have it only there), else
+        # recover it by matching the title against the DAT's descriptions — this
+        # unlocks year/manufacturer/genre for setname-less rows (coinop/libretro).
         sn = r["setname"] or (arcade_setnames or {}).get(title) or ""
+        if not sn and dat_desc_index:
+            sn = dat_desc_index.get(_norm_arcade_title(title), "")
         # genre from catver (DB) → catver-by-parent; manufacturer from the MRA
         # (DB) → MAME DAT by setname → by parent. Fills the clone-setname genre
         # gaps and the Toaplan/Nichibutsu/UPL manufacturer gaps.
@@ -1842,6 +1894,8 @@ def cmd_export_web(args):
     arcade_cats = local_catver()
     arcade_setnames = load_manifest_setnames()
     arcade_mad = local_mad()
+    # reverse index for rows with no setname anywhere: recover it from the title
+    dat_desc_index = build_dat_desc_index(arcade_meta)
     # Display the clean mainline name, but keep the qualifier where the stripped
     # base name collides among kept rows (genuinely distinct hardware/publisher
     # versions that share a base, e.g. Kangaroo / Kangaroo (Atari) / (Bootleg)).
@@ -1852,7 +1906,7 @@ def cmd_export_web(args):
             b = _arcade_base(r["title"])
             arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
-                     arcade_mad) for r in rows]
+                     arcade_mad, dat_desc_index) for r in rows]
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
@@ -2131,6 +2185,9 @@ def main():
 
     mp = sub.add_parser("mad", help="fetch arcade metadata (rotation/players/controls) from the MiSTer Arcade Database")
     mp.set_defaults(func=cmd_mad)
+
+    mmp = sub.add_parser("mame-meta", help="derive committed mame_meta.json.gz from the local raw MAME DAT (local pass)")
+    mmp.set_defaults(func=cmd_mame_meta)
 
     ep = sub.add_parser("export", help="write JSON/JSONL exports from the db")
     ep.set_defaults(func=cmd_export)

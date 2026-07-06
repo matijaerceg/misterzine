@@ -457,17 +457,27 @@ function apply() {
   render();
 }
 
-document.getElementById('q').addEventListener('input', apply);
+// Keep the still-selected row in view after any reshuffle of the list (search,
+// sort, type filter, column toggle). No-op when nothing is open or the open row
+// was filtered out of the current results — its <tr> simply isn't in the DOM.
+function recenterOpen() {
+  const tr = document.querySelector('#rows tr.open');
+  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
+}
+
+// Re-center on every keystroke: if the open row survives the filter it stays put
+// (and this covers backspacing back to the full list); if it's filtered out the
+// helper no-ops until it reappears. Filtering preserves the sort order rather
+// than ranking by match, so anchoring to the open row doesn't hide better hits.
+document.getElementById('q').addEventListener('input', () => { apply(); recenterOpen(); });
 // keyboard-first devices get told about type-anywhere; touch keeps the plain hint
 if (matchMedia('(hover: hover) and (pointer: fine)').matches)
   document.getElementById('q').placeholder = 'Type anywhere to search title, type, manufacturer, core…';
 document.getElementById('clear').addEventListener('click', () => {
   const q = document.getElementById('q');
   q.value = ''; apply(); q.focus({ preventScroll: true });
-  // the full list just replaced the filtered one; keep the user's place by
-  // re-centering on the still-selected row instead of stranding it off-screen
-  const tr = document.querySelector('#rows tr.open');
-  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
+  // the full list just replaced the filtered one; keep the user's place
+  recenterOpen();
 });
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {
@@ -482,9 +492,7 @@ document.getElementById('hrow').addEventListener('click', e => {
   sortKey = k;
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
   apply();
-  // re-sorting moves the selected row to a new position — follow it there
-  const tr = document.querySelector('#rows tr.open');
-  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
+  recenterOpen();  // re-sorting moves the selected row to a new position — follow it there
 });
 
 // --- "Types" dropdown: multi-select filter over the four base types ---
@@ -515,6 +523,7 @@ typeMenu.addEventListener('change', e => {
   localStorage.setItem('mz-types', JSON.stringify([...enabledTypes]));
   syncTypeSummary();
   apply();
+  recenterOpen();  // adding/removing whole types moves the selected row — follow it
 });
 syncTypeSummary();
 
@@ -538,9 +547,8 @@ colsMenu.addEventListener('change', e => {
   buildHeader();
   apply();
   // adding/removing columns changes row heights (in-cell wrapping), which can
-  // strand the selected row off-screen — keep it centered like the clear button does
-  const tr = document.querySelector('#rows tr.open');
-  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
+  // strand the selected row off-screen — keep it centered
+  recenterOpen();
 });
 // click outside closes any open dropdown (Types + Columns)
 function closeDropdowns(except) {

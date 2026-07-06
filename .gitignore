@@ -14,6 +14,10 @@ data/cache/*
 # the raw 71 MB DAT stays local, but this 0.5 MB gz gives the daily CI build the
 # same data, so arcade year/manufacturer/genre fill on the live site too.
 !data/cache/mame_meta.json.gz
+# ...and the derived mame2003-plus specs (rotation/players/controls per setname):
+# provisional gray-fill for arcade rows the curated Arcade Database hasn't
+# reached yet; committed so the daily build works even if the fetch fails.
+!data/cache/mame2003_specs.json.gz
 __pycache__/
 *.pyc
 

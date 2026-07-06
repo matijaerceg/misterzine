@@ -65,6 +65,13 @@ jobs:
         continue-on-error: true
         run: python misterzine.py mad
 
+      - name: Provisional arcade specs (mame2003-plus)
+        # Refreshes the committed derived gz (rotation/players/controls per
+        # setname) used to gray-fill spec cells for titles MAD hasn't catalogued
+        # yet. Non-fatal: on a fetch hiccup export falls back to the checked-out gz.
+        continue-on-error: true
+        run: python misterzine.py specs
+
       - name: Regenerate JSON exports
         run: python misterzine.py export
 
@@ -87,7 +94,7 @@ jobs:
             # events/dates, image_manifest.json records the libretro backfill
             # (matches AND misses) so tomorrow's run doesn't re-resolve them, and
             # the MAD CSV is the fetch-failure fallback for the arcade metadata.
-            git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv data/cache/mame_meta.json.gz
+            git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv data/cache/mame_meta.json.gz data/cache/mame2003_specs.json.gz
             git commit -m "Update: refresh releases ($(date -u +'%Y-%m-%d %H:%M') UTC)"
             git push
           fi

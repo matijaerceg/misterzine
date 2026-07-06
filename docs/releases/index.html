@@ -97,6 +97,12 @@
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: #8881; }
   .build { color: #888; }
+  /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
+  td.prov, .prov { color: #888; font-style: italic; }
+  .prov em { font-style: normal; opacity: .7; font-size: .85em; }
+  .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid #8883;
+             font-size: .8rem; line-height: 1.35; color: #888; max-width: 15rem; }
+  .colnote .prov { font-style: italic; }
   /* clickable rows that have a detail view */
   tr.has-detail { cursor: pointer; }
   tr.open td { background: #06c3; }
@@ -380,7 +386,14 @@ const COLUMNS = [
   { k: 'spc',  label: 'Special Controls', w: 10, mw: 5, opt: true },
   { k: 'flip', label: 'Flip', w: 6, mw: 5, opt: true },
 ];
-for (const c of COLUMNS) if (!c.cell) c.cell = d => '<td>' + esc(d[c.k] || '') + '</td>';
+// Default renderer for the optional spec columns. Cells filled provisionally
+// from mame2003-plus (pending the curated Arcade Database) render grayed with a
+// tooltip; d.prov lists which keys on this row are provisional.
+const PROV_TITLE = 'Provisional — from MAME data, pending the Arcade Database';
+for (const c of COLUMNS) if (!c.cell) c.cell = d =>
+  (d.prov && d.prov.includes(c.k))
+    ? '<td class="prov" title="' + PROV_TITLE + '">' + esc(d[c.k] || '') + '</td>'
+    : '<td>' + esc(d[c.k] || '') + '</td>';
 
 const defaultCols = () => new Set(COLUMNS.filter(c => !c.opt).map(c => c.k));
 // 'mz-cols2' holds the full visible set. The pre-2026-07 'mz-cols' key held
@@ -534,7 +547,9 @@ const colsMenu = document.getElementById('colsmenu');
 colsMenu.innerHTML = COLUMNS.map(c =>
   '<label><input type="checkbox" data-k="' + c.k + '"' +
   (c.lock ? ' checked disabled' : (enabledCols.has(c.k) ? ' checked' : '')) +
-  '> ' + c.label + '</label>').join('');
+  '> ' + c.label + '</label>').join('') +
+  '<p class="colnote"><span class="prov">Grayed</span> spec values are provisional ' +
+  '(from MAME data), pending the curated Arcade Database.</p>';
 colsMenu.addEventListener('change', e => {
   const k = e.target.dataset.k;
   if (!k) return;
@@ -574,13 +589,22 @@ function detailHTML(d) {
   if (d.core) rows.push(['Core', coreLabel(d.core) + (coreLabel(d.core) !== d.core ? ' (' + d.core + ')' : '')]);
   if (d.year) rows.push(['Original year', d.year]);
   // arcade hardware metadata (MiSTer Arcade Database) — always shown here,
-  // even when the matching table columns are toggled off
-  if (d.rot) rows.push(['Rotation', d.rot]);
-  if (d.res) rows.push(['Resolution', d.res]);
-  if (d.plr) rows.push(['Players', d.plr]);
-  if (d.ctl) rows.push(['Controls', d.ctl]);
-  if (d.spc) rows.push(['Special controls', d.spc]);
-  if (d.flip) rows.push(['Screen flip', d.flip]);
+  // even when the matching table columns are toggled off. Provisional values
+  // (mame2003-plus, pending the curated DB) render grayed with a "(provisional)" tag.
+  const specRow = (label, key) => {
+    if (!d[key]) return;
+    if (d.prov && d.prov.includes(key))
+      rows.push([label, '<span class="prov" title="' + PROV_TITLE + '">' +
+        esc(d[key]) + ' <em>(provisional)</em></span>', true]);
+    else
+      rows.push([label, d[key]]);
+  };
+  specRow('Rotation', 'rot');
+  specRow('Resolution', 'res');
+  specRow('Players', 'plr');
+  specRow('Controls', 'ctl');
+  specRow('Special controls', 'spc');
+  specRow('Screen flip', 'flip');
   rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build — debut unknown)')]);
   if (d.updated) rows.push(['Latest update', d.updated]);
   // show the repo slug (jtcores deep links keep the full path in the href only)

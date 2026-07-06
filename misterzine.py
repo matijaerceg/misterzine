@@ -1472,6 +1472,100 @@ def cmd_mad(args):
     log(f"mad: {len(mad)} setname->metadata entries from ArcadeDatabase.csv")
 
 
+# --- command: specs (provisional arcade specs for rows not yet in MAD) -----
+
+# libretro's mame2003-plus listxml (same host as catver) carries orientation,
+# players, control type and button count per game — enough to fill blank
+# Rotation/Players/Controls/Special cells for brand-new arcade titles MAD hasn't
+# catalogued yet. Values are shown grayed (provisional) and MAD overwrites them
+# the moment it catches up. Only ~22 MB, so we derive a slim gz and commit that
+# (like mame_meta.json.gz); resolution (a CRT scan class) and flip aren't
+# derivable here and stay MAD-only.
+SPECS_URL = ("https://raw.githubusercontent.com/libretro/mame2003-plus-libretro"
+             "/master/metadata/mame2003-plus.xml")
+SPECS_GZ = CACHEDIR / "mame2003_specs.json.gz"
+_SPECS_GAME = re.compile(r'<game\s+name="([^"]+)"[^>]*>(.*?)</game>', re.S)
+# movement controls -> the "move" half of the Controls cell (parse_mad's format)
+_SPECS_MOVE = {
+    "joy2way": "2-way", "joy4way": "4-way", "joy8way": "8-way",
+    "doublejoy2way": "Double 2-way", "doublejoy4way": "Double 4-way",
+    "doublejoy8way": "Double 8-way", "vjoy2way": "2-way", "stick": "Analog",
+}
+# non-joystick controls -> Special Controls cell
+_SPECS_SPECIAL = {
+    "dial": "Dial", "paddle": "Paddle", "trackball": "Trackball",
+    "lightgun": "Lightgun", "pedal": "Pedal",
+}
+
+
+def parse_specs(text):
+    """{setname_lower: {rot,plr,ctl,spc}} from mame2003-plus.xml, display-ready
+    in the same vocabulary parse_mad emits so provisional cells read identically."""
+    out = {}
+    for g in _SPECS_GAME.finditer(text):
+        name, body = g.group(1).lower(), g.group(2)
+        if name in out:
+            continue
+        e = {}
+        o = re.search(r'orientation="([^"]+)"', body)
+        if o:
+            ori = o.group(1).lower()
+            if ori == "vertical":
+                e["rot"] = "Vertical"
+            elif ori == "horizontal":
+                e["rot"] = "Horizontal"
+        inp = re.search(r"<input([^>]*)>", body)
+        if inp:
+            ia = inp.group(1)
+            pl = re.search(r'players="(\d+)"', ia)
+            if pl and pl.group(1) != "0":
+                e["plr"] = pl.group(1)
+            ct = re.search(r'control="([^"]+)"', ia)
+            control = ct.group(1).lower() if ct else ""
+            move = _SPECS_MOVE.get(control, "")
+            if control in _SPECS_SPECIAL:
+                e["spc"] = _SPECS_SPECIAL[control]
+            bt = re.search(r'buttons="(\d+)"', ia)
+            ctl = [move] if move else []
+            if bt and bt.group(1) != "0":
+                n = bt.group(1)
+                ctl.append(n + (" button" if n == "1" else " buttons"))
+            if ctl:
+                e["ctl"] = " · ".join(ctl)
+        if e:
+            out[name] = e
+    return out
+
+
+def local_specs():
+    """Provisional-specs map from the committed gz only (no network); {} if absent."""
+    if not SPECS_GZ.exists():
+        return {}
+    import gzip
+    return json.loads(gzip.decompress(SPECS_GZ.read_bytes()).decode("utf-8"))
+
+
+def specs_for(setname, specs, dat):
+    """Provisional-specs entry for a setname, falling back to its DAT parent's."""
+    if not setname:
+        return {}
+    sl = setname.lower()
+    e = specs.get(sl)
+    if e:
+        return e
+    parent = (dat.get(sl) or {}).get("parent")
+    return specs.get(parent, {}) if parent else {}
+
+
+def cmd_specs(args):
+    import gzip
+    specs = parse_specs(http_get(SPECS_URL).decode("utf-8", errors="ignore"))
+    blob = json.dumps(specs, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    SPECS_GZ.write_bytes(gzip.compress(blob, mtime=0))
+    log(f"specs: {len(specs)} setname->specs from mame2003-plus.xml "
+        f"-> {SPECS_GZ} ({SPECS_GZ.stat().st_size/1024:.0f} KB gz)")
+
+
 # --- command: export ------------------------------------------------------
 
 def cmd_export(args):
@@ -1711,7 +1805,7 @@ def _dat_field(setname, dat, field):
 
 
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
-             repo_maps=None, arcade_mad=None, dat_desc_index=None):
+             repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -1787,6 +1881,18 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     if system == "arcade":
         # MAD metadata (rotation/resolution/players/controls/flip), display-ready
         row.update(mad_for(sn, arcade_mad or {}, arcade_meta or {}))
+        # provisional fill for cells MAD hasn't catalogued yet: mame2003-plus
+        # supplies rotation/players/controls/special for brand-new titles. MAD
+        # always wins (we only fill blanks); `prov` flags these for gray display
+        # and they self-heal — once MAD has the value, the cell is no longer
+        # blank so no provisional fill happens.
+        sp = specs_for(sn, arcade_specs or {}, arcade_meta or {})
+        prov = [k for k in ("rot", "plr", "ctl", "spc")
+                if not row.get(k) and sp.get(k)]
+        for k in prov:
+            row[k] = sp[k]
+        if prov:
+            row["prov"] = prov
     return row
 
 
@@ -1894,6 +2000,8 @@ def cmd_export_web(args):
     arcade_cats = local_catver()
     arcade_setnames = load_manifest_setnames()
     arcade_mad = local_mad()
+    # provisional specs (rotation/players/controls) for rows MAD hasn't reached
+    arcade_specs = local_specs()
     # reverse index for rows with no setname anywhere: recover it from the title
     dat_desc_index = build_dat_desc_index(arcade_meta)
     # Display the clean mainline name, but keep the qualifier where the stripped
@@ -1906,7 +2014,7 @@ def cmd_export_web(args):
             b = _arcade_base(r["title"])
             arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
-                     arcade_mad, dat_desc_index) for r in rows]
+                     arcade_mad, dat_desc_index, arcade_specs) for r in rows]
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
@@ -1933,8 +2041,10 @@ def cmd_export_web(args):
     if norepo:
         sample = ", ".join(f"{d['title']} [{d['core'] or '-'}]" for d in norepo[:8])
         log(f"    e.g. {sample}")
-    n_mad = sum(1 for d in data if d.get("rot"))
-    log(f"  arcade with MAD metadata: {n_mad}/{by_base.get('Arcade', 0)}")
+    n_rot = sum(1 for d in data if d.get("rot"))
+    n_prov = sum(1 for d in data if d.get("prov"))
+    log(f"  arcade with rotation: {n_rot}/{by_base.get('Arcade', 0)} "
+        f"({n_prov} rows carry provisional specs)")
 
 
 def _write_site_meta(outdir):
@@ -2147,6 +2257,7 @@ def cmd_build(args):
         cmd_enrich_mra(args)   # year/manufacturer/rbf/setname from MRA XML (clones repos)
     cmd_genre(args)            # arcade genre from cached catver + DAT parent fallback (offline)
     cmd_mad(args)              # arcade metadata (rotation/players/controls) from MAD
+    cmd_specs(args)            # provisional specs (mame2003-plus) for rows not yet in MAD
     cmd_export(args)
     cmd_export_web(args)       # also re-tags screenshot dims via _retag_image_dims()
     cmd_stats(args)
@@ -2185,6 +2296,9 @@ def main():
 
     mp = sub.add_parser("mad", help="fetch arcade metadata (rotation/players/controls) from the MiSTer Arcade Database")
     mp.set_defaults(func=cmd_mad)
+
+    spp = sub.add_parser("specs", help="fetch provisional arcade specs (mame2003-plus) for rows not yet in MAD")
+    spp.set_defaults(func=cmd_specs)
 
     mmp = sub.add_parser("mame-meta", help="derive committed mame_meta.json.gz from the local raw MAME DAT (local pass)")
     mmp.set_defaults(func=cmd_mame_meta)

@@ -626,7 +626,7 @@ function detailHTML(d) {
   // overlay (very narrow/tall) mode: no keyboard, no resizer — swipe is the only gesture
   const overlay = window.matchMedia('(max-aspect-ratio: 3/5)').matches;
   const hint = overlay
-    ? '<p class="hint">Swipe left to close</p>'
+    ? '<p class="hint"><em>Swipe or Back to close</em></p>'
     : '<p class="hint"><kbd>↑</kbd> <kbd>↓</kbd> browse rows · drag the edge to resize · <kbd>Esc</kbd> to close</p>';
 
   // screenshots first so they own the viewport on open; derived detail text below.
@@ -647,6 +647,7 @@ function openPanel(d) {
   void panel.offsetWidth;
   document.body.classList.add('panel-open');
   markOpenRow();
+  pushPanelState();
 }
 
 function closePanel() {
@@ -655,7 +656,24 @@ function closePanel() {
   markOpenRow();
   const onEnd = () => { panel.hidden = true; panel.removeEventListener('transitionend', onEnd); };
   panel.addEventListener('transitionend', onEnd);
+  // consume the history entry that backed this panel (see pushPanelState), so a
+  // close via ×/Esc/swipe doesn't leave a dead Back press behind
+  if (panelHist) { panelHist = false; history.back(); }
 }
+
+// overlay mode (narrow/tall screens): back a just-opened panel with a dummy
+// history entry so the browser/OS Back gesture closes it instead of leaving.
+// Wide screens are exempt — there the panel is docked layout, not a modal.
+let panelHist = false;
+function pushPanelState() {
+  if (panelHist || !matchMedia('(max-aspect-ratio: 3/5)').matches) return;
+  history.pushState({ mzPanel: true }, '');
+  panelHist = true;
+}
+window.addEventListener('popstate', () => {
+  panelHist = false;  // cleared first so closePanel doesn't history.back() again
+  if (document.body.classList.contains('panel-open')) closePanel();
+});
 
 function markOpenRow() {
   document.querySelectorAll('#rows tr.open').forEach(tr => tr.classList.remove('open'));
@@ -847,6 +865,9 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
 // turning portrait while only the empty state shows → hide it so it doesn't cover the list
 matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
   if (e.matches && openRow == null && document.body.classList.contains('panel-open')) closePanel();
+  // a docked detail panel that just became a full-screen overlay needs its
+  // Back-to-close history entry too
+  else if (e.matches && openRow != null) pushPanelState();
 });
 
 // "Last updated" stamp — meta.json.updated is bumped by export-web only when the

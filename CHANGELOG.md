@@ -4,6 +4,7 @@ User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.githu
 
 ## 2026-07-07
 - The browser Back button (and swipe-back gesture) now closes the screenshot panel on mobile instead of leaving the site.
+- Visual polish: the panel's resize grip is now two crisp pixel-perfect lines, and the panel drop shadow is gone.
 
 ## 2026-07-06
 - New opt-in **Genre** column for arcade titles (via MAME's catver.ini).

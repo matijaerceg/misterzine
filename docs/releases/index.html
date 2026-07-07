@@ -290,29 +290,17 @@ const CORE_NAMES = {
   'popeye': 'Nintendo (Popeye)',
 };
 
-// Per-setname display-aspect overrides for games whose stored pixel dimensions
-// don't match how the hardware actually displays them (non-square pixels or a
-// TATE/vertical game captured in a landscape raster). Keyed by setname (d.img);
-// value is the forced CSS aspect-ratio. Without these the auto w/h heuristic
-// picks the wrong frame and object-fit:fill stretches the shot incorrectly.
+// Per-setname display-aspect escape hatch — for the handful of cases the normal
+// rotation-driven logic can't get right. Keyed by setname (d.img); value is the
+// forced CSS aspect-ratio, and it wins over everything (see detailHTML). The
+// orientation for ordinary rows now comes from the MAD rotation column (d.rot),
+// so this list only needs: (a) single-screen games whose superwide raster trips
+// the 8:3 dual-screen rule, and (b) rows where MAD's rotation tag is itself wrong.
 const ASPECT_OVERRIDE = {
-  findlove: '4 / 3',  // Sega ST-V hi-res 640x224 (non-square pixels) → 4:3, not 8:3
-  mpatrol:  '4 / 3',  // Moon Patrol raster is 240x252 (near-square) but the game is landscape 4:3
-  travrusa: '3 / 4',  // Traverse USA is a vertical/TATE game stored in a 256x240 landscape raster
-  shtrider: '3 / 4',  // Shot Rider — same: vertical/TATE racer in a 256x240 landscape raster
-  // Horizontal games stored in a square raster — the 1:1→3:4 default would wrongly
-  // stretch these tall, so pin them back to 4:3.
-  kungfum:  '4 / 3',  // Kung-Fu Master (Irem M62 256x256)
-  horizon:  '4 / 3',  // Horizon (Irem M62 256x256)
-  vigilant: '4 / 3',  // Vigilante (256x256)
-  exprraid: '4 / 3',  // Express Raider (240x240)
-  wexpress: '4 / 3',  // Western Express (240x240)
-  bankp:    '4 / 3',  // Bank Panic (Sanritsu/Sega, 240x240) — horizontal game
-  bilyard:  '4 / 3',  // Billiard (Terminal, tiamc1) — horizontal game in a square raster
-  konek:    '4 / 3',  // Konek Gorbunok (Terminal, tiamc1) — horizontal game in a 256x256 square raster
-  kot:      '4 / 3',  // Kot-Rybolov (Terminal, tiamc1) — horizontal game in a 256x256 square raster
-  crater:   '4 / 3',  // Crater Raider — horizontal game in a square raster
-  hardhat:  '4 / 3',  // Hard Hat (Exidy, 256x256) — horizontal game in a square raster
+  findlove: '4 / 3',  // Sega ST-V hi-res single screen (640x224) — else caught by the 8:3 rule
+  pong:     '4 / 3',  // superwide raster (750x246) but a single screen, not dual — false 8:3
+  shienryu: '3 / 4',  // vertical shmup; MAD wrongly tags it Horizontal (file MAD PR)
+  wrestwar: '3 / 4',  // vertical wrestling game; MAD wrongly tags it Horizontal (file MAD PR)
 };
 
 // Cosmetic title fixes for upstream MRA filenames that are misspaced. The title
@@ -619,15 +607,17 @@ function detailHTML(d) {
   // already-superwide screenshots (dual/triple-screen: Sagaia, Darius, …) → 8:3.
   // 2.4 sits below the dual-screen cluster (2.67+) but above wide single screens
   // like the PGM 448x224 games (2.0), which stay 4:3.
-  // ASPECT_OVERRIDE first: some games store non-square pixels whose raw w/h is
-  // misleading (ST-V hi-res 640x224, Irem M62 240x252, vertical/TATE games in a
-  // landscape raster), so the auto heuristic picks the wrong frame. Keyed by
-  // setname (d.img). Durable — index.html is the single source of truth.
+  // Precedence: (1) ASPECT_OVERRIDE escape hatch; (2) 8:3 for genuine dual/triple
+  // screens (all tagged Horizontal, so rotation can't detect them — must stay
+  // dimension-driven); (3) the MAD rotation column (d.rot) — the primary signal,
+  // right where a raster's raw w/h misleads (square DECO Cassette games, TATE
+  // games in a landscape raster, non-square pixels); (4) dimension fallback for
+  // the few rows with no rotation. Keyed by setname (d.img) for the override.
   const aspect = d.img_h ? d.img_w / d.img_h : 1;
-  // Square (1:1) rasters — e.g. DECO Cassette games stored 240x240 — default to
-  // the tall 3:4 frame, not 4:3: only a strictly-landscape shot (w > h) gets 4:3.
   const ratio = ASPECT_OVERRIDE[d.img] ||
-    (aspect >= 2.4 ? '8 / 3' : (d.img_w > d.img_h ? '4 / 3' : '3 / 4'));
+    (aspect >= 2.4 ? '8 / 3'
+      : d.rot ? (d.rot.startsWith('Vertical') ? '3 / 4' : '4 / 3')
+      : (d.img_w > d.img_h ? '4 / 3' : '3 / 4'));
   const shots = (d.img_slots || []).map(s =>
     '<div class="frame" style="aspect-ratio:' + ratio + '">' +
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'

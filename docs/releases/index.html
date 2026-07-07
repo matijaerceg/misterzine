@@ -134,6 +134,14 @@
   #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
   #panel dt { color: #888; }
   #panel dd { margin: 0; }
+  /* MAME setnames read best monospaced (table cells and the panel row) */
+  .rom { font-family: ui-monospace, Consolas, monospace; font-size: .95em; }
+  td.rom { white-space: nowrap; }
+  /* click-to-copy affordance next to copyable panel values */
+  #panel .copy { font: inherit; font-size: .85em; line-height: 1; margin-left: .35rem; padding: 0 .25rem;
+    border: 1px solid #8886; border-radius: 3px; background: none; color: #888; cursor: pointer; }
+  #panel .copy:hover { color: inherit; border-color: #888; }
+  #panel .copy.ok { color: #2a2; border-color: #2a2; }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
   /* empty state shown before any title is selected */
   #panel .body.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; gap: 1rem; }
@@ -359,6 +367,8 @@ function coreCell(d) {
 // Optional columns without a cell() render their data key as plain text.
 const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
+  { k: 'sn', label: 'ROM Name', w: 9, mw: 6.5, opt: true,
+    cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Type', w: 7, mw: 4, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
   { k: 'date', label: 'MiSTer Debut', w: 10, mw: 5.5,
@@ -440,7 +450,7 @@ function apply() {
     return (d.title + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
             (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
-            (d.ctl || '') + ' ' + (d.spc || '')).toLowerCase().includes(q);
+            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || '')).toLowerCase().includes(q);
   });
   if (sortKey) {
     const keyOf = x => sortKey === 'typesort' ? typeLabel(x)
@@ -571,11 +581,16 @@ buildHeader();  // header renders immediately; rows follow once data.json loads
 // --- detail panel ---
 const panel = document.getElementById('panel');
 
+// click-to-copy affordance for panel values (delegated handler on #panel)
+const copyBtn = v => '<button class="copy" data-copy="' + escA(v) + '" title="Copy">⧉</button>';
+
 function detailHTML(d) {
   const rows = [['Type', typeLabel(d)]];
   if (d.genre) rows.push(['Genre', d.genre]);
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
-  if (d.core) rows.push(['Core', coreLabel(d.core) + (coreLabel(d.core) !== d.core ? ' (' + d.core + ')' : '')]);
+  if (d.core) rows.push(['Core', esc(coreLabel(d.core)) +
+    (coreLabel(d.core) !== d.core ? ' (' + esc(d.core) + ')' : '') + copyBtn(d.core), true]);
+  if (d.sn) rows.push(['ROM name', '<span class="rom">' + esc(d.sn) + '</span>' + copyBtn(d.sn), true]);
   if (d.year) rows.push(['Original year', d.year]);
   // arcade hardware metadata (MiSTer Arcade Database) — always shown here,
   // even when the matching table columns are toggled off. Provisional values
@@ -699,7 +714,17 @@ document.getElementById('rows').addEventListener('click', e => {
   const tr = e.target.closest('tr.has-detail');
   if (tr) openPanel(view[+tr.dataset.i]);
 });
-panel.addEventListener('click', e => { if (e.target.closest('.close')) closePanel(); });
+panel.addEventListener('click', e => {
+  const cp = e.target.closest('.copy');
+  if (cp) {  // copy the value, flash confirmation, keep the panel open
+    navigator.clipboard.writeText(cp.dataset.copy).then(() => {
+      cp.classList.add('ok'); cp.textContent = '✓';
+      setTimeout(() => { cp.classList.remove('ok'); cp.textContent = '⧉'; }, 1000);
+    });
+    return;
+  }
+  if (e.target.closest('.close')) closePanel();
+});
 
 // --- arrow-key row navigation (Up/Down = click prev/next detail row) ---
 function selectableIndices() {

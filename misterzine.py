@@ -1883,6 +1883,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     if repo:
         row["repo"] = repo
     if system == "arcade":
+        # the row's own MAME setname ("ROM name"). Distinct from the screenshot
+        # key (img), which can be a shared/borrowed setname.
+        if sn:
+            row["sn"] = sn
         # MAD metadata (rotation/resolution/players/controls/flip), display-ready
         row.update(mad_for(sn, arcade_mad or {}, arcade_meta or {}))
         # provisional fill for cells MAD hasn't catalogued yet: mame2003-plus

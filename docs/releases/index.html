@@ -883,7 +883,7 @@ fetch('./meta.json').then(r => r.json()).then(m => {
   });
   el.innerHTML = 'Last updated: ' + esc(s) +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats</a>' +
-    ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>';
+    ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)</a>';
 }).catch(() => {});
 
 fetch('./data.json').then(r => r.json()).then(d => {

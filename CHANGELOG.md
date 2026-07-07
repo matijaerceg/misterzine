@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-07
+- Every row now opens the detail panel (type, dates, core, repo link, …), not just arcade titles with screenshots; the screen icon now specifically marks rows that have screenshots.
 - New opt-in **ROM Name** column showing each arcade title's MAME setname (searchable too), plus click-to-copy ROM name and core name in the detail panel.
 - The browser Back button (and swipe-back gesture) now closes the screenshot panel on mobile instead of leaving the site.
 - Visual polish: the panel's resize grip is now two crisp pixel-perfect lines, and the panel drop shadow is gone.

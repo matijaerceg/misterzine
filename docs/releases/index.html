@@ -103,8 +103,8 @@
   .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid #8883;
              font-size: .8rem; line-height: 1.35; color: #888; max-width: 15rem; }
   .colnote .prov { font-style: italic; }
-  /* clickable rows that have a detail view */
-  tr.has-detail { cursor: pointer; }
+  /* every row opens the detail panel */
+  tbody tr { cursor: pointer; }
   tr.open td { background: #06c3; }
   /* Title column pins to the scroller's left edge. It needs its own opaque
      paint: row backgrounds don't travel with a sticky cell, and the hover/open
@@ -235,7 +235,8 @@
 let DATA = [], view = [], sortKey = 'date', sortDir = -1;  // default: most recent first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
 
-const hasDetail = d => !!d.img;
+// every row opens the detail panel; the icon marks the ones with screenshots
+const hasShots = d => !!d.img;
 
 const DV_ICON = '<svg class="dv-icon" width="13" height="13" viewBox="0 0 16 16" ' +
   'fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">' +
@@ -343,7 +344,7 @@ function typeBadge(d) {
 }
 
 function titleCell(d) {
-  return esc(d.title) + (hasDetail(d) ? ' ' + DV_ICON : '');
+  return esc(d.title) + (hasShots(d) ? ' ' + DV_ICON : '');
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -429,7 +430,7 @@ function render() {
   const tb = document.getElementById('rows');
   const cols = activeColumns();
   tb.innerHTML = view.map((d, i) =>
-    '<tr' + (hasDetail(d) ? ' class="has-detail' + (d === openRow ? ' open' : '') + '" data-i="' + i + '"' : '') + '>' +
+    '<tr' + (d === openRow ? ' class="open"' : '') + ' data-i="' + i + '">' +
     cols.map(c => c.cell(d)).join('') + '</tr>'
   ).join('');
   document.getElementById('count').textContent = view.length + ' of ' + DATA.length;
@@ -652,7 +653,7 @@ function detailHTML(d) {
 }
 
 function openPanel(d) {
-  if (!d || !hasDetail(d)) return;
+  if (!d) return;
   openRow = d;
   panel.innerHTML = detailHTML(d);
   const body = panel.querySelector('.body'); if (body) body.scrollTop = 0;
@@ -711,7 +712,7 @@ function openPlaceholder() {
 
 document.getElementById('rows').addEventListener('click', e => {
   if (e.target.closest('a')) return;  // repo links navigate; don't also open the panel
-  const tr = e.target.closest('tr.has-detail');
+  const tr = e.target.closest('tr[data-i]');
   if (tr) openPanel(view[+tr.dataset.i]);
 });
 panel.addEventListener('click', e => {
@@ -726,17 +727,12 @@ panel.addEventListener('click', e => {
   if (e.target.closest('.close')) closePanel();
 });
 
-// --- arrow-key row navigation (Up/Down = click prev/next detail row) ---
-function selectableIndices() {
-  const out = [];
-  for (let i = 0; i < view.length; i++) if (hasDetail(view[i])) out.push(i);
-  return out;
-}
+// --- arrow-key row navigation (Up/Down = click prev/next row) ---
 function currentIndex() {
   return openRow == null ? -1 : view.findIndex(d => d === openRow);
 }
-function firstVisibleSelectableIdx(fromBottom) {
-  const rows = [...document.querySelectorAll('#rows tr.has-detail')];
+function firstVisibleRowIdx(fromBottom) {
+  const rows = [...document.querySelectorAll('#rows tr')];
   if (fromBottom) rows.reverse();
   // visibility is judged against the scroller, not the window — and rows tucked
   // under the sticky header row don't count, so the top boundary is the thead's
@@ -750,17 +746,15 @@ function firstVisibleSelectableIdx(fromBottom) {
   return -1;
 }
 function navigate(dir) {  // dir: +1 down, -1 up
-  const sel = selectableIndices();
-  if (!sel.length) return;
+  if (!view.length) return;
   const cur = currentIndex();
   let target;
   if (cur < 0) {                                   // nothing selected → top (or bottom) visible row
-    target = firstVisibleSelectableIdx(dir < 0);
-    if (target < 0) target = dir > 0 ? sel[0] : sel[sel.length - 1];
+    target = firstVisibleRowIdx(dir < 0);
+    if (target < 0) target = dir > 0 ? 0 : view.length - 1;
   } else {
-    const npos = sel.indexOf(cur) + dir;
-    if (npos < 0 || npos >= sel.length) return;    // clamp at the ends
-    target = sel[npos];
+    target = cur + dir;
+    if (target < 0 || target >= view.length) return;  // clamp at the ends
   }
   openPanel(view[target]);
   const tr = document.querySelector('#rows tr[data-i="' + target + '"]');

@@ -372,6 +372,7 @@ function coreCell(d) {
 const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
   { k: 'typesort', label: 'Type', w: 7, mw: 4, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
+  { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
   { k: 'date', label: 'MiSTer Debut', w: 10, mw: 5.5,
     cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' },
   { k: 'updated', label: 'Last Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },

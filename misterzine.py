@@ -1614,7 +1614,11 @@ def cmd_export(args):
 
 # Arcade rows that are BIOS/placeholders, not games — excluded from the site.
 # Keyed by MAME setname. The IGS "PGM" entry is just the PGM motherboard BIOS.
-ARCADE_EXCLUDE_SETNAMES = {"pgm"}
+# `ngp` is the NeoGeo Pocket system BIOS: Jotego ships its NGP core both as
+# _Console/NeoGeoPocket.rbf and a redundant _Arcade/NeoGeo Pocket.mra (same repo,
+# a handheld console, not an arcade game — its only "screenshot" is a blank boot
+# screen). Drop the arcade duplicate; the console .rbf row is the canonical one.
+ARCADE_EXCLUDE_SETNAMES = {"pgm", "ngp"}
 
 _CORE_DATE_RE = re.compile(r"_(20\d{6})\b")
 

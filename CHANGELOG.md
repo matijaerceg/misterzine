@@ -1,7 +1,6 @@
 # Changelog
 
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
-The release *data* refreshes automatically twice a day and isn't listed here — this file tracks changes to the site itself.
 
 ## 2026-07-07
 - The browser Back button (and swipe-back gesture) now closes the screenshot panel on mobile instead of leaving the site.

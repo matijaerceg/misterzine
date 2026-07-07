@@ -13,6 +13,15 @@ from probe_psnaps2 import pack_setnames, BASE, PACKS
 DAT = "data/cache/MAME_arcade.dat"
 PACKS_CACHE = "data/cache/psnaps_packs.json"
 OUT = "data/cache/image_manifest.json"
+# MiSTer .mra setnames that predate a MAME rename, so they match nothing in the
+# current progettoSNAPS packs. Pin each to the live MAME set (parent preferred,
+# so all three image slots — which the site keys off one setname — self-match).
+SETNAME_ALIASES = {
+    # "Pop Flamer (Bootleg conversion)" ships as `popflamn`; MAME renamed it to
+    # `popflamen` (clone of parent `popflame`). Only the parent carries a
+    # gameover shot, so alias to the parent for a consistent full trio.
+    "popflamn": "popflame",
+}
 # Order of preference for the third (in-game) shot.
 THIRD = ["gameover", "scores", "select", "bosses", "versus", "howto"]
 MACHINE = re.compile(r'<machine\s+name="([^"]+)"[^>]*?(?:\scloneof="([^"]+)")?[^>]*>')
@@ -64,6 +73,7 @@ def main():
         sn = setmap.get(match.norm(title))
         if not sn:  # backfill from MAME descriptions for setname-less titles
             sn = setname_backfill.resolve_setname(title, desc_idx, prefer=packs["snap"])
+        sn = SETNAME_ALIASES.get(sn, sn)  # pin renamed MiSTer setnames to MAME
         entry = {"title": title, "setname": sn, "source": None,
                  "title_img": None, "snap_img": None, "third_img": None, "third_pack": None}
         if sn:

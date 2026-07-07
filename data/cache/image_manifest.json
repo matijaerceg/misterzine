@@ -6823,12 +6823,12 @@
  },
  {
   "title": "Pop Flamer",
-  "setname": "popflamn",
+  "setname": "popflame",
   "source": "psnaps",
-  "title_img": null,
-  "snap_img": null,
-  "third_img": null,
-  "third_pack": null
+  "title_img": "titles/popflame.png",
+  "snap_img": "snap/popflame.png",
+  "third_img": "gameover/popflame.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Armed Police Batrider",

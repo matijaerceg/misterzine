@@ -119,10 +119,10 @@
   .dv-icon { margin-left: .4rem; color: #888; vertical-align: -1px; }
 
   /* --- detail panel: slides in from the left --- */
-  #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, calc(100vw / 3));
+  #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, round(calc(100vw / 3), 1px));
            transform: translateX(-100%); transition: transform .28s ease;
            overflow: hidden; z-index: 100; background: Canvas; display: flex; flex-direction: column;
-           border-right: 1px solid #8884; box-shadow: 4px 0 24px #0006;
+           border-right: 1px solid #8884;
            touch-action: pan-y; }
   body.panel-open #panel { transform: translateX(0); }
   #panel[hidden] { display: none; }
@@ -150,23 +150,23 @@
 
   /* draggable edge: resize the panel / flick left to close (reflow mode only) */
   #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; width: 12px; z-index: 101;
-             left: var(--pw, calc(100vw / 3)); margin-left: -6px;
+             left: var(--pw, round(calc(100vw / 3), 1px)); margin-left: -6px;
              cursor: ew-resize; display: none; touch-action: none; }
   body.panel-open #resizer { display: block; }
-  /* ribbed grip: three vertical lines running the whole edge so it reads as a draggable seam */
+  /* ribbed grip: two vertical lines running the whole edge so it reads as a draggable seam */
   #resizer { --rib: #8889; }
   #resizer:hover, body.resizing #resizer { --rib: #06c; }
+  /* integer-pixel stops (1px lines / 1px gaps) so the lines land on the pixel grid evenly */
   #resizer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right,
-      transparent 0 1.25px, var(--rib) 1.25px 2.75px, transparent 2.75px 5.25px,
-      var(--rib) 5.25px 6.75px, transparent 6.75px 9.25px, var(--rib) 9.25px 10.75px,
-      transparent 10.75px 12px); }
+      transparent 0 5px, var(--rib) 5px 6px, transparent 6px 7px,
+      var(--rib) 7px 8px, transparent 8px 12px); }
   body.resizing { cursor: ew-resize; user-select: none; }
   body.resizing #panel, body.resizing main,
   body.no-anim #panel, body.no-anim main { transition: none; }
 
   @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
     main { transition: margin-left .28s ease; }
-    body.panel-open main { margin-left: var(--pw, calc(100vw / 3)); }
+    body.panel-open main { margin-left: var(--pw, round(calc(100vw / 3), 1px)); }
   }
   @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen, no resize */
     #panel { width: 100vw; }

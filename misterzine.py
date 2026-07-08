@@ -184,6 +184,10 @@ CREATE TABLE IF NOT EXISTS jt_cores (
 CREATE TABLE IF NOT EXISTS coinop_releases (
     title TEXT PRIMARY KEY, release_date TEXT, commit_date TEXT
 );
+CREATE TABLE IF NOT EXISTS core_files (
+    source_id TEXT, path TEXT, rbf TEXT, build_date TEXT, hash TEXT, changed TEXT,
+    PRIMARY KEY (source_id, path)
+);
 CREATE TABLE IF NOT EXISTS events (
     ts TEXT, source_id TEXT, path TEXT, title TEXT, system TEXT,
     event_type TEXT, hash TEXT
@@ -381,6 +385,7 @@ def cmd_snapshot(args):
 
         # upsert catalog rows for everything currently present
         upsert_catalog(con, source["id"], files, ts_iso, seed)
+        upsert_core_files(con, source["id"], files, ts_iso)
 
         # A core rebuild renames its rbf (PDP1_20190101.rbf -> PDP1_20260702.rbf),
         # which the diff sees as new+removed and upsert_catalog as a brand-new row
@@ -461,6 +466,42 @@ def upsert_catalog(con, source_id, files, ts_iso, seed):
                 (meta.get("hash"), meta.get("size"), system, kind, title, ts_iso,
                  changed, ts_iso, source_id, path),
             )
+
+
+def upsert_core_files(con, source_id, files, ts_iso):
+    """Track the _Arcade/cores/*.rbf files (classify() marks them 'support',
+    so they never reach the catalog). Their date-suffixed filenames carry the
+    shipped build date — what update_all actually delivers — which the export
+    joins onto arcade rows via each MRA's rbf. Jotego ships undated rbfs
+    (jt1942.rbf); record when a file's hash changes anyway, but NOT as a
+    column signal — every Jotego release wave rebuilds all ~74 binaries
+    bit-differently, so `changed` marks "a release wave landed" (useful for a
+    future feed), not "this core changed". The table mirrors the current db;
+    removed/renamed paths are pruned (a rebuild renames the dated file, and
+    the new row carries the new date)."""
+    seen = set()
+    for path, meta in files.items():
+        low = path.replace("\\", "/").lower()
+        if not (low.startswith("_arcade/cores/") and low.endswith(".rbf")):
+            continue
+        seen.add(path)
+        stem = title_from_path(path)
+        row = con.execute(
+            "SELECT hash FROM core_files WHERE source_id=? AND path=?",
+            (source_id, path)).fetchone()
+        if row is None:
+            con.execute(
+                "INSERT INTO core_files(source_id,path,rbf,build_date,hash,changed) VALUES(?,?,?,?,?,?)",
+                (source_id, path, core_name(stem).lower(), core_build_date(stem),
+                 meta.get("hash"), None))
+        elif row["hash"] != meta.get("hash"):
+            con.execute(
+                "UPDATE core_files SET hash=?, changed=? WHERE source_id=? AND path=?",
+                (meta.get("hash"), ts_iso, source_id, path))
+    stale = [r["path"] for r in con.execute(
+        "SELECT path FROM core_files WHERE source_id=?", (source_id,)) if r["path"] not in seen]
+    con.executemany("DELETE FROM core_files WHERE source_id=? AND path=?",
+                    [(source_id, p) for p in stale])
 
 
 # --- command: repos (retrospective release dates) -------------------------
@@ -2082,7 +2123,8 @@ def _dat_field(setname, dat, field):
 
 
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
-             repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None):
+             repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
+             core_files=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -2135,10 +2177,30 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         year = CORE_YEAR.get(core_name(r["title"]), "")
     if not year and system == "arcade":
         year = arcade_year(sn, title) or _dat_field(sn, arcade_meta, "year")
-    # the core's latest commit date (its most recent update). `date` above is the
-    # MiSTer *debut* (first commit); this is the newest build. Shown in its own
-    # sortable column so a years-old debut date doesn't imply the core is stale.
-    updated = (r["last_update"] or "")[:10] if "last_update" in r.keys() else ""
+    # Last Updated = the newest *shipped* build (what update_all delivers), not
+    # repo activity: non-arcade cores carry it in the rbf filename's _YYYYMMDD
+    # suffix, and arcade rows get their core rbf's filename date (harvested
+    # from the dbs' _Arcade/cores/ entries; own source first — see the lookup
+    # builder in cmd_export_web). An MRA content update also ships (dip/ROM
+    # fixes update_all pulls), so it can bump the date too. The repo's latest
+    # commit — the old meaning of this column — moves to `act` (detail-panel
+    # "Latest commit"): commits land before builds ship, so it was recency-
+    # inflating the sort. Rows with no shipped signal fall back to the commit
+    # date rather than going blank (Jotego's undated rbfs, where the jtcores
+    # per-folder commit date is the best per-core signal that exists;
+    # NeoGeoPocket's undated filename).
+    commit_d = (r["last_update"] or "")[:10] if "last_update" in r.keys() else ""
+    if system == "arcade":
+        srcs = (core_files or {}).get(core.lower(), {})
+        updated = srcs.get(r["source_id"]) or max(srcs.values(), default="")
+        # an MRA hash change after ingest is a shipped update to this title
+        # (equal first_seen/last_changed just means "never touched since seed")
+        fs, lc = r["first_seen"] or "", r["last_changed"] or ""
+        if lc and lc > fs:
+            updated = max(updated, lc[:10])
+        updated = updated or commit_d
+    else:
+        updated = core_build_date(r["title"]) or commit_d
     repo = _repo_for(r, core, repo_maps or {})
     row = {
         "title": title,
@@ -2154,6 +2216,9 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # updated == date just means "never touched since debut" — still worth a cell
     if updated:
         row["updated"] = updated
+    # repo activity (latest commit) — panel-only, omitted when it adds nothing
+    if commit_d and commit_d != updated:
+        row["act"] = commit_d
     if repo:
         row["repo"] = repo
     # system rows only: arcade rows share rbfs with these (System E games run on
@@ -2271,6 +2336,21 @@ def cmd_export_web(args):
         "arcade": {(c or "").lower().replace("arcade-", "", 1): repo
                    for repo, c in con.execute("SELECT repo, core FROM arcade_repos")},
     }
+    # shipped-build dates for arcade cores, harvested from the dbs'
+    # _Arcade/cores/ entries at snapshot time (see upsert_core_files). Keyed
+    # rbf -> {source_id: date}: a row prefers its own source's file (that's the
+    # one its update_all download comes from), falling back to the newest
+    # across sources only when its own db ships none — sources CAN reuse an
+    # rbf name for different builds. The hash-`changed` stamp is deliberately
+    # NOT read here: every Jotego release wave rebuilds all ~74 binaries
+    # bit-differently (verified across snapshots), so it would mass-bump every
+    # Jotego row to the wave date; those rows keep their per-folder jtcores
+    # commit date instead.
+    core_files = {}
+    for r in con.execute("SELECT source_id, rbf, build_date FROM core_files WHERE build_date IS NOT NULL"):
+        cur = core_files.setdefault(r["rbf"], {})
+        if r["build_date"] > cur.get(r["source_id"], ""):
+            cur[r["source_id"]] = r["build_date"]
     con.close()
     # Drop arcade region/revision/bootleg variants (MiSTer files them under
     # _Arcade/_alternatives/); the site shows only the mainline title per game.
@@ -2304,7 +2384,7 @@ def cmd_export_web(args):
             b = _arcade_base(r["title"])
             arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
-                     arcade_mad, dat_desc_index, arcade_specs) for r in rows]
+                     arcade_mad, dat_desc_index, arcade_specs, core_files) for r in rows]
     # Human-ideal arcade titles (colons, punctuation, one name per game) from
     # the MAME descs. Must run AFTER _web_row — the setname/genre/screenshot
     # joins above all key on the raw MRA-derived title.

@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
+- **Last Updated now means "latest shipped build"**, the date of the file update_all actually downloads (from the core's dated filename in the distribution, e.g. `Atari800_20260603.rbf`), instead of the core repo's latest commit. Commits often land before (or without) a shipped build, so actively-developed cores looked fresher than what users can install. The commit date isn't gone: the detail panel now shows three dates: MiSTer debut, Latest update (shipped), and Latest commit (repo activity, shown when it differs). Arcade rows also count a changed MRA file as an update, and about 100 Sega System E titles gained an update date they never had.
 - The table now opens sorted by **Last Updated** (most recently active cores first) instead of MiSTer Debut; rows sharing an update date sort alphabetically instead of arbitrarily.
 - The sorted column's header is now highlighted in the accent color, so the current sort is obvious at a glance (previously just a small arrow).
 - The search box turns accent-tinted while a search is active, making it clear the list is filtered, especially after type-anywhere searching.

@@ -718,7 +718,10 @@ function detailHTML(d) {
   specRow('Special controls', 'spc');
   specRow('Screen flip', 'flip');
   rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build; debut unknown)')]);
+  // 'Latest update' = newest shipped build (what update_all delivers);
+  // 'Latest commit' = repo activity, which can run ahead of a shipped build
   if (d.updated) rows.push(['Latest update', d.updated]);
+  if (d.act) rows.push(['Latest commit', d.act]);
   // show the repo slug (jtcores deep links keep the full path in the href only)
   if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
     esc(d.repo.split('/').slice(0, 2).join('/')) + '<span class="ext">↗</span></a>', true]);

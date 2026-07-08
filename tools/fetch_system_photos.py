@@ -303,6 +303,13 @@ def publish(im, core):
     """Hard 1-bit alpha + DB16 Floyd-Steinberg quantize -> docs/images/systems."""
     im = im.convert('RGBA')
     alpha = im.getchannel('A').point(lambda v: 255 if v > 128 else 0)
+    # trim transparent padding (some sources center a small subject in a large
+    # canvas, which wastes panel space) — crop to the alpha bbox + 2px margin
+    bbox = alpha.getbbox()
+    if bbox:
+        bbox = (max(0, bbox[0] - 2), max(0, bbox[1] - 2),
+                min(im.width, bbox[2] + 2), min(im.height, bbox[3] + 2))
+        im, alpha = im.crop(bbox), alpha.crop(bbox)
     pal = Image.new('P', (1, 1))
     pal.putpalette([c for rgb in DB16 for c in rgb] + [0] * (768 - 3 * len(DB16)))
     q = im.convert('RGB').quantize(palette=pal,

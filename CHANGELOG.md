@@ -6,7 +6,7 @@ User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.githu
 - **RSS feeds**: subscribe to daily-tracked changes via three feeds (all changes / new cores & games only / updates only).
   <details><summary>more</summary>
 
-  Click the new "RSS" link in the header for URLs to paste into your reader, or just paste the page URL (readers autodiscover the feeds). Items carry the core/game name, genre, year, a screenshot where we have one, and link to the core's GitHub repo.
+  Click the new "RSS" link in the header for URLs to paste into your reader, or just paste the page URL (readers autodiscover the feeds). Items carry the core/game name, genre, year, a screenshot where we have one, and link straight to the core's GitHub commit history (the release commit sits at the top, one click saved).
   </details>
 - **Last Updated now means "latest shipped build"**: the date of the file update_all actually downloads, instead of the core repo's latest commit.
   <details><summary>more</summary>

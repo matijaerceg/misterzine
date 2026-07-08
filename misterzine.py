@@ -2522,8 +2522,19 @@ def _write_feeds(outdir):
             label = "New" if etype == "new" else "Updated"
             base = row.get("base", "")
             kind = base if base == "Arcade" else f"{base} core"
-            link = (f"https://github.com/{row['repo']}" if row.get("repo")
-                    else SITE_URL + "?ref=rss")
+            # link to the repo's commit HISTORY, not its front page: the release
+            # commit sits at the top with its message and date (one click saved;
+            # an exact-commit link isn't resolvable anyway — Distribution history
+            # is squashed and rbf diffs are binary). Jotego rows carry a
+            # /tree/master/cores/<x> path; GitHub's path-scoped history keeps
+            # the same shape as /commits/master/cores/<x>.
+            repo = row.get("repo") or ""
+            if "/tree/" in repo:
+                link = "https://github.com/" + repo.replace("/tree/", "/commits/", 1)
+            elif repo:
+                link = f"https://github.com/{repo}/commits"
+            else:
+                link = SITE_URL + "?ref=rss"
             paras = []
             bits = [b for b in (row.get("genre"), row.get("year"), row.get("manufacturer")) if b]
             if bits:

@@ -131,8 +131,10 @@ then `jtcores` and `genre`.)
   reads `Arcade, <genre>` for arcade titles and `Console core` / `Computer core` / `Other core`
   for cores (a retired core reads `… core (deprecated)`). The **MiSTer Debut** column is the
   MiSTer debut where known, otherwise the core's latest build date (`_YYYYMMDD` suffix, greyed);
-  the **Last Updated** column is the core repo's newest commit, refreshed daily by the CI's
-  incremental repo crawls. Console and computer cores carry their hardware maker
+  the **Last Updated** column is the newest *shipped* build (the dated file `update_all`
+  delivers — filename suffix for cores, the referenced core rbf's date for arcade rows); the
+  repo's newest commit shows separately in the detail panel as "Latest commit". Console and
+  computer cores carry their hardware maker
   (Nintendo/Sega/Commodore/Sinclair/…) from the `CONSOLE_MANUFACTURER` / `COMPUTER_MANUFACTURER`
   maps, and the original hardware's release year (column **Original Year**) from the `CORE_YEAR`
   map (obscure/DIY makers and years web-verified). Every console/computer core has a year; a few
@@ -141,6 +143,12 @@ then `jtcores` and `genre`.)
 
 The retired **Sega Genesis** core (replaced by MegaDrive — same console) is no longer in any DB,
 so it's injected for the record via `EXTRA_WEB_ROWS`, dated from its archived repo.
+
+**RSS feeds** (generated from the `events` table by `export-web`, last 30 days / 100 items,
+autodiscoverable from the page or via the header's "RSS" link):
+- `docs/releases/feed.xml` — all changes (new + updated)
+- `docs/releases/feed-new.xml` — new cores & games only
+- `docs/releases/feed-updates.xml` — shipped updates only
 
 Genre comes from MAME's **catver.ini** (fetched at build time, cached under `data/cache/`),
 joined to each title by its MRA `<setname>`. ~708 arcade titles are genred; the rest

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MiSTer FPGA Cores &amp; Arcade Games Tracker - MiSTerZine</title>
 <meta name="description" content="A searchable, sortable tracker of every public MiSTer core (console, computer and arcade) with specs, release dates, arcade screenshots and links to each core's GitHub. Updated daily.">
+<link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: All changes" href="feed.xml">
+<link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: New cores &amp; games" href="feed-new.xml">
+<link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: Updates only" href="feed-updates.xml">
 <script>/* apply saved theme before first paint to avoid a flash */
   try { var t = localStorage.getItem('mz-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <style>
@@ -160,10 +163,22 @@
   .rom { font-family: ui-monospace, Consolas, monospace; font-size: .95em; }
   td.rom { white-space: nowrap; }
   /* click-to-copy affordance next to copyable panel values */
-  #panel .copy { font: inherit; font-size: .85em; line-height: 1; margin-left: .35rem; padding: 0 .25rem;
+  #panel .copy, .rsspop .copy { font: inherit; font-size: .85em; line-height: 1; margin-left: .35rem; padding: 0 .25rem;
     border: none; background: none; color: #888; cursor: pointer; }
-  #panel .copy:hover { color: inherit; }
-  #panel .copy.ok { color: #2a2; }
+  #panel .copy:hover, .rsspop .copy:hover { color: inherit; }
+  #panel .copy.ok, .rsspop .copy.ok { color: #2a2; }
+  /* RSS popover: feed chooser opened from the meta line's "RSS" link; styled
+     after the Columns dropdown menu. Fixed positioning is fine — the page
+     itself never scrolls (app shell) */
+  .rsspop { position: fixed; z-index: 40; background: Canvas; border: 1px solid #8884;
+    border-radius: 6px; padding: .6rem .8rem; box-shadow: 0 4px 16px #0004;
+    font-size: .8rem; max-width: min(30rem, calc(100vw - 2rem)); }
+  .rsspop p { margin: 0 0 .45rem; color: #888; }
+  .rsspop .feedrow { display: flex; gap: .5rem; align-items: baseline; margin: .3rem 0; }
+  .rsspop .feedrow b { font-weight: 600; white-space: nowrap; }
+  .rsspop code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    direction: rtl; flex: 1; color: #888; }  /* rtl ellipsis keeps the distinctive tail (…feed-new.xml) visible */
+  @media (max-width: 480px) { .rsspop { left: 1rem !important; right: 1rem; } }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
   #panel .report { color: #888; font-size: .8rem; margin: 1.25rem 0 0; }
   #panel .report a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
@@ -899,6 +914,7 @@ function navigate(dir) {  // dir: +1 down, -1 up
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
+    if (closeRss()) return;  // an open RSS popover absorbs the Esc first
     // an active search filter absorbs the first Esc (clear it, keep the panel);
     // a second Esc — filter now empty — closes the panel as before
     if (document.getElementById('q').value) {
@@ -1039,10 +1055,53 @@ fetch('./meta.json').then(r => r.json()).then(m => {
   });
   el.innerHTML = 'Last updated: ' + esc(s) +
     ' · <span class="note" title="Patreon early-access (beta) cores are listed once they get a public release.">Public cores only</span>' +
+    ' · <a href="feed.xml" id="rss-link">RSS</a>' +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats</a>' +
     ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)</a>' +
     ' · <a href="https://github.com/matijaerceg/misterzine/issues" target="_blank" rel="noopener">Report a Problem</a>';
 }).catch(() => {});
+
+// --- RSS popover: the meta-line "RSS" link opens a small feed chooser ---
+// (readers also autodiscover all three feeds from the <link rel=alternate>
+// tags in <head>). Copy buttons because clicking a feed URL just dumps raw
+// XML at people; the href on the link itself stays for middle-click/no-JS.
+const FEED_LIST = [
+  ['All changes', 'feed.xml'],
+  ['New cores & games', 'feed-new.xml'],
+  ['Updates only', 'feed-updates.xml'],
+];
+let rsspop = null;
+function closeRss() { if (rsspop) { rsspop.remove(); rsspop = null; return true; } return false; }
+document.addEventListener('click', e => {
+  const cp = e.target.closest('.rsspop .copy');
+  if (cp) {  // copy the URL, flash confirmation, keep the popover open
+    navigator.clipboard.writeText(cp.dataset.copy).then(() => {
+      cp.classList.add('ok'); cp.textContent = '✓';
+      setTimeout(() => { cp.classList.remove('ok'); cp.textContent = '⧉'; }, 1000);
+    });
+    return;
+  }
+  const a = e.target.closest('#rss-link');
+  if (!a) {
+    if (rsspop && !e.target.closest('.rsspop')) closeRss();  // click outside closes
+    return;
+  }
+  e.preventDefault();
+  if (closeRss()) return;  // second click on the link toggles it shut
+  rsspop = document.createElement('div');
+  rsspop.className = 'rsspop';
+  rsspop.innerHTML = '<p>RSS feeds: paste a URL into your reader (most readers also ' +
+    'find these if you paste the page URL itself).</p>' +
+    FEED_LIST.map(([name, f]) => {
+      const url = new URL(f, location.href).href;
+      return '<div class="feedrow"><b>' + esc(name) + '</b><code>' + esc(url) + '</code>' +
+        copyBtn(url) + '</div>';
+    }).join('');
+  const r = a.getBoundingClientRect();
+  rsspop.style.left = Math.max(8, Math.min(r.left, innerWidth - 500)) + 'px';
+  rsspop.style.top = (r.bottom + 6) + 'px';
+  document.body.appendChild(rsspop);
+});
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

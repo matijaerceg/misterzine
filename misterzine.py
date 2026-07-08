@@ -21,6 +21,7 @@ Stdlib only. Uses the `gh` CLI just to borrow an auth token for the GitHub API.
 
 import argparse
 import datetime as dt
+import email.utils
 import hashlib
 import json
 import os
@@ -2402,6 +2403,7 @@ def cmd_export_web(args):
     (DOCSDIR / "index.html").write_text(ROOT_REDIRECT_HTML, encoding="utf-8")
     _backfill_libretro_images(data)  # give brand-new arcade titles a libretro shot
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
+    _write_feeds(outdir)  # RSS feeds from the events table (needs final data.json)
     _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
     log(f"web export written to {outdir}")
     log(f"  data.json: {len(data)} rows")
@@ -2419,6 +2421,135 @@ def cmd_export_web(args):
     n_prov = sum(1 for d in data if d.get("prov"))
     log(f"  arcade with rotation: {n_rot}/{by_base.get('Arcade', 0)} "
         f"({n_prov} rows carry provisional specs)")
+
+
+SITE_ROOT = "https://matijaerceg.github.io/misterzine/"
+SITE_URL = SITE_ROOT + "releases/"
+
+# (filename, channel-name suffix, event types included, channel description)
+FEEDS = [
+    ("feed.xml", "All changes",
+     ("new", "updated"),
+     "New cores/games and shipped updates in the public MiSTer databases, from the daily "
+     "tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only)."),
+    ("feed-new.xml", "New cores & games",
+     ("new",),
+     "Cores and arcade games newly added to the public MiSTer databases. "
+     "See feed.xml for updates too."),
+    ("feed-updates.xml", "Updates",
+     ("updated",),
+     "Shipped updates to existing cores and arcade games in the public MiSTer databases. "
+     "See feed.xml for new releases too."),
+]
+
+
+def _rfc822(iso):
+    return email.utils.format_datetime(
+        dt.datetime.fromisoformat((iso or "").replace("Z", "+00:00")))
+
+
+def _write_feeds(outdir):
+    """Write RSS 2.0 feeds to releases/ from the events table (the daily db
+    hash-diffs — i.e. things update_all actually delivers, not repo commits).
+
+    Deliberate properties:
+    - DETERMINISTIC bytes: the item set, order, and lastBuildDate all derive
+      from event data, never from build time — a no-news rerun emits identical
+      files, so the CI commit gate stays quiet.
+    - Site-visible rows only: an event that doesn't match a served data.json
+      row (an _alternatives MRA, an excluded setname, a dropped 2P dup) makes
+      no item, so the feed can never leak what the site hides.
+    - Rename pairs collapse: a core rebuild shows as removed+new dated
+      filenames in one batch; the new-path event is reported as an update.
+      Plain 'removed' events make no items.
+    Runs AFTER the image re-tag so data.json rows carry img/img_slots."""
+    data = json.loads((outdir / "data.json").read_text(encoding="utf-8"))
+    by_title = {}   # arcade rows: raw MRA title (mt when humanized) + display title
+    by_core = {}    # non-arcade rows: core token
+    for d in data:
+        if d.get("base") == "Arcade":
+            by_title.setdefault(d.get("mt") or d["title"], d)
+            by_title.setdefault(d["title"], d)
+        elif d.get("core"):
+            by_core.setdefault(d["core"].lower(), d)
+    con = connect()
+    events = con.execute(
+        "SELECT ts, source_id, path, title, system, event_type FROM events "
+        "WHERE event_type IN ('new','updated','removed') ORDER BY ts DESC, path LIMIT 3000"
+    ).fetchall()
+    con.close()
+    if not events:
+        return
+    renamed = set()
+    for e in events:
+        if e["event_type"] == "removed" and classify(e["path"])[1] == "core":
+            renamed.add((e["ts"], e["source_id"], e["system"], core_name(e["title"])))
+    cutoff = (dt.datetime.fromisoformat(events[0]["ts"]) - dt.timedelta(days=30)).isoformat()
+    items = []
+    for e in events:
+        if e["ts"] < cutoff:
+            break
+        if e["event_type"] == "removed":
+            continue
+        # arcade: the event title is the raw MRA stem with region qualifiers
+        # ("Dig Dug (Rev 2)"); site rows show the stripped/humanized base, so
+        # try raw (kept-qualifier collision rows), then the stripped base
+        row = (by_title.get(e["title"]) or by_title.get(_arcade_base(e["title"]))
+               if e["system"] == "arcade"
+               else by_core.get(core_name(e["title"]).lower()))
+        if row is None:
+            continue
+        etype = e["event_type"]
+        if etype == "new" and (e["ts"], e["source_id"], e["system"], core_name(e["title"])) in renamed:
+            etype = "updated"
+        items.append((etype, e, row))
+    from xml.sax.saxutils import escape
+    for fname, name, types, chan_desc in FEEDS:
+        # cap per feed, after filtering — a burst of updates must not starve
+        # feed-new.xml of older new-title items still inside the window
+        sel = [it for it in items if it[0] in types][:100]
+        xml = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+               '<channel>',
+               f'<title>MiSTer FPGA Core &amp; Arcade Tracker: {escape(name)}</title>',
+               f'<link>{escape(SITE_URL + "?ref=rss")}</link>',
+               f'<description>{escape(chan_desc)}</description>',
+               '<language>en</language>',
+               f'<atom:link rel="self" type="application/rss+xml" href="{escape(SITE_URL + fname)}"/>']
+        if sel:
+            xml.append(f'<lastBuildDate>{escape(_rfc822(sel[0][1]["ts"]))}</lastBuildDate>')
+        for etype, e, row in sel:
+            label = "New" if etype == "new" else "Updated"
+            base = row.get("base", "")
+            kind = base if base == "Arcade" else f"{base} core"
+            link = (f"https://github.com/{row['repo']}" if row.get("repo")
+                    else SITE_URL + "?ref=rss")
+            paras = []
+            bits = [b for b in (row.get("genre"), row.get("year"), row.get("manufacturer")) if b]
+            if bits:
+                paras.append(" / ".join(bits))
+            if base == "Arcade" and row.get("core"):
+                paras.append(f"Core: {row['core']}")
+            paras.append(f"{label} in the public MiSTer databases on {e['ts'][:10]} "
+                         f"(source: {e['source_id']}).")
+            html = "".join(f"<p>{escape(p)}</p>" for p in paras)
+            if row.get("img") and row.get("img_slots"):
+                slot, img = row["img_slots"][0], urllib.parse.quote(row["img"])
+                html = f'<p><img src="{SITE_ROOT}images/{slot}/{img}.png" alt=""/></p>' + html
+            ititle = f"[{label}] {row['title']} ({kind})"
+            guid = e["source_id"] + ":" + e["path"] + ":" + e["ts"]
+            xml += ['<item>',
+                    f'<title>{escape(ititle)}</title>',
+                    f'<link>{escape(link)}</link>',
+                    f'<guid isPermaLink="false">{escape(guid)}</guid>',
+                    f'<pubDate>{escape(_rfc822(e["ts"]))}</pubDate>',
+                    f'<category>{escape(label.lower())}</category>',
+                    f'<category>{escape(kind)}</category>',
+                    f'<description>{escape(html)}</description>',
+                    '</item>']
+        xml += ['</channel>', '</rss>', '']
+        (outdir / fname).write_text("\n".join(xml), encoding="utf-8")
+        log(f"  {fname}: {len(sel)} items")
 
 
 def _write_site_meta(outdir):

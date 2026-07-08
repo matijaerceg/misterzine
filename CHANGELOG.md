@@ -3,28 +3,64 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
-- **RSS feeds**: subscribe to daily-tracked changes via three feeds (all changes / new cores & games only / updates only). Click the new "RSS" link in the header for URLs to paste into your reader, or just paste the page URL (readers autodiscover the feeds). Items carry the core/game name, genre, year, a screenshot where we have one, and link to the core's GitHub repo.
-- **Last Updated now means "latest shipped build"**, the date of the file update_all actually downloads (from the core's dated filename in the distribution, e.g. `Atari800_20260603.rbf`), instead of the core repo's latest commit. Commits often land before (or without) a shipped build, so actively-developed cores looked fresher than what users can install. The commit date isn't gone: the detail panel now shows three dates: MiSTer debut, Latest update (shipped), and Latest commit (repo activity, shown when it differs). Arcade rows also count a changed MRA file as an update, and about 100 Sega System E titles gained an update date they never had.
+- **RSS feeds**: subscribe to daily-tracked changes via three feeds (all changes / new cores & games only / updates only).
+  <details><summary>more</summary>
+
+  Click the new "RSS" link in the header for URLs to paste into your reader, or just paste the page URL (readers autodiscover the feeds). Items carry the core/game name, genre, year, a screenshot where we have one, and link to the core's GitHub repo.
+  </details>
+- **Last Updated now means "latest shipped build"**: the date of the file update_all actually downloads, instead of the core repo's latest commit.
+  <details><summary>more</summary>
+
+  The date comes from the core's dated filename in the distribution, e.g. `Atari800_20260603.rbf`. Commits often land before (or without) a shipped build, so actively-developed cores looked fresher than what users can install. The commit date isn't gone: the detail panel now shows three dates: MiSTer debut, Latest update (shipped), and Latest commit (repo activity, shown when it differs). Arcade rows also count a changed MRA file as an update, and about 100 Sega System E titles gained an update date they never had.
+  </details>
 - The table now opens sorted by **Last Updated** (most recently active cores first) instead of MiSTer Debut; rows sharing an update date sort alphabetically instead of arbitrarily.
 - The sorted column's header is now highlighted in the accent color, so the current sort is obvious at a glance (previously just a small arrow).
 - The search box turns accent-tinted while a search is active, making it clear the list is filtered, especially after type-anywhere searching.
 - New "Public cores only" note in the header meta line (hover it for details): Patreon early-access beta cores are listed once they get a public release.
 - Site renamed to **"MiSTer FPGA Core & Arcade Tracker"**: "Tracker" better reflects what the site does (daily-updated release and change tracking) than "Index".
-- The 56 Coin-Op Collection games now show their real FPGA core in the Core column (Jaleco Mega System 1, Nichibutsu Armed F, SNK 68000, Toaplan Zero Wing HW, …) instead of the generic "Distribution-MiSTerFPGA" repo label. Their MRA files are now parsed like the other sources', which also corrected a few years/manufacturers and setnames along the way.
+- The 56 Coin-Op Collection games now show their real FPGA core in the Core column instead of the generic "Distribution-MiSTerFPGA" repo label.
+  <details><summary>more</summary>
+
+  Real cores like Jaleco Mega System 1, Nichibutsu Armed F, SNK 68000, Toaplan Zero Wing HW, and more. Their MRA files are now parsed like the other sources', which also corrected a few years/manufacturers and setnames along the way.
+  </details>
 
 ## 2026-07-07
-- Arcade titles are now written the way humans write them, derived from the MAME database: subtitles get their colons back ("Street Fighter II: The World Warrior", "Robotron: 2084"), doubled-up alternate names collapse to the familiar one ("Pac-Man - Puck Man" → "Pac-Man", "Rush'n Attack - Green Beret" → "Rush'n Attack"), and punctuation/capitalisation follow the real marquee ("Q*bert", "SWAT", "Satan of Saturn"). 121 titles cleaned up, and the discarded alternate names remain searchable.
-- Closing the detail panel now keeps the row highlighted as a "you were here" marker, handy for re-orienting after the fullscreen panel on mobile (previously the highlight was cleared, and any lingering tint was just a touch-hover accident).
+- Arcade titles are now written the way humans write them, derived from the MAME database (121 titles cleaned up).
+  <details><summary>more</summary>
+
+  Subtitles get their colons back ("Street Fighter II: The World Warrior", "Robotron: 2084"), doubled-up alternate names collapse to the familiar one ("Pac-Man - Puck Man" → "Pac-Man", "Rush'n Attack - Green Beret" → "Rush'n Attack"), and punctuation/capitalisation follow the real marquee ("Q*bert", "SWAT", "Satan of Saturn"). The discarded alternate names remain searchable.
+  </details>
+- Closing the detail panel now keeps the row highlighted as a "you were here" marker.
+  <details><summary>more</summary>
+
+  Handy for re-orienting after the fullscreen panel on mobile. Previously the highlight was cleared, and any lingering tint was just a touch-hover accident.
+  </details>
 - New "Report a problem" link in each detail panel that opens a GitHub issue prefilled with the entry's title/core/setname, plus a general "Report a Problem" link in the header next to the Changelog.
 - The Types and Columns dropdowns now have a one-click reset ("Show all" / "Reset to default") that also puts you back on track to receive any future default-column changes; the click-to-copy buttons in the detail panel lost their border box.
-- Console and computer rows now use proper human names instead of raw core filenames: Nintendo 64 (was N64), Game Boy, Master System, Mega Drive, PlayStation, Commodore 64, Acorn Archimedes, TI-99/4A, SAM Coupé, PDP-1, and ~80 more. The raw core name still shows (and is searchable) in the Core column, so "psx" or "n64" still find them.
+- Console and computer rows now use proper human names instead of raw core filenames (~90 renamed).
+  <details><summary>more</summary>
+
+  Nintendo 64 (was N64), Game Boy, Master System, Mega Drive, PlayStation, Commodore 64, Acorn Archimedes, TI-99/4A, SAM Coupé, PDP-1, and many more. The raw core name still shows (and is searchable) in the Core column, so "psx" or "n64" still find them.
+  </details>
 - The two Game & Watch cores are now distinguishable: "Game & Watch (GnW)" (pierco's 2020 core) and "Game & Watch (agg23)" (the 2026 core from the Analogue Pocket project).
 - Search now ignores accents ("sam coupe" finds SAM Coupé, "pokemon" finds Pokémon Mini).
-- The 2-player link-cable variants (Gameboy2P, GBA2P) no longer appear as separate rows; the Game Boy and GBA rows carry a note about them instead. GameGear2P is now titled "Game Gear" (it's the only standalone Game Gear core; the 1-player version lives inside the SMS core), with notes on both it and SMS explaining the relationship.
-- Fixed PDP-1 and Game of Life appearing twice: a core rebuild renames its file upstream, and the old entry was never retired. Renames are now detected and merged (keeping the original debut date).
+- The 2-player link-cable variants (Gameboy2P, GBA2P) no longer appear as separate rows; the Game Boy and GBA rows carry a note about them instead.
+  <details><summary>more</summary>
+
+  GameGear2P is now titled "Game Gear" (it's the only standalone Game Gear core; the 1-player version lives inside the SMS core), with notes on both it and SMS explaining the relationship.
+  </details>
+- Fixed PDP-1 and Game of Life appearing twice.
+  <details><summary>more</summary>
+
+  A core rebuild renames its file upstream, and the old entry was never retired. Renames are now detected and merged (keeping the original debut date).
+  </details>
 - The detail panel shows a new **Note** row for systems that have one.
 - The "deprecated" tag on the retired Genesis core moved from the Type column to sit next to its title.
-- Console and computer rows now show a photo of the actual hardware at the top of the detail panel: 115 systems, from the NES and C64 to obscurities like the Galaksija, EDSAC, and Compukit UK101, rendered in a deliberately lo-fi 16-color dithered style with a photo-credit link.
+- Console and computer rows now show a photo of the actual hardware at the top of the detail panel (115 systems).
+  <details><summary>more</summary>
+
+  From the NES and C64 to obscurities like the Galaksija, EDSAC, and Compukit UK101, rendered in a deliberately lo-fi 16-color dithered style with a photo-credit link.
+  </details>
 - Every row now opens the detail panel (type, dates, core, repo link, …), not just arcade titles with screenshots; the screen icon now specifically marks rows that have screenshots.
 - New opt-in **ROM Name** column showing each arcade title's MAME setname (searchable too), plus click-to-copy ROM name and core name in the detail panel.
 - The browser Back button (and swipe-back gesture) now closes the screenshot panel on mobile instead of leaving the site.

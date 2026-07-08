@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
+- The site got a face for sharing: an "MZ" favicon (browser tab icon) and a social preview card, so pasted links on Discord/forums show the logo and a grid of arcade screenshots instead of bare text.
 - **Every entry now has a shareable link** (e.g. releases/#dmnfrnt opens Demon Front's panel): row clicks update the URL, a new 🔗 button in the panel copies it, and on phones the Back gesture still closes the panel. RSS items now open the entry on the site, with the repo's commit history linked in the item body.
 - Every column header now explains itself on hover (what "MiSTer Debut" vs "Last Updated" vs "Original Year" actually mean).
 - A search with zero results now says "No matches" (naming the query and any active type filter) instead of showing a blank table.

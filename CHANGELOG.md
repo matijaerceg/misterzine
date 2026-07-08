@@ -4,7 +4,6 @@ User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.githu
 
 ## 2026-07-07
 - Closing the detail panel now keeps the row highlighted as a "you were here" marker — handy for re-orienting after the fullscreen panel on mobile (previously the highlight was cleared, and any lingering tint was just a touch-hover accident).
-- The panel's drag-to-resize bar now slides in and out together with the panel instead of popping into place.
 - New "Report a problem" link in each detail panel that opens a GitHub issue prefilled with the entry's title/core/setname, plus a general "Report a Problem" link in the header next to the Changelog.
 - The Types and Columns dropdowns now have a one-click reset ("Show all" / "Reset to default") that also puts you back on track to receive any future default-column changes; the click-to-copy buttons in the detail panel lost their border box.
 - Console and computer rows now use proper human names instead of raw core filenames — Nintendo 64 (was N64), Game Boy, Master System, Mega Drive, PlayStation, Commodore 64, Acorn Archimedes, TI-99/4A, SAM Coupé, PDP-1, and ~80 more. The raw core name still shows (and is searchable) in the Core column, so "psx" or "n64" still find them.

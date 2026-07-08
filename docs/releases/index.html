@@ -83,7 +83,7 @@
   .t-console  { --h: #3aa0ff; }
   .t-computer { --h: #2bbf6e; }
   .t-other    { --h: #b07cff; }
-  .type .dep { color: #888; font-size: .82em; margin-left: .35rem; }
+  td .dep { color: #888; font-size: .82em; margin-left: .35rem; }
   td.core { color: CanvasText; font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: color-mix(in srgb, #06c 60%, CanvasText); text-decoration: none; }
@@ -377,12 +377,12 @@ function typeLabel(d) {
 
 function typeBadge(d) {
   const cls = 't-' + (d.base || 'other').toLowerCase();
-  const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
-  return '<span class="badge ' + cls + '">' + esc(d.base) + '</span>' + dep;
+  return '<span class="badge ' + cls + '">' + esc(d.base) + '</span>';
 }
 
 function titleCell(d) {
-  return esc(d.title) + (hasShots(d) ? ' ' + DV_ICON : '');
+  const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
+  return esc(d.title) + (hasShots(d) ? ' ' + DV_ICON : '') + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }

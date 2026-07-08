@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-07
+- The "deprecated" tag on the retired Genesis core moved from the Type column to sit next to its title.
 - Console and computer rows now show a photo of the actual hardware at the top of the detail panel — 115 systems, from the NES and C64 to obscurities like the Galaksija, EDSAC, and Compukit UK101 — rendered in a deliberately lo-fi 16-color dithered style with a photo-credit link.
 - Every row now opens the detail panel (type, dates, core, repo link, …), not just arcade titles with screenshots; the screen icon now specifically marks rows that have screenshots.
 - New opt-in **ROM Name** column showing each arcade title's MAME setname (searchable too), plus click-to-copy ROM name and core name in the detail panel.

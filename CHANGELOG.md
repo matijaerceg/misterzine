@@ -3,6 +3,10 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
+- Every column header now explains itself on hover (what "MiSTer Debut" vs "Last Updated" vs "Original Year" actually mean).
+- A search with zero results now says "No matches" (naming the query and any active type filter) instead of showing a blank table.
+- Edge shadows hint that the table scrolls sideways: a fade on the right while more columns are off-screen, and a shadow under the Title column once scrolled.
+- Esc now closes an open Types/Columns dropdown before it clears the search.
 - **RSS feeds**: three feeds (all changes / new only / updates only) via the new "RSS" header link; readers also autodiscover them from the page URL.
 - **Last Updated now means "latest shipped build"** (the dated file update_all actually downloads) instead of the repo's latest commit, which often lands before or without a shipped build. The detail panel now shows all three dates: MiSTer debut, Latest update, Latest commit.
 - Table opens sorted by **Last Updated** instead of MiSTer Debut; date ties sort alphabetically.

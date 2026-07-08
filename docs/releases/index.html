@@ -82,8 +82,38 @@
      (the page never scrolls), so the sticky <th> anchor to it and an over-wide
      table scrolls inside the table region only. min-height:0 is load-bearing:
      without it the flex child refuses to shrink below its content height and
-     nothing scrolls. */
+     nothing scrolls — and it must hold on BOTH .tablezone and .tablewrap
+     (either level without it re-breaks the shrink chain). .tablezone exists
+     only to anchor the scroll-hint shadow overlays: the scroller itself can't
+     host them (absolute children would scroll along with the content). */
+  .tablezone { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
   .tablewrap { flex: 1 1 auto; min-height: 0; overflow: auto; }
+  /* horizontal scroll hints (classes toggled by syncScrollHints): a fade at the
+     right edge while more columns sit off-screen, and a shadow cast by the
+     sticky Title column once scrolled, so content visibly slides under it.
+     color-mix with CanvasText keeps both legible in light and dark themes. */
+  .tablezone::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 16px;
+    pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
+    background: linear-gradient(to left, color-mix(in srgb, CanvasText 20%, transparent), transparent); }
+  .tablezone.more-r::after { opacity: 1; }
+  /* the left shadow is one continuous overlay too (a per-cell box-shadow gets
+     sliced by the row borders); --titlew = the sticky Title column's right
+     edge, measured by syncScrollHints (it moves with panel/window resizes) */
+  .tablezone::before { content: ""; position: absolute; top: 0; bottom: 0; left: var(--titlew, 0px);
+    width: 12px; pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
+    background: linear-gradient(to right, color-mix(in srgb, CanvasText 20%, transparent), transparent); }
+  .tablezone.more-l::before { opacity: 1; }
+  /* "no matches" row: a single message cell replacing the row list. Undo the
+     row/cell chrome (sticky first cell, hover tint, pointer). The inner div
+     pins to the scrollport's left edge and caps at the viewport width, so the
+     centered message stays on-screen even when the table is wider than it. */
+  tr.nomatch, tr.nomatch td { cursor: default; }
+  tr.nomatch td { position: static; border-right: 0; }
+  tr.nomatch:hover td { background: none; }
+  tr.nomatch .msg { position: sticky; left: 0; max-width: calc(100vw - 2rem); text-align: center;
+                    color: #888; padding: 2.5rem .5rem; }
+  tr.nomatch .msg b { font-weight: 600; color: CanvasText; }
+  tr.nomatch .msg .esc { font-size: .85em; margin-top: .35rem; display: block; }
   table { min-width: 49rem; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
@@ -238,6 +268,8 @@
   @media print {
     html, body { height: auto; overflow: visible; }
     main { height: auto; display: block; }
+    .tablezone { display: block; }
+    .tablezone::after { display: none; }
     .tablewrap { overflow: visible; }
   }
 </style>
@@ -271,12 +303,14 @@
   <span class="count" id="count"></span>
 </div>
 </div>
+<div class="tablezone">
 <div class="tablewrap">
 <table>
   <colgroup id="cg"></colgroup>
   <thead><tr id="hrow"></tr></thead>
   <tbody id="rows"></tbody>
 </table>
+</div>
 </div>
 </main>
 <aside id="panel" hidden></aside>
@@ -464,6 +498,26 @@ const COLUMNS = [
   { k: 'spc',  label: 'Special Controls', w: 10, mw: 5, opt: true },
   { k: 'flip', label: 'Flip', w: 6, mw: 5, opt: true },
 ];
+// Header tooltips (title attributes on the <th>s, rendered by buildHeader).
+// Kept out of COLUMNS so the config rows above stay scannable. Touch devices
+// never see these; the detail panel spells out the date semantics there.
+const HEADER_TIPS = {
+  title: 'Game or system name. The monitor icon marks entries with screenshots.',
+  sn: 'MAME setname, the ROM identifier',
+  typesort: 'Arcade game, console core, computer core, or other',
+  genre: "Arcade genre, from MAME's catver.ini",
+  date: 'When this title first became publicly playable on MiSTer',
+  updated: 'Newest shipped build, what update_all installs',
+  year: 'Year the original game or hardware was released',
+  manufacturer: 'Original manufacturer',
+  core: 'The FPGA core that runs this title, linked to its GitHub repository',
+  rot: 'Monitor orientation of the original cabinet (MiSTer Arcade Database)',
+  res: 'Video signal type (MiSTer Arcade Database)',
+  plr: 'Number of players (MiSTer Arcade Database)',
+  ctl: 'Joystick and buttons (MiSTer Arcade Database)',
+  spc: 'Non-standard controls such as dials, trackballs or spinners (MiSTer Arcade Database)',
+  flip: 'Whether the game supports flipping the screen image (MiSTer Arcade Database)',
+};
 // Default renderer for the optional spec columns. Cells filled provisionally
 // from mame2003-plus (pending the curated Arcade Database) render grayed with a
 // tooltip; d.prov lists which keys on this row are provisional.
@@ -496,17 +550,50 @@ function buildHeader() {
   document.getElementById('hrow').innerHTML = cols.map(c =>
     '<th data-k="' + c.k + '"' + (c.k === sortKey
       ? ' aria-sort="' + (sortDir === 1 ? 'ascending' : 'descending') + '"' : '') +
+    (HEADER_TIPS[c.k] ? ' title="' + escA(HEADER_TIPS[c.k]) + '"' : '') +
     '>' + c.label + '</th>').join('');
   // each column contributes its mw to the table's width floor so cells don't
   // crush (the 5rem on the metadata columns keeps the nowrap date columns from
   // colliding with all 6 on); an over-wide table scrolls horizontally inside
   // .tablewrap, the page's only scroll container (the sticky <th> anchor to it)
   document.querySelector('table').style.minWidth = cols.reduce((s, c) => s + c.mw, 0) + 'rem';
+  syncScrollHints();  // toggling columns changes the table's scrollWidth
 }
+
+// Horizontal scroll hints: keep the .tablezone shadow classes in sync with the
+// scroll position. Re-checked on scroll, on any scroller resize (window,
+// panel open/close/drag — the ResizeObserver below catches them all), and
+// after column toggles (buildHeader above).
+function syncScrollHints() {
+  const w = document.querySelector('.tablewrap'), z = document.querySelector('.tablezone');
+  z.classList.toggle('more-l', w.scrollLeft > 0);
+  z.classList.toggle('more-r', w.scrollLeft + w.clientWidth < w.scrollWidth - 1);
+  // pin the left shadow to the sticky Title column's right edge (the column is
+  // percentage-sized, so the edge moves with every panel/window/column change)
+  const th = document.querySelector('#hrow th');
+  if (th) z.style.setProperty('--titlew',
+    (th.getBoundingClientRect().right - z.getBoundingClientRect().left) + 'px');
+}
+document.querySelector('.tablewrap').addEventListener('scroll', syncScrollHints, { passive: true });
+new ResizeObserver(syncScrollHints).observe(document.querySelector('.tablewrap'));
 
 function render() {
   const tb = document.getElementById('rows');
   const cols = activeColumns();
+  // zero results is never left as a silent blank table: name the query AND any
+  // active type filter (an invisible narrower is the sneaky way to get here)
+  if (!view.length && DATA.length) {
+    const q = document.getElementById('q').value.trim();
+    const partial = enabledTypes.size && enabledTypes.size < TYPES.length;
+    const types = partial ? TYPES.filter(t => enabledTypes.has(t)).join(', ') : '';
+    tb.innerHTML = '<tr class="nomatch"><td colspan="' + cols.length + '"><div class="msg">' +
+      'No matches' + (q ? ' for <b>"' + esc(q) + '"</b>' : '') +
+      (types ? ' in ' + esc(types) : '') +
+      (q && matchMedia('(hover: hover) and (pointer: fine)').matches
+        ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
+    document.getElementById('count').textContent = '0 of ' + DATA.length;
+    return;
+  }
   tb.innerHTML = view.map((d, i) =>
     '<tr' + (d === openRow ? ' class="open"' : '') + ' data-i="' + i + '">' +
     cols.map(c => c.cell(d)).join('') + '</tr>'
@@ -915,6 +1002,9 @@ function navigate(dir) {  // dir: +1 down, -1 up
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     if (closeRss()) return;  // an open RSS popover absorbs the Esc first
+    // an open Types/Columns dropdown is the next topmost thing — close it
+    const dd = document.querySelector('details.cols[open]');
+    if (dd) { dd.open = false; return; }
     // an active search filter absorbs the first Esc (clear it, keep the panel);
     // a second Esc — filter now empty — closes the panel as before
     if (document.getElementById('q').value) {

@@ -840,6 +840,12 @@ def join_core_repos_to_catalog(con):
 MRA_REPOS = [
     ("distribution_mister", "MiSTer-devel/Distribution_MiSTer", "main"),
     ("jtbindb", "jotego/jtcores_mister", "main"),
+    # Coin-Op keeps db.json.zip on the `db` branch but the MRAs live on
+    # `develop`; parsing them fills the rbf (Core column), setname, year and
+    # manufacturer for the ~57 Coin-Op rows that used to have none — the
+    # blank rbf was why their Core cell fell back to the repo-name label
+    # "Distribution-MiSTerFPGA".
+    ("coinop", "Coin-OpCollection/Distribution-MiSTerFPGA", "develop"),
 ]
 
 

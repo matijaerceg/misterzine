@@ -150,6 +150,9 @@
   #panel .copy:hover { color: inherit; }
   #panel .copy.ok { color: #2a2; }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
+  #panel .report { color: #888; font-size: .8rem; margin: 1.25rem 0 0; }
+  #panel .report a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  #panel .report a:hover { color: #06c; }
   /* empty state shown before any title is selected */
   #panel .body.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; gap: 1rem; }
   #panel .body.empty .close { position: absolute; top: .4rem; right: .6rem; float: none; }
@@ -172,8 +175,15 @@
   /* draggable edge: resize the panel / flick left to close (reflow mode only) */
   #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; width: 12px; z-index: 101;
              left: var(--pw, round(calc(100vw / 3), 1px)); margin-left: -6px;
-             cursor: ew-resize; display: none; touch-action: none; }
-  body.panel-open #resizer { display: block; }
+             cursor: ew-resize; display: none; touch-action: none;
+             /* ride the panel's edge: slide in/out with the same transition instead of
+                popping via display. Closed = pulled left by the panel width, so it sits
+                on the panel's (off-screen-adjacent) right edge; visibility flips only
+                after the slide-out so it can't be grabbed while hidden. */
+             transform: translateX(calc(-1 * var(--pw, round(calc(100vw / 3), 1px))));
+             visibility: hidden;
+             transition: transform .28s ease, visibility 0s .28s; }
+  body.panel-open #resizer { transform: none; visibility: visible; transition: transform .28s ease; }
   /* ribbed grip: two vertical lines running the whole edge so it reads as a draggable seam */
   #resizer { --rib: #8889; }
   #resizer:hover, body.resizing #resizer { --rib: #06c; }
@@ -183,15 +193,15 @@
       var(--rib) 7px 8px, transparent 8px 12px); }
   body.resizing { cursor: ew-resize; user-select: none; }
   body.resizing #panel, body.resizing main,
-  body.no-anim #panel, body.no-anim main { transition: none; }
+  body.no-anim #panel, body.no-anim main, body.no-anim #resizer { transition: none; }
 
   @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
     main { transition: margin-left .28s ease; }
+    #resizer { display: block; }  /* always rendered here; visibility/transform gate it */
     body.panel-open main { margin-left: var(--pw, round(calc(100vw / 3), 1px)); }
   }
   @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen, no resize */
     #panel { width: 100vw; }
-    body.panel-open #resizer { display: none; }
   }
   /* printing: undo the fixed-height app shell so the full row list paginates
      instead of clipping to one screen of the scroller */
@@ -703,6 +713,14 @@ function detailHTML(d) {
   // a row's third element marks the value as pre-built HTML (links); default is plain text
   const dl = '<dl>' + rows.map(([k, v, html]) => '<dt>' + esc(k) + '</dt><dd>' + (html ? v : esc(v)) + '</dd>').join('') + '</dl>';
   const prose = d.detail ? '<p class="detail">' + esc(d.detail) + '</p>' : '';
+  // prefilled GitHub issue: the report arrives already saying which row it's
+  // about (title/core/setname), so nobody has to describe "that one arcade game"
+  const issueURL = 'https://github.com/matijaerceg/misterzine/issues/new?title=' +
+    encodeURIComponent('[' + d.title + '] data problem') +
+    '&body=' + encodeURIComponent('Title: ' + d.title + '\nCore: ' + d.core +
+      (d.img ? '\nSetname: ' + d.img : '') + '\n\nWhat looks wrong:\n');
+  const report = '<p class="report">Something wrong with this entry? <a href="' + escA(issueURL) +
+    '" target="_blank" rel="noopener">Report a problem<span class="ext">↗</span></a></p>';
   // already-superwide screenshots (dual/triple-screen: Sagaia, Darius, …) → 8:3.
   // 2.4 sits below the dual-screen cluster (2.67+) but above wide single screens
   // like the PGM 448x224 games (2.0), which stay 4:3.
@@ -748,7 +766,7 @@ function detailHTML(d) {
   // .body scrolls; .hint is docked below it (built as a sibling, outside .body).
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') + '</h2>' +
-    sysphoto + shots + dl + prose + '</div>' + hint;
+    sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
 function openPanel(d) {
@@ -767,8 +785,9 @@ function openPanel(d) {
 
 function closePanel() {
   document.body.classList.remove('panel-open');
-  openRow = null;
-  markOpenRow();
+  // openRow is deliberately kept: the row stays highlighted after the panel
+  // closes as a "you were here" marker (re-orientation aid, esp. after the
+  // fullscreen overlay on mobile). Cleared only by opening another row.
   const onEnd = () => { panel.hidden = true; panel.removeEventListener('transitionend', onEnd); };
   panel.addEventListener('transitionend', onEnd);
   // consume the history entry that backed this panel (see pushPanelState), so a
@@ -984,8 +1003,9 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
 matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
   if (e.matches && openRow == null && document.body.classList.contains('panel-open')) closePanel();
   // a docked detail panel that just became a full-screen overlay needs its
-  // Back-to-close history entry too
-  else if (e.matches && openRow != null) pushPanelState();
+  // Back-to-close history entry too (openRow alone isn't enough — it now
+  // outlives the panel as the row-highlight marker, so check panel-open)
+  else if (e.matches && openRow != null && document.body.classList.contains('panel-open')) pushPanelState();
 });
 
 // "Last updated" stamp — meta.json.updated is bumped by export-web only when the
@@ -1001,7 +1021,8 @@ fetch('./meta.json').then(r => r.json()).then(m => {
   });
   el.innerHTML = 'Last updated: ' + esc(s) +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats</a>' +
-    ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)</a>';
+    ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)</a>' +
+    ' · <a href="https://github.com/matijaerceg/misterzine/issues" target="_blank" rel="noopener">Report a Problem</a>';
 }).catch(() => {});
 
 fetch('./data.json').then(r => r.json()).then(d => {

@@ -136,7 +136,8 @@ def update_data(manifest):
     by_title = {e["title"]: e for e in manifest}
     rows = json.load(open(DATA, encoding="utf-8"))
     for r in rows:
-        e = by_title.get(r.get("title"))
+        # humanized rows keep their raw MRA-derived title (the manifest key) in mt
+        e = by_title.get(r.get("mt") or r.get("title"))
         if not e or r.get("base") != "Arcade":
             continue
         key = e["setname"] if e["source"] == "psnaps" else slug(e["title"])

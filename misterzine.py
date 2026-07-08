@@ -1943,6 +1943,126 @@ def _arcade_base(title):
     return re.sub(r"\s*[\(\[].*$", "", title).strip()
 
 
+# Human-ideal display titles the MAME-description derivation below gets wrong,
+# keyed by setname. MAME's canonical name usually wins (it restores the colons,
+# punctuation and capitalisation that MRA filenames can't carry), but for these
+# sets its choice isn't the name people know, so pin it here.
+ARCADE_TITLES = {
+    "rallyx": "Rally-X",                   # marquee hyphen; DAT says "Rally X"
+    "nrallyx": "New Rally-X",
+    "kroozr": "Kozmik Krooz'r",            # DAT drops the apostrophe
+    "clubpacm": "Pac-Man Club",            # DAT spells it "Pacman Club"
+    "ctsttape": "DECO Test Tape",          # bare "Test Tape" loses all context
+    "nspiritj": "Ninja Spirit",            # Japan set; DAT names it "Saigo no Nindou"
+    "nomnlnd": "No Man's Land",            # DAT names it "Sengoku no Jieitai"
+    "warofbug": "War of the Bugs",         # "...or Monsterous Manouvers in a Mushroom Maze"
+    "znpwfv": "Zen Nippon Pro-Wrestling Featuring Virtua",  # DAT truncates "Pro-Wres"
+    "cburnrub": "Burnin' Rubber (DECO)",   # cassette version; plain name collides with brubber
+    "squash": "Squash (Gaelco 1992)",      # collides with Itisa's 1984 Squash; the MRA's
+                                           # qualifier is filename junk (ver + checksum)
+    "tetris": "Tetris (Sega System 16)",   # was "(Set 4, Japan, S16A) [FD1094 317-0093]" —
+                                           # set number + encryption-chip ID are filename junk
+    "tetrisse": "Tetris (Sega System E)",  # sibling of the above; hardware is the real difference
+    "darius2": "Darius II",                # was "(Japan, rev 1)"; the dual-screen row is the
+                                           # variant, so the single-screen one goes unqualified
+    "darius2d": "Darius II (Dual Screen)", # was "(Japan, dual screen, rev 2)"
+    "polyplay": "Poly-Play",               # both Poly-Plays share one DAT desc
+    "polyplay2": "Poly-Play 2",
+}
+
+
+def _strip_trailing_parens(s):
+    """Drop trailing (...) qualifier groups, tolerating nesting: MAME descs like
+    'Rompers (Japan, new version (Rev B))' defeat a [^)]* regex."""
+    s = s.strip()
+    while s.endswith(")"):
+        depth, i = 0, len(s) - 1
+        while i >= 0:
+            if s[i] == ")":
+                depth += 1
+            elif s[i] == "(":
+                depth -= 1
+                if depth == 0:
+                    break
+            i -= 1
+        if i < 0:
+            break
+        s = s[:i].strip()
+    return s
+
+
+def _ideal_arcade_title(raw, sn, arcade_meta):
+    """Human-ideal display title for an arcade row, derived from the MAME DAT
+    description (which carries the colons/punctuation/caps that MRA filenames
+    can't) with the raw MRA-derived name as tie-breaker and fallback.
+
+    Rules, in order: ARCADE_TITLES override; if MAME's bracketed alt name
+    ("Chuugokuryuu 2001 [Dragon World 2001]") IS our raw name, the raw
+    (Western) name wins; if the whole raw name matches the whole desc, use
+    MAME's styling (picking the first name of an "A / B" alt pair); if the
+    desc matches a non-first " - "-separated segment of the raw name, the MRA
+    crammed alt names together — keep the first (familiar) one; if it matches
+    only the first segment, the MRA carries a subtitle MAME lacks — keep raw;
+    otherwise MAME's canonical name wins outright. A "(Bootleg)" marker is
+    re-added when the raw name carried one, and any existing trailing
+    (qualifier) survives verbatim — it's there to disambiguate sibling rows."""
+    e = arcade_meta.get((sn or "").lower()) if sn else None
+    desc = (e or {}).get("desc") or ""
+    if sn in ARCADE_TITLES:
+        return ARCADE_TITLES[sn]  # verbatim: pinned titles carry their own qualifier
+    m = re.search(r"\s*[\(\[]", raw)
+    paren = raw[m.start():].strip() if m else ""
+    raw_base = (raw[:m.start()] if m else raw).strip()
+    if not desc:
+        return raw
+    else:
+        mame = _strip_trailing_parens(desc)
+        bracket = re.search(r"\s*\[([^\]]+)\]", mame)
+        if bracket and norm_key(bracket.group(1)) == norm_key(raw_base):
+            base = raw_base
+        else:
+            if bracket:
+                mame = mame.replace(bracket.group(0), "").strip()
+            first = _strip_trailing_parens(mame.split(" / ")[0]) if " / " in mame else mame
+            if norm_key(mame) == norm_key(raw_base):
+                base = first
+            else:
+                segs = [s for s in (x.strip() for x in re.split(r"\s*-\s+", raw_base)) if s]
+                hit = next((i for i, s in enumerate(segs)
+                            if norm_key(s) in (norm_key(mame), norm_key(first))), None)
+                if hit is not None and hit > 0:
+                    base = segs[0]
+                elif hit == 0 and len(segs) > 1:
+                    base = raw_base
+                else:
+                    base = first
+    if "bootleg" in raw_base.lower() and "bootleg" not in base.lower():
+        base += " (Bootleg)"
+    return (base + (" " + paren if paren else "")).strip()
+
+
+def _humanize_arcade_titles(data, arcade_meta):
+    """Swap every arcade row's title for its human-ideal form. The original
+    title moves to `mt` (only when it changed): it stays the join key for the
+    image manifest (tools/fetch_images.py matches manifest entries by it) and
+    doubles as a hidden search alias, so a discarded alt name ("Puck Man",
+    "Green Beret") still finds the row. A rename is skipped when it would
+    collide with another row's title — distinct rows must stay distinct."""
+    rows = [r for r in data if r.get("base") == "Arcade"]
+    proposed = {id(r): _ideal_arcade_title(r["title"], r.get("sn"), arcade_meta)
+                for r in rows}
+    counts = Counter(proposed.values())
+    n = 0
+    for r in rows:
+        new = proposed[id(r)]
+        if new == r["title"] or counts[new] > 1:
+            continue
+        r["mt"] = r["title"]
+        r["title"] = new
+        n += 1
+    log(f"  humanized {n} arcade titles from MAME descriptions")
+
+
 def _dat_field(setname, dat, field):
     """A DAT field for a setname, falling back to its parent setname."""
     if not setname or not dat:
@@ -2179,6 +2299,10 @@ def cmd_export_web(args):
             arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs) for r in rows]
+    # Human-ideal arcade titles (colons, punctuation, one name per game) from
+    # the MAME descs. Must run AFTER _web_row — the setname/genre/screenshot
+    # joins above all key on the raw MRA-derived title.
+    _humanize_arcade_titles(data, arcade_meta)
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
@@ -2281,10 +2405,12 @@ def _backfill_libretro_images(data):
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     except Exception:
         return
+    # manifest entries are keyed by the raw MRA-derived title, which a
+    # humanized row keeps in `mt` — always match/record with that form
     known = {e["title"] for e in manifest}
     todo = [r for r in data
             if r.get("base") == "Arcade" and not r.get("deprecated")
-            and r["title"] not in known]
+            and (r.get("mt") or r["title"]) not in known]
     if not todo:
         return  # steady state: no new titles since the last manifest build
 
@@ -2311,7 +2437,7 @@ def _backfill_libretro_images(data):
 
     hits = 0
     for r in todo:
-        title = r["title"]
+        title = r.get("mt") or r["title"]
         res = match.resolve(title, idx)  # {folder: filename stem or None}
         entry = {"title": title, "setname": None, "source": None,
                  "title_img": None, "snap_img": None,

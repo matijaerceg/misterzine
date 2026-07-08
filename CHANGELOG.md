@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-07
+- Arcade titles are now written the way humans write them, derived from the MAME database: subtitles get their colons back ("Street Fighter II: The World Warrior", "Robotron: 2084"), doubled-up alternate names collapse to the familiar one ("Pac-Man - Puck Man" → "Pac-Man", "Rush'n Attack - Green Beret" → "Rush'n Attack"), and punctuation/capitalisation follow the real marquee ("Q*bert", "SWAT", "Satan of Saturn") — 121 titles cleaned up, and the discarded alternate names remain searchable.
 - Closing the detail panel now keeps the row highlighted as a "you were here" marker — handy for re-orienting after the fullscreen panel on mobile (previously the highlight was cleared, and any lingering tint was just a touch-hover accident).
 - New "Report a problem" link in each detail panel that opens a GitHub issue prefilled with the entry's title/core/setname, plus a general "Report a Problem" link in the header next to the Changelog.
 - The Types and Columns dropdowns now have a one-click reset ("Show all" / "Reset to default") that also puts you back on track to receive any future default-column changes; the click-to-copy buttons in the detail panel lost their border box.

@@ -1,15 +1,14 @@
 name: Release update
 
-# Checks the three upstream MiSTer DBs twice a day, records any new/updated
+# Checks the three upstream MiSTer DBs four times a day, records any new/updated
 # releases (dated), enriches + regenerates the site, and commits the result.
 # Pages serves from main /docs, so the push publishes the refreshed site.
 
 on:
   schedule:
-    # Twice daily, 06:12 and 18:12 UTC (odd minute to avoid the top-of-hour
+    # Four times daily at :12 past (odd minute to avoid the top-of-hour
     # scheduler crush). A quiet run simply publishes nothing.
-    - cron: "12 6 * * *"
-    - cron: "12 18 * * *"
+    - cron: "12 0,6,12,18 * * *"
   workflow_dispatch: {}   # allow manual runs from the Actions tab
 
 # Prevent overlapping runs from racing on the same commit/push.

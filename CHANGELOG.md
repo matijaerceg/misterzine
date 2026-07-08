@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
+- **Every entry now has a shareable link** (e.g. releases/#dmnfrnt opens Demon Front's panel): row clicks update the URL, a new 🔗 button in the panel copies it, and on phones the Back gesture still closes the panel. RSS items now open the entry on the site, with the repo's commit history linked in the item body.
 - Every column header now explains itself on hover (what "MiSTer Debut" vs "Last Updated" vs "Original Year" actually mean).
 - A search with zero results now says "No matches" (naming the query and any active type filter) instead of showing a blank table.
 - Edge shadows hint that the table scrolls sideways: a fade on the right while more columns are off-screen, and a shadow under the Title column once scrolled.

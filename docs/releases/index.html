@@ -317,6 +317,10 @@
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
+// deep links: every row carries a stable key (d.k, stamped by export-web);
+// #<k> in the URL opens that row's panel, and opening a panel writes it back
+const KEY2ROW = {};  // filled when data.json loads
+const rowURL = d => location.origin + location.pathname + '#' + d.k;
 
 // every row opens the detail panel; the icon marks the ones with screenshots
 const hasShots = d => !!d.img;
@@ -792,7 +796,8 @@ buildHeader();  // header renders immediately; rows follow once data.json loads
 const panel = document.getElementById('panel');
 
 // click-to-copy affordance for panel values (delegated handler on #panel)
-const copyBtn = v => '<button class="copy" data-copy="' + escA(v) + '" title="Copy">⧉</button>';
+const copyBtn = (v, label, icon) => '<button class="copy" data-copy="' + escA(v) +
+  '" title="' + escA(label || 'Copy') + '">' + (icon || '⧉') + '</button>';
 
 function detailHTML(d) {
   const rows = [['Type', typeLabel(d)]];
@@ -885,11 +890,12 @@ function detailHTML(d) {
   // screenshots first so they own the viewport on open; derived detail text below.
   // .body scrolls; .hint is docked below it (built as a sibling, outside .body).
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
-    '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') + '</h2>' +
+    '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') +
+    (d.k ? copyBtn(rowURL(d), 'Copy link to this entry', '🔗') : '') + '</h2>' +
     sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
-function openPanel(d) {
+function openPanel(d, fromHistory) {
   if (!d) return;
   openRow = d;
   panel.innerHTML = detailHTML(d);
@@ -900,7 +906,9 @@ function openPanel(d) {
   void panel.offsetWidth;
   document.body.classList.add('panel-open');
   markOpenRow();
-  pushPanelState();
+  // history/Back navigations (and the initial #hash open) must not write
+  // history themselves — the entry they came from already carries the hash
+  if (!fromHistory) pushPanelState();
 }
 
 function closePanel() {
@@ -911,22 +919,36 @@ function closePanel() {
   const onEnd = () => { panel.hidden = true; panel.removeEventListener('transitionend', onEnd); };
   panel.addEventListener('transitionend', onEnd);
   // consume the history entry that backed this panel (see pushPanelState), so a
-  // close via ×/Esc/swipe doesn't leave a dead Back press behind
+  // close via ×/Esc/swipe doesn't leave a dead Back press behind — the URL's
+  // hash reverts with it. Docked panels never pushed, so just strip the hash.
   if (panelHist) { panelHist = false; history.back(); }
+  else if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
 }
 
-// overlay mode (narrow/tall screens): back a just-opened panel with a dummy
-// history entry so the browser/OS Back gesture closes it instead of leaving.
-// Wide screens are exempt — there the panel is docked layout, not a modal.
+// The panel's URL/history model. Overlay mode (narrow/tall screens): the FIRST
+// open pushes one history entry carrying the row's #key, so the browser/OS
+// Back gesture closes the panel instead of leaving the site; browsing further
+// rows only rewrites that entry (one Back always exits the panel). Wide
+// screens: the panel is docked layout, not a modal — never push, just keep
+// the #key in the address bar via replaceState so every state is shareable.
 let panelHist = false;
 function pushPanelState() {
-  if (panelHist || !matchMedia('(max-aspect-ratio: 3/5)').matches) return;
-  history.pushState({ mzPanel: true }, '');
-  panelHist = true;
+  const url = openRow && openRow.k ? '#' + openRow.k : null;
+  if (!panelHist && matchMedia('(max-aspect-ratio: 3/5)').matches) {
+    if (url) history.pushState({ mzPanel: true }, '', url);
+    else history.pushState({ mzPanel: true }, '');
+    panelHist = true;
+  } else if (url) {
+    history.replaceState(history.state, '', url);
+  }
 }
-window.addEventListener('popstate', () => {
-  panelHist = false;  // cleared first so closePanel doesn't history.back() again
-  if (document.body.classList.contains('panel-open')) closePanel();
+window.addEventListener('popstate', e => {
+  // panelHist mirrors "does the CURRENT entry back a panel" — set it before
+  // any closePanel so a Back-close can't history.back() a second time
+  panelHist = !!(e.state && e.state.mzPanel);
+  const d = KEY2ROW[decodeURIComponent(location.hash.slice(1))];
+  if (d) { openPanel(d, true); recenterOpen(); }  // Forward (or hash edit) re-opens
+  else if (document.body.classList.contains('panel-open')) closePanel();
 });
 
 function markOpenRow() {
@@ -953,15 +975,17 @@ document.getElementById('rows').addEventListener('click', e => {
   const tr = e.target.closest('tr[data-i]');
   if (tr) openPanel(view[+tr.dataset.i]);
 });
+// copy the value, flash confirmation, restore the button's own icon (⧉ or 🔗)
+function flashCopy(cp) {
+  if (!cp.dataset.orig) cp.dataset.orig = cp.textContent;
+  navigator.clipboard.writeText(cp.dataset.copy).then(() => {
+    cp.classList.add('ok'); cp.textContent = '✓';
+    setTimeout(() => { cp.classList.remove('ok'); cp.textContent = cp.dataset.orig; }, 1000);
+  });
+}
 panel.addEventListener('click', e => {
   const cp = e.target.closest('.copy');
-  if (cp) {  // copy the value, flash confirmation, keep the panel open
-    navigator.clipboard.writeText(cp.dataset.copy).then(() => {
-      cp.classList.add('ok'); cp.textContent = '✓';
-      setTimeout(() => { cp.classList.remove('ok'); cp.textContent = '⧉'; }, 1000);
-    });
-    return;
-  }
+  if (cp) { flashCopy(cp); return; }  // keep the panel open
   if (e.target.closest('.close')) closePanel();
 });
 
@@ -1164,13 +1188,7 @@ let rsspop = null;
 function closeRss() { if (rsspop) { rsspop.remove(); rsspop = null; return true; } return false; }
 document.addEventListener('click', e => {
   const cp = e.target.closest('.rsspop .copy');
-  if (cp) {  // copy the URL, flash confirmation, keep the popover open
-    navigator.clipboard.writeText(cp.dataset.copy).then(() => {
-      cp.classList.add('ok'); cp.textContent = '✓';
-      setTimeout(() => { cp.classList.remove('ok'); cp.textContent = '⧉'; }, 1000);
-    });
-    return;
-  }
+  if (cp) { flashCopy(cp); return; }  // keep the popover open
   const a = e.target.closest('#rss-link');
   if (!a) {
     if (rsspop && !e.target.closest('.rsspop')) closeRss();  // click outside closes
@@ -1204,8 +1222,15 @@ fetch('./data.json').then(r => r.json()).then(d => {
     else if (seen[r.core] !== r.title) seen[r.core] = null;  // more than one distinct title
   }
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
+  for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
   buildHeader();
   apply();
+  // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
+  // the entry we arrived on already IS the panel state (in overlay mode Back
+  // correctly leaves the site, i.e. returns where the visitor came from).
+  // Unknown/stale keys are ignored silently.
+  const hit = KEY2ROW[decodeURIComponent(location.hash.slice(1))];
+  if (hit) { openPanel(hit, true); recenterOpen(); }
 });
 </script>
 </body>

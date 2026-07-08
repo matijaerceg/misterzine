@@ -2393,6 +2393,7 @@ def cmd_export_web(args):
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
+    _assign_row_keys(data)  # 'k': the per-row deep-link fragment (#<k>)
     (outdir / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     # NOTE: outdir/index.html is a hand-maintained static page and the single
     # source of truth. export-web deliberately does NOT regenerate it — it used
@@ -2446,6 +2447,39 @@ FEEDS = [
 def _rfc822(iso):
     return email.utils.format_datetime(
         dt.datetime.fromisoformat((iso or "").replace("Z", "+00:00")))
+
+
+def _assign_row_keys(data):
+    """Stamp a stable, unique, URL-safe deep-link key ('k') on every row: the
+    site opens #<k> as that row's detail panel, and the RSS items link there.
+
+    Arcade rows use the MAME setname (short, familiar, and already the site's
+    join key everywhere); non-arcade rows use the core token (unique today,
+    and stable in a way titles aren't). The leftovers — rows with no setname
+    and shared-setname pairs like btime — fall back to a slugified title.
+    Keys must never move once shared, so they derive only from stable fields;
+    residual collisions get a deterministic numeric suffix (data is already
+    in its final sorted order) plus a log warning rather than a crash, so a
+    weird upstream row can't take down the daily CI run."""
+    slug = lambda s: re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+    sn_counts = Counter(d.get("sn") for d in data if d.get("sn"))
+    taken = set()
+    for d in data:
+        if d["base"] == "Arcade" and d.get("sn") and sn_counts[d["sn"]] == 1:
+            k = d["sn"]
+        elif d["base"] != "Arcade" and d.get("core"):
+            k = d["core"]
+        else:
+            k = slug(d["title"])
+        if k in taken:
+            k = slug(d["title"])
+        n = 2
+        while k in taken:
+            log(f"  WARNING: deep-link key collision on {k!r} ({d['title']})")
+            k = f"{slug(d['title'])}-{n}"
+            n += 1
+        taken.add(k)
+        d["k"] = k
 
 
 def _write_feeds(outdir):
@@ -2522,19 +2556,21 @@ def _write_feeds(outdir):
             label = "New" if etype == "new" else "Updated"
             base = row.get("base", "")
             kind = base if base == "Arcade" else f"{base} core"
-            # link to the repo's commit HISTORY, not its front page: the release
-            # commit sits at the top with its message and date (one click saved;
-            # an exact-commit link isn't resolvable anyway — Distribution history
-            # is squashed and rbf diffs are binary). Jotego rows carry a
+            # the item link opens this row's detail panel on the site (#<k>
+            # deep link). The repo's commit-history URL — the release commit
+            # sits at its top; an exact-commit link isn't resolvable anyway
+            # (Distribution history is squashed, rbf diffs are binary) — moves
+            # into the item body below. Jotego rows carry a
             # /tree/master/cores/<x> path; GitHub's path-scoped history keeps
             # the same shape as /commits/master/cores/<x>.
+            link = SITE_URL + "?ref=rss" + ("#" + row["k"] if row.get("k") else "")
             repo = row.get("repo") or ""
             if "/tree/" in repo:
-                link = "https://github.com/" + repo.replace("/tree/", "/commits/", 1)
+                hist = "https://github.com/" + repo.replace("/tree/", "/commits/", 1)
             elif repo:
-                link = f"https://github.com/{repo}/commits"
+                hist = f"https://github.com/{repo}/commits"
             else:
-                link = SITE_URL + "?ref=rss"
+                hist = ""
             paras = []
             bits = [b for b in (row.get("genre"), row.get("year"), row.get("manufacturer")) if b]
             if bits:
@@ -2544,6 +2580,8 @@ def _write_feeds(outdir):
             paras.append(f"{label} in the public MiSTer databases on {e['ts'][:10]} "
                          f"(source: {e['source_id']}).")
             html = "".join(f"<p>{escape(p)}</p>" for p in paras)
+            if hist:
+                html += f'<p><a href="{escape(hist)}">Commit history</a></p>'
             if row.get("img") and row.get("img_slots"):
                 slot, img = row["img_slots"][0], urllib.parse.quote(row["img"])
                 html = f'<p><img src="{SITE_ROOT}images/{slot}/{img}.png" alt=""/></p>' + html

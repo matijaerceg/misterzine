@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-07
+- The Types and Columns dropdowns now have a one-click reset ("Show all" / "Reset to default") that also puts you back on track to receive any future default-column changes; the click-to-copy buttons in the detail panel lost their border box.
 - Console and computer rows now use proper human names instead of raw core filenames — Nintendo 64 (was N64), Game Boy, Master System, Mega Drive, PlayStation, Commodore 64, Acorn Archimedes, TI-99/4A, SAM Coupé, PDP-1, and ~80 more. The raw core name still shows (and is searchable) in the Core column, so "psx" or "n64" still find them.
 - The two Game & Watch cores are now distinguishable: "Game & Watch (GnW)" (pierco's 2020 core) and "Game & Watch (agg23)" (the 2026 core from the Analogue Pocket project).
 - Search now ignores accents ("sam coupe" finds SAM Coupé, "pokemon" finds Pokémon Mini).

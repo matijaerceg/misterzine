@@ -54,6 +54,13 @@
                        display: grid; gap: .35rem; min-width: 10rem; }
   details.cols .menu label { display: flex; gap: .45rem; align-items: center;
                              font-size: .9rem; white-space: nowrap; cursor: pointer; }
+  /* reset-to-default entry at the bottom of each menu, sized to match the
+     checkbox rows; dimmed when the menu is already at its default state */
+  details.cols .menu .reset { border: none; background: none; padding: .1rem 0; margin: .1rem 0 0;
+                              font: inherit; font-size: .9rem; text-align: left; white-space: nowrap;
+                              color: color-mix(in srgb, #06c 60%, CanvasText); cursor: pointer; }
+  details.cols .menu .reset:hover:not(:disabled) { text-decoration: underline; }
+  details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
   /* separate (not collapse): collapsed borders are painted by the table, so they
      don't travel with the sticky <th>s — rows show through 1px seams while scrolling.
      With separate+spacing:0 each cell owns its border and it sticks along with it. */
@@ -139,9 +146,9 @@
   td.rom { white-space: nowrap; }
   /* click-to-copy affordance next to copyable panel values */
   #panel .copy { font: inherit; font-size: .85em; line-height: 1; margin-left: .35rem; padding: 0 .25rem;
-    border: 1px solid #8886; border-radius: 3px; background: none; color: #888; cursor: pointer; }
-  #panel .copy:hover { color: inherit; border-color: #888; }
-  #panel .copy.ok { color: #2a2; border-color: #2a2; }
+    border: none; background: none; color: #888; cursor: pointer; }
+  #panel .copy:hover { color: inherit; }
+  #panel .copy.ok { color: #2a2; }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
   /* empty state shown before any title is selected */
   #panel .body.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; gap: 1rem; }
@@ -566,11 +573,14 @@ const typeMenu = document.getElementById('typemenu');
 const typeSummary = document.getElementById('typesummary');
 typeMenu.innerHTML = TYPES.map(t =>
   '<label><input type="checkbox" data-t="' + t + '"' +
-  (enabledTypes.has(t) ? ' checked' : '') + '> ' + t + '</label>').join('');
+  (enabledTypes.has(t) ? ' checked' : '') + '> ' + t + '</label>').join('') +
+  '<button class="reset" id="typereset">Show all</button>';
+const typeReset = document.getElementById('typereset');
 function syncTypeSummary() {
   // empty (= no filter) and full both read as "All Types"; partial shows the count
   typeSummary.textContent = (enabledTypes.size === 0 || enabledTypes.size === TYPES.length)
     ? 'All Types' : 'Types (' + enabledTypes.size + ')';
+  typeReset.disabled = enabledTypes.size === 0;  // no boxes checked = the default
 }
 typeMenu.addEventListener('change', e => {
   const t = e.target.dataset.t;
@@ -581,6 +591,15 @@ typeMenu.addEventListener('change', e => {
   apply();
   recenterOpen();  // adding/removing whole types moves the selected row — follow it
 });
+typeReset.addEventListener('click', () => {
+  enabledTypes.clear();
+  // remove (not rewrite) the key: a reset visitor is back to "never customized"
+  localStorage.removeItem('mz-types');
+  for (const cb of typeMenu.querySelectorAll('input')) cb.checked = false;
+  syncTypeSummary();
+  apply();
+  recenterOpen();
+});
 syncTypeSummary();
 
 // --- "Columns" dropdown: toggle any column (Title stays locked on) ---
@@ -589,15 +608,17 @@ colsMenu.innerHTML = COLUMNS.map(c =>
   '<label><input type="checkbox" data-k="' + c.k + '"' +
   (c.lock ? ' checked disabled' : (enabledCols.has(c.k) ? ' checked' : '')) +
   '> ' + c.label + '</label>').join('') +
+  '<button class="reset" id="colsreset">Reset to default</button>' +
   '<p class="colnote"><span class="prov">Grayed</span> spec values are provisional ' +
   '(from MAME data), pending the curated Arcade Database.</p>';
-colsMenu.addEventListener('change', e => {
-  const k = e.target.dataset.k;
-  if (!k) return;
-  if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
-  localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
-  // sorting by a column that was just hidden would be invisible — fall back to
-  // debut date if it's visible, else the always-on title column
+const colsReset = document.getElementById('colsreset');
+function syncColsReset() {
+  const def = defaultCols();
+  colsReset.disabled = enabledCols.size === def.size && [...enabledCols].every(k => def.has(k));
+}
+// sorting by a column that was just hidden would be invisible — fall back to
+// debut date if it's visible, else the always-on title column
+function fixSortThenRebuild() {
   if (!activeColumns().some(c => c.k === sortKey)) {
     if (activeColumns().some(c => c.k === 'date')) { sortKey = 'date'; sortDir = -1; }
     else { sortKey = 'title'; sortDir = 1; }
@@ -607,7 +628,27 @@ colsMenu.addEventListener('change', e => {
   // adding/removing columns changes row heights (in-cell wrapping), which can
   // strand the selected row off-screen — keep it centered
   recenterOpen();
+}
+colsMenu.addEventListener('change', e => {
+  const k = e.target.dataset.k;
+  if (!k) return;
+  if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
+  localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
+  syncColsReset();
+  fixSortThenRebuild();
 });
+colsReset.addEventListener('click', () => {
+  enabledCols = defaultCols();
+  // remove both keys (incl. the legacy pre-2026-07 one, or the migration path
+  // would resurrect the old picks on next load) — reset means "never customized"
+  localStorage.removeItem('mz-cols2');
+  localStorage.removeItem('mz-cols');
+  for (const cb of colsMenu.querySelectorAll('input:not(:disabled)'))
+    cb.checked = enabledCols.has(cb.dataset.k);
+  syncColsReset();
+  fixSortThenRebuild();
+});
+syncColsReset();
 // click outside closes any open dropdown (Types + Columns)
 function closeDropdowns(except) {
   for (const dd of document.querySelectorAll('details.cols')) {

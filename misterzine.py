@@ -382,6 +382,37 @@ def cmd_snapshot(args):
         # upsert catalog rows for everything currently present
         upsert_catalog(con, source["id"], files, ts_iso, seed)
 
+        # A core rebuild renames its rbf (PDP1_20190101.rbf -> PDP1_20260702.rbf),
+        # which the diff sees as new+removed and upsert_catalog as a brand-new row
+        # — leaving the stale row behind (the export SELECTs the whole catalog, so
+        # the site would show the core twice) and stamping today as the new row's
+        # release_date (recency inflation). Treat it as a rename instead: carry
+        # the old row's debut/first_seen onto the new row, then drop the old row.
+        if not seed:
+            current = {}
+            for path in files:
+                system, kind, is_unit = classify(path)
+                if is_unit and kind == "core":
+                    current.setdefault((system, core_name(title_from_path(path))), path)
+            for path in old_files:
+                if path in files or path in beta_set:
+                    continue
+                system, kind, is_unit = classify(path)
+                if not (is_unit and kind == "core"):
+                    continue
+                new_path = current.get((system, core_name(title_from_path(path))))
+                old_row = con.execute(
+                    "SELECT release_date, first_seen FROM catalog WHERE source_id=? AND path=?",
+                    (source["id"], path)).fetchone()
+                if new_path and old_row:
+                    # release_date is copied verbatim (even NULL: an undated old
+                    # row means the true debut is unknown, not "today")
+                    con.execute(
+                        "UPDATE catalog SET release_date=?, first_seen=? WHERE source_id=? AND path=?",
+                        (old_row["release_date"], old_row["first_seen"], source["id"], new_path))
+                    con.execute("DELETE FROM catalog WHERE source_id=? AND path=?",
+                                (source["id"], path))
+
         if not seed:
             con.executemany(
                 "INSERT INTO events(ts,source_id,path,title,system,event_type,hash) VALUES(?,?,?,?,?,?,?)",
@@ -1730,6 +1761,122 @@ CORE_YEAR = {
     "ao486": "1989", "MultiComp": "2013", "TSConf": "2014",
 }
 
+# 2-player link-cable variants ship as separate rbf files but are the same
+# hardware (and the same core repo — see CORE_REPO_OVERRIDES) as their base
+# handheld, so they'd be duplicate rows. Dropped at export; the base row keeps
+# a CORE_NOTES pointer so the variant stays discoverable. GameGear2P is NOT
+# here: it's the only standalone Game Gear core (1-player Game Gear is built
+# into the SMS core), so its row stays, retitled via SYSTEM_TITLES.
+DUPLICATE_VARIANT_CORES = {"Gameboy2P", "GBA2P"}
+
+# Human display titles for console/computer/other rows whose rbf name isn't the
+# name a person would use. Keyed by core_name; presentation-only (repo links,
+# images and joins all key on the core, not the title). Style rule (user-agreed
+# 2026-07-07): use the machine's common name — include the brand only where it's
+# part of how people say it (Nintendo 64, Atari ST) and rely on the Manufacturer
+# column otherwise (Master System, Vectrex). Cores whose rbf already reads
+# naturally (NES, SNES, MSX, Vectrex, X68000, …) are simply absent.
+SYSTEM_TITLES = {
+    # consoles
+    "AdventureVision": "Adventure Vision",
+    "Arcadia": "Arcadia 2001",
+    "Atari5200": "Atari 5200",
+    "Atari7800": "Atari 7800",
+    "AtariLynx": "Atari Lynx",
+    "BBCBridgeCompanion": "BBC Bridge Companion",
+    "Casio_PV-1000": "PV-1000",
+    "CDi": "CD-i",
+    "ChannelF": "Channel F",
+    "GameAndWatch": "Game & Watch (agg23)",
+    "GnW": "Game & Watch (GnW)",
+    "Gameboy": "Game Boy",
+    "GameGear2P": "Game Gear",
+    "GBA": "Game Boy Advance",
+    "MegaCD": "Mega CD",
+    "MegaDrive": "Mega Drive",
+    "MyVision": "My Vision",
+    "N64": "Nintendo 64",
+    "NeoGeo": "Neo Geo",
+    "NeoGeoPocket": "Neo Geo Pocket",
+    "Odyssey2": "Odyssey 2",
+    "PokemonMini": "Pokémon Mini",
+    "PSX": "PlayStation",
+    "S32X": "32X",
+    "SCV": "Super Cassette Vision",
+    "SGB": "Super Game Boy",
+    "SMS": "Master System",
+    "Super_Vision_8000": "Super Vision 8000",
+    "SuperVision": "Supervision",
+    "TurboGrafx16": "TurboGrafx-16",
+    "VC4000": "VC 4000",
+    # computers
+    "AcornAtom": "Acorn Atom",
+    "AcornElectron": "Acorn Electron",
+    "AliceMC10": "MC-10 / Alice",
+    "Altair8800": "Altair 8800",
+    "Amstrad": "Amstrad CPC",
+    "Amstrad-PCW": "Amstrad PCW",
+    "ao486": "486 PC (ao486)",
+    "Apogee": "Apogee BK-01",
+    "Apple-I": "Apple I",
+    "Apple-II": "Apple II",
+    "Archie": "Acorn Archimedes",
+    "Atari800": "Atari 800",
+    "AtariST": "Atari ST",
+    "BBCMicro": "BBC Micro",
+    "BK0011M": "BK-0011M",
+    "C128": "Commodore 128",
+    "C16": "Commodore 16",
+    "C64": "Commodore 64",
+    "Casio_PV-2000": "PV-2000",
+    "CoCo2": "Color Computer 2",
+    "CoCo3": "Color Computer 3",
+    "ColecoAdam": "Coleco Adam",
+    "eg2000": "Colour Genie EG2000",
+    "Enterprise": "Enterprise 64/128",
+    "IQ151": "IQ 151",
+    "Jupiter": "Jupiter Ace",
+    "Laser310": "Laser 310",
+    "Lynx48": "Camputers Lynx",
+    "MacPlus": "Macintosh Plus",
+    "Minimig": "Amiga (Minimig)",
+    "Ondra_SPO186": "Ondra SPO 186",
+    "ORAO": "Orao",
+    "PC88": "PC-8801",
+    "PCXT": "PC/XT",
+    "PDP1": "PDP-1",
+    "PET2001": "PET 2001",
+    "PMD85": "PMD 85",
+    "QL": "Sinclair QL",
+    "RX78": "RX-78 Gundam",
+    "SAMCoupe": "SAM Coupé",
+    "SharpMZ": "Sharp MZ",
+    "SordM5": "Sord M5",
+    "Svi328": "SV-328",
+    "Tandy1000": "Tandy 1000",
+    "TatungEinstein": "Tatung Einstein",
+    "Ti994a": "TI-99/4A",
+    "TomyTutor": "Tomy Tutor",
+    "VIC20": "VIC-20",
+    "ZX-Spectrum": "ZX Spectrum",
+    "ZXNext": "ZX Spectrum Next",
+    # other
+    "Chip8": "CHIP-8",
+    "EpochGalaxyII": "Epoch Galaxy II",
+    "FlappyBird": "Flappy Bird",
+    "GameOfLife": "Game of Life",
+    "TomyScramble": "Tomy Scramble",
+}
+
+# Short per-core notes, keyed by core_name (the rbf). Stamped into data.json as
+# `note`; the site shows them in the detail panel.
+CORE_NOTES = {
+    "Gameboy": "A 2-player link-cable variant core (Gameboy2P) is also available.",
+    "GBA": "A 2-player link-cable variant core (GBA2P) is also available.",
+    "GameGear2P": "This is the 2-player link-cable core; the regular 1-player Game Gear is built into the SMS core.",
+    "SMS": "Also plays Game Gear games (a separate 2-player Game Gear core exists).",
+}
+
 
 # Original arcade release years for titles whose MRA carries no <year> and which
 # MAME 0.78-era data is too old to cover. The IGS PGM years are MAME-accurate
@@ -1840,8 +1987,9 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     else:
         # the Core column shows (and links) the core name for non-arcade rows too
         core = core_name(r["title"])
-        # cores: strip the date suffix from the display name (date has its own column)
-        title = _CORE_DATE_RE.sub("", r["title"]).rstrip("_ ")
+        # cores: strip the date suffix from the display name (date has its own
+        # column), then swap in the human title where the rbf name isn't one
+        title = SYSTEM_TITLES.get(core, _CORE_DATE_RE.sub("", r["title"]).rstrip("_ "))
         # prefer the real MiSTer debut (per-core repo) over the build-date suffix
         debut = (r["release_date"] or "")[:10]
         if debut:
@@ -1882,6 +2030,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         row["updated"] = updated
     if repo:
         row["repo"] = repo
+    # system rows only: arcade rows share rbfs with these (System E games run on
+    # the SMS core), and a console-flavoured note is wrong on a game row. If a
+    # per-arcade-core note ever lands (e.g. jts18 CRT sync), give it its own dict.
+    if system != "arcade" and core in CORE_NOTES:
+        row["note"] = CORE_NOTES[core]
     if system == "arcade":
         # the row's own MAME setname ("ROM name"). Distinct from the screenshot
         # key (img), which can be a shared/borrowed setname.
@@ -2001,6 +2154,9 @@ def cmd_export_web(args):
     # which has no year/screenshot and just clutters the list).
     rows = [r for r in rows if not (
         r["system"] == "arcade" and (r["setname"] or "").lower() in ARCADE_EXCLUDE_SETNAMES)]
+    # Drop 2-player link-cable duplicates of handhelds already listed 1-player.
+    rows = [r for r in rows if not (
+        r["kind"] == "core" and core_name(r["title"]) in DUPLICATE_VARIANT_CORES)]
     # arcade fill sources (cached; no-op if absent): DAT for year/manufacturer/
     # parent, catver for genre, and the image manifest's resolved setnames (many
     # backfilled rows carry a setname only there, not in catalog.setname).

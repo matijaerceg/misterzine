@@ -3,6 +3,12 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-07
+- Console and computer rows now use proper human names instead of raw core filenames — Nintendo 64 (was N64), Game Boy, Master System, Mega Drive, PlayStation, Commodore 64, Acorn Archimedes, TI-99/4A, SAM Coupé, PDP-1, and ~80 more. The raw core name still shows (and is searchable) in the Core column, so "psx" or "n64" still find them.
+- The two Game & Watch cores are now distinguishable: "Game & Watch (GnW)" (pierco's 2020 core) and "Game & Watch (agg23)" (the 2026 core from the Analogue Pocket project).
+- Search now ignores accents ("sam coupe" finds SAM Coupé, "pokemon" finds Pokémon Mini).
+- The 2-player link-cable variants (Gameboy2P, GBA2P) no longer appear as separate rows — the Game Boy and GBA rows carry a note about them instead. GameGear2P is now titled "Game Gear" (it's the only standalone Game Gear core; the 1-player version lives inside the SMS core), with notes on both it and SMS explaining the relationship.
+- Fixed PDP-1 and Game of Life appearing twice: a core rebuild renames its file upstream, and the old entry was never retired. Renames are now detected and merged (keeping the original debut date).
+- The detail panel shows a new **Note** row for systems that have one.
 - The "deprecated" tag on the retired Genesis core moved from the Type column to sit next to its title.
 - Console and computer rows now show a photo of the actual hardware at the top of the detail panel — 115 systems, from the NES and C64 to obscurities like the Galaksija, EDSAC, and Compukit UK101 — rendered in a deliberately lo-fi 16-color dithered style with a photo-credit link.
 - Every row now opens the detail panel (type, dates, core, repo link, …), not just arcade titles with screenshots; the screen icon now specifically marks rows that have screenshots.

@@ -477,19 +477,22 @@ function render() {
 function esc(s) { return (s == null ? '' : '' + s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
 function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
 
+// diacritic-insensitive lowercase for search ("sam coupe" must match "SAM Coupé")
+const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
 function apply() {
   const qEl = document.getElementById('q');
-  const q = qEl.value.toLowerCase().trim();
+  const q = fold(qEl.value.trim());
   document.getElementById('clear').hidden = !qEl.value;
   // Types filter: an empty set means "no filter" (show all) — which coincides
   // with every type being checked. Any partial selection narrows to those bases.
   view = DATA.filter(d => {
     if (enabledTypes.size && !enabledTypes.has(d.base)) return false;
     if (!q) return true;
-    return (d.title + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
+    return fold(d.title + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
             (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
-            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || '')).toLowerCase().includes(q);
+            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || '')).includes(q);
   });
   if (sortKey) {
     const keyOf = x => sortKey === 'typesort' ? typeLabel(x)
@@ -654,6 +657,7 @@ function detailHTML(d) {
   if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
     esc(d.repo.split('/').slice(0, 2).join('/')) + '<span class="ext">↗</span></a>', true]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
+  if (d.note) rows.push(['Note', d.note]);
 
   // a row's third element marks the value as pre-built HTML (links); default is plain text
   const dl = '<dl>' + rows.map(([k, v, html]) => '<dt>' + esc(k) + '</dt><dd>' + (html ? v : esc(v)) + '</dd>').join('') + '</dl>';

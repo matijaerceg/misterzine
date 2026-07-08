@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
+- Site renamed to **"MiSTer FPGA Core & Arcade Tracker"** — "Tracker" better reflects what the site does (daily-updated release and change tracking) than "Index".
 - The 56 Coin-Op Collection games now show their real FPGA core in the Core column (Jaleco Mega System 1, Nichibutsu Armed F, SNK 68000, Toaplan Zero Wing HW, …) instead of the generic "Distribution-MiSTerFPGA" repo label — their MRA files are now parsed like the other sources', which also corrected a few years/manufacturers and setnames along the way.
 
 ## 2026-07-07

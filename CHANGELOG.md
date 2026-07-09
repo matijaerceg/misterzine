@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
+- System photos now render at a consistent pixel density across the board (some were previously noticeably sharper than others).
 - The homebrew/demo cores (Chess, CHIP-8, Donut, Flappy Bird, Game of Life, SlugCross) now show a screenshot in their detail panel; the MSX core is retitled "MSX2" (it's the MSX2/2+/3 machine, distinct from the separate MSX1 core); refreshed hardware photos for Amstrad CPC, UK101, Tomy Tutor and Epoch Galaxy II.
 - The site got a face for sharing: an "MZ" favicon (browser tab icon) and a social preview card, so pasted links on Discord/forums show the logo and a grid of arcade screenshots instead of bare text.
 - **Every entry now has a shareable link** (e.g. releases/#dmnfrnt opens Demon Front's panel): row clicks update the URL, a new 🔗 button in the panel copies it, and on phones the Back gesture still closes the panel. RSS items now open the entry on the site, with the repo's commit history linked in the item body.

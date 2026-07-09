@@ -54,9 +54,10 @@
   .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
   .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
   .updated a:hover { color: #06c; }
-  /* dotted underline + help cursor mark the "Public cores only" note as
-     hoverable — its title tooltip explains the Patreon-beta exclusion */
-  .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; cursor: help; }
+  /* dotted underline (+ ⓘ) marks the meta-line popover triggers ("Public
+     cores only", "RSS") — they open an in-page popover, unlike the solid
+     underline + ↗ links, which navigate away */
+  .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
@@ -155,6 +156,20 @@
     width: var(--hint-l-w, 12px); pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
     background: linear-gradient(to right, var(--hint-shadow), transparent); }
   .tablezone.more-l::before { opacity: 1; }
+  /* "Scroll to top" button: inlaid at the table area's top right, just below
+     the sticky header (--theadh measured by syncScrollHints). Revealed by the
+     .scrolled class (toggled per scroll event) whenever the list is more than
+     about a row away from the top; pointer-events gating keeps the hidden
+     button from stealing clicks meant for the rows under it. Neutral chrome
+     (Canvas + border, like the topbar buttons) — an accent-colored pill
+     floating over the rows was too loud. */
+  .totop { position: absolute; z-index: 17; top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem;
+    font: inherit; font-size: .8rem; cursor: pointer;
+    padding: .45rem .85rem; border: 1px solid #8884; border-radius: 999px;
+    background: color-mix(in srgb, CanvasText 7%, Canvas); color: inherit; box-shadow: 0 2px 8px #0003;
+    opacity: 0; pointer-events: none; transition: opacity .15s; }
+  .tablezone.scrolled .totop { opacity: 1; pointer-events: auto; }
+  .totop:hover { background: color-mix(in srgb, CanvasText 14%, Canvas); }
   /* "no matches" row: a single message cell replacing the row list. Undo the
      row/cell chrome (sticky first cell, hover tint). The inner div
      pins to the scrollport's left edge and caps at the viewport width, so the
@@ -255,6 +270,7 @@
     border-radius: 6px; padding: .6rem .8rem; box-shadow: 0 4px 16px #0004;
     font-size: .8rem; max-width: min(30rem, calc(100vw - 2rem)); }
   .rsspop p { margin: 0 0 .45rem; color: #888; }
+  .rsspop p:last-child { margin-bottom: 0; }
   .rsspop .feedrow { display: flex; gap: .5rem; align-items: baseline; margin: .3rem 0; }
   .rsspop .feedrow b { font-weight: 600; white-space: nowrap; }
   .rsspop code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -355,6 +371,7 @@
 </div>
 </div>
 <div class="tablezone">
+<button id="totop" class="totop" type="button">↑ Scroll to top</button>
 <div class="tablewrap">
 <table>
   <colgroup id="cg"></colgroup>
@@ -678,6 +695,7 @@ function syncScrollHints() {
   const w = document.querySelector('.tablewrap'), z = document.querySelector('.tablezone');
   z.classList.toggle('more-l', w.scrollLeft > 0);
   z.classList.toggle('more-r', w.scrollLeft + w.clientWidth < w.scrollWidth - 1);
+  z.classList.toggle('scrolled', w.scrollTop > 30);  // ~a row down reveals "Scroll to top"
   // taper both hints near their end of the scroll range: each one's width
   // tracks the distance to its edge (full width until the last ~6% / 48px
   // minimum, then shrinking to 0), so they grow/shrink with scroll position
@@ -696,6 +714,8 @@ function syncScrollHints() {
   const th = document.querySelector('#hrow th');
   if (th) z.style.setProperty('--titlew',
     (th.getBoundingClientRect().right - z.getBoundingClientRect().left) + 'px');
+  // sticky header height anchors the "Scroll to top" button just below it
+  if (th) z.style.setProperty('--theadh', th.getBoundingClientRect().height + 'px');
   // floating thumbs: length ∝ visible fraction, position ∝ scroll progress
   if (vThumb) {
     const canV = w.scrollHeight > w.clientHeight + 1;
@@ -727,6 +747,10 @@ document.querySelector('.tablewrap').addEventListener('scroll', () => {
     if (!sbDragging) document.querySelector('.tablezone').classList.remove('sb-show');
   }, 900);
 }, { passive: true });
+
+document.getElementById('totop').addEventListener('click', () => {
+  document.querySelector('.tablewrap').scrollTo({ top: 0, behavior: 'smooth' });
+});
 
 function render() {
   const tb = document.getElementById('rows');
@@ -831,7 +855,10 @@ document.getElementById('hrow').addEventListener('click', e => {
   sortKey = k;
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
   apply();
-  recenterOpen();  // re-sorting moves the selected row to a new position — follow it there
+  // With a row selected, follow it to its new position; with nothing selected,
+  // jump to the top — "show me the new #1" is what a bare re-sort means.
+  if (document.querySelector('#rows tr.open')) recenterOpen();
+  else document.querySelector('.tablewrap').scrollTop = 0;
 });
 
 // --- "Types" dropdown: multi-select filter over the four base types ---
@@ -1172,7 +1199,7 @@ function navigate(dir) {  // dir: +1 down, -1 up
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (closeRss()) return;  // an open RSS popover absorbs the Esc first
+    if (closePop()) return;  // an open meta-line popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it
     const dd = document.querySelector('details.cols[open]');
     if (dd) { dd.open = false; return; }
@@ -1316,47 +1343,60 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     timeZoneName: 'short'  // append the viewer's tz (e.g. "GMT+2") so it's clearly local
   });
   el.innerHTML = 'Last updated: ' + esc(s) +
-    ' · <span class="note" title="Patreon early-access (beta) cores are listed once they get a public release.">Public cores only</span>' +
-    ' · <a href="feed.xml" id="rss-link">RSS</a>' +
-    ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats</a>' +
-    ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)</a>' +
-    ' · <a href="https://github.com/matijaerceg/misterzine/issues" target="_blank" rel="noopener">Report a Problem</a>';
+    ' · <a href="#" class="note" id="pub-note">Public cores only<span class="ext">ⓘ</span></a>' +
+    ' · <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
+    ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
+    ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
+    ' · <a href="https://github.com/matijaerceg/misterzine/issues" target="_blank" rel="noopener">Report a Problem<span class="ext">↗</span></a>';
 }).catch(() => {});
 
-// --- RSS popover: the meta-line "RSS" link opens a small feed chooser ---
-// (readers also autodiscover all three feeds from the <link rel=alternate>
-// tags in <head>). Copy buttons because clicking a feed URL just dumps raw
-// XML at people; the href on the link itself stays for middle-click/no-JS.
+// --- meta-line popovers: "RSS" opens a feed chooser (readers also
+// autodiscover all three feeds from the <link rel=alternate> tags in <head>;
+// copy buttons because clicking a feed URL just dumps raw XML at people, and
+// the href on the RSS link itself stays for middle-click/no-JS). "Public
+// cores only" opens a note explaining the Patreon-beta exclusion — a click
+// popover instead of a title tooltip so it works on touch too. One popover
+// at a time: click outside, a second click on the trigger, or Esc closes it.
 const FEED_LIST = [
   ['All changes', 'feed.xml'],
   ['New cores & games', 'feed-new.xml'],
   ['Updates only', 'feed-updates.xml'],
 ];
-let rsspop = null;
-function closeRss() { if (rsspop) { rsspop.remove(); rsspop = null; return true; } return false; }
+const PUB_NOTE_HTML =
+  '<p>Some cores (mainly Jotego arcade cores) start out as Patreon ' +
+  'early-access betas. Those are not listed here while they are ' +
+  'subscriber-only.</p>' +
+  '<p>Each core shows up automatically once it gets a public release. ' +
+  'Beta cores may get their own listing here in the future.</p>';
+let metapop = null, metapopFor = null;
+function closePop() { if (metapop) { metapop.remove(); metapop = null; return true; } return false; }
 document.addEventListener('click', e => {
   const cp = e.target.closest('.rsspop .copy');
   if (cp) { flashCopy(cp); return; }  // keep the popover open
-  const a = e.target.closest('#rss-link');
+  const a = e.target.closest('#rss-link, #pub-note');
   if (!a) {
-    if (rsspop && !e.target.closest('.rsspop')) closeRss();  // click outside closes
+    if (metapop && !e.target.closest('.rsspop')) closePop();  // click outside closes
     return;
   }
   e.preventDefault();
-  if (closeRss()) return;  // second click on the link toggles it shut
-  rsspop = document.createElement('div');
-  rsspop.className = 'rsspop';
-  rsspop.innerHTML = '<p>RSS feeds: paste a URL into your reader (most readers also ' +
-    'find these if you paste the page URL itself).</p>' +
-    FEED_LIST.map(([name, f]) => {
-      const url = new URL(f, location.href).href;
-      return '<div class="feedrow"><b>' + esc(name) + '</b><code>' + esc(url) + '</code>' +
-        copyBtn(url) + '</div>';
-    }).join('');
+  const wasFor = metapopFor;
+  if (closePop() && wasFor === a.id) return;  // second click on the same trigger toggles it shut
+  metapopFor = a.id;
+  metapop = document.createElement('div');
+  metapop.className = 'rsspop';
+  metapop.innerHTML = a.id === 'rss-link'
+    ? '<p>RSS feeds: paste a URL into your reader (most readers also ' +
+      'find these if you paste the page URL itself).</p>' +
+      FEED_LIST.map(([name, f]) => {
+        const url = new URL(f, location.href).href;
+        return '<div class="feedrow"><b>' + esc(name) + '</b><code>' + esc(url) + '</code>' +
+          copyBtn(url) + '</div>';
+      }).join('')
+    : PUB_NOTE_HTML;
   const r = a.getBoundingClientRect();
-  rsspop.style.left = Math.max(8, Math.min(r.left, innerWidth - 500)) + 'px';
-  rsspop.style.top = (r.bottom + 6) + 'px';
-  document.body.appendChild(rsspop);
+  metapop.style.left = Math.max(8, Math.min(r.left, innerWidth - 500)) + 'px';
+  metapop.style.top = (r.bottom + 6) + 'px';
+  document.body.appendChild(metapop);
 });
 
 fetch('./data.json').then(r => r.json()).then(d => {

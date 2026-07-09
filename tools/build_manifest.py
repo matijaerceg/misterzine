@@ -66,6 +66,19 @@ def main():
         setmap.setdefault(match.norm(r["title"]), r["setname"].lower())
 
     arc, lidx = match.load()  # arc rows + libretro index for fallback
+    # titles deliberately shown WITHOUT a screenshot (user call): multi-game
+    # carts where any single game's shot misrepresents the row
+    NO_IMAGE_TITLES = {"CPS1 Multi Game"}
+    # hand-wired screenshots (source="manual": web-sourced shots for games absent
+    # from psnaps/libretro — TTL games, hacks, non-MAME titles). Kept across
+    # rebuilds unless the fresh resolution actually finds a real source.
+    prev_manual = {}
+    if os.path.exists(OUT):
+        try:
+            prev_manual = {e["title"]: e for e in json.load(open(OUT, encoding="utf-8"))
+                           if e.get("source") == "manual"}
+        except Exception:
+            pass
     manifest = []
     n_title = n_snap = n_third = n_trio = n_libfallback = 0
     for r in arc:
@@ -98,6 +111,11 @@ def main():
                 entry["snap_img"] = res["Named_Snaps"] and f"Named_Snaps/{res['Named_Snaps']}.png"
                 n_libfallback += 1
 
+        if title in NO_IMAGE_TITLES:
+            entry = {"title": title, "setname": entry["setname"], "source": None,
+                     "title_img": None, "snap_img": None, "third_img": None, "third_pack": None}
+        elif entry["source"] is None and title in prev_manual:
+            entry = prev_manual[title]
         if entry["title_img"]:
             n_title += 1
         if entry["snap_img"]:

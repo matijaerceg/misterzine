@@ -164,9 +164,9 @@
  {
   "title": "Computer Space",
   "setname": null,
-  "source": null,
+  "source": "manual",
   "title_img": null,
-  "snap_img": null,
+  "snap_img": "manual",
   "third_img": null,
   "third_pack": null
  },
@@ -443,9 +443,9 @@
  {
   "title": "Pac-Manic Miner",
   "setname": null,
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "source": "manual",
+  "title_img": "manual",
+  "snap_img": "manual",
   "third_img": null,
   "third_pack": null
  },
@@ -641,18 +641,18 @@
  {
   "title": "Clean Sweep",
   "setname": "cleansweept",
-  "source": "psnaps",
+  "source": "manual",
   "title_img": null,
-  "snap_img": null,
+  "snap_img": "manual",
   "third_img": null,
   "third_pack": null
  },
  {
   "title": "Devil Fish",
   "setname": "devilfsg",
-  "source": "psnaps",
-  "title_img": null,
-  "snap_img": null,
+  "source": "libretro",
+  "title_img": "Named_Titles/Devil Fish (Galaxian hardware, bootleg_).png",
+  "snap_img": "Named_Snaps/Devil Fish (Galaxian hardware, bootleg_).png",
   "third_img": null,
   "third_pack": null
  },
@@ -704,9 +704,9 @@
  {
   "title": "Mr. Do Nightmare",
   "setname": "mrdonight",
-  "source": "psnaps",
-  "title_img": null,
-  "snap_img": null,
+  "source": "manual",
+  "title_img": "manual",
+  "snap_img": "manual",
   "third_img": null,
   "third_pack": null
  },
@@ -1586,9 +1586,9 @@
  {
   "title": "CPS1 Multi Game",
   "setname": "cps1mult",
-  "source": "psnaps",
-  "title_img": "titles/cps1mult.png",
-  "snap_img": "snap/cps1mult.png",
+  "source": null,
+  "title_img": null,
+  "snap_img": null,
   "third_img": null,
   "third_pack": null
  },
@@ -3107,9 +3107,9 @@
  {
   "title": "Space Race",
   "setname": null,
-  "source": null,
+  "source": "manual",
   "title_img": null,
-  "snap_img": null,
+  "snap_img": "manual",
   "third_img": null,
   "third_pack": null
  },
@@ -5033,9 +5033,9 @@
  {
   "title": "Clockwork Aquario",
   "setname": "aquario",
-  "source": "psnaps",
+  "source": "manual",
   "title_img": null,
-  "snap_img": null,
+  "snap_img": "manual",
   "third_img": null,
   "third_pack": null
  },

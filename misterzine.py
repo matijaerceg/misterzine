@@ -614,12 +614,16 @@ def cmd_repos(args):
 # MRA <rbf> core names that don't normalize to their repo's core name
 # (abbreviations/spelling differences). Maps normalized <rbf> -> normalized repo
 # core name. The _MiSTer-suffix case bug is handled by _repo_key, not here.
+# Also consulted for the TITLE fallback: a second game in a repo named for a
+# different game matches neither by rbf (none captured) nor by its own title
+# (Space Demon lives in Arcade-SpaceFirebird).
 ARCADE_RBF_ALIASES = {
     "taitosj": "taitosystemsj",   # Arcade-TaitoSystemSJ
     "atarisys1": "atarisystem1",  # Arcade-Atari-system1
     "sdgundamps": "gundamsd",     # Arcade-GundamSD
     "ataritetris": "atetris",     # Arcade-ATetris
     "rshnatk": "rushnattack",     # Arcade-RushnAttack
+    "spacedemon": "spacefirebird",  # Arcade-SpaceFirebird (shared hardware)
 }
 
 
@@ -652,7 +656,8 @@ def join_repos_to_catalog(con):
             rk = norm_key(row["rbf"])
             r = by_key.get(rk) or by_key.get(ARCADE_RBF_ALIASES.get(rk, ""))
         if r is None:
-            r = by_key.get(_repo_key(row["title"]))
+            tk = _repo_key(row["title"])
+            r = by_key.get(tk) or by_key.get(ARCADE_RBF_ALIASES.get(tk, ""))
         if r:
             con.execute(
                 "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",

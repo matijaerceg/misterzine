@@ -1279,17 +1279,20 @@ def join_coinop_to_catalog(con):
 
 # --- command: genre (arcade genre from MAME catver.ini, joined on setname) -
 
-# Stable raw-accessible mirror of MAME's catver.ini (this copy tracks MAME 0.239).
-# A newer catver would lift coverage slightly; 0.239 already matches ~88% of our
-# setnames. Fetched at build time and cached locally (see CACHEDIR).
-CATVER_URL = "https://raw.githubusercontent.com/libretro/mame2003-plus-libretro/master/metadata/catver.ini"
+# Raw-accessible mirror of the current catver.ini, maintained by AntoPISA
+# (the progettoSNAPS author) and tracking the latest MAME. The old source
+# (libretro's mame2003-plus copy) used MAME 0.78-era setnames, so ~70 rows
+# with modern setnames (sf2hf, combatsc, mwalk, the PGM lineup, ...) had no
+# genre. The cache is committed (like the MAD CSV) so a failed daily fetch
+# still leaves export-web a last good copy.
+CATVER_URL = "https://raw.githubusercontent.com/AntoPISA/MAME_SupportFiles/main/catver.ini/catver.ini"
 
 
-def fetch_catver():
+def fetch_catver(refresh=False):
     """Return the catver.ini text, caching the download under data/cache/."""
     CACHEDIR.mkdir(parents=True, exist_ok=True)
     cache = CACHEDIR / "catver.ini"
-    if cache.exists():
+    if cache.exists() and not refresh:
         return cache.read_text(encoding="utf-8", errors="ignore")
     log(f"  fetching catver.ini ...")
     text = http_get(CATVER_URL).decode("utf-8", errors="ignore")
@@ -1311,6 +1314,14 @@ def parse_catver(text):
             continue
         if section == "Category" and "=" in line:
             k, v = line.split("=", 1)
+            # current catver prefixes discrete-logic games with 'TTL * ' and
+            # files pinball-style games under a meaningless 'Arcade / ' parent;
+            # drop both so the real category leads before collapsing.
+            v = v.strip()
+            if v.startswith("TTL * "):
+                v = v[len("TTL * "):]
+            if v.startswith("Arcade / "):
+                v = v[len("Arcade / "):]
             v = re.split(r"[/-]", v)[0].strip()
             if v:
                 cats[k.strip().lower()] = v
@@ -1430,7 +1441,7 @@ def genre_for(setname, cats, dat):
 
 def cmd_genre(args):
     con = connect()
-    cats = parse_catver(fetch_catver())
+    cats = parse_catver(fetch_catver(refresh=True))
     dat = load_arcade_dat_meta()
     log(f"genre: {len(cats)} setname->genre entries from catver.ini"
         + (f"; {len(dat)} DAT machines for parent fallback" if dat else ""))
@@ -1927,11 +1938,13 @@ CORE_NOTES = {
 }
 
 
-# Original arcade release years for titles whose MRA carries no <year> and which
-# MAME 0.78-era data is too old to cover. The IGS PGM years are MAME-accurate
-# (web-verified); the rest are well-documented arcade debut years. Frozen so they
-# never drift. Keyed by MAME setname where one exists.
+# Original arcade release years for titles whose MRA carries no <year> (or only
+# a '20??' placeholder) and which MAME 0.78-era data is too old to cover. The
+# IGS PGM years are MAME-accurate (web-verified); the rest are well-documented
+# arcade debut years. Frozen so they never drift. Keyed by MAME setname where
+# one exists.
 ARCADE_YEAR_BY_SETNAME = {
+    "cps1mult": "2022",
     "dmnfrnt": "2002",
     "ddp2": "2001", "ddp3": "2002", "dw2001": "2001", "drgw3": "1998", "dwex": "2000",
     "espgal": "2003", "ket": "2003", "kov2": "2000", "kovsh": "1999", "martmast": "1999",
@@ -1972,6 +1985,56 @@ def arcade_year(setname, title):
     if setname and ARCADE_YEAR_BY_SETNAME.get(setname.lower()):
         return ARCADE_YEAR_BY_SETNAME[setname.lower()]
     return _ARCADE_YEAR_BY_NAME_NORM.get(norm_key(title), "")
+
+
+# Genres for the handful of titles absent from every MAME data source (hacks,
+# homebrew, and TTL games with no MAME setname). Same shape as the year tables:
+# by setname where one exists, by normalized title otherwise.
+ARCADE_GENRE_BY_SETNAME = {
+    "cleansweept": "Maze",           # Macro's homebrew port of the 1982 Vectrex maze game
+    "mrdonight": "Maze",             # Mr. Do! hack
+    "popflamn": "Maze",              # bootleg; parent popflame is 'Maze / Shooter Small'
+    "spacerace": "Driving",          # Atari 1973: two rockets racing upward
+}
+ARCADE_GENRE_BY_NAME = {
+    "Computer Space": "Shooter",
+    "Pac-Manic Miner": "Platform",   # Manic Miner port on Pac-Man hardware
+}
+_ARCADE_GENRE_BY_NAME_NORM = {norm_key(k): v for k, v in ARCADE_GENRE_BY_NAME.items()}
+
+
+def arcade_genre(setname, title):
+    """Frozen genre for an arcade title catver + the DAT can't reach."""
+    if setname and ARCADE_GENRE_BY_SETNAME.get(setname.lower()):
+        return ARCADE_GENRE_BY_SETNAME[setname.lower()]
+    return _ARCADE_GENRE_BY_NAME_NORM.get(norm_key(title), "")
+
+
+# Rotation/players/controls for the handful of rows absent from BOTH MAD and
+# mame2003-plus: setname renames where the modern name is the parent (so the
+# clone-parent fallback can't reach the old entry), multi-carts, TTL games and
+# hacks with no MAME setname. Values hand-verified against current MAME driver
+# source / the games' own attract screens. Same vocabulary as parse_specs, and
+# applied through the same provisional (gray, MAD-wins) path — they self-heal.
+ARCADE_SPECS_BY_SETNAME = {
+    "aceattaca": {"ctl": "1 button", "spc": "Trackball"},   # rotary "hand" + trackball volleyball
+    "cocean1a": {"rot": "Vertical", "plr": "2", "ctl": "8-way · 2 buttons"},  # standard DECO cassette panel
+    "cps1mult": {"rot": "Horizontal", "plr": "2", "ctl": "8-way · 6 buttons"},  # CPS1 panel, 6 for SF2'
+    "fantasyu": {"rot": "Vertical", "plr": "2", "ctl": "8-way"},  # = old 'fantasy' mame2003 entry
+}
+ARCADE_SPECS_BY_NAME = {
+    "Computer Space": {"rot": "Horizontal", "plr": "1", "ctl": "4 buttons"},  # rotate x2/thrust/fire
+    # per its own attract screen: joy1 moves, joy2-right jumps (Pac-Man cocktail panel)
+    "Pac-Manic Miner": {"rot": "Vertical", "plr": "1", "ctl": "Double 4-way"},
+}
+_ARCADE_SPECS_BY_NAME_NORM = {norm_key(k): v for k, v in ARCADE_SPECS_BY_NAME.items()}
+
+
+def arcade_specs_pin(setname, title):
+    """Frozen provisional specs for a row neither MAD nor mame2003-plus covers."""
+    if setname and ARCADE_SPECS_BY_SETNAME.get(setname.lower()):
+        return ARCADE_SPECS_BY_SETNAME[setname.lower()]
+    return _ARCADE_SPECS_BY_NAME_NORM.get(norm_key(title), {})
 
 
 def core_build_date(title):
@@ -2146,7 +2209,8 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # genre from catver (DB) → catver-by-parent; manufacturer from the MRA
         # (DB) → MAME DAT by setname → by parent. Fills the clone-setname genre
         # gaps and the Toaplan/Nichibutsu/UPL manufacturer gaps.
-        genre = r["genre"] or genre_for(sn, arcade_cats or {}, arcade_meta or {})
+        genre = (r["genre"] or genre_for(sn, arcade_cats or {}, arcade_meta or {})
+                 or arcade_genre(sn, title))
         if not manufacturer:
             manufacturer = _dat_field(sn, arcade_meta, "manufacturer")
         # the FPGA core (rbf) the game runs on. Multi-game cores (jtcps2, ST-V,
@@ -2177,8 +2241,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     year = r["year"] or ""
     if not year and system in ("console", "computer"):
         year = CORE_YEAR.get(core_name(r["title"]), "")
-    if not year and system == "arcade":
-        year = arcade_year(sn, title) or _dat_field(sn, arcade_meta, "year")
+    # '?' also covers placeholder MRA years like '20??' (cps1mult), which the
+    # frozen override table should beat
+    if system == "arcade" and (not year or "?" in year):
+        year = arcade_year(sn, title) or _dat_field(sn, arcade_meta, "year") or year
     # Last Updated = the newest *shipped* build (what update_all delivers), not
     # repo activity: non-arcade cores carry it in the rbf filename's _YYYYMMDD
     # suffix, and arcade rows get their core rbf's filename date (harvested
@@ -2241,6 +2307,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # and they self-heal — once MAD has the value, the cell is no longer
         # blank so no provisional fill happens.
         sp = specs_for(sn, arcade_specs or {}, arcade_meta or {})
+        # hand-pinned specs for rows absent from both sources; real MAME data
+        # (sp) wins over a pin for any field both carry
+        pin = arcade_specs_pin(sn, title)
+        if pin:
+            sp = {**pin, **sp}
         prov = [k for k in ("rot", "plr", "ctl", "spc")
                 if not row.get(k) and sp.get(k)]
         for k in prov:

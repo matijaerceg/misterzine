@@ -2,6 +2,10 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
+## 2026-07-09
+- Every arcade game now shows a genre: the category data moved to a source tracking current MAME (the old one missed modern names like Street Fighter II' Hyper Fighting, Moonwalker and the PGM lineup), with the last few hacks and TTL games pinned by hand.
+- Screenshots for the games no database covers: Computer Space, Space Race, Pac-Manic Miner, Mr. Do's Nightmare, Clean Sweep, Devil Fish and Clockwork Aquario all have shots in their detail panels now. Their missing rotation/players/controls were filled too (shown gray, provisional).
+
 ## 2026-07-08
 - System photos now render at a consistent pixel density across the board (some were previously noticeably sharper than others).
 - The homebrew/demo cores (Chess, CHIP-8, Donut, Flappy Bird, Game of Life, SlugCross) now show a screenshot in their detail panel; the MSX core is retitled "MSX2" (it's the MSX2/2+/3 machine, distinct from the separate MSX1 core); refreshed hardware photos for Amstrad CPC, UK101, Tomy Tutor, Epoch Galaxy II and Nintendo 64.

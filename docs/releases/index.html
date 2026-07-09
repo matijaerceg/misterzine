@@ -41,7 +41,12 @@
      behavior (scrollbars, scrollIntoView, find-in-page) framed to the table
      region instead of the full viewport. */
   html, body { height: 100%; overflow: hidden; }
-  body { font: 14px/1.4 Roboto, system-ui, sans-serif; margin: 0; }
+  body { font: 14px/1.4 Roboto, system-ui, sans-serif; margin: 0; cursor: default; }
+  /* app-shell cursor: arrow everywhere (text stays selectable, just without
+     the I-beam), except links and the search field — cursor inherits, so both
+     need their intent restored explicitly */
+  a { cursor: pointer; }
+  input { cursor: text; }
   main { height: 100vh; height: 100dvh; display: flex; flex-direction: column; padding: 0 1rem; }
   .topbar { flex: none; position: relative; z-index: 20; background: Canvas; }
   header { margin: 0; padding: 1rem 0 0; }
@@ -100,31 +105,63 @@
      (either level without it re-breaks the shrink chain). .tablezone exists
      only to anchor the scroll-hint shadow overlays: the scroller itself can't
      host them (absolute children would scroll along with the content). */
-  .tablezone { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+  /* margin-right: -1rem cancels main's right padding so the table region (and
+     its scrollbars + the right fade hint) bleeds to the viewport edge; the
+     topbar above keeps its 1rem inset. Cell padding keeps text off the glass. */
+  .tablezone { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; margin-right: -1rem; }
   .tablewrap { flex: 1 1 auto; min-height: 0; overflow: auto; }
+  /* floating scrollbars: browsers whose native element scrollbars are classic
+     (they reserve a blank rail between table and viewport edge — Chrome on
+     Windows; overflow:overlay is gone since 114 and fluent OVERLAY bars are
+     not author-controllable) get the native bars hidden and replaced by these
+     floating auto-hiding thumbs, drawn/synced by syncScrollHints and gated by
+     the .custom-sb JS feature-detect. Browsers that already float their bars
+     (Firefox on Win11) keep the native ones: no .custom-sb, none of this. */
+  body.custom-sb .tablewrap { scrollbar-width: none; }
+  body.custom-sb .tablewrap::-webkit-scrollbar { display: none; }
+  .sb-thumb { position: absolute; z-index: 16; border-radius: 4px; touch-action: none;
+    background: color-mix(in srgb, CanvasText 40%, transparent);
+    opacity: 0; transition: opacity .25s; }
+  .sb-thumb.v { right: 2px; width: 7px; }
+  .sb-thumb.h { bottom: 2px; height: 7px; }
+  /* visible while scrolling (sb-show, timer-dropped after a beat), while
+     hovered (an invisible thumb still hit-tests, so brushing the edge reveals
+     it — how real overlay bars behave), and while being dragged */
+  .tablezone.sb-show .sb-thumb, .sb-thumb:hover, .sb-thumb.drag { opacity: 1; }
+  .sb-thumb:hover, .sb-thumb.drag { background: color-mix(in srgb, CanvasText 60%, transparent); }
   /* horizontal scroll hints (classes toggled by syncScrollHints): a fade at the
      right edge while more columns sit off-screen, and a shadow cast by the
      sticky Title column once scrolled, so content visibly slides under it.
-     color-mix with CanvasText keeps both legible in light and dark themes. */
-  .tablezone::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 16px;
+     Shadows stay BLACK in both themes (a CanvasText-based one turns into a
+     white glow on dark, which reads as light, not depth) — dark theme just
+     needs more opacity to register against a near-black background.
+     light-dark() follows the effective color-scheme, incl. auto mode. */
+  .tablezone { --hint-shadow: light-dark(rgb(0 0 0 / .20), rgb(0 0 0 / .75)); }
+  /* --hint-r-w / --hint-l-w are set per scroll event by syncScrollHints: full
+     width normally, tapering to 0 as its edge of the scroll range approaches,
+     so each hint shrinks away instead of blinking off.
+     No width transition — the per-scroll updates ARE the animation. */
+  /* --sbw/--sbh (measured scrollbar thickness) inset the overlays so the
+     shadows shade the content only, not the scrollbars themselves */
+  .tablezone::after { content: ""; position: absolute; top: 0; right: var(--sbw, 0px); bottom: var(--sbh, 0px);
+    width: var(--hint-r-w, 28px);
     pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
-    background: linear-gradient(to left, color-mix(in srgb, CanvasText 20%, transparent), transparent); }
+    background: linear-gradient(to left, var(--hint-shadow), transparent); }
   .tablezone.more-r::after { opacity: 1; }
   /* the left shadow is one continuous overlay too (a per-cell box-shadow gets
      sliced by the row borders); --titlew = the sticky Title column's right
      edge, measured by syncScrollHints (it moves with panel/window resizes) */
-  .tablezone::before { content: ""; position: absolute; top: 0; bottom: 0; left: var(--titlew, 0px);
-    width: 12px; pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
-    background: linear-gradient(to right, color-mix(in srgb, CanvasText 20%, transparent), transparent); }
+  .tablezone::before { content: ""; position: absolute; top: 0; bottom: var(--sbh, 0px); left: var(--titlew, 0px);
+    width: var(--hint-l-w, 12px); pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
+    background: linear-gradient(to right, var(--hint-shadow), transparent); }
   .tablezone.more-l::before { opacity: 1; }
   /* "no matches" row: a single message cell replacing the row list. Undo the
-     row/cell chrome (sticky first cell, hover tint, pointer). The inner div
+     row/cell chrome (sticky first cell, hover tint). The inner div
      pins to the scrollport's left edge and caps at the viewport width, so the
      centered message stays on-screen even when the table is wider than it. */
-  tr.nomatch, tr.nomatch td { cursor: default; }
   tr.nomatch td { position: static; border-right: 0; }
   tr.nomatch:hover td { background: none; }
-  tr.nomatch .msg { position: sticky; left: 0; max-width: calc(100vw - 2rem); text-align: center;
+  tr.nomatch .msg { position: sticky; left: 0; max-width: calc(100vw - 1rem); text-align: center;
                     color: #888; padding: 2.5rem .5rem; }
   tr.nomatch .msg b { font-weight: 600; color: CanvasText; }
   tr.nomatch .msg .esc { font-size: .85em; margin-top: .35rem; display: block; }
@@ -172,8 +209,8 @@
   .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid #8883;
              font-size: .8rem; line-height: 1.35; color: #888; max-width: 15rem; }
   .colnote .prov { font-style: italic; }
-  /* every row opens the detail panel */
-  tbody tr { cursor: pointer; }
+  /* every row opens the detail panel (arrow cursor on purpose: rows are
+     app-style select targets, not links — the hover tint signals clickability) */
   tr.open td { background: #06c3; }
   /* Title column pins to the scroller's left edge. It needs its own opaque
      paint: row backgrounds don't travel with a sticky cell, and the hover/open
@@ -579,22 +616,117 @@ function buildHeader() {
   syncScrollHints();  // toggling columns changes the table's scrollWidth
 }
 
+// Floating scrollbar thumbs (see the .sb-thumb CSS comment): only in browsers
+// whose native element scrollbars are classic, detected with a throwaway
+// scroller (classic bars eat layout space, overlay ones don't). Can't measure
+// .tablewrap itself: it has no overflow until the data loads.
+let vThumb = null, hThumb = null, sbDragging = false, sbHideTimer = 0;
+{
+  const probe = document.createElement('div');
+  probe.style.cssText = 'position:absolute;visibility:hidden;width:60px;height:60px;overflow:scroll';
+  document.body.appendChild(probe);
+  const classic = probe.offsetWidth > probe.clientWidth;
+  probe.remove();
+  if (classic) {
+    document.body.classList.add('custom-sb');
+    const z = document.querySelector('.tablezone');
+    vThumb = Object.assign(document.createElement('div'), { className: 'sb-thumb v', hidden: true });
+    hThumb = Object.assign(document.createElement('div'), { className: 'sb-thumb h', hidden: true });
+    z.append(vThumb, hThumb);
+    dragifyThumb(vThumb, false);
+    dragifyThumb(hThumb, true);
+  }
+}
+
+// dragging a thumb scrolls proportionally, like a native scrollbar
+function dragifyThumb(t, horiz) {
+  t.addEventListener('pointerdown', e => {
+    const w = document.querySelector('.tablewrap');
+    e.preventDefault();
+    t.setPointerCapture(e.pointerId);
+    t.classList.add('drag');
+    sbDragging = true;
+    const start = horiz ? e.clientX : e.clientY;
+    const startScroll = horiz ? w.scrollLeft : w.scrollTop;
+    const track = (horiz ? w.clientWidth - t.offsetWidth : w.clientHeight - t.offsetHeight);
+    const range = horiz ? w.scrollWidth - w.clientWidth : w.scrollHeight - w.clientHeight;
+    const move = ev => {
+      const d = (horiz ? ev.clientX : ev.clientY) - start;
+      w[horiz ? 'scrollLeft' : 'scrollTop'] = startScroll + d / track * range;
+    };
+    const up = () => {
+      t.removeEventListener('pointermove', move);
+      t.classList.remove('drag');
+      sbDragging = false;
+      clearTimeout(sbHideTimer);  // the drag's own scroll events armed it while sbDragging still held
+      sbHideTimer = setTimeout(() =>
+        document.querySelector('.tablezone').classList.remove('sb-show'), 900);
+    };
+    t.addEventListener('pointermove', move);
+    t.addEventListener('pointerup', up, { once: true });
+    t.addEventListener('pointercancel', up, { once: true });
+  });
+}
+
 // Horizontal scroll hints: keep the .tablezone shadow classes in sync with the
 // scroll position. Re-checked on scroll, on any scroller resize (window,
-// panel open/close/drag — the ResizeObserver below catches them all), and
-// after column toggles (buildHeader above).
+// panel open/close/drag — the ResizeObserver below catches them all), on
+// content resizes (rows/columns change the table's size without touching the
+// scroller's box, so the wrap's own observer misses them), and after column
+// toggles (buildHeader above).
 function syncScrollHints() {
   const w = document.querySelector('.tablewrap'), z = document.querySelector('.tablezone');
   z.classList.toggle('more-l', w.scrollLeft > 0);
   z.classList.toggle('more-r', w.scrollLeft + w.clientWidth < w.scrollWidth - 1);
+  // taper both hints near their end of the scroll range: each one's width
+  // tracks the distance to its edge (full width until the last ~6% / 48px
+  // minimum, then shrinking to 0), so they grow/shrink with scroll position
+  // instead of blinking on and off
+  const maxScroll = w.scrollWidth - w.clientWidth;
+  const remain = Math.max(0, maxScroll - w.scrollLeft);
+  const taper = Math.max(48, maxScroll * .06);
+  z.style.setProperty('--hint-r-w', Math.min(28, 28 * remain / taper).toFixed(1) + 'px');
+  z.style.setProperty('--hint-l-w', Math.min(12, 12 * w.scrollLeft / taper).toFixed(1) + 'px');
+  // scrollbar thickness (0 with overlay scrollbars), so the shadows can stop
+  // short of the scrollbars instead of shading them
+  z.style.setProperty('--sbw', (w.offsetWidth - w.clientWidth) + 'px');
+  z.style.setProperty('--sbh', (w.offsetHeight - w.clientHeight) + 'px');
   // pin the left shadow to the sticky Title column's right edge (the column is
   // percentage-sized, so the edge moves with every panel/window/column change)
   const th = document.querySelector('#hrow th');
   if (th) z.style.setProperty('--titlew',
     (th.getBoundingClientRect().right - z.getBoundingClientRect().left) + 'px');
+  // floating thumbs: length ∝ visible fraction, position ∝ scroll progress
+  if (vThumb) {
+    const canV = w.scrollHeight > w.clientHeight + 1;
+    const canH = w.scrollWidth > w.clientWidth + 1;
+    vThumb.hidden = !canV;
+    hThumb.hidden = !canH;
+    if (canV) {
+      const h = Math.max(24, w.clientHeight * w.clientHeight / w.scrollHeight);
+      vThumb.style.height = h + 'px';
+      vThumb.style.top = w.scrollTop / (w.scrollHeight - w.clientHeight) * (w.clientHeight - h) + 'px';
+    }
+    if (canH) {
+      const wd = Math.max(24, w.clientWidth * w.clientWidth / w.scrollWidth);
+      hThumb.style.width = wd + 'px';
+      hThumb.style.left = w.scrollLeft / (w.scrollWidth - w.clientWidth) * (w.clientWidth - wd) + 'px';
+    }
+  }
 }
 document.querySelector('.tablewrap').addEventListener('scroll', syncScrollHints, { passive: true });
 new ResizeObserver(syncScrollHints).observe(document.querySelector('.tablewrap'));
+new ResizeObserver(syncScrollHints).observe(document.querySelector('table'));
+// reveal the floating thumbs while scrolling, drop them again after a beat
+// (unless mid-drag — releasing outside the thumb must not strand it visible)
+document.querySelector('.tablewrap').addEventListener('scroll', () => {
+  if (!vThumb) return;
+  document.querySelector('.tablezone').classList.add('sb-show');
+  clearTimeout(sbHideTimer);
+  sbHideTimer = setTimeout(() => {
+    if (!sbDragging) document.querySelector('.tablezone').classList.remove('sb-show');
+  }, 900);
+}, { passive: true });
 
 function render() {
   const tb = document.getElementById('rows');

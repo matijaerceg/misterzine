@@ -3,9 +3,6 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-08
-- The table now runs to the right edge of the window, and its scrollbars float over the content instead of reserving a blank strip (browsers that can't float them natively get custom auto-hiding thumbs, draggable like the real thing).
-- The sideways-scroll edge shadows are now true dark shadows in dark mode too (they used to read as a white glow), the right fade is wider, and both shadows shrink away smoothly as you reach the end of the scroll instead of blinking off.
-- The cursor is now the plain arrow across the app (rows, labels, panel text); links keep the hand pointer and the search box keeps the text cursor.
 - System photos now render at a consistent pixel density across the board (some were previously noticeably sharper than others).
 - The homebrew/demo cores (Chess, CHIP-8, Donut, Flappy Bird, Game of Life, SlugCross) now show a screenshot in their detail panel; the MSX core is retitled "MSX2" (it's the MSX2/2+/3 machine, distinct from the separate MSX1 core); refreshed hardware photos for Amstrad CPC, UK101, Tomy Tutor and Epoch Galaxy II.
 - The site got a face for sharing: an "MZ" favicon (browser tab icon) and a social preview card, so pasted links on Discord/forums show the logo and a grid of arcade screenshots instead of bare text.

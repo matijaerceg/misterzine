@@ -1801,7 +1801,7 @@ CORE_YEAR = {
     "Laser310": "1983", "eg2000": "1982", "RX78": "1983", "TatungEinstein": "1984",
     "Lynx48": "1983", "Oric": "1983", "Jupiter": "1982", "Enterprise": "1985",
     "Interact": "1978", "Altair8800": "1975", "UK101": "1979", "EDSAC": "1949",
-    "MSX": "1983", "MSX1": "1983", "TK2000": "1984", "Galaksija": "1983", "Homelab": "1983",
+    "MSX": "1985", "MSX1": "1983", "TK2000": "1984", "Galaksija": "1983", "Homelab": "1983",
     "Specialist": "1985", "Ondra_SPO186": "1985", "PMD85": "1985", "IQ151": "1985",
     "BK0011M": "1990", "Vector-06C": "1987", "Apogee": "1988", "ORAO": "1984",
     # best-effort years for cores with no single vintage machine: ao486 = i486 era,
@@ -1888,6 +1888,7 @@ SYSTEM_TITLES = {
     "Lynx48": "Camputers Lynx",
     "MacPlus": "Macintosh Plus",
     "Minimig": "Amiga (Minimig)",
+    "MSX": "MSX2",  # this core is the MSX2/2+/3 machine; the separate MSX1 core is first-gen
     "Ondra_SPO186": "Ondra SPO 186",
     "ORAO": "Orao",
     "PC88": "PC-8801",

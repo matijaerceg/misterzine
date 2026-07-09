@@ -1211,14 +1211,15 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// swipe-left to close
+// swipe-left to close (touch only: mouse/pen drags are for text selection,
+// and desktop has ×/Esc/resizer-flick)
 let sx = 0, sy = 0, axis = null, dx = 0;
 panel.addEventListener('pointerdown', e => {
+  if (e.pointerType !== 'touch') return;
   if (e.target.closest('.close')) return;
   sx = e.clientX; sy = e.clientY; axis = null; dx = 0;
 });
 panel.addEventListener('pointermove', e => {
-  if (!e.buttons && e.pointerType === 'mouse') return;
   if (sx === 0 && sy === 0) return;
   const mx = e.clientX - sx, my = e.clientY - sy;
   if (!axis) {

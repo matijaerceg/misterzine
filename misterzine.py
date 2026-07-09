@@ -2269,6 +2269,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         updated = updated or commit_d
     else:
         updated = core_build_date(r["title"]) or commit_d
+    # last link in the fallback chain: the debut build is itself a shipped
+    # build, so a row with no other shipped signal floors at its debut date
+    # (a real shipped signal overwrites this the moment one exists; rows whose
+    # genuine shipped file PREDATES their debut are deliberately left alone)
+    updated = updated or date
     repo = _repo_for(r, core, repo_maps or {})
     row = {
         "title": title,
@@ -2385,6 +2390,8 @@ EXTRA_WEB_ROWS = [
         "date": "2018-06-02", "date_kind": "debut", "year": "1988",
         "manufacturer": "Sega", "core": "Genesis", "deprecated": True,
         "repo": "MiSTer-devel/Genesis_MiSTer",
+        # final rbf in the archived repo's releases/ (core retired for MegaDrive)
+        "updated": "2023-02-24",
     },
 ]
 

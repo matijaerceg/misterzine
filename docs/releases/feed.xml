@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://matijaerceg.github.io/misterzine/releases/feed.xml"/>
-<lastBuildDate>Wed, 08 Jul 2026 11:21:18 +0000</lastBuildDate>
+<lastBuildDate>Thu, 09 Jul 2026 19:13:45 +0000</lastBuildDate>
+<item>
+<title>[New] Trio The Punch - Never Forget Me... (Arcade)</title>
+<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#triothep</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Trio The Punch (World).mra:2026-07-09T19:13:45+00:00</guid>
+<pubDate>Thu, 09 Jul 2026 19:13:45 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: TrioThePunch&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TrioThePunch_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Epoch Galaxy II (Other core)</title>
 <link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#EpochGalaxyII</link>
@@ -893,15 +902,6 @@
 <title>[Updated] Altered Beast (Arcade)</title>
 <link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#altbeast</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Altered Beast/Altered Beast (set 5) (FD1094 317-0069).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/altbeast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Altered Beast (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#altbeast</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Altered Beast/Altered Beast (set 6) (8751 317-0076).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>

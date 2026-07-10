@@ -54,12 +54,21 @@ def title_keys(title):
 
 
 def build_index(tree, folder):
-    idx = defaultdict(list)
+    """Exact index plus a fallback alias index keyed by the filename's
+    ' - '-split first half, so a subtitle-less MiSTer title ('Trio The Punch')
+    can still find 'Trio The Punch - Never Forget Me... (World)'. Alias keys
+    never shadow exact ones: resolve() exhausts exact before trying alias."""
+    exact, alias = defaultdict(list), defaultdict(list)
     for t in tree["tree"]:
         p = t["path"]
         if t["type"] == "blob" and p.startswith(folder + "/") and p.endswith(".png"):
-            idx[norm(p[len(folder) + 1 : -4])].append(p[len(folder) + 1 : -4])
-    return idx
+            stem = p[len(folder) + 1 : -4]
+            exact[norm(stem)].append(stem)
+            if " - " in stem:
+                head = norm(stem.split(" - ")[0])
+                if head and head != norm(stem):
+                    alias[head].append(stem)
+    return {"exact": exact, "alias": alias}
 
 
 def _regions(name):
@@ -98,9 +107,12 @@ def resolve(title, idx):
     out = {}
     for f in FOLDERS:
         hit = None
-        for k in title_keys(title):
-            if k in idx[f]:
-                hit = pick(idx[f][k])
+        for tier in ("exact", "alias"):
+            for k in title_keys(title):
+                if k in idx[f][tier]:
+                    hit = pick(idx[f][tier][k])
+                    break
+            if hit:
                 break
         out[f] = hit
     return out

@@ -56,6 +56,36 @@ dashboard is public, linked as "Traffic Stats" in the header).
 - **Every entry has a shareable deep link** (e.g. `releases/#pacman` opens Pac-Man's
   panel); a 🔗 button copies it, and the browser Back gesture closes the panel on mobile.
 - Esc closes, arrow keys walk rows, theme toggle: auto / light / dark.
+- A **Launch button** that starts the game or core on your own MiSTer (see below).
+
+**Launch on your MiSTer**
+
+Every launchable entry's panel has a "▶ Launch on MiSTer" button that starts it on real
+hardware over your local network: arcade entries launch the actual game (the `.mra` must
+be on your SD card), console/computer entries load the core.
+
+Setup (once per browser):
+
+1. On the MiSTer, install and run **Remote** from
+   [MiSTer Extensions (mrext)](https://github.com/wizzomafizzo/mrext): available in
+   `update_all` (MiSTer Extensions repo), then Scripts → `remote`. It starts a small web
+   service on port 8182 and offers to keep itself running after reboots.
+2. On the site, open any entry, click the Launch button, and add your MiSTer's address
+   (hostname or IP; `mister.local` works on a stock setup, and the port defaults
+   to 8182). Give it a name if you have several.
+3. Click Launch. A tab flashes for a second while the request is handed to the MiSTer
+   (a browser page can't quietly talk to a local device, so the brief tab *is* the
+   request), then the game appears on your TV.
+
+Notes:
+
+- Multiple MiSTers are supported: the ▾ chevron next to the button adds, removes, and
+  switches devices; picking one launches on it and makes it the new default.
+- Device addresses live only in your browser's local storage; nothing is sent anywhere
+  except to your own MiSTer, on your own network.
+- Launching a game you don't have on the SD card fails politely: the flashed tab shows
+  Remote's error text before closing.
+- Works from a phone on the same wifi too.
 
 **RSS feeds** (last 30 days / 100 items, autodiscoverable from the page or via the
 header's "RSS" link; items deep-link to the entry on the site):

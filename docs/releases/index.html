@@ -295,15 +295,16 @@
   #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid #8886; border-radius: 3px; }
   #panel .frame { width: 100%; background: #000; margin: .5rem 0; position: relative; }
   #panel .frame img { width: 100%; height: 100%; object-fit: fill; display: block; }
-  /* CRT slot mask (mask.js) drawn over each screenshot in device pixels */
-  #panel .frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* CRT slot mask (mask.js) drawn over each screenshot in device pixels;
+     decorative only — must never swallow clicks/touches */
+  #panel .frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   /* console/computer hardware photo (transparent PNG) */
   #panel .sysphoto { display: block; margin: 1.75rem auto .9rem; width: 100%; height: auto;
                      max-height: 38vh; object-fit: contain; }
   /* JS wraps the photo so the mask canvas can overlay it (margins move here) */
   #panel .sysframe { position: relative; margin: 1.75rem auto .9rem; }
   #panel .sysframe .sysphoto { margin: 0; }
-  #panel .sysframe canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  #panel .sysframe canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: #888; opacity: .55;
                       font-size: .62rem; }
   #panel .syscredit a { color: inherit; }
@@ -1015,9 +1016,14 @@ function closeDropdowns(except) {
     if (dd.open && dd !== except) dd.open = false;
   }
 }
+// capture phase so a click that closes an open dropdown is CONSUMED — it must
+// not also land on whatever is underneath (opening a row was the offender)
 document.addEventListener('click', e => {
-  closeDropdowns(e.target.closest('details.cols'));
-});
+  const inside = e.target.closest('details.cols');
+  const anyOpen = document.querySelector('details.cols[open]');
+  closeDropdowns(inside);
+  if (anyOpen && !inside) { e.stopPropagation(); e.preventDefault(); }
+}, true);
 
 buildHeader();  // header renders immediately; rows follow once data.json loads
 
@@ -1123,8 +1129,20 @@ const b64url = s => btoa(Array.from(new TextEncoder().encode(s), b => String.fro
   .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
 function fireLaunch(dev, script, btn) {
-  const w = window.open('http://' + dev.h + '/api/l/' + b64url(script));
-  if (w) setTimeout(() => { try { w.close(); } catch (e) {} }, 1500);
+  // small popup (not a full tab), pre-painted dark before it navigates to the
+  // http:// LAN URL (top-level navigation is the only mixed-content-legal
+  // transport; the Remote response page itself can't be styled or read).
+  // 4s before auto-close: enough to read Remote's plain-text 500 on a miss.
+  const w = window.open('', '_blank', 'popup,width=460,height=180');
+  if (w) {
+    try {
+      w.document.write('<title>Launching…</title><body style="margin:0;display:grid;' +
+        'place-items:center;height:100vh;background:#141414;color:#999;' +
+        'font:13px system-ui">Launching on ' + dev.n.replace(/[<>&]/g, '') + '…</body>');
+    } catch (e) {}
+    w.location.replace('http://' + dev.h + '/api/l/' + b64url(script));
+    setTimeout(() => { try { w.close(); } catch (e) {} }, 4000);
+  }
   if (btn) {  // same flash-confirm rhythm as the copy buttons
     if (!btn.dataset.orig) btn.dataset.orig = btn.textContent;
     btn.classList.add('sent'); btn.textContent = 'Sent to ' + dev.n + ' ✓';
@@ -1257,7 +1275,11 @@ function openPanel(d, fromHistory) {
   // the MiSTer device popover anchors to the outgoing panel DOM — drop it
   if (metapopFor === 'mister') closePop();
   panel.innerHTML = detailHTML(d);
+  // always open at the top — re-assert after the reveal reflow too, since a
+  // same-frame layout (or a touch that opened the panel) can nudge it
   const body = panel.querySelector('.body'); if (body) body.scrollTop = 0;
+  panel.scrollTop = 0;
+  requestAnimationFrame(() => { if (body) body.scrollTop = 0; });
   panel.hidden = false;
   // force a reflow so the off-screen start position is committed before the
   // transition; otherwise the display:none→block toggle swallows the slide-in

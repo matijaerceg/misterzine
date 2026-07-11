@@ -44,10 +44,10 @@
     try { id = ctx.getImageData(0, 0, w, h); }
     catch (e) { return false; }
     var d = id.data;
-    // Lattice scale: integer multiple of device px (fractional would band),
-    // sized so the mask reads ~the same physical size on every display —
-    // 1 on classic desktops, 2 on 2x laptops, 3 on 3x phones.
-    var m = opts.scale || Math.max(1, Math.floor(dpr));
+    // Lattice scale: integer multiple of device px (fractional would band).
+    // 1x reads right on desktops up through 2x displays; only genuinely
+    // phone-dense screens (dpr >= 2.5) double it, and 2 is the ceiling.
+    var m = opts.scale || Math.min(2, Math.max(1, Math.round(dpr / 1.5)));
     for (var y = 0; y < h; y++) {
       var row = y * w * 4;
       var yy = (y / m) | 0;

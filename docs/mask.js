@@ -32,8 +32,9 @@
     canvas.width = w; canvas.height = h;
     var ctx = canvas.getContext('2d', { willReadFrequently: true });
     ctx.imageSmoothingEnabled = opts.smooth !== false;
-    if (opts.fit === 'cover') {
-      var s = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+    if (opts.fit === 'cover' || opts.fit === 'contain') {
+      var s = (opts.fit === 'cover' ? Math.max : Math.min)(
+        w / img.naturalWidth, h / img.naturalHeight);
       var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
       ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
     } else {
@@ -43,13 +44,19 @@
     try { id = ctx.getImageData(0, 0, w, h); }
     catch (e) { return false; }
     var d = id.data;
+    // Lattice scale: integer multiple of device px (fractional would band),
+    // sized so the mask reads ~the same physical size on every display —
+    // 1 on classic desktops, 2 on 2x laptops, 3 on 3x phones.
+    var m = opts.scale || Math.max(1, Math.floor(dpr));
     for (var y = 0; y < h; y++) {
       var row = y * w * 4;
+      var yy = (y / m) | 0;
       for (var x = 0; x < w; x++) {
         var p = row + x * 4;
-        var py = (x % 6) >= 3 ? y + 2 : y;
+        var xx = (x / m) | 0;
+        var py = (xx % 6) >= 3 ? yy + 2 : yy;
         var open = (py % 4) >= 1;
-        var st = x % 3;
+        var st = xx % 3;
         for (var ch = 0; ch < 3; ch++) {
           var c0 = S2L[d[p + ch]];
           var amp = 1 / (LIM * 3 / 12 + LIM * (9 / 12) * c0);

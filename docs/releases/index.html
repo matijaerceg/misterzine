@@ -294,8 +294,7 @@
                  background: Canvas; color: #888; font-size: .78rem; }
   #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid #8886; border-radius: 3px; }
   #panel .frame { width: 100%; background: #000; margin: .5rem 0; position: relative; }
-  #panel .frame img { width: 100%; height: 100%; object-fit: fill;
-                      image-rendering: pixelated; display: block; }
+  #panel .frame img { width: 100%; height: 100%; object-fit: fill; display: block; }
   /* CRT slot mask (mask.js) drawn over each screenshot in device pixels */
   #panel .frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   /* console/computer hardware photo (transparent PNG, nearest-neighbor upscale) */
@@ -1030,7 +1029,7 @@ function maskShot(img) {
   if (!f || !f.classList.contains('frame')) return;
   let cv = f.querySelector('canvas');
   if (!cv) { cv = document.createElement('canvas'); f.appendChild(cv); }
-  if (!window.mzMask(img, cv, { fit: 'fill', smooth: false })) cv.remove();
+  if (!window.mzMask(img, cv, { fit: 'fill' })) cv.remove();
 }
 panel.addEventListener('load', e => {
   if (e.target.tagName === 'IMG') maskShot(e.target);

@@ -299,6 +299,30 @@
                       font-size: .62rem; }
   #panel .syscredit a { color: inherit; }
 
+  /* Launch on MiSTer: split button under the panel title; chooser/manager
+     reuses the .rsspop popover chrome. Transport is a GET navigation
+     (window.open + auto-close) — see the launch section in the JS. */
+  #panel .launchrow { display: flex; gap: .3rem; margin: .5rem 0 0; }
+  #panel .launchrow button { font: inherit; font-size: .78rem; padding: .28rem .65rem; cursor: pointer;
+    border: 1px solid #8887; border-radius: 6px; background: Canvas; color: inherit; }
+  #panel .launchrow button:hover { border-color: #888c; }
+  #panel .launchrow .go.sent { color: #2a2; border-color: #2a28; }
+  /* must clear the panel (and its resizer, z 101) — the launch button lives inside the panel */
+  .misterpop { width: min(22rem, calc(100vw - 2rem)); z-index: 102; }
+  .misterpop .devrow { display: flex; gap: .45rem; align-items: center; margin: .35rem 0; }
+  .misterpop button { font: inherit; font-size: .78rem; padding: .22rem .55rem; cursor: pointer;
+    border: 1px solid #8887; border-radius: 6px; background: Canvas; color: inherit; }
+  .misterpop button:hover { border-color: #888c; }
+  .misterpop .devrow code { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #888; }
+  .misterpop .devrow .rm { border: none; padding: 0 .2rem; color: #888; }
+  .misterpop .devrow .rm:hover { color: #c33; border: none; }
+  .misterpop input { font: inherit; font-size: .78rem; padding: .25rem .45rem; border: 1px solid #8887;
+    border-radius: 6px; background: Canvas; color: inherit; min-width: 0; }
+  .misterpop .adder .nm { flex: 2; }
+  .misterpop .adder .ad { flex: 3; }
+  .misterpop .note { font-size: .72rem; margin-top: .5rem; }
+  .misterpop .note a { color: inherit; }
+
   /* draggable edge: resize the panel / flick left to close (reflow mode only) */
   #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; width: 12px; z-index: 101;
              left: var(--pw, round(calc(100vw / 3), 1px)); margin-left: -6px;
@@ -977,6 +1001,81 @@ const panel = document.getElementById('panel');
 const copyBtn = (v, label, icon) => '<button class="copy" data-copy="' + escA(v) +
   '" title="' + escA(label || 'Copy') + '">' + (icon || '⧉') + '</button>';
 
+// --- Launch on MiSTer -------------------------------------------------------
+// Talks to wizzo's mrext Remote service on the visitor's MiSTer (Scripts/
+// remote.sh, port 8182): GET /api/l/<UNPADDED base64url payload> launches an
+// absolute file path or a **system:<id> script (mrext's LaunchToken dialect —
+// NOT ZapScript: launch.system is "unknown command" here, and padded base64
+// is rejected). Bare /l/ must be avoided: the SPA serves every unknown route
+// with a 200, which looks like success and launches nothing. A GET
+// *navigation* is deliberately the transport — this https page may not
+// fetch() an http LAN address (mixed content), but it may navigate to one, so
+// the button window.open()s the URL and closes the tab a beat later. No
+// response is readable (fire-and-forget); failures (missing file on the SD,
+// device off) only flash their error text in the tab before it closes.
+// Devices persist per-browser in localStorage (mz-misters / mz-mister-last).
+
+// core/rbf name → mrext system id (pkg/games/systems.go), for non-arcade rows:
+// launching a "system" loads that core. Arcade rows launch their .mra by path
+// (d.mra) and don't use this. Cores absent here (no mrext id) get no button.
+const MISTER_SYS = Object.fromEntries([
+  // cores whose mrext system id matches the core name exactly
+  ...('AcornAtom AcornElectron AliceMC10 Amstrad Apogee Aquarius Atari800 BBCMicro BK0011M ' +
+      'C16 C64 CoCo2 EDSAC Galaksija Interact Jupiter Lynx48 MSX MSX1 MacPlus MultiComp ' +
+      'Oric PCXT PDP1 PET2001 PMD85 QL RX78 SAMCoupe SordM5 Specialist TSConf ' +
+      'TatungEinstein TomyTutor UK101 VIC20 X68000 ZX81 ZXNext ao486 ' +
+      'AdventureVision Arcadia Astrocade Atari5200 Atari7800 AtariLynx ChannelF ' +
+      'ColecoVision CreatiVision GBA Gamate Gameboy Genesis Intellivision Jaguar MegaCD ' +
+      'NES NeoGeo Odyssey2 PSX PokemonMini SNES Saturn SuperVision TurboGrafx16 VC4000 ' +
+      'Vectrex WonderSwan Arduboy Chip8').split(' ').map(s => [s, s]),
+  // renames between MiSTer rbf names and mrext ids
+  ...Object.entries({
+    'Amstrad-PCW': 'AmstradPCW', 'Apple-I': 'AppleI', 'Apple-II': 'AppleII',
+    'Casio_PV-2000': 'CasioPV2000', 'Laser310': 'Laser', 'Minimig': 'Amiga',
+    'ORAO': 'Orao', 'Svi328': 'SVI328', 'TRS-80': 'TRS80', 'Ti994a': 'TI994A',
+    'Vector-06C': 'Vector06C', 'ZX-Spectrum': 'ZXSpectrum',
+    'CDi': 'CDI', 'Casio_PV-1000': 'CasioPV1000', 'GameAndWatch': 'GameNWatch',
+    'GnW': 'GameNWatch', 'GameGear2P': 'GameGear', 'MegaDrive': 'Genesis',
+    'N64': 'Nintendo64', 'S32X': 'Sega32X', 'SGB': 'SuperGameboy', 'SMS': 'MasterSystem',
+  }),
+]);
+// what a row launches: arcade → its MRA's SD-card path; others → their system
+const launchScript = d => d.base === 'Arcade'
+  ? (d.mra ? '/media/fat/' + d.mra : null)
+  : (MISTER_SYS[d.core] ? '**system:' + MISTER_SYS[d.core] : null);
+
+let misters = [];
+try { misters = JSON.parse(localStorage.getItem('mz-misters') || '[]') || []; } catch (e) {}
+let lastMister = +localStorage.getItem('mz-mister-last') || 0;
+if (lastMister >= misters.length) lastMister = 0;
+const saveMisters = () => {
+  localStorage.setItem('mz-misters', JSON.stringify(misters));
+  localStorage.setItem('mz-mister-last', lastMister);
+};
+
+// URL-safe base64 of the UTF-8 bytes (MRA paths carry 'é', '&', apostrophes…)
+const b64url = s => btoa(Array.from(new TextEncoder().encode(s), b => String.fromCharCode(b)).join(''))
+  .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+function fireLaunch(dev, script, btn) {
+  const w = window.open('http://' + dev.h + '/api/l/' + b64url(script));
+  if (w) setTimeout(() => { try { w.close(); } catch (e) {} }, 1500);
+  if (btn) {  // same flash-confirm rhythm as the copy buttons
+    if (!btn.dataset.orig) btn.dataset.orig = btn.textContent;
+    btn.classList.add('sent'); btn.textContent = 'Sent to ' + dev.n + ' ✓';
+    setTimeout(() => { btn.classList.remove('sent'); btn.textContent = btn.dataset.orig; }, 1600);
+  }
+}
+
+const launchRowHTML = () => misters.length
+  ? '<button class="go">▶ Launch on ' + esc(misters[lastMister].n) + '</button>' +
+    '<button class="more" aria-label="Manage MiSTers">▾</button>'
+  : '<button class="go">▶ Launch on MiSTer…</button>';
+function updateLaunchRow() {
+  const lr = panel.querySelector('.launchrow');
+  if (lr) lr.innerHTML = launchRowHTML();
+}
+
 function detailHTML(d) {
   const rows = [['Type', typeLabel(d)]];
   if (d.genre) rows.push(['Genre', d.genre]);
@@ -1067,15 +1166,24 @@ function detailHTML(d) {
 
   // screenshots first so they own the viewport on open; derived detail text below.
   // .body scrolls; .hint is docked below it (built as a sibling, outside .body).
+  // launchable rows get the Launch-on-MiSTer split button under the title;
+  // the script rides along as a data attribute so the click handler needs no row lookup
+  const script = launchScript(d);
+  const launcher = script
+    ? '<div class="launchrow" data-script="' + escA(script) + '">' + launchRowHTML() + '</div>'
+    : '';
+
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') +
     (d.k ? copyBtn(rowURL(d), 'Copy link to this entry', '🔗') : '') + '</h2>' +
-    sysphoto + shots + dl + prose + report + '</div>' + hint;
+    launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
 function openPanel(d, fromHistory) {
   if (!d) return;
   openRow = d;
+  // the MiSTer device popover anchors to the outgoing panel DOM — drop it
+  if (metapopFor === 'mister') closePop();
   panel.innerHTML = detailHTML(d);
   const body = panel.querySelector('.body'); if (body) body.scrollTop = 0;
   panel.hidden = false;
@@ -1090,6 +1198,7 @@ function openPanel(d, fromHistory) {
 }
 
 function closePanel() {
+  if (metapopFor === 'mister') closePop();  // don't leave the device popover floating
   document.body.classList.remove('panel-open');
   // openRow is deliberately kept: the row stays highlighted after the panel
   // closes as a "you were here" marker (re-orientation aid, esp. after the
@@ -1164,6 +1273,15 @@ function flashCopy(cp) {
 panel.addEventListener('click', e => {
   const cp = e.target.closest('.copy');
   if (cp) { flashCopy(cp); return; }  // keep the panel open
+  const lr = e.target.closest('.launchrow');
+  if (lr) {
+    // chevron (or a first click with nothing configured) opens the device
+    // popover; the main button fires at the last-used device
+    if (e.target.closest('.more') || !misters.length) { openMisterPop(lr); return; }
+    const go = e.target.closest('.go');
+    if (go) { closePop(); fireLaunch(misters[lastMister], lr.dataset.script, go); }
+    return;
+  }
   if (e.target.closest('.close')) closePanel();
 });
 
@@ -1379,7 +1497,9 @@ document.addEventListener('click', e => {
   if (cp) { flashCopy(cp); return; }  // keep the popover open
   const a = e.target.closest('#rss-link, #pub-note');
   if (!a) {
-    if (metapop && !e.target.closest('.rsspop')) closePop();  // click outside closes
+    // click outside closes — but not the .launchrow click that just opened
+    // the MiSTer popover (this document handler runs after panel's)
+    if (metapop && !e.target.closest('.rsspop') && !e.target.closest('.launchrow')) closePop();
     return;
   }
   e.preventDefault();
@@ -1402,6 +1522,71 @@ document.addEventListener('click', e => {
   metapop.style.top = (r.bottom + 6) + 'px';
   document.body.appendChild(metapop);
 });
+
+// --- MiSTer device popover: chooser + manager for the Launch button ---------
+// Shares metapop/closePop with the meta-line popovers, so outside-click and
+// Esc handling come for free. Picking a device launches on it AND makes it
+// the default; the adder normalizes pasted addresses and assumes port 8182.
+function misterPopHTML() {
+  return (misters.length
+      ? '<p>Launch on:</p>' + misters.map((m, i) =>
+          '<div class="devrow"><button class="pick" data-i="' + i + '">▶ ' + esc(m.n) + '</button>' +
+          '<code>' + esc(m.h) + '</code>' +
+          '<button class="rm" data-i="' + i + '" aria-label="Remove ' + escA(m.n) + '">✕</button></div>').join('')
+      : '<p>Add your MiSTer to launch games straight from this page ' +
+        '(works when you’re on the same network as it).</p>') +
+    '<div class="devrow adder"><input class="nm" placeholder="Name (optional)">' +
+    '<input class="ad" placeholder="mister.local or IP">' +
+    '<button class="add">Add</button></div>' +
+    '<p class="note">Each MiSTer needs the <a href="https://github.com/wizzomafizzo/mrext/blob/main/docs/remote.md" ' +
+    'target="_blank" rel="noopener">Remote<span class="ext">↗</span></a> service running (Scripts → remote).</p>';
+}
+function onMisterPop(e) {
+  // handled clicks re-render the popover, detaching e.target — the document
+  // close-on-outside-click handler would then misread it as an outside click
+  if (e.stopPropagation) e.stopPropagation();
+  const pick = e.target.closest('.pick');
+  if (pick) {
+    lastMister = +pick.dataset.i;
+    saveMisters(); updateLaunchRow();
+    fireLaunch(misters[lastMister], metapop.dataset.script, panel.querySelector('.launchrow .go'));
+    closePop(); return;
+  }
+  const rm = e.target.closest('.rm');
+  if (rm) {
+    misters.splice(+rm.dataset.i, 1);
+    if (lastMister >= misters.length) lastMister = 0;
+    saveMisters(); metapop.innerHTML = misterPopHTML(); updateLaunchRow(); return;
+  }
+  if (e.target.closest('.add')) {
+    const nm = metapop.querySelector('.nm'), ad = metapop.querySelector('.ad');
+    let h = ad.value.trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+    if (!h) { ad.focus(); return; }
+    if (!/:\d+$/.test(h)) h += ':8182';
+    misters.push({ n: nm.value.trim() || h.replace(/:\d+$/, ''), h });
+    lastMister = misters.length - 1;
+    saveMisters(); metapop.innerHTML = misterPopHTML(); updateLaunchRow();
+  }
+}
+function openMisterPop(anchor) {
+  const again = metapopFor === 'mister' && metapop;
+  closePop();
+  if (again) { metapopFor = null; return; }  // second click on the trigger toggles it shut
+  metapopFor = 'mister';
+  metapop = document.createElement('div');
+  metapop.className = 'rsspop misterpop';
+  metapop.dataset.script = anchor.dataset.script;
+  metapop.innerHTML = misterPopHTML();
+  metapop.addEventListener('click', onMisterPop);
+  metapop.addEventListener('keydown', e => {  // Enter in either field = Add
+    if (e.key === 'Enter' && e.target.closest('input')) { e.preventDefault(); onMisterPop({ target: metapop.querySelector('.add') }); }
+  });
+  const r = anchor.getBoundingClientRect();
+  metapop.style.left = Math.max(8, Math.min(r.left, innerWidth - 360)) + 'px';
+  metapop.style.top = (r.bottom + 6) + 'px';
+  document.body.appendChild(metapop);
+  if (!misters.length) metapop.querySelector('.ad').focus();
+}
 
 fetch('./data.json').then(r => r.json()).then(d => {
   DATA = d;

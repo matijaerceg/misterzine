@@ -2305,6 +2305,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     if system != "arcade" and core in CORE_NOTES:
         row["note"] = CORE_NOTES[core]
     if system == "arcade":
+        # SD-card-relative MRA path (e.g. "_Arcade/Defender (Red Label).mra"):
+        # the display title strips the qualifiers the filename carries, so the
+        # site's launch-on-MiSTer button needs the real path shipped explicitly
+        if "path" in r.keys() and r["path"]:
+            row["mra"] = r["path"]
         # the row's own MAME setname ("ROM name"). Distinct from the screenshot
         # key (img), which can be a shared/borrowed setname.
         if sn:

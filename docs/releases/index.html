@@ -293,9 +293,11 @@
   #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid #8883;
                  background: Canvas; color: #888; font-size: .78rem; }
   #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid #8886; border-radius: 3px; }
-  #panel .frame { width: 100%; background: #000; margin: .5rem 0; }
+  #panel .frame { width: 100%; background: #000; margin: .5rem 0; position: relative; }
   #panel .frame img { width: 100%; height: 100%; object-fit: fill;
                       image-rendering: pixelated; display: block; }
+  /* CRT slot mask (mask.js) drawn over each screenshot in device pixels */
+  #panel .frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   /* console/computer hardware photo (transparent PNG, nearest-neighbor upscale) */
   #panel .sysphoto { display: block; margin: 1.75rem auto .9rem; width: 100%; height: auto;
                      max-height: 38vh; object-fit: contain; image-rendering: pixelated; }
@@ -410,6 +412,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
+<script src="../mask.js"></script>
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
@@ -1017,6 +1020,30 @@ buildHeader();  // header renders immediately; rows follow once data.json loads
 
 // --- detail panel ---
 const panel = document.getElementById('panel');
+
+// CRT slot mask over panel screenshots (mask.js, device-pixel accurate).
+// Only .frame imgs (game shots) — system photos stay untouched. Imgs mask as
+// they load; the ResizeObserver re-renders (debounced) on panel resize/open.
+function maskShot(img) {
+  if (!window.mzMask) return;
+  const f = img.parentElement;
+  if (!f || !f.classList.contains('frame')) return;
+  let cv = f.querySelector('canvas');
+  if (!cv) { cv = document.createElement('canvas'); f.appendChild(cv); }
+  if (!window.mzMask(img, cv, { fit: 'fill', smooth: false })) cv.remove();
+}
+panel.addEventListener('load', e => {
+  if (e.target.tagName === 'IMG') maskShot(e.target);
+}, true);
+let maskT;
+new ResizeObserver(() => {
+  clearTimeout(maskT);
+  maskT = setTimeout(() => {
+    panel.querySelectorAll('.frame img').forEach(img => {
+      if (img.complete && img.naturalWidth) maskShot(img);
+    });
+  }, 150);
+}).observe(panel);
 
 // click-to-copy affordance for panel values (delegated handler on #panel)
 const copyBtn = (v, label, icon) => '<button class="copy" data-copy="' + escA(v) +

@@ -90,6 +90,12 @@ Notes:
   launch, and `http://<mister-ip>:8182/api/systems` lists exactly which systems are
   launchable on your device. Installing the core (e.g. via `update_all` with the main
   MiSTer distribution enabled) makes it work immediately, no rescan needed.
+- Known limitation: if your cores come from the DB9/SNAC fork (an `update_all` option
+  for DB9 controller support), console/computer launches will always fail with
+  "no core found". Those builds use renamed core files (like
+  `SNES_20260611_22baeda_DB9.rbf`) that Remote cannot match to a system, and there is
+  no workaround short of also installing the official cores. Arcade launches are not
+  affected.
 - Works from a phone on the same wifi too.
 
 **RSS feeds** (last 30 days / 100 items, autodiscoverable from the page or via the

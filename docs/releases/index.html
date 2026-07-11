@@ -297,9 +297,13 @@
   #panel .frame img { width: 100%; height: 100%; object-fit: fill; display: block; }
   /* CRT slot mask (mask.js) drawn over each screenshot in device pixels */
   #panel .frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-  /* console/computer hardware photo (transparent PNG, nearest-neighbor upscale) */
+  /* console/computer hardware photo (transparent PNG) */
   #panel .sysphoto { display: block; margin: 1.75rem auto .9rem; width: 100%; height: auto;
-                     max-height: 38vh; object-fit: contain; image-rendering: pixelated; }
+                     max-height: 38vh; object-fit: contain; }
+  /* JS wraps the photo so the mask canvas can overlay it (margins move here) */
+  #panel .sysframe { position: relative; margin: 1.75rem auto .9rem; }
+  #panel .sysframe .sysphoto { margin: 0; }
+  #panel .sysframe canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: #888; opacity: .55;
                       font-size: .62rem; }
   #panel .syscredit a { color: inherit; }
@@ -1025,7 +1029,21 @@ const panel = document.getElementById('panel');
 // they load; the ResizeObserver re-renders (debounced) on panel resize/open.
 function maskShot(img) {
   if (!window.mzMask) return;
-  const f = img.parentElement;
+  let f = img.parentElement;
+  if (img.classList.contains('sysphoto')) {
+    // hardware photo: wrap once so the canvas has a positioned box to fill
+    if (!f.classList.contains('sysframe')) {
+      const w = document.createElement('div');
+      w.className = 'sysframe';
+      img.replaceWith(w);
+      w.appendChild(img);
+      f = w;
+    }
+    let cv = f.querySelector('canvas');
+    if (!cv) { cv = document.createElement('canvas'); f.appendChild(cv); }
+    if (!window.mzMask(img, cv, { fit: 'contain' })) cv.remove();
+    return;
+  }
   if (!f || !f.classList.contains('frame')) return;
   let cv = f.querySelector('canvas');
   if (!cv) { cv = document.createElement('canvas'); f.appendChild(cv); }
@@ -1038,7 +1056,7 @@ let maskT;
 new ResizeObserver(() => {
   clearTimeout(maskT);
   maskT = setTimeout(() => {
-    panel.querySelectorAll('.frame img').forEach(img => {
+    panel.querySelectorAll('.frame img, .sysphoto').forEach(img => {
       if (img.complete && img.naturalWidth) maskShot(img);
     });
   }, 150);

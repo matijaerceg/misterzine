@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
+## 2026-07-11
+- Fixed rows that showed a sibling release's screenshots (Darius II had the dual-screen version's shots, Tetris had Sega's instead of Atari's, plus Burnin' Rubber (DECO), TwinBee, Kangaroo, Jr. Pac-Man and Fantasy Zone II 16C); 13 more games upgraded to native-resolution shots. Multi-monitor games now render at true cabinet width (triple screen = three 4:3 displays), show a "Screens" row in the panel, and turn up when searching "dual screen" or "triple screen".
+
 ## 2026-07-10
 - **Launch games on your MiSTer from this page**: every entry's detail panel now has a Launch button (arcade games start the actual game, console/computer entries load the core). Needs wizzo's Remote script running on the MiSTer and a browser on the same network; add your MiSTer(s) once by name and address, and the button remembers your last-used device.
 - Search now treats each word as its own filter: "horizontal 4-way" finds entries matching both terms, in any order, across any field.

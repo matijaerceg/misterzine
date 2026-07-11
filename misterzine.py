@@ -1943,6 +1943,12 @@ CORE_NOTES = {
 }
 
 
+# Multi-screen cabinets whose MAME desc doesn't carry a "(dual screen)" /
+# "(triple screen)" qualifier (they had no single-screen sibling to
+# disambiguate from). Descs that DO carry it (Darius II, Sagaia) are parsed
+# directly in _web_row, so future multi-screen cores self-describe.
+ARCADE_SCREENS = {"darius": 3, "ninjaw": 3, "warriorb": 2}
+
 # Original arcade release years for titles whose MRA carries no <year> (or only
 # a '20??' placeholder) and which MAME 0.78-era data is too old to cover. The
 # IGS PGM years are MAME-accurate (web-verified); the rest are well-documented
@@ -2314,6 +2320,14 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # key (img), which can be a shared/borrowed setname.
         if sn:
             row["sn"] = sn
+        # multi-monitor cabinets: 2 or 3 screens, from the MAME desc qualifier
+        # ("(dual screen)"/"(triple screen)") or the ARCADE_SCREENS pins;
+        # omitted for ordinary single-screen games
+        m = re.search(r"\((dual|triple) screen\)",
+                      ((arcade_meta or {}).get(sn.lower()) or {}).get("desc", ""), re.I)
+        scr = {"dual": 2, "triple": 3}[m.group(1).lower()] if m else ARCADE_SCREENS.get(sn.lower())
+        if scr:
+            row["scr"] = scr
         # MAD metadata (rotation/resolution/players/controls/flip), display-ready
         row.update(mad_for(sn, arcade_mad or {}, arcade_meta or {}))
         # provisional fill for cells MAD hasn't catalogued yet: mame2003-plus

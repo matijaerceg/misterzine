@@ -22,6 +22,13 @@ SETNAME_ALIASES = {
     # gameover shot, so alias to the parent for a consistent full trio.
     "popflamn": "popflame",
 }
+# Hand-pinned libretro filename stems where the canonical pick is a different
+# machine: the site's Devil Fish row is the Galaxian-hardware bootleg
+# (devilfsg), but the plain "Devil Fish.png" is the Mars-hardware original
+# (devilfsh) — different visuals entirely.
+LIBRETRO_OVERRIDES = {
+    "Devil Fish": "Devil Fish (Galaxian hardware, bootleg_)",
+}
 # Order of preference for the third (in-game) shot.
 THIRD = ["gameover", "scores", "select", "bosses", "versus", "howto"]
 MACHINE = re.compile(r'<machine\s+name="([^"]+)"[^>]*?(?:\scloneof="([^"]+)")?[^>]*>')
@@ -82,8 +89,16 @@ def main():
     manifest = []
     n_title = n_snap = n_third = n_trio = n_libfallback = 0
     for r in arc:
-        title = r["title"]
-        sn = setmap.get(match.norm(title))
+        # key entries by the RAW title (mt): fetch_images and the CI libretro
+        # backfill both look manifest entries up by `mt or title`, and since
+        # title humanization the display title no longer matches that key
+        title = r.get("mt") or r["title"]
+        # the row's own setname (stamped at export from the catalog) is the
+        # truth. The norm-title join strips parentheticals, so siblings that
+        # differ only by a paren qualifier collapse to one key and the first
+        # setname wins for both (both Darius II rows got darius2d) — keep it,
+        # and the desc-index, as fallbacks for setname-less rows only.
+        sn = (r.get("sn") or "").lower() or setmap.get(match.norm(title))
         if not sn:  # backfill from MAME descriptions for setname-less titles
             sn = setname_backfill.resolve_setname(title, desc_idx, prefer=packs["snap"])
         sn = SETNAME_ALIASES.get(sn, sn)  # pin renamed MiSTer setnames to MAME
@@ -91,20 +106,28 @@ def main():
                  "title_img": None, "snap_img": None, "third_img": None, "third_pack": None}
         if sn:
             par = parent_of.get(sn, sn)
-            entry["source"] = "psnaps"
             t = in_pack(sn, par, packs["titles"])
             s = in_pack(sn, par, packs["snap"])
-            entry["title_img"] = t and f"titles/{t}.png"
-            entry["snap_img"] = s and f"snap/{s}.png"
-            for p in THIRD:
-                hit = in_pack(sn, par, packs[p])
-                if hit:
-                    entry["third_img"] = f"{p}/{hit}.png"
-                    entry["third_pack"] = p
-                    break
-        else:
-            # libretro display-name fallback (title + snap only)
-            res = match.resolve(title, lidx)
+            # claim psnaps only when the packs actually have something —
+            # otherwise fall through so the libretro fallback and the manual
+            # preservation below still get their chance (a setname alone used
+            # to stamp source="psnaps" with no images, clobbering both)
+            if t or s:
+                entry["source"] = "psnaps"
+                entry["title_img"] = t and f"titles/{t}.png"
+                entry["snap_img"] = s and f"snap/{s}.png"
+                for p in THIRD:
+                    hit = in_pack(sn, par, packs[p])
+                    if hit:
+                        entry["third_img"] = f"{p}/{hit}.png"
+                        entry["third_pack"] = p
+                        break
+        if not entry["title_img"] and not entry["snap_img"]:
+            # libretro display-name fallback (title + snap only) — for rows
+            # with no setname AND for setnames the psnaps packs don't carry
+            pin = LIBRETRO_OVERRIDES.get(title)
+            res = ({"Named_Titles": pin, "Named_Snaps": pin} if pin
+                   else match.resolve(title, lidx))
             if res["Named_Titles"] or res["Named_Snaps"]:
                 entry["source"] = "libretro"
                 entry["title_img"] = res["Named_Titles"] and f"Named_Titles/{res['Named_Titles']}.png"

@@ -821,7 +821,8 @@ function apply() {
     const hay = fold(d.title + ' ' + (d.mt || '') + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
             (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
-            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || ''));
+            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || '') + ' ' +
+            (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : ''));
     return terms.every(t => hay.includes(t));
   });
   if (sortKey) {
@@ -1096,6 +1097,8 @@ function detailHTML(d) {
       rows.push([label, d[key]]);
   };
   specRow('Rotation', 'rot');
+  // multi-monitor cabinets only (pipeline `scr` field); single screen is implied
+  if (d.scr) rows.push(['Screens', d.scr === 3 ? 'Triple screen (3)' : 'Dual screen (2)']);
   specRow('Resolution', 'res');
   specRow('Players', 'plr');
   specRow('Controls', 'ctl');
@@ -1123,18 +1126,21 @@ function detailHTML(d) {
       (d.img ? '\nSetname: ' + d.img : '') + '\n\nWhat looks wrong:\n');
   const report = '<p class="report">Something wrong with this entry? <a href="' + escA(issueURL) +
     '" target="_blank" rel="noopener">Report a problem<span class="ext">↗</span></a></p>';
-  // already-superwide screenshots (dual/triple-screen: Sagaia, Darius, …) → 8:3.
-  // 2.4 sits below the dual-screen cluster (2.67+) but above wide single screens
-  // like the PGM 448x224 games (2.0), which stay 4:3.
-  // Precedence: (1) ASPECT_OVERRIDE escape hatch; (2) 8:3 for genuine dual/triple
-  // screens (all tagged Horizontal, so rotation can't detect them — must stay
-  // dimension-driven); (3) the MAD rotation column (d.rot) — the primary signal,
-  // right where a raster's raw w/h misleads (square DECO Cassette games, TATE
-  // games in a landscape raster, non-square pixels); (4) dimension fallback for
-  // the few rows with no rotation. Keyed by setname (d.img) for the override.
+  // multi-monitor cabinets: N screens = N 4:3 CRTs side by side, so dual → 8:3
+  // and triple → 12:3, driven by the pipeline's `scr` field (MAME desc + pins).
+  // Precedence: (1) ASPECT_OVERRIDE escape hatch; (2) d.scr (dual/triple);
+  // (3) the >= 2.4 dimension heuristic, kept as a net for a superwide shot on a
+  // row missing `scr` (2.4 sits below the dual-screen cluster at 2.67+ but above
+  // wide single screens like the PGM 448x224 games at 2.0, which stay 4:3);
+  // (4) the MAD rotation column (d.rot) — the primary signal, right where a
+  // raster's raw w/h misleads (square DECO Cassette games, TATE games in a
+  // landscape raster, non-square pixels); (5) dimension fallback for the few
+  // rows with no rotation. Keyed by setname (d.img) for the override.
   const aspect = d.img_h ? d.img_w / d.img_h : 1;
   const ratio = ASPECT_OVERRIDE[d.img] ||
-    (aspect >= 2.4 ? '8 / 3'
+    (d.scr === 3 ? '12 / 3'
+      : d.scr === 2 ? '8 / 3'
+      : aspect >= 2.4 ? '8 / 3'
       : d.rot ? (d.rot.startsWith('Vertical') ? '3 / 4' : '4 / 3')
       : (d.img_w > d.img_h ? '4 / 3' : '3 / 4'));
   const shots = (d.img_slots || []).map(s =>

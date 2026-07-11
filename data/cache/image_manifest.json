@@ -307,11 +307,11 @@
  },
  {
   "title": "Jr. Pac-Man",
-  "setname": "jrpacmanf",
+  "setname": "jrpacman",
   "source": "psnaps",
-  "title_img": "titles/jrpacmanf.png",
-  "snap_img": "snap/jrpacmanf.png",
-  "third_img": "gameover/jrpacmanf.png",
+  "title_img": "titles/jrpacman.png",
+  "snap_img": "snap/jrpacman.png",
+  "third_img": "gameover/jrpacman.png",
   "third_pack": "gameover"
  },
  {
@@ -361,12 +361,12 @@
  },
  {
   "title": "Mighty Monkey",
-  "setname": "mimonkey",
+  "setname": "mimonscr",
   "source": "psnaps",
-  "title_img": "titles/mimonkey.png",
-  "snap_img": "snap/mimonkey.png",
-  "third_img": "gameover/mimonkey.png",
-  "third_pack": "gameover"
+  "title_img": "titles/mimonscr.png",
+  "snap_img": "snap/mimonscr.png",
+  "third_img": null,
+  "third_pack": null
  },
  {
   "title": "Minefield",
@@ -523,12 +523,12 @@
  },
  {
   "title": "Super Glob",
-  "setname": "suprglob",
+  "setname": "sprglbpg",
   "source": "psnaps",
-  "title_img": "titles/suprglob.png",
-  "snap_img": "snap/suprglob.png",
-  "third_img": "scores/suprglob.png",
-  "third_pack": "scores"
+  "title_img": "titles/sprglbpg.png",
+  "snap_img": "snap/sprglbpg.png",
+  "third_img": "gameover/sprglbpg.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Tazz-Mania",
@@ -685,12 +685,12 @@
  },
  {
   "title": "Moon Cresta",
-  "setname": "mooncrst",
+  "setname": "mooncrgx",
   "source": "psnaps",
-  "title_img": "titles/mooncrst.png",
-  "snap_img": "snap/mooncrst.png",
-  "third_img": "gameover/mooncrst.png",
-  "third_pack": "gameover"
+  "title_img": "titles/mooncrgx.png",
+  "snap_img": "snap/mooncrgx.png",
+  "third_img": "scores/mooncrgx.png",
+  "third_pack": "scores"
  },
  {
   "title": "Moon Quasar",
@@ -780,6 +780,15 @@
   "title_img": "titles/mpatrol.png",
   "snap_img": "snap/mpatrol.png",
   "third_img": "gameover/mpatrol.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Burger Time (DECO)",
+  "setname": "btime",
+  "source": "psnaps",
+  "title_img": "titles/btime.png",
+  "snap_img": "snap/btime.png",
+  "third_img": "gameover/btime.png",
   "third_pack": "gameover"
  },
  {
@@ -1342,11 +1351,11 @@
  },
  {
   "title": "Tetris",
-  "setname": "tetrisse",
+  "setname": "atetris",
   "source": "psnaps",
-  "title_img": "titles/tetrisse.png",
-  "snap_img": "snap/tetrisse.png",
-  "third_img": "gameover/tetrisse.png",
+  "title_img": "titles/atetris.png",
+  "snap_img": "snap/atetris.png",
+  "third_img": "gameover/atetris.png",
   "third_pack": "gameover"
  },
  {
@@ -1764,15 +1773,6 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Street Fighter II The World Warrior",
-  "setname": "sf2",
-  "source": "psnaps",
-  "title_img": "titles/sf2.png",
-  "snap_img": "snap/sf2.png",
-  "third_img": "gameover/sf2.png",
-  "third_pack": "gameover"
- },
- {
   "title": "Street Fighter II' Champion Edition",
   "setname": "sf2ce",
   "source": "psnaps",
@@ -1789,6 +1789,15 @@
   "snap_img": "snap/sf2hf.png",
   "third_img": "scores/sf2hf.png",
   "third_pack": "scores"
+ },
+ {
+  "title": "Street Fighter II The World Warrior",
+  "setname": "sf2",
+  "source": "psnaps",
+  "title_img": "titles/sf2.png",
+  "snap_img": "snap/sf2.png",
+  "third_img": "gameover/sf2.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Street Fighter Zero",
@@ -3042,21 +3051,21 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Super Street Fighter II The New Challengers",
-  "setname": "ssf2",
-  "source": "psnaps",
-  "title_img": "titles/ssf2.png",
-  "snap_img": "snap/ssf2.png",
-  "third_img": "gameover/ssf2.png",
-  "third_pack": "gameover"
- },
- {
   "title": "Super Street Fighter II Turbo",
   "setname": "ssf2t",
   "source": "psnaps",
   "title_img": "titles/ssf2t.png",
   "snap_img": "snap/ssf2t.png",
   "third_img": "gameover/ssf2t.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Super Street Fighter II The New Challengers",
+  "setname": "ssf2",
+  "source": "psnaps",
+  "title_img": "titles/ssf2.png",
+  "snap_img": "snap/ssf2.png",
+  "third_img": "gameover/ssf2.png",
   "third_pack": "gameover"
  },
  {
@@ -3087,21 +3096,21 @@
   "third_pack": "gameover"
  },
  {
-  "title": "X-Men Children of the Atom",
-  "setname": "xmcota",
-  "source": "psnaps",
-  "title_img": "titles/xmcota.png",
-  "snap_img": "snap/xmcota.png",
-  "third_img": "gameover/xmcota.png",
-  "third_pack": "gameover"
- },
- {
   "title": "X-Men Vs. Street Fighter",
   "setname": "xmvsf",
   "source": "psnaps",
   "title_img": "titles/xmvsf.png",
   "snap_img": "snap/xmvsf.png",
   "third_img": "gameover/xmvsf.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "X-Men Children of the Atom",
+  "setname": "xmcota",
+  "source": "psnaps",
+  "title_img": "titles/xmcota.png",
+  "snap_img": "snap/xmcota.png",
+  "third_img": "gameover/xmcota.png",
   "third_pack": "gameover"
  },
  {
@@ -3231,6 +3240,15 @@
   "third_pack": "gameover"
  },
  {
+  "title": "Gallop - Armed Police Unit",
+  "setname": "gallopm72",
+  "source": "psnaps",
+  "title_img": "titles/gallopm72.png",
+  "snap_img": "snap/gallopm72.png",
+  "third_img": "scores/gallopm72.png",
+  "third_pack": "scores"
+ },
+ {
   "title": "Blade Master",
   "setname": "bmaster",
   "source": "psnaps",
@@ -3274,15 +3292,6 @@
   "snap_img": "snap/dsoccr94.png",
   "third_img": "gameover/dsoccr94.png",
   "third_pack": "gameover"
- },
- {
-  "title": "Gallop - Armed Police Unit",
-  "setname": "gallopm72",
-  "source": "psnaps",
-  "title_img": "titles/gallopm72.png",
-  "snap_img": "snap/gallopm72.png",
-  "third_img": "scores/gallopm72.png",
-  "third_pack": "scores"
  },
  {
   "title": "Gun Force II",
@@ -3565,11 +3574,11 @@
  },
  {
   "title": "TwinBee",
-  "setname": "twinbeeb",
+  "setname": "twinbee",
   "source": "psnaps",
-  "title_img": "titles/twinbeeb.png",
-  "snap_img": "snap/twinbeeb.png",
-  "third_img": "gameover/twinbeeb.png",
+  "title_img": "titles/twinbee.png",
+  "snap_img": "snap/twinbee.png",
+  "third_img": "gameover/twinbee.png",
   "third_pack": "gameover"
  },
  {
@@ -3844,11 +3853,11 @@
  },
  {
   "title": "Ace Attacker",
-  "setname": "aceattac",
+  "setname": "aceattaca",
   "source": "psnaps",
-  "title_img": "titles/aceattac.png",
-  "snap_img": "snap/aceattac.png",
-  "third_img": "gameover/aceattac.png",
+  "title_img": "titles/aceattaca.png",
+  "snap_img": "snap/aceattaca.png",
+  "third_img": "gameover/aceattaca.png",
   "third_pack": "gameover"
  },
  {
@@ -3979,11 +3988,11 @@
  },
  {
   "title": "Fantasy Zone II - The Tears of Opa-Opa (System 16C version)",
-  "setname": "fantzn2",
+  "setname": "fantzn2x",
   "source": "psnaps",
-  "title_img": "titles/fantzn2.png",
-  "snap_img": "snap/fantzn2.png",
-  "third_img": "gameover/fantzn2.png",
+  "title_img": "titles/fantzn2x.png",
+  "snap_img": "snap/fantzn2x.png",
+  "third_img": "gameover/fantzn2x.png",
   "third_pack": "gameover"
  },
  {
@@ -4042,11 +4051,11 @@
  },
  {
   "title": "Quartet 2",
-  "setname": "quartet2",
+  "setname": "quartet2a",
   "source": "psnaps",
-  "title_img": "titles/quartet2.png",
-  "snap_img": "snap/quartet2.png",
-  "third_img": "scores/quartet2.png",
+  "title_img": "titles/quartet2a.png",
+  "snap_img": "snap/quartet2a.png",
+  "third_img": "scores/quartet2a.png",
   "third_pack": "scores"
  },
  {
@@ -4474,11 +4483,11 @@
  },
  {
   "title": "Chouji Meikyuu Legion",
-  "setname": "legionj",
+  "setname": "legionj2",
   "source": "psnaps",
-  "title_img": "titles/legionj.png",
-  "snap_img": "snap/legionj.png",
-  "third_img": "gameover/legionj.png",
+  "title_img": "titles/legionj2.png",
+  "snap_img": "snap/legionj2.png",
+  "third_img": "gameover/legionj2.png",
   "third_pack": "gameover"
  },
  {
@@ -4546,11 +4555,11 @@
  },
  {
   "title": "Terra Force",
-  "setname": "terraf",
+  "setname": "terrafj",
   "source": "psnaps",
-  "title_img": "titles/terraf.png",
-  "snap_img": "snap/terraf.png",
-  "third_img": "gameover/terraf.png",
+  "title_img": "titles/terrafj.png",
+  "snap_img": "snap/terrafj.png",
+  "third_img": "gameover/terrafj.png",
   "third_pack": "gameover"
  },
  {
@@ -5221,11 +5230,11 @@
  },
  {
   "title": "The Next Space",
-  "setname": "tnextspc",
+  "setname": "tnextspcj",
   "source": "psnaps",
-  "title_img": "titles/tnextspc.png",
-  "snap_img": "snap/tnextspc.png",
-  "third_img": "gameover/tnextspc.png",
+  "title_img": "titles/tnextspcj.png",
+  "snap_img": "snap/tnextspcj.png",
+  "third_img": "gameover/tnextspcj.png",
   "third_pack": "gameover"
  },
  {
@@ -5338,20 +5347,20 @@
  },
  {
   "title": "Same! Same! Same!",
-  "setname": "samesame",
+  "setname": "samesame2",
   "source": "psnaps",
-  "title_img": "titles/samesame.png",
-  "snap_img": "snap/samesame.png",
-  "third_img": "scores/samesame.png",
-  "third_pack": "scores"
+  "title_img": "titles/samesame2.png",
+  "snap_img": "snap/samesame2.png",
+  "third_img": "gameover/samesame2.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Vimana",
-  "setname": "vimana",
+  "setname": "vimanaj",
   "source": "psnaps",
-  "title_img": "titles/vimana.png",
-  "snap_img": "snap/vimana.png",
-  "third_img": "gameover/vimana.png",
+  "title_img": "titles/vimanaj.png",
+  "snap_img": "snap/vimanaj.png",
+  "third_img": "gameover/vimanaj.png",
   "third_pack": "gameover"
  },
  {
@@ -5374,17 +5383,17 @@
  },
  {
   "title": "Demon's World - Horror Story",
-  "setname": "demonwld",
+  "setname": "demonwld2",
   "source": "psnaps",
-  "title_img": "titles/demonwld.png",
-  "snap_img": "snap/demonwld.png",
-  "third_img": "gameover/demonwld.png",
+  "title_img": "titles/demonwld2.png",
+  "snap_img": "snap/demonwld2.png",
+  "third_img": "gameover/demonwld2.png",
   "third_pack": "gameover"
  },
  {
   "title": "Adventure Canoe",
   "setname": "adcanoe",
-  "source": "psnaps",
+  "source": null,
   "title_img": null,
   "snap_img": null,
   "third_img": null,
@@ -5527,11 +5536,11 @@
  },
  {
   "title": "P-47 - The Freedom Fighter",
-  "setname": "p47a",
+  "setname": "p47j",
   "source": "psnaps",
-  "title_img": "titles/p47a.png",
-  "snap_img": "snap/p47a.png",
-  "third_img": "gameover/p47a.png",
+  "title_img": "titles/p47j.png",
+  "snap_img": "snap/p47j.png",
+  "third_img": "gameover/p47j.png",
   "third_pack": "gameover"
  },
  {
@@ -6003,15 +6012,6 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Gradius III",
-  "setname": "gradius3",
-  "source": "psnaps",
-  "title_img": "titles/gradius3.png",
-  "snap_img": "snap/gradius3.png",
-  "third_img": "scores/gradius3.png",
-  "third_pack": "scores"
- },
- {
   "title": "Toki",
   "setname": "toki",
   "source": "psnaps",
@@ -6090,42 +6090,6 @@
   "title_img": "titles/suprloco.png",
   "snap_img": "snap/suprloco.png",
   "third_img": "gameover/suprloco.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Golfing Greats",
-  "setname": "glfgreat",
-  "source": "psnaps",
-  "title_img": "titles/glfgreat.png",
-  "snap_img": "snap/glfgreat.png",
-  "third_img": "gameover/glfgreat.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Lightning Fighters",
-  "setname": "lgtnfght",
-  "source": "psnaps",
-  "title_img": "titles/lgtnfght.png",
-  "snap_img": "snap/lgtnfght.png",
-  "third_img": "gameover/lgtnfght.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Sunset Riders",
-  "setname": "ssriders",
-  "source": "psnaps",
-  "title_img": "titles/ssriders.png",
-  "snap_img": "snap/ssriders.png",
-  "third_img": "gameover/ssriders.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Teenage Mutant Ninja Turtles Turtles in Time",
-  "setname": "tmnt2",
-  "source": "psnaps",
-  "title_img": "titles/tmnt2.png",
-  "snap_img": "snap/tmnt2.png",
-  "third_img": "gameover/tmnt2.png",
   "third_pack": "gameover"
  },
  {
@@ -6300,15 +6264,6 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Find Love",
-  "setname": "findlove",
-  "source": "psnaps",
-  "title_img": "titles/findlove.png",
-  "snap_img": "snap/findlove.png",
-  "third_img": "gameover/findlove.png",
-  "third_pack": "gameover"
- },
- {
   "title": "Funky Head Boxers",
   "setname": "fhboxers",
   "source": "psnaps",
@@ -6342,15 +6297,6 @@
   "title_img": "titles/grdforce.png",
   "snap_img": "snap/grdforce.png",
   "third_img": "gameover/grdforce.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Hanagumi Taisen Columns - Sakura Wars",
-  "setname": "hanagumi",
-  "source": "psnaps",
-  "title_img": "titles/hanagumi.png",
-  "snap_img": "snap/hanagumi.png",
-  "third_img": "gameover/hanagumi.png",
   "third_pack": "gameover"
  },
  {
@@ -6442,6 +6388,15 @@
   "snap_img": "snap/rsgun.png",
   "third_img": "scores/rsgun.png",
   "third_pack": "scores"
+ },
+ {
+  "title": "Hanagumi Taisen Columns - Sakura Wars",
+  "setname": "hanagumi",
+  "source": "psnaps",
+  "title_img": "titles/hanagumi.png",
+  "snap_img": "snap/hanagumi.png",
+  "third_img": "gameover/hanagumi.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Sea Bass Fishing",
@@ -6576,6 +6531,15 @@
   "title_img": "titles/znpwfv.png",
   "snap_img": "snap/znpwfv.png",
   "third_img": "gameover/znpwfv.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Find Love",
+  "setname": "findlove",
+  "source": "psnaps",
+  "title_img": "titles/findlove.png",
+  "snap_img": "snap/findlove.png",
+  "third_img": "gameover/findlove.png",
   "third_pack": "gameover"
  },
  {
@@ -6832,20 +6796,20 @@
  },
  {
   "title": "Armed Police Batrider",
-  "setname": "batrider",
+  "setname": "batriderj",
   "source": "psnaps",
-  "title_img": "titles/batrider.png",
-  "snap_img": "snap/batrider.png",
-  "third_img": "gameover/batrider.png",
+  "title_img": "titles/batriderj.png",
+  "snap_img": "snap/batriderj.png",
+  "third_img": "gameover/batriderj.png",
   "third_pack": "gameover"
  },
  {
   "title": "Battle Bakraid - Unlimited Version",
-  "setname": "bbakraid",
+  "setname": "bbakraidj",
   "source": "psnaps",
-  "title_img": "titles/bbakraid.png",
-  "snap_img": "snap/bbakraid.png",
-  "third_img": "gameover/bbakraid.png",
+  "title_img": "titles/bbakraidj.png",
+  "snap_img": "snap/bbakraidj.png",
+  "third_img": "gameover/bbakraidj.png",
   "third_pack": "gameover"
  },
  {
@@ -6993,15 +6957,6 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Caliber 50",
-  "setname": "calibr50",
-  "source": "psnaps",
-  "title_img": "titles/calibr50.png",
-  "snap_img": "snap/calibr50.png",
-  "third_img": "gameover/calibr50.png",
-  "third_pack": "gameover"
- },
- {
   "title": "Hishou Zame",
   "setname": "hishouza",
   "source": "psnaps",
@@ -7021,11 +6976,11 @@
  },
  {
   "title": "Snow Bros. - Nick & Tom",
-  "setname": "snowbros",
+  "setname": "snowbrosj",
   "source": "psnaps",
-  "title_img": "titles/snowbros.png",
-  "snap_img": "snap/snowbros.png",
-  "third_img": "gameover/snowbros.png",
+  "title_img": "titles/snowbrosj.png",
+  "snap_img": "snap/snowbrosj.png",
+  "third_img": "gameover/snowbrosj.png",
   "third_pack": "gameover"
  },
  {
@@ -7035,15 +6990,6 @@
   "title_img": "titles/snowbro2.png",
   "snap_img": "snap/snowbro2.png",
   "third_img": "gameover/snowbro2.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Premier Soccer",
-  "setname": "prmrsocr",
-  "source": "psnaps",
-  "title_img": "titles/prmrsocr.png",
-  "snap_img": "snap/prmrsocr.png",
-  "third_img": "gameover/prmrsocr.png",
   "third_pack": "gameover"
  },
  {
@@ -7129,11 +7075,11 @@
  },
  {
   "title": "Kangaroo",
-  "setname": "kangarooa",
+  "setname": "kangaroo",
   "source": "psnaps",
-  "title_img": "titles/kangarooa.png",
-  "snap_img": "snap/kangarooa.png",
-  "third_img": "gameover/kangarooa.png",
+  "title_img": "titles/kangaroo.png",
+  "snap_img": "snap/kangaroo.png",
+  "third_img": "gameover/kangaroo.png",
   "third_pack": "gameover"
  },
  {
@@ -7147,11 +7093,11 @@
  },
  {
   "title": "Kangaroo (Bootleg)",
-  "setname": "kangarooa",
+  "setname": "kangaroob",
   "source": "psnaps",
-  "title_img": "titles/kangarooa.png",
-  "snap_img": "snap/kangarooa.png",
-  "third_img": "gameover/kangarooa.png",
+  "title_img": "titles/kangaroob.png",
+  "snap_img": "snap/kangaroob.png",
+  "third_img": "gameover/kangaroob.png",
   "third_pack": "gameover"
  },
  {
@@ -7389,6 +7335,33 @@
   "third_pack": "gameover"
  },
  {
+  "title": "Puzzle Star",
+  "setname": "puzlstar",
+  "source": "psnaps",
+  "title_img": "titles/puzlstar.png",
+  "snap_img": "snap/puzlstar.png",
+  "third_img": "scores/puzlstar.png",
+  "third_pack": "scores"
+ },
+ {
+  "title": "Puzzli 2",
+  "setname": "puzzli2",
+  "source": "psnaps",
+  "title_img": "titles/puzzli2.png",
+  "snap_img": "snap/puzzli2.png",
+  "third_img": "gameover/puzzli2.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Puzzli 2 Super",
+  "setname": "puzzli2s",
+  "source": "psnaps",
+  "title_img": "titles/puzzli2s.png",
+  "snap_img": "snap/puzzli2s.png",
+  "third_img": "gameover/puzzli2s.png",
+  "third_pack": "gameover"
+ },
+ {
   "title": "S.V.G. - Spectral vs Generation",
   "setname": "svg",
   "source": "psnaps",
@@ -7506,210 +7479,21 @@
   "third_pack": "gameover"
  },
  {
+  "title": "Space Demon",
+  "setname": "spacedem",
+  "source": "psnaps",
+  "title_img": "titles/spacedem.png",
+  "snap_img": "snap/spacedem.png",
+  "third_img": "scores/spacedem.png",
+  "third_pack": "scores"
+ },
+ {
   "title": "Space Firebird",
   "setname": "spacefb",
   "source": "psnaps",
   "title_img": "titles/spacefb.png",
   "snap_img": "snap/spacefb.png",
   "third_img": "gameover/spacefb.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Darius II (Japan, rev 1)",
-  "setname": "darius2d",
-  "source": "psnaps",
-  "title_img": "titles/darius2d.png",
-  "snap_img": "snap/darius2d.png",
-  "third_img": "gameover/darius2d.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "The Ninja Warriors",
-  "setname": "ninjaw",
-  "source": "psnaps",
-  "title_img": "titles/ninjaw.png",
-  "snap_img": "snap/ninjaw.png",
-  "third_img": "gameover/ninjaw.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Empire Strikes Back",
-  "setname": "esb",
-  "source": "psnaps",
-  "title_img": "titles/esb.png",
-  "snap_img": "snap/esb.png",
-  "third_img": "gameover/esb.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Star Wars",
-  "setname": "starwars",
-  "source": "psnaps",
-  "title_img": "titles/starwars.png",
-  "snap_img": "snap/starwars.png",
-  "third_img": "gameover/starwars.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Blood Bros",
-  "setname": "bloodbro",
-  "source": "psnaps",
-  "title_img": "titles/bloodbro.png",
-  "snap_img": "snap/bloodbro.png",
-  "third_img": "scores/bloodbro.png",
-  "third_pack": "scores"
- },
- {
-  "title": "D-Con",
-  "setname": "dcon",
-  "source": "psnaps",
-  "title_img": "titles/dcon.png",
-  "snap_img": "snap/dcon.png",
-  "third_img": "gameover/dcon.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Caveman Ninja",
-  "setname": "cninja",
-  "source": "psnaps",
-  "title_img": "titles/cninja.png",
-  "snap_img": "snap/cninja.png",
-  "third_img": "gameover/cninja.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Crude Buster",
-  "setname": "cbuster",
-  "source": "psnaps",
-  "title_img": "titles/cbuster.png",
-  "snap_img": "snap/cbuster.png",
-  "third_img": "gameover/cbuster.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "JoJo's Venture",
-  "setname": "jojon",
-  "source": "psnaps",
-  "title_img": "titles/jojon.png",
-  "snap_img": "snap/jojon.png",
-  "third_img": "gameover/jojon.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Red Earth",
-  "setname": "redearthn",
-  "source": "psnaps",
-  "title_img": "titles/redearthn.png",
-  "snap_img": "snap/redearthn.png",
-  "third_img": "gameover/redearthn.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Street Fighter III 2nd Impact Giant Attack",
-  "setname": "sfiii2n",
-  "source": "psnaps",
-  "title_img": "titles/sfiii2n.png",
-  "snap_img": "snap/sfiii2n.png",
-  "third_img": "gameover/sfiii2n.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Street Fighter III New Generation",
-  "setname": "sfiiin",
-  "source": "psnaps",
-  "title_img": "titles/sfiiin.png",
-  "snap_img": "snap/sfiiin.png",
-  "third_img": "gameover/sfiiin.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Air Gallet",
-  "setname": "agallet",
-  "source": "psnaps",
-  "title_img": "titles/agallet.png",
-  "snap_img": "snap/agallet.png",
-  "third_img": "gameover/agallet.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Hotdog Storm",
-  "setname": "hotdogst",
-  "source": "psnaps",
-  "title_img": "titles/hotdogst.png",
-  "snap_img": "snap/hotdogst.png",
-  "third_img": "gameover/hotdogst.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Mazinger Z",
-  "setname": "mazinger",
-  "source": "psnaps",
-  "title_img": "titles/mazinger.png",
-  "snap_img": "snap/mazinger.png",
-  "third_img": "gameover/mazinger.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Metamoqester",
-  "setname": "metmqstr",
-  "source": "psnaps",
-  "title_img": "titles/metmqstr.png",
-  "snap_img": "snap/metmqstr.png",
-  "third_img": "gameover/metmqstr.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Pretty Soldier Sailor Moon",
-  "setname": "sailormn",
-  "source": "psnaps",
-  "title_img": "titles/sailormn.png",
-  "snap_img": "snap/sailormn.png",
-  "third_img": "gameover/sailormn.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Cobra-Command",
-  "setname": "cobracom",
-  "source": "psnaps",
-  "title_img": "titles/cobracom.png",
-  "snap_img": "snap/cobracom.png",
-  "third_img": "gameover/cobracom.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Act-Fancer Cybernetick Hyper Weapon",
-  "setname": "actfancr",
-  "source": "psnaps",
-  "title_img": "titles/actfancr.png",
-  "snap_img": "snap/actfancr.png",
-  "third_img": "gameover/actfancr.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Darius II (Japan, dual screen, rev 2)",
-  "setname": "darius2d",
-  "source": "psnaps",
-  "title_img": "titles/darius2d.png",
-  "snap_img": "snap/darius2d.png",
-  "third_img": "gameover/darius2d.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Sagaia",
-  "setname": "sagaia",
-  "source": "psnaps",
-  "title_img": "titles/sagaia.png",
-  "snap_img": "snap/sagaia.png",
-  "third_img": "gameover/sagaia.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Warrior Blade",
-  "setname": "warriorb",
-  "source": "psnaps",
-  "title_img": "titles/warriorb.png",
-  "snap_img": "snap/warriorb.png",
-  "third_img": "gameover/warriorb.png",
   "third_pack": "gameover"
  },
  {
@@ -7758,21 +7542,12 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Burger Time (DECO)",
-  "setname": "btime",
-  "source": "psnaps",
-  "title_img": "titles/btime.png",
-  "snap_img": "snap/btime.png",
-  "third_img": "gameover/btime.png",
-  "third_pack": "gameover"
- },
- {
   "title": "Burnin Rubber",
-  "setname": "brubber",
+  "setname": "cburnrub",
   "source": "psnaps",
-  "title_img": "titles/brubber.png",
-  "snap_img": "snap/brubber.png",
-  "third_img": "gameover/brubber.png",
+  "title_img": "titles/cburnrub.png",
+  "snap_img": "snap/cburnrub.png",
+  "third_img": "gameover/cburnrub.png",
   "third_pack": "gameover"
  },
  {
@@ -7818,15 +7593,6 @@
   "title_img": "titles/cfghtice.png",
   "snap_img": "snap/cfghtice.png",
   "third_img": "gameover/cfghtice.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Flash Boy",
-  "setname": "cfboy0a1",
-  "source": "psnaps",
-  "title_img": "titles/cfboy0a1.png",
-  "snap_img": "snap/cfboy0a1.png",
-  "third_img": "gameover/cfboy0a1.png",
   "third_pack": "gameover"
  },
  {
@@ -7911,15 +7677,6 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Ocean to Ocean",
-  "setname": "cocean1a",
-  "source": "psnaps",
-  "title_img": "titles/cocean1a.png",
-  "snap_img": "snap/cocean1a.png",
-  "third_img": null,
-  "third_pack": null
- },
- {
   "title": "Oozumou - Grand Sumo",
   "setname": "coozumou",
   "source": "psnaps",
@@ -7944,15 +7701,6 @@
   "title_img": "titles/cprobowl.png",
   "snap_img": "snap/cprobowl.png",
   "third_img": "gameover/cprobowl.png",
-  "third_pack": "gameover"
- },
- {
-  "title": "Pro Golf",
-  "setname": "cprogolf",
-  "source": "psnaps",
-  "title_img": "titles/cprogolf.png",
-  "snap_img": "snap/cprogolf.png",
-  "third_img": "gameover/cprogolf.png",
   "third_pack": "gameover"
  },
  {
@@ -8055,129 +7803,282 @@
   "third_pack": "gameover"
  },
  {
-  "title": "Space Demon",
-  "setname": "spacedem",
+  "title": "Pro Golf",
+  "setname": "cprogolf",
   "source": "psnaps",
-  "title_img": "titles/spacedem.png",
-  "snap_img": "snap/spacedem.png",
-  "third_img": "scores/spacedem.png",
+  "title_img": "titles/cprogolf.png",
+  "snap_img": "snap/cprogolf.png",
+  "third_img": "gameover/cprogolf.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Darius II (Japan, rev 1)",
+  "setname": "darius2",
+  "source": "psnaps",
+  "title_img": "titles/darius2.png",
+  "snap_img": "snap/darius2.png",
+  "third_img": "gameover/darius2.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "The Ninja Warriors",
+  "setname": "ninjaw",
+  "source": "psnaps",
+  "title_img": "titles/ninjaw.png",
+  "snap_img": "snap/ninjaw.png",
+  "third_img": "gameover/ninjaw.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Star Wars",
+  "setname": "starwars",
+  "source": "psnaps",
+  "title_img": "titles/starwars.png",
+  "snap_img": "snap/starwars.png",
+  "third_img": "gameover/starwars.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Empire Strikes Back",
+  "setname": "esb",
+  "source": "psnaps",
+  "title_img": "titles/esb.png",
+  "snap_img": "snap/esb.png",
+  "third_img": "gameover/esb.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Blood Bros",
+  "setname": "bloodbro",
+  "source": "psnaps",
+  "title_img": "titles/bloodbro.png",
+  "snap_img": "snap/bloodbro.png",
+  "third_img": "scores/bloodbro.png",
   "third_pack": "scores"
  },
  {
+  "title": "D-Con",
+  "setname": "dcon",
+  "source": "psnaps",
+  "title_img": "titles/dcon.png",
+  "snap_img": "snap/dcon.png",
+  "third_img": "gameover/dcon.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Caveman Ninja",
+  "setname": "cninja",
+  "source": "psnaps",
+  "title_img": "titles/cninja.png",
+  "snap_img": "snap/cninja.png",
+  "third_img": "gameover/cninja.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Crude Buster",
+  "setname": "cbuster",
+  "source": "psnaps",
+  "title_img": "titles/cbuster.png",
+  "snap_img": "snap/cbuster.png",
+  "third_img": "gameover/cbuster.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Air Gallet",
+  "setname": "agallet",
+  "source": "psnaps",
+  "title_img": "titles/agallet.png",
+  "snap_img": "snap/agallet.png",
+  "third_img": "gameover/agallet.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Hotdog Storm",
+  "setname": "hotdogst",
+  "source": "psnaps",
+  "title_img": "titles/hotdogst.png",
+  "snap_img": "snap/hotdogst.png",
+  "third_img": "gameover/hotdogst.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Mazinger Z",
+  "setname": "mazinger",
+  "source": "psnaps",
+  "title_img": "titles/mazinger.png",
+  "snap_img": "snap/mazinger.png",
+  "third_img": "gameover/mazinger.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Metamoqester",
+  "setname": "metmqstr",
+  "source": "psnaps",
+  "title_img": "titles/metmqstr.png",
+  "snap_img": "snap/metmqstr.png",
+  "third_img": "gameover/metmqstr.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Pretty Soldier Sailor Moon",
+  "setname": "sailormn",
+  "source": "psnaps",
+  "title_img": "titles/sailormn.png",
+  "snap_img": "snap/sailormn.png",
+  "third_img": "gameover/sailormn.png",
+  "third_pack": "gameover"
+ },
+ {
   "title": "Boogie Wings",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Boogie Wings (Asia v1.5).png",
-  "snap_img": "Named_Snaps/Boogie Wings (Asia v1.5).png",
+  "setname": "boogwing",
+  "source": "psnaps",
+  "title_img": "titles/boogwing.png",
+  "snap_img": "snap/boogwing.png",
+  "third_img": "gameover/boogwing.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Cobra-Command",
+  "setname": "cobracom",
+  "source": "psnaps",
+  "title_img": "titles/cobracom.png",
+  "snap_img": "snap/cobracom.png",
+  "third_img": "gameover/cobracom.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Act-Fancer Cybernetick Hyper Weapon",
+  "setname": "actfancr",
+  "source": "psnaps",
+  "title_img": "titles/actfancr.png",
+  "snap_img": "snap/actfancr.png",
+  "third_img": "gameover/actfancr.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Darius II (Japan, dual screen, rev 2)",
+  "setname": "darius2d",
+  "source": "psnaps",
+  "title_img": "titles/darius2d.png",
+  "snap_img": "snap/darius2d.png",
+  "third_img": "gameover/darius2d.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Sagaia",
+  "setname": "sagaia",
+  "source": "psnaps",
+  "title_img": "titles/sagaia.png",
+  "snap_img": "snap/sagaia.png",
+  "third_img": "gameover/sagaia.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Warrior Blade",
+  "setname": "warriorb",
+  "source": "psnaps",
+  "title_img": "titles/warriorb.png",
+  "snap_img": "snap/warriorb.png",
+  "third_img": "gameover/warriorb.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Flash Boy",
+  "setname": "cfboy0a1",
+  "source": "psnaps",
+  "title_img": "titles/cfboy0a1.png",
+  "snap_img": "snap/cfboy0a1.png",
+  "third_img": "gameover/cfboy0a1.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Ocean to Ocean",
+  "setname": "cocean1a",
+  "source": "psnaps",
+  "title_img": "titles/cocean1a.png",
+  "snap_img": "snap/cocean1a.png",
   "third_img": null,
   "third_pack": null
  },
  {
   "title": "Gulf War II",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Gulf War II.png",
-  "snap_img": "Named_Snaps/Gulf War II.png",
-  "third_img": null,
-  "third_pack": null
- },
- {
-  "title": "Captain America and The Avengers",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Captain America and The Avengers (UK Rev 1.4).png",
-  "snap_img": "Named_Snaps/Captain America and The Avengers (UK Rev 1.4).png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "gulfwar2",
+  "source": "psnaps",
+  "title_img": "titles/gulfwar2.png",
+  "snap_img": "snap/gulfwar2.png",
+  "third_img": "gameover/gulfwar2.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Big Karnak",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Big Karnak.png",
-  "snap_img": "Named_Snaps/Big Karnak.png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "bigkarnk",
+  "source": "psnaps",
+  "title_img": "titles/bigkarnk.png",
+  "snap_img": "snap/bigkarnk.png",
+  "third_img": "gameover/bigkarnk.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Biomechanical Toy",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Biomechanical Toy (unprotected).png",
-  "snap_img": "Named_Snaps/Biomechanical Toy (unprotected).png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "biomtoy",
+  "source": "psnaps",
+  "title_img": "titles/biomtoy.png",
+  "snap_img": "snap/biomtoy.png",
+  "third_img": "gameover/biomtoy.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Cabal",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Cabal (World, Joystick).png",
-  "snap_img": "Named_Snaps/Cabal (World, Joystick).png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "cabal",
+  "source": "psnaps",
+  "title_img": "titles/cabal.png",
+  "snap_img": "snap/cabal.png",
+  "third_img": "gameover/cabal.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Captain America and The Avengers",
+  "setname": "captavenu",
+  "source": "psnaps",
+  "title_img": "titles/captavenu.png",
+  "snap_img": "snap/captavenu.png",
+  "third_img": "gameover/captavenu.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Squash (World, ver. 1.0, checksum 015aef61)",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Squash.png",
-  "snap_img": "Named_Snaps/Squash.png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "squash",
+  "source": "psnaps",
+  "title_img": "titles/squash.png",
+  "snap_img": "snap/squash.png",
+  "third_img": "gameover/squash.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Thunder Hoop",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Thunder Hoop.png",
-  "snap_img": "Named_Snaps/Thunder Hoop.png",
-  "third_img": null,
-  "third_pack": null
- },
- {
-  "title": "Puzzle Star",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Puzzle Star.png",
-  "snap_img": "Named_Snaps/Puzzle Star.png",
-  "third_img": null,
-  "third_pack": null
- },
- {
-  "title": "Puzzli 2",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Puzzli 2 (ver. 100).png",
-  "snap_img": "Named_Snaps/Puzzli 2 (ver. 100).png",
-  "third_img": null,
-  "third_pack": null
- },
- {
-  "title": "Puzzli 2 Super",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Puzzli 2 Super (ver. 200).png",
-  "snap_img": "Named_Snaps/Puzzli 2 Super (ver. 200).png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "thoop",
+  "source": "psnaps",
+  "title_img": "titles/thoop.png",
+  "snap_img": "snap/thoop.png",
+  "third_img": "gameover/thoop.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Trio The Punch",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Trio The Punch - Never Forget Me... (World).png",
-  "snap_img": "Named_Snaps/Trio The Punch - Never Forget Me... (World).png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "triothep",
+  "source": "psnaps",
+  "title_img": "titles/triothep.png",
+  "snap_img": "snap/triothep.png",
+  "third_img": "gameover/triothep.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Night Slashers",
-  "setname": null,
-  "source": "libretro",
-  "title_img": "Named_Titles/Night Slashers (Japan Rev 1.2).png",
-  "snap_img": "Named_Snaps/Night Slashers (Japan Rev 1.2).png",
-  "third_img": null,
-  "third_pack": null
+  "setname": "nslasher",
+  "source": "psnaps",
+  "title_img": "titles/nslasher.png",
+  "snap_img": "snap/nslasher.png",
+  "third_img": "gameover/nslasher.png",
+  "third_pack": "gameover"
  }
 ]

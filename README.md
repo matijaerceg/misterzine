@@ -85,6 +85,11 @@ Notes:
   except to your own MiSTer, on your own network.
 - Launching a game you don't have on the SD card fails politely: the flashed tab shows
   Remote's error text before closing.
+- Console/computer launches need that core installed on the MiSTer. A brief
+  "no core found" flash means it isn't: Remote checks the actual core files on every
+  launch, and `http://<mister-ip>:8182/api/systems` lists exactly which systems are
+  launchable on your device. Installing the core (e.g. via `update_all` with the main
+  MiSTer distribution enabled) makes it work immediately, no rescan needed.
 - Works from a phone on the same wifi too.
 
 **RSS feeds** (last 30 days / 100 items, autodiscoverable from the page or via the

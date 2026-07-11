@@ -32,6 +32,8 @@
                font-weight: 100 900; font-display: swap; }
   @font-face { font-family: 'Roboto Condensed'; src: url(../fonts/roboto-condensed-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Permanent Marker'; src: url(../fonts/permanent-marker-latin.woff2) format('woff2');
+               font-weight: 400; font-display: swap; }
   :root { color-scheme: light dark; }            /* auto — follows the OS */
   :root[data-theme="light"] { color-scheme: light; }
   :root[data-theme="dark"]  { color-scheme: dark; }
@@ -59,7 +61,7 @@
      underline + ↗ links, which navigate away */
   .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; }
   /* the zine link is the one meta-line entry we want noticed */
-  .updated a.zinelink { color: #06c; font-weight: 600; }
+  .updated a.zinelink { color: #06c; font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.15em; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }

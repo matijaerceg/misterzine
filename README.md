@@ -58,7 +58,7 @@ dashboard is public, linked as "Traffic Stats" in the header).
 - Esc closes, arrow keys walk rows, theme toggle: auto / light / dark.
 - A **Launch button** that starts the game or core on your own MiSTer (see below).
 
-**Launch on your MiSTer**
+### Launch on your MiSTer
 
 Every launchable entry's panel has a "▶ Launch on MiSTer" button that starts it on real
 hardware over your local network: arcade entries launch the actual game (the `.mra` must

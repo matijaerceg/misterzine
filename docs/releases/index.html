@@ -1538,8 +1538,10 @@ function misterPopHTML() {
     '<div class="devrow adder"><input class="nm" placeholder="Name (optional)">' +
     '<input class="ad" placeholder="mister.local or IP">' +
     '<button class="add">Add</button></div>' +
-    '<p class="note">Each MiSTer needs the <a href="https://github.com/wizzomafizzo/mrext/blob/main/docs/remote.md" ' +
-    'target="_blank" rel="noopener">Remote<span class="ext">↗</span></a> service running (Scripts → remote).</p>';
+    '<p class="note">Each MiSTer needs wizzo’s free Remote service: run it once from the Scripts ' +
+    'menu and let it enable startup, no other setup. ' +
+    '<a href="https://github.com/matijaerceg/misterzine#launch-on-your-mister" ' +
+    'target="_blank" rel="noopener">Setup guide<span class="ext">↗</span></a></p>';
 }
 function onMisterPop(e) {
   // handled clicks re-render the popover, detaching e.target — the document

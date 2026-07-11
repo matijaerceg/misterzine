@@ -784,17 +784,21 @@ const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 function apply() {
   const qEl = document.getElementById('q');
-  const q = fold(qEl.value.trim());
+  // whitespace splits the query into AND terms ("horizontal 4-way" = rows
+  // matching both, in any field, in any order); each term is an independent
+  // substring so multi-word values still match ("street fighter" hits the title)
+  const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
   document.getElementById('clear').hidden = !qEl.value;
   // Types filter: an empty set means "no filter" (show all) — which coincides
   // with every type being checked. Any partial selection narrows to those bases.
   view = DATA.filter(d => {
     if (enabledTypes.size && !enabledTypes.has(d.base)) return false;
-    if (!q) return true;
-    return fold(d.title + ' ' + (d.mt || '') + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
+    if (!terms.length) return true;
+    const hay = fold(d.title + ' ' + (d.mt || '') + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
             (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
-            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || '')).includes(q);
+            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || ''));
+    return terms.every(t => hay.includes(t));
   });
   if (sortKey) {
     const keyOf = x => sortKey === 'typesort' ? typeLabel(x)

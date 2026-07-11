@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
+## 2026-07-10
+- Search now treats each word as its own filter: "horizontal 4-way" finds entries matching both terms, in any order, across any field.
+
 ## 2026-07-09
 - Every arcade game now shows a genre: the category data moved to a source tracking current MAME (the old one missed modern names like Street Fighter II' Hyper Fighting, Moonwalker and the PGM lineup), with the last few hacks and TTL games pinned by hand.
 - Screenshots for the games no database covers: Computer Space, Space Race, Pac-Manic Miner, Mr. Do's Nightmare, Clean Sweep, Devil Fish and Clockwork Aquario all have shots in their detail panels now. Their missing rotation/players/controls were filled too (shown gray, provisional).

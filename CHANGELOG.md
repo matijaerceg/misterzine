@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-10
+- **Launch games on your MiSTer from this page**: every entry's detail panel now has a Launch button (arcade games start the actual game, console/computer entries load the core). Needs wizzo's Remote script running on the MiSTer and a browser on the same network; add your MiSTer(s) once by name and address, and the button remembers your last-used device.
 - Search now treats each word as its own filter: "horizontal 4-way" finds entries matching both terms, in any order, across any field.
 
 ## 2026-07-09

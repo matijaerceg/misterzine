@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>MiSTerZine</title>
+<link>https://matijaerceg.github.io/misterzine/?ref=rss</link>
+<description>Short, source-checked tidbits on MiSTer FPGA releases, written by AI from cited sources and verified before publishing.</description>
+<language>en</language>
+<atom:link rel="self" type="application/rss+xml" href="https://matijaerceg.github.io/misterzine/feed-zine.xml"/>
+<lastBuildDate>Fri, 11 Jul 2026 06:32:00 +0000</lastBuildDate>
+<item>
+<title>Night Slashers</title>
+<link>https://matijaerceg.github.io/misterzine/?ref=rss#20260711-nslasher</link>
+<guid isPermaLink="false">zine:20260711-nslasher</guid>
+<pubDate>Fri, 11 Jul 2026 06:32:00 +0000</pubDate>
+<description>&lt;p&gt;The Data East board behind Night Slashers guarded its main processor with an "Encrypted DECO156 ARM CPU," and rmonic79's new MiSTer FPGA core, which landed in the public database yesterday, reproduces it "with runtime on-board decrypt." So rather than shipping a pre-decrypted program, the FPGA reimplementation undoes the chip's encryption live as the hardware runs.&lt;/p&gt;&lt;p&gt;New on MiSTer 2026-07-10. Sources: &lt;a href="https://en.wikipedia.org/wiki/Night_Slashers"&gt;Wikipedia&lt;/a&gt;, &lt;a href="https://github.com/MiSTer-devel/Arcade-NightSlashers_MiSTer"&gt;core repo&lt;/a&gt;, &lt;a href="https://www.youtube.com/watch?v=h-Ys_ufBGAY"&gt;video&lt;/a&gt;.&lt;/p&gt;</description>
+</item>
+<item>
+<title>Trio The Punch - Never Forget Me...</title>
+<link>https://matijaerceg.github.io/misterzine/?ref=rss#20260711-triothep</link>
+<guid isPermaLink="false">zine:20260711-triothep</guid>
+<pubDate>Fri, 11 Jul 2026 06:31:00 +0000</pubDate>
+<description>&lt;p&gt;Trio The Punch, whose Data East arcade core reached the public MiSTer FPGA database on 2026-07-08, did not start out as a beat 'em up at all. Per Wikipedia, it was "initially planned as a sugoroku game," but "the content was completely changed during production." What shipped was a surreal brawler across 35 levels, published by Data East and released only in Japan.&lt;/p&gt;&lt;p&gt;New on MiSTer 2026-07-08. Sources: &lt;a href="https://en.wikipedia.org/wiki/Trio_the_Punch:_Never_Forget_Me..."&gt;Wikipedia&lt;/a&gt;, &lt;a href="https://github.com/MiSTer-devel/Arcade-TrioThePunch_MiSTer"&gt;core repo&lt;/a&gt;, &lt;a href="https://www.youtube.com/watch?v=TxLoYQ1pAzs"&gt;video&lt;/a&gt;.&lt;/p&gt;</description>
+</item>
+<item>
+<title>Battle Garegga</title>
+<link>https://matijaerceg.github.io/misterzine/?ref=rss#20260711-bgaregga</link>
+<guid isPermaLink="false">zine:20260711-bgaregga</guid>
+<pubDate>Fri, 11 Jul 2026 06:30:00 +0000</pubDate>
+<description>&lt;p&gt;In arcade shmup Battle Garegga, thirty years old this February, powering up your weapon and grabbing items pushes the difficulty higher, while dying drops it. The catch: the fewer lives you hold when you die, the more the difficulty falls. Players are "forced" to keep themselves powered down, conserve shots, and lose lives on purpose to keep the final stages playable.&lt;/p&gt;&lt;p&gt;30th anniversary; on MiSTer since 2023. Sources: &lt;a href="https://en.wikipedia.org/wiki/Battle_Garegga"&gt;Wikipedia&lt;/a&gt;, &lt;a href="https://www.youtube.com/watch?v=gko22FYxEAs"&gt;video&lt;/a&gt;.&lt;/p&gt;</description>
+</item>
+</channel>
+</rss>

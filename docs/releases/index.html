@@ -58,6 +58,8 @@
      cores only", "RSS") — they open an in-page popover, unlike the solid
      underline + ↗ links, which navigate away */
   .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; }
+  /* the zine link is the one meta-line entry we want noticed */
+  .updated a.zinelink { color: #06c; font-weight: 600; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
@@ -1489,6 +1491,7 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     timeZoneName: 'short'  // append the viewer's tz (e.g. "GMT+2") so it's clearly local
   });
   el.innerHTML = 'Last updated: ' + esc(s) +
+    ' · <a href="../" class="zinelink">Daily Zine<span class="ext">↗</span></a>' +
     ' · <a href="#" class="note" id="pub-note">Public cores only<span class="ext">ⓘ</span></a>' +
     ' · <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +

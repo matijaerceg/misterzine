@@ -2728,8 +2728,10 @@ def _write_site_meta(outdir):
         updated = prev["updated"]
     else:
         updated = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+    # rows count feeds the zine header's "Release index: N cores & games" pill
+    rows = len(json.loads(data_path.read_text(encoding="utf-8")))
     meta_path.write_text(
-        json.dumps({"updated": updated, "hash": digest}), encoding="utf-8")
+        json.dumps({"updated": updated, "hash": digest, "rows": rows}), encoding="utf-8")
     log(f"  meta.json: updated={updated} ({'unchanged' if prev.get('hash') == digest else 'bumped'})")
 
 

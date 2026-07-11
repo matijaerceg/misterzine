@@ -2305,6 +2305,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         row["act"] = commit_d
     if repo:
         row["repo"] = repo
+    # which downloader database ships this entry. The three ingested dbs are
+    # disjoint (no title appears in two), so one value is the whole truth;
+    # the frontend maps the raw id to a display name and search tokens.
+    if "source_id" in r.keys() and r["source_id"]:
+        row["src"] = r["source_id"]
     # system rows only: arcade rows share rbfs with these (System E games run on
     # the SMS core), and a console-flavoured note is wrong on a game row. If a
     # per-arcade-core note ever lands (e.g. jts18 CRT sync), give it its own dict.

@@ -482,6 +482,21 @@ const CORE_NAMES = {
   'popeye': 'Nintendo (Popeye)',
 };
 
+// Which downloader database ships each entry (d.src, raw source id from the
+// pipeline). Display name for the panel, and deliberately curated search
+// tokens — NOT the display name itself, so typing "mist"/"mister" while
+// hunting a title doesn't light up all ~830 MiSTer Distribution rows.
+const SRC_NAMES = {
+  distribution_mister: 'MiSTer Distribution',
+  jtbindb: 'Jotego (JTcores)',
+  coinop: 'Coin-Op Collection',
+};
+const SRC_SEARCH = {
+  distribution_mister: 'distribution',
+  jtbindb: 'jotego jtcores',
+  coinop: 'coin-op collection',
+};
+
 // Per-setname display-aspect escape hatch — for the handful of cases the normal
 // rotation-driven logic can't get right. Keyed by setname (d.img); value is the
 // forced CSS aspect-ratio, and it wins over everything (see detailHTML). The
@@ -822,7 +837,8 @@ function apply() {
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
             (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
             (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || '') + ' ' +
-            (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : ''));
+            (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
+            (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
   });
   if (sortKey) {
@@ -1109,6 +1125,8 @@ function detailHTML(d) {
   // 'Latest commit' = repo activity, which can run ahead of a shipped build
   if (d.updated) rows.push(['Latest update', d.updated]);
   if (d.act) rows.push(['Latest commit', d.act]);
+  // which downloader database delivers this entry via update_all
+  if (d.src) rows.push(['Source', SRC_NAMES[d.src] || d.src]);
   // show the repo slug (jtcores deep links keep the full path in the href only)
   if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
     esc(d.repo.split('/').slice(0, 2).join('/')) + '<span class="ext">↗</span></a>', true]);

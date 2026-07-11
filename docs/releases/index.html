@@ -61,7 +61,7 @@
      underline + ↗ links, which navigate away */
   .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; }
   /* the zine link is the one meta-line entry we want noticed */
-  .updated a.zinelink { color: #06c; font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.15em; }
+  .updated a.zinelink { color: #06c; font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
@@ -1538,11 +1538,11 @@ fetch('./meta.json').then(r => r.json()).then(m => {
   });
   el.innerHTML = 'Last updated: ' + esc(s) +
     ' · <a href="../" class="zinelink">Daily Zine<span class="ext">↗</span></a>' +
-    ' · <a href="#" class="note" id="pub-note">Public cores only<span class="ext">ⓘ</span></a>' +
     ' · <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
     ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
-    ' · <a href="https://github.com/matijaerceg/misterzine/issues" target="_blank" rel="noopener">Report a Problem<span class="ext">↗</span></a>';
+    ' · <a href="https://github.com/matijaerceg/misterzine/issues" target="_blank" rel="noopener">Report a Problem<span class="ext">↗</span></a>' +
+    ' · <a href="#" class="note" id="pub-note">Public cores only<span class="ext">ⓘ</span></a>';
 }).catch(() => {});
 
 // --- meta-line popovers: "RSS" opens a feed chooser (readers also

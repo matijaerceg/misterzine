@@ -262,7 +262,12 @@ Arcade screenshots are self-hosted at native resolution under
   display-name matching backfills titles with no setname.
 - `tools/fetch_images.py`: download and extract only the needed PNGs.
 - `tools/fetch_system_photos.py`: console/computer hardware photos from Wikimedia
-  Commons for `docs/images/systems/` (then dithered to a fixed 16-color palette).
+  Commons for `docs/images/systems/` (background-removed, alpha-trimmed, scaled to
+  164px; full color).
+- `docs/mask.js`: the CRT shadow-mask effect drawn over screenshots and hardware
+  photos in the browser is the slot mask from Timothy Lottes' RVM (Retro Video
+  Monitor) shader, released into the public domain under the Unlicense; ported here
+  to canvas and rendered at the viewer's native device pixels.
 - `data/cache/image_manifest.json` (committed) ties images to rows and records misses so
   runs don't re-resolve them.
 

@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MiSTerZine - a machine-written feed on MiSTer FPGA releases</title>
-<meta name="description" content="Short, source-checked tidbits about whatever just landed in the public MiSTer FPGA databases. Written by AI from cited sources, verified before publishing.">
+<title>MiSTerZine - a quote zine on MiSTer FPGA releases</title>
+<meta name="description" content="A collection of quotes from around the web about whatever just landed in the public MiSTer FPGA databases, each with its source linked.">
 <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <link rel="canonical" href="https://matijaerceg.github.io/misterzine/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MiSTerZine">
-<meta property="og:title" content="MiSTerZine - a daily feed on MiSTer FPGA releases">
-<meta property="og:description" content="Short, source-checked tidbits about whatever just landed in the public MiSTer databases.">
+<meta property="og:title" content="MiSTerZine - a quote zine on MiSTer FPGA releases">
+<meta property="og:description" content="Quotes from around the web about whatever just landed in the public MiSTer databases, sources linked.">
 <meta property="og:url" content="https://matijaerceg.github.io/misterzine/">
 <meta property="og:image" content="https://matijaerceg.github.io/misterzine/images/og-zine.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="MiSTerZine logo over the DawnBringer-16 palette strip">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"MiSTerZine","url":"https://matijaerceg.github.io/misterzine/","description":"Short, source-checked tidbits on MiSTer FPGA releases, written by AI from cited sources and verified before publishing."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"MiSTerZine","url":"https://matijaerceg.github.io/misterzine/","description":"A collection of quotes from around the web on MiSTer FPGA releases, each with its source linked."}</script>
 <link rel="alternate" type="application/rss+xml" title="MiSTerZine feed" href="feed-zine.xml">
 <script>/* apply saved theme before first paint to avoid a flash */
   try { var t = localStorage.getItem('mz-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
@@ -56,8 +56,14 @@
   .top nav a.idx:hover { background: color-mix(in srgb, #06c 12%, Canvas); }
 
   /* posts: one native-aspect screenshot per story (h = 4:3, v = tate 3:4,
-     w = dual-screen 8:3), masked + tube-blurred like the release index */
+     w = multi-screen wide), masked + tube-blurred like the release index */
   article { border-bottom: 1px solid #8884; padding: 1.1rem 0; display: flow-root; }
+  /* post title: game name + the reason it's here, a smidge above body text */
+  article h2 { font-size: 1.05rem; font-weight: 600; line-height: 1.35; margin: 0 0 .55rem; }
+  article h2 a { color: inherit; text-decoration: none; }
+  article h2 a:hover { color: #06c; }
+  article h2 .why { font-weight: 400; font-size: .85rem;
+                    color: color-mix(in srgb, CanvasText 55%, Canvas); }
   .shot { position: relative; border: 1px solid #8884; border-radius: 6px;
           overflow: hidden; background: #140c1c; margin: 0 0 .8rem; }
   .shot.h { aspect-ratio: 4 / 3; }
@@ -73,14 +79,12 @@
      full-size shot left, text beside it; narrow viewports stack */
   @media (min-width: 50rem) {
     article.tate { max-width: none; display: grid;
-                   grid-template-columns: 28.125rem 1fr; grid-template-rows: auto 1fr;
+                   grid-template-columns: 28.125rem 1fr; grid-template-rows: auto auto 1fr;
                    column-gap: 1.25rem; }
-    article.tate .shot.v { width: 100%; margin: 0; grid-row: 1 / 3; }
-    article.tate p { grid-column: 2; }
+    article.tate .shot.v { width: 100%; margin: 0; grid-column: 1; grid-row: 1 / 4; }
+    article.tate h2, article.tate p { grid-column: 2; }
   }
   article p { margin: 0 0 .6rem; line-height: 1.5; }
-  article strong a { color: inherit; }
-  article strong a:hover { color: #06c; }
   /* one quiet line per post: date/permalink + provenance */
   .meta { font-size: .68rem; color: color-mix(in srgb, CanvasText 32%, Canvas); margin: 0; }
   .meta a { color: inherit; text-decoration: none; }
@@ -100,55 +104,63 @@
 </header>
 
 <article id="20260712-breakout" class="tate">
-  <div class="shot v"><img src="images/zine/breakout.png" alt="Breakout arcade gameplay screenshot with its color-overlay brick wall" loading="lazy"></div>
-  <p>Before they started Apple, Steve Jobs took a job from game maker Atari to build <strong><a href="releases/#breakout">Breakout</a></strong> cheap, then handed the real work to his friend Steve Wozniak. Woz packed it onto just 44 parts, so dense that, by his own account, Atari's engineers couldn't follow how it worked. The factory gave up and rebuilt it their way with about 100. Same game, twice the parts.</p>
-  <p class="meta"><a href="#20260712-breakout">July 12, 2026 06:30 UTC</a> &middot; 50th anniversary &middot; MiSTer debut <span class="rd" data-d="2020-12-12">2020-12-12</span> &middot; <a href="https://en.wikipedia.org/wiki/Breakout_(video_game)" target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#breakout">Breakout</a> <span class="why">&middot; 50th anniversary</span></h2>
+  <div class="shot v"><img src="images/zine/breakout.png" alt="Breakout arcade screenshot: paddle under the rainbow brick wall" loading="lazy"></div>
+  <p>"The reason Atari wanted me to design it is they were tired of their games taking 150, 200 chips, and they knew I designed things with very few chips, so we had incentives for getting it under 50 or under 40 chips," Steve Wozniak said of Breakout in a <a href="https://www.gamedeveloper.com/design/woz-was-here---steve-wozniak-on-his-gaming-past" target="_blank" rel="noopener">2007 interview with Gamasutra</a>. Atari's engineers, faced with the finished board: "They had trouble understanding it."</p>
+  <p class="meta"><a href="#20260712-breakout">July 12, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2020-12-12">2020-12-12</span></p>
 </article>
 
 <article id="20260711-nslasher">
-  <div class="shot h"><img src="images/zine/nslasher.png" alt="Night Slashers arcade gameplay screenshot" loading="lazy"></div>
-  <p>Fighting through zombies, vampires, and werewolves wasn't the only thing locked down in <strong><a href="releases/#nslasher">Night Slashers</a></strong>: game maker Data East scrambled the arcade code itself, hiding it behind an encrypted processor. rmonic79's FPGA core doesn't cheat with pre-cracked copies. It unscrambles the code live as it runs, exactly as the original board did.</p>
-  <p class="meta"><a href="#20260711-nslasher">July 11, 2026 06:32 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-10">2026-07-10</span> &middot; <a href="https://en.wikipedia.org/wiki/Night_Slashers" target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#nslasher">Night Slashers</a> <span class="why">&middot; MiSTer debut <span class="rd" data-d="2026-07-10">2026-07-10</span></span></h2>
+  <div class="shot h"><img src="images/zine/nslasher.png" alt="Night Slashers screenshot: a crowd of zombies in the carnival stage" loading="lazy"></div>
+  <p>"Data East also created Night Slashers, clearly their best beat-em-up and undoubtedly capable of cracking a connoisseur's Top 10 list, if it weren't for the game's unbelievable obscurity," reads a <a href="https://www.honestgamers.com/5151/arcade/night-slashers/review.html" target="_blank" rel="noopener">2006 review at HonestGamers</a>, which sums up the appeal: "watch the heads roll, the chests implode, and the guts soil the cement."</p>
+  <p class="meta"><a href="#20260711-nslasher">July 11, 2026 06:32 UTC</a></p>
 </article>
 
 <article id="20260711-triothep">
-  <div class="shot h"><img src="images/zine/triothep.png" alt="Trio The Punch arcade gameplay screenshot" loading="lazy"></div>
-  <p><strong><a href="releases/#triothep">Trio The Punch</a></strong> began life as something else entirely: a planned board game in the vein of Western snakes and ladders, scrapped and rebuilt from scratch during development. What game maker Data East shipped instead, Japan-only, was a surreal game across 35 levels where jumping on enemy bullets bounces your character off like a trampoline, with the laws of physics tossed out.</p>
-  <p class="meta"><a href="#20260711-triothep">July 11, 2026 06:31 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-08">2026-07-08</span> &middot; <a href="https://en.wikipedia.org/wiki/Trio_the_Punch:_Never_Forget_Me..." target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#triothep">Trio The Punch</a> <span class="why">&middot; MiSTer debut <span class="rd" data-d="2026-07-08">2026-07-08</span></span></h2>
+  <div class="shot h"><img src="images/zine/triothep.png" alt="Trio The Punch screenshot: the giant lucky-cat boss" loading="lazy"></div>
+  <p>"Nothing about this game is done well, and yet everything just meshes together so perfectly into one gigantic dose of pure nonsense," writes <a href="https://www.hardcoregaming101.net/trio-the-punch/" target="_blank" rel="noopener">Hardcore Gaming 101</a>, which also says Trio The Punch "is like a visual representation of the writings of William S. Burroughs if he was a Japanese video game designer."</p>
+  <p class="meta"><a href="#20260711-triothep">July 11, 2026 06:31 UTC</a></p>
 </article>
 
 <article id="20260711-bgaregga" class="tate">
-  <div class="shot v"><img src="images/zine/bgaregga.png" alt="Battle Garegga arcade gameplay screenshot" loading="lazy"></div>
-  <p>In the arcade shooter <strong><a href="releases/#bgaregga">Battle Garegga</a></strong>, thirty years old this February, powering up your weapon and grabbing items pushes the difficulty higher, while dying drops it. The catch: the fewer lives you hold when you die, the more the difficulty falls. Players are forced to keep themselves powered down, conserve shots, and lose lives on purpose to keep the final stages playable.</p>
-  <p class="meta"><a href="#20260711-bgaregga">July 11, 2026 06:30 UTC</a> &middot; 30th anniversary &middot; MiSTer debut <span class="rd" data-d="2023-09-10">2023-09-10</span> &middot; <a href="https://en.wikipedia.org/wiki/Battle_Garegga" target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#bgaregga">Battle Garegga</a> <span class="why">&middot; 30th anniversary</span></h2>
+  <div class="shot v"><img src="images/zine/bgaregga.png" alt="Battle Garegga screenshot: the stage one bomber under fire" loading="lazy"></div>
+  <p>"A number of shoot-em-up fans regard it as one of the best shooters of all time; others feel that the cluttered visual style and rank system ruin some pretty cool ideas," writes <a href="https://www.hardcoregaming101.net/battle-garegga/" target="_blank" rel="noopener">Hardcore Gaming 101</a>. That rank system reacts to how well you play, and "creates some ridiculous scenarios where players will intentionally suicide at points to make the difficulty manageable, and can only properly clear it by scoring high enough to rack up extra lives."</p>
+  <p class="meta"><a href="#20260711-bgaregga">July 11, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2023-09-10">2023-09-10</span></p>
 </article>
 
 <article id="20260706-cabal">
-  <div class="shot h"><img src="images/zine/cabal.png" alt="Cabal arcade gameplay screenshot" loading="lazy"></div>
-  <p><strong><a href="releases/#cabal">Cabal</a></strong>, a 1988 arcade game from developer TAD Corporation, placed your character in the foreground and watched from behind the shoulder, the way modern third-person shooters do. It was successful enough to spawn a wave of imitators in the years after, among them NAM-1975 and Wild Guns.</p>
-  <p class="meta"><a href="#20260706-cabal">July 6, 2026 06:31 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-05">2026-07-05</span> &middot; <a href="https://en.wikipedia.org/wiki/Cabal_(video_game)" target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#cabal">Cabal</a> <span class="why">&middot; MiSTer debut <span class="rd" data-d="2026-07-05">2026-07-05</span></span></h2>
+  <div class="shot h"><img src="images/zine/cabal.png" alt="Cabal screenshot: the desert stage from the over-the-shoulder view" loading="lazy"></div>
+  <p>"The rather obscure Japanese TAD Corporation wondered what it would be like to give a third-person point of view to gun-based carnage," writes <a href="https://www.hardcoregaming101.net/cabal/" target="_blank" rel="noopener">Hardcore Gaming 101</a>, crediting Cabal with the wave of imitators that followed, Wild Guns and NAM-1975 among them: "None of these games would likely exist if Cabal didn't set the table."</p>
+  <p class="meta"><a href="#20260706-cabal">July 6, 2026 06:31 UTC</a></p>
 </article>
 
 <article id="20260706-biomtoy">
-  <div class="shot h"><img src="images/zine/biomtoy.png" alt="Biomechanical Toy arcade gameplay screenshot" loading="lazy"></div>
-  <p>A criminal named Scrubby breaks out of jail, locked up for trying to steal the pendulum that brings toys to life. That's the hook of game maker Gaelco's 1995 run-and-gun <strong><a href="releases/#biomtoy">Biomechanical Toy</a></strong>, where a hero named Inguz shoots his way through evil toyland. Its first console appearance came on an Evercade compilation.</p>
-  <p class="meta"><a href="#20260706-biomtoy">July 6, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-05">2026-07-05</span> &middot; <a href="https://en.wikipedia.org/wiki/Biomechanical_Toy" target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#biomtoy">Biomechanical Toy</a> <span class="why">&middot; MiSTer debut <span class="rd" data-d="2026-07-05">2026-07-05</span></span></h2>
+  <div class="shot h"><img src="images/zine/biomtoy.png" alt="Biomechanical Toy screenshot: the hero riding over a giant blue moon" loading="lazy"></div>
+  <p>"The colorful, trippy graphics are reminiscent of many Amiga games," writes <a href="https://www.hardcoregaming101.net/biomechanical-toy/" target="_blank" rel="noopener">Hardcore Gaming 101</a> of Spanish maker Gaelco's run-and-gun. "It's not really on the level of other genre greats like Metal Slug (though it did predate that game by about a year)."</p>
+  <p class="meta"><a href="#20260706-biomtoy">July 6, 2026 06:30 UTC</a></p>
 </article>
 
 <article id="20260701-cfboy0a1" class="tate">
-  <div class="shot v"><img src="images/zine/cfboy0a1.png" alt="DECO Cassette System loading screen with its countdown before Flash Boy starts" loading="lazy"></div>
-  <p>Imagine dropping a coin into an arcade cabinet, then waiting two to three minutes before the game even starts. That was the deal with <strong><a href="releases/#cfboy0a1">Flash Boy</a></strong>, a 1981 release from game maker Data East for the DECO Cassette System, where each game arrived on a standard microcassette tape. Slot one in and the cabinet copied the whole program into its memory before you could play.</p>
-  <p class="meta"><a href="#20260701-cfboy0a1">July 1, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-06-30">2026-06-30</span> &middot; <a href="https://en.wikipedia.org/wiki/DECO_Cassette_System" target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#cfboy0a1">Flash Boy</a> <span class="why">&middot; MiSTer debut <span class="rd" data-d="2026-06-30">2026-06-30</span></span></h2>
+  <div class="shot v"><img src="images/zine/cfboy0a1.png" alt="DECO Cassette System loading screen with its countdown counter" loading="lazy"></div>
+  <p>Flash Boy shipped on Data East's DECO Cassette System, tape-loaded arcade hardware where "the machine was turned on and 2 to 3 minutes later the game was loaded and ready to be played," as <a href="https://www.atariprotos.com/deco/deco.htm" target="_blank" rel="noopener">AtariProtos</a> describes it. "The tape medium didn't prove to be nearly as robust as Data East had hoped, and the cassettes had a bad habit of failing to load after only a few months."</p>
+  <p class="meta"><a href="#20260701-cfboy0a1">July 1, 2026 06:30 UTC</a></p>
 </article>
 
 <article id="20260617-darius2d">
-  <div class="shot w"><img src="images/zine/darius2d.png" alt="Darius II dual-screen arcade gameplay screenshot" loading="lazy"></div>
-  <p><strong><a href="releases/#darius2d">Darius II</a></strong> was built to sprawl. Following the original Darius, game maker Taito programmed it to stretch across several screens at once. A three-screen version exists, but the two-screen layout became the usual way to play it, which is what this core runs. Outside Japan it went by a different name: Sagaia.</p>
-  <p class="meta"><a href="#20260617-darius2d">June 17, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-06-16">2026-06-16</span> &middot; <a href="https://en.wikipedia.org/wiki/Darius_II_(video_game)" target="_blank" rel="noopener">Wikipedia</a></p>
+  <h2><a href="releases/#darius2d">Darius II</a> <span class="why">&middot; MiSTer debut <span class="rd" data-d="2026-06-16">2026-06-16</span></span></h2>
+  <div class="shot w" style="aspect-ratio: 864 / 224"><img src="images/zine/darius2d.png" alt="Darius II arcade screenshot: the full three-screen panorama" loading="lazy"></div>
+  <p>"In addition to a three-screen release, there is also a (more common) two-screen version," notes <a href="https://www.hardcoregaming101.net/darius-ii/" target="_blank" rel="noopener">Hardcore Gaming 101</a>; the shot above is the full three-screen spread, while the MiSTer core runs the two-screen one. "For some unknown reason, Darius II was renamed Sagaia outside of Japan."</p>
+  <p class="meta"><a href="#20260617-darius2d">June 17, 2026 06:30 UTC</a></p>
 </article>
 
 <footer class="colophon">
-  <p>Short, source-checked tidbits on MiSTer FPGA releases, posted automatically. Each post is written by Claude Opus 4.8 from the cited sources only and verified against them before publishing; no claims from memory. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Screenshots are shown at the original game's aspect ratio, through the same CRT shadow mask as the release index. Browse the full <a href="releases/">release index</a> or subscribe to the <a href="feed-zine.xml">RSS feed</a>.</p>
+  <p>A collection of quotes on MiSTer FPGA releases, posted automatically. Each post is a passage quoted verbatim from the linked source; nothing here is our own writing. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Screenshots are shown at the original game's aspect ratio, through the same CRT shadow mask as the release index. Browse the full <a href="releases/">release index</a> or subscribe to the <a href="feed-zine.xml">RSS feed</a>.</p>
 </footer>
 
 </div>
@@ -214,7 +226,7 @@
     var W = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
     var now = new Date();
     var today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-    document.querySelectorAll('.meta .rd').forEach(function (el) {
+    document.querySelectorAll('.rd').forEach(function (el) {
       var d = new Date(el.dataset.d + 'T00:00:00Z');
       var days = Math.round((today - d.getTime()) / 86400000);
       var t;

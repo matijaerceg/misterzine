@@ -3,65 +3,65 @@
 <channel>
 <title>MiSTerZine</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss</link>
-<description>Short, source-checked tidbits on MiSTer FPGA releases, written by AI from cited sources and verified before publishing.</description>
+<description>A collection of quotes from around the web on MiSTer FPGA releases, each with its source linked.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://matijaerceg.github.io/misterzine/feed-zine.xml"/>
 <lastBuildDate>Sun, 12 Jul 2026 06:30:00 +0000</lastBuildDate>
 <item>
-<title>Breakout</title>
+<title>Breakout (50th anniversary)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260712-breakout</link>
 <guid isPermaLink="false">zine:20260712-breakout</guid>
 <pubDate>Sun, 12 Jul 2026 06:30:00 +0000</pubDate>
-<description>&lt;p&gt;Before they started Apple, Steve Jobs took a job from game maker Atari to build Breakout cheap, then handed the real work to his friend Steve Wozniak. Woz packed it onto just 44 parts, so dense that, by his own account, Atari's engineers couldn't follow how it worked. The factory gave up and rebuilt it their way with about 100. Same game, twice the parts.&lt;/p&gt;&lt;p&gt;50th anniversary; MiSTer debut 2020-12-12. Sources: &lt;a href="https://en.wikipedia.org/wiki/Breakout_(video_game)"&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;"The reason Atari wanted me to design it is they were tired of their games taking 150, 200 chips, and they knew I designed things with very few chips, so we had incentives for getting it under 50 or under 40 chips," Steve Wozniak said of Breakout in a &lt;a href="https://www.gamedeveloper.com/design/woz-was-here---steve-wozniak-on-his-gaming-past"&gt;2007 interview with Gamasutra&lt;/a&gt;. Atari's engineers, faced with the finished board: "They had trouble understanding it."&lt;/p&gt;&lt;p&gt;MiSTer debut 2020-12-12.&lt;/p&gt;</description>
 </item>
 <item>
-<title>Night Slashers</title>
+<title>Night Slashers (MiSTer debut 2026-07-10)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260711-nslasher</link>
 <guid isPermaLink="false">zine:20260711-nslasher</guid>
 <pubDate>Fri, 11 Jul 2026 06:32:00 +0000</pubDate>
-<description>&lt;p&gt;Fighting through zombies, vampires, and werewolves wasn't the only thing locked down in Night Slashers: game maker Data East scrambled the arcade code itself, hiding it behind an encrypted processor. rmonic79's FPGA core doesn't cheat with pre-cracked copies. It unscrambles the code live as it runs, exactly as the original board did.&lt;/p&gt;&lt;p&gt;MiSTer debut 2026-07-10. Sources: &lt;a href="https://en.wikipedia.org/wiki/Night_Slashers"&gt;Wikipedia&lt;/a&gt;, &lt;a href="https://github.com/MiSTer-devel/Arcade-NightSlashers_MiSTer"&gt;core repo&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;"Data East also created Night Slashers, clearly their best beat-em-up and undoubtedly capable of cracking a connoisseur's Top 10 list, if it weren't for the game's unbelievable obscurity," reads a &lt;a href="https://www.honestgamers.com/5151/arcade/night-slashers/review.html"&gt;2006 review at HonestGamers&lt;/a&gt;, which sums up the appeal: "watch the heads roll, the chests implode, and the guts soil the cement."&lt;/p&gt;</description>
 </item>
 <item>
-<title>Trio The Punch - Never Forget Me...</title>
+<title>Trio The Punch (MiSTer debut 2026-07-08)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260711-triothep</link>
 <guid isPermaLink="false">zine:20260711-triothep</guid>
 <pubDate>Fri, 11 Jul 2026 06:31:00 +0000</pubDate>
-<description>&lt;p&gt;Trio The Punch began life as something else entirely: a planned board game in the vein of Western snakes and ladders, scrapped and rebuilt from scratch during development. What game maker Data East shipped instead, Japan-only, was a surreal game across 35 levels where jumping on enemy bullets bounces your character off like a trampoline, with the laws of physics tossed out.&lt;/p&gt;&lt;p&gt;MiSTer debut 2026-07-08. Sources: &lt;a href="https://en.wikipedia.org/wiki/Trio_the_Punch:_Never_Forget_Me..."&gt;Wikipedia&lt;/a&gt;, &lt;a href="https://github.com/MiSTer-devel/Arcade-TrioThePunch_MiSTer"&gt;core repo&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;"Nothing about this game is done well, and yet everything just meshes together so perfectly into one gigantic dose of pure nonsense," writes &lt;a href="https://www.hardcoregaming101.net/trio-the-punch/"&gt;Hardcore Gaming 101&lt;/a&gt;, which also says Trio The Punch "is like a visual representation of the writings of William S. Burroughs if he was a Japanese video game designer."&lt;/p&gt;</description>
 </item>
 <item>
-<title>Battle Garegga</title>
+<title>Battle Garegga (30th anniversary)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260711-bgaregga</link>
 <guid isPermaLink="false">zine:20260711-bgaregga</guid>
 <pubDate>Fri, 11 Jul 2026 06:30:00 +0000</pubDate>
-<description>&lt;p&gt;In the arcade shooter Battle Garegga, thirty years old this February, powering up your weapon and grabbing items pushes the difficulty higher, while dying drops it. The catch: the fewer lives you hold when you die, the more the difficulty falls. Players are forced to keep themselves powered down, conserve shots, and lose lives on purpose to keep the final stages playable.&lt;/p&gt;&lt;p&gt;30th anniversary; MiSTer debut 2023-09-10. Sources: &lt;a href="https://en.wikipedia.org/wiki/Battle_Garegga"&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;"A number of shoot-em-up fans regard it as one of the best shooters of all time; others feel that the cluttered visual style and rank system ruin some pretty cool ideas," writes &lt;a href="https://www.hardcoregaming101.net/battle-garegga/"&gt;Hardcore Gaming 101&lt;/a&gt;. That rank system reacts to how well you play, and "creates some ridiculous scenarios where players will intentionally suicide at points to make the difficulty manageable, and can only properly clear it by scoring high enough to rack up extra lives."&lt;/p&gt;&lt;p&gt;MiSTer debut 2023-09-10.&lt;/p&gt;</description>
 </item>
 <item>
-<title>Cabal</title>
+<title>Cabal (MiSTer debut 2026-07-05)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260706-cabal</link>
 <guid isPermaLink="false">zine:20260706-cabal</guid>
 <pubDate>Mon, 06 Jul 2026 06:31:00 +0000</pubDate>
-<description>&lt;p&gt;Cabal, a 1988 arcade game from developer TAD Corporation, placed your character in the foreground and watched from behind the shoulder, the way modern third-person shooters do. It was successful enough to spawn a wave of imitators in the years after, among them NAM-1975 and Wild Guns.&lt;/p&gt;&lt;p&gt;MiSTer debut 2026-07-05. Sources: &lt;a href="https://en.wikipedia.org/wiki/Cabal_(video_game)"&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;"The rather obscure Japanese TAD Corporation wondered what it would be like to give a third-person point of view to gun-based carnage," writes &lt;a href="https://www.hardcoregaming101.net/cabal/"&gt;Hardcore Gaming 101&lt;/a&gt;, crediting Cabal with the wave of imitators that followed, Wild Guns and NAM-1975 among them: "None of these games would likely exist if Cabal didn't set the table."&lt;/p&gt;</description>
 </item>
 <item>
-<title>Biomechanical Toy</title>
+<title>Biomechanical Toy (MiSTer debut 2026-07-05)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260706-biomtoy</link>
 <guid isPermaLink="false">zine:20260706-biomtoy</guid>
 <pubDate>Mon, 06 Jul 2026 06:30:00 +0000</pubDate>
-<description>&lt;p&gt;A criminal named Scrubby breaks out of jail, locked up for trying to steal the pendulum that brings toys to life. That's the hook of game maker Gaelco's 1995 run-and-gun Biomechanical Toy, where a hero named Inguz shoots his way through evil toyland. Its first console appearance came on an Evercade compilation.&lt;/p&gt;&lt;p&gt;MiSTer debut 2026-07-05. Sources: &lt;a href="https://en.wikipedia.org/wiki/Biomechanical_Toy"&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;"The colorful, trippy graphics are reminiscent of many Amiga games," writes &lt;a href="https://www.hardcoregaming101.net/biomechanical-toy/"&gt;Hardcore Gaming 101&lt;/a&gt; of Spanish maker Gaelco's run-and-gun. "It's not really on the level of other genre greats like Metal Slug (though it did predate that game by about a year)."&lt;/p&gt;</description>
 </item>
 <item>
-<title>Flash Boy</title>
+<title>Flash Boy (MiSTer debut 2026-06-30)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260701-cfboy0a1</link>
 <guid isPermaLink="false">zine:20260701-cfboy0a1</guid>
 <pubDate>Wed, 01 Jul 2026 06:30:00 +0000</pubDate>
-<description>&lt;p&gt;Imagine dropping a coin into an arcade cabinet, then waiting two to three minutes before the game even starts. That was the deal with Flash Boy, a 1981 release from game maker Data East for the DECO Cassette System, where each game arrived on a standard microcassette tape. Slot one in and the cabinet copied the whole program into its memory before you could play.&lt;/p&gt;&lt;p&gt;MiSTer debut 2026-06-30. Sources: &lt;a href="https://en.wikipedia.org/wiki/DECO_Cassette_System"&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;Flash Boy shipped on Data East's DECO Cassette System, tape-loaded arcade hardware where "the machine was turned on and 2 to 3 minutes later the game was loaded and ready to be played," as &lt;a href="https://www.atariprotos.com/deco/deco.htm"&gt;AtariProtos&lt;/a&gt; describes it. "The tape medium didn't prove to be nearly as robust as Data East had hoped, and the cassettes had a bad habit of failing to load after only a few months."&lt;/p&gt;</description>
 </item>
 <item>
-<title>Darius II (Dual Screen)</title>
+<title>Darius II (MiSTer debut 2026-06-16)</title>
 <link>https://matijaerceg.github.io/misterzine/?ref=rss#20260617-darius2d</link>
 <guid isPermaLink="false">zine:20260617-darius2d</guid>
 <pubDate>Wed, 17 Jun 2026 06:30:00 +0000</pubDate>
-<description>&lt;p&gt;Darius II was built to sprawl. Following the original Darius, game maker Taito programmed it to stretch across several screens at once. A three-screen version exists, but the two-screen layout became the usual way to play it, which is what this core runs. Outside Japan it went by a different name: Sagaia.&lt;/p&gt;&lt;p&gt;MiSTer debut 2026-06-16. Sources: &lt;a href="https://en.wikipedia.org/wiki/Darius_II_(video_game)"&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;</description>
+<description>&lt;p&gt;"In addition to a three-screen release, there is also a (more common) two-screen version," notes &lt;a href="https://www.hardcoregaming101.net/darius-ii/"&gt;Hardcore Gaming 101&lt;/a&gt;; the MiSTer core runs the two-screen one. "For some unknown reason, Darius II was renamed Sagaia outside of Japan."&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

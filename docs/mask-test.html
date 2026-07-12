@@ -37,10 +37,27 @@
     ['images/ingame/bgaregga.png', 'Battle Garegga in-game'],
   ];
   const sections = document.getElementById('sections');
-  for (const m of [0, 1, 2, 3]) {
+  // candidates A and B both target 1.5 css px triads on ANY device:
+  // A renders the canvas at a capped 2x density and lets the browser stretch;
+  // B keeps native density but runs the lattice at a fractional, floor-
+  // quantized scale (cells alternate widths). On a DPR-2 desktop both are
+  // identical to "Scale 1" — that's the sanity check.
+  const CANDIDATES = [
+    ['Original (no mask)', null],
+    ['A: virtual 2x render, browser-stretched (1.50 css px triads)',
+      { fit: 'cover', scale: 1, dpr: Math.min(dpr, 2) }],
+    ['B: quantized fractional lattice (1.50 css px triads)',
+      { fit: 'cover', scale: dpr / 2 }],
+    ['Scale 1 (' + (3 / dpr).toFixed(2) + ' css px triads)' + (auto === 1 ? ' - current auto pick' : ''),
+      { fit: 'cover', scale: 1 }],
+    ['Scale 2 (' + (6 / dpr).toFixed(2) + ' css px triads)' + (auto === 2 ? ' - current auto pick' : ''),
+      { fit: 'cover', scale: 2 }],
+    ['Scale 3 (' + (9 / dpr).toFixed(2) + ' css px triads)',
+      { fit: 'cover', scale: 3 }],
+  ];
+  for (const [label, opts] of CANDIDATES) {
     const h = document.createElement('h2');
-    h.textContent = m === 0 ? 'Original (no mask)' :
-      'Scale ' + m + ' (' + (3 * m / dpr).toFixed(2) + ' css px triads)' + (m === auto ? ' - current auto pick' : '');
+    h.textContent = label;
     sections.appendChild(h);
     for (const [src, cap] of IMGS) {
       const f = document.createElement('div'); f.className = 'frame';
@@ -50,10 +67,10 @@
       sections.appendChild(f);
       const p = document.createElement('p'); p.className = 'cap'; p.textContent = cap;
       sections.appendChild(p);
-      if (m > 0) {
+      if (opts) {
         const cv = document.createElement('canvas');
         f.appendChild(cv);
-        const render = () => window.mzMask(img, cv, { fit: 'cover', scale: m }) || cv.remove();
+        const render = () => window.mzMask(img, cv, opts) || cv.remove();
         if (img.complete && img.naturalWidth) render();
         else img.onload = render;
       }

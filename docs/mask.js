@@ -25,7 +25,10 @@
   // Returns false if pixels are unreadable (CORS taint) — caller keeps the img.
   window.mzMask = function (img, canvas, opts) {
     opts = opts || {};
-    var dpr = window.devicePixelRatio || 1;
+    // opts.dpr: render the canvas at a different pixel density than the
+    // device's (the browser stretches it to fit) — used to cap the backing
+    // store so the mask keeps a target apparent size on very dense screens
+    var dpr = opts.dpr || window.devicePixelRatio || 1;
     var box = canvas.parentElement.getBoundingClientRect();
     var w = Math.max(1, Math.round(box.width * dpr));
     var h = Math.max(1, Math.round(box.height * dpr));

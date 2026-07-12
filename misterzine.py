@@ -2508,8 +2508,9 @@ def cmd_export_web(args):
     # to write a duplicate copy of the HTML kept in a Python constant, which
     # kept silently reverting front-end edits on the next export. The page is
     # fully data-driven (fetches data.json at runtime), so only data.json needs
-    # regenerating.
-    (DOCSDIR / "index.html").write_text(ROOT_REDIRECT_HTML, encoding="utf-8")
+    # regenerating. The same rule covers DOCSDIR/index.html (the site root):
+    # it's the hand-maintained daily zine since 2026-07-11, not a redirect —
+    # export-web must never write it.
     _backfill_libretro_images(data)  # give brand-new arcade titles a libretro shot
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
     _write_feeds(outdir)  # RSS feeds from the events table (needs final data.json)
@@ -2855,18 +2856,6 @@ def _retag_image_dims():
     except Exception as e:
         log(f"  WARNING: image re-tag failed ({e}); data.json has no screenshot keys")
 
-
-ROOT_REDIRECT_HTML = """<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<title>misterzine</title>
-<link rel="canonical" href="./releases/">
-<meta http-equiv="refresh" content="0; url=./releases/">
-</head>
-<body><p>Redirecting to <a href="./releases/">releases</a> &hellip;</p></body>
-</html>
-"""
 
 
 # --- command: stats -------------------------------------------------------

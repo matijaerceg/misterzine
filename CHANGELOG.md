@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
+## 2026-07-12
+- Detail-panel screenshots now have a slight blur along the scan direction, like a worn arcade tube, and vertical (tate) games render the shadow mask rotated 90 degrees, matching how the monitor sits in the real cabinet.
+
 ## 2026-07-11
 - Screenshots and hardware photos (on both the zine and the release index) now render through a CRT shadow mask (Timothy Lottes' public-domain slot mask), drawn at your display's native pixel grid so it stays crisp at any display scale, phones included. Hardware photos are now full-color and softly scaled instead of dithered.
 - **The site root is now a daily zine**: short, source-checked tidbits about newly released MiSTer cores (and decade anniversaries of old favorites), each with a click-to-play gameplay video, written automatically from cited sources and verified against them before publishing. Has its own RSS feed (feed-zine.xml); the zine and the release index link to each other.

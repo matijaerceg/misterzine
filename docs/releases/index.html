@@ -416,7 +416,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
-<script src="../mask.js"></script>
+<script src="../mask.js?v=2"></script>
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
@@ -1031,8 +1031,12 @@ buildHeader();  // header renders immediately; rows follow once data.json loads
 const panel = document.getElementById('panel');
 
 // CRT slot mask over panel screenshots (mask.js, device-pixel accurate).
-// Only .frame imgs (game shots) — system photos stay untouched. Imgs mask as
-// they load; the ResizeObserver re-renders (debounced) on panel resize/open.
+// Game shots also get a worn-tube blur along the scan axis (source-relative),
+// and tate rows (.vert frames) rotate mask + blur together. System photos are
+// masked but never blurred (they're photos of hardware, not tube content).
+// Imgs mask as they load; the ResizeObserver re-renders (debounced) on panel
+// resize/open.
+const TUBE_BLUR = 1.5;  // user-tuned 2026-07-12; candidate retune: 1.25
 function maskShot(img) {
   if (!window.mzMask) return;
   let f = img.parentElement;
@@ -1053,7 +1057,8 @@ function maskShot(img) {
   if (!f || !f.classList.contains('frame')) return;
   let cv = f.querySelector('canvas');
   if (!cv) { cv = document.createElement('canvas'); f.appendChild(cv); }
-  if (!window.mzMask(img, cv, { fit: 'fill' })) cv.remove();
+  if (!window.mzMask(img, cv, { fit: 'fill', blur: TUBE_BLUR,
+                                rot: f.classList.contains('vert') })) cv.remove();
 }
 panel.addEventListener('load', e => {
   if (e.target.tagName === 'IMG') maskShot(e.target);
@@ -1227,8 +1232,11 @@ function detailHTML(d) {
       : aspect >= 2.4 ? '8 / 3'
       : d.rot ? (d.rot.startsWith('Vertical') ? '3 / 4' : '4 / 3')
       : (d.img_w > d.img_h ? '4 / 3' : '3 / 4'));
+  // tate rows (however the ratio decision got there — MAD, override, or
+  // dimension fallback) carry .vert so the CRT mask + tube blur rotate with
+  // the monitor
   const shots = (d.img_slots || []).map(s =>
-    '<div class="frame" style="aspect-ratio:' + ratio + '">' +
+    '<div class="frame' + (ratio === '3 / 4' ? ' vert' : '') + '" style="aspect-ratio:' + ratio + '">' +
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
   ).join('');
   // console/computer rows: hardware photo instead of screenshots, with a

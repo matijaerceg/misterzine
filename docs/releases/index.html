@@ -1036,7 +1036,7 @@ const panel = document.getElementById('panel');
 // masked but never blurred (they're photos of hardware, not tube content).
 // Imgs mask as they load; the ResizeObserver re-renders (debounced) on panel
 // resize/open.
-const TUBE_BLUR = 1.5;  // user-tuned 2026-07-12; candidate retune: 1.25
+const TUBE_BLUR = 1.25;  // user-tuned 2026-07-12
 function maskShot(img) {
   if (!window.mzMask) return;
   let f = img.parentElement;

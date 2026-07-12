@@ -290,11 +290,11 @@
   /* debossed watermark: fill sits a hair darker than the Canvas surface in both
      themes; the #mzstamp svg filter adds the pressed-in edge shading */
   #panel .body.empty .logo { width: 60%; max-width: 220px; aspect-ratio: 532.4 / 354.2;
-    fill: light-dark(color-mix(in srgb, CanvasText 8%, Canvas), color-mix(in srgb, #000 22%, Canvas)); }
+    fill: light-dark(color-mix(in srgb, CanvasText 8%, Canvas), color-mix(in srgb, #000 15%, Canvas)); }
   /* pressed-in edge shading: strong sheen would glow on a dark surface, so both
      floods are theme-tuned here rather than fixed in the filter markup */
-  #mzstamp .shade { flood-color: light-dark(rgb(0 0 0 / .42), rgb(0 0 0 / .65)); }
-  #mzstamp .sheen { flood-color: light-dark(rgb(255 255 255 / .55), rgb(255 255 255 / .14)); }
+  #mzstamp .shade { flood-color: light-dark(rgb(0 0 0 / .42), rgb(0 0 0 / .45)); }
+  #mzstamp .sheen { flood-color: light-dark(rgb(255 255 255 / .55), rgb(255 255 255 / .09)); }
   #panel .pick { color: #888; font-size: .95rem; margin: 0; }
   /* footer is docked to the bottom of the panel (outside the scrolling .body) */
   #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid #8883;

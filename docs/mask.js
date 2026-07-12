@@ -25,10 +25,12 @@
   // Returns false if pixels are unreadable (CORS taint) — caller keeps the img.
   window.mzMask = function (img, canvas, opts) {
     opts = opts || {};
-    // opts.dpr: render the canvas at a different pixel density than the
-    // device's (the browser stretches it to fit) — used to cap the backing
-    // store so the mask keeps a target apparent size on very dense screens
-    var dpr = opts.dpr || window.devicePixelRatio || 1;
+    // Render density is capped at 2x: on denser screens (phones) the browser
+    // stretches the finished canvas, keeping the triads at ~1.5 css px like a
+    // 2x desktop. Device-tested 2026-07-12: uncapped 3px triads at DPR 2.6+
+    // are invisible, integer scale-2 is too coarse, and a fractional lattice
+    // rainbows badly — the capped stretch reads right (slight rainbow, ok'd).
+    var dpr = opts.dpr || Math.min(window.devicePixelRatio || 1, 2);
     var box = canvas.parentElement.getBoundingClientRect();
     var w = Math.max(1, Math.round(box.width * dpr));
     var h = Math.max(1, Math.round(box.height * dpr));
@@ -47,10 +49,9 @@
     try { id = ctx.getImageData(0, 0, w, h); }
     catch (e) { return false; }
     var d = id.data;
-    // Lattice scale: integer multiple of device px (fractional would band).
-    // 1x reads right on desktops up through 2x displays; only genuinely
-    // phone-dense screens (dpr >= 2.5) double it, and 2 is the ceiling.
-    var m = opts.scale || Math.min(2, Math.max(1, Math.round(dpr / 1.5)));
+    // Lattice scale stays 1 (integer, in canvas px) — apparent size is
+    // governed by the density cap above, not by scaling the lattice.
+    var m = opts.scale || 1;
     for (var y = 0; y < h; y++) {
       var row = y * w * 4;
       var yy = (y / m) | 0;

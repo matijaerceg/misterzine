@@ -51,21 +51,21 @@
   .top nav a.idx .cnt { font-size: .85em; font-weight: 500; }
   .top nav a.idx:hover { background: color-mix(in srgb, #06c 12%, Canvas); }
 
-  /* posts */
-  article { border-bottom: 1px solid #8884; padding: 1.1rem 0; }
-  .media { position: relative; aspect-ratio: 16 / 9; border: 1px solid #8884; border-radius: 6px;
-           overflow: hidden; background: #140c1c; margin: 0 0 .8rem; }
-  .media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* posts: one native-aspect screenshot per story (h = 4:3, v = tate 3:4,
+     w = dual-screen 8:3), masked + tube-blurred like the release index */
+  article { border-bottom: 1px solid #8884; padding: 1.1rem 0; display: flow-root; }
+  .shot { position: relative; border: 1px solid #8884; border-radius: 6px;
+          overflow: hidden; background: #140c1c; margin: 0 0 .8rem; }
+  .shot.h { aspect-ratio: 4 / 3; }
+  .shot.v { aspect-ratio: 3 / 4; max-width: 19rem; margin-inline: auto; }
+  .shot.w { aspect-ratio: 8 / 3; }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; }
   /* CRT slot mask (mask.js) rendered over the still in device pixels */
-  .media canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-  .media button.play { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
-                       border: 0; background: #0000; cursor: pointer; }
-  .media button.play span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-                            display: grid; place-items: center; width: 4rem; height: 2.8rem;
-                            background: #140c1ccc; border: 1px solid #deeed655; border-radius: 8px;
-                            color: #deeed6; font-size: 1.2rem; transition: background .15s; }
-  .media button.play:hover span, .media button.play:focus-visible span { background: #d04648cc; }
-  .media iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .shot canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  /* wide viewports: tate shots sit left of the text and it wraps around */
+  @media (min-width: 40rem) {
+    .shot.v { float: left; width: 15rem; margin: 0 1.1rem .35rem 0; }
+  }
   article p { margin: 0 0 .6rem; line-height: 1.5; }
   article strong a { color: inherit; }
   article strong a:hover { color: #06c; }
@@ -76,7 +76,7 @@
 
   .colophon { color: #888; font-size: .8rem; padding-top: 1.25rem; }
   .colophon a { color: inherit; }
-  @media (prefers-reduced-motion: reduce) { .media button.play span { transition: none; } .top img { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .top img { transition: none; } }
 </style>
 </head>
 <body>
@@ -88,97 +88,78 @@
 </header>
 
 <article id="20260711-nslasher">
-  <div class="media" data-yt="h-Ys_ufBGAY" data-vt="Night Slashers arcade longplay (YouTube)">
-    <img src="https://i.ytimg.com/vi/h-Ys_ufBGAY/hqdefault.jpg" alt="Night Slashers arcade gameplay still" loading="lazy" crossorigin="anonymous">
-    <button class="play" type="button" aria-label="Play video (YouTube)"><span>&#9654;</span></button>
-  </div>
+  <div class="shot h"><img src="images/snap/nslasher.png" alt="Night Slashers arcade gameplay screenshot" loading="lazy"></div>
   <p>The Data East board behind <strong><a href="releases/#nslasher">Night Slashers</a></strong> guarded its main processor with an "Encrypted DECO156 ARM CPU," and rmonic79's new MiSTer FPGA core, which landed in the public database yesterday, reproduces it "with runtime on-board decrypt." So rather than shipping a pre-decrypted program, the FPGA reimplementation undoes the chip's encryption live as the hardware runs.</p>
   <p class="meta"><a href="#20260711-nslasher">July 11, 2026 06:32 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-10">2026-07-10</span> &middot; <a href="https://en.wikipedia.org/wiki/Night_Slashers" target="_blank" rel="noopener">Wikipedia</a></p>
 </article>
 
 <article id="20260711-triothep">
-  <div class="media" data-yt="TxLoYQ1pAzs" data-vt="Trio The Punch arcade longplay (YouTube)">
-    <img src="https://i.ytimg.com/vi/TxLoYQ1pAzs/hqdefault.jpg" alt="Trio The Punch arcade gameplay still" loading="lazy" crossorigin="anonymous">
-    <button class="play" type="button" aria-label="Play video (YouTube)"><span>&#9654;</span></button>
-  </div>
+  <div class="shot h"><img src="images/snap/triothep.png" alt="Trio The Punch arcade gameplay screenshot" loading="lazy"></div>
   <p><strong><a href="releases/#triothep">Trio The Punch</a></strong>, whose Data East arcade core reached the public MiSTer FPGA database on 2026-07-08, did not start out as a beat 'em up at all. Per Wikipedia, it was "initially planned as a sugoroku game," but "the content was completely changed during production." What shipped was a surreal brawler across 35 levels, published by Data East and released only in Japan.</p>
   <p class="meta"><a href="#20260711-triothep">July 11, 2026 06:31 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-08">2026-07-08</span> &middot; <a href="https://en.wikipedia.org/wiki/Trio_the_Punch:_Never_Forget_Me..." target="_blank" rel="noopener">Wikipedia</a></p>
 </article>
 
 <article id="20260711-bgaregga">
-  <div class="media" data-yt="HjiJIT6VZs0" data-vt="Battle Garegga arcade longplay (YouTube)">
-    <img src="https://i.ytimg.com/vi/HjiJIT6VZs0/hqdefault.jpg" alt="Battle Garegga arcade gameplay still" loading="lazy" crossorigin="anonymous">
-    <button class="play" type="button" aria-label="Play video (YouTube)"><span>&#9654;</span></button>
-  </div>
+  <div class="shot v"><img src="images/snap/bgaregga.png" alt="Battle Garegga arcade gameplay screenshot" loading="lazy"></div>
   <p>In arcade shmup <strong><a href="releases/#bgaregga">Battle Garegga</a></strong>, thirty years old this February, powering up your weapon and grabbing items pushes the difficulty higher, while dying drops it. The catch: the fewer lives you hold when you die, the more the difficulty falls. Players are "forced" to keep themselves powered down, conserve shots, and lose lives on purpose to keep the final stages playable.</p>
   <p class="meta"><a href="#20260711-bgaregga">July 11, 2026 06:30 UTC</a> &middot; 30th anniversary &middot; MiSTer debut <span class="rd" data-d="2023-09-10">2023-09-10</span> &middot; <a href="https://en.wikipedia.org/wiki/Battle_Garegga" target="_blank" rel="noopener">Wikipedia</a></p>
 </article>
 
 <article id="20260706-cabal">
-  <div class="media" data-yt="WPSwJPsPiek" data-vt="Cabal arcade longplay (YouTube)">
-    <img src="https://i.ytimg.com/vi/WPSwJPsPiek/hqdefault.jpg" alt="Cabal arcade gameplay still" loading="lazy" crossorigin="anonymous">
-    <button class="play" type="button" aria-label="Play video (YouTube)"><span>&#9654;</span></button>
-  </div>
+  <div class="shot h"><img src="images/snap/cabal.png" alt="Cabal arcade gameplay screenshot" loading="lazy"></div>
   <p><strong><a href="releases/#cabal">Cabal</a></strong>, the 1988 TAD Corporation arcade game now on MiSTer, put the player character in the foreground under an over-the-shoulder camera, "similar to modern third-person shooters." Its success spawned a wave of clones, including NAM-1975 and Wild Guns.</p>
   <p class="meta"><a href="#20260706-cabal">July 6, 2026 06:31 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-05">2026-07-05</span> &middot; <a href="https://en.wikipedia.org/wiki/Cabal_(video_game)" target="_blank" rel="noopener">Wikipedia</a></p>
 </article>
 
 <article id="20260706-biomtoy">
-  <div class="media" data-yt="0Da-ovEc1bw" data-vt="Biomechanical Toy arcade longplay (YouTube)">
-    <img src="https://i.ytimg.com/vi/0Da-ovEc1bw/hqdefault.jpg" alt="Biomechanical Toy arcade gameplay still" loading="lazy" crossorigin="anonymous">
-    <button class="play" type="button" aria-label="Play video (YouTube)"><span>&#9654;</span></button>
-  </div>
+  <div class="shot h"><img src="images/snap/biomtoy.png" alt="Biomechanical Toy arcade gameplay screenshot" loading="lazy"></div>
   <p>From its 1995 arcade cabinet, <strong><a href="releases/#biomtoy">Biomechanical Toy</a></strong> waited decades for a home version: its first console appearance came only via the Gaelco Arcade 1 compilation for the Evercade. Now on MiSTer, the Gaelco/Zeus run and gun is playable outside an arcade board by a second route entirely.</p>
   <p class="meta"><a href="#20260706-biomtoy">July 6, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-07-05">2026-07-05</span> &middot; <a href="https://en.wikipedia.org/wiki/Biomechanical_Toy" target="_blank" rel="noopener">Wikipedia</a></p>
 </article>
 
 <article id="20260701-cfboy0a1">
-  <div class="media" data-yt="bjY8IQ56dn0" data-vt="Flash Boy arcade gameplay (YouTube)">
-    <img src="https://i.ytimg.com/vi/bjY8IQ56dn0/hqdefault.jpg" alt="Flash Boy arcade gameplay still" loading="lazy" crossorigin="anonymous">
-    <button class="play" type="button" aria-label="Play video (YouTube)"><span>&#9654;</span></button>
-  </div>
+  <div class="shot v"><img src="images/snap/cfboy0a1.png" alt="Flash Boy arcade gameplay screenshot" loading="lazy"></div>
   <p><strong><a href="releases/#cfboy0a1">Flash Boy</a></strong> (Data East, 1981) is now on MiSTer, a title for the DECO Cassette System. Its games shipped on standard Microcassette tapes, and inserting one copied the program into the cabinet's RAM chips, a process that took about two to three minutes before you could play.</p>
   <p class="meta"><a href="#20260701-cfboy0a1">July 1, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-06-30">2026-06-30</span> &middot; <a href="https://en.wikipedia.org/wiki/DECO_Cassette_System" target="_blank" rel="noopener">Wikipedia</a></p>
 </article>
 
 <article id="20260617-darius2d">
-  <div class="media" data-yt="H8cfVtEnJQY" data-vt="Darius II dual-screen arcade gameplay (YouTube)">
-    <img src="https://i.ytimg.com/vi/H8cfVtEnJQY/hqdefault.jpg" alt="Darius II dual-screen arcade gameplay still" loading="lazy" crossorigin="anonymous">
-    <button class="play" type="button" aria-label="Play video (YouTube)"><span>&#9654;</span></button>
-  </div>
+  <div class="shot w"><img src="images/snap/darius2d.png" alt="Darius II dual-screen arcade gameplay screenshot" loading="lazy"></div>
   <p>The MiSTer core for <strong><a href="releases/#darius2d">Darius II</a></strong> runs the dual-screen version. Taito's game shipped in a three-screen configuration like the original Darius too, but "while a three-screen version like the original exists, Darius II is more commonly and generally represented as a two-screen game." Outside Japan it went by another name entirely: Sagaia.</p>
   <p class="meta"><a href="#20260617-darius2d">June 17, 2026 06:30 UTC</a> &middot; MiSTer debut <span class="rd" data-d="2026-06-16">2026-06-16</span> &middot; <a href="https://en.wikipedia.org/wiki/Darius_II_(video_game)" target="_blank" rel="noopener">Wikipedia</a></p>
 </article>
 
 <footer class="colophon">
-  <p>Short, source-checked tidbits on MiSTer FPGA releases, posted automatically. Each post is written by Claude Opus 4.8 from the cited sources only and verified against them before publishing; no claims from memory. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Videos play here on click via YouTube's privacy-enhanced embed; nothing loads from YouTube until you press play. Browse the full <a href="releases/">release index</a> or subscribe to the <a href="feed-zine.xml">RSS feed</a>.</p>
+  <p>Short, source-checked tidbits on MiSTer FPGA releases, posted automatically. Each post is written by Claude Opus 4.8 from the cited sources only and verified against them before publishing; no claims from memory. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Screenshots are shown at the original game's aspect ratio, through the same CRT shadow mask as the release index. Browse the full <a href="releases/">release index</a> or subscribe to the <a href="feed-zine.xml">RSS feed</a>.</p>
 </footer>
 
 </div>
-<script src="mask.js"></script>
+<script src="mask.js?v=2"></script>
 <script>
-  // CRT slot mask over the stills, drawn in device pixels (mask.js);
-  // falls back to the plain img if pixels are unreadable
+  // CRT slot mask + worn-tube blur over the screenshots, drawn in device
+  // pixels (mask.js); tate shots (.shot.v) rotate mask and blur together.
+  // Falls back to the plain img if pixels are unreadable.
   (function () {
     if (!window.mzMask) return;
     function upgrade(img) {
-      var m = img.closest('.media');
+      var m = img.closest('.shot');
       if (!m) return;
       var cv = m.querySelector('canvas');
       if (!cv) { cv = document.createElement('canvas'); img.after(cv); }
-      if (!window.mzMask(img, cv, { fit: 'cover' })) cv.remove();
+      if (!window.mzMask(img, cv, { fit: 'fill', blur: 1.25,
+                                    rot: m.classList.contains('v') })) cv.remove();
     }
     document.addEventListener('load', function (e) {
-      if (e.target.tagName === 'IMG' && e.target.closest('.media')) upgrade(e.target);
+      if (e.target.tagName === 'IMG' && e.target.closest('.shot')) upgrade(e.target);
     }, true);
-    document.querySelectorAll('.media img').forEach(function (img) {
+    document.querySelectorAll('.shot img').forEach(function (img) {
       if (img.complete && img.naturalWidth) upgrade(img);
     });
     var t;
     function rerender() {
       clearTimeout(t);
       t = setTimeout(function () {
-        document.querySelectorAll('.media img').forEach(function (img) {
+        document.querySelectorAll('.shot img').forEach(function (img) {
           if (img.complete && img.naturalWidth) upgrade(img);
         });
       }, 150);
@@ -227,18 +208,6 @@
       el.textContent = t;
     });
   })();
-  // click-to-play: swap the still for a privacy-enhanced YouTube embed
-  document.querySelectorAll('.media').forEach(function (m) {
-    m.querySelector('.play').addEventListener('click', function () {
-      var f = document.createElement('iframe');
-      f.src = 'https://www.youtube-nocookie.com/embed/' + m.dataset.yt + '?autoplay=1';
-      f.allow = 'autoplay; encrypted-media; picture-in-picture';
-      f.allowFullscreen = true;
-      f.title = m.dataset.vt;
-      m.textContent = '';
-      m.appendChild(f);
-    });
-  });
 </script>
 <!-- GoatCounter analytics (privacy-friendly, no cookies) -->
 <script data-goatcounter="https://misterzine.goatcounter.com/count"

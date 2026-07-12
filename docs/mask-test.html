@@ -12,6 +12,13 @@
   h1 { font-size: 16px; margin: 0 0 2px; color: #eee; }
   .info { color: #888; font-size: 12px; margin: 0 0 14px; }
   h2 { font-size: 13px; font-weight: 600; color: #aaa; margin: 18px 0 6px; }
+  .ctl { position: sticky; top: 0; z-index: 2; background: #141414;
+         padding: 8px 0; display: flex; align-items: center; gap: 10px;
+         border-bottom: 1px solid #2a2a2a; }
+  .ctl input { flex: 1; max-width: 420px; accent-color: #e8b23a; }
+  .ctl .val { font-variant-numeric: tabular-nums; color: #e8b23a;
+              font-weight: 600; min-width: 5.5ch; }
+  .cell.live .cap { color: #e8b23a; }
   .row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; }
   .cell { flex: none; }
   .cell .cap { font-size: 12px; color: #999; margin: 0 0 3px;
@@ -27,6 +34,11 @@
 <body>
 <h1>Tube blur test</h1>
 <p class="info" id="info"></p>
+<div class="ctl">
+  <span>blur</span>
+  <input type="range" id="knob" min="1" max="10" step="0.25" value="2">
+  <span class="val" id="knobval">2x</span>
+</div>
 <div id="sheet"></div>
 <script src="mask.js"></script>
 <script>
@@ -41,19 +53,22 @@
     { set: 'batrider', note: 'Batrider — axis control: UNROTATED mask + blur', v: true, rot: false }
   ];
   var sheet = document.getElementById('sheet');
+  var knob = document.getElementById('knob');
+  var knobval = document.getElementById('knobval');
   var jobs = [];
+  var liveJobs = [];
   SUBJECTS.forEach(function (sub) {
     var h2 = document.createElement('h2');
     h2.textContent = sub.note;
     sheet.appendChild(h2);
     var row = document.createElement('div');
     row.className = 'row';
-    STRENGTHS.forEach(function (k) {
+    function makeCell(k, live) {
       var cell = document.createElement('div');
-      cell.className = 'cell';
+      cell.className = 'cell' + (live ? ' live' : '');
       var cap = document.createElement('p');
       cap.className = 'cap';
-      cap.textContent = k ? 'blur ' + k + 'x' : 'blur off';
+      cap.textContent = live ? 'slider' : (k ? 'blur ' + k + 'x' : 'blur off');
       var box = document.createElement('div');
       box.className = 'box ' + (sub.v ? 'v' : 'h');
       var img = new Image();
@@ -64,9 +79,30 @@
       cell.appendChild(cap);
       cell.appendChild(box);
       row.appendChild(cell);
-      jobs.push({ img: img, cv: cv, opts: { fit: 'fill', blur: k, rot: sub.rot } });
-    });
+      var job = { img: img, cv: cv, cap: cap,
+                  opts: { fit: 'fill', blur: k, rot: sub.rot } };
+      jobs.push(job);
+      if (live) liveJobs.push(job);
+    }
+    makeCell(parseFloat(knob.value), true);
+    STRENGTHS.forEach(function (k) { makeCell(k, false); });
     sheet.appendChild(row);
+  });
+
+  var kt;
+  knob.addEventListener('input', function () {
+    var k = parseFloat(knob.value);
+    knobval.textContent = k + 'x';
+    clearTimeout(kt);
+    kt = setTimeout(function () {
+      liveJobs.forEach(function (job) {
+        job.opts.blur = k;
+        job.cap.textContent = 'slider ' + k + 'x';
+        if (job.img.complete && job.img.naturalWidth) {
+          window.mzMask(job.img, job.cv, job.opts);
+        }
+      });
+    }, 60);
   });
 
   function renderAll() {

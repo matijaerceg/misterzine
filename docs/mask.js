@@ -22,9 +22,9 @@
 
   // Render img into canvas (sized from its parent box * devicePixelRatio) and
   // mask it. opts.fit: 'cover' | 'fill'; opts.smooth: false = pixelated.
-  // opts.blur: >1 lowers resolution along the scan direction by that factor,
-  // at SOURCE resolution pre-mask (worn-tube look). opts.rot: tate — rotates
-  // the lattice AND the blur axis together (they live on the same tube).
+  // opts.blur: >1 softens along the scan direction (tent blur of roughly
+  // that width in SOURCE pixels, pre-mask — worn-tube look). opts.rot:
+  // tate — rotates the lattice AND the blur axis together (same tube).
   // Returns false if pixels are unreadable (CORS taint) — caller keeps the img.
   window.mzMask = function (img, canvas, opts) {
     opts = opts || {};
@@ -41,19 +41,32 @@
     canvas.width = w; canvas.height = h;
     var ctx = canvas.getContext('2d', { willReadFrequently: true });
     ctx.imageSmoothingEnabled = opts.smooth !== false;
-    // Scan-direction blur: bilinear-downscale the source along the raster
-    // axis only, then let the fitted draw stretch it back — the softening is
-    // tied to the image's native pixels, never the output size. Fit math
-    // keeps the ORIGINAL dims so aspect is untouched.
+    // Scan-direction blur at SOURCE resolution: two box passes (= tent
+    // filter) built from alpha-accumulated sub-pixel-offset draws along the
+    // raster axis. Full-res grid throughout — no decimation, so no aliasing
+    // shimmer and no blocky re-upscale (a naive downscale/upscale draw
+    // aliases hard past 2x). Softening is tied to the image's native pixels,
+    // never the output size.
     var src = img;
     if (opts.blur > 1) {
-      var off = document.createElement('canvas');
-      off.width = rot ? img.naturalWidth
-        : Math.max(1, Math.round(img.naturalWidth / opts.blur));
-      off.height = rot ? Math.max(1, Math.round(img.naturalHeight / opts.blur))
-        : img.naturalHeight;
-      off.getContext('2d').drawImage(img, 0, 0, off.width, off.height);
-      src = off;
+      var bw = img.naturalWidth, bh = img.naturalHeight;
+      var acc = document.createElement('canvas');
+      acc.width = bw; acc.height = bh;
+      acc.getContext('2d').drawImage(img, 0, 0);
+      var span = opts.blur - 1;
+      var taps = Math.max(2, Math.ceil(opts.blur));
+      for (var pass = 0; pass < 2; pass++) {
+        var nxt = document.createElement('canvas');
+        nxt.width = bw; nxt.height = bh;
+        var nctx = nxt.getContext('2d');
+        for (var t = 0; t < taps; t++) {
+          var o = span * (t / (taps - 1) - 0.5);
+          nctx.globalAlpha = 1 / (t + 1);
+          nctx.drawImage(acc, rot ? 0 : o, rot ? o : 0);
+        }
+        acc = nxt;
+      }
+      src = acc;
     }
     if (opts.fit === 'cover' || opts.fit === 'contain') {
       var s = (opts.fit === 'cover' ? Math.max : Math.min)(

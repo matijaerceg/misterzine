@@ -22,9 +22,13 @@
 
   // Render img into canvas (sized from its parent box * devicePixelRatio) and
   // mask it. opts.fit: 'cover' | 'fill'; opts.smooth: false = pixelated.
+  // opts.blur: >1 lowers resolution along the scan direction by that factor,
+  // at SOURCE resolution pre-mask (worn-tube look). opts.rot: tate — rotates
+  // the lattice AND the blur axis together (they live on the same tube).
   // Returns false if pixels are unreadable (CORS taint) — caller keeps the img.
   window.mzMask = function (img, canvas, opts) {
     opts = opts || {};
+    var rot = !!opts.rot;
     // Render density is capped at 2x: on denser screens (phones) the browser
     // stretches the finished canvas, keeping the triads at ~1.5 css px like a
     // 2x desktop. Device-tested 2026-07-12: uncapped 3px triads at DPR 2.6+
@@ -37,13 +41,27 @@
     canvas.width = w; canvas.height = h;
     var ctx = canvas.getContext('2d', { willReadFrequently: true });
     ctx.imageSmoothingEnabled = opts.smooth !== false;
+    // Scan-direction blur: bilinear-downscale the source along the raster
+    // axis only, then let the fitted draw stretch it back — the softening is
+    // tied to the image's native pixels, never the output size. Fit math
+    // keeps the ORIGINAL dims so aspect is untouched.
+    var src = img;
+    if (opts.blur > 1) {
+      var off = document.createElement('canvas');
+      off.width = rot ? img.naturalWidth
+        : Math.max(1, Math.round(img.naturalWidth / opts.blur));
+      off.height = rot ? Math.max(1, Math.round(img.naturalHeight / opts.blur))
+        : img.naturalHeight;
+      off.getContext('2d').drawImage(img, 0, 0, off.width, off.height);
+      src = off;
+    }
     if (opts.fit === 'cover' || opts.fit === 'contain') {
       var s = (opts.fit === 'cover' ? Math.max : Math.min)(
         w / img.naturalWidth, h / img.naturalHeight);
       var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
-      ctx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
+      ctx.drawImage(src, (w - dw) / 2, (h - dh) / 2, dw, dh);
     } else {
-      ctx.drawImage(img, 0, 0, w, h);
+      ctx.drawImage(src, 0, 0, w, h);
     }
     var id;
     try { id = ctx.getImageData(0, 0, w, h); }
@@ -58,9 +76,14 @@
       for (var x = 0; x < w; x++) {
         var p = row + x * 4;
         var xx = (x / m) | 0;
-        var py = (xx % 6) >= 3 ? yy + 2 : yy;
-        var open = (py % 4) >= 1;
-        var st = xx % 3;
+        // a = stripe/stagger axis (across scanlines), b = slot axis. Tate
+        // rotation swaps them — the mask is printed on the tube, so it turns
+        // with the monitor. 90 vs 270 is moot: only the axis matters.
+        var a = rot ? yy : xx;
+        var b = rot ? xx : yy;
+        var pb = (a % 6) >= 3 ? b + 2 : b;
+        var open = (pb % 4) >= 1;
+        var st = a % 3;
         for (var ch = 0; ch < 3; ch++) {
           var c0 = S2L[d[p + ch]];
           var amp = 1 / (LIM * 3 / 12 + LIM * (9 / 12) * c0);

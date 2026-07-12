@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>tube blur test</title>
+<style>
+  html { color-scheme: dark; }
+  body { margin: 0; padding: 12px; background: #141414; color: #ccc;
+         font: 14px/1.4 system-ui, sans-serif; }
+  h1 { font-size: 16px; margin: 0 0 2px; color: #eee; }
+  .info { color: #888; font-size: 12px; margin: 0 0 14px; }
+  h2 { font-size: 13px; font-weight: 600; color: #aaa; margin: 18px 0 6px; }
+  .row { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; }
+  .cell { flex: none; }
+  .cell .cap { font-size: 12px; color: #999; margin: 0 0 3px;
+               font-variant-numeric: tabular-nums; }
+  .box { position: relative; background: #000; }
+  .box.h { width: 320px; height: 240px; }
+  .box.v { width: 240px; height: 320px; }
+  .box img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .box canvas { position: absolute; inset: 0; width: 100%; height: 100%;
+                pointer-events: none; }
+</style>
+</head>
+<body>
+<h1>Tube blur test</h1>
+<p class="info" id="info"></p>
+<div id="sheet"></div>
+<script src="mask.js"></script>
+<script>
+(function () {
+  'use strict';
+  var STRENGTHS = [0, 1.5, 1.75, 2, 2.5];
+  var SUBJECTS = [
+    { set: 'sf2',      note: 'Street Fighter II — 384×224, crisp hi-res', v: false, rot: false },
+    { set: 'gng',      note: 'Ghosts\'n Goblins — 256×224, chunky low-res', v: false, rot: false },
+    { set: 'nslasher', note: 'Night Slashers — 320×240, dark', v: false, rot: false },
+    { set: 'batrider', note: 'Armed Police Batrider — 240×320 vertical, ROTATED mask + blur', v: true, rot: true },
+    { set: 'batrider', note: 'Batrider — axis control: UNROTATED mask + blur', v: true, rot: false }
+  ];
+  var sheet = document.getElementById('sheet');
+  var jobs = [];
+  SUBJECTS.forEach(function (sub) {
+    var h2 = document.createElement('h2');
+    h2.textContent = sub.note;
+    sheet.appendChild(h2);
+    var row = document.createElement('div');
+    row.className = 'row';
+    STRENGTHS.forEach(function (k) {
+      var cell = document.createElement('div');
+      cell.className = 'cell';
+      var cap = document.createElement('p');
+      cap.className = 'cap';
+      cap.textContent = k ? 'blur ' + k + 'x' : 'blur off';
+      var box = document.createElement('div');
+      box.className = 'box ' + (sub.v ? 'v' : 'h');
+      var img = new Image();
+      img.src = 'images/ingame/' + sub.set + '.png';
+      var cv = document.createElement('canvas');
+      box.appendChild(img);
+      box.appendChild(cv);
+      cell.appendChild(cap);
+      cell.appendChild(box);
+      row.appendChild(cell);
+      jobs.push({ img: img, cv: cv, opts: { fit: 'fill', blur: k, rot: sub.rot } });
+    });
+    sheet.appendChild(row);
+  });
+
+  function renderAll() {
+    document.getElementById('info').textContent =
+      'devicePixelRatio ' + (window.devicePixelRatio || 1).toFixed(3) +
+      ' · render density ' + Math.min(window.devicePixelRatio || 1, 2) +
+      'x · blur is source-relative (scan axis only), applied before the mask';
+    jobs.forEach(function (job) {
+      if (job.img.complete && job.img.naturalWidth) {
+        window.mzMask(job.img, job.cv, job.opts);
+      }
+    });
+  }
+  jobs.forEach(function (job) {
+    job.img.addEventListener('load', function () {
+      window.mzMask(job.img, job.cv, job.opts);
+    });
+  });
+  renderAll();
+  var t;
+  window.addEventListener('resize', function () {
+    clearTimeout(t); t = setTimeout(renderAll, 150);
+  });
+  function watchDPR() {
+    var mq = window.matchMedia('(resolution: ' + (window.devicePixelRatio || 1) + 'dppx)');
+    mq.addEventListener('change', function () { renderAll(); watchDPR(); }, { once: true });
+  }
+  watchDPR();
+})();
+</script>
+</body>
+</html>

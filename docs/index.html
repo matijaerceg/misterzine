@@ -41,18 +41,24 @@
   a { color: #06c; text-decoration: underline; text-underline-offset: 2px; }
   a:hover { color: color-mix(in srgb, #06c 70%, CanvasText); }
   :focus-visible { outline: 2px solid #06c; outline-offset: 2px; }
-  /* the column is 37.5rem; tate articles may grow to the full 50rem wrap */
-  .wrap { max-width: 52.5rem; margin: 0 auto; padding: 0 1.25rem 3rem; }
+  /* the column is 37.5rem; tate articles may grow to the full 50rem wrap.
+     padding-top reserves the FULL header height (JS refines it) so the fixed
+     header never overlaps content and its resize can't shift the page */
+  .wrap { max-width: 52.5rem; margin: 0 auto; padding: 112px 1.25rem 3rem; }
   article, .colophon { max-width: 37.5rem; margin-inline: auto; }
 
-  /* sticky top line: logo + nav, nothing else */
-  .top { position: sticky; top: 0; z-index: 10;
+  /* top line: logo + nav, nothing else. FIXED (out of flow) so its scroll-linked
+     shrink never reflows the page; centered + padded to match the .wrap column */
+  .top { position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+         margin-inline: auto; max-width: 52.5rem;
          display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap;
-         padding: .5rem 0 1.25rem; }
+         padding: .5rem 1.25rem 1.25rem; }
   /* opaque fill with a wavy bottom edge (posts vanish under the wave): a solid
      mask down to the last 9px, unioned with the wave tile. On its own pseudo so
-     it doesn't clip the visible squiggle line below */
-  .top::before { content: ''; position: absolute; inset: 0; z-index: -1; background: Canvas;
+     it doesn't clip the visible squiggle line below. Inset to the 50rem content
+     box (left/right 1.25rem) so it lines up with the wide dividers */
+  .top::before { content: ''; position: absolute; top: 0; bottom: 0; left: 1.25rem; right: 1.25rem;
+                 z-index: -1; background: Canvas;
                  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
                                var(--wavefill) left bottom / 30px 11px repeat-x;
                          mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
@@ -60,12 +66,12 @@
   /* visible squiggle line drawn right on that wavy edge (same look as the dividers).
      both waves are anchored left (0%) with the same 30px tile so they stay in phase;
      the fill defaulting to `bottom` (center) put them 5px out of step */
-  .top::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 11px;
+  .top::after { content: ''; position: absolute; left: 1.25rem; right: 1.25rem; bottom: 0; height: 11px;
                 background: #888a; -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
-  .top .logo { height: 84px; width: auto; aspect-ratio: 532.4 / 354.2; display: block;
-               color: #06c; transition: height .18s ease; }
+  /* height is driven per-scroll-frame by JS (84px -> 44px); no CSS transition,
+     which would lag behind the scroll instead of tracking it */
+  .top .logo { height: 84px; width: auto; aspect-ratio: 532.4 / 354.2; display: block; color: #06c; }
   .top a:hover .logo { color: color-mix(in srgb, #06c 70%, CanvasText); }
-  .top.shrunk .logo { height: 44px; }
   .top nav { display: flex; align-items: center; gap: .8rem; }
   .top nav a.idx { color: #06c; font-weight: 600; font-size: .9rem; text-decoration: none;
                    border: 1px solid color-mix(in srgb, #06c 55%, Canvas); border-radius: 999px;
@@ -119,7 +125,6 @@
 
   .colophon { color: #888; font-size: .8rem; padding-top: 1.25rem; }
   .colophon a { color: inherit; }
-  @media (prefers-reduced-motion: reduce) { .top .logo { transition: none; } }
 </style>
 </head>
 <body>
@@ -247,17 +252,38 @@
       } catch (e) {}
     })();
   })();
-  // sticky header shrinks once the feed is scrolled (asymmetric thresholds
-  // so the height change can't oscillate around a single trigger point)
+  // Header resize + page scroll are fully decoupled. The header is position:fixed
+  // (out of flow), so its size never reflows the feed -> no scroll jump. The logo
+  // height is interpolated straight from scrollY (84px at rest -> 44px after RANGE
+  // px), so it shrinks as a smooth factor of how far you've scrolled, not a class
+  // flip at a threshold. The feed's reserved top space is a CONSTANT = the full
+  // (unshrunk) header height, re-measured on resize (nav wraps taller on phones).
   (function () {
     var top = document.querySelector('.top');
-    function onScroll() {
-      var y = window.scrollY;
-      if (y > 70) top.classList.add('shrunk');
-      else if (y < 25) top.classList.remove('shrunk');
+    var wrap = document.querySelector('.wrap');
+    var logo = top.querySelector('.logo');
+    var H_MAX = 84, H_MIN = 44, RANGE = 120;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function reserve() {  // reserve full header height; force logo full while measuring
+      var prev = logo.style.height;
+      logo.style.height = H_MAX + 'px';
+      wrap.style.paddingTop = top.offsetHeight + 'px';
+      logo.style.height = prev;
     }
-    addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    var ticking = false;
+    function apply() {
+      ticking = false;
+      if (reduce) { logo.style.height = H_MAX + 'px'; return; }
+      var y = window.scrollY > 0 ? window.scrollY : 0;
+      var t = y < RANGE ? y / RANGE : 1;
+      logo.style.height = (H_MAX - (H_MAX - H_MIN) * t).toFixed(2) + 'px';
+    }
+    reserve(); apply();
+    addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
+    }, { passive: true });
+    addEventListener('resize', function () { reserve(); apply(); });
   })();
   // live row count for the index pill (static text is the fallback)
   fetch('releases/meta.json').then(function (r) { return r.json(); }).then(function (m) {

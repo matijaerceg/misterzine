@@ -1885,6 +1885,8 @@ SYSTEM_TITLES = {
     "Apogee": "Apogee BK-01",
     "Apple-I": "Apple I",
     "Apple-II": "Apple II",
+    "Apple-IIgs": "Apple IIGS",
+    "Apple-Lisa": "Apple Lisa",
     "Archie": "Acorn Archimedes",
     "Atari800": "Atari 800",
     "AtariST": "Atari ST",

@@ -83,6 +83,13 @@
   details.cols summary::-webkit-details-marker { display: none; }
   details.cols summary::after { content: " ▾"; color: #888; }
   details.cols summary:hover, details.cols[open] summary { background: #8882; }
+  /* a Types/Year filter that's narrowing results tints its summary with the same
+     accent as a non-empty search box, so an active filter stays obvious with the
+     menu closed (Columns is a display pref, not a filter, so it never glows) */
+  details.cols summary.active { border-color: color-mix(in srgb, #06c 60%, CanvasText);
+                                background: color-mix(in srgb, #06c 10%, Canvas); }
+  details.cols summary.active:hover, details.cols[open] summary.active {
+                                background: color-mix(in srgb, #06c 18%, Canvas); }
   details.cols .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30;
                        background: Canvas; border: 1px solid #8884; border-radius: 6px;
                        padding: .55rem .8rem; box-shadow: 0 4px 16px #0004;
@@ -979,8 +986,9 @@ typeMenu.innerHTML = TYPES.map(t =>
 const typeReset = document.getElementById('typereset');
 function syncTypeSummary() {
   // empty (= no filter) and full both read as "All Types"; partial shows the count
-  typeSummary.textContent = (enabledTypes.size === 0 || enabledTypes.size === TYPES.length)
-    ? 'All Types' : 'Types (' + enabledTypes.size + ')';
+  const partial = enabledTypes.size !== 0 && enabledTypes.size !== TYPES.length;
+  typeSummary.textContent = partial ? 'Types (' + enabledTypes.size + ')' : 'All Types';
+  typeSummary.classList.toggle('active', partial);  // glow when narrowing, like a non-empty search box
   typeReset.disabled = enabledTypes.size === 0;  // no boxes checked = the default
 }
 typeMenu.addEventListener('change', e => {
@@ -1075,6 +1083,7 @@ function yearLabel() {
 function syncYear() {
   const lbl = yearLabel();
   yearSummary.textContent = lbl ? 'Year: ' + lbl : 'Year';
+  yearSummary.classList.toggle('active', !!lbl);  // glow while a range is set, like a non-empty search box
   for (const x of yearMenu.querySelectorAll('.xclr'))
     x.hidden = (x.dataset.b === 'from' ? yearFrom : yearTo) == null;
   for (const c of yearMenu.querySelectorAll('.dchip')) {

@@ -54,12 +54,14 @@
      it doesn't clip the visible squiggle line below */
   .top::before { content: ''; position: absolute; inset: 0; z-index: -1; background: Canvas;
                  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
-                               var(--wavefill) bottom / 30px 11px repeat-x;
+                               var(--wavefill) left bottom / 30px 11px repeat-x;
                          mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
-                               var(--wavefill) bottom / 30px 11px repeat-x; }
-  /* visible squiggle line drawn right on that wavy edge (same look as the dividers) */
+                               var(--wavefill) left bottom / 30px 11px repeat-x; }
+  /* visible squiggle line drawn right on that wavy edge (same look as the dividers).
+     both waves are anchored left (0%) with the same 30px tile so they stay in phase;
+     the fill defaulting to `bottom` (center) put them 5px out of step */
   .top::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 11px;
-                background: #888a; -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
+                background: #888a; -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
   .top .logo { height: 84px; width: auto; aspect-ratio: 532.4 / 354.2; display: block;
                color: #06c; transition: height .18s ease; }
   .top a:hover .logo { color: color-mix(in srgb, #06c 70%, CanvasText); }

@@ -379,6 +379,12 @@
   #resizer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right,
       transparent 0 5px, var(--rib) 5px 6px, transparent 6px 7px,
       var(--rib) 7px 8px, transparent 8px 12px); }
+  /* centered grab nub: a small pill riding the seam so the middle reads as a
+     handle, while the full-height ribs keep advertising the whole edge is
+     grabbable. Flat (no border/shadow) to sit with the seam; tracks --rib to
+     blue on hover. Painted after ::before, so it merges over the ribs. */
+  #resizer::after { content: ""; position: absolute; top: 50%; left: 3px; width: 7px; height: 48px;
+      transform: translateY(-50%); border-radius: 3px; background: var(--rib); }
   body.resizing { cursor: ew-resize; user-select: none; }
   body.resizing #panel, body.resizing main,
   body.no-anim #panel, body.no-anim main, body.no-anim #resizer { transition: none; }

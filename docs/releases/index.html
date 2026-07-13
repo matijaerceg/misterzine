@@ -1764,7 +1764,7 @@ function navigate(dir) {  // dir: +1 down, -1 up
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (closePop()) return;  // an open meta-line popover absorbs the Esc first
+    if (closePop() || closeHoverPop()) return;  // an open popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it
     const dd = document.querySelector('details.cols[open]');
     if (dd) { dd.open = false; return; }
@@ -1918,17 +1918,18 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     ' · <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
     ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
-    ' · <a href="https://github.com/matijaerceg/misterzine/issues" target="_blank" rel="noopener">Report a Problem<span class="ext">↗</span></a>' +
+    ' · <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link">Discord<span class="ext">↗</span></a>' +
     ' · <a href="#" class="note" id="pub-note">Public cores only<span class="ext">ⓘ</span></a>';
 }).catch(() => {});
 
-// --- meta-line popovers: "RSS" opens a feed chooser (readers also
-// autodiscover all three feeds from the <link rel=alternate> tags in <head>;
-// copy buttons because clicking a feed URL just dumps raw XML at people, and
-// the href on the RSS link itself stays for middle-click/no-JS). "Public
-// cores only" opens a note explaining the Patreon-beta exclusion — a click
-// popover instead of a title tooltip so it works on touch too. One popover
-// at a time: click outside, a second click on the trigger, or Esc closes it.
+// --- meta-line hover popovers: Discord, RSS and "Public cores only" all
+// reveal their content on hover (or keyboard focus) — our own popup, so
+// there's none of the native-title delay and no click needed. RSS lists the
+// three feeds with copy buttons (readers also autodiscover them from the
+// <link rel=alternate> tags in <head>; the href on the RSS link stays for
+// middle-click/no-JS). Shared .rsspop chrome; a short close grace period lets
+// the pointer travel from the link into the popover to use the copy buttons.
+// Touch has no hover, so there a tap toggles the popover instead.
 const FEED_LIST = [
   ['All changes', 'feed.xml'],
   ['New cores & games', 'feed-new.xml'],
@@ -1940,37 +1941,65 @@ const PUB_NOTE_HTML =
   'subscriber-only.</p>' +
   '<p>Each core shows up automatically once it gets a public release. ' +
   'Beta cores may get their own listing here in the future.</p>';
+const META_POP = {
+  'discord-link': () => '<p>Dedicated thread on the official MiSTer Discord.</p>',
+  'pub-note': () => PUB_NOTE_HTML,
+  'rss-link': () =>
+    '<p>RSS feeds: paste a URL into your reader (most readers also ' +
+    'find these if you paste the page URL itself).</p>' +
+    FEED_LIST.map(([name, f]) => {
+      const url = new URL(f, location.href).href;
+      return '<div class="feedrow"><b>' + esc(name) + '</b><code>' + esc(url) + '</code>' +
+        copyBtn(url) + '</div>';
+    }).join(''),
+};
+const META_SEL = '#discord-link, #rss-link, #pub-note';
+const CAN_HOVER = matchMedia('(hover: hover)').matches;
+let hoverPop = null, hoverPopFor = null, hoverTimer = null;
+function closeHoverPop() {
+  clearTimeout(hoverTimer);
+  if (hoverPop) { hoverPop.remove(); hoverPop = null; hoverPopFor = null; return true; }
+  return false;
+}
+function scheduleHoverClose() { clearTimeout(hoverTimer); hoverTimer = setTimeout(closeHoverPop, 200); }
+function openHoverPop(a) {
+  clearTimeout(hoverTimer);
+  if (hoverPopFor === a.id) return;  // already showing this one
+  closeHoverPop();
+  hoverPopFor = a.id;
+  hoverPop = document.createElement('div');
+  hoverPop.className = 'rsspop';
+  hoverPop.innerHTML = META_POP[a.id]();
+  hoverPop.addEventListener('mouseenter', () => clearTimeout(hoverTimer));  // keep open over the popover
+  hoverPop.addEventListener('mouseleave', scheduleHoverClose);
+  document.body.appendChild(hoverPop);
+  const r = a.getBoundingClientRect();
+  hoverPop.style.left = Math.max(8, Math.min(r.left, innerWidth - 500)) + 'px';
+  hoverPop.style.top = (r.bottom + 6) + 'px';
+}
+// keyboard focus opens on any device; pointer hover only where hover exists
+document.addEventListener('focusin', e => { const a = e.target.closest(META_SEL); if (a) openHoverPop(a); });
+document.addEventListener('focusout', e => { const a = e.target.closest(META_SEL); if (a) scheduleHoverClose(); });
+if (CAN_HOVER) {
+  document.addEventListener('mouseover', e => { const a = e.target.closest(META_SEL); if (a) openHoverPop(a); });
+  document.addEventListener('mouseout', e => { const a = e.target.closest(META_SEL); if (a && !a.contains(e.relatedTarget)) scheduleHoverClose(); });
+}
 let metapop = null, metapopFor = null;
 function closePop() { if (metapop) { metapop.remove(); metapop = null; return true; } return false; }
 document.addEventListener('click', e => {
   const cp = e.target.closest('.rsspop .copy');
   if (cp) { flashCopy(cp); return; }  // keep the popover open
-  const a = e.target.closest('#rss-link, #pub-note');
-  if (!a) {
-    // click outside closes — but not the .launchrow click that just opened
-    // the MiSTer popover (this document handler runs after panel's)
-    if (metapop && !e.target.closest('.rsspop') && !e.target.closest('.launchrow')) closePop();
+  const trig = e.target.closest('#rss-link, #pub-note');
+  if (trig) {
+    e.preventDefault();  // these only reveal a popover; the link itself does nothing
+    if (!CAN_HOVER) { hoverPopFor === trig.id ? closeHoverPop() : openHoverPop(trig); }  // touch: tap toggles
     return;
   }
-  e.preventDefault();
-  const wasFor = metapopFor;
-  if (closePop() && wasFor === a.id) return;  // second click on the same trigger toggles it shut
-  metapopFor = a.id;
-  metapop = document.createElement('div');
-  metapop.className = 'rsspop';
-  metapop.innerHTML = a.id === 'rss-link'
-    ? '<p>RSS feeds: paste a URL into your reader (most readers also ' +
-      'find these if you paste the page URL itself).</p>' +
-      FEED_LIST.map(([name, f]) => {
-        const url = new URL(f, location.href).href;
-        return '<div class="feedrow"><b>' + esc(name) + '</b><code>' + esc(url) + '</code>' +
-          copyBtn(url) + '</div>';
-      }).join('')
-    : PUB_NOTE_HTML;
-  const r = a.getBoundingClientRect();
-  metapop.style.left = Math.max(8, Math.min(r.left, innerWidth - 500)) + 'px';
-  metapop.style.top = (r.bottom + 6) + 'px';
-  document.body.appendChild(metapop);
+  // outside click closes a tapped-open hover popover and the MiSTer launch
+  // popover — but not a click inside either, nor the .launchrow click that
+  // just opened the MiSTer one (this document handler runs after panel's)
+  if (hoverPop && !e.target.closest('.rsspop') && !e.target.closest(META_SEL)) closeHoverPop();
+  if (metapop && !e.target.closest('.rsspop') && !e.target.closest('.launchrow')) closePop();
 });
 
 // --- MiSTer device popover: chooser + manager for the Launch button ---------

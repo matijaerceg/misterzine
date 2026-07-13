@@ -434,7 +434,7 @@
   /* draggable edge: resize the panel / flick left to close (reflow mode only) */
   #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; width: 12px; z-index: 101;
              left: var(--pw, round(calc(100vw / 3), 1px)); margin-left: -6px;
-             cursor: ew-resize; display: none; touch-action: none;
+             cursor: col-resize; display: none; touch-action: none;
              /* ride the panel's edge: slide in/out with the same transition instead of
                 popping via display. Closed = pulled left by the panel width, so it sits
                 on the panel's (off-screen-adjacent) right edge; visibility flips only
@@ -456,7 +456,7 @@
      blue on hover. Painted after ::before, so it merges over the ribs. */
   #resizer::after { content: ""; position: absolute; top: 50%; left: 3px; width: 7px; height: 48px;
       transform: translateY(-50%); border-radius: 3px; background: var(--rib); }
-  body.resizing { cursor: ew-resize; user-select: none; }
+  body.resizing { cursor: col-resize; user-select: none; }
   body.resizing #panel, body.resizing main,
   body.no-anim #panel, body.no-anim main, body.no-anim #resizer { transition: none; }
 

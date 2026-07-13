@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-13
+- A single Clear filters button now appears at the right of the filter bar whenever any filter is active (search, Types, Genres or Year) and clears them all at once; the search box also has its own small x to clear just the text. Filters now reset when you reload the page, so you always start from the full list (your chosen columns are still remembered).
 - If you have saved more than one MiSTer, the detail panel's Launch button now shows one button per device side by side, so you can start a game on either MiSTer with a single click instead of switching your default device first.
 - You can now filter the table by arcade genre: a new Genre menu (next to Types and Year) lets you check off Shooter, Platform, Fighter and the rest, with each genre's game count shown, instead of typing the genre into the search box. Selecting a genre hides consoles and computers, which have no genre.
 - Every entry's detail panel now has a small Copy link icon next to the title that copies a direct link to that game, so you can share it without fishing the URL out of the address bar.

@@ -64,7 +64,19 @@
   .updated a.zinelink { color: #06c; font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
-  input[type=search] { padding: .4rem .6rem; min-width: 16rem; flex: 1; }
+  /* the search box carries its own inline clear-x, so it lives in a relative wrapper
+     that takes the grow-to-fill role the bare input used to have */
+  .searchwrap { position: relative; display: flex; flex: 1; min-width: 16rem; }
+  input[type=search] { padding: .4rem .6rem; flex: 1; min-width: 0; padding-right: 1.7rem; }
+  /* suppress the browser's native search clear-x so it doesn't double up with .qx */
+  input[type=search]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+  /* small x inside the search box, shown only while the box has text — the same
+     "clear one field" idiom as the Year From/To fields' .xclr */
+  .qx { position: absolute; right: .15rem; top: 50%; transform: translateY(-50%);
+        border: none; background: none; padding: 0 .4rem; font: inherit; font-size: 1.05rem;
+        line-height: 1; color: #888; cursor: pointer; visibility: hidden; }
+  .qx:hover { color: color-mix(in srgb, #06c 60%, CanvasText); }
+  #q:not(:placeholder-shown) ~ .qx { visibility: visible; }
   /* a non-empty search box (placeholder hidden = something typed) gets accent
      styling so an active filter — easy to trigger via type-anywhere — is obvious */
   input[type=search]:not(:placeholder-shown) {
@@ -436,8 +448,10 @@
   <p class="updated" id="updated"></p>
 </header>
 <div class="controls">
-  <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>
-  <button type="button" id="clear" class="clear" hidden>Clear</button>
+  <div class="searchwrap">
+    <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>
+    <button type="button" id="qx" class="qx" title="Clear search" tabindex="-1">x</button>
+  </div>
   <details class="cols" id="typedd">
     <summary id="typesummary">All Types</summary>
     <div class="menu" id="typemenu"></div>
@@ -455,6 +469,7 @@
     <div class="menu" id="colsmenu"></div>
   </details>
   <span class="count" id="count"></span>
+  <button type="button" id="clear" class="clear" hidden>Clear filters</button>
 </div>
 </div>
 <div class="tablezone">
@@ -896,7 +911,9 @@ function apply() {
   // matching both, in any field, in any order); each term is an independent
   // substring so multi-word values still match ("street fighter" hits the title)
   const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
-  document.getElementById('clear').hidden = !qEl.value;
+  // the global "Clear filters" button shows whenever ANY filter is narrowing results
+  document.getElementById('clear').hidden =
+    !(qEl.value || enabledTypes.size || enabledGenres.size || yearFrom != null || yearTo != null);
   // Types filter: an empty set means "no filter" (show all) — which coincides
   // with every type being checked. Any partial selection narrows to those bases.
   view = DATA.filter(d => {
@@ -961,12 +978,24 @@ document.getElementById('q').addEventListener('input', () => { apply(); recenter
 // keyboard-first devices get told about type-anywhere; touch keeps the plain hint
 if (matchMedia('(hover: hover) and (pointer: fine)').matches)
   document.getElementById('q').placeholder = 'Type anywhere to search title, type, manufacturer, core…';
-document.getElementById('clear').addEventListener('click', () => {
+// clears the text search only — wired to the inline x and to Esc; leaves the dropdown filters alone
+function clearSearch() {
   const q = document.getElementById('q');
   q.value = ''; apply(); q.focus({ preventScroll: true });
-  // the full list just replaced the filtered one; keep the user's place
+  recenterOpen();  // the full list just replaced the filtered one; keep the user's place
+}
+document.getElementById('qx').addEventListener('click', clearSearch);
+// the far-right "Clear filters" button resets every filter at once (text + all three dropdowns);
+// resetTypes/resetGenres/resetYear are state-only helpers defined with each dropdown below
+function clearAllFilters() {
+  const q = document.getElementById('q');
+  q.value = '';
+  resetTypes(); resetGenres(); resetYear();
+  apply();
+  q.focus({ preventScroll: true });
   recenterOpen();
-});
+}
+document.getElementById('clear').addEventListener('click', clearAllFilters);
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {
   const th = e.target.closest('th');
@@ -988,32 +1017,17 @@ document.getElementById('hrow').addEventListener('click', e => {
 
 // --- "Types" dropdown: multi-select filter over the four base types ---
 // enabledTypes holds the checked bases; an empty set is "no filter" (all rows),
-// which is intentionally the same result as every box checked. Persisted so a
-// visitor's filter survives reload; the pre-checkbox site had no type memory.
+// which is intentionally the same result as every box checked.
 const TYPES = ['Arcade', 'Console', 'Computer', 'Other'];
-let enabledTypes;
-try {
-  const saved = localStorage.getItem('mz-types');
-  enabledTypes = new Set(saved !== null ? JSON.parse(saved) : []);
-} catch (e) { enabledTypes = new Set(); }
-
-// Genre filter: same "empty set = no filter" shape as Types, but the option list is
-// data-seeded (arcade genres from MAME's catver.ini), so the menu is built on load by
-// buildGenreMenu(), not here. enabledGenres survives reload via localStorage.
-let enabledGenres;
-try {
-  const saved = localStorage.getItem('mz-genre');
-  enabledGenres = new Set(saved !== null ? JSON.parse(saved) : []);
-} catch (e) { enabledGenres = new Set(); }
-
-// Year range filter: yearFrom/yearTo are numbers or null (null = that end
-// unbounded). Persisted like the Types/Columns filters; restored into the
-// selects once buildYearMenu() has the real year span (data-load handler).
+// The Types/Genres/Year filters deliberately do NOT persist across reloads — a page
+// refresh starts unfiltered (only the Columns display pref survives, see mz-cols2).
+// So each begins empty here: an empty set / null bound means "no filter". The Genre
+// option list is data-seeded (arcade genres from MAME's catver.ini) so its menu is
+// built on load by buildGenreMenu(); the Year selects are populated by buildYearMenu()
+// once the real year span is known (both in the data-load handler).
+let enabledTypes = new Set();
+let enabledGenres = new Set();
 let yearFrom = null, yearTo = null, YEAR_MIN = null, YEAR_MAX = null;
-try {
-  const s = JSON.parse(localStorage.getItem('mz-year') || 'null');
-  if (s) { yearFrom = s.from ?? null; yearTo = s.to ?? null; }
-} catch (e) {}
 
 const typeMenu = document.getElementById('typemenu');
 const typeSummary = document.getElementById('typesummary');
@@ -1033,20 +1047,18 @@ typeMenu.addEventListener('change', e => {
   const t = e.target.dataset.t;
   if (!t) return;
   if (e.target.checked) enabledTypes.add(t); else enabledTypes.delete(t);
-  localStorage.setItem('mz-types', JSON.stringify([...enabledTypes]));
   syncTypeSummary();
   apply();
   recenterOpen();  // adding/removing whole types moves the selected row — follow it
 });
-typeReset.addEventListener('click', () => {
+// state-only reset (no apply/recenter) so the in-menu button and the global
+// "Clear filters" can both reuse it
+function resetTypes() {
   enabledTypes.clear();
-  // remove (not rewrite) the key: a reset visitor is back to "never customized"
-  localStorage.removeItem('mz-types');
   for (const cb of typeMenu.querySelectorAll('input')) cb.checked = false;
   syncTypeSummary();
-  apply();
-  recenterOpen();
-});
+}
+typeReset.addEventListener('click', () => { resetTypes(); apply(); recenterOpen(); });
 syncTypeSummary();
 
 // --- "Columns" dropdown: toggle any column (Title stays locked on) ---
@@ -1105,10 +1117,6 @@ syncColsReset();
 // Original Year drop out while a bound is set (see apply()).
 const yearMenu = document.getElementById('yearmenu');
 const yearSummary = document.getElementById('yearsummary');
-function saveYear() {
-  if (yearFrom == null && yearTo == null) localStorage.removeItem('mz-year');
-  else localStorage.setItem('mz-year', JSON.stringify({ from: yearFrom, to: yearTo }));
-}
 // prose form of the active range, reused by the summary and the no-match message
 // (plain ASCII, no arrows). Empty string when no bound is set.
 function yearLabel() {
@@ -1147,12 +1155,14 @@ function buildYearMenu() {
     '<button type="button" class="dchip" data-d="' + d + '">' + ('' + d).slice(2) + 's</button>').join('') + '</div>';
   yearMenu.innerHTML = row('from', 'From') + row('to', 'To') + chips +
     '<button class="reset" id="yearreset">Reset</button>';
-  // restore the persisted range now that the options exist; if a saved year no
-  // longer appears in the data the select stays blank, so drop that stale bound
-  const fromSel = yearMenu.querySelector('.yfrom'), toSel = yearMenu.querySelector('.yto');
-  if (yearFrom != null) { fromSel.value = yearFrom; if (fromSel.value === '') yearFrom = null; }
-  if (yearTo != null) { toSel.value = yearTo; if (toSel.value === '') yearTo = null; }
-  if (yearFrom == null && yearTo == null) saveYear();
+  syncYear();  // filters never persist, so the menu is always built at its default (no range)
+}
+// state-only reset (no apply/recenter) shared by the in-menu Reset and "Clear filters"
+function resetYear() {
+  yearFrom = yearTo = null;
+  const f = yearMenu.querySelector('.yfrom'), t = yearMenu.querySelector('.yto');
+  if (f) f.value = '';
+  if (t) t.value = '';
   syncYear();
 }
 // delegated so the listeners survive buildYearMenu() rebuilding the innerHTML
@@ -1161,7 +1171,7 @@ yearMenu.addEventListener('change', e => {
   if (!sel) return;
   const v = +sel.value || null;
   if (sel.classList.contains('yfrom')) yearFrom = v; else yearTo = v;
-  saveYear(); syncYear(); apply(); recenterOpen();
+  syncYear(); apply(); recenterOpen();
 });
 yearMenu.addEventListener('click', e => {
   const x = e.target.closest('.xclr'), chip = e.target.closest('.dchip'), rst = e.target.closest('#yearreset');
@@ -1174,11 +1184,9 @@ yearMenu.addEventListener('click', e => {
     yearMenu.querySelector('.yfrom').value = yearFrom;
     yearMenu.querySelector('.yto').value = yearTo;
   } else if (rst) {
-    yearFrom = yearTo = null;
-    yearMenu.querySelector('.yfrom').value = '';
-    yearMenu.querySelector('.yto').value = '';
+    resetYear();
   } else return;
-  saveYear(); syncYear(); apply(); recenterOpen();
+  syncYear(); apply(); recenterOpen();
 });
 
 // --- "Genre" dropdown: multi-select filter over arcade genres, seeded from data ---
@@ -1189,10 +1197,6 @@ yearMenu.addEventListener('click', e => {
 const genreMenu = document.getElementById('genremenu');
 const genreSummary = document.getElementById('genresummary');
 let GENRE_COUNT = 0;  // distinct genres present, so "all checked" can read as "All Genres"
-function saveGenre() {
-  if (enabledGenres.size) localStorage.setItem('mz-genre', JSON.stringify([...enabledGenres]));
-  else localStorage.removeItem('mz-genre');  // no selection = back to "never customized"
-}
 function syncGenreSummary() {
   // empty (= no filter) and every-genre-checked both read as "All Genres"; a partial
   // selection shows the count and glows, matching the Types dropdown.
@@ -1210,12 +1214,6 @@ function buildGenreMenu() {
   GENRE_COUNT = genres.length;
   // most-populated first; ties fall back to A-Z so the order is stable run to run
   genres.sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
-  // drop any persisted genre that no longer exists in the data (self-healing), and
-  // re-save if we pruned one so the stale value doesn't linger in localStorage
-  const present = new Set(genres);
-  let pruned = false;
-  for (const g of [...enabledGenres]) if (!present.has(g)) { enabledGenres.delete(g); pruned = true; }
-  if (pruned) saveGenre();
   genreMenu.innerHTML = genres.map(g =>
     '<label><input type="checkbox" data-g="' + escA(g) + '"' +
     (enabledGenres.has(g) ? ' checked' : '') + '> ' + esc(g) +
@@ -1228,19 +1226,19 @@ genreMenu.addEventListener('change', e => {
   const g = e.target.dataset.g;
   if (!g) return;
   if (e.target.checked) enabledGenres.add(g); else enabledGenres.delete(g);
-  saveGenre();
   syncGenreSummary();
   apply();
   recenterOpen();  // adding/removing whole genres moves the selected row — follow it
 });
-genreMenu.addEventListener('click', e => {
-  if (!e.target.closest('#genrereset')) return;
+// state-only reset (no apply/recenter) shared by the in-menu Reset and "Clear filters"
+function resetGenres() {
   enabledGenres.clear();
-  localStorage.removeItem('mz-genre');
   for (const cb of genreMenu.querySelectorAll('input')) cb.checked = false;
   syncGenreSummary();
-  apply();
-  recenterOpen();
+}
+genreMenu.addEventListener('click', e => {
+  if (!e.target.closest('#genrereset')) return;
+  resetGenres(); apply(); recenterOpen();
 });
 syncGenreSummary();  // initial state before data loads (reads "All Genres" / no glow)
 
@@ -1265,7 +1263,23 @@ document.addEventListener('click', e => {
 function syncDdOpen() {
   document.body.classList.toggle('dd-open', !!document.querySelector('details.cols[open]'));
 }
-for (const dd of document.querySelectorAll('details.cols')) dd.addEventListener('toggle', syncDdOpen);
+// Keep an opening menu inside the viewport. These dropdowns cluster at the right edge,
+// so a menu anchored under its summary (left:0) can spill off-screen (Year/Genre/Columns
+// were clipping). Align under the summary when it fits, else slide left just enough to
+// clear the edge; measure + reposition synchronously so there's no visible jump.
+function positionMenu(dd) {
+  const menu = dd.querySelector('.menu');
+  if (!menu) return;
+  menu.style.left = '';  // back to the CSS default (left:0) before measuring
+  const margin = 8, dRect = dd.getBoundingClientRect(), mW = menu.offsetWidth;
+  const vw = document.documentElement.clientWidth;
+  let mLeft = dRect.left;                                   // default: aligned under the summary
+  if (mLeft + mW > vw - margin) mLeft = vw - margin - mW;   // don't spill past the right edge
+  if (mLeft < margin) mLeft = margin;                       // ...nor past the left edge
+  menu.style.left = (mLeft - dRect.left) + 'px';
+}
+for (const dd of document.querySelectorAll('details.cols'))
+  dd.addEventListener('toggle', () => { syncDdOpen(); if (dd.open) positionMenu(dd); });
 
 buildHeader();  // header renders immediately; rows follow once data.json loads
 
@@ -1684,7 +1698,7 @@ document.addEventListener('keydown', e => {
     // a second Esc — filter now empty — closes the panel as before
     if (document.getElementById('q').value) {
       e.preventDefault();
-      document.getElementById('clear').click();  // clears + re-centers on the selected row
+      clearSearch();  // Esc clears the search only, never the dropdown filters
       return;
     }
     if (document.body.classList.contains('panel-open')) closePanel();

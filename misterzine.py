@@ -2536,7 +2536,7 @@ def cmd_export_web(args):
         f"({n_prov} rows carry provisional specs)")
 
 
-SITE_ROOT = "https://matijaerceg.github.io/misterzine/"
+SITE_ROOT = "https://misterzine.fyi/"
 SITE_URL = SITE_ROOT + "releases/"
 
 # (filename, channel-name suffix, event types included, channel description)

@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
 <title>MiSTer FPGA Core &amp; Arcade Tracker: All changes</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss</link>
+<link>https://misterzine.fyi/releases/?ref=rss</link>
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
-<atom:link rel="self" type="application/rss+xml" href="https://matijaerceg.github.io/misterzine/releases/feed.xml"/>
+<atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
 <lastBuildDate>Mon, 13 Jul 2026 05:56:57 +0000</lastBuildDate>
 <item>
 <title>[New] Apple Lisa (Computer core)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#Apple-Lisa</link>
+<link>https://misterzine.fyi/releases/?ref=rss#Apple-Lisa</link>
 <guid isPermaLink="false">distribution_mister:_Computer/Apple-Lisa_20260712.rbf:2026-07-13T05:56:57+00:00</guid>
 <pubDate>Mon, 13 Jul 2026 05:56:57 +0000</pubDate>
 <category>new</category>
@@ -18,7 +18,7 @@
 </item>
 <item>
 <title>[New] Apple IIGS (Computer core)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#Apple-IIgs</link>
+<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
 <guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20260712.rbf:2026-07-12T23:54:24+00:00</guid>
 <pubDate>Sun, 12 Jul 2026 23:54:24 +0000</pubDate>
 <category>new</category>
@@ -27,25 +27,25 @@
 </item>
 <item>
 <title>[New] Night Slashers (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#nslasher</link>
+<link>https://misterzine.fyi/releases/?ref=rss#nslasher</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Night Slashers (Korea Rev 1.3, DE-0397-0 PCB).mra:2026-07-10T23:10:44+00:00</guid>
 <pubDate>Fri, 10 Jul 2026 23:10:44 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/nslasher.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: NightSlashers&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-NightSlashers_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/nslasher.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: NightSlashers&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-NightSlashers_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Trio The Punch - Never Forget Me... (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#triothep</link>
+<link>https://misterzine.fyi/releases/?ref=rss#triothep</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Trio The Punch (World).mra:2026-07-09T19:13:45+00:00</guid>
 <pubDate>Thu, 09 Jul 2026 19:13:45 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/triothep.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: TrioThePunch&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TrioThePunch_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/triothep.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: TrioThePunch&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TrioThePunch_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Epoch Galaxy II (Other core)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#EpochGalaxyII</link>
+<link>https://misterzine.fyi/releases/?ref=rss#EpochGalaxyII</link>
 <guid isPermaLink="false">distribution_mister:_Other/EpochGalaxyII_20260529.rbf:2026-07-08T11:21:18+00:00</guid>
 <pubDate>Wed, 08 Jul 2026 11:21:18 +0000</pubDate>
 <category>updated</category>
@@ -54,61 +54,61 @@
 </item>
 <item>
 <title>[New] Boogie Wings (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#boogwing</link>
+<link>https://misterzine.fyi/releases/?ref=rss#boogwing</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Boogie Wings (Euro v1.5, 92.12.07).mra:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/boogwing.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: BoogieWings&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BoogieWings_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/boogwing.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: BoogieWings&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BoogieWings_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Dig Dug (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#digdug</link>
+<link>https://misterzine.fyi/releases/?ref=rss#digdug</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Dig Dug (Rev 2).mra:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/digdug.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Namco&lt;/p&gt;&lt;p&gt;Core: digdug&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DigDug_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/digdug.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Namco&lt;/p&gt;&lt;p&gt;Core: digdug&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DigDug_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Gulf War II (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#gulfwar2</link>
+<link>https://misterzine.fyi/releases/?ref=rss#gulfwar2</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Gulf War II (set 1).mra:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/gulfwar2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1991 / Comad&lt;/p&gt;&lt;p&gt;Core: GulfWarII&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-GulfWarII_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gulfwar2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1991 / Comad&lt;/p&gt;&lt;p&gt;Core: GulfWarII&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-GulfWarII_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Puzzle Star (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#puzlstar</link>
+<link>https://misterzine.fyi/releases/?ref=rss#puzlstar</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Puzzle Star (ver. 100MG, WORLD).mra:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/puzlstar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1999 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzlstar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1999 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Puzzli 2 (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#puzzli2</link>
+<link>https://misterzine.fyi/releases/?ref=rss#puzzli2</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Puzzli 2 (ver. 100, WORLD).mra:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/puzzli2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1999 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzzli2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1999 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Puzzli 2 Super (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#puzzli2s</link>
+<link>https://misterzine.fyi/releases/?ref=rss#puzzli2s</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Puzzli 2 Super (ver. 200, WORLD).mra:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/puzzli2s.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2001 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzzli2s.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2001 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] PDP-1 (Computer core)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#PDP1</link>
+<link>https://misterzine.fyi/releases/?ref=rss#PDP1</link>
 <guid isPermaLink="false">distribution_mister:_Computer/PDP1_20260702.rbf:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>updated</category>
@@ -117,7 +117,7 @@
 </item>
 <item>
 <title>[Updated] Game of Life (Other core)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#GameOfLife</link>
+<link>https://misterzine.fyi/releases/?ref=rss#GameOfLife</link>
 <guid isPermaLink="false">distribution_mister:_Other/GameOfLife_20260702.rbf:2026-07-07T22:19:48+00:00</guid>
 <pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>updated</category>
@@ -126,786 +126,786 @@
 </item>
 <item>
 <title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943kai</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
 <guid isPermaLink="false">jtbindb:_Arcade/1943 Kai Midway Kaisen (Japan).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943kai.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943kai.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943kai</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
 <guid isPermaLink="false">jtbindb:_Arcade/1943 Kai Midway Kaisen (Japan).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943kai.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943kai.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943</link>
 <guid isPermaLink="false">jtbindb:_Arcade/1943 The Battle of Midway (Euro).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943</link>
 <guid isPermaLink="false">jtbindb:_Arcade/1943 The Battle of Midway (Euro).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway Mark II (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943mii</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943mii</link>
 <guid isPermaLink="false">jtbindb:_Arcade/1943 The Battle of Midway Mark II (US).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943mii.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943mii.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway Mark II (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943mii</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943mii</link>
 <guid isPermaLink="false">jtbindb:_Arcade/1943 The Battle of Midway Mark II (US).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943mii.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943mii.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Ace Attacker (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aceattaca</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aceattaca</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Ace Attacker (Japan, S16A) [FD1094 317-0060].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aceattaca.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aceattaca.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Ace Attacker (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aceattaca</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aceattaca</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Ace Attacker (Japan, S16A) [FD1094 317-0060].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aceattaca.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aceattaca.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Action Fighter (World, S16A) [FD1089A 317-0018].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Action Fighter (World, S16A) [FD1089A 317-0018].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Aurail (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aurail</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aurail</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Aurail (set 3, US) (unprotected).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aurail.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aurail.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Aurail (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aurail</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aurail</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Aurail (set 3, US) (unprotected).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aurail.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aurail.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Bad Dudes vs. Dragonninja (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#baddudes</link>
+<link>https://misterzine.fyi/releases/?ref=rss#baddudes</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Bad Dudes vs. Dragonninja (US, revision 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/baddudes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/baddudes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Bad Dudes vs. Dragonninja (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#baddudes</link>
+<link>https://misterzine.fyi/releases/?ref=rss#baddudes</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Bad Dudes vs. Dragonninja (US, revision 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/baddudes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/baddudes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Big Karnak (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#bigkarnk</link>
+<link>https://misterzine.fyi/releases/?ref=rss#bigkarnk</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Big Karnak (ver. 1.0, checksum 1e38c94).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/bigkarnk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bigkarnk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Big Karnak (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#bigkarnk</link>
+<link>https://misterzine.fyi/releases/?ref=rss#bigkarnk</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Big Karnak (ver. 1.0, checksum 1e38c94).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/bigkarnk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bigkarnk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#biomtoy</link>
+<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Biomechanical Toy (ver. 1.0.1885, checksum 69f5e032).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#biomtoy</link>
+<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Biomechanical Toy (ver. 1.0.1885, checksum 69f5e032).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Body Slam (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#bodyslam</link>
+<link>https://misterzine.fyi/releases/?ref=rss#bodyslam</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Body Slam (World, S16) [8751 317-0015].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/bodyslam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bodyslam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Body Slam (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#bodyslam</link>
+<link>https://misterzine.fyi/releases/?ref=rss#bodyslam</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Body Slam (World, S16) [8751 317-0015].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/bodyslam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bodyslam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Cabal (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#cabal</link>
+<link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Cabal (World, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Cabal (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#cabal</link>
+<link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Cabal (World, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Cyber Police ESWAT (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#eswat</link>
+<link>https://misterzine.fyi/releases/?ref=rss#eswat</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Cyber Police ESWAT (set 4, World) (FD1094 317-0130).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/eswat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eswat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Cyber Police ESWAT (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#eswat</link>
+<link>https://misterzine.fyi/releases/?ref=rss#eswat</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Cyber Police ESWAT (set 4, World) (FD1094 317-0130).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/eswat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eswat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Double Dragon (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ddragon</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ddragon</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Double Dragon (World set 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ddragon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1987 / Technos Japan (Taito license)&lt;/p&gt;&lt;p&gt;Core: jtdd&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1987 / Technos Japan (Taito license)&lt;/p&gt;&lt;p&gt;Core: jtdd&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Double Dragon (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ddragon</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ddragon</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Double Dragon (World set 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ddragon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1987 / Technos Japan (Taito license)&lt;/p&gt;&lt;p&gt;Core: jtdd&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1987 / Technos Japan (Taito license)&lt;/p&gt;&lt;p&gt;Core: jtdd&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Double Dragon II: The Revenge (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ddragon2</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ddragon2</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Double Dragon II The Revenge (World).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ddragon2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: jtdd2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd2"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: jtdd2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd2"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Double Dragon II: The Revenge (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ddragon2</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ddragon2</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Double Dragon II The Revenge (World).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ddragon2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: jtdd2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd2"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: jtdd2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd2"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Dunk Shot (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#dunkshot</link>
+<link>https://misterzine.fyi/releases/?ref=rss#dunkshot</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Dunk Shot (Rev C, FD1089A 317-0022).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/dunkshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dunkshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Dunk Shot (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#dunkshot</link>
+<link>https://misterzine.fyi/releases/?ref=rss#dunkshot</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Dunk Shot (Rev C, FD1089A 317-0022).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/dunkshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dunkshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Dynamite Dux (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ddux</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ddux</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Dynamite Dux (set 3, World) (FD1094 317-0096).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ddux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Dynamite Dux (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ddux</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ddux</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Dynamite Dux (set 3, World) (FD1094 317-0096).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ddux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Fantasy Zone (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#fantzone</link>
+<link>https://misterzine.fyi/releases/?ref=rss#fantzone</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Fantasy Zone (Rev A, World, S16A) [No Protection].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/fantzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Fantasy Zone (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#fantzone</link>
+<link>https://misterzine.fyi/releases/?ref=rss#fantzone</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Fantasy Zone (Rev A, World, S16A) [No Protection].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/fantzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Flash Point (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#fpoint</link>
+<link>https://misterzine.fyi/releases/?ref=rss#fpoint</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Flash Point (set 2, Japan) (FD1094 317-0127A).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/fpoint.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fpoint.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Flash Point (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#fpoint</link>
+<link>https://misterzine.fyi/releases/?ref=rss#fpoint</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Flash Point (set 2, Japan) (FD1094 317-0127A).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/fpoint.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fpoint.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Major League (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#mjleague</link>
+<link>https://misterzine.fyi/releases/?ref=rss#mjleague</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Major League (World, S16A) [No Protection].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/mjleague.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mjleague.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Major League (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#mjleague</link>
+<link>https://misterzine.fyi/releases/?ref=rss#mjleague</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Major League (World, S16A) [No Protection].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/mjleague.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mjleague.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Riot City (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#riotcity</link>
+<link>https://misterzine.fyi/releases/?ref=rss#riotcity</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Riot City (Japan).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/riotcity.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/riotcity.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Riot City (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#riotcity</link>
+<link>https://misterzine.fyi/releases/?ref=rss#riotcity</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Riot City (Japan).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/riotcity.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/riotcity.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Robocop (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#robocop</link>
+<link>https://misterzine.fyi/releases/?ref=rss#robocop</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Robocop (World, revision 4).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/robocop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/robocop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Robocop (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#robocop</link>
+<link>https://misterzine.fyi/releases/?ref=rss#robocop</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Robocop (World, revision 4).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/robocop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/robocop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] RyuKyu (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ryukyu</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ryukyu</link>
 <guid isPermaLink="false">jtbindb:_Arcade/RyuKyu (Rev A, Japan) (FD1094 317-5023A).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ryukyu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Success / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ryukyu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Success / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] RyuKyu (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#ryukyu</link>
+<link>https://misterzine.fyi/releases/?ref=rss#ryukyu</link>
 <guid isPermaLink="false">jtbindb:_Arcade/RyuKyu (Rev A, Japan) (FD1094 317-5023A).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/ryukyu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Success / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ryukyu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Success / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] SDI - Strategic Defense Initiative (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#sdi</link>
+<link>https://misterzine.fyi/releases/?ref=rss#sdi</link>
 <guid isPermaLink="false">jtbindb:_Arcade/SDI Strategic Defense Initiative (Japan, New Ver., S16A) [FD1089B 317-0027].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/sdi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sdi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] SDI - Strategic Defense Initiative (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#sdi</link>
+<link>https://misterzine.fyi/releases/?ref=rss#sdi</link>
 <guid isPermaLink="false">jtbindb:_Arcade/SDI Strategic Defense Initiative (Japan, New Ver., S16A) [FD1089B 317-0027].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/sdi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sdi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Secret Agent (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#secretag</link>
+<link>https://misterzine.fyi/releases/?ref=rss#secretag</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Secret Agent (World, revision 3).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Secret Agent (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#secretag</link>
+<link>https://misterzine.fyi/releases/?ref=rss#secretag</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Secret Agent (World, revision 3).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Sonic Boom (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#sonicbom</link>
+<link>https://misterzine.fyi/releases/?ref=rss#sonicbom</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Sonic Boom (FD1094 317-0053).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/sonicbom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sonicbom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Sonic Boom (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#sonicbom</link>
+<link>https://misterzine.fyi/releases/?ref=rss#sonicbom</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Sonic Boom (FD1094 317-0053).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/sonicbom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sonicbom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Squash (Gaelco 1992) (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#squash</link>
+<link>https://misterzine.fyi/releases/?ref=rss#squash</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Squash (World, ver. 1.0, checksum 015aef61).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/squash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/squash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Squash (Gaelco 1992) (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#squash</link>
+<link>https://misterzine.fyi/releases/?ref=rss#squash</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Squash (World, ver. 1.0, checksum 015aef61).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/squash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/squash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Sukeban Jansi Ryuko (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#sjryuko</link>
+<link>https://misterzine.fyi/releases/?ref=rss#sjryuko</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Sukeban Jansi Ryuko (set 2, System 16B, FD1089B 317-5021).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/sjryuko.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop / 1988 / White Board&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sjryuko.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop / 1988 / White Board&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Sukeban Jansi Ryuko (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#sjryuko</link>
+<link>https://misterzine.fyi/releases/?ref=rss#sjryuko</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Sukeban Jansi Ryuko (set 2, System 16B, FD1089B 317-5021).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/sjryuko.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop / 1988 / White Board&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sjryuko.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop / 1988 / White Board&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Tetris (Sega System 16) (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#tetris</link>
+<link>https://misterzine.fyi/releases/?ref=rss#tetris</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Tetris (Set 4, Japan, S16A) [FD1094 317-0093].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/tetris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tetris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Tetris (Sega System 16) (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#tetris</link>
+<link>https://misterzine.fyi/releases/?ref=rss#tetris</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Tetris (Set 4, Japan, S16A) [FD1094 317-0093].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/tetris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tetris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Thunder Hoop (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#thoop</link>
+<link>https://misterzine.fyi/releases/?ref=rss#thoop</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Thunder Hoop (ver. 1, checksum 02a09f7d).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/thoop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thoop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Thunder Hoop (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#thoop</link>
+<link>https://misterzine.fyi/releases/?ref=rss#thoop</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Thunder Hoop (ver. 1, checksum 02a09f7d).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/thoop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thoop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Toki (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#toki</link>
+<link>https://misterzine.fyi/releases/?ref=rss#toki</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Toki (World, set 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/toki.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toki.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Toki (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#toki</link>
+<link>https://misterzine.fyi/releases/?ref=rss#toki</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Toki (World, set 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/toki.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toki.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Toryumon (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#toryumon</link>
+<link>https://misterzine.fyi/releases/?ref=rss#toryumon</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Toryumon.mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/toryumon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toryumon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Toryumon (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#toryumon</link>
+<link>https://misterzine.fyi/releases/?ref=rss#toryumon</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Toryumon.mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/toryumon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toryumon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Tough Turf (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#tturfu</link>
+<link>https://misterzine.fyi/releases/?ref=rss#tturfu</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Tough Turf (set 1, US) (8751 317-0099).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/tturfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Sega / Sunsoft&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tturfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Sega / Sunsoft&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Tough Turf (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#tturfu</link>
+<link>https://misterzine.fyi/releases/?ref=rss#tturfu</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Tough Turf (set 1, US) (8751 317-0099).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/tturfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Sega / Sunsoft&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tturfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Sega / Sunsoft&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Trojan (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#trojan</link>
+<link>https://misterzine.fyi/releases/?ref=rss#trojan</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Trojan (US set 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/trojan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/trojan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Trojan (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#trojan</link>
+<link>https://misterzine.fyi/releases/?ref=rss#trojan</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Trojan (US set 1).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/trojan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/trojan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Wrestle War (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#wrestwar</link>
+<link>https://misterzine.fyi/releases/?ref=rss#wrestwar</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Wrestle War (set 3, World) (8751 317-0103).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/wrestwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wrestwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Wrestle War (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#wrestwar</link>
+<link>https://misterzine.fyi/releases/?ref=rss#wrestwar</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Wrestle War (set 3, World) (8751 317-0103).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/wrestwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wrestwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_1943 The Battle of Midway/1943 The Battle of Midway (US).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_1943 The Battle of Midway/1943 The Battle of Midway (US).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_1943 The Battle of Midway/1943 The Battle of Midway (US, Rev C).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] 1943: The Battle of Midway (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#1943</link>
+<link>https://misterzine.fyi/releases/?ref=rss#1943</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_1943 The Battle of Midway/1943 The Battle of Midway (US, Rev C).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (System 16B, FD1089A 317-0018).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (System 16B, FD1089A 317-0018).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (System 16B, FD1089B 317-unknown, analog controls).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (System 16B, FD1089B 317-unknown, analog controls).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (System 16B, unprotected, analog controls).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (System 16B, unprotected, analog controls).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (World, S16A) [FD1089B 317-xxxx] [Analog Controls].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (World, S16A) [FD1089B 317-xxxx] [Analog Controls].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (World, S16A) [No Protection] [Analog Controls].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Action Fighter (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#afighter</link>
+<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Action Fighter/Action Fighter (World, S16A) [No Protection] [Analog Controls].mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Alien Syndrome (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aliensyn</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aliensyn</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Alien Syndrome/Alien Syndrome (set 6, Japan, new, System 16B, FD1089A 317-0033).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Alien Syndrome (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aliensyn</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aliensyn</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Alien Syndrome/Alien Syndrome (set 6, Japan, new, System 16B, FD1089A 317-0033).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Alien Syndrome (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aliensyn</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aliensyn</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Alien Syndrome/Alien Syndrome (set 7, System 16B, MC-8123B 317-00xx).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Alien Syndrome (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#aliensyn</link>
+<link>https://misterzine.fyi/releases/?ref=rss#aliensyn</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Alien Syndrome/Alien Syndrome (set 7, System 16B, MC-8123B 317-00xx).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Altered Beast (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#altbeast</link>
+<link>https://misterzine.fyi/releases/?ref=rss#altbeast</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Altered Beast/Altered Beast (set 2) (MC-8123B 317-0066).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/altbeast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/altbeast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

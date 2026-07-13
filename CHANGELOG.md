@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-12
+- The newly released Apple IIgs and Apple Lisa cores now show a photo of the hardware in their detail panel.
 - The zine is now a collection of quotes: each post has a small title (game name plus why it's here, like an anniversary or a fresh MiSTer debut) and a passage quoted verbatim from a linked source (interviews, reviews, retro-gaming sites) instead of our own write-up. All eight posts rewritten; every screenshot replaced with a different capture found around the web.
 - Zine posts now show game screenshots at their native aspect ratio (with the same CRT treatment as the release index) instead of embedded YouTube videos: no player, no ads, nothing loads from YouTube. Vertical games sit beside the text on wide screens.
 - Detail-panel screenshots now have a slight blur along the scan direction, like a worn arcade tube, and vertical (tate) games render the shadow mask rotated 90 degrees, matching how the monitor sits in the real cabinet.

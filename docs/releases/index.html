@@ -1322,13 +1322,17 @@ function closeDropdowns(except) {
     if (dd.open && dd !== except) dd.open = false;
   }
 }
-// capture phase so a click that closes an open dropdown is CONSUMED — it must
-// not also land on whatever is underneath (opening a row was the offender)
+// Capture phase so the dismiss click can be intercepted before it reaches its
+// target. We only CONSUME it when it would otherwise open a results row (the
+// original offender) — there the dismiss and the row-open would double up, and
+// the row hover tint is already suppressed (body.dd-open) so the row looks
+// inert. Every other control (sibling filters, Clear, sort headers, search)
+// passes through, so one click both dismisses the open menu AND acts.
 document.addEventListener('click', e => {
   const inside = e.target.closest('details.cols');
-  const anyOpen = document.querySelector('details.cols[open]');
+  if (!document.querySelector('details.cols[open]')) return;
   closeDropdowns(inside);
-  if (anyOpen && !inside) { e.stopPropagation(); e.preventDefault(); }
+  if (!inside && e.target.closest('#rows tr')) { e.stopPropagation(); e.preventDefault(); }
 }, true);
 
 // While any filter dropdown is open, flag <body> so the CSS above drops the row

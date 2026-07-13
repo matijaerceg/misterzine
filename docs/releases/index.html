@@ -96,6 +96,20 @@
                               color: color-mix(in srgb, #06c 60%, CanvasText); cursor: pointer; }
   details.cols .menu .reset:hover:not(:disabled) { text-decoration: underline; }
   details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
+  /* "Year" dropdown: From/To range selects + one-tap decade chips. The per-field
+     x shows only when that bound is set (mirrors the search Clear button). */
+  .yearrow { display: flex; align-items: center; gap: .4rem; }
+  .yearrow .ylbl { width: 2.6rem; color: #888; font-size: .9rem; }
+  .yearrow select { flex: 1; }
+  .yearrow .xclr { border: none; background: none; padding: 0 .2rem; font: inherit;
+                   line-height: 1; color: #888; cursor: pointer; }
+  .yearrow .xclr:hover { color: color-mix(in srgb, #06c 60%, CanvasText); }
+  .decades { display: flex; flex-wrap: wrap; gap: .3rem; margin: .1rem 0; }
+  .decades .dchip { font: inherit; font-size: .8rem; padding: .15rem .4rem; cursor: pointer;
+                    border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
+  .decades .dchip:hover { background: #8882; }
+  .decades .dchip.on { border-color: color-mix(in srgb, #06c 60%, CanvasText);
+                       background: color-mix(in srgb, #06c 18%, Canvas); }
   /* separate (not collapse): collapsed borders are painted by the table, so they
      don't travel with the sticky <th>s — rows show through 1px seams while scrolling.
      With separate+spacing:0 each cell owns its border and it sticks along with it. */
@@ -403,6 +417,10 @@
   <details class="cols" id="typedd">
     <summary id="typesummary">All Types</summary>
     <div class="menu" id="typemenu"></div>
+  </details>
+  <details class="cols" id="yeardd">
+    <summary id="yearsummary">Year</summary>
+    <div class="menu" id="yearmenu"></div>
   </details>
   <details class="cols" id="cols">
     <summary>Columns</summary>
@@ -821,6 +839,7 @@ function render() {
     tb.innerHTML = '<tr class="nomatch"><td colspan="' + cols.length + '"><div class="msg">' +
       'No matches' + (q ? ' for <b>"' + esc(q) + '"</b>' : '') +
       (types ? ' in ' + esc(types) : '') +
+      (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
         ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
     document.getElementById('count').textContent = '0 of ' + DATA.length;
@@ -850,6 +869,13 @@ function apply() {
   // with every type being checked. Any partial selection narrows to those bases.
   view = DATA.filter(d => {
     if (enabledTypes.size && !enabledTypes.has(d.base)) return false;
+    // Year range: rows with no numeric Original Year drop out while a bound is set
+    if (yearFrom != null || yearTo != null) {
+      const y = +d.year;
+      if (!y) return false;
+      if (yearFrom != null && y < yearFrom) return false;
+      if (yearTo != null && y > yearTo) return false;
+    }
     if (!terms.length) return true;
     const hay = fold(d.title + ' ' + (d.mt || '') + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
@@ -935,6 +961,15 @@ try {
   enabledTypes = new Set(saved !== null ? JSON.parse(saved) : []);
 } catch (e) { enabledTypes = new Set(); }
 
+// Year range filter: yearFrom/yearTo are numbers or null (null = that end
+// unbounded). Persisted like the Types/Columns filters; restored into the
+// selects once buildYearMenu() has the real year span (data-load handler).
+let yearFrom = null, yearTo = null, YEAR_MIN = null, YEAR_MAX = null;
+try {
+  const s = JSON.parse(localStorage.getItem('mz-year') || 'null');
+  if (s) { yearFrom = s.from ?? null; yearTo = s.to ?? null; }
+} catch (e) {}
+
 const typeMenu = document.getElementById('typemenu');
 const typeSummary = document.getElementById('typesummary');
 typeMenu.innerHTML = TYPES.map(t =>
@@ -1017,6 +1052,88 @@ colsReset.addEventListener('click', () => {
   fixSortThenRebuild();
 });
 syncColsReset();
+
+// --- "Year" dropdown: filter rows by Original Year (From / To range) ---
+// The selects are seeded from the years actually present in DATA (buildYearMenu,
+// called on load) so every option yields a distinct result. Rows with no numeric
+// Original Year drop out while a bound is set (see apply()).
+const yearMenu = document.getElementById('yearmenu');
+const yearSummary = document.getElementById('yearsummary');
+function saveYear() {
+  if (yearFrom == null && yearTo == null) localStorage.removeItem('mz-year');
+  else localStorage.setItem('mz-year', JSON.stringify({ from: yearFrom, to: yearTo }));
+}
+// prose form of the active range, reused by the summary and the no-match message
+// (plain ASCII, no arrows). Empty string when no bound is set.
+function yearLabel() {
+  if (yearFrom == null && yearTo == null) return '';
+  if (yearFrom != null && yearTo != null)
+    return yearFrom === yearTo ? '' + yearFrom : yearFrom + '-' + yearTo;
+  return yearFrom != null ? 'from ' + yearFrom : 'to ' + yearTo;
+}
+// single source of truth for the control's visible state after any change
+function syncYear() {
+  const lbl = yearLabel();
+  yearSummary.textContent = lbl ? 'Year: ' + lbl : 'Year';
+  for (const x of yearMenu.querySelectorAll('.xclr'))
+    x.hidden = (x.dataset.b === 'from' ? yearFrom : yearTo) == null;
+  for (const c of yearMenu.querySelectorAll('.dchip')) {
+    const s = +c.dataset.d;
+    c.classList.toggle('on', yearFrom === Math.max(s, YEAR_MIN) && yearTo === Math.min(s + 9, YEAR_MAX));
+  }
+  const rst = yearMenu.querySelector('#yearreset');
+  if (rst) rst.disabled = yearFrom == null && yearTo == null;
+}
+function buildYearMenu() {
+  const years = [...new Set(DATA.map(d => +d.year).filter(Boolean))].sort((a, b) => a - b);
+  if (!years.length) { document.getElementById('yeardd').hidden = true; return; }
+  YEAR_MIN = years[0]; YEAR_MAX = years[years.length - 1];
+  const opts = '<option value="">Any</option>' +
+    years.map(y => '<option value="' + y + '">' + y + '</option>').join('');
+  const row = (b, label) =>
+    '<div class="yearrow"><span class="ylbl">' + label + '</span>' +
+    '<select class="y' + b + '">' + opts + '</select>' +
+    '<button type="button" class="xclr" data-b="' + b + '" title="Clear ' + label + '" hidden>x</button></div>';
+  const decs = [];
+  for (let d = Math.floor(YEAR_MIN / 10) * 10; d <= YEAR_MAX; d += 10) decs.push(d);
+  const chips = '<div class="decades">' + decs.map(d =>
+    '<button type="button" class="dchip" data-d="' + d + '">' + ('' + d).slice(2) + 's</button>').join('') + '</div>';
+  yearMenu.innerHTML = row('from', 'From') + row('to', 'To') + chips +
+    '<button class="reset" id="yearreset">Reset</button>';
+  // restore the persisted range now that the options exist; if a saved year no
+  // longer appears in the data the select stays blank, so drop that stale bound
+  const fromSel = yearMenu.querySelector('.yfrom'), toSel = yearMenu.querySelector('.yto');
+  if (yearFrom != null) { fromSel.value = yearFrom; if (fromSel.value === '') yearFrom = null; }
+  if (yearTo != null) { toSel.value = yearTo; if (toSel.value === '') yearTo = null; }
+  if (yearFrom == null && yearTo == null) saveYear();
+  syncYear();
+}
+// delegated so the listeners survive buildYearMenu() rebuilding the innerHTML
+yearMenu.addEventListener('change', e => {
+  const sel = e.target.closest('select');
+  if (!sel) return;
+  const v = +sel.value || null;
+  if (sel.classList.contains('yfrom')) yearFrom = v; else yearTo = v;
+  saveYear(); syncYear(); apply(); recenterOpen();
+});
+yearMenu.addEventListener('click', e => {
+  const x = e.target.closest('.xclr'), chip = e.target.closest('.dchip'), rst = e.target.closest('#yearreset');
+  if (x) {
+    if (x.dataset.b === 'from') { yearFrom = null; yearMenu.querySelector('.yfrom').value = ''; }
+    else { yearTo = null; yearMenu.querySelector('.yto').value = ''; }
+  } else if (chip) {
+    const s = +chip.dataset.d;
+    yearFrom = Math.max(s, YEAR_MIN); yearTo = Math.min(s + 9, YEAR_MAX);
+    yearMenu.querySelector('.yfrom').value = yearFrom;
+    yearMenu.querySelector('.yto').value = yearTo;
+  } else if (rst) {
+    yearFrom = yearTo = null;
+    yearMenu.querySelector('.yfrom').value = '';
+    yearMenu.querySelector('.yto').value = '';
+  } else return;
+  saveYear(); syncYear(); apply(); recenterOpen();
+});
+
 // click outside closes any open dropdown (Types + Columns)
 function closeDropdowns(except) {
   for (const dd of document.querySelectorAll('details.cols')) {
@@ -1720,6 +1837,7 @@ fetch('./data.json').then(r => r.json()).then(d => {
   }
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
+  buildYearMenu();
   buildHeader();
   apply();
   // deep link: a #key in the arrival URL opens that row's panel. fromHistory —

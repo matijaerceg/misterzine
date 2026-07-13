@@ -2,6 +2,10 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
+## 2026-07-13
+- Titles that debuted on MiSTer within the last week now show a NEW badge.
+- Removed the small monitor icon next to titles that marked rows with screenshots: nearly every entry has screenshots now, so the icon marked almost everything.
+
 ## 2026-07-12
 - You can now filter the release table by original release year: a new Year menu with From and To pickers, plus one-tap decade shortcuts (70s, 80s, 90s...). Consoles and computers with no listed year are hidden while a year range is active.
 - The zine is now a collection of quotes: each post has a small title (game name plus why it's here, like an anniversary or a fresh MiSTer debut) and a passage quoted verbatim from a linked source (interviews, reviews, retro-gaming sites) instead of our own write-up. All eight posts rewritten; every screenshot replaced with a different capture found around the web.

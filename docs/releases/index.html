@@ -262,7 +262,6 @@
   td:first-child, th:first-child { border-right: 1px solid #8883; }
   tr:hover td:first-child { background: color-mix(in srgb, #888 7%, Canvas); }
   tr.open td:first-child  { background: color-mix(in srgb, #06c 20%, Canvas); }
-  .dv-icon { margin-left: .4rem; color: #888; vertical-align: -1px; }
 
   /* --- detail panel: slides in from the left --- */
   #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, round(calc(100vw / 3), 1px));
@@ -457,13 +456,6 @@ let openRow = null;  // the selected data object (unique & stable; d.img is NOT 
 const KEY2ROW = {};  // filled when data.json loads
 const rowURL = d => location.origin + location.pathname + '#' + d.k;
 
-// every row opens the detail panel; the icon marks the ones with screenshots
-const hasShots = d => !!d.img;
-
-const DV_ICON = '<svg class="dv-icon" width="13" height="13" viewBox="0 0 16 16" ' +
-  'fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">' +
-  '<rect x="1.5" y="2" width="13" height="9" rx="1"/><path d="M5.5 14h5M8 11v3"/></svg>';
-
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
 // the raw value stays visible as a tooltip. Only multi-game hardware families
 // are listed here — single-game cores fall back to the game's own title (see
@@ -609,9 +601,18 @@ function typeBadge(d) {
   return '<span class="badge ' + cls + '">' + esc(d.base) + '</span>';
 }
 
+// True only for a genuinely known MiSTer debut in the last 7 days. Gating on
+// date_kind === 'debut' skips console/computer rows that fell back to a build
+// date (debut unknown), so those never get falsely flagged as new.
+function isNewDebut(d) {
+  return d.date_kind === 'debut' && d.date &&
+         Date.now() - Date.parse(d.date) < 7 * 864e5;   // 864e5 = ms per day
+}
+
 function titleCell(d) {
+  const nw  = isNewDebut(d) ? ' \u{1F195}' : '';   // NEW emoji for recent debuts
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
-  return esc(d.title) + (hasShots(d) ? ' ' + DV_ICON : '') + dep;
+  return esc(d.title) + nw + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -657,7 +658,7 @@ const COLUMNS = [
 // Kept out of COLUMNS so the config rows above stay scannable. Touch devices
 // never see these; the detail panel spells out the date semantics there.
 const HEADER_TIPS = {
-  title: 'Game or system name. The monitor icon marks entries with screenshots.',
+  title: 'Game or system name.',
   sn: 'MAME setname, the ROM identifier',
   typesort: 'Arcade game, console core, computer core, or other',
   genre: "Arcade genre, from MAME's catver.ini",

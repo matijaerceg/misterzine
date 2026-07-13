@@ -156,11 +156,20 @@
                               color: var(--accent); cursor: pointer; }
   details.cols .menu .reset:hover:not(:disabled) { text-decoration: underline; }
   details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
-  /* "Year" dropdown: From/To range selects + one-tap decade chips. The per-field
-     x shows only when that bound is set (mirrors the search Clear button). */
+  /* "Year" dropdown: From/To numeric range inputs + one-tap decade chips. Inputs
+     (not selects) so any boundary year is enterable, including decade edges like
+     2010/2019 that no game in the data happens to carry; the per-field x shows
+     only when that bound is set (mirrors the search Clear button). */
   .yearrow { display: flex; align-items: center; gap: .4rem; }
   .yearrow .ylbl { width: 2.6rem; color: #888; font-size: .9rem; }
-  .yearrow select { flex: 1; }
+  .yearrow input[type=number] { flex: 1; min-width: 0; font-family: inherit; font-size: .9rem;
+                   padding: .4rem; border: 1px solid #8884; border-radius: 4px;
+                   background: transparent; color: inherit; }
+  .yearrow input[type=number]:focus { border-color: var(--accent); outline: none; }
+  /* strip the native spin buttons: inconsistent across browsers and cramped in this narrow field */
+  .yearrow input[type=number] { -moz-appearance: textfield; appearance: textfield; }
+  .yearrow input[type=number]::-webkit-inner-spin-button,
+  .yearrow input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
   .yearrow .xclr { border: none; background: none; padding: 0 .2rem; font: inherit;
                    line-height: 1; color: #888; cursor: pointer; }
   .yearrow .xclr:hover { color: var(--accent); }
@@ -1169,9 +1178,11 @@ colsReset.addEventListener('click', () => {
 syncColsReset();
 
 // --- "Year" dropdown: filter rows by Original Year (From / To range) ---
-// The selects are seeded from the years actually present in DATA (buildYearMenu,
-// called on load) so every option yields a distinct result. Rows with no numeric
-// Original Year drop out while a bound is set (see apply()).
+// Two numeric inputs, not selects: a range bound is a threshold ("from 2010" =
+// 2010-and-later), not a value that must exist in the data, so free entry lets any
+// year through, including decade edges the decade chips set that no game carries.
+// min/max (from YEAR_MIN/YEAR_MAX, set in buildYearMenu) clamp what's committed.
+// Rows with no numeric Original Year drop out while a bound is set (see apply()).
 const yearMenu = document.getElementById('yearmenu');
 const yearSummary = document.getElementById('yearsummary');
 // prose form of the active range, reused by the summary and the no-match message
@@ -1200,17 +1211,17 @@ function buildYearMenu() {
   const years = [...new Set(DATA.map(d => +d.year).filter(Boolean))].sort((a, b) => a - b);
   if (!years.length) { document.getElementById('yeardd').hidden = true; return; }
   YEAR_MIN = years[0]; YEAR_MAX = years[years.length - 1];
-  const opts = '<option value="">Any</option>' +
-    years.map(y => '<option value="' + y + '">' + y + '</option>').join('');
-  const row = (b, label) =>
+  // placeholder shows the data's span, recovering the one hint the old dropdown gave for free
+  const row = (b, label, ph) =>
     '<div class="yearrow"><span class="ylbl">' + label + '</span>' +
-    '<select class="y' + b + '">' + opts + '</select>' +
+    '<input type="number" inputmode="numeric" class="y' + b + '" min="' + YEAR_MIN +
+      '" max="' + YEAR_MAX + '" step="1" placeholder="' + ph + '">' +
     '<button type="button" class="xclr" data-b="' + b + '" title="Clear ' + label + '" hidden>x</button></div>';
   const decs = [];
   for (let d = Math.floor(YEAR_MIN / 10) * 10; d <= YEAR_MAX; d += 10) decs.push(d);
   const chips = '<div class="decades">' + decs.map(d =>
     '<button type="button" class="dchip" data-d="' + d + '">' + ('' + d).slice(2) + 's</button>').join('') + '</div>';
-  yearMenu.innerHTML = row('from', 'From') + row('to', 'To') + chips +
+  yearMenu.innerHTML = row('from', 'From', YEAR_MIN) + row('to', 'To', YEAR_MAX) + chips +
     '<button class="reset" id="yearreset">Reset</button>';
   syncYear();  // filters never persist, so the menu is always built at its default (no range)
 }
@@ -1222,12 +1233,18 @@ function resetYear() {
   if (t) t.value = '';
   syncYear();
 }
-// delegated so the listeners survive buildYearMenu() rebuilding the innerHTML
+// delegated so the listeners survive buildYearMenu() rebuilding the innerHTML.
+// change (not input) fires on blur/Enter/spinner, so a half-typed year like "2"
+// never filters mid-keystroke.
 yearMenu.addEventListener('change', e => {
-  const sel = e.target.closest('select');
-  if (!sel) return;
-  const v = +sel.value || null;
-  if (sel.classList.contains('yfrom')) yearFrom = v; else yearTo = v;
+  const inp = e.target.closest('input[type=number]');
+  if (!inp) return;
+  // clamp to the data's span and write it back, so an out-of-range or partial entry
+  // can't set a bound the table could never match; blank leaves that end unset
+  let v = inp.value === '' ? null : Math.round(+inp.value);
+  if (v != null) v = Math.min(Math.max(v, YEAR_MIN), YEAR_MAX);
+  inp.value = v == null ? '' : v;
+  if (inp.classList.contains('yfrom')) yearFrom = v; else yearTo = v;
   syncYear(); apply(); recenterOpen();
 });
 yearMenu.addEventListener('click', e => {

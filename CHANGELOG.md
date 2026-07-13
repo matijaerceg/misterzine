@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-13
+- You can now filter the table by arcade genre: a new Genre menu (next to Types and Year) lets you check off Shooter, Platform, Fighter and the rest, with each genre's game count shown, instead of typing the genre into the search box. Selecting a genre hides consoles and computers, which have no genre.
 - Every entry's detail panel now has a labeled "Copy link" button next to the title that copies a direct link to that game, so you can share it without fishing the URL out of the address bar.
 - Titles that debuted on MiSTer within the last week now show a NEW badge.
 - Removed the small monitor icon next to titles that marked rows with screenshots: nearly every entry has screenshots now, so the icon marked almost everything.

@@ -96,6 +96,9 @@
                        display: grid; gap: .35rem; min-width: 10rem; }
   details.cols .menu label { display: flex; gap: .45rem; align-items: center;
                              font-size: .9rem; white-space: nowrap; cursor: pointer; }
+  /* per-genre row count, pushed to the right edge and dimmed so the genre name leads */
+  details.cols .menu label .gcount { margin-left: auto; padding-left: .9rem;
+                                     opacity: .55; font-variant-numeric: tabular-nums; }
   /* reset-to-default entry at the bottom of each menu, sized to match the
      checkbox rows; dimmed when the menu is already at its default state */
   details.cols .menu .reset { border: none; background: none; padding: .1rem 0; margin: .1rem 0 0;
@@ -432,6 +435,10 @@
   <details class="cols" id="typedd">
     <summary id="typesummary">All Types</summary>
     <div class="menu" id="typemenu"></div>
+  </details>
+  <details class="cols" id="genredd">
+    <summary id="genresummary">All Genres</summary>
+    <div class="menu" id="genremenu"></div>
   </details>
   <details class="cols" id="yeardd">
     <summary id="yearsummary">Year</summary>
@@ -848,14 +855,16 @@ function render() {
   const tb = document.getElementById('rows');
   const cols = activeColumns();
   // zero results is never left as a silent blank table: name the query AND any
-  // active type filter (an invisible narrower is the sneaky way to get here)
+  // active type/genre filter (an invisible narrower is the sneaky way to get here)
   if (!view.length && DATA.length) {
     const q = document.getElementById('q').value.trim();
     const partial = enabledTypes.size && enabledTypes.size < TYPES.length;
     const types = partial ? TYPES.filter(t => enabledTypes.has(t)).join(', ') : '';
+    const genres = enabledGenres.size ? [...enabledGenres].join(', ') : '';
     tb.innerHTML = '<tr class="nomatch"><td colspan="' + cols.length + '"><div class="msg">' +
       'No matches' + (q ? ' for <b>"' + esc(q) + '"</b>' : '') +
       (types ? ' in ' + esc(types) : '') +
+      (genres ? ' in ' + esc(genres) : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
         ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
@@ -886,6 +895,10 @@ function apply() {
   // with every type being checked. Any partial selection narrows to those bases.
   view = DATA.filter(d => {
     if (enabledTypes.size && !enabledTypes.has(d.base)) return false;
+    // Genre filter: like Types, an empty set is "no filter". A selection narrows to
+    // those genres — rows with no genre (everything non-arcade) drop out, same as a
+    // type filter shrinking the set.
+    if (enabledGenres.size && !enabledGenres.has(d.genre)) return false;
     // Year range: rows with no numeric Original Year drop out while a bound is set
     if (yearFrom != null || yearTo != null) {
       const y = +d.year;
@@ -977,6 +990,15 @@ try {
   const saved = localStorage.getItem('mz-types');
   enabledTypes = new Set(saved !== null ? JSON.parse(saved) : []);
 } catch (e) { enabledTypes = new Set(); }
+
+// Genre filter: same "empty set = no filter" shape as Types, but the option list is
+// data-seeded (arcade genres from MAME's catver.ini), so the menu is built on load by
+// buildGenreMenu(), not here. enabledGenres survives reload via localStorage.
+let enabledGenres;
+try {
+  const saved = localStorage.getItem('mz-genre');
+  enabledGenres = new Set(saved !== null ? JSON.parse(saved) : []);
+} catch (e) { enabledGenres = new Set(); }
 
 // Year range filter: yearFrom/yearTo are numbers or null (null = that end
 // unbounded). Persisted like the Types/Columns filters; restored into the
@@ -1152,6 +1174,69 @@ yearMenu.addEventListener('click', e => {
   } else return;
   saveYear(); syncYear(); apply(); recenterOpen();
 });
+
+// --- "Genre" dropdown: multi-select filter over arcade genres, seeded from data ---
+// The option list is the genres actually present in DATA (arcade rows carry a genre
+// from MAME's catver.ini; everything else has none), ordered most-common-first with a
+// per-genre row count, and rebuilt on load (buildGenreMenu) so genres added or retired
+// upstream reflow automatically. Empty selection = no filter, exactly like Types.
+const genreMenu = document.getElementById('genremenu');
+const genreSummary = document.getElementById('genresummary');
+let GENRE_COUNT = 0;  // distinct genres present, so "all checked" can read as "All Genres"
+function saveGenre() {
+  if (enabledGenres.size) localStorage.setItem('mz-genre', JSON.stringify([...enabledGenres]));
+  else localStorage.removeItem('mz-genre');  // no selection = back to "never customized"
+}
+function syncGenreSummary() {
+  // empty (= no filter) and every-genre-checked both read as "All Genres"; a partial
+  // selection shows the count and glows, matching the Types dropdown.
+  const partial = enabledGenres.size !== 0 && enabledGenres.size !== GENRE_COUNT;
+  genreSummary.textContent = partial ? 'Genres (' + enabledGenres.size + ')' : 'All Genres';
+  genreSummary.classList.toggle('active', partial);
+  const rst = genreMenu.querySelector('#genrereset');
+  if (rst) rst.disabled = enabledGenres.size === 0;
+}
+function buildGenreMenu() {
+  const counts = {};
+  for (const d of DATA) if (d.genre) counts[d.genre] = (counts[d.genre] || 0) + 1;
+  const genres = Object.keys(counts);
+  if (!genres.length) { document.getElementById('genredd').hidden = true; return; }
+  GENRE_COUNT = genres.length;
+  // most-populated first; ties fall back to A-Z so the order is stable run to run
+  genres.sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+  // drop any persisted genre that no longer exists in the data (self-healing), and
+  // re-save if we pruned one so the stale value doesn't linger in localStorage
+  const present = new Set(genres);
+  let pruned = false;
+  for (const g of [...enabledGenres]) if (!present.has(g)) { enabledGenres.delete(g); pruned = true; }
+  if (pruned) saveGenre();
+  genreMenu.innerHTML = genres.map(g =>
+    '<label><input type="checkbox" data-g="' + escA(g) + '"' +
+    (enabledGenres.has(g) ? ' checked' : '') + '> ' + esc(g) +
+    '<span class="gcount">' + counts[g] + '</span></label>').join('') +
+    '<button class="reset" id="genrereset">Show all</button>';
+  syncGenreSummary();
+}
+// delegated so the listeners survive buildGenreMenu() rebuilding the innerHTML
+genreMenu.addEventListener('change', e => {
+  const g = e.target.dataset.g;
+  if (!g) return;
+  if (e.target.checked) enabledGenres.add(g); else enabledGenres.delete(g);
+  saveGenre();
+  syncGenreSummary();
+  apply();
+  recenterOpen();  // adding/removing whole genres moves the selected row — follow it
+});
+genreMenu.addEventListener('click', e => {
+  if (!e.target.closest('#genrereset')) return;
+  enabledGenres.clear();
+  localStorage.removeItem('mz-genre');
+  for (const cb of genreMenu.querySelectorAll('input')) cb.checked = false;
+  syncGenreSummary();
+  apply();
+  recenterOpen();
+});
+syncGenreSummary();  // initial state before data loads (reads "All Genres" / no glow)
 
 // click outside closes any open dropdown (Types + Columns)
 function closeDropdowns(except) {
@@ -1857,6 +1942,7 @@ fetch('./data.json').then(r => r.json()).then(d => {
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
   buildYearMenu();
+  buildGenreMenu();
   buildHeader();
   apply();
   // deep link: a #key in the arrival URL opens that row's panel. fromHistory —

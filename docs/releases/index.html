@@ -279,6 +279,8 @@
   #panel .close { position: sticky; top: 0; float: right; font-size: 1.4rem; line-height: 1;
                   border: 0; background: transparent; color: inherit; cursor: pointer; padding: .1rem .3rem; }
   #panel h2 { font-size: 1.1rem; margin: 0 1.5rem .5rem 0; }
+  /* the game title itself in the marker face (year + copy-link stay upright) */
+  #panel h2 .gametitle { font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.2rem; }
   #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
   #panel dt { color: #888; }
   #panel dd { margin: 0; }
@@ -345,7 +347,7 @@
   /* Launch on MiSTer: split button under the panel title; chooser/manager
      reuses the .rsspop popover chrome. Transport is a GET navigation
      (window.open + auto-close) — see the launch section in the JS. */
-  #panel .launchrow { display: flex; gap: .3rem; margin: .5rem 0 0; }
+  #panel .launchrow { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 0; }
   #panel .launchrow button { font: inherit; font-size: .78rem; padding: .28rem .65rem; cursor: pointer;
     border: 1px solid #8887; border-radius: 6px; background: Canvas; color: inherit; }
   #panel .launchrow button:hover { border-color: #888c; }
@@ -1383,10 +1385,14 @@ function fireLaunch(dev, script, btn) {
   }
 }
 
-const launchRowHTML = () => misters.length
-  ? '<button class="go">▶ Launch on ' + esc(misters[lastMister].n) + '</button>' +
-    '<button class="more" aria-label="Manage MiSTers">▾</button>'
-  : '<button class="go">▶ Launch on MiSTer…</button>';
+const launchRowHTML = () => {
+  if (!misters.length)
+    return '<button class="go" data-mi="-1">▶ Launch on MiSTer…</button>';
+  // one Launch button per saved device (fires straight at it), + manager chevron
+  return misters.map((m, i) =>
+      '<button class="go" data-mi="' + i + '">▶ Launch on ' + esc(m.n) + '</button>').join('') +
+    '<button class="more" aria-label="Manage MiSTers">▾</button>';
+};
 function updateLaunchRow() {
   const lr = panel.querySelector('.launchrow');
   if (lr) lr.innerHTML = launchRowHTML();
@@ -1500,8 +1506,9 @@ function detailHTML(d) {
     : '';
 
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
-    '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') +
-    (d.k ? copyBtn(rowURL(d), 'Copy link to this entry', '⧉ Copy link', '✓ Copied!', 'permalink') : '') + '</h2>' +
+    '<h2><span class="gametitle">' + esc(d.title) + '</span>' +
+    (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') +
+    (d.k ? copyBtn(rowURL(d), 'Copy link to this entry', '⧉', '✓', 'permalink') : '') + '</h2>' +
     launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
@@ -1607,11 +1614,15 @@ panel.addEventListener('click', e => {
   if (cp) { flashCopy(cp); return; }  // keep the panel open
   const lr = e.target.closest('.launchrow');
   if (lr) {
-    // chevron (or a first click with nothing configured) opens the device
-    // popover; the main button fires at the last-used device
-    if (e.target.closest('.more') || !misters.length) { openMisterPop(lr); return; }
+    // chevron opens the device manager popover; each Launch button fires
+    // straight at its own device (data-mi), so multiple MiSTers sit side by side
+    if (e.target.closest('.more')) { openMisterPop(lr); return; }
     const go = e.target.closest('.go');
-    if (go) { closePop(); fireLaunch(misters[lastMister], lr.dataset.script, go); }
+    if (go) {
+      const mi = +go.dataset.mi;
+      if (mi < 0 || !misters[mi]) { openMisterPop(lr); return; }  // nothing saved yet
+      closePop(); fireLaunch(misters[mi], lr.dataset.script, go);
+    }
     return;
   }
   if (e.target.closest('.close')) closePanel();
@@ -1890,7 +1901,8 @@ function onMisterPop(e) {
   if (pick) {
     lastMister = +pick.dataset.i;
     saveMisters(); updateLaunchRow();
-    fireLaunch(misters[lastMister], metapop.dataset.script, panel.querySelector('.launchrow .go'));
+    fireLaunch(misters[lastMister], metapop.dataset.script,
+      panel.querySelector('.launchrow .go[data-mi="' + lastMister + '"]') || panel.querySelector('.launchrow .go'));
     closePop(); return;
   }
   const rm = e.target.closest('.rm');

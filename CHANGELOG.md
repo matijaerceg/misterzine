@@ -4,6 +4,7 @@ User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/re
 
 ## 2026-07-13
 - The "Report a Problem" link in the header now points to the MiSTerZine Discord channel instead of GitHub issues.
+- With a filter menu open, clicking another control (Clear filters, a sort header, the search box, or another filter) now closes the menu and does that action in one click, instead of the first click only closing the menu.
 - The page heading now ends with the site address (misterzine.fyi/releases), and clicking the heading takes you back to the full list, closing any open entry and clearing its link from the address bar.
 - A single Clear filters button now appears at the right of the filter bar whenever any filter is active (search, Types, Genres or Year) and clears them all at once; the search box also has its own small x to clear just the text. Filters now reset when you reload the page, so you always start from the full list (your chosen columns are still remembered).
 - MiSTerZine now has its own domain: the site lives at misterzine.fyi. The old github.io address still works and redirects here.

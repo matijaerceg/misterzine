@@ -42,7 +42,7 @@ ORIG = os.path.join(ROOT, 'data', 'cache', 'system_photos', 'orig')
 TODO = os.path.join(ROOT, 'data', 'cache', 'system_photos', 'todo')
 CREDITS = os.path.join(PUB, 'credits.json')
 
-UA = 'misterzine-system-photos/1.0 (https://github.com/matijaerceg/misterzine; matija.erceg@gmail.com)'
+UA = 'misterzine-system-photos/1.0 (+https://github.com/matijaerceg/misterzine)'
 WIDTH = 240
 SLEEP = 2.5
 

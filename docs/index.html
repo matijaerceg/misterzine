@@ -94,20 +94,34 @@
   .top .theme[data-mode="dark"]  .i-dark { display: block; }
   /* index link (marker-set label + live count) */
   .top .idx { color: #06c; font-weight: 600; text-decoration: none; white-space: nowrap;
-              font-size: calc(.9rem - .06rem * var(--sh));
+              font-size: calc(.9rem - .12rem * var(--sh));
               border: 1px solid color-mix(in srgb, #06c 55%, Canvas); border-radius: 999px;
               padding: .4rem .9rem; }
   .top .idx .pm { font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
   .top .idx .cnt { font-size: .85em; font-weight: 500; }
   .top .idx:hover { background: color-mix(in srgb, #06c 12%, Canvas); }
-  /* MOBILE (below ~34rem the logo + index won't sit side by side): logo top-left,
-     theme toggle pinned to the top-right corner, index link centered below with
-     even margins. The header auto-sizes to this stack and still shrinks with --sh. */
+  /* MOBILE (below ~34rem): logo top-left; theme toggle pinned to the top-right
+     corner and SHRINKING TO NOTHING on scroll; index link stacked below at rest
+     and GLIDING up beside the shrunken logo as you scroll. Toggle + index are
+     positioned independently so the toggle stays in the corner (it used to ride
+     down with the index's column). min-height driven by --sh so the wavy bottom
+     edge tracks the shrink; content stays decoupled (fixed header, const reserve). */
   @media (max-width: 34rem) {
-    .top { display: block; }
+    .top { display: block; min-height: calc(11rem - 6.5rem * var(--sh)); }
     .top nav { display: contents; }
-    .top .theme { position: absolute; top: .55rem; right: 1.25rem; z-index: 2; }
-    .top .idx { display: block; width: fit-content; margin: 1.15rem auto 0; }
+    /* toggle: top-right corner, box + icon scale to 0 and fade (gone by ~sh 0.6,
+       before the index reaches the corner area, so they never collide) */
+    .top .theme { position: absolute; top: .55rem; right: 1.25rem; z-index: 2; overflow: hidden;
+                  width:  calc(2.05rem * (1 - min(1, var(--sh) * 1.7)));
+                  height: calc(2.05rem * (1 - min(1, var(--sh) * 1.7)));
+                  opacity: calc(1 - var(--sh) * 1.7); }
+    /* index: centered-below at rest -> beside the logo at min. left 50% -> 5.7rem
+       with translateX -50% -> 0 (centered at rest, left-anchored beside the logo
+       at min; viewport-independent). top below-logo -> logo row. */
+    .top .idx { position: absolute;
+                left: calc(50% * (1 - var(--sh)) + 5.7rem * var(--sh));
+                top:  calc(6.75rem * (1 - var(--sh)) + 1rem * var(--sh));
+                transform: translateX(calc(-50% * (1 - var(--sh)))); }
   }
 
   /* posts: one native-aspect screenshot per story (h = 4:3, v = tate 3:4,

@@ -126,11 +126,11 @@
        right-aligns regardless of the (collapsing) pill width; 100% adapts to vw. */
     .top .idx { position: absolute;
                 left: calc(1.25rem + (100% - 2.5rem) * min(1, var(--sh) * 4));
-                top:  calc(6.75rem * (1 - var(--sh)) + 1rem * var(--sh));
+                top:  calc(6.5rem * (1 - var(--sh)) + .75rem * var(--sh));
                 transform: translateX(calc(-100% * min(1, var(--sh) * 4))); }
     /* collapse the count faster on mobile so the pill is narrow by the time it
        tucks right, keeping it clear of the logo even on ~320px screens */
-    .top .idx .cnt { max-width: calc(var(--cnt-w, 20rem) * (1 - min(1, var(--sh) * 2.4))); }
+    .top .idx .cnt { max-width: calc(var(--cnt-w, 20rem) * (1 - min(1, var(--sh) * 3.6))); }
   }
 
   /* posts: one native-aspect screenshot per story (h = 4:3, v = tate 3:4,

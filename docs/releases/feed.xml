@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://matijaerceg.github.io/misterzine/releases/feed.xml"/>
-<lastBuildDate>Sun, 12 Jul 2026 23:54:24 +0000</lastBuildDate>
+<lastBuildDate>Mon, 13 Jul 2026 05:56:57 +0000</lastBuildDate>
+<item>
+<title>[New] Apple-Lisa (Computer core)</title>
+<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#Apple-Lisa</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Apple-Lisa_20260712.rbf:2026-07-13T05:56:57+00:00</guid>
+<pubDate>Mon, 13 Jul 2026 05:56:57 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Apple&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-13 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-Lisa_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Apple-IIgs (Computer core)</title>
 <link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#Apple-IIgs</link>
@@ -14,7 +23,7 @@
 <pubDate>Sun, 12 Jul 2026 23:54:24 +0000</pubDate>
 <category>new</category>
 <category>Computer core</category>
-<description>&lt;p&gt;New in the public MiSTer databases on 2026-07-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Night Slashers (Arcade)</title>
@@ -888,15 +897,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Altered Beast (Arcade)</title>
-<link>https://matijaerceg.github.io/misterzine/releases/?ref=rss#altbeast</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Altered Beast/Altered Beast (set 2) (MC-8123B 317-0066).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://matijaerceg.github.io/misterzine/images/title/altbeast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Altered Beast (Arcade)</title>

@@ -244,7 +244,11 @@
   .theme button + button { border-left: 1px solid #8884; }
   .theme button[aria-pressed="true"] { background: #8883; font-weight: 600; }
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
-  tr:hover td { background: #8881; }
+  /* :where() adds the "no dropdown open" guard at zero specificity cost, so the
+     hover/open precedence below is unchanged. While a filter dropdown is open a
+     click on the table only dismisses it (never opens a row), so the hover tint
+     would be lying about clickability — suppress it via body.dd-open. */
+  :where(body:not(.dd-open)) tr:hover td { background: #8881; }
   .build { color: #888; }
   /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
   td.prov, .prov { color: #888; font-style: italic; }
@@ -263,7 +267,7 @@
   td:first-child { position: sticky; left: 0; z-index: 2; background: Canvas; }
   th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
   td:first-child, th:first-child { border-right: 1px solid #8883; }
-  tr:hover td:first-child { background: color-mix(in srgb, #888 7%, Canvas); }
+  :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, #888 7%, Canvas); }
   tr.open td:first-child  { background: color-mix(in srgb, #06c 20%, Canvas); }
 
   /* --- detail panel: slides in from the left --- */
@@ -1254,6 +1258,14 @@ document.addEventListener('click', e => {
   closeDropdowns(inside);
   if (anyOpen && !inside) { e.stopPropagation(); e.preventDefault(); }
 }, true);
+
+// While any filter dropdown is open, flag <body> so the CSS above drops the row
+// hover tint (the click only dismisses the menu, so a hover cue would mislead).
+// `toggle` fires whether the details opens via summary click or JS closeDropdowns.
+function syncDdOpen() {
+  document.body.classList.toggle('dd-open', !!document.querySelector('details.cols[open]'));
+}
+for (const dd of document.querySelectorAll('details.cols')) dd.addEventListener('toggle', syncDdOpen);
 
 buildHeader();  // header renders immediately; rows follow once data.json loads
 

@@ -37,6 +37,13 @@
   :root { color-scheme: light dark; }            /* auto — follows the OS */
   :root[data-theme="light"] { color-scheme: light; }
   :root[data-theme="dark"]  { color-scheme: dark; }
+  /* single source of truth for the site's blue: one hue, lightness tuned per
+     theme so links and every UI accent (borders, interactive text, tints) read
+     as ONE blue while staying legible on both light and dark. Explicit per-theme
+     values (not light-dark()) so the token nests safely inside color-mix(). */
+  :root { --accent: #0066cc; }                       /* light, and auto when OS is light */
+  :root[data-theme="dark"] { --accent: #3399ff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme]) { --accent: #3399ff; } }
   * { box-sizing: border-box; }
   /* app shell: the page itself never scrolls — .tablewrap is the only scroll
      container. This keeps the fixed detail panel and every native scroll
@@ -53,17 +60,38 @@
   .topbar { flex: none; position: relative; z-index: 20; background: Canvas; }
   header { margin: 0; padding: 1rem 0 0; }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
+  /* the whole title is the "home" link: click anywhere on it to drop a deep-link
+     #hash and return to the clean /releases/ URL. One color (inherits the heading's,
+     i.e. full white/black), never underlined; a dot divides the descriptive name
+     from the URL, which stays lighter-weight so the two parts still read distinct. */
+  h1 a.titlelink { color: inherit; text-decoration: none; }
+  h1 .site { font-weight: 400; white-space: nowrap; }
+  /* right-margin only: the break-legal space in the markup supplies the gap on the
+     dot's left, so the divider stays evenly spaced without doubling up */
+  h1 .site::before { content: "\00B7"; margin: 0 .4em 0 0; font-weight: 400; }
   .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
-  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-  .updated a:hover { color: #06c; }
+  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  .updated a:hover { color: var(--accent); }
   /* dotted underline (+ ⓘ) marks the meta-line popover triggers ("Public
      cores only", "RSS") — they open an in-page popover, unlike the solid
      underline + ↗ links, which navigate away */
-  .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; }
+  .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; white-space: nowrap; }
   /* the zine link is the one meta-line entry we want noticed */
-  .updated a.zinelink { color: #06c; font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
+  .updated a.zinelink { color: var(--accent); font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
-  .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
+  .controls { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
+  /* the filter cluster grows to fill the row; the search field grows within it to
+     take up the slack (dropdowns sit to its right), and it wraps to the left of the
+     tally column pinned on its right */
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+             flex: 1 1 auto; min-width: 0; }
+  /* thin divider; flex:none keeps it (and the Columns pref after it) from ever
+     wrapping, so Columns stays pinned to the far right no matter how filters wrap */
+  .ctrlsep { flex: none; align-self: center; width: 1px; height: 1.5rem; background: #8884; }
+  /* the divider before Columns spans the full row height (stretches down with any
+     wrapped filter rows); Columns itself top-aligns with the filters, not centered */
+  .ctrlsep.tall { align-self: stretch; height: auto; }
+  #cols { flex: none; align-self: flex-start; }
   /* the search box carries its own inline clear-x, so it lives in a relative wrapper
      that takes the grow-to-fill role the bare input used to have */
   .searchwrap { position: relative; display: flex; flex: 1; min-width: 16rem; }
@@ -75,19 +103,29 @@
   .qx { position: absolute; right: .15rem; top: 50%; transform: translateY(-50%);
         border: none; background: none; padding: 0 .4rem; font: inherit; font-size: 1.05rem;
         line-height: 1; color: #888; cursor: pointer; visibility: hidden; }
-  .qx:hover { color: color-mix(in srgb, #06c 60%, CanvasText); }
+  .qx:hover { color: var(--accent); }
   #q:not(:placeholder-shown) ~ .qx { visibility: visible; }
   /* a non-empty search box (placeholder hidden = something typed) gets accent
      styling so an active filter — easy to trigger via type-anywhere — is obvious */
   input[type=search]:not(:placeholder-shown) {
-    border-color: color-mix(in srgb, #06c 60%, CanvasText);
-    background: color-mix(in srgb, #06c 10%, Canvas); }
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, Canvas); }
   select, input[type=search] { font-family: inherit; font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
-  .count { color: #888; font-size: .8rem; }
-  button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; border: 1px solid #8884;
-                 border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
-  button.clear:hover { background: #8882; }
+  .count { color: #888; font-size: .8rem; flex: none; white-space: nowrap; align-self: flex-start; }
+  /* "Clear filters" is an ACTION, not a status, so it gets a warmer, heavier
+     treatment than the blue active-filter glow: amber fill + amber border +
+     amber text reads as "press me to undo", and the distinct hue keeps it from
+     being mistaken for a fourth active filter. Theme-aware via color-mix. */
+  button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; cursor: pointer;
+                 border-radius: 4px;
+                 border: 1px solid color-mix(in srgb, #e08000 65%, CanvasText);
+                 background: color-mix(in srgb, #e08000 20%, Canvas);
+                 color: color-mix(in srgb, #e08000 72%, CanvasText); }
+  button.clear:not(:disabled):hover { background: color-mix(in srgb, #e08000 32%, Canvas); }
+  /* always present, but grayed + inert until a filter is actually narrowing the
+     list (JS toggles [disabled]); the amber above is the "armed" state */
+  button.clear:disabled { border-color: #8884; background: transparent; color: #888; cursor: default; }
   /* "Columns" dropdown: opt-in arcade metadata columns (default all off) */
   details.cols { position: relative; }
   details.cols summary { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
@@ -98,10 +136,10 @@
   /* a Types/Year filter that's narrowing results tints its summary with the same
      accent as a non-empty search box, so an active filter stays obvious with the
      menu closed (Columns is a display pref, not a filter, so it never glows) */
-  details.cols summary.active { border-color: color-mix(in srgb, #06c 60%, CanvasText);
-                                background: color-mix(in srgb, #06c 10%, Canvas); }
+  details.cols summary.active { border-color: var(--accent);
+                                background: color-mix(in srgb, var(--accent) 10%, Canvas); }
   details.cols summary.active:hover, details.cols[open] summary.active {
-                                background: color-mix(in srgb, #06c 18%, Canvas); }
+                                background: color-mix(in srgb, var(--accent) 18%, Canvas); }
   details.cols .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30;
                        background: Canvas; border: 1px solid #8884; border-radius: 6px;
                        padding: .55rem .8rem; box-shadow: 0 4px 16px #0004;
@@ -115,7 +153,7 @@
      checkbox rows; dimmed when the menu is already at its default state */
   details.cols .menu .reset { border: none; background: none; padding: .1rem 0; margin: .1rem 0 0;
                               font: inherit; font-size: .9rem; text-align: left; white-space: nowrap;
-                              color: color-mix(in srgb, #06c 60%, CanvasText); cursor: pointer; }
+                              color: var(--accent); cursor: pointer; }
   details.cols .menu .reset:hover:not(:disabled) { text-decoration: underline; }
   details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
   /* "Year" dropdown: From/To range selects + one-tap decade chips. The per-field
@@ -125,13 +163,13 @@
   .yearrow select { flex: 1; }
   .yearrow .xclr { border: none; background: none; padding: 0 .2rem; font: inherit;
                    line-height: 1; color: #888; cursor: pointer; }
-  .yearrow .xclr:hover { color: color-mix(in srgb, #06c 60%, CanvasText); }
+  .yearrow .xclr:hover { color: var(--accent); }
   .decades { display: flex; flex-wrap: wrap; gap: .3rem; margin: .1rem 0; }
   .decades .dchip { font: inherit; font-size: .8rem; padding: .15rem .4rem; cursor: pointer;
                     border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
   .decades .dchip:hover { background: #8882; }
-  .decades .dchip.on { border-color: color-mix(in srgb, #06c 60%, CanvasText);
-                       background: color-mix(in srgb, #06c 18%, Canvas); }
+  .decades .dchip.on { border-color: var(--accent);
+                       background: color-mix(in srgb, var(--accent) 18%, Canvas); }
   /* separate (not collapse): collapsed borders are painted by the table, so they
      don't travel with the sticky <th>s — rows show through 1px seams while scrolling.
      With separate+spacing:0 each cell owns its border and it sticks along with it. */
@@ -228,8 +266,8 @@
   /* the sorted column's header is unmistakable: accent-tinted (opaquely, via
      color-mix with Canvas, so rows never show through the sticky header) with
      the accent color on the label + arrow */
-  th[aria-sort] { background: color-mix(in srgb, #06c 14%, Canvas);
-                  color: color-mix(in srgb, #06c 62%, CanvasText); }
+  th[aria-sort] { background: color-mix(in srgb, var(--accent) 14%, Canvas);
+                  color: var(--accent); }
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   /* every column after Title is condensed — denser metadata, more room for titles */
@@ -245,7 +283,7 @@
   td .dep { color: #888; font-size: .82em; margin-left: .35rem; }
   td.core { color: CanvasText; font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
-  td.core a { color: color-mix(in srgb, #06c 60%, CanvasText); text-decoration: none; }
+  td.core a { color: var(--accent); text-decoration: none; }
   td.core a:hover { text-decoration: underline; }
   .ext { color: #888; margin-left: .25rem; font-size: .85em; text-decoration: none; display: inline-block; }
   /* floated (not flexed) top-right so the title/meta text lines shorten beside
@@ -270,7 +308,7 @@
   .colnote .prov { font-style: italic; }
   /* every row opens the detail panel (arrow cursor on purpose: rows are
      app-style select targets, not links — the hover tint signals clickability) */
-  tr.open td { background: #06c3; }
+  tr.open td { background: color-mix(in srgb, var(--accent) 20%, transparent); }
   /* Title column pins to the scroller's left edge. It needs its own opaque
      paint: row backgrounds don't travel with a sticky cell, and the hover/open
      tints above are translucent — content scrolling beneath would bleed
@@ -280,7 +318,7 @@
   th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
   td:first-child, th:first-child { border-right: 1px solid #8883; }
   :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, #888 7%, Canvas); }
-  tr.open td:first-child  { background: color-mix(in srgb, #06c 20%, Canvas); }
+  tr.open td:first-child  { background: color-mix(in srgb, var(--accent) 20%, Canvas); }
 
   /* --- detail panel: slides in from the left --- */
   #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, round(calc(100vw / 3), 1px));
@@ -326,8 +364,8 @@
   @media (max-width: 480px) { .rsspop { left: 1rem !important; right: 1rem; } }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
   #panel .report { color: #888; font-size: .8rem; margin: 1.25rem 0 0; }
-  #panel .report a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-  #panel .report a:hover { color: #06c; }
+  #panel .report a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  #panel .report a:hover { color: var(--accent); }
   /* empty state shown before any title is selected */
   #panel .body.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; gap: 1rem; }
   #panel .body.empty .close { position: absolute; top: .4rem; right: .6rem; float: none; }
@@ -398,7 +436,7 @@
   body.panel-open #resizer { transform: none; visibility: visible; transition: transform .28s ease; }
   /* ribbed grip: two vertical lines running the whole edge so it reads as a draggable seam */
   #resizer { --rib: #8889; }
-  #resizer:hover, body.resizing #resizer { --rib: #06c; }
+  #resizer:hover, body.resizing #resizer { --rib: var(--accent); }
   /* integer-pixel stops (1px lines / 1px gaps) so the lines land on the pixel grid evenly */
   #resizer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right,
       transparent 0 5px, var(--rib) 5px 6px, transparent 6px 7px,
@@ -444,32 +482,41 @@
     <button type="button" data-set="light">Light</button>
     <button type="button" data-set="dark">Dark</button>
   </div>
-  <h1>MiSTerZine - MiSTer FPGA Core &amp; Arcade Tracker</h1>
+  <h1><a href="./" id="brandlink" class="titlelink" title="Back to the full list (drops the deep link, resets the URL)">MiSTer FPGA Core &amp; Arcade Tracker <span class="site">MiSTerZine.fyi/releases</span></a></h1>
   <p class="updated" id="updated"></p>
 </header>
 <div class="controls">
-  <div class="searchwrap">
-    <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>
-    <button type="button" id="qx" class="qx" title="Clear search" tabindex="-1">x</button>
+  <!-- the filters live in their own wrapping section; it grows to fill the row
+       and right-aligns its contents, so the cluster hugs the separator and wraps
+       upward against the right edge. Columns stays pinned far-right, outside it. -->
+  <div class="filters">
+    <div class="searchwrap">
+      <input type="search" id="q" placeholder="Search title, type, manufacturer, core…" autofocus>
+      <button type="button" id="qx" class="qx" title="Clear search" tabindex="-1">x</button>
+    </div>
+    <details class="cols" id="typedd">
+      <summary id="typesummary">All Types</summary>
+      <div class="menu" id="typemenu"></div>
+    </details>
+    <details class="cols" id="genredd">
+      <summary id="genresummary">All Genres</summary>
+      <div class="menu" id="genremenu"></div>
+    </details>
+    <details class="cols" id="yeardd">
+      <summary id="yearsummary">Year</summary>
+      <div class="menu" id="yearmenu"></div>
+    </details>
+    <button type="button" id="clear" class="clear" disabled>Clear filters</button>
   </div>
-  <details class="cols" id="typedd">
-    <summary id="typesummary">All Types</summary>
-    <div class="menu" id="typemenu"></div>
-  </details>
-  <details class="cols" id="genredd">
-    <summary id="genresummary">All Genres</summary>
-    <div class="menu" id="genremenu"></div>
-  </details>
-  <details class="cols" id="yeardd">
-    <summary id="yearsummary">Year</summary>
-    <div class="menu" id="yearmenu"></div>
-  </details>
+  <!-- The tally is its own anchored column: the filter cluster (left) grows and
+       wraps against it, while the tally, the full-height divider, and the Columns
+       display-pref stay pinned to the right and never wrap. -->
+  <span class="count" id="count"></span>
+  <span class="ctrlsep tall" aria-hidden="true"></span>
   <details class="cols" id="cols">
     <summary>Columns</summary>
     <div class="menu" id="colsmenu"></div>
   </details>
-  <span class="count" id="count"></span>
-  <button type="button" id="clear" class="clear" hidden>Clear filters</button>
 </div>
 </div>
 <div class="tablezone">
@@ -911,8 +958,9 @@ function apply() {
   // matching both, in any field, in any order); each term is an independent
   // substring so multi-word values still match ("street fighter" hits the title)
   const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
-  // the global "Clear filters" button shows whenever ANY filter is narrowing results
-  document.getElementById('clear').hidden =
+  // the global "Clear filters" button is always present; it's armed (enabled) only
+  // while a filter is narrowing results, and grayed/disabled otherwise
+  document.getElementById('clear').disabled =
     !(qEl.value || enabledTypes.size || enabledGenres.size || yearFrom != null || yearTo != null);
   // Types filter: an empty set means "no filter" (show all) — which coincides
   // with every type being checked. Any partial selection narrows to those bases.
@@ -996,6 +1044,15 @@ function clearAllFilters() {
   recenterOpen();
 }
 document.getElementById('clear').addEventListener('click', clearAllFilters);
+// the brand/URL in the title doubles as a "home" reset: click it to close any
+// open panel and drop the deep-link #hash, back to a clean /releases/ URL.
+// href="./" is the no-JS fallback; intercepting keeps filter + scroll state.
+document.getElementById('brandlink').addEventListener('click', e => {
+  if (e.metaKey || e.ctrlKey || e.shiftKey) return;  // let open-in-new-tab through
+  e.preventDefault();
+  if (document.body.classList.contains('panel-open')) closePanel();
+  else if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
+});
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {
   const th = e.target.closest('th');

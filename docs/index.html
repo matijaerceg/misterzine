@@ -46,15 +46,20 @@
   article, .colophon { max-width: 37.5rem; margin-inline: auto; }
 
   /* sticky top line: logo + nav, nothing else */
-  .top { position: sticky; top: 0; z-index: 10; background: Canvas;
+  .top { position: sticky; top: 0; z-index: 10;
          display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap;
-         padding: .5rem 0 1.25rem;
-         /* the header fill's bottom edge IS the squiggle: a solid mask down to the
-            last 9px, unioned with the wave tile, so posts vanish under the wave */
-         -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
-                       var(--wavefill) bottom / 30px 11px repeat-x;
-                 mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
-                       var(--wavefill) bottom / 30px 11px repeat-x; }
+         padding: .5rem 0 1.25rem; }
+  /* opaque fill with a wavy bottom edge (posts vanish under the wave): a solid
+     mask down to the last 9px, unioned with the wave tile. On its own pseudo so
+     it doesn't clip the visible squiggle line below */
+  .top::before { content: ''; position: absolute; inset: 0; z-index: -1; background: Canvas;
+                 -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
+                               var(--wavefill) bottom / 30px 11px repeat-x;
+                         mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
+                               var(--wavefill) bottom / 30px 11px repeat-x; }
+  /* visible squiggle line drawn right on that wavy edge (same look as the dividers) */
+  .top::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 11px;
+                background: #888a; -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
   .top .logo { height: 84px; width: auto; aspect-ratio: 532.4 / 354.2; display: block;
                color: #06c; transition: height .18s ease; }
   .top a:hover .logo { color: color-mix(in srgb, #06c 70%, CanvasText); }

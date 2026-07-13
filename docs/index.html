@@ -33,7 +33,10 @@
           --squig: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E");
           /* same wave as a FILL (opaque above the line): masks the header so its
              bottom edge is the squiggle itself, and posts scroll under the wave */
-          --wavefill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5 L45 -6 L-15 -6 Z' fill='black'/%3E%3C/svg%3E"); }
+          --wavefill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5 L45 -6 L-15 -6 Z' fill='black'/%3E%3C/svg%3E");
+          /* width of a full-width squiggle: ~11% past the 50rem content column so
+             it runs beyond the edge, clamped to the viewport (never a scrollbar) */
+          --sqw: min(55.5rem, calc(100vw - 2rem)); }
   :root[data-theme="light"] { color-scheme: light; }
   :root[data-theme="dark"]  { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -54,68 +57,57 @@
   .top { --sh: 0;
          position: fixed; top: 0; left: 0; right: 0; z-index: 10;
          margin-inline: auto; max-width: 52.5rem;
-         display: flex; align-items: center; justify-content: space-between;
-         gap: calc(.4rem + .35rem * (1 - var(--sh))); flex-wrap: wrap;
-         padding: .5rem 1.25rem 1.25rem; }
-  /* opaque fill with a wavy bottom edge (posts vanish under the wave): a solid
-     mask down to the last 9px, unioned with the wave tile. On its own pseudo so
-     it doesn't clip the visible squiggle line below. Inset to the 50rem content
-     box (left/right 1.25rem) so it lines up with the wide dividers */
-  .top::before { content: ''; position: absolute; top: 0; bottom: 0; left: 1.25rem; right: 1.25rem;
+         display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+         padding: .5rem 1.25rem 1.5rem; }
+  /* opaque fill with a wavy bottom edge (posts vanish under the wave). Widened to
+     --sqw and centered so it runs ~11% past the content column (clamped to the
+     viewport). On its own pseudo so it doesn't clip the visible line below. */
+  .top::before { content: ''; position: absolute; top: 0; bottom: 0;
+                 left: calc(50% - var(--sqw) / 2); width: var(--sqw);
                  z-index: -1; background: Canvas;
                  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
                                var(--wavefill) left bottom / 30px 11px repeat-x;
                          mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
                                var(--wavefill) left bottom / 30px 11px repeat-x; }
-  /* visible squiggle line drawn right on that wavy edge (same look as the dividers).
-     both waves are anchored left (0%) with the same 30px tile so they stay in phase;
-     the fill defaulting to `bottom` (center) put them 5px out of step */
-  .top::after { content: ''; position: absolute; left: 1.25rem; right: 1.25rem; bottom: 0; height: 11px;
+  /* visible squiggle line on that wavy edge (same look + width as the dividers) */
+  .top::after { content: ''; position: absolute; bottom: 0; height: 11px;
+                left: calc(50% - var(--sqw) / 2); width: var(--sqw);
                 background: #888; -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
   /* logo height interpolates 84px -> 44px straight from --sh; no CSS transition,
      which would lag behind the scroll instead of tracking it */
   .top .logo { height: calc(84px - 40px * var(--sh)); width: auto; aspect-ratio: 532.4 / 354.2;
                display: block; color: #06c; }
-  .top a:hover .logo { color: color-mix(in srgb, #06c 70%, CanvasText); }
-  /* nav is a right-aligned column: theme toggle above the index link. margin-left
-     auto keeps it right even when it wraps below the logo (mobile, full size) */
-  .top nav { display: flex; flex-direction: column; align-items: flex-end; margin-left: auto;
-             gap: calc(.5rem * (1 - var(--sh))); }
-  /* theme toggle: a round icon button that shrinks to nothing as the header
-     shrinks (its box collapses AND it fades, so at min it's gone with no gap) */
-  .top .theme { --d: calc(2.05rem * (1 - var(--sh)));
-                width: var(--d); height: var(--d); flex: 0 0 auto; padding: 0; overflow: hidden;
+  .top .home { display: block; width: fit-content; flex: 0 0 auto; }
+  .top .home:hover .logo { color: color-mix(in srgb, #06c 70%, CanvasText); }
+  /* right side: index link + theme toggle in a row, toggle in the far corner */
+  .top nav { display: flex; align-items: center; gap: .6rem; }
+  /* theme toggle: round icon button, always visible in the top-right corner */
+  .top .theme { width: 2.05rem; height: 2.05rem; flex: 0 0 auto; padding: 0;
                 border: 1px solid color-mix(in srgb, #06c 45%, Canvas); border-radius: 999px;
                 background: Canvas; color: #06c; cursor: pointer; display: grid; place-items: center;
-                opacity: calc(1 - var(--sh)); transition: background .15s ease; }
+                transition: background .15s ease; }
   .top .theme:hover { background: color-mix(in srgb, #06c 12%, Canvas); }
   .top .theme svg { width: 58%; height: 58%; display: block; }
   .top .theme .i { display: none; }
   .top .theme[data-mode="auto"]  .i-auto,
   .top .theme[data-mode="light"] .i-light,
   .top .theme[data-mode="dark"]  .i-dark { display: block; }
-  /* index link shrinks with the header (smaller font -> narrower, so on mobile it
-     stops being wider than the row and tucks up beside the shrunken logo) */
-  .top nav a.idx { color: #06c; font-weight: 600; text-decoration: none; white-space: nowrap;
-                   font-size: calc(.9rem - .16rem * var(--sh));
-                   border: 1px solid color-mix(in srgb, #06c 55%, Canvas); border-radius: 999px;
-                   padding: calc(.45rem - .12rem * var(--sh)) calc(.85rem - .24rem * var(--sh)); }
-  .top nav a.idx .pm { font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
-  .top nav a.idx .cnt { font-size: .85em; font-weight: 500; }
-  .top nav a.idx:hover { background: color-mix(in srgb, #06c 12%, Canvas); }
-  /* On phones the index link can't fit beside the full-size logo, so at rest it
-     sits stacked below (with the theme toggle above it). Rather than let a flex
-     wrap snap it up beside the logo at some scroll threshold, the nav is absolutely
-     positioned and its spot is interpolated from --sh: it glides up-and-right into
-     place beside the shrunken logo while shrinking. The header's own height is
-     interpolated off --sh too, so the wavy bottom edge tracks the shrink. */
-  @media (max-width: 30rem) {
-    /* pin the logo to the top (not vertically centered in the tall header, which
-       would drop it onto the stacked nav); the nav sits clear below it at rest */
-    .top { align-items: flex-start; min-height: calc(12.5rem - 8rem * var(--sh)); }
-    .top nav { position: absolute; right: 1.25rem; margin-left: 0; z-index: 1;
-               top: calc(6.25rem - 5.25rem * var(--sh));
-               transform: translateX(calc(-1.5rem * (1 - var(--sh)))); }
+  /* index link (marker-set label + live count) */
+  .top .idx { color: #06c; font-weight: 600; text-decoration: none; white-space: nowrap;
+              font-size: calc(.9rem - .06rem * var(--sh));
+              border: 1px solid color-mix(in srgb, #06c 55%, Canvas); border-radius: 999px;
+              padding: .4rem .9rem; }
+  .top .idx .pm { font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
+  .top .idx .cnt { font-size: .85em; font-weight: 500; }
+  .top .idx:hover { background: color-mix(in srgb, #06c 12%, Canvas); }
+  /* MOBILE (below ~34rem the logo + index won't sit side by side): logo top-left,
+     theme toggle pinned to the top-right corner, index link centered below with
+     even margins. The header auto-sizes to this stack and still shrinks with --sh. */
+  @media (max-width: 34rem) {
+    .top { display: block; }
+    .top nav { display: contents; }
+    .top .theme { position: absolute; top: .55rem; right: 1.25rem; z-index: 2; }
+    .top .idx { display: block; width: fit-content; margin: 1.15rem auto 0; }
   }
 
   /* posts: one native-aspect screenshot per story (h = 4:3, v = tate 3:4,
@@ -125,9 +117,11 @@
   /* squiggle divider between posts, its own element so it can be wider than a
      narrow post: .wide spans the full column (used on both sides of a wide/tate
      post), plain spans the 37.5rem text column (between two narrow posts) */
-  hr.sq { border: 0; height: 11px; margin: 1.95rem auto; max-width: 37.5rem;
+  hr.sq { border: 0; height: 11px; margin: 1.95rem auto; max-width: 41.5rem;
           background: #888; -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
-  hr.sq.wide { max-width: 50rem; }
+  /* wide dividers run past the 50rem content column too (breaks out of the wrap,
+     centered on the viewport, clamped so it never causes a horizontal scrollbar) */
+  hr.sq.wide { max-width: none; width: var(--sqw); margin-inline: calc(50% - var(--sqw) / 2) auto; }
   /* post title: game name (marker font) + the reason it's here, a smidge above body text */
   article h2 { font-family: 'Permanent Marker', cursive; font-weight: 400;
                font-size: 1.25rem; line-height: 1.3; margin: 0 0 .5rem; letter-spacing: .01em; }
@@ -169,8 +163,9 @@
 <div class="wrap">
 
 <header class="top">
-  <a href="./" aria-label="MiSTerZine home"><svg class="logo" viewBox="38.5 111.3 532.4 354.2" aria-hidden="true" fill="currentColor"><g transform="translate(0,600) scale(0.1,-0.1)"><path d="M2400 4880 c-25 -6 -73 -24 -108 -41 -57 -28 -66 -29 -95 -19 -47 18 -314 25 -390 10 -68 -13 -149 -49 -185 -83 l-22 -21 -28 26 c-77 72 -173 92 -425 86 -209 -5 -261 -19 -341 -89 -86 -76 -95 -106 -192 -654 -52 -293 -86 -516 -86 -555 0 -92 31 -168 92 -227 42 -41 47 -49 39 -72 -23 -69 -61 -320 -57 -381 8 -145 113 -259 271 -295 l50 -11 -185 -166 c-102 -92 -199 -184 -215 -205 -63 -80 -86 -147 -123 -357 -17 -100 -18 -130 -9 -180 22 -124 96 -221 209 -275 l55 -26 730 0 730 0 50 24 c49 23 56 24 275 22 205 -3 231 -1 286 18 l61 20 59 -20 c53 -19 77 -20 264 -17 l205 3 65 35 65 35 69 -35 69 -35 216 0 216 0 65 32 c36 17 80 46 99 64 33 32 34 32 60 15 62 -41 195 -97 277 -118 118 -29 391 -32 527 -5 246 49 408 149 473 290 15 35 34 108 47 183 18 107 19 136 10 201 l-11 75 38 62 c58 93 82 174 88 297 13 301 -145 543 -430 656 -35 14 -69 31 -77 38 -22 21 -6 59 34 78 56 27 121 93 145 148 12 28 30 104 41 168 24 146 29 156 76 172 44 14 101 48 125 75 32 36 68 131 90 236 19 92 21 111 10 160 -33 147 -156 230 -316 213 -85 -9 -84 -9 -211 0 -110 8 -196 -3 -258 -34 -38 -19 -40 -19 -81 -1 -23 10 -67 23 -97 30 l-55 12 0 87 c1 75 -3 93 -27 143 -33 66 -90 119 -156 145 -40 15 -92 18 -422 21 -322 3 -385 1 -440 -13 -83 -21 -77 -22 -199 5 -197 42 -436 28 -597 -36 -66 -27 -68 -26 -123 18 -73 57 -220 89 -320 68z m163 -214 c58 -24 81 -59 85 -130 9 -147 -93 -239 -241 -216 -100 15 -147 87 -126 193 13 70 51 124 102 148 50 22 134 25 180 5z m842 -56 c90 -23 128 -46 134 -81 1 -13 -5 -62 -15 -109 -13 -65 -24 -92 -45 -112 -33 -33 -43 -34 -144 -8 -130 33 -240 22 -259 -26 -12 -31 21 -61 101 -94 177 -72 235 -111 281 -188 25 -43 27 -56 27 -147 -1 -124 -24 -191 -95 -268 -94 -103 -222 -147 -426 -147 -168 0 -320 34 -371 82 -29 27 -29 61 -2 158 35 127 65 141 200 95 135 -46 276 -42 295 10 16 40 -4 62 -83 95 -206 84 -257 118 -298 201 -79 155 -7 383 152 482 136 85 351 107 548 57z m-2005 -5 c16 -8 34 -25 41 -36 6 -12 15 -125 21 -267 5 -136 13 -255 16 -264 5 -12 43 62 121 235 63 139 122 266 133 283 33 57 68 66 254 62 l166 -3 24 -28 c15 -17 24 -41 24 -60 0 -18 -23 -162 -51 -322 -27 -159 -65 -379 -84 -487 -19 -108 -39 -206 -45 -217 -23 -43 -48 -51 -172 -51 -171 0 -175 7 -138 200 38 197 81 443 77 446 -2 2 -63 -134 -137 -302 -90 -204 -142 -312 -159 -325 -19 -15 -40 -19 -112 -19 -134 0 -126 -18 -154 330 -22 283 -28 341 -31 337 -2 -2 -28 -142 -58 -312 -67 -379 -52 -355 -220 -355 -99 0 -115 2 -134 20 -12 11 -24 31 -28 44 -3 13 15 135 40 272 25 137 66 366 91 509 49 271 56 293 110 315 11 5 100 9 198 9 140 1 184 -2 207 -14z m3045 -10 c30 -29 30 -41 6 -163 -26 -132 -40 -145 -166 -150 -54 -3 -98 -9 -103 -16 -5 -6 -18 -65 -31 -131 -12 -66 -42 -230 -66 -365 -25 -135 -48 -253 -51 -263 -3 -10 -20 -27 -37 -38 -27 -16 -51 -19 -160 -19 -122 0 -129 1 -152 25 -16 15 -25 36 -25 55 0 17 29 182 65 367 36 185 65 346 65 359 0 23 -3 24 -72 24 -75 0 -113 12 -132 42 -13 21 18 222 40 252 31 44 41 45 427 46 l368 0 24 -25z m-1884 -364 c16 -16 29 -38 29 -48 0 -44 -112 -651 -125 -681 -8 -18 -26 -37 -41 -42 -35 -14 -227 -13 -258 1 -53 24 -52 40 9 396 38 220 63 336 75 353 28 41 57 50 173 50 107 0 109 0 138 -29z m2171 -16 c104 -36 169 -145 154 -258 -9 -65 -28 -100 -71 -132 -57 -44 -142 -65 -266 -65 -121 0 -129 -5 -85 -57 21 -24 32 -28 93 -31 51 -3 91 2 148 18 l79 22 18 -22 c15 -18 17 -32 12 -74 -11 -83 -19 -100 -54 -123 -66 -45 -215 -70 -319 -54 -132 21 -196 62 -243 159 -30 61 -33 74 -32 162 1 297 181 490 444 475 41 -2 96 -11 122 -20z m484 4 c34 -12 44 -25 44 -59 l1 -25 22 26 c34 41 87 69 133 69 51 0 77 -19 77 -56 0 -42 -32 -178 -46 -198 -8 -11 -36 -20 -75 -26 -72 -10 -113 -35 -136 -85 -9 -19 -30 -107 -46 -195 -31 -169 -39 -193 -70 -210 -25 -13 -196 -13 -221 1 -43 22 -42 45 17 372 30 172 61 326 69 344 10 23 24 35 47 41 48 13 152 14 184 1z m-2365 -901 c90 -30 133 -95 132 -198 -2 -120 -49 -202 -141 -247 -49 -24 -68 -28 -142 -27 -125 1 -191 40 -221 131 -16 49 -5 150 22 207 25 53 93 118 141 133 45 15 168 15 209 1z m-531 -53 c36 -18 60 -62 60 -107 0 -59 -50 -300 -68 -332 -10 -17 -205 -200 -433 -406 l-416 -375 337 -5 c314 -5 339 -6 359 -24 27 -25 27 -63 0 -214 -26 -148 -41 -179 -93 -203 -39 -17 -79 -19 -671 -19 -419 0 -643 4 -669 11 -45 12 -81 48 -89 87 -7 35 36 259 57 301 21 39 -2 18 490 454 l420 372 -350 5 c-192 3 -357 9 -367 14 -23 11 -37 38 -37 73 0 54 49 285 67 316 40 69 16 67 731 67 555 0 647 -2 672 -15z m2837 -353 c124 -39 211 -113 261 -220 24 -50 27 -69 27 -162 0 -95 -3 -111 -28 -162 -46 -94 -128 -150 -275 -190 -60 -16 -121 -22 -272 -27 l-195 -6 3 -25 c3 -29 28 -66 63 -92 68 -51 234 -46 422 11 153 48 180 25 158 -132 -16 -114 -30 -147 -73 -180 -46 -36 -195 -83 -303 -98 -112 -15 -310 -6 -385 16 -242 74 -361 261 -347 545 12 229 99 442 234 572 76 74 204 136 333 164 92 19 296 12 377 -14z m-1145 -8 c65 -22 130 -82 158 -145 31 -74 29 -174 -9 -394 -81 -463 -114 -631 -127 -657 -29 -55 -54 -63 -219 -66 -177 -3 -211 7 -232 70 -11 33 -6 74 47 365 33 180 60 340 60 354 0 45 -31 73 -79 71 -56 -2 -96 -25 -126 -70 -20 -30 -35 -97 -85 -372 -41 -227 -67 -343 -79 -360 -35 -50 -73 -60 -226 -60 -164 0 -201 12 -223 71 -12 33 -6 75 82 563 53 291 102 540 108 554 7 14 26 35 41 46 25 19 45 21 182 24 124 3 159 0 184 -12 33 -18 54 -69 43 -108 -5 -19 3 -15 45 22 129 116 303 156 455 104z m-1190 -144 c20 -6 47 -23 59 -38 18 -23 20 -36 16 -92 -7 -95 -145 -847 -165 -899 -30 -77 -51 -85 -220 -89 -163 -4 -210 5 -241 45 -26 32 -26 65 -2 195 11 57 45 245 76 418 30 173 60 334 66 357 13 49 51 88 99 101 47 14 266 14 312 2z"/><path d="M4516 4009 c-14 -11 -33 -34 -41 -50 l-16 -29 65 0 c78 0 95 6 107 37 22 59 -57 88 -115 42z"/><path d="M4842 2590 c-61 -28 -105 -80 -127 -149 l-7 -24 113 5 c157 6 199 30 199 112 0 68 -90 96 -178 56z"/></g></svg></a>
+  <a class="home" href="./" aria-label="MiSTerZine home"><svg class="logo" viewBox="38.5 111.3 532.4 354.2" aria-hidden="true" fill="currentColor"><g transform="translate(0,600) scale(0.1,-0.1)"><path d="M2400 4880 c-25 -6 -73 -24 -108 -41 -57 -28 -66 -29 -95 -19 -47 18 -314 25 -390 10 -68 -13 -149 -49 -185 -83 l-22 -21 -28 26 c-77 72 -173 92 -425 86 -209 -5 -261 -19 -341 -89 -86 -76 -95 -106 -192 -654 -52 -293 -86 -516 -86 -555 0 -92 31 -168 92 -227 42 -41 47 -49 39 -72 -23 -69 -61 -320 -57 -381 8 -145 113 -259 271 -295 l50 -11 -185 -166 c-102 -92 -199 -184 -215 -205 -63 -80 -86 -147 -123 -357 -17 -100 -18 -130 -9 -180 22 -124 96 -221 209 -275 l55 -26 730 0 730 0 50 24 c49 23 56 24 275 22 205 -3 231 -1 286 18 l61 20 59 -20 c53 -19 77 -20 264 -17 l205 3 65 35 65 35 69 -35 69 -35 216 0 216 0 65 32 c36 17 80 46 99 64 33 32 34 32 60 15 62 -41 195 -97 277 -118 118 -29 391 -32 527 -5 246 49 408 149 473 290 15 35 34 108 47 183 18 107 19 136 10 201 l-11 75 38 62 c58 93 82 174 88 297 13 301 -145 543 -430 656 -35 14 -69 31 -77 38 -22 21 -6 59 34 78 56 27 121 93 145 148 12 28 30 104 41 168 24 146 29 156 76 172 44 14 101 48 125 75 32 36 68 131 90 236 19 92 21 111 10 160 -33 147 -156 230 -316 213 -85 -9 -84 -9 -211 0 -110 8 -196 -3 -258 -34 -38 -19 -40 -19 -81 -1 -23 10 -67 23 -97 30 l-55 12 0 87 c1 75 -3 93 -27 143 -33 66 -90 119 -156 145 -40 15 -92 18 -422 21 -322 3 -385 1 -440 -13 -83 -21 -77 -22 -199 5 -197 42 -436 28 -597 -36 -66 -27 -68 -26 -123 18 -73 57 -220 89 -320 68z m163 -214 c58 -24 81 -59 85 -130 9 -147 -93 -239 -241 -216 -100 15 -147 87 -126 193 13 70 51 124 102 148 50 22 134 25 180 5z m842 -56 c90 -23 128 -46 134 -81 1 -13 -5 -62 -15 -109 -13 -65 -24 -92 -45 -112 -33 -33 -43 -34 -144 -8 -130 33 -240 22 -259 -26 -12 -31 21 -61 101 -94 177 -72 235 -111 281 -188 25 -43 27 -56 27 -147 -1 -124 -24 -191 -95 -268 -94 -103 -222 -147 -426 -147 -168 0 -320 34 -371 82 -29 27 -29 61 -2 158 35 127 65 141 200 95 135 -46 276 -42 295 10 16 40 -4 62 -83 95 -206 84 -257 118 -298 201 -79 155 -7 383 152 482 136 85 351 107 548 57z m-2005 -5 c16 -8 34 -25 41 -36 6 -12 15 -125 21 -267 5 -136 13 -255 16 -264 5 -12 43 62 121 235 63 139 122 266 133 283 33 57 68 66 254 62 l166 -3 24 -28 c15 -17 24 -41 24 -60 0 -18 -23 -162 -51 -322 -27 -159 -65 -379 -84 -487 -19 -108 -39 -206 -45 -217 -23 -43 -48 -51 -172 -51 -171 0 -175 7 -138 200 38 197 81 443 77 446 -2 2 -63 -134 -137 -302 -90 -204 -142 -312 -159 -325 -19 -15 -40 -19 -112 -19 -134 0 -126 -18 -154 330 -22 283 -28 341 -31 337 -2 -2 -28 -142 -58 -312 -67 -379 -52 -355 -220 -355 -99 0 -115 2 -134 20 -12 11 -24 31 -28 44 -3 13 15 135 40 272 25 137 66 366 91 509 49 271 56 293 110 315 11 5 100 9 198 9 140 1 184 -2 207 -14z m3045 -10 c30 -29 30 -41 6 -163 -26 -132 -40 -145 -166 -150 -54 -3 -98 -9 -103 -16 -5 -6 -18 -65 -31 -131 -12 -66 -42 -230 -66 -365 -25 -135 -48 -253 -51 -263 -3 -10 -20 -27 -37 -38 -27 -16 -51 -19 -160 -19 -122 0 -129 1 -152 25 -16 15 -25 36 -25 55 0 17 29 182 65 367 36 185 65 346 65 359 0 23 -3 24 -72 24 -75 0 -113 12 -132 42 -13 21 18 222 40 252 31 44 41 45 427 46 l368 0 24 -25z m-1884 -364 c16 -16 29 -38 29 -48 0 -44 -112 -651 -125 -681 -8 -18 -26 -37 -41 -42 -35 -14 -227 -13 -258 1 -53 24 -52 40 9 396 38 220 63 336 75 353 28 41 57 50 173 50 107 0 109 0 138 -29z m2171 -16 c104 -36 169 -145 154 -258 -9 -65 -28 -100 -71 -132 -57 -44 -142 -65 -266 -65 -121 0 -129 -5 -85 -57 21 -24 32 -28 93 -31 51 -3 91 2 148 18 l79 22 18 -22 c15 -18 17 -32 12 -74 -11 -83 -19 -100 -54 -123 -66 -45 -215 -70 -319 -54 -132 21 -196 62 -243 159 -30 61 -33 74 -32 162 1 297 181 490 444 475 41 -2 96 -11 122 -20z m484 4 c34 -12 44 -25 44 -59 l1 -25 22 26 c34 41 87 69 133 69 51 0 77 -19 77 -56 0 -42 -32 -178 -46 -198 -8 -11 -36 -20 -75 -26 -72 -10 -113 -35 -136 -85 -9 -19 -30 -107 -46 -195 -31 -169 -39 -193 -70 -210 -25 -13 -196 -13 -221 1 -43 22 -42 45 17 372 30 172 61 326 69 344 10 23 24 35 47 41 48 13 152 14 184 1z m-2365 -901 c90 -30 133 -95 132 -198 -2 -120 -49 -202 -141 -247 -49 -24 -68 -28 -142 -27 -125 1 -191 40 -221 131 -16 49 -5 150 22 207 25 53 93 118 141 133 45 15 168 15 209 1z m-531 -53 c36 -18 60 -62 60 -107 0 -59 -50 -300 -68 -332 -10 -17 -205 -200 -433 -406 l-416 -375 337 -5 c314 -5 339 -6 359 -24 27 -25 27 -63 0 -214 -26 -148 -41 -179 -93 -203 -39 -17 -79 -19 -671 -19 -419 0 -643 4 -669 11 -45 12 -81 48 -89 87 -7 35 36 259 57 301 21 39 -2 18 490 454 l420 372 -350 5 c-192 3 -357 9 -367 14 -23 11 -37 38 -37 73 0 54 49 285 67 316 40 69 16 67 731 67 555 0 647 -2 672 -15z m2837 -353 c124 -39 211 -113 261 -220 24 -50 27 -69 27 -162 0 -95 -3 -111 -28 -162 -46 -94 -128 -150 -275 -190 -60 -16 -121 -22 -272 -27 l-195 -6 3 -25 c3 -29 28 -66 63 -92 68 -51 234 -46 422 11 153 48 180 25 158 -132 -16 -114 -30 -147 -73 -180 -46 -36 -195 -83 -303 -98 -112 -15 -310 -6 -385 16 -242 74 -361 261 -347 545 12 229 99 442 234 572 76 74 204 136 333 164 92 19 296 12 377 -14z m-1145 -8 c65 -22 130 -82 158 -145 31 -74 29 -174 -9 -394 -81 -463 -114 -631 -127 -657 -29 -55 -54 -63 -219 -66 -177 -3 -211 7 -232 70 -11 33 -6 74 47 365 33 180 60 340 60 354 0 45 -31 73 -79 71 -56 -2 -96 -25 -126 -70 -20 -30 -35 -97 -85 -372 -41 -227 -67 -343 -79 -360 -35 -50 -73 -60 -226 -60 -164 0 -201 12 -223 71 -12 33 -6 75 82 563 53 291 102 540 108 554 7 14 26 35 41 46 25 19 45 21 182 24 124 3 159 0 184 -12 33 -18 54 -69 43 -108 -5 -19 3 -15 45 22 129 116 303 156 455 104z m-1190 -144 c20 -6 47 -23 59 -38 18 -23 20 -36 16 -92 -7 -95 -145 -847 -165 -899 -30 -77 -51 -85 -220 -89 -163 -4 -210 5 -241 45 -26 32 -26 65 -2 195 11 57 45 245 76 418 30 173 60 334 66 357 13 49 51 88 99 101 47 14 266 14 312 2z"/><path d="M4516 4009 c-14 -11 -33 -34 -41 -50 l-16 -29 65 0 c78 0 95 6 107 37 22 59 -57 88 -115 42z"/><path d="M4842 2590 c-61 -28 -105 -80 -127 -149 l-7 -24 113 5 c157 6 199 30 199 112 0 68 -90 96 -178 56z"/></g></svg></a>
   <nav>
+    <a class="idx" href="releases/"><span class="pm">Release index</span><span class="cnt">: 1,000+ cores &amp; games &#8594;</span></a>
     <button class="theme" type="button" data-mode="auto" title="Theme: Auto" aria-label="Color theme: Auto">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <g class="i i-auto"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></g>
@@ -178,7 +173,6 @@
         <g class="i i-dark"><path d="M20.5 13.2A8 8 0 1 1 10.8 3.5a6.3 6.3 0 0 0 9.7 9.7z" fill="currentColor" stroke="none"/></g>
       </svg>
     </button>
-    <a class="idx" href="releases/"><span class="pm">Release index</span><span class="cnt">: 1,000+ cores &amp; games &#8594;</span></a>
   </nav>
 </header>
 

@@ -287,6 +287,9 @@
     border: none; background: none; color: #888; cursor: pointer; }
   #panel .copy:hover, .rsspop .copy:hover { color: inherit; }
   #panel .copy.ok, .rsspop .copy.ok { color: #2a2; }
+  /* the share permalink carries a text label so it's findable, but stays a
+     quiet muted glyph+label (not a loud pill) so it doesn't fight the title */
+  #panel .copy.permalink { font-size: .8em; }
   /* RSS popover: feed chooser opened from the meta line's "RSS" link; styled
      after the Columns dropdown menu. Fixed positioning is fine — the page
      itself never scrolls (app shell) */
@@ -1214,8 +1217,8 @@ new ResizeObserver(() => {
 }).observe(panel);
 
 // click-to-copy affordance for panel values (delegated handler on #panel)
-const copyBtn = (v, label, icon) => '<button class="copy" data-copy="' + escA(v) +
-  '" title="' + escA(label || 'Copy') + '">' + (icon || '⧉') + '</button>';
+const copyBtn = (v, label, icon, ok, cls) => '<button class="copy' + (cls ? ' ' + cls : '') + '" data-copy="' + escA(v) +
+  '"' + (ok ? ' data-ok="' + escA(ok) + '"' : '') + ' title="' + escA(label || 'Copy') + '">' + (icon || '⧉') + '</button>';
 
 // --- Launch on MiSTer -------------------------------------------------------
 // Talks to wizzo's mrext Remote service on the visitor's MiSTer (Scripts/
@@ -1413,7 +1416,7 @@ function detailHTML(d) {
 
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + esc(d.title) + (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') +
-    (d.k ? copyBtn(rowURL(d), 'Copy link to this entry', '🔗') : '') + '</h2>' +
+    (d.k ? copyBtn(rowURL(d), 'Copy link to this entry', '⧉ Copy link', '✓ Copied!', 'permalink') : '') + '</h2>' +
     launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
@@ -1510,7 +1513,7 @@ document.getElementById('rows').addEventListener('click', e => {
 function flashCopy(cp) {
   if (!cp.dataset.orig) cp.dataset.orig = cp.textContent;
   navigator.clipboard.writeText(cp.dataset.copy).then(() => {
-    cp.classList.add('ok'); cp.textContent = '✓';
+    cp.classList.add('ok'); cp.textContent = cp.dataset.ok || '✓';
     setTimeout(() => { cp.classList.remove('ok'); cp.textContent = cp.dataset.orig; }, 1000);
   });
 }

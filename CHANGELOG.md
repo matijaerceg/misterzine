@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://matijaerceg.github.io/misterzine/releases/).
 
 ## 2026-07-13
+- Every entry's detail panel now has a labeled "Copy link" button next to the title that copies a direct link to that game, so you can share it without fishing the URL out of the address bar.
 - Titles that debuted on MiSTer within the last week now show a NEW badge.
 - Removed the small monitor icon next to titles that marked rows with screenshots: nearly every entry has screenshots now, so the icon marked almost everything.
 

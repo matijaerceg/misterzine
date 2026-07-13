@@ -30,7 +30,7 @@
   :root { color-scheme: light dark;
           /* hand-drawn squiggle rule, tiled; drawn as a mask so one gray colors it in both themes
              (path overhangs the tile edges so the repeat has no seams) */
-          --squig: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5' fill='none' stroke='black' stroke-width='3'/%3E%3C/svg%3E");
+          --squig: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E");
           /* same wave as a FILL (opaque above the line): masks the header so its
              bottom edge is the squiggle itself, and posts scroll under the wave */
           --wavefill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5 L45 -6 L-15 -6 Z' fill='black'/%3E%3C/svg%3E"); }
@@ -71,7 +71,7 @@
      both waves are anchored left (0%) with the same 30px tile so they stay in phase;
      the fill defaulting to `bottom` (center) put them 5px out of step */
   .top::after { content: ''; position: absolute; left: 1.25rem; right: 1.25rem; bottom: 0; height: 11px;
-                background: #888a; -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
+                background: #888; -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
   /* logo height interpolates 84px -> 44px straight from --sh; no CSS transition,
      which would lag behind the scroll instead of tracking it */
   .top .logo { height: calc(84px - 40px * var(--sh)); width: auto; aspect-ratio: 532.4 / 354.2;
@@ -110,9 +110,11 @@
      place beside the shrunken logo while shrinking. The header's own height is
      interpolated off --sh too, so the wavy bottom edge tracks the shrink. */
   @media (max-width: 30rem) {
-    .top { min-height: calc(11.9rem - 7.4rem * var(--sh)); }
+    /* pin the logo to the top (not vertically centered in the tall header, which
+       would drop it onto the stacked nav); the nav sits clear below it at rest */
+    .top { align-items: flex-start; min-height: calc(12.5rem - 8rem * var(--sh)); }
     .top nav { position: absolute; right: 1.25rem; margin-left: 0; z-index: 1;
-               top: calc(5.55rem - 4.5rem * var(--sh));
+               top: calc(6.25rem - 5.25rem * var(--sh));
                transform: translateX(calc(-1.5rem * (1 - var(--sh)))); }
   }
 
@@ -124,7 +126,7 @@
      narrow post: .wide spans the full column (used on both sides of a wide/tate
      post), plain spans the 37.5rem text column (between two narrow posts) */
   hr.sq { border: 0; height: 11px; margin: 1.95rem auto; max-width: 37.5rem;
-          background: #888a; -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
+          background: #888; -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
   hr.sq.wide { max-width: 50rem; }
   /* post title: game name (marker font) + the reason it's here, a smidge above body text */
   article h2 { font-family: 'Permanent Marker', cursive; font-weight: 400;
@@ -309,7 +311,8 @@
   (function () {
     var top = document.querySelector('.top');
     var wrap = document.querySelector('.wrap');
-    var RANGE = 120;
+    var RANGE = 130;  // >= the largest header collapse (mobile ~128px) so the
+                      // header bottom never outruns the scrolling content (no gap)
 
     function reserve() {  // reserve full header height; force --sh:0 while measuring
       var prev = top.style.getPropertyValue('--sh');

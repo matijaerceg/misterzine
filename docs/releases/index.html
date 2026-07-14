@@ -514,7 +514,7 @@
     <button type="button" data-set="light">Light</button>
     <button type="button" data-set="dark">Dark</button>
   </div>
-  <h1><a href="./" id="brandlink" class="titlelink" title="Back to the full list (drops the deep link, resets the URL)">MiSTer FPGA Core &amp; Arcade Tracker <span class="site">MiSTerZine.fyi/releases</span></a></h1>
+  <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)">MiSTer FPGA Core &amp; Arcade Tracker <span class="site">MiSTerZine.fyi/releases</span></a></h1>
   <p class="updated" id="updated"></p>
 </header>
 <div class="controls">
@@ -1082,15 +1082,10 @@ function clearAllFilters() {
   recenterOpen();
 }
 document.getElementById('clear').addEventListener('click', clearAllFilters);
-// the brand/URL in the title doubles as a "home" reset: click it to close any
-// open panel and drop the deep-link #hash, back to a clean /releases/ URL.
-// href="./" is the no-JS fallback; intercepting keeps filter + scroll state.
-document.getElementById('brandlink').addEventListener('click', e => {
-  if (e.metaKey || e.ctrlKey || e.shiftKey) return;  // let open-in-new-tab through
-  e.preventDefault();
-  if (document.body.classList.contains('panel-open')) closePanel();
-  else if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
-});
+// the brand/URL in the title is a plain link to "./": clicking it does a real
+// navigation to a bare /releases/, exactly like typing that URL and hitting
+// Enter. That's a full fresh load (panel/hash, filters, sort and scroll all
+// reset; theme, columns, saved devices and panel width persist via localStorage).
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {
   const th = e.target.closest('th');

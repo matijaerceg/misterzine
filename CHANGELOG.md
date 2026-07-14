@@ -4,6 +4,7 @@ User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/re
 
 ## 2026-07-13
 - The header's update line is now labeled "Latest release" and shows a relative time ("3 hours ago") instead of a full timestamp; hover it to see the exact date and time, and once it is more than a day old it shows the date instead.
+- The filter bar now reflows sensibly on phones: the search box gets its own full-width line, the Types/Genres/Year/Clear buttons wrap beneath it, and the result tally no longer overlaps the search box, instead of everything cramming into one narrow column.
 - The "Report a Problem" link in the header now points to the MiSTerZine Discord channel instead of GitHub issues.
 - With a filter menu open, clicking another control (Clear filters, a sort header, the search box, or another filter) now closes the menu and does that action in one click, instead of the first click only closing the menu.
 - The page heading now ends with the site address (misterzine.fyi/releases), and clicking the heading takes you back to the full list, closing any open entry and clearing its link from the address bar.

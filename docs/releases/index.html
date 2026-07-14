@@ -112,7 +112,11 @@
     background: color-mix(in srgb, var(--accent) 10%, Canvas); }
   select, input[type=search] { font-family: inherit; font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
-  .count { color: #888; font-size: .8rem; flex: none; white-space: nowrap; align-self: flex-start; }
+  /* the tally always stacks onto two lines ("1025" over "of 1025"): the second
+     line ("of " + the fixed total) is always the wider of the two, so the column
+     width is constant and the filter cluster no longer shifts as the count changes */
+  .count { color: #888; font-size: .8rem; flex: none; white-space: nowrap; align-self: flex-start;
+           display: flex; flex-direction: column; line-height: 1.15; text-align: right; }
   /* "Clear filters" is an ACTION, not a status, so it gets a warmer, heavier
      treatment than the blue active-filter glow: amber fill + amber border +
      amber text reads as "press me to undo", and the distinct hue keeps it from
@@ -471,6 +475,20 @@
   }
   @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen, no resize */
     #panel { width: 100vw; }
+  }
+  /* phones: the desktop controls row assumes it can wrap the filter cluster
+     against a tally + divider + Columns pinned on the right, which collapses on a
+     narrow screen (tally floats over the search box, filters squeeze into a sliver).
+     Reflow into stacked full-width rows instead: search on its own line, the filter
+     dropdowns wrapping beneath it, and the tally + Columns sharing the last row. */
+  @media (max-width: 640px) {
+    .controls { flex-wrap: wrap; row-gap: .5rem; }
+    .filters { flex: 1 1 100%; }
+    .searchwrap { flex: 1 1 100%; min-width: 0; }  /* search takes its own full line */
+    .ctrlsep.tall { display: none; }               /* no room for the vertical divider */
+    /* last row: tally on the left, Columns pushed to the right edge, both centered */
+    .count { align-self: center; text-align: left; margin-right: auto; }
+    #cols { align-self: center; }
   }
   /* printing: undo the fixed-height app shell so the full row list paginates
      instead of clipping to one screen of the scroller */
@@ -949,14 +967,20 @@ function render() {
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
         ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
-    document.getElementById('count').textContent = '0 of ' + DATA.length;
+    setCount(0);
     return;
   }
   tb.innerHTML = view.map((d, i) =>
     '<tr' + (d === openRow ? ' class="open"' : '') + ' data-i="' + i + '">' +
     cols.map(c => c.cell(d)).join('') + '</tr>'
   ).join('');
-  document.getElementById('count').textContent = view.length + ' of ' + DATA.length;
+  setCount(view.length);
+}
+// tally: the shown count and the "of <total>" always render as two stacked lines
+// (see .count CSS) so the filter cluster's right edge stays put as the count changes
+function setCount(shown) {
+  document.getElementById('count').innerHTML =
+    '<span>' + shown + '</span><span>of ' + DATA.length + '</span>';
 }
 
 function esc(s) { return (s == null ? '' : '' + s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }

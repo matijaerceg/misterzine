@@ -1100,7 +1100,6 @@ function clearAllFilters() {
   q.value = '';
   resetTypes(); resetGenres(); resetYear();
   apply();
-  q.focus({ preventScroll: true });
   recenterOpen();
 }
 document.getElementById('clear').addEventListener('click', clearAllFilters);

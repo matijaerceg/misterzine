@@ -76,6 +76,10 @@ def main():
     # titles deliberately shown WITHOUT a screenshot (user call): multi-game
     # carts where any single game's shot misrepresents the row
     NO_IMAGE_TITLES = {"CPS1 Multi Game"}
+    # titles whose upstream TITLE-screen capture is corrupt across every source
+    # (progettoSNAPS/ADB/libretro all ship one identical broken ST-V grab) —
+    # drop just that slot and keep the good snap + in-game shots.
+    NO_TITLE_TITLES = {"Tecmo World Cup '98"}
     # hand-wired screenshots (source="manual": web-sourced shots for games absent
     # from psnaps/libretro — TTL games, hacks, non-MAME titles). Kept across
     # rebuilds unless the fresh resolution actually finds a real source.
@@ -139,6 +143,8 @@ def main():
                      "title_img": None, "snap_img": None, "third_img": None, "third_pack": None}
         elif entry["source"] is None and title in prev_manual:
             entry = prev_manual[title]
+        if title in NO_TITLE_TITLES:
+            entry["title_img"] = None
         if entry["title_img"]:
             n_title += 1
         if entry["snap_img"]:

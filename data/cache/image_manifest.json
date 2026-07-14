@@ -5393,9 +5393,9 @@
  {
   "title": "Adventure Canoe",
   "setname": "adcanoe",
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "source": "manual",
+  "title_img": "manual",
+  "snap_img": "manual",
   "third_img": null,
   "third_pack": null
  },
@@ -6474,7 +6474,7 @@
   "title": "Tecmo World Cup '98",
   "setname": "twcup98",
   "source": "psnaps",
-  "title_img": "titles/twcup98.png",
+  "title_img": null,
   "snap_img": "snap/twcup98.png",
   "third_img": "select/twcup98.png",
   "third_pack": "select"

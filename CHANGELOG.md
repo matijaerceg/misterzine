@@ -3,122 +3,58 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-13
-- The header's update line is now labeled "Latest release" and shows a relative time ("3 hours ago") instead of a full timestamp; hover it to see the exact date and time, and once it is more than a day old it shows the date instead.
-- The filter bar now reflows sensibly on phones: the search box gets its own full-width line, the Types/Genres/Year/Clear buttons wrap beneath it, and the result tally no longer overlaps the search box, instead of everything cramming into one narrow column.
-- The "Report a Problem" link in the header now points to the MiSTerZine Discord channel instead of GitHub issues.
-- With a filter menu open, clicking another control (Clear filters, a sort header, the search box, or another filter) now closes the menu and does that action in one click, instead of the first click only closing the menu.
-- The page heading now ends with the site address (misterzine.fyi/releases), and clicking the heading takes you back to the full list, closing any open entry and clearing its link from the address bar.
-- A single Clear filters button now appears at the right of the filter bar whenever any filter is active (search, Types, Genres or Year) and clears them all at once; the search box also has its own small x to clear just the text. Filters now reset when you reload the page, so you always start from the full list (your chosen columns are still remembered).
 - MiSTerZine now has its own domain: the site lives at misterzine.fyi. The old github.io address still works and redirects here.
-- If you have saved more than one MiSTer, the detail panel's Launch button now shows one button per device side by side, so you can start a game on either MiSTer with a single click instead of switching your default device first.
-- You can now filter the table by arcade genre: a new Genre menu (next to Types and Year) lets you check off Shooter, Platform, Fighter and the rest, with each genre's game count shown, instead of typing the genre into the search box. Selecting a genre hides consoles and computers, which have no genre.
-- Every entry's detail panel now has a small Copy link icon next to the title that copies a direct link to that game, so you can share it without fishing the URL out of the address bar.
+- If you have saved more than one MiSTer, the detail panel's Launch button now shows one button per device side by side, so you can start a game on either MiSTer with a single click.
+- You can now filter the table by arcade genre: a new Genre menu (next to Types and Year) lets you check off Shooter, Platform, Fighter and the rest. Selecting a genre hides consoles and computers, which have no genre.
+- A single Clear filters button now clears every active filter (search, Types, Genres, Year) at once, and filters reset when you reload the page so you always start from the full list (your chosen columns are still remembered).
 - Titles that debuted on MiSTer within the last week now show a NEW badge.
-- Removed the small monitor icon next to titles that marked rows with screenshots: nearly every entry has screenshots now, so the icon marked almost everything.
 
 ## 2026-07-12
 - You can now filter the release table by original release year: a new Year menu with From and To pickers, plus one-tap decade shortcuts (70s, 80s, 90s...). Consoles and computers with no listed year are hidden while a year range is active.
-- The zine is now a collection of quotes: each post has a small title (game name plus why it's here, like an anniversary or a fresh MiSTer debut) and a passage quoted verbatim from a linked source (interviews, reviews, retro-gaming sites) instead of our own write-up. All eight posts rewritten; every screenshot replaced with a different capture found around the web.
-- Zine posts now show game screenshots at their native aspect ratio (with the same CRT treatment as the release index) instead of embedded YouTube videos: no player, no ads, nothing loads from YouTube. Vertical games sit beside the text on wide screens.
-- Detail-panel screenshots now have a slight blur along the scan direction, like a worn arcade tube, and vertical (tate) games render the shadow mask rotated 90 degrees, matching how the monitor sits in the real cabinet.
+- The zine is now a collection of quotes: each post pairs a short title with a passage quoted verbatim from a linked source (interviews, reviews, retro-gaming sites) instead of our own write-up.
 
 ## 2026-07-11
-- Screenshots and hardware photos (on both the zine and the release index) now render through a CRT shadow mask (Timothy Lottes' public-domain slot mask), drawn at your display's native pixel grid so it stays crisp at any display scale, phones included. Hardware photos are now full-color and softly scaled instead of dithered.
-- **The site root is now a daily zine**: short, source-checked tidbits about newly released MiSTer cores (and decade anniversaries of old favorites), each with a click-to-play gameplay video, written automatically from cited sources and verified against them before publishing. Has its own RSS feed (feed-zine.xml); the zine and the release index link to each other.
+- **The site root is now a daily zine**: short, source-checked tidbits about newly released MiSTer cores (and decade anniversaries of old favorites), written automatically from cited sources. Has its own RSS feed (feed-zine.xml); the zine and the release index link to each other.
+- Screenshots now render through a CRT shadow mask, drawn at your display's native pixel grid so it stays crisp at any scale, phones included.
 - Every entry's detail panel now shows its Source: which downloader database delivers it (MiSTer Distribution, Jotego, or Coin-Op Collection), and searching "jotego" or "coin-op" filters to that provider's games.
-- Fixed rows that showed a sibling release's screenshots (Darius II had the dual-screen version's shots, Tetris had Sega's instead of Atari's, plus Burnin' Rubber (DECO), TwinBee, Kangaroo, Jr. Pac-Man and Fantasy Zone II 16C); 13 more games upgraded to native-resolution shots. Multi-monitor games now render at true cabinet width (triple screen = three 4:3 displays), show a "Screens" row in the panel, and turn up when searching "dual screen" or "triple screen".
+- Multi-monitor games now render at true cabinet width (triple screen = three 4:3 displays), show a "Screens" row in the panel, and turn up when searching "dual screen" or "triple screen".
 
 ## 2026-07-10
-- **Launch games on your MiSTer from this page**: every entry's detail panel now has a Launch button (arcade games start the actual game, console/computer entries load the core). Needs wizzo's Remote script running on the MiSTer and a browser on the same network; add your MiSTer(s) once by name and address, and the button remembers your last-used device.
+- **Launch games on your MiSTer from this page**: every entry's detail panel now has a Launch button (arcade games start the actual game, console/computer entries load the core). Needs wizzo's Remote script running on the MiSTer and a browser on the same network.
 - Search now treats each word as its own filter: "horizontal 4-way" finds entries matching both terms, in any order, across any field.
 
-## 2026-07-09
-- Every arcade game now shows a genre: the category data moved to a source tracking current MAME (the old one missed modern names like Street Fighter II' Hyper Fighting, Moonwalker and the PGM lineup), with the last few hacks and TTL games pinned by hand.
-- Screenshots for the games no database covers: Computer Space, Space Race, Pac-Manic Miner, Mr. Do's Nightmare, Clean Sweep, Devil Fish and Clockwork Aquario all have shots in their detail panels now. Their missing rotation/players/controls were filled too (shown gray, provisional).
-
 ## 2026-07-08
-- System photos now render at a consistent pixel density across the board (some were previously noticeably sharper than others).
-- The homebrew/demo cores (Chess, CHIP-8, Donut, Flappy Bird, Game of Life, SlugCross) now show a screenshot in their detail panel; the MSX core is retitled "MSX2" (it's the MSX2/2+/3 machine, distinct from the separate MSX1 core); refreshed hardware photos for Amstrad CPC, UK101, Tomy Tutor, Epoch Galaxy II and Nintendo 64.
-- The site got a face for sharing: an "MZ" favicon (browser tab icon) and a social preview card, so pasted links on Discord/forums show the logo and a grid of arcade screenshots instead of bare text.
-- **Every entry now has a shareable link** (e.g. releases/#dmnfrnt opens Demon Front's panel): row clicks update the URL, a new 🔗 button in the panel copies it, and on phones the Back gesture still closes the panel. RSS items now open the entry on the site, with the repo's commit history linked in the item body.
-- Every column header now explains itself on hover (what "MiSTer Debut" vs "Last Updated" vs "Original Year" actually mean).
-- A search with zero results now says "No matches" (naming the query and any active type filter) instead of showing a blank table.
-- Edge shadows hint that the table scrolls sideways: a fade on the right while more columns are off-screen, and a shadow under the Title column once scrolled.
-- Esc now closes an open Types/Columns dropdown before it clears the search.
-- **RSS feeds**: three feeds (all changes / new only / updates only) via the new "RSS" header link; readers also autodiscover them from the page URL.
-- **Last Updated now means "latest shipped build"** (the dated file update_all actually downloads) instead of the repo's latest commit, which often lands before or without a shipped build. The detail panel now shows all three dates: MiSTer debut, Latest update, Latest commit.
-- Table opens sorted by **Last Updated** instead of MiSTer Debut; date ties sort alphabetically.
-- The sorted column's header is highlighted in the accent color; the search box turns accent-tinted while a filter is active.
-- New "Public cores only" note in the header meta line (Patreon beta cores are listed once public).
-- Site renamed to **"MiSTer FPGA Core & Arcade Tracker"**.
-- The 56 Coin-Op Collection games now show their real FPGA core instead of the generic distribution repo label.
+- **Every entry now has a shareable link** (e.g. releases/#dmnfrnt opens Demon Front's panel): row clicks update the URL, and a button in the panel copies it.
+- **RSS feeds**: three feeds (all changes / new only / updates only) via the "RSS" header link; readers also autodiscover them from the page URL.
+- **Last Updated now means "latest shipped build"** (the dated file update_all actually downloads) instead of the repo's latest commit. The detail panel shows all three dates: MiSTer debut, Latest update, Latest commit.
 
 ## 2026-07-07
-- Arcade titles rewritten the way humans write them, from the MAME database: "Street Fighter II: The World Warrior", "Pac-Man" (not "Pac-Man - Puck Man"), "Q*bert". 121 titles cleaned up; discarded alternate names stay searchable.
-- Console and computer rows use proper human names (Nintendo 64, PlayStation, Commodore 64, ~90 renamed); raw core names still show and search in the Core column.
-- Console and computer rows show a photo of the actual hardware in the detail panel: 115 systems in a deliberately lo-fi 16-color dithered style.
-- Every row now opens the detail panel, not just arcade titles; the screen icon specifically marks rows with screenshots.
-- New opt-in **ROM Name** column (MAME setname, searchable), plus click-to-copy ROM/core name in the detail panel.
-- New "Report a problem" link in each detail panel (prefilled GitHub issue) and in the header.
-- The detail panel shows a new **Note** row for systems that have one.
-- Closing the detail panel keeps the row highlighted as a "you were here" marker.
-- Browser Back (and swipe-back) closes the panel on mobile instead of leaving the site.
-- Search ignores accents ("sam coupe" finds SAM Coupé).
-- The Types and Columns dropdowns got one-click resets.
-- The two Game & Watch cores are now distinguishable: "(GnW)" vs "(agg23)".
-- 2-player link-cable variants (Gameboy2P, GBA2P) folded into notes on the Game Boy/GBA rows; GameGear2P retitled "Game Gear".
-- Fixed PDP-1 and Game of Life appearing twice: upstream file renames are now detected and merged, keeping the original debut date.
-- The "deprecated" tag on the retired Genesis core moved next to its title.
-- Visual polish: crisp pixel-perfect resize grip, panel drop shadow removed.
+- Arcade, console and computer rows now use human-readable names ("Street Fighter II: The World Warrior", "Pac-Man", "Nintendo 64"); the raw core and discarded alternate names stay searchable.
+- Console and computer rows show a photo of the actual hardware in the detail panel.
+- Every row now opens a detail panel, not just arcade titles.
+- New opt-in **ROM Name** column (MAME setname, searchable).
 
 ## 2026-07-06
-- New opt-in **Genre** column for arcade titles (via MAME's catver.ini).
-- Arcade rows not yet in the MiSTer Arcade Database show provisional Rotation/Players/Controls in gray (from MAME 2003-plus), replaced automatically once verified data lands.
-- Brand-new arcade titles get Year/Manufacturer/Genre from the MAME DAT on day one instead of showing up blank.
-- Screenshot frames pick horizontal vs vertical aspect automatically from rotation data.
-- Removed a duplicate NeoGeo Pocket row (Jotego lists the handheld under Arcade too).
-- Visual polish: Core column in full text color, repo links in the accent blue.
-
-## 2026-07-05
-- The selected row stays centered in view when a filter or sort reshuffles the table.
-
-## 2026-07-04
-- Release data now updates **twice a day** (was once).
-- Date columns sort newest-first on the first click; blank dates always sort to the bottom.
-- Added a **Traffic Stats** link to the site's public analytics dashboard.
+- New opt-in **Genre** column for arcade titles.
+- Arcade rows not yet in the MiSTer Arcade Database show provisional Rotation/Players/Controls in gray, replaced automatically once verified data lands.
 
 ## 2026-07-03
 - **Type anywhere to filter**: stray keystrokes go straight into the search box.
 - The **Title column stays pinned** left when scrolling horizontally.
-- App-shell layout: the page never scrolls; the table is the single scroll surface with truly sticky headers.
-- Self-hosted fonts (Roboto + Roboto Condensed); condensed type keeps more data on screen.
-- Esc clears an active search first; a second Esc closes the panel.
-- MiSTerZine branding and SEO-friendly page titles.
-- Added privacy-friendly visitor analytics (GoatCounter).
 
 ## 2026-07-02
 - New **opt-in arcade metadata columns** from the MiSTer Arcade Database: Resolution, Rotation, Players, Controls, Flip.
 - The Type filter is now a **multi-select dropdown**.
 - **Every column is toggleable** via the Columns dropdown.
 - Every row's Core name **links to its GitHub repository**.
-- Flip column distinguishes an explicit "No" from simply-unverified (blank).
 
 ## 2026-07-01
 - **Patreon-gated Jotego beta cores are excluded** until they graduate to public release.
-- Title sorting is now case-insensitive.
-- Screenshot corrections: wrong-game matches fixed, a dozen square-raster games pinned to 4:3.
 
 ## 2026-06-30
 - **Click-to-open detail panel with arcade screenshots**: self-hosted at native resolution, resizable, Esc to close, arrow keys to walk rows.
 - Theme toggle: auto / light / dark.
 - Friendly core names, colored type badges, and a new **Core** column.
-- Site renamed to **"MiSTer FPGA Core & Arcade Index"**.
-- "Last updated" stamp under the title, bumped only when data actually changes.
-- Search and filter controls stick to the top.
-- New arcade titles get screenshots auto-backfilled from libretro daily.
-- Corrected Jotego core dates inflated by their Feb-2023 monorepo migration.
 
 ## 2026-06-29
 - **Site launched** at `/releases`: a sortable index of every MiSTer console, computer, and utility core plus every arcade title, with release dates, hardware years, manufacturers, and genres.
-- Hand-verified debut dates for cores whose repo history couldn't be trusted; corrected 18 inflated dates.
-- Default sort: newest releases first.

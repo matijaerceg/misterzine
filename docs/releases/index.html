@@ -1910,24 +1910,49 @@ matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
   else if (e.matches && openRow != null && document.body.classList.contains('panel-open')) pushPanelState();
 });
 
-// "Last updated" stamp — meta.json.updated is bumped by export-web only when the
+// Relative "X ago" for the Last-updated stamp. Fine-grained under a day; a day
+// or more falls back to an absolute short date (see the render comment for why).
+function relUpdated(dt) {
+  const min = Math.round((Date.now() - dt.getTime()) / 60000);
+  if (min < 1) return 'just now';
+  if (min < 60) return min + (min === 1 ? ' minute ago' : ' minutes ago');
+  const hr = Math.round(min / 60);
+  if (hr < 24) return hr + (hr === 1 ? ' hour ago' : ' hours ago');
+  return dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+// "Latest release" stamp — meta.json.updated is bumped by export-web only when the
 // served data actually changes (see _write_site_meta), so this date/time is stable
 // across no-op rebuilds. Stored as an ISO minute-precision UTC string.
 fetch('./meta.json').then(r => r.json()).then(m => {
   const el = document.getElementById('updated');
   if (!el || !m.updated) return;
   const dt = new Date(m.updated);
-  const s = isNaN(dt) ? m.updated : dt.toLocaleString(undefined, {
+  const valid = !isNaN(dt);
+  // exact stamp lives in the hover/focus tooltip (title); the visible text is
+  // relative ("2 hours ago"). Past a day we switch BACK to an absolute date so a
+  // quiet news week reads as "last shipped Jul 11", not "3 days ago" = neglect
+  // (meta.updated only bumps when data actually changes, so it legitimately sits
+  // still on no-op rebuilds).
+  const full = valid ? dt.toLocaleString(undefined, {
     year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
-    timeZoneName: 'short'  // append the viewer's tz (e.g. "GMT+2") so it's clearly local
-  });
-  el.innerHTML = 'Last updated: ' + esc(s) +
+    timeZoneName: 'short'  // viewer's tz (e.g. "GMT+2") so the exact time is clearly local
+  }) : m.updated;
+  const label = () => valid ? relUpdated(dt) : m.updated;
+  el.innerHTML = 'Latest release: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span>' +
     ' · <a href="../" class="zinelink">Daily Zine<span class="ext">↗</span></a>' +
     ' · <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
     ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
     ' · <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link">Discord<span class="ext">↗</span></a>' +
     ' · <a href="#" class="note" id="pub-note">Public cores only<span class="ext">ⓘ</span></a>';
+  // keep a left-open tab honest: refresh the relative label on a slow tick and
+  // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
+  if (valid) {
+    const tick = () => { const s = document.getElementById('updated-rel'); if (s) s.textContent = relUpdated(dt); };
+    setInterval(tick, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
+  }
 }).catch(() => {});
 
 // --- meta-line hover popovers: Discord, RSS and "Public cores only" all

@@ -80,8 +80,13 @@
      cores only", "RSS") — they open an in-page popover, unlike the solid
      underline + ↗ links, which navigate away */
   .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; white-space: nowrap; }
-  /* the zine link is the one meta-line entry we want noticed */
-  .updated a.zinelink { color: var(--accent); font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.2em; }
+  /* the zine link is the one meta-line entry we want noticed. It tilts on hover
+     and holds the tilt until you leave, like a sticker peeled up at one corner.
+     Transformable only because .updated is a flex container: that blockifies its
+     children, so this <a> takes a transform an ordinary inline one would ignore. */
+  .updated a.zinelink { color: var(--accent); font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.2em;
+                        transform-origin: 50% 65%; transition: transform .18s cubic-bezier(.2, .8, .3, 1); }
+  .updated a.zinelink:hover, .updated a.zinelink:focus-visible { transform: rotate(-5deg) scale(1.07); }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   /* the filter cluster grows to fill the row; the search field grows within it to
@@ -373,6 +378,10 @@
   #panel .copy.permalink { font-size: .8em; font-weight: normal; }
   /* flat yellow bolt after the ZapScript field label */
   #panel .zapbolt { width: .8em; height: .8em; fill: #f5c518; vertical-align: -.08em; margin-left: .25rem; }
+  /* the ZapScript token takes a jolt on hover/copy (zapJolt, below). inline-block
+     is load-bearing: transforms do nothing on a plain inline box, so without it
+     the animation runs and paints not one pixel. */
+  #panel .rom.zap { display: inline-block; }
   /* RSS popover: feed chooser opened from the meta line's "RSS" link; styled
      after the Columns dropdown menu. Fixed positioning is fine — the page
      itself never scrolls (app shell) */
@@ -1608,7 +1617,7 @@ function detailHTML(d) {
   // → bare .mra path, others → **launch.system:<id>. Rendered like Core/ROM
   // name: a monospace value with the shared ⧉ copy affordance.
   const zap = zapScript(d);
-  if (zap) rows.push(['ZapScript' + ZAP_ICON, '<span class="rom">' + esc(zap) + '</span>' +
+  if (zap) rows.push(['ZapScript' + ZAP_ICON, '<span class="rom zap">' + esc(zap) + '</span>' +
     copyBtn(zap, 'Copy Zaparoo ZapScript (for NFC tags)'), true, true]);
 
   // a row's third element marks the value as pre-built HTML (links); the fourth
@@ -1776,6 +1785,44 @@ document.getElementById('rows').addEventListener('click', e => {
   const tr = e.target.closest('tr[data-i]');
   if (tr) openPanel(view[+tr.dataset.i]);
 });
+// EASTER EGG: the ZapScript token takes a jolt of current when you touch it, and
+// another when you copy it. Keyframes are minted per fire (Web Animations, not a
+// CSS @keyframes) so no two jolts share a shape — a fixed @keyframes replays the
+// identical twitch every time and stops reading as noise. steps(1, end) is the
+// other half: it holds each frame and snaps to the next, so the token stutters
+// between positions instead of gliding between them. Transform-only, so the
+// panel's grid never reflows around it.
+//
+// Translation ONLY, and short hops (12 of them in 240ms, ~50/sec). Rotation is
+// what separates a buzz from a wobble: rock the token even a degree and it reads
+// as something soft flapping, not something rigid with current through it. Same
+// reason the amplitude is equal on both axes and barely 2px — a stiff vibration
+// is fast and tight, so it stays legible while it happens.
+//
+// The easing MUST sit on the keyframes, not in the options object. In options it
+// is the EFFECT easing, which quantizes the whole iteration's progress rather
+// than each hop: steps(1) there pins progress at 0 for the full duration, so the
+// token holds frame one ('none') and lands on the last ('none') having animated
+// flawlessly between two identical values. It looks exactly like a dead egg.
+function zapJolt(el) {
+  if (!el) return;
+  el.getAnimations().forEach(a => a.cancel());  // hover-then-click restarts, never stacks
+  const j = () => ((Math.random() * 2 - 1) * 1.9).toFixed(2);
+  const frames = [{ transform: 'none' }];
+  for (let i = 0; i < 11; i++)
+    frames.push({ transform: 'translate(' + j() + 'px,' + j() + 'px)' });
+  frames.push({ transform: 'none' });
+  frames.forEach(f => f.easing = 'steps(1, end)');  // per-hop: hold, then snap
+  el.animate(frames, { duration: 240 });
+}
+// mouseover, not mouseenter: the panel is re-rendered per row, so the handler has
+// to be delegated, and mouseenter doesn't bubble. The relatedTarget guard keeps a
+// re-entry from a child re-firing it (the token has none today, but a future span
+// inside it would otherwise make the jolt stutter as you move across the text).
+panel.addEventListener('mouseover', e => {
+  const z = e.target.closest('.rom.zap');
+  if (z && !z.contains(e.relatedTarget)) zapJolt(z);
+});
 // copy the value, flash confirmation, restore the button's own icon (⧉ or 🔗)
 function flashCopy(cp) {
   if (!cp.dataset.orig) cp.dataset.orig = cp.textContent;
@@ -1786,7 +1833,9 @@ function flashCopy(cp) {
 }
 panel.addEventListener('click', e => {
   const cp = e.target.closest('.copy');
-  if (cp) { flashCopy(cp); return; }  // keep the panel open
+  // keep the panel open; the ZapScript row's button re-jolts its token (the
+  // query finds nothing for every other copy button, and zapJolt no-ops)
+  if (cp) { flashCopy(cp); zapJolt(cp.parentElement.querySelector('.rom.zap')); return; }
   const lr = e.target.closest('.launchrow');
   if (lr) {
     // chevron opens the device manager popover; each Launch button fires

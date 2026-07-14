@@ -147,7 +147,15 @@
   .top .idx .cnt { font-size: .85em; font-weight: 500; overflow: hidden; white-space: nowrap;
                    max-width: calc(var(--cnt-w, 20rem) * (1 - min(1, var(--sh) * 1.6)));
                    opacity: calc(1 - min(1, var(--sh) * 2)); }
-  .top .idx:hover { background: color-mix(in srgb, #06f 12%, var(--bg)); }
+  /* the pill takes one quick breath the moment the pointer lands on it, then
+     settles. Deliberately animates `scale`, NOT `transform`: the mobile rules
+     below drive this same element's `transform` (its slide up beside the shrunken
+     logo), and an animation on that property would win the cascade and fling the
+     pill back to its unscrolled spot mid-breath. The individual transform
+     properties compose with `transform` instead of clobbering it. */
+  @keyframes idx-breathe { 0%, 100% { scale: 1; } 50% { scale: 1.055; } }
+  .top .idx:hover { background: color-mix(in srgb, #06f 12%, var(--bg));
+                    animation: idx-breathe .2s ease-in-out; }
   /* MOBILE (below ~34rem): logo top-left; theme toggle pinned to the top-right
      corner and SHRINKING TO NOTHING on scroll; index link stacked below at rest
      and GLIDING up beside the shrunken logo as you scroll. Toggle + index are

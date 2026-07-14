@@ -312,7 +312,16 @@
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
   td.core a:hover { text-decoration: underline; }
-  .ext { color: #888; margin-left: .25rem; font-size: .85em; text-decoration: none; display: inline-block; }
+  /* The ↗/ⓘ is plain inline text, and NOT inline-block: an atomic inline gets a
+     break opportunity on BOTH sides, which stranded the glyph alone on a line of
+     its own wherever a link's label can wrap — the panel's Repository row did it
+     at the default panel width. As inline text it's class AL and can't part from
+     the word before it, so a long slug breaks at one of its hyphens instead.
+     The accepted cost: a descendant can't cancel an inherited underline, so the
+     link's underline now runs under the glyph. `text-decoration: none` here would
+     be a decoy — it does nothing. Restoring inline-block to tidy that up re-breaks
+     the wrap. */
+  .ext { color: #888; margin-left: .25rem; font-size: .85em; }
   /* floated (not flexed) top-right so the title/meta text lines shorten beside
      the buttons and flow full-width beneath them instead of wrapping early */
   .theme { float: right; display: inline-flex; margin-left: 1rem;

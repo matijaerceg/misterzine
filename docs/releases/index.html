@@ -276,7 +276,8 @@
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
            overflow-wrap: break-word; }
   th { position: sticky; top: 0; z-index: 10; background: Canvas; cursor: pointer; user-select: none;
-       overflow-wrap: normal; }  /* headers wrap at spaces, never mid-word */
+       overflow-wrap: normal;  /* headers wrap at spaces, never mid-word */
+       border-top: 1px solid #8886; }  /* a divider so the header row reads apart from the filters above */
   /* the sorted column's header is marked by the accent color on its label +
      arrow alone (no background fill) */
   th[aria-sort] { color: var(--accent); }

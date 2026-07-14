@@ -523,7 +523,7 @@
        upward against the right edge. Columns stays pinned far-right, outside it. -->
   <div class="filters">
     <div class="searchwrap">
-      <input type="search" id="q" placeholder="Search title, type, manufacturer, core…">
+      <input type="search" id="q" placeholder="Find anything">
       <button type="button" id="qx" class="qx" title="Clear search" tabindex="-1">x</button>
     </div>
     <details class="cols" id="typedd">
@@ -1063,9 +1063,6 @@ function recenterOpen() {
 // helper no-ops until it reappears. Filtering preserves the sort order rather
 // than ranking by match, so anchoring to the open row doesn't hide better hits.
 document.getElementById('q').addEventListener('input', () => { apply(); recenterOpen(); });
-// keyboard-first devices get told about type-anywhere; touch keeps the plain hint
-if (matchMedia('(hover: hover) and (pointer: fine)').matches)
-  document.getElementById('q').placeholder = 'Type anywhere to search title, type, manufacturer, core…';
 // clears the text search only — wired to the inline x and to Esc; leaves the dropdown filters alone
 function clearSearch() {
   const q = document.getElementById('q');

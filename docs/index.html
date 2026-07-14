@@ -84,10 +84,18 @@
      static, the wordmark paints UNDER mister-kun and he reads as stuck on the front
      of it; positioned, both share a paint step, DOM order wins, and the wordmark
      laps over him the way it should. */
-  .top .logo { position: relative; height: calc(71px - 34px * var(--sh)); width: auto;
+  .top .logo { position: relative; height: var(--logoh); width: auto;
                aspect-ratio: 532.4 / 354.2; display: block; color: CanvasText; }
-  .top .home { position: relative; display: block; width: fit-content; flex: 0 0 auto; }
-  .top .home:hover .logo { color: color-mix(in srgb, CanvasText 65%, Canvas); }
+  /* --logoh is the wordmark height, shared so kun can size/place himself off it in
+     px (see .kun) rather than as a % of .peek, whose box we grow downward below. */
+  .top .home { position: relative; display: block; width: fit-content; flex: 0 0 auto;
+               --logoh: calc(71px - 34px * var(--sh)); }
+  /* hover tints the wordmark the official MiSTer brand purple (#514689, straight
+     from the MiSTer-devel docs theme) so the emerging kun pops by hue, not by the
+     old grey dim. On the near-black dark bg #514689 goes muddy, so light-dark()
+     swaps in a lighter sibling of the same hue there; both keep the letter-hole
+     letters legible against the sticker body. */
+  .top .home:hover .logo { color: light-dark(#514689, #8b7fd0); }
   /* EASTER EGG: hover the wordmark and mister-kun leans out from behind it.
      THE WALL: .peek's left edge is the ONLY clip line; everything left of it reads as
      behind the logo. Two forces set its 96.2%, and they pull opposite ways:
@@ -103,10 +111,32 @@
      path, not guessed, and they are why this is not a round number.
      The other three sides stay open (negative insets) so the lean can overshoot
      without a second, accidental cut. Everything is a % of .home, so he tracks the
-     logo's --sh scroll shrink (71px -> 37px) for free. */
-  .top .peek { position: absolute; left: 96.2%; top: 0; height: 100%; width: 240%;
-               clip-path: inset(-70% -70% -18% 0); pointer-events: none; }
-  .top .kun { position: absolute; left: 0; bottom: 4%; height: 78%; aspect-ratio: 1;
+     logo's --sh scroll shrink (71px -> 37px) for free.
+
+     FEATHER: the wall can't move left of 95.88% (holes), but at kun's band the ink
+     has already receded to ~90%, so a HARD cut at 96.2% left a straight edge sitting
+     in that background gap and kun read as sliced. So the left edge is now a soft
+     mask fade (transparent at the wall -> opaque 5% into the peek box) instead of a
+     hard clip: he dissolves into the wordmark rather than being guillotined. The
+     fade only ADDS opacity to the RIGHT of the wall, so it never reaches the 95.88%
+     hole and can't ghost him through the letters. 5% (not px) so it scales with the
+     --sh shrink. clip-path still trims the other three sides (all open, negative).
+     A `mask` clips paint to the element's box (mask-clip: border-box), so the peek
+     box has to CONTAIN kun's feet or the mask lops them off. The 13deg lean pivots on
+     his bottom-left and swings his right foot ~10px below the wordmark baseline, so
+     the box is grown 40px downward (height = --logoh + 40px). kun no longer sizes off
+     this taller box (that would scale him); he's placed in --sh px instead (see .kun).
+     mask-clip: no-clip would be the tidy fix but Chromium ignores it here. */
+  .top .peek { position: absolute; left: 96.2%; top: 0; height: calc(var(--logoh) + 40px); width: 240%;
+               clip-path: inset(-70% -70% 0 0); pointer-events: none;
+               -webkit-mask: linear-gradient(to right, transparent 0, #000 5%);
+                       mask: linear-gradient(to right, transparent 0, #000 5%); }
+  /* height/bottom in --sh px, not % of .peek: the peek box is grown 40px past the
+     wordmark (for the mask, above), and a % would ride that growth and mis-size/place
+     him. .78 and .04 are the old 78%/4%-of-logo; the +40px cancels the grown box so
+     he lands pixel-identical to before, and still tracks the --sh shrink via --logoh. */
+  .top .kun { position: absolute; left: 0; bottom: calc(40px + var(--logoh) * .04);
+              height: calc(var(--logoh) * .78); aspect-ratio: 1;
               fill: currentColor; color: CanvasText; --kun-paper: var(--bg);
               transform-origin: bottom left;
               transform: translateX(-100%) rotate(0deg);

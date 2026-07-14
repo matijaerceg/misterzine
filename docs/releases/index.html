@@ -368,20 +368,55 @@
   /* MAME setnames read best monospaced (table cells and the panel row) */
   .rom { font-family: ui-monospace, Consolas, monospace; font-size: .95em; }
   td.rom { white-space: nowrap; }
-  /* click-to-copy affordance next to copyable panel values */
-  #panel .copy, .rsspop .copy { font: inherit; font-size: .85em; line-height: 1; margin-left: .35rem; padding: 0 .25rem;
-    border: none; background: none; color: #888; cursor: pointer; }
-  #panel .copy:hover, .rsspop .copy:hover { color: inherit; }
-  #panel .copy.ok, .rsspop .copy.ok { color: #2a2; }
-  /* the share permalink carries a text label so it's findable, but stays a
-     quiet muted glyph+label (not a loud pill) so it doesn't fight the title */
-  #panel .copy.permalink { font-size: .8em; font-weight: normal; }
+  /* --- click-to-copy fields ------------------------------------------------
+     Every copyable surface (the panel's value rows, the title's permalink, the
+     RSS feed rows) is a real <button> wrapping its own content, so the whole
+     field is the hit target and the keyboard/AT behaviour comes from the
+     element. But the reason it's shaped this way is the ⧉. A <button> is an
+     atomic inline to the line breaker, and a break is ALWAYS allowed before
+     one: as a sibling after a long ZapScript path it dropped onto a line of its
+     own. As a plain inline <span> INSIDE the button it's just class-AL text and
+     can't part from the word before it (UAX#14 LB28 AL x AL; LB30 CP x AL
+     covers the Core row's trailing paren).
+     No aria-label anywhere: the content is the accessible name (the setname,
+     the game title) and title is the description. An aria-label would replace
+     them, erasing the game title from the h2's heading.
+     Padding + equal negative margin cushions the hover tint without moving one
+     pixel of text or shifting a single wrap point: a one-sided bleed would
+     leave padding inside the box and wrap the text early. content-box (against
+     the page-wide border-box) is what makes that cancel out for free — the
+     content stays exactly the column's width whatever padding a variant picks.
+     The explicit width is NOT redundant: a <button> shrink-to-fits even at
+     display:block, which left the empty half of a short field unclickable. */
+  .cf { font: inherit; line-height: inherit; color: inherit; text-align: left;
+        background: none; border: 0; border-radius: 4px; cursor: pointer;
+        display: block; user-select: text;
+        box-sizing: content-box; width: 100%;
+        padding: .1rem .3rem; margin: -.1rem -.3rem; }
+  .cf:hover { background: color-mix(in srgb, #888 7%, Canvas); }
+  .cf:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+  .cf .ci { color: #888; font-size: .85em; margin-left: .35rem; user-select: none; }
+  .cf:hover .ci, .cf:focus-visible .ci { color: inherit; }
+  /* the title's field hugs the title rather than banding the whole line: the h2
+     is the only place a full-width tint would run under the sticky × */
+  #panel h2 .cf { display: inline-block; width: auto; max-width: calc(100% + .8rem);
+                  padding: .15rem .4rem; margin: -.15rem -.4rem; }
+  #panel h2 .ci { font-size: .8em; }   /* quiet next to the title, not a loud pill */
   /* flat yellow bolt after the ZapScript field label */
   #panel .zapbolt { width: .8em; height: .8em; fill: #f5c518; vertical-align: -.08em; margin-left: .25rem; }
-  /* the ZapScript token takes a jolt on hover/copy (zapJolt, below). inline-block
-     is load-bearing: transforms do nothing on a plain inline box, so without it
-     the animation runs and paints not one pixel. */
-  #panel .rom.zap { display: inline-block; }
+  /* the ZapScript token takes a jolt on hover/copy (zapJolt, below). position:
+     relative is load-bearing and inline-block is forbidden: transforms do
+     nothing on a plain inline box, but relative offsets DO apply to one — and
+     an inline-block token is a shrink-to-fit atom that takes the whole value
+     column, which is exactly what used to orphan the ⧉ after it. */
+  #panel .rom.zap { position: relative; }
+  /* "Copied" chip: fixed, so it lands beside the ⧉ wherever the line happened
+     to break, and neither the panel body's overflow nor the popover can clip it
+     the way an absolutely positioned bubble inside them would. */
+  .copychip { position: fixed; left: 0; top: 0; z-index: 200;
+    opacity: 0; pointer-events: none;
+    background: var(--accent); color: #fff; font-size: .7rem; font-weight: 600;
+    line-height: 1; padding: .2rem .4rem; border-radius: 4px; white-space: nowrap; }
   /* RSS popover: feed chooser opened from the meta line's "RSS" link; styled
      after the Columns dropdown menu. Fixed positioning is fine — the page
      itself never scrolls (app shell) */
@@ -394,8 +429,12 @@
   .rsspop.hoverpop::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
   .rsspop p { margin: 0 0 .45rem; color: #888; }
   .rsspop p:last-child { margin-bottom: 0; }
-  .rsspop .feedrow { display: flex; gap: .5rem; align-items: baseline; margin: .3rem 0; }
+  /* each feed row IS its own copy field (a .cf button), so the ⧉ is just the
+     last flex item and the wrap problem never arises here */
+  .rsspop .feedrow { display: flex; gap: .5rem; align-items: baseline;
+                     margin: 0 -.35rem; padding: .15rem .35rem; }
   .rsspop .feedrow b { font-weight: 600; white-space: nowrap; }
+  .rsspop .feedrow .ci { flex: none; margin-left: 0; }   /* the gap already spaces it */
   .rsspop code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     direction: rtl; flex: 1; color: #888; }  /* rtl ellipsis keeps the distinctive tail (…feed-new.xml) visible */
   @media (max-width: 480px) { .rsspop { left: 1rem !important; right: 1rem; } }
@@ -1468,9 +1507,15 @@ new ResizeObserver(() => {
   }, 150);
 }).observe(panel);
 
-// click-to-copy affordance for panel values (delegated handler on #panel)
-const copyBtn = (v, label, icon, ok, cls) => '<button class="copy' + (cls ? ' ' + cls : '') + '" data-copy="' + escA(v) +
-  '"' + (ok ? ' data-ok="' + escA(ok) + '"' : '') + ' title="' + escA(label || 'Copy') + '">' + (icon || '⧉') + '</button>';
+// One click-to-copy affordance for every copyable surface: the whole field is
+// the button (see .cf in the CSS for why the ⧉ has to live inside it, not after
+// it). `inner` is the field's own display HTML, which may deliberately differ
+// from `v`, the value that lands on the clipboard: the Core row shows the pretty
+// name and copies the raw rbf. `label` becomes the button's DESCRIPTION; its
+// name is the content, which is what you want spoken.
+const CI = '<span class="ci" aria-hidden="true">⧉</span>';
+const cfield = (v, inner, label, cls) => '<button class="cf' + (cls ? ' ' + cls : '') +
+  '" data-copy="' + escA(v) + '" title="' + escA(label) + '">' + inner + CI + '</button>';
 // flat yellow lightning bolt (inline SVG, no icon-font dep) for the ZapScript field label
 const ZAP_ICON = '<svg class="zapbolt" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>';
 
@@ -1552,7 +1597,7 @@ function fireLaunch(dev, script, btn) {
     w.location.replace('http://' + dev.h + '/api/l/' + b64url(script));
     setTimeout(() => { try { w.close(); } catch (e) {} }, 4000);
   }
-  if (btn) {  // same flash-confirm rhythm as the copy buttons
+  if (btn) {  // its own swap, not the copy fields' chip: this one names the device
     if (!btn.dataset.orig) btn.dataset.orig = btn.textContent;
     btn.classList.add('sent'); btn.textContent = 'Sent to ' + dev.n + ' ✓';
     setTimeout(() => { btn.classList.remove('sent'); btn.textContent = btn.dataset.orig; }, 1600);
@@ -1576,9 +1621,9 @@ function detailHTML(d) {
   const rows = [['Type', typeLabel(d)]];
   if (d.genre) rows.push(['Genre', d.genre]);
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
-  if (d.core) rows.push(['Core', esc(coreLabel(d.core)) +
-    (coreLabel(d.core) !== d.core ? ' (' + esc(d.core) + ')' : '') + copyBtn(d.core), true]);
-  if (d.sn) rows.push(['ROM name', '<span class="rom">' + esc(d.sn) + '</span>' + copyBtn(d.sn), true]);
+  if (d.core) rows.push(['Core', cfield(d.core, esc(coreLabel(d.core)) +
+    (coreLabel(d.core) !== d.core ? ' (' + esc(d.core) + ')' : ''), 'Copy core name'), true]);
+  if (d.sn) rows.push(['ROM name', cfield(d.sn, '<span class="rom">' + esc(d.sn) + '</span>', 'Copy ROM name'), true]);
   if (d.year) rows.push(['Original year', d.year]);
   // arcade hardware metadata (MiSTer Arcade Database) — always shown here,
   // even when the matching table columns are toggled off. Provisional values
@@ -1615,10 +1660,11 @@ function detailHTML(d) {
   // Zaparoo ZapScript token for this row (copy to persist on an NFC tag /
   // playlist, then tap to launch) — same coverage as the Launch button: arcade
   // → bare .mra path, others → **launch.system:<id>. Rendered like Core/ROM
-  // name: a monospace value with the shared ⧉ copy affordance.
+  // name: a monospace value in the shared click-to-copy field.
   const zap = zapScript(d);
-  if (zap) rows.push(['ZapScript' + ZAP_ICON, '<span class="rom zap">' + esc(zap) + '</span>' +
-    copyBtn(zap, 'Copy Zaparoo ZapScript (for NFC tags)'), true, true]);
+  if (zap) rows.push(['ZapScript' + ZAP_ICON,
+    cfield(zap, '<span class="rom zap">' + esc(zap) + '</span>',
+      'Copy Zaparoo ZapScript (for NFC tags)'), true, true]);
 
   // a row's third element marks the value as pre-built HTML (links); the fourth
   // does the same for the label (used by the ZapScript row's inline bolt icon)
@@ -1689,10 +1735,12 @@ function detailHTML(d) {
     ? '<div class="launchrow" data-script="' + escA(script) + '">' + launchRowHTML() + '</div>'
     : '';
 
+  // the title doubles as the permalink's copy field (it has no text of its own
+  // to sit beside), so a keyless row falls back to the bare title
+  const titleHTML = '<span class="gametitle">' + esc(d.title) + '</span>' +
+    (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '');
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
-    '<h2><span class="gametitle">' + esc(d.title) + '</span>' +
-    (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '') +
-    (d.k ? copyBtn(rowURL(d), 'Copy link to this entry', '⧉', '✓', 'permalink') : '') + '</h2>' +
+    '<h2>' + (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') : titleHTML) + '</h2>' +
     launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
@@ -1719,6 +1767,7 @@ function openPanel(d, fromHistory) {
 }
 
 function closePanel() {
+  hideChip();  // a viewport-pinned chip would outlive the field it points at
   if (metapopFor === 'mister') closePop();  // don't leave the device popover floating
   document.body.classList.remove('panel-open');
   // openRow is deliberately kept: the row stays highlighted after the panel
@@ -1790,10 +1839,17 @@ document.getElementById('rows').addEventListener('click', e => {
 // CSS @keyframes) so no two jolts share a shape — a fixed @keyframes replays the
 // identical twitch every time and stops reading as noise. steps(1, end) is the
 // other half: it holds each frame and snaps to the next, so the token stutters
-// between positions instead of gliding between them. Transform-only, so the
-// panel's grid never reflows around it.
+// between positions instead of gliding between them. Relative offsets only, so
+// the panel's grid never reflows around it.
 //
-// Translation ONLY, and short hops (12 of them in 240ms, ~50/sec). Rotation is
+// It has to be left/top on a position:relative token, NOT transform: the token
+// is a plain inline box, where transforms paint not one pixel. The obvious fix
+// for that — inline-block — is what used to orphan the copy affordance onto a
+// line of its own, because a shrink-to-fit box claims the whole value column and
+// leaves nothing after it anywhere to sit. Relative positioning, unlike
+// transform, does apply to an inline box.
+//
+// Displacement ONLY, and short hops (12 of them in 240ms, ~50/sec). Rotation is
 // what separates a buzz from a wobble: rock the token even a degree and it reads
 // as something soft flapping, not something rigid with current through it. Same
 // reason the amplitude is equal on both axes and barely 2px — a stiff vibration
@@ -1807,35 +1863,85 @@ document.getElementById('rows').addEventListener('click', e => {
 function zapJolt(el) {
   if (!el) return;
   el.getAnimations().forEach(a => a.cancel());  // hover-then-click restarts, never stacks
-  const j = () => ((Math.random() * 2 - 1) * 1.9).toFixed(2);
-  const frames = [{ transform: 'none' }];
-  for (let i = 0; i < 11; i++)
-    frames.push({ transform: 'translate(' + j() + 'px,' + j() + 'px)' });
-  frames.push({ transform: 'none' });
+  const j = () => ((Math.random() * 2 - 1) * 1.9).toFixed(2) + 'px';
+  const frames = [{ left: '0px', top: '0px' }];
+  for (let i = 0; i < 11; i++) frames.push({ left: j(), top: j() });
+  frames.push({ left: '0px', top: '0px' });
   frames.forEach(f => f.easing = 'steps(1, end)');  // per-hop: hold, then snap
   el.animate(frames, { duration: 240 });
 }
+// The token jolts, not the whole field: the jolt is a property of the token, not
+// of the control around it. Crossing the field tints it (this is clickable);
+// crossing the token buzzes it (this is alive). Field-wide, it would fire with
+// the pointer 200px away from the token and read as noise. A copy still jolts
+// from anywhere in the field — copying IS a whole-field act.
+//
 // mouseover, not mouseenter: the panel is re-rendered per row, so the handler has
 // to be delegated, and mouseenter doesn't bubble. The relatedTarget guard keeps a
-// re-entry from a child re-firing it (the token has none today, but a future span
-// inside it would otherwise make the jolt stutter as you move across the text).
+// re-entry from a child re-firing it — the ⧉ sitting next to the token makes that
+// crossing real, not hypothetical.
 panel.addEventListener('mouseover', e => {
   const z = e.target.closest('.rom.zap');
   if (z && !z.contains(e.relatedTarget)) zapJolt(z);
 });
-// copy the value, flash confirmation, restore the button's own icon (⧉ or 🔗)
-function flashCopy(cp) {
-  if (!cp.dataset.orig) cp.dataset.orig = cp.textContent;
-  navigator.clipboard.writeText(cp.dataset.copy).then(() => {
-    cp.classList.add('ok'); cp.textContent = cp.dataset.ok || '✓';
-    setTimeout(() => { cp.classList.remove('ok'); cp.textContent = cp.dataset.orig; }, 1000);
-  });
+// One "Copied" chip serves every copy field (the panel's value rows, the h2
+// permalink, the RSS feed rows): it's position:fixed off the ⧉'s own rect, so it
+// lands beside the icon wherever the line happened to break, and neither the
+// panel body's overflow nor the popover can clip it the way an absolutely
+// positioned bubble inside them would. It lives in <body> from the start and is
+// emptied rather than removed: a role=status inserted and filled in the same tick
+// isn't announced, and reusing the one node means a repeat click restarts it
+// instead of stacking a second bubble on the first.
+const chip = document.createElement('div');
+chip.className = 'copychip';
+chip.setAttribute('role', 'status');
+document.body.appendChild(chip);
+let chipT;
+function showChip(anchor, text) {
+  chip.textContent = text;
+  const r = anchor.getBoundingClientRect();
+  const w = chip.offsetWidth;   // laid out even at opacity 0
+  const right = r.right + 6;    // flip to the icon's left rather than run off the edge
+  chip.style.left = (right + w > innerWidth - 8 ? Math.max(8, r.left - 6 - w) : right) + 'px';
+  chip.style.top = (r.top + r.height / 2) + 'px';
+  chip.getAnimations().forEach(a => a.cancel());
+  clearTimeout(chipT);
+  chip.animate([
+    { opacity: 0, transform: 'translateY(-50%) scale(.9)' },
+    { opacity: 1, transform: 'translateY(-50%) scale(1)', offset: .15 },
+    { opacity: 1, transform: 'translateY(-50%) scale(1)', offset: .65 },
+    { opacity: 0, transform: 'translateY(-50%) scale(1)' },
+  ], { duration: 1000, easing: 'ease-out' });
+  chipT = setTimeout(() => { chip.textContent = ''; }, 1000);
 }
+// it's pinned to viewport coords, so anything that moves the anchor out from
+// under it (scrolling the panel body, closing the panel or the popover) retires it
+function hideChip() {
+  if (!chip.textContent) return;
+  chip.getAnimations().forEach(a => a.cancel());
+  clearTimeout(chipT);
+  chip.textContent = '';
+}
+addEventListener('scroll', hideChip, { capture: true, passive: true });
+function doCopy(f) {
+  // a drag-select that ends inside the field arrives here as a click; copying
+  // then would swap the clipboard out from under the selection just made. A
+  // plain click collapses the selection before this fires, so it always passes.
+  const sel = getSelection();
+  if (sel && !sel.isCollapsed && f.contains(sel.focusNode)) return;
+  const ci = f.querySelector('.ci');
+  navigator.clipboard.writeText(f.dataset.copy).then(
+    () => showChip(ci, 'Copied'),
+    () => showChip(ci, 'Copy failed'));  // insecure context / permission denied
+}
+// one handler for every .cf on the page, panel and popover alike. The ZapScript
+// field re-jolts its token (the query finds nothing for the other fields, and
+// zapJolt no-ops)
+document.addEventListener('click', e => {
+  const f = e.target.closest('.cf');
+  if (f) { doCopy(f); zapJolt(f.querySelector('.rom.zap')); }
+});
 panel.addEventListener('click', e => {
-  const cp = e.target.closest('.copy');
-  // keep the panel open; the ZapScript row's button re-jolts its token (the
-  // query finds nothing for every other copy button, and zapJolt no-ops)
-  if (cp) { flashCopy(cp); zapJolt(cp.parentElement.querySelector('.rom.zap')); return; }
   const lr = e.target.closest('.launchrow');
   if (lr) {
     // chevron opens the device manager popover; each Launch button fires
@@ -2102,15 +2208,15 @@ const META_POP = {
     'find these if you paste the page URL itself).</p>' +
     FEED_LIST.map(([name, f]) => {
       const url = new URL(f, location.href).href;
-      return '<div class="feedrow"><b>' + esc(name) + '</b><code>' + esc(url) + '</code>' +
-        copyBtn(url) + '</div>';
+      return cfield(url, '<b>' + esc(name) + '</b><code>' + esc(url) + '</code>',
+        'Copy ' + name + ' feed URL', 'feedrow');
     }).join(''),
 };
 const META_SEL = '#discord-link, #rss-link, #pub-note';
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
 let hoverPop = null, hoverPopFor = null;
 function closeHoverPop() {
-  if (hoverPop) { hoverPop.remove(); hoverPop = null; hoverPopFor = null; return true; }
+  if (hoverPop) { hideChip(); hoverPop.remove(); hoverPop = null; hoverPopFor = null; return true; }
   return false;
 }
 // close the instant the pointer/focus leaves BOTH the trigger and the popover;
@@ -2145,8 +2251,6 @@ if (CAN_HOVER) {
 let metapop = null, metapopFor = null;
 function closePop() { if (metapop) { metapop.remove(); metapop = null; return true; } return false; }
 document.addEventListener('click', e => {
-  const cp = e.target.closest('.rsspop .copy');
-  if (cp) { flashCopy(cp); return; }  // keep the popover open
   const trig = e.target.closest('#rss-link, #pub-note');
   if (trig) {
     e.preventDefault();  // these only reveal a popover; the link itself does nothing

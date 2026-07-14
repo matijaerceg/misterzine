@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-13
+- The colour theme toggle is now just Light and Dark (the Auto option is gone), and new visitors start in dark mode. If you already picked a theme, that choice is kept.
 - The Core Type column now shows an icon instead of a word: a joystick for arcade, a gamepad for console, a monitor for computer and a box for anything else. The colour coding is unchanged, hovering a row's icon still names its type, and searching for "arcade", "console" or "computer" works as before.
 - The detail panel now shows a ZapScript field for cores and arcade games, with a copy button: it copies the Zaparoo ZapScript token for that title so you can write it to an NFC tag or add it to a playlist and launch the game by tapping.
 - Fixed screenshots for two arcade games: Adventure Canoe, which previously had none, now shows gameplay shots, and Tecmo World Cup '98's corrupt title screen was removed (its gameplay shots remain).

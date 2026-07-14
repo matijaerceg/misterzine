@@ -23,7 +23,7 @@
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: New cores &amp; games" href="feed-new.xml">
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: Updates only" href="feed-updates.xml">
 <script>/* apply saved theme before first paint to avoid a flash */
-  try { var t = localStorage.getItem('mz-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -71,7 +71,7 @@
      dot's left, so the divider stays evenly spaced without doubling up */
   h1 .site::before { content: "\00B7"; margin: 0 .4em 0 0; font-weight: 400; }
   .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
-  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; margin-left: .8rem; }
   .updated a:hover { color: var(--accent); }
   /* dotted underline (+ ⓘ) marks the meta-line popover triggers ("Public
      cores only", "RSS") — they open an in-page popover, unlike the solid
@@ -277,7 +277,7 @@
            overflow-wrap: break-word; }
   th { position: sticky; top: 0; z-index: 10; background: Canvas; cursor: pointer; user-select: none;
        overflow-wrap: normal;  /* headers wrap at spaces, never mid-word */
-       border-top: 1px solid #8886; }  /* a divider so the header row reads apart from the filters above */
+       border-top: 1px solid #8883; }  /* a divider so the header row reads apart from the filters above */
   /* the sorted column's header is marked by the accent color on its label +
      arrow alone (no background fill) */
   th[aria-sort] { color: var(--accent); }
@@ -517,11 +517,10 @@
 <div class="topbar">
 <header>
   <div class="theme" id="theme" role="group" aria-label="Color theme">
-    <button type="button" data-set="auto">Auto</button>
     <button type="button" data-set="light">Light</button>
     <button type="button" data-set="dark">Dark</button>
   </div>
-  <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)">MiSTer FPGA Core &amp; Arcade Tracker <span class="site">MiSTerZine.fyi/releases</span></a></h1>
+  <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)">MiSTer FPGA Core &amp; Arcade Tracker <span class="site">misterzine.fyi/releases</span></a></h1>
   <p class="updated" id="updated"></p>
 </header>
 <div class="controls">
@@ -1948,18 +1947,18 @@ function endResize(e) {
 resizer.addEventListener('pointerup', endResize);
 resizer.addEventListener('pointercancel', endResize);
 
-// --- theme toggle (auto / light / dark; persisted) ---
+// --- theme toggle (light / dark; persisted, defaults to dark) ---
 const themeBtns = [...document.querySelectorAll('#theme button')];
 function applyTheme(t) {
-  if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
-  else { document.documentElement.removeAttribute('data-theme'); t = 'auto'; }
+  if (t !== 'light' && t !== 'dark') t = 'dark';
+  document.documentElement.setAttribute('data-theme', t);
   themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.set === t));
 }
 themeBtns.forEach(b => b.addEventListener('click', () => {
   localStorage.setItem('mz-theme', b.dataset.set);
   applyTheme(b.dataset.set);
 }));
-applyTheme(localStorage.getItem('mz-theme') || 'auto');
+applyTheme(localStorage.getItem('mz-theme') || 'dark');
 
 // wide screens: dock the panel with the empty state by default (no slide-in on first paint)
 if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
@@ -2006,12 +2005,12 @@ fetch('./meta.json').then(r => r.json()).then(m => {
   }) : m.updated;
   const label = () => valid ? relUpdated(dt) : m.updated;
   el.innerHTML = 'Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span>' +
-    ' · <a href="../" class="zinelink">Daily Zine<span class="ext">↗</span></a>' +
-    ' · <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
-    ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
-    ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
-    ' · <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link">Discord<span class="ext">↗</span></a>' +
-    ' · <a href="#" class="note" id="pub-note">Public cores only, no alternatives<span class="ext">ⓘ</span></a>';
+    ' <a href="#" class="note" id="pub-note">Public cores only, no alternatives<span class="ext">ⓘ</span></a>' +
+    ' <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
+    ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
+    ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
+    ' <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link">Discord<span class="ext">↗</span></a>' +
+    ' <a href="../" class="zinelink">Zine Home</a>';
   // keep a left-open tab honest: refresh the relative label on a slow tick and
   // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
   if (valid) {

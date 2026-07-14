@@ -364,6 +364,10 @@
   .rsspop { position: fixed; z-index: 40; background: Canvas; border: 1px solid #8884;
     border-radius: 6px; padding: .6rem .8rem; box-shadow: 0 4px 16px #0004;
     font-size: .8rem; max-width: min(30rem, calc(100vw - 2rem)); }
+  /* hover popovers (Discord/RSS/Public-cores) sit a few px below their link;
+     this invisible strip bridges that gap so travelling link->popover never
+     leaves the hover region, letting the popover close instantly otherwise */
+  .rsspop.hoverpop::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
   .rsspop p { margin: 0 0 .45rem; color: #888; }
   .rsspop p:last-child { margin-bottom: 0; }
   .rsspop .feedrow { display: flex; gap: .5rem; align-items: baseline; margin: .3rem 0; }
@@ -1959,34 +1963,39 @@ const META_POP = {
 };
 const META_SEL = '#discord-link, #rss-link, #pub-note';
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
-let hoverPop = null, hoverPopFor = null, hoverTimer = null;
+let hoverPop = null, hoverPopFor = null;
 function closeHoverPop() {
-  clearTimeout(hoverTimer);
   if (hoverPop) { hoverPop.remove(); hoverPop = null; hoverPopFor = null; return true; }
   return false;
 }
-function scheduleHoverClose() { clearTimeout(hoverTimer); hoverTimer = setTimeout(closeHoverPop, 200); }
+// close the instant the pointer/focus leaves BOTH the trigger and the popover;
+// the .hoverpop::before bridge spans the gap so a link->popover move keeps the
+// pointer within the popover and doesn't trip this
+function closeIfOut(e) {
+  if (!hoverPop) return;
+  const trig = hoverPopFor && document.getElementById(hoverPopFor);
+  if (hoverPop.contains(e.relatedTarget) || (trig && trig.contains(e.relatedTarget))) return;
+  closeHoverPop();
+}
 function openHoverPop(a) {
-  clearTimeout(hoverTimer);
   if (hoverPopFor === a.id) return;  // already showing this one
   closeHoverPop();
   hoverPopFor = a.id;
   hoverPop = document.createElement('div');
-  hoverPop.className = 'rsspop';
+  hoverPop.className = 'rsspop hoverpop';
   hoverPop.innerHTML = META_POP[a.id]();
-  hoverPop.addEventListener('mouseenter', () => clearTimeout(hoverTimer));  // keep open over the popover
-  hoverPop.addEventListener('mouseleave', scheduleHoverClose);
   document.body.appendChild(hoverPop);
   const r = a.getBoundingClientRect();
-  hoverPop.style.left = Math.max(8, Math.min(r.left, innerWidth - 500)) + 'px';
+  const w = hoverPop.offsetWidth;  // measure after insert so we can keep the bridge under the link
+  hoverPop.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
   hoverPop.style.top = (r.bottom + 6) + 'px';
 }
 // keyboard focus opens on any device; pointer hover only where hover exists
 document.addEventListener('focusin', e => { const a = e.target.closest(META_SEL); if (a) openHoverPop(a); });
-document.addEventListener('focusout', e => { const a = e.target.closest(META_SEL); if (a) scheduleHoverClose(); });
+document.addEventListener('focusout', e => { if (hoverPop && (e.target.closest(META_SEL) || hoverPop.contains(e.target))) closeIfOut(e); });
 if (CAN_HOVER) {
   document.addEventListener('mouseover', e => { const a = e.target.closest(META_SEL); if (a) openHoverPop(a); });
-  document.addEventListener('mouseout', e => { const a = e.target.closest(META_SEL); if (a && !a.contains(e.relatedTarget)) scheduleHoverClose(); });
+  document.addEventListener('mouseout', e => { if (hoverPop && (e.target.closest(META_SEL) || hoverPop.contains(e.target))) closeIfOut(e); });
 }
 let metapop = null, metapopFor = null;
 function closePop() { if (metapop) { metapop.remove(); metapop = null; return true; } return false; }

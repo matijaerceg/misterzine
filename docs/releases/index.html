@@ -368,6 +368,8 @@
   /* the share permalink carries a text label so it's findable, but stays a
      quiet muted glyph+label (not a loud pill) so it doesn't fight the title */
   #panel .copy.permalink { font-size: .8em; font-weight: normal; }
+  /* flat yellow bolt after the ZapScript field label */
+  #panel .zapbolt { width: .8em; height: .8em; fill: #f5c518; vertical-align: -.08em; margin-left: .25rem; }
   /* RSS popover: feed chooser opened from the meta line's "RSS" link; styled
      after the Columns dropdown menu. Fixed positioning is fine — the page
      itself never scrolls (app shell) */
@@ -1459,6 +1461,8 @@ new ResizeObserver(() => {
 // click-to-copy affordance for panel values (delegated handler on #panel)
 const copyBtn = (v, label, icon, ok, cls) => '<button class="copy' + (cls ? ' ' + cls : '') + '" data-copy="' + escA(v) +
   '"' + (ok ? ' data-ok="' + escA(ok) + '"' : '') + ' title="' + escA(label || 'Copy') + '">' + (icon || '⧉') + '</button>';
+// flat yellow lightning bolt (inline SVG, no icon-font dep) for the ZapScript field label
+const ZAP_ICON = '<svg class="zapbolt" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>';
 
 // --- Launch on MiSTer -------------------------------------------------------
 // Talks to wizzo's mrext Remote service on the visitor's MiSTer (Scripts/
@@ -1502,6 +1506,13 @@ const MISTER_SYS = Object.fromEntries([
 const launchScript = d => d.base === 'Arcade'
   ? (d.mra ? '/media/fat/' + d.mra : null)
   : (MISTER_SYS[d.core] ? '**system:' + MISTER_SYS[d.core] : null);
+// same row → its Zaparoo ZapScript token (to persist on an NFC tag / playlist,
+// not launch live): arcade → the bare SD-relative .mra (Zaparoo auto-launch, no
+// /media/fat/ prefix); others → **launch.system:<id> (ZapScript's dialect, vs
+// mrext's **system: above). Same coverage gate; mrext ids double as Zaparoo ids.
+const zapScript = d => d.base === 'Arcade'
+  ? (d.mra || null)
+  : (MISTER_SYS[d.core] ? '**launch.system:' + MISTER_SYS[d.core] : null);
 
 let misters = [];
 try { misters = JSON.parse(localStorage.getItem('mz-misters') || '[]') || []; } catch (e) {}
@@ -1591,9 +1602,18 @@ function detailHTML(d) {
     esc(d.repo.split('/').slice(0, 2).join('/')) + '<span class="ext">↗</span></a>', true]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
   if (d.note) rows.push(['Note', d.note]);
+  // Zaparoo ZapScript token for this row (copy to persist on an NFC tag /
+  // playlist, then tap to launch) — same coverage as the Launch button: arcade
+  // → bare .mra path, others → **launch.system:<id>. Rendered like Core/ROM
+  // name: a monospace value with the shared ⧉ copy affordance.
+  const zap = zapScript(d);
+  if (zap) rows.push(['ZapScript' + ZAP_ICON, '<span class="rom">' + esc(zap) + '</span>' +
+    copyBtn(zap, 'Copy Zaparoo ZapScript (for NFC tags)'), true, true]);
 
-  // a row's third element marks the value as pre-built HTML (links); default is plain text
-  const dl = '<dl>' + rows.map(([k, v, html]) => '<dt>' + esc(k) + '</dt><dd>' + (html ? v : esc(v)) + '</dd>').join('') + '</dl>';
+  // a row's third element marks the value as pre-built HTML (links); the fourth
+  // does the same for the label (used by the ZapScript row's inline bolt icon)
+  const dl = '<dl>' + rows.map(([k, v, html, khtml]) =>
+    '<dt>' + (khtml ? k : esc(k)) + '</dt><dd>' + (html ? v : esc(v)) + '</dd>').join('') + '</dl>';
   const prose = d.detail ? '<p class="detail">' + esc(d.detail) + '</p>' : '';
   // prefilled GitHub issue: the report arrives already saying which row it's
   // about (title/core/setname), so nobody has to describe "that one arcade game"

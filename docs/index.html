@@ -36,14 +36,18 @@
           --wavefill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5 L45 -6 L-15 -6 Z' fill='black'/%3E%3C/svg%3E");
           /* width of a full-width squiggle: ~11% past the 50rem content column so
              it runs beyond the edge, clamped to the viewport (never a scrollbar) */
-          --sqw: min(55.5rem, calc(100vw - 2rem)); }
-  :root[data-theme="light"] { color-scheme: light; }
-  :root[data-theme="dark"]  { color-scheme: dark; }
+          --sqw: min(55.5rem, calc(100vw - 2rem));
+          /* page background: pure grayscale (no chroma) in either theme, rather than
+             the system Canvas color which can carry a faint tint in dark mode */
+          --bg: #fcfcfc; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #131313; } }
+  :root[data-theme="light"] { color-scheme: light; --bg: #fcfcfc; }
+  :root[data-theme="dark"]  { color-scheme: dark;  --bg: #131313; }
   * { box-sizing: border-box; }
-  body { font: 16px/1.6 Roboto, system-ui, sans-serif; margin: 0; background: Canvas; color: CanvasText; }
-  a { color: #06c; text-decoration: underline; text-underline-offset: 2px; }
-  a:hover { color: color-mix(in srgb, #06c 70%, CanvasText); }
-  :focus-visible { outline: 2px solid #06c; outline-offset: 2px; }
+  body { font: 16px/1.6 Roboto, system-ui, sans-serif; margin: 0; background: var(--bg); color: CanvasText; }
+  a { color: #06f; text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: color-mix(in srgb, #06f 70%, CanvasText); }
+  :focus-visible { outline: 2px solid #06f; outline-offset: 2px; }
   /* the column is 37.5rem; tate articles may grow to the full 50rem wrap.
      padding-top reserves the FULL header height (JS refines it) so the fixed
      header never overlaps content and its resize can't shift the page */
@@ -64,7 +68,7 @@
      viewport). On its own pseudo so it doesn't clip the visible line below. */
   .top::before { content: ''; position: absolute; top: 0; bottom: 0;
                  left: calc(50% - var(--sqw) / 2); width: var(--sqw);
-                 z-index: -1; background: Canvas;
+                 z-index: -1; background: var(--bg);
                  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
                                var(--wavefill) left bottom / 30px 11px repeat-x;
                          mask: linear-gradient(#000 0 0) top / 100% calc(100% - 9px) no-repeat,
@@ -76,9 +80,9 @@
   /* logo height interpolates 84px -> 44px straight from --sh; no CSS transition,
      which would lag behind the scroll instead of tracking it */
   .top .logo { height: calc(84px - 40px * var(--sh)); width: auto; aspect-ratio: 532.4 / 354.2;
-               display: block; color: #06c; }
+               display: block; color: CanvasText; }
   .top .home { display: block; width: fit-content; flex: 0 0 auto; }
-  .top .home:hover .logo { color: color-mix(in srgb, #06c 70%, CanvasText); }
+  .top .home:hover .logo { color: color-mix(in srgb, CanvasText 65%, Canvas); }
   /* right side: index link + theme toggle in a row, toggle in the far corner */
   .top nav { display: flex; align-items: center; gap: .6rem; }
   /* theme toggle: the same text-based Auto|Light|Dark control as the release index,
@@ -92,9 +96,9 @@
   /* index link (marker-set label + live count). inline-flex so the count can take a
      max-width and still baseline-align with the label */
   .top .idx { display: inline-flex; align-items: baseline;
-              color: #06c; font-weight: 600; text-decoration: none; white-space: nowrap;
+              color: #06f; font-weight: 600; text-decoration: none; white-space: nowrap;
               font-size: calc(.9rem - .12rem * var(--sh));
-              border: 1px solid color-mix(in srgb, #06c 55%, Canvas); border-radius: 999px;
+              border: 1px solid color-mix(in srgb, #06f 55%, var(--bg)); border-radius: 999px;
               padding: .4rem .9rem; }
   .top .idx .pm { font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
   /* the ": N cores & games" tail collapses to nothing on scroll, leaving just the
@@ -103,7 +107,7 @@
   .top .idx .cnt { font-size: .85em; font-weight: 500; overflow: hidden; white-space: nowrap;
                    max-width: calc(var(--cnt-w, 20rem) * (1 - min(1, var(--sh) * 1.6)));
                    opacity: calc(1 - min(1, var(--sh) * 2)); }
-  .top .idx:hover { background: color-mix(in srgb, #06c 12%, Canvas); }
+  .top .idx:hover { background: color-mix(in srgb, #06f 12%, var(--bg)); }
   /* MOBILE (below ~34rem): logo top-left; theme toggle pinned to the top-right
      corner and SHRINKING TO NOTHING on scroll; index link stacked below at rest
      and GLIDING up beside the shrunken logo as you scroll. Toggle + index are
@@ -147,11 +151,11 @@
   hr.sq.wide { max-width: none; width: var(--sqw); margin-inline: calc(50% - var(--sqw) / 2) auto; }
   /* post title: game name (marker font) + the reason it's here, a smidge above body text */
   article h2 { font-family: 'Permanent Marker', cursive; font-weight: 400;
-               font-size: 1.25rem; line-height: 1.3; margin: 0 0 .5rem; letter-spacing: .01em; }
-  article h2 a { color: inherit; text-decoration: none; }
-  article h2 a:hover { color: #06c; }
+               font-size: 1.45rem; line-height: 1.3; margin: 0 0 .5rem; letter-spacing: .01em; }
+  article h2 a { color: #06f; text-decoration: none; }
+  article h2 a:hover { color: color-mix(in srgb, #06f 70%, CanvasText); }
   article h2 .why { font-family: Roboto, system-ui, sans-serif; font-weight: 400; font-size: .8rem;
-                    letter-spacing: 0; color: color-mix(in srgb, CanvasText 55%, Canvas); }
+                    letter-spacing: 0; color: color-mix(in srgb, CanvasText 55%, var(--bg)); }
   .shot { position: relative; border: 1px solid #8884; border-radius: 6px;
           overflow: hidden; background: #140c1c; margin: 0 0 .8rem; }
   .shot.h { aspect-ratio: 4 / 3; }
@@ -174,9 +178,9 @@
   }
   article p { margin: 0 0 .6rem; line-height: 1.5; }
   /* one quiet line per post: date/permalink + provenance */
-  .meta { font-size: .68rem; color: color-mix(in srgb, CanvasText 32%, Canvas); margin: 0; }
+  .meta { font-size: .68rem; color: color-mix(in srgb, CanvasText 32%, var(--bg)); margin: 0; }
   .meta a { color: inherit; text-decoration: none; }
-  .meta a:hover { color: #06c; text-decoration: underline; }
+  .meta a:hover { color: #06f; text-decoration: underline; }
 
   .colophon { color: #888; font-size: .8rem; padding-top: 1.25rem; }
   .colophon a { color: inherit; }

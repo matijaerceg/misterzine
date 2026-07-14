@@ -51,7 +51,7 @@
   /* the column is 37.5rem; tate articles may grow to the full 50rem wrap.
      padding-top reserves the FULL header height (JS refines it) so the fixed
      header never overlaps content and its resize can't shift the page */
-  .wrap { max-width: 52.5rem; margin: 0 auto; padding: 112px 1.25rem 3rem; }
+  .wrap { max-width: 52.5rem; margin: 0 auto; padding: 99px 1.25rem 3rem; }
   article, .colophon { max-width: 37.5rem; margin-inline: auto; }
 
   /* top line: logo + nav. FIXED (out of flow) so its scroll-linked shrink never
@@ -77,9 +77,9 @@
   .top::after { content: ''; position: absolute; bottom: 0; height: 11px;
                 left: calc(50% - var(--sqw) / 2); width: var(--sqw);
                 background: #888; -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
-  /* logo height interpolates 84px -> 44px straight from --sh; no CSS transition,
+  /* logo height interpolates 71px -> 37px straight from --sh; no CSS transition,
      which would lag behind the scroll instead of tracking it */
-  .top .logo { height: calc(84px - 40px * var(--sh)); width: auto; aspect-ratio: 532.4 / 354.2;
+  .top .logo { height: calc(71px - 34px * var(--sh)); width: auto; aspect-ratio: 532.4 / 354.2;
                display: block; color: CanvasText; }
   .top .home { display: block; width: fit-content; flex: 0 0 auto; }
   .top .home:hover .logo { color: color-mix(in srgb, CanvasText 65%, Canvas); }

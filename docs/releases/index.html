@@ -41,9 +41,9 @@
      theme so links and every UI accent (borders, interactive text, tints) read
      as ONE blue while staying legible on both light and dark. Explicit per-theme
      values (not light-dark()) so the token nests safely inside color-mix(). */
-  :root { --accent: #0066cc; }                       /* light, and auto when OS is light */
-  :root[data-theme="dark"] { --accent: #3399ff; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme]) { --accent: #3399ff; } }
+  :root { --accent: #0066ff; }                       /* light, and auto when OS is light */
+  :root[data-theme="dark"] { --accent: #0066ff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme]) { --accent: #0066ff; } }
   * { box-sizing: border-box; }
   /* app shell: the page itself never scrolls — .tablewrap is the only scroll
      container. This keeps the fixed detail panel and every native scroll

@@ -763,6 +763,7 @@ const COLUMNS = [
   { k: 'manufacturer', label: 'Manufacturer', w: 19, mw: 8.5, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
   { k: 'core', label: 'Core', w: 24, mw: 10,
     cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
+  { k: 'reg',  label: 'Region',     w: 8,  mw: 5, opt: true },
   { k: 'rot',  label: 'Rotation',   w: 10, mw: 5, opt: true },
   { k: 'res',  label: 'Resolution', w: 10, mw: 5, opt: true },
   { k: 'plr',  label: 'Players',    w: 13, mw: 5, opt: true },
@@ -783,6 +784,7 @@ const HEADER_TIPS = {
   year: 'Year the original game or hardware was released',
   manufacturer: 'Original manufacturer',
   core: 'The FPGA core that runs this title, linked to its GitHub repository',
+  reg: 'Region of the listed ROM set, e.g. World, Japan, USA (MiSTer Arcade Database)',
   rot: 'Monitor orientation of the original cabinet (MiSTer Arcade Database)',
   res: 'Video signal type (MiSTer Arcade Database)',
   plr: 'Number of players (MiSTer Arcade Database)',
@@ -1019,7 +1021,7 @@ function apply() {
     const hay = fold(d.title + ' ' + (d.mt || '') + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
             (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
-            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.sn || '') + ' ' +
+            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
             (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
             (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
@@ -1545,6 +1547,7 @@ function detailHTML(d) {
     else
       rows.push([label, d[key]]);
   };
+  specRow('Region', 'reg');
   specRow('Rotation', 'rot');
   // multi-monitor cabinets only (pipeline `scr` field); single screen is implied
   if (d.scr) rows.push(['Screens', d.scr === 3 ? 'Triple screen (3)' : 'Dual screen (2)']);
@@ -1965,7 +1968,7 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
     ' · <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
     ' · <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link">Discord<span class="ext">↗</span></a>' +
-    ' · <a href="#" class="note" id="pub-note">Public cores only<span class="ext">ⓘ</span></a>';
+    ' · <a href="#" class="note" id="pub-note">Public cores only, no alternatives<span class="ext">ⓘ</span></a>';
   // keep a left-open tab honest: refresh the relative label on a slow tick and
   // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
   if (valid) {
@@ -1989,11 +1992,15 @@ const FEED_LIST = [
   ['Updates only', 'feed-updates.xml'],
 ];
 const PUB_NOTE_HTML =
-  '<p>Some cores (mainly Jotego arcade cores) start out as Patreon ' +
-  'early-access betas. Those are not listed here while they are ' +
-  'subscriber-only.</p>' +
-  '<p>Each core shows up automatically once it gets a public release. ' +
-  'Beta cores may get their own listing here in the future.</p>';
+  '<p><b>Public cores only.</b> Some cores (mainly Jotego arcade cores) ' +
+  'start out as Patreon early-access betas. Those are not listed here ' +
+  'while they are subscriber-only, and each shows up automatically once ' +
+  'it gets a public release.</p>' +
+  '<p><b>No alternatives.</b> Each arcade game is listed once, as its ' +
+  'mainline version. Regional and revision variants, clones and bootlegs ' +
+  '(what MiSTer files under _alternatives) are folded into that one row, ' +
+  'so where a Region is shown it is the region of the mainline set, not ' +
+  'every version the game shipped in.</p>';
 const META_POP = {
   'discord-link': () => '<p>Dedicated thread on the official MiSTer Discord.</p>',
   'pub-note': () => PUB_NOTE_HTML,

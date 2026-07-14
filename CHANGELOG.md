@@ -3,6 +3,8 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-13
+- Arcade entries now show their Region (World, Japan, USA and so on), sourced from the MiSTer Arcade Database: it appears in the detail panel, is searchable, and there is a matching opt-in Region column you can turn on from the Columns menu. It reflects the region of the mainline set that is listed.
+- The footer note now reads "Public cores only, no alternatives" and its popover explains that each arcade game is listed once, as its mainline version, with regional and revision variants, clones and bootlegs folded into that one row.
 - MiSTerZine now has its own domain: the site lives at misterzine.fyi. The old github.io address still works and redirects here.
 - If you have saved more than one MiSTer, the detail panel's Launch button now shows one button per device side by side, so you can start a game on either MiSTer with a single click.
 - You can now filter the table by arcade genre: a new Genre menu (next to Types and Year) lets you check off Shooter, Platform, Fighter and the rest. Selecting a genre hides consoles and computers, which have no genre.

@@ -1495,7 +1495,7 @@ def fetch_mad(refresh=False):
 
 
 def parse_mad(text):
-    """{setname_lower: {rot,res,plr,ctl,spc,flip}} — display-ready values.
+    """{setname_lower: {rot,res,plr,ctl,spc,flip,reg}} — display-ready values.
 
     The CSV vocabulary is uneven ('n-a'/'' blanks, '15 kHz' vs '15kHz',
     'trackball' vs 'Trackball'), so values are normalized here once; the
@@ -1537,6 +1537,12 @@ def parse_mad(text):
             e["flip"] = "Yes"
         elif flip == "no":
             e["flip"] = "No"
+        # region of this ROM set (World/Japan/USA/...); ~99% populated and clean.
+        # Capitalize the first letter so the odd lowercase value ('bootleg')
+        # matches the rest; the vocabulary is otherwise display-ready.
+        reg = val("region")
+        if reg:
+            e["reg"] = reg[0].upper() + reg[1:]
         if e:
             out[sn] = e
     return out

@@ -1987,7 +1987,7 @@ function relUpdated(dt) {
   return dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-// "Latest release" stamp — meta.json.updated is bumped by export-web only when the
+// "Updated" stamp — meta.json.updated is bumped by export-web only when the
 // served data actually changes (see _write_site_meta), so this date/time is stable
 // across no-op rebuilds. Stored as an ISO minute-precision UTC string.
 fetch('./meta.json').then(r => r.json()).then(m => {
@@ -2005,7 +2005,7 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     timeZoneName: 'short'  // viewer's tz (e.g. "GMT+2") so the exact time is clearly local
   }) : m.updated;
   const label = () => valid ? relUpdated(dt) : m.updated;
-  el.innerHTML = 'Latest release: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span>' +
+  el.innerHTML = 'Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span>' +
     ' · <a href="../" class="zinelink">Daily Zine<span class="ext">↗</span></a>' +
     ' · <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
     ' · <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +

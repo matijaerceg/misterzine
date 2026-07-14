@@ -21,7 +21,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"MiSTerZine","url":"https://misterzine.fyi/","description":"A collection of quotes from around the web on MiSTer FPGA releases, each with its source linked."}</script>
 <link rel="alternate" type="application/rss+xml" title="MiSTerZine feed" href="feed-zine.xml">
 <script>/* apply saved theme before first paint to avoid a flash */
-  try { var t = localStorage.getItem('mz-theme'); if (t && t !== 'auto') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <style>
   @font-face { font-family: Roboto; src: url(fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -194,7 +194,6 @@
   <nav>
     <a class="idx" href="releases/"><span class="pm">Release index</span><span class="cnt">: 1,000+ cores &amp; games &#8594;</span></a>
     <div class="theme" id="theme" role="group" aria-label="Color theme">
-      <button type="button" data-set="auto">Auto</button>
       <button type="button" data-set="light">Light</button>
       <button type="button" data-set="dark">Dark</button>
     </div>
@@ -414,20 +413,20 @@
     }, { passive: true });
     addEventListener('resize', function () { reserve(); apply(); });
   })();
-  // theme toggle: Auto/Light/Dark, persisted (same control + behavior as the release index)
+  // theme toggle: Light/Dark, persisted, defaults to dark (same control + behavior as the release index)
   (function () {
     var btns = [].slice.call(document.querySelectorAll('#theme button'));
     if (!btns.length) return;
     function apply(t) {
-      if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
-      else { document.documentElement.removeAttribute('data-theme'); t = 'auto'; }
+      if (t !== 'light' && t !== 'dark') t = 'dark';
+      document.documentElement.setAttribute('data-theme', t);
       btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); });
     }
     btns.forEach(function (b) { b.addEventListener('click', function () {
       try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
       apply(b.dataset.set);
     }); });
-    var saved = 'auto'; try { saved = localStorage.getItem('mz-theme') || 'auto'; } catch (e) {}
+    var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
     apply(saved);
   })();
   // index pill: fill the live row count, and measure the natural width of the

@@ -1498,7 +1498,7 @@ function fireLaunch(dev, script, btn) {
   // http:// LAN URL (top-level navigation is the only mixed-content-legal
   // transport; the Remote response page itself can't be styled or read).
   // 4s before auto-close: enough to read Remote's plain-text 500 on a miss.
-  const w = window.open('', '_blank', 'popup,width=460,height=180');
+  const w = window.open('', '_blank', 'popup,width=280,height=120');
   if (w) {
     try {
       w.document.write('<title>Launching…</title><body style="margin:0;display:grid;' +

@@ -1870,19 +1870,19 @@ function zapJolt(el) {
   frames.forEach(f => f.easing = 'steps(1, end)');  // per-hop: hold, then snap
   el.animate(frames, { duration: 240 });
 }
-// The token jolts, not the whole field: the jolt is a property of the token, not
-// of the control around it. Crossing the field tints it (this is clickable);
-// crossing the token buzzes it (this is alive). Field-wide, it would fire with
-// the pointer 200px away from the token and read as noise. A copy still jolts
-// from anywhere in the field — copying IS a whole-field act.
+// Touching anywhere on the field jolts its token: the whole field is the control,
+// so the whole field is the live surface — reaching for it anywhere should wake it,
+// not just landing on the glyphs. Copying jolts it too, from anywhere in the field.
 //
 // mouseover, not mouseenter: the panel is re-rendered per row, so the handler has
-// to be delegated, and mouseenter doesn't bubble. The relatedTarget guard keeps a
-// re-entry from a child re-firing it — the ⧉ sitting next to the token makes that
-// crossing real, not hypothetical.
+// to be delegated, and mouseenter doesn't bubble. The relatedTarget guard is what
+// makes "anywhere" fire ONCE: it's scoped to the field, not the token, so crossing
+// from the text to the ⧉ (or to the field's empty half) is travel WITHIN the same
+// control and must not re-fire. Only entering from outside the field counts.
 panel.addEventListener('mouseover', e => {
-  const z = e.target.closest('.rom.zap');
-  if (z && !z.contains(e.relatedTarget)) zapJolt(z);
+  const f = e.target.closest('.cf');
+  const z = f && f.querySelector('.rom.zap');
+  if (z && !f.contains(e.relatedTarget)) zapJolt(z);
 });
 // One "Copied" chip serves every copy field (the panel's value rows, the h2
 // permalink, the RSS feed rows): it's position:fixed off the ⧉'s own rect, so it

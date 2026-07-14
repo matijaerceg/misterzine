@@ -527,7 +527,7 @@
       <button type="button" id="qx" class="qx" title="Clear search" tabindex="-1">x</button>
     </div>
     <details class="cols" id="typedd">
-      <summary id="typesummary">All Types</summary>
+      <summary id="typesummary">All Core Types</summary>
       <div class="menu" id="typemenu"></div>
     </details>
     <details class="cols" id="genredd">
@@ -1132,9 +1132,9 @@ typeMenu.innerHTML = TYPES.map(t =>
   '<button class="reset" id="typereset">Show all</button>';
 const typeReset = document.getElementById('typereset');
 function syncTypeSummary() {
-  // empty (= no filter) and full both read as "All Types"; partial shows the count
+  // empty (= no filter) and full both read as "All Core Types"; partial shows the count
   const partial = enabledTypes.size !== 0 && enabledTypes.size !== TYPES.length;
-  typeSummary.textContent = partial ? 'Types (' + enabledTypes.size + ')' : 'All Types';
+  typeSummary.textContent = partial ? 'Core Types (' + enabledTypes.size + ')' : 'All Core Types';
   typeSummary.classList.toggle('active', partial);  // glow when narrowing, like a non-empty search box
   typeReset.disabled = enabledTypes.size === 0;  // no boxes checked = the default
 }

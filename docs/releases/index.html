@@ -60,21 +60,19 @@
   main { height: 100vh; height: 100dvh; display: flex; flex-direction: column; padding: 0 1rem; }
   .topbar { flex: none; position: relative; z-index: 20; background: Canvas; }
   header { margin: 0; padding: 1rem 0 0; }
-  h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
+  h1 { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: 1.25rem; font-weight: 600; margin: 0 0 .25rem; }
   /* the whole title is the "home" link: click anywhere on it to drop a deep-link
-     #hash and return to the clean /releases/ URL. One color (inherits the heading's,
-     i.e. full white/black), never underlined; a dot divides the descriptive name
-     from the URL, which stays lighter-weight so the two parts still read distinct. */
+     #hash and return to the clean /releases/ URL. Roboto Condensed 600, one colour
+     throughout (full white/black), never underlined; the URL leads, then a dash +
+     tagline. The break-legal space in the markup supplies the gap before the dash,
+     and .site's nowrap keeps the URL itself from breaking mid-address. */
   h1 a.titlelink { color: inherit; text-decoration: none; }
-  h1 .site { font-weight: 400; white-space: nowrap; }
-  /* right-margin only: the break-legal space in the markup supplies the gap on the
-     dot's left, so the divider stays evenly spaced without doubling up */
-  h1 .site::before { content: "\00B7"; margin: 0 .4em 0 0; font-weight: 400; }
+  h1 .site { white-space: nowrap; }
   /* flex-wrap (not inline links + margin) so that when the meta line breaks,
      the links on the 2nd+ lines sit flush against the left edge of the line
      above instead of inheriting a leading indent. column-gap gives every item
      the same spacing; the "Updated: <time>" prefix is one item via .upd-stamp. */
-  .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .8rem; row-gap: .15rem; }
+  .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .6rem; row-gap: .15rem; }
   .updated .upd-stamp { white-space: nowrap; }
   .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
   .updated a:hover { color: var(--accent); }
@@ -525,7 +523,7 @@
     <button type="button" data-set="light">Light</button>
     <button type="button" data-set="dark">Dark</button>
   </div>
-  <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)">MiSTer FPGA Core &amp; Arcade Tracker <span class="site">misterzine.fyi/releases</span></a></h1>
+  <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)"><span class="site">misterzine.fyi/releases</span> - a MiSTer FPGA core and arcade tracker</a></h1>
   <p class="updated" id="updated"></p>
 </header>
 <div class="controls">

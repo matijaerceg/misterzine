@@ -70,15 +70,20 @@
   /* right-margin only: the break-legal space in the markup supplies the gap on the
      dot's left, so the divider stays evenly spaced without doubling up */
   h1 .site::before { content: "\00B7"; margin: 0 .4em 0 0; font-weight: 400; }
-  .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; }
-  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; margin-left: .8rem; }
+  /* flex-wrap (not inline links + margin) so that when the meta line breaks,
+     the links on the 2nd+ lines sit flush against the left edge of the line
+     above instead of inheriting a leading indent. column-gap gives every item
+     the same spacing; the "Updated: <time>" prefix is one item via .upd-stamp. */
+  .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .8rem; row-gap: .15rem; }
+  .updated .upd-stamp { white-space: nowrap; }
+  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
   .updated a:hover { color: var(--accent); }
   /* dotted underline (+ ⓘ) marks the meta-line popover triggers ("Public
      cores only", "RSS") — they open an in-page popover, unlike the solid
      underline + ↗ links, which navigate away */
   .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; white-space: nowrap; }
   /* the zine link is the one meta-line entry we want noticed */
-  .updated a.zinelink { color: var(--accent); font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.3em; }
+  .updated a.zinelink { color: var(--accent); font-family: 'Permanent Marker', cursive; font-weight: 400; font-size: 1.2em; }
   .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   /* the filter cluster grows to fill the row; the search field grows within it to
@@ -2003,7 +2008,7 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     timeZoneName: 'short'  // viewer's tz (e.g. "GMT+2") so the exact time is clearly local
   }) : m.updated;
   const label = () => valid ? relUpdated(dt) : m.updated;
-  el.innerHTML = 'Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span>' +
+  el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span></span>' +
     ' <a href="#" class="note" id="pub-note">Public cores only, no alternatives<span class="ext">ⓘ</span></a>' +
     ' <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
     ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +

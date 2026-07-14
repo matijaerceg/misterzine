@@ -753,7 +753,7 @@ const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
   { k: 'sn', label: 'ROM Name', w: 9, mw: 6.5, opt: true,
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
-  { k: 'typesort', label: 'Type', w: 7, mw: 4, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
+  { k: 'typesort', label: 'Core Type', w: 7, mw: 4, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
   { k: 'updated', label: 'Last Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },
   { k: 'date', label: 'MiSTer Debut', w: 10, mw: 5.5,

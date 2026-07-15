@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-15
+- Six new color themes join Light and Dark, picked from a new Theme menu in the top-right toggle: MiSTer-y (deep indigo and mauve), Vaporwave, Ice Cream, Pastel, Pink and Unit-01. Your pick follows you across the zine and the release tracker, and Light/Dark look exactly as before.
+
 ## 2026-07-14
 - Copying from the detail panel is easier: click anywhere on a field to copy it, not just the small icon. That covers the core name, the ROM name and the ZapScript token, and the game's title now copies a link to its entry. The RSS popover's feed rows work the same way. A "Copied" tag appears next to the icon to confirm, instead of the icon briefly turning into a tick.
 - Hover the logo on the zine home page and mister-kun, the MiSTer mascot, leans out from behind it to see who is there. He ducks back when you move away.

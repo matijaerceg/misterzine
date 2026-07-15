@@ -1,0 +1,256 @@
+/* theme.css — the single source of truth for every palette value on the site.
+   Both pages (/ and /releases/) link this file; their inline CSS speaks ONLY
+   in the tokens below — never raw Canvas/CanvasText, light-dark(), or a color
+   literal — so adding a whole new theme is: one block here + one toggle
+   button per page. Rules that keep this safe:
+   - Token values stay PLAIN (hex / rgb / color-mix of plain values), never
+     light-dark(): the use sites nest tokens inside color-mix(), and a
+     light-dark() value would not survive that nesting.
+   - color-scheme is declared per theme so native form controls, scrollbars
+     and UA default colors stay legible (any dark-grounded theme says dark).
+   - Backgrounds are explicit grayscale/hex rather than system Canvas, which
+     can carry a faint tint in dark mode and varies per browser. */
+
+/* Derived neutrals: every hairline border, divider and hover wash is an
+   alpha of --line. Defined once — they re-resolve when a theme changes
+   --line. The fractional percentages reproduce the old #888x hex-alpha
+   bytes exactly (x/15: #8881=6.67%, #8882=13.33%, #8883=20%, #8884=26.67%,
+   #8886=40%, #8887=46.67%, #8889=60%, #888c=80%). */
+:root {
+  --row-hover:        color-mix(in srgb, var(--line)  6.67%, transparent);
+  --hover-bg:         color-mix(in srgb, var(--line) 13.33%, transparent);
+  --rule:             color-mix(in srgb, var(--line) 20%,    transparent);
+  --hair:             color-mix(in srgb, var(--line) 26.67%, transparent);
+  --kbd-border:       color-mix(in srgb, var(--line) 40%,    transparent);
+  --btn-border:       color-mix(in srgb, var(--line) 46.67%, transparent);
+  --rib-idle:         color-mix(in srgb, var(--line) 60%,    transparent);
+  --btn-border-hover: color-mix(in srgb, var(--line) 80%,    transparent);
+}
+
+/* ---- light (also the auto default; auto's dark half is the media block) */
+:root {
+  color-scheme: light dark;
+  --bg: #fcfcfc;            /* page/table ground */
+  --surface: #fcfcfc;       /* raised chrome: topbar, header row, panel, popovers */
+  --fg: #000;               /* primary text / ink */
+  --muted: #888;            /* secondary text and icons */
+  --line: #888;             /* base for the alpha borders/washes above */
+  --accent: #0066ff;        /* the site blue: links, focus, active filters */
+  --accent-on: #fff;        /* text/icons sitting ON an --accent fill */
+  --brand-hover: #514689;   /* zine wordmark hover: official MiSTer purple */
+  --type-arcade: #e8a317;   /* the four core-type hues (badges + icons) */
+  --type-console: #3aa0ff;
+  --type-computer: #2bbf6e;
+  --type-other: #b07cff;
+  --reset: #e08000;         /* "Clear filters" amber */
+  --ok: #22aa22;            /* success (Launch "sent") */
+  --danger: #cc3333;        /* destructive hover (remove device) */
+  --warn: #f5c518;          /* ZapScript bolt */
+  /* shadows/deboss stay black-anchored on every theme: a --fg-based shadow
+     turns into a white glow on dark grounds (reads as light, not depth) */
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- dark values, shared by auto-when-OS-is-dark and explicit dark */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #131313; --surface: #131313; --fg: #fff;
+    --brand-hover: #8b7fd0;
+    --hint-shadow: rgb(0 0 0 / .75);
+    --watermark: color-mix(in srgb, #000 11%, var(--surface));
+    --stamp-shade: rgb(0 0 0 / .33);
+    --stamp-sheen: rgb(255 255 255 / .05);
+  }
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #131313; --surface: #131313; --fg: #fff;
+  --brand-hover: #8b7fd0;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 11%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .33);
+  --stamp-sheen: rgb(255 255 255 / .05);
+}
+
+/* Optional per-theme token: --accent2. A handful of "secondary highlight"
+   sites (active-filter glow, sorted column header) consume it as
+   var(--accent2, var(--accent)), so themes that don't define it — light and
+   dark included — are completely unaffected, while colorful themes can put a
+   second hue on screen. */
+
+/* ---- punchy (menu label "MiSTer-y"): Catppuccin Mocha
+   (catppuccin.com/palette). color-scheme is dark so native form
+   controls/scrollbars render dark. Notes:
+   - Every Mocha accent is a LIGHT pastel, so --accent-on (text sitting ON an
+     accent fill, e.g. the "Copied" chip) flips to near-black Crust.
+   - --line is Surface2, lighter than --muted's job would suggest: the derived
+     borders are alphas OVER Base, and a darker base would make them vanish. */
+:root[data-theme="punchy"] {
+  color-scheme: dark;
+  --bg: #1e1e2e;            /* Base */
+  --surface: #313244;       /* Surface0 */
+  --fg: #cdd6f4;            /* Text */
+  --muted: #7f849c;         /* Overlay1 */
+  --line: #585b70;          /* Surface2 */
+  --accent: #cba6f7;        /* Mauve */
+  --accent-on: #11111b;     /* Crust */
+  --brand-hover: #cba6f7;   /* Mauve */
+  --type-arcade: #fab387;   /* Peach */
+  --type-console: #89b4fa;  /* Blue */
+  --type-computer: #a6e3a1; /* Green */
+  --type-other: #f5c2e7;    /* Pink */
+  --reset: #fab387;         /* Peach */
+  --ok: #a6e3a1;            /* Green */
+  --danger: #f38ba8;        /* Red */
+  --warn: #f9e2af;          /* Yellow */
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- vaporwave: the classic strip (ff71ce / 01cdfe / 05ffa1 / b967ff /
+   fffb96), ALL five distributed: pink links, cyan secondary text + active
+   filters (--accent2), mint success + computer hue, purple other hue +
+   brand hover, yellow arcade hue + armed Clear button. */
+:root[data-theme="vaporwave"] {
+  color-scheme: dark;
+  --bg: #1a1240;
+  --surface: #251a55;
+  --fg: #f3ecff;
+  --muted: #7cc5e0;          /* cyan-tinted secondary text */
+  --line: #6a5cae;
+  --accent: #ff71ce;         /* hot pink */
+  --accent2: #01cdfe;        /* cyan: active filters + sorted column */
+  --accent-on: #1a1240;
+  --brand-hover: #b967ff;
+  --type-arcade: #fffb96;    /* pale yellow */
+  --type-console: #01cdfe;   /* cyan */
+  --type-computer: #05ffa1;  /* mint */
+  --type-other: #b967ff;     /* purple */
+  --reset: #fffb96;
+  --ok: #05ffa1;
+  --danger: #ff5577;
+  --warn: #fffb96;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- ice cream: neapolitan (6b3e26 chocolate / ffc5d9 strawberry /
+   c2f2d0 mint / fdf5c9 vanilla / ffcb85 caramel). Vanilla page, strawberry
+   chrome, chocolate ink; mint takes the active filters. Accent hues are
+   the strip's, deepened enough to read as text on the light grounds. */
+:root[data-theme="icecream"] {
+  color-scheme: light;
+  --bg: #fdf5c9;             /* vanilla */
+  --surface: #ffc5d9;        /* strawberry */
+  --fg: #46281a;             /* chocolate */
+  --muted: #8a6a52;
+  --line: #a67c5e;
+  --accent: #c93a6e;         /* deep strawberry */
+  --accent2: #8f5a1e;        /* deep caramel: active filters + sorted column */
+  --accent-on: #fff;
+  --brand-hover: #d6467a;
+  --type-arcade: #c9822a;    /* caramel */
+  --type-console: #3aa06b;   /* mint */
+  --type-computer: #8a5a38;  /* chocolate */
+  --type-other: #d6467a;     /* strawberry */
+  --reset: #c9822a;
+  --ok: #3aa06b;
+  --danger: #c2334d;
+  --warn: #c9822a;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- pastel: a LIGHT theme built from the strip (ffd4e5 pink / d4ffea mint /
+   eecbff lilac / feffa3 lemon / dbdcff periwinkle): periwinkle-white page,
+   lilac chrome, soft-violet ink; the hues deepen just enough to read as
+   text/accents on the light grounds while the badge tints stay pastel. */
+:root[data-theme="pastel"] {
+  color-scheme: light;
+  --bg: #f4f2ff;             /* periwinkle-white */
+  --surface: #eecbff;        /* lilac */
+  --fg: #4a4160;             /* soft violet ink */
+  --muted: #8b7fa8;
+  --line: #a698c8;
+  --accent: #9d4cbf;         /* deepened lilac for links */
+  --accent2: #b03064;        /* deepened pink: active filters + sorted column */
+  --accent-on: #fff;
+  --brand-hover: #9d4cbf;
+  --type-arcade: #b8a212;    /* lemon, deepened */
+  --type-console: #6a6ce0;   /* periwinkle */
+  --type-computer: #43b088;  /* mint */
+  --type-other: #d0578f;     /* pink */
+  --reset: #c98a2e;
+  --ok: #43b088;
+  --danger: #cc4467;
+  --warn: #b8a212;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- pink: the shades-of-pink ladder (ffc0cb / ffb6c1 / ff69b4 / ff1493 /
+   c71585) as a LIGHT pink theme: pink page, deeper pink chrome, raspberry
+   ink, vivid pink accents. Monochrome by design (the type hues are graded
+   pinks); status green stays green — "sent" has to read as success. */
+:root[data-theme="pink"] {
+  color-scheme: light;
+  --bg: #ffd9e7;
+  --surface: #ffc3d8;
+  --fg: #58102f;             /* deep raspberry */
+  --muted: #a85479;
+  --line: #c47e9b;
+  --accent: #c4136c;         /* vivid pink */
+  --accent2: #ff69b4;        /* hot pink: active filters + sorted column */
+  --accent-on: #fff;
+  --brand-hover: #ff1493;
+  --type-arcade: #f973a8;
+  --type-console: #e8447f;
+  --type-computer: #c2185b;
+  --type-other: #96125e;
+  --reset: #e8447f;
+  --ok: #2e9e63;
+  --danger: #b3123f;
+  --warn: #c78a00;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- eva: Unit-01. Unmistakably PURPLE ground and chrome, acid-green
+   accent; orange / violet / lime / cyan type hues. */
+:root[data-theme="eva"] {
+  color-scheme: dark;
+  --bg: #1d1330;
+  --surface: #2f2050;
+  --fg: #e9e3f6;
+  --muted: #a293c7;
+  --line: #6b5a94;
+  --accent: #a6ff00;         /* acid green */
+  --accent-on: #16102a;
+  --brand-hover: #b18cff;
+  --type-arcade: #ff9a3d;    /* pylon orange */
+  --type-console: #b18cff;   /* violet */
+  --type-computer: #a3e635;  /* lime */
+  --type-other: #67e8f9;     /* AT-field cyan */
+  --reset: #ff9a3d;
+  --ok: #a3e635;
+  --danger: #ff4f6d;
+  --warn: #ffd21e;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}

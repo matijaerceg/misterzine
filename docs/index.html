@@ -21,14 +21,15 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"MiSTerZine","url":"https://misterzine.fyi/","description":"A collection of quotes from around the web on MiSTer FPGA releases, each with its source linked."}</script>
 <link rel="alternate" type="application/rss+xml" title="MiSTerZine feed" href="feed-zine.xml">
 <script>/* apply saved theme before first paint to avoid a flash */
-  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+<link rel="stylesheet" href="theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
 <style>
   @font-face { font-family: Roboto; src: url(fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
   @font-face { font-family: 'Permanent Marker'; src: url(fonts/permanent-marker-latin.woff2) format('woff2');
                font-weight: 400; font-display: swap; }
-  :root { color-scheme: light dark;
-          /* hand-drawn squiggle rule, tiled; drawn as a mask so one gray colors it in both themes
+  /* all palette values (incl. --bg/--fg and color-scheme) live in theme.css */
+  :root { /* hand-drawn squiggle rule, tiled; drawn as a mask so one gray colors it in both themes
              (path overhangs the tile edges so the repeat has no seams) */
           --squig: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E");
           /* same wave as a FILL (opaque above the line): masks the header so its
@@ -36,18 +37,12 @@
           --wavefill: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='11'%3E%3Cpath d='M-15 5.5 Q-7.5 -1 0 5.5 T15 5.5 T30 5.5 T45 5.5 L45 -6 L-15 -6 Z' fill='black'/%3E%3C/svg%3E");
           /* width of a full-width squiggle: ~11% past the 50rem content column so
              it runs beyond the edge, clamped to the viewport (never a scrollbar) */
-          --sqw: min(55.5rem, calc(100vw - 2rem));
-          /* page background: pure grayscale (no chroma) in either theme, rather than
-             the system Canvas color which can carry a faint tint in dark mode */
-          --bg: #fcfcfc; }
-  @media (prefers-color-scheme: dark) { :root { --bg: #131313; } }
-  :root[data-theme="light"] { color-scheme: light; --bg: #fcfcfc; }
-  :root[data-theme="dark"]  { color-scheme: dark;  --bg: #131313; }
+          --sqw: min(55.5rem, calc(100vw - 2rem)); }
   * { box-sizing: border-box; }
-  body { font: 16px/1.6 Roboto, system-ui, sans-serif; margin: 0; background: var(--bg); color: CanvasText; }
-  a { color: #06f; text-decoration: underline; text-underline-offset: 2px; }
-  a:hover { color: color-mix(in srgb, #06f 70%, CanvasText); }
-  :focus-visible { outline: 2px solid #06f; outline-offset: 2px; }
+  body { font: 16px/1.6 Roboto, system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--fg); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   /* the column is 37.5rem; tate articles may grow to the full 50rem wrap.
      padding-top reserves the FULL header height (JS refines it) so the fixed
      header never overlaps content and its resize can't shift the page */
@@ -76,7 +71,7 @@
   /* visible squiggle line on that wavy edge (same look + width as the dividers) */
   .top::after { content: ''; position: absolute; bottom: 0; height: 11px;
                 left: calc(50% - var(--sqw) / 2); width: var(--sqw);
-                background: #888; -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
+                background: var(--muted); -webkit-mask: var(--squig) left repeat-x; mask: var(--squig) left repeat-x; }
   /* logo height interpolates 71px -> 37px straight from --sh; no CSS transition,
      which would lag behind the scroll instead of tracking it */
   /* position:relative is load-bearing, not cosmetic: .peek below is absolute, and
@@ -85,17 +80,16 @@
      of it; positioned, both share a paint step, DOM order wins, and the wordmark
      laps over him the way it should. */
   .top .logo { position: relative; height: var(--logoh); width: auto;
-               aspect-ratio: 532.4 / 354.2; display: block; color: CanvasText; }
+               aspect-ratio: 532.4 / 354.2; display: block; color: var(--fg); }
   /* --logoh is the wordmark height, shared so kun can size/place himself off it in
      px (see .kun) rather than as a % of .peek, whose box we grow downward below. */
   .top .home { position: relative; display: block; width: fit-content; flex: 0 0 auto;
                --logoh: calc(71px - 34px * var(--sh)); }
-  /* hover tints the wordmark the official MiSTer brand purple (#514689, straight
-     from the MiSTer-devel docs theme) so the emerging kun pops by hue, not by the
-     old grey dim. On the near-black dark bg #514689 goes muddy, so light-dark()
-     swaps in a lighter sibling of the same hue there; both keep the letter-hole
-     letters legible against the sticker body. */
-  .top .home:hover .logo { color: light-dark(#514689, #8b7fd0); }
+  /* hover tints the wordmark the official MiSTer brand purple (--brand-hover:
+     #514689 straight from the MiSTer-devel docs theme; dark themes swap in a
+     lighter sibling of the same hue, since #514689 goes muddy on near-black)
+     so the emerging kun pops by hue, not by the old grey dim. */
+  .top .home:hover .logo { color: var(--brand-hover); }
   /* EASTER EGG: hover the wordmark and mister-kun leans out from behind it.
      THE WALL: .peek's left edge is the ONLY clip line; everything left of it reads as
      behind the logo. Two forces set its 96.2%, and they pull opposite ways:
@@ -137,7 +131,7 @@
      he lands pixel-identical to before, and still tracks the --sh shrink via --logoh. */
   .top .kun { position: absolute; left: 0; bottom: calc(40px + var(--logoh) * .04);
               height: calc(var(--logoh) * .78); aspect-ratio: 1;
-              fill: currentColor; color: CanvasText; --kun-paper: var(--bg);
+              fill: currentColor; color: var(--fg); --kun-paper: var(--bg);
               transform-origin: bottom left;
               transform: translateX(-100%) rotate(0deg);
               /* ease-out, no overshoot: he leans out and stops */
@@ -152,19 +146,37 @@
   .top nav { display: flex; align-items: center; gap: .6rem; }
   /* theme toggle: the same text-based Auto|Light|Dark control as the release index,
      always visible top-right (a nav flex item here rather than floated) */
-  .top .theme { display: inline-flex; flex: 0 0 auto; border: 1px solid #8884;
-                border-radius: 6px; overflow: hidden; }
+  /* no overflow:hidden (it would clip the absolute theme menu); the group's
+     rounded ends are re-applied to the first/last segments instead */
+  .top .theme { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--hair);
+                border-radius: 6px; }
   .top .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
                        background: transparent; color: inherit; cursor: pointer; }
-  .top .theme button + button { border-left: 1px solid #8884; }
-  .top .theme button[aria-pressed="true"] { background: #8883; font-weight: 600; }
+  .top .theme > button:first-child { border-radius: 5px 0 0 5px; }
+  .top .theme button + button { border-left: 1px solid var(--hair); }
+  .top .theme button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  /* fun-theme dropdown: the toggle's third segment; the summary wears the
+     active fun theme's name (same control as the release index) */
+  .top .theme details { position: relative; }
+  .top .theme summary { list-style: none; font-size: .78rem; padding: .3rem .6rem; cursor: pointer;
+                        border-left: 1px solid var(--hair); border-radius: 0 5px 5px 0; user-select: none; }
+  .top .theme summary::-webkit-details-marker { display: none; }
+  .top .theme summary::after { content: " \25BE"; opacity: .6; }
+  .top .theme summary:hover, .top .theme details[open] summary { background: var(--hover-bg); }
+  .top .theme summary.on { background: var(--rule); font-weight: 600; }
+  .top .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+                      background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
+                      padding: .3rem; display: grid; gap: 2px; min-width: 7.5rem; box-shadow: 0 4px 16px #0004; }
+  .top .theme .menu button { border: 0; text-align: left; border-radius: 4px; font-size: .85rem;
+                             padding: .3rem .5rem; }
+  .top .theme .menu button:hover { background: var(--hover-bg); }
   /* index link (marker-set label + live count). inline-flex so the count can take a
      max-width; centered (not baselined) so the small count sits mid-height against the
      tall marker label, reading as pill/button text rather than bottom-anchored prose */
   .top .idx { display: inline-flex; align-items: center;
-              color: #06f; font-weight: 600; text-decoration: none; white-space: nowrap;
+              color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap;
               font-size: calc(.9rem - .12rem * var(--sh));
-              border: 1px solid color-mix(in srgb, #06f 55%, var(--bg)); border-radius: 999px;
+              border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 999px;
               padding: .4rem .9rem; }
   /* the marker font's tall ascent metric parks the glyphs low in the line box, so at
      1x desktop DPI the label rounds a pixel below the pill's optical center; nudge it up
@@ -187,7 +199,7 @@
      sweep up the --sh-driven transform/left/top the mobile rules animate by scroll
      position, and the pill would lag behind the scroll instead of tracking it. */
   .top .idx { transition: scale .12s ease-out; }
-  .top .idx:hover { background: color-mix(in srgb, #06f 12%, var(--bg)); scale: 1.055; }
+  .top .idx:hover { background: color-mix(in srgb, var(--accent) 12%, var(--bg)); scale: 1.055; }
   /* MOBILE (below ~34rem): logo top-left; theme toggle pinned to the top-right
      corner and SHRINKING TO NOTHING on scroll; index link stacked below at rest
      and GLIDING up beside the shrunken logo as you scroll. Toggle + index are
@@ -227,18 +239,18 @@
      narrow post: .wide spans the full column (used on both sides of a wide/tate
      post), plain spans the 37.5rem text column (between two narrow posts) */
   hr.sq { border: 0; height: 11px; margin: 1.95rem auto; max-width: 41.5rem;
-          background: #888; -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
+          background: var(--muted); -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
   /* wide dividers run past the 50rem content column too (breaks out of the wrap,
      centered on the viewport, clamped so it never causes a horizontal scrollbar) */
   hr.sq.wide { max-width: none; width: var(--sqw); margin-inline: calc(50% - var(--sqw) / 2) auto; }
   /* post title: game name (marker font) + the reason it's here, a smidge above body text */
   article h2 { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400;
                font-size: 1.45rem; line-height: 1.3; margin: 0 0 .5rem; letter-spacing: .01em; }
-  article h2 a { color: #06f; text-decoration: none; }
-  article h2 a:hover { color: color-mix(in srgb, #06f 70%, CanvasText); }
+  article h2 a { color: var(--accent); text-decoration: none; }
+  article h2 a:hover { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
   article h2 .why { font-family: Roboto, system-ui, sans-serif; font-weight: 400; font-size: .8rem;
-                    letter-spacing: 0; color: color-mix(in srgb, CanvasText 55%, var(--bg)); }
-  .shot { position: relative; border: 1px solid #8884; border-radius: 6px;
+                    letter-spacing: 0; color: color-mix(in srgb, var(--fg) 55%, var(--bg)); }
+  .shot { position: relative; border: 1px solid var(--hair); border-radius: 6px;
           overflow: hidden; background: #140c1c; margin: 0 0 .8rem; }
   .shot.h { aspect-ratio: 4 / 3; }
   /* tate: full column width when stacked (tall is fine); in the wide
@@ -260,11 +272,11 @@
   }
   article p { margin: 0 0 .6rem; line-height: 1.5; }
   /* one quiet line per post: date/permalink + provenance */
-  .meta { font-size: .68rem; color: color-mix(in srgb, CanvasText 32%, var(--bg)); margin: 0; }
+  .meta { font-size: .68rem; color: color-mix(in srgb, var(--fg) 32%, var(--bg)); margin: 0; }
   .meta a { color: inherit; text-decoration: none; }
-  .meta a:hover { color: #06f; text-decoration: underline; }
+  .meta a:hover { color: var(--accent); text-decoration: underline; }
 
-  .colophon { color: #888; font-size: .8rem; padding-top: 1.25rem; }
+  .colophon { color: var(--muted); font-size: .8rem; padding-top: 1.25rem; }
   .colophon a { color: inherit; }
 </style>
 </head>
@@ -278,6 +290,17 @@
     <div class="theme" id="theme" role="group" aria-label="Color theme">
       <button type="button" data-set="light">Light</button>
       <button type="button" data-set="dark">Dark</button>
+      <details id="themedd">
+        <summary id="themesum">Theme</summary>
+        <div class="menu">
+          <button type="button" data-set="punchy">MiSTer-y</button>
+          <button type="button" data-set="vaporwave">Vaporwave</button>
+          <button type="button" data-set="icecream">Ice Cream</button>
+          <button type="button" data-set="pastel">Pastel</button>
+          <button type="button" data-set="pink">Pink</button>
+          <button type="button" data-set="eva">Unit-01</button>
+        </div>
+      </details>
     </div>
   </nav>
 </header>
@@ -504,19 +527,35 @@
     }, { passive: true });
     addEventListener('resize', function () { reserve(); apply(); });
   })();
-  // theme toggle: Light/Dark, persisted, defaults to dark (same control + behavior as the release index)
+  // theme toggle: persisted, defaults to dark (same control + behavior as the
+  // release index). Light/Dark are one-click buttons; the fun themes live in a
+  // dropdown whose summary shows the active one. The valid-theme list comes
+  // from the controls themselves, so a new theme = one menu button here + one
+  // block in theme.css.
   (function () {
-    var btns = [].slice.call(document.querySelectorAll('#theme button'));
+    var btns = [].slice.call(document.querySelectorAll('#theme button[data-set]'));
     if (!btns.length) return;
+    var dd = document.getElementById('themedd');
+    var sum = document.getElementById('themesum');
+    var themes = btns.map(function (b) { return b.dataset.set; });
     function apply(t) {
-      if (t !== 'light' && t !== 'dark') t = 'dark';
+      if (themes.indexOf(t) < 0) t = 'dark';
       document.documentElement.setAttribute('data-theme', t);
       btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); });
+      var fun = null;
+      btns.forEach(function (b) { if (b.dataset.set === t && dd.contains(b)) fun = b; });
+      sum.textContent = fun ? fun.textContent : 'Theme';
+      sum.classList.toggle('on', !!fun);
     }
     btns.forEach(function (b) { b.addEventListener('click', function () {
       try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
       apply(b.dataset.set);
+      dd.open = false;
     }); });
+    // click outside closes the menu
+    document.addEventListener('click', function (e) {
+      if (dd.open && !dd.contains(e.target)) dd.open = false;
+    });
     var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
     apply(saved);
   })();

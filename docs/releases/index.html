@@ -23,7 +23,8 @@
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: New cores &amp; games" href="feed-new.xml">
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: Updates only" href="feed-updates.xml">
 <script>/* apply saved theme before first paint to avoid a flash */
-  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+<link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -34,23 +35,17 @@
                font-weight: 100 900; font-display: swap; }
   @font-face { font-family: 'Permanent Marker'; src: url(../fonts/permanent-marker-latin.woff2) format('woff2');
                font-weight: 400; font-display: swap; }
-  :root { color-scheme: light dark; }            /* auto — follows the OS */
-  :root[data-theme="light"] { color-scheme: light; }
-  :root[data-theme="dark"]  { color-scheme: dark; }
-  /* single source of truth for the site's blue: one hue, lightness tuned per
-     theme so links and every UI accent (borders, interactive text, tints) read
-     as ONE blue while staying legible on both light and dark. Explicit per-theme
-     values (not light-dark()) so the token nests safely inside color-mix(). */
-  :root { --accent: #0066ff; }                       /* light, and auto when OS is light */
-  :root[data-theme="dark"] { --accent: #0066ff; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme]) { --accent: #0066ff; } }
+  /* all palette values (color-scheme, --bg/--surface/--fg, --accent, the type
+     hues, status colors, shadow/watermark tokens) live in ../theme.css — the
+     single source of truth for every theme. This block speaks only in tokens. */
   * { box-sizing: border-box; }
   /* app shell: the page itself never scrolls — .tablewrap is the only scroll
      container. This keeps the fixed detail panel and every native scroll
      behavior (scrollbars, scrollIntoView, find-in-page) framed to the table
      region instead of the full viewport. */
   html, body { height: 100%; overflow: hidden; }
-  body { font: 14px/1.4 Roboto, system-ui, sans-serif; margin: 0; cursor: default; }
+  body { font: 14px/1.4 Roboto, system-ui, sans-serif; margin: 0; cursor: default;
+         background: var(--bg); color: var(--fg); }
   /* app-shell cursor: arrow everywhere (text stays selectable, just without
      the I-beam), except links and the search field — cursor inherits, so both
      need their intent restored explicitly */
@@ -58,7 +53,12 @@
   input { cursor: text; }
   input[type=checkbox] { cursor: pointer; }  /* toggles, not text entry */
   main { height: 100vh; height: 100dvh; display: flex; flex-direction: column; padding: 0 1rem; }
-  .topbar { flex: none; position: relative; z-index: 20; background: Canvas; }
+  /* full-bleed: negative margins cancel main's 1rem side padding (padding
+     re-adds it inside), so the surface band runs to the viewport edges —
+     otherwise themes where --surface differs from --bg show the page ground
+     as odd gutters beside the topbar */
+  .topbar { flex: none; position: relative; z-index: 20; background: var(--surface);
+            margin: 0 -1rem; padding: 0 1rem; }
   header { margin: 0; padding: 1rem 0 0; }
   h1 { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: 1.25rem; font-weight: 600; margin: 0 0 .25rem; }
   /* the whole title is the "home" link: click anywhere on it to drop a deep-link
@@ -72,7 +72,7 @@
      the links on the 2nd+ lines sit flush against the left edge of the line
      above instead of inheriting a leading indent. column-gap gives every item
      the same spacing; the "Updated: <time>" prefix is one item via .upd-stamp. */
-  .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .6rem; row-gap: .15rem; }
+  .updated { color: var(--muted); font-size: .8rem; margin: 0; min-height: 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .6rem; row-gap: .15rem; }
   .updated .upd-stamp { white-space: nowrap; }
   .updated a { color: inherit; text-decoration: none; text-underline-offset: 2px; white-space: nowrap; }
   .updated a:hover { color: var(--accent); }
@@ -92,7 +92,7 @@
   .updated a.zinelink { color: var(--accent); font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.2em;
                         transform-origin: 50% 65%; transition: transform .18s cubic-bezier(.2, .8, .3, 1); }
   .updated a.zinelink:hover, .updated a.zinelink:focus-visible { transform: rotate(-5deg) scale(1.07); }
-  .legend { color: #888; font-size: .8rem; margin: .25rem 0 0; }
+  .legend { color: var(--muted); font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   /* the filter cluster grows to fill the row; the search field grows within it to
      take up the slack (dropdowns sit to its right), and it wraps to the left of the
@@ -101,7 +101,7 @@
              flex: 1 1 auto; min-width: 0; }
   /* thin divider; flex:none keeps it (and the Columns pref after it) from ever
      wrapping, so Columns stays pinned to the far right no matter how filters wrap */
-  .ctrlsep { flex: none; align-self: center; width: 1px; height: 1.5rem; background: #8884; }
+  .ctrlsep { flex: none; align-self: center; width: 1px; height: 1.5rem; background: var(--hair); }
   /* the divider before Columns spans the full row height (stretches down with any
      wrapped filter rows); Columns itself top-aligns with the filters, not centered */
   .ctrlsep.tall { align-self: stretch; height: auto; }
@@ -116,20 +116,22 @@
      "clear one field" idiom as the Year From/To fields' .xclr */
   .qx { position: absolute; right: .15rem; top: 50%; transform: translateY(-50%);
         border: none; background: none; padding: 0 .4rem; font: inherit; font-size: 1.05rem;
-        line-height: 1; color: #888; cursor: pointer; visibility: hidden; }
+        line-height: 1; color: var(--muted); cursor: pointer; visibility: hidden; }
   .qx:hover { color: var(--accent); }
   #q:not(:placeholder-shown) ~ .qx { visibility: visible; }
   /* a non-empty search box (placeholder hidden = something typed) gets accent
      styling so an active filter — easy to trigger via type-anywhere — is obvious */
+  /* active-filter chrome takes the optional secondary highlight where a
+     theme defines one (falls back to the accent everywhere else) */
   input[type=search]:not(:placeholder-shown) {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 10%, Canvas); }
-  select, input[type=search] { font-family: inherit; font-size: .9rem; border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
+    border-color: var(--accent2, var(--accent));
+    background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
+  select, input[type=search] { font-family: inherit; font-size: .9rem; border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
   /* the tally always stacks onto two lines ("1025" over "of 1025"): the second
      line ("of " + the fixed total) is always the wider of the two, so the column
      width is constant and the filter cluster no longer shifts as the count changes */
-  .count { color: #888; font-size: .8rem; flex: none; white-space: nowrap; align-self: flex-start;
+  .count { color: var(--muted); font-size: .8rem; flex: none; white-space: nowrap; align-self: flex-start;
            display: flex; flex-direction: column; line-height: 1.15; text-align: right; }
   /* "Clear filters" is an ACTION, not a status, so it gets a warmer, heavier
      treatment than the blue active-filter glow: amber fill + amber border +
@@ -137,29 +139,29 @@
      being mistaken for a fourth active filter. Theme-aware via color-mix. */
   button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; cursor: pointer;
                  border-radius: 4px;
-                 border: 1px solid color-mix(in srgb, #e08000 65%, CanvasText);
-                 background: color-mix(in srgb, #e08000 20%, Canvas);
-                 color: color-mix(in srgb, #e08000 72%, CanvasText); }
-  button.clear:not(:disabled):hover { background: color-mix(in srgb, #e08000 32%, Canvas); }
+                 border: 1px solid color-mix(in srgb, var(--reset) 65%, var(--fg));
+                 background: color-mix(in srgb, var(--reset) 20%, var(--surface));
+                 color: color-mix(in srgb, var(--reset) 72%, var(--fg)); }
+  button.clear:not(:disabled):hover { background: color-mix(in srgb, var(--reset) 32%, var(--surface)); }
   /* always present, but grayed + inert until a filter is actually narrowing the
      list (JS toggles [disabled]); the amber above is the "armed" state */
-  button.clear:disabled { border-color: #8884; background: transparent; color: #888; cursor: default; }
+  button.clear:disabled { border-color: var(--hair); background: transparent; color: var(--muted); cursor: default; }
   /* "Columns" dropdown: opt-in arcade metadata columns (default all off) */
   details.cols { position: relative; }
   details.cols summary { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
-                         padding: .4rem .7rem; border: 1px solid #8884; border-radius: 4px; }
+                         padding: .4rem .7rem; border: 1px solid var(--hair); border-radius: 4px; }
   details.cols summary::-webkit-details-marker { display: none; }
-  details.cols summary::after { content: " ▾"; color: #888; }
-  details.cols summary:hover, details.cols[open] summary { background: #8882; }
+  details.cols summary::after { content: " ▾"; color: var(--muted); }
+  details.cols summary:hover, details.cols[open] summary { background: var(--hover-bg); }
   /* a Types/Year filter that's narrowing results tints its summary with the same
      accent as a non-empty search box, so an active filter stays obvious with the
      menu closed (Columns is a display pref, not a filter, so it never glows) */
-  details.cols summary.active { border-color: var(--accent);
-                                background: color-mix(in srgb, var(--accent) 10%, Canvas); }
+  details.cols summary.active { border-color: var(--accent2, var(--accent));
+                                background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   details.cols summary.active:hover, details.cols[open] summary.active {
-                                background: color-mix(in srgb, var(--accent) 18%, Canvas); }
+                                background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
   details.cols .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30;
-                       background: Canvas; border: 1px solid #8884; border-radius: 6px;
+                       background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
                        padding: .55rem .8rem; box-shadow: 0 4px 16px #0004;
                        display: grid; gap: .35rem; min-width: 10rem; }
   details.cols .menu label { display: flex; gap: .45rem; align-items: center;
@@ -179,9 +181,9 @@
      2010/2019 that no game in the data happens to carry; the per-field x shows
      only when that bound is set (mirrors the search Clear button). */
   .yearrow { display: flex; align-items: center; gap: .4rem; }
-  .yearrow .ylbl { width: 2.6rem; color: #888; font-size: .9rem; }
+  .yearrow .ylbl { width: 2.6rem; color: var(--muted); font-size: .9rem; }
   .yearrow input[type=number] { flex: 1; min-width: 0; font-family: inherit; font-size: .9rem;
-                   padding: .4rem; border: 1px solid #8884; border-radius: 4px;
+                   padding: .4rem; border: 1px solid var(--hair); border-radius: 4px;
                    background: transparent; color: inherit; }
   .yearrow input[type=number]:focus { border-color: var(--accent); outline: none; }
   /* strip the native spin buttons: inconsistent across browsers and cramped in this narrow field */
@@ -189,14 +191,14 @@
   .yearrow input[type=number]::-webkit-inner-spin-button,
   .yearrow input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
   .yearrow .xclr { border: none; background: none; padding: 0 .2rem; font: inherit;
-                   line-height: 1; color: #888; cursor: pointer; }
+                   line-height: 1; color: var(--muted); cursor: pointer; }
   .yearrow .xclr:hover { color: var(--accent); }
   .decades { display: flex; flex-wrap: wrap; gap: .3rem; margin: .1rem 0; }
   .decades .dchip { font: inherit; font-size: .8rem; padding: .15rem .4rem; cursor: pointer;
-                    border: 1px solid #8884; border-radius: 4px; background: transparent; color: inherit; }
-  .decades .dchip:hover { background: #8882; }
-  .decades .dchip.on { border-color: var(--accent);
-                       background: color-mix(in srgb, var(--accent) 18%, Canvas); }
+                    border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit; }
+  .decades .dchip:hover { background: var(--hover-bg); }
+  .decades .dchip.on { border-color: var(--accent2, var(--accent));
+                       background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
   /* separate (not collapse): collapsed borders are painted by the table, so they
      don't travel with the sticky <th>s — rows show through 1px seams while scrolling.
      With separate+spacing:0 each cell owns its border and it sticks along with it. */
@@ -226,7 +228,7 @@
   body.custom-sb .tablewrap { scrollbar-width: none; }
   body.custom-sb .tablewrap::-webkit-scrollbar { display: none; }
   .sb-thumb { position: absolute; z-index: 16; border-radius: 4px; touch-action: none;
-    background: color-mix(in srgb, CanvasText 40%, transparent);
+    background: color-mix(in srgb, var(--fg) 40%, transparent);
     opacity: 0; transition: opacity .25s; }
   .sb-thumb.v { right: 2px; width: 7px; }
   .sb-thumb.h { bottom: 2px; height: 7px; }
@@ -234,15 +236,14 @@
      hovered (an invisible thumb still hit-tests, so brushing the edge reveals
      it — how real overlay bars behave), and while being dragged */
   .tablezone.sb-show .sb-thumb, .sb-thumb:hover, .sb-thumb.drag { opacity: 1; }
-  .sb-thumb:hover, .sb-thumb.drag { background: color-mix(in srgb, CanvasText 60%, transparent); }
+  .sb-thumb:hover, .sb-thumb.drag { background: color-mix(in srgb, var(--fg) 60%, transparent); }
   /* horizontal scroll hints (classes toggled by syncScrollHints): a fade at the
      right edge while more columns sit off-screen, and a shadow cast by the
      sticky Title column once scrolled, so content visibly slides under it.
-     Shadows stay BLACK in both themes (a CanvasText-based one turns into a
-     white glow on dark, which reads as light, not depth) — dark theme just
-     needs more opacity to register against a near-black background.
-     light-dark() follows the effective color-scheme, incl. auto mode. */
-  .tablezone { --hint-shadow: light-dark(rgb(0 0 0 / .20), rgb(0 0 0 / .75)); }
+     Shadows stay BLACK in every theme (a text-color-based one turns into a
+     white glow on dark, which reads as light, not depth) — dark themes just
+     need more opacity to register against a near-black background.
+     --hint-shadow is set per theme in theme.css. */
   /* --hint-r-w / --hint-l-w are set per scroll event by syncScrollHints: full
      width normally, tapering to 0 as its edge of the scroll range approaches,
      so each hint shrinks away instead of blinking off.
@@ -266,15 +267,24 @@
      .scrolled class (toggled per scroll event) whenever the list is more than
      about a row away from the top; pointer-events gating keeps the hidden
      button from stealing clicks meant for the rows under it. Neutral chrome
-     (Canvas + border, like the topbar buttons) — an accent-colored pill
+     (--surface + border, like the topbar buttons) — an accent-colored pill
      floating over the rows was too loud. */
+  /* the 1rem gutter left of the table exposes the page ground beside the
+     header row on themes where --surface differs from --bg (invisible on
+     light/dark where they match) — this strip patches exactly the header
+     band's height, hairlines included, so the band reads full-bleed */
+  .thpatch { position: absolute; left: -1rem; width: 1rem; top: 0; height: var(--theadh, 2.2rem);
+             background: var(--surface); z-index: 1; }
+             /* deliberately no hairline borders: they'd draw new 1px lines in
+                light/dark (where the strip itself is invisible), and against a
+                contrasting band color their absence in this 1rem is unnoticeable */
   .totop { position: absolute; z-index: 17; top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem;
     font: inherit; font-size: .8rem; cursor: pointer;
-    padding: .45rem .85rem; border: 1px solid #8884; border-radius: 999px;
-    background: color-mix(in srgb, CanvasText 7%, Canvas); color: inherit; box-shadow: 0 2px 8px #0003;
+    padding: .45rem .85rem; border: 1px solid var(--hair); border-radius: 999px;
+    background: color-mix(in srgb, var(--fg) 7%, var(--surface)); color: inherit; box-shadow: 0 2px 8px #0003;
     opacity: 0; pointer-events: none; transition: opacity .15s; }
   .tablezone.scrolled .totop { opacity: 1; pointer-events: auto; }
-  .totop:hover { background: color-mix(in srgb, CanvasText 14%, Canvas); }
+  .totop:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
   /* "no matches" row: a single message cell replacing the row list. Undo the
      row/cell chrome (sticky first cell, hover tint). The inner div
      pins to the scrollport's left edge and caps at the viewport width, so the
@@ -282,38 +292,38 @@
   tr.nomatch td { position: static; border-right: 0; }
   tr.nomatch:hover td { background: none; }
   tr.nomatch .msg { position: sticky; left: 0; max-width: calc(100vw - 1rem); text-align: center;
-                    color: #888; padding: 2.5rem .5rem; }
-  tr.nomatch .msg b { font-weight: 600; color: CanvasText; }
+                    color: var(--muted); padding: 2.5rem .5rem; }
+  tr.nomatch .msg b { font-weight: 600; color: var(--fg); }
   tr.nomatch .msg .esc { font-size: .85em; margin-top: .35rem; display: block; }
   table { min-width: 49rem; }
-  th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #8883; vertical-align: top;
+  th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top;
            overflow-wrap: break-word; }
-  th { position: sticky; top: 0; z-index: 10; background: Canvas; cursor: pointer; user-select: none;
+  th { position: sticky; top: 0; z-index: 10; background: var(--surface); cursor: pointer; user-select: none;
        overflow-wrap: normal;  /* headers wrap at spaces, never mid-word */
-       border-top: 1px solid #8883; }  /* a divider so the header row reads apart from the filters above */
+       border-top: 1px solid var(--rule); }  /* a divider so the header row reads apart from the filters above */
   /* the sorted column's header is marked by the accent color on its label +
      arrow alone (no background fill) */
-  th[aria-sort] { color: var(--accent); }
+  th[aria-sort] { color: var(--accent2, var(--accent)); }
   th[aria-sort=ascending]::after { content: " \2191"; }
   th[aria-sort=descending]::after { content: " \2193"; }
   /* every column after Title is condensed — denser metadata, more room for titles */
   th + th, td + td { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
            font-weight: 600; white-space: nowrap; line-height: 1.5;
-           background: color-mix(in srgb, var(--h) 20%, Canvas);
-           color: color-mix(in srgb, var(--h) 72%, CanvasText); }
-  .t-arcade   { --h: #e8a317; }
-  .t-console  { --h: #3aa0ff; }
-  .t-computer { --h: #2bbf6e; }
-  .t-other    { --h: #b07cff; }
+           background: color-mix(in srgb, var(--h) 20%, var(--bg));
+           color: color-mix(in srgb, var(--h) 72%, var(--fg)); }
+  .t-arcade   { --h: var(--type-arcade); }
+  .t-console  { --h: var(--type-console); }
+  .t-computer { --h: var(--type-computer); }
+  .t-other    { --h: var(--type-other); }
   /* Core Type icons (Lucide, ISC): colour-coded via the same --h hue as the
-     old badges, icon-only. The hue is mixed toward CanvasText so it stays
+     old badges, icon-only. The hue is mixed toward var(--fg) so it stays
      vivid yet legible on both the light and dark table grounds. */
   .tico { display: inline-flex; align-items: center; vertical-align: middle;
-          color: color-mix(in srgb, var(--h) 80%, CanvasText); }
+          color: color-mix(in srgb, var(--h) 80%, var(--fg)); }
   .tico svg { width: 1rem; height: 1rem; }
-  td .dep { color: #888; font-size: .82em; margin-left: .35rem; }
-  td.core { color: CanvasText; font-size: .92em; cursor: default; }
+  td .dep { color: var(--muted); font-size: .82em; margin-left: .35rem; }
+  td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
   td.core a:hover .lbl { text-decoration: underline; }
@@ -327,26 +337,41 @@
      anchor-level underline also runs under the glyph and the gap before it as a
      detached stub, and a descendant can't cancel an inherited underline, so
      `text-decoration: none` here on .ext would be a decoy. */
-  .ext { color: #888; margin-left: .25rem; font-size: .85em; }
+  .ext { color: var(--muted); margin-left: .25rem; font-size: .85em; }
   /* floated (not flexed) top-right so the title/meta text lines shorten beside
      the buttons and flow full-width beneath them instead of wrapping early */
+  /* no overflow:hidden (it would clip the absolute theme menu); the group's
+     rounded ends are re-applied to the first/last segments instead */
   .theme { float: right; display: inline-flex; margin-left: 1rem;
-           border: 1px solid #8884; border-radius: 6px; overflow: hidden; }
+           border: 1px solid var(--hair); border-radius: 6px; }
   .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
-  .theme button + button { border-left: 1px solid #8884; }
-  .theme button[aria-pressed="true"] { background: #8883; font-weight: 600; }
+  .theme > button:first-child { border-radius: 5px 0 0 5px; }
+  .theme button + button { border-left: 1px solid var(--hair); }
+  .theme button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  /* the fun-theme dropdown: a details.cols (so it inherits the shared
+     outside-click close + viewport-fit positioning), restyled as the third
+     segment of the toggle. The summary shows the active fun theme's name. */
+  .theme details.cols summary { border: 0; border-left: 1px solid var(--hair); border-radius: 0 5px 5px 0;
+                                font-size: .78rem; padding: .3rem .6rem; }
+  .theme details.cols summary::after { content: " \25BE"; color: var(--muted); }
+  .theme details.cols summary.on { background: var(--rule); font-weight: 600; }
+  /* the menu itself keeps the shared details.cols .menu chrome (same box as
+     the Columns dropdown); only its buttons need styling of their own */
+  .theme .menu button { font-size: .85rem; text-align: left; padding: .3rem .5rem;
+                        border: 0; border-radius: 4px; }
+  .theme .menu button:hover { background: var(--hover-bg); }
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   /* :where() adds the "no dropdown open" guard at zero specificity cost, so the
      hover/open precedence below is unchanged. While a filter dropdown is open a
      click on the table only dismisses it (never opens a row), so the hover tint
      would be lying about clickability — suppress it via body.dd-open. */
-  :where(body:not(.dd-open)) tr:hover td { background: #8881; }
-  .build { color: #888; }
+  :where(body:not(.dd-open)) tr:hover td { background: var(--row-hover); }
+  .build { color: var(--muted); }
   /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
-  td.prov, .prov { color: #888; font-style: italic; }
+  td.prov, .prov { color: var(--muted); font-style: italic; }
   .prov em { font-style: normal; opacity: .7; font-size: .85em; }
-  .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid #8883;
-             font-size: .8rem; line-height: 1.35; color: #888; max-width: 15rem; }
+  .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid var(--rule);
+             font-size: .8rem; line-height: 1.35; color: var(--muted); max-width: 15rem; }
   .colnote .prov { font-style: italic; }
   /* every row opens the detail panel (arrow cursor on purpose: rows are
      app-style select targets, not links — the hover tint signals clickability) */
@@ -354,19 +379,19 @@
   /* Title column pins to the scroller's left edge. It needs its own opaque
      paint: row backgrounds don't travel with a sticky cell, and the hover/open
      tints above are translucent — content scrolling beneath would bleed
-     through — so the :first-child overrides remix them opaquely over Canvas
+     through — so the :first-child overrides remix them opaquely over --bg
      (they also need the extra specificity to beat `tr:hover td`/`tr.open td`). */
-  td:first-child { position: sticky; left: 0; z-index: 2; background: Canvas; }
+  td:first-child { position: sticky; left: 0; z-index: 2; background: var(--bg); }
   th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
-  td:first-child, th:first-child { border-right: 1px solid #8883; }
-  :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, #888 7%, Canvas); }
-  tr.open td:first-child  { background: color-mix(in srgb, var(--accent) 20%, Canvas); }
+  td:first-child, th:first-child { border-right: 1px solid var(--rule); }
+  :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, var(--line) 7%, var(--bg)); }
+  tr.open td:first-child  { background: color-mix(in srgb, var(--accent) 20%, var(--bg)); }
 
   /* --- detail panel: slides in from the left --- */
   #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, round(calc(100vw / 3), 1px));
            transform: translateX(-100%); transition: transform .28s ease;
-           overflow: hidden; z-index: 100; background: Canvas; display: flex; flex-direction: column;
-           border-right: 1px solid #8884;
+           overflow: hidden; z-index: 100; background: var(--surface); display: flex; flex-direction: column;
+           border-right: 1px solid var(--hair);
            touch-action: pan-y; }
   body.panel-open #panel { transform: translateX(0); }
   #panel[hidden] { display: none; }
@@ -378,7 +403,7 @@
   /* the game title itself in the marker face (year + copy-link stay upright) */
   #panel h2 .gametitle { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.2rem; }
   #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
-  #panel dt { color: #888; }
+  #panel dt { color: var(--muted); }
   #panel dd { margin: 0; }
   /* the Repository row link: same .lbl-only underline as every glyph-tailed link */
   #panel dd a { text-decoration: none; }
@@ -411,9 +436,9 @@
         display: block; user-select: text;
         box-sizing: content-box; width: 100%;
         padding: .1rem .3rem; margin: -.1rem -.3rem; }
-  .cf:hover { background: color-mix(in srgb, #888 7%, Canvas); }
+  .cf:hover { background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
   .cf:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
-  .cf .ci { color: #888; font-size: .85em; margin-left: .35rem; user-select: none; }
+  .cf .ci { color: var(--muted); font-size: .85em; margin-left: .35rem; user-select: none; }
   .cf:hover .ci, .cf:focus-visible .ci { color: inherit; }
   /* the title's field hugs the title rather than banding the whole line: the h2
      is the only place a full-width tint would run under the sticky × */
@@ -421,7 +446,7 @@
                   padding: .15rem .4rem; margin: -.15rem -.4rem; }
   #panel h2 .ci { font-size: .8em; }   /* quiet next to the title, not a loud pill */
   /* flat yellow bolt after the ZapScript field label */
-  #panel .zapbolt { width: .8em; height: .8em; fill: #f5c518; vertical-align: -.08em; margin-left: .25rem; }
+  #panel .zapbolt { width: .8em; height: .8em; fill: var(--warn); vertical-align: -.08em; margin-left: .25rem; }
   /* the ZapScript token takes a jolt on hover/copy (zapJolt, below). position:
      relative is load-bearing and inline-block is forbidden: transforms do
      nothing on a plain inline box, but relative offsets DO apply to one — and
@@ -433,19 +458,19 @@
      the way an absolutely positioned bubble inside them would. */
   .copychip { position: fixed; left: 0; top: 0; z-index: 200;
     opacity: 0; pointer-events: none;
-    background: var(--accent); color: #fff; font-size: .7rem; font-weight: 600;
+    background: var(--accent); color: var(--accent-on); font-size: .7rem; font-weight: 600;
     line-height: 1; padding: .2rem .4rem; border-radius: 4px; white-space: nowrap; }
   /* RSS popover: feed chooser opened from the meta line's "RSS" link; styled
      after the Columns dropdown menu. Fixed positioning is fine — the page
      itself never scrolls (app shell) */
-  .rsspop { position: fixed; z-index: 40; background: Canvas; border: 1px solid #8884;
+  .rsspop { position: fixed; z-index: 40; background: var(--surface); border: 1px solid var(--hair);
     border-radius: 6px; padding: .6rem .8rem; box-shadow: 0 4px 16px #0004;
     font-size: .8rem; max-width: min(30rem, calc(100vw - 2rem)); }
   /* hover popovers (Discord/RSS/Public-cores) sit a few px below their link;
      this invisible strip bridges that gap so travelling link->popover never
      leaves the hover region, letting the popover close instantly otherwise */
   .rsspop.hoverpop::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
-  .rsspop p { margin: 0 0 .45rem; color: #888; }
+  .rsspop p { margin: 0 0 .45rem; color: var(--muted); }
   .rsspop p:last-child { margin-bottom: 0; }
   /* each feed row IS its own copy field (a .cf button), so the ⧉ is just the
      last flex item and the wrap problem never arises here */
@@ -454,29 +479,30 @@
   .rsspop .feedrow b { font-weight: 600; white-space: nowrap; }
   .rsspop .feedrow .ci { flex: none; margin-left: 0; }   /* the gap already spaces it */
   .rsspop code { overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    direction: rtl; flex: 1; color: #888; }  /* rtl ellipsis keeps the distinctive tail (…feed-new.xml) visible */
+    direction: rtl; flex: 1; color: var(--muted); }  /* rtl ellipsis keeps the distinctive tail (…feed-new.xml) visible */
   @media (max-width: 480px) { .rsspop { left: 1rem !important; right: 1rem; } }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
-  #panel .report { color: #888; font-size: .8rem; margin: 1.25rem 0 0; }
+  #panel .report { color: var(--muted); font-size: .8rem; margin: 1.25rem 0 0; }
   #panel .report a { color: inherit; text-decoration: none; text-underline-offset: 2px; white-space: nowrap; }
   #panel .report a .lbl { text-decoration: underline; }
   #panel .report a:hover { color: var(--accent); }
   /* empty state shown before any title is selected */
   #panel .body.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; gap: 1rem; }
   #panel .body.empty .close { position: absolute; top: .4rem; right: .6rem; float: none; }
-  /* debossed watermark: fill sits a hair darker than the Canvas surface in both
-     themes; the #mzstamp svg filter adds the pressed-in edge shading */
+  /* debossed watermark: fill sits a hair darker than the panel surface in every
+     theme (--watermark, per theme in theme.css); the #mzstamp svg filter adds
+     the pressed-in edge shading */
   #panel .body.empty .logo { width: 60%; max-width: 220px; aspect-ratio: 532.4 / 354.2;
-    fill: light-dark(color-mix(in srgb, CanvasText 8%, Canvas), color-mix(in srgb, #000 11%, Canvas)); }
+    fill: var(--watermark); }
   /* pressed-in edge shading: strong sheen would glow on a dark surface, so both
-     floods are theme-tuned here rather than fixed in the filter markup */
-  #mzstamp .shade { flood-color: light-dark(rgb(0 0 0 / .42), rgb(0 0 0 / .33)); }
-  #mzstamp .sheen { flood-color: light-dark(rgb(255 255 255 / .55), rgb(255 255 255 / .05)); }
-  #panel .pick { color: #888; font-size: .95rem; margin: 0; }
+     floods are theme-tuned (in theme.css) rather than fixed in the filter markup */
+  #mzstamp .shade { flood-color: var(--stamp-shade); }
+  #mzstamp .sheen { flood-color: var(--stamp-sheen); }
+  #panel .pick { color: var(--muted); font-size: .95rem; margin: 0; }
   /* footer is docked to the bottom of the panel (outside the scrolling .body) */
-  #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid #8883;
-                 background: Canvas; color: #888; font-size: .78rem; }
-  #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid #8886; border-radius: 3px; }
+  #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid var(--rule);
+                 background: var(--surface); color: var(--muted); font-size: .78rem; }
+  #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid var(--kbd-border); border-radius: 3px; }
   #panel .frame { width: 100%; background: #000; margin: .5rem 0; position: relative; }
   #panel .frame img { width: 100%; height: 100%; object-fit: fill; display: block; }
   /* CRT slot mask (mask.js) drawn over each screenshot in device pixels;
@@ -489,7 +515,7 @@
   #panel .sysframe { position: relative; margin: 1.75rem auto .9rem; }
   #panel .sysframe .sysphoto { margin: 0; }
   #panel .sysframe canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-  #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: #888; opacity: .55;
+  #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: var(--muted); opacity: .55;
                       font-size: .62rem; }
   #panel .syscredit a { color: inherit; }
 
@@ -498,20 +524,20 @@
      (window.open + auto-close) — see the launch section in the JS. */
   #panel .launchrow { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 0; }
   #panel .launchrow button { font: inherit; font-size: .78rem; padding: .28rem .65rem; cursor: pointer;
-    border: 1px solid #8887; border-radius: 6px; background: Canvas; color: inherit; }
-  #panel .launchrow button:hover { border-color: #888c; }
-  #panel .launchrow .go.sent { color: #2a2; border-color: #2a28; }
+    border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface); color: inherit; }
+  #panel .launchrow button:hover { border-color: var(--btn-border-hover); }
+  #panel .launchrow .go.sent { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 53.33%, transparent); }
   /* must clear the panel (and its resizer, z 101) — the launch button lives inside the panel */
   .misterpop { width: min(22rem, calc(100vw - 2rem)); z-index: 102; }
   .misterpop .devrow { display: flex; gap: .45rem; align-items: center; margin: .35rem 0; }
   .misterpop button { font: inherit; font-size: .78rem; padding: .22rem .55rem; cursor: pointer;
-    border: 1px solid #8887; border-radius: 6px; background: Canvas; color: inherit; }
-  .misterpop button:hover { border-color: #888c; }
-  .misterpop .devrow code { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #888; }
-  .misterpop .devrow .rm { border: none; padding: 0 .2rem; color: #888; }
-  .misterpop .devrow .rm:hover { color: #c33; border: none; }
-  .misterpop input { font: inherit; font-size: .78rem; padding: .25rem .45rem; border: 1px solid #8887;
-    border-radius: 6px; background: Canvas; color: inherit; min-width: 0; }
+    border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface); color: inherit; }
+  .misterpop button:hover { border-color: var(--btn-border-hover); }
+  .misterpop .devrow code { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); }
+  .misterpop .devrow .rm { border: none; padding: 0 .2rem; color: var(--muted); }
+  .misterpop .devrow .rm:hover { color: var(--danger); border: none; }
+  .misterpop input { font: inherit; font-size: .78rem; padding: .25rem .45rem; border: 1px solid var(--btn-border);
+    border-radius: 6px; background: var(--surface); color: inherit; min-width: 0; }
   .misterpop .adder .nm { flex: 2; }
   .misterpop .adder .ad { flex: 3; }
   .misterpop .note { font-size: .72rem; margin-top: .5rem; }
@@ -531,7 +557,7 @@
              transition: transform .28s ease, visibility 0s .28s; }
   body.panel-open #resizer { transform: none; visibility: visible; transition: transform .28s ease; }
   /* ribbed grip: two vertical lines running the whole edge so it reads as a draggable seam */
-  #resizer { --rib: #8889; }
+  #resizer { --rib: var(--rib-idle); }
   #resizer:hover, body.resizing #resizer { --rib: var(--accent); }
   /* integer-pixel stops (1px lines / 1px gaps) so the lines land on the pixel grid evenly */
   #resizer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right,
@@ -590,6 +616,17 @@
   <div class="theme" id="theme" role="group" aria-label="Color theme">
     <button type="button" data-set="light">Light</button>
     <button type="button" data-set="dark">Dark</button>
+    <details class="cols" id="themedd">
+      <summary id="themesum">Theme</summary>
+      <div class="menu">
+        <button type="button" data-set="punchy">MiSTer-y</button>
+        <button type="button" data-set="vaporwave">Vaporwave</button>
+        <button type="button" data-set="icecream">Ice Cream</button>
+        <button type="button" data-set="pastel">Pastel</button>
+        <button type="button" data-set="pink">Pink</button>
+        <button type="button" data-set="eva">Unit-01</button>
+      </div>
+    </details>
   </div>
   <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)"><span class="site">misterzine.fyi/releases</span> - a MiSTer FPGA core and arcade tracker</a></h1>
   <p class="updated" id="updated"></p>
@@ -629,6 +666,7 @@
 </div>
 </div>
 <div class="tablezone">
+<div class="thpatch" aria-hidden="true"></div>
 <button id="totop" class="totop" type="button">↑ Scroll to top</button>
 <div class="tablewrap">
 <table>
@@ -1758,7 +1796,7 @@ function detailHTML(d) {
   // the title doubles as the permalink's copy field (it has no text of its own
   // to sit beside), so a keyless row falls back to the bare title
   const titleHTML = '<span class="gametitle">' + esc(d.title) + '</span>' +
-    (d.year ? ' <span style="color:#888;font-weight:normal">(' + esc(d.year) + ')</span>' : '');
+    (d.year ? ' <span style="color:var(--muted);font-weight:normal">(' + esc(d.year) + ')</span>' : '');
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') : titleHTML) + '</h2>' +
     launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
@@ -2124,16 +2162,28 @@ function endResize(e) {
 resizer.addEventListener('pointerup', endResize);
 resizer.addEventListener('pointercancel', endResize);
 
-// --- theme toggle (light / dark; persisted, defaults to dark) ---
-const themeBtns = [...document.querySelectorAll('#theme button')];
+// --- theme toggle (persisted, defaults to dark). Light/Dark are one-click
+// buttons; the fun themes live in a details.cols dropdown whose summary shows
+// the active one. The valid-theme list comes from the controls themselves, so
+// a new theme = one menu button + one theme.css block. ---
+const themeBtns = [...document.querySelectorAll('#theme button[data-set]')];
+const themeDD = document.getElementById('themedd');
+const themeSum = document.getElementById('themesum');
+const THEMES = themeBtns.map(b => b.dataset.set);
 function applyTheme(t) {
-  if (t !== 'light' && t !== 'dark') t = 'dark';
+  if (!THEMES.includes(t)) t = 'dark';
   document.documentElement.setAttribute('data-theme', t);
   themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.set === t));
+  // summary wears the active fun theme's name (and its pressed look); when a
+  // base theme is active it reverts to the neutral "Theme" label
+  const fun = themeBtns.find(b => b.dataset.set === t && themeDD.contains(b));
+  themeSum.textContent = fun ? fun.textContent : 'Theme';
+  themeSum.classList.toggle('on', !!fun);
 }
 themeBtns.forEach(b => b.addEventListener('click', () => {
   localStorage.setItem('mz-theme', b.dataset.set);
   applyTheme(b.dataset.set);
+  themeDD.open = false;
 }));
 applyTheme(localStorage.getItem('mz-theme') || 'dark');
 

@@ -584,9 +584,7 @@
       var posts = z.posts, out = [];
       posts.forEach(function (p, i) {
         var why = p.why === 'decadeversary' ? '&middot; ' + p.nth + 'th decadeversary' : rd(p.debut);
-        // legacy decadeversary posts carry the debut on the meta line
-        var meta = '<a href="#' + esc(p.id) + '">' + stamp(p.posted) + '</a>' +
-                   (p.why === 'decadeversary' && p.debut ? ' ' + rd(p.debut) : '');
+        var meta = '<a href="#' + esc(p.id) + '">' + stamp(p.posted) + '</a>';
         out.push(
           '<article id="' + esc(p.id) + '"' + (p.tate ? ' class="tate"' : '') + '>\n' +
           '  <h2><a href="releases/#' + esc(p.k) + '">' + esc(p.title) +

@@ -2795,10 +2795,6 @@ def _zine_feed_xml(posts):
         xml.append(f'<lastBuildDate>{escape(_rfc822(posts[0]["posted"]))}</lastBuildDate>')
     for p in posts:
         desc = "".join(f"<p>{par}</p>" for par in p["body"])
-        # legacy decadeversary posts show the debut on their meta line; the
-        # feed mirrors the page (new decadeversary posts carry no debut)
-        if p["why"] == "decadeversary" and p.get("debut"):
-            desc += f"<p>MiSTer debut {p['debut']}.</p>"
         xml += ['<item>',
                 f'<title>{escape(p["title"])} ({escape(_zine_reason(p))})</title>',
                 f'<link>{SITE_ROOT}?ref=rss#{escape(p["id"])}</link>',
@@ -2853,9 +2849,9 @@ def _zine_validate(z):
         elif p["why"] == "decadeversary":
             if not (isinstance(p.get("nth"), int) and p["nth"] % 10 == 0):
                 bad("decadeversary post needs nth: a multiple of 10")
-            # legacy posts may carry debut (rendered in .meta); new ones must not
-            if "debut" in p and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", p["debut"]):
-                bad("debut must be YYYY-MM-DD")
+            # one reason per post: the linked release row carries the debut date
+            if "debut" in p:
+                bad("debut on a decadeversary post: exactly one reason per post")
         else:
             bad("why must be 'debut' or 'decadeversary'")
         if p["shot"] not in ("h", "v", "w"):

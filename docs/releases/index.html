@@ -339,6 +339,15 @@
           color: color-mix(in srgb, var(--h) 80%, var(--fg)); }
   .tico svg { width: 1rem; height: 1rem; }
   td .dep { color: var(--muted); font-size: .82em; margin-left: .35rem; }
+  /* NEW badge: our own pill, where the NEW emoji it replaces was a fixed blue
+     that ignored every theme. Outlined in --accent, which is already vetted
+     against the surface in each theme, so there's no second fill/text token to
+     keep legible; age fades the whole pill via an inline opacity. */
+  td .nb { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
+           border: 1px solid var(--accent); border-radius: .2rem;
+           color: var(--accent); font-size: .6em; font-weight: 700;
+           letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
+           white-space: nowrap; }
   td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
@@ -928,18 +937,33 @@ function typeBadge(d) {
          '" aria-label="' + escA(base) + '">' + ico + '</span>';
 }
 
-// True only for a genuinely known MiSTer debut in the last 7 days. Gating on
+// Whole days since a genuinely known MiSTer debut, else -1. Gating on
 // date_kind === 'debut' skips console/computer rows that fell back to a build
-// date (debut unknown), so those never get falsely flagged as new.
-function isNewDebut(d) {
-  return d.date_kind === 'debut' && d.date &&
-         Date.now() - Date.parse(d.date) < 7 * 864e5;   // 864e5 = ms per day
+// date (debut unknown), so those never get falsely flagged as new. Clamped at
+// 0 because the date is parsed as UTC midnight but compared against a local
+// clock, which runs a debut dated today slightly negative west of UTC.
+function debutAgeDays(d) {
+  if (d.date_kind !== 'debut' || !d.date) return -1;
+  return Math.max(0, Math.floor((Date.now() - Date.parse(d.date)) / 864e5));  // 864e5 = ms per day
+}
+
+// The NEW badge rides for four weeks, fading with age down to a 0.3 floor and
+// then going entirely: fading to a true 0 would leave a stretch of invisible
+// pills that still answer the hover. Its popover text is baked in here, so the
+// shared hover handler only has to read data-tip back out.
+const NEW_DAYS = 28;
+function newBadge(d) {
+  const age = debutAgeDays(d);
+  if (age < 0 || age >= NEW_DAYS) return '';
+  const op  = (1 - 0.7 * age / NEW_DAYS).toFixed(2);
+  const tip = age === 0 ? 'Debuted today'
+            : age + (age === 1 ? ' day' : ' days') + ' old (debuted ' + d.date + ')';
+  return '<span class="nb" style="opacity:' + op + '" data-tip="' + escA(tip) + '">NEW</span>';
 }
 
 function titleCell(d) {
-  const nw  = isNewDebut(d) ? ' \u{1F195}' : '';   // NEW emoji for recent debuts
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
-  return esc(d.title) + nw + dep;
+  return esc(d.title) + newBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -1179,6 +1203,10 @@ document.getElementById('totop').addEventListener('click', () => {
 function render() {
   const tb = document.getElementById('rows');
   const cols = activeColumns();
+  // every path below rebuilds the tbody, detaching any NEW badge a hover
+  // popover is anchored to — and a removed node never fires the mouseout that
+  // would close it, so retire it here rather than leave one floating
+  if (hoverPopFor && hoverPopFor.closest('#rows')) closeHoverPop();
   // zero results is never left as a silent blank table: name the query AND any
   // active type/genre filter (an invisible narrower is the sneaky way to get here)
   if (!view.length && DATA.length) {
@@ -2439,8 +2467,15 @@ const META_POP = {
     }).join(''),
 };
 const META_SEL = '#discord-link, #rss-link, #pub-note';
+// The NEW badges borrow this same chrome, but as pointer triggers only: they're
+// per-row and re-rendered on every sort and filter, so they're tracked by
+// element and carry their own text in data-tip rather than being ids in
+// META_POP. They stay out of the focus and tap paths below — focusing them
+// would add a dozen tab stops for a date the Debut column already spells out,
+// and on touch a tap in that cell belongs to the row's detail panel.
+const HOVER_SEL = META_SEL + ', td .nb';
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
-let hoverPop = null, hoverPopFor = null;
+let hoverPop = null, hoverPopFor = null;   // hoverPopFor: the trigger element
 function closeHoverPop() {
   if (hoverPop) { hideChip(); hoverPop.remove(); hoverPop = null; hoverPopFor = null; return true; }
   return false;
@@ -2450,17 +2485,17 @@ function closeHoverPop() {
 // pointer within the popover and doesn't trip this
 function closeIfOut(e) {
   if (!hoverPop) return;
-  const trig = hoverPopFor && document.getElementById(hoverPopFor);
-  if (hoverPop.contains(e.relatedTarget) || (trig && trig.contains(e.relatedTarget))) return;
+  if (hoverPop.contains(e.relatedTarget) ||
+      (hoverPopFor && hoverPopFor.contains(e.relatedTarget))) return;
   closeHoverPop();
 }
 function openHoverPop(a) {
-  if (hoverPopFor === a.id) return;  // already showing this one
+  if (hoverPopFor === a) return;  // already showing this one
   closeHoverPop();
-  hoverPopFor = a.id;
+  hoverPopFor = a;
   hoverPop = document.createElement('div');
   hoverPop.className = 'rsspop hoverpop';
-  hoverPop.innerHTML = META_POP[a.id]();
+  hoverPop.innerHTML = a.dataset.tip ? '<p>' + esc(a.dataset.tip) + '</p>' : META_POP[a.id]();
   document.body.appendChild(hoverPop);
   const r = a.getBoundingClientRect();
   const w = hoverPop.offsetWidth;  // measure after insert so we can keep the bridge under the link
@@ -2471,8 +2506,8 @@ function openHoverPop(a) {
 document.addEventListener('focusin', e => { const a = e.target.closest(META_SEL); if (a) openHoverPop(a); });
 document.addEventListener('focusout', e => { if (hoverPop && (e.target.closest(META_SEL) || hoverPop.contains(e.target))) closeIfOut(e); });
 if (CAN_HOVER) {
-  document.addEventListener('mouseover', e => { const a = e.target.closest(META_SEL); if (a) openHoverPop(a); });
-  document.addEventListener('mouseout', e => { if (hoverPop && (e.target.closest(META_SEL) || hoverPop.contains(e.target))) closeIfOut(e); });
+  document.addEventListener('mouseover', e => { const a = e.target.closest(HOVER_SEL); if (a) openHoverPop(a); });
+  document.addEventListener('mouseout', e => { if (hoverPop && (e.target.closest(HOVER_SEL) || hoverPop.contains(e.target))) closeIfOut(e); });
 }
 let metapop = null, metapopFor = null;
 function closePop() { if (metapop) { metapop.remove(); metapop = null; return true; } return false; }
@@ -2480,7 +2515,7 @@ document.addEventListener('click', e => {
   const trig = e.target.closest('#rss-link, #pub-note');
   if (trig) {
     e.preventDefault();  // these only reveal a popover; the link itself does nothing
-    if (!CAN_HOVER) { hoverPopFor === trig.id ? closeHoverPop() : openHoverPop(trig); }  // touch: tap toggles
+    if (!CAN_HOVER) { hoverPopFor === trig ? closeHoverPop() : openHoverPop(trig); }  // touch: tap toggles
     return;
   }
   // outside click closes a tapped-open hover popover and the MiSTer launch

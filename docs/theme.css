@@ -153,7 +153,7 @@
   --fg: #46281a;             /* chocolate */
   --muted: #8a6a52;
   --line: #a67c5e;
-  --accent: #c93a6e;         /* deep strawberry */
+  --accent: #b02d5c;         /* deep strawberry (dark enough for the marker title on the strawberry panel) */
   --accent2: #8f5a1e;        /* deep caramel: active filters + sorted column */
   --accent-on: #fff;
   --brand-hover: #d6467a;
@@ -182,10 +182,10 @@
   --fg: #4a4160;             /* soft violet ink */
   --muted: #8b7fa8;
   --line: #a698c8;
-  --accent: #9d4cbf;         /* deepened lilac for links */
+  --accent: #863a9f;         /* deepened lilac for links + the marker title on the lilac panel */
   --accent2: #b03064;        /* deepened pink: active filters + sorted column */
   --accent-on: #fff;
-  --brand-hover: #9d4cbf;
+  --brand-hover: #863a9f;
   --type-arcade: #b8a212;    /* lemon, deepened */
   --type-console: #6a6ce0;   /* periwinkle */
   --type-computer: #43b088;  /* mint */

@@ -401,7 +401,10 @@
                   border: 0; background: transparent; color: inherit; cursor: pointer; padding: .1rem .3rem; }
   #panel h2 { font-size: 1.1rem; margin: 0 1.5rem .5rem 0; }
   /* the game title itself in the marker face (year + copy-link stay upright) */
-  #panel h2 .gametitle { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.2rem; }
+  /* the marker-font game title wears the theme accent (like the Zine Home /
+     Release Tracker marker links), so opening a title shows off the palette */
+  #panel h2 .gametitle { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.2rem;
+                         color: var(--accent); }
   #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
   #panel dt { color: var(--muted); }
   #panel dd { margin: 0; }
@@ -526,7 +529,16 @@
   #panel .launchrow button { font: inherit; font-size: .78rem; padding: .28rem .65rem; cursor: pointer;
     border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface); color: inherit; }
   #panel .launchrow button:hover { border-color: var(--btn-border-hover); }
-  #panel .launchrow .go.sent { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 53.33%, transparent); }
+  /* the Launch action (.go) is the panel's primary CTA, so it wears the theme
+     accent as a solid fill (--accent-on keeps the label legible on light-pastel
+     accents). The manager chevron (.more) stays neutral chrome. */
+  #panel .launchrow .go { background: var(--accent); color: var(--accent-on); border-color: var(--accent); }
+  #panel .launchrow .go:hover { border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
+  /* success state overrides the accent fill back to a neutral surface so the
+     green "Sent" reads as a state change, not green-on-accent */
+  #panel .launchrow .go.sent { background: var(--surface); color: var(--ok);
+    border-color: color-mix(in srgb, var(--ok) 53.33%, transparent); }
   /* must clear the panel (and its resizer, z 101) — the launch button lives inside the panel */
   .misterpop { width: min(22rem, calc(100vw - 2rem)); z-index: 102; }
   .misterpop .devrow { display: flex; gap: .45rem; align-items: center; margin: .35rem 0; }

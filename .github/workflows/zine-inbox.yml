@@ -59,7 +59,7 @@ jobs:
         run: |
           CHANGED=$(git diff --name-only origin/main..HEAD)
           echo "$CHANGED"
-          BAD=$(echo "$CHANGED" | grep -Ev '^(docs/zine\.json|docs/feed-zine\.xml|docs/images/zine/[^/]+\.png)$' || true)
+          BAD=$(echo "$CHANGED" | grep -Ev '^(docs/zine\.json|docs/feed-zine\.xml|docs/images/zine/[^/]+\.png|ZINE-SKIPS\.md)$' || true)
           if [ -n "$BAD" ]; then
             echo "::error::zine-inbox may only change post data; refused paths:"
             echo "$BAD"

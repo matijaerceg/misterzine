@@ -14,6 +14,42 @@ Making a post means: add one object to zine.json, add one image, run
 `python misterzine.py zine`, push to the `zine-inbox` branch. That is all.
 The details are in "The post data" and "Publishing" below.
 
+## The run (step by step, for the automated publisher)
+
+Publish exactly ONE post per run, or skip loudly. Never end a run silently.
+
+1. Read the rest of this file in full before anything else.
+2. Read `docs/zine.json`. It is the published record: every existing post is
+   an object with id `YYYYMMDD-<k>`. This tells you what is already covered,
+   which quotes and images are already used, and the exact shape of a post
+   object. Candidate data lives in `docs/releases/data.json`.
+3. Pick a candidate using the hooks and variety rules below.
+4. Research the candidate with WebSearch and WebFetch. Every fact must come
+   from text you fetched this run; never write a fact from memory. Choose
+   quotes per "Writing the post" below.
+5. Verify mechanically. Save each fetched source's text to a file and check
+   with Python or grep that every quoted span in your draft is an exact
+   character-for-character substring of the source. A failed check means fix
+   the quote to the source's exact text or drop the candidate. Never ship an
+   unverified quote.
+6. Get the screenshot per "The screenshot" below: an image the site has never
+   shown, correct display aspect (mind non-square pixels), native pixels,
+   saved to `docs/images/zine/`. You may pip install pillow for conversion.
+   If you cannot get a confident image, drop the candidate.
+7. Write the post object per "The post data" below, run
+   `python misterzine.py zine`, fix anything it flags until clean, then walk
+   the "Before you publish" checklist line by line. Use `date -u` for the
+   real current UTC time; post ids and timestamps are UTC.
+8. Publish per "Publishing" below: commit ONLY `docs/zine.json`,
+   `docs/feed-zine.xml`, and the new image, with a short imperative subject
+   like `Zine: <Game Name>`. Never add any AI attribution, co-author trailer,
+   or "Generated with" line anywhere. Push to `zine-inbox`, NEVER to main.
+
+If a candidate fails at any step, move to the next candidate. If no candidate
+ships, publish nothing and report the skip per "When you cannot" at the end of
+this file. Do not edit ZINE.md. Touch nothing else in the repo, no matter what
+you notice.
+
 ## The one rule
 
 **Nothing here is our own writing.** A post is a verbatim quote from a source,
@@ -280,8 +316,11 @@ inspection; fix and push again.
 
 ## When you cannot
 
-Skip and say so, loudly. Open an issue saying what you tried and why you bailed.
-Do not lower the bar to ship something: there are four posts a day and a missed
+Skip and say so, loudly. Open a GitHub issue on matijaerceg/misterzine titled
+`Zine skip: <UTC date and time>` saying what you tried and why you bailed. If
+issue creation fails, append the same report to `ZINE-SKIPS.md` at the repo
+root instead, commit it, and push to `zine-inbox` (the landing workflow accepts
+that file). Do not lower the bar to ship something: there are four posts a day and a missed
 one costs nothing, while a bad one is on the public site until someone notices.
 Silence is the one thing worse than skipping, because a quiet failure looks
 exactly like a quiet day.

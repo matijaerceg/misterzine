@@ -510,6 +510,11 @@
      this invisible strip bridges that gap so travelling link->popover never
      leaves the hover region, letting the popover close instantly otherwise */
   .rsspop.hoverpop::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
+  /* the NEW badge's age tip is read-only, so it never needs to be travelled
+     into: click-through keeps it from swallowing clicks on the row it covers
+     (it opens right over the next one) and drops the bridge with it */
+  .rsspop.tippop { pointer-events: none; }
+  .rsspop.tippop::before { content: none; }
   .rsspop p { margin: 0 0 .45rem; color: var(--muted); }
   .rsspop p:last-child { margin-bottom: 0; }
   /* each feed row IS its own copy field (a .cf button), so the ⧉ is just the
@@ -947,15 +952,16 @@ function debutAgeDays(d) {
   return Math.max(0, Math.floor((Date.now() - Date.parse(d.date)) / 864e5));  // 864e5 = ms per day
 }
 
-// The NEW badge rides for four weeks, fading with age down to a 0.3 floor and
-// then going entirely: fading to a true 0 would leave a stretch of invisible
-// pills that still answer the hover. Its popover text is baked in here, so the
-// shared hover handler only has to read data-tip back out.
-const NEW_DAYS = 28;
+// The NEW badge rides for four weeks, fading with age to NEW_FLOOR and then
+// going entirely rather than reaching 0: a pill faded to nothing would still
+// answer the hover, popping a tip up off what looks like blank space. Its
+// popover text is baked in here, so the shared hover handler only has to read
+// data-tip back out.
+const NEW_DAYS = 28, NEW_FLOOR = 0.15;
 function newBadge(d) {
   const age = debutAgeDays(d);
   if (age < 0 || age >= NEW_DAYS) return '';
-  const op  = (1 - 0.7 * age / NEW_DAYS).toFixed(2);
+  const op  = (1 - (1 - NEW_FLOOR) * age / NEW_DAYS).toFixed(2);
   const tip = age === 0 ? 'Debuted today'
             : age + (age === 1 ? ' day' : ' days') + ' old (debuted ' + d.date + ')';
   return '<span class="nb" style="opacity:' + op + '" data-tip="' + escA(tip) + '">NEW</span>';
@@ -2494,7 +2500,11 @@ function openHoverPop(a) {
   closeHoverPop();
   hoverPopFor = a;
   hoverPop = document.createElement('div');
-  hoverPop.className = 'rsspop hoverpop';
+  // a tip has nothing to travel into and click, unlike the feed rows, so it
+  // wants none of the bridge/grace the others need: .tippop is click-through,
+  // which both keeps it off the row it overlaps and means the pointer can never
+  // be "inside" it, so leaving the badge closes it immediately below
+  hoverPop.className = 'rsspop hoverpop' + (a.dataset.tip ? ' tippop' : '');
   hoverPop.innerHTML = a.dataset.tip ? '<p>' + esc(a.dataset.tip) + '</p>' : META_POP[a.id]();
   document.body.appendChild(hoverPop);
   const r = a.getBoundingClientRect();

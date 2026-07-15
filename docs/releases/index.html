@@ -315,10 +315,13 @@
        overflow-wrap: normal;  /* headers wrap at spaces, never mid-word */
        border-top: 1px solid var(--rule); }  /* a divider so the header row reads apart from the filters above */
   /* the sorted column's header is marked by the accent color on its label +
-     arrow alone (no background fill) */
+     arrow alone (no background fill). The space before the arrow is a NO-BREAK
+     one: a plain space lets the arrow wrap to a second line at the min-width
+     floor, which re-talls the whole sticky header exactly when a column is
+     sorted (i.e. always — the default sort is Last Updated). */
   th[aria-sort] { color: var(--accent2, var(--accent)); }
-  th[aria-sort=ascending]::after { content: " \2191"; }
-  th[aria-sort=descending]::after { content: " \2193"; }
+  th[aria-sort=ascending]::after { content: "\00a0\2191"; }
+  th[aria-sort=descending]::after { content: "\00a0\2193"; }
   /* every column after Title is condensed — denser metadata, more room for titles */
   th + th, td + td { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
@@ -615,7 +618,11 @@
      Reflow into a single wrapping cluster: search + tally on line one, then the
      dropdowns / Clear / Columns flowing together beneath it. */
   @media (max-width: 899px) {
-    .controls { flex-wrap: wrap; row-gap: .5rem; }
+    /* column-gap is tighter than the .5rem default: with the short labels the whole
+       cluster (3 dropdowns + Clear + Columns) needs ~383px against 358px of usable
+       width on a 390px phone, and this plus the summary padding below closes that
+       gap — buying a whole row back rather than leaving Columns stranded alone. */
+    .controls { flex-wrap: wrap; row-gap: .5rem; column-gap: .3rem; }
     /* dissolve the filters wrapper so its children become flex items of .controls
        itself and join one shared wrap flow with the tally and Columns — the
        desktop "grows and wraps against a pinned right column" split is exactly
@@ -636,8 +643,15 @@
     button.clear { order: 7; }
     /* Columns keeps its far-right anchoring, now against whatever row it lands on */
     #cols { order: 8; margin-left: auto; align-self: center; }
-    /* a notch tighter so the three filter dropdowns fit one line on a ~390px phone */
-    details.cols summary, button.clear { font-size: .85rem; padding: .35rem .55rem; }
+    /* a notch tighter so the filter cluster fits one line on a ~390px phone. Only
+       the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
+       the tap targets keep their height. */
+    details.cols summary, button.clear { font-size: .85rem; padding: .35rem .45rem; }
+    /* the sort arrow is dropped here: at this width it's the thing that wraps the
+       header onto a second sticky line, and the accent color already says which
+       column is sorted. Direction is the only loss (tap again to flip); aria-sort
+       still carries it to screen readers, and desktop keeps the arrow. */
+    th[aria-sort]::after { content: none; }
   }
   /* printing: undo the fixed-height app shell so the full row list paginates
      instead of clipping to one screen of the scroller */
@@ -926,16 +940,20 @@ function coreCell(d) {
 // whichever columns are enabled (the table uses table-layout:fixed); mw is
 // each column's contribution (rem) to the table's min-width floor.
 // Optional columns without a cell() render their data key as plain text.
+// sl is a one-word header used on narrow screens only (see narrowMQ): at the mw
+// floor a two-word label wraps, and since the header row is sticky that second
+// line is spent at every scroll position. Only multi-word labels need one; the
+// Columns menu always shows the full label.
 const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
-  { k: 'sn', label: 'ROM Name', w: 9, mw: 6.5, opt: true,
+  { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
-  { k: 'typesort', label: 'Core Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
+  { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
-  { k: 'updated', label: 'Last Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },
-  { k: 'date', label: 'MiSTer Debut', w: 10, mw: 5.5,
+  { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },
+  { k: 'date', label: 'MiSTer Debut', sl: 'Debut', w: 10, mw: 5.5,
     cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' },
-  { k: 'year', label: 'Original Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
+  { k: 'year', label: 'Original Year', sl: 'Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
   { k: 'manufacturer', label: 'Manufacturer', w: 19, mw: 8.5, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
   { k: 'core', label: 'Core', w: 24, mw: 10,
     cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
@@ -944,7 +962,7 @@ const COLUMNS = [
   { k: 'res',  label: 'Resolution', w: 10, mw: 5, opt: true },
   { k: 'plr',  label: 'Players',    w: 13, mw: 5, opt: true },
   { k: 'ctl',  label: 'Controls',   w: 13, mw: 5, opt: true },
-  { k: 'spc',  label: 'Special Controls', w: 10, mw: 5, opt: true },
+  { k: 'spc',  label: 'Special Controls', sl: 'Special', w: 10, mw: 5, opt: true },
   { k: 'flip', label: 'Flip', w: 6, mw: 5, opt: true },
 ];
 // Header tooltips (title attributes on the <th>s, rendered by buildHeader).
@@ -992,6 +1010,14 @@ try {
 
 const activeColumns = () => COLUMNS.filter(c => c.lock || enabledCols.has(c.k));
 
+// Narrow screens trade wording for vertical space: one-word headers (COLUMNS.sl)
+// and terser filter summaries, so neither the sticky header row nor the filter
+// row costs a second line on a phone. Same breakpoint as the controls reflow
+// above — the header only wraps once the table is at its min-width floor, which
+// is roughly the same zone. The change listener re-runs every piece of text that
+// depends on it; each sync fn below reads narrowMQ.matches itself.
+const narrowMQ = matchMedia('(max-width: 899px)');
+
 function buildHeader() {
   const cols = activeColumns();
   const total = cols.reduce((s, c) => s + c.w, 0);
@@ -1001,7 +1027,7 @@ function buildHeader() {
     '<th data-k="' + c.k + '"' + (c.k === sortKey
       ? ' aria-sort="' + (sortDir === 1 ? 'ascending' : 'descending') + '"' : '') +
     (HEADER_TIPS[c.k] ? ' title="' + escA(HEADER_TIPS[c.k]) + '"' : '') +
-    '>' + c.label + '</th>').join('');
+    '>' + ((narrowMQ.matches && c.sl) || c.label) + '</th>').join('');
   // each column contributes its mw to the table's width floor so cells don't
   // crush (the 5rem on the metadata columns keeps the nowrap date columns from
   // colliding with all 6 on); an over-wide table scrolls horizontally inside
@@ -1256,6 +1282,16 @@ function clearAllFilters() {
   recenterOpen();
 }
 document.getElementById('clear').addEventListener('click', clearAllFilters);
+// "Clear filters" is the longest control in the row; narrow keeps just the verb.
+// The tooltip only exists while the label is abbreviated — on desktop it would
+// just echo the full label back. Unlike the dropdowns, no existing sync fn owns
+// this button's text, hence the helper.
+function syncClearLabel() {
+  const b = document.getElementById('clear');
+  b.textContent = narrowMQ.matches ? 'Clear' : 'Clear filters';
+  if (narrowMQ.matches) b.title = 'Clear filters'; else b.removeAttribute('title');
+}
+syncClearLabel();
 // the brand/URL in the title is a plain link to "./": clicking it does a real
 // navigation to a bare /releases/, exactly like typing that URL and hitting
 // Enter. That's a full fresh load (panel/hash, filters, sort and scroll all
@@ -1307,7 +1343,9 @@ const typeReset = document.getElementById('typereset');
 function syncTypeSummary() {
   // empty (= no filter) and full both read as "All Core Types"; partial shows the count
   const partial = enabledTypes.size !== 0 && enabledTypes.size !== TYPES.length;
-  typeSummary.textContent = partial ? 'Core Types (' + enabledTypes.size + ')' : 'All Core Types';
+  const name = narrowMQ.matches ? 'Types' : 'Core Types';
+  typeSummary.textContent = partial ? name + ' (' + enabledTypes.size + ')'
+    : (narrowMQ.matches ? name : 'All ' + name);
   typeSummary.classList.toggle('active', partial);  // glow when narrowing, like a non-empty search box
   typeReset.disabled = enabledTypes.size === 0;  // no boxes checked = the default
 }
@@ -1398,7 +1436,10 @@ function yearLabel() {
 // single source of truth for the control's visible state after any change
 function syncYear() {
   const lbl = yearLabel();
-  yearSummary.textContent = lbl ? 'Year: ' + lbl : 'Year';
+  // narrow drops the "Year:" prefix — the glow already marks it as an active
+  // filter, and the range itself reads as years. yearLabel() is untouched: the
+  // no-match message wraps it in its own prose.
+  yearSummary.textContent = lbl ? (narrowMQ.matches ? lbl : 'Year: ' + lbl) : 'Year';
   yearSummary.classList.toggle('active', !!lbl);  // glow while a range is set, like a non-empty search box
   for (const x of yearMenu.querySelectorAll('.xclr'))
     x.hidden = (x.dataset.b === 'from' ? yearFrom : yearTo) == null;
@@ -1477,7 +1518,8 @@ function syncGenreSummary() {
   // empty (= no filter) and every-genre-checked both read as "All Genres"; a partial
   // selection shows the count and glows, matching the Types dropdown.
   const partial = enabledGenres.size !== 0 && enabledGenres.size !== GENRE_COUNT;
-  genreSummary.textContent = partial ? 'Genres (' + enabledGenres.size + ')' : 'All Genres';
+  genreSummary.textContent = partial ? 'Genres (' + enabledGenres.size + ')'
+    : (narrowMQ.matches ? 'Genres' : 'All Genres');
   genreSummary.classList.toggle('active', partial);
   const rst = genreMenu.querySelector('#genrereset');
   if (rst) rst.disabled = enabledGenres.size === 0;
@@ -2243,6 +2285,18 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
   openPlaceholder();
   requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('no-anim')));
 }
+// crossing the narrow breakpoint swaps every label that has a short form. The
+// header must go through buildHeader(): it ends in syncScrollHints(), which
+// re-measures --theadh off the first <th> — and the header's height is exactly
+// what changes here (the "Scroll to top" pill and .thpatch both anchor to it).
+narrowMQ.addEventListener('change', () => {
+  buildHeader();
+  syncTypeSummary();
+  syncGenreSummary();
+  syncYear();
+  syncClearLabel();
+});
+
 // turning portrait while only the empty state shows → hide it so it doesn't cover the list
 matchMedia('(max-aspect-ratio: 3/5)').addEventListener('change', e => {
   if (e.matches && openRow == null && document.body.classList.contains('panel-open')) closePanel();

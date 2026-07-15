@@ -185,10 +185,10 @@
   .top .theme .menu button { border: 0; text-align: left; border-radius: 4px; font-size: .85rem;
                              padding: .3rem .5rem; white-space: nowrap;
                              display: flex; align-items: center; gap: .5em; }
-  /* each theme's pair of swatch dots (its surface + its signature colour);
-     the second dot is a box-shadow copy of the first. The colours
-     (--sw1/--sw2) come from the swatch table in theme.css, so no literals
-     live here. */
+  /* each theme's pair of preview dots (the two colours that theme declares as
+     its preview: base first, signature second); the second dot is a box-shadow
+     copy of the first. The colours (--sw1/--sw2) come from the preview-colour
+     table in theme.css, so no literals live here. */
   .top .theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
                                      margin-right: .95em; border-radius: 50%; background: var(--sw1);
                                      box-shadow: .95em 0 0 var(--sw2); }

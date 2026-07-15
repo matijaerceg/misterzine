@@ -547,29 +547,55 @@
   --stamp-sheen: rgb(255 255 255 / .06);
 }
 
-/* ---- theme swatches: the pair of little dots beside each name in the
-   theme dropdown — the theme's SURFACE first (the colour the dropdown itself
-   would wear, so the dot matches what you land on), then its signature colour. Restated here because CSS can't reach into another theme's block
-   (tokens always resolve to the ACTIVE theme) — keep in sync when a palette
-   above changes. The pages draw the dots themselves (a ::before reading
-   --sw1/--sw2); this file only supplies the colours, so the
-   no-literals-in-page-CSS rule holds. */
-.menu button[data-set="punchy"]     { --sw1: #313244; --sw2: #cba6f7; }
-.menu button[data-set="vaporwave"]  { --sw1: #251a55; --sw2: #ff71ce; }
-.menu button[data-set="icecream"]   { --sw1: #ffc5d9; --sw2: #fdf5c9; }
-/* pastel's sw2 is its --accent2, not its lemon --bg: the ground (#fbfbe4) is
-   too pale to read as a dot on the menu's own light surface (it just looks
-   like a missing swatch). Gelato can use its vanilla --bg because #fdf5c9 is
-   saturated enough; this one isn't. */
-.menu button[data-set="pastel"]     { --sw1: #eecbff; --sw2: #4a4fd0; }
-.menu button[data-set="pink"]       { --sw1: #ffc3d8; --sw2: #ff69b4; }
-.menu button[data-set="eva"]        { --sw1: #2f2050; --sw2: #a6ff00; }
-.menu button[data-set="phosphor"]   { --sw1: #101a12; --sw2: #35e86b; }
-.menu button[data-set="dmg"]        { --sw1: #8bac0f; --sw2: #306230; }
-.menu button[data-set="spectrum"]   { --sw1: #14142e; --sw2: #00ffff; }
-.menu button[data-set="workbench"]  { --sw1: #00498f; --sw2: #ff9422; }
-.menu button[data-set="commodore"]  { --sw1: #2a1f63; --sw2: #7869c4; }
-.menu button[data-set="riso"]       { --sw1: #e8e3d5; --sw2: #c8156b; }
-.menu button[data-set="amber"]      { --sw1: #1c1408; --sw2: #ffb000; }
-.menu button[data-set="famicom"]    { --sw1: #ece4d0; --sw2: #a71d31; }
-.menu button[data-set="virtualboy"] { --sw1: #1c0505; --sw2: #ff2a2a; }
+/* ---- theme PREVIEW COLOURS: the pair of little dots beside each name in the
+   theme dropdown.
+
+   THE RULE, and it is the same for every theme: each theme DECLARES the two
+   colours that best preview it. Base/field colour first, signature colour
+   second. That is the whole rule. The pair is AUTHORED, not derived from the
+   theme's tokens — do not "fix" a row to make it match --surface, --bg or
+   --accent, and do not invent a per-theme exception. If a theme previews
+   badly, change its two declared colours here.
+
+   Why authored and not derived (all three were tried and rejected):
+   - --surface first: --surface is only ever a lifted variant of --bg, so
+     every theme's two dots came out near-twins (RGB distance < 90 on all 15;
+     Phosphor showed no green, Amber no amber, Virtual Boy no red). It also
+     silently broke the ACTIVE row: the menu box IS background:var(--surface),
+     so the active theme's first dot vanished into it.
+   - --bg + --accent: uniform and legible everywhere, but it can only ever
+     show the accent, and a theme's most recognisable colour often isn't its
+     accent (Pastel's pink lives in --type-other; it would have shown purple).
+   - "surface + signature": the old rule. "Signature" is a judgment call, so
+     the table drifted into four different rules at once (accent, bg, accent2,
+     a type hue) and nobody could tell which was intended.
+   The colours here need not be tokens at all, and several aren't.
+
+   Restated as literal hex because CSS can't reach into another theme's block
+   (tokens always resolve to the ACTIVE theme). The pages draw the dots
+   themselves (a ::before reading --sw1/--sw2); this file only supplies the
+   colours, so the no-literals-in-page-CSS rule holds.
+
+   One constraint the authoring must respect: never declare a colour equal to
+   that theme's OWN --surface, because the menu box wears the active theme's
+   surface and the dot would vanish on exactly the row you're looking at.
+   (Pink and Famicom both did; they declare their --bg instead.)
+
+   Known and accepted: a dark theme's dark first dot is hard to see while some
+   OTHER dark theme is active (its bright second dot carries the row). That's
+   inherent to previewing a black-grounded theme on a black menu, not a bug. */
+.menu button[data-set="punchy"]     { --sw1: #1e1e2e; --sw2: #cba6f7; } /* deep indigo + mauve */
+.menu button[data-set="vaporwave"]  { --sw1: #b967ff; --sw2: #ff71ce; } /* medium purple + pink */
+.menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #d6467a; } /* vanilla + strawberry */
+.menu button[data-set="pastel"]     { --sw1: #fbfbe4; --sw2: #d0578f; } /* lemon + pink */
+.menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #c4136c; } /* soft pink + deep pink */
+.menu button[data-set="eva"]        { --sw1: #6b5a94; --sw2: #a6ff00; } /* medium purple + green */
+.menu button[data-set="phosphor"]   { --sw1: #0a0e0a; --sw2: #35e86b; } /* dark + bright green */
+.menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #0f380f; } /* screen + ink */
+.menu button[data-set="spectrum"]   { --sw1: #000000; --sw2: #00ffff; } /* black + cyan */
+.menu button[data-set="workbench"]  { --sw1: #003a75; --sw2: #ff9422; } /* Amiga blue + orange */
+.menu button[data-set="commodore"]  { --sw1: #352879; --sw2: #7869c4; } /* the two VIC-II blues */
+.menu button[data-set="riso"]       { --sw1: #f2efe6; --sw2: #c8156b; } /* newsprint + spot ink */
+.menu button[data-set="amber"]      { --sw1: #100b04; --sw2: #ffb000; } /* black + amber */
+.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; } /* cream + crimson */
+.menu button[data-set="virtualboy"] { --sw1: #000000; --sw2: #ff2a2a; } /* black + LED red */

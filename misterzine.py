@@ -116,6 +116,18 @@ def gh_token():
     return _token_cache
 
 
+# Prefer certifi's CA bundle when it's installed: some local Python builds carry
+# a trust store too old for the modern Let's Encrypt chain (adb.arcadeitalia.net,
+# letsencrypt.org, ...). Absent certifi (e.g. bare CI python) None falls back to
+# the platform default, which is current there anyway.
+try:
+    import ssl as _ssl
+    import certifi as _certifi
+    _SSL_CONTEXT = _ssl.create_default_context(cafile=_certifi.where())
+except ImportError:
+    _SSL_CONTEXT = None
+
+
 def http_get(url, headers=None, want_headers=False, retries=3):
     h = {"User-Agent": UA}
     if headers:
@@ -124,7 +136,7 @@ def http_get(url, headers=None, want_headers=False, retries=3):
     for attempt in range(retries):
         req = urllib.request.Request(url, headers=h)
         try:
-            with urllib.request.urlopen(req, timeout=60) as r:
+            with urllib.request.urlopen(req, timeout=60, context=_SSL_CONTEXT) as r:
                 body = r.read()
                 if want_headers:
                     return body, dict(r.headers)
@@ -2520,7 +2532,7 @@ def cmd_export_web(args):
     # regenerating. The same rule covers DOCSDIR/index.html (the site root):
     # it's the hand-maintained daily zine since 2026-07-11, not a redirect —
     # export-web must never write it.
-    _backfill_libretro_images(data)  # give brand-new arcade titles a libretro shot
+    _backfill_arcade_images(data)  # give brand-new arcade titles an ADB/libretro shot
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
     _write_feeds(outdir)  # RSS feeds from the events table (needs final data.json)
     _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
@@ -2926,6 +2938,19 @@ def cmd_zine(args):
 
 LIBRETRO_RAW = "https://raw.githubusercontent.com/libretro-thumbnails/MAME/master/{}"
 LIBRETRO_TREE_API = "/repos/libretro-thumbnails/MAME/git/trees/master?recursive=1"
+# Arcade Database serves per-setname native-res PNGs (the same progettoSNAPS
+# captures our manual local pass extracts from the pack zips), but only to
+# requests that look like a browser: plain curl / default-UA fetches 404.
+ADB_MEDIA = "https://adb.arcadeitalia.net/media/mame.current/{}/{}.png"
+ADB_HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                             "AppleWebKit/537.36 (KHTML, like Gecko) "
+                             "Chrome/126.0 Safari/537.36",
+               "Referer": "https://adb.arcadeitalia.net/"}
+# How long a recorded screenshot miss keeps being retried: a brand-new title's
+# images usually appear in ADB/libretro within weeks of the core release, but a
+# title absent for this long (test tapes, multigame carts, non-MAME games) is a
+# permanent gap and further probing is noise. Measured from the row's debut date.
+BACKFILL_RETRY_DAYS = 90
 
 
 def _libretro_slug(s):
@@ -2934,16 +2959,16 @@ def _libretro_slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
-def _fetch_libretro_png(ref, dest):
-    """Download one libretro thumbnail (ref like 'Named_Titles/Dig Dug.png') to
-    dest. Returns True on a valid PNG. Skips if a non-empty file is already there."""
+def _fetch_png(url, dest, headers=None, label=""):
+    """Download one screenshot to dest. Returns True on a valid PNG (magic-checked
+    so an HTML error page never lands on disk). Skips if a non-empty file is
+    already there."""
     if dest.exists() and dest.stat().st_size > 0:
         return True
-    url = LIBRETRO_RAW.format(urllib.parse.quote(ref))
     try:
-        body = http_get(url)
+        body = http_get(url, headers=headers)
     except Exception as e:
-        log(f"    libretro miss {ref}: {e}")
+        log(f"    {label} miss: {e}")
         return False
     if not body or body[:8] != b"\x89PNG\r\n\x1a\n":
         return False
@@ -2952,17 +2977,25 @@ def _fetch_libretro_png(ref, dest):
     return True
 
 
-def _backfill_libretro_images(data):
-    """Give arcade titles that debuted since the last manifest build a screenshot
-    from libretro-thumbnails (per-file GitHub raw — CI-friendly: no 7z, no giant
-    progettoSNAPS packs, no MAME DAT).
+def _backfill_arcade_images(data):
+    """Give arcade titles that debuted since the last manifest build a screenshot,
+    CI-friendly (per-file GETs: no 7z, no giant progettoSNAPS packs, no MAME DAT).
 
-    Native-res progettoSNAPS remains a manual local pass; this just stops brand-new
-    titles from landing on the daily site with no image. Each candidate is recorded
-    in the manifest exactly once (with refs if matched, empty if not) so it's never
-    re-resolved, and the following _retag_image_dims() stamps the refs onto data.json.
-    A later local build_manifest run rebuilds the whole manifest and upgrades any of
-    these to native-res progettoSNAPS where available."""
+    Two tiers: Arcade Database first (setname-keyed — deterministic join, and its
+    PNGs are the same native-res progettoSNAPS captures as the manual local pass),
+    then libretro-thumbnails matched by display name (for setname-less rows and
+    setnames ADB doesn't carry). Each candidate is recorded in the manifest (with
+    refs if matched, empty if not) and the following _retag_image_dims() stamps
+    the refs onto data.json.
+
+    A recorded miss is retried on later runs while the row's debut is younger
+    than BACKFILL_RETRY_DAYS (sources often gain a new title's images weeks after
+    the core ships — e.g. Legionnaire 2026-07-15 had an ADB shot on day one but
+    nothing in libretro); after that it freezes so permanent gaps aren't probed
+    forever. Deliberately-bare titles (build_manifest's NO_IMAGE_TITLES) rely on
+    that freeze — their rows are old — so a NEW deliberately-bare row would need
+    its own guard here. A later local build_manifest run rebuilds the whole
+    manifest and upgrades adb/libretro rows to progettoSNAPS where available."""
     manifest_path = CACHEDIR / "image_manifest.json"
     if not manifest_path.exists():
         return  # no manifest to extend (cold checkout); nothing to do
@@ -2972,60 +3005,102 @@ def _backfill_libretro_images(data):
         return
     # manifest entries are keyed by the raw MRA-derived title, which a
     # humanized row keeps in `mt` — always match/record with that form
-    known = {e["title"] for e in manifest}
-    todo = [r for r in data
-            if r.get("base") == "Arcade" and not r.get("deprecated")
-            and (r.get("mt") or r["title"]) not in known]
-    if not todo:
-        return  # steady state: no new titles since the last manifest build
+    by_title = {e["title"]: e for e in manifest}
 
-    # The repo file tree, fetched once (cached; gitignored so re-fetched per CI run).
-    tree_path = CACHEDIR / "libretro_mame_tree.json"
-    if tree_path.exists():
-        tree = json.loads(tree_path.read_text(encoding="utf-8"))
-    else:
+    def bare(e):
+        return not (e.get("source") or e.get("title_img")
+                    or e.get("snap_img") or e.get("third_img"))
+
+    def young(r):
         try:
-            tree = gh_api(LIBRETRO_TREE_API)
-            CACHEDIR.mkdir(parents=True, exist_ok=True)
-            tree_path.write_text(json.dumps(tree), encoding="utf-8")
-        except Exception as e:
-            log(f"  libretro backfill skipped: tree fetch failed ({e})")
-            return
+            age = dt.date.today() - dt.date.fromisoformat(r.get("date") or "")
+        except ValueError:
+            return False
+        return age.days <= BACKFILL_RETRY_DAYS
 
-    sys.path.insert(0, str(ROOT / "tools"))
-    try:
-        import match  # normalization + region-aware candidate picking
-    except Exception as e:
-        log(f"  libretro backfill skipped: match module unavailable ({e})")
-        return
-    idx = {f: match.build_index(tree, f) for f in ("Named_Titles", "Named_Snaps")}
+    todo = []  # (row, manifest entry — freshly appended for unseen titles)
+    for r in data:
+        if r.get("base") != "Arcade" or r.get("deprecated"):
+            continue
+        entry = by_title.get(r.get("mt") or r["title"])
+        if entry is None:
+            entry = {"title": r.get("mt") or r["title"], "setname": None,
+                     "source": None, "title_img": None, "snap_img": None,
+                     "third_img": None, "third_pack": None}
+            manifest.append(entry)
+            by_title[entry["title"]] = entry
+            todo.append((r, entry))
+        elif bare(entry) and young(r):
+            todo.append((r, entry))  # recorded miss, row still young: retry
+    if not todo:
+        return  # steady state: no new titles, no young misses
 
     hits = 0
-    for r in todo:
-        title = r.get("mt") or r["title"]
-        res = match.resolve(title, idx)  # {folder: filename stem or None}
-        entry = {"title": title, "setname": None, "source": None,
-                 "title_img": None, "snap_img": None,
-                 "third_img": None, "third_pack": None}
+    leftovers = []  # rows ADB couldn't cover; get the libretro tier
+    for r, entry in todo:
+        sn = (r.get("sn") or "").lower()
+        if sn and not entry.get("setname"):
+            entry["setname"] = sn  # record even on a miss; informative
         got = False
-        for folder, field, slot in (("Named_Titles", "title_img", "title"),
-                                    ("Named_Snaps", "snap_img", "snap")):
-            stem = res.get(folder)
-            if not stem:
+        for kind, field, slot in (("titles", "title_img", "title"),
+                                  ("ingames", "snap_img", "snap")):
+            if not sn:
                 continue
-            ref = f"{folder}/{stem}.png"
-            dest = DOCSDIR / "images" / slot / (_libretro_slug(title) + ".png")
-            if _fetch_libretro_png(ref, dest):
-                entry[field] = ref
-                entry["source"] = "libretro"
+            dest = DOCSDIR / "images" / slot / (sn + ".png")
+            if _fetch_png(ADB_MEDIA.format(kind, urllib.parse.quote(sn)), dest,
+                          headers=ADB_HEADERS, label=f"adb {kind}/{sn}"):
+                entry[field] = f"{kind}/{sn}.png"
+                entry["source"] = "adb"
                 got = True
         if got:
             hits += 1
-        manifest.append(entry)  # record even misses so they aren't re-resolved
+        else:
+            leftovers.append((r, entry))
 
+    if leftovers:
+        # The repo file tree, fetched once (cached; gitignored so re-fetched per CI run).
+        tree_path = CACHEDIR / "libretro_mame_tree.json"
+        tree = idx = None
+        if tree_path.exists():
+            tree = json.loads(tree_path.read_text(encoding="utf-8"))
+        else:
+            try:
+                tree = gh_api(LIBRETRO_TREE_API)
+                CACHEDIR.mkdir(parents=True, exist_ok=True)
+                tree_path.write_text(json.dumps(tree), encoding="utf-8")
+            except Exception as e:
+                log(f"  libretro tier skipped: tree fetch failed ({e})")
+        if tree is not None:
+            sys.path.insert(0, str(ROOT / "tools"))
+            try:
+                import match  # normalization + region-aware candidate picking
+                idx = {f: match.build_index(tree, f)
+                       for f in ("Named_Titles", "Named_Snaps")}
+            except Exception as e:
+                log(f"  libretro tier skipped: match module unavailable ({e})")
+        for r, entry in (leftovers if idx else []):
+            title = entry["title"]
+            res = match.resolve(title, idx)  # {folder: filename stem or None}
+            got = False
+            for folder, field, slot in (("Named_Titles", "title_img", "title"),
+                                        ("Named_Snaps", "snap_img", "snap")):
+                stem = res.get(folder)
+                if not stem:
+                    continue
+                ref = f"{folder}/{stem}.png"
+                dest = DOCSDIR / "images" / slot / (_libretro_slug(title) + ".png")
+                if _fetch_png(LIBRETRO_RAW.format(urllib.parse.quote(ref)), dest,
+                              label=f"libretro {ref}"):
+                    entry[field] = ref
+                    entry["source"] = "libretro"
+                    got = True
+            if got:
+                hits += 1
+
+    # An all-miss retry pass rewrites identical bytes: no git churn.
     manifest_path.write_text(json.dumps(manifest, indent=1, ensure_ascii=False),
                              encoding="utf-8")
-    log(f"  libretro backfill: {hits}/{len(todo)} new arcade titles matched a screenshot")
+    log(f"  screenshot backfill: {hits}/{len(todo)} arcade titles matched (adb/libretro)")
 
 
 def _retag_image_dims():

@@ -98,8 +98,8 @@ jobs:
             echo "No new or updated releases today — nothing to publish."
           else
             # Persist alongside the published outputs: the sqlite carries the new
-            # events/dates, image_manifest.json records the libretro backfill
-            # (matches AND misses) so tomorrow's run doesn't re-resolve them, and
+            # events/dates, image_manifest.json records the screenshot backfill
+            # (adb/libretro matches AND misses; misses on young rows retry), and
             # the MAD CSV is the fetch-failure fallback for the arcade metadata.
             git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv data/cache/mame_meta.json.gz data/cache/mame2003_specs.json.gz
             git commit -m "Update: refresh releases ($(date -u +'%Y-%m-%d %H:%M') UTC)"

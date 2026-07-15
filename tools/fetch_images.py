@@ -9,6 +9,13 @@ Stdlib + 7z.exe. Re-runnable: downloaded zips and existing outputs are skipped.
 """
 import json, os, re, struct, subprocess, sys, urllib.request, urllib.parse, zipfile, shutil
 
+try:  # certifi when available: local trust stores can be too old for the
+    import ssl  # modern Let's Encrypt chain that adb.arcadeitalia.net uses
+    import certifi
+    SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
+except ImportError:
+    SSL_CONTEXT = None
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = os.path.join(ROOT, "data/cache/image_manifest.json")
 DATA = os.path.join(ROOT, "docs/releases/data.json")
@@ -132,6 +139,35 @@ def do_libretro(manifest):
                 print(f"    libretro miss {e['title']}: {ex}")
 
 
+def do_adb(manifest):
+    """Re-fetch Arcade Database screenshots for adb-sourced entries whose PNGs
+    are missing on disk (they're normally saved by the CI backfill itself).
+    ADB 404s non-browser requests: needs the UA + Referer below."""
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                             "AppleWebKit/537.36 (KHTML, like Gecko) "
+                             "Chrome/126.0 Safari/537.36",
+               "Referer": "https://adb.arcadeitalia.net/"}
+    for e in manifest:
+        if e["source"] != "adb":
+            continue
+        for field, sub in (("title_img", "title"), ("snap_img", "snap")):
+            ref = e[field]
+            if not ref:
+                continue
+            out = os.path.join(IMGROOT, sub, e["setname"] + ".png")
+            if os.path.exists(out):
+                continue
+            os.makedirs(os.path.dirname(out), exist_ok=True)
+            url = "https://adb.arcadeitalia.net/media/mame.current/" + ref
+            try:
+                data = urllib.request.urlopen(urllib.request.Request(url, headers=headers),
+                                              timeout=60, context=SSL_CONTEXT).read()
+                if data[:8] == b"\x89PNG\r\n\x1a\n":
+                    open(out, "wb").write(data)
+            except Exception as ex:
+                print(f"    adb miss {e['title']}: {ex}")
+
+
 def update_data(manifest):
     by_title = {e["title"]: e for e in manifest}
     rows = json.load(open(DATA, encoding="utf-8"))
@@ -140,7 +176,8 @@ def update_data(manifest):
         e = by_title.get(r.get("mt") or r.get("title"))
         if not e or r.get("base") != "Arcade":
             continue
-        key = e["setname"] if e["source"] == "psnaps" else slug(e["title"])
+        # psnaps and adb images are saved keyed by setname; libretro/manual by slug
+        key = e["setname"] if e["source"] in ("psnaps", "adb") else slug(e["title"])
         slots = [s for s, f in (("title", "title_img"), ("snap", "snap_img"),
                                 ("ingame", "third_img")) if e[f]]
         if slots:
@@ -165,11 +202,14 @@ def main():
     if arg == "all":
         do_psnaps(manifest)
         do_libretro(manifest)
+        do_adb(manifest)
         update_data(manifest)
     elif arg.startswith("pack="):
         do_psnaps(manifest, only_pack=arg.split("=", 1)[1])
     elif arg == "libretro":
         do_libretro(manifest)
+    elif arg == "adb":
+        do_adb(manifest)
     elif arg == "data":
         update_data(manifest)
 

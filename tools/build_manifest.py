@@ -80,14 +80,17 @@ def main():
     # (progettoSNAPS/ADB/libretro all ship one identical broken ST-V grab) —
     # drop just that slot and keep the good snap + in-game shots.
     NO_TITLE_TITLES = {"Tecmo World Cup '98"}
-    # hand-wired screenshots (source="manual": web-sourced shots for games absent
-    # from psnaps/libretro — TTL games, hacks, non-MAME titles). Kept across
-    # rebuilds unless the fresh resolution actually finds a real source.
-    prev_manual = {}
+    # entries to carry across rebuilds unless the fresh resolution actually
+    # finds a real source: source="manual" (hand-wired web-sourced shots for
+    # games absent from psnaps/libretro — TTL games, hacks, non-MAME titles)
+    # and source="adb" (CI backfill shots from Arcade Database for titles
+    # newer than the pinned psnaps pack versions — same native-res captures,
+    # so they self-heal to psnaps once the packs catch up).
+    prev_keep = {}
     if os.path.exists(OUT):
         try:
-            prev_manual = {e["title"]: e for e in json.load(open(OUT, encoding="utf-8"))
-                           if e.get("source") == "manual"}
+            prev_keep = {e["title"]: e for e in json.load(open(OUT, encoding="utf-8"))
+                         if e.get("source") in ("manual", "adb")}
         except Exception:
             pass
     manifest = []
@@ -141,8 +144,8 @@ def main():
         if title in NO_IMAGE_TITLES:
             entry = {"title": title, "setname": entry["setname"], "source": None,
                      "title_img": None, "snap_img": None, "third_img": None, "third_pack": None}
-        elif entry["source"] is None and title in prev_manual:
-            entry = prev_manual[title]
+        elif entry["source"] is None and title in prev_keep:
+            entry = prev_keep[title]
         if title in NO_TITLE_TITLES:
             entry["title_img"] = None
         if entry["title_img"]:

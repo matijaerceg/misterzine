@@ -229,6 +229,198 @@
   --stamp-sheen: rgb(255 255 255 / .55);
 }
 
+/* ---- phosphor: a monochrome P1 green CRT. Authentic in the way the real
+   thing was: one hue, three intensities — dim (--muted), normal (--fg),
+   bright (--accent). The four type hues are therefore a green LADDER rather
+   than four hues (same trick as pink), and --ok/--danger keep their green/red
+   jobs: "sent" and "remove" have to read as success/destruction even here. */
+:root[data-theme="phosphor"] {
+  color-scheme: dark;
+  --bg: #0a0e0a;
+  --surface: #101a12;
+  --fg: #35e86b;             /* normal beam */
+  --muted: #4f9a68;          /* dim beam */
+  --line: #2f6b45;
+  --accent: #9dffbe;         /* bright beam: links, marker title, Launch fill */
+  --accent-on: #0a0e0a;
+  --brand-hover: #9dffbe;
+  --type-arcade: #d4ffa0;    /* the ladder, brightest to deepest */
+  --type-console: #6cff9c;
+  --type-computer: #22c964;
+  --type-other: #a8ffd6;
+  --reset: #d4ffa0;
+  --ok: #35e86b;
+  --danger: #ff5560;
+  --warn: #d4ff5c;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- dmg: the Game Boy's four-shade LCD (9bbc0f page / 8bac0f chrome /
+   306230 mid / 0f380f ink). Monochrome like phosphor, but LIGHT. The real
+   DMG ran genuinely low contrast — canonical ink on canonical screen is only
+   6.0:1, under the 8:1 body-text floor every other theme holds — so --fg is
+   one step deeper than the darkest shade (8.0:1) and the canonical #0f380f
+   takes --accent. That inverts the usual relationship: links and the marker
+   title are LIGHTER than body ink, which is exactly how a 4-shade panel
+   behaves. The Launch button lands as ink-on-screen with #9bbc0f text. */
+:root[data-theme="dmg"] {
+  color-scheme: light;
+  --bg: #9bbc0f;             /* lightest shade */
+  --surface: #8bac0f;
+  --fg: #081d08;             /* deepened past canonical ink to clear 8:1 */
+  --muted: #2a5520;
+  --line: #306230;           /* mid shade */
+  --accent: #0f380f;         /* canonical darkest: links + Launch fill */
+  /* accent2 is LIGHTER than the ink, so the sorted th tints toward the mid
+     shade rather than away from it. Intentional: this palette is monochrome
+     and --fg is already pinned near-black by the 8:1 floor, so there is no
+     darker value left to emphasise with — and the aria-sort arrow carries the
+     signal regardless. icecream/riso lighten their accent2 the same way. */
+  --accent2: #306230;        /* canonical mid: active filters + sorted th */
+  --accent-on: #9bbc0f;
+  --brand-hover: #306230;
+  --type-arcade: #6f8a0c;    /* the ladder, in screen-olive */
+  --type-console: #4a7a1c;
+  --type-computer: #306230;
+  --type-other: #0f380f;
+  --reset: #5c5f0a;
+  --ok: #1f6b1f;
+  --danger: #7a1f10;
+  --warn: #5c5f0a;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- spectrum: ZX Spectrum BRIGHT set on black paper. The one theme whose
+   source palette needs no deepening — there are exactly enough saturated
+   primaries for four type hues plus accent and accent2. BRIGHT blue (#0000ff)
+   is deliberately unused: it's ~2:1 on black and illegible as text. */
+:root[data-theme="spectrum"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #14142e;
+  --fg: #ffffff;             /* BRIGHT white */
+  --muted: #a8a8c8;
+  --line: #5a5a8a;
+  --accent: #00ffff;         /* BRIGHT cyan */
+  --accent2: #ffff00;        /* BRIGHT yellow: active filters + sorted th */
+  --accent-on: #000000;
+  --brand-hover: #ff00ff;
+  --type-arcade: #ffff00;
+  --type-console: #00ffff;
+  --type-computer: #00ff00;
+  --type-other: #ff00ff;
+  --reset: #ffff00;
+  --ok: #00ff00;
+  --danger: #ff5555;
+  --warn: #ffff00;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- workbench: Amiga 1.3 (0055aa blue / ff8800 orange / white / black).
+   Bright chrome on a darker desktop, like 1.3 itself. Both blues are a touch
+   deeper than #0055aa and the orange a touch lighter than #ff8800: the
+   canonical pairing is only 3.05:1, and the accent has to carry the panel's
+   marker title where it sits ON --surface. Measured, that's the cheapest
+   drift that clears 4:1 — deepening the surface alone can't (3.73 at best
+   before the blue stops reading as Workbench blue). */
+:root[data-theme="workbench"] {
+  color-scheme: dark;
+  --bg: #003a75;
+  --surface: #00498f;        /* the Workbench blue, deepened */
+  --fg: #ffffff;
+  --muted: #a8cdf0;
+  --line: #5a97d4;
+  --accent: #ff9422;         /* Workbench orange, lifted */
+  /* deliberately NO --accent2: white is 1.3's other signature colour, but it
+     is already --fg, so a white sorted th rendered IDENTICAL to every plain
+     th and the sort emphasis silently vanished. Falling back to the orange
+     accent (as light/dark do) is the only value here that reads as emphasis. */
+  --accent-on: #1a1000;
+  --brand-hover: #ffaa44;
+  --type-arcade: #ff8800;
+  --type-console: #7fc0ff;
+  --type-computer: #ffffff;
+  --type-other: #ffcc66;
+  --reset: #ff8800;
+  --ok: #6ee87f;
+  --danger: #ff8080;
+  --warn: #ffcc00;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- commodore (menu label "C64"): the VIC-II boot screen — 352879 screen,
+   7869c4 border/text. The real thing ran text at ~3:1, so --fg is the light
+   blue lifted to a legible weight while the accents come straight from the
+   16-colour palette; the darkest four (purple/orange/light-red/blue) are
+   lifted too, since they vanish against the blue ground. Slug is letters-only
+   ("c64" would fail the /^[a-z]+$/ anti-FOUC guard). */
+:root[data-theme="commodore"] {
+  color-scheme: dark;
+  --bg: #352879;             /* screen */
+  --surface: #2a1f63;
+  --fg: #d3ccff;             /* light blue, lifted to clear 8:1 */
+  --muted: #8d7fd6;
+  --line: #6c5eb5;
+  --accent: #bfce72;         /* VIC-II yellow */
+  --accent2: #67b6bd;        /* VIC-II cyan: active filters + sorted th */
+  --accent-on: #17123a;
+  --brand-hover: #7869c4;    /* border light blue */
+  --type-arcade: #bfce72;    /* yellow */
+  --type-console: #7869c4;   /* light blue */
+  --type-computer: #94e089;  /* light green */
+  --type-other: #c78ad6;     /* purple, lifted */
+  --reset: #d99a5c;          /* orange, lifted */
+  --ok: #94e089;
+  --danger: #d98a84;         /* light red, lifted */
+  --warn: #bfce72;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- riso: risograph print. Newsprint ground, soft-black ink, and exactly
+   two spot inks — which is what --accent/--accent2 already are. Fluorescent
+   pink (#ff48b0) and blue (#0078bf) are ~2.8:1 on paper, so the text-bearing
+   tokens carry deepened versions (same concession ice cream/pastel make)
+   while the badge hues stay closer to the real fluoro. */
+:root[data-theme="riso"] {
+  color-scheme: light;
+  --bg: #f2efe6;             /* newsprint */
+  --surface: #e8e3d5;
+  --fg: #23201c;             /* soft black */
+  --muted: #6f6a5e;
+  --line: #a8a191;
+  --accent: #c8156b;         /* fluorescent pink, deepened for text */
+  --accent2: #0067a8;        /* blue: active filters + sorted th */
+  --accent-on: #ffffff;
+  --brand-hover: #c8156b;
+  --type-arcade: #b85c00;    /* fluorescent orange */
+  --type-console: #0067a8;   /* blue */
+  --type-computer: #1f7a45;  /* green */
+  --type-other: #7a3fa8;     /* purple */
+  --reset: #b85c00;
+  --ok: #1f7a45;
+  --danger: #c2183c;
+  --warn: #8a6800;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
 /* ---- eva: Unit-01. Unmistakably PURPLE ground and chrome, acid-green
    accent; orange / violet / lime / cyan type hues. */
 :root[data-theme="eva"] {

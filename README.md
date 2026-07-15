@@ -1,5 +1,3 @@
-<img width="3018" height="1536" alt="image" src="https://github.com/user-attachments/assets/edf30b93-c064-4800-b81f-01879e996c6e" />
-
 # misterzine
 
 An automated release database for **MiSTer FPGA** cores, and the public site it powers:

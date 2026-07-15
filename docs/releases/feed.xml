@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Tue, 14 Jul 2026 08:54:43 +0000</lastBuildDate>
+<lastBuildDate>Wed, 15 Jul 2026 00:10:16 +0000</lastBuildDate>
+<item>
+<title>[Updated] Coleco Adam (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ColecoAdam</link>
+<guid isPermaLink="false">distribution_mister:_Computer/ColecoAdam_20260714.rbf:2026-07-15T00:10:16+00:00</guid>
+<pubDate>Wed, 15 Jul 2026 00:10:16 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Coleco&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/ColecoAdam_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Sharp MZ (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#SharpMZ</link>
@@ -884,15 +893,6 @@
 <title>[Updated] Alien Syndrome (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#aliensyn</link>
 <guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Alien Syndrome/Alien Syndrome (set 6, Japan, new, System 16B, FD1089A 317-0033).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Alien Syndrome (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#aliensyn</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Alien Syndrome/Alien Syndrome (set 7, System 16B, MC-8123B 317-00xx).mra:2026-07-05T21:10:17+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>

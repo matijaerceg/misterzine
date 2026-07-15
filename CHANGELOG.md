@@ -6,7 +6,7 @@ User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/re
 - The zine now writes itself: posts are researched, verified and published automatically four times a day. Every quote is still checked word for word against its source before a post goes live.
 - Six new color themes join Light and Dark, picked from a new Theme menu in the top-right toggle: MiSTer-y (deep indigo and mauve), Vaporwave, Ice Cream, Pastel, Pink and Unit-01. Your pick follows you across the zine and the release tracker, and Light/Dark look exactly as before.
 - Six more themes, all borrowed from the hardware: Phosphor (a green CRT), Game Boy (the four-shade LCD), ZX Spectrum (the bright colors on black), Workbench (Amiga blue and orange), C64 (the two VIC-II blues) and Riso (newsprint with two spot inks).
-- Three more: Amber (the orange terminal), Famicom (the console shell's cream, crimson and gold) and Virtual Boy (red LEDs on black). Every theme in the menu now shows three little dots of its palette next to its name.
+- Three more: Amber (the orange terminal), Famicom (the console shell's cream, crimson and gold) and Virtual Boy (red LEDs on black). Every theme in the menu now shows two little dots of its palette next to its name.
 
 ## 2026-07-14
 - Copying from the detail panel is easier: click anywhere on a field to copy it, not just the small icon. That covers the core name, the ROM name and the ZapScript token, and the game's title now copies a link to its entry. The RSS popover's feed rows work the same way. A "Copied" tag appears next to the icon to confirm, instead of the icon briefly turning into a tick.

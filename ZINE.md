@@ -47,7 +47,9 @@ Then apply all of these:
   censorship, development story, port legacy, core implementation, design
   oddity, cultural footnote, reception.
 - **Watch the manufacturer.** The 2026 release wave is heavily Data East.
-  Prefer a non-DE core when the choice is close.
+  Prefer a non-DE core when the choice is close, and avoid the same
+  manufacturer or platform family two posts running (two Apple machines
+  back to back reads like a theme week nobody announced).
 - **Never inflate recency.** Do not let a displayed date drift to make an old
   thing look new.
 
@@ -57,6 +59,13 @@ Then apply all of these:
 "[sic]"-corrected. Before publishing, check each quoted span is an exact
 substring of the fetched source text. If a quote does not match, the post does
 not ship. This check is mechanical and it is not optional.
+
+**Never re-punctuate a quote.** If a passage contains quotation marks of its
+own, keep them exactly as the source prints them; do not convert double quotes
+to single to nest them inside your own. Quote a smaller span or restructure the
+glue so the nesting never arises. The substring check runs on the raw text
+between your quote marks with no normalization; a check that "passes" after
+smartening or swapping quote characters is a failed check.
 
 **Never write from memory.** Every claim traces to text you actually fetched. If
 you did not fetch it, you do not know it.
@@ -181,10 +190,11 @@ other true aspect, keep the closest class and add an inline override:
 `style="aspect-ratio: 864 / 224"`. A tate post also needs `class="tate"` on the
 `<article>`.
 
-**The reason span (`.why`):** if the game's year is an exact multiple of 10 years
-ago, the reason is `&middot; Nth decadeversary` and the MiSTer debut moves to the
-`.meta` line. Otherwise the reason is `&middot; MiSTer debut <rd>` and `.meta`
-carries only the timestamp. The debut always appears somewhere.
+**The reason span (`.why`): exactly one reason per post.** If the game's year
+is an exact multiple of 10 years ago, the reason is `&middot; Nth decadeversary`
+and the MiSTer debut date appears **nowhere** in the post: the linked release
+row carries it. Otherwise the reason is `&middot; MiSTer debut <rd>`. Either
+way `.meta` carries only the timestamp. Never show two datings on one post.
 
 Say **decadeversary**, never "anniversary". We only know the year, not the day,
 so "anniversary" would falsely imply we are honouring the actual date.

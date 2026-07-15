@@ -606,19 +606,38 @@
   @media (max-aspect-ratio: 3/5) {   /* very narrow/tall → overlay full screen, no resize */
     #panel { width: 100vw; }
   }
-  /* phones: the desktop controls row assumes it can wrap the filter cluster
-     against a tally + divider + Columns pinned on the right, which collapses on a
-     narrow screen (tally floats over the search box, filters squeeze into a sliver).
-     Reflow into stacked full-width rows instead: search on its own line, the filter
-     dropdowns wrapping beneath it, and the tally + Columns sharing the last row. */
-  @media (max-width: 640px) {
+  /* narrow: the desktop controls row assumes it can wrap the filter cluster
+     against a tally + divider + Columns pinned on the right. That only fits on one
+     line at ~900px+; below it the cluster squeezes into a sliver (one dropdown per
+     line, tally crowding the search box) and eats three rows of height. So the
+     breakpoint sits where the desktop row genuinely stops fitting, not at a phone
+     width — landscape phones, tablets and narrow windows all land in that zone.
+     Reflow into a single wrapping cluster: search + tally on line one, then the
+     dropdowns / Clear / Columns flowing together beneath it. */
+  @media (max-width: 899px) {
     .controls { flex-wrap: wrap; row-gap: .5rem; }
-    .filters { flex: 1 1 100%; }
-    .searchwrap { flex: 1 1 100%; min-width: 0; }  /* search takes its own full line */
-    .ctrlsep.tall { display: none; }               /* no room for the vertical divider */
-    /* last row: tally on the left, Columns pushed to the right edge, both centered */
-    .count { align-self: center; text-align: left; margin-right: auto; }
-    #cols { align-self: center; }
+    /* dissolve the filters wrapper so its children become flex items of .controls
+       itself and join one shared wrap flow with the tally and Columns — the
+       desktop "grows and wraps against a pinned right column" split is exactly
+       what has no room here. Order is then set explicitly below, since document
+       order puts the tally after the dropdowns. */
+    .filters { display: contents; }
+    .searchwrap { order: 1; flex: 1 1 8rem; min-width: 0; }
+    /* tally rides the search line as one line ("1025 of 1025"): it's status, not a
+       control, so it doesn't earn a row of its own at this width */
+    .count { order: 2; flex-direction: row; gap: .3rem; align-self: center; text-align: left; }
+    /* the vertical divider has no room here, but the element is still useful: a
+       zero-height 100%-wide flex item forces the wrap after the search line, so
+       the dropdowns always start a fresh row instead of trailing the tally */
+    .ctrlsep.tall { order: 3; flex-basis: 100%; width: auto; height: 0; background: none; align-self: auto; }
+    #typedd { order: 4; }
+    #genredd { order: 5; }
+    #yeardd { order: 6; }
+    button.clear { order: 7; }
+    /* Columns keeps its far-right anchoring, now against whatever row it lands on */
+    #cols { order: 8; margin-left: auto; align-self: center; }
+    /* a notch tighter so the three filter dropdowns fit one line on a ~390px phone */
+    details.cols summary, button.clear { font-size: .85rem; padding: .35rem .55rem; }
   }
   /* printing: undo the fixed-height app shell so the full row list paginates
      instead of clipping to one screen of the scroller */

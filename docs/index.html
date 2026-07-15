@@ -182,13 +182,12 @@
                              padding: .3rem .5rem; white-space: nowrap;
                              display: flex; align-items: center; gap: .5em; }
   /* each theme's pair of swatch dots (its surface + its signature colour);
-     the second dot is a box-shadow copy of the first, each over its own 1px
-     ring so pale dots keep an edge. The colours (--sw1/--sw2) come from the
-     swatch table in theme.css, so no literals live here. */
-  .top .theme .menu button::before { content: ""; flex: 0 0 auto; width: .5em; height: .5em;
-                                     margin-right: .8em; border-radius: 50%; background: var(--sw1);
-                                     box-shadow: 0 0 0 1px var(--kbd-border),
-                                                 .8em 0 0 var(--sw2), .8em 0 0 1px var(--kbd-border); }
+     the second dot is a box-shadow copy of the first. The colours
+     (--sw1/--sw2) come from the swatch table in theme.css, so no literals
+     live here. */
+  .top .theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
+                                     margin-right: .95em; border-radius: 50%; background: var(--sw1);
+                                     box-shadow: .95em 0 0 var(--sw2); }
   .top .theme .menu button:hover { background: var(--hover-bg); }
   /* index link (marker-set label + live count). inline-flex so the count can take a
      max-width; centered (not baselined) so the small count sits mid-height against the

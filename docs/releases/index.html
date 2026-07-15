@@ -172,7 +172,11 @@
   details.cols .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30;
                        background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
                        padding: .55rem .8rem; box-shadow: 0 4px 16px #0004;
-                       display: grid; gap: .35rem; min-width: 10rem; }
+                       display: grid; gap: .35rem; min-width: 10rem;
+                       /* the page itself never scrolls, so a menu taller than the viewport
+                          (Genre on a phone) scrolls inside itself instead; the max-height
+                          cap is set per-open by positionMenu() */
+                       overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
   details.cols .menu label { display: flex; gap: .45rem; align-items: center;
                              font-size: .9rem; white-space: nowrap; cursor: pointer; }
   /* per-genre row count, pushed to the right edge and dimmed so the genre name leads */
@@ -1524,16 +1528,22 @@ function syncDdOpen() {
 // so a menu anchored under its summary (left:0) can spill off-screen (Year/Genre/Columns
 // were clipping). Align under the summary when it fits, else slide left just enough to
 // clear the edge; measure + reposition synchronously so there's no visible jump.
+// Vertically: the page never scrolls, so a menu running past the bottom edge would be
+// unreachable (Genre/Columns on a phone) — cap its height to the room below it and let
+// the menu scroll inside itself (overflow-y in the .menu CSS).
 function positionMenu(dd) {
   const menu = dd.querySelector('.menu');
   if (!menu) return;
-  menu.style.left = '';  // back to the CSS default (left:0) before measuring
+  menu.style.left = '';  // back to the CSS defaults before measuring
+  menu.style.maxHeight = '';
   const margin = 8, dRect = dd.getBoundingClientRect(), mW = menu.offsetWidth;
   const vw = document.documentElement.clientWidth;
   let mLeft = dRect.left;                                   // default: aligned under the summary
   if (mLeft + mW > vw - margin) mLeft = vw - margin - mW;   // don't spill past the right edge
   if (mLeft < margin) mLeft = margin;                       // ...nor past the left edge
   menu.style.left = (mLeft - dRect.left) + 'px';
+  const room = document.documentElement.clientHeight - menu.getBoundingClientRect().top - margin;
+  if (menu.offsetHeight > room) menu.style.maxHeight = room + 'px';
 }
 for (const dd of document.querySelectorAll('details.cols'))
   dd.addEventListener('toggle', () => { syncDdOpen(); if (dd.open) positionMenu(dd); });

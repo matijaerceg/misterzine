@@ -169,10 +169,14 @@
   /* fun-theme dropdown: the toggle's third segment; the summary wears the
      active fun theme's name (same control as the release index) */
   .top .theme details { position: relative; }
+  /* flex + auto margin pins the caret to the segment's right edge: the summary is
+     frozen at its widest label (see lockSummary), so a left-hugging caret would
+     wander inside that fixed box as the active theme's name changes. */
   .top .theme summary { list-style: none; font-size: .78rem; padding: .3rem .6rem; cursor: pointer;
-                        border-left: 1px solid var(--hair); border-radius: 0 5px 5px 0; user-select: none; }
+                        border-left: 1px solid var(--hair); border-radius: 0 5px 5px 0; user-select: none;
+                        display: flex; align-items: center; }
   .top .theme summary::-webkit-details-marker { display: none; }
-  .top .theme summary::after { content: " \25BE"; opacity: .6; }
+  .top .theme summary::after { content: " \25BE"; opacity: .6; margin-left: auto; padding-left: .4em; }
   .top .theme summary:hover, .top .theme details[open] summary { background: var(--hover-bg); }
   .top .theme summary.on { background: var(--rule); font-weight: 600; }
   .top .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
@@ -439,17 +443,46 @@
       sum.textContent = fun ? fun.textContent : 'Theme';
       sum.classList.toggle('on', !!fun);
     }
+    // Picking a theme deliberately leaves the menu OPEN: themes apply live, so the
+    // list doubles as a preview you click through. The summary label + pressed
+    // state already confirm the pick, and the outside-click handler below still
+    // dismisses it -- including via the Light/Dark buttons, which sit outside it.
     btns.forEach(function (b) { b.addEventListener('click', function () {
       try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
       apply(b.dataset.set);
-      dd.open = false;
     }); });
     // click outside closes the menu
     document.addEventListener('click', function (e) {
       if (dd.open && !dd.contains(e.target)) dd.open = false;
     });
+    // The switcher's right edge is pinned (the menu hangs off it at right:0, and on
+    // narrow screens the group itself is right-anchored), so its width is its LEFT
+    // edge: letting the summary resize to each theme's name walks the Light/Dark
+    // buttons ~35px sideways -- which, now that the menu stays open, happens under
+    // the cursor mid-pick. So freeze the summary at its widest label. Measured off
+    // the live DOM rather than tuned, so a new theme still needs only its button.
+    function lockSummary() {
+      var prevText = sum.textContent, prevOn = sum.classList.contains('on'), max = 0;
+      sum.style.minWidth = '';  // measure the natural widths, not the last lock
+      // Weight is load-bearing: .on renders the label at 600, and a fun theme's name
+      // is ONLY ever shown in that state, so measuring it unbolded under-reserves
+      // and the longest name -- the one that has to fit -- is what overflows.
+      function measure(label, on) {
+        sum.textContent = label;
+        sum.classList.toggle('on', on);
+        max = Math.max(max, sum.getBoundingClientRect().width);
+      }
+      measure('Theme', false);  // the neutral label only ever shows unbolded
+      btns.forEach(function (b) { if (dd.contains(b)) measure(b.textContent, true); });
+      sum.textContent = prevText;
+      sum.classList.toggle('on', prevOn);
+      sum.style.minWidth = Math.ceil(max) + 'px';
+    }
     var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
     apply(saved);
+    lockSummary();
+    // re-run once webfonts land: the fallback font's metrics differ
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
   })();
   // index pill: fill the live row count, and measure the natural width of the
   // ": N cores & games" tail into --cnt-w so it collapses proportionally on scroll

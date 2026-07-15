@@ -74,12 +74,17 @@
      the same spacing; the "Updated: <time>" prefix is one item via .upd-stamp. */
   .updated { color: #888; font-size: .8rem; margin: 0; min-height: 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .6rem; row-gap: .15rem; }
   .updated .upd-stamp { white-space: nowrap; }
-  .updated a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  .updated a { color: inherit; text-decoration: none; text-underline-offset: 2px; white-space: nowrap; }
   .updated a:hover { color: var(--accent); }
+  /* underline the .lbl span, never the anchor, so the line stops at the last
+     letter instead of running under the ↗/ⓘ glyph as a detached stub (the
+     two-span pattern is documented at .ext). Also what keeps the Zine Home
+     sticker underline-free: no .lbl, no line. */
+  .updated a .lbl { text-decoration: underline; }
   /* dotted underline (+ ⓘ) marks the meta-line popover triggers ("Public
      cores only", "RSS") — they open an in-page popover, unlike the solid
      underline + ↗ links, which navigate away */
-  .updated .note { text-decoration: underline dotted; text-underline-offset: 2px; white-space: nowrap; }
+  .updated .note .lbl { text-decoration: underline dotted; }
   /* the zine link is the one meta-line entry we want noticed. It tilts on hover
      and holds the tilt until you leave, like a sticker peeled up at one corner.
      Transformable only because .updated is a flex container: that blockifies its
@@ -311,16 +316,17 @@
   td.core { color: CanvasText; font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
-  td.core a:hover { text-decoration: underline; }
-  /* The ↗/ⓘ is plain inline text, and NOT inline-block: an atomic inline gets a
-     break opportunity on BOTH sides, which stranded the glyph alone on a line of
-     its own wherever a link's label can wrap — the panel's Repository row did it
-     at the default panel width. As inline text it's class AL and can't part from
-     the word before it, so a long slug breaks at one of its hyphens instead.
-     The accepted cost: a descendant can't cancel an inherited underline, so the
-     link's underline now runs under the glyph. `text-decoration: none` here would
-     be a decoy — it does nothing. Restoring inline-block to tidy that up re-breaks
-     the wrap. */
+  td.core a:hover .lbl { text-decoration: underline; }
+  /* Glyph-tailed links are two spans: <a><span class=lbl>label</span><span
+     class=ext>↗</span></a>. The .ext glyph is plain inline text, NOT inline-block:
+     an atomic inline gets a break opportunity on BOTH sides, which stranded the
+     glyph alone on a line of its own wherever a link's label can wrap — the
+     panel's Repository row did it at the default panel width. As inline text it's
+     class AL and can't part from the word before it, so a long slug breaks at one
+     of its hyphens instead. The underline lives on .lbl, never on the anchor: an
+     anchor-level underline also runs under the glyph and the gap before it as a
+     detached stub, and a descendant can't cancel an inherited underline, so
+     `text-decoration: none` here on .ext would be a decoy. */
   .ext { color: #888; margin-left: .25rem; font-size: .85em; }
   /* floated (not flexed) top-right so the title/meta text lines shorten beside
      the buttons and flow full-width beneath them instead of wrapping early */
@@ -374,6 +380,9 @@
   #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
   #panel dt { color: #888; }
   #panel dd { margin: 0; }
+  /* the Repository row link: same .lbl-only underline as every glyph-tailed link */
+  #panel dd a { text-decoration: none; }
+  #panel dd a .lbl { text-decoration: underline; }
   /* MAME setnames read best monospaced (table cells and the panel row) */
   .rom { font-family: ui-monospace, Consolas, monospace; font-size: .95em; }
   td.rom { white-space: nowrap; }
@@ -449,7 +458,8 @@
   @media (max-width: 480px) { .rsspop { left: 1rem !important; right: 1rem; } }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
   #panel .report { color: #888; font-size: .8rem; margin: 1.25rem 0 0; }
-  #panel .report a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+  #panel .report a { color: inherit; text-decoration: none; text-underline-offset: 2px; white-space: nowrap; }
+  #panel .report a .lbl { text-decoration: underline; }
   #panel .report a:hover { color: var(--accent); }
   /* empty state shown before any title is selected */
   #panel .body.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; gap: 1rem; }
@@ -505,7 +515,8 @@
   .misterpop .adder .nm { flex: 2; }
   .misterpop .adder .ad { flex: 3; }
   .misterpop .note { font-size: .72rem; margin-top: .5rem; }
-  .misterpop .note a { color: inherit; }
+  .misterpop .note a { color: inherit; text-decoration: none; }
+  .misterpop .note a .lbl { text-decoration: underline; }
 
   /* draggable edge: resize the panel / flick left to close (reflow mode only) */
   #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; width: 12px; z-index: 101;
@@ -822,7 +833,7 @@ function coreCell(d) {
   // rows whose catalog never captured an rbf: name the link after the repo
   if (!label) label = d.repo.split('/')[1].replace(/^Arcade[-_]/i, '').replace(/[-_]MiSTer$/i, '');
   return '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
-    esc(label) + '<span class="ext">↗</span></a>';
+    '<span class="lbl">' + esc(label) + '</span><span class="ext">↗</span></a>';
 }
 
 // The table's columns, all toggleable via the "Columns" dropdown except Title
@@ -1663,7 +1674,7 @@ function detailHTML(d) {
   if (d.src) rows.push(['Source', SRC_NAMES[d.src] || d.src]);
   // show the repo slug (jtcores deep links keep the full path in the href only)
   if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
-    esc(d.repo.split('/').slice(0, 2).join('/')) + '<span class="ext">↗</span></a>', true]);
+    '<span class="lbl">' + esc(d.repo.split('/').slice(0, 2).join('/')) + '</span><span class="ext">↗</span></a>', true]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
   if (d.note) rows.push(['Note', d.note]);
   // Zaparoo ZapScript token for this row (copy to persist on an NFC tag /
@@ -1687,7 +1698,7 @@ function detailHTML(d) {
     '&body=' + encodeURIComponent('Title: ' + d.title + '\nCore: ' + d.core +
       (d.img ? '\nSetname: ' + d.img : '') + '\n\nWhat looks wrong:\n');
   const report = '<p class="report">Something wrong with this entry? <a href="' + escA(issueURL) +
-    '" target="_blank" rel="noopener">Report a problem<span class="ext">↗</span></a></p>';
+    '" target="_blank" rel="noopener"><span class="lbl">Report a problem</span><span class="ext">↗</span></a></p>';
   // multi-monitor cabinets: N screens = N 4:3 CRTs side by side, so dual → 8:3
   // and triple → 12:3, driven by the pipeline's `scr` field (MAME desc + pins).
   // Precedence: (1) ASPECT_OVERRIDE escape hatch; (2) d.scr (dual/triple);
@@ -2171,11 +2182,11 @@ fetch('./meta.json').then(r => r.json()).then(m => {
   }) : m.updated;
   const label = () => valid ? relUpdated(dt) : m.updated;
   el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span></span>' +
-    ' <a href="#" class="note" id="pub-note">Public cores only, no alternatives<span class="ext">ⓘ</span></a>' +
-    ' <a href="feed.xml" class="note" id="rss-link">RSS<span class="ext">ⓘ</span></a>' +
-    ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic Stats<span class="ext">↗</span></a>' +
-    ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog (GitHub)<span class="ext">↗</span></a>' +
-    ' <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link">Discord<span class="ext">↗</span></a>' +
+    ' <a href="#" class="note" id="pub-note"><span class="lbl">Public cores only, no alternatives</span><span class="ext">ⓘ</span></a>' +
+    ' <a href="feed.xml" class="note" id="rss-link"><span class="lbl">RSS</span><span class="ext">ⓘ</span></a>' +
+    ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener"><span class="lbl">Traffic Stats</span><span class="ext">↗</span></a>' +
+    ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener"><span class="lbl">Changelog (GitHub)</span><span class="ext">↗</span></a>' +
+    ' <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link"><span class="lbl">Discord</span><span class="ext">↗</span></a>' +
     ' <a href="../" class="zinelink">Zine Home</a>';
   // keep a left-open tab honest: refresh the relative label on a slow tick and
   // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
@@ -2291,7 +2302,7 @@ function misterPopHTML() {
     '<p class="note">Each MiSTer needs wizzo’s free Remote service: run it once from the Scripts ' +
     'menu and let it enable startup, no other setup. ' +
     '<a href="https://github.com/matijaerceg/misterzine#launch-on-your-mister" ' +
-    'target="_blank" rel="noopener">Setup guide<span class="ext">↗</span></a></p>';
+    'target="_blank" rel="noopener"><span class="lbl">Setup guide</span><span class="ext">↗</span></a></p>';
 }
 function onMisterPop(e) {
   // handled clicks re-render the popover, detaching e.target — the document

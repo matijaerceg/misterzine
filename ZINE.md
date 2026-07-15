@@ -67,6 +67,15 @@ glue so the nesting never arises. The substring check runs on the raw text
 between your quote marks with no normalization; a check that "passes" after
 smartening or swapping quote characters is a failed check.
 
+A consequence: on sources that print curly apostrophes, curly quotes, or en
+dashes (Hardcore Gaming 101 does; Wikipedia's plaintext API does not), any
+span containing one of those characters cannot ship at all, because typing it
+as ASCII fails the substring check and quoting it faithfully breaks the
+plain-ASCII rule. Pick spans that contain none of them (they exist; hunt) and
+move the apostrophe-bearing facts into your own glue. Example: quote the
+single word "pronounceable" and render the title Oni - The Ninja Master
+yourself in ASCII, rather than quoting the source's en-dashed title.
+
 **Never write from memory.** Every claim traces to text you actually fetched. If
 you did not fetch it, you do not know it.
 
@@ -229,7 +238,14 @@ post must produce a byte-identical file, or it creates noise commits forever.
 
 ## Before you publish
 
-- [ ] Every quoted span is an exact substring of the fetched source
+- [ ] Every quoted span is an exact substring of the fetched source, checked
+      against the raw text with no punctuation normalization
+- [ ] The debut date in the `.why` span and the feed title is copied from the
+      row's `date` field in `docs/releases/data.json`, re-read this run. The
+      date is the one span in a post that is not quoted from a fetched source,
+      which makes it the easiest thing to invent; never type it from memory
+- [ ] Every quote stands on its own: a reaction or punchline ships together
+      with the thing it reacts to, or not at all
 - [ ] The game is not already covered in `docs/index.html`
 - [ ] No quote is reused from another post
 - [ ] The screenshot is not one the release index shows

@@ -172,18 +172,29 @@
 }
 
 /* ---- pastel: a LIGHT theme built from the strip (ffd4e5 pink / d4ffea mint /
-   eecbff lilac / feffa3 lemon / dbdcff periwinkle): periwinkle-white page,
-   lilac chrome, soft-violet ink; the hues deepen just enough to read as
-   text/accents on the light grounds while the badge tints stay pastel. */
+   eecbff lilac / feffa3 lemon / dbdcff periwinkle): lemon-cream page, lilac
+   chrome, soft-violet ink, periwinkle emphasis; the hues deepen just enough
+   to read as text/accents on the light grounds while the badge tints stay
+   pastel.
+   The ground is deliberately a WARM hue against the cool lilac chrome: the
+   page used to be #f4f2ff, nominally "periwinkle-white" but ~97% white, so
+   only two things had real pixel area (a white page, a lilac/pink chrome)
+   and the theme read as "white and pink" — the other strip hues live only in
+   badge chips, which dilute to 20% over --bg and can't carry a theme.
+   Do NOT try to make the ground the strip's literal periwinkle (dbdcff):
+   blue is luminance-poor and it lands at fg/bg 7.24, under the 8:1 floor.
+   Lemon clears it at 9.03 without touching the ink. */
 :root[data-theme="pastel"] {
   color-scheme: light;
-  --bg: #f4f2ff;             /* periwinkle-white */
+  --bg: #fbfbe4;             /* lemon cream (fg/bg 9.03) */
   --surface: #eecbff;        /* lilac */
   --fg: #4a4160;             /* soft violet ink */
   --muted: #8b7fa8;
   --line: #a698c8;
   --accent: #863a9f;         /* deepened lilac for links + the marker title on the lilac panel */
-  --accent2: #b03064;        /* deepened pink: active filters + sorted column */
+  --accent2: #4a4fd0;        /* deepened periwinkle: active filters + sorted column.
+                                NOT pink — pink here doubled down on the surface
+                                and was half the "white and pink" problem. */
   --accent-on: #fff;
   --brand-hover: #863a9f;
   --type-arcade: #b8a212;    /* lemon, deepened */
@@ -546,7 +557,11 @@
 .menu button[data-set="punchy"]     { --sw1: #313244; --sw2: #cba6f7; }
 .menu button[data-set="vaporwave"]  { --sw1: #251a55; --sw2: #ff71ce; }
 .menu button[data-set="icecream"]   { --sw1: #ffc5d9; --sw2: #fdf5c9; }
-.menu button[data-set="pastel"]     { --sw1: #eecbff; --sw2: #d0578f; }
+/* pastel's sw2 is its --accent2, not its lemon --bg: the ground (#fbfbe4) is
+   too pale to read as a dot on the menu's own light surface (it just looks
+   like a missing swatch). Gelato can use its vanilla --bg because #fdf5c9 is
+   saturated enough; this one isn't. */
+.menu button[data-set="pastel"]     { --sw1: #eecbff; --sw2: #4a4fd0; }
 .menu button[data-set="pink"]       { --sw1: #ffc3d8; --sw2: #ff69b4; }
 .menu button[data-set="eva"]        { --sw1: #2f2050; --sw2: #a6ff00; }
 .menu button[data-set="phosphor"]   { --sw1: #101a12; --sw2: #35e86b; }

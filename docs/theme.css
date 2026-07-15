@@ -421,6 +421,95 @@
   --stamp-sheen: rgb(255 255 255 / .55);
 }
 
+/* ---- amber: the other monochrome terminal, a P3 amber phosphor. Same
+   one-hue-three-intensities structure as phosphor: dim (--muted), normal
+   (--fg, the classic #ffb000), bright (--accent). Amber clears every floor
+   at its canonical value, so unlike dmg nothing needed deepening. No
+   --accent2 (monochrome, same reasoning as phosphor/workbench). */
+:root[data-theme="amber"] {
+  color-scheme: dark;
+  --bg: #100b04;
+  --surface: #1c1408;
+  --fg: #ffb000;             /* the canonical amber beam */
+  --muted: #a87830;          /* dim beam */
+  --line: #7a5a24;
+  --accent: #ffd75e;         /* bright beam: links, marker title, Launch fill */
+  --accent-on: #1a1000;
+  --brand-hover: #ffd75e;
+  --type-arcade: #ffe08a;    /* the ladder, brightest to deepest */
+  --type-console: #ffc040;
+  --type-computer: #d98f00;
+  --type-other: #fff0c0;
+  --reset: #ffe08a;
+  --ok: #58d06a;
+  --danger: #ff5560;
+  --warn: #ffd75e;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- famicom: the console SHELL, not a screen — white-cream plastic, the
+   deep crimson of the body trim, the controller gold. The first theme drawn
+   from a case colour. Crimson reads as text at its canonical value; the
+   gold deepens for text duty (canonical #b8860b is ~3.2:1 on the cream)
+   while the badge tint keeps the real gold. */
+:root[data-theme="famicom"] {
+  color-scheme: light;
+  --bg: #f5f0e4;             /* shell cream */
+  --surface: #ece4d0;
+  --fg: #2a211c;
+  --muted: #7a6a5c;
+  --line: #a89681;
+  --accent: #a71d31;         /* body crimson: links, marker title, Launch */
+  --accent2: #8a6210;        /* controller gold, deepened: filters + sorted th */
+  --accent-on: #fff;
+  --brand-hover: #c22840;
+  --type-arcade: #b8860b;    /* canonical gold (badge tint, no text floor) */
+  --type-console: #c22840;
+  --type-computer: #8a5a30;
+  --type-other: #6e1420;
+  --reset: #b8720c;
+  --ok: #2e8f4e;
+  --danger: #a71d31;
+  --warn: #8a6210;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- virtualboy (menu label "Virtual Boy"): the red LED array on true
+   black. Monochrome like phosphor/amber, but red physically can't reach the
+   8:1 body floor while staying red — pure #ff0000 is 5.25:1 on black — so
+   --fg lifts toward salmon and the saturated LED red takes --accent (the
+   dmg concession, in the other direction). --ok stays green: "sent" must
+   read as success even on an all-red theme. */
+:root[data-theme="virtualboy"] {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #1c0505;
+  --fg: #ff7a6b;             /* lifted to clear 8:1 on black */
+  --muted: #b8524a;
+  --line: #7a2820;
+  --accent: #ff2a2a;         /* the LED red: links, marker title, Launch */
+  --accent-on: #000000;
+  --brand-hover: #ff2a2a;
+  --type-arcade: #ff9a8a;    /* the ladder */
+  --type-console: #ff5544;
+  --type-computer: #d42020;
+  --type-other: #ffc0b5;
+  --reset: #ff9a8a;
+  --ok: #4ad06a;
+  --danger: #ff4444;
+  --warn: #ffb040;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
 /* ---- eva: Unit-01. Unmistakably PURPLE ground and chrome, acid-green
    accent; orange / violet / lime / cyan type hues. */
 :root[data-theme="eva"] {
@@ -446,3 +535,25 @@
   --stamp-shade: rgb(0 0 0 / .45);
   --stamp-sheen: rgb(255 255 255 / .06);
 }
+
+/* ---- theme swatches: the little split dot beside each name in the theme
+   dropdown. Each entry is that theme's ground + signature colour, restated
+   here because CSS can't reach into another theme's block (tokens always
+   resolve to the ACTIVE theme) — keep in sync when a palette above changes.
+   The pages draw the dot themselves (a ::before reading --sw1/--sw2); this
+   file only supplies the pair, so the no-literals-in-page-CSS rule holds. */
+.menu button[data-set="punchy"]     { --sw1: #1e1e2e; --sw2: #cba6f7; }
+.menu button[data-set="vaporwave"]  { --sw1: #1a1240; --sw2: #ff71ce; }
+.menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #ffc5d9; }
+.menu button[data-set="pastel"]     { --sw1: #f4f2ff; --sw2: #eecbff; }
+.menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #c4136c; }
+.menu button[data-set="eva"]        { --sw1: #1d1330; --sw2: #a6ff00; }
+.menu button[data-set="phosphor"]   { --sw1: #0a0e0a; --sw2: #35e86b; }
+.menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #0f380f; }
+.menu button[data-set="spectrum"]   { --sw1: #000000; --sw2: #00ffff; }
+.menu button[data-set="workbench"]  { --sw1: #003a75; --sw2: #ff9422; }
+.menu button[data-set="commodore"]  { --sw1: #352879; --sw2: #7869c4; }
+.menu button[data-set="riso"]       { --sw1: #c8156b; --sw2: #0067a8; }
+.menu button[data-set="amber"]      { --sw1: #100b04; --sw2: #ffb000; }
+.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; }
+.menu button[data-set="virtualboy"] { --sw1: #000000; --sw2: #ff2a2a; }

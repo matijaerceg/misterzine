@@ -2745,6 +2745,185 @@ def _write_site_meta(outdir):
     log(f"  meta.json: updated={updated} ({'unchanged' if prev.get('hash') == digest else 'bumped'})")
 
 
+# ---------------------------------------------------------------------------
+# The zine (site root). Posts live in docs/zine.json — the single source of
+# truth. docs/index.html renders them client-side (it is still hand-maintained
+# and never written by this script; only the post DATA moved out of it), and
+# docs/feed-zine.xml is generated from the same data below. The posting agent
+# edits zine.json + adds an image, nothing else; see ZINE.md.
+
+_ZINE_BODY_TAG = re.compile(r'<a href="[^"]+">|</a>')
+_ZINE_CHANNEL = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+    '<channel>',
+    '<title>MiSTerZine</title>',
+    f'<link>{SITE_ROOT}?ref=rss</link>',
+    '<description>A collection of quotes from around the web on MiSTer FPGA '
+    'releases, each with its source linked.</description>',
+    '<language>en</language>',
+    f'<atom:link rel="self" type="application/rss+xml" href="{SITE_ROOT}feed-zine.xml"/>',
+]
+
+
+def _zine_reason(p):
+    # the same reason text the page's .why span shows; feed titles carry it too
+    return (f"{p['nth']}th decadeversary" if p["why"] == "decadeversary"
+            else f"MiSTer debut {p['debut']}")
+
+
+def _zine_feed_xml(posts):
+    """feed-zine.xml bytes from the post list. Deterministic: everything,
+    lastBuildDate included, derives from post data, never from build time —
+    a rerun with no new post emits identical bytes (same rule as the
+    releases feeds, and the same reason: the CI commit gate must stay quiet)."""
+    from xml.sax.saxutils import escape
+    xml = list(_ZINE_CHANNEL)
+    if posts:
+        xml.append(f'<lastBuildDate>{escape(_rfc822(posts[0]["posted"]))}</lastBuildDate>')
+    for p in posts:
+        desc = "".join(f"<p>{par}</p>" for par in p["body"])
+        # legacy decadeversary posts show the debut on their meta line; the
+        # feed mirrors the page (new decadeversary posts carry no debut)
+        if p["why"] == "decadeversary" and p.get("debut"):
+            desc += f"<p>MiSTer debut {p['debut']}.</p>"
+        xml += ['<item>',
+                f'<title>{escape(p["title"])} ({escape(_zine_reason(p))})</title>',
+                f'<link>{SITE_ROOT}?ref=rss#{escape(p["id"])}</link>',
+                f'<guid isPermaLink="false">zine:{escape(p["id"])}</guid>',
+                f'<pubDate>{escape(_rfc822(p["posted"]))}</pubDate>',
+                f'<description>{escape(desc)}</description>',
+                '</item>']
+    xml += ['</channel>', '</rss>', '']
+    return "\n".join(xml)
+
+
+def _zine_validate(z):
+    """Every structural rule a post must satisfy. Returns a list of problem
+    strings (empty = valid). Content rules (verbatim quotes, no slop, image
+    provenance) are the posting agent's job per ZINE.md; this catches the
+    mechanical failures that would break the page or the feed."""
+    errs = []
+    posts = z.get("posts")
+    if not isinstance(posts, list) or not posts:
+        return ["zine.json must be {\"posts\": [...]} with at least one post"]
+    if set(z) != {"posts"}:
+        errs.append(f"unexpected top-level keys: {sorted(set(z) - {'posts'})}")
+    seen_ids, seen_imgs = set(), set()
+    allowed = {"id", "k", "title", "why", "debut", "nth", "tate",
+               "shot", "aspect", "img", "alt", "body", "posted"}
+    for i, p in enumerate(posts):
+        pid = p.get("id", f"posts[{i}]")
+        def bad(msg):
+            errs.append(f"{pid}: {msg}")
+        extra = set(p) - allowed
+        if extra:
+            bad(f"unknown fields {sorted(extra)}")
+        for f in ("id", "k", "title", "why", "shot", "img", "alt", "body", "posted"):
+            if f not in p:
+                bad(f"missing field '{f}'")
+        if errs and errs[-1].startswith(f"{pid}: missing"):
+            continue  # field checks below would just KeyError-noise
+        if not re.fullmatch(r"\d{8}-[A-Za-z0-9-]+", p["id"]):
+            bad("id must be YYYYMMDD-<k>")
+        if p["id"] in seen_ids:
+            bad("duplicate id")
+        seen_ids.add(p["id"])
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", p["posted"]):
+            bad("posted must be YYYY-MM-DDTHH:MM:SSZ")
+        elif p["id"][:8] != p["posted"][:10].replace("-", ""):
+            bad("id date prefix disagrees with posted")
+        if p["why"] == "debut":
+            if "nth" in p:
+                bad("nth on a debut post")
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", p.get("debut") or ""):
+                bad("debut post needs debut: YYYY-MM-DD")
+        elif p["why"] == "decadeversary":
+            if not (isinstance(p.get("nth"), int) and p["nth"] % 10 == 0):
+                bad("decadeversary post needs nth: a multiple of 10")
+            # legacy posts may carry debut (rendered in .meta); new ones must not
+            if "debut" in p and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", p["debut"]):
+                bad("debut must be YYYY-MM-DD")
+        else:
+            bad("why must be 'debut' or 'decadeversary'")
+        if p["shot"] not in ("h", "v", "w"):
+            bad("shot must be h, v or w")
+        if "aspect" in p and not re.fullmatch(r"\d+ / \d+", p["aspect"]):
+            bad("aspect must look like '864 / 224'")
+        if "tate" in p and p["tate"] is not True:
+            bad("tate is either true or absent")
+        if (p["shot"] == "v") != bool(p.get("tate")):
+            bad("tate and shot 'v' go together")
+        if not re.fullmatch(r"[A-Za-z0-9._-]+\.png", p["img"]):
+            bad("img must be a bare .png filename")
+        elif not (DOCSDIR / "images" / "zine" / p["img"]).is_file():
+            bad(f"docs/images/zine/{p['img']} does not exist")
+        if p["img"] in seen_imgs:
+            bad("image reused by an earlier post")
+        seen_imgs.add(p["img"])
+        if not (isinstance(p["body"], list) and p["body"]
+                and all(isinstance(b, str) and b.strip() for b in p["body"])):
+            bad("body must be a non-empty list of non-empty strings")
+        else:
+            for b in p["body"]:
+                for tag in re.findall(r"<[^>]*>", b):
+                    if not _ZINE_BODY_TAG.fullmatch(tag):
+                        bad(f"body tag not allowed: {tag}")
+                if 'target=' in b or 'rel=' in b:
+                    bad("body links carry no target/rel (the renderer adds them)")
+        for f in ("k", "title", "alt"):
+            v = p.get(f)
+            if not (isinstance(v, str) and v.strip()):
+                bad(f"{f} must be a non-empty string")
+        for s in [p["title"], p["alt"], p["k"]] + list(p["body"]):
+            if isinstance(s, str) and not s.isascii():
+                bad("plain ASCII only")
+                break
+    for a, b in zip(posts, posts[1:]):
+        if isinstance(a, dict) and isinstance(b, dict) and \
+           a.get("posted", "") < b.get("posted", ""):
+            errs.append(f"{b.get('id')}: posts must be newest-first "
+                        f"({a.get('id')} is older)")
+    return errs
+
+
+def cmd_zine(args):
+    """Validate docs/zine.json, then write it back canonically formatted and
+    regenerate docs/feed-zine.xml from it. --check verifies instead of writing
+    (fails if either file differs from what would be written)."""
+    path = DOCSDIR / "zine.json"
+    raw = path.read_text(encoding="utf-8")
+    try:
+        z = json.loads(raw)
+    except ValueError as e:
+        sys.exit(f"zine.json does not parse: {e}")
+    errs = _zine_validate(z)
+    if errs:
+        for e in errs:
+            log(f"  INVALID {e}")
+        sys.exit(f"zine.json failed validation with {len(errs)} problem(s)")
+    canonical = json.dumps(z, ensure_ascii=False, indent=1) + "\n"
+    feed = _zine_feed_xml(z["posts"])
+    feed_path = DOCSDIR / "feed-zine.xml"
+    old_feed = feed_path.read_text(encoding="utf-8") if feed_path.exists() else ""
+    if args.check:
+        if raw != canonical:
+            sys.exit("zine.json is valid but not canonically formatted: "
+                     "run `python misterzine.py zine` and commit the result")
+        if old_feed != feed:
+            sys.exit("feed-zine.xml does not match zine.json: "
+                     "run `python misterzine.py zine` and commit the result")
+        log(f"zine.json OK ({len(z['posts'])} posts), feed-zine.xml in sync")
+        return
+    if raw != canonical:
+        path.write_text(canonical, encoding="utf-8")
+        log("  zine.json reformatted canonically")
+    if old_feed != feed:
+        feed_path.write_text(feed, encoding="utf-8")
+        log("  feed-zine.xml regenerated")
+    log(f"zine OK: {len(z['posts'])} posts")
+
+
 LIBRETRO_RAW = "https://raw.githubusercontent.com/libretro-thumbnails/MAME/master/{}"
 LIBRETRO_TREE_API = "/repos/libretro-thumbnails/MAME/git/trees/master?recursive=1"
 
@@ -2972,6 +3151,11 @@ def main():
 
     wp = sub.add_parser("export-web", help="write the static site (docs/) for GitHub Pages")
     wp.set_defaults(func=cmd_export_web)
+
+    zp = sub.add_parser("zine", help="validate docs/zine.json and regenerate feed-zine.xml from it")
+    zp.add_argument("--check", action="store_true",
+                    help="verify instead of write (CI gate); fails on any drift")
+    zp.set_defaults(func=cmd_zine)
 
     stp = sub.add_parser("stats", help="print database summary")
     stp.set_defaults(func=cmd_stats)

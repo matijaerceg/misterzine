@@ -1,0 +1,93 @@
+name: Zine inbox
+
+# The posting agent pushes each zine post to a 'zine-inbox' branch, never to
+# main. This workflow replays the post onto the latest main, checks it only
+# touches post data, validates it, and lands it. The trigger is a branch
+# PATTERN on purpose: if the agent's push permission is ever reset (a saved
+# routine silently loses its branch grant and falls back to pushing a
+# suffixed branch, e.g. zine-inbox-abc123), the post still lands instead of
+# stranding, which is exactly what happened with main-fpicmk on 2026-07-15.
+
+on:
+  push:
+    branches: ["zine-inbox*"]
+
+permissions:
+  contents: write
+  issues: write
+
+# Serialize landings so two inbox branches can't race each other on main.
+concurrency:
+  group: zine-inbox
+  cancel-in-progress: false
+
+jobs:
+  land:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Replay the post onto latest main
+        run: |
+          git config user.name "misterzine-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git fetch origin main
+          COMMITS=$(git rev-list --reverse origin/main..$GITHUB_SHA)
+          if [ -z "$COMMITS" ]; then
+            echo "Branch has no commits beyond main; nothing to land."
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          else
+            git checkout -B land origin/main
+            git cherry-pick $COMMITS
+          fi
+
+      - name: Refuse anything that is not post data
+        # The agent's job is one post: zine.json, the feed, new images.
+        # Anything else on an inbox branch (code, workflows, other docs) does
+        # not get to ride into main on this rail.
+        if: env.SKIP != '1'
+        run: |
+          CHANGED=$(git diff --name-only origin/main..HEAD)
+          echo "$CHANGED"
+          BAD=$(echo "$CHANGED" | grep -Ev '^(docs/zine\.json|docs/feed-zine\.xml|docs/images/zine/[^/]+\.png)$' || true)
+          if [ -n "$BAD" ]; then
+            echo "::error::zine-inbox may only change post data; refused paths:"
+            echo "$BAD"
+            exit 1
+          fi
+
+      - name: Validate the post
+        if: env.SKIP != '1'
+        run: python misterzine.py zine --check
+
+      - name: Land on main
+        if: env.SKIP != '1'
+        # Retry absorbs a racing push (e.g. the daily refresh landing between
+        # our fetch and push).
+        run: |
+          for i in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            git rebase origin/main
+          done
+          exit 1
+
+      - name: Delete the inbox branch
+        run: git push origin --delete "$GITHUB_REF_NAME" || true
+
+      - name: Open an issue so the failure is loud
+        if: failure()
+        run: |
+          gh issue create \
+            --title "Zine inbox: $GITHUB_REF_NAME failed to land" \
+            --body "The zine-inbox workflow rejected or failed to land branch \`$GITHUB_REF_NAME\` (commit \`$GITHUB_SHA\`). The branch is left in place for inspection. See the run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"

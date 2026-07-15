@@ -4,9 +4,15 @@ This is the spec for the daily zine at https://misterzine.fyi/. It is written fo
 whoever or whatever is making the post, human or automated, starting from zero
 context. Read all of it before writing anything.
 
-The site root `docs/index.html` IS the zine. It is hand-maintained. Nothing in
-`misterzine.py` may write it (see the note in `cmd_export_web`, which explains
-why). `docs/feed-zine.xml` mirrors it and is maintained the same way.
+The posts live in `docs/zine.json`, the single source of truth. The site root
+`docs/index.html` renders them client-side; it is hand-maintained presentation
+and a post never touches it. `docs/feed-zine.xml` is GENERATED from zine.json
+by `python misterzine.py zine`; never edit it by hand. (Nothing in
+`misterzine.py` may write index.html itself; see the note in `cmd_export_web`.)
+
+Making a post means: add one object to zine.json, add one image, run
+`python misterzine.py zine`, push to the `zine-inbox` branch. That is all.
+The details are in "The post data" and "Publishing" below.
 
 ## The one rule
 
@@ -32,8 +38,8 @@ Take the first hook that yields a candidate:
 
 Then apply all of these:
 
-- **Do not cover a game twice within a few weeks.** `docs/index.html` is the
-  record: every post has `id="YYYYMMDD-<k>"` where `<k>` is the row's key. Read
+- **Do not cover a game twice within a few weeks.** `docs/zine.json` is the
+  record: every post has `id: "YYYYMMDD-<k>"` where `<k>` is the row's key. Read
   it first. After a few weeks a game may come round again, but a repeat must
   have a genuinely **different focus**: a different fact, a different angle, a
   new quote, a new screenshot. A repeat that retells the same story is a
@@ -177,64 +183,80 @@ Save to `docs/images/zine/<k>.png`.
 one.** If no candidate yields one, post nothing and say so. A wrong image is
 worse than no post.
 
-## The markup
+## The post data
 
-New posts go at the **top**, immediately below `</header>`.
+New posts go at the **top of the `posts` array** in `docs/zine.json`.
 
-**Copy the newest existing post in `docs/index.html` element for element, then
-swap the content.** Do not reproduce a template from this document and do not
-invent markup. The post design is actively worked on and changes often: the
-order of the `<h2>` and the screenshot flipped on 2026-07-14 alone. Whatever the
-top post looks like right now is correct by definition; anything written down
-here would be a snapshot that quietly goes stale.
+**Copy the newest existing post object field for field, then swap the
+content.** Do not invent fields; `python misterzine.py zine --check` rejects
+unknown ones. A post looks like this (the newest one in zine.json is the
+authoritative example):
 
-The pieces a post is made of: an `<article>` with `id="YYYYMMDD-<k>"`, a
-screenshot in a `.shot` div, an `<h2>` holding the game name linked to
-`releases/#<k>` plus a `.why` reason span, one or more body paragraphs ending in
-the inline source link, and a `.meta` line. Their arrangement is whatever the
-newest post does.
+```json
+{
+ "id": "20260715-ninjaw",
+ "k": "ninjaw",
+ "title": "The Ninja Warriors",
+ "why": "debut",
+ "debut": "2026-05-23",
+ "shot": "w",
+ "aspect": "864 / 224",
+ "img": "ninjaw.png",
+ "alt": "The Ninja Warriors screenshot: ...",
+ "body": ["...one string per paragraph, ending in the inline source link..."],
+ "posted": "2026-07-15T12:48:00Z"
+}
+```
 
-**Shot class:** `h` = 4:3, `v` = tate (3:4), `w` = multi-screen (8:3). For any
-other true aspect, keep the closest class and add an inline override:
-`style="aspect-ratio: 864 / 224"`. A tate post also needs `class="tate"` on the
-`<article>`.
+- `id` is `YYYYMMDD-<k>` where the date matches `posted`.
+- `k` is the release row's deep-link key; the title links to `releases/#<k>`.
+- **`why` is exactly one reason per post.** If the game's year is an exact
+  multiple of 10 years ago: `"why": "decadeversary"` plus `"nth": 30` (the
+  multiple), and the MiSTer debut date appears **nowhere** in the post: the
+  linked release row carries it, so no `debut` field at all. Otherwise:
+  `"why": "debut"` plus `"debut": "YYYY-MM-DD"`. Never two datings on one post.
+  Say **decadeversary**, never "anniversary": we only know the year, not the
+  day, so "anniversary" would falsely imply we are honouring the actual date.
+- **`shot`:** `h` = 4:3, `v` = tate (3:4), `w` = multi-screen (8:3). For any
+  other true aspect, keep the closest class and add `"aspect": "864 / 224"`
+  (the raw pixel dimensions). A tate post also sets `"tate": true`; `v` and
+  `tate` go together, always both or neither.
+- `img` is the bare filename under `docs/images/zine/`; never reuse an earlier
+  post's filename (a repeat post gets a new image AND a new filename).
+- `body` strings are HTML, but the only tag allowed is a bare
+  `<a href="...">source name</a>`; no `target` or `rel` (the page adds those).
+- `posted` is the moment of posting, UTC. Posts stay newest-first by `posted`.
 
-**The reason span (`.why`): exactly one reason per post.** If the game's year
-is an exact multiple of 10 years ago, the reason is `&middot; Nth decadeversary`
-and the MiSTer debut date appears **nowhere** in the post: the linked release
-row carries it. Otherwise the reason is `&middot; MiSTer debut <rd>`. Either
-way `.meta` carries only the timestamp. Never show two datings on one post.
-
-Say **decadeversary**, never "anniversary". We only know the year, not the day,
-so "anniversary" would falsely imply we are honouring the actual date.
-
-**Relative dates are client-side.** Write the absolute date in the `.rd` span's
-text as a no-JS fallback; the page renders "yesterday" or "two weeks ago" at
-runtime. Never bake a relative word into the HTML.
-
-**Dividers.** One `<hr>` after every post, including the last one before the
-colophon. It is `<hr class="sq wide">` if the article immediately before or after
-it has `class="tate"`, otherwise `<hr class="sq">`. Only tate articles are wide;
-a `w` shot does not widen its article, so a `w` post's dividers are narrow.
+Everything presentational is derived at render time: the `.why` span, the meta
+line, relative dates, and the `hr` dividers (wide when they touch a tate post)
+all come from these fields. There is no markup to write and no divider to pick.
 
 ## The feed
 
-Mirror every post into `docs/feed-zine.xml` as the newest `<item>`:
+`docs/feed-zine.xml` is generated from zine.json. After editing zine.json run:
 
-```xml
-<item>
-<title>Apple Lisa (MiSTer debut 2026-07-13)</title>
-<link>https://misterzine.fyi/?ref=rss#20260714-apple-lisa</link>
-<guid isPermaLink="false">zine:20260714-apple-lisa</guid>
-<pubDate>Tue, 14 Jul 2026 14:55:00 +0000</pubDate>
-<description>&lt;p&gt;...the post body, escaped...&lt;/p&gt;</description>
-</item>
+```
+python misterzine.py zine
 ```
 
-The title suffix is the same reason as the `.why` span: `(MiSTer debut
-YYYY-MM-DD)` or `(30th decadeversary)`. Set `<lastBuildDate>` to the newest
-post's timestamp. **Never set it from the current time** - a rebuild with no new
-post must produce a byte-identical file, or it creates noise commits forever.
+It validates every structural rule above (missing/unknown fields, id/posted
+mismatch, duplicate ids, reused or missing images, non-ASCII, disallowed body
+markup, ordering), canonicalizes zine.json's formatting, and rewrites the feed.
+Fix what it flags and re-run until it passes; `--check` verifies without
+writing. Never edit feed-zine.xml by hand and never set any timestamp in it
+from the current time: the output is deliberately byte-deterministic so a
+rebuild with no new post produces an identical file.
+
+## Publishing
+
+**Never push to main.** Commit `docs/zine.json`, the new image, and the
+regenerated `docs/feed-zine.xml` (nothing else; the landing workflow refuses
+other paths), then push the commit to the **`zine-inbox`** branch
+(`git push --force origin HEAD:zine-inbox`; the branch is scratch, force is
+fine and clears any stale leftover). The "Zine inbox" GitHub Action replays it
+onto the latest main, re-validates, lands it, and deletes the branch. If
+validation fails, the Action opens an issue and leaves the branch for
+inspection; fix and push again.
 
 ## Before you publish
 
@@ -246,15 +268,15 @@ post must produce a byte-identical file, or it creates noise commits forever.
       which makes it the easiest thing to invent; never type it from memory
 - [ ] Every quote stands on its own: a reaction or punchline ships together
       with the thing it reacts to, or not at all
-- [ ] The game is not already covered in `docs/index.html`
+- [ ] The game is not already covered in `docs/zine.json`
 - [ ] No quote is reused from another post
 - [ ] The screenshot is not one the release index shows
 - [ ] The container aspect matches the real display aspect
 - [ ] No release-date talk in the body
 - [ ] Plain ASCII throughout, no banned phrases
 - [ ] Wikipedia has no speech verb
-- [ ] The `<hr>` before and after the new post have the right width
-- [ ] `feed-zine.xml` has the item and its `lastBuildDate` is the post's own time
+- [ ] `python misterzine.py zine` ran clean (it regenerates the feed) and the
+      commit is pushed to `zine-inbox`, not main
 
 ## When you cannot
 

@@ -536,24 +536,24 @@
   --stamp-sheen: rgb(255 255 255 / .06);
 }
 
-/* ---- theme swatches: the little split dot beside each name in the theme
-   dropdown. Each entry is that theme's ground + signature colour, restated
+/* ---- theme swatches: the row of three little dots beside each name in the
+   theme dropdown — ground, then the theme's two signature colours, restated
    here because CSS can't reach into another theme's block (tokens always
    resolve to the ACTIVE theme) — keep in sync when a palette above changes.
-   The pages draw the dot themselves (a ::before reading --sw1/--sw2); this
-   file only supplies the pair, so the no-literals-in-page-CSS rule holds. */
-.menu button[data-set="punchy"]     { --sw1: #1e1e2e; --sw2: #cba6f7; }
-.menu button[data-set="vaporwave"]  { --sw1: #1a1240; --sw2: #ff71ce; }
-.menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #ffc5d9; }
-.menu button[data-set="pastel"]     { --sw1: #f4f2ff; --sw2: #eecbff; }
-.menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #c4136c; }
-.menu button[data-set="eva"]        { --sw1: #1d1330; --sw2: #a6ff00; }
-.menu button[data-set="phosphor"]   { --sw1: #0a0e0a; --sw2: #35e86b; }
-.menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #0f380f; }
-.menu button[data-set="spectrum"]   { --sw1: #000000; --sw2: #00ffff; }
-.menu button[data-set="workbench"]  { --sw1: #003a75; --sw2: #ff9422; }
-.menu button[data-set="commodore"]  { --sw1: #352879; --sw2: #7869c4; }
-.menu button[data-set="riso"]       { --sw1: #c8156b; --sw2: #0067a8; }
-.menu button[data-set="amber"]      { --sw1: #100b04; --sw2: #ffb000; }
-.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; }
-.menu button[data-set="virtualboy"] { --sw1: #000000; --sw2: #ff2a2a; }
+   The pages draw the dots themselves (a ::before reading --sw1/2/3); this
+   file only supplies the colours, so the no-literals-in-page-CSS rule holds. */
+.menu button[data-set="punchy"]     { --sw1: #1e1e2e; --sw2: #cba6f7; --sw3: #fab387; }
+.menu button[data-set="vaporwave"]  { --sw1: #1a1240; --sw2: #ff71ce; --sw3: #01cdfe; }
+.menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #ffc5d9; --sw3: #46281a; }
+.menu button[data-set="pastel"]     { --sw1: #f4f2ff; --sw2: #eecbff; --sw3: #d0578f; }
+.menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #ff69b4; --sw3: #c4136c; }
+.menu button[data-set="eva"]        { --sw1: #1d1330; --sw2: #a6ff00; --sw3: #ff9a3d; }
+.menu button[data-set="phosphor"]   { --sw1: #0a0e0a; --sw2: #35e86b; --sw3: #9dffbe; }
+.menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #306230; --sw3: #0f380f; }
+.menu button[data-set="spectrum"]   { --sw1: #000000; --sw2: #00ffff; --sw3: #ffff00; }
+.menu button[data-set="workbench"]  { --sw1: #003a75; --sw2: #ff9422; --sw3: #ffffff; }
+.menu button[data-set="commodore"]  { --sw1: #352879; --sw2: #7869c4; --sw3: #bfce72; }
+.menu button[data-set="riso"]       { --sw1: #f2efe6; --sw2: #c8156b; --sw3: #0067a8; }
+.menu button[data-set="amber"]      { --sw1: #100b04; --sw2: #ffb000; --sw3: #ffd75e; }
+.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; --sw3: #b8860b; }
+.menu button[data-set="virtualboy"] { --sw1: #000000; --sw2: #ff2a2a; --sw3: #ff7a6b; }

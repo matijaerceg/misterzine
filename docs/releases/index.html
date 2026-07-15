@@ -65,9 +65,18 @@
      #hash and return to the clean /releases/ URL. Roboto Condensed 600, one colour
      throughout (full white/black), never underlined; the URL leads, then a dash +
      tagline. The break-legal space in the markup supplies the gap before the dash,
-     and .site's nowrap keeps the URL itself from breaking mid-address. */
+     and the .nb halves keep the URL from breaking mid-address.
+
+     The URL is split into two nowrap halves around a <wbr> so the ONE legal break
+     inside it is at the slash: the theme switcher floats right, shortening the
+     first line boxes, and a single nowrap URL that no longer fits beside the float
+     doesn't wrap -- it overflows UNDER it. How much room is left depends on the
+     current theme's name width, so this must adapt rather than be tuned. Keep the
+     nowrap on .nb, not on .site: a <wbr> inside a nowrap parent is honoured
+     inconsistently across browsers. Browsers don't break URLs at "/" on their own,
+     hence the explicit <wbr>. */
   h1 a.titlelink { color: inherit; text-decoration: none; }
-  h1 .site { white-space: nowrap; }
+  h1 .site .nb { white-space: nowrap; }
   /* flex-wrap (not inline links + margin) so that when the meta line breaks,
      the links on the 2nd+ lines sit flush against the left edge of the line
      above instead of inheriting a leading indent. column-gap gives every item
@@ -640,7 +649,7 @@
       </div>
     </details>
   </div>
-  <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)"><span class="site">misterzine.fyi/releases</span> - a MiSTer FPGA core and arcade tracker</a></h1>
+  <h1><a href="./" id="brandlink" class="titlelink" title="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)"><span class="site"><span class="nb">misterzine.fyi/</span><wbr><span class="nb">releases</span></span> - a MiSTer FPGA core and arcade tracker</a></h1>
   <p class="updated" id="updated"></p>
 </header>
 <div class="controls">

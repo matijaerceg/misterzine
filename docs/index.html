@@ -539,28 +539,10 @@
       if (e.pointerType === 'touch' && !home.contains(e.target)) home.classList.remove('on');
     }, true);
   })();
-  // debut dates render relative (today/yesterday/N days/N weeks), then Month
-  // Year. Called by the post renderer below (all .rd spans live inside posts).
-  function mzRelDates(root) {
-    var W = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
-    var now = new Date();
-    var today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-    root.querySelectorAll('.rd').forEach(function (el) {
-      var d = new Date(el.dataset.d + 'T00:00:00Z');
-      var days = Math.round((today - d.getTime()) / 86400000);
-      var t;
-      if (days <= 0) t = 'today';
-      else if (days === 1) t = 'yesterday';
-      else if (days < 7) t = W[days] + ' days ago';
-      else if (days < 30) { var w = Math.floor(days / 7); t = W[w] + (w === 1 ? ' week ago' : ' weeks ago'); }
-      else t = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
-      el.textContent = t;
-    });
-  }
   // the zine itself: posts render from docs/zine.json, the single source of
   // truth the posting agent writes (it never touches this file). The markup
   // built here must match what a hand-written post looked like element for
-  // element: mask.js, mzRelDates, and the CSS all key on that shape.
+  // element: mask.js and the CSS both key on that shape.
   (function () {
     var mount = document.getElementById('zine');
     if (!mount || !window.fetch) return;
@@ -574,8 +556,8 @@
       return MONTHS[+iso.slice(5, 7) - 1] + ' ' + +iso.slice(8, 10) + ', ' +
              iso.slice(0, 4) + ' ' + iso.slice(11, 16) + ' UTC';
     }
-    function rd(d) {  // absolute date is the no-JS fallback text; mzRelDates rewrites it
-      return '&middot; MiSTer debut <span class="rd" data-d="' + esc(d) + '">' + esc(d) + '</span>';
+    function rd(iso) {  // "2026-05-23" -> "&middot; MiSTer debut May 2026"
+      return '&middot; MiSTer debut ' + MONTHS[+iso.slice(5, 7) - 1] + ' ' + iso.slice(0, 4);
     }
     fetch('zine.json').then(function (r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -603,7 +585,6 @@
       mount.querySelectorAll('article p a[href^="http"]').forEach(function (a) {
         a.target = '_blank'; a.rel = 'noopener';
       });
-      mzRelDates(mount);
       if (window.mzUpgradeShots) window.mzUpgradeShots();
       // the browser gave up on the URL hash before the posts existed; honor it now
       if (location.hash.length > 1) {

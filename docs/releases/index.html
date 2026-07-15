@@ -367,9 +367,13 @@
   /* the fun-theme dropdown: a details.cols (so it inherits the shared
      outside-click close + viewport-fit positioning), restyled as the third
      segment of the toggle. The summary shows the active fun theme's name. */
+  /* flex + auto margin pins the caret to the segment's right edge: the summary is
+     frozen at its widest label (see lockThemeSummary), so a left-hugging caret
+     would wander inside that fixed box as the active theme's name changes. */
   .theme details.cols summary { border: 0; border-left: 1px solid var(--hair); border-radius: 0 5px 5px 0;
-                                font-size: .78rem; padding: .3rem .6rem; }
-  .theme details.cols summary::after { content: " \25BE"; color: var(--muted); }
+                                font-size: .78rem; padding: .3rem .6rem;
+                                display: flex; align-items: center; }
+  .theme details.cols summary::after { content: " \25BE"; color: var(--muted); margin-left: auto; padding-left: .4em; }
   .theme details.cols summary.on { background: var(--rule); font-weight: 600; }
   /* the menu itself keeps the shared details.cols .menu chrome (same box as
      the Columns dropdown); only its buttons need styling of their own */
@@ -2298,7 +2302,34 @@ themeBtns.forEach(b => b.addEventListener('click', () => {
   localStorage.setItem('mz-theme', b.dataset.set);
   applyTheme(b.dataset.set);
 }));
+// The switcher floats right, so its width IS its left edge: letting the summary
+// resize to each theme's name would shove the Light/Dark buttons -- and the open
+// menu, which is anchored to the group and only positioned once, on open --
+// sideways under the cursor mid-pick. So freeze the summary at its widest label.
+// Measured off the live DOM rather than tuned, so a new theme still needs only
+// its button + theme.css block; re-run once webfonts land, since the fallback
+// font's metrics differ from Roboto's.
+function lockThemeSummary() {
+  const prevText = themeSum.textContent, prevOn = themeSum.classList.contains('on');
+  themeSum.style.minWidth = '';  // measure the natural widths, not the last lock
+  let max = 0;
+  // Weight is load-bearing: .on renders the label at 600, and a fun theme's name
+  // is ONLY ever shown in that state, so measuring it unbolded under-reserves by
+  // ~1px and the longest name -- the one that has to fit -- is what overflows.
+  const measure = (label, on) => {
+    themeSum.textContent = label;
+    themeSum.classList.toggle('on', on);
+    max = Math.max(max, themeSum.getBoundingClientRect().width);
+  };
+  measure('Theme', false);  // the neutral label only ever shows unbolded
+  for (const b of themeBtns) if (themeDD.contains(b)) measure(b.textContent, true);
+  themeSum.textContent = prevText;
+  themeSum.classList.toggle('on', prevOn);
+  themeSum.style.minWidth = Math.ceil(max) + 'px';
+}
 applyTheme(localStorage.getItem('mz-theme') || 'dark');
+lockThemeSummary();
+document.fonts?.ready.then(lockThemeSummary);
 
 // wide screens: dock the panel with the empty state by default (no slide-in on first paint)
 if (matchMedia('(min-aspect-ratio: 3/5)').matches) {

@@ -2778,10 +2778,19 @@ _ZINE_CHANNEL = [
 ]
 
 
+# spelled out rather than strftime("%B"), which follows the process locale:
+# the feed is byte-deterministic under a CI gate, so a build box set to a
+# non-English locale would otherwise rewrite every title. Mirrors the MONTHS
+# array the page's rd() uses, which is what keeps the two texts identical.
+_ZINE_MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"]
+
+
 def _zine_reason(p):
     # the same reason text the page's .why span shows; feed titles carry it too
-    return (f"{p['nth']}th decadeversary" if p["why"] == "decadeversary"
-            else f"MiSTer debut {p['debut']}")
+    if p["why"] == "decadeversary":
+        return f"{p['nth']}th decadeversary"
+    return f"MiSTer debut {_ZINE_MONTHS[int(p['debut'][5:7]) - 1]} {p['debut'][:4]}"
 
 
 def _zine_feed_xml(posts):

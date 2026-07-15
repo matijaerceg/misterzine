@@ -2289,10 +2289,14 @@ function applyTheme(t) {
   themeSum.textContent = fun ? fun.textContent : 'Theme';
   themeSum.classList.toggle('on', !!fun);
 }
+// Picking a theme deliberately leaves the menu OPEN (like the filter dropdowns):
+// themes apply live, so the list doubles as a preview you click through. The
+// summary label + pressed state already confirm the pick. Outside-click and
+// Escape still close it via the shared details.cols handlers — including the
+// Light/Dark buttons, which sit outside the menu.
 themeBtns.forEach(b => b.addEventListener('click', () => {
   localStorage.setItem('mz-theme', b.dataset.set);
   applyTheme(b.dataset.set);
-  themeDD.open = false;
 }));
 applyTheme(localStorage.getItem('mz-theme') || 'dark');
 

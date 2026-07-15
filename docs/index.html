@@ -455,6 +455,12 @@
     document.addEventListener('click', function (e) {
       if (dd.open && !dd.contains(e.target)) dd.open = false;
     });
+    // ...and so does Escape, matching the releases picker. That page orders Esc
+    // topmost-first (popover, then dropdown, then search, then panel); here the
+    // menu is the only dismissible thing, so there's nothing to yield to.
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dd.open) dd.open = false;
+    });
     // The switcher's right edge is pinned (the menu hangs off it at right:0, and on
     // narrow screens the group itself is right-anchored), so its width is its LEFT
     // edge: letting the summary resize to each theme's name walks the Light/Dark

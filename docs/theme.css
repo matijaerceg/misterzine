@@ -403,10 +403,12 @@
 }
 
 /* ---- riso: risograph print. Newsprint ground, soft-black ink, and exactly
-   two spot inks — which is what --accent/--accent2 already are. Fluorescent
-   pink (#ff48b0) and blue (#0078bf) are ~2.8:1 on paper, so the text-bearing
-   tokens carry deepened versions (same concession ice cream/pastel make)
-   while the badge hues stay closer to the real fluoro. */
+   two spot inks — which is what --accent/--accent2 already are. Teal
+   (#00827f) and fluorescent orange (#ff6c2f) are the two most popular real
+   riso inks after fluorescent pink; the text-bearing tokens carry deepened
+   versions (same concession ice cream/pastel make) while the badge hues
+   stay closer to the canonical inks. Previously pink + blue, reworked to
+   teal + orange to differentiate from Famicom's red-on-cream. */
 :root[data-theme="riso"] {
   color-scheme: light;
   --bg: #f2efe6;             /* newsprint */
@@ -414,15 +416,15 @@
   --fg: #23201c;             /* soft black */
   --muted: #6f6a5e;
   --line: #a8a191;
-  --accent: #c8156b;         /* fluorescent pink, deepened for text */
-  --accent2: #0067a8;        /* blue: active filters + sorted th */
+  --accent: #007a76;         /* teal, deepened for text (bg 4.51, surf 4.05) */
+  --accent2: #c84a08;        /* fluorescent orange: active filters + sorted th */
   --accent-on: #ffffff;
-  --brand-hover: #c8156b;
-  --type-arcade: #b85c00;    /* fluorescent orange */
-  --type-console: #0067a8;   /* blue */
+  --brand-hover: #009490;
+  --type-arcade: #d4520a;    /* fluorescent orange */
+  --type-console: #00827f;   /* teal */
   --type-computer: #1f7a45;  /* green */
   --type-other: #7a3fa8;     /* purple */
-  --reset: #b85c00;
+  --reset: #c84a08;
   --ok: #1f7a45;
   --danger: #c2183c;
   --warn: #8a6800;
@@ -592,6 +594,9 @@
    0.00000) up to Pastel (#fbfbe4, 0.95105). Ties on --bg break on --surface
    luminance, which is what puts Virtual Boy above ZX (both grounds are pure
    black; their surfaces are #1c0505 vs #14142e).
+   Exception: Famicom (#f5f0e4, L=0.873) sorts AFTER Gelato (#fdf5c9, L=0.904)
+   because the cream reads whiter than the yellow despite lower measured
+   luminance. This is a deliberate visual override, not a bug.
    It is luminance, NOT the hex value and NOT contrast: #9bbc0f (Game Boy)
    looks mid-bright and sorts at 0.42969, between the dark grounds and the
    near-white ones. An earlier version sorted by fg/bg CONTRAST instead and
@@ -608,7 +613,7 @@
 .menu button[data-set="workbench"]  { --sw1: #003a75; --sw2: #ff9422; } /* Amiga blue + orange */
 .menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #0f380f; } /* screen + ink */
 .menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #c4136c; } /* soft pink + deep pink */
-.menu button[data-set="riso"]       { --sw1: #f2efe6; --sw2: #c8156b; } /* newsprint + spot ink */
-.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; } /* cream + crimson */
 .menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #d6467a; } /* vanilla + strawberry */
+.menu button[data-set="riso"]       { --sw1: #f2efe6; --sw2: #00827f; } /* newsprint + teal ink */
+.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; } /* cream + crimson */
 .menu button[data-set="pastel"]     { --sw1: #fbfbe4; --sw2: #d0578f; } /* lemon + pink */

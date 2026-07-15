@@ -583,19 +583,28 @@
 
    Known and accepted: a dark theme's dark first dot is hard to see while some
    OTHER dark theme is active (its bright second dot carries the row). That's
-   inherent to previewing a black-grounded theme on a black menu, not a bug. */
-.menu button[data-set="punchy"]     { --sw1: #1e1e2e; --sw2: #cba6f7; } /* deep indigo + mauve */
+   inherent to previewing a black-grounded theme on a black menu, not a bug.
+
+   MENU ORDER (this table is kept in the same order as the buttons, purely so
+   the two read alike; nothing depends on it — THEMES is only used for an
+   includes() check). The menu runs by fg/bg CONTRAST: the darks descending
+   from the highest, then the lights ascending to the highest, so the ratio
+   falls 21.00 -> 8.00 and climbs 8.06 -> 14.11, quietest in the middle.
+   The trough lands on the dark/light seam by luck, not design (C64 8.00 is
+   the darkest-side floor, Game Boy 8.06 the lightest-side one). A NEW theme
+   slots in by its measured ratio, not by when it was added. */
+.menu button[data-set="spectrum"]   { --sw1: #000000; --sw2: #00ffff; } /* black + cyan */
 .menu button[data-set="vaporwave"]  { --sw1: #b967ff; --sw2: #ff71ce; } /* medium purple + pink */
-.menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #d6467a; } /* vanilla + strawberry */
-.menu button[data-set="pastel"]     { --sw1: #fbfbe4; --sw2: #d0578f; } /* lemon + pink */
-.menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #c4136c; } /* soft pink + deep pink */
 .menu button[data-set="eva"]        { --sw1: #6b5a94; --sw2: #a6ff00; } /* medium purple + green */
 .menu button[data-set="phosphor"]   { --sw1: #0a0e0a; --sw2: #35e86b; } /* dark + bright green */
-.menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #0f380f; } /* screen + ink */
-.menu button[data-set="spectrum"]   { --sw1: #000000; --sw2: #00ffff; } /* black + cyan */
+.menu button[data-set="punchy"]     { --sw1: #1e1e2e; --sw2: #cba6f7; } /* deep indigo + mauve */
 .menu button[data-set="workbench"]  { --sw1: #003a75; --sw2: #ff9422; } /* Amiga blue + orange */
-.menu button[data-set="commodore"]  { --sw1: #352879; --sw2: #7869c4; } /* the two VIC-II blues */
-.menu button[data-set="riso"]       { --sw1: #f2efe6; --sw2: #c8156b; } /* newsprint + spot ink */
 .menu button[data-set="amber"]      { --sw1: #100b04; --sw2: #ffb000; } /* black + amber */
-.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; } /* cream + crimson */
 .menu button[data-set="virtualboy"] { --sw1: #000000; --sw2: #ff2a2a; } /* black + LED red */
+.menu button[data-set="commodore"]  { --sw1: #352879; --sw2: #7869c4; } /* the two VIC-II blues */
+.menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #0f380f; } /* screen + ink */
+.menu button[data-set="pastel"]     { --sw1: #fbfbe4; --sw2: #d0578f; } /* lemon + pink */
+.menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #c4136c; } /* soft pink + deep pink */
+.menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #d6467a; } /* vanilla + strawberry */
+.menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; } /* cream + crimson */
+.menu button[data-set="riso"]       { --sw1: #f2efe6; --sw2: #c8156b; } /* newsprint + spot ink */

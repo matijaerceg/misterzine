@@ -83,13 +83,23 @@
                aspect-ratio: 532.4 / 354.2; display: block; color: var(--fg); }
   /* --logoh is the wordmark height, shared so kun can size/place himself off it in
      px (see .kun) rather than as a % of .peek, whose box we grow downward below. */
+  /* --lean is kun's leaned-out transform, shared by all three triggers below so the
+     two tuned numbers live in one place. -webkit-touch-callout/user-select: a
+     long-press on the egg otherwise pops iOS's link/image callout right over it. */
   .top .home { position: relative; display: block; width: fit-content; flex: 0 0 auto;
-               --logoh: calc(71px - 34px * var(--sh)); }
+               --logoh: calc(71px - 34px * var(--sh));
+               --lean: translateX(-42%) rotate(13deg);
+               -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
   /* hover tints the wordmark the official MiSTer brand purple (--brand-hover:
      #514689 straight from the MiSTer-devel docs theme; dark themes swap in a
      lighter sibling of the same hue, since #514689 goes muddy on near-black)
-     so the emerging kun pops by hue, not by the old grey dim. */
-  .top .home:hover .logo { color: var(--brand-hover); }
+     so the emerging kun pops by hue, not by the old grey dim.
+     THREE TRIGGERS, and the hover one is gated behind (hover: hover) on purpose:
+     phones emulate :hover on tap and LEAVE it stuck on the last-tapped element, so
+     an ungated hover rule would pin kun out and make the touch toggle read as
+     broken. On touch the .on class (set in JS) is the only source of truth. */
+  @media (hover: hover) { .top .home:hover .logo { color: var(--brand-hover); } }
+  .top .home.on .logo { color: var(--brand-hover); }
   /* EASTER EGG: hover the wordmark and mister-kun leans out from behind it.
      THE WALL: .peek's left edge is the ONLY clip line; everything left of it reads as
      behind the logo. Two forces set its 96.2%, and they pull opposite ways:
@@ -136,12 +146,13 @@
               transform: translateX(-100%) rotate(0deg);
               /* ease-out, no overshoot: he leans out and stops */
               transition: transform .17s cubic-bezier(.2, .8, .3, 1); }
-  .top .home:hover .kun, .top .home:focus-visible .kun {
-              transform: translateX(-42%) rotate(13deg); }
+  .top .home.on .kun, .top .home:focus-visible .kun { transform: var(--lean); }
+  @media (hover: hover) { .top .home:hover .kun { transform: var(--lean); } }
   /* Deliberately no prefers-reduced-motion carve-out. Killing the travel doesn't
      remove the motion, it turns a 32px lean into an instant teleport, which is the
-     more jarring of the two. The lean is small, hover-triggered, and reverses the
-     moment you leave: the setting exists for large unbidden movement, not this. */
+     more jarring of the two. The lean is small, only ever fires on a hover or a
+     press, and reverses the moment you leave: the setting exists for large unbidden
+     movement, not this. */
   /* right side: index link + theme toggle in a row, toggle in the far corner */
   .top nav { display: flex; align-items: center; gap: .6rem; }
   /* theme toggle: the same text-based Auto|Light|Dark control as the release index,
@@ -586,6 +597,36 @@
       if (m && m.rows) { cnt.textContent = ' ' + m.rows.toLocaleString('en-US') + ' cores & games →'; measure(); }
     }).catch(function () {});
     addEventListener('resize', measure);
+  })();
+  // EASTER EGG, touch half: a phone has no hover, so mister-kun's lean is driven
+  // by an .on class here instead (the CSS hover rule is gated to (hover: hover)).
+  // The wordmark links to the page it is already on, so a tap has nothing to
+  // navigate to and the tap is spent on the egg instead. Touch only: on a mouse,
+  // hover already covers press (you cannot click without hovering first) and a
+  // second trigger would only fight it.
+  (function () {
+    var home = document.querySelector('.top .home');
+    if (!home) return;
+    var touched = false;  // set by a touch pointerdown, read by the click it produces
+    home.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'touch') return;
+      touched = true;
+      home.classList.toggle('on');  // respond under the finger, before the tap completes
+    });
+    // a press that turns into a scroll fling cancels: retract instead of fighting
+    // the gesture (this is also why .home has no touch-action of its own)
+    home.addEventListener('pointercancel', function () { home.classList.remove('on'); });
+    home.addEventListener('click', function (e) {
+      if (!touched) return;  // real mouse click or keyboard Enter: let the link be a link
+      e.preventDefault();
+      touched = false;
+    });
+    // tapping anywhere else puts him back -- the touch equivalent of mouse-out, and
+    // it means starting a scroll elsewhere dismisses him for free. Capture phase, so
+    // a stopPropagation further down the page cannot strand him out.
+    document.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'touch' && !home.contains(e.target)) home.classList.remove('on');
+    }, true);
   })();
   // debut dates render relative (today/yesterday/N days/N weeks), then Month Year
   (function () {

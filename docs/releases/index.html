@@ -112,7 +112,7 @@
   .controls { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   /* the filter cluster grows to fill the row; the search field grows within it to
      take up the slack (dropdowns sit to its right), and it wraps to the left of the
-     tally column pinned on its right */
+     divider + Columns pinned on its right */
   .filters { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
              flex: 1 1 auto; min-width: 0; }
   /* thin divider; flex:none keeps it (and the Columns pref after it) from ever
@@ -125,12 +125,19 @@
   /* the search box carries its own inline clear-x, so it lives in a relative wrapper
      that takes the grow-to-fill role the bare input used to have */
   .searchwrap { position: relative; display: flex; flex: 1; min-width: 16rem; }
-  input[type=search] { padding: .4rem .6rem; flex: 1; min-width: 0; padding-right: 1.7rem; }
+  input[type=search] { padding: .4rem .6rem; flex: 1; min-width: 0;
+                       /* right padding = the clear-x slot + the tally's measured width
+                          (--countw, set by setCount) + a breathing gap, so typed
+                          text never runs under either */
+                       padding-right: calc(1.85rem + var(--countw, 0px)); }
   /* suppress the browser's native search clear-x so it doesn't double up with .qx */
   input[type=search]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
   /* small x inside the search box, shown only while the box has text — the same
      "clear one field" idiom as the Year From/To fields' .xclr */
-  .qx { position: absolute; right: .15rem; top: 50%; transform: translateY(-50%);
+  /* top nudges on .qx and .count: box-centering two different font sizes puts
+     their baselines ~1.4px apart (the x rode visibly low next to the tally);
+     these land both on the typed text's baseline */
+  .qx { position: absolute; right: .15rem; top: calc(50% - 1px); transform: translateY(-50%);
         border: none; background: none; padding: 0 .4rem; font: inherit; font-size: 1.05rem;
         line-height: 1; color: var(--muted); cursor: pointer; visibility: hidden; }
   .qx:hover { color: var(--accent); }
@@ -144,11 +151,17 @@
     background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   select, input[type=search] { font-family: inherit; font-size: .9rem; border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit; }
   select { padding: .4rem; }
-  /* the tally always stacks onto two lines ("1025" over "of 1025"): the second
-     line ("of " + the fixed total) is always the wider of the two, so the column
-     width is constant and the filter cluster no longer shifts as the count changes */
-  .count { color: var(--muted); font-size: .8rem; flex: none; white-space: nowrap; align-self: flex-start;
-           display: flex; flex-direction: column; line-height: 1.15; text-align: right; }
+  /* the tally lives INSIDE the search box: live "142 of 1025" feedback where
+     the filtering happens, costing the controls row no real estate.
+     pointer-events:none so clicks land in the input; tabular digits so
+     142->143 doesn't twitch. While the box is empty it hugs the right padding;
+     when text appears it slides left in the same motion that pops the x in,
+     landing snug beside the glyph (not the button box — the .4rem around the
+     x is invisible hit area, so aligning to the box edge reads as a gap). */
+  .count { position: absolute; right: .6rem; top: calc(50% + .5px); transform: translateY(-50%);
+           color: var(--muted); font-size: .8rem; white-space: nowrap;
+           font-variant-numeric: tabular-nums; pointer-events: none; }
+  #q:not(:placeholder-shown) ~ .count { right: 1.45rem; }
   /* "Clear filters" is an ACTION, not a status, so it gets a warmer, heavier
      treatment than the blue active-filter glow: amber fill + amber border +
      amber text reads as "press me to undo", and the distinct hue keeps it from
@@ -783,13 +796,13 @@
     #panel { width: 100vw; }
   }
   /* narrow: the desktop controls row assumes it can wrap the filter cluster
-     against a tally + divider + Columns pinned on the right. That only fits on one
-     line at ~900px+; below it the cluster squeezes into a sliver (one dropdown per
-     line, tally crowding the search box) and eats three rows of height. So the
-     breakpoint sits where the desktop row genuinely stops fitting, not at a phone
-     width — landscape phones, tablets and narrow windows all land in that zone.
-     Reflow into a single wrapping cluster: search + tally on line one, then the
-     dropdowns / Clear / Columns flowing together beneath it. */
+     against a divider + Columns pinned on the right. That only fits on one
+     line at ~900px+; below it the cluster squeezes into a sliver (one dropdown
+     per line) and eats three rows of height. So the breakpoint sits where the
+     desktop row genuinely stops fitting, not at a phone width — landscape
+     phones, tablets and narrow windows all land in that zone. Reflow into a
+     single wrapping cluster: the search box (tally riding inside it) on line
+     one, then the dropdowns / Clear / Columns flowing together beneath it. */
   @media (max-width: 899px) {
     /* column-gap is tighter than the .5rem default, and the summary padding below
        is trimmed with it: together they keep the five filters (3 dropdowns, Clear,
@@ -799,18 +812,14 @@
        (still right-anchored, which reads as the display-pref corner it is). */
     .controls { flex-wrap: wrap; row-gap: .5rem; column-gap: .3rem; }
     /* dissolve the filters wrapper so its children become flex items of .controls
-       itself and join one shared wrap flow with the tally and Columns — the
-       desktop "grows and wraps against a pinned right column" split is exactly
-       what has no room here. Order is then set explicitly below, since document
-       order puts the tally after the dropdowns. */
+       itself and join one shared wrap flow with Columns — the desktop "grows and
+       wraps against a pinned right column" split is exactly what has no room
+       here. Order is then set explicitly below. */
     .filters { display: contents; }
     .searchwrap { order: 1; flex: 1 1 8rem; min-width: 0; }
-    /* tally rides the search line as one line ("1025 of 1025"): it's status, not a
-       control, so it doesn't earn a row of its own at this width */
-    .count { order: 2; flex-direction: row; gap: .3rem; align-self: center; text-align: left; }
     /* the vertical divider has no room here, but the element is still useful: a
        zero-height 100%-wide flex item forces the wrap after the search line, so
-       the dropdowns always start a fresh row instead of trailing the tally */
+       the dropdowns always start a fresh row instead of trailing the search box */
     .ctrlsep.tall { order: 3; flex-basis: 100%; width: auto; height: 0; background: none; align-self: auto; }
     #typedd { order: 4; }
     #genredd { order: 5; }
@@ -889,6 +898,7 @@
     <div class="searchwrap">
       <input type="search" id="q" placeholder="Find anything">
       <button type="button" id="qx" class="qx" title="Clear search" tabindex="-1">x</button>
+      <span class="count" id="count"></span>
     </div>
     <details class="cols" id="typedd">
       <summary id="typesummary">All Core Types</summary>
@@ -919,10 +929,9 @@
       </details>
     </div>
   </div>
-  <!-- The tally is its own anchored column: the filter cluster (left) grows and
-       wraps against it, while the tally, the full-height divider, and the Columns
-       display-pref stay pinned to the right and never wrap. -->
-  <span class="count" id="count"></span>
+  <!-- The full-height divider and the Columns display-pref stay pinned to the
+       right and never wrap; the filter cluster (left) grows and wraps against
+       them. The tally lives inside .searchwrap above. -->
   <span class="ctrlsep tall" aria-hidden="true"></span>
   <details class="cols" id="cols">
     <summary>Columns</summary>
@@ -1651,11 +1660,14 @@ function splitAt() {
   for (let i = 0; i < n; i++) if (isUnseen(view[i])) last = i;
   return last;
 }
-// tally: the shown count and the "of <total>" always render as two stacked lines
-// (see .count CSS) so the filter cluster's right edge stays put as the count changes
+// tally: rendered inside the search box (see .count CSS). "142 of 1025" while
+// the list is narrowed; just the bare total when everything shows, since
+// "1025 of 1025" says nothing. The measured width feeds --countw, which the
+// input's right padding reserves so typed text never runs under the tally.
 function setCount(shown) {
-  document.getElementById('count').innerHTML =
-    '<span>' + shown + '</span><span>of ' + DATA.length + '</span>';
+  const el = document.getElementById('count');
+  el.textContent = shown === DATA.length ? String(DATA.length) : shown + ' of ' + DATA.length;
+  el.parentElement.style.setProperty('--countw', el.offsetWidth + 'px');
 }
 
 function esc(s) { return (s == null ? '' : '' + s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }

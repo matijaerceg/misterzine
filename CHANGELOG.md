@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-16
+- The result tally now lives inside the search box, counting down live as you type ("2 of 1039"). When nothing is filtered it shows just the total, and the filter row gets back the space the old standalone tally took up.
 - Some vertical arcade games are known to boot rotated the opposite way on MiSTer from the original cabinet, with no screen flip to correct it. Their Rotation cell now carries a small "boots CW"/"boots CCW" tag with the hardware-verified orientation (hover it, or open the entry, for the full story), and searching cw or ccw matches what the core actually boots.
 - The site can now be installed as an app: Add to Home Screen on iPhone/iPad and Android, or the Install button in Chrome and Edge on desktop. Installing gives it its own icon and window, and on iPhone/iPad it also makes your favorites permanent (Safari otherwise deletes a site's saved data after 7 days without a visit).
 - Every zine post footer now carries a "View [title] in the release tracker" link to the game's entry. The post title already linked there, but nothing said so; the footer link spells it out.

@@ -46,6 +46,14 @@ jobs:
           if [ -z "$COMMITS" ]; then
             echo "Branch has no commits beyond main; nothing to land."
             echo "SKIP=1" >> "$GITHUB_ENV"
+          elif [ -z "$(git cherry origin/main $GITHUB_SHA | grep '^+' || true)" ]; then
+            # The posting session's end-of-run push can recreate the inbox
+            # branch after the first run already landed it on main and deleted
+            # it. Every patch is then already upstream (git cherry marks them
+            # all '-'), and cherry-picking would die on an empty commit. Land
+            # nothing; the delete step below removes the branch again.
+            echo "All patches already landed on main; nothing to land."
+            echo "SKIP=1" >> "$GITHUB_ENV"
           else
             git checkout -B land origin/main
             git cherry-pick $COMMITS

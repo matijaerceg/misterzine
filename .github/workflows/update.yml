@@ -105,5 +105,12 @@ jobs:
             # the MAD CSV is the fetch-failure fallback for the arcade metadata.
             git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv data/cache/mame_meta.json.gz data/cache/mame2003_specs.json.gz
             git commit -m "Update: refresh releases ($(date -u +'%Y-%m-%d %H:%M') UTC)"
-            git push
+            # Retry absorbs a racing push (e.g. a zine post landing on main
+            # between our checkout and push), same as the zine-inbox workflow.
+            for i in 1 2 3; do
+              if git push; then exit 0; fi
+              git fetch origin main
+              git rebase origin/main
+            done
+            exit 1
           fi

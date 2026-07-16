@@ -472,10 +472,15 @@
   /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
   td.prov, .prov { color: var(--muted); font-style: italic; }
   .prov em { font-style: normal; opacity: .7; font-size: .85em; }
-  /* boot-rotation marker: the Rotation cell keeps MAD's cabinet value, dotted
-     because the core is verified to boot the other way; hover explains via the
-     shared popover. Deliberately not .prov — this value isn't uncertain. */
-  td .br { text-decoration: underline dotted; text-underline-offset: .15em; cursor: help; }
+  /* boot-rotation pill: rides the Rotation value like the NEW/beta badges when
+     the core is hardware-verified to boot the opposite way with no working flip
+     (data.json brot). --warn chrome: it's a caution, not a novelty (.nb accent)
+     or a work-in-progress (.bb dashed). Hover explains via the shared popover. */
+  td .br { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
+           border: 1px solid var(--warn); border-radius: .2rem;
+           color: var(--warn); font-size: .6em; font-weight: 700;
+           letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
+           white-space: nowrap; cursor: help; }
   /* the panel's fuller boot-orientation sentence, under the Rotation value */
   dd .brot { color: var(--muted); font-size: .9em; }
   /* "8 years ago" trailing a panel date. Dimmed like .prov but deliberately NOT
@@ -1314,17 +1319,19 @@ function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
 
 // Rotation stays MAME-honest (the original cabinet, via MAD). d.brot is a
 // hardware-verified note that the MiSTer core boots the other way with no
-// working flip (misterzine.py ARCADE_BOOT_ROTATION): dotted underline + the
-// shared data-tip popover. brot outranks prov styling if both ever coincide —
-// a verified contradiction is the stronger signal. The prov branch is
-// replicated here because a column with its own cell() skips the default
-// prov-aware renderer below.
+// working flip (misterzine.py ARCADE_BOOT_ROTATION): a "boots CCW"/"boots CW"
+// pill rides the value, answering hover via the shared data-tip popover.
+// brot outranks prov styling if both ever coincide — a verified contradiction
+// is the stronger signal. The prov branch is replicated here because a column
+// with its own cell() skips the default prov-aware renderer below.
 function rotCell(d) {
   if (!d.rot) return '<td></td>';
   if (d.brot) {
+    const dir = d.brot.includes('CCW') ? 'CCW' : 'CW';
     const tip = 'Cabinet rotation is ' + d.rot + ', but on MiSTer this core boots ' +
       d.brot + ' and has no working screen flip. Hardware verified.';
-    return '<td><span class="br" data-tip="' + escA(tip) + '">' + esc(d.rot) + '</span></td>';
+    return '<td>' + esc(d.rot) +
+      '<span class="br" data-tip="' + escA(tip) + '">boots ' + dir + '</span></td>';
   }
   return (d.prov && d.prov.includes('rot'))
     ? '<td class="prov" title="' + PROV_TITLE + '">' + esc(d.rot) + '</td>'
@@ -1665,7 +1672,7 @@ function apply() {
     if (!terms.length) return true;
     const hay = fold(d.title + ' ' + (d.mt || '') + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
             d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
-            (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
+            (d.rot || '') + ' ' + (d.brot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
             (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
             (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
             (d.beta ? 'beta patreon' : '') + ' ' +

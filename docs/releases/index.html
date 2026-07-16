@@ -437,10 +437,13 @@
   #panel .close { position: sticky; top: 0; float: right; font-size: 1.4rem; line-height: 1;
                   border: 0; background: transparent; color: inherit; cursor: pointer; padding: .1rem .3rem; }
   #panel h2 { font-size: 1.1rem; margin: 0 1.5rem .5rem 0; }
-  /* the game title itself in the marker face (year + copy-link stay upright) */
-  /* the marker-font game title wears the theme accent (like the Zine Home /
-     Release Tracker marker links), so opening a title shows off the palette */
-  #panel h2 .gametitle { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.2rem;
+  /* the game title itself (year + copy-link sit beside it at h2's own size).
+     Condensed 700 rather than the marker face: these are humanized MAME descs,
+     the longest and most punctuation-heavy strings on the site, and the marker
+     is a single-weight handwriting face that wraps and scans badly at that
+     length. It also stays the zine's voice (wordmark, Zine Home link) by NOT
+     appearing on every row here. Accent colour still shows off the palette. */
+  #panel h2 .gametitle { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; font-size: 1.35rem;
                          color: var(--accent); }
   #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
   #panel dt { color: var(--muted); }

@@ -410,6 +410,13 @@
            color: var(--accent); font-size: .6em; font-weight: 700;
            letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; }
+  /* Patreon-beta chip: the NEW badge's pill, but dashed and muted — "not fully
+     here yet" rather than "look at me". Hover explains via the shared popover. */
+  td .bb { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
+           border: 1px dashed var(--muted); border-radius: .2rem;
+           color: var(--muted); font-size: .6em; font-weight: 700;
+           letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
+           white-space: nowrap; }
   td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
@@ -1253,6 +1260,14 @@ function newBadge(d) {
   return '<span class="nb" style="opacity:' + op + '" data-tip="' + escA(tip) + '">NEW</span>';
 }
 
+// Patreon-beta chip: rides next to the title like the NEW badge and answers
+// hover with the same shared popover (data-tip). Rendered per-row, so like the
+// NEW badge it stays out of META_POP and the focus/tap paths.
+const BETA_TIP = 'Patreon early access from Jotego: running it needs his beta key file (jtbeta.zip). It stays listed here and goes public when the beta ends.';
+function betaBadge(d) {
+  return d.beta ? '<span class="bb" data-tip="' + escA(BETA_TIP) + '">beta</span>' : '';
+}
+
 // The star sits out of flow in the sticky cell's left padding (see the .fav CSS),
 // so it costs the Title column no width and shifts no text when it appears on
 // hover. Without hover there's nothing to reveal it, so touch gets a plain
@@ -1263,7 +1278,7 @@ function titleCell(d) {
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
     : FAVS.has(d.k) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
-  return fav + esc(d.title) + newBadge(d) + dep;
+  return fav + esc(d.title) + newBadge(d) + betaBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -1605,6 +1620,7 @@ function apply() {
             (d.rot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
             (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
             (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
+            (d.beta ? 'beta patreon' : '') + ' ' +
             (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
   });
@@ -2235,7 +2251,16 @@ function updateLaunchRow() {
 }
 
 function detailHTML(d) {
-  const rows = [['Type', typeLabel(d)]];
+  const rows = [];
+  // Patreon-beta rows lead with what the chip can only hint at: who gates it,
+  // what unlocks it, and where to subscribe. First row so it reads before the
+  // Launch button gets tried on a MiSTer without the key.
+  if (d.beta) rows.push(['Patreon beta',
+    'Early access from Jotego: running it needs the beta key file (jtbeta.zip) from his ' +
+    '<a href="https://www.patreon.com/jotego" target="_blank" rel="noopener">' +
+    '<span class="lbl">Patreon</span><span class="ext">↗</span></a>. ' +
+    'It stays listed here and goes public when the beta ends.', true]);
+  rows.push(['Type', typeLabel(d)]);
   if (d.genre) rows.push(['Genre', d.genre]);
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
   if (d.core) rows.push(['Core', cfield(d.core, esc(coreLabel(d.core)) +
@@ -2863,7 +2888,7 @@ function stampMeta(m) {
   }) : m.updated;
   const label = valid ? relUpdated(dt) : m.updated;
   el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label) + '</span></span>' +
-    ' <a href="#" class="note" id="pub-note"><span class="lbl">Public cores only, no alternatives</span><span class="ext">ⓘ</span></a>' +
+    ' <a href="#" class="note" id="pub-note"><span class="lbl">Public cores + Jotego betas, no alternatives</span><span class="ext">ⓘ</span></a>' +
     ' <a href="feed.xml" class="note" id="rss-link"><span class="lbl">RSS</span><span class="ext">ⓘ</span></a>' +
     ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener"><span class="lbl">Traffic Stats</span><span class="ext">↗</span></a>' +
     ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener"><span class="lbl">Changelog (GitHub)</span><span class="ext">↗</span></a>' +
@@ -2894,10 +2919,12 @@ const FEED_LIST = [
   ['Updates only', 'feed-updates.xml'],
 ];
 const PUB_NOTE_HTML =
-  '<p><b>Public cores only.</b> Some cores (mainly Jotego arcade cores) ' +
-  'start out as Patreon early-access betas. Those are not listed here ' +
-  'while they are subscriber-only, and each shows up automatically once ' +
-  'it gets a public release.</p>' +
+  '<p><b>Public cores + Jotego betas.</b> Everything in the public MiSTer ' +
+  'databases is listed. Jotego announces his Patreon early-access cores in ' +
+  'the public database too, so those are listed as well, marked beta: ' +
+  'running one needs his Patreon beta key until it gets a public release. ' +
+  'Other paywalled cores (like Coin-Op Collection betas) never appear in a ' +
+  'public database, so they cannot be listed.</p>' +
   '<p><b>No alternatives.</b> Each arcade game is listed once, as its ' +
   'mainline version. Regional and revision variants, clones and bootlegs ' +
   '(what MiSTer files under _alternatives) are folded into that one row, ' +
@@ -2922,7 +2949,7 @@ const META_SEL = '#discord-link, #rss-link, #pub-note';
 // META_POP. They stay out of the focus and tap paths below — focusing them
 // would add a dozen tab stops for a date the Debut column already spells out,
 // and on touch a tap in that cell belongs to the row's detail panel.
-const HOVER_SEL = META_SEL + ', td .nb';
+const HOVER_SEL = META_SEL + ', td .nb, td .bb';
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
 let hoverPop = null, hoverPopFor = null;   // hoverPopFor: the trigger element
 function closeHoverPop() {

@@ -710,9 +710,13 @@
   .misterpop .note a { color: inherit; text-decoration: none; }
   .misterpop .note a .lbl { text-decoration: underline; }
 
-  /* draggable edge: resize the panel / flick left to close (reflow mode only) */
-  #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; width: 12px; z-index: 101;
-             left: var(--pw, round(calc(100vw / 3), 1px)); margin-left: -6px;
+  /* draggable edge: resize the panel / flick left to close (reflow mode only).
+     --hit-l/--hit-r set how far the (invisible) hit box reaches to each side of
+     the seam; the painted ribs/nub stay a 12px strip on the seam regardless. */
+  #resizer { --hit-l: 6px; --hit-r: 6px;
+             position: fixed; top: 0; height: 100vh; height: 100dvh; z-index: 101;
+             width: calc(var(--hit-l) + var(--hit-r));
+             left: var(--pw, round(calc(100vw / 3), 1px)); margin-left: calc(-1 * var(--hit-l));
              cursor: col-resize; display: none; touch-action: none;
              /* ride the panel's edge: slide in/out with the same transition instead of
                 popping via display. Closed = pulled left by the panel width, so it sits
@@ -725,18 +729,29 @@
   /* ribbed grip: two vertical lines running the whole edge so it reads as a draggable seam */
   #resizer { --rib: var(--rib-idle); }
   #resizer:hover, body.resizing #resizer { --rib: var(--accent); }
-  /* integer-pixel stops (1px lines / 1px gaps) so the lines land on the pixel grid evenly */
-  #resizer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to right,
+  /* integer-pixel stops (1px lines / 1px gaps) so the lines land on the pixel grid evenly;
+     the insets pin this to a 12px strip centered on the seam even when the hit box is wider */
+  #resizer::before { content: ""; position: absolute;
+      inset: 0 calc(var(--hit-r) - 6px) 0 calc(var(--hit-l) - 6px);
+      background: linear-gradient(to right,
       transparent 0 5px, var(--rib) 5px 6px, transparent 6px 7px,
       var(--rib) 7px 8px, transparent 8px 12px); }
   /* centered grab nub: a small pill riding the seam so the middle reads as a
      handle, while the full-height ribs keep advertising the whole edge is
      grabbable. Flat (no border/shadow) to sit with the seam; tracks --rib to
      blue on hover. Painted after ::before, so it merges over the ribs. */
-  #resizer::after { content: ""; position: absolute; top: 50%; left: 3px; width: 7px; height: 48px;
+  #resizer::after { content: ""; position: absolute; top: 50%; left: calc(var(--hit-l) - 3px);
+      width: 7px; height: 48px;
       transform: translateY(-50%); border-radius: 3px; background: var(--rib); }
+  /* touch: 12px is far under finger size, so grow the hit box to 36px. Biased
+     toward the panel (whose left edge is padding) so the table-side overhang
+     stays off the favorites-star gutter; touches starting on the strip go to
+     the drag (touch-action: none), never to scroll. */
+  @media (pointer: coarse) { #resizer { --hit-l: 28px; --hit-r: 8px; } }
   body.resizing { cursor: col-resize; user-select: none; }
-  body.resizing #panel, body.resizing main,
+  /* #resizer included: the ghost drag drives its transform inline, and the
+     commit on release must not animate the seam (see endResize) */
+  body.resizing #panel, body.resizing main, body.resizing #resizer,
   body.no-anim #panel, body.no-anim main, body.no-anim #resizer { transition: none; }
 
   @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
@@ -2749,28 +2764,41 @@ function setPanelW(px) { document.documentElement.style.setProperty('--pw', Math
 let committedW = +localStorage.getItem('mz-panel-w') || 0;
 if (committedW) setPanelW(committedW);
 
-let resizing = false;
+// Ghost drag: while the finger/mouse is down, only the seam moves (an inline
+// compositor transform on the resizer) and the real width lands once on
+// release. Writing --pw per pointermove relayouts the whole table each event,
+// which tablets can't hold a frame through. grabDX anchors the drag to where
+// the seam was grabbed, so the wide touch hit box doesn't make it jump.
+let resizing = false, seamX = 0, grabDX = 0;
+const seamTarget = x => Math.min(Math.max(40, x - grabDX), maxW());  // let it visibly shrink toward close
 resizer.addEventListener('pointerdown', e => {
   e.preventDefault();
   resizing = true;
+  seamX = resizer.getBoundingClientRect().left - parseFloat(getComputedStyle(resizer).marginLeft);
+  grabDX = e.clientX - seamX;
   resizer.setPointerCapture(e.pointerId);
   document.body.classList.add('resizing');
 });
 resizer.addEventListener('pointermove', e => {
-  if (resizing) setPanelW(Math.max(40, e.clientX));  // follow the cursor; let it visibly shrink toward close
+  if (resizing) resizer.style.transform = 'translateX(' + (seamTarget(e.clientX) - seamX) + 'px)';
 });
 function endResize(e) {
   if (!resizing) return;
   resizing = false;
-  document.body.classList.remove('resizing');
-  if (e.clientX < CLOSEW) {                            // flicked/dragged past the edge → close
+  resizer.style.transform = '';
+  const x = e.clientX - grabDX;
+  if (x < CLOSEW) {                                    // flicked/dragged past the edge → close
     if (committedW) setPanelW(committedW); else document.documentElement.style.removeProperty('--pw');
-    closePanel();
-    return;
+  } else {
+    committedW = Math.round(Math.min(Math.max(x, MINW), maxW()));
+    setPanelW(committedW);
+    localStorage.setItem('mz-panel-w', committedW);
   }
-  committedW = Math.round(Math.min(Math.max(e.clientX, MINW), maxW()));
-  setPanelW(committedW);
-  localStorage.setItem('mz-panel-w', committedW);
+  // flush the un-ghosted transform while body.resizing still holds transitions
+  // off, or re-enabling them would animate the seam from the ghost position
+  resizer.getBoundingClientRect();
+  document.body.classList.remove('resizing');
+  if (x < CLOSEW) closePanel();
 }
 resizer.addEventListener('pointerup', endResize);
 resizer.addEventListener('pointercancel', endResize);

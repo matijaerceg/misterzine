@@ -453,12 +453,14 @@
   td:first-child { position: sticky; left: 0; z-index: 2; background: var(--bg); }
   th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
   td:first-child, th:first-child { border-right: 1px solid var(--rule); }
-  /* 1rem, not the usual .6rem: the table bleeds a full rem past main's padding
-     (.tablezone), so this puts the first column's text back on the h1's edge */
-  td:first-child, th:first-child { padding-left: 1rem; }
+  /* 1.7rem: 1rem re-absorbs the table's full-rem bleed past main's padding
+     (.tablezone) — which used to put this column's text exactly on the h1's
+     edge — and the extra .7rem airs out the favorites star gutter (user-picked
+     over the alignment; the star was wedged against the viewport edge at 1rem) */
+  td:first-child, th:first-child { padding-left: 1.7rem; }
   :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, var(--line) 7%, var(--bg)); }
   tr.open td:first-child  { background: color-mix(in srgb, var(--accent) 20%, var(--bg)); }
-  /* the favorites star lives in the 1rem gutter above, absolutely positioned
+  /* the favorites star lives in the 1.7rem gutter above, absolutely positioned
      against the sticky cell: out of flow, so revealing it on hover moves no
      title text and costs the column no width. Full row height, so it's a target
      you can hit without aiming. Hidden (not absent) when idle — visibility
@@ -467,7 +469,7 @@
      that has to hold its own against the row, and accent2 is a highlight tint —
      in Pink it lands at 2.1:1 on the row. --accent is what the page already
      trusts on --bg (links, panel titles) and clears 3:1 in all 17 themes. */
-  td:first-child .fav { position: absolute; left: 0; top: 0; bottom: 0; width: 1rem;
+  td:first-child .fav { position: absolute; left: .4rem; top: 0; bottom: 0; width: 1rem;
                         display: flex; align-items: center; justify-content: center;
                         border: 0; padding: 0; background: none; font-size: .9rem; line-height: 1;
                         color: var(--muted); cursor: pointer; visibility: hidden; }

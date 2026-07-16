@@ -226,10 +226,13 @@
      (either level without it re-breaks the shrink chain). .tablezone exists
      only to anchor the scroll-hint shadow overlays: the scroller itself can't
      host them (absolute children would scroll along with the content). */
-  /* margin-right: -1rem cancels main's right padding so the table region (and
-     its scrollbars + the right fade hint) bleeds to the viewport edge; the
-     topbar above keeps its 1rem inset. Cell padding keeps text off the glass. */
-  .tablezone { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; margin-right: -1rem; }
+  /* the -1rem side margins cancel main's padding so the table region (its
+     scrollbars, the fade hints, and every row's background) bleeds to both
+     edges of the column; the topbar above keeps its 1rem inset. Cell padding
+     keeps text off the glass — and the first column re-adds the full 1rem
+     (see td:first-child) so its text still lines up with the h1 above. */
+  .tablezone { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column;
+               margin-left: -1rem; margin-right: -1rem; }
   .tablewrap { flex: 1 1 auto; min-height: 0; overflow: auto; }
   /* floating scrollbars: browsers whose native element scrollbars are classic
      (they reserve a blank rail between table and viewport edge — Chrome on
@@ -282,15 +285,6 @@
      button from stealing clicks meant for the rows under it. Neutral chrome
      (--surface + border, like the topbar buttons) — an accent-colored pill
      floating over the rows was too loud. */
-  /* the 1rem gutter left of the table exposes the page ground beside the
-     header row on themes where --surface differs from --bg (invisible on
-     light/dark where they match) — this strip patches exactly the header
-     band's height, hairlines included, so the band reads full-bleed */
-  .thpatch { position: absolute; left: -1rem; width: 1rem; top: 0; height: var(--theadh, 2.2rem);
-             background: var(--surface); z-index: 1; }
-             /* deliberately no hairline borders: they'd draw new 1px lines in
-                light/dark (where the strip itself is invisible), and against a
-                contrasting band color their absence in this 1rem is unnoticeable */
   .totop { position: absolute; z-index: 17; top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem;
     font: inherit; font-size: .8rem; cursor: pointer;
     padding: .45rem .85rem; border: 1px solid var(--hair); border-radius: 999px;
@@ -424,6 +418,9 @@
   td:first-child { position: sticky; left: 0; z-index: 2; background: var(--bg); }
   th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
   td:first-child, th:first-child { border-right: 1px solid var(--rule); }
+  /* 1rem, not the usual .6rem: the table bleeds a full rem past main's padding
+     (.tablezone), so this puts the first column's text back on the h1's edge */
+  td:first-child, th:first-child { padding-left: 1rem; }
   :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, var(--line) 7%, var(--bg)); }
   tr.open td:first-child  { background: color-mix(in srgb, var(--accent) 20%, var(--bg)); }
 
@@ -762,7 +759,6 @@
 </div>
 </div>
 <div class="tablezone">
-<div class="thpatch" aria-hidden="true"></div>
 <button id="totop" class="totop" type="button">↑ Scroll to top</button>
 <div class="tablewrap">
 <table>
@@ -2421,7 +2417,7 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
 // crossing the narrow breakpoint swaps every label that has a short form. The
 // header must go through buildHeader(): it ends in syncScrollHints(), which
 // re-measures --theadh off the first <th> — and the header's height is exactly
-// what changes here (the "Scroll to top" pill and .thpatch both anchor to it).
+// what changes here (the "Scroll to top" pill anchors to it).
 narrowMQ.addEventListener('change', () => {
   buildHeader();
   syncTypeSummary();

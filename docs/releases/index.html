@@ -327,6 +327,41 @@
     opacity: 0; pointer-events: none; transition: opacity .15s; }
   .tablezone.scrolled .totop { opacity: 1; pointer-events: auto; }
   .totop:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
+  /* "new data landed" notice, shown after a live swap brought in rows worth
+     mentioning. Borrows .totop's neutral chrome (an accent pill over the rows
+     would be far too loud for a thing that appears unbidden).
+     Anchored to the BOTTOM, where a toast belongs: the news itself arrives at
+     the top of the list under the default sort, and a notice centred up there
+     lands squarely on the one row it's telling you about — on a phone it covers
+     that row's title outright. Down here it clears .totop's corner too, and
+     --sbh (measured by syncScrollHints) keeps it off the horizontal scrollbar. */
+  .newspill { position: absolute; z-index: 17; bottom: calc(var(--sbh, 0px) + .8rem);
+    left: 50%; transform: translateX(-50%);
+    display: none; align-items: center; gap: .35rem; max-width: calc(100% - 2rem);
+    font: inherit; font-size: .8rem;
+    padding: .35rem .45rem .35rem .85rem; border: 1px solid var(--hair); border-radius: 999px;
+    background: color-mix(in srgb, var(--fg) 7%, var(--surface)); color: inherit;
+    box-shadow: 0 2px 8px #0003; }
+  .newspill.on { display: flex; }
+  .newspill .txt { cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .newspill:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
+  .newspill .x { flex: none; cursor: pointer; border: 0; background: none; color: var(--muted);
+    font: inherit; font-size: .95rem; line-height: 1; padding: .1rem .3rem; }
+  .newspill .x:hover { color: var(--accent); }
+  /* "new since your last visit" divider: one full-width row closing off the
+     rows that changed since the visitor's stored baseline (render only emits it
+     under the default Last Updated sort, where "the top of the list" and "the
+     new stuff" are the same set). Undo the row/cell chrome like tr.nomatch
+     below; the inner div pins to the scrollport's left edge so the label stays
+     on screen when the table is scrolled right, and the rule runs out from it. */
+  tr.newsplit td { position: static; border-right: 0; border-bottom: 0; padding: 0; }
+  tr.newsplit:hover td { background: none; }
+  tr.newsplit .msg { position: sticky; left: 0; max-width: calc(100vw - 1rem);
+    display: flex; align-items: center; gap: .5rem; padding: .3rem .6rem;
+    color: var(--muted); font-size: .68rem; letter-spacing: .05em;
+    text-transform: uppercase; white-space: nowrap; }
+  tr.newsplit .msg::after { content: ""; flex: 1; height: 1px;
+    background: color-mix(in srgb, var(--accent) 55%, transparent); }
   /* "no matches" row: a single message cell replacing the row list. Undo the
      row/cell chrome (sticky first cell, hover tint). The inner div
      pins to the scrollport's left edge and caps at the viewport width, so the
@@ -858,6 +893,7 @@
 </div>
 <div class="tablezone">
 <button id="totop" class="totop" type="button">↑ Scroll to top</button>
+<div id="newspill" class="newspill"><span class="txt"></span><button type="button" class="x" title="Dismiss">x</button></div>
 <div class="tablewrap">
 <table>
   <colgroup id="cg"></colgroup>
@@ -939,6 +975,56 @@ const favBtnHTML = d => '<button type="button" class="fav' + (FAVS.has(d.k) ? ' 
   '" data-k="' + escA(d.k) + '" aria-pressed="' + FAVS.has(d.k) + '" aria-label="' +
   (FAVS.has(d.k) ? 'Remove from favorites' : 'Add to favorites') + '">' +
   (FAVS.has(d.k) ? '★' : '☆') + '</button>';
+
+// --- "new since your last visit" baseline -------------------------------
+// What this browser had already seen when it last looked: every row's k mapped
+// to its `updated` stamp, plus when the snapshot was taken. render() fences the
+// rows that differ from it behind a divider, and the live update check diffs
+// against it too. One comparison covers both kinds of news: an unknown k is a
+// new release, a known k with a different stamp is a new build.
+//
+// Deliberately NOT advanced by a live swap: rows that land while the tab is
+// open stay unseen, so the divider means "since you last looked" rather than
+// "since this page loaded", and the notice pill and the divider agree.
+// Two snapshots are kept, and both are load-bearing:
+//   cur  — the rows as of this visit. Becomes the next visit's baseline.
+//   base — the rows as of the PREVIOUS visit. What the divider compares against.
+// One snapshot can't do the job: the moment a visit banks what it can see, it
+// has erased the very difference the divider is drawing, so a reload a minute
+// later would silently lose the line the visitor came back to read. Splitting
+// them lets the baseline hold still for a whole visit and advance only when a
+// real gap says the visitor went away and came back.
+const SEEN_KEY = 'mz-seen';
+const SEEN_HOLD_MIN = 60;   // a return within the hour is the same visit, not a new one
+let baseRows = null;        // k -> updated, as of the previous visit (null = first visit, no divider)
+let seenState = null;       // the stored record, held so a live swap can bank into it
+
+const rowMap = rows => {
+  const m = {};
+  for (const d of rows) if (d.k) m[d.k] = d.updated || '';
+  return m;
+};
+// private mode / quota: the divider simply never shows, which is why the reads
+// and writes here are failure-tolerant rather than gated on a support check
+const saveSeen = s => { try { localStorage.setItem(SEEN_KEY, JSON.stringify(s)); } catch (e) {} };
+
+function initSeen(rows) {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(SEEN_KEY) || 'null'); } catch (e) {}
+  const t = s && Date.parse(s.t);
+  const sameVisit = !!(t && Date.now() - t < SEEN_HOLD_MIN * 60000);
+  baseRows = s ? (sameVisit ? s.base : s.cur) || null : null;
+  seenState = { t: new Date().toISOString(), base: baseRows, cur: rowMap(rows) };
+  saveSeen(seenState);
+}
+// Rows that land mid-visit are banked as seen for NEXT time, but deliberately
+// kept out of the baseline: this visit's divider has to go on showing them.
+function bankSeen(rows) {
+  if (!seenState) return;
+  seenState.cur = rowMap(rows);
+  saveSeen(seenState);
+}
+const isUnseen = d => !!(baseRows && d.k && baseRows[d.k] !== (d.updated || ''));
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
 // the raw value stays visible as a tooltip. Only multi-game hardware families
@@ -1436,11 +1522,32 @@ function render() {
     setCount(0);
     return;
   }
+  const split = splitAt();
   tb.innerHTML = view.map((d, i) =>
     '<tr' + (d === openRow ? ' class="open"' : '') + ' data-i="' + i + '">' +
-    cols.map(c => c.cell(d)).join('') + '</tr>'
+    cols.map(c => c.cell(d)).join('') + '</tr>' +
+    (i === split ? '<tr class="newsplit"><td colspan="' + cols.length + '">' +
+      '<div class="msg">above: new since your last visit</div></td></tr>' : '')
   ).join('');
   setCount(view.length);
+}
+// Index of the last row the visitor hasn't seen — the divider goes right after
+// it, so everything above the line is news. -1 = draw no divider.
+//
+// Only under the default Last Updated sort: under any other order the unseen
+// rows aren't a contiguous block at the top, so no single line can fence them.
+// The scan stops at SPLIT_SCAN rows, because one backfilled row carrying an old
+// date would otherwise drag the divider halfway down the table; past that depth
+// a stray unseen row just goes unfenced. Same-day rows interleave seen with
+// unseen (the stamps are day-granular), so the line lands approximately on busy
+// days — that's accepted, it's a hint and not an audit.
+const SPLIT_SCAN = 200;
+function splitAt() {
+  if (!baseRows || sortKey !== 'updated' || sortDir !== -1) return -1;
+  let last = -1;
+  const n = Math.min(view.length, SPLIT_SCAN);
+  for (let i = 0; i < n; i++) if (isUnseen(view[i])) last = i;
+  return last;
 }
 // tally: the shown count and the "of <total>" always render as two stacked lines
 // (see .count CSS) so the filter cluster's right edge stays put as the count changes
@@ -1725,19 +1832,23 @@ function buildYearMenu() {
   const years = [...new Set(DATA.map(d => +d.year).filter(Boolean))].sort((a, b) => a - b);
   if (!years.length) { document.getElementById('yeardd').hidden = true; return; }
   YEAR_MIN = years[0]; YEAR_MAX = years[years.length - 1];
-  // placeholder shows the data's span, recovering the one hint the old dropdown gave for free
-  const row = (b, label, ph) =>
+  // placeholder shows the data's span, recovering the one hint the old dropdown gave for free.
+  // The value is stamped from state rather than left empty: on arrival there's no
+  // range set so this is a no-op, but a live data swap rebuilds this menu under a
+  // visitor who may have one, and blank boxes over a still-filtered table would lie.
+  const row = (b, label, ph, val) =>
     '<div class="yearrow"><span class="ylbl">' + label + '</span>' +
     '<input type="number" inputmode="numeric" class="y' + b + '" min="' + YEAR_MIN +
-      '" max="' + YEAR_MAX + '" step="1" placeholder="' + ph + '">' +
+      '" max="' + YEAR_MAX + '" step="1" placeholder="' + ph + '"' +
+      (val == null ? '' : ' value="' + val + '"') + '>' +
     '<button type="button" class="xclr" data-b="' + b + '" title="Clear ' + label + '" hidden>x</button></div>';
   const decs = [];
   for (let d = Math.floor(YEAR_MIN / 10) * 10; d <= YEAR_MAX; d += 10) decs.push(d);
   const chips = '<div class="decades">' + decs.map(d =>
     '<button type="button" class="dchip" data-d="' + d + '">' + ('' + d).slice(2) + 's</button>').join('') + '</div>';
-  yearMenu.innerHTML = row('from', 'From', YEAR_MIN) + row('to', 'To', YEAR_MAX) + chips +
+  yearMenu.innerHTML = row('from', 'From', YEAR_MIN, yearFrom) + row('to', 'To', YEAR_MAX, yearTo) + chips +
     '<button class="reset" id="yearreset">Reset</button>';
-  syncYear();  // filters never persist, so the menu is always built at its default (no range)
+  syncYear();  // re-marks the summary, clear-x's and decade chips from the live state
 }
 // state-only reset (no apply/recenter) shared by the in-menu Reset and "Clear filters"
 function resetYear() {
@@ -2481,13 +2592,20 @@ function currentIndex() {
   return openRow == null ? -1 : view.findIndex(d => d === openRow);
 }
 function firstVisibleRowIdx(fromBottom) {
-  const rows = [...document.querySelectorAll('#rows tr')];
+  // [data-i] only: the tbody also holds chrome rows (the "new since your last
+  // visit" divider, the no-matches message), and those carry no index to return
+  const rows = [...document.querySelectorAll('#rows tr[data-i]')];
   if (fromBottom) rows.reverse();
   // visibility is judged against the scroller, not the window — and rows tucked
-  // under the sticky header row don't count, so the top boundary is the thead's
-  // bottom edge rather than the scroller's own top
+  // under the sticky header row don't count, so the top boundary is the header's
+  // bottom edge rather than the scroller's own top.
+  // Measured off the th, NOT the thead: the stickiness lives on the th (see the
+  // th rule), so it's the th whose rect follows the header down the page. The
+  // thead's own box scrolls away with the table, and once its bottom goes
+  // negative every row in the list passes the test and row 0 always wins.
   const wrap = document.querySelector('.tablewrap').getBoundingClientRect();
-  const top = document.querySelector('thead').getBoundingClientRect().bottom;
+  const th = document.querySelector('#hrow th');
+  const top = th ? th.getBoundingClientRect().bottom : wrap.top;
   for (const tr of rows) {
     const r = tr.getBoundingClientRect();
     if (r.bottom > top && r.top < wrap.bottom) return +tr.dataset.i;  // first row inside the visible scroll area
@@ -2719,11 +2837,18 @@ function relUpdated(dt) {
 // "Updated" stamp — meta.json.updated is bumped by export-web only when the
 // served data actually changes (see _write_site_meta), so this date/time is stable
 // across no-op rebuilds. Stored as an ISO minute-precision UTC string.
-fetch('./meta.json').then(r => r.json()).then(m => {
+//
+// Re-called after a live data swap so the stamp keeps describing the rows on
+// screen. Re-writing this innerHTML is safe for the meta-line popovers below:
+// they're delegated from the document and keyed on element ids, not bound to
+// the elements this replaces.
+let metaDt = null;   // date behind the relative label; a swap moves it
+function stampMeta(m) {
   const el = document.getElementById('updated');
   if (!el || !m.updated) return;
   const dt = new Date(m.updated);
   const valid = !isNaN(dt);
+  metaDt = valid ? dt : null;
   // exact stamp lives in the hover/focus tooltip (title); the visible text is
   // relative ("2 hours ago"). Past a day we switch BACK to an absolute date so a
   // quiet news week reads as "last shipped Jul 11", not "3 days ago" = neglect
@@ -2733,22 +2858,24 @@ fetch('./meta.json').then(r => r.json()).then(m => {
     year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
     timeZoneName: 'short'  // viewer's tz (e.g. "GMT+2") so the exact time is clearly local
   }) : m.updated;
-  const label = () => valid ? relUpdated(dt) : m.updated;
-  el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label()) + '</span></span>' +
+  const label = valid ? relUpdated(dt) : m.updated;
+  el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label) + '</span></span>' +
     ' <a href="#" class="note" id="pub-note"><span class="lbl">Public cores only, no alternatives</span><span class="ext">ⓘ</span></a>' +
     ' <a href="feed.xml" class="note" id="rss-link"><span class="lbl">RSS</span><span class="ext">ⓘ</span></a>' +
     ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener"><span class="lbl">Traffic Stats</span><span class="ext">↗</span></a>' +
     ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener"><span class="lbl">Changelog (GitHub)</span><span class="ext">↗</span></a>' +
     ' <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link"><span class="lbl">Discord</span><span class="ext">↗</span></a>' +
     ' <a href="../" class="zinelink">Zine Home</a>';
-  // keep a left-open tab honest: refresh the relative label on a slow tick and
-  // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
-  if (valid) {
-    const tick = () => { const s = document.getElementById('updated-rel'); if (s) s.textContent = relUpdated(dt); };
-    setInterval(tick, 60000);
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
-  }
-}).catch(() => {});
+}
+// keep a left-open tab honest: refresh the relative label on a slow tick and
+// whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
+// Armed once, outside stampMeta: a re-stamp must not stack a second interval.
+function tickMeta() {
+  const s = document.getElementById('updated-rel');
+  if (s && metaDt) s.textContent = relUpdated(metaDt);
+}
+setInterval(tickMeta, 60000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) tickMeta(); });
 
 // --- meta-line hover popovers: Discord, RSS and "Public cores only" all
 // reveal their content on hover (or keyboard focus) — our own popup, so
@@ -2916,7 +3043,11 @@ function openMisterPop(anchor) {
   if (!misters.length) metapop.querySelector('.ad').focus();
 }
 
-fetch('./data.json').then(r => r.json()).then(d => {
+// Everything the page does with a data.json — the arrival load and a live swap
+// run this same path, which is what makes swapping cheap and safe: apply()
+// re-derives the view from module state, so the visitor's sort, search and
+// filters all survive without any reconciling of their own.
+function ingest(d) {
   DATA = d;
   // index cores that map to exactly one title, so single-game cores read as
   // the game name without hard-coding each (see coreLabel / CORE_NAMES).
@@ -2926,36 +3057,216 @@ fetch('./data.json').then(r => r.json()).then(d => {
     if (!(r.core in seen)) seen[r.core] = r.title;
     else if (seen[r.core] !== r.title) seen[r.core] = null;  // more than one distinct title
   }
+  // both maps are rebuilt, not merged: a core that has just gained a second
+  // title must LOSE its sole-title entry, and a row that's gone must leave
+  // KEY2ROW or its stale object would still answer deep links
+  for (const c in coreSoleTitle) delete coreSoleTitle[c];
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
+  for (const k in KEY2ROW) delete KEY2ROW[k];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
-  // a ?fav= list in the arrival URL: show it before adopting it. Keys that no
-  // longer name a row are dropped without comment — the point of the link is the
-  // rows it can still show, and a retired core isn't the visitor's problem.
-  const favParam = new URLSearchParams(location.search).get('fav');
-  if (favParam) {
-    const keys = favParam.split(',').map(decodeURIComponent).filter(k => KEY2ROW[k]);
-    if (keys.length) {
-      favView = new Set(keys);
-      document.getElementById('favbannermsg').textContent =
-        'Viewing a favorites link (' + keys.length + (keys.length === 1 ? ' entry)' : ' entries)');
-      // nothing to add when it's already your own list (the common case: your
-      // own backup link, opened on a device that's caught up)
-      document.getElementById('favadd').hidden = keys.every(k => FAVS.has(k));
-      document.getElementById('favbanner').hidden = false;
-    } else {
-      stripFavParam();  // nothing usable in it; don't announce a link with no rows
-    }
-  }
+  // a swap replaces every row object, and the open row is tracked by identity
+  // (see render) — re-point it at its replacement or the highlight silently
+  // dies under an open panel. A row that's gone keeps its old object.
+  if (openRow && openRow.k) openRow = KEY2ROW[openRow.k] || openRow;
   buildYearMenu();
   buildGenreMenu();
   buildHeader();
   apply();
+}
+
+// A ?fav= list in the arrival URL: show it before adopting it. Keys that no
+// longer name a row are dropped without comment — the point of the link is the
+// rows it can still show, and a retired core isn't the visitor's problem.
+// Arrival-only (called once, after the first ingest): a live data swap must not
+// re-read the URL and re-announce a banner the visitor may have dismissed.
+function adoptFavParam() {
+  const favParam = new URLSearchParams(location.search).get('fav');
+  if (!favParam) return;
+  const keys = favParam.split(',').map(decodeURIComponent).filter(k => KEY2ROW[k]);
+  if (keys.length) {
+    favView = new Set(keys);
+    document.getElementById('favbannermsg').textContent =
+      'Viewing a favorites link (' + keys.length + (keys.length === 1 ? ' entry)' : ' entries)');
+    // nothing to add when it's already your own list (the common case: your
+    // own backup link, opened on a device that's caught up)
+    document.getElementById('favadd').hidden = keys.every(k => FAVS.has(k));
+    document.getElementById('favbanner').hidden = false;
+    apply();  // favView narrows the view, and the first ingest already rendered
+  } else {
+    stripFavParam();  // nothing usable in it; don't announce a link with no rows
+  }
+}
+
+// --- live updates --------------------------------------------------------
+// The data republishes on a cron (mirrored from .github/workflows/update.yml —
+// keep the two in step); a quiet run publishes nothing at all. So rather than
+// poll, we look a few times after each slot, plus whenever a left-open tab
+// comes back to the front. Nothing is ever claimed from the clock alone: only a
+// real meta.json hash mismatch does anything, and only a diff worth mentioning
+// says anything.
+const CRON_HOURS = [0, 6, 12, 18], CRON_MIN = 12;  // "12 0,6,12,18 * * *" UTC
+const CHECK_OFFSETS = [5, 15, 30, 45];             // minutes past a slot to look
+const REFOCUS_MIN = 5;                             // throttle for the refocus backstop
+let currentHash = null;      // hash of the data.json now on screen
+let lastCheck = Date.now();  // the page just loaded, so it starts current
+let checking = false;
+
+// soonest slot+offset moment still ahead of `now` (tomorrow's slots included,
+// so the small hours after the last check of the day still find 00:12)
+function nextCheckAt(now) {
+  let best = Infinity;
+  for (let day = 0; day <= 1; day++)
+    for (const h of CRON_HOURS) {
+      const slot = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + day, h, CRON_MIN);
+      for (const off of CHECK_OFFSETS) {
+        const t = slot + off * 60000;
+        if (t > now.getTime() && t < best) best = t;
+      }
+    }
+  return best;
+}
+function armNextCheck() {
+  const t = nextCheckAt(new Date());
+  if (!isFinite(t)) return;
+  // a background tab throttles this timer, which only ever delays a check —
+  // the refocus backstop covers the visitor who comes back before it fires
+  setTimeout(() => { check(); armNextCheck(); }, Math.max(1000, t - Date.now()));
+}
+
+function check() {
+  if (checking) return Promise.resolve();
+  checking = true;
+  lastCheck = Date.now();
+  // cache-busted: GitHub Pages serves meta.json with a 10-minute max-age, which
+  // is longer than the gaps in the ladder above
+  return fetch('./meta.json?t=' + Date.now(), { cache: 'no-store' })
+    .then(r => r.json())
+    .then(m => {
+      if (!m.hash) return;
+      // no hash from the arrival load (its meta fetch failed): adopt this one
+      // rather than cry wolf about a change we can't actually vouch for
+      if (!currentHash) { currentHash = m.hash; return; }
+      if (m.hash === currentHash) return;
+      // keyed on the new hash so no cache anywhere can hand back the copy we have
+      return fetch('./data.json?v=' + encodeURIComponent(m.hash), { cache: 'no-store' })
+        .then(r => r.json())
+        .then(d => swapIn(d, m));
+    })
+    // offline, a mid-deploy 404, half-written json: nothing to do, and nothing
+    // to say to the visitor. The next check picks it up.
+    .catch(() => {})
+    .finally(() => { checking = false; });
+}
+window.mzCheck = check;  // hook for testing a swap without waiting for a publish
+
+// What just landed, phrased for the pill, or '' if there's nothing a visitor
+// would care about. Compares against the rows on screen (KEY2ROW) — this
+// answers "what changed just now", where the divider answers "what's new since
+// you last looked".
+function diffNews(d) {
+  const fresh = [], built = [];
+  for (const r of d) {
+    if (!r.k) continue;
+    const old = KEY2ROW[r.k];
+    if (!old) fresh.push(r.title);
+    else if ((old.updated || '') !== (r.updated || '')) built.push(r.title);
+  }
+  if (!fresh.length && !built.length) return '';
+  // both kinds at once: counts only. Naming two sets in one pill is a mouthful,
+  // and the divider is about to show exactly which rows they are.
+  if (fresh.length && built.length) return fresh.length + ' new, ' + built.length + ' updated';
+  const names = fresh.length ? fresh : built;
+  const noun = fresh.length ? ' new: ' : ' updated: ';
+  // a Jotego wave rebuilds dozens of cores at once, so the tail is always capped
+  const rest = names.length - Math.min(names.length, 3);
+  return names.length + noun + names.slice(0, 3).join(', ') + (rest ? ' +' + rest + ' more' : '');
+}
+
+// Keep the visitor's place when rows appear above them. At the very top we
+// deliberately don't: rows visibly arriving there is the whole point.
+function captureAnchor() {
+  const wrap = document.querySelector('.tablewrap');
+  if (wrap.scrollTop <= 0) return null;
+  const i = firstVisibleRowIdx();
+  const d = i >= 0 ? view[i] : null;
+  const tr = i >= 0 ? document.querySelector('#rows tr[data-i="' + i + '"]') : null;
+  if (!d || !d.k || !tr) return null;
+  return { wrap, k: d.k, top: tr.getBoundingClientRect().top };
+}
+function restoreAnchor(a) {
+  if (!a) return;
+  const i = view.findIndex(x => x.k === a.k);
+  if (i < 0) return;  // the anchor row itself is gone; leave the scroll alone
+  const tr = document.querySelector('#rows tr[data-i="' + i + '"]');
+  if (tr) a.wrap.scrollTop += tr.getBoundingClientRect().top - a.top;
+}
+
+function swapIn(d, m) {
+  const news = diffNews(d);
+  try {
+    const anchor = captureAnchor();
+    ingest(d);
+    stampMeta(m);
+    restoreAnchor(anchor);
+  } catch (e) {
+    // this page's JS meeting a data shape it doesn't know (the site itself was
+    // redeployed under the tab). Don't limp on half-swapped: offer the reload
+    // that actually fixes it, cache-busted, keeping any open deep link.
+    showPill('Site updated, refresh for the latest', () => {
+      location.href = location.pathname + '?v=' + encodeURIComponent(m.hash) + location.hash;
+    });
+    return;
+  }
+  currentHash = m.hash;
+  bankSeen(d);  // seen next visit; the divider still fences them off for this one
+  // Noise filter: the hash also moves for things the table doesn't show (a
+  // fresh commit stamp behind the panel's "Latest commit", say). Those swap in
+  // silently — a pill that cries about nothing teaches people to ignore it.
+  if (news) showPill(news, () => document.querySelector('.tablewrap').scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+// The notice itself: neutral chrome, dismissible, and it never moves the page
+// on its own — clicking it is what takes you to the new rows.
+const pill = document.getElementById('newspill');
+let pillAction = null;
+function showPill(text, action) {
+  pillAction = action;
+  pill.querySelector('.txt').textContent = text;
+  pill.classList.add('on');
+}
+function hidePill() { pill.classList.remove('on'); pillAction = null; }
+pill.addEventListener('click', e => {
+  const act = e.target.closest('.x') ? null : pillAction;
+  hidePill();
+  if (act) act();
+});
+
+// Backstop for the tab that was left open or slept: the ladder's timer may have
+// been throttled to uselessness or missed the slot entirely, so re-check on the
+// way back in. pageshow covers a bfcache restore, which fires no visibilitychange.
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && Date.now() - lastCheck > REFOCUS_MIN * 60000) check();
+});
+window.addEventListener('pageshow', e => {
+  if (e.persisted && Date.now() - lastCheck > REFOCUS_MIN * 60000) check();
+});
+
+fetch('./meta.json').then(r => r.json()).then(m => {
+  currentHash = m.hash || null;
+  stampMeta(m);
+}).catch(() => {});
+
+fetch('./data.json').then(r => r.json()).then(d => {
+  initSeen(d);  // before ingest: render() fences the unseen rows off on this first paint
+  ingest(d);
+  adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
   // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
   // the entry we arrived on already IS the panel state (in overlay mode Back
   // correctly leaves the site, i.e. returns where the visitor came from).
   // Unknown/stale keys are ignored silently.
   const hit = KEY2ROW[decodeURIComponent(location.hash.slice(1))];
   if (hit) { openPanel(hit, true); recenterOpen(); }
+  armNextCheck();
 });
 </script>
 </body>

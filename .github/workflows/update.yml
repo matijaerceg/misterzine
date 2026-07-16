@@ -8,6 +8,8 @@ on:
   schedule:
     # Four times daily at :12 past (odd minute to avoid the top-of-hour
     # scheduler crush). A quiet run simply publishes nothing.
+    # Mirrored in docs/releases/index.html (CRON_HOURS/CRON_MIN), which times
+    # its "has the data changed" checks off these slots — change both together.
     - cron: "12 0,6,12,18 * * *"
   workflow_dispatch: {}   # allow manual runs from the Actions tab
 

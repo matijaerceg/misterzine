@@ -2,6 +2,10 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-16
+- The table now keeps itself current. When new releases or builds are published, they appear in the list on their own, with a small notice at the bottom naming what landed. Nothing moves under you while you read, and a tab left open for days catches up the moment you come back to it.
+- Coming back after a while, a line across the table marks everything new since your last visit, so you can see what you missed without checking dates.
+
 ## 2026-07-15
 - Favorites: star any entry to keep it, from the row itself or its detail panel. The new star control beside Clear filters narrows the table to what you have saved, and its menu copies a backup link that restores your list in another browser, on your phone, or for anyone you send it to.
 - Every date in the detail panel now says how long ago it was, so a game reads as 45 years old and its core as updated 2 days ago without you working it out. The release date also names itself plainly: "MiSTer debut", or "Latest build" for the rare core whose debut nobody knows.

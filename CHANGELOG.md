@@ -3,7 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-16
-- Every zine post footer now carries a "View in the release index" link to the game's entry. The post title already linked there, but nothing said so; the footer link spells it out.
+- Every zine post footer now carries a "View [title] in the release tracker" link to the game's entry. The post title already linked there, but nothing said so; the footer link spells it out.
 - Jotego's Patreon early-access cores are now listed (Sunset Riders, the Street Fighter IIIs, Turtles in Time and more), each marked with a small beta tag. Hover the tag or open the entry for the details: running one needs his Patreon beta key until it gets a public release, at which point the tag simply disappears. The footer note explains why other paywalled cores can't be listed.
 - The table now keeps itself current. When new releases or builds are published, they appear in the list on their own, with a small notice at the bottom naming what landed. Nothing moves under you while you read, and a tab left open for days catches up the moment you come back to it.
 - Coming back after a while, a line across the table marks everything new since your last visit, so you can see what you missed without checking dates.

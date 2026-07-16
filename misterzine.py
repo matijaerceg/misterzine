@@ -2130,6 +2130,32 @@ def arcade_specs_pin(setname, title):
     return _ARCADE_SPECS_BY_NAME_NORM.get(norm_key(title), {})
 
 
+# Hardware-verified MiSTer boot orientation for cores that boot the OPPOSITE
+# vertical rotation from MAD/MAME (which record the original cabinet, by
+# policy) with no working screen flip to bridge the gap. Values use the
+# _MAD_ROTATION display vocabulary so they compare exactly against row["rot"].
+# Exported as `brot` only while the value still differs from the row's current
+# rot AND flip != "Yes", so entries self-retire when MAD changes or a working
+# flip ships. Key only setnames that are actual site rows (mainline sets), and
+# only after hardware-testing on a real MiSTer + rotating monitor — dead clone
+# keys would imply testing that never happened. Verified 2026-07.
+ARCADE_BOOT_ROTATION = {
+    # freeze core, no working flip; MAD/MAME say Vertical (CW) for all five
+    "freeze":   "Vertical (CCW)",
+    "jack":     "Vertical (CCW)",
+    "sucasino": "Vertical (CCW)",
+    "tripool":  "Vertical (CCW)",
+    "zzyzzyxx": "Vertical (CCW)",
+    # donkeykong core, flip declared broken in the MRA; MAD PR #89 moves rot to CCW
+    "radarscp": "Vertical (CW)",
+    # jtroc core, no flip at all; MAD PR #90
+    "rocnrope": "Vertical (CW)",
+    # CrazyKong core, no usable flip; MAD PR #91
+    "ckong":    "Vertical (CW)",
+    "ckongpt2": "Vertical (CW)",
+}
+
+
 def core_build_date(title):
     """Pull a console/computer core's build date from its `_YYYYMMDD` filename suffix.
 
@@ -2444,6 +2470,13 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
             row[k] = sp[k]
         if prov:
             row["prov"] = prov
+        # hardware-verified boot orientation where the core boots the opposite
+        # vertical rotation from the cabinet (see ARCADE_BOOT_ROTATION).
+        # Compared against the row's final rot (MAD or provisional) each build,
+        # never stored: the marker appears/retires as MAD rot and flip move.
+        boot = ARCADE_BOOT_ROTATION.get(sn.lower()) if sn else None
+        if boot and row.get("rot") and boot != row["rot"] and row.get("flip") != "Yes":
+            row["brot"] = boot
     return row
 
 
@@ -2632,6 +2665,8 @@ def cmd_export_web(args):
     n_prov = sum(1 for d in data if d.get("prov"))
     log(f"  arcade with rotation: {n_rot}/{by_base.get('Arcade', 0)} "
         f"({n_prov} rows carry provisional specs)")
+    n_brot = sum(1 for d in data if d.get("brot"))
+    log(f"  boot-rotation markers (brot): {n_brot}/{len(ARCADE_BOOT_ROTATION)} curated")
 
 
 SITE_ROOT = "https://misterzine.fyi/"

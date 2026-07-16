@@ -472,6 +472,12 @@
   /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
   td.prov, .prov { color: var(--muted); font-style: italic; }
   .prov em { font-style: normal; opacity: .7; font-size: .85em; }
+  /* boot-rotation marker: the Rotation cell keeps MAD's cabinet value, dotted
+     because the core is verified to boot the other way; hover explains via the
+     shared popover. Deliberately not .prov — this value isn't uncertain. */
+  td .br { text-decoration: underline dotted; text-underline-offset: .15em; cursor: help; }
+  /* the panel's fuller boot-orientation sentence, under the Rotation value */
+  dd .brot { color: var(--muted); font-size: .9em; }
   /* "8 years ago" trailing a panel date. Dimmed like .prov but deliberately NOT
      .prov: that italic means "this value is uncertain", which an age never is. */
   .ago { color: var(--muted); margin-left: .4rem; }
@@ -1306,6 +1312,25 @@ function titleCell(d) {
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
 
+// Rotation stays MAME-honest (the original cabinet, via MAD). d.brot is a
+// hardware-verified note that the MiSTer core boots the other way with no
+// working flip (misterzine.py ARCADE_BOOT_ROTATION): dotted underline + the
+// shared data-tip popover. brot outranks prov styling if both ever coincide —
+// a verified contradiction is the stronger signal. The prov branch is
+// replicated here because a column with its own cell() skips the default
+// prov-aware renderer below.
+function rotCell(d) {
+  if (!d.rot) return '<td></td>';
+  if (d.brot) {
+    const tip = 'Cabinet rotation is ' + d.rot + ', but on MiSTer this core boots ' +
+      d.brot + ' and has no working screen flip. Hardware verified.';
+    return '<td><span class="br" data-tip="' + escA(tip) + '">' + esc(d.rot) + '</span></td>';
+  }
+  return (d.prov && d.prov.includes('rot'))
+    ? '<td class="prov" title="' + PROV_TITLE + '">' + esc(d.rot) + '</td>'
+    : '<td>' + esc(d.rot) + '</td>';
+}
+
 function coreCell(d) {
   let label = coreLabel(d.core);
   if (!d.repo) return esc(label);
@@ -1341,7 +1366,7 @@ const COLUMNS = [
   { k: 'core', label: 'Core', w: 24, mw: 10,
     cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
   { k: 'reg',  label: 'Region',     w: 8,  mw: 5, opt: true },
-  { k: 'rot',  label: 'Rotation',   w: 10, mw: 5, opt: true },
+  { k: 'rot',  label: 'Rotation',   w: 10, mw: 5, opt: true, cell: d => rotCell(d) },
   { k: 'res',  label: 'Resolution', w: 10, mw: 5, opt: true },
   { k: 'plr',  label: 'Players',    w: 13, mw: 5, opt: true },
   { k: 'ctl',  label: 'Controls',   w: 13, mw: 5, opt: true },
@@ -2302,7 +2327,13 @@ function detailHTML(d) {
       rows.push([label, d[key]]);
   };
   specRow('Region', 'reg');
-  specRow('Rotation', 'rot');
+  // boot-orientation mismatch (d.brot): the value stays MAD's cabinet rotation,
+  // the note below it says what the MiSTer core actually boots (see rotCell)
+  if (d.brot) rows.push(['Rotation', esc(d.rot) +
+    '<br><span class="brot">On MiSTer this core boots ' + esc(d.brot) + ', not ' +
+    esc(d.rot) + ' as on the original cabinet, and it has no working screen flip. ' +
+    'Hardware verified.</span>', true]);
+  else specRow('Rotation', 'rot');
   // multi-monitor cabinets only (pipeline `scr` field); single screen is implied
   if (d.scr) rows.push(['Screens', d.scr === 3 ? 'Triple screen (3)' : 'Dual screen (2)']);
   specRow('Resolution', 'res');
@@ -2986,7 +3017,7 @@ const META_SEL = '#discord-link, #rss-link, #pub-note';
 // META_POP. They stay out of the focus and tap paths below — focusing them
 // would add a dozen tab stops for a date the Debut column already spells out,
 // and on touch a tap in that cell belongs to the row's detail panel.
-const HOVER_SEL = META_SEL + ', td .nb, td .bb';
+const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .br';
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
 let hoverPop = null, hoverPopFor = null;   // hoverPopFor: the trigger element
 function closeHoverPop() {

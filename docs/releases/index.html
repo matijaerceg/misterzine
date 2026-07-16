@@ -313,63 +313,54 @@
     width: var(--hint-l-w, 12px); pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
     background: linear-gradient(to right, var(--hint-shadow), transparent); }
   .tablezone.more-l::before { opacity: 1; }
-  /* "Scroll to top" button: inlaid at the table area's top right, just below
-     the sticky header (--theadh measured by syncScrollHints). Revealed by the
-     .scrolled class (toggled per scroll event) whenever the list is more than
-     about a row away from the top; pointer-events gating keeps the hidden
-     button from stealing clicks meant for the rows under it. Neutral chrome
-     (--surface + border, like the topbar buttons) — an accent-colored pill
-     floating over the rows was too loud. */
-  .totop { position: absolute; z-index: 17; top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem;
-    font: inherit; font-size: .8rem; cursor: pointer;
-    padding: .45rem .85rem; border: 1px solid var(--hair); border-radius: 999px;
-    background: color-mix(in srgb, var(--fg) 7%, var(--surface)); color: inherit; box-shadow: 0 2px 8px #0003;
+  /* Floating pills over the table: "Scroll to top" (top right, revealed by the
+     .scrolled class whenever the list is more than about a row from the top)
+     and the "new data landed" notice (bottom centre, shown after a live swap
+     brought in rows worth mentioning). One shared neutral chrome — --surface +
+     border, like the topbar buttons; an accent-colored pill floating over the
+     rows was too loud — so the two can never drift apart per theme.
+     The notice anchors to the BOTTOM, where a toast belongs: the news itself
+     arrives at the top of the list under the default sort, and a notice up
+     there lands squarely on the one row it's telling you about (on a phone it
+     covers that row's title outright). Down at the bottom it clears .totop's
+     corner too, and --sbh (measured by syncScrollHints) keeps it off the
+     horizontal scrollbar. */
+  .totop, .newspill { position: absolute; z-index: 17;
+    font: inherit; font-size: .8rem;
+    border: 1px solid var(--hair); border-radius: 999px;
+    background: color-mix(in srgb, var(--fg) 7%, var(--surface)); color: inherit; box-shadow: 0 2px 8px #0003; }
+  .totop:hover, .newspill:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
+  .totop { top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem; cursor: pointer;
+    padding: .45rem .85rem;
     opacity: 0; pointer-events: none; transition: opacity .15s; }
   .tablezone.scrolled .totop { opacity: 1; pointer-events: auto; }
-  .totop:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
-  /* "new data landed" notice, shown after a live swap brought in rows worth
-     mentioning. Borrows .totop's neutral chrome (an accent pill over the rows
-     would be far too loud for a thing that appears unbidden).
-     Anchored to the BOTTOM, where a toast belongs: the news itself arrives at
-     the top of the list under the default sort, and a notice centred up there
-     lands squarely on the one row it's telling you about — on a phone it covers
-     that row's title outright. Down here it clears .totop's corner too, and
-     --sbh (measured by syncScrollHints) keeps it off the horizontal scrollbar. */
-  .newspill { position: absolute; z-index: 17; bottom: calc(var(--sbh, 0px) + .8rem);
-    left: 50%; transform: translateX(-50%);
+  .newspill { bottom: calc(var(--sbh, 0px) + .8rem); left: 50%; transform: translateX(-50%);
     display: none; align-items: center; gap: .35rem; max-width: calc(100% - 2rem);
-    font: inherit; font-size: .8rem;
-    padding: .35rem .45rem .35rem .85rem; border: 1px solid var(--hair); border-radius: 999px;
-    background: color-mix(in srgb, var(--fg) 7%, var(--surface)); color: inherit;
-    box-shadow: 0 2px 8px #0003; }
+    padding: .35rem .45rem .35rem .85rem; }
   .newspill.on { display: flex; }
   .newspill .txt { cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .newspill:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
   .newspill .x { flex: none; cursor: pointer; border: 0; background: none; color: var(--muted);
     font: inherit; font-size: .95rem; line-height: 1; padding: .1rem .3rem; }
   .newspill .x:hover { color: var(--accent); }
-  /* "new since your last visit" divider: one full-width row closing off the
-     rows that changed since the visitor's stored baseline (render only emits it
-     under the default Last Updated sort, where "the top of the list" and "the
-     new stuff" are the same set). Undo the row/cell chrome like tr.nomatch
-     below; the inner div pins to the scrollport's left edge so the label stays
-     on screen when the table is scrolled right, and the rule runs out from it. */
-  tr.newsplit td { position: static; border-right: 0; border-bottom: 0; padding: 0; }
-  tr.newsplit:hover td { background: none; }
-  tr.newsplit .msg { position: sticky; left: 0; max-width: calc(100vw - 1rem);
-    display: flex; align-items: center; gap: .5rem; padding: .3rem .6rem;
-    color: var(--muted); font-size: .68rem; letter-spacing: .05em;
+  /* Full-width message rows in the tbody — the "new since your last visit"
+     divider and the "no matches" message. Both undo the row/cell chrome
+     (sticky first cell, hover tint), and both pin their inner div to the
+     scrollport's left edge, capped at the viewport width, so the text stays
+     on-screen when the table is wider than it. */
+  tr.newsplit td, tr.nomatch td { position: static; border-right: 0; }
+  tr.newsplit:hover td, tr.nomatch:hover td { background: none; }
+  tr.newsplit .msg, tr.nomatch .msg { position: sticky; left: 0; max-width: calc(100vw - 1rem);
+    color: var(--muted); }
+  /* the divider: a small uppercase label with the rule running out from it
+     (render only emits the row under the default Last Updated sort, where "the
+     top of the list" and "the new stuff" are the same set) */
+  tr.newsplit td { border-bottom: 0; padding: 0; }
+  tr.newsplit .msg { display: flex; align-items: center; gap: .5rem; padding: .3rem .6rem;
+    font-size: .68rem; letter-spacing: .05em;
     text-transform: uppercase; white-space: nowrap; }
   tr.newsplit .msg::after { content: ""; flex: 1; height: 1px;
     background: color-mix(in srgb, var(--accent) 55%, transparent); }
-  /* "no matches" row: a single message cell replacing the row list. Undo the
-     row/cell chrome (sticky first cell, hover tint). The inner div
-     pins to the scrollport's left edge and caps at the viewport width, so the
-     centered message stays on-screen even when the table is wider than it. */
-  tr.nomatch td { position: static; border-right: 0; }
-  tr.nomatch:hover td { background: none; }
-  tr.nomatch .msg { position: sticky; left: 0; max-width: calc(100vw - 1rem); text-align: center;
-                    color: var(--muted); padding: 2.5rem .5rem; }
+  tr.nomatch .msg { text-align: center; padding: 2.5rem .5rem; }
   tr.nomatch .msg b { font-weight: 600; color: var(--fg); }
   tr.nomatch .msg .esc { font-size: .85em; margin-top: .35rem; display: block; }
   table { min-width: 49rem; }
@@ -1014,6 +1005,10 @@ function initSeen(rows) {
   const t = s && Date.parse(s.t);
   const sameVisit = !!(t && Date.now() - t < SEEN_HOLD_MIN * 60000);
   baseRows = s ? (sameVisit ? s.base : s.cur) || null : null;
+  // an EMPTY snapshot (a visit that loaded no rows, e.g. mid-deploy) must read
+  // as "no baseline", or every row counts as unseen and the divider fences off
+  // the entire table
+  if (baseRows && !Object.keys(baseRows).length) baseRows = null;
   seenState = { t: new Date().toISOString(), base: baseRows, cur: rowMap(rows) };
   saveSeen(seenState);
 }
@@ -1021,6 +1016,13 @@ function initSeen(rows) {
 // kept out of the baseline: this visit's divider has to go on showing them.
 function bankSeen(rows) {
   if (!seenState) return;
+  // another tab may have advanced the record since this one loaded; keep the
+  // newer clock and baseline rather than dragging them back to ours (each
+  // tab's own divider is untouched — baseRows was fixed at its load)
+  try {
+    const s = JSON.parse(localStorage.getItem(SEEN_KEY) || 'null');
+    if (s && Date.parse(s.t) > Date.parse(seenState.t)) { seenState.t = s.t; seenState.base = s.base; }
+  } catch (e) {}
   seenState.cur = rowMap(rows);
   saveSeen(seenState);
 }
@@ -1493,9 +1495,12 @@ document.querySelector('.tablewrap').addEventListener('scroll', () => {
   }, 900);
 }, { passive: true });
 
-document.getElementById('totop').addEventListener('click', () => {
+// shared by the Scroll-to-top button and the "new data landed" notice, whose
+// news sits at the top of the list under the default sort
+function scrollTableTop() {
   document.querySelector('.tablewrap').scrollTo({ top: 0, behavior: 'smooth' });
-});
+}
+document.getElementById('totop').addEventListener('click', scrollTableTop);
 
 function render() {
   const tb = document.getElementById('rows');
@@ -1828,9 +1833,16 @@ function syncYear() {
   const rst = yearMenu.querySelector('#yearreset');
   if (rst) rst.disabled = yearFrom == null && yearTo == null;
 }
+let yearMenuSig = null;  // the year set the menu was last built from
 function buildYearMenu() {
   const years = [...new Set(DATA.map(d => +d.year).filter(Boolean))].sort((a, b) => a - b);
   if (!years.length) { document.getElementById('yeardd').hidden = true; return; }
+  // same years = same menu: skip the innerHTML rebuild. This is what keeps a
+  // live data swap from wiping a year the visitor is mid-typing (change only
+  // fires on blur, so a half-typed value exists ONLY in the input's DOM state).
+  const sig = years.join(',');
+  if (sig === yearMenuSig) return;
+  yearMenuSig = sig;
   YEAR_MIN = years[0]; YEAR_MAX = years[years.length - 1];
   // placeholder shows the data's span, recovering the one hint the old dropdown gave for free.
   // The value is stamped from state rather than left empty: on arrival there's no
@@ -3110,31 +3122,30 @@ const REFOCUS_MIN = 5;                             // throttle for the refocus b
 let currentHash = null;      // hash of the data.json now on screen
 let lastCheck = Date.now();  // the page just loaded, so it starts current
 let checking = false;
+let booted = false;          // the arrival data.json has rendered
 
-// soonest slot+offset moment still ahead of `now` (tomorrow's slots included,
-// so the small hours after the last check of the day still find 00:12)
+// Soonest slot+offset moment ahead of `now`. The candidates are generated in
+// strictly ascending order (offsets never reach the next 6-hour slot), so the
+// first one ahead wins — and the day+1 pass means there always IS one, even at
+// 23:59 (tomorrow's 00:17).
 function nextCheckAt(now) {
-  let best = Infinity;
   for (let day = 0; day <= 1; day++)
-    for (const h of CRON_HOURS) {
-      const slot = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + day, h, CRON_MIN);
+    for (const h of CRON_HOURS)
       for (const off of CHECK_OFFSETS) {
-        const t = slot + off * 60000;
-        if (t > now.getTime() && t < best) best = t;
+        const t = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + day, h, CRON_MIN) + off * 60000;
+        if (t > now.getTime()) return t;
       }
-    }
-  return best;
 }
 function armNextCheck() {
-  const t = nextCheckAt(new Date());
-  if (!isFinite(t)) return;
   // a background tab throttles this timer, which only ever delays a check —
   // the refocus backstop covers the visitor who comes back before it fires
-  setTimeout(() => { check(); armNextCheck(); }, Math.max(1000, t - Date.now()));
+  setTimeout(() => { check(); armNextCheck(); }, Math.max(1000, nextCheckAt(new Date()) - Date.now()));
 }
 
 function check() {
-  if (checking) return Promise.resolve();
+  // never before the arrival rows are up: there is nothing to update yet, and
+  // a swap against an empty table would announce the whole database as news
+  if (checking || !booted) return Promise.resolve();
   checking = true;
   lastCheck = Date.now();
   // cache-busted: GitHub Pages serves meta.json with a 10-minute max-age, which
@@ -3142,11 +3153,12 @@ function check() {
   return fetch('./meta.json?t=' + Date.now(), { cache: 'no-store' })
     .then(r => r.json())
     .then(m => {
-      if (!m.hash) return;
-      // no hash from the arrival load (its meta fetch failed): adopt this one
-      // rather than cry wolf about a change we can't actually vouch for
-      if (!currentHash) { currentHash = m.hash; return; }
-      if (m.hash === currentHash) return;
+      // null currentHash (the arrival meta fetch failed) counts as a mismatch:
+      // we can't vouch for what's on screen, so fetch and diff — the noise
+      // filter keeps a rows-identical result silent, and the swap adopts the
+      // hash either way. Blindly adopting it here instead would silently skip
+      // any publish that landed since arrival.
+      if (!m.hash || m.hash === currentHash) return;
       // keyed on the new hash so no cache anywhere can hand back the copy we have
       return fetch('./data.json?v=' + encodeURIComponent(m.hash), { cache: 'no-store' })
         .then(r => r.json())
@@ -3202,39 +3214,46 @@ function restoreAnchor(a) {
 }
 
 function swapIn(d, m) {
-  const news = diffNews(d);
+  const prev = DATA;
   try {
+    // diffNews INSIDE the try: unknown-shaped data throws right here, and this
+    // is the very failure the catch below exists to surface
+    const news = diffNews(d);
     const anchor = captureAnchor();
     ingest(d);
     stampMeta(m);
     restoreAnchor(anchor);
+    currentHash = m.hash;
+    bankSeen(d);  // seen next visit; the divider still fences them off for this one
+    // a leftover failure pill is moot now — this swap just succeeded
+    if (pillErr) hidePill();
+    // Noise filter: the hash also moves for things the table doesn't show (a
+    // fresh commit stamp behind the panel's "Latest commit", say). Those swap in
+    // silently — a pill that cries about nothing teaches people to ignore it.
+    if (news) showPill(news, scrollTableTop);
   } catch (e) {
     // this page's JS meeting a data shape it doesn't know (the site itself was
-    // redeployed under the tab). Don't limp on half-swapped: offer the reload
-    // that actually fixes it, cache-busted, keeping any open deep link.
+    // redeployed under the tab). Don't limp on half-swapped state: put the rows
+    // that were rendering fine a moment ago back, and offer the reload that
+    // actually fixes things — cache-busted, keeping any open deep link.
+    try { ingest(prev); } catch (e2) {}
     showPill('Site updated, refresh for the latest', () => {
       location.href = location.pathname + '?v=' + encodeURIComponent(m.hash) + location.hash;
-    });
-    return;
+    }, true);
   }
-  currentHash = m.hash;
-  bankSeen(d);  // seen next visit; the divider still fences them off for this one
-  // Noise filter: the hash also moves for things the table doesn't show (a
-  // fresh commit stamp behind the panel's "Latest commit", say). Those swap in
-  // silently — a pill that cries about nothing teaches people to ignore it.
-  if (news) showPill(news, () => document.querySelector('.tablewrap').scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 // The notice itself: neutral chrome, dismissible, and it never moves the page
 // on its own — clicking it is what takes you to the new rows.
 const pill = document.getElementById('newspill');
-let pillAction = null;
-function showPill(text, action) {
+let pillAction = null, pillErr = false;  // pillErr: showing the failure variant
+function showPill(text, action, isErr) {
   pillAction = action;
+  pillErr = !!isErr;
   pill.querySelector('.txt').textContent = text;
   pill.classList.add('on');
 }
-function hidePill() { pill.classList.remove('on'); pillAction = null; }
+function hidePill() { pill.classList.remove('on'); pillAction = null; pillErr = false; }
 pill.addEventListener('click', e => {
   const act = e.target.closest('.x') ? null : pillAction;
   hidePill();
@@ -3251,14 +3270,22 @@ window.addEventListener('pageshow', e => {
   if (e.persisted && Date.now() - lastCheck > REFOCUS_MIN * 60000) check();
 });
 
-fetch('./meta.json').then(r => r.json()).then(m => {
-  currentHash = m.hash || null;
-  stampMeta(m);
-}).catch(() => {});
-
-fetch('./data.json').then(r => r.json()).then(d => {
+// Arrival: meta first, then data KEYED TO META'S HASH. The two files are
+// separate 10-minute cache entries, so fetched independently they can be a
+// mismatched pair — a fresh meta.json with a still-cached pre-publish
+// data.json. Recording that meta's hash against those rows would blind every
+// later check until the NEXT publish moves the hash again. Keying the data URL
+// to the hash makes the pair atomic (a new hash is a new URL, so no cache has
+// it), and costs one tiny request's latency before the big one. A stale cached
+// meta gives the matching stale data: consistent, and the ladder's cache-busted
+// checks catch the real state minutes later.
+fetch('./meta.json').then(r => r.json()).catch(() => null).then(m => {
+  if (m) { currentHash = m.hash || null; stampMeta(m); }
+  return fetch('./data.json' + (m && m.hash ? '?v=' + encodeURIComponent(m.hash) : ''));
+}).then(r => r.json()).then(d => {
   initSeen(d);  // before ingest: render() fences the unseen rows off on this first paint
   ingest(d);
+  booted = true;
   adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
   // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
   // the entry we arrived on already IS the panel state (in overlay mode Back

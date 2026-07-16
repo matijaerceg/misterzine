@@ -743,11 +743,13 @@
   #resizer::after { content: ""; position: absolute; top: 50%; left: calc(var(--hit-l) - 3px);
       width: 7px; height: 48px;
       transform: translateY(-50%); border-radius: 3px; background: var(--rib); }
-  /* touch: 12px is far under finger size, so grow the hit box to 36px. Biased
-     toward the panel (whose left edge is padding) so the table-side overhang
-     stays off the favorites-star gutter; touches starting on the strip go to
-     the drag (touch-action: none), never to scroll. */
-  @media (pointer: coarse) { #resizer { --hit-l: 28px; --hit-r: 8px; } }
+  /* touch: 12px is far under finger size, so grow the hit box to 56px (past
+     Apple's 44pt floor). The table-side half covers the favorites-star gutter
+     near the seam; user accepted that trade on touch (2026-07-16) after the
+     earlier 28/8 bias made the right side noticeably harder to grab. Touches
+     starting on the strip go to the drag (touch-action: none), never to
+     scroll or taps underneath. */
+  @media (pointer: coarse) { #resizer { --hit-l: 28px; --hit-r: 28px; } }
   body.resizing { cursor: col-resize; user-select: none; }
   /* #resizer included: the ghost drag drives its transform inline, and the
      commit on release must not animate the seam (see endResize) */

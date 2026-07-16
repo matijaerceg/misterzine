@@ -407,6 +407,9 @@
   /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
   td.prov, .prov { color: var(--muted); font-style: italic; }
   .prov em { font-style: normal; opacity: .7; font-size: .85em; }
+  /* "8 years ago" trailing a panel date. Dimmed like .prov but deliberately NOT
+     .prov: that italic means "this value is uncertain", which an age never is. */
+  .ago { color: var(--muted); margin-left: .4rem; }
   .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid var(--rule);
              font-size: .8rem; line-height: 1.35; color: var(--muted); max-width: 15rem; }
   .colnote .prov { font-style: italic; }
@@ -951,6 +954,43 @@ function debutAgeDays(d) {
   if (d.date_kind !== 'debut' || !d.date) return -1;
   return Math.max(0, Math.floor((Date.now() - Date.parse(d.date)) / 864e5));  // 864e5 = ms per day
 }
+
+// Human age for a plain YYYY-MM-DD, trailing a date in the detail panel. Not
+// relUpdated(): that ladder is minute/hour-grained for the meta stamp, which
+// tracks a clock, while these are whole-day facts. Coarse past a year on
+// purpose ("8 years ago", never "8 years, 3 months"). Same UTC-midnight-vs-local
+// clamp as debutAgeDays above. Both bands round rather than floor: flooring
+// makes an exact anniversary undershoot by a whole unit (730 days / 365.25 is
+// 1.998, i.e. "1 year ago" on a two-year-old debut). Rounding up through 12
+// months would then say "12 months ago", so the month band hands anything that
+// rounds to a year over to the year arm — which is also why that arm can't see
+// a value below 1 and needs no floor guard.
+function relAge(iso) {
+  if (!iso) return '';
+  const days = Math.max(0, Math.floor((Date.now() - Date.parse(iso)) / 864e5));
+  if (days === 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days <= 30) return days + ' days ago';
+  const mon = Math.round(days / 30.44);
+  if (mon < 12) return mon + (mon === 1 ? ' month ago' : ' months ago');
+  const yr = Math.round(days / 365.25);
+  return yr + (yr === 1 ? ' year ago' : ' years ago');
+}
+
+// Original year is year-only, so its age is inherently give-or-take one: it says
+// "45 years old", never "45 years ago", because "old" doesn't promise the
+// precision a full date does. Blank under a year, so a same-year release can't
+// report "0 years old".
+function yearAge(y) {
+  const age = new Date().getFullYear() - (+y);
+  if (!(+y) || age < 1) return '';
+  return age + (age === 1 ? ' year old' : ' years old');
+}
+
+// The leading space is not decoration: .ago's margin separates the two visually,
+// but without a real text node between them the dd copies (and reads aloud) as
+// "198145 years old". Empty age = no span and no stray space.
+const agoSpan = s => s ? ' <span class="ago">' + s + '</span>' : '';
 
 // The NEW badge rides for four weeks, fading with age to NEW_FLOOR and then
 // going entirely rather than reaching 0: a pill faded to nothing would still
@@ -1829,7 +1869,7 @@ function detailHTML(d) {
   if (d.core) rows.push(['Core', cfield(d.core, esc(coreLabel(d.core)) +
     (coreLabel(d.core) !== d.core ? ' (' + esc(d.core) + ')' : ''), 'Copy core name'), true]);
   if (d.sn) rows.push(['ROM name', cfield(d.sn, '<span class="rom">' + esc(d.sn) + '</span>', 'Copy ROM name'), true]);
-  if (d.year) rows.push(['Original year', d.year]);
+  if (d.year) rows.push(['Original year', esc(d.year) + agoSpan(yearAge(d.year)), true]);
   // arcade hardware metadata (MiSTer Arcade Database) — always shown here,
   // even when the matching table columns are toggled off. Provisional values
   // (mame2003-plus, pending the curated DB) render grayed with a "(provisional)" tag.
@@ -1850,11 +1890,18 @@ function detailHTML(d) {
   specRow('Controls', 'ctl');
   specRow('Special controls', 'spc');
   specRow('Screen flip', 'flip');
-  rows.push(['MiSTer release', d.date + (d.date_kind === 'debut' ? ' (MiSTer debut)' : ' (latest build; debut unknown)')]);
+  // The label carries the debut-vs-fallback distinction, so the value doesn't
+  // have to: a row reading "MiSTer release ... (MiSTer debut)" said MiSTer twice
+  // to disambiguate from a case that no current row is in (every row in the data
+  // is date_kind 'debut'). The 'build' arm is dormant, not dead — a non-arcade
+  // core whose repo yields no release_date still lands there (misterzine.py).
+  const debut = d.date_kind === 'debut';
+  rows.push([debut ? 'MiSTer debut' : 'Latest build',
+    esc(d.date) + agoSpan(relAge(d.date) + (debut ? '' : ' (debut unknown)')), true]);
   // 'Latest update' = newest shipped build (what update_all delivers);
   // 'Latest commit' = repo activity, which can run ahead of a shipped build
-  if (d.updated) rows.push(['Latest update', d.updated]);
-  if (d.act) rows.push(['Latest commit', d.act]);
+  if (d.updated) rows.push(['Latest update', esc(d.updated) + agoSpan(relAge(d.updated)), true]);
+  if (d.act) rows.push(['Latest commit', esc(d.act) + agoSpan(relAge(d.act)), true]);
   // which downloader database delivers this entry via update_all
   if (d.src) rows.push(['Source', SRC_NAMES[d.src] || d.src]);
   // show the repo slug (jtcores deep links keep the full path in the href only)

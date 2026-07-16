@@ -9,6 +9,13 @@
      Pages project site doesn't own the domain root) -->
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<!-- installable web app (no service worker on purpose: the live-update flow
+     assumes the network is the truth). Installing exempts localStorage from
+     iOS Safari's 7-day eviction, which is what keeps favorites durable. -->
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MiSTerZine">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <!-- social link previews (one static card for every URL, incl. #deep-links) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MiSTerZine">
@@ -833,7 +840,13 @@
     .tablewrap { overflow: visible; }
   }
 </style>
-<!-- GoatCounter analytics (privacy-friendly, no cookies) -->
+<!-- GoatCounter analytics (privacy-friendly, no cookies). Views from the
+     installed app have no referrer of their own, so label them "pwa" --
+     count.js reads window.goatcounter overrides when it fires. -->
+<script>
+  if (matchMedia('(display-mode: standalone)').matches || navigator.standalone)
+    window.goatcounter = { referrer: 'pwa' };
+</script>
 <script data-goatcounter="https://misterzine.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -955,6 +968,16 @@ const rowURL = d => location.origin + location.pathname + '#' + d.k;
 // than a count that runs ahead of what's on screen.
 let FAVS = new Set();
 try { FAVS = new Set(JSON.parse(localStorage.getItem('mz-favs') || '[]')); } catch (e) {}
+// installed-app (home screen / Install) session vs a plain browser tab
+const STANDALONE = matchMedia('(display-mode: standalone)').matches || !!navigator.standalone;
+// iOS Safari, where a 7-day visit gap deletes localStorage unless the site is
+// installed (iPadOS masquerades as a Mac, hence the touch check)
+const IOS_BROWSER = !STANDALONE && (/iP(hone|ad|od)/.test(navigator.userAgent) ||
+  (navigator.userAgent.includes('Mac') && 'ontouchend' in document));
+// pin this origin's storage; gated to installed sessions because Firefox
+// answers persist() with a permission popup a drive-by tab hasn't earned
+if (STANDALONE && navigator.storage && navigator.storage.persist)
+  navigator.storage.persist().catch(() => {});
 let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter
 let favView = null;    // Set of keys while viewing someone's ?fav= link, else null
 // unlike the page's other writes (prefs, all replaceable) this one is the user's
@@ -979,10 +1002,13 @@ function toggleFav(d, anchor) {
   if (favOnly || favView) { apply(); recenterOpen(); }
   if (!saved) { showChip(anchor, 'Could not save (private window?)'); return; }
   // where the list lives is worth saying once, the first time it matters; the
-  // star menu carries the rest (the backup link) from then on
+  // star menu carries the rest (the backup link) from then on. On iOS Safari
+  // that once is spent on the thing that actually protects the list: installing
+  // (Safari deletes a non-installed site's storage after 7 days away)
   if (on && !localStorage.getItem('mz-fav-hint')) {
     try { localStorage.setItem('mz-fav-hint', '1'); } catch (e) {}
-    showChip(anchor, 'Saved in this browser');
+    showChip(anchor, IOS_BROWSER ? 'Saved. Add to Home Screen to keep favorites safe'
+                                 : 'Saved in this browser');
   }
 }
 // repaint the two stars that can show one row's state, without rebuilding the

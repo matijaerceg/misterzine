@@ -7,6 +7,12 @@
 <meta name="description" content="A collection of quotes from around the web about whatever just landed in the public MiSTer FPGA databases, each with its source linked.">
 <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<!-- installable web app (manifest shared with /releases/; no service worker
+     on purpose -- the tracker's live-update flow assumes network truth) -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="MiSTerZine">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="canonical" href="https://misterzine.fyi/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MiSTerZine">
@@ -599,7 +605,13 @@
     });
   })();
 </script>
-<!-- GoatCounter analytics (privacy-friendly, no cookies) -->
+<!-- GoatCounter analytics (privacy-friendly, no cookies). Views from the
+     installed app have no referrer of their own, so label them "pwa" --
+     count.js reads window.goatcounter overrides when it fires. -->
+<script>
+  if (matchMedia('(display-mode: standalone)').matches || navigator.standalone)
+    window.goatcounter = { referrer: 'pwa' };
+</script>
 <script data-goatcounter="https://misterzine.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </body>

@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-15
+- Favorites: star any entry to keep it, from the row itself or its detail panel. The new star control beside Clear filters narrows the table to what you have saved, and its menu copies a backup link that restores your list in another browser, on your phone, or for anyone you send it to.
 - Every date in the detail panel now says how long ago it was, so a game reads as 45 years old and its core as updated 2 days ago without you working it out. The release date also names itself plainly: "MiSTer debut", or "Latest build" for the rare core whose debut nobody knows.
 - New releases are flagged for four weeks instead of one, with a NEW badge that fades as the release ages. Hover it to see exactly how old the release is.
 - The zine now writes itself: posts are researched, verified and published automatically four times a day. Every quote is still checked word for word against its source before a post goes live.

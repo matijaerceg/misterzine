@@ -193,6 +193,41 @@
      (not selects) so any boundary year is enterable, including decade edges like
      2010/2019 that no game in the data happens to carry; the per-field x shows
      only when that bound is set (mirrors the search Clear button). */
+  /* favorites control: a filter toggle welded to a details.cols menu, built like
+     the header's theme toggle (segments inside one bordered group) but sized to
+     sit in the filter row. Growing counts push right into the row's own gap, so
+     unlike the theme summary this needs no measured width lock — just a floor
+     wide enough that 0->9 doesn't twitch, and tabular digits so 10->11 doesn't. */
+  .favctl { display: inline-flex; align-self: center; border: 1px solid var(--hair); border-radius: 4px; }
+  .favctl > button { font: inherit; font-size: .9rem; padding: .4rem .55rem;
+                     border: 0; border-radius: 3px 0 0 3px; background: transparent; color: inherit;
+                     cursor: pointer; min-width: 3.4em; text-align: center;
+                     font-variant-numeric: tabular-nums; }
+  .favctl > button:disabled { color: var(--muted); cursor: default; }
+  .favctl > button:not(:disabled):hover { background: var(--hover-bg); }
+  .favctl details.cols summary { border: 0; border-left: 1px solid var(--hair);
+                                 border-radius: 0 3px 3px 0; padding: .4rem .45rem; }
+  /* narrowing state wears the same accent as the other filters' summaries; it's
+     the group that glows, since the border is the group's, not the segment's */
+  .favctl.active { border-color: var(--accent2, var(--accent)); }
+  .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
+  .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
+  /* sized and ruled off like the Columns menu's footnote (.colnote) */
+  .favctl .menu .favnote { margin: .35rem 0 0; padding-top: .4rem; border-top: 1px solid var(--rule);
+                           font-size: .78rem; line-height: 1.35; color: var(--muted);
+                           max-width: 15rem; white-space: normal; }
+  /* the ?fav= arrival banner, in the topbar's flow directly above the table it's
+     describing (the topbar is flex:none, so it simply shortens the scroller) */
+  .favbanner[hidden] { display: none; }   /* the display below outranks the UA's [hidden] rule */
+  .favbanner { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+               margin: 0 0 .7rem; padding: .5rem .7rem; font-size: .9rem;
+               border: 1px solid var(--accent2, var(--accent)); border-radius: 6px;
+               background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
+  .favbanner button { font: inherit; font-size: .85rem; padding: .3rem .55rem; cursor: pointer;
+                      border: 1px solid var(--hair); border-radius: 4px;
+                      background: var(--surface); color: inherit; }
+  .favbanner button:hover { background: var(--hover-bg); }
+  #favdismiss { margin-left: auto; }
   .yearrow { display: flex; align-items: center; gap: .4rem; }
   .yearrow .ylbl { width: 2.6rem; color: var(--muted); font-size: .9rem; }
   .yearrow input[type=number] { flex: 1; min-width: 0; font-family: inherit; font-size: .9rem;
@@ -423,6 +458,26 @@
   td:first-child, th:first-child { padding-left: 1rem; }
   :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, var(--line) 7%, var(--bg)); }
   tr.open td:first-child  { background: color-mix(in srgb, var(--accent) 20%, var(--bg)); }
+  /* the favorites star lives in the 1rem gutter above, absolutely positioned
+     against the sticky cell: out of flow, so revealing it on hover moves no
+     title text and costs the column no width. Full row height, so it's a target
+     you can hit without aiming. Hidden (not absent) when idle — visibility
+     keeps the box measured, and a favorited star stays lit on every device. */
+  /* --accent, not the --accent2 the filter glows use: a lit star is a solid glyph
+     that has to hold its own against the row, and accent2 is a highlight tint —
+     in Pink it lands at 2.1:1 on the row. --accent is what the page already
+     trusts on --bg (links, panel titles) and clears 3:1 in all 17 themes. */
+  td:first-child .fav { position: absolute; left: 0; top: 0; bottom: 0; width: 1rem;
+                        display: flex; align-items: center; justify-content: center;
+                        border: 0; padding: 0; background: none; font-size: .72rem; line-height: 1;
+                        color: var(--muted); cursor: pointer; visibility: hidden; }
+  td:first-child .fav.on { visibility: visible; color: var(--accent); }
+  /* matches the row-hover tint's own guard: while a menu is open the click only
+     dismisses it, so offering a star to press would be a lie */
+  @media (hover: hover) {
+    :where(body:not(.dd-open)) #rows tr:hover td:first-child .fav { visibility: visible; }
+    td:first-child .fav:hover { color: var(--accent); }
+  }
 
   /* --- detail panel: slides in from the left --- */
   #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, round(calc(100vw / 3), 1px));
@@ -488,6 +543,13 @@
   #panel h2 .cf { display: inline-block; width: auto; max-width: calc(100% + .8rem);
                   padding: .15rem .4rem; margin: -.15rem -.4rem; }
   #panel h2 .ci { font-size: .8em; }   /* quiet next to the title, not a loud pill */
+  /* the panel's star: the touch device's only way to favorite, so it's a real
+     target here rather than the row's 1rem hint. The right margin looks large
+     because the copy field beside it pulls .4rem left (negative margin above). */
+  #panel h2 .fav { font: inherit; font-size: 1.2rem; line-height: 1; vertical-align: baseline;
+                   border: 0; padding: 0; margin-right: .75rem; background: none;
+                   color: var(--muted); cursor: pointer; }
+  #panel h2 .fav.on, #panel h2 .fav:hover { color: var(--accent); }
   /* flat yellow bolt after the ZapScript field label */
   #panel .zapbolt { width: .8em; height: .8em; fill: var(--warn); vertical-align: -.08em; margin-left: .25rem; }
   /* the ZapScript token takes a jolt on hover/copy (zapJolt, below). position:
@@ -647,10 +709,12 @@
      Reflow into a single wrapping cluster: search + tally on line one, then the
      dropdowns / Clear / Columns flowing together beneath it. */
   @media (max-width: 899px) {
-    /* column-gap is tighter than the .5rem default: with the short labels the whole
-       cluster (3 dropdowns + Clear + Columns) needs ~383px against 358px of usable
-       width on a 390px phone, and this plus the summary padding below closes that
-       gap — buying a whole row back rather than leaving Columns stranded alone. */
+    /* column-gap is tighter than the .5rem default, and the summary padding below
+       is trimmed with it: together they keep the five filters (3 dropdowns, Clear,
+       favorites) on one line at 358px of usable width on a 390px phone — 338px
+       against 358px. Columns no longer joins them: six controls want ~429px, and
+       nothing short of dropping one closes a 70px gap, so it takes the next row
+       (still right-anchored, which reads as the display-pref corner it is). */
     .controls { flex-wrap: wrap; row-gap: .5rem; column-gap: .3rem; }
     /* dissolve the filters wrapper so its children become flex items of .controls
        itself and join one shared wrap flow with the tally and Columns — the
@@ -670,12 +734,14 @@
     #genredd { order: 5; }
     #yeardd { order: 6; }
     button.clear { order: 7; }
+    .favctl { order: 8; }
     /* Columns keeps its far-right anchoring, now against whatever row it lands on */
-    #cols { order: 8; margin-left: auto; align-self: center; }
+    #cols { order: 9; margin-left: auto; align-self: center; }
     /* a notch tighter so the filter cluster fits one line on a ~390px phone. Only
        the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
        the tap targets keep their height. */
-    details.cols summary, button.clear { font-size: .85rem; padding: .35rem .45rem; }
+    details.cols summary, button.clear, .favctl > button { font-size: .85rem; padding: .35rem .45rem; }
+    .favctl > button { min-width: 3em; }
     /* the sort arrow is dropped here: at this width it's the thing that wraps the
        header onto a second sticky line, and the accent color already says which
        column is sorted. Direction is the only loss (tap again to flip); aria-sort
@@ -749,6 +815,21 @@
       <div class="menu" id="yearmenu"></div>
     </details>
     <button type="button" id="clear" class="clear" disabled>Clear filters</button>
+    <!-- favorites: the left segment filters the list down to starred rows, the
+         caret opens the housekeeping (backup link, clear). Same split shape as
+         the theme toggle in the header. -->
+    <div class="favctl" id="favctl">
+      <button type="button" id="favtoggle" aria-pressed="false" disabled
+              title="Star an entry to save it here">&#9733; 0</button>
+      <details class="cols" id="favdd">
+        <summary id="favsum" aria-label="Favorites menu"></summary>
+        <div class="menu">
+          <button type="button" class="reset" id="favcopy" disabled>Copy backup link</button>
+          <button type="button" class="reset" id="favclearall" disabled>Clear all favorites</button>
+          <p class="favnote">Favorites are saved in this browser. Keep this link to restore them anywhere.</p>
+        </div>
+      </details>
+    </div>
   </div>
   <!-- The tally is its own anchored column: the filter cluster (left) grows and
        wraps against it, while the tally, the full-height divider, and the Columns
@@ -759,6 +840,13 @@
     <summary>Columns</summary>
     <div class="menu" id="colsmenu"></div>
   </details>
+</div>
+<!-- shown only when the URL carries a ?fav= list: someone opening a shared link
+     is here to look, so the list is filtered to it and adopting it stays a choice -->
+<div class="favbanner" id="favbanner" hidden>
+  <span id="favbannermsg"></span>
+  <button type="button" id="favadd">Add to my favorites</button>
+  <button type="button" id="favdismiss">Dismiss</button>
 </div>
 </div>
 <div class="tablezone">
@@ -781,6 +869,69 @@ let openRow = null;  // the selected data object (unique & stable; d.img is NOT 
 // #<k> in the URL opens that row's panel, and opening a panel writes it back
 const KEY2ROW = {};  // filled when data.json loads
 const rowURL = d => location.origin + location.pathname + '#' + d.k;
+
+// --- favorites ---------------------------------------------------------------
+// A starred row is remembered by its deep-link key (d.k), so favorites survive
+// every rebuild of the data. Browser storage is the working copy; ?fav= is the
+// durable one — it's what makes a list movable to another device, or shareable.
+// Keys that no longer match a row (a retired core) are kept, never pruned: the
+// row may well come back, and silently dropping someone's saved entry is worse
+// than a count that runs ahead of what's on screen.
+let FAVS = new Set();
+try { FAVS = new Set(JSON.parse(localStorage.getItem('mz-favs') || '[]')); } catch (e) {}
+let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter
+let favView = null;    // Set of keys while viewing someone's ?fav= link, else null
+// unlike the page's other writes (prefs, all replaceable) this one is the user's
+// own data: a silent failure would lose what the UI just claimed to have saved,
+// so the caller reports it instead
+function favSave() {
+  try { localStorage.setItem('mz-favs', JSON.stringify([...FAVS])); return true; }
+  catch (e) { return false; }
+}
+const favURL = () => location.origin + location.pathname + '?fav=' +
+  [...FAVS].map(encodeURIComponent).join(',');
+
+function toggleFav(d, anchor) {
+  if (!d || !d.k) return;
+  const on = !FAVS.has(d.k);
+  if (on) FAVS.add(d.k); else FAVS.delete(d.k);
+  const saved = favSave();
+  syncFavStars(d);
+  syncFavSummary();
+  // unstarring while the list is narrowed to favorites drops the row out from
+  // under the click, which is the honest result — re-run the filter to show it
+  if (favOnly || favView) { apply(); recenterOpen(); }
+  if (!saved) { showChip(anchor, 'Could not save (private window?)'); return; }
+  // where the list lives is worth saying once, the first time it matters; the
+  // star menu carries the rest (the backup link) from then on
+  if (on && !localStorage.getItem('mz-fav-hint')) {
+    try { localStorage.setItem('mz-fav-hint', '1'); } catch (e) {}
+    showChip(anchor, 'Saved in this browser');
+  }
+}
+// repaint the two stars that can show one row's state, without rebuilding the
+// tbody under the pointer (a full render() would drop the hover the star is
+// riding on). Touch has no hover star to update in place, so it re-renders.
+function syncFavStars(d) {
+  const on = FAVS.has(d.k);
+  const rb = document.querySelector('#rows .fav[data-k="' + CSS.escape(d.k) + '"]');
+  if (rb) setFavBtn(rb, on);
+  else if (!CAN_HOVER) render();  // passive marker appears/disappears
+  if (openRow === d) {
+    const pb = panel.querySelector('h2 .fav');
+    if (pb) setFavBtn(pb, on);
+  }
+}
+function setFavBtn(b, on) {
+  b.classList.toggle('on', on);
+  b.textContent = on ? '★' : '☆';
+  b.setAttribute('aria-pressed', on);
+  b.setAttribute('aria-label', on ? 'Remove from favorites' : 'Add to favorites');
+}
+const favBtnHTML = d => '<button type="button" class="fav' + (FAVS.has(d.k) ? ' on' : '') +
+  '" data-k="' + escA(d.k) + '" aria-pressed="' + FAVS.has(d.k) + '" aria-label="' +
+  (FAVS.has(d.k) ? 'Remove from favorites' : 'Add to favorites') + '">' +
+  (FAVS.has(d.k) ? '★' : '☆') + '</button>';
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
 // the raw value stays visible as a tooltip. Only multi-game hardware families
@@ -1006,9 +1157,17 @@ function newBadge(d) {
   return '<span class="nb" style="opacity:' + op + '" data-tip="' + escA(tip) + '">NEW</span>';
 }
 
+// The star sits out of flow in the sticky cell's left padding (see the .fav CSS),
+// so it costs the Title column no width and shifts no text when it appears on
+// hover. Without hover there's nothing to reveal it, so touch gets a plain
+// marker on favorited rows and does its starring in the detail panel; a live
+// button there would only compete with the row's own tap target.
 function titleCell(d) {
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
-  return esc(d.title) + newBadge(d) + dep;
+  const fav = !d.k ? ''
+    : CAN_HOVER ? favBtnHTML(d)
+    : FAVS.has(d.k) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
+  return fav + esc(d.title) + newBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -1263,6 +1422,7 @@ function render() {
       'No matches' + (q ? ' for <b>"' + esc(q) + '"</b>' : '') +
       (types ? ' in ' + esc(types) : '') +
       (genres ? ' in ' + esc(genres) : '') +
+      (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
         ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
@@ -1297,10 +1457,16 @@ function apply() {
   // the global "Clear filters" button is always present; it's armed (enabled) only
   // while a filter is narrowing results, and grayed/disabled otherwise
   document.getElementById('clear').disabled =
-    !(qEl.value || enabledTypes.size || enabledGenres.size || yearFrom != null || yearTo != null);
+    !(qEl.value || enabledTypes.size || enabledGenres.size || yearFrom != null || yearTo != null
+      || favOnly || favView);
   // Types filter: an empty set means "no filter" (show all) — which coincides
   // with every type being checked. Any partial selection narrows to those bases.
   view = DATA.filter(d => {
+    // favorites: someone else's shared link (favView) and your own toggle are
+    // separate narrowers — a shared link is a view of THEIR list, and starring
+    // things while reading it mustn't change what the link shows
+    if (favView && !(d.k && favView.has(d.k))) return false;
+    if (favOnly && !(d.k && FAVS.has(d.k))) return false;
     if (enabledTypes.size && !enabledTypes.has(d.base)) return false;
     // Genre filter: like Types, an empty set is "no filter". A selection narrows to
     // those genres — rows with no genre (everything non-arcade) drop out, same as a
@@ -1372,6 +1538,10 @@ function clearAllFilters() {
   const q = document.getElementById('q');
   q.value = '';
   resetTypes(); resetGenres(); resetYear();
+  // both favorites narrowers go too (the saved list itself is untouched) — a
+  // "Clear filters" that left the table still hiding rows would be lying
+  resetFavOnly();
+  if (favView) dismissFavView();
   apply();
   recenterOpen();
 }
@@ -1653,6 +1823,88 @@ genreMenu.addEventListener('click', e => {
   resetGenres(); apply(); recenterOpen();
 });
 syncGenreSummary();  // initial state before data loads (reads "All Genres" / no glow)
+
+// --- favorites control: filter toggle + housekeeping menu ---------------------
+const favctl = document.getElementById('favctl');
+const favToggle = document.getElementById('favtoggle');
+const favdd = document.getElementById('favdd');
+const favCopyBtn = document.getElementById('favcopy');
+const favClearBtn = document.getElementById('favclearall');
+function syncFavSummary() {
+  // the count is the whole list, not what survives the current filters: it says
+  // "this is what you've saved", which is a fact about you, not about the table
+  const n = FAVS.size;
+  favToggle.textContent = '★ ' + n;
+  // never disable while it's the thing doing the narrowing (clearing the last
+  // favorite switches the toggle off first, so the two can't deadlock)
+  favToggle.disabled = n === 0 && !favOnly;
+  favToggle.title = n === 0 ? 'Star an entry to save it here' : 'Show only favorites';
+  favToggle.setAttribute('aria-pressed', favOnly);
+  favctl.classList.toggle('active', favOnly);
+  favCopyBtn.disabled = n === 0;
+  favClearBtn.disabled = n === 0;
+  // a wider count nudges the caret this menu is anchored under
+  if (favdd.open) positionMenu(favdd);
+}
+favToggle.addEventListener('click', () => {
+  favOnly = !favOnly;
+  syncFavSummary(); apply(); recenterOpen();
+});
+// state-only reset (no apply/recenter), matching resetTypes/resetGenres/resetYear
+function resetFavOnly() { favOnly = false; syncFavSummary(); }
+
+// "Clear all favorites" arms on the first click and acts on the second. The other
+// menus' resets only drop session filters; this one throws away saved data, and
+// it sits one slip away from "Copy backup link".
+let favClearArmed = false;
+function disarmFavClear() { favClearArmed = false; favClearBtn.textContent = 'Clear all favorites'; }
+favdd.addEventListener('toggle', () => { if (!favdd.open) disarmFavClear(); });
+favdd.querySelector('.menu').addEventListener('click', e => {
+  if (e.target.closest('#favcopy')) {
+    navigator.clipboard.writeText(favURL()).then(
+      () => showChip(favCopyBtn, 'Copied'),
+      () => showChip(favCopyBtn, 'Copy failed'));   // insecure context / permission denied
+    return;
+  }
+  if (e.target.closest('#favclearall')) {
+    if (!favClearArmed) { favClearArmed = true; favClearBtn.textContent = 'Really clear all?'; return; }
+    FAVS.clear(); favSave(); disarmFavClear();
+    resetFavOnly();   // an empty favorites-only list is a dead end to strand anyone in
+    syncFavSummary();
+    if (openRow) syncFavStars(openRow);
+    apply(); recenterOpen();   // rebuilds every row's star from the now-empty set
+  }
+});
+syncFavSummary();  // a returning visitor's count is already known before data loads
+
+// --- arriving on a ?fav= link ------------------------------------------------
+// The param is read once, on load (see the data.json handler — it needs KEY2ROW
+// to know which keys are real), and lives on screen as favView + the banner
+// until it's adopted or dismissed. Either way the URL is cleaned up afterwards,
+// so a refresh doesn't ask again and the address bar stops advertising a list
+// that may no longer be what's on screen.
+function stripFavParam() {
+  // fav is the only query param this page has ever read, so dropping the whole
+  // search string is safe; a second one would need a real URLSearchParams delete
+  history.replaceState(history.state, '', location.pathname + location.hash);
+}
+function dismissFavView() {
+  favView = null;
+  document.getElementById('favbanner').hidden = true;
+  stripFavParam();
+}
+document.getElementById('favadd').addEventListener('click', () => {
+  for (const k of favView) FAVS.add(k);
+  const saved = favSave();
+  syncFavSummary();
+  if (openRow) syncFavStars(openRow);
+  dismissFavView();
+  apply(); recenterOpen();
+  if (!saved) showChip(favToggle, 'Could not save (private window?)');
+});
+document.getElementById('favdismiss').addEventListener('click', () => {
+  dismissFavView(); apply(); recenterOpen();
+});
 
 // click outside closes any open dropdown (Types + Columns)
 function closeDropdowns(except) {
@@ -1990,8 +2242,10 @@ function detailHTML(d) {
   // to sit beside), so a keyless row falls back to the bare title
   const titleHTML = '<span class="gametitle">' + esc(d.title) + '</span>' +
     (d.year ? ' <span style="color:var(--muted);font-weight:normal">(' + esc(d.year) + ')</span>' : '');
+  // the star rides beside the copy field, never inside it: nesting a button in a
+  // button is invalid, and the page-wide .cf handler would copy on every star press
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
-    '<h2>' + (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') : titleHTML) + '</h2>' +
+    '<h2>' + (d.k ? favBtnHTML(d) + cfield(rowURL(d), titleHTML, 'Copy link to this entry') : titleHTML) + '</h2>' +
     launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
@@ -2082,6 +2336,8 @@ function openPlaceholder() {
 
 document.getElementById('rows').addEventListener('click', e => {
   if (e.target.closest('a')) return;  // repo links navigate; don't also open the panel
+  const fb = e.target.closest('button.fav');  // starring is not a row selection
+  if (fb) { toggleFav(KEY2ROW[fb.dataset.k], fb); return; }
   const tr = e.target.closest('tr[data-i]');
   if (tr) openPanel(view[+tr.dataset.i]);
 });
@@ -2193,6 +2449,9 @@ document.addEventListener('click', e => {
   if (f) { doCopy(f); zapJolt(f.querySelector('.rom.zap')); }
 });
 panel.addEventListener('click', e => {
+  // on touch this is the only way to star anything (rows have no hover to reveal one)
+  const fb = e.target.closest('button.fav');
+  if (fb) { toggleFav(openRow, fb); return; }
   const lr = e.target.closest('.launchrow');
   if (lr) {
     // chevron opens the device manager popover; each Launch button fires
@@ -2661,6 +2920,24 @@ fetch('./data.json').then(r => r.json()).then(d => {
   }
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
+  // a ?fav= list in the arrival URL: show it before adopting it. Keys that no
+  // longer name a row are dropped without comment — the point of the link is the
+  // rows it can still show, and a retired core isn't the visitor's problem.
+  const favParam = new URLSearchParams(location.search).get('fav');
+  if (favParam) {
+    const keys = favParam.split(',').map(decodeURIComponent).filter(k => KEY2ROW[k]);
+    if (keys.length) {
+      favView = new Set(keys);
+      document.getElementById('favbannermsg').textContent =
+        'Viewing a favorites link (' + keys.length + (keys.length === 1 ? ' entry)' : ' entries)');
+      // nothing to add when it's already your own list (the common case: your
+      // own backup link, opened on a device that's caught up)
+      document.getElementById('favadd').hidden = keys.every(k => FAVS.has(k));
+      document.getElementById('favbanner').hidden = false;
+    } else {
+      stripFavParam();  // nothing usable in it; don't announce a link with no rows
+    }
+  }
   buildYearMenu();
   buildGenreMenu();
   buildHeader();

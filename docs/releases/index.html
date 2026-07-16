@@ -967,6 +967,13 @@ let openRow = null;  // the selected data object (unique & stable; d.img is NOT 
 // #<k> in the URL opens that row's panel, and opening a panel writes it back
 const KEY2ROW = {};  // filled when data.json loads
 const rowURL = d => location.origin + location.pathname + '#' + d.k;
+// the deep-link key carried in the URL hash; '' when there is none. Malformed
+// %-sequences in a mangled link would make decodeURIComponent throw, and both
+// callers sit in paths that must survive that (the arrival chain still has to
+// arm the update checker, popstate still has to close the panel).
+function hashKey() {
+  try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; }
+}
 
 // --- favorites ---------------------------------------------------------------
 // A starred row is remembered by its deep-link key (d.k), so favorites survive
@@ -1893,7 +1900,8 @@ colsMenu.addEventListener('change', e => {
   const k = e.target.dataset.k;
   if (!k) return;
   if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
-  localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
+  // tolerated failure: blocked storage loses the pref, not the toggle
+  try { localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols])); } catch (e) {}
   syncColsReset();
   fixSortThenRebuild();
 });
@@ -2555,7 +2563,7 @@ window.addEventListener('popstate', e => {
   // panelHist mirrors "does the CURRENT entry back a panel" — set it before
   // any closePanel so a Back-close can't history.back() a second time
   panelHist = !!(e.state && e.state.mzPanel);
-  const d = KEY2ROW[decodeURIComponent(location.hash.slice(1))];
+  const d = KEY2ROW[hashKey()];
   if (d) { openPanel(d, true); recenterOpen(); }  // Forward (or hash edit) re-opens
   else if (document.body.classList.contains('panel-open')) closePanel();
 });
@@ -2905,8 +2913,10 @@ function applyTheme(t) {
 // Escape still close it via the shared details.cols handlers — including the
 // Light/Dark buttons, which sit outside the menu.
 themeBtns.forEach(b => b.addEventListener('click', () => {
-  localStorage.setItem('mz-theme', b.dataset.set);
+  // apply before persisting: with storage blocked (private mode, quota) a
+  // throwing setItem must cost only the persistence, not the switch itself
   applyTheme(b.dataset.set);
+  try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
 }));
 // The switcher floats right, so its width IS its left edge: letting the summary
 // resize to each theme's name would shove the Light/Dark buttons -- and the open
@@ -3000,7 +3010,7 @@ function stampMeta(m) {
     timeZoneName: 'short'  // viewer's tz (e.g. "GMT+2") so the exact time is clearly local
   }) : m.updated;
   const label = valid ? relUpdated(dt) : m.updated;
-  el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + esc(full) + '">' + esc(label) + '</span></span>' +
+  el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + escA(full) + '">' + esc(label) + '</span></span>' +
     ' <a href="#" class="note" id="pub-note"><span class="lbl">Public + JT Beta cores; no alts</span><span class="ext">ⓘ</span></a>' +
     ' <a href="feed.xml" class="note" id="rss-link"><span class="lbl">RSS</span><span class="ext">ⓘ</span></a>' +
     ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener"><span class="lbl">Traffic Stats</span><span class="ext">↗</span></a>' +
@@ -3410,22 +3420,32 @@ window.addEventListener('pageshow', e => {
 // it), and costs one tiny request's latency before the big one. A stale cached
 // meta gives the matching stale data: consistent, and the ladder's cache-busted
 // checks catch the real state minutes later.
-fetch('./meta.json').then(r => r.json()).catch(() => null).then(m => {
-  if (m) { currentHash = m.hash || null; stampMeta(m); }
-  return fetch('./data.json' + (m && m.hash ? '?v=' + encodeURIComponent(m.hash) : ''));
-}).then(r => r.json()).then(d => {
-  initSeen(d);  // before ingest: render() fences the unseen rows off on this first paint
-  ingest(d);
-  booted = true;
-  adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
-  // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
-  // the entry we arrived on already IS the panel state (in overlay mode Back
-  // correctly leaves the site, i.e. returns where the visitor came from).
-  // Unknown/stale keys are ignored silently.
-  const hit = KEY2ROW[decodeURIComponent(location.hash.slice(1))];
-  if (hit) { openPanel(hit, true); recenterOpen(); }
-  armNextCheck();
-});
+function boot() {
+  fetch('./meta.json').then(r => r.json()).catch(() => null).then(m => {
+    if (m) { currentHash = m.hash || null; stampMeta(m); }
+    return fetch('./data.json' + (m && m.hash ? '?v=' + encodeURIComponent(m.hash) : ''));
+  }).then(r => r.json()).then(d => {
+    initSeen(d);  // before ingest: render() fences the unseen rows off on this first paint
+    ingest(d);
+    booted = true;
+    hidePill();       // a retry just succeeded; don't leave its failure pill up
+    adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
+    // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
+    // the entry we arrived on already IS the panel state (in overlay mode Back
+    // correctly leaves the site, i.e. returns where the visitor came from).
+    // Unknown/stale keys are ignored silently.
+    const hit = KEY2ROW[hashKey()];
+    if (hit) { openPanel(hit, true); recenterOpen(); }
+    armNextCheck();
+  }).catch(() => {
+    // a failed arrival (offline, mid-deploy 404, half-written json) must not
+    // strand the visitor on a silently empty table: nothing was rendered,
+    // booted stayed false (so check() no-ops), and armNextCheck never ran —
+    // this pill's retry is the only way the page recovers
+    showPill('Could not load the list, tap to retry', boot, true);
+  });
+}
+boot();
 </script>
 </body>
 </html>

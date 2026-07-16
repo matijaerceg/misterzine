@@ -74,6 +74,11 @@ Take the first hook that yields a candidate:
 
 Then apply all of these:
 
+- **Skip Patreon-beta rows.** Rows with `"beta": true` in data.json are
+  Jotego's paywalled early-access cores, listed on the site for reference but
+  not runnable by most readers. They are not zine material under any hook (a
+  beta arrival is not a release, and its anniversary is nobody's anniversary).
+  A row becomes fair game the day the flag disappears, i.e. it went public.
 - **Do not cover a game twice within a few weeks.** `docs/zine.json` is the
   record: every post has `id: "YYYYMMDD-<k>"` where `<k>` is the row's key. Read
   it first. After a few weeks a game may come round again, but a repeat must

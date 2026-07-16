@@ -216,7 +216,8 @@ def _ensure_columns(con):
     CREATE TABLE IF NOT EXISTS won't alter an already-created table, so add new
     columns idempotently (the ALTER no-ops/raises if the column already exists).
     """
-    for col, decl in [("setname", "TEXT"), ("genre", "TEXT")]:
+    for col, decl in [("setname", "TEXT"), ("genre", "TEXT"),
+                      ("beta", "INTEGER DEFAULT 0")]:
         try:
             con.execute(f"ALTER TABLE catalog ADD COLUMN {col} {decl}")
         except sqlite3.OperationalError:
@@ -279,11 +280,12 @@ def fetch_db(source):
 
     Jotego marks Patreon-only cores with the 'jtbeta' tag in the db's
     tag_dictionary: the MRA ships in the public db but the core requires the
-    beta.bin key (a Patreon reward), so it's effectively paywalled. The site is
-    public-only, so we drop those files here and return their paths so the caller
-    can purge any rows ingested before this filter existed. When such a core
-    later graduates to free, Jotego removes the tag and it flows back in with its
-    real (graduation-day) debut date — no manual list to maintain."""
+    jtbeta.zip key (a Patreon reward), so it's effectively paywalled. Since
+    2026-07-16 these are INGESTED and listed (labeled "beta" on the site)
+    rather than dropped — the returned beta_paths tell cmd_snapshot which rows
+    to flag. When a core graduates to free, Jotego removes the tag; the row's
+    flag clears, its beta-debut date stays (no recency inflation), and the
+    graduation logs a 'new' event so the feeds announce it going public."""
     log(f"  fetching {source['name']} ...")
     raw = http_get(source["db_url"])
     z = zipfile.ZipFile(BytesIO(raw))
@@ -295,10 +297,9 @@ def fetch_db(source):
     for path, meta in d.get("files", {}).items():
         if beta_tag is not None and beta_tag in meta.get("tags", []):
             beta_paths.append(path)
-            continue
         files[path] = {"hash": meta.get("hash"), "size": meta.get("size")}
     if beta_paths:
-        log(f"    excluded {len(beta_paths)} jtbeta (Patreon-gated) files")
+        log(f"    {len(beta_paths)} jtbeta (Patreon-gated) files flagged")
     return d.get("timestamp"), files, beta_paths
 
 
@@ -343,12 +344,21 @@ def cmd_snapshot(args):
         prev = latest_snapshot(source["id"])
         ts_iso = epoch_to_iso(ts) or now_iso()
 
-        # Purge any Patreon-gated (jtbeta) rows that were ingested before the
-        # fetch_db filter existed. These were never legitimately public, so we
-        # delete the catalog rows outright rather than leaving stale entries the
-        # export would keep serving forever (SELECT * FROM catalog).
+        # Patreon-gated (jtbeta) bookkeeping. Beta rows are listed (labeled) since
+        # 2026-07-16, so instead of purging we track the flag across snapshots:
+        # - graduated: was beta, still shipped, tag gone -> now public. Flag
+        #   clears via upsert_catalog below; log it as a 'new' event (it IS newly
+        #   public — that's the release feed readers care about). The row itself
+        #   persists, so its beta-debut date never inflates to graduation day.
+        # - vanished: was beta, no longer in the db at all (pulled upstream).
+        #   Purge the row like the old filter did — a paywalled core that even
+        #   patrons no longer receive has no business on the site — and stay
+        #   quiet: no 'removed' event for something that was never public.
         beta_set = set(beta_paths)
-        for path in beta_paths:
+        prev_beta = {r["path"] for r in con.execute(
+            "SELECT path FROM catalog WHERE source_id=? AND beta=1", (source["id"],))}
+        graduated = (prev_beta & set(files)) - beta_set
+        for path in prev_beta - set(files):
             con.execute("DELETE FROM catalog WHERE source_id=? AND path=?",
                         (source["id"], path))
 
@@ -376,7 +386,13 @@ def cmd_snapshot(args):
             if not is_unit:
                 continue
             old = old_files.get(path)
-            if old is None:
+            if path in beta_set:
+                # Patreon-gated: listed on the site but never announced — the
+                # feeds speak only of things every reader can download.
+                etype = None
+            elif path in graduated:
+                etype = "new"  # tag dropped: newly public, whatever the hash did
+            elif old is None:
                 etype = "seed" if seed else "new"
             elif old.get("hash") != meta.get("hash"):
                 etype = "updated"
@@ -385,19 +401,19 @@ def cmd_snapshot(args):
             if etype:
                 events.append((ts_iso, source["id"], path, title_from_path(path), system, etype, meta.get("hash")))
 
-        # removals (only meaningful after seed). Skip jtbeta paths: they're being
-        # purged as never-legitimately-public, not organically removed upstream,
-        # so a "removed" event would misrepresent the history.
+        # removals (only meaningful after seed). Skip paths that were beta:
+        # a vanished beta file is purged above, and a "removed" event for
+        # something that was never public would misrepresent the history.
         if not seed:
             for path in old_files:
-                if path not in files and path not in beta_set:
+                if path not in files and path not in prev_beta:
                     system, kind, is_unit = classify(path)
                     if not is_unit:
                         continue
                     events.append((ts_iso, source["id"], path, title_from_path(path), system, "removed", None))
 
         # upsert catalog rows for everything currently present
-        upsert_catalog(con, source["id"], files, ts_iso, seed)
+        upsert_catalog(con, source["id"], files, ts_iso, seed, beta_set)
         upsert_core_files(con, source["id"], files, ts_iso)
 
         # A core rebuild renames its rbf (PDP1_20190101.rbf -> PDP1_20260702.rbf),
@@ -413,7 +429,7 @@ def cmd_snapshot(args):
                 if is_unit and kind == "core":
                     current.setdefault((system, core_name(title_from_path(path))), path)
             for path in old_files:
-                if path in files or path in beta_set:
+                if path in files or path in prev_beta:
                     continue
                 system, kind, is_unit = classify(path)
                 if not (is_unit and kind == "core"):
@@ -448,12 +464,13 @@ def cmd_snapshot(args):
     log(f"snapshot done. {total_events} new dated events logged.")
 
 
-def upsert_catalog(con, source_id, files, ts_iso, seed):
+def upsert_catalog(con, source_id, files, ts_iso, seed, beta_set=frozenset()):
     for path, meta in files.items():
         system, kind, is_unit = classify(path)
         if not is_unit:
             continue
         title = title_from_path(path)
+        beta = 1 if path in beta_set else 0
         row = con.execute(
             "SELECT hash, first_seen FROM catalog WHERE source_id=? AND path=?",
             (source_id, path),
@@ -464,19 +481,21 @@ def upsert_catalog(con, source_id, files, ts_iso, seed):
             # MiSTer release date — stamp it. Seed-time inserts leave it NULL so
             # the retrospective repo crawls supply the true historical debut and
             # old undated titles are never inflated to the cold-build date.
+            # (Beta rows keep this stamp through graduation: their debut is
+            # when patrons first got them, not when the tag came off.)
             release_date = None if seed else ts_iso
             con.execute(
-                "INSERT INTO catalog(source_id,path,system,kind,title,hash,size,release_date,first_seen,last_seen,last_changed) "
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO catalog(source_id,path,system,kind,title,hash,size,release_date,first_seen,last_seen,last_changed,beta) "
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
                 (source_id, path, system, kind, title, meta.get("hash"), meta.get("size"),
-                 release_date, ts_iso, ts_iso, ts_iso),
+                 release_date, ts_iso, ts_iso, ts_iso, beta),
             )
         else:
             changed = row["hash"] != meta.get("hash")
             con.execute(
-                "UPDATE catalog SET hash=?, size=?, system=?, kind=?, title=?, last_seen=?, "
+                "UPDATE catalog SET hash=?, size=?, system=?, kind=?, title=?, last_seen=?, beta=?, "
                 "last_changed=CASE WHEN ? THEN ? ELSE last_changed END WHERE source_id=? AND path=?",
-                (meta.get("hash"), meta.get("size"), system, kind, title, ts_iso,
+                (meta.get("hash"), meta.get("size"), system, kind, title, ts_iso, beta,
                  changed, ts_iso, source_id, path),
             )
 
@@ -1149,6 +1168,48 @@ def apply_jt_frozen_dates(con):
         n += cur.rowcount
     if n:
         log(f"  corrected {n} Jotego arcade titles off the Feb-2023 migration date")
+
+
+# Patreon-beta MRAs already in beta when the site started listing them
+# (2026-07-16). The catalog stamps detection day as release_date for rows first
+# seen via the diff — right for future betas, but these predate the feature, so
+# their true beta-ship dates are pinned here: the first commit touching
+# mra/<name>.mra in jotego/jtbin (the bin repo with real history;
+# jtcores_mister's is force-squashed). Harvested 2026-07-16 via the commits API
+# Link-rel=last trick; the API's path filter doesn't follow renames, so a
+# renamed MRA could be older than shown (acceptable: never newer). Keyed by
+# catalog path so the pin survives graduation (row and path persist; only the
+# tag comes off). Future betas need no entry — detection day IS their debut.
+JT_BETA_FROZEN_DATES = {
+    "_Arcade/Caliber 50 (Ver. 1.01).mra": "2026-03-13",
+    "_Arcade/Double Dribble.mra": "2026-07-05",
+    "_Arcade/Golfing Greats (World, version L).mra": "2025-09-12",
+    "_Arcade/Gradius III (World, version R).mra": "2026-05-16",
+    "_Arcade/JoJo's Venture (Asia 990128, NO CD).mra": "2026-06-21",
+    "_Arcade/Lightning Fighters (World).mra": "2025-06-27",
+    "_Arcade/Premier Soccer (ver EAB).mra": "2026-01-02",
+    "_Arcade/Red Earth (Asia 961121, NO CD).mra": "2026-06-12",
+    "_Arcade/Street Fighter III 2nd Impact Giant Attack (Asia 970930, NO CD).mra": "2026-06-28",
+    "_Arcade/Street Fighter III New Generation (Asia 970204, NO CD, BIOS set 1).mra": "2026-06-12",
+    "_Arcade/Sunset Riders (4 Players ver EAC).mra": "2024-07-27",
+    "_Arcade/Teenage Mutant Ninja Turtles Turtles in Time (4 Players ver UAA).mra": "2026-03-13",
+}
+
+
+def apply_jt_beta_frozen_dates(con):
+    """Pin the pre-feature beta rows' debut to their real beta-ship date.
+    Must run AFTER apply_jt_frozen_dates: that helper stamps every row of a
+    listed folder unconditionally (the cps3 entry would drag the CPS3 betas
+    to the folder's 2026-06-10 date), and this per-title pin wins."""
+    n = 0
+    for path, debut in JT_BETA_FROZEN_DATES.items():
+        cur = con.execute(
+            "UPDATE catalog SET release_date=? WHERE source_id='jtbindb' AND path=?",
+            (debut, path),
+        )
+        n += cur.rowcount
+    if n:
+        log(f"  pinned {n} Patreon-beta debut dates (jtbin first-commit)")
 
 
 # --- command: coinop (Coin-Op release dates from commit messages) ---------
@@ -2195,10 +2256,16 @@ def _humanize_arcade_titles(data, arcade_meta):
     rows = [r for r in data if r.get("base") == "Arcade"]
     proposed = {id(r): _ideal_arcade_title(r["title"], r.get("sn"), arcade_meta)
                 for r in rows}
-    counts = Counter(proposed.values())
+    # Public rows resolve collisions among themselves only, so a Patreon beta
+    # of the same game (same setname, same MAME desc — e.g. Jotego's Turtles
+    # in Time beta next to Coin-Op's public core) can never strip a public
+    # row of its clean name; the beta yields and keeps its raw MRA title.
+    pub_counts = Counter(proposed[id(r)] for r in rows if not r.get("beta"))
+    all_counts = Counter(proposed.values())
     n = 0
     for r in rows:
         new = proposed[id(r)]
+        counts = all_counts if r.get("beta") else pub_counts
         if new == r["title"] or counts[new] > 1:
             continue
         r["mt"] = r["title"]
@@ -2331,6 +2398,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # the frontend maps the raw id to a display name and search tokens.
     if "source_id" in r.keys() and r["source_id"]:
         row["src"] = r["source_id"]
+    # Patreon-gated (jtbeta): listed but labeled — the frontend badges the row
+    # and the panel explains the beta key requirement. Feeds/zine skip these.
+    if "beta" in r.keys() and r["beta"]:
+        row["beta"] = True
     # system rows only: arcade rows share rbfs with these (System E games run on
     # the SMS core), and a console-flavoured note is wrong on a game row. If a
     # per-arcade-core note ever lands (e.g. jts18 CRT sync), give it its own dict.
@@ -2455,6 +2526,7 @@ def cmd_export_web(args):
     apply_frozen_core_dates(con)  # always pin hand-verified core debuts before publishing
     apply_frozen_arcade_core_dates(con)  # and repo-less multi-game arcade cores
     apply_jt_frozen_dates(con)  # correct Jotego cores off the Feb-2023 monorepo-migration date
+    apply_jt_beta_frozen_dates(con)  # after the jt pins: per-title beta dates win over folder dates
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
     # repo-link fallbacks for arcade rows whose catalog.repo is empty: Jotego
@@ -2507,12 +2579,20 @@ def cmd_export_web(args):
     # Display the clean mainline name, but keep the qualifier where the stripped
     # base name collides among kept rows (genuinely distinct hardware/publisher
     # versions that share a base, e.g. Kangaroo / Kangaroo (Atari) / (Bootleg)).
-    counts = Counter(_arcade_base(r["title"]) for r in rows if r["system"] == "arcade")
+    # Beta rows are counted separately so a Patreon beta arriving (or leaving)
+    # can never change what an already-public row displays: the public counts
+    # ignore betas, and a beta takes the clean base only when no public row
+    # uses it and no other beta wants it.
+    counts = Counter(_arcade_base(r["title"]) for r in rows
+                     if r["system"] == "arcade" and not r["beta"])
+    beta_counts = Counter(_arcade_base(r["title"]) for r in rows
+                          if r["system"] == "arcade" and r["beta"])
     arcade_titles = {}
     for r in rows:
         if r["system"] == "arcade":
             b = _arcade_base(r["title"])
-            arcade_titles[(r["source_id"], r["path"])] = b if counts[b] == 1 else r["title"]
+            clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
+            arcade_titles[(r["source_id"], r["path"])] = b if clean else r["title"]
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files) for r in rows]
     # Human-ideal arcade titles (colons, punctuation, one name per game) from
@@ -2593,10 +2673,18 @@ def _assign_row_keys(data):
     weird upstream row can't take down the daily CI run."""
     slug = lambda s: re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
     sn_counts = Counter(d.get("sn") for d in data if d.get("sn"))
+    # keys must never move: a Patreon beta sharing a public row's setname
+    # (Jotego's tmnt2 beta vs Coin-Op's public tmnt2) must not cost the public
+    # row its bare-setname key — the public row keeps it, the beta slugs.
+    pub_sn_counts = Counter(d.get("sn") for d in data
+                            if d.get("sn") and not d.get("beta"))
     taken = set()
     for d in data:
-        if d["base"] == "Arcade" and d.get("sn") and sn_counts[d["sn"]] == 1:
-            k = d["sn"]
+        sn = d.get("sn")
+        if d["base"] == "Arcade" and sn and (
+                sn_counts[sn] == 1
+                or (not d.get("beta") and pub_sn_counts[sn] == 1)):
+            k = sn
         elif d["base"] != "Arcade" and d.get("core"):
             k = d["core"]
         else:
@@ -2662,6 +2750,13 @@ def _write_feeds(outdir):
                if e["system"] == "arcade"
                else by_core.get(core_name(e["title"]).lower()))
         if row is None:
+            continue
+        # Patreon-beta rows are on the site (labeled) but never in the feeds:
+        # most readers can't download them. Snapshot already logs no events
+        # for them; this guards old/edge events too. Graduation is announced
+        # naturally — its 'new' event lands in the same run that clears the
+        # row's beta flag, so the row passes here by then.
+        if row.get("beta"):
             continue
         etype = e["event_type"]
         if etype == "new" and (e["ts"], e["source_id"], e["system"], core_name(e["title"])) in renamed:

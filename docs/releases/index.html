@@ -1412,7 +1412,7 @@ const COLUMNS = [
     cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' },
   { k: 'year', label: 'Original Year', sl: 'Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
   { k: 'manufacturer', label: 'Manufacturer', w: 19, mw: 8.5, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
-  { k: 'core', label: 'Core', w: 24, mw: 10,
+  { k: 'core', label: 'FPGA Core', sl: 'Core', w: 24, mw: 10,
     cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
   { k: 'reg',  label: 'Region',     w: 8,  mw: 5, opt: true },
   { k: 'rot',  label: 'Rotation',   w: 10, mw: 5, opt: true, cell: d => rotCell(d) },
@@ -2364,7 +2364,7 @@ function detailHTML(d) {
   rows.push(['Type', typeLabel(d)]);
   if (d.genre) rows.push(['Genre', d.genre]);
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
-  if (d.core) rows.push(['Core', cfield(d.core, esc(coreLabel(d.core)) +
+  if (d.core) rows.push(['FPGA core', cfield(d.core, esc(coreLabel(d.core)) +
     (coreLabel(d.core) !== d.core ? ' (' + esc(d.core) + ')' : ''), 'Copy core name'), true]);
   if (d.sn) rows.push(['ROM name', cfield(d.sn, '<span class="rom">' + esc(d.sn) + '</span>', 'Copy ROM name'), true]);
   if (d.year) rows.push(['Original year', esc(d.year) + agoSpan(yearAge(d.year)), true]);

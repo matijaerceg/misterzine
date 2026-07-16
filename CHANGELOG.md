@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-16
+- The Core column is now headed "FPGA Core", spelling out what it lists, and an open entry says "FPGA core" to match. Narrow screens keep the shorter "Core" so the header stays on one line.
 - The result tally now lives inside the search box, counting down live as you type ("2 of 1039"). When nothing is filtered it shows just the total, and the filter row gets back the space the old standalone tally took up.
 - If the list fails to load (a bad connection, a mid-deploy moment), the page now says so with a "tap to retry" notice instead of sitting on a silent empty table.
 - Some vertical arcade games are known to boot rotated the opposite way on MiSTer from the original cabinet, with no screen flip to correct it. Their Rotation cell now carries a small "boots CW"/"boots CCW" tag with the hardware-verified orientation (hover it, or open the entry, for the full story), and searching cw or ccw matches what the core actually boots.

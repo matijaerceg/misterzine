@@ -583,12 +583,18 @@
      target here rather than the row's 1rem hint. It TRAILS the title — leading
      it looks like the table's convention, but the copy field is an atomic
      inline-block, so a wrapping title would leave a leading star stranded on a
-     line of its own above everything. Trailing, that same wrap drops the star
-     into the action row beside Launch, which still reads as furniture. The
-     margin looks large because the copy field pulls .4rem toward it (negative
-     margin above). */
+     line of its own above everything. Trailing, it lives beside the title, but
+     as a sibling button a line break was ALWAYS allowed before it, so long
+     titles dropped it onto a lonely line. The starred h2 is therefore a flex
+     row: the star can never wrap — short titles keep it right after the text,
+     wrapped titles pin it top-right at the first line's baseline. min-width:0
+     lets the copy field shrink below max-content and wrap internally. The
+     star's margin looks large because the copy field pulls .4rem toward it
+     (negative margin above). */
+  #panel h2.starred { display: flex; align-items: baseline; }
+  #panel h2.starred .cf { min-width: 0; flex: 0 1 auto; }
   #panel h2 .fav { font: inherit; font-size: 1.2rem; line-height: 1; vertical-align: baseline;
-                   border: 0; padding: 0; margin-left: .75rem; background: none;
+                   flex: none; border: 0; padding: 0; margin-left: .75rem; background: none;
                    color: var(--muted); cursor: pointer; }
   #panel h2 .fav.on, #panel h2 .fav:hover { color: var(--accent); }
   /* flat yellow bolt after the ZapScript field label */
@@ -2392,7 +2398,8 @@ function detailHTML(d) {
   // button is invalid, and the page-wide .cf handler would copy on every star
   // press (why after and not before: see the #panel h2 .fav CSS)
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
-    '<h2>' + (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
+    '<h2' + (d.k ? ' class="starred"' : '') + '>' +
+    (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
     launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 

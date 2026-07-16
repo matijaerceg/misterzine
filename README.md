@@ -3,7 +3,7 @@
 An automated release database for **MiSTer FPGA** cores, and the public site it powers:
 
 **[MiSTer FPGA Core & Arcade Tracker](https://misterzine.fyi/releases/)**,
-a searchable, sortable index of every public MiSTer console, computer, and utility core
+a searchable, sortable tracker of every public MiSTer console, computer, and utility core
 plus every public arcade title (1,000+ rows), with real debut dates back to **2017**,
 shipped-update dates, screenshots, hardware photos, and RSS feeds. It refreshes itself
 **four times a day** via GitHub Actions with no manual steps.

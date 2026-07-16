@@ -344,7 +344,7 @@
 <noscript><p style="max-width:37.5rem;margin:1.4rem auto">The posts need JavaScript to render. They are also in the <a href="feed-zine.xml">RSS feed</a>, which does not.</p></noscript>
 
 <footer class="colophon">
-  <p>A collection of quotes on MiSTer FPGA releases, posted automatically. Each post is a passage quoted verbatim from the linked source; nothing here is our own writing. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Screenshots are shown at the original game's aspect ratio, through the same CRT shadow mask as the release index. Browse the full <a href="releases/">release index</a> or subscribe to the <a href="feed-zine.xml">RSS feed</a>.</p>
+  <p>A collection of quotes on MiSTer FPGA releases, posted automatically. Each post is a passage quoted verbatim from the linked source; nothing here is our own writing. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Screenshots are shown at the original game's aspect ratio, through the same CRT shadow mask as the release tracker. Browse the full <a href="releases/">release tracker</a> or subscribe to the <a href="feed-zine.xml">RSS feed</a>.</p>
 </footer>
 
 </div>
@@ -567,7 +567,8 @@
       posts.forEach(function (p, i) {
         var why = p.why === 'decadeversary' ? '&middot; ' + p.nth + 'th decadeversary' : rd(p.debut);
         var meta = '<a href="#' + esc(p.id) + '">' + stamp(p.posted) + '</a> ' +
-                   '&middot; <a href="releases/#' + esc(p.k) + '">View in the release index</a>';
+                   '&middot; <a href="releases/#' + esc(p.k) + '">View ' + esc(p.title) +
+                   ' in the release tracker</a>';
         out.push(
           '<article id="' + esc(p.id) + '"' + (p.tate ? ' class="tate"' : '') + '>\n' +
           '  <h2><a href="releases/#' + esc(p.k) + '">' + esc(p.title) +

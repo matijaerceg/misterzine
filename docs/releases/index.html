@@ -469,7 +469,7 @@
      trusts on --bg (links, panel titles) and clears 3:1 in all 17 themes. */
   td:first-child .fav { position: absolute; left: 0; top: 0; bottom: 0; width: 1rem;
                         display: flex; align-items: center; justify-content: center;
-                        border: 0; padding: 0; background: none; font-size: .72rem; line-height: 1;
+                        border: 0; padding: 0; background: none; font-size: .9rem; line-height: 1;
                         color: var(--muted); cursor: pointer; visibility: hidden; }
   td:first-child .fav.on { visibility: visible; color: var(--accent); }
   /* matches the row-hover tint's own guard: while a menu is open the click only
@@ -544,10 +544,15 @@
                   padding: .15rem .4rem; margin: -.15rem -.4rem; }
   #panel h2 .ci { font-size: .8em; }   /* quiet next to the title, not a loud pill */
   /* the panel's star: the touch device's only way to favorite, so it's a real
-     target here rather than the row's 1rem hint. The right margin looks large
-     because the copy field beside it pulls .4rem left (negative margin above). */
+     target here rather than the row's 1rem hint. It TRAILS the title — leading
+     it looks like the table's convention, but the copy field is an atomic
+     inline-block, so a wrapping title would leave a leading star stranded on a
+     line of its own above everything. Trailing, that same wrap drops the star
+     into the action row beside Launch, which still reads as furniture. The
+     margin looks large because the copy field pulls .4rem toward it (negative
+     margin above). */
   #panel h2 .fav { font: inherit; font-size: 1.2rem; line-height: 1; vertical-align: baseline;
-                   border: 0; padding: 0; margin-right: .75rem; background: none;
+                   border: 0; padding: 0; margin-left: .75rem; background: none;
                    color: var(--muted); cursor: pointer; }
   #panel h2 .fav.on, #panel h2 .fav:hover { color: var(--accent); }
   /* flat yellow bolt after the ZapScript field label */
@@ -2242,10 +2247,11 @@ function detailHTML(d) {
   // to sit beside), so a keyless row falls back to the bare title
   const titleHTML = '<span class="gametitle">' + esc(d.title) + '</span>' +
     (d.year ? ' <span style="color:var(--muted);font-weight:normal">(' + esc(d.year) + ')</span>' : '');
-  // the star rides beside the copy field, never inside it: nesting a button in a
-  // button is invalid, and the page-wide .cf handler would copy on every star press
+  // the star rides AFTER the copy field, never inside it: nesting a button in a
+  // button is invalid, and the page-wide .cf handler would copy on every star
+  // press (why after and not before: see the #panel h2 .fav CSS)
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
-    '<h2>' + (d.k ? favBtnHTML(d) + cfield(rowURL(d), titleHTML, 'Copy link to this entry') : titleHTML) + '</h2>' +
+    '<h2>' + (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
     launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 

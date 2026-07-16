@@ -29,6 +29,27 @@ never "release tracker" (that term belongs to the releases page).
 - `status: announced` items render visibly non-orderable. Discontinued items
   stay in the file with `status: discontinued` (spatial permanence).
 
+## Page UX (agreed 2026-07-16, before any page code exists)
+
+The page mimics an expert being asked "which MiSTer should I buy": the
+poster is the expert's mental map, the interview prunes it.
+
+- **Poster**: all lanes visible at once. Semantic zoom in DISCRETE levels
+  (landscape -> lane -> card spec sheet), never continuous free pan/zoom.
+  Each zoom level is a legible, linkable layout. Transitions must work as
+  instant cuts (user's OS runs prefers-reduced-motion).
+- **Interview**: persistent side rail on desktop, questions answerable in
+  any order, each with an "I don't know" that never prunes, plus microcopy
+  on why the question matters. Mobile: rail collapses to sticky removable
+  chips ("CRT - S-video x") over a vertical lane scroll.
+- **Pruning**: gray, never hide or shrink; every grayed card carries its
+  rule-out reason. Spatial permanence: the landscape never rearranges.
+- **Verdict**: top pick + runner-up + one-line why, rendered only after
+  ~3 answered questions. Before that, only a neutral count survives.
+- **Every state is a URL** (answers as query params) — veterans answer
+  "which MiSTer?" threads with a link that opens the pre-pruned map.
+- `provides_unverified` renders hedged; low-confidence prices render hedged.
+
 ## hardware.json schema (v1)
 
 Top-level keys:

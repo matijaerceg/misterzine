@@ -1,0 +1,93 @@
+# The MiSTer Hardware Landscape — data spec
+
+This folder is the third misterzine channel: a hand-curated map of every way to
+own a MiSTer. Nothing here is scraped or automated. Updates happen in normal
+Claude sessions by editing `hardware.json` only; the page (when built) renders
+entirely from that file, so adding/editing hardware never touches layout code.
+
+Nav name: **Landscape**. Page title: "The MiSTer Hardware Landscape".
+URL: `/landscape/`. Outward copy may say "landscape" or "hardware matrix" —
+never "release tracker" (that term belongs to the releases page).
+
+## Design doctrine (agreed 2026-07-16, do not silently reverse)
+
+- The unit is a **purchasable starting point**, not a chip. A bare MiSTer Pi
+  and a kit containing one are different options in different lanes.
+- Lanes = **assembly effort** (turnkey -> kit -> DIY -> special -> horizon).
+  Display type, Y/C, SNAC, budget are cross-cutting filters, never lanes.
+- Zero state is **neutral fact only** — no badges, no opinions. Opinion
+  (verdicts, "most popular") appears only downstream of visitor answers.
+- Complete-setup price is fact, not opinion: computed as option price plus
+  its `to_complete` parts. Sticker price alone is a half-truth; never show it
+  without the complete figure.
+- Capabilities are **paths, not booleans**. "Y/C out" resolves to
+  built-in / possible-with-listed-parts(+cost) / no-path. Never a bare check.
+- Filtered-out options are **grayed with a stated reason**, never hidden.
+- Every fact cell carries a `verified: YYYY-MM` stamp. Prefer "unverified"
+  over marketing claims. No live prices — typical USD street, revisited on
+  quarterly sweeps.
+- `status: announced` items render visibly non-orderable. Discontinued items
+  stay in the file with `status: discontinued` (spatial permanence).
+
+## hardware.json schema (v1)
+
+Top-level keys:
+
+- `meta` — `{schema, updated, currency}`. Bump `updated` on every edit.
+- `capabilities` — vocabulary of tokens used in `provides`/`requires`.
+  `{id: {name, explain}}`. Add a token here before using it anywhere.
+- `lanes` — ordered `[{id, name, tagline}]`.
+- `parts` — `{id: {name, vendor, price_usd, provides[], requires[], notes,
+  verified, sources[]}}`. A part is addable to an option when its `requires`
+  tokens are all present in the option's *effective* provides (built-in plus
+  included parts, transitively). This is how chains work: an active Y/C
+  adapter `requires: [yc-source]`; the analog I/O board `provides: [yc-source]`
+  but `requires: [gpio-header]`; boards provide `gpio-header`. The renderer
+  computes the closure — parts and options stay independent to edit.
+- `options` — the starting points. `[{id, lane, name, vendor, price_usd,
+  status, provides[], includes[], to_complete[], notes, verified, sources[]}]`
+  - `status`: `orderable | preorder | announced | discontinued | cancelled`.
+    "Sells in batches, sold out between them" is `orderable` + a note, not
+    a status.
+  - `provides`: capability tokens built into the product itself
+  - `provides_unverified` (optional): tokens the vendor/press claim but no
+    teardown or review confirms. Render visibly hedged, never as plain fact.
+  - `includes`: ids physically in the box — part ids OR option ids (kits
+    contain boards). Their provides count as built-in; never restate them
+    in `provides`.
+  - `to_complete`: part ids still needed for a minimal working setup
+    (PSU, SD card, controller — and SDRAM for bare boards: a board that
+    can't run popular cores is not complete). Complete price = price_usd
+    + these.
+
+Field conventions (parts and options both):
+  - `price_usd`: number, `[low, high]` range (vendor/batch spread), or
+    `null` (= unknown; never guess). EUR-sourced prices are converted
+    approximately and say so in notes.
+  - `confidence`: `high | medium | low` — high means a vendor/official page
+    was fetched directly; medium reviewer-sourced; low snippet/commodity
+    estimate. Render low-confidence prices hedged.
+- `appendix_not_mister` — `[{name, one_liner, sources[]}]`. The "looks like
+  MiSTer, isn't" fence. Keep each to one honest line.
+
+## Known modeling limitation (schema v1)
+
+The chain closure treats an included option's sockets as free. In reality a
+kit's own board can occupy the GPIO stack (e.g. iCode's digital-I/O build,
+MiSTercade), so a "possible with parts" answer for such kits may mean
+"replace a board", not "add one". The renderer must phrase with-parts
+answers for kit-lane options as advisory. Proper fix if it ever matters:
+a `consumes` field on parts/options that removes socket tokens.
+
+After ANY edit to hardware.json, run the validator (JSON parse + token/id
+integrity + chain reachability):
+
+    python validate_landscape.py docs/landscape/hardware.json
+
+## Editing recipe for future sessions
+
+1. Read this file fully. 2. Edit `hardware.json` only. 3. New capability?
+Define the token in `capabilities` first. 4. Stamp every touched entry's
+`verified` with the current YYYY-MM and add a source URL. 5. Bump
+`meta.updated`. 6. Normal push policy applies (test locally, user okay).
+Visitor-visible landscape changes get a CHANGELOG.md line like everything else.

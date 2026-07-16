@@ -453,11 +453,7 @@
                                 box-shadow: .95em 0 0 var(--sw2); }
   .theme .menu button:hover { background: var(--hover-bg); }
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
-  /* :where() adds the "no dropdown open" guard at zero specificity cost, so the
-     hover/open precedence below is unchanged. While a filter dropdown is open a
-     click on the table only dismisses it (never opens a row), so the hover tint
-     would be lying about clickability — suppress it via body.dd-open. */
-  :where(body:not(.dd-open)) tr:hover td { background: var(--row-hover); }
+  tr:hover td { background: var(--row-hover); }
   .build { color: var(--muted); }
   /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
   td.prov, .prov { color: var(--muted); font-style: italic; }
@@ -484,7 +480,7 @@
      edge — and the extra .7rem airs out the favorites star gutter (user-picked
      over the alignment; the star was wedged against the viewport edge at 1rem) */
   td:first-child, th:first-child { padding-left: 1.7rem; }
-  :where(body:not(.dd-open)) tr:hover td:first-child { background: color-mix(in srgb, var(--line) 7%, var(--bg)); }
+  tr:hover td:first-child { background: color-mix(in srgb, var(--line) 7%, var(--bg)); }
   tr.open td:first-child  { background: color-mix(in srgb, var(--accent) 20%, var(--bg)); }
   /* the favorites star lives in the 1.7rem gutter above, absolutely positioned
      against the sticky cell: out of flow, so revealing it on hover moves no
@@ -500,10 +496,8 @@
                         border: 0; padding: 0; background: none; font-size: .9rem; line-height: 1;
                         color: var(--muted); cursor: pointer; visibility: hidden; }
   td:first-child .fav.on { visibility: visible; color: var(--accent); }
-  /* matches the row-hover tint's own guard: while a menu is open the click only
-     dismisses it, so offering a star to press would be a lie */
   @media (hover: hover) {
-    :where(body:not(.dd-open)) #rows tr:hover td:first-child .fav { visibility: visible; }
+    #rows tr:hover td:first-child .fav { visibility: visible; }
     td:first-child .fav:hover { color: var(--accent); }
   }
 
@@ -2042,25 +2036,15 @@ function closeDropdowns(except) {
     if (dd.open && dd !== except) dd.open = false;
   }
 }
-// Capture phase so the dismiss click can be intercepted before it reaches its
-// target. We only CONSUME it when it would otherwise open a results row (the
-// original offender) — there the dismiss and the row-open would double up, and
-// the row hover tint is already suppressed (body.dd-open) so the row looks
-// inert. Every other control (sibling filters, Clear, sort headers, search)
-// passes through, so one click both dismisses the open menu AND acts.
+// Capture phase, and never consumed: light dismiss in the Popover API sense.
+// The dismissing click passes through to whatever it landed on (rows, sibling
+// filters, Clear, sort headers, search), so one click both closes the open
+// menu AND acts on the target underneath.
 document.addEventListener('click', e => {
   const inside = e.target.closest('details.cols');
   if (!document.querySelector('details.cols[open]')) return;
   closeDropdowns(inside);
-  if (!inside && e.target.closest('#rows tr')) { e.stopPropagation(); e.preventDefault(); }
 }, true);
-
-// While any filter dropdown is open, flag <body> so the CSS above drops the row
-// hover tint (the click only dismisses the menu, so a hover cue would mislead).
-// `toggle` fires whether the details opens via summary click or JS closeDropdowns.
-function syncDdOpen() {
-  document.body.classList.toggle('dd-open', !!document.querySelector('details.cols[open]'));
-}
 // Keep an opening menu inside the viewport. These dropdowns cluster at the right edge,
 // so a menu anchored under its summary (left:0) can spill off-screen (Year/Genre/Columns
 // were clipping). Align under the summary when it fits, else slide left just enough to
@@ -2083,7 +2067,7 @@ function positionMenu(dd) {
   if (menu.offsetHeight > room) menu.style.maxHeight = room + 'px';
 }
 for (const dd of document.querySelectorAll('details.cols'))
-  dd.addEventListener('toggle', () => { syncDdOpen(); if (dd.open) positionMenu(dd); });
+  dd.addEventListener('toggle', () => { if (dd.open) positionMenu(dd); });
 
 buildHeader();  // header renders immediately; rows follow once data.json loads
 

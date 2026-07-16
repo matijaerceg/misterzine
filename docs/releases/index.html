@@ -369,6 +369,13 @@
   th { position: sticky; top: 0; z-index: 10; background: var(--surface); cursor: pointer; user-select: none;
        overflow-wrap: normal;  /* headers wrap at spaces, never mid-word */
        border-top: 1px solid var(--rule); }  /* a divider so the header row reads apart from the filters above */
+  /* clicking a header re-sorts, so it hover-reacts like every other control.
+     --hover-bg's strength, but mixed opaquely over --surface: a sticky cell
+     with a translucent background lets scrolling content bleed through.
+     hover:hover gate: a phone's emulated hover sticks after the sorting tap. */
+  @media (hover: hover) {
+    th:hover { background: color-mix(in srgb, var(--line) 13.33%, var(--surface)); }
+  }
   /* the sorted column's header is marked by the accent color on its label +
      arrow alone (no background fill). The space before the arrow is a NO-BREAK
      one: a plain space lets the arrow wrap to a second line at the min-width

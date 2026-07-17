@@ -292,6 +292,24 @@ Field conventions (parts and options both):
 - **The adapters column is grouped by subheads**: parts carry
   `subcat: video|input|other`, rendered as Video / Controllers / Extras.
   New adapter parts must set subcat (default bucket is Extras).
+- **`design: "official"` (option AND part field, beta feedback
+  2026-07-17)**: marks the Terasic reference board and boards built to
+  the MiSTer project's own published designs - the guarantee boundary
+  cores are developed against. Renders as an ok-colored "official design"
+  tag on cards/pcards; a footer legend explains it and tells readers
+  everything unmarked is third-party (DYOR). Marked DELIBERATELY
+  NARROWLY: de10-nano, io-analog (v6/9.2 class), sdram-128. Things the
+  community trusts but that are NOT project designs (MiSTer Pi board,
+  IO Analog Pro, MikeS11 adapters, USB hub) stay unmarked - diluting the
+  marker kills it. A DE10-vs-clones sub-grouping of the mainboard column
+  was considered and NOT done: three boards, and the marker communicates
+  lineage without re-architecture.
+- **QMTech mixed-vendor caveat (researched 2026-07-17)**: the Discord
+  claim "QMTech boards don't work with normal IO boards" is NOT fully
+  true (Irken Labs ran third-party JAMMA/JVS expanders on one), but
+  dual-RAM setups, the mirrored RAM header, and QMTech-IO-on-other-boards
+  are real traps - notes carry the nuance; gpio-header was NOT stripped
+  from qmtech-cv. Revisit only with new owner reports.
 - **`tag` (option field, 2026-07-17)**: the glance-level positioning line
   rendered in muted italics under the card name ("The value pick") -
   community perception in one phrase, distinct from the sheet's `what`.

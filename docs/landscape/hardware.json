@@ -266,7 +266,7 @@
       "requires": [
         "gpio-header"
       ],
-      "notes": "Current-generation analog board: RGBs (correct 700mV), YPbPr, and NATIVE S-Video/composite (MikeS Y/C core support) through an ADV7125 24-bit DAC and a Saturn Mini-DIN-10 connector - no VGA port, so MikeS11 dongles do not apply to it. HDMI stays live simultaneously. In stock at review (verified on the product page 2026-07-16). Whether the onboard Y/C path is actively filtered to MikeS11-Active standard is the same open question as the SuperStation One.",
+      "notes": "Current-generation analog board: RGBs (correct 700mV), YPbPr, and NATIVE S-Video/composite (MikeS Y/C core support) through an ADV7125 24-bit DAC and a Saturn Mini-DIN-10 connector - no VGA port, so MikeS11 dongles do not apply to it. HDMI stays live simultaneously. In stock at review (verified on the product page 2026-07-16). Whether the onboard Y/C path is actively filtered to MikeS11-Active standard remains an open question for THIS board (the SuperStation One's version of this question was settled by teardown - its Y/C is THS7374-amplified).",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -649,7 +649,7 @@
         "gpio-header"
       ],
       "what": "The I/O board shaped like a JAMMA edge: your MiSTer becomes the game PCB inside a real arcade cabinet.",
-      "notes": "Lite tier: bring your own mainboard and RAM. The $550 Full Kit version includes a DE10-Nano and dual 128MB SDRAM. 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Sold out at review (\"back in soon\"). The Versus 2P sidekick board ($55) is an accessory, not listed. Cabinet not included, obviously. BUDGET ALTERNATIVES exist but are not listed as paths (verified 2026-07-17): a QMTech-branded JAMMA conversion board sells on AliExpress (~C$27, 3 sold, owner-reported input bugs on player 1 - r/MiSTerFPGA 1pfrd5i), and the generic JammASD V3 PC-to-JAMMA converter (EUR65.90, smallcab.net) reportedly works via a VGA analog board + USB, though no hardware-verified MiSTer report was found (1on1cd3). Both too thinly attested to put on the map as reliable JAMMA paths.",
+      "notes": "Lite tier: bring your own mainboard and RAM. The $550 Full Kit version includes a DE10-Nano and dual 128MB SDRAM. 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Sold out at review (\"back in soon\"). The Versus 2P sidekick board ($55) is an accessory, not listed. Cabinet not included, obviously. A budget alternative exists but is not listed as a path: a QMTech-branded JAMMA conversion board sells on AliExpress (~C$27, 3 sold as of 2026-07, owner-reported input bugs on player 1 - r/MiSTerFPGA 1pfrd5i) - too thinly attested to put on the map as a reliable JAMMA path.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -767,9 +767,7 @@
         "usbc-power",
         "rtc",
         "ssone-port",
-        "ethernet"
-      ],
-      "provides_unverified": [
+        "ethernet",
         "yc-active-filtered"
       ],
       "includes": [
@@ -781,9 +779,8 @@
       "line_overrides": {
         "snac": "built in (PS1 ports); others via the SuperDock + adapter"
       },
-      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Mini-DIN-10 wired to the SATURN PINOUT (Taki Udon on r/MiSTerFPGA: We used Saturn Pinout). Aftermarket Saturn AV cables with round plugs fit and work - owners report S-Video plus audio over a ten-dollar Saturn cable - but ORIGINAL Sega cables with the flat-keyed shell physically do not fit. PS1 SNAC controller+memory-card ports, NFC loading, wired Ethernet (vendor Ports spec, verified 2026-07-16; cnx-software corroborates the RJ45), WiFi/BT, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 selects the FPGA MikeS-style encoder vs an onboard Sony encoder chip - RetroRGB: \"Put them in the Up/FPGA position and MiSTer generates Composite and S-Video via the MikeS FPGA code\"; forum consensus calls the Sony path \"not as good\". Whether the FPGA path is THS7374-class actively filtered remains UNVERIFIED by any teardown. Early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026). Field reports on the native S-Video are strong: on a PVM-20L5 one owner rates it very similar to the unit RGB output, and the sub consensus is that no MikeS11 adapter is needed (r/MiSTerFPGA, June 2026). SNAC is PS1-ports-only on the unit itself: other consoles' original pads need the SuperDock's dedicated SNAC port plus a standard SNAC adapter - the USB ports do NOT carry SNAC signals (r/MiSTerFPGA 1obnro9, 1q53mss, 1tjuym2; owners report ordering the dock specifically to get the SNAC port).",
+      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Mini-DIN-10 wired to the SATURN PINOUT (Taki Udon on r/MiSTerFPGA: We used Saturn Pinout). Aftermarket Saturn AV cables with round plugs fit and work - owners report S-Video plus audio over a ten-dollar Saturn cable - but ORIGINAL Sega cables with the flat-keyed shell physically do not fit. PS1 SNAC controller+memory-card ports, NFC loading, wired Ethernet (vendor Ports spec, verified 2026-07-16; cnx-software corroborates the RJ45), WiFi/BT, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 selects the FPGA MikeS-style encoder vs the onboard Sony CXA2075M encoder chip. SETTLED BY TEARDOWN (What's Ken Making, 'Inside the SuperStation One', May 2026): the analog path is an ADV7125 24-bit DAC into an LMH6722 buffer, and ALL analog outputs - both encoder paths included - pass through three TI THS7374 video amplifiers before leaving the board, so the built-in Y/C IS actively filtered; RetroRGB separately scope-verified proper video levels on every output. Ken's counterpoint to the forum consensus (which prefers the MikeS/FPGA path): the FPGA's waveform is quantized, so he expects the Sony chip's encode to be smoother - both paths are amplified, pick by ear/eye via DIP 3. Same-teardown caveats: the stock NFC coil is too small for card-size Zaparoo tokens (buttons/stickers work; a ~$3 larger DigiKey coil fixes cards), and in YPbPr mode the composite/S-Video outputs go dead (mode-exclusive, per RetroRGB's review). Early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026). Field reports on the native S-Video are strong: on a PVM-20L5 one owner rates it very similar to the unit RGB output, and the sub consensus is that no MikeS11 adapter is needed (r/MiSTerFPGA, June 2026). SNAC is PS1-ports-only on the unit itself: other consoles' original pads need the SuperDock's dedicated SNAC port plus a standard SNAC adapter - the USB ports do NOT carry SNAC signals (r/MiSTerFPGA 1obnro9, 1q53mss, 1tjuym2; owners report ordering the dock specifically to get the SNAC port).",
       "verified": "2026-07",
-      "confidence": "medium",
       "sources": [
         "https://retroremake.co/products/superstation-one",
         "https://retroremake.co/pages/superstation%E1%B5%92%E2%81%BF%E1%B5%89",
@@ -792,11 +789,14 @@
         "https://misterfpga.org/viewtopic.php?t=10452",
         "https://old.reddit.com/r/MiSTerFPGA/comments/1ibo3ys/is_superstation_one_din_10_connector_same/",
         "https://old.reddit.com/r/MiSTerFPGA/comments/1tydpkx/recommended_s_video_cable_for_superstation/",
-        "https://old.reddit.com/r/MiSTerFPGA/comments/1obnro9/"
+        "https://old.reddit.com/r/MiSTerFPGA/comments/1obnro9/",
+        "https://retrorgb.com/kens-superstation-one-teardown-nfc-fix.html",
+        "https://www.youtube.com/watch?v=gEKTp0RCc-U"
       ],
       "effort": "none",
       "stock": "waves",
       "ships_from": "us",
+      "confidence": "high",
       "img": "superstation-one.png",
       "url": "https://retroremake.co/products/superstation-one",
       "what": "A complete MiSTer in a PSone-style shell: plug it into power and a TV and you are playing.",
@@ -1016,7 +1016,7 @@
       "to_complete": [
         "psu-usbc"
       ],
-      "notes": "Premium Chinese full-kit line on a genuine DE10-Nano. Per-variant box contents verified 2026-07-17 (browser sweep of all four product pages): every kit ships the official DE10-Nano, RetroCastle's own IO board, official 128MB SDRAM (x2 in the Dual versions), a 256GB microSD card, your choice of acrylic or aluminum case, fan or heatsink, MicroUSB bridge, screws, and a barrel-to-USB-C adapter - power comes over USB-C only (their care notes warn against plugging both), so a 5V USB-C supply is the one thing left to buy. No USB hub in the box. Prices from the product pages: VGA 2023 $517, Saturn 2023 $527, Digital Dual-SDRAM 2024 $527, Saturn Dual-SDRAM 2024 $624. Saturn versions use a DIN-style analog connector; whether the 2024 'Digital' Dual board keeps the VGA-out of the 2023 boards is not stated - ask the shop. SNAC adapters, YC Active adapter, RTC and a VGA-to-composite/S-Video adapter are sold as addons, not included.",
+      "notes": "Premium Chinese full-kit line on a genuine DE10-Nano. Per-variant box contents verified 2026-07-17 (browser sweep of all four product pages): every kit ships the official DE10-Nano, RetroCastle's own IO board, official 128MB SDRAM (x2 in the Dual versions), a 256GB microSD card, your choice of acrylic or aluminum case, fan or heatsink, MicroUSB bridge, screws, and a barrel-to-USB-C adapter - power comes over USB-C only (their care notes warn against plugging both), so a 5V USB-C supply is the one thing left to buy. No USB hub in the box. Prices from the product pages: VGA 2023 $517, Saturn 2023 $527, Digital Dual-SDRAM 2024 $527, Saturn Dual-SDRAM 2024 $624. Saturn versions use a DIN-style analog connector; the Digital Dual-SDRAM 2024 board has NO VGA port (site owner verified from product photos 2026-07-17) - it is the HDMI-only configuration. SNAC adapters, YC Active adapter, RTC and a VGA-to-composite/S-Video adapter are sold as addons, not included.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -1046,7 +1046,7 @@
           "adds": [
             "dual-sdram"
           ],
-          "note": "Dual RAM (futureproofing; current cores run single-module)."
+          "note": "Dual RAM (futureproofing) but NO VGA port - this version is HDMI-only, so not the one for CRT setups."
         },
         {
           "id": "saturndual24",
@@ -1121,7 +1121,7 @@
         "psu-usbc",
         "sd-card"
       ],
-      "notes": "The board that broke the DE10 price. Same Cyclone V class, 1GB DDR3, USB-C power, accessory-compatible dimensions/headers. Sold in preorder batches; board listed From $125 and SOLD OUT at review 2026-07-16, with no discontinuation or final-batch language on the store - accessories (SDRAM $20, hub $20, acrylic case $10, SNAC bundles) mostly remain in stock, A/V Pro 9.2 and RTC sold out. Watch for batch 6 or an end-of-line signal; Retro Remake's focus is visibly the SuperStation One.",
+      "notes": "The board that broke the DE10 price. Same Cyclone V class, 1GB DDR3, USB-C power, accessory-compatible dimensions/headers. Sold in preorder batches; board listed From $125 and SOLD OUT at review 2026-07-16, with no discontinuation or final-batch language on the store - accessories (SDRAM $20, hub $20, acrylic case $10, SNAC bundles) mostly remain in stock, A/V Pro 9.2 and RTC sold out. Watch for batch 6 or an end-of-line signal; Retro Remake's focus is visibly the SuperStation One. Soft restock signal: Taki mentioned working on a restock around June 2026, nothing announced since (MiSTer Discord, relayed by site owner 2026-07-17).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [

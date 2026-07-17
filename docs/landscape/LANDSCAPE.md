@@ -271,6 +271,13 @@ Field conventions (parts and options both):
 - **The controllers question never says SNAC**: label "Plug in original
   console controllers", short "Original controllers" - the jargon appears
   only in results/parts (user, 2026-07-17).
+- **The region question (id `region`) NEVER prunes** - it annotates. Every
+  orderable option carries `ships_from: us|eu|cn|tw` (validator-checked);
+  answering paints "ships from X" on each card, green "- your region" on
+  matches, muted otherwise. Import friction is the visitor's own algebra;
+  the sheet's vendor line states origin permanently. The silence/fanless
+  question was considered and REJECTED (user 2026-07-17: "no solution is
+  that loud") - don't re-propose.
 - **The adapters column is grouped by subheads**: parts carry
   `subcat: video|input|other`, rendered as Video / Controllers / Extras.
   New adapter parts must set subcat (default bucket is Extras).

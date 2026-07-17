@@ -34,6 +34,34 @@ never "release tracker" (that term belongs to the releases page).
 - `status: announced` items render visibly non-orderable. Discontinued items
   stay in the file with `status: discontinued` (spatial permanence).
 
+## User taste rulings (2026-07-16 review round - do not silently reverse)
+
+- **No Permanent Marker on this page.** Titles are Roboto Condensed 700
+  (`.cd`), body is Roboto. (Marker stays a zine/releases brand element.)
+- **No budget question.** Price is visible on every card and guides the
+  verdict ranking; it is not a filter. Rejected as a main filter by the user.
+- **No per-question microcopy.** Questions stand alone; the `why` field was
+  removed from the interview schema.
+- **Option names include the maker** the way people say them ("MiSTer Addons
+  Skeleton Kit"); cards show no separate vendor line (the sheet keeps the
+  `vendor` field).
+- **Display question is multi-select** (labels: HDMI / RGB - Component /
+  S-Video - Composite); every selected output must be satisfiable.
+- **Availability is a factor**: options carry `stock`
+  (`now | waves | scarce | na`) rendered as a card line, plus a "How soon?"
+  question whose ASAP answer requires `now`. Stock drifts fast - re-verify
+  on every sweep.
+- **Dead ends are loud**: any answer that leaves zero fits shows a warning
+  verdict box IMMEDIATELY (whatever the answer count), naming horizon items
+  that would fit ("It exists, but only on the horizon: ...").
+- **Announced items get slim rows**, not full cards (horizon lane renders
+  compact); status tags sit in the card flow, never overlapping the name.
+- **Lane zoom is animated** (FLIP, transform-only, ~220ms, no rotation, runs
+  under prefers-reduced-motion per the site's standing rationale); the sheet
+  gets a 150ms fade/scale-in. Verified by sampling transforms per frame.
+- Options may carry `img` (file in docs/landscape/img/, 52px contain-fit on
+  the card). No images shipped yet - sourcing is an open question.
+
 ## Page UX (agreed 2026-07-16, before any page code exists)
 
 The page mimics an expert being asked "which MiSTer should I buy": the

@@ -22,8 +22,9 @@ assembled; checkmark-or-priced-add-on per answered question) - **Do It
 Yourself** (rendered as COLUMNS: Mainboards | I/O boards | USB | Adapters -
 the columns ARE the anatomy lesson; parts carry `category: io|hub|adapter`
 and get their own small sheets at `#p-<id>`; answers HIGHLIGHT the parts a
-build would use; each mainboard card carries a "+ 128MB RAM stick" line,
-no RAM column) - **On the horizon**. The Special builds lane is GONE:
+build would use; each mainboard needing RAM carries "+ 128MB RAM stick"
+INSIDE ITS TITLE (muted suffix - beta feedback 2026-07-17: the DE10
+needing RAM must be unmissable), no RAM column) - **On the horizon**. The Special builds lane is GONE:
 ironclad-dx and mistercade-lite are IO-column parts now (the JAMMA/cab
 answer resolves as a parts chain), multisystem1 lives in Consoles as a
 discontinued row. Once any answer exists, entries that do not fit collapse
@@ -68,10 +69,16 @@ are NOT listed anywhere on the landscape. Do not add them on any sweep.**
 - **Display question is multi-select** (labels: HDMI / RGB - Component /
   S-Video - Composite); every selected output must be satisfiable.
 - **Availability is a factor**: options carry `stock`
-  (`now | waves | scarce | na`) rendered as a card line, plus a
-  single-toggle "Want it soon?" question (ONE checkbox-style answer, user
-  ruling 2026-07-16) requiring `now`. Stock drifts fast - re-verify on
-  every sweep.
+  (`now | waves | scarce | unconfirmed | na`) rendered as a card line,
+  plus a single-toggle availability question (ONE checkbox-style answer,
+  user ruling 2026-07-16) requiring `now`. Stock drifts fast - re-verify
+  on every sweep. `unconfirmed` (added 2026-07-17, beta feedback) means
+  sold out with NO announced restock (the MiSTer Pi): it renders a
+  warn-colored "restock unconfirmed" FACT tag even at the zero state,
+  and the card stays a full card until an answer prunes it. A product in
+  this state does NOT get duplicated into other lanes - the user's
+  add-it-as-a-kit-too idea was answered with this tag instead (bundles
+  you assemble yourself are not kits-lane material).
 - **Dead ends are loud**: any answer that leaves zero fits shows a warning
   verdict box IMMEDIATELY (whatever the answer count), naming horizon items
   that would fit ("It exists, but only on the horizon: ...").

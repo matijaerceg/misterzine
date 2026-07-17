@@ -2945,6 +2945,14 @@ def _zine_feed_xml(posts):
     return "\n".join(xml)
 
 
+# Editor-approved exceptions to the zine image size gate below. This file is
+# not on the zine-inbox workflow's allowed-paths list, so the posting routine
+# cannot add to it: a new low-res image still fails validation.
+ZINE_LOWRES_KEEP = {
+    "starwars.png",  # 317x315 dogfight thumbnail, kept on taste 2026-07-17
+}
+
+
 def _zine_native_dims():
     """k -> (img_w, img_h) from the released data.json, for the zine image
     size gate. Empty when data.json is absent (offline-safe no-op)."""
@@ -3027,7 +3035,7 @@ def _zine_validate(z):
             bad("img must be a bare .png filename")
         elif not (DOCSDIR / "images" / "zine" / p["img"]).is_file():
             bad(f"docs/images/zine/{p['img']} does not exist")
-        elif p.get("k") in native_dims:
+        elif p.get("k") in native_dims and p["img"] not in ZINE_LOWRES_KEEP:
             # both dimensions below the game's native framebuffer = a
             # downscaled web thumbnail (e.g. Wikipedia's fair-use images);
             # one dimension below is fine (square-pixel corrections shrink

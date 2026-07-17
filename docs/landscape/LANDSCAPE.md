@@ -218,59 +218,62 @@ Field conventions (parts and options both):
 - `appendix_not_mister` — `[{name, one_liner, sources[]}]`. The "looks like
   MiSTer, isn't" fence. Keep each to one honest line.
 
-## NEXT ROUND - user rulings 2026-07-17 morning (implement, then delete this
-## section; conversation may be compacted, this list is the source of truth)
+## Card + rail rendering rules (2026-07-17 round, all shipped - do not
+## silently reverse)
 
-1. Prices move to the BOTTOM of every card in every lane (uniform scan line).
-2. Badges become STICKERS: absolutely positioned over the card's top corner
-   (slight rotation, may overhang), never pushing content down.
-3. Unify grayed styling: dimmed pcards in DIY columns must match the mini
-   grayed cards elsewhere.
-4. Lane subtitles (user copy, tune lightly): Consoles "Plug and play; less
-   open ecosystem." / Kits "Standard MiSTer sandwiches, assembled. Play
-   today, but easy to tinker and swap parts later." / DIY "Pick a mainboard,
-   add what you need, put it together yourself."
-5. CTA gets playful VISUAL treatment: e.g. CSS-drawn down-arrows flanking
-   "Your requirements here" (glyph ban applies to copy, not CSS decoration).
-   Equal or more levity than that.
-6. Availability is always IMPLIED, never asserted: soften stock copy to
-   impressions ("tends to sell out") and add a line encouraging visitors to
-   verify with the shop themselves.
-7. "To get playing" sentences must not end "and you are playing" (the
-   prefix already says it). Rewrite template.
-8. ASSUME visitors own a USB pad: remove usb-controller from every
-   to_complete (prices drop); one footer sentence states the assumption.
-   (Keep the part record; it is reference, not a column item.)
-9. The shelf/desk answer now FILTERS JAMMA gear (dim mistercade-lite etc.):
-   shelf and cabinet become inverse filters, so shelf stays a real option.
-10. SSOne SNAC line override: "built in (PS1 ports)" - other consoles need
-    the SuperDock's SNAC port + a standard adapter (dock sells out), per
-    r/MiSTerFPGA (1obnro9: only PS1-port SNAC on the unit; 1q53mss: users
-    buy the dock to get the SNAC port; 1tjuym2: USB ports do NOT do SNAC).
-    Implement as a generic per-option line-override field.
-11. Collapse built-in info lines on cards into one "Covers: X, Y" line;
-    costed paths stay as separate lines.
-12. RULING: variant-beats-cheaper-chain CONFIRMED for consoles - assume the
-    buyer of a less-open ecosystem wants the ecosystem version, not a
-    dongle (MS2 RGB = Analogue version, not DV dongle).
-13. iCode sells BOTH digital and analog builds (user URLs:
-    /product/mister-fpga-fully-built-digital-dual-ram/ and
-    /product/mister-fpga-kit-terasic-de10-nanocase128mbusb-hub256gb-micro-sd-preloded/,
-    the latter with 256GB preloaded SD) - model as variants. Then do an
-    SD-CARD PASS over all entries: which ship preloaded cards (verify MS2
-    and RetroCastle especially).
-14. Sheet "Specs and sources": try default-OPEN (user lean; builder may
-    push back if it re-creates the data dump - alternative is a fatter
-    full-width expander at the sheet bottom).
-15. Badge idea to try: combined "cheap + in stock" sticker (cheapest among
-    usually-in-stock fits); user unsure, prototype and show.
-16. Blocked-site browsing upgrade: extend tools/fetch_page.py with a
-    --cdp mode connecting to the user's OWN desktop Chrome via
-    chrome.exe --remote-debugging-port=9222 (real profile, real
-    fingerprint; beats any MCP install). Coordinate with user when needed;
-    use for RetroCastle per-variant contents.
-17. DIY headline number stays unlabeled (ruling); SSOne chip row stays as
-    is (ruling: chips are fine, copy was the problem).
+- **Prices sit at the BOTTOM of every card** in every lane: one scan line
+  across the page. Order inside a card: status tag, photo, name, capability
+  chips, per-answer lines, RAM reminder, then complete price + muted
+  device/availability line.
+- **Badges are STICKERS**: absolutely positioned over the card's top-right
+  corner, slightly rotated, allowed to overhang, never pushing content
+  down. Sticker = accent background, bg-colored text. Two stickers stack
+  with alternating tilt. Current set (post-answer only): "cheapest fit"
+  (computed), "community favorite" (editorial `popular` flag), and
+  "cheap and in stock" - the cheapest among usually-in-stock fits, shown
+  only when that differs from the outright cheapest (prototype; user asked
+  to see it, has not yet ruled on keeping it).
+- **One gray language**: dimmed pcards match the mini grayed cards (dashed
+  hairline, page bg, .45 text). colsdim dims only the column headers -
+  the cards inside carry their own dim/mini styling.
+- **Lane subtitles are user copy** (2026-07-17): Consoles "Plug and play;
+  less open ecosystem." / Kits "Standard MiSTer sandwiches, assembled.
+  Play today, but easy to tinker and swap parts later." / DIY "Pick a
+  mainboard, add what you need, put it together yourself."
+- **The rail CTA is visual**: CSS-drawn down-arrows flanking "Your
+  requirements here" (the plain-ASCII rule governs copy, not CSS
+  decoration).
+- **Availability is IMPLIED, never asserted**: all stock copy is an
+  impression ("tends to sell out between batches", "usually in stock") and
+  the footer tells visitors to check the shop themselves before counting
+  on stock.
+- **Visitors are assumed to own a USB controller**: no option lists
+  usb-controller in to_complete (the part stays as a reference record);
+  one footer sentence states the assumption.
+- **The shelf answer filters JAMMA gear** (dims mistercade-lite etc.), so
+  shelf and cabinet are inverse filters and shelf is a real option.
+- **Built-in per-answer lines collapse to one "Covers: X, Y" line**; costed
+  paths and overridden lines stay separate.
+- **`line_overrides`** (option field): `{token: "text"}` replaces the
+  "built in" line for a token the option provides - e.g. the SuperStation
+  One's snac override "built in (PS1 ports); others via the SuperDock +
+  adapter" (r/MiSTerFPGA 1obnro9 / 1q53mss / 1tjuym2: unit SNAC is
+  PS1-ports-only, USB ports carry no SNAC; the dock adds the SNAC port).
+  Validator checks the keys are capability tokens.
+- **"To get playing" sentences never end "and you are playing"** (the
+  prefix already says it); options with an empty to_complete get "Nothing
+  else to buy - it plays out of the box."
+- **Sheet "Specs and sources" stays COLLAPSED** (user agreed 2026-07-17;
+  default-open was considered and dropped).
+- RULING: variant-beats-cheaper-chain confirmed for consoles - the buyer
+  of a less-open ecosystem wants the ecosystem version, not a dongle
+  (MS2 RGB = Analogue version, never a Direct Video dongle).
+- Data facts landed 2026-07-17: iCode digital + Analog builds as variants
+  (both in stock, SD preloaded 64GB-1TB, 256GB anchors $459.95/$479.95);
+  QMTech assembled includes its 32GB card; Multisystem2 ships with NO SD
+  card and NO PSU (Heber's own "Extras you will need" list) - both are in
+  its to_complete now. RetroCastle box contents (SD? PSU?) still
+  unverified - needs the --cdp sweep.
 
 ## Chain-honesty rules (overnight audit 2026-07-17)
 
@@ -311,6 +314,13 @@ all do), fetch it through a real browser instead:
 machine's IP, verified working on all three 2026-07-16. Reddit refuses even
 this (blocks headless traffic); don't burn time on it. AliExpress shows
 CAD prices from this location - convert and date-stamp.
+
+For sites that block even that (RetroCastle): `--cdp` attaches to the
+user's OWN desktop Chrome (real profile/fingerprint). COORDINATE FIRST -
+the user must launch `chrome.exe --remote-debugging-port=9222`; the tool
+opens one tab, reads it, closes only that tab. Built 2026-07-17, not yet
+exercised against RetroCastle (waiting on a session where the user starts
+Chrome that way).
 
 ## Editing recipe for future sessions
 

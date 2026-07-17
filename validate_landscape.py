@@ -17,6 +17,9 @@ for o in d['options']:
     for ref in o['includes'] + o['to_complete']:
         if ref not in parts and ref not in opts:
             errs.append(f"option {o['id']}: unknown include/to_complete id {ref}")
+    for t in o.get('line_overrides', {}):
+        if t not in caps:
+            errs.append(f"option {o['id']}: line_overrides keys must be capability tokens, got {t}")
 
 def effective(o, seen=None):
     seen = seen or set(); out = set(o['provides'])

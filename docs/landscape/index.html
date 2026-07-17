@@ -132,7 +132,7 @@
   body[data-zoom="lane"] .lane.focus .cards { grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
   body[data-zoom="lane"] .lane.focus .caps { display: flex; }
 
-  .card { text-align: left; font: inherit; color: inherit; cursor: pointer;
+  .card { text-align: left; font: inherit; color: inherit; cursor: pointer; position: relative;
           border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
           padding: .6rem .7rem .55rem; display: flex; flex-direction: column; gap: .22rem; min-height: 5rem; }
   .card:hover { border-color: var(--btn-border-hover); background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
@@ -167,9 +167,12 @@
 
   /* ---- Do It Yourself: the columns ARE the anatomy lesson ---- */
   .cols { display: grid; grid-template-columns: 1.35fr 1.15fr 1fr 1fr; gap: .8rem; align-items: start; }
-  .pcard.dim { opacity: .45; }
+  /* grayed pcards match the mini grayed cards everywhere else: dashed hairline,
+     page background, dimmed text (user ruling: one gray language on the page) */
+  .pcard.dim { border-style: dashed; background: var(--bg); }
+  .pcard.dim .nm, .pcard.dim .pr { opacity: .45; }
   .pcard.dim .pw { display: none; }
-  .cols.colsdim .colhead, .cols.colsdim .card { opacity: .45; }
+  .cols.colsdim .colhead { opacity: .45; }
   .pcard .pw.addon { color: color-mix(in srgb, var(--fg) 55%, var(--bg)); }
   .col .colhead { margin: 0 0 .45rem; }
   .col .colhead h3 { font-size: 1.02rem; margin: 0; }
@@ -186,14 +189,31 @@
   /* answer-driven highlight: the parts your answers would pull into a build */
   .pcard.hl { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
   .card .ramline { font-size: .72rem; color: var(--muted); }
-  /* characteristic badges (post-answer spotlights, never zero-state) */
-  .card .bdgs { display: flex; flex-wrap: wrap; gap: .25rem; }
+  /* characteristic badges (post-answer spotlights, never zero-state) render as
+     STICKERS slapped over the card's top-right corner: rotated, allowed to
+     overhang the edge, absolutely positioned so they never push content down */
+  .card .bdgs { position: absolute; top: -.55rem; right: -.35rem; display: flex; flex-direction: column;
+                align-items: flex-end; gap: .25rem; z-index: 2; pointer-events: none; }
   .card .bdg { font-size: .64rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 700;
-               color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg));
-               border-radius: 4px; padding: .04rem .35rem;
-               background: color-mix(in srgb, var(--accent) 10%, var(--bg)); }
+               color: var(--bg); background: var(--accent); border-radius: 3px; padding: .12rem .45rem;
+               transform: rotate(3deg); box-shadow: 0 1px 4px #0005;
+               border: 1px solid color-mix(in srgb, var(--bg) 25%, var(--accent)); }
+  .card .bdg:nth-child(2) { transform: rotate(-2.5deg); }
   .keynote { font-size: .8rem; color: var(--muted); margin: 0 0 1rem; }
-  .cta { font-size: .78rem; color: var(--muted); margin: 0; }
+  /* the invitation over the questions: CSS-drawn down-arrows flanking the
+     text (decoration, so the plain-ASCII copy rule is not violated) */
+  .cta { display: flex; align-items: center; justify-content: center; gap: .55rem; margin: 0;
+         font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
+         font-size: .82rem; color: var(--accent); text-transform: uppercase; letter-spacing: .07em; }
+  .cta .txt { transform: rotate(-1.5deg); }
+  .cta .arr { position: relative; width: .9em; height: 1.25em; flex: 0 0 auto; }
+  .cta .arr::before { content: ""; position: absolute; left: calc(50% - 1px); top: .05em;
+                      width: 2px; height: .62em; background: currentColor; border-radius: 1px; }
+  .cta .arr::after { content: ""; position: absolute; left: calc(50% - .42em); top: .55em;
+                     border-left: .42em solid transparent; border-right: .42em solid transparent;
+                     border-top: .55em solid currentColor; }
+  .cta .arr:first-child { transform: rotate(-10deg); }
+  .cta .arr:last-child { transform: rotate(10deg); }
   @media (max-width: 66rem) { .cols { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
 
@@ -330,7 +350,7 @@
     <details id="railfold" open>
       <summary id="railsum">Find my MiSTer</summary>
       <div class="foldin">
-        <p class="cta">Every answer prunes the map.</p>
+        <p class="cta"><span class="arr" aria-hidden="true"></span><span class="txt">Your requirements here</span><span class="arr" aria-hidden="true"></span></p>
         <div id="questions"></div>
         <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
       </div>
@@ -348,7 +368,7 @@
 
 <footer class="colophon">
   <p id="stamp"></p>
-  <p>Hand-curated and hand-verified; nothing on this page is scraped or sponsored. Prices are typical street prices, not live quotes; availability notes reflect the last review date. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Also on MiSTerZine: the <a href="../releases/">release tracker</a> and the <a href="../">daily quote zine</a>.</p>
+  <p>Hand-curated and hand-verified; nothing on this page is scraped or sponsored. Prices are typical street prices, not live quotes, and they assume you already own a USB controller. Availability notes are impressions from the last review, not live facts - check the shop itself before you count on stock. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Also on MiSTerZine: the <a href="../releases/">release tracker</a> and the <a href="../">daily quote zine</a>.</p>
 </footer>
 
 </div>
@@ -363,9 +383,12 @@
   var PARTS = null, OPTS = null, CAPS = null;
 
   var NOPIC = {};                  // card images that 404ed; skipped on re-render
-  var STOCK_LABEL = { now: 'usually in stock', waves: 'sells out between batches', scarce: 'chronically scarce' };
-  var STOCK_REASON = { waves: 'Sells out between batches - not usually in stock',
-                       scarce: 'Chronically scarce - not usually in stock' };
+  /* availability is IMPLIED, never asserted (user ruling): every stock phrase
+     is an impression from the last review, and the footer tells visitors to
+     verify with the shop themselves */
+  var STOCK_LABEL = { now: 'usually in stock', waves: 'tends to sell out between batches', scarce: 'tends to be hard to find' };
+  var STOCK_REASON = { waves: 'Tends to sell out between batches',
+                       scarce: 'Tends to be hard to find in stock' };
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -478,7 +501,13 @@
         if (have[grp[i]]) { hit = grp[i]; break; }
         if (unv.indexOf(grp[i]) >= 0) hedged = grp[i];
       }
-      if (hit) { r.reqInfo.push({ label: label, text: 'built in' }); continue; }
+      if (hit) {
+        /* an option can override the line for a token it provides - e.g. the
+           SuperStation One's SNAC is PS1-ports-only, not a bare "built in" */
+        var ov = o.line_overrides && o.line_overrides[hit];
+        r.reqInfo.push({ label: label, text: ov || 'built in', builtin: !ov });
+        continue;
+      }
       if (hedged) {  // alive, but visibly hedged
         r.hedges.push(CAPS[hedged].name);
         r.reqInfo.push({ label: label, text: 'claimed by vendor, unverified' });
@@ -513,7 +542,7 @@
            (the SuperDock is a preorder, not a shelf item) */
         var scarcePart = best.parts.some(function (pid) {
           return PARTS[pid].stock && PARTS[pid].stock !== 'now'; });
-        r.reqInfo.push({ label: label, text: 'with parts (~' + money(best.lo) + (scarcePart ? ', sells out' : '') + ')' });
+        r.reqInfo.push({ label: label, text: 'with parts (~' + money(best.lo) + (scarcePart ? ', often sold out' : '') + ')' });
       }
     }
     r.lo = lo; r.hi = hi;
@@ -597,9 +626,36 @@
       bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
     }
     bits.push('<span class="nm">' + esc(o.name) + '</span>');
-    /* ONE headline number: the complete price (including anything the
-       visitor's answers require). Device price + availability follow, muted.
-       Dead products say "was $X" or nothing - never "price TBA". */
+    var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
+      .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
+    (o.provides_unverified || []).forEach(function (t) {
+      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
+    });
+    if (chips.length) bits.push('<span class="caps">' + chips.join('') + '</span>');
+    if (r.ghost || !r.in) {
+      bits.push('<span class="out-why">' + esc(r.reason) + '</span>');
+    } else {
+      /* plain built-ins collapse to ONE "Covers:" line (user ruling); costed
+         paths and overridden lines stay separate, in the user's own words */
+      var covers = [], lines = [];
+      r.reqInfo.forEach(function (ri) { (ri.builtin ? covers : lines).push(ri); });
+      if (covers.length) {
+        bits.push('<span class="need">Covers: ' + esc(covers.map(function (ri) { return ri.label; }).join(', ')) + '</span>');
+      }
+      lines.forEach(function (ri) {
+        var hedgy = ri.text.indexOf('unverified') >= 0;
+        bits.push('<span class="' + (hedgy ? 'hedge' : 'need') + '">' +
+                  esc(ri.label) + ': ' + esc(ri.text) + '</span>');
+      });
+    }
+    /* DIY mainboards carry their RAM reminder inside the card (user ruling) */
+    if (o.lane === 'diy' && (o.to_complete || []).indexOf('sdram-128') >= 0) {
+      bits.push('<span class="ramline">+ 128MB RAM stick (' + esc(priceText(PARTS['sdram-128'].price_usd)) + ')</span>');
+    }
+    /* the price sits at the BOTTOM of every card (user ruling: one scan line
+       across all lanes). Still ONE headline number - the complete price -
+       with device price + availability muted below. Dead products say
+       "was $X" or nothing - never "price TBA". */
     var dead = o.status === 'discontinued' || o.status === 'cancelled';
     if (dead) {
       if (o.price_usd != null) bits.push('<span class="pr">was ' + priceText(o.price_usd) + '</span>');
@@ -613,27 +669,6 @@
       if (Math.round(r.lo) !== Math.round(plo(o.price_usd))) sub.push('device ' + priceText(o.price_usd));
       if (STOCK_LABEL[o.stock]) sub.push(STOCK_LABEL[o.stock]);
       if (sub.length) bits.push('<span class="avail">' + sub.map(esc).join(' &middot; ') + '</span>');
-    }
-    var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
-      .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
-    (o.provides_unverified || []).forEach(function (t) {
-      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
-    });
-    /* DIY mainboards carry their RAM reminder inside the card (user ruling) */
-    if (o.lane === 'diy' && (o.to_complete || []).indexOf('sdram-128') >= 0) {
-      bits.push('<span class="ramline">+ 128MB RAM stick (' + esc(priceText(PARTS['sdram-128'].price_usd)) + ')</span>');
-    }
-    if (chips.length) bits.push('<span class="caps">' + chips.join('') + '</span>');
-    if (r.ghost || !r.in) {
-      bits.push('<span class="out-why">' + esc(r.reason) + '</span>');
-    } else {
-      /* one line per answered requirement, in the user's own words:
-         "S-Video / Composite: built in" / "with parts (~$27)" / etc. */
-      r.reqInfo.forEach(function (ri) {
-        var hedgy = ri.text.indexOf('unverified') >= 0;
-        bits.push('<span class="' + (hedgy ? 'hedge' : 'need') + '">' +
-                  esc(ri.label) + ': ' + esc(ri.text) + '</span>');
-      });
     }
     return '<button type="button" class="card' + ((r.ghost || !r.in) ? ' out' : '') + (r.ghost ? ' ghost' : '') +
            '" data-card="' + o.id + '">' + bits.join('') + '</button>';
@@ -666,8 +701,16 @@
       if (fits.length > 1) {
         var cheapest = fits.reduce(function (a, b) { return b.lo < a.lo ? b : a; });
         (BADGES[cheapest.o.id] = BADGES[cheapest.o.id] || []).push('cheapest fit');
+        /* combined sticker (prototype, user request): the cheapest fit AMONG
+           the usually-in-stock ones, only when that differs from the outright
+           cheapest - two stickers saying "cheapest" would fight */
+        var stocked = fits.filter(function (r) { return r.o.stock === 'now'; });
+        if (stocked.length) {
+          var cs = stocked.reduce(function (a, b) { return b.lo < a.lo ? b : a; });
+          if (cs.o.id !== cheapest.o.id) (BADGES[cs.o.id] = BADGES[cs.o.id] || []).push('cheap and in stock');
+        }
       }
-      /* deliberately no usually-in-stock badge: it lands on most cards and
+      /* deliberately no bare usually-in-stock badge: it lands on most cards and
          the muted availability line already says it - a badge on everything
          is a badge on nothing */
       fits.forEach(function (r) {
@@ -687,14 +730,18 @@
     Object.keys(PARTS).forEach(function (pid) {
       if ((PARTS[pid].provides || []).some(function (t) { return reqTokens[t]; })) hl[pid] = true;
     });
-    /* adapters you have answered AWAY get dimmed and shrunk: analog-video
-       adapters when your display answers do not need them, SNAC gear when
-       you said USB pads are fine (unanswered questions dim nothing) */
+    /* parts you have answered AWAY get dimmed: analog-video adapters when
+       your display answers do not need them, SNAC gear when you said USB
+       pads are fine, JAMMA gear when the machine is going on a shelf
+       (unanswered questions dim nothing) */
     var VIDEOISH = { yc: 1, 'yc-source': 1, 'vga-rgb': 1, ypbpr: 1, composite: 1, 'yc-active-filtered': 1 };
     var qa = {}; D.interview.forEach(function (q) { if (chosen(q).length) qa[q.id] = chosen(q); });
     function dimPart(pid) {
       var p = PARTS[pid];
-      if (p.category !== 'adapter' || hl[pid]) return false;
+      if (hl[pid]) return false;
+      if (qa.situation && qa.situation.some(function (a) { return a.id === 'shelf'; }) &&
+          (p.provides || []).indexOf('jamma') >= 0) return true;
+      if (p.category !== 'adapter') return false;
       var videoish = (p.provides || []).some(function (t) { return VIDEOISH[t]; });
       if (videoish && qa.display) return true;
       if (pid === 'snac-adapter' && qa.snac) return true;
@@ -747,7 +794,7 @@
       v.hidden = false; v.classList.add('dead');
       v.innerHTML = '<p class="vh">Dead end</p><p>Nothing you can order today does that.</p>' +
         (stockMiss.length
-          ? '<p class="fit">Would fit, but sells out between batches: ' +
+          ? '<p class="fit">Would fit, but tends to sell out between batches: ' +
             esc(stockMiss.map(function (r) { return r.o.name; }).join(', ')) + '.</p>' : '') +
         (ghostsFit.length
           ? '<p class="fit">It exists, but only on the horizon: ' +
@@ -836,18 +883,24 @@
       var p = PARTS[ref] || OPTS[ref];
       return '<li>' + esc(p.name) + ' (' + esc(priceText(p.price_usd)) + ')</li>';
     });
-    /* the "to get playing" sentence: generated from to_complete, short names */
+    /* the "to get playing" sentence: generated from to_complete, short names.
+       The prefix already says "to get playing", so the sentence must NOT end
+       "and you are playing" (user ruling: no duplication) */
     var play = '';
-    if (o.status === 'orderable' && (o.to_complete || []).length) {
-      var tlo = 0, thi = 0, names = [];
-      o.to_complete.forEach(function (ref) {
-        var p = PARTS[ref] || OPTS[ref];
-        tlo += plo(p.price_usd) || 0; thi += phi(p.price_usd) || 0;
-        names.push(p.name.replace(/\s*\(.*$/, ''));
-      });
-      play = 'Add ' + (names.length > 1
-              ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0]) +
-             ' - about ' + money(tlo) + (thi > tlo ? '-' + money(thi) : '') + ' more - and you are playing.';
+    if (o.status === 'orderable') {
+      if ((o.to_complete || []).length) {
+        var tlo = 0, thi = 0, names = [];
+        o.to_complete.forEach(function (ref) {
+          var p = PARTS[ref] || OPTS[ref];
+          tlo += plo(p.price_usd) || 0; thi += phi(p.price_usd) || 0;
+          names.push(p.name.replace(/\s*\(.*$/, ''));
+        });
+        play = 'Add ' + (names.length > 1
+                ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0]) +
+               ' - about ' + money(tlo) + (thi > tlo ? '-' + money(thi) : '') + ' more.';
+      } else {
+        play = 'Nothing else to buy - it plays out of the box.';
+      }
       if (built.indexOf('yc') < 0 && unv.indexOf('yc') < 0) {
         var have2 = {}; Object.keys(builtIn(o)).forEach(function (t) { have2[t] = true; });
         var crt = solve('yc', have2, [], o);

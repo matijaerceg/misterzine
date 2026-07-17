@@ -988,29 +988,34 @@
       "lane": "kits",
       "name": "RetroCastle Full Kit",
       "vendor": "RetroCastle (Ivory, CN; retrocastlestore.com)",
-      "price_usd": 467,
+      "price_usd": 517,
       "status": "orderable",
       "provides": [
         "vga-rgb",
-        "yc-source"
+        "yc-source",
+        "usbc-power"
       ],
       "includes": [
         "de10-nano",
-        "sdram-128"
+        "sdram-128",
+        "sd-card"
       ],
-      "to_complete": [],
-      "notes": "Premium Chinese full-kit line on a genuine DE10-Nano, four variants at review (browser-verified storefront 2026-07-16): VGA 2023 \\, Saturn 2023 \\, Digital Dual-SDRAM 2024 \\, Saturn Dual-SDRAM 2024 \\. Saturn versions use a DIN-style analog connector, dual-SDRAM versions target Saturn/PSX-class cores; exact box contents per variant not yet itemized here - treat includes as the conservative common core (board + one 128MB module) pending a per-variant sweep. Whether the kits ship an SD card or PSU is also unverified (the store blocks automated access) - complete price here assumes neither. Also sells IO boards, metal cases, PSX SNAC gear.",
+      "to_complete": [
+        "psu-usbc"
+      ],
+      "notes": "Premium Chinese full-kit line on a genuine DE10-Nano. Per-variant box contents verified 2026-07-17 (browser sweep of all four product pages): every kit ships the official DE10-Nano, RetroCastle's own IO board, official 128MB SDRAM (x2 in the Dual versions), a 256GB microSD card, your choice of acrylic or aluminum case, fan or heatsink, MicroUSB bridge, screws, and a barrel-to-USB-C adapter - power comes over USB-C only (their care notes warn against plugging both), so a 5V USB-C supply is the one thing left to buy. No USB hub in the box. Prices from the product pages: VGA 2023 $517, Saturn 2023 $527, Digital Dual-SDRAM 2024 $527, Saturn Dual-SDRAM 2024 $624. Saturn versions use a DIN-style analog connector; whether the 2024 'Digital' Dual board keeps the VGA-out of the 2023 boards is not stated - ask the shop. SNAC adapters, YC Active adapter, RTC and a VGA-to-composite/S-Video adapter are sold as addons, not included.",
       "verified": "2026-07",
-      "confidence": "medium",
+      "confidence": "high",
       "sources": [
-        "https://www.retrocastlestore.com/",
+        "https://www.retrocastlestore.com/products/mister-fpga-full-kit-vga-2023-version",
+        "https://www.retrocastlestore.com/products/mister-fpga-full-kit-saturn-dual-sdram-2024-version",
         "https://retrorgb.com/retro-castle-mister-kits.html"
       ],
       "effort": "none",
       "stock": "now",
       "img": "retrocastle-full-kit.png",
       "url": "https://www.retrocastlestore.com/",
-      "what": "Premium pre-built kits on a genuine DE10-Nano, sold in four configurations.",
+      "what": "Premium pre-built kits on a genuine DE10-Nano with a 256GB card and case included, sold in four configurations.",
       "advice": "The high end of the pre-built market. The Saturn-connector versions suit CRT setups; the dual-SDRAM 2024 versions add RAM headroom current cores do not require.",
       "variants": [
         {
@@ -1023,7 +1028,7 @@
         {
           "id": "dual24",
           "name": "Digital Dual-SDRAM 2024 version",
-          "price_delta": 60,
+          "price_delta": 10,
           "adds": [
             "dual-sdram"
           ],
@@ -1155,7 +1160,7 @@
     {
       "id": "multisystem2",
       "lane": "turnkey",
-      "name": "Heber MiSTer Multisystem2",
+      "name": "Heber Multisystem2",
       "vendor": "Heber / RMC (UK)",
       "price_usd": 235,
       "status": "orderable",

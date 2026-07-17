@@ -187,6 +187,18 @@
   /* product picture in the popup: floated so the header and lists wrap it */
   #sheet .spic { float: right; width: 120px; max-height: 130px; object-fit: contain;
                  margin: 1.2rem 0 .6rem .9rem; }
+  /* noob-first narrative blocks: identity, the to-get-playing sentence, the steer */
+  #sheet .what { font-size: .95rem; margin: .1rem 0 .5rem; }
+  #sheet .play, #sheet .adv { font-size: .86rem; margin: .35rem 0; }
+  #sheet .vars { font-size: .8rem; color: var(--muted); margin: .45rem 0 0; }
+  #sheet .caps { display: flex; flex-wrap: wrap; gap: .25rem; margin: .6rem 0 .2rem; }
+  #sheet .cap { font-size: .68rem; border: 1px solid var(--hair); border-radius: 999px; padding: .06rem .45rem;
+                color: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
+  #sheet .cap.unv { border-style: dashed; color: var(--muted); }
+  /* the receipts live one tap away, not in the greeting */
+  #sheet .fine { margin-top: .7rem; border-top: 1px solid var(--rule); padding-top: .5rem; }
+  #sheet .fine summary { cursor: pointer; font-size: .78rem; color: var(--muted); user-select: none; }
+  #sheet .fine summary:hover { color: var(--accent); }
   #sheet .x { position: absolute; top: .55rem; right: .65rem; font: inherit; border: 1px solid var(--hair);
               background: var(--surface); color: inherit; border-radius: 6px; padding: .1rem .5rem; cursor: pointer; }
   #sheet .x:hover { background: var(--hover-bg); }
@@ -377,8 +389,8 @@
 
   /* full evaluation of one option against the current answers */
   function evaluate(o) {
-    var r = { o: o, in: true, ghost: false, wouldFit: false, reason: '', needParts: [], hedges: [],
-              lo: NaN, hi: NaN, unknownPrice: o.price_usd == null };
+    var r = { o: o, in: true, ghost: false, wouldFit: false, reason: '', needParts: [], needVariants: [],
+              hedges: [], lo: NaN, hi: NaN, unknownPrice: o.price_usd == null };
     var c = constraints();
     if (o.status !== 'orderable') {
       r.ghost = true;
@@ -407,6 +419,19 @@
       }
       if (hit) continue;
       if (hedged) { r.hedges.push(CAPS[hedged].name); continue; }  // alive, but visibly hedged
+      /* first-party variant configurations ("get the Analogue version")
+         count before add-on part chains - that is how the expert talks */
+      var vbest = null;
+      (o.variants || []).forEach(function (v) {
+        var covers = grp.some(function (t) { return (v.adds || []).indexOf(t) >= 0; });
+        if (covers && (!vbest || v.price_delta < vbest.price_delta)) vbest = v;
+      });
+      if (vbest) {
+        lo += vbest.price_delta; hi += vbest.price_delta;
+        (vbest.adds || []).forEach(function (t) { have[t] = true; });
+        if (r.needVariants.indexOf(vbest) < 0) r.needVariants.push(vbest);
+        continue;
+      }
       var best = null;
       for (var j = 0; j < grp.length; j++) {
         var ch = solve(grp[j], have, []);
@@ -494,8 +519,11 @@
     if (r.ghost || !r.in) {
       bits.push('<span class="out-why">' + esc(r.reason) + '</span>');
     } else {
-      if (r.needParts.length) {
-        bits.push('<span class="need">Fits with: ' + esc(r.needParts.map(function (pid) { return PARTS[pid].name; }).join(' + ')) + '</span>');
+      var needs = r.needVariants.map(function (v) {
+        return 'the ' + v.name + (v.price_delta ? ' (+' + money(v.price_delta) + ')' : ' (same price)');
+      }).concat(r.needParts.map(function (pid) { return PARTS[pid].name; }));
+      if (needs.length) {
+        bits.push('<span class="need">Fits with: ' + esc(needs.join(' + ')) + '</span>');
       }
       if (r.hedges.length) {
         bits.push('<span class="hedge">Claimed but unverified: ' + esc(r.hedges.join(', ')) + '</span>');
@@ -556,8 +584,10 @@
       return;
     }
     var top = ranked[0], run = ranked[1];
+    var incl = top.needVariants.map(function (v) { return 'the ' + v.name; })
+      .concat(top.needParts.map(function (p) { return PARTS[p].name; }));
     var why = 'Cheapest complete setup that does everything you asked: ~' + money(top.lo) +
-              (top.needParts.length ? ', including ' + top.needParts.map(function (p) { return PARTS[p].name; }).join(' + ') : '') + '.';
+              (incl.length ? ', including ' + incl.join(' + ') : '') + '.';
     v.innerHTML = '<p class="vh">Verdict</p>' +
       '<p class="pick"><span class="cd">' + esc(top.o.name) + '</span></p>' +
       '<p>' + esc(why) + '</p>' +
@@ -642,6 +672,30 @@
       var p = PARTS[ref] || OPTS[ref];
       return '<li>' + esc(p.name) + ' (' + esc(priceText(p.price_usd)) + ')</li>';
     });
+    /* the "to get playing" sentence: generated from to_complete, short names */
+    var play = '';
+    if (o.status === 'orderable' && (o.to_complete || []).length) {
+      var tlo = 0, thi = 0, names = [];
+      o.to_complete.forEach(function (ref) {
+        var p = PARTS[ref] || OPTS[ref];
+        tlo += plo(p.price_usd) || 0; thi += phi(p.price_usd) || 0;
+        names.push(p.name.replace(/\s*\(.*$/, ''));
+      });
+      play = 'Add ' + (names.length > 1
+              ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0]) +
+             ' - about ' + money(tlo) + (thi > tlo ? '-' + money(thi) : '') + ' more - and you are playing.';
+      if (built.indexOf('yc') < 0 && unv.indexOf('yc') < 0) {
+        var have2 = {}; Object.keys(builtIn(o)).forEach(function (t) { have2[t] = true; });
+        var crt = solve('yc', have2, []);
+        if (crt) play += ' For a CRT via S-Video, budget roughly ' + money(crt.lo) +
+                         ' on top (the fine print has the parts).';
+      }
+    }
+    var chips = built.map(function (t) {
+      return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
+    unv.forEach(function (t) {
+      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
+    });
     sheet.innerHTML =
       '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
       (o.img && !NOPIC['img/' + o.img]
@@ -651,22 +705,30 @@
         (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.vendor) + ' - official page</a>'
                : esc(o.vendor)) +
         ' &middot; ' + esc(o.status) +
-        (o.status === 'orderable' && STOCK_LABEL[o.stock] ? ' (' + esc(STOCK_LABEL[o.stock]) + ')' : '') +
-        ' &middot; lane: ' + esc(D.lanes.filter(function (l) { return l.id === o.lane; })[0].name) + '</p>' +
+        (o.status === 'orderable' && STOCK_LABEL[o.stock] ? ' (' + esc(STOCK_LABEL[o.stock]) + ')' : '') + '</p>' +
       ((o.status === 'discontinued' || o.status === 'cancelled')
         ? (o.price_usd == null ? '' : '<p class="price">was ' + esc(priceText(o.price_usd)) + '</p>')
         : '<p class="price"><b>' + esc(priceText(o.price_usd)) + '</b>' +
           (!r.unknownPrice && o.status === 'orderable' ? ' &middot; from ~' + money(r.lo) + ' complete' : '') + '</p>') +
-      (built.length ? '<h4>Built in</h4><ul>' + built.map(function (t) {
-        return '<li title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
-      (unv.length ? '<h4>Claimed, not verified</h4><ul>' + unv.map(function (t) {
-        return '<li class="unv">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
-      (withParts.length ? '<h4>Possible with parts</h4><ul>' + withParts.join('') + '</ul>' : '') +
-      (still.length ? '<h4>Still needed for a complete setup</h4><ul>' + still.join('') + '</ul>' : '') +
-      '<h4>Notes</h4><p class="notes">' + esc(o.notes) + '</p>' +
-      '<p class="meta2">Verified ' + esc(o.verified) + ' &middot; confidence: ' + esc(o.confidence || 'n/a') +
-        (o.sources && o.sources.length ? ' &middot; sources: ' + o.sources.map(function (u, i) {
-          return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + (i + 1) + '</a>'; }).join(' ') : '') + '</p>';
+      '<p class="what">' + esc(o.what) + '</p>' +
+      (play ? '<p class="play"><b>To get playing:</b> ' + esc(play) + '</p>' : '') +
+      '<p class="adv">' + esc(o.advice) + '</p>' +
+      (o.variants && o.variants.length
+        ? '<p class="vars"><b>Versions:</b> ' + o.variants.map(function (v) {
+            return esc(v.name) + (v.price_delta ? ' +' + money(v.price_delta) : ', same price') +
+                   (v.note ? ' - ' + esc(v.note) : '');
+          }).join(' &middot; ') + '</p>' : '') +
+      (chips.length ? '<div class="caps">' + chips.join('') + '</div>' : '') +
+      '<details class="fine"><summary>The fine print</summary>' +
+        (unv.length ? '<h4>Claimed, not verified</h4><ul>' + unv.map(function (t) {
+          return '<li class="unv">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
+        (withParts.length ? '<h4>Possible with parts</h4><ul>' + withParts.join('') + '</ul>' : '') +
+        (still.length ? '<h4>Still needed for a complete setup</h4><ul>' + still.join('') + '</ul>' : '') +
+        '<h4>Notes</h4><p class="notes">' + esc(o.notes) + '</p>' +
+        '<p class="meta2">Verified ' + esc(o.verified) + ' &middot; confidence: ' + esc(o.confidence || 'n/a') +
+          (o.sources && o.sources.length ? ' &middot; sources: ' + o.sources.map(function (u, i) {
+            return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + (i + 1) + '</a>'; }).join(' ') : '') + '</p>' +
+      '</details>';
     sheetId = id;
     if (push) history.pushState(null, '', '#' + id);
     if (!sheet.open) {

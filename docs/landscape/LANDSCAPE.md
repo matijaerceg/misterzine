@@ -135,7 +135,29 @@ Top-level keys:
   - `to_complete`: part ids still needed for a minimal working setup
     (PSU, SD card, controller — and SDRAM for bare boards: a board that
     can't run popular cores is not complete). Complete price = price_usd
-    + these.
+    + these. May also name an OPTION id (Ironclad DX needs a whole board).
+  - `what` (REQUIRED): one plain-language identity sentence. The first
+    thing a newcomer reads on the sheet.
+  - `advice` (REQUIRED): the expert's orientation. TONE RULE (user,
+    2026-07-16): popularity and fit, never put-downs — "most commonly
+    recommended", "the pick if you want X" are the register; no
+    pooh-poohing any product or brand. Factual trade-offs allowed.
+    May point across lanes ("the kits lane is this stack pre-built").
+  - `variants` (optional): first-party configurations,
+    `[{id, name, price_delta, adds[], note}]`. Rendered as chain-style
+    answers ("Fits with: the Analogue version (+$50)") and a Versions
+    line on the sheet. Use when a configuration changes capabilities or
+    price meaningfully; NEVER split an option into multiple cards for
+    SKU differences (ruling 2026-07-16 — the noob decision is which
+    product, not which SKU). Variant tokens beat parts chains in the
+    requirement check (buying the right version beats bolting on parts).
+
+Sheet structure (redesigned 2026-07-16 for newcomers — the sheet is an
+ONBOARDING view, not a data dump): photo, price/complete/stock, `what`,
+generated "To get playing" sentence (from to_complete, plus a CRT-budget
+line when Y/C needs parts), `advice`, Versions line, capability chips,
+then everything else (research notes, unverified flags, chains, sources,
+confidence) behind a collapsed "The fine print" disclosure.
 
 Field conventions (parts and options both):
   - `price_usd`: number, `[low, high]` range (vendor/batch spread), or

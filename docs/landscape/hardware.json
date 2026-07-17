@@ -560,7 +560,7 @@
       ]
     },
     "usb-controller": {
-      "name": "Any USB gamepad",
+      "name": "a USB gamepad",
       "vendor": "commodity",
       "price_usd": [
         15,
@@ -646,7 +646,9 @@
       "effort": "none",
       "stock": "waves",
       "img": "superstation-one.png",
-      "url": "https://retroremake.co/products/superstation-one"
+      "url": "https://retroremake.co/products/superstation-one",
+      "what": "A complete MiSTer in a PSone-style shell: plug it into power and a TV and you are playing.",
+      "advice": "The most talked-about turnkey option right now. Batches sell out, so getting one takes patience. Original PS1 pads and memory cards plug straight in, and the S-Video/composite output needs no extra parts."
     },
     {
       "id": "aluminum-armor-bundle",
@@ -682,7 +684,20 @@
       "effort": "none",
       "stock": "waves",
       "img": "aluminum-armor-bundle.png",
-      "url": "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano"
+      "url": "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano",
+      "what": "The classic MiSTer stack - board, RAM, I/O, USB hub - pre-assembled in a silent all-aluminum case.",
+      "advice": "A commonly recommended one-box route to the traditional stack, with S-Video and RGB out of the box. Pick the IO Direct configuration if Saturn-class cores matter to you (it ships dual RAM).",
+      "variants": [
+        {
+          "id": "iodirect",
+          "name": "IO Direct configuration",
+          "price_delta": 0,
+          "adds": [
+            "dual-sdram"
+          ],
+          "note": "Ships 2x 128MB SDRAM for Saturn-class cores; HDMI or analog rather than both at once."
+        }
+      ]
     },
     {
       "id": "ultimate-mister-pro",
@@ -715,7 +730,29 @@
       "effort": "none",
       "stock": "now",
       "img": "ultimate-mister-pro.png",
-      "url": "https://ultimatemister.com/product/ultimate-mister-pro/"
+      "url": "https://ultimatemister.com/product/ultimate-mister-pro/",
+      "what": "A pre-built classic stack on a genuine DE10-Nano, assembled and tested in the EU.",
+      "advice": "A long-standing, commonly recommended EU route to the traditional stack, with VGA analog out as standard. The DUAL RAM tier is the one to pick for Saturn-class cores.",
+      "variants": [
+        {
+          "id": "dualram",
+          "name": "DUAL RAM tier",
+          "price_delta": 35,
+          "adds": [
+            "dual-sdram"
+          ],
+          "note": "Second 128MB module, Digital I/O and 24-bit Direct Video for Saturn-class cores (EUR379.90)."
+        },
+        {
+          "id": "blisster",
+          "name": "BlisSTer tier",
+          "price_delta": 80,
+          "adds": [
+            "dual-sdram"
+          ],
+          "note": "Low-latency BlisSTer hub with native gamepad ports; HDMI-only, no VGA (EUR419.90)."
+        }
+      ]
     },
     {
       "id": "qmtech-assembled",
@@ -749,7 +786,9 @@
       "effort": "none",
       "stock": "now",
       "img": "qmtech-assembled.png",
-      "url": "https://www.aliexpress.com/item/1005012462104429.html"
+      "url": "https://www.aliexpress.com/item/1005012462104429.html",
+      "what": "A factory-built MiSTer on the QMTech board - the lowest-priced ready-made option.",
+      "advice": "A popular budget entry. The trade-offs are AliExpress shipping and less hand-holding than the boutique kits; the hardware itself covers the essentials, SNAC and RTC included."
     },
     {
       "id": "icode-fully-built",
@@ -787,19 +826,21 @@
       "effort": "none",
       "stock": "now",
       "img": "icode-fully-built.png",
-      "url": "https://www.icode.com/product/mister-fpga-fully-built-digital-dual-ram/"
+      "url": "https://www.icode.com/product/mister-fpga-fully-built-digital-dual-ram/",
+      "what": "A fully assembled DE10-Nano build with digital audio I/O, sold from US stock.",
+      "advice": "One of the few builds reliably in stock. It has no analog video output as configured, so it suits modern-TV setups best - CRT paths need added parts (see the fine print)."
     },
     {
       "id": "retrocastle-full-kit",
       "lane": "kits",
       "name": "RetroCastle Full Kit",
       "vendor": "RetroCastle (Ivory, CN; retrocastlestore.com)",
-      "price_usd": [
-        467,
-        574
-      ],
+      "price_usd": 467,
       "status": "orderable",
-      "provides": [],
+      "provides": [
+        "vga-rgb",
+        "yc-source"
+      ],
       "includes": [
         "de10-nano",
         "sdram-128"
@@ -817,7 +858,36 @@
       "effort": "none",
       "stock": "now",
       "img": "retrocastle-full-kit.png",
-      "url": "https://www.retrocastlestore.com/"
+      "url": "https://www.retrocastlestore.com/",
+      "what": "Premium pre-built kits on a genuine DE10-Nano, sold in four configurations.",
+      "advice": "The high end of the pre-built market. The dual-SDRAM 2024 versions aim at Saturn-class cores; the Saturn-connector versions suit CRT setups.",
+      "variants": [
+        {
+          "id": "saturn23",
+          "name": "Saturn 2023 version",
+          "price_delta": 10,
+          "adds": [],
+          "note": "Saturn-style AV connector instead of VGA."
+        },
+        {
+          "id": "dual24",
+          "name": "Digital Dual-SDRAM 2024 version",
+          "price_delta": 60,
+          "adds": [
+            "dual-sdram"
+          ],
+          "note": "Dual RAM for Saturn-class cores."
+        },
+        {
+          "id": "saturndual24",
+          "name": "Saturn Dual-SDRAM 2024 version",
+          "price_delta": 107,
+          "adds": [
+            "dual-sdram"
+          ],
+          "note": "Dual RAM plus the Saturn AV connector."
+        }
+      ]
     },
     {
       "id": "de10-nano",
@@ -842,7 +912,7 @@
         "sd-card",
         "usb-controller"
       ],
-      "notes": "The reference board. $225 direct from Terasic, which restocks regularly (site owner observation 2026-07-16; the \"chronic scarcity\" framing came from an undated shortage-era buying guide). Third-party resellers mark it up when they have it at all. Ships a 5V/2.5A adapter; upgrade advised once addons stack up. At $225 bare it is hard to justify against the MiSTer Pi unless you specifically want the original.",
+      "notes": "The reference board. $225 direct from Terasic, which restocks regularly (site owner observation 2026-07-16; the \"chronic scarcity\" framing came from an undated shortage-era buying guide). Third-party resellers mark it up when they have it at all. Ships a 5V/2.5A adapter; upgrade advised once addons stack up.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -852,7 +922,9 @@
       "effort": "diy",
       "stock": "waves",
       "img": "de10-nano.png",
-      "url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046"
+      "url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046",
+      "what": "The original reference board every MiSTer descends from. Bare, it can boot a handful of cores over HDMI - but almost nobody uses one that way.",
+      "advice": "Most newcomers now start with a MiSTer Pi or a pre-built kit; the DE10-Nano remains the pick if you want the reference hardware itself, and everything in the ecosystem fits it."
     },
     {
       "id": "mister-pi",
@@ -890,7 +962,9 @@
       "effort": "diy",
       "stock": "waves",
       "img": "mister-pi.png",
-      "url": "https://retroremake.co/pages/store"
+      "url": "https://retroremake.co/pages/store",
+      "what": "A modern remake of the reference board: same FPGA class, USB-C power, sold in batches.",
+      "advice": "The most commonly recommended starting point for self-builders. It sells out between batches, and its accessory line (RAM, hub, case) is inexpensive."
     },
     {
       "id": "qmtech-cv",
@@ -925,7 +999,9 @@
       "effort": "diy",
       "stock": "now",
       "img": "qmtech-cv.png",
-      "url": "https://www.aliexpress.com/item/1005007858010441.html"
+      "url": "https://www.aliexpress.com/item/1005007858010441.html",
+      "what": "The Chinese clone of the reference board, often with the 128MB RAM already soldered on.",
+      "advice": "Liked for being in stock when others are not, and by fanless builders for its thermal headroom. Quality control varies more than the originals - mind the RAM-slot orientation note before assembling."
     },
     {
       "id": "mistercade-v2",
@@ -957,17 +1033,16 @@
       "effort": "some",
       "stock": "waves",
       "img": "mistercade-v2.png",
-      "url": "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit"
+      "url": "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit",
+      "what": "A kit that turns a MiSTer into the JAMMA board inside a real arcade cabinet.",
+      "advice": "The standard answer for cabinet builds. The full kit includes the board and dual RAM; the Lite tier suits people who already own a MiSTer."
     },
     {
       "id": "multisystem2",
       "lane": "turnkey",
       "name": "Heber MiSTer Multisystem2",
       "vendor": "Heber / RMC (UK)",
-      "price_usd": [
-        235,
-        285
-      ],
+      "price_usd": 235,
       "status": "orderable",
       "provides": [
         "hdmi",
@@ -975,8 +1050,7 @@
         "usb-hub",
         "toslink",
         "analog-audio",
-        "sdram128",
-        "vga-rgb"
+        "sdram128"
       ],
       "includes": [],
       "to_complete": [
@@ -993,7 +1067,21 @@
       "effort": "none",
       "stock": "now",
       "img": "multisystem2.png",
-      "url": "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/"
+      "url": "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/",
+      "what": "A complete console built around its own integrated MiSTer board, assembled in the UK.",
+      "advice": "The turnkey option that is actually in stock. CRT owners usually go for the Analogue version; the Digital version is the cheaper HDMI-only route.",
+      "variants": [
+        {
+          "id": "analogue",
+          "name": "Analogue version",
+          "price_delta": 50,
+          "adds": [
+            "vga-rgb",
+            "yc-source"
+          ],
+          "note": "24-bit analog out: mini-DIN RGB for SCART plus a VGA-style port. The base (Digital) version is HDMI-only."
+        }
+      ]
     },
     {
       "id": "ironclad-dx",
@@ -1030,7 +1118,9 @@
       "effort": "some",
       "stock": "waves",
       "img": "ironclad-dx.png",
-      "url": "https://www.d3fmod.com/product/mini-itx_ironclad_dx/"
+      "url": "https://www.d3fmod.com/product/mini-itx_ironclad_dx/",
+      "what": "A carrier board that turns a Mini-ITX PC case into a MiSTer, with CRT outputs and smart power built in.",
+      "advice": "A favorite among PC-case builders - S-Video is built in and documented. Hand-made in small monthly batches, so catching stock is the hard part. You supply the FPGA board (DE10, MiSTer Pi or QMTech) and the case."
     },
     {
       "id": "multisystem1",
@@ -1052,7 +1142,9 @@
       "effort": "some",
       "stock": "na",
       "img": "multisystem1.png",
-      "url": "https://heber.co.uk/mister-multisystem-is-now-open-source/"
+      "url": "https://heber.co.uk/mister-multisystem-is-now-open-source/",
+      "what": "The original Multisystem console: a case and carrier board your DE10-Nano dropped into.",
+      "advice": "No longer sold; the design is open-source now and the Multisystem2 is its successor. Listed so you know where it went."
     },
     {
       "id": "agilex5-nextgen",
@@ -1076,7 +1168,9 @@
       "effort": "diy",
       "stock": "na",
       "img": "agilex5-nextgen.png",
-      "url": null
+      "url": null,
+      "what": "The next-generation FPGA boards Taki Udon is developing on Altera's Agilex 5 - what the community calls 'MiSTer 2'.",
+      "advice": "Developer seeding only so far, no product or date. Buy for what exists today; treat this as the future, not an option."
     },
     {
       "id": "multisystem2-pocket",
@@ -1100,7 +1194,9 @@
       "effort": "none",
       "stock": "na",
       "img": "multisystem2-pocket.png",
-      "url": "https://shop.heber.co.uk/blog-news/the-multisystem2-pocket-project-mister-fpga-handheld-open-innovation-design-and-development/"
+      "url": "https://shop.heber.co.uk/blog-news/the-multisystem2-pocket-project-mister-fpga-handheld-open-innovation-design-and-development/",
+      "what": "A handheld take on the Multisystem2, being designed in the open with community input.",
+      "advice": "Aiming for late 2026. Nothing to order yet - and no orderable MiSTer handheld exists from anyone."
     },
     {
       "id": "de25-nano",
@@ -1122,7 +1218,9 @@
       "effort": "diy",
       "stock": "na",
       "img": "de25-nano.png",
-      "url": null
+      "url": null,
+      "what": "Terasic's successor to the DE10-Nano: real and orderable, but MiSTer does not run on it yet.",
+      "advice": "No framework port exists as of mid-2026. Do not buy one expecting a MiSTer; watch this space instead."
     },
     {
       "id": "mars-fpga",
@@ -1143,7 +1241,9 @@
       "effort": "diy",
       "stock": "na",
       "img": "mars-fpga.png",
-      "url": null
+      "url": null,
+      "what": "A once-announced next-generation board with big ambitions, cancelled in late 2025.",
+      "advice": "Listed so the landscape says plainly: it is not coming."
     }
   ],
   "appendix_not_mister": [

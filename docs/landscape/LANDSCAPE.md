@@ -10,7 +10,7 @@ layout code. The interview questions also live in `hardware.json` (an
 allowlists, or a `budget` cap), and options carry an `effort` grade
 (`none | some | diy`) the build question filters on.
 
-Nav name: **Landscape**. Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; freshness chip (meta.updated) rides the subtitle.
+Nav name: **Landscape**. Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness chip (meta.updated) IS the whole subtitle (scope sentence removed, user ruling 2026-07-16); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
 URL: `/landscape/`. Outward copy may say "landscape" or "hardware matrix" —
 never "release tracker" (that term belongs to the releases page).
 
@@ -48,9 +48,10 @@ never "release tracker" (that term belongs to the releases page).
 - **Display question is multi-select** (labels: HDMI / RGB - Component /
   S-Video - Composite); every selected output must be satisfiable.
 - **Availability is a factor**: options carry `stock`
-  (`now | waves | scarce | na`) rendered as a card line, plus a "How soon?"
-  question whose ASAP answer requires `now`. Stock drifts fast - re-verify
-  on every sweep.
+  (`now | waves | scarce | na`) rendered as a card line, plus a
+  single-toggle "Want it soon?" question (ONE checkbox-style answer, user
+  ruling 2026-07-16) requiring `now`. Stock drifts fast - re-verify on
+  every sweep.
 - **Dead ends are loud**: any answer that leaves zero fits shows a warning
   verdict box IMMEDIATELY (whatever the answer count), naming horizon items
   that would fit ("It exists, but only on the horizon: ...").

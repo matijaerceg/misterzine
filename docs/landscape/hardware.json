@@ -46,7 +46,7 @@
     },
     "dual-sdram": {
       "name": "Dual 128MB SDRAM",
-      "explain": "Two modules; needed for Saturn and other dual-RAM cores."
+      "explain": "Two RAM modules. Saturn and PSX run on a single module these days - a second mostly buys futureproofing and serves a handful of niche setups."
     },
     "sdram-slot": {
       "name": "SDRAM socket",
@@ -153,6 +153,11 @@
     "handheld": {
       "name": "Handheld",
       "explain": "A MiSTer you can hold. Nothing orderable provides this yet."
+    },
+    "ms2-slot": {
+      "name": "Multisystem expansion slot",
+      "explain": "Internal token: the Multisystem2 cartridge slot that SNAC cartridges plug into.",
+      "internal": true
     }
   },
   "lanes": [
@@ -212,7 +217,7 @@
       "requires": [
         "sdram128"
       ],
-      "notes": "Dual-RAM configs (Saturn, future PSX work) need two modules and an I/O board that supports the second socket (e.g. IO Direct).",
+      "notes": "A second module is OPTIONAL futureproofing now: Saturn and PSX cores run single-module (owner correction 2026-07-16; older guides overstate this). Needs an I/O board with the second socket (e.g. IO Direct).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -686,6 +691,46 @@
       "sources": [
         "https://retroremake.co/pages/store"
       ]
+    },
+    "ms2-snac-cart": {
+      "name": "Multisystem SNAC cartridge",
+      "vendor": "Heber (SNES/NES/N64/Saturn/PSX/PCE/Neo Geo variants)",
+      "price_usd": [
+        27,
+        47
+      ],
+      "provides": [
+        "snac"
+      ],
+      "requires": [
+        "ms2-slot"
+      ],
+      "what": "Plug-in cartridges that give the Multisystem2 native ports for original controllers, one console family per cartridge.",
+      "notes": "GBP21-36 ex VAT per cartridge on the Heber shop (verified 2026-07-16); the slot is the Multisystem2 expansion cartridge bay. Not part of the standard MiSTer stack, so it lives off the DIY columns.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://shop.heber.co.uk/search.php?search_query=SNAC"
+      ]
+    },
+    "usb-controller-adapter": {
+      "name": "USB adapters for original pads (Reflex Adapt, Daemonbite)",
+      "vendor": "MiSTer Addons Reflex Adapt ($50) / Daemonbite builds (~$30) / Bliss-Box",
+      "price_usd": [
+        30,
+        50
+      ],
+      "category": "adapter",
+      "provides": [],
+      "requires": [],
+      "what": "Original controllers over USB at ~1ms - menu support included, no SNAC wiring, works on every option here.",
+      "notes": "The most commonly recommended way to use original pads. A well-upvoted community take holds that these serve most people better than SNAC, which chiefly matters for lightguns (old.reddit.com/r/MiSTerFPGA/comments/1fqq6wy; adapter comparison thread: old.reddit.com/r/MiSTerFPGA/comments/1dceelz). Reflex Adapt sold out at review.",
+      "verified": "2026-07",
+      "confidence": "medium",
+      "sources": [
+        "https://misteraddons.com/collections/kits",
+        "https://old.reddit.com/r/MiSTerFPGA/comments/1dceelz/reflex_adapt_or_blisster/"
+      ]
     }
   },
   "options": [
@@ -780,7 +825,7 @@
       "img": "aluminum-armor-bundle.png",
       "url": "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano",
       "what": "The classic MiSTer stack - board, RAM, I/O, USB hub - pre-assembled in a silent all-aluminum case.",
-      "advice": "A commonly recommended one-box route to the traditional stack, with S-Video and RGB out of the box. Pick the IO Direct configuration if Saturn-class cores matter to you (it ships dual RAM).",
+      "advice": "A commonly recommended one-box route to the traditional stack, with S-Video and RGB out of the box. Both configurations cover current cores; IO Direct adds a second RAM module as futureproofing.",
       "variants": [
         {
           "id": "iodirect",
@@ -789,7 +834,7 @@
           "adds": [
             "dual-sdram"
           ],
-          "note": "Ships 2x 128MB SDRAM for Saturn-class cores; HDMI or analog rather than both at once."
+          "note": "Ships 2x 128MB SDRAM (futureproofing - current cores run single-module); HDMI or analog rather than both at once."
         }
       ]
     },
@@ -826,7 +871,7 @@
       "img": "ultimate-mister-pro.png",
       "url": "https://ultimatemister.com/product/ultimate-mister-pro/",
       "what": "A pre-built classic stack on a genuine DE10-Nano, assembled and tested in the EU.",
-      "advice": "A long-standing, commonly recommended EU route to the traditional stack, with VGA analog out as standard. The DUAL RAM tier is the one to pick for Saturn-class cores.",
+      "advice": "A long-standing, commonly recommended EU route to the traditional stack, with VGA analog out as standard. The DUAL RAM tier adds a second module as futureproofing - current cores run on one.",
       "variants": [
         {
           "id": "dualram",
@@ -835,7 +880,7 @@
           "adds": [
             "dual-sdram"
           ],
-          "note": "Second 128MB module, Digital I/O and 24-bit Direct Video for Saturn-class cores (EUR379.90)."
+          "note": "Second 128MB module (futureproofing), Digital I/O and 24-bit Direct Video (EUR379.90)."
         },
         {
           "id": "blisster",
@@ -954,7 +999,7 @@
       "img": "retrocastle-full-kit.png",
       "url": "https://www.retrocastlestore.com/",
       "what": "Premium pre-built kits on a genuine DE10-Nano, sold in four configurations.",
-      "advice": "The high end of the pre-built market. The dual-SDRAM 2024 versions aim at Saturn-class cores; the Saturn-connector versions suit CRT setups.",
+      "advice": "The high end of the pre-built market. The Saturn-connector versions suit CRT setups; the dual-SDRAM 2024 versions add RAM headroom current cores do not require.",
       "variants": [
         {
           "id": "saturn23",
@@ -970,7 +1015,7 @@
           "adds": [
             "dual-sdram"
           ],
-          "note": "Dual RAM for Saturn-class cores."
+          "note": "Dual RAM (futureproofing; current cores run single-module)."
         },
         {
           "id": "saturndual24",
@@ -979,7 +1024,7 @@
           "adds": [
             "dual-sdram"
           ],
-          "note": "Dual RAM plus the Saturn AV connector."
+          "note": "Dual RAM (futureproofing) plus the Saturn AV connector."
         }
       ]
     },
@@ -1110,14 +1155,15 @@
         "usb-hub",
         "toslink",
         "analog-audio",
-        "sdram128"
+        "sdram128",
+        "ms2-slot"
       ],
       "includes": [],
       "to_complete": [
         "usb-controller",
         "sd-card"
       ],
-      "notes": "Not a DE10 carrier: one integrated motherboard (own Cyclone V, 128MB SDRAM + 1GB LPDDR, powered 7-port hub) in a 3D-printed enclosure, assembled. Digital version GBP180 ex VAT (~$235, HDMI only); Analogue version GBP220 ex VAT (~$285) adds 24-bit analog out: 9-pin mini-DIN RGB+C-sync for SCART AND a 15-way VGA-style port for CRT/arcade monitors (vendor spec verified 2026-07-16; S-Video/composite are NOT native - the DIN carries RGB). Whether the VGA port hosts MikeS11 Y/C adapters is untested - it should carry the standard MiSTer analog signal, worth verifying. In stock, 1-2 week lead. JAMMA Arcade edition preorders ship from Aug 2026. Enclosure files are open (Printables, CC-BY-SA).",
+      "notes": "Not a DE10 carrier: one integrated motherboard (own Cyclone V, 128MB SDRAM + 1GB LPDDR, powered 7-port hub) in a 3D-printed enclosure, assembled. Digital version GBP180 ex VAT (~$235, HDMI only); Analogue version GBP220 ex VAT (~$285) adds 24-bit analog out: 9-pin mini-DIN RGB+C-sync for SCART AND a 15-way VGA-style port for CRT/arcade monitors (vendor spec verified 2026-07-16; S-Video/composite are NOT native - the DIN carries RGB). Whether the VGA port hosts MikeS11 Y/C adapters is untested - it should carry the standard MiSTer analog signal, worth verifying. In stock, 1-2 week lead. JAMMA Arcade edition preorders ship from Aug 2026. Enclosure files are open (Printables, CC-BY-SA). Original controllers: the expansion cartridge bay takes Heber SNAC cartridges (SNES/NES/N64/Saturn/PSX/PCE/Neo Geo, GBP21-36 ex VAT each, verified 2026-07-16).",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -1343,20 +1389,16 @@
     },
     {
       "id": "snac",
-      "q": "Original console controllers, plugged in natively?",
+      "q": "Original controllers?",
       "answers": [
         {
           "id": "yes",
-          "label": "Yes, native ports (SNAC)",
+          "label": "Plug in original console controllers natively (SNAC)",
           "require": [
             [
               "snac"
             ]
           ]
-        },
-        {
-          "id": "no",
-          "label": "USB pads are fine"
         }
       ]
     },
@@ -1390,11 +1432,11 @@
     },
     {
       "id": "stock",
-      "q": "Want it soon?",
+      "q": "Availability",
       "answers": [
         {
           "id": "asap",
-          "label": "Must be orderable right now",
+          "label": "Only what is usually in stock",
           "stock": [
             "now"
           ]
@@ -1413,10 +1455,6 @@
               "cd-drive"
             ]
           ]
-        },
-        {
-          "id": "no",
-          "label": "Files on a card are fine"
         }
       ]
     }

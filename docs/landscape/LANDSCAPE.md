@@ -75,10 +75,7 @@ are NOT listed anywhere on the landscape. Do not add them on any sweep.**
   on every sweep. `unconfirmed` (added 2026-07-17, beta feedback) means
   sold out with NO announced restock (the MiSTer Pi): it renders a
   warn-colored "restock unconfirmed" FACT tag even at the zero state,
-  and the card stays a full card until an answer prunes it. A product in
-  this state does NOT get duplicated into other lanes - the user's
-  add-it-as-a-kit-too idea was answered with this tag instead (bundles
-  you assemble yourself are not kits-lane material).
+  and the card stays a full card until an answer prunes it.
 - **Dead ends are loud**: any answer that leaves zero fits shows a warning
   verdict box IMMEDIATELY (whatever the answer count), naming horizon items
   that would fit ("It exists, but only on the horizon: ...").
@@ -96,11 +93,13 @@ are NOT listed anywhere on the landscape. Do not add them on any sweep.**
   DIY fabrication" lane was considered and scoped out 2026-07-16 - the
   audience is overwhelmed newcomers, not PCB fabricators; revisit only if
   several such entries accumulate.
-- **MiSTer Pi bundle tiers are NOT separate cards** (ruling 2026-07-16):
-  bundles of the same board + parts you still assemble are price points of
-  one starting point, listed in the option's notes. Contrast: a factory-
-  ASSEMBLED build (qmtech-assembled) is its own kits-lane card because the
-  effort grade differs.
+- **MiSTer Pi bundles ARE a kits-lane card** (user reversal 2026-07-17,
+  beta round; supersedes the 2026-07-16 not-separate-cards ruling): ONE
+  entry (mister-pi-turbo, Turbo Pack as the face) with Mega/RAM tiers as
+  negative-delta variants, effort `some` (light assembly - the kits lane
+  tolerates this one non-assembled member by explicit user request). The
+  bare board keeps its own DIY-lane card; both wear the restock tag.
+  Still never split tiers into separate cards.
 - Options carry `img: "<option-id>.png"` pointing into docs/landscape/img/.
   The user sources the images himself (alpha-transparent PNGs, ~160px on the
   long side is plenty; card slot renders 52px contain-fit). A missing file

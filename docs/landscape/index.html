@@ -77,7 +77,9 @@
   .theme .menu button:hover { background: var(--hover-bg); }
 
   /* ---- shell: interview rail + poster ---- */
-  .shell { display: grid; grid-template-columns: 19.5rem 1fr; gap: 1.4rem; align-items: start; }
+  /* rail narrowed 19.5 -> 16.5rem (user: the CTA banner read wider than any
+     answer); the poster gets the reclaimed width */
+  .shell { display: grid; grid-template-columns: 16.5rem 1fr; gap: 1.4rem; align-items: start; }
 
   #rail { position: sticky; top: .8rem; display: grid; gap: .9rem;
           max-height: calc(100vh - 1.6rem); overflow-y: auto; padding-right: .15rem; }
@@ -210,19 +212,6 @@
   .pcard.hl { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
   /* the RAM stick lives inside the mainboard title: same line, muted weight */
   .card .nm .nmram { color: var(--muted); font-size: .88em; font-weight: 600; white-space: nowrap; }
-  /* characteristic badges (post-answer spotlights, never zero-state) render as
-     STICKERS slapped over the card's top-right corner: rotated, allowed to
-     overhang the edge, absolutely positioned so they never push content down */
-  .card .bdgs { position: absolute; top: -.5rem; right: -.3rem; display: flex; flex-direction: row;
-                gap: .3rem; z-index: 2; pointer-events: none; }
-  /* a stickered card grows top padding so stickers sit above the title,
-     never over it (two side-by-side stickers were covering names) */
-  .card.stuck { padding-top: 1.05rem; }
-  .card .bdg { font-size: .64rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 700;
-               color: var(--bg); background: var(--accent); border-radius: 3px; padding: .12rem .45rem;
-               transform: rotate(3deg); box-shadow: 0 1px 4px #0005;
-               border: 1px solid color-mix(in srgb, var(--bg) 25%, var(--accent)); }
-  .card .bdg:nth-child(2) { transform: rotate(-2.5deg); }
   .keynote { font-size: .8rem; color: var(--muted); margin: 0 0 1rem; }
   /* the invitation over the questions: a full-width banner box with
      CSS-drawn down-arrows flanking the text (decoration, so the
@@ -668,12 +657,6 @@
              why + '</button>';
     }
     bits.push(stagHTML(o));
-    /* characteristic badges: spotlights, not recommendations - and only once
-       at least one question is answered (the zero state stays opinion-free) */
-    if (BADGES[o.id] && BADGES[o.id].length) {
-      bits.push('<span class="bdgs">' + BADGES[o.id].map(function (t) {
-        return '<span class="bdg">' + esc(t) + '</span>'; }).join('') + '</span>');
-    }
     /* every option points at img/<id>.png; a file that does not exist (yet)
        removes itself, so dropping a PNG into the folder upgrades the card
        with no code change. NOPIC remembers misses so re-renders do not
@@ -731,7 +714,6 @@
       if (STOCK_LABEL[o.stock]) bits.push('<span class="avail">' + esc(STOCK_LABEL[o.stock]) + '</span>');
     }
     return '<button type="button" class="card' + ((r.ghost || !r.in) ? ' out' : '') + (r.ghost ? ' ghost' : '') +
-           ((BADGES[o.id] && BADGES[o.id].length) ? ' stuck' : '') +
            '" data-card="' + o.id + '">' + bits.join('') + '</button>';
   }
 
@@ -752,33 +734,12 @@
       '<span class="pr">' + esc(priceText(p.price_usd)) + '</span></button>';
   }
 
-  var BADGES = {};
-
+  /* recommendation stickers ("cheapest fit", "community favorite") REMOVED
+     entirely (user, 2026-07-17): not neutral enough for a page whose honest
+     message includes how uneven non-official hardware can be. The tag line,
+     the per-answer lines and the prices carry the differentiation. */
   function renderPoster() {
     var evals = D.options.map(evaluate);
-    /* badges are computed fresh per render; empty until something is answered */
-    BADGES = {};
-    if (answeredCount() > 0) {
-      var fits = evals.filter(function (r) { return !r.ghost && r.in && !r.unknownPrice; });
-      if (fits.length > 1) {
-        var cheapest = fits.reduce(function (a, b) { return b.lo < a.lo ? b : a; });
-        (BADGES[cheapest.o.id] = BADGES[cheapest.o.id] || []).push('cheapest fit');
-        /* combined sticker (prototype, user request): the cheapest fit AMONG
-           the usually-in-stock ones, only when that differs from the outright
-           cheapest - two stickers saying "cheapest" would fight */
-        var stocked = fits.filter(function (r) { return r.o.stock === 'now'; });
-        if (stocked.length) {
-          var cs = stocked.reduce(function (a, b) { return b.lo < a.lo ? b : a; });
-          if (cs.o.id !== cheapest.o.id) (BADGES[cs.o.id] = BADGES[cs.o.id] || []).push('cheap and in stock');
-        }
-      }
-      /* deliberately no bare usually-in-stock badge: it lands on most cards and
-         the muted availability line already says it - a badge on everything
-         is a badge on nothing */
-      fits.forEach(function (r) {
-        if (r.o.popular) (BADGES[r.o.id] = BADGES[r.o.id] || []).push('community favorite');
-      });
-    }
     var byLane = {};
     evals.forEach(function (r) { (byLane[r.o.lane] = byLane[r.o.lane] || []).push(r); });
     /* highlight column parts your answers would pull into a build: anything a

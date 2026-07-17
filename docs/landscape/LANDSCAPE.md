@@ -237,15 +237,17 @@ Field conventions (parts and options both):
   chips, per-answer lines, RAM reminder, then complete price + muted
   availability line. NO device price on cards and NO price on the RAM
   reminder line (user: too much text; the sheet keeps the device price).
-- **Badges are STICKERS**: absolutely positioned SIDE BY SIDE in a row over
-  the card's top-right corner, slightly rotated, allowed to overhang, never
-  pushing content down. Sticker = accent background, bg-colored text. A
-  stickered card gets class `stuck` (extra top padding) so stickers land
-  above the title, never over it. Current set (post-answer only):
-  "cheapest fit" (computed), "community favorite" (editorial `popular`
-  flag), and "cheap and in stock" - the cheapest among usually-in-stock
-  fits, shown only when that differs from the outright cheapest (user
-  approved the sticker treatment 2026-07-17).
+- **Recommendation stickers are REMOVED FOR GOOD** (user, 2026-07-17
+  evening, reversing the same-day sticker approval): "cheapest fit" /
+  "community favorite" / "cheap and in stock" were judged not neutral
+  enough for a page that also warns how uneven non-official hardware can
+  be. The `popular` data field is gone too. Differentiation is carried by
+  the tag line, per-answer lines, prices and the official-design mark.
+  Do not re-propose computed or editorial recommendation badges. (The
+  FACT tags - status, "restock unconfirmed", "official design" - are a
+  different thing and stay.)
+- **The rail is 16.5rem wide** (narrowed from 19.5, user 2026-07-17: the
+  CTA banner read wider than any answer).
 - **One gray language**: dimmed pcards match the mini grayed cards (dashed
   hairline, page bg, .45 text). colsdim dims only the column headers -
   the cards inside carry their own dim/mini styling. Mini cards are

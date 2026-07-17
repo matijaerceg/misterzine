@@ -160,6 +160,15 @@ integrity + chain reachability):
 
     python validate_landscape.py docs/landscape/hardware.json
 
+## Research access
+
+When WebFetch 403s a source (retrorgb.com, misterfpga.org, aliexpress.com
+all do), fetch it through a real browser instead:
+`python tools/fetch_page.py <url> [needle]` - Playwright Chromium from this
+machine's IP, verified working on all three 2026-07-16. Reddit refuses even
+this (blocks headless traffic); don't burn time on it. AliExpress shows
+CAD prices from this location - convert and date-stamp.
+
 ## Editing recipe for future sessions
 
 1. Read this file fully. 2. Edit `hardware.json` only. 3. New capability?

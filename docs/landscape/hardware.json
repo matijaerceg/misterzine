@@ -633,7 +633,7 @@
         "psu-usbc",
         "usb-controller"
       ],
-      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Saturn-LOOKING 10-pin mini-DIN that is NOT pin-compatible with real Saturn cables. PS1 SNAC controller+memory-card ports, NFC loading, wired Ethernet (vendor Ports spec, verified 2026-07-16; cnx-software corroborates the RJ45), WiFi/BT, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 selects the FPGA MikeS-style encoder vs an onboard Sony encoder chip - RetroRGB: \"Put them in the Up/FPGA position and MiSTer generates Composite and S-Video via the MikeS FPGA code\"; forum consensus calls the Sony path \"not as good\". Whether the FPGA path is THS7374-class actively filtered remains UNVERIFIED by any teardown. Early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026).",
+      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Mini-DIN-10 wired to the SATURN PINOUT (Taki Udon on r/MiSTerFPGA: We used Saturn Pinout). Aftermarket Saturn AV cables with round plugs fit and work - owners report S-Video plus audio over a ten-dollar Saturn cable - but ORIGINAL Sega cables with the flat-keyed shell physically do not fit. PS1 SNAC controller+memory-card ports, NFC loading, wired Ethernet (vendor Ports spec, verified 2026-07-16; cnx-software corroborates the RJ45), WiFi/BT, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 selects the FPGA MikeS-style encoder vs an onboard Sony encoder chip - RetroRGB: \"Put them in the Up/FPGA position and MiSTer generates Composite and S-Video via the MikeS FPGA code\"; forum consensus calls the Sony path \"not as good\". Whether the FPGA path is THS7374-class actively filtered remains UNVERIFIED by any teardown. Early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026). Field reports on the native S-Video are strong: on a PVM-20L5 one owner rates it very similar to the unit RGB output, and the sub consensus is that no MikeS11 adapter is needed (r/MiSTerFPGA, June 2026).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -641,7 +641,9 @@
         "https://retroremake.co/pages/superstation%E1%B5%92%E2%81%BF%E1%B5%89",
         "https://www.cnx-software.com/2025/01/29/superstation-one-soc-fpga-based-retro-gaming-console-supports-mister-emulation-playstation-controllers-cd-drive/",
         "https://retrorgb.com/mister-superstation-one-review.html",
-        "https://misterfpga.org/viewtopic.php?t=10452"
+        "https://misterfpga.org/viewtopic.php?t=10452",
+        "https://old.reddit.com/r/MiSTerFPGA/comments/1ibo3ys/is_superstation_one_din_10_connector_same/",
+        "https://old.reddit.com/r/MiSTerFPGA/comments/1tydpkx/recommended_s_video_cable_for_superstation/"
       ],
       "effort": "none",
       "stock": "waves",

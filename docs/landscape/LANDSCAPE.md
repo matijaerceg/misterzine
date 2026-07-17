@@ -178,10 +178,15 @@ Interview/rail rulings (user, 2026-07-16 overhaul round):
   built in" / "with parts (~$27)" / "with the Analogue version (+$50)" /
   "claimed by vendor, unverified").
 
-Reddit research: user holds personal Reddit API keys. They go in
-`.secrets/reddit.json` ({"client_id","client_secret"}) - the folder is
-gitignored; NEVER commit or echo them. Build tools/reddit_search.py on
-app-only OAuth when the file exists.
+Reddit research (WORKING since 2026-07-16): `tools/reddit_search.py` -
+official API with the user's own keys from `.secrets/reddit.json` in the
+MAIN checkout ({"client_id": "...", "client_secret": ""} - empty secret =
+installed-app grant, which is what the user has). NEVER commit or echo the
+keys. Usage: `python tools/reddit_search.py "query" [--sub X --limit N
+--sort new]` for search, `--comments POST_ID` for a thread. r/MiSTerFPGA
+is dense with owner reports - it corrected the SSOne DIN10 story
+(Saturn PINOUT, round-plug aftermarket cables fit, OEM keyed shells do
+not) on day one. Prefer this over the --headed browser hack.
 
 Field conventions (parts and options both):
   - `price_usd`: number, `[low, high]` range (vendor/batch spread), or

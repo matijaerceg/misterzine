@@ -52,6 +52,13 @@ for o in d['options']:
         errs.append(f"option {o['id']}: stock must be one of {sorted(STOCKS)}")
     if o.get('stock') == 'na' and o['status'] == 'orderable':
         errs.append(f"option {o['id']}: orderable options need a real stock value, not na")
+    for fld in ('what', 'advice'):
+        if not (o.get(fld) or '').strip():
+            errs.append(f"option {o['id']}: missing editorial field '{fld}'")
+    for v in o.get('variants', []):
+        toks(v.get('adds', []), f"option {o['id']} variant {v.get('id')}.adds")
+        if not isinstance(v.get('price_delta'), (int, float)):
+            errs.append(f"option {o['id']} variant {v.get('id')}: price_delta must be a number")
 for q in d.get('interview', []):
     seen_a = set()
     for a in q['answers']:

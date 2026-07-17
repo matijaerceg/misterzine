@@ -202,7 +202,8 @@
       "sources": [
         "https://misteraddons.com/products/sdram",
         "https://retroremake.co/pages/store"
-      ]
+      ],
+      "design": "official"
     },
     "sdram-128-second": {
       "name": "Second 128MB SDRAM module (dual RAM)",
@@ -251,7 +252,8 @@
       ],
       "category": "io",
       "what": "The VGA-generation analog board: RGB or component by cable, and the VGA pins the MikeS11 Y/C adapters plug into.",
-      "addon_note": "+ a case: acrylic $10 to aluminum $75"
+      "addon_note": "+ a case: acrylic $10 to aluminum $75",
+      "design": "official"
     },
     "io-analog-pro": {
       "name": "MiSTer Addons IO Analog Pro",
@@ -1025,7 +1027,7 @@
       "ships_from": "us",
       "img": "mister-pi-turbo.png",
       "url": "https://retroremake.co/products/mister-pi-retro-gaming-fpga-board-1",
-      "what": "The MiSTer Pi as a complete boxed kit: board, RAM, analog I/O, hub, flashed SD and shell in one order, with light assembly.",
+      "what": "The MiSTer Pi as a complete boxed kit: board, RAM, analog I/O, hub, flashed SD and shell in one order, with light assembly. No relation to the Raspberry Pi - just the name.",
       "advice": "The one-order version of the community's favorite self-build - when batches exist. Every tier is sold out with no announced restock; if a batch appears, the Turbo Pack is the complete package and the price is hard to argue with.",
       "tag": "The default recommendation, boxed",
       "variants": [
@@ -1238,7 +1240,8 @@
       "url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046",
       "what": "The original reference board every MiSTer descends from. Bare, it can boot a handful of cores over HDMI - but almost nobody uses one that way.",
       "advice": "Most newcomers now start with a MiSTer Pi or a pre-built kit; the DE10-Nano remains the pick if you want the reference hardware itself, and everything in the ecosystem fits it.",
-      "tag": "The original reference board"
+      "tag": "The original reference board",
+      "design": "official"
     },
     {
       "id": "mister-pi",
@@ -1265,7 +1268,7 @@
         "psu-usbc",
         "sd-card"
       ],
-      "notes": "The board that broke the DE10 price. Same Cyclone V class, 1GB DDR3, USB-C power, accessory-compatible dimensions/headers. Sold in preorder batches; board listed From $125 and SOLD OUT at review 2026-07-16, with no discontinuation or final-batch language on the store - accessories (SDRAM $20, hub $20, acrylic case $10, SNAC bundles) mostly remain in stock, A/V Pro 9.2 and RTC sold out. Watch for batch 6 or an end-of-line signal; Retro Remake's focus is visibly the SuperStation One. Soft restock signal: Taki mentioned working on a restock around June 2026, nothing announced since (MiSTer Discord, relayed by site owner 2026-07-17).",
+      "notes": "The board that broke the DE10 price. Same Cyclone V class, 1GB DDR3, USB-C power, accessory-compatible dimensions/headers. Sold in preorder batches; board listed From $125 and SOLD OUT at review 2026-07-16, with no discontinuation or final-batch language on the store - accessories (SDRAM $20, hub $20, acrylic case $10, SNAC bundles) mostly remain in stock, A/V Pro 9.2 and RTC sold out. Watch for batch 6 or an end-of-line signal; Retro Remake's focus is visibly the SuperStation One. Soft restock signal: Taki mentioned working on a restock around June 2026, nothing announced since (MiSTer Discord, relayed by site owner 2026-07-17). Community testing also relays that the LAST batch of boards has trouble with the TurboGrafx-16 core (MiSTer Discord, relayed by site owner 2026-07-17; unverified beyond owner reports).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1277,10 +1280,10 @@
       "ships_from": "us",
       "img": "mister-pi.png",
       "url": "https://retroremake.co/pages/store",
-      "what": "A modern remake of the reference board: same FPGA class, USB-C power, sold in batches.",
+      "what": "A modern remake of the reference board: same FPGA class, USB-C power, sold in batches. No relation to the Raspberry Pi - it just borrowed the name.",
       "advice": "The most commonly recommended starting point for self-builders - when you can get one. The board is sold out with no announced restock (community testing flagged this 2026-07-17); its accessory line (RAM, hub, case) mostly remains in stock. If a batch 6 appears, it is an easy pick.",
       "popular": true,
-      "tag": "The default recommendation"
+      "tag": "Often recommended, never in stock"
     },
     {
       "id": "qmtech-cv",
@@ -1307,7 +1310,7 @@
         "psu-barrel-5a",
         "sd-card"
       ],
-      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some OTHER QMTech listings integrate the SDRAM on-board (+~$15; then skip the module) - the listing linked here (owner-supplied 2026-07-17) is the bare board WITHOUT onboard RAM, so the 128MB stick applies. Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic. Official sales channel is the QMTech AliExpress store; listing browser-verified 2026-07-17 (via desktop-Chrome fetch): SKUs span roughly C$141-C$266 (~$105-$195 converted from CAD as shown at this location) across bare-board and higher-spec bundles - the old flat $100 figure is shortage-era history. AliExpress URLs are volatile, re-check on each sweep.",
+      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some OTHER QMTech listings integrate the SDRAM on-board (+~$15; then skip the module) - the listing linked here (owner-supplied 2026-07-17) is the bare board WITHOUT onboard RAM, so the 128MB stick applies. Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic. Official sales channel is the QMTech AliExpress store; listing browser-verified 2026-07-17 (via desktop-Chrome fetch): SKUs span roughly C$141-C$266 (~$105-$195 converted from CAD as shown at this location) across bare-board and higher-spec bundles - the old flat $100 figure is shortage-era history. AliExpress URLs are volatile, re-check on each sweep. MIXED-VENDOR CAVEAT (community testing 2026-07-17 + research): QMTech's own IO boards are designed around the QMTech board (their V2.1 IO board also disables dual RAM), and while third-party GPIO gear has been run on QMTech boards successfully (Irken Labs tested their JAMMA/JVS expanders on one, working with caveats), the safe assumption for a newcomer is: QMTech board with QMTech IO gear, or plan to verify the specific pairing before buying. Dual-RAM builds and the flipped RAM header are the known traps.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [

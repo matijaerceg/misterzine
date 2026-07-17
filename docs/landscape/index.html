@@ -170,6 +170,12 @@
   .card .stag.cancelled { color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 55%, var(--bg)); }
   .card .stag.preorder { color: var(--muted); border: 1px solid var(--hair); }
   .card .stag.restock { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 55%, var(--bg)); }
+  /* the guarantee boundary: Terasic's reference + the project's own board
+     designs get a quiet mark; everything unmarked is third-party */
+  .card .stag.official, .pcard .official { color: color-mix(in srgb, var(--ok) 80%, var(--fg));
+    border: 1px solid color-mix(in srgb, var(--ok) 45%, var(--bg)); }
+  .pcard .official { font-size: .62rem; text-transform: uppercase; letter-spacing: .05em;
+    border-radius: 4px; padding: .03rem .3rem; align-self: flex-start; }
   .card.out { background: var(--bg); border-style: dashed; }
   .card.out .nm, .card.out .pr, .card.out .avail, .card.out .caps { opacity: .45; }
   .card.ghost .nm, .card.ghost .pr { opacity: .6; }
@@ -389,6 +395,7 @@
 
 <footer class="colophon">
   <p id="stamp"></p>
+  <p>Entries marked "official design" are the Terasic reference board or boards built to the MiSTer project's own published designs - cores are developed and tested against those. Everything else is third-party hardware: widely used and usually fine, but support is the vendor's promise, not the project's, so do your own research before betting a build on it.</p>
   <p>Hand-curated and hand-verified; nothing on this page is scraped or sponsored. Prices are typical street prices, not live quotes, and they assume you already own a USB controller. Availability notes are impressions from the last review, not live facts - check the shop itself before you count on stock. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Also on MiSTerZine: the <a href="../releases/">release tracker</a> and the <a href="../">daily quote zine</a>.</p>
 </footer>
 
@@ -635,7 +642,8 @@
        at the zero state (a sold-out board with no announced batch is not the
        same fact as one that cycles) */
     if (o.status === 'orderable') {
-      return o.stock === 'unconfirmed' ? '<span class="stag restock">restock unconfirmed</span>' : '';
+      return (o.design === 'official' ? '<span class="stag official">official design</span>' : '') +
+             (o.stock === 'unconfirmed' ? '<span class="stag restock">restock unconfirmed</span>' : '');
     }
     var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
     return '<span class="stag ' + cls + '">' + esc(o.status) + '</span>';
@@ -737,6 +745,7 @@
   function partCardHTML(pid, hl, dim) {
     var p = PARTS[pid];
     return '<button type="button" class="pcard' + (hl ? ' hl' : '') + (dim ? ' dim' : '') + '" data-part="' + pid + '">' +
+      (p.design === 'official' ? '<span class="official">official design</span>' : '') +
       '<span class="nm">' + esc(p.name) + '</span>' +
       (p.what ? '<span class="pw">' + esc(p.what) + '</span>' : '') +
       (p.addon_note ? '<span class="pw addon">' + esc(p.addon_note) + '</span>' : '') +

@@ -5,213 +5,477 @@
     "currency": "USD",
     "price_note": "Typical street prices. Ranges [low,high] where vendors or batches differ. EUR prices converted approximately, marked in notes."
   },
-
   "capabilities": {
-    "hdmi": { "name": "HDMI out", "explain": "Digital video for modern displays." },
-    "vga-rgb": { "name": "Analog RGB (VGA)", "explain": "RGB over a VGA/DB15 connector, for PVMs, SCART CRTs, upscalers." },
-    "ypbpr": { "name": "Component (YPbPr)", "explain": "Component video for consumer CRTs and some TVs." },
-    "composite": { "name": "Composite video", "explain": "Single yellow-plug video." },
-    "yc": { "name": "Y/C (S-Video)", "explain": "Separated luma/chroma via MikeS11's encoder work. A usable, filtered Y/C signal, not just the raw source." },
-    "yc-active-filtered": { "name": "Actively filtered Y/C", "explain": "Y/C through a THS7374-class amplifier stage with NTSC-spec voltage correction, the cleanest chain." },
-    "yc-source": { "name": "Y/C source signal", "explain": "Internal token: a VGA-pin signal a Y/C adapter can filter. Provided by an analog I/O board or a Direct Video DAC." },
-    "yc-source-io": { "name": "Y/C source from analog I/O board", "explain": "Internal token: the MikeS11 ACTIVE adapter only accepts this (needs 5V on VGA pin 9, Sync-on-Green off); it rejects Direct Video sources." },
-    "sdram128": { "name": "128MB SDRAM", "explain": "Core-side SDRAM. Needed by many cores; 128MB is the de facto standard (big Neo Geo ROMs, Mega CD, GBA)." },
-    "dual-sdram": { "name": "Dual 128MB SDRAM", "explain": "Two modules; needed for Saturn and other dual-RAM cores." },
-    "sdram-slot": { "name": "SDRAM socket", "explain": "Internal token: accepts an SDRAM module." },
-    "gpio-header": { "name": "GPIO expansion header", "explain": "Internal token: accepts the I/O-board addon stack." },
-    "user-io-port": { "name": "USER I/O port", "explain": "Internal token: accepts SNAC controller adapters." },
-    "usb-otg-header": { "name": "USB OTG header", "explain": "Internal token: accepts the USB hub addon." },
-    "usb-hub": { "name": "Multiple USB ports", "explain": "Enough USB for controllers, keyboard, WiFi, etc. without a squid of adapters." },
-    "ethernet": { "name": "Wired Ethernet", "explain": "For updates, game streaming from NAS, remote control." },
-    "wifi": { "name": "WiFi", "explain": "Built-in wireless networking." },
-    "bluetooth": { "name": "Bluetooth", "explain": "Built-in wireless controllers." },
-    "toslink": { "name": "Optical audio out", "explain": "Digital S/PDIF audio." },
-    "analog-audio": { "name": "3.5mm analog audio", "explain": "Headphone-jack audio out." },
-    "snac": { "name": "SNAC (native controller ports)", "explain": "Original console controllers wired near-directly into the core; lowest possible input lag." },
-    "nfc": { "name": "NFC game loading", "explain": "Tap a card/figure to launch a game (Zaparoo-style)." },
-    "rtc": { "name": "Real-time clock", "explain": "System keeps date/time without network." },
-    "cd-drive": { "name": "Optical disc drive", "explain": "Load real CDs (PS1 now; Saturn/Sega CD support maturing in firmware)." },
-    "m2-slot": { "name": "M.2 SSD bay", "explain": "Internal storage beyond the SD card." },
-    "jamma": { "name": "JAMMA edge", "explain": "Drops into a real arcade cabinet as the game PCB." },
-    "usbc-power": { "name": "USB-C power", "explain": "Powered by any decent USB-C phone charger; no barrel brick." },
-    "barrel-power": { "name": "5V barrel-jack power", "explain": "Internal token: needs a 5V DC barrel supply." },
-    "boot-media": { "name": "Boot SD card", "explain": "Internal token: SD card with the MiSTer OS." },
-    "psu": { "name": "Power supply", "explain": "Internal token: an adequate power source." },
-    "case": { "name": "Enclosure", "explain": "Internal token: a case around the board stack." },
-    "controller": { "name": "A controller", "explain": "Internal token: any USB gamepad to actually play." },
-    "midi-mt32": { "name": "MT-32 MIDI synth", "explain": "Roland MT-32/SoundFont music for DOS-era cores via mt32-pi." },
-    "ssone-port": { "name": "SuperStation expansion port", "explain": "Internal token: accepts the SuperDock." }
+    "hdmi": {
+      "name": "HDMI out",
+      "explain": "Digital video for modern displays."
+    },
+    "vga-rgb": {
+      "name": "Analog RGB (VGA)",
+      "explain": "RGB over a VGA/DB15 connector, for PVMs, SCART CRTs, upscalers."
+    },
+    "ypbpr": {
+      "name": "Component (YPbPr)",
+      "explain": "Component video for consumer CRTs and some TVs."
+    },
+    "composite": {
+      "name": "Composite video",
+      "explain": "Single yellow-plug video."
+    },
+    "yc": {
+      "name": "Y/C (S-Video)",
+      "explain": "Separated luma/chroma via MikeS11's encoder work. A usable, filtered Y/C signal, not just the raw source."
+    },
+    "yc-active-filtered": {
+      "name": "Actively filtered Y/C",
+      "explain": "Y/C through a THS7374-class amplifier stage with NTSC-spec voltage correction, the cleanest chain."
+    },
+    "yc-source": {
+      "name": "Y/C source signal",
+      "explain": "Internal token: a VGA-pin signal a Y/C adapter can filter. Provided by an analog I/O board or a Direct Video DAC.",
+      "internal": true
+    },
+    "yc-source-io": {
+      "name": "Y/C source from analog I/O board",
+      "explain": "Internal token: the MikeS11 ACTIVE adapter only accepts this (needs 5V on VGA pin 9, Sync-on-Green off); it rejects Direct Video sources.",
+      "internal": true
+    },
+    "sdram128": {
+      "name": "128MB SDRAM",
+      "explain": "Core-side SDRAM. Needed by many cores; 128MB is the de facto standard (big Neo Geo ROMs, Mega CD, GBA)."
+    },
+    "dual-sdram": {
+      "name": "Dual 128MB SDRAM",
+      "explain": "Two modules; needed for Saturn and other dual-RAM cores."
+    },
+    "sdram-slot": {
+      "name": "SDRAM socket",
+      "explain": "Internal token: accepts an SDRAM module.",
+      "internal": true
+    },
+    "gpio-header": {
+      "name": "GPIO expansion header",
+      "explain": "Internal token: accepts the I/O-board addon stack.",
+      "internal": true
+    },
+    "user-io-port": {
+      "name": "USER I/O port",
+      "explain": "Internal token: accepts SNAC controller adapters.",
+      "internal": true
+    },
+    "usb-otg-header": {
+      "name": "USB OTG header",
+      "explain": "Internal token: accepts the USB hub addon.",
+      "internal": true
+    },
+    "usb-hub": {
+      "name": "Multiple USB ports",
+      "explain": "Enough USB for controllers, keyboard, WiFi, etc. without a squid of adapters."
+    },
+    "ethernet": {
+      "name": "Wired Ethernet",
+      "explain": "For updates, game streaming from NAS, remote control."
+    },
+    "wifi": {
+      "name": "WiFi",
+      "explain": "Built-in wireless networking."
+    },
+    "bluetooth": {
+      "name": "Bluetooth",
+      "explain": "Built-in wireless controllers."
+    },
+    "toslink": {
+      "name": "Optical audio out",
+      "explain": "Digital S/PDIF audio."
+    },
+    "analog-audio": {
+      "name": "3.5mm analog audio",
+      "explain": "Headphone-jack audio out."
+    },
+    "snac": {
+      "name": "SNAC (native controller ports)",
+      "explain": "Original console controllers wired near-directly into the core; lowest possible input lag."
+    },
+    "nfc": {
+      "name": "NFC game loading",
+      "explain": "Tap a card/figure to launch a game (Zaparoo-style)."
+    },
+    "rtc": {
+      "name": "Real-time clock",
+      "explain": "System keeps date/time without network."
+    },
+    "cd-drive": {
+      "name": "Optical disc drive",
+      "explain": "Load real CDs (PS1 now; Saturn/Sega CD support maturing in firmware)."
+    },
+    "m2-slot": {
+      "name": "M.2 SSD bay",
+      "explain": "Internal storage beyond the SD card."
+    },
+    "jamma": {
+      "name": "JAMMA edge",
+      "explain": "Drops into a real arcade cabinet as the game PCB."
+    },
+    "usbc-power": {
+      "name": "USB-C power",
+      "explain": "Powered by any decent USB-C phone charger; no barrel brick."
+    },
+    "barrel-power": {
+      "name": "5V barrel-jack power",
+      "explain": "Internal token: needs a 5V DC barrel supply.",
+      "internal": true
+    },
+    "boot-media": {
+      "name": "Boot SD card",
+      "explain": "Internal token: SD card with the MiSTer OS.",
+      "internal": true
+    },
+    "psu": {
+      "name": "Power supply",
+      "explain": "Internal token: an adequate power source.",
+      "internal": true
+    },
+    "case": {
+      "name": "Enclosure",
+      "explain": "Internal token: a case around the board stack.",
+      "internal": true
+    },
+    "controller": {
+      "name": "A controller",
+      "explain": "Internal token: any USB gamepad to actually play.",
+      "internal": true
+    },
+    "midi-mt32": {
+      "name": "MT-32 MIDI synth",
+      "explain": "Roland MT-32/SoundFont music for DOS-era cores via mt32-pi."
+    },
+    "ssone-port": {
+      "name": "SuperStation expansion port",
+      "explain": "Internal token: accepts the SuperDock.",
+      "internal": true
+    },
+    "handheld": {
+      "name": "Handheld",
+      "explain": "A MiSTer you can hold. Nothing orderable provides this yet."
+    }
   },
-
   "lanes": [
-    { "id": "turnkey", "name": "Turnkey consoles", "tagline": "Plug in and play. No screwdriver." },
-    { "id": "kits", "name": "Assembled kits", "tagline": "The classic stack, built and tested by someone else." },
-    { "id": "diy", "name": "Build your own", "tagline": "A bare board plus the addons you choose." },
-    { "id": "special", "name": "Special builds", "tagline": "Cabinets and consoles with their own boards." },
-    { "id": "horizon", "name": "On the horizon", "tagline": "Announced. Not orderable. Do not wait for these unless you enjoy waiting." }
+    {
+      "id": "turnkey",
+      "name": "Turnkey consoles",
+      "tagline": "Plug in and play. No screwdriver."
+    },
+    {
+      "id": "kits",
+      "name": "Assembled kits",
+      "tagline": "The classic stack, built and tested by someone else."
+    },
+    {
+      "id": "diy",
+      "name": "Build your own",
+      "tagline": "A bare board plus the addons you choose."
+    },
+    {
+      "id": "special",
+      "name": "Special builds",
+      "tagline": "Cabinets and consoles with their own boards."
+    },
+    {
+      "id": "horizon",
+      "name": "On the horizon",
+      "tagline": "Announced. Not orderable. Do not wait for these unless you enjoy waiting."
+    }
   ],
-
   "parts": {
     "sdram-128": {
       "name": "128MB SDRAM module",
       "vendor": "MiSTer Addons (XS-DS v3, $50) / Retro Remake ($20)",
-      "price_usd": [20, 50],
-      "provides": ["sdram128"],
-      "requires": ["sdram-slot"],
+      "price_usd": [
+        20,
+        50
+      ],
+      "provides": [
+        "sdram128"
+      ],
+      "requires": [
+        "sdram-slot"
+      ],
       "notes": "The de facto standard module; 32MB is largely phased out of retail. Many popular cores need SDRAM at all, so treat this as part of a real build, not an extra.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/sdram", "https://retroremake.co/pages/store"]
+      "sources": [
+        "https://misteraddons.com/products/sdram",
+        "https://retroremake.co/pages/store"
+      ]
     },
     "sdram-128-second": {
       "name": "Second 128MB SDRAM module (dual RAM)",
       "vendor": "same as sdram-128",
-      "price_usd": [20, 50],
-      "provides": ["dual-sdram"],
-      "requires": ["sdram128"],
+      "price_usd": [
+        20,
+        50
+      ],
+      "provides": [
+        "dual-sdram"
+      ],
+      "requires": [
+        "sdram128"
+      ],
       "notes": "Dual-RAM configs (Saturn, future PSX work) need two modules and an I/O board that supports the second socket (e.g. IO Direct).",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://misteraddons.com/products/mister-bundles"]
+      "sources": [
+        "https://misteraddons.com/products/mister-bundles"
+      ]
     },
     "io-analog": {
       "name": "Analog I/O board (IO Analog Pro / official v6-class)",
       "vendor": "MiSTer Addons ($60) and equivalents",
       "price_usd": 60,
-      "provides": ["vga-rgb", "ypbpr", "yc-source", "yc-source-io", "analog-audio", "toslink"],
-      "requires": ["gpio-header"],
+      "provides": [
+        "vga-rgb",
+        "ypbpr",
+        "yc-source",
+        "yc-source-io",
+        "analog-audio",
+        "toslink"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
       "notes": "The board that turns a bare MiSTer into a CRT machine: VGA RGB or YPbPr by cable choice, audio, fan header, second SD. A EUR349.90 price seen in one search result is a stale-snippet artifact (that is a full built unit's price), not this board's.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/mister-fpga-io-analog-pro", "https://misterfpga.co.uk/product/mister-fpga-analog-io-board/"]
+      "sources": [
+        "https://misteraddons.com/products/mister-fpga-io-analog-pro",
+        "https://misterfpga.co.uk/product/mister-fpga-analog-io-board/"
+      ]
     },
     "io-digital": {
       "name": "Digital I/O board (v1.2)",
       "vendor": "Ultimate MiSTer and others",
       "price_usd": null,
-      "provides": ["toslink"],
-      "requires": ["gpio-header"],
+      "provides": [
+        "toslink"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
       "notes": "S/PDIF digital audio out (96kHz); DE10-Nano SW3 must be ON. Current price unverified: the only figure found (EUR349.90) duplicates the analog board snippet and is not trusted.",
       "verified": "2026-07",
       "confidence": "low",
-      "sources": ["https://ultimatemister.com/product/mister-digital-io-edition-v1-2/"]
+      "sources": [
+        "https://ultimatemister.com/product/mister-digital-io-edition-v1-2/"
+      ]
     },
     "usb-hub": {
       "name": "USB hub addon (v2.1)",
       "vendor": "MiSTer Addons ($50) / Ultimate MiSTer (~$65)",
-      "price_usd": [50, 65],
-      "provides": ["usb-hub"],
-      "requires": ["usb-otg-header"],
+      "price_usd": [
+        50,
+        65
+      ],
+      "provides": [
+        "usb-hub"
+      ],
+      "requires": [
+        "usb-otg-header"
+      ],
       "notes": "7 ports (1 power-only + 6 USB 2.0), FE2.1 chip; needs its own power via rear barrel splitter (included).",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/usb-hub", "https://ultimatemister.com/product/mister-usb-hub/"]
+      "sources": [
+        "https://misteraddons.com/products/usb-hub",
+        "https://ultimatemister.com/product/mister-usb-hub/"
+      ]
     },
     "direct-video-dac": {
       "name": "Direct Video HDMI DAC (generic AG6200-class dongle)",
       "vendor": "generic",
-      "price_usd": [10, 20],
-      "provides": ["vga-rgb", "yc-source", "analog-audio"],
-      "requires": ["hdmi"],
+      "price_usd": [
+        10,
+        20
+      ],
+      "provides": [
+        "vga-rgb",
+        "yc-source",
+        "analog-audio"
+      ],
+      "requires": [
+        "hdmi"
+      ],
       "notes": "Firmware feature (direct_video=1) plus a cheap HDMI-to-VGA dongle: analog RGB without an I/O board, same low latency. While enabled the HDMI port stops being normal HDMI. Some gear wants a 470-ohm inline resistor on sync.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://mister-devel.github.io/MkDocs_MiSTer/advanced/directvideo/"]
+      "sources": [
+        "https://mister-devel.github.io/MkDocs_MiSTer/advanced/directvideo/"
+      ]
     },
     "yc-passive": {
       "name": "MikeS11 Y/C adapter, PASSIVE",
       "vendor": "Ultimate MiSTer (EUR15.90 ~ $17)",
       "price_usd": 17,
-      "provides": ["yc", "composite"],
-      "requires": ["yc-source"],
+      "provides": [
+        "yc",
+        "composite"
+      ],
+      "requires": [
+        "yc-source"
+      ],
       "notes": "Passive luma-trap filter, no amplifier. Explicitly dual-compatible: analog I/O board VGA (direct_video=0) OR Direct Video DAC (direct_video=1). The flexible budget path to S-Video.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://ultimatemister.com/product/mikes1-yc-passive-board/"]
+      "sources": [
+        "https://ultimatemister.com/product/mikes1-yc-passive-board/"
+      ]
     },
     "yc-active": {
       "name": "MikeS11 Y/C adapter, ACTIVE (THS7374)",
       "vendor": "Ultimate MiSTer (EUR24.90 ~ $27); MiSTer Addons YC Active Encoder Board ($55)",
-      "price_usd": [27, 55],
-      "provides": ["yc", "composite", "yc-active-filtered"],
-      "requires": ["yc-source-io"],
-      "notes": "THS7374 amplifier, NTSC-spec voltage modes, luma trap for clean composite. Ultimate MiSTer's own page contradicts itself on Direct Video: the description mentions a DV mode but the compatibility instructions say NOT compatible with Direct Video dongles and require the analog I/O board's VGA with 5V on pin 9 and Sync-on-Green off. We model the restrictive reading; flagged, not resolved.",
+      "price_usd": [
+        27,
+        55
+      ],
+      "provides": [
+        "yc",
+        "composite",
+        "yc-active-filtered"
+      ],
+      "requires": [
+        "yc-source-io"
+      ],
+      "notes": "THS7374 amplifier, NTSC-spec voltage modes, luma trap for clean composite. Ultimate MiSTer's own page contradicts itself on Direct Video: the description mentions a DV mode but the compatibility instructions say NOT compatible with Direct Video dongles and require the analog I/O board's VGA with 5V on pin 9 and Sync-on-Green off. We model the restrictive reading; flagged, not resolved. EARMARK 2026-07-16: site owner recalls getting Y/C over a Direct Video HDMI-VGA dongle successfully - consistent with the PASSIVE adapter (documented DV-compatible); whether the ACTIVE adapter also works on DV despite its compatibility notes still needs bench verification.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://ultimatemister.com/product/mikes11-active-composite-svideo/", "https://misteraddons.com/products/yc-active-encoder-board"]
+      "sources": [
+        "https://ultimatemister.com/product/mikes11-active-composite-svideo/",
+        "https://misteraddons.com/products/yc-active-encoder-board"
+      ]
     },
     "snac-adapter": {
       "name": "SNAC / SNAX / SNAX64 adapter",
       "vendor": "MiSTer Addons ($15 SNAC V1, $35 SNAX V2.1 adds PSX/NeoGeo+2P, $50 SNAX64 adds 4P N64); Retro Remake bundles $5-10",
-      "price_usd": [15, 50],
-      "provides": ["snac"],
-      "requires": ["user-io-port"],
+      "price_usd": [
+        15,
+        50
+      ],
+      "provides": [
+        "snac"
+      ],
+      "requires": [
+        "user-io-port"
+      ],
       "notes": "Plugs into the USER I/O header, not the I/O board. PSX and N64 controllers need SNAX/SNAX64 tiers, not SNAC V1. Console cables usually sold separately.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/snac", "https://retroremake.co/pages/store"]
+      "sources": [
+        "https://misteraddons.com/products/snac",
+        "https://retroremake.co/pages/store"
+      ]
     },
     "rtc-board": {
       "name": "RTC board",
       "vendor": "Retro Remake ($5, MiSTer Pi-specific) / others (~$14)",
-      "price_usd": [5, 14],
-      "provides": ["rtc"],
-      "requires": ["gpio-header"],
+      "price_usd": [
+        5,
+        14
+      ],
+      "provides": [
+        "rtc"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
       "notes": "Cheap, niche: few cores use it, auto-set anyway if networked.",
       "verified": "2026-07",
       "confidence": "low",
-      "sources": ["https://retroremake.co/pages/store"]
+      "sources": [
+        "https://retroremake.co/pages/store"
+      ]
     },
     "mt32-pi-kit": {
       "name": "MT32-pi interface kit",
       "vendor": "various (~$24 for the interface; Raspberry Pi 3+ sold separately)",
       "price_usd": 24,
-      "provides": ["midi-mt32"],
-      "requires": ["user-io-port"],
+      "provides": [
+        "midi-mt32"
+      ],
+      "requires": [
+        "user-io-port"
+      ],
       "notes": "Roland MT-32 / SoundFont synth for DOS-era cores; budget the Pi on top.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://github.com/dwhinham/mt32-pi", "https://misteraddons.com/products/mt32-pi"]
+      "sources": [
+        "https://github.com/dwhinham/mt32-pi",
+        "https://misteraddons.com/products/mt32-pi"
+      ]
     },
     "case-armor": {
       "name": "Aluminum Armor case (passive cooling)",
       "vendor": "MiSTer Addons",
       "price_usd": 75,
-      "provides": ["case"],
-      "requires": ["gpio-header"],
+      "provides": [
+        "case"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
       "notes": "Whole case is the heatsink; fanless. Fits DE10-Nano-class boards incl. MiSTer Pi with an IO Analog Pro / IO Direct board.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/aluminum-passively-cooled-case"]
+      "sources": [
+        "https://misteraddons.com/products/aluminum-passively-cooled-case"
+      ]
     },
     "case-acrylic": {
       "name": "Acrylic case",
       "vendor": "Retro Remake ($10) / misterfpga.co.uk",
-      "price_usd": [10, 15],
-      "provides": ["case"],
+      "price_usd": [
+        10,
+        15
+      ],
+      "provides": [
+        "case"
+      ],
       "requires": [],
       "notes": "Cheapest enclosure; vented for a fan.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://retroremake.co/pages/store"]
+      "sources": [
+        "https://retroremake.co/pages/store"
+      ]
     },
     "psu-barrel-5a": {
       "name": "5V 5A barrel power supply",
       "vendor": "MiSTer Addons ($17.50) / Mean Well equivalents",
       "price_usd": 17.5,
-      "provides": ["psu"],
-      "requires": ["barrel-power"],
+      "provides": [
+        "psu"
+      ],
+      "requires": [
+        "barrel-power"
+      ],
       "notes": "The recommended upgrade over stock 2A-class adapters once addons hang off the board.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/io-boards"]
+      "sources": [
+        "https://misteraddons.com/products/io-boards"
+      ]
     },
     "psu-usbc": {
       "name": "USB-C power supply (any decent 5V charger)",
       "vendor": "commodity",
-      "price_usd": [10, 15],
-      "provides": ["psu"],
-      "requires": ["usbc-power"],
+      "price_usd": [
+        10,
+        15
+      ],
+      "provides": [
+        "psu"
+      ],
+      "requires": [
+        "usbc-power"
+      ],
       "notes": "Phone charger territory; nothing exotic.",
       "verified": "2026-07",
       "confidence": "low",
@@ -220,19 +484,31 @@
     "sd-card": {
       "name": "MicroSD card (32GB+, U1/Class 10)",
       "vendor": "commodity",
-      "price_usd": [10, 20],
-      "provides": ["boot-media"],
+      "price_usd": [
+        10,
+        20
+      ],
+      "provides": [
+        "boot-media"
+      ],
       "requires": [],
       "notes": "SanDisk Ultra class is the community default.",
       "verified": "2026-07",
       "confidence": "low",
-      "sources": ["https://hackmd.io/@ampheo/how-to-build-a-mister-fpga-on-your-own"]
+      "sources": [
+        "https://hackmd.io/@ampheo/how-to-build-a-mister-fpga-on-your-own"
+      ]
     },
     "usb-controller": {
       "name": "Any USB gamepad",
       "vendor": "commodity",
-      "price_usd": [15, 40],
-      "provides": ["controller"],
+      "price_usd": [
+        15,
+        40
+      ],
+      "provides": [
+        "controller"
+      ],
       "requires": [],
       "notes": "8BitDo-class pads are the community default; Bluetooth works where the option provides it.",
       "verified": "2026-07",
@@ -243,46 +519,104 @@
       "name": "SuperDock",
       "vendor": "Retro Remake",
       "price_usd": 50,
-      "provides": ["cd-drive", "m2-slot", "usb-hub"],
-      "requires": ["ssone-port"],
+      "provides": [
+        "cd-drive",
+        "m2-slot",
+        "usb-hub"
+      ],
+      "requires": [
+        "ssone-port"
+      ],
       "notes": "SuperStation One only. Tray-loading DVD-RW, unpopulated M.2 2280 bay, 4 more USB-A, IR remote. Preorder, sold out; disc loading works for PS1, Saturn/Sega CD support still maturing in firmware. Shipped later than the original window.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://retroremake.co/products/superdock", "https://blog.lon.tv/2026/06/07/superstation-one-with-dock-mister-review-lots-of-analog-tv-options/"]
+      "sources": [
+        "https://retroremake.co/products/superdock",
+        "https://blog.lon.tv/2026/06/07/superstation-one-with-dock-mister-review-lots-of-analog-tv-options/"
+      ]
     }
   },
-
   "options": [
     {
       "id": "superstation-one",
       "lane": "turnkey",
       "name": "SuperStation One",
       "vendor": "Retro Remake",
-      "price_usd": [210, 225],
+      "price_usd": [
+        210,
+        225
+      ],
       "status": "orderable",
-      "provides": ["hdmi", "vga-rgb", "ypbpr", "composite", "yc", "sdram128", "snac", "nfc", "wifi", "bluetooth", "usbc-power", "rtc", "ssone-port"],
-      "provides_unverified": ["yc-active-filtered", "ethernet"],
-      "includes": ["sd-card"],
-      "to_complete": ["psu-usbc", "usb-controller"],
+      "provides": [
+        "hdmi",
+        "vga-rgb",
+        "ypbpr",
+        "composite",
+        "yc",
+        "sdram128",
+        "snac",
+        "nfc",
+        "wifi",
+        "bluetooth",
+        "usbc-power",
+        "rtc",
+        "ssone-port"
+      ],
+      "provides_unverified": [
+        "yc-active-filtered",
+        "ethernet"
+      ],
+      "includes": [
+        "sd-card"
+      ],
+      "to_complete": [
+        "psu-usbc",
+        "usb-controller"
+      ],
       "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Saturn-LOOKING 10-pin mini-DIN that is NOT pin-compatible with real Saturn cables. PS1 SNAC controller+memory-card ports, NFC loading, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 picks FPGA MikeS-style encoding vs an onboard Sony encoder chip (forum consensus: FPGA path better). Whether the built-in path has THS7374-class active filtering is UNVERIFIED by any teardown; early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026). Wired Ethernet claimed in one review, absent from vendor specs: unverified.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://retroremake.co/products/superstation-one", "https://www.timeextension.com/reviews/superstation-one-this-usd210-fpga-playstation-puts-sonys-ps-classic-to-shame", "https://seafoamgaming.com/2026/06/17/retro-remake-superstation-one-review/"]
+      "sources": [
+        "https://retroremake.co/products/superstation-one",
+        "https://www.timeextension.com/reviews/superstation-one-this-usd210-fpga-playstation-puts-sonys-ps-classic-to-shame",
+        "https://seafoamgaming.com/2026/06/17/retro-remake-superstation-one-review/"
+      ],
+      "effort": "none"
     },
     {
       "id": "aluminum-armor-bundle",
       "lane": "kits",
       "name": "Aluminum Armor Bundle",
       "vendor": "MiSTer Addons",
-      "price_usd": [425, 475],
+      "price_usd": [
+        425,
+        475
+      ],
       "status": "orderable",
-      "provides": ["hdmi", "ethernet", "usbc-power"],
-      "includes": ["de10-nano", "sdram-128", "io-analog", "usb-hub", "case-armor", "sd-card", "psu-barrel-5a"],
-      "to_complete": ["usb-controller"],
+      "provides": [
+        "hdmi",
+        "ethernet",
+        "usbc-power"
+      ],
+      "includes": [
+        "de10-nano",
+        "sdram-128",
+        "io-analog",
+        "usb-hub",
+        "case-armor",
+        "sd-card",
+        "psu-barrel-5a"
+      ],
+      "to_complete": [
+        "usb-controller"
+      ],
       "notes": "The classic full stack, fanless aluminum, I/O board style chosen at purchase (Analog Pro / IO Direct / VGA; IO Direct config ships dual RAM). 32GB card preloaded. Sold out at check ('back in soon'). USB-PD Reflex Volt supply in the USB-C configs.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano"]
+      "sources": [
+        "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano"
+      ],
+      "effort": "none"
     },
     {
       "id": "skeleton-kit",
@@ -291,13 +625,28 @@
       "vendor": "MiSTer Addons",
       "price_usd": 450,
       "status": "orderable",
-      "provides": ["hdmi", "ethernet"],
-      "includes": ["de10-nano", "sdram-128", "io-analog", "usb-hub", "sd-card", "psu-barrel-5a"],
-      "to_complete": ["usb-controller"],
+      "provides": [
+        "hdmi",
+        "ethernet"
+      ],
+      "includes": [
+        "de10-nano",
+        "sdram-128",
+        "io-analog",
+        "usb-hub",
+        "sd-card",
+        "psu-barrel-5a"
+      ],
+      "to_complete": [
+        "usb-controller"
+      ],
       "notes": "Same stack, bare by design. Current stock status unverified (search-sourced).",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://misteraddons.com/products/mister-bundles"]
+      "sources": [
+        "https://misteraddons.com/products/mister-bundles"
+      ],
+      "effort": "some"
     },
     {
       "id": "ultimate-mister-pro",
@@ -306,13 +655,28 @@
       "vendor": "Ultimate MiSTer (EU)",
       "price_usd": 380,
       "status": "orderable",
-      "provides": ["hdmi", "ethernet"],
-      "includes": ["de10-nano", "sdram-128", "io-analog", "usb-hub", "sd-card"],
-      "to_complete": ["usb-controller"],
+      "provides": [
+        "hdmi",
+        "ethernet"
+      ],
+      "includes": [
+        "de10-nano",
+        "sdram-128",
+        "io-analog",
+        "usb-hub",
+        "sd-card"
+      ],
+      "to_complete": [
+        "usb-controller"
+      ],
       "notes": "EUR349.90 excl VAT. Genuine DE10-Nano (explicitly not a clone), AV Pro 9.2 board, official case, assembled and tested. DUAL RAM tier at ~EUR379.90 adds second module + Digital I/O + 24-bit Direct Video for Saturn-class cores; BlisSTer tier (~EUR419.90) swaps in the low-latency BlisSTer hub, HDMI-only, no VGA.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://ultimatemister.com/product/ultimate-mister-pro/", "https://ultimatemister.com/"]
+      "sources": [
+        "https://ultimatemister.com/product/ultimate-mister-pro/",
+        "https://ultimatemister.com/"
+      ],
+      "effort": "none"
     },
     {
       "id": "ultimate-mister-qmtech",
@@ -321,28 +685,61 @@
       "vendor": "Ultimate MiSTer (EU)",
       "price_usd": 215,
       "status": "orderable",
-      "provides": ["hdmi", "ethernet"],
-      "includes": ["qmtech-cv", "io-analog", "usb-hub", "sd-card"],
-      "to_complete": ["usb-controller"],
+      "provides": [
+        "hdmi",
+        "ethernet"
+      ],
+      "includes": [
+        "qmtech-cv",
+        "io-analog",
+        "usb-hub",
+        "sd-card"
+      ],
+      "to_complete": [
+        "usb-controller"
+      ],
       "notes": "EUR199.90 excl VAT: the budget assembled route, built on the QMTech clone with a matched I/O board and case. Cheapest 'someone else built it' path found.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://ultimatemister.com/product-category/qmtech-fpga/"]
+      "sources": [
+        "https://ultimatemister.com/product-category/qmtech-fpga/"
+      ],
+      "effort": "none"
     },
     {
       "id": "icode-fully-built",
       "lane": "kits",
       "name": "iCode Fully Built (Digital IO)",
       "vendor": "iCode",
-      "price_usd": [430, 500],
+      "price_usd": [
+        430,
+        500
+      ],
       "status": "orderable",
-      "provides": ["hdmi", "ethernet", "rtc", "toslink"],
-      "includes": ["de10-nano", "sdram-128", "io-digital", "usb-hub", "sd-card", "psu-barrel-5a"],
-      "to_complete": ["usb-controller"],
+      "provides": [
+        "hdmi",
+        "ethernet",
+        "rtc",
+        "toslink"
+      ],
+      "includes": [
+        "de10-nano",
+        "sdram-128",
+        "io-digital",
+        "usb-hub",
+        "sd-card",
+        "psu-barrel-5a"
+      ],
+      "to_complete": [
+        "usb-controller"
+      ],
       "notes": "In stock at check, which is rare in this market. Price tiers by SD size (64GB-1TB). Digital I/O build: no analog video out of the box. 6A supply, RGB fan, RTC board loose in box. Dual-RAM upgrade available.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://www.icode.com/product/mister-fpga-fully-built-digital-dual-ram/"]
+      "sources": [
+        "https://www.icode.com/product/mister-fpga-fully-built-digital-dual-ram/"
+      ],
+      "effort": "none"
     },
     {
       "id": "de10-nano",
@@ -351,28 +748,65 @@
       "vendor": "Terasic",
       "price_usd": 225,
       "status": "orderable",
-      "provides": ["hdmi", "ethernet", "gpio-header", "sdram-slot", "user-io-port", "usb-otg-header", "barrel-power"],
+      "provides": [
+        "hdmi",
+        "ethernet",
+        "gpio-header",
+        "sdram-slot",
+        "user-io-port",
+        "usb-otg-header",
+        "barrel-power"
+      ],
       "includes": [],
-      "to_complete": ["sdram-128", "psu-barrel-5a", "sd-card", "usb-controller"],
+      "to_complete": [
+        "sdram-128",
+        "psu-barrel-5a",
+        "sd-card",
+        "usb-controller"
+      ],
       "notes": "The reference board. Chronically scarce since the chip shortage; often only reliably available direct from Terasic (ships a 5V/2.5A adapter, upgrade advised once addons stack up). At $225 bare it is hard to justify against the MiSTer Pi unless you specifically want the original. July-2026 stock status not freshly confirmed.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046", "https://misterfpga.co.uk/where-to-buy-a-de10-nano/"]
+      "sources": [
+        "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046",
+        "https://misterfpga.co.uk/where-to-buy-a-de10-nano/"
+      ],
+      "effort": "diy"
     },
     {
       "id": "mister-pi",
       "lane": "diy",
       "name": "MiSTer Pi",
       "vendor": "Retro Remake",
-      "price_usd": [99, 125],
+      "price_usd": [
+        99,
+        125
+      ],
       "status": "orderable",
-      "provides": ["hdmi", "ethernet", "usbc-power", "gpio-header", "sdram-slot", "user-io-port", "usb-otg-header"],
+      "provides": [
+        "hdmi",
+        "ethernet",
+        "usbc-power",
+        "gpio-header",
+        "sdram-slot",
+        "user-io-port",
+        "usb-otg-header"
+      ],
       "includes": [],
-      "to_complete": ["sdram-128", "psu-usbc", "sd-card", "usb-controller"],
+      "to_complete": [
+        "sdram-128",
+        "psu-usbc",
+        "sd-card",
+        "usb-controller"
+      ],
       "notes": "The board that broke the DE10 price. Same Cyclone V class, 1GB DDR3, USB-C power, accessory-compatible dimensions/headers. Sold in preorder batches (price drifts $99-125 by batch/bundle; $160 Mega Pack adds hub + A/V board, ~$180 full case kit). Sold out between batches. Own accessory line: A/V Pro 9.2 $40, 128MB SDRAM $20, hub $20, RTC $5, acrylic case $10.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://retroremake.co/pages/store", "https://www.timeextension.com/reviews/mister-pi-a-usd99-gateway-to-fpga-retro-gaming"]
+      "sources": [
+        "https://retroremake.co/pages/store",
+        "https://www.timeextension.com/reviews/mister-pi-a-usd99-gateway-to-fpga-retro-gaming"
+      ],
+      "effort": "diy"
     },
     {
       "id": "qmtech-cv",
@@ -381,13 +815,30 @@
       "vendor": "QMTech (AliExpress)",
       "price_usd": 100,
       "status": "orderable",
-      "provides": ["hdmi", "ethernet", "gpio-header", "sdram-slot", "user-io-port", "usb-otg-header", "barrel-power"],
+      "provides": [
+        "hdmi",
+        "ethernet",
+        "gpio-header",
+        "sdram-slot",
+        "user-io-port",
+        "usb-otg-header",
+        "barrel-power"
+      ],
       "includes": [],
-      "to_complete": ["sdram-128", "psu-barrel-5a", "sd-card", "usb-controller"],
+      "to_complete": [
+        "sdram-128",
+        "psu-barrel-5a",
+        "sd-card",
+        "usb-controller"
+      ],
       "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some variants have SDRAM integrated on-board (+~$15; then skip the module). Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://blog.lon.tv/2025/12/20/the-qmtech-mister-clone-is-affordable-and-available/", "https://irkenlabs.com/qmtech-de10-clone-mini-review/"]
+      "sources": [
+        "https://blog.lon.tv/2025/12/20/the-qmtech-mister-clone-is-affordable-and-available/",
+        "https://irkenlabs.com/qmtech-de10-clone-mini-review/"
+      ],
+      "effort": "diy"
     },
     {
       "id": "mistercade-v2",
@@ -396,35 +847,69 @@
       "vendor": "MiSTer Addons",
       "price_usd": 550,
       "status": "orderable",
-      "provides": ["jamma", "hdmi", "vga-rgb", "analog-audio", "toslink"],
-      "includes": ["de10-nano", "sdram-128", "sdram-128-second", "sd-card"],
+      "provides": [
+        "jamma",
+        "hdmi",
+        "vga-rgb",
+        "analog-audio",
+        "toslink"
+      ],
+      "includes": [
+        "de10-nano",
+        "sdram-128",
+        "sdram-128-second",
+        "sd-card"
+      ],
       "to_complete": [],
       "notes": "Your MiSTer becomes the JAMMA PCB in a real cabinet: 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Lite kit (BYO DE10 + RAM) ~$275. Sold out at check ('back in soon'). Cabinet not included, obviously.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit"]
+      "sources": [
+        "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit"
+      ],
+      "effort": "some"
     },
     {
       "id": "multisystem2",
       "lane": "special",
       "name": "MiSTer Multisystem2",
       "vendor": "Heber / RMC (UK)",
-      "price_usd": [300, 350],
+      "price_usd": [
+        300,
+        350
+      ],
       "status": "orderable",
-      "provides": ["hdmi", "ethernet", "usb-hub", "toslink", "analog-audio", "sdram128"],
+      "provides": [
+        "hdmi",
+        "ethernet",
+        "usb-hub",
+        "toslink",
+        "analog-audio",
+        "sdram128"
+      ],
       "includes": [],
-      "to_complete": ["usb-controller", "sd-card"],
+      "to_complete": [
+        "usb-controller",
+        "sd-card"
+      ],
       "notes": "Not a DE10 carrier: one integrated motherboard (own Cyclone V, 128MB SDRAM + 1GB LPDDR, powered 7-port hub) in a 3D-printed enclosure, assembled. ~$300 shipped HDMI-only; ~+$50 for the analog-video version (24-bit, 9-pin mini-DIN RGB+sync for SCART). GBP264 inc VAT in the UK. Shipping now, 1-2 week lead. JAMMA 'Arcade' edition preorders ship from Aug 2026. Enclosure files are open (Printables, CC-BY-SA); Multisystem1 is fully open-source and discontinued as a product.",
       "verified": "2026-07",
       "confidence": "high",
-      "sources": ["https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/", "https://blog.lon.tv/2026/03/14/mister-multisystem-2-review-a-consolized-retro-fpga-device/"]
+      "sources": [
+        "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/",
+        "https://blog.lon.tv/2026/03/14/mister-multisystem-2-review-a-consolized-retro-fpga-device/"
+      ],
+      "effort": "none"
     },
     {
       "id": "agilex5-nextgen",
       "lane": "horizon",
       "name": "Agilex 5 next-gen boards ('MiSTer 2')",
       "vendor": "Taki Udon / Retro Remake, with Altera",
-      "price_usd": [150, 300],
+      "price_usd": [
+        150,
+        300
+      ],
       "status": "announced",
       "provides": [],
       "includes": [],
@@ -432,7 +917,10 @@
       "notes": "Engineering boards in MiSTer Pi form factor being seeded to developers; no consumer product or date. Stated target 1.5-3x MiSTer Pi pricing. Motivation: Cyclone V is out of headroom for full N64/Saturn accuracy; Agilex 5 could reach toward Dreamcast-class. Cores must be ported before any of this plays games.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://www.timeextension.com/news/2025/03/the-next-generation-of-fpga-gaming-could-be-just-around-the-corner-thanks-to-mister-pi"]
+      "sources": [
+        "https://www.timeextension.com/news/2025/03/the-next-generation-of-fpga-gaming-could-be-just-around-the-corner-thanks-to-mister-pi"
+      ],
+      "effort": "diy"
     },
     {
       "id": "multisystem2-pocket",
@@ -441,13 +929,19 @@
       "vendor": "Heber / RMC / The Retro Collective",
       "price_usd": null,
       "status": "announced",
-      "provides": [],
+      "provides": [
+        "handheld"
+      ],
       "includes": [],
       "to_complete": [],
       "notes": "Handheld Multisystem2 in open community-input development; 4:3 screen, modular controls planned; 'before end of 2026' aspiration, no committed date or price. The widescreen 'Wide Boy' prototype seen in press is explicitly NOT the final design. Only credible MiSTer handheld project found; no orderable MiSTer portable exists.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://www.timeextension.com/news/2026/05/a-handheld-mister-is-coming-but-this-darius-playing-widescreen-prototype-isnt-it", "https://misterfpga.org/viewtopic.php?t=10390"]
+      "sources": [
+        "https://www.timeextension.com/news/2026/05/a-handheld-mister-is-coming-but-this-darius-playing-widescreen-prototype-isnt-it",
+        "https://misterfpga.org/viewtopic.php?t=10390"
+      ],
+      "effort": "none"
     },
     {
       "id": "de25-nano",
@@ -462,7 +956,11 @@
       "notes": "The board is real and orderable ($248; ~25% more logic, DDR4, much faster ARM) but MiSTer does NOT run on it: no official framework port confirmed as of July 2026. Listed so nobody buys one expecting a MiSTer. A likely future host, nothing more yet.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://retrorgb.com/de-25-orders-open.html", "https://misterfpga.org/viewtopic.php?t=9642"]
+      "sources": [
+        "https://retrorgb.com/de-25-orders-open.html",
+        "https://misterfpga.org/viewtopic.php?t=9642"
+      ],
+      "effort": "diy"
     },
     {
       "id": "mars-fpga",
@@ -477,35 +975,225 @@
       "notes": "CANCELLED November 2025. Was pitched as a DE10-eclipsing open board (Dreamcast/NAOMI/3DO/Jaguar ambitions, 4K + full analog out). Kept here so the landscape says so out loud instead of letting old hype linger.",
       "verified": "2026-07",
       "confidence": "medium",
-      "sources": ["https://retrorgb.com/mars-multi-arcade-retro-system.html"]
+      "sources": [
+        "https://retrorgb.com/mars-multi-arcade-retro-system.html"
+      ],
+      "effort": "diy"
     }
   ],
-
   "appendix_not_mister": [
     {
       "name": "Analogue Pocket / Analogue 3D",
       "one_liner": "Closed platform with its own 'openFPGA' core format; polished, but not MiSTer's cores, updates, or ecosystem (the 3D is N64-only, no openFPGA).",
-      "sources": ["https://openfpga-library.github.io/analogue-pocket/"]
+      "sources": [
+        "https://openfpga-library.github.io/analogue-pocket/"
+      ]
     },
     {
       "name": "ModRetro Chromatic",
       "one_liner": "A single-system FPGA Game Boy/GBC replica ($199+), cartridge-based; no relation to MiSTer.",
-      "sources": ["https://www.timeextension.com/reviews/modretro-chromatic-is-so-close-to-the-real-thing-youd-think-nintendo-made-it"]
+      "sources": [
+        "https://www.timeextension.com/reviews/modretro-chromatic-is-so-close-to-the-real-thing-youd-think-nintendo-made-it"
+      ]
     },
     {
       "name": "ModRetro M64",
       "one_liner": "A dedicated N64-compatible FPGA console ($229.99, launching July 28, 2026, AMD Artix UltraScale+, real cartridges); single-system, not MiSTer.",
-      "sources": ["https://modretro.com/pages/m64"]
+      "sources": [
+        "https://modretro.com/pages/m64"
+      ]
     },
     {
       "name": "FPGBC (FunnyPlaying)",
       "one_liner": "A budget FPGA Game Boy Color clone handheld/kit; single-system, not MiSTer.",
-      "sources": ["https://www.zedlabz.com/en-us/products/fpgbc-kit-fpga-powered-diy-handheld-games-console-compatible-with-game-boy-color-original-games-funnyplaying"]
+      "sources": [
+        "https://www.zedlabz.com/en-us/products/fpgbc-kit-fpga-powered-diy-handheld-games-console-compatible-with-game-boy-color-original-games-funnyplaying"
+      ]
     },
     {
       "name": "Replay2 (FPGAArcade)",
       "one_liner": "An in-development Agilex 5 mini-ITX FPGA machine from the FPGAArcade lineage; same next-gen conversation, different core ecosystem, not MiSTer-compatible.",
-      "sources": ["https://www.fpgaarcade.com/replay2-design-nearing-completion/"]
+      "sources": [
+        "https://www.fpgaarcade.com/replay2-design-nearing-completion/"
+      ]
+    }
+  ],
+  "interview": [
+    {
+      "id": "build",
+      "q": "How much building do you want to do?",
+      "why": "The biggest fork in the hobby: MiSTer can be a finished console or a stack of boards you assemble yourself.",
+      "answers": [
+        {
+          "id": "none",
+          "label": "None - ready out of the box",
+          "effort": [
+            "none"
+          ]
+        },
+        {
+          "id": "some",
+          "label": "A screwdriver is fine",
+          "effort": [
+            "none",
+            "some"
+          ]
+        },
+        {
+          "id": "diy",
+          "label": "I want to build it myself"
+        },
+        {
+          "id": "dk",
+          "label": "Not sure yet"
+        }
+      ]
+    },
+    {
+      "id": "display",
+      "q": "What are you plugging it into?",
+      "why": "This decides your whole video chain. S-Video and RGB need an analog path some options have built in and others need parts for.",
+      "answers": [
+        {
+          "id": "modern",
+          "label": "Modern TV or monitor (HDMI)",
+          "require": [
+            [
+              "hdmi"
+            ]
+          ]
+        },
+        {
+          "id": "yc",
+          "label": "CRT with S-Video or composite",
+          "require": [
+            [
+              "yc"
+            ]
+          ]
+        },
+        {
+          "id": "rgb",
+          "label": "CRT or PVM with RGB or component",
+          "require": [
+            [
+              "vga-rgb",
+              "ypbpr"
+            ]
+          ]
+        },
+        {
+          "id": "dk",
+          "label": "Not sure yet"
+        }
+      ]
+    },
+    {
+      "id": "snac",
+      "q": "Original console controllers, plugged in natively?",
+      "why": "Native ports (SNAC) wire the real pad straight into the core for the lowest possible lag. USB pads are fine for most people.",
+      "answers": [
+        {
+          "id": "yes",
+          "label": "Yes, native ports",
+          "require": [
+            [
+              "snac"
+            ]
+          ]
+        },
+        {
+          "id": "no",
+          "label": "USB pads are fine"
+        },
+        {
+          "id": "dk",
+          "label": "Not sure yet"
+        }
+      ]
+    },
+    {
+      "id": "budget",
+      "q": "Budget for a complete setup?",
+      "why": "Complete means power, storage, a controller and any parts your other answers need - not the sticker price.",
+      "answers": [
+        {
+          "id": "b150",
+          "label": "Under $150",
+          "budget": 150
+        },
+        {
+          "id": "b300",
+          "label": "Under $300",
+          "budget": 300
+        },
+        {
+          "id": "b500",
+          "label": "Under $500",
+          "budget": 500
+        },
+        {
+          "id": "open",
+          "label": "No limit"
+        }
+      ]
+    },
+    {
+      "id": "situation",
+      "q": "Where is it going?",
+      "why": "A desk, a cabinet and a pocket are three different machines.",
+      "answers": [
+        {
+          "id": "shelf",
+          "label": "A shelf, a desk, under the TV"
+        },
+        {
+          "id": "cab",
+          "label": "Inside an arcade cabinet",
+          "require": [
+            [
+              "jamma"
+            ]
+          ]
+        },
+        {
+          "id": "pocket",
+          "label": "My pocket - a handheld",
+          "require": [
+            [
+              "handheld"
+            ]
+          ]
+        },
+        {
+          "id": "dk",
+          "label": "Not sure yet"
+        }
+      ]
+    },
+    {
+      "id": "discs",
+      "q": "Load real CD games from the disc?",
+      "why": "Almost everyone loads games from the SD card. Real disc loading exists on exactly one path today.",
+      "answers": [
+        {
+          "id": "yes",
+          "label": "Yes, real discs",
+          "require": [
+            [
+              "cd-drive"
+            ]
+          ]
+        },
+        {
+          "id": "no",
+          "label": "Files on a card are fine"
+        },
+        {
+          "id": "dk",
+          "label": "Not sure yet"
+        }
+      ]
     }
   ]
 }

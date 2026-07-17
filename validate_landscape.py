@@ -43,6 +43,20 @@ for pid, p in parts.items():
     if not any(set(p['requires']) <= have for have in grown_eff.values()):
         errs.append(f"part {pid}: requires {p['requires']} satisfiable from NO option (even with chains)")
 
+EFFORTS = {'none', 'some', 'diy'}
+for o in d['options']:
+    if o.get('effort') not in EFFORTS:
+        errs.append(f"option {o['id']}: effort must be one of {sorted(EFFORTS)}")
+for q in d.get('interview', []):
+    seen_a = set()
+    for a in q['answers']:
+        if a['id'] in seen_a: errs.append(f"interview {q['id']}: duplicate answer id {a['id']}")
+        seen_a.add(a['id'])
+        for grp in a.get('require', []):
+            toks(grp, f"interview {q['id']}.{a['id']}.require")
+        for e in a.get('effort', []):
+            if e not in EFFORTS: errs.append(f"interview {q['id']}.{a['id']}: bad effort {e}")
+
 print('ERRORS:' if errs else 'OK - all references and chains resolve.')
 print('\n'.join(errs))
 print('options reaching yc (any path):',

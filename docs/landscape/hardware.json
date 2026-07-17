@@ -967,8 +967,8 @@
       "id": "hamgeek-mister",
       "lane": "kits",
       "name": "Hamgeek MiSTer",
-      "vendor": "Hamgeek (AliExpress / hamgeek.com)",
-      "price_usd": 155,
+      "vendor": "Hamgeek (hgeek.com / AliExpress)",
+      "price_usd": 186,
       "status": "orderable",
       "provides": [
         "hdmi",
@@ -984,7 +984,7 @@
         "sd-card"
       ],
       "to_complete": [],
-      "notes": "A clone of a clone: the QMTech board design (128MB SDRAM integrated) in a case with Hamgeek's analog I/O board, fan and PSU, factory-assembled, sold on AliExpress and Hamgeek's own site. ~GBP124 (~$155) at a Feb 2026 forum sighting; AliExpress prices drift. HISTORY THAT MATTERS: early units had RAM-timing problems on demanding cores (N64/PSX); a core developer confirms the RAM issue is FIXED and affected buyers got free replacement boards - 'Hamgeek clones are fine now' (misterfpga.org t=10139, Feb 2026, TheJesusFish). Community habits: replace the included power supply with a stronger 5V unit; pick the metal case over the plastic one (same price, more robust - Lon.TV review, Apr 2026). VGA analog out for CRTs; combined 3.5mm analog/optical audio jack (optical attested by one owner only, hence hedged); no WiFi/Bluetooth (the USB dongle applies); one unresolved Retrotink 4K handshake thread (r/MiSTerFPGA 1u2x1zm, June 2026). Standing clone caveat from the core dev: cores are not built with clones as their target, so niche titles may behave differently.",
+      "notes": "A clone of a clone: the QMTech board design (128MB SDRAM integrated) in a case with Hamgeek's analog I/O board, fan and PSU, factory-assembled, sold on Hamgeek's own store (hgeek.com) and AliExpress. $186 on the maker's own store, verified 2026-07-17 (32GB card included; plastic, metal and white shell versions - the checked variant was sold out, others listed); cheaper sightings (~GBP124/$155, Feb 2026 forum) were AliExpress listings, which drift. HISTORY THAT MATTERS: early units had RAM-timing problems on demanding cores (N64/PSX); a core developer confirms the RAM issue is FIXED and affected buyers got free replacement boards - 'Hamgeek clones are fine now' (misterfpga.org t=10139, Feb 2026, TheJesusFish). Community habits: replace the included power supply with a stronger 5V unit; pick the metal case over the plastic one (same price, more robust - Lon.TV review, Apr 2026). VGA analog out for CRTs; combined 3.5mm analog/optical audio jack (optical attested by one owner only, hence hedged); no WiFi/Bluetooth (the USB dongle applies); one unresolved Retrotink 4K handshake thread (r/MiSTerFPGA 1u2x1zm, June 2026). Standing clone caveat from the core dev: cores are not built with clones as their target, so niche titles may behave differently.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -996,7 +996,7 @@
       "stock": "now",
       "ships_from": "cn",
       "img": "hamgeek-mister.png",
-      "url": "https://www.aliexpress.com/item/1005009558327924.html",
+      "url": "https://www.hgeek.com/products/hamgeek-mister-game-console-with-cyclone-v-soc-fpga-development-board-plastic-metal-shell-and-32gb-tf-card",
       "what": "The budget factory-assembled clone: a QMTech-design board, case, analog I/O and fan in one AliExpress box.",
       "advice": "The cheapest assembled route on the map and a common first MiSTer. Owners typically swap the included power supply for a stronger one and pick the metal case; early RAM problems were fixed with free replacement boards, and current units run the demanding cores fine."
     },

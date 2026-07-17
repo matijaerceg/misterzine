@@ -97,6 +97,10 @@
   .q .ans label.cb { display: flex; align-items: center; gap: .5em; font-size: .82rem; cursor: pointer;
                      padding: .12rem 0; }
   .q .ans label.cb input { accent-color: var(--accent); width: .95em; height: .95em; margin: 0; flex: 0 0 auto; }
+  .q h3 .qclear { font: inherit; font-size: .72rem; font-weight: 400; color: var(--muted); background: none;
+                  border: 0; padding: 0; margin-left: .5em; cursor: pointer; text-decoration: underline;
+                  text-underline-offset: 2px; }
+  .q h3 .qclear:hover { color: var(--accent); }
   .q .ans button { font: inherit; font-size: .82rem; text-align: left; cursor: pointer;
                    border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface);
                    color: inherit; padding: .34rem .55rem; }
@@ -162,10 +166,7 @@
   .card.ghost .nm, .card.ghost .pr { opacity: .6; }
 
   /* ---- Do It Yourself: the columns ARE the anatomy lesson ---- */
-  .cols { display: grid; grid-template-columns: 1.35fr auto 1.15fr auto 1fr auto 1fr; gap: .55rem; align-items: start; }
-  /* the plus signs between columns: layers of a cake you add together */
-  .plus { align-self: start; padding-top: 2.6rem; font-size: 1.5rem; font-weight: 700;
-          color: var(--muted); user-select: none; }
+  .cols { display: grid; grid-template-columns: 1.35fr 1.15fr 1fr 1fr; gap: .8rem; align-items: start; }
   .pcard.dim { opacity: .45; }
   .pcard.dim .pw { display: none; }
   .pcard .pw.addon { color: color-mix(in srgb, var(--fg) 55%, var(--bg)); }
@@ -184,7 +185,7 @@
   /* answer-driven highlight: the parts your answers would pull into a build */
   .pcard.hl { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
   .card .ramline { font-size: .72rem; color: var(--muted); }
-  @media (max-width: 66rem) { .cols { grid-template-columns: 1fr 1fr; } .plus { display: none; } }
+  @media (max-width: 66rem) { .cols { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
 
   /* ineligible entries collapse to a slim reasoned row once answers exist */
@@ -352,9 +353,9 @@
   var PARTS = null, OPTS = null, CAPS = null;
 
   var NOPIC = {};                  // card images that 404ed; skipped on re-render
-  var STOCK_LABEL = { now: 'orderable now', waves: 'sells out between batches', scarce: 'chronically scarce' };
-  var STOCK_REASON = { waves: 'Sells out between batches - not reliably orderable today',
-                       scarce: 'Chronically scarce - not reliably orderable today' };
+  var STOCK_LABEL = { now: 'usually in stock', waves: 'sells out between batches', scarce: 'chronically scarce' };
+  var STOCK_REASON = { waves: 'Sells out between batches - not usually in stock',
+                       scarce: 'Chronically scarce - not usually in stock' };
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -524,17 +525,18 @@
     var host = document.getElementById('questions');
     host.innerHTML = D.interview.map(function (q) {
       var picked = chosen(q).map(function (a) { return a.id; });
-      /* multi-selects and single toggles are literal checkboxes; only
-         mutually-exclusive choices render as buttons */
+      /* multi-selects and single toggles are checkboxes; mutually-exclusive
+         choices are radios, with a "clear" affordance (radios famously
+         cannot be un-picked on their own) */
       var boxy = q.multi || q.answers.length === 1;
-      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) + '</h3><div class="ans">' +
+      var clearBtn = (!boxy && picked.length)
+        ? ' <button type="button" class="qclear" data-clear="' + q.id + '">clear</button>' : '';
+      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) + clearBtn + '</h3><div class="ans">' +
         q.answers.map(function (a) {
-          if (boxy) {
-            return '<label class="cb"><input type="checkbox" data-a="' + a.id + '"' +
-                   (picked.indexOf(a.id) >= 0 ? ' checked' : '') + '>' + esc(a.label) + '</label>';
-          }
-          return '<button type="button" data-a="' + a.id + '" aria-pressed="' + (picked.indexOf(a.id) >= 0) + '">' +
-                 esc(a.label) + '</button>';
+          var type = boxy ? 'checkbox' : 'radio';
+          return '<label class="cb"><input type="' + type + '"' +
+                 (boxy ? '' : ' name="q-' + q.id + '"') + ' data-a="' + a.id + '"' +
+                 (picked.indexOf(a.id) >= 0 ? ' checked' : '') + '>' + esc(a.label) + '</label>';
         }).join('') + '</div></div>';
     }).join('');
   }
@@ -609,10 +611,11 @@
            '" data-card="' + o.id + '">' + bits.join('') + '</button>';
   }
 
+  /* the "+" lives in the column titles: layers you add to the mainboard */
   var PART_COLS = [
-    ['io', '2. I/O boards'],
-    ['hub', '3. USB'],
-    ['adapter', '4. Adapters']
+    ['io', '+ 2. I/O boards'],
+    ['hub', '+ 3. USB'],
+    ['adapter', '+ 4. Adapters']
   ];
 
   function partCardHTML(pid, hl, dim) {
@@ -662,9 +665,7 @@
           '<div class="cards">' + rows.map(cardHTML).join('') + '</div></div>' +
           PART_COLS.map(function (pc) {
             var pids = Object.keys(PARTS).filter(function (pid) { return PARTS[pid].category === pc[0]; });
-            /* the "+" between columns: a build is layers you add together */
-            return '<div class="plus" aria-hidden="true">+</div>' +
-              '<div class="col"><div class="colhead"><h3 class="cd">' + esc(pc[1]) + '</h3></div><div class="cards">' +
+            return '<div class="col"><div class="colhead"><h3 class="cd">' + esc(pc[1]) + '</h3></div><div class="cards">' +
               pids.map(function (pid) { return partCardHTML(pid, !!hl[pid], dimPart(pid)); }).join('') + '</div></div>';
           }).join('') + '</div>';
       } else {
@@ -935,12 +936,14 @@
     writeURL(); renderQuestions(); renderPoster();
   }
   document.getElementById('questions').addEventListener('click', function (e) {
-    var b = e.target.closest('button[data-a]'); if (!b) return;
-    toggleAnswer(b.closest('.q').dataset.q, b.dataset.a);
+    var c = e.target.closest('button[data-clear]');
+    if (c) { delete A[c.dataset.clear]; writeURL(); renderQuestions(); renderPoster(); }
   });
   document.getElementById('questions').addEventListener('change', function (e) {
     var i = e.target.closest('input[data-a]'); if (!i) return;
-    toggleAnswer(i.closest('.q').dataset.q, i.dataset.a);
+    var qid = i.closest('.q').dataset.q;
+    if (i.type === 'radio') { A[qid] = i.dataset.a; writeURL(); renderQuestions(); renderPoster(); }
+    else toggleAnswer(qid, i.dataset.a);
   });
   document.getElementById('chips').addEventListener('click', function (e) {
     if (e.target.closest('button[data-clearall]')) {

@@ -11,8 +11,8 @@
       "explain": "Digital video for modern displays."
     },
     "vga-rgb": {
-      "name": "Analog RGB (VGA)",
-      "explain": "RGB over a VGA/DB15 connector, for PVMs, SCART CRTs, upscalers."
+      "name": "Analog RGB",
+      "explain": "RGB for PVMs, SCART CRTs, upscalers - via a VGA connector or an AV-DIN breakout, board-dependent."
     },
     "ypbpr": {
       "name": "Component (YPbPr)",
@@ -229,9 +229,12 @@
       ]
     },
     "io-analog": {
-      "name": "Analog I/O board (IO Analog Pro / official v6-class)",
-      "vendor": "MiSTer Addons ($60) and equivalents",
-      "price_usd": 60,
+      "name": "Analog I/O board, VGA-class (official v6 / A/V Pro 9.2)",
+      "vendor": "Retro Remake A/V Pro 9.2 ($40) / official v6-class boards (~$60)",
+      "price_usd": [
+        40,
+        60
+      ],
       "provides": [
         "vga-rgb",
         "ypbpr",
@@ -243,12 +246,50 @@
       "requires": [
         "gpio-header"
       ],
-      "notes": "The board that turns a bare MiSTer into a CRT machine: VGA RGB or YPbPr by cable choice, audio, fan header, second SD. A EUR349.90 price seen in one search result is a stale-snippet artifact (that is a full built unit's price), not this board's.",
+      "notes": "The VGA-connector generation of analog I/O boards: RGB or YPbPr by cable, analog audio, and the VGA pins the MikeS11 Y/C adapters plug into. Distinct from MiSTer Addons IO Analog Pro (own entry), which has no VGA port. A EUR349.90 price seen in one search result is a stale-snippet artifact.",
+      "verified": "2026-07",
+      "confidence": "medium",
+      "sources": [
+        "https://retroremake.co/pages/store",
+        "https://ultimatemister.com/product/ultimate-mister-pro/"
+      ]
+    },
+    "io-analog-pro": {
+      "name": "MiSTer Addons IO Analog Pro",
+      "vendor": "MiSTer Addons",
+      "price_usd": 65,
+      "provides": [
+        "vga-rgb",
+        "ypbpr",
+        "yc",
+        "composite"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
+      "notes": "Current-generation analog board: RGBs (correct 700mV), YPbPr, and NATIVE S-Video/composite (MikeS Y/C core support) through an ADV7125 24-bit DAC and a Saturn Mini-DIN-10 connector - no VGA port, so MikeS11 dongles do not apply to it. HDMI stays live simultaneously. In stock at review (verified on the product page 2026-07-16). Whether the onboard Y/C path is actively filtered to MikeS11-Active standard is the same open question as the SuperStation One.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
-        "https://misteraddons.com/products/mister-fpga-io-analog-pro",
-        "https://misterfpga.co.uk/product/mister-fpga-analog-io-board/"
+        "https://misteraddons.com/products/mister-fpga-io-analog-pro"
+      ]
+    },
+    "reflex-prism": {
+      "name": "MiSTer Addons Reflex Prism (Direct Video DAC)",
+      "vendor": "MiSTer Addons",
+      "price_usd": 40,
+      "provides": [
+        "vga-rgb",
+        "yc-source"
+      ],
+      "requires": [
+        "hdmi"
+      ],
+      "notes": "Productized digital-to-analog video converter (the polished alternative to a generic Direct Video dongle). In stock at review. Full output details not yet verified beyond the listing.",
+      "verified": "2026-07",
+      "confidence": "low",
+      "sources": [
+        "https://misteraddons.com/collections/kits"
       ]
     },
     "io-digital": {
@@ -591,10 +632,7 @@
       "lane": "kits",
       "name": "MiSTer Addons Aluminum Armor Bundle",
       "vendor": "MiSTer Addons",
-      "price_usd": [
-        425,
-        475
-      ],
+      "price_usd": 475,
       "status": "orderable",
       "provides": [
         "hdmi",
@@ -604,7 +642,7 @@
       "includes": [
         "de10-nano",
         "sdram-128",
-        "io-analog",
+        "io-analog-pro",
         "usb-hub",
         "case-armor",
         "sd-card",
@@ -613,49 +651,17 @@
       "to_complete": [
         "usb-controller"
       ],
-      "notes": "The classic full stack, fanless aluminum, I/O board style chosen at purchase (Analog Pro / IO Direct / VGA; IO Direct config ships dual RAM). 32GB card preloaded. Sold out at check ('back in soon'). USB-PD Reflex Volt supply in the USB-C configs.",
+      "notes": "The classic full stack in the fanless aluminum case, assembled and tested. I/O board chosen at purchase: IO Analog Pro (1x SDRAM, simultaneous HDMI+analog, native S-Video/composite) or IO Direct (2x SDRAM, HDMI or analog). 32GB card preloaded. Made to order; both configs sold out at review (\"back in soon\"), backorders final. $475 regular price (an earlier $425 figure is stale). A \"Skeleton\" caseless bundle that once appeared in search results is no longer a live product - its URL serves this bundle.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
-        "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano"
+        "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano",
+        "https://misteraddons.com/collections/kits"
       ],
       "effort": "none",
       "stock": "waves",
       "img": "aluminum-armor-bundle.png",
       "url": "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano"
-    },
-    {
-      "id": "skeleton-kit",
-      "lane": "kits",
-      "name": "MiSTer Addons Skeleton Kit",
-      "vendor": "MiSTer Addons",
-      "price_usd": 450,
-      "status": "orderable",
-      "provides": [
-        "hdmi",
-        "ethernet"
-      ],
-      "includes": [
-        "de10-nano",
-        "sdram-128",
-        "io-analog",
-        "usb-hub",
-        "sd-card",
-        "psu-barrel-5a"
-      ],
-      "to_complete": [
-        "usb-controller"
-      ],
-      "notes": "Same stack, bare by design. Current stock status unverified (search-sourced).",
-      "verified": "2026-07",
-      "confidence": "medium",
-      "sources": [
-        "https://misteraddons.com/products/mister-bundles"
-      ],
-      "effort": "some",
-      "stock": "waves",
-      "img": "skeleton-kit.png",
-      "url": "https://misteraddons.com/products/mister-bundles"
     },
     {
       "id": "ultimate-mister-pro",
@@ -703,23 +709,22 @@
       ],
       "includes": [
         "qmtech-cv",
-        "io-analog",
-        "usb-hub",
         "sd-card"
       ],
       "to_complete": [
-        "usb-controller"
+        "usb-controller",
+        "psu-barrel-5a"
       ],
-      "notes": "EUR199.90 excl VAT: the budget assembled route, built on the QMTech clone with a matched I/O board and case. Cheapest 'someone else built it' path found.",
+      "notes": "EUR199.90 excl VAT: the budget assembled route, built on the QMTech clone. OUT OF STOCK at review (2026-07-16), and the live product page itemizes nothing beyond the price - earlier listings suggested an analog I/O board, USB hub and case, but none of that is verifiable today, so this entry claims only the board and a preloaded card. Re-verify contents when it restocks before trusting the complete price.",
       "verified": "2026-07",
-      "confidence": "medium",
+      "confidence": "low",
       "sources": [
         "https://ultimatemister.com/product-category/qmtech-fpga/"
       ],
       "effort": "none",
-      "stock": "now",
+      "stock": "waves",
       "img": "ultimate-mister-qmtech.png",
-      "url": "https://ultimatemister.com/product-category/qmtech-fpga/"
+      "url": "https://ultimatemister.com/product/ultimate-qmtech-fpga/"
     },
     {
       "id": "icode-fully-built",
@@ -888,7 +893,7 @@
         "sd-card"
       ],
       "to_complete": [],
-      "notes": "Your MiSTer becomes the JAMMA PCB in a real cabinet: 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Lite kit (BYO DE10 + RAM) ~$275. Sold out at check ('back in soon'). Cabinet not included, obviously.",
+      "notes": "Your MiSTer becomes the JAMMA PCB in a real cabinet: 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. This entry is the Full Kit at $550 (DE10 + dual RAM included); the $275 shown on the kits collection is the Lite tier (BYO board + RAM). Sold out at review (\"back in soon\"). Cabinet not included, obviously.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [

@@ -409,12 +409,28 @@
       "requires": [
         "user-io-port"
       ],
-      "notes": "Plugs into the USER I/O header, not the I/O board. PSX and N64 controllers need SNAX/SNAX64 tiers, not SNAC V1. Console cables usually sold separately.",
+      "notes": "Plugs into the USER I/O header, not the I/O board. PSX and N64 controllers need SNAX/SNAX64 tiers, not SNAC V1. Console cables usually sold separately. USB alternatives that keep original pads without SNAC wiring: MiSTer Addons Reflex Adapt (\\, GP2040-CE, ~1ms) and the Bliss-Box family (Ultimate MiSTer's BlisSTer hub tier integrates it) - accessories, so they are notes here, not entries.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
         "https://misteraddons.com/products/snac",
         "https://retroremake.co/pages/store"
+      ]
+    },
+    "nfc-reader": {
+      "name": "NFC reader (Zaparoo/TapTo launching)",
+      "vendor": "Retro Remake NFC Reader Pack (\\, in stock) and generic USB readers",
+      "price_usd": 10,
+      "provides": [
+        "nfc"
+      ],
+      "requires": [],
+      "notes": "Tap-a-card game launching via the Zaparoo (ex-TapTo) ecosystem; plugs into any USB port, so any option here can add it. The SuperStation One ships one built in.",
+      "verified": "2026-07",
+      "confidence": "medium",
+      "sources": [
+        "https://retroremake.co/pages/store",
+        "https://zaparoo.org/"
       ]
     },
     "rtc-board": {
@@ -774,6 +790,36 @@
       "url": "https://www.icode.com/product/mister-fpga-fully-built-digital-dual-ram/"
     },
     {
+      "id": "retrocastle-full-kit",
+      "lane": "kits",
+      "name": "RetroCastle Full Kit",
+      "vendor": "RetroCastle (Ivory, CN; retrocastlestore.com)",
+      "price_usd": [
+        467,
+        574
+      ],
+      "status": "orderable",
+      "provides": [],
+      "includes": [
+        "de10-nano",
+        "sdram-128"
+      ],
+      "to_complete": [
+        "usb-controller"
+      ],
+      "notes": "Premium Chinese full-kit line on a genuine DE10-Nano, four variants at review (browser-verified storefront 2026-07-16): VGA 2023 \\, Saturn 2023 \\, Digital Dual-SDRAM 2024 \\, Saturn Dual-SDRAM 2024 \\. Saturn versions use a DIN-style analog connector, dual-SDRAM versions target Saturn/PSX-class cores; exact box contents per variant not yet itemized here - treat includes as the conservative common core (board + one 128MB module) pending a per-variant sweep. Also sells IO boards, metal cases, PSX SNAC gear.",
+      "verified": "2026-07",
+      "confidence": "medium",
+      "sources": [
+        "https://www.retrocastlestore.com/",
+        "https://retrorgb.com/retro-castle-mister-kits.html"
+      ],
+      "effort": "none",
+      "stock": "now",
+      "img": "retrocastle-full-kit.png",
+      "url": "https://www.retrocastlestore.com/"
+    },
+    {
       "id": "de10-nano",
       "lane": "diy",
       "name": "Terasic DE10-Nano",
@@ -902,7 +948,7 @@
         "sd-card"
       ],
       "to_complete": [],
-      "notes": "Your MiSTer becomes the JAMMA PCB in a real cabinet: 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. This entry is the Full Kit at $550 (DE10 + dual RAM included); the $275 shown on the kits collection is the Lite tier (BYO board + RAM). Sold out at review (\"back in soon\"). Cabinet not included, obviously.",
+      "notes": "Your MiSTer becomes the JAMMA PCB in a real cabinet: 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. This entry is the Full Kit at $550 (DE10 + dual RAM included); the $275 shown on the kits collection is the Lite tier (BYO board + RAM). Sold out at review (\"back in soon\"). Cabinet not included, obviously. The Versus 2P sidekick board (\\) is deliberately not listed: accessory, not a starting point.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -915,7 +961,7 @@
     },
     {
       "id": "multisystem2",
-      "lane": "special",
+      "lane": "turnkey",
       "name": "Heber MiSTer Multisystem2",
       "vendor": "Heber / RMC (UK)",
       "price_usd": [
@@ -950,6 +996,43 @@
       "url": "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/"
     },
     {
+      "id": "ironclad-dx",
+      "lane": "special",
+      "name": "d3fmod Ironclad DX (Mini-ITX)",
+      "vendor": "d3fmod design",
+      "price_usd": 240,
+      "status": "orderable",
+      "provides": [
+        "vga-rgb",
+        "yc",
+        "snac",
+        "usb-hub",
+        "rtc",
+        "analog-audio",
+        "sdram-slot",
+        "user-io-port"
+      ],
+      "includes": [],
+      "to_complete": [
+        "mister-pi",
+        "sdram-128",
+        "sd-card",
+        "usb-controller",
+        "psu-barrel-5a"
+      ],
+      "notes": "A Mini-ITX carrier that turns any ITX/ATX PC case into a MiSTer: your DE10-Nano, MiSTer Pi or QMTech Cyclone V drops onto it (complete price below assumes a MiSTer Pi; the PC case itself is also yours to supply). 24-bit Analog Devices DAC with a Saturn-style RGB/S-Video connector and an INTERNAL PASSIVE LUMA TRAP - native Y/C with vendor-documented filtering (composite needs a cable adapter, not claimed here). Dual SDRAM (official v9.2-compliant), 7 USB, SNAC via DB9 + USB3 user port, RTC, i2s audio DAC + headphone amp, tape in, IR remote power, fan control keyed to FPGA temperature, over-voltage/short protection. EUR219.99 (~USD240); hand-assembled in monthly batches, out of stock at review 2026-07-16. Successor to the Ironclad Plus.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://www.d3fmod.com/ironclad-dx/",
+        "https://www.d3fmod.com/product/mini-itx_ironclad_dx/"
+      ],
+      "effort": "some",
+      "stock": "waves",
+      "img": "ironclad-dx.png",
+      "url": "https://www.d3fmod.com/product/mini-itx_ironclad_dx/"
+    },
+    {
       "id": "multisystem1",
       "lane": "special",
       "name": "Heber MiSTer Multisystem (1)",
@@ -959,14 +1042,14 @@
       "provides": [],
       "includes": [],
       "to_complete": [],
-      "notes": "The original 2021-era Multisystem: a carrier board + console case that a DE10-Nano dropped into. Discontinued as a Heber product and released as fully open-source hardware (schematics and PCB files on GitHub, 2023); superseded by the integrated Multisystem2. Listed so the landscape says what happened to it: you can still build one, you can no longer buy one.",
+      "notes": "The original 2021-era Multisystem: a carrier board + console case you installed your own DE10-Nano into (a screwdriver product, not turnkey). Discontinued as a Heber product and released as fully open-source hardware (schematics and PCB files on GitHub, 2023); superseded by the integrated Multisystem2. Listed so the landscape says what happened to it: you can still build one, you can no longer buy one.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
         "https://heber.co.uk/mister-multisystem-is-now-open-source/",
         "https://heber.co.uk/mister-multisystem-console/"
       ],
-      "effort": "diy",
+      "effort": "some",
       "stock": "na",
       "img": "multisystem1.png",
       "url": "https://heber.co.uk/mister-multisystem-is-now-open-source/"

@@ -10,7 +10,7 @@ layout code. The interview questions also live in `hardware.json` (an
 allowlists, or a `budget` cap), and options carry an `effort` grade
 (`none | some | diy`) the build question filters on.
 
-Nav name: **Landscape**. Page title: "The MiSTer Hardware Landscape".
+Nav name: **Landscape**. Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; freshness chip (meta.updated) rides the subtitle.
 URL: `/landscape/`. Outward copy may say "landscape" or "hardware matrix" —
 never "release tracker" (that term belongs to the releases page).
 

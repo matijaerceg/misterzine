@@ -399,6 +399,7 @@
   var STOCK_LABEL = { now: 'usually in stock', waves: 'tends to sell out between batches', scarce: 'tends to be hard to find' };
   var STOCK_REASON = { waves: 'Tends to sell out between batches',
                        scarce: 'Tends to be hard to find in stock' };
+  var REGION_NAME = { us: 'the US', eu: 'the UK/Europe', cn: 'China', tw: 'Taiwan' };
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -470,6 +471,9 @@
       chosen(q).forEach(function (ans) {
         if (ans.effort) c.effortAllowed = ans.effort;
         if (ans.stock) c.stockAllowed = ans.stock;
+        /* the region answer never prunes - it annotates every card with
+           where it ships from (import friction is the visitor's algebra) */
+        if (ans.region !== undefined) c.region = ans;
         (ans.require || []).forEach(function (grp) {
           // label = the user's own words; short version for card lines
           c.reqs.push({ grp: grp, label: ans.short || ans.label });
@@ -559,6 +563,10 @@
           return PARTS[pid].stock && PARTS[pid].stock !== 'now'; });
         r.reqInfo.push({ label: label, text: 'with parts (~' + money(best.lo) + (scarcePart ? ', often sold out' : '') + ')' });
       }
+    }
+    if (c.region && o.status === 'orderable' && o.ships_from) {
+      r.shipHome = c.region.region === o.ships_from;
+      r.shipLine = 'ships from ' + REGION_NAME[o.ships_from] + (r.shipHome ? ' - your region' : '');
     }
     r.lo = lo; r.hi = hi;
     r.wouldFit = fitsCaps;                  // used for honest dead-end messaging on ghosts
@@ -662,6 +670,9 @@
         bits.push('<span class="' + (hedgy ? 'hedge' : 'need') + '">' +
                   esc(ri.label) + ': ' + esc(ri.text) + '</span>');
       });
+    }
+    if (r.shipLine && r.in && !r.ghost) {
+      bits.push('<span class="' + (r.shipHome ? 'need' : 'avail') + '">' + esc(r.shipLine) + '</span>');
     }
     /* DIY mainboards carry their RAM reminder inside the card (user ruling;
        no price on it - the complete number below already counts it) */
@@ -953,6 +964,7 @@
       '<p class="vd">' +
         (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.vendor) + ' - official page</a>'
                : esc(o.vendor)) +
+        (o.ships_from ? ' &middot; ships from ' + esc(REGION_NAME[o.ships_from]) : '') +
         (o.status === 'orderable' ? '' : ' &middot; ' + esc(o.status)) + '</p>' +
       ((o.status === 'discontinued' || o.status === 'cancelled')
         ? (o.price_usd == null ? '' : '<p class="price">was ' + esc(priceText(o.price_usd)) + '</p>')

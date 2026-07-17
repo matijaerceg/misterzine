@@ -796,6 +796,7 @@
       ],
       "effort": "none",
       "stock": "waves",
+      "ships_from": "us",
       "img": "superstation-one.png",
       "url": "https://retroremake.co/products/superstation-one",
       "what": "A complete MiSTer in a PSone-style shell: plug it into power and a TV and you are playing.",
@@ -833,6 +834,7 @@
       ],
       "effort": "none",
       "stock": "waves",
+      "ships_from": "us",
       "img": "aluminum-armor-bundle.png",
       "url": "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano",
       "what": "The classic MiSTer stack - board, RAM, I/O, USB hub - pre-assembled in a silent all-aluminum case.",
@@ -877,6 +879,7 @@
       ],
       "effort": "none",
       "stock": "now",
+      "ships_from": "eu",
       "img": "ultimate-mister-pro.png",
       "url": "https://ultimatemister.com/product/ultimate-mister-pro/",
       "what": "A pre-built classic stack on a genuine DE10-Nano, assembled and tested in the EU.",
@@ -933,6 +936,7 @@
       ],
       "effort": "none",
       "stock": "now",
+      "ships_from": "cn",
       "img": "qmtech-assembled.png",
       "url": "https://www.aliexpress.com/item/1005012462104429.html",
       "what": "A factory-built MiSTer on the QMTech board - the lowest-priced ready-made option.",
@@ -972,6 +976,7 @@
       ],
       "effort": "none",
       "stock": "now",
+      "ships_from": "us",
       "img": "icode-fully-built.png",
       "url": "https://www.icode.com/product/mister-fpga-fully-built-digital-dual-ram/",
       "what": "Fully assembled DE10-Nano builds with a preloaded SD card, sold from US stock in digital and analog configurations.",
@@ -1021,6 +1026,7 @@
       ],
       "effort": "none",
       "stock": "now",
+      "ships_from": "cn",
       "img": "retrocastle-full-kit.png",
       "url": "https://www.retrocastlestore.com/",
       "what": "Premium pre-built kits on a genuine DE10-Nano with a 256GB card and case included, sold in four configurations.",
@@ -1084,6 +1090,7 @@
       ],
       "effort": "diy",
       "stock": "now",
+      "ships_from": "tw",
       "img": "de10-nano.png",
       "url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046",
       "what": "The original reference board every MiSTer descends from. Bare, it can boot a handful of cores over HDMI - but almost nobody uses one that way.",
@@ -1123,6 +1130,7 @@
       ],
       "effort": "diy",
       "stock": "waves",
+      "ships_from": "us",
       "img": "mister-pi.png",
       "url": "https://retroremake.co/pages/store",
       "what": "A modern remake of the reference board: same FPGA class, USB-C power, sold in batches.",
@@ -1163,6 +1171,7 @@
       ],
       "effort": "diy",
       "stock": "now",
+      "ships_from": "cn",
       "img": "qmtech-cv.png",
       "url": "https://www.aliexpress.com/item/1005007858010441.html",
       "what": "The Chinese clone of the reference board, often with the 128MB RAM already soldered on.",
@@ -1199,6 +1208,7 @@
       ],
       "effort": "none",
       "stock": "now",
+      "ships_from": "eu",
       "img": "multisystem2.png",
       "url": "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/",
       "what": "A complete console built around its own integrated MiSTer board, assembled in the UK.",
@@ -1244,6 +1254,7 @@
       ],
       "effort": "none",
       "stock": "na",
+      "ships_from": "eu",
       "img": "ms2-arcade.png",
       "url": "https://shop.heber.co.uk/multisystem2-arcade-system-jamma-with-black-enclosure/",
       "what": "The Multisystem2 in JAMMA form: a complete console that slots into an arcade cabinet as the game board.",
@@ -1268,6 +1279,7 @@
       ],
       "effort": "some",
       "stock": "na",
+      "ships_from": "eu",
       "img": "multisystem1.png",
       "url": "https://heber.co.uk/mister-multisystem-is-now-open-source/",
       "what": "The original Multisystem console: a case and carrier board your DE10-Nano dropped into.",
@@ -1490,6 +1502,30 @@
             ]
           ],
           "short": "Handheld"
+        }
+      ]
+    },
+    {
+      "id": "region",
+      "q": "Where do you live?",
+      "answers": [
+        {
+          "id": "us",
+          "label": "United States",
+          "region": "us",
+          "short": "US"
+        },
+        {
+          "id": "eu",
+          "label": "Europe or the UK",
+          "region": "eu",
+          "short": "Europe/UK"
+        },
+        {
+          "id": "other",
+          "label": "Somewhere else",
+          "region": null,
+          "short": "elsewhere"
         }
       ]
     },

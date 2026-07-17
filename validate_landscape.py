@@ -48,7 +48,10 @@ for pid, p in parts.items():
 
 EFFORTS = {'none', 'some', 'diy'}
 STOCKS = {'now', 'waves', 'scarce', 'na'}
+REGIONS = {'us', 'eu', 'cn', 'tw'}
 for o in d['options']:
+    if 'ships_from' in o and o['ships_from'] not in REGIONS:
+        errs.append(f"option {o['id']}: ships_from must be one of {sorted(REGIONS)}")
     if o.get('effort') not in EFFORTS:
         errs.append(f"option {o['id']}: effort must be one of {sorted(EFFORTS)}")
     if o.get('stock') not in STOCKS:

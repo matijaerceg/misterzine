@@ -787,7 +787,8 @@
       "img": "superstation-one.png",
       "url": "https://retroremake.co/products/superstation-one",
       "what": "A complete MiSTer in a PSone-style shell: plug it into power and a TV and you are playing.",
-      "advice": "The most talked-about turnkey option right now. Batches sell out, so getting one takes patience. Original PS1 pads and memory cards plug straight in, and the S-Video/composite output needs no extra parts."
+      "advice": "The most talked-about turnkey option right now. Batches sell out, so getting one takes patience. Original PS1 pads and memory cards plug straight in, and the S-Video/composite output needs no extra parts.",
+      "popular": true
     },
     {
       "id": "aluminum-armor-bundle",
@@ -1103,7 +1104,8 @@
       "img": "mister-pi.png",
       "url": "https://retroremake.co/pages/store",
       "what": "A modern remake of the reference board: same FPGA class, USB-C power, sold in batches.",
-      "advice": "The most commonly recommended starting point for self-builders. It sells out between batches, and its accessory line (RAM, hub, case) is inexpensive."
+      "advice": "The most commonly recommended starting point for self-builders. It sells out between batches, and its accessory line (RAM, hub, case) is inexpensive.",
+      "popular": true
     },
     {
       "id": "qmtech-cv",
@@ -1192,7 +1194,7 @@
     {
       "id": "multisystem1",
       "lane": "turnkey",
-      "name": "Heber MiSTer Multisystem 1",
+      "name": "Heber MiSTer Multisystem",
       "vendor": "Heber / RMC (UK)",
       "price_usd": null,
       "status": "discontinued",

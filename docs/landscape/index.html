@@ -185,6 +185,14 @@
   /* answer-driven highlight: the parts your answers would pull into a build */
   .pcard.hl { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
   .card .ramline { font-size: .72rem; color: var(--muted); }
+  /* characteristic badges (post-answer spotlights, never zero-state) */
+  .card .bdgs { display: flex; flex-wrap: wrap; gap: .25rem; }
+  .card .bdg { font-size: .64rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 700;
+               color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg));
+               border-radius: 4px; padding: .04rem .35rem;
+               background: color-mix(in srgb, var(--accent) 10%, var(--bg)); }
+  .keynote { font-size: .8rem; color: var(--muted); margin: 0 0 1rem; }
+  .cta { font-size: .78rem; color: var(--muted); margin: 0; }
   @media (max-width: 66rem) { .cols { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
 
@@ -321,6 +329,7 @@
     <details id="railfold" open>
       <summary id="railsum">Find my MiSTer</summary>
       <div class="foldin">
+        <p class="cta">Tell it what you need. The map narrows as you answer.</p>
         <div id="questions"></div>
         <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
       </div>
@@ -554,13 +563,22 @@
        only once answers exist */
     if (r.ghost || (answeredCount() > 0 && !r.in)) {
       var dead2 = o.status === 'discontinued' || o.status === 'cancelled';
+      /* skip the reason when it just repeats the status tag ("discontinued" twice) */
+      var why = r.reason.toLowerCase() === o.status ? '' :
+                '<span class="out-why">' + esc(r.reason) + '</span>';
       return '<button type="button" class="card mini' + (r.ghost ? ' ghost out' : ' out') +
              '" data-card="' + o.id + '">' + stagHTML(o) +
              '<span class="nm">' + esc(o.name) + '</span>' +
              (o.price_usd != null ? '<span class="pr">' + (dead2 ? 'was ' : '') + esc(priceText(o.price_usd)) + '</span>' : '') +
-             '<span class="out-why">' + esc(r.reason) + '</span></button>';
+             why + '</button>';
     }
     bits.push(stagHTML(o));
+    /* characteristic badges: spotlights, not recommendations - and only once
+       at least one question is answered (the zero state stays opinion-free) */
+    if (BADGES[o.id] && BADGES[o.id].length) {
+      bits.push('<span class="bdgs">' + BADGES[o.id].map(function (t) {
+        return '<span class="bdg">' + esc(t) + '</span>'; }).join('') + '</span>');
+    }
     /* every option points at img/<id>.png; a file that does not exist (yet)
        removes itself, so dropping a PNG into the folder upgrades the card
        with no code change. NOPIC remembers misses so re-renders do not
@@ -627,8 +645,25 @@
       '<span class="pr">' + esc(priceText(p.price_usd)) + '</span></button>';
   }
 
+  var BADGES = {};
+
   function renderPoster() {
     var evals = D.options.map(evaluate);
+    /* badges are computed fresh per render; empty until something is answered */
+    BADGES = {};
+    if (answeredCount() > 0) {
+      var fits = evals.filter(function (r) { return !r.ghost && r.in && !r.unknownPrice; });
+      if (fits.length > 1) {
+        var cheapest = fits.reduce(function (a, b) { return b.lo < a.lo ? b : a; });
+        (BADGES[cheapest.o.id] = BADGES[cheapest.o.id] || []).push('cheapest fit');
+      }
+      /* deliberately no usually-in-stock badge: it lands on most cards and
+         the muted availability line already says it - a badge on everything
+         is a badge on nothing */
+      fits.forEach(function (r) {
+        if (r.o.popular) (BADGES[r.o.id] = BADGES[r.o.id] || []).push('community favorite');
+      });
+    }
     var byLane = {};
     evals.forEach(function (r) { (byLane[r.o.lane] = byLane[r.o.lane] || []).push(r); });
     /* highlight column parts your answers would pull into a build: anything a
@@ -655,7 +690,9 @@
       if (pid === 'snac-adapter' && qa.snac) return true;
       return false;
     }
-    document.getElementById('poster').innerHTML = D.lanes.map(function (l) {
+    document.getElementById('poster').innerHTML =
+      '<p class="keynote">Every machine here plays the same core library. You are choosing a body, not a brain.</p>' +
+      D.lanes.map(function (l) {
       var rows = byLane[l.id] || [];
       var body;
       if (l.id === 'diy') {

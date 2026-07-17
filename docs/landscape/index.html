@@ -618,7 +618,10 @@
     sheet.innerHTML =
       '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
       '<h2><span class="cd">' + esc(o.name) + '</span></h2>' +
-      '<p class="vd">' + esc(o.vendor) + ' &middot; ' + esc(o.status) +
+      '<p class="vd">' +
+        (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.vendor) + ' - official page</a>'
+               : esc(o.vendor)) +
+        ' &middot; ' + esc(o.status) +
         (o.status === 'orderable' && STOCK_LABEL[o.stock] ? ' (' + esc(STOCK_LABEL[o.stock]) + ')' : '') +
         ' &middot; lane: ' + esc(D.lanes.filter(function (l) { return l.id === o.lane; })[0].name) + '</p>' +
       '<p class="price"><b>' + esc(priceText(o.price_usd)) + '</b>' +

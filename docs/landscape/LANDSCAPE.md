@@ -113,6 +113,10 @@ Top-level keys:
   - `includes`: ids physically in the box — part ids OR option ids (kits
     contain boards). Their provides count as built-in; never restate them
     in `provides`.
+  - `url`: the official product page, rendered as the "vendor - official
+    page" link at the top of the spec sheet. `null` when no stable official
+    page exists (QMTech's AliExpress store URL is volatile; announced items
+    often have none) - never substitute a review or a reseller.
   - `to_complete`: part ids still needed for a minimal working setup
     (PSU, SD card, controller — and SDRAM for bare boards: a board that
     can't run popular cores is not complete). Complete price = price_usd

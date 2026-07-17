@@ -224,8 +224,11 @@ the system's native resolution yourself and hold the image to it.
   own progettoSNAPS slots (the other state categories above are fair game).
   libretro `Named_Snaps` likewise duplicates our `snap` slot.
 - A Wikipedia game screenshot that "looks fine" in the article is still a
-  downscaled thumbnail (see above). This shipped two blurry posts
-  (Rampage 338x254, Star Wars 317x315) before the size gate existed.
+  downscaled thumbnail (see above). This shipped two blurry posts before
+  the size gate existed: Rampage (338x254, replaced) and Star Wars
+  (317x315, which the editor chose to keep - it is pinned as an exception
+  in `misterzine.py`, a file this workflow cannot touch, so it is not a
+  precedent you can follow).
 - Some HG101 captures have a decorative frame that is not part of the game's
   framebuffer (the Boogie Wings gold frame). Reject those.
 - Wikipedia's "Apple Lisa Office System 3.1.png" is a mislabelled, downscaled

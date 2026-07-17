@@ -633,6 +633,34 @@
       "stock": "waves",
       "addon_note": "+ a Mini-ITX or larger PC case (yours to pick)"
     },
+    "jammix": {
+      "name": "JAMMIX I/O board (mini-ITX / JAMMA)",
+      "vendor": "JAMMIX / Ultimate MiSTer (EU)",
+      "price_usd": 275,
+      "category": "io",
+      "provides": [
+        "jamma",
+        "vga-rgb",
+        "ypbpr",
+        "usb-hub",
+        "analog-audio"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
+      "what": "The I/O board that turns a MiSTer into an ITX-case PC build OR a JAMMA arcade board - buffered RGB out of both at once.",
+      "notes": "EUR249.90 excl VAT (~$275) for the rev.2 board at Ultimate MiSTer, in stock at review 2026-07-17. Simultaneous buffered RGB via the JAMMA edge and a VGA port (component via sync-on-Y is an either/or mode), 4V p-p arcade-monitor levels, buffered TTL csync, onboard stereo amp for Neo Geo style cabinets, MVS harness compatible, CHAMMA 6-button support, I2S audio DAC with line in/out, 4+2-port USB hub, Ethernet routed to the IO shield, self-resetting fuses, ATX/JAMMA/5V power with soft power. Complete 'Ultimate JAMMIX' kits run EUR499.90-699.90 and do NOT include the DE10-Nano. The other current JAMMA I/O option alongside the MiSTercade; RetroCastle's earlier JAMMA kit is no longer listed anywhere (their store and the CastleMania listing both come up empty, checked 2026-07-17).",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://www.jammix.io/",
+        "https://ultimatemister.com/product-category/jamma-itx/"
+      ],
+      "img": "jammix.png",
+      "url": "https://ultimatemister.com/product-category/jamma-itx/",
+      "stock": "now",
+      "addon_note": "+ an ITX case or arcade cabinet (yours)"
+    },
     "mistercade-lite": {
       "name": "MiSTer Addons MiSTercade V2 (Lite)",
       "vendor": "MiSTer Addons",
@@ -822,7 +850,8 @@
       "url": "https://retroremake.co/products/superstation-one",
       "what": "A complete MiSTer in a PSone-style shell: plug it into power and a TV and you are playing.",
       "advice": "The most talked-about turnkey option right now. Batches sell out, so getting one takes patience. Original PS1 pads and memory cards plug straight in, and the S-Video/composite output needs no extra parts.",
-      "popular": true
+      "popular": true,
+      "tag": "The one everyone is talking about"
     },
     {
       "id": "aluminum-armor-bundle",
@@ -859,7 +888,7 @@
       "img": "aluminum-armor-bundle.png",
       "url": "https://misteraddons.com/products/aluminum-kit-bundle-no-de10-nano",
       "what": "The classic MiSTer stack - board, RAM, I/O, USB hub - pre-assembled in a silent all-aluminum case.",
-      "advice": "A commonly recommended one-box route to the traditional stack, with S-Video and RGB out of the box. Both configurations cover current cores; IO Direct adds a second RAM module as futureproofing.",
+      "advice": "A commonly recommended one-box route to the traditional stack, with S-Video and RGB out of the box. The maker's addon boards are the community's reference parts, and the support reputation is part of what you pay for. Both configurations cover current cores; IO Direct adds a second RAM module as futureproofing.",
       "variants": [
         {
           "id": "iodirect",
@@ -870,7 +899,8 @@
           ],
           "note": "Ships 2x 128MB SDRAM (futureproofing - current cores run single-module); HDMI or analog rather than both at once."
         }
-      ]
+      ],
+      "tag": "The premium pick: boards, case and support"
     },
     {
       "id": "ultimate-mister-pro",
@@ -924,7 +954,8 @@
           ],
           "note": "Low-latency BlisSTer hub with native gamepad ports; HDMI-only, no VGA (EUR419.90)."
         }
-      ]
+      ],
+      "tag": "The long-trusted EU build"
     },
     {
       "id": "qmtech-assembled",
@@ -961,7 +992,8 @@
       "img": "qmtech-assembled.png",
       "url": "https://www.aliexpress.com/item/1005012462104429.html",
       "what": "A factory-built MiSTer on the QMTech board - the lowest-priced ready-made option.",
-      "advice": "A popular budget entry. The trade-offs are AliExpress shipping and less hand-holding than the boutique kits; the hardware itself covers the essentials, SNAC and RTC included."
+      "advice": "A popular budget entry. The trade-offs are AliExpress shipping and less hand-holding than the boutique kits; the hardware itself covers the essentials, SNAC and RTC included.",
+      "tag": "The value pick"
     },
     {
       "id": "hamgeek-mister",
@@ -998,7 +1030,8 @@
       "img": "hamgeek-mister.png",
       "url": "https://www.hgeek.com/products/hamgeek-mister-game-console-with-cyclone-v-soc-fpga-development-board-plastic-metal-shell-and-32gb-tf-card",
       "what": "The budget factory-assembled clone: a QMTech-design board, case, analog I/O and fan in one AliExpress box.",
-      "advice": "The cheapest assembled route on the map and a common first MiSTer. Owners typically swap the included power supply for a stronger one and pick the metal case; early RAM problems were fixed with free replacement boards, and current units run the demanding cores fine."
+      "advice": "The cheapest assembled route on the map and a common first MiSTer. Owners typically swap the included power supply for a stronger one and pick the metal case; early RAM problems were fixed with free replacement boards, and current units run the demanding cores fine.",
+      "tag": "The lowest-priced way in"
     },
     {
       "id": "icode-fully-built",
@@ -1052,7 +1085,8 @@
           ],
           "note": "VGA-connector analog I/O board (RGB/component by cable; MikeS11 passive Y/C applies), metal case, 2A supply."
         }
-      ]
+      ],
+      "tag": "The convenience build: preloaded, in stock"
     },
     {
       "id": "retrocastle-full-kit",
@@ -1088,7 +1122,7 @@
       "img": "retrocastle-full-kit.png",
       "url": "https://www.retrocastlestore.com/",
       "what": "Premium pre-built kits on a genuine DE10-Nano with a 256GB card and case included, sold in four configurations.",
-      "advice": "The high end of the pre-built market. The Saturn-connector versions suit CRT setups; the dual-SDRAM 2024 versions add RAM headroom current cores do not require.",
+      "advice": "The most complete boxes on the map: genuine DE10-Nano, 256GB card, case and cooling all included. The Saturn-connector versions suit CRT setups; the dual-SDRAM 2024 versions add RAM headroom current cores do not require.",
       "variants": [
         {
           "id": "saturn23",
@@ -1115,7 +1149,8 @@
           ],
           "note": "Dual RAM (futureproofing) plus the Saturn AV connector."
         }
-      ]
+      ],
+      "tag": "The fully loaded import"
     },
     {
       "id": "de10-nano",
@@ -1152,7 +1187,8 @@
       "img": "de10-nano.png",
       "url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046",
       "what": "The original reference board every MiSTer descends from. Bare, it can boot a handful of cores over HDMI - but almost nobody uses one that way.",
-      "advice": "Most newcomers now start with a MiSTer Pi or a pre-built kit; the DE10-Nano remains the pick if you want the reference hardware itself, and everything in the ecosystem fits it."
+      "advice": "Most newcomers now start with a MiSTer Pi or a pre-built kit; the DE10-Nano remains the pick if you want the reference hardware itself, and everything in the ecosystem fits it.",
+      "tag": "The original reference board"
     },
     {
       "id": "mister-pi",
@@ -1193,7 +1229,8 @@
       "url": "https://retroremake.co/pages/store",
       "what": "A modern remake of the reference board: same FPGA class, USB-C power, sold in batches.",
       "advice": "The most commonly recommended starting point for self-builders. It sells out between batches, and its accessory line (RAM, hub, case) is inexpensive.",
-      "popular": true
+      "popular": true,
+      "tag": "The default recommendation"
     },
     {
       "id": "qmtech-cv",
@@ -1233,7 +1270,8 @@
       "img": "qmtech-cv.png",
       "url": "https://www.aliexpress.com/item/1005007858010441.html",
       "what": "The Chinese clone of the reference board, often with the 128MB RAM already soldered on.",
-      "advice": "Liked for being in stock when others are not, and by fanless builders for its thermal headroom. Quality control varies more than the originals - mind the RAM-slot orientation note before assembling."
+      "advice": "Liked for being in stock when others are not, and by fanless builders for its thermal headroom. Quality control varies more than the originals - mind the RAM-slot orientation note before assembling.",
+      "tag": "The clone that is in stock"
     },
     {
       "id": "multisystem2",
@@ -1283,7 +1321,8 @@
           "adds": [],
           "note": "HDMI-only and about $50 less: no analog video, no Ethernet, no optical/3.5mm audio, and no cartridge bay (so no SNAC or video cartridges)."
         }
-      ]
+      ],
+      "tag": "The dependable UK all-in-one"
     },
     {
       "id": "ms2-arcade",

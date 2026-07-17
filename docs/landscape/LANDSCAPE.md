@@ -259,8 +259,21 @@ Field conventions (parts and options both):
 - **Visitors are assumed to own a USB controller**: no option lists
   usb-controller in to_complete (the part stays as a reference record);
   one footer sentence states the assumption.
-- **The shelf answer filters JAMMA gear** (dims mistercade-lite etc.), so
-  shelf and cabinet are inverse filters and shelf is a real option.
+- **Shelf and cabinet are INVERSE filters**: shelf dims JAMMA gear; the
+  cabinet answer dims every io-category board that does NOT provide jamma
+  (a required-token highlight beats the dim). (2026-07-17)
+- **DIY card prices NEVER absorb answer-driven chain costs**: a mainboard
+  card shows board + its own essentials (`baseLo`), full stop - the
+  per-answer line carries the chain cost ("with parts (~$275)"). A QMTech
+  jumping to $423 on the cab answer read as "QMTech sells JAMMA gear"
+  (user, 2026-07-17). Consoles/kits keep answer-inclusive complete prices -
+  that IS their meaning.
+- **The controllers question never says SNAC**: label "Plug in original
+  console controllers", short "Original controllers" - the jargon appears
+  only in results/parts (user, 2026-07-17).
+- **The adapters column is grouped by subheads**: parts carry
+  `subcat: video|input|other`, rendered as Video / Controllers / Extras.
+  New adapter parts must set subcat (default bucket is Extras).
 - **Built-in per-answer lines collapse to one "Covers: X, Y" line**; costed
   paths and overridden lines stay separate.
 - **`line_overrides`** (option field): `{token: "text"}` replaces the
@@ -281,8 +294,19 @@ Field conventions (parts and options both):
   (both in stock, SD preloaded 64GB-1TB, 256GB anchors $459.95/$479.95);
   QMTech assembled includes its 32GB card; Multisystem2 ships with NO SD
   card and NO PSU (Heber's own "Extras you will need" list) - both are in
-  its to_complete now. RetroCastle box contents (SD? PSU?) still
-  unverified - needs the --cdp sweep.
+  its to_complete now. RetroCastle per-variant contents fully verified via
+  the CDP sweep (256GB SD + case in every kit, USB-C power, no hub/PSU;
+  $517/$527/$527/$624). QMTech AliExpress listings browser-verified:
+  assembled base ~C$274 (~$200), bare-board SKUs ~C$141-266 (~$105-195).
+- **JAMMA landscape (swept 2026-07-17)**: ms2-arcade added as a turnkey
+  PREORDER entry (Heber Multisystem2 Arcade, GBP215 ex VAT ~ $280, ships
+  from Aug 2026 - the first turnkey JAMMA MiSTer). Budget alternatives
+  exist but are NOTES ONLY on mistercade-lite, not paths: the QMTech
+  AliExpress JAMMA conversion board (~C$27, 3 sold, owner-reported P1
+  input bugs, r/MiSTerFPGA 1pfrd5i) and JammASD V3 (EUR65.90, PC-to-JAMMA
+  via VGA+USB, no hardware-verified MiSTer report found). Too thinly
+  attested to enter the chain solver - revisit if reports accumulate.
+  (Heber's MultiPi JAMMA is Raspberry-Pi-based, not FPGA - ignore.)
 
 ## Chain-honesty rules (overnight audit 2026-07-17)
 

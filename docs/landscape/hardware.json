@@ -295,6 +295,7 @@
         "https://misteraddons.com/products/reflex-prism-hdmi-to-analog"
       ],
       "category": "adapter",
+      "subcat": "video",
       "what": "The polished Direct Video converter: RGB, component and native S-Video from the HDMI port."
     },
     "io-digital": {
@@ -362,6 +363,7 @@
         "https://mister-devel.github.io/MkDocs_MiSTer/advanced/directvideo/"
       ],
       "category": "adapter",
+      "subcat": "video",
       "what": "A generic HDMI-to-VGA dongle plus one ini line = analog RGB without an I/O board."
     },
     "yc-passive": {
@@ -382,6 +384,7 @@
         "https://ultimatemister.com/product/mikes1-yc-passive-board/"
       ],
       "category": "adapter",
+      "subcat": "video",
       "what": "Cheapest clean S-Video: plugs into a VGA port or a Direct Video dongle."
     },
     "yc-active": {
@@ -409,6 +412,7 @@
         "https://github.com/MikeS11/MiSTerCRT"
       ],
       "category": "adapter",
+      "subcat": "video",
       "what": "The amplified S-Video/composite adapter (THS7374) for VGA-equipped analog boards."
     },
     "snac-adapter": {
@@ -432,6 +436,7 @@
         "https://retroremake.co/pages/store"
       ],
       "category": "adapter",
+      "subcat": "input",
       "what": "Real console controllers wired near-directly into the core - the zero-lag option."
     },
     "nfc-reader": {
@@ -450,6 +455,7 @@
         "https://zaparoo.org/"
       ],
       "category": "adapter",
+      "subcat": "other",
       "what": "Tap-a-card game launching (Zaparoo) from any USB port."
     },
     "rtc-board": {
@@ -643,7 +649,7 @@
         "gpio-header"
       ],
       "what": "The I/O board shaped like a JAMMA edge: your MiSTer becomes the game PCB inside a real arcade cabinet.",
-      "notes": "Lite tier: bring your own mainboard and RAM. The $550 Full Kit version includes a DE10-Nano and dual 128MB SDRAM. 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Sold out at review (\"back in soon\"). The Versus 2P sidekick board ($55) is an accessory, not listed. Cabinet not included, obviously.",
+      "notes": "Lite tier: bring your own mainboard and RAM. The $550 Full Kit version includes a DE10-Nano and dual 128MB SDRAM. 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Sold out at review (\"back in soon\"). The Versus 2P sidekick board ($55) is an accessory, not listed. Cabinet not included, obviously. BUDGET ALTERNATIVES exist but are not listed as paths (verified 2026-07-17): a QMTech-branded JAMMA conversion board sells on AliExpress (~C$27, 3 sold, owner-reported input bugs on player 1 - r/MiSTerFPGA 1pfrd5i), and the generic JammASD V3 PC-to-JAMMA converter (EUR65.90, smallcab.net) reportedly works via a VGA analog board + USB, though no hardware-verified MiSTer report was found (1on1cd3). Both too thinly attested to put on the map as reliable JAMMA paths.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -685,6 +691,7 @@
         "bluetooth"
       ],
       "requires": [],
+      "subcat": "other",
       "what": "Wireless networking and Bluetooth pads for boards that have neither - one little USB dongle.",
       "notes": "Any Linux-friendly USB WiFi/BT dongle works; Retro Remake sells a known-good WiFi 5 / BT 4.2 one for $5.",
       "verified": "2026-07",
@@ -722,6 +729,7 @@
         50
       ],
       "category": "adapter",
+      "subcat": "input",
       "provides": [],
       "requires": [],
       "what": "Original controllers over USB at ~1ms - menu support included, no SNAC wiring, works on every option here.",
@@ -916,7 +924,7 @@
         "sd-card"
       ],
       "to_complete": [],
-      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Priced $159 per RetroRGB (Oct 2024) for this exact bundle - a dated anchor, not a verified current price; AliExpress prices drift and vary by region (US listings reportedly cheaper than international), and their pages block automated verification. Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless. Its V2.1 IO board VGA out is the older 18-bit-colour style (community reports); fine on a cab monitor, not the 24-bit path of newer boards.",
+      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Listing browser-verified 2026-07-17 (desktop-Chrome fetch): base C$273.99 (~$200 converted from CAD as shown at this location), with higher-tier SKUs to ~C$540; prices drift and vary by region. Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless. Its V2.1 IO board VGA out is the older 18-bit-colour style (community reports); fine on a cab monitor, not the 24-bit path of newer boards.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1126,7 +1134,10 @@
       "lane": "diy",
       "name": "QMTech Cyclone V Clone",
       "vendor": "QMTech (AliExpress)",
-      "price_usd": 100,
+      "price_usd": [
+        105,
+        195
+      ],
       "status": "orderable",
       "provides": [
         "hdmi",
@@ -1143,7 +1154,7 @@
         "psu-barrel-5a",
         "sd-card"
       ],
-      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some variants have SDRAM integrated on-board (+~$15; then skip the module). Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic. Official sales channel is the QMTech AliExpress store; the linked listing was supplied by the site owner 2026-07-16 and cannot be machine-verified (AliExpress blocks automated access) - AliExpress URLs are volatile, re-check on each sweep.",
+      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some variants have SDRAM integrated on-board (+~$15; then skip the module). Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic. Official sales channel is the QMTech AliExpress store; listing browser-verified 2026-07-17 (via desktop-Chrome fetch): SKUs span roughly C$141-C$266 (~$105-$195 converted from CAD as shown at this location) across bare-board and higher-spec bundles - the old flat $100 figure is shortage-era history. AliExpress URLs are volatile, re-check on each sweep.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1204,6 +1215,39 @@
           "note": "24-bit analog out: mini-DIN RGB for SCART plus a VGA-style port. The base (Digital) version is HDMI-only."
         }
       ]
+    },
+    {
+      "id": "ms2-arcade",
+      "lane": "turnkey",
+      "name": "Heber Multisystem2 Arcade (JAMMA)",
+      "vendor": "Heber / RMC (UK)",
+      "price_usd": 280,
+      "status": "preorder",
+      "provides": [
+        "jamma",
+        "hdmi",
+        "ethernet",
+        "usb-hub",
+        "sdram128",
+        "barrel-power"
+      ],
+      "includes": [],
+      "to_complete": [
+        "sd-card",
+        "psu-barrel-5a"
+      ],
+      "notes": "The Multisystem2 board in JAMMA trim: the console that drops into a real arcade cabinet as the game PCB. GBP215 ex VAT (~$280) on preorder at the Heber shop, shipping from Aug 2026 (product page verified 2026-07-17). Same integrated-board family as the Multisystem2; assume the same extras apply (SD card and 5V PSU not included on the standard MS2 - confirm the Arcade edition's box when it ships). Exact JAMMA-edge spec (video bit depth, kick harness support) not yet reviewed anywhere - preorder buyers are early.",
+      "verified": "2026-07",
+      "confidence": "medium",
+      "sources": [
+        "https://shop.heber.co.uk/multisystem2-arcade-system-jamma-with-black-enclosure/"
+      ],
+      "effort": "none",
+      "stock": "na",
+      "img": "ms2-arcade.png",
+      "url": "https://shop.heber.co.uk/multisystem2-arcade-system-jamma-with-black-enclosure/",
+      "what": "The Multisystem2 in JAMMA form: a complete console that slots into an arcade cabinet as the game board.",
+      "advice": "The first turnkey JAMMA MiSTer - everything else in a cabinet is a parts build. Preorders ship from Aug 2026; nobody has reviewed one yet, so early buyers are pioneers."
     },
     {
       "id": "multisystem1",
@@ -1409,13 +1453,13 @@
       "answers": [
         {
           "id": "yes",
-          "label": "Plug in original console controllers natively (SNAC)",
+          "label": "Plug in original console controllers",
           "require": [
             [
               "snac"
             ]
           ],
-          "short": "Original controllers (SNAC)"
+          "short": "Original controllers"
         }
       ]
     },

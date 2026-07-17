@@ -175,6 +175,11 @@
   .cols.colsdim .colhead { opacity: .45; }
   .pcard .pw.addon { color: color-mix(in srgb, var(--fg) 55%, var(--bg)); }
   .col .colhead { margin: 0 0 .45rem; }
+  /* subheads inside the adapters column: video / controllers / extras */
+  .col .subhead { font-size: .66rem; text-transform: uppercase; letter-spacing: .07em;
+                  color: var(--muted); font-weight: 700; margin: .3rem 0 -.2rem; }
+  .col .subhead:first-child { margin-top: 0; }
+  .cols.colsdim .subhead { opacity: .45; }
   .col .colhead h3 { font-size: 1.02rem; margin: 0; }
   .col .colhead span { display: block; font-size: .7rem; color: var(--muted); }
   .col .cards { grid-template-columns: 1fr; gap: .45rem; }
@@ -495,6 +500,11 @@
       if (PARTS[ref]) p.provides.forEach(function (t) { have[t] = true; });
       else Object.keys(builtIn(p)).forEach(function (t) { have[t] = true; });
     });
+    /* the pre-answers bill: DIY cards display THIS, never answer-driven
+       chain costs - a mainboard's price must not absorb another column's
+       parts (user: a QMTech jumping to $423 on the cab answer reads as
+       "QMTech sells JAMMA gear"). The per-answer lines carry those costs. */
+    r.baseLo = lo; r.baseHi = hi;
     var fitsCaps = true;                    // capability+effort fit, ignoring stock/status
     if (c.effortAllowed && c.effortAllowed.indexOf(o.effort) < 0) fitsCaps = false;
     var unv = o.provides_unverified || [];
@@ -670,7 +680,7 @@
     } else {
       /* DIY mainboards drop the word "complete" - the number covers board +
          essentials, not a finished machine (user ruling) */
-      bits.push('<span class="pr"><b>~' + money(r.lo) + (o.lane === 'diy' ? '' : ' complete') + '</b></span>');
+      bits.push('<span class="pr"><b>~' + money(o.lane === 'diy' ? r.baseLo : r.lo) + (o.lane === 'diy' ? '' : ' complete') + '</b></span>');
       /* no device price on cards (user: too much text) - the sheet keeps it */
       if (STOCK_LABEL[o.stock]) bits.push('<span class="avail">' + esc(STOCK_LABEL[o.stock]) + '</span>');
     }
@@ -744,8 +754,12 @@
     function dimPart(pid) {
       var p = PARTS[pid];
       if (hl[pid]) return false;
-      if (qa.situation && qa.situation.some(function (a) { return a.id === 'shelf'; }) &&
-          (p.provides || []).indexOf('jamma') >= 0) return true;
+      /* shelf and cabinet are inverse filters: shelf dims JAMMA gear, the
+         cabinet dims every I/O board that is NOT a JAMMA one */
+      var situ = qa.situation && qa.situation[0] && qa.situation[0].id;
+      var hasJamma = (p.provides || []).indexOf('jamma') >= 0;
+      if (situ === 'shelf' && hasJamma) return true;
+      if (situ === 'cab' && p.category === 'io' && !hasJamma) return true;
       if (p.category !== 'adapter') return false;
       var videoish = (p.provides || []).some(function (t) { return VIDEOISH[t]; });
       if (videoish && qa.display) return true;
@@ -766,8 +780,21 @@
           '<div class="cards">' + rows.map(cardHTML).join('') + '</div></div>' +
           PART_COLS.map(function (pc) {
             var pids = Object.keys(PARTS).filter(function (pid) { return PARTS[pid].category === pc[0]; });
+            var inner;
+            if (pc[0] === 'adapter') {
+              /* the adapters column is the longest: tiny subheads group it
+                 by what the adapter is for (parts carry a subcat field) */
+              inner = [['video', 'Video'], ['input', 'Controllers'], ['other', 'Extras']].map(function (sc) {
+                var sp = pids.filter(function (pid) { return (PARTS[pid].subcat || 'other') === sc[0]; });
+                if (!sp.length) return '';
+                return '<div class="subhead">' + sc[1] + '</div>' +
+                  sp.map(function (pid) { return partCardHTML(pid, !allDim && !!hl[pid], allDim || dimPart(pid)); }).join('');
+              }).join('');
+            } else {
+              inner = pids.map(function (pid) { return partCardHTML(pid, !allDim && !!hl[pid], allDim || dimPart(pid)); }).join('');
+            }
             return '<div class="col"><div class="colhead"><h3 class="cd">' + esc(pc[1]) + '</h3></div><div class="cards">' +
-              pids.map(function (pid) { return partCardHTML(pid, !allDim && !!hl[pid], allDim || dimPart(pid)); }).join('') + '</div></div>';
+              inner + '</div></div>';
           }).join('') + '</div>';
       } else {
         body = '<div class="cards">' + rows.map(cardHTML).join('') + '</div>';

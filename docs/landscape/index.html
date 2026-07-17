@@ -19,23 +19,25 @@
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: 'Permanent Marker'; src: url(../fonts/permanent-marker-latin.woff2) format('woff2');
-               font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Roboto Condensed'; src: url(../fonts/roboto-condensed-latin-var.woff2) format('woff2');
+               font-weight: 100 900; font-display: swap; }
   * { box-sizing: border-box; }
   body { font: 15px/1.5 Roboto, system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--fg); }
   a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
   a:hover { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .pm { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; }
+  /* titles are Roboto Condensed on this page (no marker font here) */
+  .cd { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; }
 
   .wrap { max-width: 78rem; margin: 0 auto; padding: .8rem 1.25rem 3rem; }
 
   /* ---- header: title left, channel pills + theme toggle right ---- */
   .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
          padding: .35rem 0 .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
-  .top h1 { font-size: 1.65rem; margin: 0; line-height: 1.2; letter-spacing: .01em; }
-  .top h1 .pm { color: var(--accent); }
-  .top .scope { display: block; font-size: .78rem; font-weight: 400; color: var(--muted); margin-top: .1rem; }
+  .top h1 { font-size: 1.75rem; margin: 0; line-height: 1.15; letter-spacing: .01em; }
+  .top h1 .cd { color: var(--accent); }
+  .top .scope { display: block; font-family: Roboto, system-ui, sans-serif; font-size: .78rem; font-weight: 400;
+                color: var(--muted); margin-top: .15rem; }
   .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
   .top .pill { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; font-size: .85rem;
                border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 999px; padding: .34rem .8rem; }
@@ -68,21 +70,21 @@
   /* ---- shell: interview rail + poster ---- */
   .shell { display: grid; grid-template-columns: 19.5rem 1fr; gap: 1.4rem; align-items: start; }
 
-  /* the rail: sticky, questions in source order, verdict on top */
   #rail { position: sticky; top: .8rem; display: grid; gap: .9rem;
           max-height: calc(100vh - 1.6rem); overflow-y: auto; padding-right: .15rem; }
-  .railhead { font-size: 1.15rem; margin: 0; }
+  .railhead { font-size: 1.2rem; margin: 0; }
   .railsub { font-size: .78rem; color: var(--muted); margin: -.55rem 0 0; }
   #verdict { border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
              padding: .7rem .8rem; font-size: .85rem; }
   #verdict .vh { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .3rem; }
   #verdict .pick { font-weight: 700; }
-  #verdict .pick .pm { color: var(--accent); font-size: 1.15em; }
+  #verdict .pick .cd { color: var(--accent); font-size: 1.15em; }
   #verdict p { margin: .25rem 0 0; }
   #verdict .fit { color: var(--muted); font-size: .78rem; }
+  #verdict.dead { border-color: color-mix(in srgb, var(--warn) 55%, var(--bg)); }
+  #verdict.dead .vh { color: var(--warn); }
   .q { border: 1px solid var(--hair); border-radius: 8px; padding: .65rem .8rem; background: var(--bg); }
-  .q h3 { margin: 0 0 .1rem; font-size: .92rem; }
-  .q .why { margin: 0 0 .5rem; font-size: .74rem; color: var(--muted); }
+  .q h3 { margin: 0 0 .45rem; font-size: .92rem; }
   .q .ans { display: grid; gap: .3rem; }
   .q .ans button { font: inherit; font-size: .82rem; text-align: left; cursor: pointer;
                    border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface);
@@ -102,27 +104,28 @@
   .lane { margin: 0 0 1.5rem; }
   .lanebar { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin: 0 0 .55rem; }
   .lanebar button.lname { font: inherit; border: 0; background: none; color: var(--fg); cursor: pointer;
-                          padding: 0; font-size: 1.25rem; }
-  .lanebar button.lname .pm { letter-spacing: .01em; }
-  .lanebar button.lname:hover .pm { color: var(--accent); }
-  .lane.focus .lanebar button.lname .pm { color: var(--accent); }
+                          padding: 0; font-size: 1.3rem; }
+  .lanebar button.lname:hover .cd { color: var(--accent); }
+  .lane.focus .lanebar button.lname .cd { color: var(--accent); }
   .lanebar .tag2 { font-size: .76rem; color: var(--muted); }
   .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
-  /* zoomed lane: bigger cards, chips revealed; other lanes compress to their bars */
   body[data-zoom="lane"] .lane:not(.focus) .cards { display: none; }
   body[data-zoom="lane"] .lane:not(.focus) { margin-bottom: .7rem; opacity: .55; }
   body[data-zoom="lane"] .lane.focus .cards { grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
   body[data-zoom="lane"] .lane.focus .caps { display: flex; }
 
-  .card { position: relative; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  .card { text-align: left; font: inherit; color: inherit; cursor: pointer;
           border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
-          padding: .6rem .7rem .55rem; display: flex; flex-direction: column; gap: .22rem; min-height: 5.4rem; }
+          padding: .6rem .7rem .55rem; display: flex; flex-direction: column; gap: .22rem; min-height: 5rem; }
   .card:hover { border-color: var(--btn-border-hover); background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
-  .card .nm { font-weight: 700; font-size: .95rem; line-height: 1.25; }
-  .card .vd { font-size: .72rem; color: var(--muted); }
+  .card .nm { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
+              font-size: 1.02rem; line-height: 1.2; }
+  .card .pic { width: 52px; height: 52px; object-fit: contain; align-self: flex-end;
+               margin: -0.2rem 0 -2.6rem; }
   .card .pr { font-size: .8rem; }
   .card .pr b { font-weight: 700; }
   .card .pr .cpl { color: var(--muted); }
+  .card .avail { font-size: .72rem; color: var(--muted); }
   .card .caps { display: none; flex-wrap: wrap; gap: .25rem; margin-top: .15rem; }
   .card .cap { font-size: .68rem; border: 1px solid var(--hair); border-radius: 999px; padding: .06rem .45rem;
                color: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
@@ -130,20 +133,27 @@
   .card .need { font-size: .74rem; color: color-mix(in srgb, var(--ok) 75%, var(--fg)); }
   .card .hedge { font-size: .74rem; color: var(--warn); }
   .card .out-why { font-size: .74rem; color: var(--muted); }
-  .card .stag { position: absolute; top: .5rem; right: .6rem; font-size: .66rem; text-transform: uppercase;
+  /* status tag lives in the card flow (never overlaps the name) */
+  .card .stag { align-self: flex-start; font-size: .66rem; text-transform: uppercase;
                 letter-spacing: .05em; border-radius: 4px; padding: .05rem .35rem; }
   .card .stag.announced { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 55%, var(--bg)); }
   .card .stag.cancelled { color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 55%, var(--bg)); }
   .card .stag.preorder { color: var(--muted); border: 1px solid var(--hair); }
-  /* ruled out: grayed, never hidden; reason stays readable */
   .card.out { background: var(--bg); border-style: dashed; }
-  .card.out .nm, .card.out .pr, .card.out .vd, .card.out .caps { opacity: .45; }
-  /* announced/cancelled: always ghosted regardless of answers */
-  .card.ghost .nm, .card.ghost .pr, .card.ghost .vd { opacity: .6; }
+  .card.out .nm, .card.out .pr, .card.out .avail, .card.out .caps { opacity: .45; }
+  .card.ghost .nm, .card.ghost .pr { opacity: .6; }
+
+  /* horizon: announced things earn a slim row, not a full card */
+  .lane.slim .cards { grid-template-columns: 1fr; gap: .35rem; }
+  .lane.slim .card { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: .3rem .6rem;
+                     min-height: 0; padding: .4rem .65rem; }
+  .lane.slim .card .nm { font-size: .92rem; }
+  .lane.slim .card .out-why { margin-left: auto; }
+  .lane.slim .card .caps { display: none !important; }
 
   /* ---- appendix + footer ---- */
   .appendix { border-top: 1px solid var(--rule); margin-top: 1.8rem; padding-top: 1rem; }
-  .appendix h2 { font-size: 1.05rem; margin: 0 0 .5rem; }
+  .appendix h2 { font-size: 1.1rem; margin: 0 0 .5rem; }
   .appendix ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .35rem; }
   .appendix li { font-size: .82rem; }
   .appendix li b { font-weight: 700; }
@@ -154,8 +164,8 @@
   dialog#sheet { border: 1px solid var(--hair); border-radius: 10px; background: var(--surface); color: var(--fg);
                  padding: 1rem 1.15rem 1.1rem; width: min(34rem, calc(100vw - 2rem)); max-height: calc(100vh - 3rem); }
   dialog#sheet::backdrop { background: #0007; }
-  #sheet h2 { margin: 0; font-size: 1.35rem; }
-  #sheet h2 .pm { color: var(--accent); }
+  #sheet h2 { margin: 0; font-size: 1.4rem; }
+  #sheet h2 .cd { color: var(--accent); }
   #sheet .vd { color: var(--muted); font-size: .8rem; margin: .05rem 0 .6rem; }
   #sheet .price { font-size: .95rem; margin: 0 0 .6rem; }
   #sheet h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: .8rem 0 .25rem; }
@@ -195,7 +205,7 @@
 <div class="wrap">
 
 <header class="top">
-  <h1><span class="pm">The MiSTer Hardware Landscape</span>
+  <h1><span class="cd">The MiSTer Hardware Landscape</span>
     <span class="scope">Every way to own a MiSTer, one map. Complete-setup prices, not sticker prices.</span>
   </h1>
   <nav>
@@ -237,7 +247,7 @@
       <summary id="railsum">Find my MiSTer</summary>
       <div class="foldin">
         <div>
-          <h2 class="railhead pm">Which one should I buy?</h2>
+          <h2 class="railhead cd">Which one should I buy?</h2>
           <p class="railsub">Answer what you know. Everything you rule out stays on the map, grayed, with the reason.</p>
         </div>
         <div id="questions"></div>
@@ -250,13 +260,13 @@
 </div>
 
 <section class="appendix" id="appendix" hidden>
-  <h2 class="pm">Looks like MiSTer, isn't MiSTer</h2>
+  <h2 class="cd">Looks like MiSTer, isn't MiSTer</h2>
   <ul id="notmister"></ul>
 </section>
 
 <footer class="colophon">
   <p id="stamp"></p>
-  <p>Hand-curated and hand-verified; nothing on this page is scraped or sponsored. Prices are typical street prices, not live quotes; sold-out batches and preorders are called out on each card. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Also on MiSTerZine: the <a href="../releases/">release tracker</a> and the <a href="../">daily quote zine</a>.</p>
+  <p>Hand-curated and hand-verified; nothing on this page is scraped or sponsored. Prices are typical street prices, not live quotes; availability notes reflect the last review date. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Also on MiSTerZine: the <a href="../releases/">release tracker</a> and the <a href="../">daily quote zine</a>.</p>
 </footer>
 
 </div>
@@ -267,8 +277,12 @@
 (function () {
   'use strict';
   var D = null;                    // hardware.json
-  var A = {};                      // answers: qid -> aid
+  var A = {};                      // answers: qid -> aid (string) or [aid,...] for multi questions
   var PARTS = null, OPTS = null, CAPS = null;
+
+  var STOCK_LABEL = { now: 'orderable now', waves: 'sells out between batches', scarce: 'chronically scarce' };
+  var STOCK_REASON = { waves: 'Sells out between batches - not reliably orderable today',
+                       scarce: 'Chronically scarce - not reliably orderable today' };
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -281,6 +295,11 @@
     if (p == null) return 'price TBA';
     return Array.isArray(p) ? money(p[0]) + '-' + money(p[1]) : money(p);
   }
+  function chosen(q) {  // selected answer objects for a question, [] if unanswered
+    var v = A[q.id]; if (!v) return [];
+    var ids = Array.isArray(v) ? v : [v];
+    return q.answers.filter(function (a) { return ids.indexOf(a.id) >= 0; });
+  }
 
   /* built-in capability set: own provides + everything inside the box,
      transitively (includes may name parts or other options, e.g. kits
@@ -289,19 +308,18 @@
   function builtIn(o) {
     if (builtCache[o.id]) return builtCache[o.id];
     var have = {};
-    (function add(x, isOpt) {
+    (function add(x) {
       (x.provides || []).forEach(function (t) { have[t] = true; });
       (x.includes || []).forEach(function (ref) {
-        if (PARTS[ref]) add(PARTS[ref], false);
-        else if (OPTS[ref]) add(OPTS[ref], true);
+        if (PARTS[ref]) add(PARTS[ref]);
+        else if (OPTS[ref]) add(OPTS[ref]);
       });
-    })(o, true);
+    })(o);
     return (builtCache[o.id] = have);
   }
 
-  /* cheapest chain of add-on parts that makes `token` true for option o,
-     given the capability set `have` (mutated by the caller between tokens so
-     shared parts are only bought once). Returns {lo, hi, parts[]} or null. */
+  /* cheapest chain of add-on parts that makes `token` true given `have`
+     (mutated by the caller between tokens so shared parts are bought once) */
   function solve(token, have, stack) {
     if (have[token]) return { lo: 0, hi: 0, parts: [] };
     var best = null;
@@ -320,22 +338,35 @@
     }
     return best;
   }
-  function buyChain(chain, have) {  // add a chosen chain's provides to `have`
+  function buyChain(chain, have) {
     chain.parts.forEach(function (pid) {
       PARTS[pid].provides.forEach(function (t) { have[t] = true; });
     });
   }
 
+  function constraints() {  // answers -> {effortAllowed, stockAllowed, reqGroups}
+    var c = { effortAllowed: null, stockAllowed: null, reqGroups: [] };
+    D.interview.forEach(function (q) {
+      chosen(q).forEach(function (ans) {
+        if (ans.effort) c.effortAllowed = ans.effort;
+        if (ans.stock) c.stockAllowed = ans.stock;
+        (ans.require || []).forEach(function (grp) { c.reqGroups.push(grp); });
+      });
+    });
+    return c;
+  }
+
   /* full evaluation of one option against the current answers */
   function evaluate(o) {
-    var r = { o: o, in: true, ghost: false, reason: '', needParts: [], hedges: [],
+    var r = { o: o, in: true, ghost: false, wouldFit: false, reason: '', needParts: [], hedges: [],
               lo: NaN, hi: NaN, unknownPrice: o.price_usd == null };
+    var c = constraints();
     if (o.status !== 'orderable') {
       r.ghost = true;
       r.reason = { announced: 'Announced - not orderable yet', preorder: 'Preorder only',
                    cancelled: 'Cancelled - it is not coming', discontinued: 'Discontinued' }[o.status] || o.status;
     }
-    // start the bill: sticker + the completion basics
+    // the bill: sticker + the completion basics
     var have = {}; Object.keys(builtIn(o)).forEach(function (t) { have[t] = true; });
     var lo = plo(o.price_usd) || 0, hi = phi(o.price_usd) || 0;
     (o.to_complete || []).forEach(function (pid) {
@@ -343,49 +374,42 @@
       lo += plo(p.price_usd) || 0; hi += phi(p.price_usd) || 0;
       p.provides.forEach(function (t) { have[t] = true; });
     });
-    // answers -> constraints
-    var effortAllowed = null, budget = Infinity, reqGroups = [];
-    D.interview.forEach(function (q) {
-      var aid = A[q.id]; if (!aid || aid === 'dk') return;
-      var ans = q.answers.filter(function (a) { return a.id === aid; })[0]; if (!ans) return;
-      if (ans.effort) effortAllowed = ans.effort;
-      if (ans.budget) budget = Math.min(budget, ans.budget);
-      (ans.require || []).forEach(function (grp) { reqGroups.push({ grp: grp, q: q }); });
-    });
-    if (r.ghost) { r.lo = lo; r.hi = hi; return r; }   // ghosts keep status as their reason
-    if (effortAllowed && effortAllowed.indexOf(o.effort) < 0) {
-      r.in = false;
-      r.reason = o.effort === 'diy' ? 'You said no building; this is a build-it-yourself board'
-                                    : 'You said ready out of the box; this one needs a screwdriver';
-    }
+    var fitsCaps = true;                    // capability+effort fit, ignoring stock/status
+    if (c.effortAllowed && c.effortAllowed.indexOf(o.effort) < 0) fitsCaps = false;
     var unv = o.provides_unverified || [];
-    for (var g = 0; r.in && g < reqGroups.length; g++) {
-      var grp = reqGroups[g].grp, hit = null, hedged = null;
+    for (var g = 0; fitsCaps && g < c.reqGroups.length; g++) {
+      var grp = c.reqGroups[g], hit = null, hedged = null;
       for (var i = 0; i < grp.length; i++) {
         if (have[grp[i]]) { hit = grp[i]; break; }
         if (unv.indexOf(grp[i]) >= 0) hedged = grp[i];
       }
       if (hit) continue;
       if (hedged) { r.hedges.push(CAPS[hedged].name); continue; }  // alive, but visibly hedged
-      // try to buy the cheapest chain for any token in the group
       var best = null;
       for (var j = 0; j < grp.length; j++) {
-        var c = solve(grp[j], have, []);
-        if (c && (!best || c.lo < best.lo)) best = c;
+        var ch = solve(grp[j], have, []);
+        if (ch && (!best || ch.lo < best.lo)) best = ch;
       }
-      if (!best) {
-        r.in = false;
-        r.reason = 'No ' + CAPS[grp[0]].name + ' path, even with parts';
-      } else {
+      if (!best) { fitsCaps = false; r.failCap = CAPS[grp[0]].name; }
+      else {
         lo += best.lo; hi += best.hi;
         buyChain(best, have);
         best.parts.forEach(function (pid) { if (r.needParts.indexOf(pid) < 0) r.needParts.push(pid); });
       }
     }
     r.lo = lo; r.hi = hi;
-    if (r.in && budget < Infinity && !r.unknownPrice && lo > budget) {
+    r.wouldFit = fitsCaps;                  // used for honest dead-end messaging on ghosts
+    if (r.ghost) return r;
+    if (c.effortAllowed && c.effortAllowed.indexOf(o.effort) < 0) {
       r.in = false;
-      r.reason = 'Over ' + money(budget) + ' complete (this one lands at ~' + money(lo) + ')';
+      r.reason = o.effort === 'diy' ? 'You said no building; this is a build-it-yourself board'
+                                    : 'You said ready out of the box; this one needs a screwdriver';
+    } else if (!fitsCaps) {
+      r.in = false;
+      r.reason = 'No ' + r.failCap + ' path, even with parts';
+    } else if (c.stockAllowed && c.stockAllowed.indexOf(o.stock) < 0) {
+      r.in = false;
+      r.reason = STOCK_REASON[o.stock] || 'Not reliably orderable today';
     }
     return r;
   }
@@ -393,38 +417,40 @@
   /* ---------- rendering ---------- */
   function answeredCount() {
     var n = 0;
-    D.interview.forEach(function (q) { if (A[q.id] && A[q.id] !== 'dk') n++; });
+    D.interview.forEach(function (q) { if (chosen(q).length) n++; });
     return n;
   }
 
   function renderQuestions() {
     var host = document.getElementById('questions');
     host.innerHTML = D.interview.map(function (q) {
-      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) + '</h3>' +
-        '<p class="why">' + esc(q.why) + '</p><div class="ans">' +
+      var picked = chosen(q).map(function (a) { return a.id; });
+      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) +
+        (q.multi ? ' <span style="font-weight:400;color:var(--muted);font-size:.78em">(all that apply)</span>' : '') +
+        '</h3><div class="ans">' +
         q.answers.map(function (a) {
-          return '<button type="button" data-a="' + a.id + '" aria-pressed="' + (A[q.id] === a.id) + '">' +
+          return '<button type="button" data-a="' + a.id + '" aria-pressed="' + (picked.indexOf(a.id) >= 0) + '">' +
                  esc(a.label) + '</button>';
         }).join('') + '</div></div>';
     }).join('');
   }
 
-  function statusTag(o) {
-    if (o.status === 'orderable') return '';
-    var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
-    return '<span class="stag ' + cls + '">' + esc(o.status) + '</span>';
-  }
-
   function cardHTML(r) {
     var o = r.o, bits = [];
+    if (o.status !== 'orderable') {
+      var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
+      bits.push('<span class="stag ' + cls + '">' + esc(o.status) + '</span>');
+    }
+    if (o.img) bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
     bits.push('<span class="nm">' + esc(o.name) + '</span>');
-    bits.push('<span class="vd">' + esc(o.vendor) + '</span>');
     var pr = '<b>' + priceText(o.price_usd) + '</b>';
     if (!r.unknownPrice && o.status === 'orderable') {
       pr += ' <span class="cpl">&middot; from ~' + money(r.lo) + ' complete</span>';
     }
     bits.push('<span class="pr">' + pr + '</span>');
-    // capability chips (revealed at lane zoom): built-in, public tokens only
+    if (o.status === 'orderable' && STOCK_LABEL[o.stock]) {
+      bits.push('<span class="avail">' + esc(STOCK_LABEL[o.stock]) + '</span>');
+    }
     var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
       .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
     (o.provides_unverified || []).forEach(function (t) {
@@ -442,7 +468,7 @@
       }
     }
     return '<button type="button" class="card' + ((r.ghost || !r.in) ? ' out' : '') + (r.ghost ? ' ghost' : '') +
-           '" data-card="' + o.id + '">' + statusTag(o) + bits.join('') + '</button>';
+           '" data-card="' + o.id + '">' + bits.join('') + '</button>';
   }
 
   function renderPoster() {
@@ -451,8 +477,8 @@
     evals.forEach(function (r) { (byLane[r.o.lane] = byLane[r.o.lane] || []).push(r); });
     document.getElementById('poster').innerHTML = D.lanes.map(function (l) {
       var rows = byLane[l.id] || [];
-      return '<section class="lane" id="lane-' + l.id + '"><div class="lanebar">' +
-        '<button type="button" class="lname" data-lane="' + l.id + '"><span class="pm">' + esc(l.name) + '</span></button>' +
+      return '<section class="lane' + (l.id === 'horizon' ? ' slim' : '') + '" id="lane-' + l.id + '"><div class="lanebar">' +
+        '<button type="button" class="lname" data-lane="' + l.id + '"><span class="cd">' + esc(l.name) + '</span></button>' +
         '<span class="tag2">' + esc(l.tagline) + '</span></div>' +
         '<div class="cards">' + rows.map(cardHTML).join('') + '</div></section>';
     }).join('');
@@ -462,6 +488,7 @@
 
   function renderVerdict(evals) {
     var v = document.getElementById('verdict');
+    v.classList.remove('dead');
     var n = answeredCount();
     var live = evals.filter(function (r) { return !r.ghost; });
     var fit = live.filter(function (r) { return r.in; });
@@ -469,6 +496,18 @@
       n === 0 ? live.length + ' options you can order today, ' + (evals.length - live.length) + ' on the horizon.'
               : fit.length + ' of ' + live.length + ' orderable options still fit.';
     document.getElementById('reset').hidden = n === 0;
+    // an answer that leaves NOTHING is the loudest fact on the page - show it
+    // immediately, whatever the answer count
+    if (n >= 1 && !fit.length) {
+      var ghostsFit = evals.filter(function (r) { return r.ghost && r.wouldFit; });
+      v.hidden = false; v.classList.add('dead');
+      v.innerHTML = '<p class="vh">Dead end</p><p>Nothing you can order today does that.</p>' +
+        (ghostsFit.length
+          ? '<p class="fit">It exists, but only on the horizon: ' +
+            esc(ghostsFit.map(function (r) { return r.o.name; }).join(', ')) + '.</p>'
+          : '<p class="fit">Loosen one answer and watch what comes back.</p>');
+      return;
+    }
     if (n < 3) {
       v.hidden = n === 0;
       v.innerHTML = '<p class="vh">Verdict</p><p class="fit">Answer ' + (3 - n) +
@@ -479,20 +518,15 @@
     var ranked = fit.filter(function (r) { return !r.unknownPrice; })
                     .sort(function (a, b) { return a.lo - b.lo; });
     if (!ranked.length) {
-      // honest zero: name the closest miss
-      var miss = live.filter(function (r) { return !r.in && r.reason.indexOf('Over') === 0; })
-                     .sort(function (a, b) { return a.lo - b.lo; })[0];
       v.innerHTML = '<p class="vh">Verdict</p><p>Nothing orderable does all of that.</p>' +
-        (miss ? '<p class="fit">Closest miss: ' + esc(miss.o.name) + ' at ~' + money(miss.lo) +
-                ' complete - over your budget.</p>'
-              : '<p class="fit">Loosen one answer and watch what comes back.</p>');
+        '<p class="fit">Loosen one answer and watch what comes back.</p>';
       return;
     }
     var top = ranked[0], run = ranked[1];
     var why = 'Cheapest complete setup that does everything you asked: ~' + money(top.lo) +
               (top.needParts.length ? ', including ' + top.needParts.map(function (p) { return PARTS[p].name; }).join(' + ') : '') + '.';
     v.innerHTML = '<p class="vh">Verdict</p>' +
-      '<p class="pick"><span class="pm">' + esc(top.o.name) + '</span></p>' +
+      '<p class="pick"><span class="cd">' + esc(top.o.name) + '</span></p>' +
       '<p>' + esc(why) + '</p>' +
       (top.hedges.length ? '<p class="fit">Caveat: ' + esc(top.hedges.join(', ')) + ' is claimed by the vendor but unverified.</p>' : '') +
       (run ? '<p class="fit">Runner-up: ' + esc(run.o.name) + ' at ~' + money(run.lo) + ' complete.</p>' : '');
@@ -502,11 +536,47 @@
     var host = document.getElementById('chips');
     var out = [];
     D.interview.forEach(function (q) {
-      var aid = A[q.id]; if (!aid || aid === 'dk') return;
-      var ans = q.answers.filter(function (a) { return a.id === aid; })[0];
-      out.push('<button type="button" class="chip" data-chip="' + q.id + '">' + esc(ans.label) + '<b>x</b></button>');
+      chosen(q).forEach(function (ans) {
+        out.push('<button type="button" class="chip" data-chip="' + q.id + '" data-cv="' + ans.id + '">' +
+                 esc(ans.label) + '<b>x</b></button>');
+      });
     });
     host.innerHTML = out.join('');
+  }
+
+  /* ---------- lane zoom, animated (FLIP: cards glide to their new size) ----------
+     Deliberately runs under prefers-reduced-motion too: it is user-initiated,
+     short, and killing the travel just turns a glide into a teleport (the site's
+     standing rationale). Transform-only, no rotation. */
+  function flipLane(sec, mutate) {
+    var cards = [].slice.call(sec.querySelectorAll('.card'));
+    var first = cards.map(function (c) { return c.getBoundingClientRect(); });
+    mutate();
+    cards.forEach(function (c, i) {
+      var last = c.getBoundingClientRect();
+      var f = first[i];
+      if (!f.width || !last.width) return;
+      var dx = f.left - last.left, dy = f.top - last.top;
+      var sx = f.width / last.width, sy = f.height / last.height;
+      if (!dx && !dy && sx === 1 && sy === 1) return;
+      c.animate([
+        { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + sx + ',' + sy + ')', transformOrigin: '0 0' },
+        { transform: 'none', transformOrigin: '0 0' }
+      ], { duration: 220, easing: 'cubic-bezier(.2,.8,.3,1)' });
+    });
+    sec.querySelectorAll('.card .caps').forEach(function (el) {
+      if (getComputedStyle(el).display !== 'none') el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 });
+    });
+  }
+  function setLaneZoom(target) {  // target: section or null for overview
+    var current = document.querySelector('.lane.focus');
+    var sec = target || current;
+    if (!sec) return;
+    flipLane(sec, function () {
+      document.querySelectorAll('.lane.focus').forEach(function (s) { s.classList.remove('focus'); });
+      if (target) { target.classList.add('focus'); document.body.dataset.zoom = 'lane'; }
+      else document.body.dataset.zoom = 'all';
+    });
   }
 
   /* ---------- the card sheet (zoom level 3) ---------- */
@@ -527,7 +597,6 @@
     var r = evaluate(o);
     var built = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; });
     var unv = o.provides_unverified || [];
-    // interesting with-parts capabilities: public, not built in, reachable
     var withParts = [];
     ['yc', 'yc-active-filtered', 'vga-rgb', 'ypbpr', 'snac', 'dual-sdram', 'cd-drive', 'usb-hub', 'midi-mt32']
       .forEach(function (t) {
@@ -540,9 +609,10 @@
     });
     sheet.innerHTML =
       '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
-      '<h2><span class="pm">' + esc(o.name) + '</span></h2>' +
-      '<p class="vd">' + esc(o.vendor) + ' &middot; ' + esc(o.status) + ' &middot; lane: ' +
-        esc(D.lanes.filter(function (l) { return l.id === o.lane; })[0].name) + '</p>' +
+      '<h2><span class="cd">' + esc(o.name) + '</span></h2>' +
+      '<p class="vd">' + esc(o.vendor) + ' &middot; ' + esc(o.status) +
+        (o.status === 'orderable' && STOCK_LABEL[o.stock] ? ' (' + esc(STOCK_LABEL[o.stock]) + ')' : '') +
+        ' &middot; lane: ' + esc(D.lanes.filter(function (l) { return l.id === o.lane; })[0].name) + '</p>' +
       '<p class="price"><b>' + esc(priceText(o.price_usd)) + '</b>' +
         (!r.unknownPrice && o.status === 'orderable' ? ' &middot; from ~' + money(r.lo) + ' complete' : '') + '</p>' +
       (built.length ? '<h4>Built in</h4><ul>' + built.map(function (t) {
@@ -557,7 +627,11 @@
           return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + (i + 1) + '</a>'; }).join(' ') : '') + '</p>';
     sheetId = id;
     if (push) history.pushState(null, '', '#' + id);
-    if (!sheet.open) sheet.showModal();
+    if (!sheet.open) {
+      sheet.showModal();
+      sheet.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }],
+                    { duration: 150, easing: 'ease-out' });
+    }
     document.getElementById('sheetx').addEventListener('click', function () { sheet.close(); });
   }
   sheet.addEventListener('close', function () {
@@ -565,7 +639,7 @@
     if (closingFromHistory) { closingFromHistory = false; return; }
     if (location.hash === '#' + was) history.back();
   });
-  sheet.addEventListener('click', function (e) {  // backdrop click closes
+  sheet.addEventListener('click', function (e) {
     if (e.target === sheet) sheet.close();
   });
   addEventListener('popstate', function () {
@@ -581,28 +655,44 @@
     A = {};
     var sp = new URLSearchParams(location.search);
     D.interview.forEach(function (q) {
-      var v = sp.get(q.id);
-      if (v && q.answers.some(function (a) { return a.id === v; })) A[q.id] = v;
+      var v = sp.get(q.id); if (!v) return;
+      var ok = v.split(',').filter(function (id) {
+        return q.answers.some(function (a) { return a.id === id; });
+      });
+      if (!ok.length) return;
+      A[q.id] = q.multi ? ok : ok[0];
     });
   }
   function writeURL() {
     var sp = new URLSearchParams();
-    D.interview.forEach(function (q) { if (A[q.id]) sp.set(q.id, A[q.id]); });
+    D.interview.forEach(function (q) {
+      var v = A[q.id]; if (!v || (Array.isArray(v) && !v.length)) return;
+      sp.set(q.id, Array.isArray(v) ? v.join(',') : v);
+    });
     var qs = sp.toString();
     history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
   }
 
   /* ---------- events ---------- */
+  function toggleAnswer(qid, aid) {
+    var q = D.interview.filter(function (x) { return x.id === qid; })[0];
+    if (q.multi) {
+      var cur = Array.isArray(A[qid]) ? A[qid].slice() : [];
+      var at = cur.indexOf(aid);
+      if (at >= 0) cur.splice(at, 1); else cur.push(aid);
+      if (cur.length) A[qid] = cur; else delete A[qid];
+    } else {
+      if (A[qid] === aid) delete A[qid]; else A[qid] = aid;
+    }
+    writeURL(); renderQuestions(); renderPoster();
+  }
   document.getElementById('questions').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-a]'); if (!b) return;
-    var qid = b.closest('.q').dataset.q, aid = b.dataset.a;
-    if (A[qid] === aid) delete A[qid]; else A[qid] = aid;   // click again to clear
-    writeURL(); renderQuestions(); renderPoster();
+    toggleAnswer(b.closest('.q').dataset.q, b.dataset.a);
   });
   document.getElementById('chips').addEventListener('click', function (e) {
     var c = e.target.closest('button[data-chip]'); if (!c) return;
-    delete A[c.dataset.chip];
-    writeURL(); renderQuestions(); renderPoster();
+    toggleAnswer(c.dataset.chip, c.dataset.cv);
   });
   document.getElementById('reset').addEventListener('click', function () {
     A = {}; writeURL(); renderQuestions(); renderPoster();
@@ -613,17 +703,11 @@
     var lane = e.target.closest('button[data-lane]');
     if (lane) {
       var sec = document.getElementById('lane-' + lane.dataset.lane);
-      var was = sec.classList.contains('focus');
-      document.querySelectorAll('.lane.focus').forEach(function (s) { s.classList.remove('focus'); });
-      if (!was) { sec.classList.add('focus'); document.body.dataset.zoom = 'lane'; }
-      else document.body.dataset.zoom = 'all';
+      setLaneZoom(sec.classList.contains('focus') ? null : sec);
     }
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !sheet.open && document.body.dataset.zoom === 'lane') {
-      document.querySelectorAll('.lane.focus').forEach(function (s) { s.classList.remove('focus'); });
-      document.body.dataset.zoom = 'all';
-    }
+    if (e.key === 'Escape' && !sheet.open && document.body.dataset.zoom === 'lane') setLaneZoom(null);
   });
 
   /* ---------- boot ---------- */

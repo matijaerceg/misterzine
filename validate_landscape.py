@@ -44,9 +44,14 @@ for pid, p in parts.items():
         errs.append(f"part {pid}: requires {p['requires']} satisfiable from NO option (even with chains)")
 
 EFFORTS = {'none', 'some', 'diy'}
+STOCKS = {'now', 'waves', 'scarce', 'na'}
 for o in d['options']:
     if o.get('effort') not in EFFORTS:
         errs.append(f"option {o['id']}: effort must be one of {sorted(EFFORTS)}")
+    if o.get('stock') not in STOCKS:
+        errs.append(f"option {o['id']}: stock must be one of {sorted(STOCKS)}")
+    if o.get('stock') == 'na' and o['status'] == 'orderable':
+        errs.append(f"option {o['id']}: orderable options need a real stock value, not na")
 for q in d.get('interview', []):
     seen_a = set()
     for a in q['answers']:
@@ -56,6 +61,8 @@ for q in d.get('interview', []):
             toks(grp, f"interview {q['id']}.{a['id']}.require")
         for e in a.get('effort', []):
             if e not in EFFORTS: errs.append(f"interview {q['id']}.{a['id']}: bad effort {e}")
+        for s in a.get('stock', []):
+            if s not in STOCKS: errs.append(f"interview {q['id']}.{a['id']}: bad stock {s}")
 
 print('ERRORS:' if errs else 'OK - all references and chains resolve.')
 print('\n'.join(errs))

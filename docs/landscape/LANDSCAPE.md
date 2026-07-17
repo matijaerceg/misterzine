@@ -171,6 +171,11 @@ Top-level keys:
     SKU differences (ruling 2026-07-16 — the noob decision is which
     product, not which SKU). Variant tokens beat parts chains in the
     requirement check (buying the right version beats bolting on parts).
+    `price_delta` MAY BE NEGATIVE for a cheaper stripped trim: when one
+    trim has strictly more capability, model THAT as the base (per the
+    ecosystem ruling) and the stripped one as a negative-delta variant
+    with empty `adds` (precedent: Multisystem2 Analogue base, "Digital
+    version -$50"). The renderer prints "-$X" for negative deltas.
 
 Sheet structure (redesigned 2026-07-16 for newcomers — the sheet is an
 ONBOARDING view, not a data dump): photo, price, `what`, generated
@@ -305,6 +310,25 @@ Field conventions (parts and options both):
   the CDP sweep (256GB SD + case in every kit, USB-C power, no hub/PSU;
   $517/$527/$527/$624). QMTech AliExpress listings browser-verified:
   assembled base ~C$274 (~$200), bare-board SKUs ~C$141-266 (~$105-195).
+- **Multisystem2 deep-verify (2026-07-17, RetroRGB scope test + Ken's
+  teardown + Heber listings)**: remodeled with the ANALOGUE trim as base
+  ($285) and "Digital version -$50" as variant - the Digital drops analog
+  video, Ethernet, optical/3.5mm audio AND the cartridge bay (no SNAC).
+  HD15 RGB scope-verified excellent (R2R ladder DAC); the Genesis-2-style
+  mini-DIN is dim (100mV low, sync on composite pin only, csync unwired,
+  no composite circuit) - steer people to HD15-to-SCART; YPbPr sync is a
+  low 44mV. New part ms2-svideo-cart (Heber Super Video Custard, ~$47,
+  in stock): the in-ecosystem composite/S-Video route via ms2-slot.
+  MikeS11-on-HD15 still untested (Discord question outstanding). Both MS2
+  versions support Direct Video via external HDMI DAC (vendor-stated), so
+  the dongle chain shown on cards is legitimate. Mini cards now render a
+  small dimmed thumbnail (ghosts included).
+- **SSOne Y/C settled 2026-07-17**: Ken's teardown (YouTube transcript
+  scrape) - ADV7125 DAC, LMH6722 buffer, 3x THS7374 on ALL analog outs,
+  Sony CXA2075M alternate encoder via DIP3. yc-active-filtered moved from
+  provides_unverified to provides. QMTech V2.1 + MikeS11: one Discord
+  owner says it works, but iffy-IO-board reports pending the owner's own
+  investigation - noted, not yet modeled as verified.
 - **JAMMA landscape (swept 2026-07-17)**: ms2-arcade added as a turnkey
   PREORDER entry (Heber Multisystem2 Arcade, GBP215 ex VAT ~ $280, ships
   from Aug 2026 - the first turnkey JAMMA MiSTer). Budget alternatives

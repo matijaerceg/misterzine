@@ -20,6 +20,9 @@ for o in d['options']:
     for t in o.get('line_overrides', {}):
         if t not in caps:
             errs.append(f"option {o['id']}: line_overrides keys must be capability tokens, got {t}")
+for thing in list(d['options']) + list(parts.values()):
+    if 'design' in thing and thing['design'] != 'official':
+        errs.append(f"design field must be 'official' when present, got {thing['design']}")
 
 def effective(o, seen=None):
     seen = seen or set(); out = set(o['provides'])

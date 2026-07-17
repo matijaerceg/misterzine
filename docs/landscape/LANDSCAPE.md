@@ -248,6 +248,12 @@ Field conventions (parts and options both):
   different thing and stay.)
 - **The rail is 16.5rem wide** (narrowed from 19.5, user 2026-07-17: the
   CTA banner read wider than any answer).
+- **On phones the interview is OPT-IN** (user 2026-07-17): the railfold
+  boots CLOSED on <=52rem viewports so the poster comes first and "Find
+  my MiSTer" invites - UNLESS the URL carries answers (a shared pre-pruned
+  link keeps the fold open so the pruning is explained). Desktop is
+  untouched. "(Optional)" copy in the CTA was considered and rejected as
+  form-speak - do not add it.
 - **One gray language**: dimmed pcards match the mini grayed cards (dashed
   hairline, page bg, .45 text). colsdim dims only the column headers -
   the cards inside carry their own dim/mini styling. Mini cards are

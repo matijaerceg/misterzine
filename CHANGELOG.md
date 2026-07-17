@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-16
+- The Landscape reorganized around how you actually buy: Consoles, Ready-built kits, and a Do It Yourself section laid out as columns (mainboards, I/O boards, USB, adapters) so the anatomy of a build is visible at a glance. Answering questions highlights the parts your build would need, prices every entry as a complete setup, and collapses whatever no longer fits to a one-line row with the reason. Every part is clickable for its own detail sheet.
 - New third section of the site: [The MiSTer Hardware Landscape](https://misterzine.fyi/landscape/) at /landscape/, a hand-verified map of every way to own a MiSTer, from turnkey consoles to bare boards. Every card shows the complete-setup price (power, storage, controller, needed parts), not the sticker price. Answer a few questions in the side rail and the map grays out what doesn't fit you, with the reason stated on each card; three answers in, it names a pick and a runner-up. The state lives in the URL, so a filtered map can be shared as a link. Vendor claims nobody has verified are marked as exactly that.
 - Arcade entries now carry a "More info" link to the game's Arcade Database page (arcadeitalia.net): history, flyers, cabinet photos, manuals and videos, one click from the entry panel.
 - The Core column is now headed "FPGA Core", spelling out what it lists, and an open entry says "FPGA core" to match. Narrow screens keep the shorter "Core" so the header stays on one line.

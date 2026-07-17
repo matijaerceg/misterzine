@@ -162,23 +162,18 @@
   "lanes": [
     {
       "id": "turnkey",
-      "name": "Turnkey consoles",
-      "tagline": "Plug in and play. No screwdriver."
+      "name": "Consoles",
+      "tagline": "Custom-shell machines. Plug in and play."
     },
     {
       "id": "kits",
-      "name": "Assembled kits",
-      "tagline": "The classic stack, built and tested by someone else."
+      "name": "Ready-built kits",
+      "tagline": "The standard modular stack, assembled. Play today, swap parts forever."
     },
     {
       "id": "diy",
-      "name": "Build your own",
-      "tagline": "A bare board plus the addons you choose."
-    },
-    {
-      "id": "special",
-      "name": "Special builds",
-      "tagline": "Cabinets and consoles with their own boards."
+      "name": "Do It Yourself",
+      "tagline": "Pick a mainboard, add what you need. The columns are the anatomy."
     },
     {
       "id": "horizon",
@@ -246,13 +241,15 @@
       "requires": [
         "gpio-header"
       ],
-      "notes": "The VGA-connector generation of analog I/O boards: RGB or YPbPr by cable, analog audio, and the VGA pins the MikeS11 Y/C adapters plug into. Distinct from MiSTer Addons IO Analog Pro (own entry), which has no VGA port. A EUR349.90 price seen in one search result is a stale-snippet artifact. Retro Remake A/V Pro 9.2 sold out at review 2026-07-16.",
+      "notes": "The VGA-connector generation of analog I/O boards: RGB or YPbPr by cable, analog audio, and the VGA pins the MikeS11 Y/C adapters plug into. Distinct from MiSTer Addons IO Analog Pro (own entry), which has no VGA port. A EUR349.90 price seen in one search result is a stale-snippet artifact. Retro Remake A/V Pro 9.2 sold out at review 2026-07-16. Early A/V Pro 9.2 units shipped with muffled analog audio; the vendor replaced them - if analog audio sounds wrong, claim it (r/MiSTerFPGA, Oct 2024, 114 pts: old.reddit.com/r/MiSTerFPGA/comments/1fuyl9e).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
         "https://retroremake.co/pages/store",
         "https://ultimatemister.com/product/ultimate-mister-pro/"
-      ]
+      ],
+      "category": "io",
+      "what": "The VGA-generation analog board: RGB or component by cable, and the VGA pins the MikeS11 Y/C adapters plug into."
     },
     "io-analog-pro": {
       "name": "MiSTer Addons IO Analog Pro",
@@ -272,7 +269,9 @@
       "confidence": "high",
       "sources": [
         "https://misteraddons.com/products/mister-fpga-io-analog-pro"
-      ]
+      ],
+      "category": "io",
+      "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out a Saturn-style socket, HDMI stays live."
     },
     "reflex-prism": {
       "name": "MiSTer Addons Reflex Prism (HDMI to analog)",
@@ -291,7 +290,9 @@
       "confidence": "high",
       "sources": [
         "https://misteraddons.com/products/reflex-prism-hdmi-to-analog"
-      ]
+      ],
+      "category": "adapter",
+      "what": "The polished Direct Video converter: RGB, component and native S-Video from the HDMI port."
     },
     "io-digital": {
       "name": "Digital I/O board (v1.2)",
@@ -308,7 +309,9 @@
       "confidence": "high",
       "sources": [
         "https://ultimatemister.com/product/mister-digital-io-edition-v1-2/"
-      ]
+      ],
+      "category": "io",
+      "what": "Optical digital audio and a second SD slot - for HDMI-only setups that want clean audio out."
     },
     "usb-hub": {
       "name": "USB hub addon (v2.1)",
@@ -329,7 +332,9 @@
       "sources": [
         "https://misteraddons.com/products/usb-hub",
         "https://ultimatemister.com/product/mister-usb-hub/"
-      ]
+      ],
+      "category": "hub",
+      "what": "Seven USB ports that stack neatly under the board."
     },
     "direct-video-dac": {
       "name": "Direct Video HDMI DAC (generic AG6200-class dongle)",
@@ -351,7 +356,9 @@
       "confidence": "high",
       "sources": [
         "https://mister-devel.github.io/MkDocs_MiSTer/advanced/directvideo/"
-      ]
+      ],
+      "category": "adapter",
+      "what": "A generic HDMI-to-VGA dongle plus one ini line = analog RGB without an I/O board."
     },
     "yc-passive": {
       "name": "MikeS11 Y/C adapter, PASSIVE",
@@ -369,7 +376,9 @@
       "confidence": "high",
       "sources": [
         "https://ultimatemister.com/product/mikes1-yc-passive-board/"
-      ]
+      ],
+      "category": "adapter",
+      "what": "Cheapest clean S-Video: plugs into a VGA port or a Direct Video dongle."
     },
     "yc-active": {
       "name": "MikeS11 Y/C adapter, ACTIVE (THS7374)",
@@ -394,7 +403,9 @@
         "https://raw.githubusercontent.com/MiSTer-devel/MkDocs_MiSTer/main/docs/advanced/crt.md",
         "https://misteraddons.com/products/yc-active-encoder-board",
         "https://github.com/MikeS11/MiSTerCRT"
-      ]
+      ],
+      "category": "adapter",
+      "what": "The amplified S-Video/composite adapter (THS7374) for VGA-equipped analog boards."
     },
     "snac-adapter": {
       "name": "SNAC / SNAX / SNAX64 adapter",
@@ -409,13 +420,15 @@
       "requires": [
         "user-io-port"
       ],
-      "notes": "Plugs into the USER I/O header, not the I/O board. PSX and N64 controllers need SNAX/SNAX64 tiers, not SNAC V1. Console cables usually sold separately. USB alternatives that keep original pads without SNAC wiring: MiSTer Addons Reflex Adapt (\\, GP2040-CE, ~1ms) and the Bliss-Box family (Ultimate MiSTer's BlisSTer hub tier integrates it) - accessories, so they are notes here, not entries.",
+      "notes": "Plugs into the USER I/O header, not the I/O board. PSX and N64 controllers need SNAX/SNAX64 tiers, not SNAC V1. Console cables usually sold separately. USB alternatives that keep original pads without SNAC wiring: MiSTer Addons Reflex Adapt (\\, GP2040-CE, ~1ms) and the Bliss-Box family (Ultimate MiSTer's BlisSTer hub tier integrates it) - accessories, so they are notes here, not entries. Community counterpoint worth knowing: SNAC controllers have no menu support and stay locked to matching cores - a well-upvoted take says wired USB adapters (~1ms) serve most people, and SNAC chiefly matters for lightguns (old.reddit.com/r/MiSTerFPGA/comments/1fqq6wy).",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
         "https://misteraddons.com/products/snac",
         "https://retroremake.co/pages/store"
-      ]
+      ],
+      "category": "adapter",
+      "what": "Real console controllers wired near-directly into the core - the zero-lag option."
     },
     "nfc-reader": {
       "name": "NFC reader (Zaparoo/TapTo launching)",
@@ -431,7 +444,9 @@
       "sources": [
         "https://retroremake.co/pages/store",
         "https://zaparoo.org/"
-      ]
+      ],
+      "category": "adapter",
+      "what": "Tap-a-card game launching (Zaparoo) from any USB port."
     },
     "rtc-board": {
       "name": "RTC board",
@@ -469,7 +484,9 @@
       "sources": [
         "https://github.com/dwhinham/mt32-pi",
         "https://misteraddons.com/products/mt32-pi"
-      ]
+      ],
+      "category": "adapter",
+      "what": "Roland MT-32 music for DOS-era cores, via a Raspberry Pi you add."
     },
     "case-armor": {
       "name": "Aluminum Armor case (passive cooling)",
@@ -594,6 +611,79 @@
         "https://retroremake.co/products/superdock",
         "https://blog.lon.tv/2026/06/07/superstation-one-with-dock-mister-review-lots-of-analog-tv-options/"
       ]
+    },
+    "ironclad-dx": {
+      "name": "d3fmod Ironclad DX",
+      "vendor": "d3fmod design",
+      "price_usd": 240,
+      "category": "io",
+      "provides": [
+        "vga-rgb",
+        "yc",
+        "snac",
+        "usb-hub",
+        "rtc",
+        "analog-audio",
+        "user-io-port"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
+      "what": "The maximal I/O board: it turns a Mini-ITX PC case into a MiSTer, with native S-Video, SNAC, 7 USB and smart power built in.",
+      "notes": "A Mini-ITX carrier that turns any ITX/ATX PC case into a MiSTer: your DE10-Nano, MiSTer Pi or QMTech Cyclone V drops onto it (complete price below assumes a MiSTer Pi; the PC case itself is also yours to supply). 24-bit Analog Devices DAC with a Saturn-style RGB/S-Video connector and an INTERNAL PASSIVE LUMA TRAP - native Y/C with vendor-documented filtering (composite needs a cable adapter, not claimed here). Dual SDRAM (official v9.2-compliant), 7 USB, SNAC via DB9 + USB3 user port, RTC, i2s audio DAC + headphone amp, tape in, IR remote power, fan control keyed to FPGA temperature, over-voltage/short protection. EUR219.99 (~USD240); hand-assembled in monthly batches, out of stock at review 2026-07-16. Successor to the Ironclad Plus. COMPATIBILITY: hosts DE10-Nano, MiSTer Pi or QMTech via board-specific B-boards - check the right B-board is in the box for your mainboard.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://www.d3fmod.com/ironclad-dx/",
+        "https://www.d3fmod.com/product/mini-itx_ironclad_dx/"
+      ],
+      "img": "ironclad-dx.png",
+      "url": "https://www.d3fmod.com/product/mini-itx_ironclad_dx/",
+      "stock": "waves"
+    },
+    "mistercade-lite": {
+      "name": "MiSTer Addons MiSTercade V2 (Lite)",
+      "vendor": "MiSTer Addons",
+      "price_usd": 275,
+      "category": "io",
+      "provides": [
+        "jamma",
+        "hdmi",
+        "vga-rgb",
+        "analog-audio",
+        "toslink"
+      ],
+      "requires": [
+        "gpio-header"
+      ],
+      "what": "The I/O board shaped like a JAMMA edge: your MiSTer becomes the game PCB inside a real arcade cabinet.",
+      "notes": "Lite tier: bring your own mainboard and RAM. The $550 Full Kit version includes a DE10-Nano and dual 128MB SDRAM. 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Sold out at review (\"back in soon\"). The Versus 2P sidekick board ($55) is an accessory, not listed. Cabinet not included, obviously.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit"
+      ],
+      "img": "mistercade-v2.png",
+      "url": "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit",
+      "stock": "waves"
+    },
+    "usb-hub-generic": {
+      "name": "Any powered USB hub",
+      "vendor": "commodity",
+      "price_usd": [
+        10,
+        20
+      ],
+      "category": "hub",
+      "provides": [
+        "usb-hub"
+      ],
+      "requires": [],
+      "what": "A plain powered USB hub from anywhere does the same job as the MiSTer-shaped ones - it just does not stack neatly on the board.",
+      "notes": "The MiSTer-specific hubs exist for form factor, not function.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": []
     }
   },
   "options": [
@@ -778,7 +868,7 @@
       "to_complete": [
         "usb-controller"
       ],
-      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Priced $159 per RetroRGB (Oct 2024) for this exact bundle - a dated anchor, not a verified current price; AliExpress prices drift and vary by region (US listings reportedly cheaper than international), and their pages block automated verification. Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless.",
+      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Priced $159 per RetroRGB (Oct 2024) for this exact bundle - a dated anchor, not a verified current price; AliExpress prices drift and vary by region (US listings reportedly cheaper than international), and their pages block automated verification. Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless. Its V2.1 IO board VGA out is the older 18-bit-colour style (community reports); fine on a cab monitor, not the 24-bit path of newer boards.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1006,40 +1096,6 @@
       "advice": "Liked for being in stock when others are not, and by fanless builders for its thermal headroom. Quality control varies more than the originals - mind the RAM-slot orientation note before assembling."
     },
     {
-      "id": "mistercade-v2",
-      "lane": "special",
-      "name": "MiSTer Addons MiSTercade V2",
-      "vendor": "MiSTer Addons",
-      "price_usd": 550,
-      "status": "orderable",
-      "provides": [
-        "jamma",
-        "hdmi",
-        "vga-rgb",
-        "analog-audio",
-        "toslink"
-      ],
-      "includes": [
-        "de10-nano",
-        "sdram-128",
-        "sdram-128-second",
-        "sd-card"
-      ],
-      "to_complete": [],
-      "notes": "Your MiSTer becomes the JAMMA PCB in a real cabinet: 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. This entry is the Full Kit at $550 (DE10 + dual RAM included); the $275 shown on the kits collection is the Lite tier (BYO board + RAM). Sold out at review (\"back in soon\"). Cabinet not included, obviously. The Versus 2P sidekick board (\\) is deliberately not listed: accessory, not a starting point.",
-      "verified": "2026-07",
-      "confidence": "high",
-      "sources": [
-        "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit"
-      ],
-      "effort": "some",
-      "stock": "waves",
-      "img": "mistercade-v2.png",
-      "url": "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit",
-      "what": "A kit that turns a MiSTer into the JAMMA board inside a real arcade cabinet.",
-      "advice": "The standard answer for cabinet builds. The full kit includes the board and dual RAM; the Lite tier suits people who already own a MiSTer."
-    },
-    {
       "id": "multisystem2",
       "lane": "turnkey",
       "name": "Heber MiSTer Multisystem2",
@@ -1086,47 +1142,8 @@
       ]
     },
     {
-      "id": "ironclad-dx",
-      "lane": "special",
-      "name": "d3fmod Ironclad DX (Mini-ITX)",
-      "vendor": "d3fmod design",
-      "price_usd": 240,
-      "status": "orderable",
-      "provides": [
-        "vga-rgb",
-        "yc",
-        "snac",
-        "usb-hub",
-        "rtc",
-        "analog-audio",
-        "sdram-slot",
-        "user-io-port"
-      ],
-      "includes": [],
-      "to_complete": [
-        "mister-pi",
-        "sdram-128",
-        "sd-card",
-        "usb-controller",
-        "psu-barrel-5a"
-      ],
-      "notes": "A Mini-ITX carrier that turns any ITX/ATX PC case into a MiSTer: your DE10-Nano, MiSTer Pi or QMTech Cyclone V drops onto it (complete price below assumes a MiSTer Pi; the PC case itself is also yours to supply). 24-bit Analog Devices DAC with a Saturn-style RGB/S-Video connector and an INTERNAL PASSIVE LUMA TRAP - native Y/C with vendor-documented filtering (composite needs a cable adapter, not claimed here). Dual SDRAM (official v9.2-compliant), 7 USB, SNAC via DB9 + USB3 user port, RTC, i2s audio DAC + headphone amp, tape in, IR remote power, fan control keyed to FPGA temperature, over-voltage/short protection. EUR219.99 (~USD240); hand-assembled in monthly batches, out of stock at review 2026-07-16. Successor to the Ironclad Plus.",
-      "verified": "2026-07",
-      "confidence": "high",
-      "sources": [
-        "https://www.d3fmod.com/ironclad-dx/",
-        "https://www.d3fmod.com/product/mini-itx_ironclad_dx/"
-      ],
-      "effort": "some",
-      "stock": "waves",
-      "img": "ironclad-dx.png",
-      "url": "https://www.d3fmod.com/product/mini-itx_ironclad_dx/",
-      "what": "A carrier board that turns a Mini-ITX PC case into a MiSTer, with CRT outputs and smart power built in.",
-      "advice": "A favorite among PC-case builders - S-Video is built in and documented. Hand-made in small monthly batches, so catching stock is the hard part. You supply the FPGA board (DE10, MiSTer Pi or QMTech) and the case."
-    },
-    {
       "id": "multisystem1",
-      "lane": "special",
+      "lane": "turnkey",
       "name": "Heber MiSTer Multisystem (1)",
       "vendor": "Heber / RMC (UK)",
       "price_usd": null,

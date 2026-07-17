@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-17
+- The new 3DO core now fills in its details: original year (1993), manufacturer (Panasonic) and a photo of the Panasonic REAL FZ-1 in its detail panel.
 - Every console, kit and mainboard card now carries a one-line character sketch under its name ("The value pick", "The default recommendation", "The fully loaded import") so first-timers can tell the options apart at a glance. Lane titles picked up the accent color, the page uses more of a wide screen with roomier cards, and the adapters got grouped subheadings.
 - The JAMMIX I/O board joins the Do It Yourself columns: an in-stock route to putting a MiSTer in an arcade cabinet (or an ITX PC case), alongside the MiSTercade. Cabinet cost estimates now prefer parts you can actually order today.
 - The Hamgeek MiSTer joins the kits lane: the budget factory-assembled clone (~$155 with case, analog I/O, fan and SD card). Its entry tells the whole story - the early RAM problems were fixed with free replacement boards, owners typically swap the included power supply, and cores are not built with clones as their target. New photos across the consoles and kits lanes.

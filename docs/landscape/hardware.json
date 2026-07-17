@@ -273,7 +273,7 @@
         "https://misteraddons.com/products/mister-fpga-io-analog-pro"
       ],
       "category": "io",
-      "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out a Saturn-style socket, HDMI stays live.",
+      "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out of a Saturn-style socket, HDMI stays live.",
       "addon_note": "+ a case: acrylic $10 to aluminum $75"
     },
     "reflex-prism": {
@@ -648,7 +648,7 @@
       "requires": [
         "gpio-header"
       ],
-      "what": "The I/O board that turns a MiSTer into an ITX-case PC build OR a JAMMA arcade board - buffered RGB out of both at once.",
+      "what": "The I/O board that turns a MiSTer into an ITX-case PC build OR a JAMMA arcade board - buffered RGB out of both ports at once.",
       "notes": "EUR249.90 excl VAT (~$275) for the rev.2 board at Ultimate MiSTer, in stock at review 2026-07-17. Simultaneous buffered RGB via the JAMMA edge and a VGA port (component via sync-on-Y is an either/or mode), 4V p-p arcade-monitor levels, buffered TTL csync, onboard stereo amp for Neo Geo style cabinets, MVS harness compatible, CHAMMA 6-button support, I2S audio DAC with line in/out, 4+2-port USB hub, Ethernet routed to the IO shield, self-resetting fuses, ATX/JAMMA/5V power with soft power. Complete 'Ultimate JAMMIX' kits run EUR499.90-699.90 and do NOT include the DE10-Nano. The other current JAMMA I/O option alongside the MiSTercade; RetroCastle's earlier JAMMA kit is no longer listed anywhere (their store and the CastleMania listing both come up empty, checked 2026-07-17).",
       "verified": "2026-07",
       "confidence": "high",
@@ -760,7 +760,7 @@
       "requires": [
         "ms2-slot"
       ],
-      "what": "Heber's own cartridge that adds quality composite and S-Video to the Multisystem's expansion bay.",
+      "what": "Heber's own cartridge that adds high-quality composite and S-Video to the Multisystem's expansion bay.",
       "notes": "GBP36 ex VAT (~$47), in stock at review 2026-07-17 (with black enclosure). Ken's Multisystem 2 teardown calls its composite/S-Video output high quality. The in-ecosystem Y/C route for the Multisystem2 Analogue; not part of the standard MiSTer stack, so it lives off the DIY columns.",
       "verified": "2026-07",
       "confidence": "high",
@@ -1029,7 +1029,7 @@
       "ships_from": "cn",
       "img": "hamgeek-mister.png",
       "url": "https://www.hgeek.com/products/hamgeek-mister-game-console-with-cyclone-v-soc-fpga-development-board-plastic-metal-shell-and-32gb-tf-card",
-      "what": "The budget factory-assembled clone: a QMTech-design board, case, analog I/O and fan in one AliExpress box.",
+      "what": "The budget factory-assembled clone: a QMTech-design board, case, analog I/O and fan in one box.",
       "advice": "The cheapest assembled route on the map and a common first MiSTer. Owners typically swap the included power supply for a stronger one and pick the metal case; early RAM problems were fixed with free replacement boards, and current units run the demanding cores fine.",
       "tag": "The lowest-priced way in"
     },
@@ -1312,7 +1312,7 @@
       "img": "multisystem2.png",
       "url": "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/",
       "what": "A complete console built around its own integrated MiSTer board, assembled in the UK.",
-      "advice": "The turnkey option that is actually in stock, shown here in its Analogue trim. RGB out the VGA port is scope-verified excellent; skip the mini-DIN and use an HD15-to-SCART cable for SCART sets. HDMI-only households can take the Digital version and save about $50.",
+      "advice": "The turnkey option that is actually in stock, shown here in its Analogue trim. RGB from the VGA port is scope-verified excellent; skip the mini-DIN and use an HD15-to-SCART cable for SCART sets. HDMI-only households can take the Digital version and save about $50.",
       "variants": [
         {
           "id": "digital",
@@ -1361,7 +1361,7 @@
     {
       "id": "multisystem1",
       "lane": "turnkey",
-      "name": "Heber MiSTer Multisystem",
+      "name": "Heber Multisystem",
       "vendor": "Heber / RMC (UK)",
       "price_usd": null,
       "status": "discontinued",
@@ -1642,7 +1642,7 @@
     },
     {
       "id": "discs",
-      "q": "Load real CD games from the disc?",
+      "q": "Play games from real discs?",
       "answers": [
         {
           "id": "yes",

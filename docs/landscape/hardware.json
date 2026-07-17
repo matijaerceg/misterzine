@@ -1294,7 +1294,7 @@
     },
     {
       "id": "stock",
-      "q": "How soon?",
+      "q": "Want it soon?",
       "answers": [
         {
           "id": "asap",
@@ -1302,10 +1302,6 @@
           "stock": [
             "now"
           ]
-        },
-        {
-          "id": "wait",
-          "label": "I can wait for a batch or preorder"
         }
       ]
     }

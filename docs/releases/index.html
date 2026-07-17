@@ -2411,6 +2411,11 @@ function detailHTML(d) {
   // show the repo slug (jtcores deep links keep the full path in the href only)
   if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
     '<span class="lbl">' + esc(d.repo.split('/').slice(0, 2).join('/')) + '</span><span class="ext">↗</span></a>', true]);
+  // per-title encyclopedia page (history, flyers, manuals, videos), keyed by
+  // the row's OWN setname (sn) — never img, which can be a borrowed setname
+  if (d.sn) rows.push(['More info', '<a href="https://adb.arcadeitalia.net/dettaglio_mame.php?game_name=' +
+    encodeURIComponent(d.sn) + '&lang=en" target="_blank" rel="noopener">' +
+    '<span class="lbl">Arcade Database</span><span class="ext">↗</span></a>', true]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
   if (d.note) rows.push(['Note', d.note]);
   // Zaparoo ZapScript token for this row (copy to persist on an NFC tag /

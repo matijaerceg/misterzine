@@ -458,3 +458,8 @@ Define the token in `capabilities` first. 4. Stamp every touched entry's
 `verified` with the current YYYY-MM and add a source URL. 5. Bump
 `meta.updated`. 6. Normal push policy applies (test locally, user okay).
 Visitor-visible landscape changes get a CHANGELOG.md line like everything else.
+
+On quarterly sweeps also run `python tools/check_landscape_links.py` (from
+the repo root; needs the CDP Chrome running for AliExpress/RetroCastle -
+see Research access). It checks every option/part `url` for liveness AND
+that the page title still matches the product. All 18 passed 2026-07-17.

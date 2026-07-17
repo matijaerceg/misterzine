@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The MiSTer Hardware Landscape - MiSTerZine</title>
+<meta name="description" content="Every way to own a MiSTer FPGA, on one map: consoles, kits, bare boards, cabinets and what is coming - with complete-setup prices, not sticker prices. Answer a few questions and the landscape narrows to your pick.">
+<link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="canonical" href="https://misterzine.fyi/landscape/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MiSTerZine">
+<meta property="og:title" content="The MiSTer Hardware Landscape">
+<meta property="og:description" content="Every way to own a MiSTer FPGA, on one map, with complete-setup prices. Answer a few questions and it narrows to your pick.">
+<meta property="og:url" content="https://misterzine.fyi/landscape/">
+<script>/* apply saved theme before first paint to avoid a flash */
+  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+<link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
+<style>
+  @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
+               font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Permanent Marker'; src: url(../fonts/permanent-marker-latin.woff2) format('woff2');
+               font-weight: 400; font-display: swap; }
+  * { box-sizing: border-box; }
+  body { font: 15px/1.5 Roboto, system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--fg); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .pm { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; }
+
+  .wrap { max-width: 78rem; margin: 0 auto; padding: .8rem 1.25rem 3rem; }
+
+  /* ---- header: title left, channel pills + theme toggle right ---- */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+         padding: .35rem 0 .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
+  .top h1 { font-size: 1.65rem; margin: 0; line-height: 1.2; letter-spacing: .01em; }
+  .top h1 .pm { color: var(--accent); }
+  .top .scope { display: block; font-size: .78rem; font-weight: 400; color: var(--muted); margin-top: .1rem; }
+  .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  .top .pill { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; font-size: .85rem;
+               border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 999px; padding: .34rem .8rem; }
+  .top .pill:hover { background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
+  /* theme toggle: same control as the other two pages */
+  .theme { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--hair); border-radius: 6px; }
+  .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
+                  background: transparent; color: inherit; cursor: pointer; }
+  .theme > button:first-child { border-radius: 5px 0 0 5px; }
+  .theme button + button { border-left: 1px solid var(--hair); }
+  .theme button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  .theme details { position: relative; }
+  .theme summary { list-style: none; font-size: .78rem; padding: .3rem .6rem; cursor: pointer;
+                   border-left: 1px solid var(--hair); border-radius: 0 5px 5px 0; user-select: none;
+                   display: flex; align-items: center; }
+  .theme summary::-webkit-details-marker { display: none; }
+  .theme summary::after { content: " \25BE"; opacity: .6; margin-left: auto; padding-left: .4em; }
+  .theme summary:hover, .theme details[open] summary { background: var(--hover-bg); }
+  .theme summary.on { background: var(--rule); font-weight: 600; }
+  .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+                 background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
+                 padding: .3rem; display: grid; gap: 2px; min-width: 7.5rem; box-shadow: 0 4px 16px #0004; }
+  .theme .menu button { border: 0; text-align: left; border-radius: 4px; font-size: .85rem;
+                        padding: .3rem .5rem; white-space: nowrap; display: flex; align-items: center; gap: .5em; }
+  .theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
+                                margin-right: .95em; border-radius: 50%; background: var(--sw1);
+                                box-shadow: .95em 0 0 var(--sw2); }
+  .theme .menu button:hover { background: var(--hover-bg); }
+
+  /* ---- shell: interview rail + poster ---- */
+  .shell { display: grid; grid-template-columns: 19.5rem 1fr; gap: 1.4rem; align-items: start; }
+
+  /* the rail: sticky, questions in source order, verdict on top */
+  #rail { position: sticky; top: .8rem; display: grid; gap: .9rem;
+          max-height: calc(100vh - 1.6rem); overflow-y: auto; padding-right: .15rem; }
+  .railhead { font-size: 1.15rem; margin: 0; }
+  .railsub { font-size: .78rem; color: var(--muted); margin: -.55rem 0 0; }
+  #verdict { border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
+             padding: .7rem .8rem; font-size: .85rem; }
+  #verdict .vh { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .3rem; }
+  #verdict .pick { font-weight: 700; }
+  #verdict .pick .pm { color: var(--accent); font-size: 1.15em; }
+  #verdict p { margin: .25rem 0 0; }
+  #verdict .fit { color: var(--muted); font-size: .78rem; }
+  .q { border: 1px solid var(--hair); border-radius: 8px; padding: .65rem .8rem; background: var(--bg); }
+  .q h3 { margin: 0 0 .1rem; font-size: .92rem; }
+  .q .why { margin: 0 0 .5rem; font-size: .74rem; color: var(--muted); }
+  .q .ans { display: grid; gap: .3rem; }
+  .q .ans button { font: inherit; font-size: .82rem; text-align: left; cursor: pointer;
+                   border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface);
+                   color: inherit; padding: .34rem .55rem; }
+  .q .ans button:hover { border-color: var(--btn-border-hover); background: var(--hover-bg); }
+  .q .ans button[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--bg));
+                                        font-weight: 600; }
+  .railfoot { font-size: .72rem; color: var(--muted); margin: 0; }
+  .railfoot button { font: inherit; font-size: inherit; color: inherit; background: none; border: 0;
+                     padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .railfoot button:hover { color: var(--accent); }
+
+  /* answered chips: sticky strip, mobile only (the rail folds away there) */
+  #chips { display: none; }
+
+  /* ---- the poster ---- */
+  .lane { margin: 0 0 1.5rem; }
+  .lanebar { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin: 0 0 .55rem; }
+  .lanebar button.lname { font: inherit; border: 0; background: none; color: var(--fg); cursor: pointer;
+                          padding: 0; font-size: 1.25rem; }
+  .lanebar button.lname .pm { letter-spacing: .01em; }
+  .lanebar button.lname:hover .pm { color: var(--accent); }
+  .lane.focus .lanebar button.lname .pm { color: var(--accent); }
+  .lanebar .tag2 { font-size: .76rem; color: var(--muted); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem; }
+  /* zoomed lane: bigger cards, chips revealed; other lanes compress to their bars */
+  body[data-zoom="lane"] .lane:not(.focus) .cards { display: none; }
+  body[data-zoom="lane"] .lane:not(.focus) { margin-bottom: .7rem; opacity: .55; }
+  body[data-zoom="lane"] .lane.focus .cards { grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
+  body[data-zoom="lane"] .lane.focus .caps { display: flex; }
+
+  .card { position: relative; text-align: left; font: inherit; color: inherit; cursor: pointer;
+          border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
+          padding: .6rem .7rem .55rem; display: flex; flex-direction: column; gap: .22rem; min-height: 5.4rem; }
+  .card:hover { border-color: var(--btn-border-hover); background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
+  .card .nm { font-weight: 700; font-size: .95rem; line-height: 1.25; }
+  .card .vd { font-size: .72rem; color: var(--muted); }
+  .card .pr { font-size: .8rem; }
+  .card .pr b { font-weight: 700; }
+  .card .pr .cpl { color: var(--muted); }
+  .card .caps { display: none; flex-wrap: wrap; gap: .25rem; margin-top: .15rem; }
+  .card .cap { font-size: .68rem; border: 1px solid var(--hair); border-radius: 999px; padding: .06rem .45rem;
+               color: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
+  .card .cap.unv { border-style: dashed; color: var(--muted); }
+  .card .need { font-size: .74rem; color: color-mix(in srgb, var(--ok) 75%, var(--fg)); }
+  .card .hedge { font-size: .74rem; color: var(--warn); }
+  .card .out-why { font-size: .74rem; color: var(--muted); }
+  .card .stag { position: absolute; top: .5rem; right: .6rem; font-size: .66rem; text-transform: uppercase;
+                letter-spacing: .05em; border-radius: 4px; padding: .05rem .35rem; }
+  .card .stag.announced { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 55%, var(--bg)); }
+  .card .stag.cancelled { color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 55%, var(--bg)); }
+  .card .stag.preorder { color: var(--muted); border: 1px solid var(--hair); }
+  /* ruled out: grayed, never hidden; reason stays readable */
+  .card.out { background: var(--bg); border-style: dashed; }
+  .card.out .nm, .card.out .pr, .card.out .vd, .card.out .caps { opacity: .45; }
+  /* announced/cancelled: always ghosted regardless of answers */
+  .card.ghost .nm, .card.ghost .pr, .card.ghost .vd { opacity: .6; }
+
+  /* ---- appendix + footer ---- */
+  .appendix { border-top: 1px solid var(--rule); margin-top: 1.8rem; padding-top: 1rem; }
+  .appendix h2 { font-size: 1.05rem; margin: 0 0 .5rem; }
+  .appendix ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .35rem; }
+  .appendix li { font-size: .82rem; }
+  .appendix li b { font-weight: 700; }
+  .colophon { color: var(--muted); font-size: .78rem; border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; }
+  .colophon a { color: inherit; }
+
+  /* ---- card sheet (zoom level 3) ---- */
+  dialog#sheet { border: 1px solid var(--hair); border-radius: 10px; background: var(--surface); color: var(--fg);
+                 padding: 1rem 1.15rem 1.1rem; width: min(34rem, calc(100vw - 2rem)); max-height: calc(100vh - 3rem); }
+  dialog#sheet::backdrop { background: #0007; }
+  #sheet h2 { margin: 0; font-size: 1.35rem; }
+  #sheet h2 .pm { color: var(--accent); }
+  #sheet .vd { color: var(--muted); font-size: .8rem; margin: .05rem 0 .6rem; }
+  #sheet .price { font-size: .95rem; margin: 0 0 .6rem; }
+  #sheet h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: .8rem 0 .25rem; }
+  #sheet ul { margin: 0; padding-left: 1.1rem; font-size: .84rem; }
+  #sheet li { margin: .12rem 0; }
+  #sheet .unv { color: var(--warn); }
+  #sheet .notes { font-size: .82rem; margin: .3rem 0 0; }
+  #sheet .meta2 { font-size: .72rem; color: var(--muted); margin-top: .8rem; }
+  #sheet .x { position: absolute; top: .55rem; right: .65rem; font: inherit; border: 1px solid var(--hair);
+              background: var(--surface); color: inherit; border-radius: 6px; padding: .1rem .5rem; cursor: pointer; }
+  #sheet .x:hover { background: var(--hover-bg); }
+
+  /* ---- mobile: rail folds into a details, chips go sticky ---- */
+  @media (max-width: 52rem) {
+    .shell { grid-template-columns: 1fr; }
+    #rail { position: static; max-height: none; overflow: visible; }
+    #railfold { border: 1px solid var(--hair); border-radius: 8px; background: var(--surface); }
+    #railfold summary { list-style: none; cursor: pointer; padding: .6rem .8rem; font-weight: 700; }
+    #railfold summary::-webkit-details-marker { display: none; }
+    #railfold summary::after { content: " \25BE"; opacity: .6; }
+    #railfold[open] summary::after { content: " \25B4"; }
+    #railfold .foldin { padding: 0 .8rem .8rem; display: grid; gap: .9rem; }
+    #chips:not(:empty) { display: flex; flex-wrap: wrap; gap: .35rem; position: sticky; top: 0; z-index: 5;
+                         background: var(--bg); padding: .5rem 0; border-bottom: 1px solid var(--rule); margin-bottom: .6rem; }
+    #chips .chip { font: inherit; font-size: .75rem; cursor: pointer; color: inherit;
+                   border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 999px;
+                   background: color-mix(in srgb, var(--accent) 10%, var(--bg)); padding: .18rem .6rem; }
+    #chips .chip b { font-weight: 700; margin-left: .35em; }
+  }
+  @media (min-width: 52.01rem) {
+    #railfold summary { display: none; }
+    #railfold .foldin { display: grid; gap: .9rem; }
+  }
+</style>
+</head>
+<body data-zoom="all">
+<div class="wrap">
+
+<header class="top">
+  <h1><span class="pm">The MiSTer Hardware Landscape</span>
+    <span class="scope">Every way to own a MiSTer, one map. Complete-setup prices, not sticker prices.</span>
+  </h1>
+  <nav>
+    <a class="pill" href="../">Zine Home</a>
+    <a class="pill" href="../releases/">Release Tracker</a>
+    <div class="theme" id="theme" role="group" aria-label="Color theme">
+      <button type="button" data-set="light">Light</button>
+      <button type="button" data-set="dark">Dark</button>
+      <details id="themedd">
+        <summary id="themesum">Theme</summary>
+        <div class="menu">
+          <button type="button" data-set="virtualboy">Virtual</button>
+          <button type="button" data-set="spectrum">ZX</button>
+          <button type="button" data-set="amber">Amber</button>
+          <button type="button" data-set="phosphor">Phosphor</button>
+          <button type="button" data-set="eva">Unit-01</button>
+          <button type="button" data-set="vaporwave">Synth</button>
+          <button type="button" data-set="punchy">MiSTer-y</button>
+          <button type="button" data-set="commodore">C64</button>
+          <button type="button" data-set="workbench">Bench</button>
+          <button type="button" data-set="dmg">Game Boy</button>
+          <button type="button" data-set="pink">Pink</button>
+          <button type="button" data-set="icecream">Gelato</button>
+          <button type="button" data-set="riso">Riso</button>
+          <button type="button" data-set="famicom">Famicom</button>
+          <button type="button" data-set="pastel">Pastel</button>
+        </div>
+      </details>
+    </div>
+  </nav>
+</header>
+
+<div id="chips"></div>
+
+<div class="shell">
+  <aside id="rail">
+    <div id="verdict" hidden></div>
+    <details id="railfold" open>
+      <summary id="railsum">Find my MiSTer</summary>
+      <div class="foldin">
+        <div>
+          <h2 class="railhead pm">Which one should I buy?</h2>
+          <p class="railsub">Answer what you know. Everything you rule out stays on the map, grayed, with the reason.</p>
+        </div>
+        <div id="questions"></div>
+        <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear answers</button></p>
+      </div>
+    </details>
+  </aside>
+
+  <main id="poster"><noscript><p>The landscape needs JavaScript to render. The raw data is in <a href="hardware.json">hardware.json</a>.</p></noscript></main>
+</div>
+
+<section class="appendix" id="appendix" hidden>
+  <h2 class="pm">Looks like MiSTer, isn't MiSTer</h2>
+  <ul id="notmister"></ul>
+</section>
+
+<footer class="colophon">
+  <p id="stamp"></p>
+  <p>Hand-curated and hand-verified; nothing on this page is scraped or sponsored. Prices are typical street prices, not live quotes; sold-out batches and preorders are called out on each card. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Also on MiSTerZine: the <a href="../releases/">release tracker</a> and the <a href="../">daily quote zine</a>.</p>
+</footer>
+
+</div>
+
+<dialog id="sheet"></dialog>
+
+<script>
+(function () {
+  'use strict';
+  var D = null;                    // hardware.json
+  var A = {};                      // answers: qid -> aid
+  var PARTS = null, OPTS = null, CAPS = null;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function plo(p) { return Array.isArray(p) ? p[0] : (p == null ? NaN : p); }
+  function phi(p) { return Array.isArray(p) ? p[1] : (p == null ? NaN : p); }
+  function priceText(p) {
+    if (p == null) return 'price TBA';
+    return Array.isArray(p) ? money(p[0]) + '-' + money(p[1]) : money(p);
+  }
+
+  /* built-in capability set: own provides + everything inside the box,
+     transitively (includes may name parts or other options, e.g. kits
+     containing the DE10-Nano) */
+  var builtCache = {};
+  function builtIn(o) {
+    if (builtCache[o.id]) return builtCache[o.id];
+    var have = {};
+    (function add(x, isOpt) {
+      (x.provides || []).forEach(function (t) { have[t] = true; });
+      (x.includes || []).forEach(function (ref) {
+        if (PARTS[ref]) add(PARTS[ref], false);
+        else if (OPTS[ref]) add(OPTS[ref], true);
+      });
+    })(o, true);
+    return (builtCache[o.id] = have);
+  }
+
+  /* cheapest chain of add-on parts that makes `token` true for option o,
+     given the capability set `have` (mutated by the caller between tokens so
+     shared parts are only bought once). Returns {lo, hi, parts[]} or null. */
+  function solve(token, have, stack) {
+    if (have[token]) return { lo: 0, hi: 0, parts: [] };
+    var best = null;
+    for (var pid in PARTS) {
+      var p = PARTS[pid];
+      if (p.provides.indexOf(token) < 0 || stack.indexOf(pid) >= 0) continue;
+      var cost = { lo: plo(p.price_usd) || 0, hi: phi(p.price_usd) || 0, parts: [pid] };
+      var ok = true;
+      for (var i = 0; i < p.requires.length; i++) {
+        var sub = solve(p.requires[i], have, stack.concat(pid));
+        if (!sub) { ok = false; break; }
+        cost.lo += sub.lo; cost.hi += sub.hi;
+        sub.parts.forEach(function (q) { if (cost.parts.indexOf(q) < 0) cost.parts.push(q); });
+      }
+      if (ok && (!best || cost.lo < best.lo)) best = cost;
+    }
+    return best;
+  }
+  function buyChain(chain, have) {  // add a chosen chain's provides to `have`
+    chain.parts.forEach(function (pid) {
+      PARTS[pid].provides.forEach(function (t) { have[t] = true; });
+    });
+  }
+
+  /* full evaluation of one option against the current answers */
+  function evaluate(o) {
+    var r = { o: o, in: true, ghost: false, reason: '', needParts: [], hedges: [],
+              lo: NaN, hi: NaN, unknownPrice: o.price_usd == null };
+    if (o.status !== 'orderable') {
+      r.ghost = true;
+      r.reason = { announced: 'Announced - not orderable yet', preorder: 'Preorder only',
+                   cancelled: 'Cancelled - it is not coming', discontinued: 'Discontinued' }[o.status] || o.status;
+    }
+    // start the bill: sticker + the completion basics
+    var have = {}; Object.keys(builtIn(o)).forEach(function (t) { have[t] = true; });
+    var lo = plo(o.price_usd) || 0, hi = phi(o.price_usd) || 0;
+    (o.to_complete || []).forEach(function (pid) {
+      var p = PARTS[pid];
+      lo += plo(p.price_usd) || 0; hi += phi(p.price_usd) || 0;
+      p.provides.forEach(function (t) { have[t] = true; });
+    });
+    // answers -> constraints
+    var effortAllowed = null, budget = Infinity, reqGroups = [];
+    D.interview.forEach(function (q) {
+      var aid = A[q.id]; if (!aid || aid === 'dk') return;
+      var ans = q.answers.filter(function (a) { return a.id === aid; })[0]; if (!ans) return;
+      if (ans.effort) effortAllowed = ans.effort;
+      if (ans.budget) budget = Math.min(budget, ans.budget);
+      (ans.require || []).forEach(function (grp) { reqGroups.push({ grp: grp, q: q }); });
+    });
+    if (r.ghost) { r.lo = lo; r.hi = hi; return r; }   // ghosts keep status as their reason
+    if (effortAllowed && effortAllowed.indexOf(o.effort) < 0) {
+      r.in = false;
+      r.reason = o.effort === 'diy' ? 'You said no building; this is a build-it-yourself board'
+                                    : 'You said ready out of the box; this one needs a screwdriver';
+    }
+    var unv = o.provides_unverified || [];
+    for (var g = 0; r.in && g < reqGroups.length; g++) {
+      var grp = reqGroups[g].grp, hit = null, hedged = null;
+      for (var i = 0; i < grp.length; i++) {
+        if (have[grp[i]]) { hit = grp[i]; break; }
+        if (unv.indexOf(grp[i]) >= 0) hedged = grp[i];
+      }
+      if (hit) continue;
+      if (hedged) { r.hedges.push(CAPS[hedged].name); continue; }  // alive, but visibly hedged
+      // try to buy the cheapest chain for any token in the group
+      var best = null;
+      for (var j = 0; j < grp.length; j++) {
+        var c = solve(grp[j], have, []);
+        if (c && (!best || c.lo < best.lo)) best = c;
+      }
+      if (!best) {
+        r.in = false;
+        r.reason = 'No ' + CAPS[grp[0]].name + ' path, even with parts';
+      } else {
+        lo += best.lo; hi += best.hi;
+        buyChain(best, have);
+        best.parts.forEach(function (pid) { if (r.needParts.indexOf(pid) < 0) r.needParts.push(pid); });
+      }
+    }
+    r.lo = lo; r.hi = hi;
+    if (r.in && budget < Infinity && !r.unknownPrice && lo > budget) {
+      r.in = false;
+      r.reason = 'Over ' + money(budget) + ' complete (this one lands at ~' + money(lo) + ')';
+    }
+    return r;
+  }
+
+  /* ---------- rendering ---------- */
+  function answeredCount() {
+    var n = 0;
+    D.interview.forEach(function (q) { if (A[q.id] && A[q.id] !== 'dk') n++; });
+    return n;
+  }
+
+  function renderQuestions() {
+    var host = document.getElementById('questions');
+    host.innerHTML = D.interview.map(function (q) {
+      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) + '</h3>' +
+        '<p class="why">' + esc(q.why) + '</p><div class="ans">' +
+        q.answers.map(function (a) {
+          return '<button type="button" data-a="' + a.id + '" aria-pressed="' + (A[q.id] === a.id) + '">' +
+                 esc(a.label) + '</button>';
+        }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  function statusTag(o) {
+    if (o.status === 'orderable') return '';
+    var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
+    return '<span class="stag ' + cls + '">' + esc(o.status) + '</span>';
+  }
+
+  function cardHTML(r) {
+    var o = r.o, bits = [];
+    bits.push('<span class="nm">' + esc(o.name) + '</span>');
+    bits.push('<span class="vd">' + esc(o.vendor) + '</span>');
+    var pr = '<b>' + priceText(o.price_usd) + '</b>';
+    if (!r.unknownPrice && o.status === 'orderable') {
+      pr += ' <span class="cpl">&middot; from ~' + money(r.lo) + ' complete</span>';
+    }
+    bits.push('<span class="pr">' + pr + '</span>');
+    // capability chips (revealed at lane zoom): built-in, public tokens only
+    var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
+      .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
+    (o.provides_unverified || []).forEach(function (t) {
+      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
+    });
+    if (chips.length) bits.push('<span class="caps">' + chips.join('') + '</span>');
+    if (r.ghost || !r.in) {
+      bits.push('<span class="out-why">' + esc(r.reason) + '</span>');
+    } else {
+      if (r.needParts.length) {
+        bits.push('<span class="need">Fits with: ' + esc(r.needParts.map(function (pid) { return PARTS[pid].name; }).join(' + ')) + '</span>');
+      }
+      if (r.hedges.length) {
+        bits.push('<span class="hedge">Claimed but unverified: ' + esc(r.hedges.join(', ')) + '</span>');
+      }
+    }
+    return '<button type="button" class="card' + ((r.ghost || !r.in) ? ' out' : '') + (r.ghost ? ' ghost' : '') +
+           '" data-card="' + o.id + '">' + statusTag(o) + bits.join('') + '</button>';
+  }
+
+  function renderPoster() {
+    var evals = D.options.map(evaluate);
+    var byLane = {};
+    evals.forEach(function (r) { (byLane[r.o.lane] = byLane[r.o.lane] || []).push(r); });
+    document.getElementById('poster').innerHTML = D.lanes.map(function (l) {
+      var rows = byLane[l.id] || [];
+      return '<section class="lane" id="lane-' + l.id + '"><div class="lanebar">' +
+        '<button type="button" class="lname" data-lane="' + l.id + '"><span class="pm">' + esc(l.name) + '</span></button>' +
+        '<span class="tag2">' + esc(l.tagline) + '</span></div>' +
+        '<div class="cards">' + rows.map(cardHTML).join('') + '</div></section>';
+    }).join('');
+    renderVerdict(evals);
+    renderChips();
+  }
+
+  function renderVerdict(evals) {
+    var v = document.getElementById('verdict');
+    var n = answeredCount();
+    var live = evals.filter(function (r) { return !r.ghost; });
+    var fit = live.filter(function (r) { return r.in; });
+    document.getElementById('fitline').textContent =
+      n === 0 ? live.length + ' options you can order today, ' + (evals.length - live.length) + ' on the horizon.'
+              : fit.length + ' of ' + live.length + ' orderable options still fit.';
+    document.getElementById('reset').hidden = n === 0;
+    if (n < 3) {
+      v.hidden = n === 0;
+      v.innerHTML = '<p class="vh">Verdict</p><p class="fit">Answer ' + (3 - n) +
+        ' more and the landscape answers back.</p>';
+      return;
+    }
+    v.hidden = false;
+    var ranked = fit.filter(function (r) { return !r.unknownPrice; })
+                    .sort(function (a, b) { return a.lo - b.lo; });
+    if (!ranked.length) {
+      // honest zero: name the closest miss
+      var miss = live.filter(function (r) { return !r.in && r.reason.indexOf('Over') === 0; })
+                     .sort(function (a, b) { return a.lo - b.lo; })[0];
+      v.innerHTML = '<p class="vh">Verdict</p><p>Nothing orderable does all of that.</p>' +
+        (miss ? '<p class="fit">Closest miss: ' + esc(miss.o.name) + ' at ~' + money(miss.lo) +
+                ' complete - over your budget.</p>'
+              : '<p class="fit">Loosen one answer and watch what comes back.</p>');
+      return;
+    }
+    var top = ranked[0], run = ranked[1];
+    var why = 'Cheapest complete setup that does everything you asked: ~' + money(top.lo) +
+              (top.needParts.length ? ', including ' + top.needParts.map(function (p) { return PARTS[p].name; }).join(' + ') : '') + '.';
+    v.innerHTML = '<p class="vh">Verdict</p>' +
+      '<p class="pick"><span class="pm">' + esc(top.o.name) + '</span></p>' +
+      '<p>' + esc(why) + '</p>' +
+      (top.hedges.length ? '<p class="fit">Caveat: ' + esc(top.hedges.join(', ')) + ' is claimed by the vendor but unverified.</p>' : '') +
+      (run ? '<p class="fit">Runner-up: ' + esc(run.o.name) + ' at ~' + money(run.lo) + ' complete.</p>' : '');
+  }
+
+  function renderChips() {
+    var host = document.getElementById('chips');
+    var out = [];
+    D.interview.forEach(function (q) {
+      var aid = A[q.id]; if (!aid || aid === 'dk') return;
+      var ans = q.answers.filter(function (a) { return a.id === aid; })[0];
+      out.push('<button type="button" class="chip" data-chip="' + q.id + '">' + esc(ans.label) + '<b>x</b></button>');
+    });
+    host.innerHTML = out.join('');
+  }
+
+  /* ---------- the card sheet (zoom level 3) ---------- */
+  var sheet = document.getElementById('sheet');
+  var sheetId = null, closingFromHistory = false;
+
+  function chainText(o, token) {
+    var have = {}; Object.keys(builtIn(o)).forEach(function (t) { have[t] = true; });
+    if (have[token]) return null;
+    var c = solve(token, have, []);
+    if (!c) return 'no path';
+    return 'add ' + c.parts.map(function (p) { return PARTS[p].name; }).join(' + ') +
+           ' (~' + money(c.lo) + (c.hi > c.lo ? '-' + money(c.hi) : '') + ')';
+  }
+
+  function openSheet(id, push) {
+    var o = OPTS[id]; if (!o) return;
+    var r = evaluate(o);
+    var built = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; });
+    var unv = o.provides_unverified || [];
+    // interesting with-parts capabilities: public, not built in, reachable
+    var withParts = [];
+    ['yc', 'yc-active-filtered', 'vga-rgb', 'ypbpr', 'snac', 'dual-sdram', 'cd-drive', 'usb-hub', 'midi-mt32']
+      .forEach(function (t) {
+        if (built.indexOf(t) >= 0 || unv.indexOf(t) >= 0) return;
+        var txt = chainText(o, t);
+        if (txt && txt !== 'no path') withParts.push('<li>' + esc(CAPS[t].name) + ': ' + esc(txt) + '</li>');
+      });
+    var still = (o.to_complete || []).map(function (pid) {
+      return '<li>' + esc(PARTS[pid].name) + ' (' + esc(priceText(PARTS[pid].price_usd)) + ')</li>';
+    });
+    sheet.innerHTML =
+      '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
+      '<h2><span class="pm">' + esc(o.name) + '</span></h2>' +
+      '<p class="vd">' + esc(o.vendor) + ' &middot; ' + esc(o.status) + ' &middot; lane: ' +
+        esc(D.lanes.filter(function (l) { return l.id === o.lane; })[0].name) + '</p>' +
+      '<p class="price"><b>' + esc(priceText(o.price_usd)) + '</b>' +
+        (!r.unknownPrice && o.status === 'orderable' ? ' &middot; from ~' + money(r.lo) + ' complete' : '') + '</p>' +
+      (built.length ? '<h4>Built in</h4><ul>' + built.map(function (t) {
+        return '<li title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
+      (unv.length ? '<h4>Claimed, not verified</h4><ul>' + unv.map(function (t) {
+        return '<li class="unv">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
+      (withParts.length ? '<h4>Possible with parts</h4><ul>' + withParts.join('') + '</ul>' : '') +
+      (still.length ? '<h4>Still needed for a complete setup</h4><ul>' + still.join('') + '</ul>' : '') +
+      '<h4>Notes</h4><p class="notes">' + esc(o.notes) + '</p>' +
+      '<p class="meta2">Verified ' + esc(o.verified) + ' &middot; confidence: ' + esc(o.confidence || 'n/a') +
+        (o.sources && o.sources.length ? ' &middot; sources: ' + o.sources.map(function (u, i) {
+          return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + (i + 1) + '</a>'; }).join(' ') : '') + '</p>';
+    sheetId = id;
+    if (push) history.pushState(null, '', '#' + id);
+    if (!sheet.open) sheet.showModal();
+    document.getElementById('sheetx').addEventListener('click', function () { sheet.close(); });
+  }
+  sheet.addEventListener('close', function () {
+    var was = sheetId; sheetId = null;
+    if (closingFromHistory) { closingFromHistory = false; return; }
+    if (location.hash === '#' + was) history.back();
+  });
+  sheet.addEventListener('click', function (e) {  // backdrop click closes
+    if (e.target === sheet) sheet.close();
+  });
+  addEventListener('popstate', function () {
+    if (sheet.open && location.hash.slice(1) !== sheetId) {
+      closingFromHistory = true; sheet.close();
+    } else if (!sheet.open && location.hash.length > 1 && OPTS && OPTS[location.hash.slice(1)]) {
+      openSheet(location.hash.slice(1), false);
+    }
+  });
+
+  /* ---------- answers <-> URL ---------- */
+  function readURL() {
+    A = {};
+    var sp = new URLSearchParams(location.search);
+    D.interview.forEach(function (q) {
+      var v = sp.get(q.id);
+      if (v && q.answers.some(function (a) { return a.id === v; })) A[q.id] = v;
+    });
+  }
+  function writeURL() {
+    var sp = new URLSearchParams();
+    D.interview.forEach(function (q) { if (A[q.id]) sp.set(q.id, A[q.id]); });
+    var qs = sp.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+  }
+
+  /* ---------- events ---------- */
+  document.getElementById('questions').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-a]'); if (!b) return;
+    var qid = b.closest('.q').dataset.q, aid = b.dataset.a;
+    if (A[qid] === aid) delete A[qid]; else A[qid] = aid;   // click again to clear
+    writeURL(); renderQuestions(); renderPoster();
+  });
+  document.getElementById('chips').addEventListener('click', function (e) {
+    var c = e.target.closest('button[data-chip]'); if (!c) return;
+    delete A[c.dataset.chip];
+    writeURL(); renderQuestions(); renderPoster();
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    A = {}; writeURL(); renderQuestions(); renderPoster();
+  });
+  document.getElementById('poster').addEventListener('click', function (e) {
+    var card = e.target.closest('button[data-card]');
+    if (card) { openSheet(card.dataset.card, true); return; }
+    var lane = e.target.closest('button[data-lane]');
+    if (lane) {
+      var sec = document.getElementById('lane-' + lane.dataset.lane);
+      var was = sec.classList.contains('focus');
+      document.querySelectorAll('.lane.focus').forEach(function (s) { s.classList.remove('focus'); });
+      if (!was) { sec.classList.add('focus'); document.body.dataset.zoom = 'lane'; }
+      else document.body.dataset.zoom = 'all';
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !sheet.open && document.body.dataset.zoom === 'lane') {
+      document.querySelectorAll('.lane.focus').forEach(function (s) { s.classList.remove('focus'); });
+      document.body.dataset.zoom = 'all';
+    }
+  });
+
+  /* ---------- boot ---------- */
+  fetch('hardware.json').then(function (r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(function (d) {
+    D = d; PARTS = d.parts; CAPS = d.capabilities;
+    OPTS = {}; d.options.forEach(function (o) { OPTS[o.id] = o; });
+    readURL();
+    renderQuestions();
+    renderPoster();
+    document.getElementById('appendix').hidden = false;
+    document.getElementById('notmister').innerHTML = d.appendix_not_mister.map(function (x) {
+      return '<li><b>' + esc(x.name) + '</b> - ' + esc(x.one_liner) + '</li>';
+    }).join('');
+    document.getElementById('stamp').textContent =
+      'Every fact on this page carries its own verification date; the dataset was last reviewed ' +
+      d.meta.updated + '. Vendor claims nobody has torn down are marked "claimed, not verified".';
+    if (location.hash.length > 1 && OPTS[location.hash.slice(1)]) openSheet(location.hash.slice(1), false);
+  }).catch(function (e) {
+    document.getElementById('poster').innerHTML =
+      '<p>The landscape failed to load (' + esc((e && e.message) || e) +
+      '). The raw data is in <a href="hardware.json">hardware.json</a>.</p>';
+  });
+
+  /* ---------- theme toggle (same control + behavior as the other pages) ---------- */
+  (function () {
+    var btns = [].slice.call(document.querySelectorAll('#theme button[data-set]'));
+    if (!btns.length) return;
+    var dd = document.getElementById('themedd');
+    var sum = document.getElementById('themesum');
+    var themes = btns.map(function (b) { return b.dataset.set; });
+    function apply(t) {
+      if (themes.indexOf(t) < 0) t = 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); });
+      var fun = null;
+      btns.forEach(function (b) { if (b.dataset.set === t && dd.contains(b)) fun = b; });
+      sum.textContent = fun ? fun.textContent : 'Theme';
+      sum.classList.toggle('on', !!fun);
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () {
+      try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
+      apply(b.dataset.set);
+    }); });
+    document.addEventListener('click', function (e) {
+      if (dd.open && !dd.contains(e.target)) dd.open = false;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dd.open) dd.open = false;
+    });
+    function lockSummary() {
+      var prevText = sum.textContent, prevOn = sum.classList.contains('on'), max = 0;
+      sum.style.minWidth = '';
+      function measure(label, on) {
+        sum.textContent = label;
+        sum.classList.toggle('on', on);
+        max = Math.max(max, sum.getBoundingClientRect().width);
+      }
+      measure('Theme', false);
+      btns.forEach(function (b) { if (dd.contains(b)) measure(b.textContent, true); });
+      sum.textContent = prevText;
+      sum.classList.toggle('on', prevOn);
+      sum.style.minWidth = Math.ceil(max) + 'px';
+    }
+    var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
+    apply(saved);
+    lockSummary();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
+  })();
+})();
+</script>
+</body>
+</html>

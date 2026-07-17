@@ -2,8 +2,13 @@
 
 This folder is the third misterzine channel: a hand-curated map of every way to
 own a MiSTer. Nothing here is scraped or automated. Updates happen in normal
-Claude sessions by editing `hardware.json` only; the page (when built) renders
-entirely from that file, so adding/editing hardware never touches layout code.
+Claude sessions by editing `hardware.json` only; the page (`index.html` in
+this folder, one self-contained vanilla-JS file like the other two surfaces)
+renders entirely from that file, so adding/editing hardware never touches
+layout code. The interview questions also live in `hardware.json` (an
+`interview` key: answers carry `require` any-of token groups, `effort`
+allowlists, or a `budget` cap), and options carry an `effort` grade
+(`none | some | diy`) the build question filters on.
 
 Nav name: **Landscape**. Page title: "The MiSTer Hardware Landscape".
 URL: `/landscape/`. Outward copy may say "landscape" or "hardware matrix" —

@@ -721,6 +721,27 @@
         "https://shop.heber.co.uk/search.php?search_query=SNAC"
       ]
     },
+    "ms2-svideo-cart": {
+      "name": "Super Video Custard cartridge",
+      "vendor": "Heber",
+      "price_usd": 47,
+      "provides": [
+        "yc",
+        "composite"
+      ],
+      "requires": [
+        "ms2-slot"
+      ],
+      "what": "Heber's own cartridge that adds quality composite and S-Video to the Multisystem's expansion bay.",
+      "notes": "GBP36 ex VAT (~$47), in stock at review 2026-07-17 (with black enclosure). Ken's Multisystem 2 teardown calls its composite/S-Video output high quality. The in-ecosystem Y/C route for the Multisystem2 Analogue; not part of the standard MiSTer stack, so it lives off the DIY columns.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://shop.heber.co.uk/super-video-custard-cartridge-for-multisystem-with-black-enclosure/",
+        "https://retrorgb.com/inside-the-multisystem-2.html"
+      ],
+      "stock": "now"
+    },
     "usb-controller-adapter": {
       "name": "USB adapters for original pads (Reflex Adapt, Daemonbite)",
       "vendor": "MiSTer Addons Reflex Adapt ($50) / Daemonbite builds (~$30) / Bliss-Box",
@@ -927,7 +948,7 @@
         "sd-card"
       ],
       "to_complete": [],
-      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Listing browser-verified 2026-07-17 (desktop-Chrome fetch): base C$273.99 (~$200 converted from CAD as shown at this location), with higher-tier SKUs to ~C$540; prices drift and vary by region. Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless. Its V2.1 IO board VGA out is the older 18-bit-colour style (community reports); fine on a cab monitor, not the 24-bit path of newer boards.",
+      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Listing browser-verified 2026-07-17 (desktop-Chrome fetch): base C$273.99 (~$200 converted from CAD as shown at this location), with higher-tier SKUs to ~C$540; prices drift and vary by region. MikeS11 Y/C adapters: a Discord owner reports they work on the V2.1 IO board (relayed by site owner 2026-07-17), but the same channel carries recent reports of iffy QMTech IO-board quality - treat active-adapter support as promising but pending the owner's own investigation; the passive chain applies regardless. Its V2.1 IO board VGA out is the older 18-bit-colour style (community reports); fine on a cab monitor, not the 24-bit path of newer boards.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1182,7 +1203,7 @@
       "lane": "turnkey",
       "name": "Heber Multisystem2",
       "vendor": "Heber / RMC (UK)",
-      "price_usd": 235,
+      "price_usd": 285,
       "status": "orderable",
       "provides": [
         "hdmi",
@@ -1192,19 +1213,23 @@
         "analog-audio",
         "sdram128",
         "ms2-slot",
-        "barrel-power"
+        "barrel-power",
+        "vga-rgb"
       ],
       "includes": [],
       "to_complete": [
         "sd-card",
         "psu-barrel-5a"
       ],
-      "notes": "Not a DE10 carrier: one integrated motherboard (own Cyclone V, 128MB SDRAM + 1GB LPDDR, powered 7-port hub) in a 3D-printed enclosure, assembled. Digital version GBP180 ex VAT (~$235, HDMI only); Analogue version GBP220 ex VAT (~$285) adds 24-bit analog out: 9-pin mini-DIN RGB+C-sync for SCART AND a 15-way VGA-style port for CRT/arcade monitors (vendor spec verified 2026-07-16; S-Video/composite are NOT native - the DIN carries RGB). Whether the VGA port hosts MikeS11 Y/C adapters is untested - it should carry the standard MiSTer analog signal, worth verifying. In stock, 1-2 week lead. JAMMA Arcade edition preorders ship from Aug 2026. Enclosure files are open (Printables, CC-BY-SA). Original controllers: the expansion cartridge bay takes Heber SNAC cartridges (SNES/NES/N64/Saturn/PSX/PCE/Neo Geo, GBP21-36 ex VAT each, verified 2026-07-16). NO SD card and NO power supply in the box: Heber's own 'Extras you will need' list asks for a 32GB+ SD card and a 5V PSU (they suggest a 5V 4A Meanwell; verified on the product page 2026-07-17) - both counted in the complete price here.",
+      "notes": "Not a DE10 carrier: one integrated motherboard (own Cyclone V sourced direct from Altera, 128MB Alliance SDRAM + 1GB LPDDR, powered 7-port hub) in a 3D-printed enclosure, assembled. MODELED HERE AS THE ANALOGUE VERSION (GBP220 ex VAT ~ $285) - the trim reviewers tested and Heber stocks deepest; the Digital version (GBP180 ~ $235) is HDMI-only and drops Ethernet, optical/3.5mm audio AND the cartridge bay (so no SNAC or video cartridges; per Ken's teardown and Heber's own Digital listing, verified 2026-07-17). Analog video facts (RetroRGB scope test of two units, Sep 2025): the HD15/VGA RGB out is excellent with textbook voltages (a simple resistor-ladder DAC with the two LSBs on DIP switches, per Ken); the Genesis-2-style mini-DIN measures 100mV dimmer with sync only on its composite-video pin (csync unwired, no composite circuit) - Bob calls it 'essentially useless', use the HD15 with an HD15-to-SCART cable instead; YPbPr works but its 44mV sync voltage may bother some CRTs. S-Video/composite are NOT native to the console: the in-ecosystem route is the Super Video Custard cartridge in the expansion bay; whether MikeS11 VGA adapters work on the HD15 is untested. Both versions also support Direct Video via an external HDMI DAC (vendor-stated). Original controllers: the bay takes Heber SNAC cartridges (SNES/NES/N64/Saturn/PSX/PCE/Neo Geo, GBP21-36 ex VAT each); there is NO standard USB SNAC port. NO SD card and NO power supply in the box (Heber's own 'Extras you will need' list) - both counted in the complete price here. In stock, 1-2 week lead. JAMMA Arcade edition preorders ship from Aug 2026. Enclosure files are open (Printables, CC-BY-SA).",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
         "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/",
-        "https://blog.lon.tv/2026/03/14/mister-multisystem-2-review-a-consolized-retro-fpga-device/"
+        "https://blog.lon.tv/2026/03/14/mister-multisystem-2-review-a-consolized-retro-fpga-device/",
+        "https://retrorgb.com/mister-multisystem-2-analog-video-tested.html",
+        "https://retrorgb.com/inside-the-multisystem-2.html",
+        "https://www.youtube.com/watch?v=EgzsWs_TV9M"
       ],
       "effort": "none",
       "stock": "now",
@@ -1212,17 +1237,14 @@
       "img": "multisystem2.png",
       "url": "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/",
       "what": "A complete console built around its own integrated MiSTer board, assembled in the UK.",
-      "advice": "The turnkey option that is actually in stock. CRT owners usually go for the Analogue version; the Digital version is the cheaper HDMI-only route.",
+      "advice": "The turnkey option that is actually in stock, shown here in its Analogue trim. RGB out the VGA port is scope-verified excellent; skip the mini-DIN and use an HD15-to-SCART cable for SCART sets. HDMI-only households can take the Digital version and save about $50.",
       "variants": [
         {
-          "id": "analogue",
-          "name": "Analogue version",
-          "price_delta": 50,
-          "adds": [
-            "vga-rgb",
-            "yc-source"
-          ],
-          "note": "24-bit analog out: mini-DIN RGB for SCART plus a VGA-style port. The base (Digital) version is HDMI-only."
+          "id": "digital",
+          "name": "Digital version",
+          "price_delta": -50,
+          "adds": [],
+          "note": "HDMI-only and about $50 less: no analog video, no Ethernet, no optical/3.5mm audio, and no cartridge bay (so no SNAC or video cartridges)."
         }
       ]
     },

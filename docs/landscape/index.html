@@ -232,6 +232,7 @@
      shrunken vs full cards, but with card bones */
   .card.mini { gap: .15rem; min-height: 0; padding: .45rem .65rem; }
   .card.mini .nm { font-size: .88rem; }
+  .card.mini .pic { width: 40px; height: 40px; margin: -.15rem 0 -1.6rem; opacity: .55; }
 
   /* horizon: announced things earn a slim row, not a full card */
   .lane.slim .cards { grid-template-columns: 1fr; gap: .35rem; }
@@ -630,6 +631,8 @@
                 '<span class="out-why">' + esc(r.reason) + '</span>';
       return '<button type="button" class="card mini' + (r.ghost ? ' ghost out' : ' out') +
              '" data-card="' + o.id + '">' + stagHTML(o) +
+             (o.img && !NOPIC['img/' + o.img]
+               ? '<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">' : '') +
              '<span class="nm">' + esc(o.name) + '</span>' +
              (o.price_usd != null ? '<span class="pr">' + (dead2 ? 'was ' : '') + esc(priceText(o.price_usd)) + '</span>' : '') +
              why + '</button>';
@@ -978,8 +981,10 @@
       '<p class="adv">' + esc(o.advice) + '</p>' +
       (o.variants && o.variants.length
         ? '<p class="vars"><b>Versions:</b> ' + o.variants.map(function (v) {
-            return esc(v.name) + (v.price_delta ? ' +' + money(v.price_delta) : ', same price') +
-                   (v.note ? ' - ' + esc(v.note) : '');
+            /* a negative delta is a cheaper trim (e.g. the MS2 Digital) */
+            var d = !v.price_delta ? ', same price'
+                  : v.price_delta < 0 ? ' -' + money(-v.price_delta) : ' +' + money(v.price_delta);
+            return esc(v.name) + d + (v.note ? ' - ' + esc(v.note) : '');
           }).join(' &middot; ') + '</p>' : '') +
       (chips.length ? '<div class="caps">' + chips.join('') + '</div>' : '') +
       '<details class="fine"><summary>Specs and sources</summary>' +

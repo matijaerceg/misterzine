@@ -1811,6 +1811,7 @@ CONSOLE_MANUFACTURER = {
     "NeoGeo": "SNK", "NeoGeoPocket": "SNK",
     "TurboGrafx16": "NEC",
     "PSX": "Sony",
+    "3DO": "Panasonic",  # licensed standard (The 3DO Company); reference unit = Panasonic REAL FZ-1
     "CDi": "Philips",
     "Intellivision": "Mattel",
     "ColecoVision": "Coleco",
@@ -1878,6 +1879,7 @@ CORE_YEAR = {
     "S32X": "1994", "Saturn": "1994",
     "Atari5200": "1982", "Atari7800": "1986", "AtariLynx": "1989", "Jaguar": "1993",
     "NeoGeo": "1990", "NeoGeoPocket": "1998", "TurboGrafx16": "1987", "PSX": "1994",
+    "3DO": "1993",  # Panasonic REAL FZ-1, Oct 1993
     "CDi": "1991", "Intellivision": "1979", "ColecoVision": "1982", "Odyssey2": "1978",
     "ChannelF": "1976", "Astrocade": "1978", "Arcadia": "1982", "Vectrex": "1982",
     "WonderSwan": "1999", "Super_Vision_8000": "1979", "SuperVision": "1992", "SCV": "1984",

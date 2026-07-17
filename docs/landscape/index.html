@@ -1138,6 +1138,13 @@
     D = d; PARTS = d.parts; CAPS = d.capabilities;
     OPTS = {}; d.options.forEach(function (o) { OPTS[o.id] = o; });
     readURL();
+    /* on phones the interview is OPT-IN: the poster comes first and
+       "Find my MiSTer" invites, so the rail never reads as a mandatory
+       form (user ruling 2026-07-17). A shared link that already carries
+       answers keeps the fold open so the pruning is explained. */
+    if (matchMedia('(max-width: 52rem)').matches && !Object.keys(A).length) {
+      document.getElementById('railfold').open = false;
+    }
     renderQuestions();
     renderPoster();
     document.getElementById('appendix').hidden = false;

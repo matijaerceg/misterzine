@@ -190,18 +190,42 @@ is in `docs/images/zine/`. This matters most on a repeat: a second post about a
 game the zine has covered before needs a new picture as well as a new fact.
 
 **Sources that work:**
+- **Arcade Database extra state captures** (arcade rows only): the release
+  index shows `titles`, `snap` and one state capture, but ADB usually has
+  more states at
+  `https://adb.arcadeitalia.net/media/mame.current/<category>/<setname>.png`
+  for `<category>` in `selects`, `gameovers`, `scores`, `versus`, `bosses`,
+  `ends`, `howtos`. These are native-res MAME captures. Needs a browser
+  User-Agent plus `Referer: https://adb.arcadeitalia.net/` or it 404s. One
+  of these categories IS our `ingame` slot (byte-identical file), so
+  hash-compare every candidate against all three slot PNGs before using it.
 - **Wikipedia** article images (`prop=images`, then `prop=imageinfo` for the
-  upload.wikimedia.org URL).
+  upload.wikimedia.org URL) - but ONLY freely licensed media. A game
+  article's screenshot is almost always a NON-FREE fair-use file that
+  Wikipedia policy shrinks to about 0.1 megapixels; it will always fail the
+  size check below. Photos of hardware and freely licensed images are fine.
 - **Hardcore Gaming 101** article images (`wp-content/uploads`). Exclude
   `-NxN.` size variants. Watch for sidebar thumbs belonging to other games.
 - **GUIdebook** (`guidebookgallery.org`) for computer and OS screenshots. Only
   `desktop/*` and `startupshutdown/*` are full-screen; everything else in those
   galleries is a cropped UI element.
 
+**Check the size before you ship it.** The zine stretches images to fill
+their box, so an undersized image renders blurry. For an arcade row,
+`data.json` carries the native framebuffer as `img_w`/`img_h`; the picture
+you save must not be below it in BOTH dimensions (one dimension smaller is
+legitimate: a square-pixel correction squashes one axis). The validator
+enforces this and will refuse the post. For rows without `img_w`, look up
+the system's native resolution yourself and hold the image to it.
+
 **Dead ends and traps:**
 - MobyGames and arcade-history are Cloudflare 403. Do not try.
-- `adb.arcadeitalia.net` media is pixel-identical to our own progettoSNAPS
-  slots. Same for libretro `Named_Snaps`. Not distinct sources.
+- `adb.arcadeitalia.net` `ingames` and `titles` are pixel-identical to our
+  own progettoSNAPS slots (the other state categories above are fair game).
+  libretro `Named_Snaps` likewise duplicates our `snap` slot.
+- A Wikipedia game screenshot that "looks fine" in the article is still a
+  downscaled thumbnail (see above). This shipped two blurry posts
+  (Rampage 338x254, Star Wars 317x315) before the size gate existed.
 - Some HG101 captures have a decorative frame that is not part of the game's
   framebuffer (the Boogie Wings gold frame). Reject those.
 - Wikipedia's "Apple Lisa Office System 3.1.png" is a mislabelled, downscaled
@@ -312,6 +336,8 @@ inspection; fix and push again.
 - [ ] The game is not already covered in `docs/zine.json`
 - [ ] No quote is reused from another post
 - [ ] The screenshot is not one the release index shows
+- [ ] The screenshot is native resolution, not a downscaled web thumbnail
+      (compare against the row's `img_w`/`img_h`)
 - [ ] The container aspect matches the real display aspect
 - [ ] No release-date talk in the body
 - [ ] Plain ASCII throughout, no banned phrases

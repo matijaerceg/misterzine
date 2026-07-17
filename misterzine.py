@@ -2945,12 +2945,34 @@ def _zine_feed_xml(posts):
     return "\n".join(xml)
 
 
+def _zine_native_dims():
+    """k -> (img_w, img_h) from the released data.json, for the zine image
+    size gate. Empty when data.json is absent (offline-safe no-op)."""
+    dims = {}
+    path = DOCSDIR / "releases" / "data.json"
+    if path.is_file():
+        for d in json.loads(path.read_text(encoding="utf-8")):
+            if d.get("k") and d.get("img_w") and d.get("img_h"):
+                dims[d["k"]] = (d["img_w"], d["img_h"])
+    return dims
+
+
+def _png_dims(path):
+    """(width, height) from a PNG's IHDR, or None if it isn't one."""
+    head = path.open("rb").read(24)
+    if len(head) == 24 and head[12:16] == b"IHDR":
+        return (int.from_bytes(head[16:20], "big"),
+                int.from_bytes(head[20:24], "big"))
+    return None
+
+
 def _zine_validate(z):
     """Every structural rule a post must satisfy. Returns a list of problem
     strings (empty = valid). Content rules (verbatim quotes, no slop, image
     provenance) are the posting agent's job per ZINE.md; this catches the
     mechanical failures that would break the page or the feed."""
     errs = []
+    native_dims = _zine_native_dims()
     posts = z.get("posts")
     if not isinstance(posts, list) or not posts:
         return ["zine.json must be {\"posts\": [...]} with at least one post"]
@@ -3005,6 +3027,17 @@ def _zine_validate(z):
             bad("img must be a bare .png filename")
         elif not (DOCSDIR / "images" / "zine" / p["img"]).is_file():
             bad(f"docs/images/zine/{p['img']} does not exist")
+        elif p.get("k") in native_dims:
+            # both dimensions below the game's native framebuffer = a
+            # downscaled web thumbnail (e.g. Wikipedia's fair-use images);
+            # one dimension below is fine (square-pixel corrections shrink
+            # one axis, e.g. HG101's pre-squashed captures)
+            got = _png_dims(DOCSDIR / "images" / "zine" / p["img"])
+            nw, nh = native_dims[p["k"]]
+            if got and got[0] < nw and got[1] < nh:
+                bad(f"image is {got[0]}x{got[1]} but the game's native "
+                    f"resolution is {nw}x{nh}: that is a downscaled "
+                    f"thumbnail, fetch a native-res capture (see ZINE.md)")
         if p["img"] in seen_imgs:
             bad("image reused by an earlier post")
         seen_imgs.add(p["img"])

@@ -10,7 +10,7 @@ layout code. The interview questions also live in `hardware.json` (an
 allowlists, or a `budget` cap), and options carry an `effort` grade
 (`none | some | diy`) the build question filters on.
 
-Nav name: **Landscape**. Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness chip (meta.updated) IS the whole subtitle (scope sentence removed, user ruling 2026-07-16); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
+Nav name: **Landscape**. Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness stamp (meta.updated, plain muted text, NOT a chip) IS the whole subtitle (scope sentence removed 2026-07-16, de-chipped 2026-07-17); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
 URL: `/landscape/`. Outward copy may say "landscape" or "hardware matrix" —
 never "release tracker" (that term belongs to the releases page).
 
@@ -224,25 +224,34 @@ Field conventions (parts and options both):
 - **Prices sit at the BOTTOM of every card** in every lane: one scan line
   across the page. Order inside a card: status tag, photo, name, capability
   chips, per-answer lines, RAM reminder, then complete price + muted
-  device/availability line.
-- **Badges are STICKERS**: absolutely positioned over the card's top-right
-  corner, slightly rotated, allowed to overhang, never pushing content
-  down. Sticker = accent background, bg-colored text. Two stickers stack
-  with alternating tilt. Current set (post-answer only): "cheapest fit"
-  (computed), "community favorite" (editorial `popular` flag), and
-  "cheap and in stock" - the cheapest among usually-in-stock fits, shown
-  only when that differs from the outright cheapest (prototype; user asked
-  to see it, has not yet ruled on keeping it).
+  availability line. NO device price on cards and NO price on the RAM
+  reminder line (user: too much text; the sheet keeps the device price).
+- **Badges are STICKERS**: absolutely positioned SIDE BY SIDE in a row over
+  the card's top-right corner, slightly rotated, allowed to overhang, never
+  pushing content down. Sticker = accent background, bg-colored text. A
+  stickered card gets class `stuck` (extra top padding) so stickers land
+  above the title, never over it. Current set (post-answer only):
+  "cheapest fit" (computed), "community favorite" (editorial `popular`
+  flag), and "cheap and in stock" - the cheapest among usually-in-stock
+  fits, shown only when that differs from the outright cheapest (user
+  approved the sticker treatment 2026-07-17).
 - **One gray language**: dimmed pcards match the mini grayed cards (dashed
   hairline, page bg, .45 text). colsdim dims only the column headers -
-  the cards inside carry their own dim/mini styling.
+  the cards inside carry their own dim/mini styling. Mini cards are
+  COMPACT CARDS (column layout, card bones), not bare text rows - a
+  discontinued console must still read as a card (user, 2026-07-17).
+- **Lanes are visible BANDS**: each lane section gets a tinted rounded
+  band (surface/bg mix + rule border) so the lanes read as lanes.
 - **Lane subtitles are user copy** (2026-07-17): Consoles "Plug and play;
   less open ecosystem." / Kits "Standard MiSTer sandwiches, assembled.
   Play today, but easy to tinker and swap parts later." / DIY "Pick a
   mainboard, add what you need, put it together yourself."
-- **The rail CTA is visual**: CSS-drawn down-arrows flanking "Your
-  requirements here" (the plain-ASCII rule governs copy, not CSS
-  decoration).
+- **The rail CTA is a BANNER**: a full-rail-width accent-tinted box with
+  CSS-drawn down-arrows flanking "Your requirements here". NO tilt on the
+  text (user ruling 2026-07-17). The plain-ASCII rule governs copy, not
+  CSS decoration.
+- **The freshness stamp is plain muted text** under the title, not a chip
+  (user ruling 2026-07-17).
 - **Availability is IMPLIED, never asserted**: all stock copy is an
   impression ("tends to sell out between batches", "usually in stock") and
   the footer tells visitors to check the shop themselves before counting
@@ -315,12 +324,17 @@ machine's IP, verified working on all three 2026-07-16. Reddit refuses even
 this (blocks headless traffic); don't burn time on it. AliExpress shows
 CAD prices from this location - convert and date-stamp.
 
-For sites that block even that (RetroCastle): `--cdp` attaches to the
-user's OWN desktop Chrome (real profile/fingerprint). COORDINATE FIRST -
-the user must launch `chrome.exe --remote-debugging-port=9222`; the tool
-opens one tab, reads it, closes only that tab. Built 2026-07-17, not yet
-exercised against RetroCastle (waiting on a session where the user starts
-Chrome that way).
+For sites that block even headless-with-UA (RetroCastle is Cloudflare
+"Just a moment"-walled): `--cdp` attaches to a Chrome running with
+`--remote-debugging-port=9222`. NO USER ACTION NEEDED for public pages:
+Claude spawns its own real Chrome on a scratch profile
+(`chrome.exe --remote-debugging-port=9222 --user-data-dir=<scratchpad>\chrome-cdp-profile`
+via Start-Process), fetches through it, then kills only that instance
+(match on the profile path in CommandLine). Verified beating RetroCastle's
+Cloudflare 2026-07-17 - the full per-variant kit sweep came through it.
+A visible Chrome window appears on the user's screen while it runs; tell
+him when doing it. Only login-gated pages would need HIS profile, which
+requires him to relaunch his own Chrome with the flag - coordinate then.
 
 ## Editing recipe for future sessions
 

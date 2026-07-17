@@ -39,9 +39,8 @@
   .top .brand { display: block; flex: 0 0 auto; color: var(--fg); }
   .top .brand svg { display: block; height: 48px; width: auto; }
   .top .brand:hover { color: var(--brand-hover); }
-  /* the freshness stamp IS the subtitle: hand-checked data goes stale, say so up top */
-  .vchip { display: inline-block; border: 1px solid var(--hair); border-radius: 999px;
-           padding: .02rem .5rem; white-space: nowrap; }
+  /* the freshness stamp IS the subtitle: plain muted text, not a chip (user ruling) */
+  .vchip { display: inline-block; }
   .top h1 { font-size: 1.75rem; margin: 0; line-height: 1.15; letter-spacing: .01em; }
   .top h1 .cd { color: var(--accent); }
   .top .scope { display: block; font-family: Roboto, system-ui, sans-serif; font-size: .78rem; font-weight: 400;
@@ -115,8 +114,9 @@
   /* answered chips: sticky strip, mobile only (the rail folds away there) */
   #chips { display: none; }
 
-  /* ---- the poster ---- */
-  .lane { margin: 0 0 1.5rem; }
+  /* ---- the poster: each lane is a visible BAND (a lane, not just a gap) ---- */
+  .lane { margin: 0 0 1rem; background: color-mix(in srgb, var(--surface) 55%, var(--bg));
+          border: 1px solid var(--rule); border-radius: 10px; padding: .65rem .8rem .8rem; }
   .lanebar { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin: 0 0 .55rem; }
   .lanebar button.lname { font: inherit; border: 0; background: none; color: var(--fg); cursor: pointer;
                           padding: 0; font-size: 1.3rem; }
@@ -192,20 +192,25 @@
   /* characteristic badges (post-answer spotlights, never zero-state) render as
      STICKERS slapped over the card's top-right corner: rotated, allowed to
      overhang the edge, absolutely positioned so they never push content down */
-  .card .bdgs { position: absolute; top: -.55rem; right: -.35rem; display: flex; flex-direction: column;
-                align-items: flex-end; gap: .25rem; z-index: 2; pointer-events: none; }
+  .card .bdgs { position: absolute; top: -.5rem; right: -.3rem; display: flex; flex-direction: row;
+                gap: .3rem; z-index: 2; pointer-events: none; }
+  /* a stickered card grows top padding so stickers sit above the title,
+     never over it (two side-by-side stickers were covering names) */
+  .card.stuck { padding-top: 1.05rem; }
   .card .bdg { font-size: .64rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 700;
                color: var(--bg); background: var(--accent); border-radius: 3px; padding: .12rem .45rem;
                transform: rotate(3deg); box-shadow: 0 1px 4px #0005;
                border: 1px solid color-mix(in srgb, var(--bg) 25%, var(--accent)); }
   .card .bdg:nth-child(2) { transform: rotate(-2.5deg); }
   .keynote { font-size: .8rem; color: var(--muted); margin: 0 0 1rem; }
-  /* the invitation over the questions: CSS-drawn down-arrows flanking the
-     text (decoration, so the plain-ASCII copy rule is not violated) */
+  /* the invitation over the questions: a full-width banner box with
+     CSS-drawn down-arrows flanking the text (decoration, so the
+     plain-ASCII copy rule is not violated). No tilt (user ruling). */
   .cta { display: flex; align-items: center; justify-content: center; gap: .55rem; margin: 0;
          font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
-         font-size: .82rem; color: var(--accent); text-transform: uppercase; letter-spacing: .07em; }
-  .cta .txt { transform: rotate(-1.5deg); }
+         font-size: .82rem; color: var(--accent); text-transform: uppercase; letter-spacing: .07em;
+         border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 8px;
+         padding: .42rem .6rem; background: color-mix(in srgb, var(--accent) 10%, var(--bg)); }
   .cta .arr { position: relative; width: .9em; height: 1.25em; flex: 0 0 auto; }
   .cta .arr::before { content: ""; position: absolute; left: calc(50% - 1px); top: .05em;
                       width: 2px; height: .62em; background: currentColor; border-radius: 1px; }
@@ -217,11 +222,11 @@
   @media (max-width: 66rem) { .cols { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
 
-  /* ineligible entries collapse to a slim reasoned row once answers exist */
-  .card.mini { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem;
-               min-height: 0; padding: .32rem .65rem; }
+  /* ineligible entries collapse to a COMPACT CARD (not a bare text row -
+     user: the Multisystem1 line "didn't look like a card"): still visibly
+     shrunken vs full cards, but with card bones */
+  .card.mini { gap: .15rem; min-height: 0; padding: .45rem .65rem; }
   .card.mini .nm { font-size: .88rem; }
-  .card.mini .out-why { margin-left: auto; }
 
   /* horizon: announced things earn a slim row, not a full card */
   .lane.slim .cards { grid-template-columns: 1fr; gap: .35rem; }
@@ -648,9 +653,10 @@
                   esc(ri.label) + ': ' + esc(ri.text) + '</span>');
       });
     }
-    /* DIY mainboards carry their RAM reminder inside the card (user ruling) */
+    /* DIY mainboards carry their RAM reminder inside the card (user ruling;
+       no price on it - the complete number below already counts it) */
     if (o.lane === 'diy' && (o.to_complete || []).indexOf('sdram-128') >= 0) {
-      bits.push('<span class="ramline">+ 128MB RAM stick (' + esc(priceText(PARTS['sdram-128'].price_usd)) + ')</span>');
+      bits.push('<span class="ramline">+ 128MB RAM stick</span>');
     }
     /* the price sits at the BOTTOM of every card (user ruling: one scan line
        across all lanes). Still ONE headline number - the complete price -
@@ -665,12 +671,11 @@
       /* DIY mainboards drop the word "complete" - the number covers board +
          essentials, not a finished machine (user ruling) */
       bits.push('<span class="pr"><b>~' + money(r.lo) + (o.lane === 'diy' ? '' : ' complete') + '</b></span>');
-      var sub = [];
-      if (Math.round(r.lo) !== Math.round(plo(o.price_usd))) sub.push('device ' + priceText(o.price_usd));
-      if (STOCK_LABEL[o.stock]) sub.push(STOCK_LABEL[o.stock]);
-      if (sub.length) bits.push('<span class="avail">' + sub.map(esc).join(' &middot; ') + '</span>');
+      /* no device price on cards (user: too much text) - the sheet keeps it */
+      if (STOCK_LABEL[o.stock]) bits.push('<span class="avail">' + esc(STOCK_LABEL[o.stock]) + '</span>');
     }
     return '<button type="button" class="card' + ((r.ghost || !r.in) ? ' out' : '') + (r.ghost ? ' ghost' : '') +
+           ((BADGES[o.id] && BADGES[o.id].length) ? ' stuck' : '') +
            '" data-card="' + o.id + '">' + bits.join('') + '</button>';
   }
 

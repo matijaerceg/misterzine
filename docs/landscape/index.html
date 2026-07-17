@@ -72,8 +72,6 @@
 
   #rail { position: sticky; top: .8rem; display: grid; gap: .9rem;
           max-height: calc(100vh - 1.6rem); overflow-y: auto; padding-right: .15rem; }
-  .railhead { font-size: 1.2rem; margin: 0; }
-  .railsub { font-size: .78rem; color: var(--muted); margin: -.55rem 0 0; }
   #verdict { border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
              padding: .7rem .8rem; font-size: .85rem; }
   #verdict .vh { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .3rem; }
@@ -118,8 +116,12 @@
           border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
           padding: .6rem .7rem .55rem; display: flex; flex-direction: column; gap: .22rem; min-height: 5rem; }
   .card:hover { border-color: var(--btn-border-hover); background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
+  /* the title halo keeps names readable when a narrow card slides the photo
+     under them: shadowing in --surface is a dark shadow on dark themes and a
+     light glow on light ones, no literals, all 17 themes covered */
   .card .nm { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
-              font-size: 1.02rem; line-height: 1.2; }
+              font-size: 1.02rem; line-height: 1.2; position: relative;
+              text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 1px 5px var(--surface); }
   .card .pic { width: 52px; height: 52px; object-fit: contain; align-self: flex-end;
                margin: -0.2rem 0 -2.6rem; }
   .card .pr { font-size: .8rem; }
@@ -174,6 +176,9 @@
   #sheet .unv { color: var(--warn); }
   #sheet .notes { font-size: .82rem; margin: .3rem 0 0; }
   #sheet .meta2 { font-size: .72rem; color: var(--muted); margin-top: .8rem; }
+  /* product picture in the popup: floated so the header and lists wrap it */
+  #sheet .spic { float: right; width: 120px; max-height: 130px; object-fit: contain;
+                 margin: 1.2rem 0 .6rem .9rem; }
   #sheet .x { position: absolute; top: .55rem; right: .65rem; font: inherit; border: 1px solid var(--hair);
               background: var(--surface); color: inherit; border-radius: 6px; padding: .1rem .5rem; cursor: pointer; }
   #sheet .x:hover { background: var(--hover-bg); }
@@ -246,10 +251,6 @@
     <details id="railfold" open>
       <summary id="railsum">Find my MiSTer</summary>
       <div class="foldin">
-        <div>
-          <h2 class="railhead cd">Which one should I buy?</h2>
-          <p class="railsub">Answer what you know. Everything you rule out stays on the map, grayed, with the reason.</p>
-        </div>
         <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
         <div id="questions"></div>
       </div>
@@ -623,6 +624,8 @@
     });
     sheet.innerHTML =
       '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
+      (o.img && !NOPIC['img/' + o.img]
+        ? '<img class="spic" src="img/' + esc(o.img) + '" alt="">' : '') +
       '<h2><span class="cd">' + esc(o.name) + '</span></h2>' +
       '<p class="vd">' +
         (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.vendor) + ' - official page</a>'
@@ -719,9 +722,10 @@
   document.getElementById('reset').addEventListener('click', function () {
     A = {}; writeURL(); renderQuestions(); renderPoster();
   });
-  /* error events do not bubble, so catch card-image 404s in capture phase */
-  document.getElementById('poster').addEventListener('error', function (e) {
-    if (e.target.tagName === 'IMG' && e.target.classList.contains('pic')) {
+  /* error events do not bubble, so catch image 404s in capture phase at the
+     document (covers card thumbs AND sheet pictures) */
+  document.addEventListener('error', function (e) {
+    if (e.target.tagName === 'IMG' && (e.target.classList.contains('pic') || e.target.classList.contains('spic'))) {
       NOPIC[e.target.getAttribute('src')] = true;
       e.target.remove();
     }

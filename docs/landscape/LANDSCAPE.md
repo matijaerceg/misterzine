@@ -59,8 +59,12 @@ never "release tracker" (that term belongs to the releases page).
 - **Lane zoom is animated** (FLIP, transform-only, ~220ms, no rotation, runs
   under prefers-reduced-motion per the site's standing rationale); the sheet
   gets a 150ms fade/scale-in. Verified by sampling transforms per frame.
-- Options may carry `img` (file in docs/landscape/img/, 52px contain-fit on
-  the card). No images shipped yet - sourcing is an open question.
+- Options carry `img: "<option-id>.png"` pointing into docs/landscape/img/.
+  The user sources the images himself (alpha-transparent PNGs, ~160px on the
+  long side is plenty; card slot renders 52px contain-fit). A missing file
+  self-removes and is remembered (NOPIC) so re-renders fire no repeat 404s -
+  dropping a correctly named PNG into the folder is the entire workflow, no
+  code or data change.
 
 ## Page UX (agreed 2026-07-16, before any page code exists)
 

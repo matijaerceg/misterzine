@@ -250,8 +250,8 @@
           <h2 class="railhead cd">Which one should I buy?</h2>
           <p class="railsub">Answer what you know. Everything you rule out stays on the map, grayed, with the reason.</p>
         </div>
+        <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
         <div id="questions"></div>
-        <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear answers</button></p>
       </div>
     </details>
   </aside>
@@ -280,6 +280,7 @@
   var A = {};                      // answers: qid -> aid (string) or [aid,...] for multi questions
   var PARTS = null, OPTS = null, CAPS = null;
 
+  var NOPIC = {};                  // card images that 404ed; skipped on re-render
   var STOCK_LABEL = { now: 'orderable now', waves: 'sells out between batches', scarce: 'chronically scarce' };
   var STOCK_REASON = { waves: 'Sells out between batches - not reliably orderable today',
                        scarce: 'Chronically scarce - not reliably orderable today' };
@@ -441,7 +442,13 @@
       var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
       bits.push('<span class="stag ' + cls + '">' + esc(o.status) + '</span>');
     }
-    if (o.img) bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
+    /* every option points at img/<id>.png; a file that does not exist (yet)
+       removes itself, so dropping a PNG into the folder upgrades the card
+       with no code change. NOPIC remembers misses so re-renders do not
+       re-request every absent file. */
+    if (o.img && !NOPIC['img/' + o.img]) {
+      bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
+    }
     bits.push('<span class="nm">' + esc(o.name) + '</span>');
     var pr = '<b>' + priceText(o.price_usd) + '</b>';
     if (!r.unknownPrice && o.status === 'orderable') {
@@ -541,6 +548,7 @@
                  esc(ans.label) + '<b>x</b></button>');
       });
     });
+    if (out.length > 1) out.push('<button type="button" class="chip" data-clearall="1">clear all<b>x</b></button>');
     host.innerHTML = out.join('');
   }
 
@@ -691,12 +699,22 @@
     toggleAnswer(b.closest('.q').dataset.q, b.dataset.a);
   });
   document.getElementById('chips').addEventListener('click', function (e) {
+    if (e.target.closest('button[data-clearall]')) {
+      A = {}; writeURL(); renderQuestions(); renderPoster(); return;
+    }
     var c = e.target.closest('button[data-chip]'); if (!c) return;
     toggleAnswer(c.dataset.chip, c.dataset.cv);
   });
   document.getElementById('reset').addEventListener('click', function () {
     A = {}; writeURL(); renderQuestions(); renderPoster();
   });
+  /* error events do not bubble, so catch card-image 404s in capture phase */
+  document.getElementById('poster').addEventListener('error', function (e) {
+    if (e.target.tagName === 'IMG' && e.target.classList.contains('pic')) {
+      NOPIC[e.target.getAttribute('src')] = true;
+      e.target.remove();
+    }
+  }, true);
   document.getElementById('poster').addEventListener('click', function (e) {
     var card = e.target.closest('button[data-card]');
     if (card) { openSheet(card.dataset.card, true); return; }

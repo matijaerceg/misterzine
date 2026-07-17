@@ -386,12 +386,14 @@
       "requires": [
         "yc-source-io"
       ],
-      "notes": "THS7374 amplifier, NTSC-spec voltage modes, luma trap for clean composite. Ultimate MiSTer's own page contradicts itself on Direct Video: the description mentions a DV mode but the compatibility instructions say NOT compatible with Direct Video dongles and require the analog I/O board's VGA with 5V on pin 9 and Sync-on-Green off. We model the restrictive reading; flagged, not resolved. EARMARK 2026-07-16: site owner recalls getting Y/C over a Direct Video HDMI-VGA dongle successfully - consistent with the PASSIVE adapter (documented DV-compatible); whether the ACTIVE adapter also works on DV despite its compatibility notes still needs bench verification.",
+      "notes": "THS7374 amplifier, NTSC-spec voltage modes, luma trap for clean composite. The Direct Video question is a DOCUMENTED contradiction between two primary sources (both verified 2026-07-16): the official MiSTer CRT guide (MkDocs, co-written by MikeS11) gives a Direct Video configuration section stating \"Active / Passive adapters will include a SOG circuit\" - no active-adapter restriction - while Ultimate MiSTer's SKU page states \"This adapter is not compatible with Direct Video HDMI-to-VGA dongles\" and requires 5V on VGA pin 9 via the analog I/O board's jumper. We model the restrictive reading because it is the shipping SKU's own spec and the physical rationale is plain: the active amp draws its 5V from pin 9, which a bare DV dongle does not supply. EARMARK 2026-07-16: site owner recalls Y/C over a DV dongle working - fully consistent with the PASSIVE adapter, which is documented Direct-Video-compatible everywhere.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
         "https://ultimatemister.com/product/mikes11-active-composite-svideo/",
-        "https://misteraddons.com/products/yc-active-encoder-board"
+        "https://raw.githubusercontent.com/MiSTer-devel/MkDocs_MiSTer/main/docs/advanced/crt.md",
+        "https://misteraddons.com/products/yc-active-encoder-board",
+        "https://github.com/MikeS11/MiSTerCRT"
       ]
     },
     "snac-adapter": {
@@ -602,11 +604,11 @@
         "bluetooth",
         "usbc-power",
         "rtc",
-        "ssone-port"
+        "ssone-port",
+        "ethernet"
       ],
       "provides_unverified": [
-        "yc-active-filtered",
-        "ethernet"
+        "yc-active-filtered"
       ],
       "includes": [
         "sd-card"
@@ -615,13 +617,15 @@
         "psu-usbc",
         "usb-controller"
       ],
-      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Saturn-LOOKING 10-pin mini-DIN that is NOT pin-compatible with real Saturn cables. PS1 SNAC controller+memory-card ports, NFC loading, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 picks FPGA MikeS-style encoding vs an onboard Sony encoder chip (forum consensus: FPGA path better). Whether the built-in path has THS7374-class active filtering is UNVERIFIED by any teardown; early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026). Wired Ethernet claimed in one review, absent from vendor specs: unverified.",
+      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Saturn-LOOKING 10-pin mini-DIN that is NOT pin-compatible with real Saturn cables. PS1 SNAC controller+memory-card ports, NFC loading, wired Ethernet (vendor Ports spec, verified 2026-07-16; cnx-software corroborates the RJ45), WiFi/BT, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 selects the FPGA MikeS-style encoder vs an onboard Sony encoder chip - RetroRGB: \"Put them in the Up/FPGA position and MiSTer generates Composite and S-Video via the MikeS FPGA code\"; forum consensus calls the Sony path \"not as good\". Whether the FPGA path is THS7374-class actively filtered remains UNVERIFIED by any teardown. Early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
         "https://retroremake.co/products/superstation-one",
-        "https://www.timeextension.com/reviews/superstation-one-this-usd210-fpga-playstation-puts-sonys-ps-classic-to-shame",
-        "https://seafoamgaming.com/2026/06/17/retro-remake-superstation-one-review/"
+        "https://retroremake.co/pages/superstation%E1%B5%92%E2%81%BF%E1%B5%89",
+        "https://www.cnx-software.com/2025/01/29/superstation-one-soc-fpga-based-retro-gaming-console-supports-mister-emulation-playstation-controllers-cd-drive/",
+        "https://retrorgb.com/mister-superstation-one-review.html",
+        "https://misterfpga.org/viewtopic.php?t=10452"
       ],
       "effort": "none",
       "stock": "waves",
@@ -702,7 +706,7 @@
       "lane": "kits",
       "name": "QMTech Factory-Assembled MiSTer",
       "vendor": "QMTech (AliExpress); resold by Ultimate MiSTer as \"Ultimate MiSTer FPGA\"",
-      "price_usd": null,
+      "price_usd": 159,
       "status": "orderable",
       "provides": [
         "hdmi",
@@ -719,7 +723,7 @@
       "to_complete": [
         "usb-controller"
       ],
-      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). AliExpress price pending verification (their pages block automated access). Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless.",
+      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Priced $159 per RetroRGB (Oct 2024) for this exact bundle - a dated anchor, not a verified current price; AliExpress prices drift and vary by region (US listings reportedly cheaper than international), and their pages block automated verification. Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [

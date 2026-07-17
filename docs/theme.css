@@ -30,9 +30,9 @@
 /* ---- light (also the auto default; auto's dark half is the media block) */
 :root {
   color-scheme: light dark;
-  --bg: #fcfcfc;            /* page/table ground */
-  --surface: #fcfcfc;       /* raised chrome: topbar, header row, panel, popovers */
-  --fg: #000;               /* primary text / ink */
+  --bg: #fafafa;            /* page/table ground (eased off pure white) */
+  --surface: #fafafa;       /* raised chrome: topbar, header row, panel, popovers */
+  --fg: #202020;            /* primary text / ink (softened off pure black) */
   --muted: #888;            /* secondary text and icons */
   --line: #888;             /* base for the alpha borders/washes above */
   --accent: #0066ff;        /* the site blue: links, focus, active filters */
@@ -57,7 +57,7 @@
 /* ---- dark values, shared by auto-when-OS-is-dark and explicit dark */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --bg: #131313; --surface: #131313; --fg: #fff;
+    --bg: #181818; --surface: #181818; --fg: #e6e6e6;
     --brand-hover: #8b7fd0;
     --hint-shadow: rgb(0 0 0 / .75);
     --watermark: color-mix(in srgb, #000 11%, var(--surface));
@@ -68,7 +68,7 @@
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #131313; --surface: #131313; --fg: #fff;
+  --bg: #181818; --surface: #181818; --fg: #e6e6e6;
   --brand-hover: #8b7fd0;
   --hint-shadow: rgb(0 0 0 / .75);
   --watermark: color-mix(in srgb, #000 11%, var(--surface));

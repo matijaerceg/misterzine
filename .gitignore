@@ -32,3 +32,6 @@ __pycache__/
 
 # Claude Code local state
 .claude/
+
+# local credentials (Reddit API keys etc.) - never committed
+.secrets/

@@ -89,9 +89,14 @@
   #verdict .fit { color: var(--muted); font-size: .78rem; }
   #verdict.dead { border-color: color-mix(in srgb, var(--warn) 55%, var(--bg)); }
   #verdict.dead .vh { color: var(--warn); }
-  .q { border: 1px solid var(--hair); border-radius: 8px; padding: .65rem .8rem; background: var(--bg); }
-  .q h3 { margin: 0 0 .45rem; font-size: .92rem; }
+  /* questions sit flat in the rail - no nested cards, no double margins */
+  #questions { display: grid; gap: .85rem; }
+  .q h3 { margin: 0 0 .35rem; font-size: .92rem; }
   .q .ans { display: grid; gap: .3rem; }
+  /* checkbox-style answers (multi-select and single toggles) */
+  .q .ans label.cb { display: flex; align-items: center; gap: .5em; font-size: .82rem; cursor: pointer;
+                     padding: .12rem 0; }
+  .q .ans label.cb input { accent-color: var(--accent); width: .95em; height: .95em; margin: 0; flex: 0 0 auto; }
   .q .ans button { font: inherit; font-size: .82rem; text-align: left; cursor: pointer;
                    border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface);
                    color: inherit; padding: .34rem .55rem; }
@@ -191,6 +196,7 @@
   #sheet .what { font-size: .95rem; margin: .1rem 0 .5rem; }
   #sheet .play, #sheet .adv { font-size: .86rem; margin: .35rem 0; }
   #sheet .vars { font-size: .8rem; color: var(--muted); margin: .45rem 0 0; }
+  #sheet .psub { color: var(--muted); font-size: .8rem; font-weight: 400; }
   #sheet .caps { display: flex; flex-wrap: wrap; gap: .25rem; margin: .6rem 0 .2rem; }
   #sheet .cap { font-size: .68rem; border: 1px solid var(--hair); border-radius: 999px; padding: .06rem .45rem;
                 color: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
@@ -276,14 +282,14 @@
 
 <div class="shell">
   <aside id="rail">
-    <div id="verdict" hidden></div>
     <details id="railfold" open>
       <summary id="railsum">Find my MiSTer</summary>
       <div class="foldin">
-        <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
         <div id="questions"></div>
+        <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
       </div>
     </details>
+    <div id="verdict" hidden></div>
   </aside>
 
   <main id="poster"><noscript><p>The landscape needs JavaScript to render. The raw data is in <a href="hardware.json">hardware.json</a>.</p></noscript></main>
@@ -375,13 +381,15 @@
     });
   }
 
-  function constraints() {  // answers -> {effortAllowed, stockAllowed, reqGroups}
-    var c = { effortAllowed: null, stockAllowed: null, reqGroups: [] };
+  function constraints() {  // answers -> {effortAllowed, stockAllowed, reqs}
+    var c = { effortAllowed: null, stockAllowed: null, reqs: [] };
     D.interview.forEach(function (q) {
       chosen(q).forEach(function (ans) {
         if (ans.effort) c.effortAllowed = ans.effort;
         if (ans.stock) c.stockAllowed = ans.stock;
-        (ans.require || []).forEach(function (grp) { c.reqGroups.push(grp); });
+        (ans.require || []).forEach(function (grp) {
+          c.reqs.push({ grp: grp, label: ans.label });  // label = the user's own words
+        });
       });
     });
     return c;
@@ -390,7 +398,7 @@
   /* full evaluation of one option against the current answers */
   function evaluate(o) {
     var r = { o: o, in: true, ghost: false, wouldFit: false, reason: '', needParts: [], needVariants: [],
-              hedges: [], lo: NaN, hi: NaN, unknownPrice: o.price_usd == null };
+              hedges: [], reqInfo: [], lo: NaN, hi: NaN, unknownPrice: o.price_usd == null };
     var c = constraints();
     if (o.status !== 'orderable') {
       r.ghost = true;
@@ -411,14 +419,20 @@
     var fitsCaps = true;                    // capability+effort fit, ignoring stock/status
     if (c.effortAllowed && c.effortAllowed.indexOf(o.effort) < 0) fitsCaps = false;
     var unv = o.provides_unverified || [];
-    for (var g = 0; fitsCaps && g < c.reqGroups.length; g++) {
-      var grp = c.reqGroups[g], hit = null, hedged = null;
+    /* each answered requirement produces one card line (reqInfo), labeled in
+       the user's own words - the card explains itself per answered question */
+    for (var g = 0; fitsCaps && g < c.reqs.length; g++) {
+      var grp = c.reqs[g].grp, label = c.reqs[g].label, hit = null, hedged = null;
       for (var i = 0; i < grp.length; i++) {
         if (have[grp[i]]) { hit = grp[i]; break; }
         if (unv.indexOf(grp[i]) >= 0) hedged = grp[i];
       }
-      if (hit) continue;
-      if (hedged) { r.hedges.push(CAPS[hedged].name); continue; }  // alive, but visibly hedged
+      if (hit) { r.reqInfo.push({ label: label, text: 'built in' }); continue; }
+      if (hedged) {  // alive, but visibly hedged
+        r.hedges.push(CAPS[hedged].name);
+        r.reqInfo.push({ label: label, text: 'claimed by vendor, unverified' });
+        continue;
+      }
       /* first-party variant configurations ("get the Analogue version")
          count before add-on part chains - that is how the expert talks */
       var vbest = null;
@@ -430,6 +444,8 @@
         lo += vbest.price_delta; hi += vbest.price_delta;
         (vbest.adds || []).forEach(function (t) { have[t] = true; });
         if (r.needVariants.indexOf(vbest) < 0) r.needVariants.push(vbest);
+        r.reqInfo.push({ label: label, text: 'with the ' + vbest.name +
+                         (vbest.price_delta ? ' (+' + money(vbest.price_delta) + ')' : '') });
         continue;
       }
       var best = null;
@@ -437,11 +453,12 @@
         var ch = solve(grp[j], have, []);
         if (ch && (!best || ch.lo < best.lo)) best = ch;
       }
-      if (!best) { fitsCaps = false; r.failCap = CAPS[grp[0]].name; }
+      if (!best) { fitsCaps = false; r.failCap = label; }
       else {
         lo += best.lo; hi += best.hi;
         buyChain(best, have);
         best.parts.forEach(function (pid) { if (r.needParts.indexOf(pid) < 0) r.needParts.push(pid); });
+        r.reqInfo.push({ label: label, text: 'with parts (~' + money(best.lo) + ')' });
       }
     }
     r.lo = lo; r.hi = hi;
@@ -453,7 +470,7 @@
                                     : 'You said ready out of the box; this one needs a screwdriver';
     } else if (!fitsCaps) {
       r.in = false;
-      r.reason = 'No ' + r.failCap + ' path, even with parts';
+      r.reason = 'No path to "' + r.failCap + '", even with parts';
     } else if (c.stockAllowed && c.stockAllowed.indexOf(o.stock) < 0) {
       r.in = false;
       r.reason = STOCK_REASON[o.stock] || 'Not reliably orderable today';
@@ -472,10 +489,15 @@
     var host = document.getElementById('questions');
     host.innerHTML = D.interview.map(function (q) {
       var picked = chosen(q).map(function (a) { return a.id; });
-      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) +
-        (q.multi ? ' <span style="font-weight:400;color:var(--muted);font-size:.78em">(all that apply)</span>' : '') +
-        '</h3><div class="ans">' +
+      /* multi-selects and single toggles are literal checkboxes; only
+         mutually-exclusive choices render as buttons */
+      var boxy = q.multi || q.answers.length === 1;
+      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) + '</h3><div class="ans">' +
         q.answers.map(function (a) {
+          if (boxy) {
+            return '<label class="cb"><input type="checkbox" data-a="' + a.id + '"' +
+                   (picked.indexOf(a.id) >= 0 ? ' checked' : '') + '>' + esc(a.label) + '</label>';
+          }
           return '<button type="button" data-a="' + a.id + '" aria-pressed="' + (picked.indexOf(a.id) >= 0) + '">' +
                  esc(a.label) + '</button>';
         }).join('') + '</div></div>';
@@ -496,19 +518,20 @@
       bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
     }
     bits.push('<span class="nm">' + esc(o.name) + '</span>');
-    /* dead products never say "price TBA": show "was $X" if the last price is
-       known, otherwise no price line at all */
+    /* ONE headline number: the complete price (including anything the
+       visitor's answers require). Device price + availability follow, muted.
+       Dead products say "was $X" or nothing - never "price TBA". */
     var dead = o.status === 'discontinued' || o.status === 'cancelled';
-    if (!(dead && o.price_usd == null)) {
-      var pr = dead ? 'was ' + priceText(o.price_usd)
-                    : '<b>' + priceText(o.price_usd) + '</b>';
-      if (!r.unknownPrice && o.status === 'orderable') {
-        pr += ' <span class="cpl">&middot; from ~' + money(r.lo) + ' complete</span>';
-      }
-      bits.push('<span class="pr">' + pr + '</span>');
-    }
-    if (o.status === 'orderable' && STOCK_LABEL[o.stock]) {
-      bits.push('<span class="avail">' + esc(STOCK_LABEL[o.stock]) + '</span>');
+    if (dead) {
+      if (o.price_usd != null) bits.push('<span class="pr">was ' + priceText(o.price_usd) + '</span>');
+    } else if (o.status !== 'orderable' || r.unknownPrice) {
+      bits.push('<span class="pr">' + priceText(o.price_usd) + '</span>');
+    } else {
+      bits.push('<span class="pr"><b>~' + money(r.lo) + ' complete</b></span>');
+      var sub = [];
+      if (Math.round(r.lo) !== Math.round(plo(o.price_usd))) sub.push('device ' + priceText(o.price_usd));
+      if (STOCK_LABEL[o.stock]) sub.push(STOCK_LABEL[o.stock]);
+      if (sub.length) bits.push('<span class="avail">' + sub.map(esc).join(' &middot; ') + '</span>');
     }
     var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
       .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
@@ -519,15 +542,13 @@
     if (r.ghost || !r.in) {
       bits.push('<span class="out-why">' + esc(r.reason) + '</span>');
     } else {
-      var needs = r.needVariants.map(function (v) {
-        return 'the ' + v.name + (v.price_delta ? ' (+' + money(v.price_delta) + ')' : ' (same price)');
-      }).concat(r.needParts.map(function (pid) { return PARTS[pid].name; }));
-      if (needs.length) {
-        bits.push('<span class="need">Fits with: ' + esc(needs.join(' + ')) + '</span>');
-      }
-      if (r.hedges.length) {
-        bits.push('<span class="hedge">Claimed but unverified: ' + esc(r.hedges.join(', ')) + '</span>');
-      }
+      /* one line per answered requirement, in the user's own words:
+         "S-Video / Composite: built in" / "with parts (~$27)" / etc. */
+      r.reqInfo.forEach(function (ri) {
+        var hedgy = ri.text.indexOf('unverified') >= 0;
+        bits.push('<span class="' + (hedgy ? 'hedge' : 'need') + '">' +
+                  esc(ri.label) + ': ' + esc(ri.text) + '</span>');
+      });
     }
     return '<button type="button" class="card' + ((r.ghost || !r.in) ? ' out' : '') + (r.ghost ? ' ghost' : '') +
            '" data-card="' + o.id + '">' + bits.join('') + '</button>';
@@ -688,7 +709,7 @@
         var have2 = {}; Object.keys(builtIn(o)).forEach(function (t) { have2[t] = true; });
         var crt = solve('yc', have2, []);
         if (crt) play += ' For a CRT via S-Video, budget roughly ' + money(crt.lo) +
-                         ' on top (the fine print has the parts).';
+                         ' on top (parts listed under Specs and sources).';
       }
     }
     var chips = built.map(function (t) {
@@ -704,12 +725,14 @@
       '<p class="vd">' +
         (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.vendor) + ' - official page</a>'
                : esc(o.vendor)) +
-        ' &middot; ' + esc(o.status) +
-        (o.status === 'orderable' && STOCK_LABEL[o.stock] ? ' (' + esc(STOCK_LABEL[o.stock]) + ')' : '') + '</p>' +
+        (o.status === 'orderable' ? '' : ' &middot; ' + esc(o.status)) + '</p>' +
       ((o.status === 'discontinued' || o.status === 'cancelled')
         ? (o.price_usd == null ? '' : '<p class="price">was ' + esc(priceText(o.price_usd)) + '</p>')
-        : '<p class="price"><b>' + esc(priceText(o.price_usd)) + '</b>' +
-          (!r.unknownPrice && o.status === 'orderable' ? ' &middot; from ~' + money(r.lo) + ' complete' : '') + '</p>') +
+        : (o.status !== 'orderable' || r.unknownPrice)
+          ? '<p class="price">' + esc(priceText(o.price_usd)) + '</p>'
+          : '<p class="price"><b>~' + money(r.lo) + ' complete</b><span class="psub">' +
+            (Math.round(r.lo) !== Math.round(plo(o.price_usd)) ? ' &middot; device ' + esc(priceText(o.price_usd)) : '') +
+            (STOCK_LABEL[o.stock] ? ' &middot; ' + esc(STOCK_LABEL[o.stock]) : '') + '</span></p>') +
       '<p class="what">' + esc(o.what) + '</p>' +
       (play ? '<p class="play"><b>To get playing:</b> ' + esc(play) + '</p>' : '') +
       '<p class="adv">' + esc(o.advice) + '</p>' +
@@ -719,7 +742,7 @@
                    (v.note ? ' - ' + esc(v.note) : '');
           }).join(' &middot; ') + '</p>' : '') +
       (chips.length ? '<div class="caps">' + chips.join('') + '</div>' : '') +
-      '<details class="fine"><summary>The fine print</summary>' +
+      '<details class="fine"><summary>Specs and sources</summary>' +
         (unv.length ? '<h4>Claimed, not verified</h4><ul>' + unv.map(function (t) {
           return '<li class="unv">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
         (withParts.length ? '<h4>Possible with parts</h4><ul>' + withParts.join('') + '</ul>' : '') +
@@ -793,6 +816,10 @@
   document.getElementById('questions').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-a]'); if (!b) return;
     toggleAnswer(b.closest('.q').dataset.q, b.dataset.a);
+  });
+  document.getElementById('questions').addEventListener('change', function (e) {
+    var i = e.target.closest('input[data-a]'); if (!i) return;
+    toggleAnswer(i.closest('.q').dataset.q, i.dataset.a);
   });
   document.getElementById('chips').addEventListener('click', function (e) {
     if (e.target.closest('button[data-clearall]')) {

@@ -153,11 +153,35 @@ Top-level keys:
     requirement check (buying the right version beats bolting on parts).
 
 Sheet structure (redesigned 2026-07-16 for newcomers — the sheet is an
-ONBOARDING view, not a data dump): photo, price/complete/stock, `what`,
-generated "To get playing" sentence (from to_complete, plus a CRT-budget
-line when Y/C needs parts), `advice`, Versions line, capability chips,
-then everything else (research notes, unverified flags, chains, sources,
-confidence) behind a collapsed "The fine print" disclosure.
+ONBOARDING view, not a data dump): photo, price, `what`, generated
+"To get playing" sentence (from to_complete, plus a CRT-budget line when
+Y/C needs parts), `advice`, Versions line, capability chips, then
+everything else (research notes, unverified flags, chains, sources,
+confidence) behind a collapsed disclosure labeled **"Specs and sources"**
+(user rejected "The fine print" — not a contract).
+
+Interview/rail rulings (user, 2026-07-16 overhaul round):
+- Verdict + tally render BELOW the questions. Nothing that appears on
+  answering may push the questions down - no layout shift above the
+  interaction point.
+- Questions are flat in the rail (no per-question card boxes).
+- Multi-select questions AND single-answer toggles render as literal
+  checkboxes (accent-colored native inputs); only mutually-exclusive
+  choices are buttons.
+- Price display: ONE headline number - the complete price, which includes
+  whatever the visitor's answers require. Device/sticker price and
+  availability follow muted on one secondary line (availability ranks
+  below price but stays visible). Never show "range + from-X-complete"
+  side by side.
+- Cards explain themselves per answered question: one line per answered
+  requirement, labeled with the ANSWER'S OWN WORDS ("S-Video / Composite:
+  built in" / "with parts (~$27)" / "with the Analogue version (+$50)" /
+  "claimed by vendor, unverified").
+
+Reddit research: user holds personal Reddit API keys. They go in
+`.secrets/reddit.json` ({"client_id","client_secret"}) - the folder is
+gitignored; NEVER commit or echo them. Build tools/reddit_search.py on
+app-only OAuth when the file exists.
 
 Field conventions (parts and options both):
   - `price_usd`: number, `[low, high]` range (vendor/batch spread), or

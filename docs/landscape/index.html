@@ -29,7 +29,9 @@
   /* titles are Roboto Condensed on this page (no marker font here) */
   .cd { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; }
 
-  .wrap { max-width: 78rem; margin: 0 auto; padding: .8rem 1.25rem 3rem; }
+  /* 88rem (up from 78) with a raised card minimum: the extra width goes into
+     wider cards and roomier DIY columns, not into extra grid columns */
+  .wrap { max-width: 88rem; margin: 0 auto; padding: .8rem 1.25rem 3rem; }
 
   /* ---- header: wordmark + title left; pills + theme toggle pinned top-right
      at every width (nowrap - the nav goes vertical on phones, never below) ---- */
@@ -115,17 +117,20 @@
   #chips { display: none; }
 
   /* ---- the poster: each lane is a visible BAND (a lane, not just a gap) ---- */
-  .lane { margin: 0 0 1rem; background: color-mix(in srgb, var(--surface) 55%, var(--bg));
+  .lane { margin: 0 0 .6rem; background: color-mix(in srgb, var(--surface) 55%, var(--bg));
           border: 1px solid var(--rule); border-radius: 10px; padding: .65rem .8rem .8rem; }
   .lanebar { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin: 0 0 .55rem; }
+  /* lane names carry the accent: they are the poster's structure, and the
+     one place extra color earns its keep (proposal 2026-07-17) */
   .lanebar button.lname { font: inherit; border: 0; background: none; color: var(--fg); cursor: pointer;
                           padding: 0; font-size: 1.3rem; }
-  .lanebar button.lname:hover .cd { color: var(--accent); }
+  .lanebar button.lname .cd { color: var(--accent); }
+  .lanebar button.lname:hover .cd { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
   .lane.focus .lanebar button.lname .cd { color: var(--accent); }
   .lanebar .tag2 { font-size: .76rem; color: var(--muted); }
   /* align-items: start = every card takes its natural height instead of
      stretching to the row's tallest (user ruling) */
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(13.5rem, 1fr)); gap: .6rem;
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .6rem;
            align-items: start; }
   body[data-zoom="lane"] .lane:not(.focus) .cards { display: none; }
   body[data-zoom="lane"] .lane:not(.focus) { margin-bottom: .7rem; opacity: .55; }
@@ -144,6 +149,9 @@
               text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 1px 5px var(--surface); }
   .card .pic { width: 52px; height: 52px; object-fit: contain; align-self: flex-end;
                margin: -0.2rem 0 -2.6rem; }
+  .card .tagl { font-size: .72rem; font-style: italic; color: var(--muted); margin-top: -.1rem;
+                position: relative;
+                text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 1px 5px var(--surface); }
   .card .pr { font-size: .8rem; }
   .card .pr b { font-weight: 700; }
   .card .pr .cpl { color: var(--muted); }
@@ -456,7 +464,12 @@
         cost.lo += sub.lo; cost.hi += sub.hi;
         sub.parts.forEach(function (q) { if (cost.parts.indexOf(q) < 0) cost.parts.push(q); });
       }
-      if (ok && (!best || cost.lo < best.lo)) best = cost;
+      if (!ok) continue;
+      /* tie-break equal-price chains by availability: fewer sells-out parts
+         wins (the in-stock JAMMIX vs the equal-priced MiSTercade) */
+      cost.scarce = cost.parts.filter(function (q) {
+        return PARTS[q].stock && PARTS[q].stock !== 'now'; }).length;
+      if (!best || cost.lo < best.lo || (cost.lo === best.lo && cost.scarce < best.scarce)) best = cost;
     }
     return best;
   }
@@ -652,6 +665,9 @@
       bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
     }
     bits.push('<span class="nm">' + esc(o.name) + '</span>');
+    /* the glance-level positioning line ("The value pick") - community
+       perception in one muted phrase, distinct from the sheet's what */
+    if (o.tag) bits.push('<span class="tagl">' + esc(o.tag) + '</span>');
     var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
       .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
     (o.provides_unverified || []).forEach(function (t) {

@@ -286,6 +286,26 @@ Field conventions (parts and options both):
 - **The adapters column is grouped by subheads**: parts carry
   `subcat: video|input|other`, rendered as Video / Controllers / Extras.
   New adapter parts must set subcat (default bucket is Extras).
+- **`tag` (option field, 2026-07-17)**: the glance-level positioning line
+  rendered in muted italics under the card name ("The value pick") -
+  community perception in one phrase, distinct from the sheet's `what`.
+  User-approved slate on consoles/kits/mainboards; ghosts and horizon
+  entries carry none. "Premium" belongs to MiSTer Addons (boards +
+  support reputation), NOT to the priciest kit - RetroCastle's tag is
+  about completeness ("The fully loaded import"), a user correction.
+- **Lane names render in the accent color** (structure, not decoration -
+  the agreed one-notch answer to "more color?"). Card titles stay fg.
+- **Chain tie-break**: equal-price chains prefer the one with fewer
+  sells-out parts (the in-stock JAMMIX must beat the equal-priced
+  MiSTercade when both provide jamma).
+- **Layout: 88rem page cap + 15rem card minimum + .6rem lane gutter**
+  (2026-07-17): extra width goes into wider cards and roomier DIY
+  columns, never into extra grid columns.
+- **JAMMA update**: jammix added as a second io-column JAMMA part
+  (~$275 board at Ultimate MiSTer, in stock; kits EUR499.90+ WITHOUT
+  the DE10). RetroCastle's old JAMMA kit is delisted everywhere
+  (their store + CastleMania both empty 2026-07-17) - noted in the
+  jammix entry, do not resurrect without a live listing.
 - **Built-in per-answer lines collapse to one "Covers: X, Y" line**; costed
   paths and overridden lines stay separate.
 - **`line_overrides`** (option field): `{token: "text"}` replaces the

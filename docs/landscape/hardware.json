@@ -145,10 +145,6 @@
       "explain": "Internal token: any USB gamepad to actually play.",
       "internal": true
     },
-    "midi-mt32": {
-      "name": "MT-32 MIDI synth",
-      "explain": "Roland MT-32/SoundFont music for DOS-era cores via mt32-pi."
-    },
     "ssone-port": {
       "name": "SuperStation expansion port",
       "explain": "Internal token: accepts the SuperDock.",
@@ -249,7 +245,8 @@
         "https://ultimatemister.com/product/ultimate-mister-pro/"
       ],
       "category": "io",
-      "what": "The VGA-generation analog board: RGB or component by cable, and the VGA pins the MikeS11 Y/C adapters plug into."
+      "what": "The VGA-generation analog board: RGB or component by cable, and the VGA pins the MikeS11 Y/C adapters plug into.",
+      "addon_note": "+ a case: acrylic $10 to aluminum $75"
     },
     "io-analog-pro": {
       "name": "MiSTer Addons IO Analog Pro",
@@ -271,7 +268,8 @@
         "https://misteraddons.com/products/mister-fpga-io-analog-pro"
       ],
       "category": "io",
-      "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out a Saturn-style socket, HDMI stays live."
+      "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out a Saturn-style socket, HDMI stays live.",
+      "addon_note": "+ a case: acrylic $10 to aluminum $75"
     },
     "reflex-prism": {
       "name": "MiSTer Addons Reflex Prism (HDMI to analog)",
@@ -311,7 +309,8 @@
         "https://ultimatemister.com/product/mister-digital-io-edition-v1-2/"
       ],
       "category": "io",
-      "what": "Optical digital audio and a second SD slot - for HDMI-only setups that want clean audio out."
+      "what": "Optical digital audio and a second SD slot - for HDMI-only setups that want clean audio out.",
+      "addon_note": "+ a case: acrylic $10 to aluminum $75"
     },
     "usb-hub": {
       "name": "USB hub addon (v2.1)",
@@ -468,26 +467,6 @@
         "https://retroremake.co/pages/store"
       ]
     },
-    "mt32-pi-kit": {
-      "name": "MT32-pi interface kit",
-      "vendor": "various (~$24 for the interface; Raspberry Pi 3+ sold separately)",
-      "price_usd": 24,
-      "provides": [
-        "midi-mt32"
-      ],
-      "requires": [
-        "user-io-port"
-      ],
-      "notes": "Roland MT-32 / SoundFont synth for DOS-era cores; budget the Pi on top.",
-      "verified": "2026-07",
-      "confidence": "medium",
-      "sources": [
-        "https://github.com/dwhinham/mt32-pi",
-        "https://misteraddons.com/products/mt32-pi"
-      ],
-      "category": "adapter",
-      "what": "Roland MT-32 music for DOS-era cores, via a Raspberry Pi you add."
-    },
     "case-armor": {
       "name": "Aluminum Armor case (passive cooling)",
       "vendor": "MiSTer Addons",
@@ -639,7 +618,8 @@
       ],
       "img": "ironclad-dx.png",
       "url": "https://www.d3fmod.com/product/mini-itx_ironclad_dx/",
-      "stock": "waves"
+      "stock": "waves",
+      "addon_note": "+ a Mini-ITX or larger PC case (yours to pick)"
     },
     "mistercade-lite": {
       "name": "MiSTer Addons MiSTercade V2 (Lite)",
@@ -665,7 +645,8 @@
       ],
       "img": "mistercade-v2.png",
       "url": "https://misteraddons.com/products/mistercade-v2-kit-mister-fpga-jamma-arcade-kit",
-      "stock": "waves"
+      "stock": "waves",
+      "addon_note": "+ an arcade cabinet (yours)"
     },
     "usb-hub-generic": {
       "name": "Any powered USB hub",
@@ -1417,6 +1398,25 @@
           "stock": [
             "now"
           ]
+        }
+      ]
+    },
+    {
+      "id": "discs",
+      "q": "Load real CD games from the disc?",
+      "answers": [
+        {
+          "id": "yes",
+          "label": "Yes, real discs",
+          "require": [
+            [
+              "cd-drive"
+            ]
+          ]
+        },
+        {
+          "id": "no",
+          "label": "Files on a card are fine"
         }
       ]
     }

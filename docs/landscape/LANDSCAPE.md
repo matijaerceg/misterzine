@@ -59,6 +59,20 @@ never "release tracker" (that term belongs to the releases page).
 - **Lane zoom is animated** (FLIP, transform-only, ~220ms, no rotation, runs
   under prefers-reduced-motion per the site's standing rationale); the sheet
   gets a 150ms fade/scale-in. Verified by sampling transforms per frame.
+- **Discontinued/cancelled items never render "price TBA"**: `price_usd` on
+  a dead product means its last known price, shown as "was $X"; null hides
+  the price line entirely (user ruling 2026-07-16).
+- **Open-source-only hardware stays within existing lanes, no new lane**:
+  Multisystem1 (discontinued as a product, buildable from open files) lives
+  in special builds with its story in the notes. A dedicated "open-source
+  DIY fabrication" lane was considered and scoped out 2026-07-16 - the
+  audience is overwhelmed newcomers, not PCB fabricators; revisit only if
+  several such entries accumulate.
+- **MiSTer Pi bundle tiers are NOT separate cards** (ruling 2026-07-16):
+  bundles of the same board + parts you still assemble are price points of
+  one starting point, listed in the option's notes. Contrast: a factory-
+  ASSEMBLED build (qmtech-assembled) is its own kits-lane card because the
+  effort grade differs.
 - Options carry `img: "<option-id>.png"` pointing into docs/landscape/img/.
   The user sources the images himself (alpha-transparent PNGs, ~160px on the
   long side is plenty; card slot renders 52px contain-fit). A missing file

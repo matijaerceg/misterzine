@@ -275,21 +275,22 @@
       ]
     },
     "reflex-prism": {
-      "name": "MiSTer Addons Reflex Prism (Direct Video DAC)",
+      "name": "MiSTer Addons Reflex Prism (HDMI to analog)",
       "vendor": "MiSTer Addons",
-      "price_usd": 40,
+      "price_usd": 80,
       "provides": [
         "vga-rgb",
-        "yc-source"
+        "ypbpr",
+        "yc"
       ],
       "requires": [
         "hdmi"
       ],
-      "notes": "Productized digital-to-analog video converter (the polished alternative to a generic Direct Video dongle). In stock at review. Full output details not yet verified beyond the listing.",
+      "notes": "Lag-free 1:1 digital-to-analog converter for Direct Video (direct_video=2, 15kHz modes): HD15 port does RGB or YPbPr (switch, up to 1920x1200), Saturn Mini-DIN-10 does RGB and native S-Video simultaneously. Composite is present but the vendor itself calls it unsupported \"due to dot crawl\" - honest, so we do not claim it. $80 assembled V1.1, ready to ship at review (an earlier $40 figure from a collection listing was wrong).",
       "verified": "2026-07",
-      "confidence": "low",
+      "confidence": "high",
       "sources": [
-        "https://misteraddons.com/collections/kits"
+        "https://misteraddons.com/products/reflex-prism-hdmi-to-analog"
       ]
     },
     "io-digital": {
@@ -697,34 +698,38 @@
       "url": "https://ultimatemister.com/product/ultimate-mister-pro/"
     },
     {
-      "id": "ultimate-mister-qmtech",
+      "id": "qmtech-assembled",
       "lane": "kits",
-      "name": "Ultimate MiSTer QMTech Build",
-      "vendor": "Ultimate MiSTer (EU)",
-      "price_usd": 215,
+      "name": "QMTech Factory-Assembled MiSTer",
+      "vendor": "QMTech (AliExpress); resold by Ultimate MiSTer as \"Ultimate MiSTer FPGA\"",
+      "price_usd": null,
       "status": "orderable",
       "provides": [
         "hdmi",
-        "ethernet"
+        "ethernet",
+        "sdram128",
+        "vga-rgb",
+        "yc-source",
+        "snac",
+        "usb-hub",
+        "rtc",
+        "analog-audio"
       ],
-      "includes": [
-        "qmtech-cv",
-        "sd-card"
-      ],
+      "includes": [],
       "to_complete": [
-        "usb-controller",
-        "psu-barrel-5a"
+        "usb-controller"
       ],
-      "notes": "EUR199.90 excl VAT: the budget assembled route, built on the QMTech clone. OUT OF STOCK at review (2026-07-16), and the live product page itemizes nothing beyond the price - earlier listings suggested an analog I/O board, USB hub and case, but none of that is verifiable today, so this entry claims only the board and a preloaded card. Re-verify contents when it restocks before trusting the complete price.",
+      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). AliExpress price pending verification (their pages block automated access). Whether the V2.1 IO board hosts MikeS11 ACTIVE adapters (5V on VGA pin 9) is unverified; the passive chain applies regardless.",
       "verified": "2026-07",
-      "confidence": "low",
+      "confidence": "medium",
       "sources": [
-        "https://ultimatemister.com/product-category/qmtech-fpga/"
+        "https://www.aliexpress.com/item/1005012462104429.html",
+        "https://ultimatemister.com/product/ultimate-qmtech-fpga/"
       ],
       "effort": "none",
-      "stock": "waves",
-      "img": "ultimate-mister-qmtech.png",
-      "url": "https://ultimatemister.com/product/ultimate-qmtech-fpga/"
+      "stock": "now",
+      "img": "qmtech-assembled.png",
+      "url": "https://www.aliexpress.com/item/1005012462104429.html"
     },
     {
       "id": "icode-fully-built",
@@ -787,7 +792,7 @@
         "sd-card",
         "usb-controller"
       ],
-      "notes": "The reference board. Chronically scarce since the chip shortage; often only reliably available direct from Terasic (ships a 5V/2.5A adapter, upgrade advised once addons stack up). At $225 bare it is hard to justify against the MiSTer Pi unless you specifically want the original. July-2026 stock status not freshly confirmed.",
+      "notes": "The reference board. $225 direct from Terasic, which restocks regularly (site owner observation 2026-07-16; the \"chronic scarcity\" framing came from an undated shortage-era buying guide). Third-party resellers mark it up when they have it at all. Ships a 5V/2.5A adapter; upgrade advised once addons stack up. At $225 bare it is hard to justify against the MiSTer Pi unless you specifically want the original.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -795,7 +800,7 @@
         "https://misterfpga.co.uk/where-to-buy-a-de10-nano/"
       ],
       "effort": "diy",
-      "stock": "scarce",
+      "stock": "waves",
       "img": "de10-nano.png",
       "url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046"
     },

@@ -450,11 +450,17 @@
       bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
     }
     bits.push('<span class="nm">' + esc(o.name) + '</span>');
-    var pr = '<b>' + priceText(o.price_usd) + '</b>';
-    if (!r.unknownPrice && o.status === 'orderable') {
-      pr += ' <span class="cpl">&middot; from ~' + money(r.lo) + ' complete</span>';
+    /* dead products never say "price TBA": show "was $X" if the last price is
+       known, otherwise no price line at all */
+    var dead = o.status === 'discontinued' || o.status === 'cancelled';
+    if (!(dead && o.price_usd == null)) {
+      var pr = dead ? 'was ' + priceText(o.price_usd)
+                    : '<b>' + priceText(o.price_usd) + '</b>';
+      if (!r.unknownPrice && o.status === 'orderable') {
+        pr += ' <span class="cpl">&middot; from ~' + money(r.lo) + ' complete</span>';
+      }
+      bits.push('<span class="pr">' + pr + '</span>');
     }
-    bits.push('<span class="pr">' + pr + '</span>');
     if (o.status === 'orderable' && STOCK_LABEL[o.stock]) {
       bits.push('<span class="avail">' + esc(STOCK_LABEL[o.stock]) + '</span>');
     }
@@ -624,8 +630,10 @@
         ' &middot; ' + esc(o.status) +
         (o.status === 'orderable' && STOCK_LABEL[o.stock] ? ' (' + esc(STOCK_LABEL[o.stock]) + ')' : '') +
         ' &middot; lane: ' + esc(D.lanes.filter(function (l) { return l.id === o.lane; })[0].name) + '</p>' +
-      '<p class="price"><b>' + esc(priceText(o.price_usd)) + '</b>' +
-        (!r.unknownPrice && o.status === 'orderable' ? ' &middot; from ~' + money(r.lo) + ' complete' : '') + '</p>' +
+      ((o.status === 'discontinued' || o.status === 'cancelled')
+        ? (o.price_usd == null ? '' : '<p class="price">was ' + esc(priceText(o.price_usd)) + '</p>')
+        : '<p class="price"><b>' + esc(priceText(o.price_usd)) + '</b>' +
+          (!r.unknownPrice && o.status === 'orderable' ? ' &middot; from ~' + money(r.lo) + ' complete' : '') + '</p>') +
       (built.length ? '<h4>Built in</h4><ul>' + built.map(function (t) {
         return '<li title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
       (unv.length ? '<h4>Claimed, not verified</h4><ul>' + unv.map(function (t) {

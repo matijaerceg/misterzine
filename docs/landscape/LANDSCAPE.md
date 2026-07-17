@@ -14,6 +14,26 @@ Nav name: **Landscape**. Page title: "The MiSTer FPGA Hardware Landscape" (user 
 URL: `/landscape/`. Outward copy may say "landscape" or "hardware matrix" —
 never "release tracker" (that term belongs to the releases page).
 
+## Page structure (restructured 2026-07-16, user's design)
+
+Four lanes: **Consoles** (custom-shell machines, "starting at" pricing,
+variants in the panel) - **Ready-built kits** (standard modular stack,
+assembled; checkmark-or-priced-add-on per answered question) - **Do It
+Yourself** (rendered as COLUMNS: Mainboards | I/O boards | USB | Adapters -
+the columns ARE the anatomy lesson; parts carry `category: io|hub|adapter`
+and get their own small sheets at `#p-<id>`; answers HIGHLIGHT the parts a
+build would use; each mainboard card carries a "+ 128MB RAM stick" line,
+no RAM column) - **On the horizon**. The Special builds lane is GONE:
+ironclad-dx and mistercade-lite are IO-column parts now (the JAMMA/cab
+answer resolves as a parts chain), multisystem1 lives in Consoles as a
+discontinued row. Once any answer exists, entries that do not fit collapse
+to slim reasoned rows in every lane (gray-never-hide, evolved). No
+clickable configurator - configurations are IMPLIED educationally (user
+ruling; revisit only if he asks).
+
+**Vendor exclusion (user, personal, 2026-07-16): Antonio Villena products
+are NOT listed anywhere on the landscape. Do not add them on any sweep.**
+
 ## Design doctrine (agreed 2026-07-16, do not silently reverse)
 
 - The unit is a **purchasable starting point**, not a chip. A bare MiSTer Pi

@@ -158,6 +158,32 @@
   .card.out .nm, .card.out .pr, .card.out .avail, .card.out .caps { opacity: .45; }
   .card.ghost .nm, .card.ghost .pr { opacity: .6; }
 
+  /* ---- Do It Yourself: the columns ARE the anatomy lesson ---- */
+  .cols { display: grid; grid-template-columns: 1.35fr 1.15fr 1fr 1fr; gap: .8rem; align-items: start; }
+  .col .colhead { margin: 0 0 .45rem; }
+  .col .colhead h3 { font-size: 1.02rem; margin: 0; }
+  .col .colhead span { display: block; font-size: .7rem; color: var(--muted); }
+  .col .cards { grid-template-columns: 1fr; gap: .45rem; }
+  .pcard { text-align: left; font: inherit; color: inherit; cursor: pointer;
+           border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
+           padding: .45rem .6rem; display: flex; flex-direction: column; gap: .12rem; }
+  .pcard:hover { border-color: var(--btn-border-hover); background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
+  .pcard .nm { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; font-size: .88rem;
+               line-height: 1.2; }
+  .pcard .pw { font-size: .7rem; color: var(--muted); }
+  .pcard .pr { font-size: .76rem; font-weight: 600; }
+  /* answer-driven highlight: the parts your answers would pull into a build */
+  .pcard.hl { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+  .card .ramline { font-size: .72rem; color: var(--muted); }
+  @media (max-width: 66rem) { .cols { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
+
+  /* ineligible entries collapse to a slim reasoned row once answers exist */
+  .card.mini { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: .25rem .6rem;
+               min-height: 0; padding: .32rem .65rem; }
+  .card.mini .nm { font-size: .88rem; }
+  .card.mini .out-why { margin-left: auto; }
+
   /* horizon: announced things earn a slim row, not a full card */
   .lane.slim .cards { grid-template-columns: 1fr; gap: .35rem; }
   .lane.slim .card { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: .3rem .6rem;
@@ -504,12 +530,23 @@
     }).join('');
   }
 
+  function stagHTML(o) {
+    if (o.status === 'orderable') return '';
+    var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
+    return '<span class="stag ' + cls + '">' + esc(o.status) + '</span>';
+  }
+
   function cardHTML(r) {
     var o = r.o, bits = [];
-    if (o.status !== 'orderable') {
-      var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
-      bits.push('<span class="stag ' + cls + '">' + esc(o.status) + '</span>');
+    /* once answers exist, entries that no longer fit collapse to a slim
+       reasoned row - still on the map, just not spending vertical space */
+    if (answeredCount() > 0 && (r.ghost || !r.in)) {
+      return '<button type="button" class="card mini' + (r.ghost ? ' ghost' : ' out') +
+             '" data-card="' + o.id + '">' + stagHTML(o) +
+             '<span class="nm">' + esc(o.name) + '</span>' +
+             '<span class="out-why">' + esc(r.reason) + '</span></button>';
     }
+    bits.push(stagHTML(o));
     /* every option points at img/<id>.png; a file that does not exist (yet)
        removes itself, so dropping a PNG into the folder upgrades the card
        with no code change. NOPIC remembers misses so re-renders do not
@@ -538,6 +575,10 @@
     (o.provides_unverified || []).forEach(function (t) {
       chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
     });
+    /* DIY mainboards carry their RAM reminder inside the card (user ruling) */
+    if (o.lane === 'diy' && (o.to_complete || []).indexOf('sdram-128') >= 0) {
+      bits.push('<span class="ramline">+ 128MB RAM stick (' + esc(priceText(PARTS['sdram-128'].price_usd)) + ')</span>');
+    }
     if (chips.length) bits.push('<span class="caps">' + chips.join('') + '</span>');
     if (r.ghost || !r.in) {
       bits.push('<span class="out-why">' + esc(r.reason) + '</span>');
@@ -554,16 +595,56 @@
            '" data-card="' + o.id + '">' + bits.join('') + '</button>';
   }
 
+  var PART_COLS = [
+    ['io', 'I/O boards', 'video outputs and more - from plain to a JAMMA edge'],
+    ['hub', 'USB', 'more ports for pads and sticks'],
+    ['adapter', 'Adapters', 'one-job add-ons: video, controllers, NFC']
+  ];
+
+  function partCardHTML(pid, hl) {
+    var p = PARTS[pid];
+    return '<button type="button" class="pcard' + (hl ? ' hl' : '') + '" data-part="' + pid + '">' +
+      '<span class="nm">' + esc(p.name) + '</span>' +
+      (p.what ? '<span class="pw">' + esc(p.what) + '</span>' : '') +
+      '<span class="pr">' + esc(priceText(p.price_usd)) + '</span></button>';
+  }
+
   function renderPoster() {
     var evals = D.options.map(evaluate);
     var byLane = {};
     evals.forEach(function (r) { (byLane[r.o.lane] = byLane[r.o.lane] || []).push(r); });
+    /* highlight column parts your answers would pull into a build: anything a
+       fitting DIY recipe uses, plus anything directly providing a required token */
+    var reqTokens = {};
+    constraints().reqs.forEach(function (rq) { rq.grp.forEach(function (t) { reqTokens[t] = true; }); });
+    var hl = {};
+    evals.forEach(function (r) {
+      if (r.o.lane === 'diy' && r.in) r.needParts.forEach(function (pid) { hl[pid] = true; });
+    });
+    Object.keys(PARTS).forEach(function (pid) {
+      if ((PARTS[pid].provides || []).some(function (t) { return reqTokens[t]; })) hl[pid] = true;
+    });
     document.getElementById('poster').innerHTML = D.lanes.map(function (l) {
       var rows = byLane[l.id] || [];
+      var body;
+      if (l.id === 'diy') {
+        /* the anatomy columns: mainboards + one column per part category */
+        body = '<div class="cols">' +
+          '<div class="col"><div class="colhead"><h3 class="cd">Mainboards</h3>' +
+          '<span>the computer itself - every build starts here</span></div>' +
+          '<div class="cards">' + rows.map(cardHTML).join('') + '</div></div>' +
+          PART_COLS.map(function (pc) {
+            var pids = Object.keys(PARTS).filter(function (pid) { return PARTS[pid].category === pc[0]; });
+            return '<div class="col"><div class="colhead"><h3 class="cd">' + esc(pc[1]) + '</h3>' +
+              '<span>' + esc(pc[2]) + '</span></div><div class="cards">' +
+              pids.map(function (pid) { return partCardHTML(pid, !!hl[pid]); }).join('') + '</div></div>';
+          }).join('') + '</div>';
+      } else {
+        body = '<div class="cards">' + rows.map(cardHTML).join('') + '</div>';
+      }
       return '<section class="lane' + (l.id === 'horizon' ? ' slim' : '') + '" id="lane-' + l.id + '"><div class="lanebar">' +
         '<button type="button" class="lname" data-lane="' + l.id + '"><span class="cd">' + esc(l.name) + '</span></button>' +
-        '<span class="tag2">' + esc(l.tagline) + '</span></div>' +
-        '<div class="cards">' + rows.map(cardHTML).join('') + '</div></section>';
+        '<span class="tag2">' + esc(l.tagline) + '</span></div>' + body + '</section>';
     }).join('');
     renderVerdict(evals);
     renderChips();
@@ -761,6 +842,41 @@
     }
     document.getElementById('sheetx').addEventListener('click', function () { sheet.close(); });
   }
+  /* small sheet for a PART (column item): what it is, price, then the receipts */
+  function openPartSheet(pid, push) {
+    var p = PARTS[pid]; if (!p) return;
+    sheet.innerHTML =
+      '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
+      (p.img && !NOPIC['img/' + p.img] ? '<img class="spic" src="img/' + esc(p.img) + '" alt="">' : '') +
+      '<h2><span class="cd">' + esc(p.name) + '</span></h2>' +
+      '<p class="vd">' +
+        (p.url ? '<a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.vendor || 'vendor') + ' - official page</a>'
+               : esc(p.vendor || '')) +
+        (p.stock && STOCK_LABEL[p.stock] ? ' &middot; ' + esc(STOCK_LABEL[p.stock]) : '') + '</p>' +
+      '<p class="price"><b>' + esc(priceText(p.price_usd)) + '</b></p>' +
+      (p.what ? '<p class="what">' + esc(p.what) + '</p>' : '') +
+      '<details class="fine"><summary>Specs and sources</summary>' +
+        '<p class="notes">' + esc(p.notes || '') + '</p>' +
+        '<p class="meta2">Verified ' + esc(p.verified || 'n/a') + ' &middot; confidence: ' + esc(p.confidence || 'n/a') +
+          (p.sources && p.sources.length ? ' &middot; sources: ' + p.sources.map(function (u, i) {
+            return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + (i + 1) + '</a>'; }).join(' ') : '') + '</p>' +
+      '</details>';
+    sheetId = 'p-' + pid;
+    if (push) history.pushState(null, '', '#p-' + pid);
+    if (!sheet.open) {
+      sheet.showModal();
+      sheet.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }],
+                    { duration: 150, easing: 'ease-out' });
+    }
+    document.getElementById('sheetx').addEventListener('click', function () { sheet.close(); });
+  }
+
+  function openByHash(hash, push) {  // '#id' or '#p-id' -> the right sheet
+    var h = hash.slice(1);
+    if (h.indexOf('p-') === 0 && PARTS[h.slice(2)]) openPartSheet(h.slice(2), push);
+    else if (OPTS[h]) openSheet(h, push);
+  }
+
   sheet.addEventListener('close', function () {
     var was = sheetId; sheetId = null;
     if (closingFromHistory) { closingFromHistory = false; return; }
@@ -772,8 +888,8 @@
   addEventListener('popstate', function () {
     if (sheet.open && location.hash.slice(1) !== sheetId) {
       closingFromHistory = true; sheet.close();
-    } else if (!sheet.open && location.hash.length > 1 && OPTS && OPTS[location.hash.slice(1)]) {
-      openSheet(location.hash.slice(1), false);
+    } else if (!sheet.open && location.hash.length > 1 && OPTS) {
+      openByHash(location.hash, false);
     }
   });
 
@@ -842,8 +958,10 @@
   document.getElementById('poster').addEventListener('click', function (e) {
     var card = e.target.closest('button[data-card]');
     if (card) { openSheet(card.dataset.card, true); return; }
+    var pc = e.target.closest('button[data-part]');
+    if (pc) { openPartSheet(pc.dataset.part, true); return; }
     var lane = e.target.closest('button[data-lane]');
-    if (lane) {
+    if (lane && lane.dataset.lane !== 'diy') {  // diy is columns; zoom has no meaning there
       var sec = document.getElementById('lane-' + lane.dataset.lane);
       setLaneZoom(sec.classList.contains('focus') ? null : sec);
     }
@@ -872,7 +990,7 @@
     var vc = document.getElementById('vchip');
     vc.textContent = 'facts checked ' + d.meta.updated + ' - prices and stock drift';
     vc.hidden = false;
-    if (location.hash.length > 1 && OPTS[location.hash.slice(1)]) openSheet(location.hash.slice(1), false);
+    if (location.hash.length > 1) openByHash(location.hash, false);
   }).catch(function (e) {
     document.getElementById('poster').innerHTML =
       '<p>The landscape failed to load (' + esc((e && e.message) || e) +

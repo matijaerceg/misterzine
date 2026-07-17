@@ -169,6 +169,7 @@
   .card .stag.announced { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 55%, var(--bg)); }
   .card .stag.cancelled { color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 55%, var(--bg)); }
   .card .stag.preorder { color: var(--muted); border: 1px solid var(--hair); }
+  .card .stag.restock { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 55%, var(--bg)); }
   .card.out { background: var(--bg); border-style: dashed; }
   .card.out .nm, .card.out .pr, .card.out .avail, .card.out .caps { opacity: .45; }
   .card.ghost .nm, .card.ghost .pr { opacity: .6; }
@@ -201,7 +202,8 @@
   .pcard .pr { font-size: .76rem; font-weight: 600; }
   /* answer-driven highlight: the parts your answers would pull into a build */
   .pcard.hl { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
-  .card .ramline { font-size: .72rem; color: var(--muted); }
+  /* the RAM stick lives inside the mainboard title: same line, muted weight */
+  .card .nm .nmram { color: var(--muted); font-size: .88em; font-weight: 600; white-space: nowrap; }
   /* characteristic badges (post-answer spotlights, never zero-state) render as
      STICKERS slapped over the card's top-right corner: rotated, allowed to
      overhang the edge, absolutely positioned so they never push content down */
@@ -405,9 +407,11 @@
   /* availability is IMPLIED, never asserted (user ruling): every stock phrase
      is an impression from the last review, and the footer tells visitors to
      verify with the shop themselves */
-  var STOCK_LABEL = { now: 'usually in stock', waves: 'tends to sell out between batches', scarce: 'tends to be hard to find' };
+  var STOCK_LABEL = { now: 'usually in stock', waves: 'tends to sell out between batches',
+                      scarce: 'tends to be hard to find', unconfirmed: 'sold out - no restock confirmed' };
   var STOCK_REASON = { waves: 'Tends to sell out between batches',
-                       scarce: 'Tends to be hard to find in stock' };
+                       scarce: 'Tends to be hard to find in stock',
+                       unconfirmed: 'Sold out - no restock confirmed' };
   var REGION_NAME = { us: 'the US', eu: 'the UK/Europe', cn: 'China', tw: 'Taiwan' };
 
   function esc(s) {
@@ -627,7 +631,12 @@
   }
 
   function stagHTML(o) {
-    if (o.status === 'orderable') return '';
+    /* "restock unconfirmed" is a FACT tag, so like status tags it shows even
+       at the zero state (a sold-out board with no announced batch is not the
+       same fact as one that cycles) */
+    if (o.status === 'orderable') {
+      return o.stock === 'unconfirmed' ? '<span class="stag restock">restock unconfirmed</span>' : '';
+    }
     var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
     return '<span class="stag ' + cls + '">' + esc(o.status) + '</span>';
   }
@@ -664,7 +673,11 @@
     if (o.img && !NOPIC['img/' + o.img]) {
       bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
     }
-    bits.push('<span class="nm">' + esc(o.name) + '</span>');
+    /* DIY mainboards carry the RAM stick IN THE TITLE (community-testing
+       feedback: the DE10 needing RAM must be unmissable) */
+    var needsRam = o.lane === 'diy' && (o.to_complete || []).indexOf('sdram-128') >= 0;
+    bits.push('<span class="nm">' + esc(o.name) +
+              (needsRam ? ' <span class="nmram">+ 128MB RAM stick</span>' : '') + '</span>');
     /* the glance-level positioning line ("The value pick") - community
        perception in one muted phrase, distinct from the sheet's what */
     if (o.tag) bits.push('<span class="tagl">' + esc(o.tag) + '</span>');
@@ -692,11 +705,6 @@
     }
     if (r.shipLine && r.in && !r.ghost) {
       bits.push('<span class="' + (r.shipHome ? 'need' : 'avail') + '">' + esc(r.shipLine) + '</span>');
-    }
-    /* DIY mainboards carry their RAM reminder inside the card (user ruling;
-       no price on it - the complete number below already counts it) */
-    if (o.lane === 'diy' && (o.to_complete || []).indexOf('sdram-128') >= 0) {
-      bits.push('<span class="ramline">+ 128MB RAM stick</span>');
     }
     /* the price sits at the BOTTOM of every card (user ruling: one scan line
        across all lanes). Still ONE headline number - the complete price -

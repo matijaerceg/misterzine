@@ -990,7 +990,7 @@
       "stock": "now",
       "ships_from": "cn",
       "img": "qmtech-assembled.png",
-      "url": "https://www.aliexpress.com/item/1005012462104429.html",
+      "url": "https://www.aliexpress.us/item/3256812275789677.html",
       "what": "A factory-built MiSTer on the QMTech board - the lowest-priced ready-made option.",
       "advice": "A popular budget entry. The trade-offs are AliExpress shipping and less hand-holding than the boutique kits; the hardware itself covers the essentials, SNAC and RTC included.",
       "tag": "The value pick"
@@ -1223,12 +1223,12 @@
         "https://www.timeextension.com/reviews/mister-pi-a-usd99-gateway-to-fpga-retro-gaming"
       ],
       "effort": "diy",
-      "stock": "waves",
+      "stock": "unconfirmed",
       "ships_from": "us",
       "img": "mister-pi.png",
       "url": "https://retroremake.co/pages/store",
       "what": "A modern remake of the reference board: same FPGA class, USB-C power, sold in batches.",
-      "advice": "The most commonly recommended starting point for self-builders. It sells out between batches, and its accessory line (RAM, hub, case) is inexpensive.",
+      "advice": "The most commonly recommended starting point for self-builders - when you can get one. The board is sold out with no announced restock (community testing flagged this 2026-07-17); its accessory line (RAM, hub, case) mostly remains in stock. If a batch 6 appears, it is an easy pick.",
       "popular": true,
       "tag": "The default recommendation"
     },
@@ -1257,7 +1257,7 @@
         "psu-barrel-5a",
         "sd-card"
       ],
-      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some variants have SDRAM integrated on-board (+~$15; then skip the module). Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic. Official sales channel is the QMTech AliExpress store; listing browser-verified 2026-07-17 (via desktop-Chrome fetch): SKUs span roughly C$141-C$266 (~$105-$195 converted from CAD as shown at this location) across bare-board and higher-spec bundles - the old flat $100 figure is shortage-era history. AliExpress URLs are volatile, re-check on each sweep.",
+      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some OTHER QMTech listings integrate the SDRAM on-board (+~$15; then skip the module) - the listing linked here (owner-supplied 2026-07-17) is the bare board WITHOUT onboard RAM, so the 128MB stick applies. Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic. Official sales channel is the QMTech AliExpress store; listing browser-verified 2026-07-17 (via desktop-Chrome fetch): SKUs span roughly C$141-C$266 (~$105-$195 converted from CAD as shown at this location) across bare-board and higher-spec bundles - the old flat $100 figure is shortage-era history. AliExpress URLs are volatile, re-check on each sweep.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1268,8 +1268,8 @@
       "stock": "now",
       "ships_from": "cn",
       "img": "qmtech-cv.png",
-      "url": "https://www.aliexpress.com/item/1005007858010441.html",
-      "what": "The Chinese clone of the reference board, often with the 128MB RAM already soldered on.",
+      "url": "https://www.aliexpress.us/item/3256811500817016.html",
+      "what": "The Chinese clone of the reference board. The linked listing is the bare board - the RAM stick comes separately.",
       "advice": "Liked for being in stock when others are not, and by fanless builders for its thermal headroom. Quality control varies more than the originals - mind the RAM-slot orientation note before assembling.",
       "tag": "The clone that is in stock"
     },

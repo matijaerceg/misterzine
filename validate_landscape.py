@@ -47,7 +47,7 @@ for pid, p in parts.items():
         errs.append(f"part {pid}: requires {p['requires']} satisfiable from NO option (even with chains)")
 
 EFFORTS = {'none', 'some', 'diy'}
-STOCKS = {'now', 'waves', 'scarce', 'na'}
+STOCKS = {'now', 'waves', 'scarce', 'unconfirmed', 'na'}
 REGIONS = {'us', 'eu', 'cn', 'tw'}
 for o in d['options']:
     if 'ships_from' in o and o['ships_from'] not in REGIONS:

@@ -684,6 +684,27 @@
       "verified": "2026-07",
       "confidence": "high",
       "sources": []
+    },
+    "wifi-bt-adapter": {
+      "name": "USB WiFi + Bluetooth adapter",
+      "vendor": "Retro Remake ($5, WiFi5/BT4.2) / generic",
+      "price_usd": [
+        5,
+        15
+      ],
+      "category": "adapter",
+      "provides": [
+        "wifi",
+        "bluetooth"
+      ],
+      "requires": [],
+      "what": "Wireless networking and Bluetooth pads for boards that have neither - one little USB dongle.",
+      "notes": "Any Linux-friendly USB WiFi/BT dongle works; Retro Remake sells a known-good WiFi 5 / BT 4.2 one for $5.",
+      "verified": "2026-07",
+      "confidence": "medium",
+      "sources": [
+        "https://retroremake.co/pages/store"
+      ]
     }
   },
   "options": [
@@ -1004,7 +1025,7 @@
         "sd-card",
         "usb-controller"
       ],
-      "notes": "The reference board. $225 direct from Terasic, which restocks regularly (site owner observation 2026-07-16; the \"chronic scarcity\" framing came from an undated shortage-era buying guide). Third-party resellers mark it up when they have it at all. Ships a 5V/2.5A adapter; upgrade advised once addons stack up.",
+      "notes": "The reference board. $225 direct from Terasic and usually in stock there (owner observation 2026-07-16; the old chronic-scarcity story is shortage-era history). Third-party resellers mark it up when they have it at all. Ships a 5V/2.5A adapter; upgrade advised once addons stack up.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1012,7 +1033,7 @@
         "https://misterfpga.co.uk/where-to-buy-a-de10-nano/"
       ],
       "effort": "diy",
-      "stock": "waves",
+      "stock": "now",
       "img": "de10-nano.png",
       "url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1046",
       "what": "The original reference board every MiSTer descends from. Bare, it can boot a handful of cores over HDMI - but almost nobody uses one that way.",
@@ -1144,7 +1165,7 @@
     {
       "id": "multisystem1",
       "lane": "turnkey",
-      "name": "Heber MiSTer Multisystem (1)",
+      "name": "Heber MiSTer Multisystem 1",
       "vendor": "Heber / RMC (UK)",
       "price_usd": null,
       "status": "discontinued",
@@ -1303,31 +1324,6 @@
     }
   ],
   "interview": [
-    {
-      "id": "build",
-      "q": "How much building do you want to do?",
-      "answers": [
-        {
-          "id": "none",
-          "label": "None - ready out of the box",
-          "effort": [
-            "none"
-          ]
-        },
-        {
-          "id": "some",
-          "label": "A screwdriver is fine",
-          "effort": [
-            "none",
-            "some"
-          ]
-        },
-        {
-          "id": "diy",
-          "label": "I want to build it myself"
-        }
-      ]
-    },
     {
       "id": "display",
       "q": "What are you plugging it into?",

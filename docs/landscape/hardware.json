@@ -964,6 +964,43 @@
       "advice": "A popular budget entry. The trade-offs are AliExpress shipping and less hand-holding than the boutique kits; the hardware itself covers the essentials, SNAC and RTC included."
     },
     {
+      "id": "hamgeek-mister",
+      "lane": "kits",
+      "name": "Hamgeek MiSTer",
+      "vendor": "Hamgeek (AliExpress / hamgeek.com)",
+      "price_usd": 155,
+      "status": "orderable",
+      "provides": [
+        "hdmi",
+        "ethernet",
+        "sdram128",
+        "vga-rgb",
+        "analog-audio"
+      ],
+      "provides_unverified": [
+        "toslink"
+      ],
+      "includes": [
+        "sd-card"
+      ],
+      "to_complete": [],
+      "notes": "A clone of a clone: the QMTech board design (128MB SDRAM integrated) in a case with Hamgeek's analog I/O board, fan and PSU, factory-assembled, sold on AliExpress and Hamgeek's own site. ~GBP124 (~$155) at a Feb 2026 forum sighting; AliExpress prices drift. HISTORY THAT MATTERS: early units had RAM-timing problems on demanding cores (N64/PSX); a core developer confirms the RAM issue is FIXED and affected buyers got free replacement boards - 'Hamgeek clones are fine now' (misterfpga.org t=10139, Feb 2026, TheJesusFish). Community habits: replace the included power supply with a stronger 5V unit; pick the metal case over the plastic one (same price, more robust - Lon.TV review, Apr 2026). VGA analog out for CRTs; combined 3.5mm analog/optical audio jack (optical attested by one owner only, hence hedged); no WiFi/Bluetooth (the USB dongle applies); one unresolved Retrotink 4K handshake thread (r/MiSTerFPGA 1u2x1zm, June 2026). Standing clone caveat from the core dev: cores are not built with clones as their target, so niche titles may behave differently.",
+      "verified": "2026-07",
+      "confidence": "medium",
+      "sources": [
+        "https://misterfpga.org/viewtopic.php?t=10139",
+        "https://blog.lon.tv/2026/04/02/hamgeek-fpga-mister-clone-review/",
+        "https://old.reddit.com/r/MiSTerFPGA/comments/1u2gv60/hamgeek_arrived_today_some_thoughts/"
+      ],
+      "effort": "none",
+      "stock": "now",
+      "ships_from": "cn",
+      "img": "hamgeek-mister.png",
+      "url": "https://www.aliexpress.com/item/1005009558327924.html",
+      "what": "The budget factory-assembled clone: a QMTech-design board, case, analog I/O and fan in one AliExpress box.",
+      "advice": "The cheapest assembled route on the map and a common first MiSTer. Owners typically swap the included power supply for a stronger one and pick the metal case; early RAM problems were fixed with free replacement boards, and current units run the demanding cores fine."
+    },
+    {
       "id": "icode-fully-built",
       "lane": "kits",
       "name": "iCode Fully Built MiSTer",

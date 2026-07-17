@@ -329,6 +329,14 @@ Field conventions (parts and options both):
   provides_unverified to provides. QMTech V2.1 + MikeS11: one Discord
   owner says it works, but iffy-IO-board reports pending the owner's own
   investigation - noted, not yet modeled as verified.
+- **Clone sweep (2026-07-17)**: hamgeek-mister added to the kits lane -
+  the QMTech-design "clone of a clone" sold assembled on AliExpress
+  (~$155, SD included, PSU-swap advice, early RAM issues fixed with free
+  replacement boards per core dev, misterfpga.org t=10139; optical audio
+  hedged). No other unlisted DE10-Nano clones exist: every no-name
+  AliExpress "MiSTer" checked is the QMTech/Hamgeek family. Tang-based
+  partial ports (MiSTeryNano) and DECA/SoCkit ports are NOT clones and
+  stay off the map.
 - **JAMMA landscape (swept 2026-07-17)**: ms2-arcade added as a turnkey
   PREORDER entry (Heber Multisystem2 Arcade, GBP215 ex VAT ~ $280, ships
   from Aug 2026 - the first turnkey JAMMA MiSTer). Budget alternatives

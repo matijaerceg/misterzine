@@ -996,6 +996,56 @@
       "tag": "The value pick"
     },
     {
+      "id": "mister-pi-turbo",
+      "lane": "kits",
+      "name": "MiSTer Pi Turbo Pack",
+      "vendor": "Retro Remake",
+      "price_usd": 190,
+      "status": "orderable",
+      "provides": [],
+      "includes": [
+        "mister-pi",
+        "sdram-128",
+        "io-analog",
+        "usb-hub",
+        "sd-card",
+        "snac-adapter"
+      ],
+      "to_complete": [
+        "psu-usbc"
+      ],
+      "notes": "The MiSTer Pi boxed as one order (a kits-lane entry by owner request, beta round 2026-07-17): Turbo Pack $190 ships the v1.6 board, 128MB SDRAM, A/V Pro v9.2 analog board, USB hub, 64GB SD flashed with an offline stock image, a bonus SNES SNAC adapter, a pre-assembled acrylic shell and a PD cable - light assembly, no soldering. Lower tiers on the same listing: Mega Pack $170 (v1.5 board tier; fewer extras) and RAM Bundle $125 (board, RAM, fan board, acrylic top - no analog I/O, hub or SD). All tiers SOLD OUT with no announced restock, same situation as the bare board (verified on the product page 2026-07-17). No wall charger in any tier - the PD cable needs a USB-C supply.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://retroremake.co/products/mister-pi-retro-gaming-fpga-board-1"
+      ],
+      "effort": "some",
+      "stock": "unconfirmed",
+      "ships_from": "us",
+      "img": "mister-pi-turbo.png",
+      "url": "https://retroremake.co/products/mister-pi-retro-gaming-fpga-board-1",
+      "what": "The MiSTer Pi as a complete boxed kit: board, RAM, analog I/O, hub, flashed SD and shell in one order, with light assembly.",
+      "advice": "The one-order version of the community's favorite self-build - when batches exist. Every tier is sold out with no announced restock; if a batch appears, the Turbo Pack is the complete package and the price is hard to argue with.",
+      "tag": "The default recommendation, boxed",
+      "variants": [
+        {
+          "id": "mega",
+          "name": "Mega Pack",
+          "price_delta": -20,
+          "adds": [],
+          "note": "The v1.5 board tier with fewer extras - check the listing for exact contents."
+        },
+        {
+          "id": "rambundle",
+          "name": "RAM Bundle",
+          "price_delta": -65,
+          "adds": [],
+          "note": "Board, RAM, fan board and acrylic top only - no analog I/O, hub, SD or SNAC adapter."
+        }
+      ]
+    },
+    {
       "id": "hamgeek-mister",
       "lane": "kits",
       "name": "Hamgeek MiSTer",

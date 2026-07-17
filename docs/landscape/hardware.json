@@ -436,7 +436,7 @@
     },
     "nfc-reader": {
       "name": "NFC reader (Zaparoo/TapTo launching)",
-      "vendor": "Retro Remake NFC Reader Pack (\\, in stock) and generic USB readers",
+      "vendor": "Retro Remake NFC Reader Pack (USD10, in stock) and generic USB readers",
       "price_usd": 10,
       "provides": [
         "nfc"
@@ -594,7 +594,8 @@
       "sources": [
         "https://retroremake.co/products/superdock",
         "https://blog.lon.tv/2026/06/07/superstation-one-with-dock-mister-review-lots-of-analog-tv-options/"
-      ]
+      ],
+      "stock": "waves"
     },
     "ironclad-dx": {
       "name": "d3fmod Ironclad DX",
@@ -1400,7 +1401,8 @@
             [
               "snac"
             ]
-          ]
+          ],
+          "short": "Original controllers (SNAC)"
         }
       ]
     },
@@ -1419,7 +1421,8 @@
             [
               "jamma"
             ]
-          ]
+          ],
+          "short": "Arcade cabinet"
         },
         {
           "id": "pocket",
@@ -1428,7 +1431,8 @@
             [
               "handheld"
             ]
-          ]
+          ],
+          "short": "Handheld"
         }
       ]
     },
@@ -1456,7 +1460,8 @@
             [
               "cd-drive"
             ]
-          ]
+          ],
+          "short": "Real discs"
         }
       ]
     }

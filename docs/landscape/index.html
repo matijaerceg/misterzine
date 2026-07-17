@@ -169,6 +169,7 @@
   .cols { display: grid; grid-template-columns: 1.35fr 1.15fr 1fr 1fr; gap: .8rem; align-items: start; }
   .pcard.dim { opacity: .45; }
   .pcard.dim .pw { display: none; }
+  .cols.colsdim .colhead, .cols.colsdim .card { opacity: .45; }
   .pcard .pw.addon { color: color-mix(in srgb, var(--fg) 55%, var(--bg)); }
   .col .colhead { margin: 0 0 .45rem; }
   .col .colhead h3 { font-size: 1.02rem; margin: 0; }
@@ -329,7 +330,7 @@
     <details id="railfold" open>
       <summary id="railsum">Find my MiSTer</summary>
       <div class="foldin">
-        <p class="cta">Tell it what you need. The map narrows as you answer.</p>
+        <p class="cta">Every answer prunes the map.</p>
         <div id="questions"></div>
         <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
       </div>
@@ -401,17 +402,21 @@
   }
 
   /* cheapest chain of add-on parts that makes `token` true given `have`
-     (mutated by the caller between tokens so shared parts are bought once) */
-  function solve(token, have, stack) {
+     (mutated by the caller between tokens so shared parts are bought once).
+     forOpt: I/O-class boards only chain onto bare DIY mainboards - an
+     assembled kit's GPIO stack is already occupied, so "add a MiSTercade to
+     your Armor bundle" would really mean gutting the kit. Not a path. */
+  function solve(token, have, stack, forOpt) {
     if (have[token]) return { lo: 0, hi: 0, parts: [] };
     var best = null;
     for (var pid in PARTS) {
       var p = PARTS[pid];
       if (p.provides.indexOf(token) < 0 || stack.indexOf(pid) >= 0) continue;
+      if (p.category === 'io' && forOpt && forOpt.lane !== 'diy') continue;
       var cost = { lo: plo(p.price_usd) || 0, hi: phi(p.price_usd) || 0, parts: [pid] };
       var ok = true;
       for (var i = 0; i < p.requires.length; i++) {
-        var sub = solve(p.requires[i], have, stack.concat(pid));
+        var sub = solve(p.requires[i], have, stack.concat(pid), forOpt);
         if (!sub) { ok = false; break; }
         cost.lo += sub.lo; cost.hi += sub.hi;
         sub.parts.forEach(function (q) { if (cost.parts.indexOf(q) < 0) cost.parts.push(q); });
@@ -433,7 +438,8 @@
         if (ans.effort) c.effortAllowed = ans.effort;
         if (ans.stock) c.stockAllowed = ans.stock;
         (ans.require || []).forEach(function (grp) {
-          c.reqs.push({ grp: grp, label: ans.label });  // label = the user's own words
+          // label = the user's own words; short version for card lines
+          c.reqs.push({ grp: grp, label: ans.short || ans.label });
         });
       });
     });
@@ -495,7 +501,7 @@
       }
       var best = null;
       for (var j = 0; j < grp.length; j++) {
-        var ch = solve(grp[j], have, []);
+        var ch = solve(grp[j], have, [], o);
         if (ch && (!best || ch.lo < best.lo)) best = ch;
       }
       if (!best) { fitsCaps = false; r.failCap = label; }
@@ -503,7 +509,11 @@
         lo += best.lo; hi += best.hi;
         buyChain(best, have);
         best.parts.forEach(function (pid) { if (r.needParts.indexOf(pid) < 0) r.needParts.push(pid); });
-        r.reqInfo.push({ label: label, text: 'with parts (~' + money(best.lo) + ')' });
+        /* honesty: flag when a chain leans on a part that itself sells out
+           (the SuperDock is a preorder, not a shelf item) */
+        var scarcePart = best.parts.some(function (pid) {
+          return PARTS[pid].stock && PARTS[pid].stock !== 'now'; });
+        r.reqInfo.push({ label: label, text: 'with parts (~' + money(best.lo) + (scarcePart ? ', sells out' : '') + ')' });
       }
     }
     r.lo = lo; r.hi = hi;
@@ -515,7 +525,7 @@
                                     : 'You said ready out of the box; this one needs a screwdriver';
     } else if (!fitsCaps) {
       r.in = false;
-      r.reason = 'No path to "' + r.failCap + '", even with parts';
+      r.reason = 'No way to get "' + r.failCap + '", even with parts';
     } else if (c.stockAllowed && c.stockAllowed.indexOf(o.stock) < 0) {
       r.in = false;
       r.reason = STOCK_REASON[o.stock] || 'Not reliably orderable today';
@@ -690,20 +700,22 @@
       if (pid === 'snac-adapter' && qa.snac) return true;
       return false;
     }
-    document.getElementById('poster').innerHTML =
-      '<p class="keynote">Every machine here plays the same core library. You are choosing a body, not a brain.</p>' +
-      D.lanes.map(function (l) {
+    document.getElementById('poster').innerHTML = D.lanes.map(function (l) {
       var rows = byLane[l.id] || [];
       var body;
       if (l.id === 'diy') {
-        /* the anatomy columns: mainboards + one column per part category */
-        body = '<div class="cols">' +
+        /* the anatomy columns: mainboards + one column per part category.
+           If NO mainboard fits (e.g. the handheld answer), the whole workshop
+           dims - parts for machines you cannot start are noise */
+        var diyAlive = evals.some(function (r) { return r.o.lane === 'diy' && r.in; });
+        var allDim = answeredCount() > 0 && !diyAlive;
+        body = '<div class="cols' + (allDim ? ' colsdim' : '') + '">' +
           '<div class="col"><div class="colhead"><h3 class="cd">1. Mainboards</h3></div>' +
           '<div class="cards">' + rows.map(cardHTML).join('') + '</div></div>' +
           PART_COLS.map(function (pc) {
             var pids = Object.keys(PARTS).filter(function (pid) { return PARTS[pid].category === pc[0]; });
             return '<div class="col"><div class="colhead"><h3 class="cd">' + esc(pc[1]) + '</h3></div><div class="cards">' +
-              pids.map(function (pid) { return partCardHTML(pid, !!hl[pid], dimPart(pid)); }).join('') + '</div></div>';
+              pids.map(function (pid) { return partCardHTML(pid, !allDim && !!hl[pid], allDim || dimPart(pid)); }).join('') + '</div></div>';
           }).join('') + '</div>';
       } else {
         body = '<div class="cards">' + rows.map(cardHTML).join('') + '</div>';
@@ -729,12 +741,19 @@
     document.getElementById('reset').hidden = n === 0;
     if (n >= 1 && !fit.length) {
       var ghostsFit = evals.filter(function (r) { return r.ghost && r.wouldFit; });
+      /* near-misses that failed ONLY on availability deserve naming - "the
+         SuperStation One does it, you just have to catch a batch" */
+      var stockMiss = evals.filter(function (r) { return !r.ghost && !r.in && r.wouldFit; });
       v.hidden = false; v.classList.add('dead');
       v.innerHTML = '<p class="vh">Dead end</p><p>Nothing you can order today does that.</p>' +
+        (stockMiss.length
+          ? '<p class="fit">Would fit, but sells out between batches: ' +
+            esc(stockMiss.map(function (r) { return r.o.name; }).join(', ')) + '.</p>' : '') +
         (ghostsFit.length
           ? '<p class="fit">It exists, but only on the horizon: ' +
-            esc(ghostsFit.map(function (r) { return r.o.name; }).join(', ')) + '.</p>'
-          : '<p class="fit">Loosen one answer and watch what comes back.</p>');
+            esc(ghostsFit.map(function (r) { return r.o.name; }).join(', ')) + '.</p>' : '') +
+        (!stockMiss.length && !ghostsFit.length
+          ? '<p class="fit">Loosen one answer and watch what comes back.</p>' : '');
       return;
     }
     v.hidden = true;
@@ -795,7 +814,7 @@
   function chainText(o, token) {
     var have = {}; Object.keys(builtIn(o)).forEach(function (t) { have[t] = true; });
     if (have[token]) return null;
-    var c = solve(token, have, []);
+    var c = solve(token, have, [], o);
     if (!c) return 'no path';
     return 'add ' + c.parts.map(function (p) { return PARTS[p].name; }).join(' + ') +
            ' (~' + money(c.lo) + (c.hi > c.lo ? '-' + money(c.hi) : '') + ')';
@@ -831,7 +850,7 @@
              ' - about ' + money(tlo) + (thi > tlo ? '-' + money(thi) : '') + ' more - and you are playing.';
       if (built.indexOf('yc') < 0 && unv.indexOf('yc') < 0) {
         var have2 = {}; Object.keys(builtIn(o)).forEach(function (t) { have2[t] = true; });
-        var crt = solve('yc', have2, []);
+        var crt = solve('yc', have2, [], o);
         if (crt) play += ' For a CRT via S-Video, budget roughly ' + money(crt.lo) +
                          ' on top (parts listed under Specs and sources).';
       }

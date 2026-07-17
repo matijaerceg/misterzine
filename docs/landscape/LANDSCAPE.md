@@ -218,6 +218,23 @@ Field conventions (parts and options both):
 - `appendix_not_mister` — `[{name, one_liner, sources[]}]`. The "looks like
   MiSTer, isn't" fence. Keep each to one honest line.
 
+## Chain-honesty rules (overnight audit 2026-07-17)
+
+- **I/O-class parts (category io) only chain onto DIY mainboards.** An
+  assembled kit's GPIO stack is occupied; "add a MiSTercade to your Armor
+  bundle" would mean gutting the kit, so it renders as no-path, matching
+  the sealed products. This resolves the socket-occupancy limitation for
+  the io category specifically.
+- **Chains leaning on a part that itself sells out say so**: "with parts
+  (~$50, sells out)" - driven by the part's optional `stock` field (the
+  SuperDock case).
+- **The dead-end banner names near-misses that failed only on
+  availability** ("Would fit, but sells out between batches: ...") in
+  addition to horizon matches.
+- The verdict/tally stay retired; only the dead-end banner renders.
+- Answers may carry `short` - the compact wording used for card info lines
+  and failure reasons; `label` stays the full checkbox/radio text.
+
 ## Known modeling limitation (schema v1)
 
 The chain closure treats an included option's sockets as free. In reality a

@@ -246,7 +246,7 @@
       "requires": [
         "gpio-header"
       ],
-      "notes": "The VGA-connector generation of analog I/O boards: RGB or YPbPr by cable, analog audio, and the VGA pins the MikeS11 Y/C adapters plug into. Distinct from MiSTer Addons IO Analog Pro (own entry), which has no VGA port. A EUR349.90 price seen in one search result is a stale-snippet artifact.",
+      "notes": "The VGA-connector generation of analog I/O boards: RGB or YPbPr by cable, analog audio, and the VGA pins the MikeS11 Y/C adapters plug into. Distinct from MiSTer Addons IO Analog Pro (own entry), which has no VGA port. A EUR349.90 price seen in one search result is a stale-snippet artifact. Retro Remake A/V Pro 9.2 sold out at review 2026-07-16.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -294,17 +294,17 @@
     },
     "io-digital": {
       "name": "Digital I/O board (v1.2)",
-      "vendor": "Ultimate MiSTer and others",
-      "price_usd": null,
+      "vendor": "Ultimate MiSTer (EUR29.90 excl VAT ~ $33)",
+      "price_usd": 33,
       "provides": [
         "toslink"
       ],
       "requires": [
         "gpio-header"
       ],
-      "notes": "S/PDIF digital audio out (96kHz); DE10-Nano SW3 must be ON. Current price unverified: the only figure found (EUR349.90) duplicates the analog board snippet and is not trusted.",
+      "notes": "S/PDIF digital audio out (Mini-TOSLINK + TOSLINK), second MicroSD slot, onboard power switch; DE10-Nano SW3 must be ON. Price verified on the live product page 2026-07-16 (the earlier EUR349.90 snippet was a stale artifact, as suspected).",
       "verified": "2026-07",
-      "confidence": "low",
+      "confidence": "high",
       "sources": [
         "https://ultimatemister.com/product/mister-digital-io-edition-v1-2/"
       ]
@@ -825,7 +825,7 @@
         "sd-card",
         "usb-controller"
       ],
-      "notes": "The board that broke the DE10 price. Same Cyclone V class, 1GB DDR3, USB-C power, accessory-compatible dimensions/headers. Sold in preorder batches (price drifts $99-125 by batch/bundle; $160 Mega Pack adds hub + A/V board, ~$180 full case kit). Sold out between batches. Own accessory line: A/V Pro 9.2 $40, 128MB SDRAM $20, hub $20, RTC $5, acrylic case $10.",
+      "notes": "The board that broke the DE10 price. Same Cyclone V class, 1GB DDR3, USB-C power, accessory-compatible dimensions/headers. Sold in preorder batches; board listed From $125 and SOLD OUT at review 2026-07-16, with no discontinuation or final-batch language on the store - accessories (SDRAM $20, hub $20, acrylic case $10, SNAC bundles) mostly remain in stock, A/V Pro 9.2 and RTC sold out. Watch for batch 6 or an end-of-line signal; Retro Remake's focus is visibly the SuperStation One.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -860,7 +860,7 @@
         "sd-card",
         "usb-controller"
       ],
-      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some variants have SDRAM integrated on-board (+~$15; then skip the module). Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic.",
+      "notes": "Automotive-grade Cyclone V with a higher thermal ceiling than the DE10's chip: the fanless builder's pick, and actually in stock when others aren't. Some variants have SDRAM integrated on-board (+~$15; then skip the module). Caveats: RAM slot orientation differs from DE10 on one header (people have fried modules inserting them the DE10 way) and QC is more variable than Terasic. Official sales channel is the QMTech AliExpress store; the linked listing was supplied by the site owner 2026-07-16 and cannot be machine-verified (AliExpress blocks automated access) - AliExpress URLs are volatile, re-check on each sweep.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -870,7 +870,7 @@
       "effort": "diy",
       "stock": "now",
       "img": "qmtech-cv.png",
-      "url": null
+      "url": "https://www.aliexpress.com/item/1005007858010441.html"
     },
     {
       "id": "mistercade-v2",
@@ -910,8 +910,8 @@
       "name": "Heber MiSTer Multisystem2",
       "vendor": "Heber / RMC (UK)",
       "price_usd": [
-        300,
-        350
+        235,
+        285
       ],
       "status": "orderable",
       "provides": [
@@ -920,14 +920,15 @@
         "usb-hub",
         "toslink",
         "analog-audio",
-        "sdram128"
+        "sdram128",
+        "vga-rgb"
       ],
       "includes": [],
       "to_complete": [
         "usb-controller",
         "sd-card"
       ],
-      "notes": "Not a DE10 carrier: one integrated motherboard (own Cyclone V, 128MB SDRAM + 1GB LPDDR, powered 7-port hub) in a 3D-printed enclosure, assembled. ~$300 shipped HDMI-only; ~+$50 for the analog-video version (24-bit, 9-pin mini-DIN RGB+sync for SCART). GBP264 inc VAT in the UK. Shipping now, 1-2 week lead. JAMMA 'Arcade' edition preorders ship from Aug 2026. Enclosure files are open (Printables, CC-BY-SA); Multisystem1 is fully open-source and discontinued as a product.",
+      "notes": "Not a DE10 carrier: one integrated motherboard (own Cyclone V, 128MB SDRAM + 1GB LPDDR, powered 7-port hub) in a 3D-printed enclosure, assembled. Digital version GBP180 ex VAT (~$235, HDMI only); Analogue version GBP220 ex VAT (~$285) adds 24-bit analog out: 9-pin mini-DIN RGB+C-sync for SCART AND a 15-way VGA-style port for CRT/arcade monitors (vendor spec verified 2026-07-16; S-Video/composite are NOT native - the DIN carries RGB). Whether the VGA port hosts MikeS11 Y/C adapters is untested - it should carry the standard MiSTer analog signal, worth verifying. In stock, 1-2 week lead. JAMMA Arcade edition preorders ship from Aug 2026. Enclosure files are open (Printables, CC-BY-SA).",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -938,6 +939,28 @@
       "stock": "now",
       "img": "multisystem2.png",
       "url": "https://shop.heber.co.uk/mister-multisystem2-fpga-analogue-console-system-black-enclosure/"
+    },
+    {
+      "id": "multisystem1",
+      "lane": "special",
+      "name": "Heber MiSTer Multisystem (1)",
+      "vendor": "Heber / RMC (UK)",
+      "price_usd": null,
+      "status": "discontinued",
+      "provides": [],
+      "includes": [],
+      "to_complete": [],
+      "notes": "The original 2021-era Multisystem: a carrier board + console case that a DE10-Nano dropped into. Discontinued as a Heber product and released as fully open-source hardware (schematics and PCB files on GitHub, 2023); superseded by the integrated Multisystem2. Listed so the landscape says what happened to it: you can still build one, you can no longer buy one.",
+      "verified": "2026-07",
+      "confidence": "high",
+      "sources": [
+        "https://heber.co.uk/mister-multisystem-is-now-open-source/",
+        "https://heber.co.uk/mister-multisystem-console/"
+      ],
+      "effort": "diy",
+      "stock": "na",
+      "img": "multisystem1.png",
+      "url": "https://heber.co.uk/mister-multisystem-is-now-open-source/"
     },
     {
       "id": "agilex5-nextgen",

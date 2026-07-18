@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-18
+- The CRT shadow mask over screenshots can now be turned off: a "Shadow mask" toggle sits at the bottom of the theme menu on the zine and the release tracker, and the choice is remembered across both pages.
+
 ## 2026-07-17
 - Landscape: boards, kits and consoles that deliver full 24-bit analog color now carry a "24-bit analog color" capability chip (dashed with a "?" where the claim is disputed), so color depth reads at a glance while browsing.
 - Landscape: spec sheets now list every capability reachable with parts (composite-via-adapter was silently missing on some kits), the collapsed specs section is a clearer call to action ("Full specs, part paths and sources" with a source count), and the copy now notes the active Y/C adapter's filtering chiefly benefits composite.

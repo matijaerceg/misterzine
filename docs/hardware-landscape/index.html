@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The MiSTer FPGA Hardware Landscape - MiSTerZine</title>
+<meta name="description" content="Every way to own a MiSTer FPGA, on one map: consoles, kits, bare boards, cabinets and what is coming - with complete-setup prices, not sticker prices. Answer a few questions and the landscape narrows to your pick.">
+<link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="canonical" href="https://misterzine.fyi/hardware-landscape/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MiSTerZine">
+<meta property="og:title" content="The MiSTer FPGA Hardware Landscape">
+<meta property="og:description" content="Every way to own a MiSTer FPGA, on one map, with complete-setup prices. Answer a few questions and it narrows to your pick.">
+<meta property="og:url" content="https://misterzine.fyi/hardware-landscape/">
+<meta property="og:image" content="https://misterzine.fyi/images/og-hardware-landscape.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The MiSTer FPGA Hardware Landscape - MiSTerZine">
+<meta name="twitter:card" content="summary_large_image">
+<script>/* apply saved theme before first paint to avoid a flash */
+  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+<link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
+<style>
+  @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
+               font-weight: 100 900; font-display: swap; }
+  @font-face { font-family: 'Roboto Condensed'; src: url(../fonts/roboto-condensed-latin-var.woff2) format('woff2');
+               font-weight: 100 900; font-display: swap; }
+  * { box-sizing: border-box; }
+  body { font: 15px/1.5 Roboto, system-ui, sans-serif; margin: 0; background: var(--bg); color: var(--fg); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  /* titles are Roboto Condensed on this page (no marker font here) */
+  .cd { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; }
+
+  /* 88rem (up from 78) with a raised card minimum: the extra width goes into
+     wider cards and roomier DIY columns, not into extra grid columns */
+  .wrap { max-width: 88rem; margin: 0 auto; padding: .8rem 1.25rem 3rem; }
+
+  /* ---- header: wordmark + title left; pills + theme toggle pinned top-right
+     at every width (nowrap - the nav goes vertical on phones, never below) ---- */
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+         padding: .35rem 0 .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
+  .masthead { display: flex; align-items: center; gap: .95rem; min-width: 0; }
+  .top .brand { display: block; flex: 0 0 auto; color: var(--fg); }
+  .top .brand svg { display: block; height: 48px; width: auto; }
+  .top .brand:hover { color: var(--brand-hover); }
+  /* the freshness stamp IS the subtitle: plain muted text, not a chip (user ruling) */
+  .vchip { display: inline-block; }
+  .top h1 { font-size: 1.75rem; margin: 0; line-height: 1.15; letter-spacing: .01em; }
+  .top h1 .cd { color: var(--accent); }
+  .top .scope { display: block; font-family: Roboto, system-ui, sans-serif; font-size: .78rem; font-weight: 400;
+                color: var(--muted); margin-top: .15rem; }
+  /* site nav: one segmented control (Zine | Cores | Hardware); current filled */
+  .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  .top .segnav { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
+                 border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
+  .top .pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; text-align: center;
+               text-transform: uppercase; letter-spacing: .04em; font-size: .78rem; padding: .38rem .95rem; }
+  .top .pill + .pill { border-left: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hair)); }
+  .top .pill:hover { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); }
+  .top .pill[aria-current] { background: var(--accent); color: var(--bg); cursor: default; }
+  /* theme control: a single dropdown showing the current theme's name; Light,
+     Dark and the fun themes all live in its menu (same control on all pages) */
+  .theme { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--hair); border-radius: 6px; }
+  .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
+                  background: transparent; color: inherit; cursor: pointer; }
+  .theme details { position: relative; }
+  .theme summary { list-style: none; font-size: .78rem; padding: .3rem .6rem; cursor: pointer;
+                   border-radius: 6px; user-select: none; display: flex; align-items: center; }
+  .theme summary::-webkit-details-marker { display: none; }
+  .theme summary::after { content: " \25BE"; opacity: .6; margin-left: auto; padding-left: .4em; }
+  .theme summary:hover, .theme details[open] summary { background: var(--hover-bg); }
+  .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
+                 background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
+                 padding: .3rem; display: grid; gap: 2px; min-width: 7.5rem; box-shadow: 0 4px 16px #0004; }
+  .theme .menu button { border: 0; text-align: left; border-radius: 4px; font-size: .85rem;
+                        padding: .3rem .5rem; white-space: nowrap; display: flex; align-items: center; gap: .5em; }
+  .theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
+                                margin-right: .95em; border-radius: 50%; background: var(--sw1);
+                                box-shadow: .95em 0 0 var(--sw2); }
+  .theme .menu button:hover { background: var(--hover-bg); }
+
+  /* ---- shell: interview rail + poster ---- */
+  /* rail narrowed 19.5 -> 16.5rem (user: the CTA banner read wider than any
+     answer); the poster gets the reclaimed width */
+  .shell { display: grid; grid-template-columns: 16.5rem 1fr; gap: 1.4rem; align-items: start; }
+
+  #rail { position: sticky; top: .8rem; display: grid; gap: .9rem;
+          max-height: calc(100vh - 1.6rem); overflow-y: auto; padding-right: .15rem; }
+  #verdict { border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
+             padding: .7rem .8rem; font-size: .85rem; }
+  #verdict .vh { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .3rem; }
+  #verdict .pick { font-weight: 700; }
+  #verdict .pick .cd { color: var(--accent); font-size: 1.15em; }
+  #verdict p { margin: .25rem 0 0; }
+  #verdict .fit { color: var(--muted); font-size: .78rem; }
+  #verdict.dead { border-color: color-mix(in srgb, var(--warn) 55%, var(--bg)); }
+  #verdict.dead .vh { color: var(--warn); }
+  /* questions sit flat in the rail - no nested cards, no double margins */
+  #questions { display: grid; gap: .85rem; }
+  .q h3 { margin: 0 0 .35rem; font-size: .92rem; }
+  .q .ans { display: grid; gap: .3rem; }
+  /* checkbox-style answers (multi-select and single toggles) */
+  .q .ans label.cb { display: flex; align-items: center; gap: .5em; font-size: .82rem; cursor: pointer;
+                     padding: .12rem 0; }
+  .q .ans label.cb input { accent-color: var(--accent); width: .95em; height: .95em; margin: 0; flex: 0 0 auto; }
+  .q h3 .qclear { font: inherit; font-size: .72rem; font-weight: 400; color: var(--muted); background: none;
+                  border: 0; padding: 0; margin-left: .5em; cursor: pointer; text-decoration: underline;
+                  text-underline-offset: 2px; }
+  .q h3 .qclear:hover { color: var(--accent); }
+  .q .ans button { font: inherit; font-size: .82rem; text-align: left; cursor: pointer;
+                   border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface);
+                   color: inherit; padding: .34rem .55rem; }
+  .q .ans button:hover { border-color: var(--btn-border-hover); background: var(--hover-bg); }
+  .q .ans button[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--bg));
+                                        font-weight: 600; }
+  .railfoot { font-size: .72rem; color: var(--muted); margin: 0; }
+  .railfoot button { font: inherit; font-size: inherit; color: inherit; background: none; border: 0;
+                     padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+  .railfoot button:hover { color: var(--accent); }
+
+  /* answered chips: sticky strip, mobile only (the rail folds away there) */
+  #chips { display: none; }
+
+  /* ---- the poster: each lane is a visible BAND (a lane, not just a gap) ---- */
+  .lane { margin: 0 0 .6rem; background: color-mix(in srgb, var(--surface) 55%, var(--bg));
+          border: 1px solid var(--rule); border-radius: 10px; padding: .65rem .8rem .8rem; }
+  .lanebar { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin: 0 0 .55rem; }
+  /* lane names carry the accent: they are the poster's structure, and the
+     one place extra color earns its keep (proposal 2026-07-17) */
+  .lanebar button.lname { font: inherit; border: 0; background: none; color: var(--fg); cursor: pointer;
+                          padding: 0; font-size: 1.3rem; }
+  .lanebar button.lname .cd { color: var(--accent); }
+  .lanebar button.lname:hover .cd { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
+  .lane.focus .lanebar button.lname .cd { color: var(--accent); }
+  .lanebar .tag2 { font-size: .76rem; color: var(--muted); }
+  /* align-items: start = every card takes its natural height instead of
+     stretching to the row's tallest (user ruling) */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .6rem;
+           align-items: start; }
+  body[data-zoom="lane"] .lane:not(.focus) .cards { display: none; }
+  body[data-zoom="lane"] .lane:not(.focus) { margin-bottom: .7rem; opacity: .55; }
+  body[data-zoom="lane"] .lane.focus .cards { grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
+  body[data-zoom="lane"] .lane.focus .caps { display: flex; }
+
+  .card { text-align: left; font: inherit; color: inherit; cursor: pointer; position: relative;
+          border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
+          padding: .6rem .7rem .55rem; display: flex; flex-direction: column; gap: .22rem; min-height: 5rem; }
+  .card:hover { border-color: var(--btn-border-hover); background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
+  /* the title halo keeps names readable when a narrow card slides the photo
+     under them: shadowing in --surface is a dark shadow on dark themes and a
+     light glow on light ones, no literals, all 17 themes covered */
+  .card .nm { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
+              font-size: 1.02rem; line-height: 1.2; position: relative;
+              text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 1px 5px var(--surface); }
+  .card .pic { width: 52px; height: 52px; object-fit: contain; align-self: flex-end;
+               margin: -0.2rem 0 -2.6rem; }
+  .card .tagl { font-size: .72rem; font-style: italic; color: var(--muted); margin-top: -.1rem;
+                position: relative;
+                text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 1px 5px var(--surface); }
+  .card .pr { font-size: .8rem; }
+  .card .pr b { font-weight: 700; }
+  .card .pr .cpl { color: var(--muted); }
+  .card .avail { font-size: .72rem; color: var(--muted); }
+  .card .caps { display: none; flex-wrap: wrap; gap: .25rem; margin-top: .15rem; }
+  .card .cap { font-size: .68rem; border: 1px solid var(--hair); border-radius: 999px; padding: .06rem .45rem;
+               color: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
+  .card .cap.unv { border-style: dashed; color: var(--muted); }
+  .card .need { font-size: .74rem; color: color-mix(in srgb, var(--ok) 75%, var(--fg)); }
+  .card .hedge { font-size: .74rem; color: var(--warn); }
+  .card .out-why { font-size: .74rem; color: var(--muted); }
+  /* status tag lives in the card flow (never overlaps the name) */
+  .card .stag { align-self: flex-start; font-size: .66rem; text-transform: uppercase;
+                letter-spacing: .05em; border-radius: 4px; padding: .05rem .35rem; }
+  .card .stag.announced { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 55%, var(--bg)); }
+  .card .stag.cancelled { color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 55%, var(--bg)); }
+  .card .stag.preorder { color: var(--muted); border: 1px solid var(--hair); }
+  .card .stag.restock { color: var(--warn); border: 1px solid color-mix(in srgb, var(--warn) 55%, var(--bg)); }
+  /* the guarantee boundary: Terasic's reference + the project's own board
+     designs get a quiet mark; everything unmarked is third-party */
+  .card .stag.official, .pcard .official { color: color-mix(in srgb, var(--ok) 80%, var(--fg));
+    border: 1px solid color-mix(in srgb, var(--ok) 45%, var(--bg)); }
+  .pcard .official { font-size: .62rem; text-transform: uppercase; letter-spacing: .05em;
+    border-radius: 4px; padding: .03rem .3rem; align-self: flex-start; }
+  .card.out { background: var(--bg); border-style: dashed; }
+  .card.out .nm, .card.out .pr, .card.out .avail, .card.out .caps { opacity: .45; }
+  .card.ghost .nm, .card.ghost .pr { opacity: .6; }
+
+  /* ---- Do It Yourself: the columns ARE the anatomy lesson ---- */
+  .cols { display: grid; grid-template-columns: 1.35fr 1.15fr 1fr 1fr; gap: .8rem; align-items: start; }
+  /* grayed pcards match the mini grayed cards everywhere else: dashed hairline,
+     page background, dimmed text (user ruling: one gray language on the page) */
+  .pcard.dim { border-style: dashed; background: var(--bg); }
+  .pcard.dim .nm, .pcard.dim .pr { opacity: .45; }
+  .pcard.dim .pw { display: none; }
+  .cols.colsdim .colhead { opacity: .45; }
+  .pcard .pw.addon { color: color-mix(in srgb, var(--fg) 55%, var(--bg)); }
+  .col .colhead { margin: 0 0 .45rem; }
+  /* subheads inside the adapters column: video / controllers / extras */
+  .col .subhead { font-size: .66rem; text-transform: uppercase; letter-spacing: .07em;
+                  color: var(--muted); font-weight: 700; margin: .3rem 0 -.2rem; }
+  .col .subhead:first-child { margin-top: 0; }
+  .cols.colsdim .subhead { opacity: .45; }
+  .col .colhead h3 { font-size: 1.02rem; margin: 0; }
+  .col .colhead span { display: block; font-size: .7rem; color: var(--muted); }
+  .col .cards { grid-template-columns: 1fr; gap: .45rem; }
+  .pcard { text-align: left; font: inherit; color: inherit; cursor: pointer;
+           border: 1px solid var(--hair); border-radius: 8px; background: var(--surface);
+           padding: .45rem .6rem; display: flex; flex-direction: column; gap: .12rem; }
+  .pcard:hover { border-color: var(--btn-border-hover); background: color-mix(in srgb, var(--line) 7%, var(--surface)); }
+  .pcard .nm { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; font-size: .88rem;
+               line-height: 1.2; }
+  .pcard .pw { font-size: .7rem; color: var(--muted); }
+  .pcard .pr { font-size: .76rem; font-weight: 600; }
+  /* answer-driven highlight: the parts your answers would pull into a build */
+  .pcard.hl { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+  /* the RAM stick lives inside the mainboard title: same line, muted weight */
+  .card .nm .nmram { color: var(--muted); font-size: .88em; font-weight: 600; white-space: nowrap; }
+  .keynote { font-size: .8rem; color: var(--muted); margin: 0 0 1rem; }
+  /* the invitation over the questions: a full-width banner box with
+     CSS-drawn down-arrows flanking the text (decoration, so the
+     plain-ASCII copy rule is not violated). No tilt (user ruling). */
+  .cta { display: flex; align-items: center; justify-content: center; gap: .55rem; margin: 0;
+         font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
+         font-size: .82rem; color: var(--accent); text-transform: uppercase; letter-spacing: .07em;
+         border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 8px;
+         padding: .42rem .6rem; background: color-mix(in srgb, var(--accent) 10%, var(--bg)); }
+  .cta .arr { position: relative; width: .9em; height: 1.25em; flex: 0 0 auto; }
+  .cta .arr::before { content: ""; position: absolute; left: calc(50% - 1px); top: .05em;
+                      width: 2px; height: .62em; background: currentColor; border-radius: 1px; }
+  .cta .arr::after { content: ""; position: absolute; left: calc(50% - .42em); top: .55em;
+                     border-left: .42em solid transparent; border-right: .42em solid transparent;
+                     border-top: .55em solid currentColor; }
+  .cta .arr:first-child { transform: rotate(-10deg); }
+  .cta .arr:last-child { transform: rotate(10deg); }
+  @media (max-width: 66rem) { .cols { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 40rem) { .cols { grid-template-columns: 1fr; } }
+
+  /* ineligible entries collapse to a COMPACT CARD (not a bare text row -
+     user: the Multisystem1 line "didn't look like a card"): still visibly
+     shrunken vs full cards, but with card bones */
+  .card.mini { gap: .15rem; min-height: 0; padding: .45rem .65rem; }
+  .card.mini .nm { font-size: .88rem; }
+  .card.mini .pic { width: 40px; height: 40px; margin: -.15rem 0 -1.6rem; opacity: .55; }
+
+  /* horizon: announced things earn a slim row, not a full card */
+  .lane.slim .cards { grid-template-columns: 1fr; gap: .35rem; }
+  .lane.slim .card { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: .3rem .6rem;
+                     min-height: 0; padding: .4rem .65rem; }
+  .lane.slim .card .nm { font-size: .92rem; }
+  .lane.slim .card .out-why { margin-left: auto; }
+  .lane.slim .card .caps { display: none !important; }
+
+  /* ---- appendix + footer ---- */
+  .appendix { border-top: 1px solid var(--rule); margin-top: 1.8rem; padding-top: 1rem; }
+  .appendix h2 { font-size: 1.1rem; margin: 0 0 .5rem; }
+  .appendix ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .35rem; }
+  .appendix li { font-size: .82rem; }
+  .appendix li b { font-weight: 700; }
+  .colophon { color: var(--muted); font-size: .78rem; border-top: 1px solid var(--rule); margin-top: 1.6rem; padding-top: .9rem; }
+  .colophon a { color: inherit; }
+
+  /* ---- card sheet (zoom level 3) ---- */
+  dialog#sheet { border: 1px solid var(--hair); border-radius: 10px; background: var(--surface); color: var(--fg);
+                 padding: 1rem 1.15rem 1.1rem; width: min(34rem, calc(100vw - 2rem)); max-height: calc(100vh - 3rem); }
+  dialog#sheet::backdrop { background: #0007; }
+  #sheet h2 { margin: 0; font-size: 1.4rem; }
+  #sheet h2 .cd { color: var(--accent); }
+  #sheet .vd { color: var(--muted); font-size: .8rem; margin: .05rem 0 .6rem; }
+  #sheet .price { font-size: .95rem; margin: 0 0 .6rem; }
+  #sheet h4 { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: .8rem 0 .25rem; }
+  #sheet ul { margin: 0; padding-left: 1.1rem; font-size: .84rem; }
+  #sheet li { margin: .12rem 0; }
+  #sheet .unv { color: var(--warn); }
+  #sheet .notes { font-size: .82rem; margin: .3rem 0 0; }
+  #sheet .meta2 { font-size: .72rem; color: var(--muted); margin-top: .8rem; }
+  /* product picture in the popup: floated so the header and lists wrap it */
+  #sheet .spic { float: right; width: 120px; max-height: 130px; object-fit: contain;
+                 margin: 1.2rem 0 .6rem .9rem; }
+  /* noob-first narrative blocks: identity, the to-get-playing sentence, the steer */
+  #sheet .what { font-size: .95rem; margin: .1rem 0 .5rem; }
+  #sheet .play, #sheet .adv { font-size: .86rem; margin: .35rem 0; }
+  #sheet .vars { font-size: .8rem; color: var(--muted); margin: .45rem 0 0; }
+  #sheet .psub { color: var(--muted); font-size: .8rem; font-weight: 400; }
+  #sheet .caps { display: flex; flex-wrap: wrap; gap: .25rem; margin: .6rem 0 .2rem; }
+  #sheet .cap { font-size: .68rem; border: 1px solid var(--hair); border-radius: 999px; padding: .06rem .45rem;
+                color: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
+  #sheet .cap.unv { border-style: dashed; color: var(--muted); }
+  /* the receipts live one tap away, not in the greeting */
+  #sheet .fine { margin-top: .7rem; border-top: 1px solid var(--rule); padding-top: .5rem; }
+  #sheet .fine summary { cursor: pointer; font-size: .78rem; color: var(--muted); user-select: none; }
+  #sheet .fine summary:hover { color: var(--accent); }
+  #sheet .x { position: absolute; top: .55rem; right: .65rem; font: inherit; border: 1px solid var(--hair);
+              background: var(--surface); color: inherit; border-radius: 6px; padding: .1rem .5rem; cursor: pointer; }
+  #sheet .x:hover { background: var(--hover-bg); }
+
+  /* ---- mobile: rail folds into a details, chips go sticky ---- */
+  @media (max-width: 52rem) {
+    /* nav stays top-right: stack it vertically instead of wrapping below */
+    .top { align-items: flex-start; }
+    .top nav { flex-direction: column; align-items: flex-end; gap: .45rem; }
+    .masthead { gap: .6rem; }
+    .top .brand svg { height: 34px; }
+    .top h1 { font-size: 1.1rem; }
+    .shell { grid-template-columns: 1fr; }
+    #rail { position: static; max-height: none; overflow: visible; }
+    #railfold { border: 1px solid var(--hair); border-radius: 8px; background: var(--surface); }
+    #railfold summary { list-style: none; cursor: pointer; padding: .6rem .8rem; font-weight: 700; }
+    #railfold summary::-webkit-details-marker { display: none; }
+    #railfold summary::after { content: " \25BE"; opacity: .6; }
+    #railfold[open] summary::after { content: " \25B4"; }
+    #railfold .foldin { padding: 0 .8rem .8rem; display: grid; gap: .9rem; }
+    #chips:not(:empty) { display: flex; flex-wrap: wrap; gap: .35rem; position: sticky; top: 0; z-index: 5;
+                         background: var(--bg); padding: .5rem 0; border-bottom: 1px solid var(--rule); margin-bottom: .6rem; }
+    #chips .chip { font: inherit; font-size: .75rem; cursor: pointer; color: inherit;
+                   border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 999px;
+                   background: color-mix(in srgb, var(--accent) 10%, var(--bg)); padding: .18rem .6rem; }
+    #chips .chip b { font-weight: 700; margin-left: .35em; }
+  }
+  @media (min-width: 52.01rem) {
+    #railfold summary { display: none; }
+    #railfold .foldin { display: grid; gap: .9rem; }
+  }
+</style>
+<!-- GoatCounter analytics (privacy-friendly, no cookies). Views from the
+     installed app have no referrer of their own, so label them "pwa" --
+     count.js reads window.goatcounter overrides when it fires. -->
+<script>
+  if (matchMedia('(display-mode: standalone)').matches || navigator.standalone)
+    window.goatcounter = { referrer: 'pwa' };
+</script>
+<script data-goatcounter="https://misterzine.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body data-zoom="all">
+<div class="wrap">
+
+<header class="top">
+  <div class="masthead">
+    <a class="brand" href="../" aria-label="MiSTerZine home"><svg class="logo" viewBox="38.5 111.3 532.4 354.2" aria-hidden="true" fill="currentColor"><g transform="translate(0,600) scale(0.1,-0.1)"><path d="M2400 4880 c-25 -6 -73 -24 -108 -41 -57 -28 -66 -29 -95 -19 -47 18 -314 25 -390 10 -68 -13 -149 -49 -185 -83 l-22 -21 -28 26 c-77 72 -173 92 -425 86 -209 -5 -261 -19 -341 -89 -86 -76 -95 -106 -192 -654 -52 -293 -86 -516 -86 -555 0 -92 31 -168 92 -227 42 -41 47 -49 39 -72 -23 -69 -61 -320 -57 -381 8 -145 113 -259 271 -295 l50 -11 -185 -166 c-102 -92 -199 -184 -215 -205 -63 -80 -86 -147 -123 -357 -17 -100 -18 -130 -9 -180 22 -124 96 -221 209 -275 l55 -26 730 0 730 0 50 24 c49 23 56 24 275 22 205 -3 231 -1 286 18 l61 20 59 -20 c53 -19 77 -20 264 -17 l205 3 65 35 65 35 69 -35 69 -35 216 0 216 0 65 32 c36 17 80 46 99 64 33 32 34 32 60 15 62 -41 195 -97 277 -118 118 -29 391 -32 527 -5 246 49 408 149 473 290 15 35 34 108 47 183 18 107 19 136 10 201 l-11 75 38 62 c58 93 82 174 88 297 13 301 -145 543 -430 656 -35 14 -69 31 -77 38 -22 21 -6 59 34 78 56 27 121 93 145 148 12 28 30 104 41 168 24 146 29 156 76 172 44 14 101 48 125 75 32 36 68 131 90 236 19 92 21 111 10 160 -33 147 -156 230 -316 213 -85 -9 -84 -9 -211 0 -110 8 -196 -3 -258 -34 -38 -19 -40 -19 -81 -1 -23 10 -67 23 -97 30 l-55 12 0 87 c1 75 -3 93 -27 143 -33 66 -90 119 -156 145 -40 15 -92 18 -422 21 -322 3 -385 1 -440 -13 -83 -21 -77 -22 -199 5 -197 42 -436 28 -597 -36 -66 -27 -68 -26 -123 18 -73 57 -220 89 -320 68z m163 -214 c58 -24 81 -59 85 -130 9 -147 -93 -239 -241 -216 -100 15 -147 87 -126 193 13 70 51 124 102 148 50 22 134 25 180 5z m842 -56 c90 -23 128 -46 134 -81 1 -13 -5 -62 -15 -109 -13 -65 -24 -92 -45 -112 -33 -33 -43 -34 -144 -8 -130 33 -240 22 -259 -26 -12 -31 21 -61 101 -94 177 -72 235 -111 281 -188 25 -43 27 -56 27 -147 -1 -124 -24 -191 -95 -268 -94 -103 -222 -147 -426 -147 -168 0 -320 34 -371 82 -29 27 -29 61 -2 158 35 127 65 141 200 95 135 -46 276 -42 295 10 16 40 -4 62 -83 95 -206 84 -257 118 -298 201 -79 155 -7 383 152 482 136 85 351 107 548 57z m-2005 -5 c16 -8 34 -25 41 -36 6 -12 15 -125 21 -267 5 -136 13 -255 16 -264 5 -12 43 62 121 235 63 139 122 266 133 283 33 57 68 66 254 62 l166 -3 24 -28 c15 -17 24 -41 24 -60 0 -18 -23 -162 -51 -322 -27 -159 -65 -379 -84 -487 -19 -108 -39 -206 -45 -217 -23 -43 -48 -51 -172 -51 -171 0 -175 7 -138 200 38 197 81 443 77 446 -2 2 -63 -134 -137 -302 -90 -204 -142 -312 -159 -325 -19 -15 -40 -19 -112 -19 -134 0 -126 -18 -154 330 -22 283 -28 341 -31 337 -2 -2 -28 -142 -58 -312 -67 -379 -52 -355 -220 -355 -99 0 -115 2 -134 20 -12 11 -24 31 -28 44 -3 13 15 135 40 272 25 137 66 366 91 509 49 271 56 293 110 315 11 5 100 9 198 9 140 1 184 -2 207 -14z m3045 -10 c30 -29 30 -41 6 -163 -26 -132 -40 -145 -166 -150 -54 -3 -98 -9 -103 -16 -5 -6 -18 -65 -31 -131 -12 -66 -42 -230 -66 -365 -25 -135 -48 -253 -51 -263 -3 -10 -20 -27 -37 -38 -27 -16 -51 -19 -160 -19 -122 0 -129 1 -152 25 -16 15 -25 36 -25 55 0 17 29 182 65 367 36 185 65 346 65 359 0 23 -3 24 -72 24 -75 0 -113 12 -132 42 -13 21 18 222 40 252 31 44 41 45 427 46 l368 0 24 -25z m-1884 -364 c16 -16 29 -38 29 -48 0 -44 -112 -651 -125 -681 -8 -18 -26 -37 -41 -42 -35 -14 -227 -13 -258 1 -53 24 -52 40 9 396 38 220 63 336 75 353 28 41 57 50 173 50 107 0 109 0 138 -29z m2171 -16 c104 -36 169 -145 154 -258 -9 -65 -28 -100 -71 -132 -57 -44 -142 -65 -266 -65 -121 0 -129 -5 -85 -57 21 -24 32 -28 93 -31 51 -3 91 2 148 18 l79 22 18 -22 c15 -18 17 -32 12 -74 -11 -83 -19 -100 -54 -123 -66 -45 -215 -70 -319 -54 -132 21 -196 62 -243 159 -30 61 -33 74 -32 162 1 297 181 490 444 475 41 -2 96 -11 122 -20z m484 4 c34 -12 44 -25 44 -59 l1 -25 22 26 c34 41 87 69 133 69 51 0 77 -19 77 -56 0 -42 -32 -178 -46 -198 -8 -11 -36 -20 -75 -26 -72 -10 -113 -35 -136 -85 -9 -19 -30 -107 -46 -195 -31 -169 -39 -193 -70 -210 -25 -13 -196 -13 -221 1 -43 22 -42 45 17 372 30 172 61 326 69 344 10 23 24 35 47 41 48 13 152 14 184 1z m-2365 -901 c90 -30 133 -95 132 -198 -2 -120 -49 -202 -141 -247 -49 -24 -68 -28 -142 -27 -125 1 -191 40 -221 131 -16 49 -5 150 22 207 25 53 93 118 141 133 45 15 168 15 209 1z m-531 -53 c36 -18 60 -62 60 -107 0 -59 -50 -300 -68 -332 -10 -17 -205 -200 -433 -406 l-416 -375 337 -5 c314 -5 339 -6 359 -24 27 -25 27 -63 0 -214 -26 -148 -41 -179 -93 -203 -39 -17 -79 -19 -671 -19 -419 0 -643 4 -669 11 -45 12 -81 48 -89 87 -7 35 36 259 57 301 21 39 -2 18 490 454 l420 372 -350 5 c-192 3 -357 9 -367 14 -23 11 -37 38 -37 73 0 54 49 285 67 316 40 69 16 67 731 67 555 0 647 -2 672 -15z m2837 -353 c124 -39 211 -113 261 -220 24 -50 27 -69 27 -162 0 -95 -3 -111 -28 -162 -46 -94 -128 -150 -275 -190 -60 -16 -121 -22 -272 -27 l-195 -6 3 -25 c3 -29 28 -66 63 -92 68 -51 234 -46 422 11 153 48 180 25 158 -132 -16 -114 -30 -147 -73 -180 -46 -36 -195 -83 -303 -98 -112 -15 -310 -6 -385 16 -242 74 -361 261 -347 545 12 229 99 442 234 572 76 74 204 136 333 164 92 19 296 12 377 -14z m-1145 -8 c65 -22 130 -82 158 -145 31 -74 29 -174 -9 -394 -81 -463 -114 -631 -127 -657 -29 -55 -54 -63 -219 -66 -177 -3 -211 7 -232 70 -11 33 -6 74 47 365 33 180 60 340 60 354 0 45 -31 73 -79 71 -56 -2 -96 -25 -126 -70 -20 -30 -35 -97 -85 -372 -41 -227 -67 -343 -79 -360 -35 -50 -73 -60 -226 -60 -164 0 -201 12 -223 71 -12 33 -6 75 82 563 53 291 102 540 108 554 7 14 26 35 41 46 25 19 45 21 182 24 124 3 159 0 184 -12 33 -18 54 -69 43 -108 -5 -19 3 -15 45 22 129 116 303 156 455 104z m-1190 -144 c20 -6 47 -23 59 -38 18 -23 20 -36 16 -92 -7 -95 -145 -847 -165 -899 -30 -77 -51 -85 -220 -89 -163 -4 -210 5 -241 45 -26 32 -26 65 -2 195 11 57 45 245 76 418 30 173 60 334 66 357 13 49 51 88 99 101 47 14 266 14 312 2z"/><path d="M4516 4009 c-14 -11 -33 -34 -41 -50 l-16 -29 65 0 c78 0 95 6 107 37 22 59 -57 88 -115 42z"/><path d="M4842 2590 c-61 -28 -105 -80 -127 -149 l-7 -24 113 5 c157 6 199 30 199 112 0 68 -90 96 -178 56z"/></g></svg></a>
+    <h1><span class="cd">The MiSTer FPGA Hardware Landscape</span>
+      <span class="scope"><span class="vchip" id="vchip" hidden></span></span>
+    </h1>
+  </div>
+  <nav>
+    <span class="segnav">
+      <a class="pill" href="../">Zine</a>
+      <a class="pill" href="../releases/">Cores</a>
+      <span class="pill" aria-current="page">Hardware</span>
+    </span>
+    <div class="theme" id="theme">
+      <details id="themedd">
+        <summary id="themesum">Theme</summary>
+        <div class="menu">
+          <button type="button" data-set="light">Light</button>
+          <button type="button" data-set="dark">Dark</button>
+          <button type="button" data-set="virtualboy">Virtual</button>
+          <button type="button" data-set="spectrum">ZX</button>
+          <button type="button" data-set="amber">Amber</button>
+          <button type="button" data-set="phosphor">Phosphor</button>
+          <button type="button" data-set="eva">Unit-01</button>
+          <button type="button" data-set="vaporwave">Synth</button>
+          <button type="button" data-set="punchy">MiSTer-y</button>
+          <button type="button" data-set="commodore">C64</button>
+          <button type="button" data-set="workbench">Bench</button>
+          <button type="button" data-set="dmg">Game Boy</button>
+          <button type="button" data-set="pink">Pink</button>
+          <button type="button" data-set="icecream">Gelato</button>
+          <button type="button" data-set="riso">Riso</button>
+          <button type="button" data-set="famicom">Famicom</button>
+          <button type="button" data-set="pastel">Pastel</button>
+        </div>
+      </details>
+    </div>
+  </nav>
+</header>
+
+<div id="chips"></div>
+
+<div class="shell">
+  <aside id="rail">
+    <details id="railfold" open>
+      <summary id="railsum">Find my MiSTer</summary>
+      <div class="foldin">
+        <p class="cta"><span class="arr" aria-hidden="true"></span><span class="txt">Your requirements here</span><span class="arr" aria-hidden="true"></span></p>
+        <div id="questions"></div>
+        <p class="railfoot"><span id="fitline"></span> <button type="button" id="reset" hidden>Clear all answers</button></p>
+      </div>
+    </details>
+    <div id="verdict" hidden></div>
+  </aside>
+
+  <main id="poster"><noscript><p>The landscape needs JavaScript to render. The raw data is in <a href="hardware.json">hardware.json</a>.</p></noscript></main>
+</div>
+
+<section class="appendix" id="appendix" hidden>
+  <h2 class="cd">Looks like MiSTer, isn't MiSTer</h2>
+  <ul id="notmister"></ul>
+</section>
+
+<footer class="colophon">
+  <p id="stamp"></p>
+  <p>Entries marked "official design" are the Terasic reference board or boards built to the MiSTer project's own published designs - cores are developed and tested against those. Everything else is third-party hardware: widely used and usually fine, but support is the vendor's promise, not the project's, so do your own research before betting a build on it.</p>
+  <p>Hand-curated and hand-verified; nothing on this page is scraped or sponsored. Prices are typical street prices, not live quotes, and they assume you already own a USB controller. Availability notes are impressions from the last review, not live facts - check the shop itself before you count on stock. Corrections happen in the open in the <a href="https://github.com/matijaerceg/misterzine" target="_blank" rel="noopener">git history</a>. Also on MiSTerZine: the <a href="../releases/">release tracker</a> and the <a href="../">daily quote zine</a>.</p>
+</footer>
+
+</div>
+
+<dialog id="sheet"></dialog>
+
+<script>
+(function () {
+  'use strict';
+  var D = null;                    // hardware.json
+  var A = {};                      // answers: qid -> aid (string) or [aid,...] for multi questions
+  var PARTS = null, OPTS = null, CAPS = null;
+
+  var NOPIC = {};                  // card images that 404ed; skipped on re-render
+  /* availability is IMPLIED, never asserted (user ruling): every stock phrase
+     is an impression from the last review, and the footer tells visitors to
+     verify with the shop themselves */
+  var STOCK_LABEL = { now: 'usually in stock', waves: 'tends to sell out between batches',
+                      scarce: 'tends to be hard to find', unconfirmed: 'sold out - no restock confirmed' };
+  var STOCK_REASON = { waves: 'Tends to sell out between batches',
+                       scarce: 'Tends to be hard to find in stock',
+                       unconfirmed: 'Sold out - no restock confirmed' };
+  var REGION_NAME = { us: 'the US', eu: 'the UK/Europe', cn: 'China', tw: 'Taiwan' };
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function plo(p) { return Array.isArray(p) ? p[0] : (p == null ? NaN : p); }
+  function phi(p) { return Array.isArray(p) ? p[1] : (p == null ? NaN : p); }
+  function priceText(p) {
+    if (p == null) return 'price TBA';
+    return Array.isArray(p) ? money(p[0]) + '-' + money(p[1]) : money(p);
+  }
+  function chosen(q) {  // selected answer objects for a question, [] if unanswered
+    var v = A[q.id]; if (!v) return [];
+    var ids = Array.isArray(v) ? v : [v];
+    return q.answers.filter(function (a) { return ids.indexOf(a.id) >= 0; });
+  }
+
+  /* built-in capability set: own provides + everything inside the box,
+     transitively (includes may name parts or other options, e.g. kits
+     containing the DE10-Nano) */
+  var builtCache = {};
+  function builtIn(o) {
+    if (builtCache[o.id]) return builtCache[o.id];
+    var have = {};
+    (function add(x) {
+      (x.provides || []).forEach(function (t) { have[t] = true; });
+      (x.includes || []).forEach(function (ref) {
+        if (PARTS[ref]) add(PARTS[ref]);
+        else if (OPTS[ref]) add(OPTS[ref]);
+      });
+    })(o);
+    return (builtCache[o.id] = have);
+  }
+
+  /* cheapest chain of add-on parts that makes `token` true given `have`
+     (mutated by the caller between tokens so shared parts are bought once).
+     forOpt: I/O-class boards only chain onto bare DIY mainboards - an
+     assembled kit's GPIO stack is already occupied, so "add a MiSTercade to
+     your Armor bundle" would really mean gutting the kit. Not a path. */
+  function solve(token, have, stack, forOpt) {
+    if (have[token]) return { lo: 0, hi: 0, parts: [] };
+    var best = null;
+    for (var pid in PARTS) {
+      var p = PARTS[pid];
+      if (p.provides.indexOf(token) < 0 || stack.indexOf(pid) >= 0) continue;
+      if (p.category === 'io' && forOpt && forOpt.lane !== 'diy') continue;
+      var cost = { lo: plo(p.price_usd) || 0, hi: phi(p.price_usd) || 0, parts: [pid] };
+      var ok = true;
+      for (var i = 0; i < p.requires.length; i++) {
+        var sub = solve(p.requires[i], have, stack.concat(pid), forOpt);
+        if (!sub) { ok = false; break; }
+        cost.lo += sub.lo; cost.hi += sub.hi;
+        sub.parts.forEach(function (q) { if (cost.parts.indexOf(q) < 0) cost.parts.push(q); });
+      }
+      if (!ok) continue;
+      /* tie-break equal-price chains by availability: fewer sells-out parts
+         wins (the in-stock JAMMIX vs the equal-priced MiSTercade) */
+      cost.scarce = cost.parts.filter(function (q) {
+        return PARTS[q].stock && PARTS[q].stock !== 'now'; }).length;
+      if (!best || cost.lo < best.lo || (cost.lo === best.lo && cost.scarce < best.scarce)) best = cost;
+    }
+    return best;
+  }
+  function buyChain(chain, have) {
+    chain.parts.forEach(function (pid) {
+      PARTS[pid].provides.forEach(function (t) { have[t] = true; });
+    });
+  }
+
+  function constraints() {  // answers -> {effortAllowed, stockAllowed, reqs}
+    var c = { effortAllowed: null, stockAllowed: null, reqs: [] };
+    D.interview.forEach(function (q) {
+      chosen(q).forEach(function (ans) {
+        if (ans.effort) c.effortAllowed = ans.effort;
+        if (ans.stock) c.stockAllowed = ans.stock;
+        /* the region answer never prunes - it annotates every card with
+           where it ships from (import friction is the visitor's algebra) */
+        if (ans.region !== undefined) c.region = ans;
+        (ans.require || []).forEach(function (grp) {
+          // label = the user's own words; short version for card lines
+          c.reqs.push({ grp: grp, label: ans.short || ans.label });
+        });
+      });
+    });
+    return c;
+  }
+
+  /* full evaluation of one option against the current answers */
+  function evaluate(o) {
+    var r = { o: o, in: true, ghost: false, wouldFit: false, reason: '', needParts: [], needVariants: [],
+              hedges: [], reqInfo: [], lo: NaN, hi: NaN, unknownPrice: o.price_usd == null };
+    var c = constraints();
+    if (o.status !== 'orderable') {
+      r.ghost = true;
+      r.reason = { announced: 'Announced - not orderable yet', preorder: 'Preorder only',
+                   cancelled: 'Cancelled - it is not coming', discontinued: 'Discontinued' }[o.status] || o.status;
+    }
+    // the bill: sticker + the completion basics
+    var have = {}; Object.keys(builtIn(o)).forEach(function (t) { have[t] = true; });
+    var lo = plo(o.price_usd) || 0, hi = phi(o.price_usd) || 0;
+    (o.to_complete || []).forEach(function (ref) {
+      /* a completion item is usually a part, but can be another OPTION
+         (the Ironclad DX needs a whole FPGA board added to it) */
+      var p = PARTS[ref] || OPTS[ref];
+      lo += plo(p.price_usd) || 0; hi += phi(p.price_usd) || 0;
+      if (PARTS[ref]) p.provides.forEach(function (t) { have[t] = true; });
+      else Object.keys(builtIn(p)).forEach(function (t) { have[t] = true; });
+    });
+    /* the pre-answers bill: DIY cards display THIS, never answer-driven
+       chain costs - a mainboard's price must not absorb another column's
+       parts (user: a QMTech jumping to $423 on the cab answer reads as
+       "QMTech sells JAMMA gear"). The per-answer lines carry those costs. */
+    r.baseLo = lo; r.baseHi = hi;
+    var fitsCaps = true;                    // capability+effort fit, ignoring stock/status
+    if (c.effortAllowed && c.effortAllowed.indexOf(o.effort) < 0) fitsCaps = false;
+    var unv = o.provides_unverified || [];
+    /* each answered requirement produces one card line (reqInfo), labeled in
+       the user's own words - the card explains itself per answered question */
+    for (var g = 0; fitsCaps && g < c.reqs.length; g++) {
+      var grp = c.reqs[g].grp, label = c.reqs[g].label, hit = null, hedged = null;
+      for (var i = 0; i < grp.length; i++) {
+        if (have[grp[i]]) { hit = grp[i]; break; }
+        if (unv.indexOf(grp[i]) >= 0) hedged = grp[i];
+      }
+      if (hit) {
+        /* an option can override the line for a token it provides - e.g. the
+           SuperStation One's SNAC is PS1-ports-only, not a bare "built in" */
+        var ov = o.line_overrides && o.line_overrides[hit];
+        r.reqInfo.push({ label: label, text: ov || 'built in', builtin: !ov });
+        continue;
+      }
+      if (hedged) {  // alive, but visibly hedged
+        r.hedges.push(CAPS[hedged].name);
+        r.reqInfo.push({ label: label, text: 'claimed by vendor, unverified' });
+        continue;
+      }
+      /* first-party variant configurations ("get the Analogue version")
+         count before add-on part chains - that is how the expert talks */
+      var vbest = null;
+      (o.variants || []).forEach(function (v) {
+        var covers = grp.some(function (t) { return (v.adds || []).indexOf(t) >= 0; });
+        if (covers && (!vbest || v.price_delta < vbest.price_delta)) vbest = v;
+      });
+      if (vbest) {
+        lo += vbest.price_delta; hi += vbest.price_delta;
+        (vbest.adds || []).forEach(function (t) { have[t] = true; });
+        if (r.needVariants.indexOf(vbest) < 0) r.needVariants.push(vbest);
+        r.reqInfo.push({ label: label, text: 'with the ' + vbest.name +
+                         (vbest.price_delta ? ' (+' + money(vbest.price_delta) + ')' : '') });
+        continue;
+      }
+      var best = null;
+      for (var j = 0; j < grp.length; j++) {
+        var ch = solve(grp[j], have, [], o);
+        if (ch && (!best || ch.lo < best.lo)) best = ch;
+      }
+      if (!best) { fitsCaps = false; r.failCap = label; }
+      else {
+        lo += best.lo; hi += best.hi;
+        buyChain(best, have);
+        best.parts.forEach(function (pid) { if (r.needParts.indexOf(pid) < 0) r.needParts.push(pid); });
+        /* honesty: flag when a chain leans on a part that itself sells out
+           (the SuperDock is a preorder, not a shelf item) */
+        var scarcePart = best.parts.some(function (pid) {
+          return PARTS[pid].stock && PARTS[pid].stock !== 'now'; });
+        r.reqInfo.push({ label: label, text: 'with parts (~' + money(best.lo) + (scarcePart ? ', often sold out' : '') + ')' });
+      }
+    }
+    if (c.region && o.status === 'orderable' && o.ships_from) {
+      r.shipHome = c.region.region === o.ships_from;
+      r.shipLine = 'ships from ' + REGION_NAME[o.ships_from] + (r.shipHome ? ' - your region' : '');
+    }
+    r.lo = lo; r.hi = hi;
+    r.wouldFit = fitsCaps;                  // used for honest dead-end messaging on ghosts
+    if (r.ghost) return r;
+    if (c.effortAllowed && c.effortAllowed.indexOf(o.effort) < 0) {
+      r.in = false;
+      r.reason = o.effort === 'diy' ? 'You said no building; this is a build-it-yourself board'
+                                    : 'You said ready out of the box; this one needs a screwdriver';
+    } else if (!fitsCaps) {
+      r.in = false;
+      r.reason = 'No way to get "' + r.failCap + '", even with parts';
+    } else if (c.stockAllowed && c.stockAllowed.indexOf(o.stock) < 0) {
+      r.in = false;
+      r.reason = STOCK_REASON[o.stock] || 'Not reliably orderable today';
+    }
+    return r;
+  }
+
+  /* ---------- rendering ---------- */
+  function answeredCount() {
+    var n = 0;
+    D.interview.forEach(function (q) { if (chosen(q).length) n++; });
+    return n;
+  }
+
+  function renderQuestions() {
+    var host = document.getElementById('questions');
+    host.innerHTML = D.interview.map(function (q) {
+      var picked = chosen(q).map(function (a) { return a.id; });
+      /* multi-selects and single toggles are checkboxes; mutually-exclusive
+         choices are radios, with a "clear" affordance (radios famously
+         cannot be un-picked on their own) */
+      var boxy = q.multi || q.answers.length === 1;
+      var clearBtn = (!boxy && picked.length)
+        ? ' <button type="button" class="qclear" data-clear="' + q.id + '">clear</button>' : '';
+      return '<div class="q" data-q="' + q.id + '"><h3>' + esc(q.q) + clearBtn + '</h3><div class="ans">' +
+        q.answers.map(function (a) {
+          var type = boxy ? 'checkbox' : 'radio';
+          return '<label class="cb"><input type="' + type + '"' +
+                 (boxy ? '' : ' name="q-' + q.id + '"') + ' data-a="' + a.id + '"' +
+                 (picked.indexOf(a.id) >= 0 ? ' checked' : '') + '>' + esc(a.label) + '</label>';
+        }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  function stagHTML(o) {
+    /* "restock unconfirmed" is a FACT tag, so like status tags it shows even
+       at the zero state (a sold-out board with no announced batch is not the
+       same fact as one that cycles) */
+    if (o.status === 'orderable') {
+      return (o.design === 'official' ? '<span class="stag official">official design</span>' : '') +
+             (o.stock === 'unconfirmed' ? '<span class="stag restock">restock unconfirmed</span>' : '');
+    }
+    var cls = o.status === 'cancelled' ? 'cancelled' : (o.status === 'preorder' ? 'preorder' : 'announced');
+    return '<span class="stag ' + cls + '">' + esc(o.status) + '</span>';
+  }
+
+  function cardHTML(r) {
+    var o = r.o, bits = [];
+    /* ghosts (announced/discontinued/cancelled) are ALWAYS slim grayed rows -
+       they never toggle with answers; fitting entries collapse the same way
+       only once answers exist */
+    if (r.ghost || (answeredCount() > 0 && !r.in)) {
+      var dead2 = o.status === 'discontinued' || o.status === 'cancelled';
+      /* skip the reason when it just repeats the status tag ("discontinued" twice) */
+      var why = r.reason.toLowerCase() === o.status ? '' :
+                '<span class="out-why">' + esc(r.reason) + '</span>';
+      return '<button type="button" class="card mini' + (r.ghost ? ' ghost out' : ' out') +
+             '" data-card="' + o.id + '">' + stagHTML(o) +
+             (o.img && !NOPIC['img/' + o.img]
+               ? '<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">' : '') +
+             '<span class="nm">' + esc(o.name) + '</span>' +
+             (o.price_usd != null ? '<span class="pr">' + (dead2 ? 'was ' : '') + esc(priceText(o.price_usd)) + '</span>' : '') +
+             why + '</button>';
+    }
+    bits.push(stagHTML(o));
+    /* every option points at img/<id>.png; a file that does not exist (yet)
+       removes itself, so dropping a PNG into the folder upgrades the card
+       with no code change. NOPIC remembers misses so re-renders do not
+       re-request every absent file. */
+    if (o.img && !NOPIC['img/' + o.img]) {
+      bits.push('<img class="pic" src="img/' + esc(o.img) + '" alt="" loading="lazy">');
+    }
+    /* DIY mainboards carry the RAM stick IN THE TITLE (community-testing
+       feedback: the DE10 needing RAM must be unmissable) */
+    var needsRam = o.lane === 'diy' && (o.to_complete || []).indexOf('sdram-128') >= 0;
+    bits.push('<span class="nm">' + esc(o.name) +
+              (needsRam ? ' <span class="nmram">+ 128MB RAM stick</span>' : '') + '</span>');
+    /* the glance-level positioning line ("The value pick") - community
+       perception in one muted phrase, distinct from the sheet's what */
+    if (o.tag) bits.push('<span class="tagl">' + esc(o.tag) + '</span>');
+    var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
+      .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
+    (o.provides_unverified || []).forEach(function (t) {
+      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
+    });
+    if (chips.length) bits.push('<span class="caps">' + chips.join('') + '</span>');
+    if (r.ghost || !r.in) {
+      bits.push('<span class="out-why">' + esc(r.reason) + '</span>');
+    } else {
+      /* plain built-ins collapse to ONE "Covers:" line (user ruling); costed
+         paths and overridden lines stay separate, in the user's own words */
+      var covers = [], lines = [];
+      r.reqInfo.forEach(function (ri) { (ri.builtin ? covers : lines).push(ri); });
+      if (covers.length) {
+        bits.push('<span class="need">Covers: ' + esc(covers.map(function (ri) { return ri.label; }).join(', ')) + '</span>');
+      }
+      lines.forEach(function (ri) {
+        var hedgy = ri.text.indexOf('unverified') >= 0;
+        bits.push('<span class="' + (hedgy ? 'hedge' : 'need') + '">' +
+                  esc(ri.label) + ': ' + esc(ri.text) + '</span>');
+      });
+    }
+    if (r.shipLine && r.in && !r.ghost) {
+      bits.push('<span class="' + (r.shipHome ? 'need' : 'avail') + '">' + esc(r.shipLine) + '</span>');
+    }
+    /* the price sits at the BOTTOM of every card (user ruling: one scan line
+       across all lanes). Still ONE headline number - the complete price -
+       with device price + availability muted below. Dead products say
+       "was $X" or nothing - never "price TBA". */
+    var dead = o.status === 'discontinued' || o.status === 'cancelled';
+    if (dead) {
+      if (o.price_usd != null) bits.push('<span class="pr">was ' + priceText(o.price_usd) + '</span>');
+    } else if (o.status !== 'orderable' || r.unknownPrice) {
+      bits.push('<span class="pr">' + priceText(o.price_usd) + '</span>');
+    } else {
+      /* DIY mainboards drop the word "complete" - the number covers board +
+         essentials, not a finished machine (user ruling) */
+      bits.push('<span class="pr"><b>~' + money(o.lane === 'diy' ? r.baseLo : r.lo) + (o.lane === 'diy' ? '' : ' complete') + '</b></span>');
+      /* no device price on cards (user: too much text) - the sheet keeps it */
+      if (STOCK_LABEL[o.stock]) bits.push('<span class="avail">' + esc(STOCK_LABEL[o.stock]) + '</span>');
+    }
+    return '<button type="button" class="card' + ((r.ghost || !r.in) ? ' out' : '') + (r.ghost ? ' ghost' : '') +
+           '" data-card="' + o.id + '">' + bits.join('') + '</button>';
+  }
+
+  /* the "+" lives in the column titles: layers you add to the mainboard */
+  var PART_COLS = [
+    ['io', '+ 2. I/O boards'],
+    ['hub', '+ 3. USB'],
+    ['adapter', '+ 4. Adapters']
+  ];
+
+  function partCardHTML(pid, hl, dim) {
+    var p = PARTS[pid];
+    return '<button type="button" class="pcard' + (hl ? ' hl' : '') + (dim ? ' dim' : '') + '" data-part="' + pid + '">' +
+      (p.design === 'official' ? '<span class="official">official design</span>' : '') +
+      '<span class="nm">' + esc(p.name) + '</span>' +
+      (p.what ? '<span class="pw">' + esc(p.what) + '</span>' : '') +
+      (p.addon_note ? '<span class="pw addon">' + esc(p.addon_note) + '</span>' : '') +
+      '<span class="pr">' + esc(priceText(p.price_usd)) + '</span></button>';
+  }
+
+  /* recommendation stickers ("cheapest fit", "community favorite") REMOVED
+     entirely (user, 2026-07-17): not neutral enough for a page whose honest
+     message includes how uneven non-official hardware can be. The tag line,
+     the per-answer lines and the prices carry the differentiation. */
+  function renderPoster() {
+    var evals = D.options.map(evaluate);
+    var byLane = {};
+    evals.forEach(function (r) { (byLane[r.o.lane] = byLane[r.o.lane] || []).push(r); });
+    /* highlight column parts your answers would pull into a build: anything a
+       fitting DIY recipe uses, plus anything directly providing a required token */
+    var reqTokens = {};
+    constraints().reqs.forEach(function (rq) { rq.grp.forEach(function (t) { reqTokens[t] = true; }); });
+    var hl = {};
+    evals.forEach(function (r) {
+      if (r.o.lane === 'diy' && r.in) r.needParts.forEach(function (pid) { hl[pid] = true; });
+    });
+    Object.keys(PARTS).forEach(function (pid) {
+      if ((PARTS[pid].provides || []).some(function (t) { return reqTokens[t]; })) hl[pid] = true;
+    });
+    /* parts you have answered AWAY get dimmed: analog-video adapters when
+       your display answers do not need them, SNAC gear when you said USB
+       pads are fine, JAMMA gear when the machine is going on a shelf
+       (unanswered questions dim nothing) */
+    var VIDEOISH = { yc: 1, 'yc-source': 1, 'vga-rgb': 1, ypbpr: 1, composite: 1, 'yc-active-filtered': 1 };
+    var qa = {}; D.interview.forEach(function (q) { if (chosen(q).length) qa[q.id] = chosen(q); });
+    function dimPart(pid) {
+      var p = PARTS[pid];
+      if (hl[pid]) return false;
+      /* shelf and cabinet are inverse filters: shelf dims JAMMA gear, the
+         cabinet dims every I/O board that is NOT a JAMMA one */
+      var situ = qa.situation && qa.situation[0] && qa.situation[0].id;
+      var hasJamma = (p.provides || []).indexOf('jamma') >= 0;
+      if (situ === 'shelf' && hasJamma) return true;
+      if (situ === 'cab' && p.category === 'io' && !hasJamma) return true;
+      if (p.category !== 'adapter') return false;
+      var videoish = (p.provides || []).some(function (t) { return VIDEOISH[t]; });
+      if (videoish && qa.display) return true;
+      if (pid === 'snac-adapter' && qa.snac) return true;
+      return false;
+    }
+    document.getElementById('poster').innerHTML = D.lanes.map(function (l) {
+      var rows = byLane[l.id] || [];
+      var body;
+      if (l.id === 'diy') {
+        /* the anatomy columns: mainboards + one column per part category.
+           If NO mainboard fits (e.g. the handheld answer), the whole workshop
+           dims - parts for machines you cannot start are noise */
+        var diyAlive = evals.some(function (r) { return r.o.lane === 'diy' && r.in; });
+        var allDim = answeredCount() > 0 && !diyAlive;
+        body = '<div class="cols' + (allDim ? ' colsdim' : '') + '">' +
+          '<div class="col"><div class="colhead"><h3 class="cd">1. Mainboards</h3></div>' +
+          '<div class="cards">' + rows.map(cardHTML).join('') + '</div></div>' +
+          PART_COLS.map(function (pc) {
+            var pids = Object.keys(PARTS).filter(function (pid) { return PARTS[pid].category === pc[0]; });
+            var inner;
+            if (pc[0] === 'adapter') {
+              /* the adapters column is the longest: tiny subheads group it
+                 by what the adapter is for (parts carry a subcat field) */
+              inner = [['video', 'Video'], ['input', 'Controllers'], ['other', 'Extras']].map(function (sc) {
+                var sp = pids.filter(function (pid) { return (PARTS[pid].subcat || 'other') === sc[0]; });
+                if (!sp.length) return '';
+                return '<div class="subhead">' + sc[1] + '</div>' +
+                  sp.map(function (pid) { return partCardHTML(pid, !allDim && !!hl[pid], allDim || dimPart(pid)); }).join('');
+              }).join('');
+            } else {
+              inner = pids.map(function (pid) { return partCardHTML(pid, !allDim && !!hl[pid], allDim || dimPart(pid)); }).join('');
+            }
+            return '<div class="col"><div class="colhead"><h3 class="cd">' + esc(pc[1]) + '</h3></div><div class="cards">' +
+              inner + '</div></div>';
+          }).join('') + '</div>';
+      } else {
+        body = '<div class="cards">' + rows.map(cardHTML).join('') + '</div>';
+      }
+      return '<section class="lane' + (l.id === 'horizon' ? ' slim' : '') + '" id="lane-' + l.id + '"><div class="lanebar">' +
+        '<button type="button" class="lname" data-lane="' + l.id + '"><span class="cd">' + esc(l.name) + '</span></button>' +
+        '<span class="tag2">' + esc(l.tagline) + '</span></div>' + body + '</section>';
+    }).join('');
+    renderVerdict(evals);
+    renderChips();
+  }
+
+  /* verdict + tally RETIRED for now (user, 2026-07-16): the cards' own
+     per-answer lines and the collapse behavior carry the signal. Only the
+     dead-end banner survives - an answer that leaves nothing orderable is
+     the loudest fact on the page and has nowhere else to live. */
+  function renderVerdict(evals) {
+    var v = document.getElementById('verdict');
+    v.classList.remove('dead');
+    var n = answeredCount();
+    var fit = evals.filter(function (r) { return !r.ghost && r.in; });
+    document.getElementById('fitline').textContent = '';
+    document.getElementById('reset').hidden = n === 0;
+    if (n >= 1 && !fit.length) {
+      var ghostsFit = evals.filter(function (r) { return r.ghost && r.wouldFit; });
+      /* near-misses that failed ONLY on availability deserve naming - "the
+         SuperStation One does it, you just have to catch a batch" */
+      var stockMiss = evals.filter(function (r) { return !r.ghost && !r.in && r.wouldFit; });
+      v.hidden = false; v.classList.add('dead');
+      v.innerHTML = '<p class="vh">Dead end</p><p>Nothing you can order today does that.</p>' +
+        (stockMiss.length
+          ? '<p class="fit">Would fit, but tends to sell out between batches: ' +
+            esc(stockMiss.map(function (r) { return r.o.name; }).join(', ')) + '.</p>' : '') +
+        (ghostsFit.length
+          ? '<p class="fit">It exists, but only on the horizon: ' +
+            esc(ghostsFit.map(function (r) { return r.o.name; }).join(', ')) + '.</p>' : '') +
+        (!stockMiss.length && !ghostsFit.length
+          ? '<p class="fit">Loosen one answer and watch what comes back.</p>' : '');
+      return;
+    }
+    v.hidden = true;
+  }
+
+  function renderChips() {
+    var host = document.getElementById('chips');
+    var out = [];
+    D.interview.forEach(function (q) {
+      chosen(q).forEach(function (ans) {
+        out.push('<button type="button" class="chip" data-chip="' + q.id + '" data-cv="' + ans.id + '">' +
+                 esc(ans.label) + '<b>x</b></button>');
+      });
+    });
+    if (out.length > 1) out.push('<button type="button" class="chip" data-clearall="1">clear all<b>x</b></button>');
+    host.innerHTML = out.join('');
+  }
+
+  /* ---------- lane zoom, animated (FLIP: cards glide to their new size) ----------
+     Deliberately runs under prefers-reduced-motion too: it is user-initiated,
+     short, and killing the travel just turns a glide into a teleport (the site's
+     standing rationale). Transform-only, no rotation. */
+  function flipLane(sec, mutate) {
+    var cards = [].slice.call(sec.querySelectorAll('.card'));
+    var first = cards.map(function (c) { return c.getBoundingClientRect(); });
+    mutate();
+    cards.forEach(function (c, i) {
+      var last = c.getBoundingClientRect();
+      var f = first[i];
+      if (!f.width || !last.width) return;
+      var dx = f.left - last.left, dy = f.top - last.top;
+      var sx = f.width / last.width, sy = f.height / last.height;
+      if (!dx && !dy && sx === 1 && sy === 1) return;
+      c.animate([
+        { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(' + sx + ',' + sy + ')', transformOrigin: '0 0' },
+        { transform: 'none', transformOrigin: '0 0' }
+      ], { duration: 220, easing: 'cubic-bezier(.2,.8,.3,1)' });
+    });
+    sec.querySelectorAll('.card .caps').forEach(function (el) {
+      if (getComputedStyle(el).display !== 'none') el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 });
+    });
+  }
+  function setLaneZoom(target) {  // target: section or null for overview
+    var current = document.querySelector('.lane.focus');
+    var sec = target || current;
+    if (!sec) return;
+    flipLane(sec, function () {
+      document.querySelectorAll('.lane.focus').forEach(function (s) { s.classList.remove('focus'); });
+      if (target) { target.classList.add('focus'); document.body.dataset.zoom = 'lane'; }
+      else document.body.dataset.zoom = 'all';
+    });
+  }
+
+  /* ---------- the card sheet (zoom level 3) ---------- */
+  var sheet = document.getElementById('sheet');
+  var sheetId = null, closingFromHistory = false;
+
+  function chainText(o, token) {
+    var have = {}; Object.keys(builtIn(o)).forEach(function (t) { have[t] = true; });
+    if (have[token]) return null;
+    var c = solve(token, have, [], o);
+    if (!c) return 'no path';
+    return 'add ' + c.parts.map(function (p) { return PARTS[p].name; }).join(' + ') +
+           ' (~' + money(c.lo) + (c.hi > c.lo ? '-' + money(c.hi) : '') + ')';
+  }
+
+  function openSheet(id, push) {
+    var o = OPTS[id]; if (!o) return;
+    var r = evaluate(o);
+    var built = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; });
+    var unv = o.provides_unverified || [];
+    var withParts = [];
+    ['yc', 'yc-active-filtered', 'vga-rgb', 'ypbpr', 'snac', 'dual-sdram', 'cd-drive', 'usb-hub']
+      .forEach(function (t) {
+        if (built.indexOf(t) >= 0 || unv.indexOf(t) >= 0) return;
+        var txt = chainText(o, t);
+        if (txt && txt !== 'no path') withParts.push('<li>' + esc(CAPS[t].name) + ': ' + esc(txt) + '</li>');
+      });
+    var still = (o.to_complete || []).map(function (ref) {
+      var p = PARTS[ref] || OPTS[ref];
+      return '<li>' + esc(p.name) + ' (' + esc(priceText(p.price_usd)) + ')</li>';
+    });
+    /* the "to get playing" sentence: generated from to_complete, short names.
+       The prefix already says "to get playing", so the sentence must NOT end
+       "and you are playing" (user ruling: no duplication) */
+    var play = '';
+    if (o.status === 'orderable') {
+      if ((o.to_complete || []).length) {
+        var tlo = 0, thi = 0, names = [];
+        o.to_complete.forEach(function (ref) {
+          var p = PARTS[ref] || OPTS[ref];
+          tlo += plo(p.price_usd) || 0; thi += phi(p.price_usd) || 0;
+          names.push(p.name.replace(/\s*\(.*$/, ''));
+        });
+        play = 'Add ' + (names.length > 1
+                ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names[0]) +
+               ' - about ' + money(tlo) + (thi > tlo ? '-' + money(thi) : '') + ' more.';
+      } else {
+        play = 'Nothing else to buy - it plays out of the box.';
+      }
+      if (built.indexOf('yc') < 0 && unv.indexOf('yc') < 0) {
+        var have2 = {}; Object.keys(builtIn(o)).forEach(function (t) { have2[t] = true; });
+        var crt = solve('yc', have2, [], o);
+        if (crt) play += ' For a CRT via S-Video, budget roughly ' + money(crt.lo) +
+                         ' on top (parts listed under Specs and sources).';
+      }
+    }
+    var chips = built.map(function (t) {
+      return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
+    unv.forEach(function (t) {
+      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
+    });
+    sheet.innerHTML =
+      '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
+      (o.img && !NOPIC['img/' + o.img]
+        ? '<img class="spic" src="img/' + esc(o.img) + '" alt="">' : '') +
+      '<h2><span class="cd">' + esc(o.name) + '</span></h2>' +
+      '<p class="vd">' +
+        (o.url ? '<a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.vendor) + ' - official page</a>'
+               : esc(o.vendor)) +
+        (o.ships_from ? ' &middot; ships from ' + esc(REGION_NAME[o.ships_from]) : '') +
+        (o.status === 'orderable' ? '' : ' &middot; ' + esc(o.status)) + '</p>' +
+      ((o.status === 'discontinued' || o.status === 'cancelled')
+        ? (o.price_usd == null ? '' : '<p class="price">was ' + esc(priceText(o.price_usd)) + '</p>')
+        : (o.status !== 'orderable' || r.unknownPrice)
+          ? '<p class="price">' + esc(priceText(o.price_usd)) + '</p>'
+          : '<p class="price"><b>~' + money(r.lo) + ' complete</b><span class="psub">' +
+            (Math.round(r.lo) !== Math.round(plo(o.price_usd)) ? ' &middot; device ' + esc(priceText(o.price_usd)) : '') +
+            (STOCK_LABEL[o.stock] ? ' &middot; ' + esc(STOCK_LABEL[o.stock]) : '') + '</span></p>') +
+      '<p class="what">' + esc(o.what) + '</p>' +
+      (play ? '<p class="play"><b>To get playing:</b> ' + esc(play) + '</p>' : '') +
+      '<p class="adv">' + esc(o.advice) + '</p>' +
+      (o.variants && o.variants.length
+        ? '<p class="vars"><b>Versions:</b> ' + o.variants.map(function (v) {
+            /* a negative delta is a cheaper trim (e.g. the MS2 Digital) */
+            var d = !v.price_delta ? ', same price'
+                  : v.price_delta < 0 ? ' -' + money(-v.price_delta) : ' +' + money(v.price_delta);
+            return esc(v.name) + d + (v.note ? ' - ' + esc(v.note) : '');
+          }).join(' &middot; ') + '</p>' : '') +
+      (chips.length ? '<div class="caps">' + chips.join('') + '</div>' : '') +
+      '<details class="fine"><summary>Specs and sources</summary>' +
+        (unv.length ? '<h4>Claimed, not verified</h4><ul>' + unv.map(function (t) {
+          return '<li class="unv">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
+        (withParts.length ? '<h4>Possible with parts</h4><ul>' + withParts.join('') + '</ul>' : '') +
+        (still.length ? '<h4>Still needed for a complete setup</h4><ul>' + still.join('') + '</ul>' : '') +
+        '<h4>Notes</h4><p class="notes">' + esc(o.notes) + '</p>' +
+        '<p class="meta2">Verified ' + esc(o.verified) + ' &middot; confidence: ' + esc(o.confidence || 'n/a') +
+          (o.sources && o.sources.length ? ' &middot; sources: ' + o.sources.map(function (u, i) {
+            return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + (i + 1) + '</a>'; }).join(' ') : '') + '</p>' +
+      '</details>';
+    sheetId = id;
+    if (push) history.pushState(null, '', '#' + id);
+    if (!sheet.open) {
+      sheet.showModal();
+      sheet.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }],
+                    { duration: 150, easing: 'ease-out' });
+    }
+    document.getElementById('sheetx').addEventListener('click', function () { sheet.close(); });
+  }
+  /* small sheet for a PART (column item): what it is, price, then the receipts */
+  function openPartSheet(pid, push) {
+    var p = PARTS[pid]; if (!p) return;
+    sheet.innerHTML =
+      '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
+      (p.img && !NOPIC['img/' + p.img] ? '<img class="spic" src="img/' + esc(p.img) + '" alt="">' : '') +
+      '<h2><span class="cd">' + esc(p.name) + '</span></h2>' +
+      '<p class="vd">' +
+        (p.url ? '<a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.vendor || 'vendor') + ' - official page</a>'
+               : esc(p.vendor || '')) +
+        (p.stock && STOCK_LABEL[p.stock] ? ' &middot; ' + esc(STOCK_LABEL[p.stock]) : '') + '</p>' +
+      '<p class="price"><b>' + esc(priceText(p.price_usd)) + '</b></p>' +
+      (p.what ? '<p class="what">' + esc(p.what) + '</p>' : '') +
+      '<details class="fine"><summary>Specs and sources</summary>' +
+        '<p class="notes">' + esc(p.notes || '') + '</p>' +
+        '<p class="meta2">Verified ' + esc(p.verified || 'n/a') + ' &middot; confidence: ' + esc(p.confidence || 'n/a') +
+          (p.sources && p.sources.length ? ' &middot; sources: ' + p.sources.map(function (u, i) {
+            return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + (i + 1) + '</a>'; }).join(' ') : '') + '</p>' +
+      '</details>';
+    sheetId = 'p-' + pid;
+    if (push) history.pushState(null, '', '#p-' + pid);
+    if (!sheet.open) {
+      sheet.showModal();
+      sheet.animate([{ opacity: 0, transform: 'scale(.96)' }, { opacity: 1, transform: 'none' }],
+                    { duration: 150, easing: 'ease-out' });
+    }
+    document.getElementById('sheetx').addEventListener('click', function () { sheet.close(); });
+  }
+
+  function openByHash(hash, push) {  // '#id' or '#p-id' -> the right sheet
+    var h = hash.slice(1);
+    if (h.indexOf('p-') === 0 && PARTS[h.slice(2)]) openPartSheet(h.slice(2), push);
+    else if (OPTS[h]) openSheet(h, push);
+  }
+
+  sheet.addEventListener('close', function () {
+    var was = sheetId; sheetId = null;
+    if (closingFromHistory) { closingFromHistory = false; return; }
+    if (location.hash === '#' + was) history.back();
+  });
+  sheet.addEventListener('click', function (e) {
+    if (e.target === sheet) sheet.close();
+  });
+  addEventListener('popstate', function () {
+    if (sheet.open && location.hash.slice(1) !== sheetId) {
+      closingFromHistory = true; sheet.close();
+    } else if (!sheet.open && location.hash.length > 1 && OPTS) {
+      openByHash(location.hash, false);
+    }
+  });
+
+  /* ---------- answers <-> URL ---------- */
+  function readURL() {
+    A = {};
+    var sp = new URLSearchParams(location.search);
+    D.interview.forEach(function (q) {
+      var v = sp.get(q.id); if (!v) return;
+      var ok = v.split(',').filter(function (id) {
+        return q.answers.some(function (a) { return a.id === id; });
+      });
+      if (!ok.length) return;
+      A[q.id] = q.multi ? ok : ok[0];
+    });
+  }
+  function writeURL() {
+    var sp = new URLSearchParams();
+    D.interview.forEach(function (q) {
+      var v = A[q.id]; if (!v || (Array.isArray(v) && !v.length)) return;
+      sp.set(q.id, Array.isArray(v) ? v.join(',') : v);
+    });
+    var qs = sp.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+  }
+
+  /* ---------- events ---------- */
+  function toggleAnswer(qid, aid) {
+    var q = D.interview.filter(function (x) { return x.id === qid; })[0];
+    if (q.multi) {
+      var cur = Array.isArray(A[qid]) ? A[qid].slice() : [];
+      var at = cur.indexOf(aid);
+      if (at >= 0) cur.splice(at, 1); else cur.push(aid);
+      if (cur.length) A[qid] = cur; else delete A[qid];
+    } else {
+      if (A[qid] === aid) delete A[qid]; else A[qid] = aid;
+    }
+    writeURL(); renderQuestions(); renderPoster();
+  }
+  document.getElementById('questions').addEventListener('click', function (e) {
+    var c = e.target.closest('button[data-clear]');
+    if (c) { delete A[c.dataset.clear]; writeURL(); renderQuestions(); renderPoster(); }
+  });
+  document.getElementById('questions').addEventListener('change', function (e) {
+    var i = e.target.closest('input[data-a]'); if (!i) return;
+    var qid = i.closest('.q').dataset.q;
+    if (i.type === 'radio') { A[qid] = i.dataset.a; writeURL(); renderQuestions(); renderPoster(); }
+    else toggleAnswer(qid, i.dataset.a);
+  });
+  document.getElementById('chips').addEventListener('click', function (e) {
+    if (e.target.closest('button[data-clearall]')) {
+      A = {}; writeURL(); renderQuestions(); renderPoster(); return;
+    }
+    var c = e.target.closest('button[data-chip]'); if (!c) return;
+    toggleAnswer(c.dataset.chip, c.dataset.cv);
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    A = {}; writeURL(); renderQuestions(); renderPoster();
+  });
+  /* error events do not bubble, so catch image 404s in capture phase at the
+     document (covers card thumbs AND sheet pictures) */
+  document.addEventListener('error', function (e) {
+    if (e.target.tagName === 'IMG' && (e.target.classList.contains('pic') || e.target.classList.contains('spic'))) {
+      NOPIC[e.target.getAttribute('src')] = true;
+      e.target.remove();
+    }
+  }, true);
+  document.getElementById('poster').addEventListener('click', function (e) {
+    var card = e.target.closest('button[data-card]');
+    if (card) { openSheet(card.dataset.card, true); return; }
+    var pc = e.target.closest('button[data-part]');
+    if (pc) { openPartSheet(pc.dataset.part, true); return; }
+    var lane = e.target.closest('button[data-lane]');
+    if (lane && lane.dataset.lane !== 'diy') {  // diy is columns; zoom has no meaning there
+      var sec = document.getElementById('lane-' + lane.dataset.lane);
+      setLaneZoom(sec.classList.contains('focus') ? null : sec);
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !sheet.open && document.body.dataset.zoom === 'lane') setLaneZoom(null);
+  });
+
+  /* ---------- boot ---------- */
+  fetch('hardware.json').then(function (r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }).then(function (d) {
+    D = d; PARTS = d.parts; CAPS = d.capabilities;
+    OPTS = {}; d.options.forEach(function (o) { OPTS[o.id] = o; });
+    readURL();
+    /* on phones the interview is OPT-IN: the poster comes first and
+       "Find my MiSTer" invites, so the rail never reads as a mandatory
+       form (user ruling 2026-07-17). A shared link that already carries
+       answers keeps the fold open so the pruning is explained. */
+    if (matchMedia('(max-width: 52rem)').matches && !Object.keys(A).length) {
+      document.getElementById('railfold').open = false;
+    }
+    renderQuestions();
+    renderPoster();
+    document.getElementById('appendix').hidden = false;
+    document.getElementById('notmister').innerHTML = d.appendix_not_mister.map(function (x) {
+      return '<li><b>' + esc(x.name) + '</b> - ' + esc(x.one_liner) + '</li>';
+    }).join('');
+    document.getElementById('stamp').textContent =
+      'Every fact on this page carries its own verification date; the dataset was last reviewed ' +
+      d.meta.updated + '. Vendor claims nobody has torn down are marked "claimed, not verified".';
+    var vc = document.getElementById('vchip');
+    vc.textContent = 'facts checked ' + d.meta.updated + ' - prices and stock drift';
+    vc.hidden = false;
+    if (location.hash.length > 1) openByHash(location.hash, false);
+  }).catch(function (e) {
+    document.getElementById('poster').innerHTML =
+      '<p>The landscape failed to load (' + esc((e && e.message) || e) +
+      '). The raw data is in <a href="hardware.json">hardware.json</a>.</p>';
+  });
+
+  /* ---------- theme toggle (same control + behavior as the other pages) ---------- */
+  (function () {
+    var btns = [].slice.call(document.querySelectorAll('#theme button[data-set]'));
+    if (!btns.length) return;
+    var dd = document.getElementById('themedd');
+    var sum = document.getElementById('themesum');
+    var themes = btns.map(function (b) { return b.dataset.set; });
+    function apply(t) {
+      if (themes.indexOf(t) < 0) t = 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+      var cur = null;
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); if (b.dataset.set === t) cur = b; });
+      sum.textContent = cur ? cur.textContent : 'Theme';
+    }
+    btns.forEach(function (b) { b.addEventListener('click', function () {
+      try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
+      apply(b.dataset.set);
+    }); });
+    document.addEventListener('click', function (e) {
+      if (dd.open && !dd.contains(e.target)) dd.open = false;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && dd.open) dd.open = false;
+    });
+    function lockSummary() {
+      var prevText = sum.textContent, max = 0;
+      sum.style.minWidth = '';
+      function measure(label) {
+        sum.textContent = label;
+        max = Math.max(max, sum.getBoundingClientRect().width);
+      }
+      btns.forEach(function (b) { measure(b.textContent); });
+      sum.textContent = prevText;
+      sum.style.minWidth = Math.ceil(max) + 'px';
+    }
+    var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
+    apply(saved);
+    lockSummary();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
+  })();
+})();
+</script>
+</body>
+</html>

@@ -291,8 +291,11 @@
   #sheet .cap.unv { border-style: dashed; color: var(--muted); }
   /* the receipts live one tap away, not in the greeting */
   #sheet .fine { margin-top: .7rem; border-top: 1px solid var(--rule); padding-top: .5rem; }
-  #sheet .fine summary { cursor: pointer; font-size: .78rem; color: var(--muted); user-select: none; }
-  #sheet .fine summary:hover { color: var(--accent); }
+  #sheet .fine summary { cursor: pointer; font-size: .8rem; font-weight: 600; user-select: none;
+    color: var(--accent); display: inline-block; padding: .28rem .6rem; border-radius: 6px;
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--bg)); }
+  #sheet .fine summary:hover { background: color-mix(in srgb, var(--accent) 12%, var(--bg)); }
+  #sheet .fine[open] summary { border-color: transparent; padding-left: 0; }
   #sheet .x { position: absolute; top: .55rem; right: .65rem; font: inherit; border: 1px solid var(--hair);
               background: var(--surface); color: inherit; border-radius: 6px; padding: .1rem .5rem; cursor: pointer; }
   #sheet .x:hover { background: var(--hover-bg); }
@@ -444,6 +447,18 @@
     var v = A[q.id]; if (!v) return [];
     var ids = Array.isArray(v) ? v : [v];
     return q.answers.filter(function (a) { return ids.indexOf(a.id) >= 0; });
+  }
+
+  /* a question with `when` only exists while one of the named answers to
+     another question is picked (the 24-bit question is a CRT refinement -
+     it never faces an HDMI-only visitor) */
+  function qVisible(q) {
+    if (!q.when) return true;
+    var v = A[q.when.q], ids = Array.isArray(v) ? v : (v ? [v] : []);
+    return q.when.any.some(function (id) { return ids.indexOf(id) >= 0; });
+  }
+  function pruneHidden() {  // a hidden question's answer must never keep pruning
+    D.interview.forEach(function (q) { if (!qVisible(q) && A[q.id] !== undefined) delete A[q.id]; });
   }
 
   /* built-in capability set: own provides + everything inside the box,
@@ -627,7 +642,7 @@
 
   function renderQuestions() {
     var host = document.getElementById('questions');
-    host.innerHTML = D.interview.map(function (q) {
+    host.innerHTML = D.interview.filter(qVisible).map(function (q) {
       var picked = chosen(q).map(function (a) { return a.id; });
       /* multi-selects and single toggles are checkboxes; mutually-exclusive
          choices are radios, with a "clear" affordance (radios famously
@@ -769,8 +784,18 @@
     evals.forEach(function (r) {
       if (r.o.lane === 'diy' && r.in) r.needParts.forEach(function (pid) { hl[pid] = true; });
     });
+    /* direct-provider highlight only fires for tokens some fitting DIY board
+       LACKS built-in - a part must be able to be the thing that delivers the
+       answer. (The MiSTercade's HDMI passthrough must not light up the whole
+       board when the visitor says "HDMI" - every mainboard already has it.) */
+    var diyLacks = {};
+    evals.forEach(function (r) {
+      if (r.o.lane !== 'diy' || !r.in) return;
+      var bi = builtIn(r.o);
+      Object.keys(reqTokens).forEach(function (t) { if (!bi[t]) diyLacks[t] = true; });
+    });
     Object.keys(PARTS).forEach(function (pid) {
-      if ((PARTS[pid].provides || []).some(function (t) { return reqTokens[t]; })) hl[pid] = true;
+      if ((PARTS[pid].provides || []).some(function (t) { return diyLacks[t]; })) hl[pid] = true;
     });
     /* parts you have answered AWAY get dimmed: analog-video adapters when
        your display answers do not need them, SNAC gear when you said USB
@@ -919,6 +944,12 @@
 
   function chainText(o, token) {
     var have = {}; Object.keys(builtIn(o)).forEach(function (t) { have[t] = true; });
+    /* to_complete items are already in the complete price - the "Still needed"
+       list owns them, so they must not repeat under "Possible with parts" */
+    (o.to_complete || []).forEach(function (ref) {
+      if (PARTS[ref]) PARTS[ref].provides.forEach(function (t) { have[t] = true; });
+      else if (OPTS[ref]) Object.keys(builtIn(OPTS[ref])).forEach(function (t) { have[t] = true; });
+    });
     if (have[token]) return null;
     var c = solve(token, have, [], o);
     if (!c) return 'no path';
@@ -932,7 +963,9 @@
     var built = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; });
     var unv = o.provides_unverified || [];
     var withParts = [];
-    ['yc', 'yc-active-filtered', 'vga-rgb', 'ypbpr', 'snac', 'dual-sdram', 'cd-drive', 'usb-hub']
+    /* every non-internal capability, in vocabulary order - a hard-coded token
+       list here once silently dropped "composite via adapter" from the sheets */
+    Object.keys(CAPS).filter(function (t) { return !CAPS[t].internal; })
       .forEach(function (t) {
         if (built.indexOf(t) >= 0 || unv.indexOf(t) >= 0) return;
         var txt = chainText(o, t);
@@ -964,7 +997,7 @@
         var have2 = {}; Object.keys(builtIn(o)).forEach(function (t) { have2[t] = true; });
         var crt = solve('yc', have2, [], o);
         if (crt) play += ' For a CRT via S-Video, budget roughly ' + money(crt.lo) +
-                         ' on top (parts listed under Specs and sources).';
+                         ' on top (parts listed in the full specs below).';
       }
     }
     var chips = built.map(function (t) {
@@ -1000,7 +1033,8 @@
             return esc(v.name) + d + (v.note ? ' - ' + esc(v.note) : '');
           }).join(' &middot; ') + '</p>' : '') +
       (chips.length ? '<div class="caps">' + chips.join('') + '</div>' : '') +
-      '<details class="fine"><summary>Specs and sources</summary>' +
+      '<details class="fine"><summary>Full specs, part paths and sources' +
+        (o.sources && o.sources.length ? ' (' + o.sources.length + ')' : '') + '</summary>' +
         (unv.length ? '<h4>Claimed, not verified</h4><ul>' + unv.map(function (t) {
           return '<li class="unv">' + esc(CAPS[t].name) + '</li>'; }).join('') + '</ul>' : '') +
         (withParts.length ? '<h4>Possible with parts</h4><ul>' + withParts.join('') + '</ul>' : '') +
@@ -1032,7 +1066,8 @@
         (p.stock && STOCK_LABEL[p.stock] ? ' &middot; ' + esc(STOCK_LABEL[p.stock]) : '') + '</p>' +
       '<p class="price"><b>' + esc(priceText(p.price_usd)) + '</b></p>' +
       (p.what ? '<p class="what">' + esc(p.what) + '</p>' : '') +
-      '<details class="fine"><summary>Specs and sources</summary>' +
+      '<details class="fine"><summary>Full specs and sources' +
+        (p.sources && p.sources.length ? ' (' + p.sources.length + ')' : '') + '</summary>' +
         '<p class="notes">' + esc(p.notes || '') + '</p>' +
         '<p class="meta2">Verified ' + esc(p.verified || 'n/a') + ' &middot; confidence: ' + esc(p.confidence || 'n/a') +
           (p.sources && p.sources.length ? ' &middot; sources: ' + p.sources.map(function (u, i) {
@@ -1082,8 +1117,10 @@
       if (!ok.length) return;
       A[q.id] = q.multi ? ok : ok[0];
     });
+    pruneHidden();
   }
   function writeURL() {
+    pruneHidden();
     var sp = new URLSearchParams();
     D.interview.forEach(function (q) {
       var v = A[q.id]; if (!v || (Array.isArray(v) && !v.length)) return;
@@ -1157,6 +1194,7 @@
     D = d; PARTS = d.parts; CAPS = d.capabilities;
     OPTS = {}; d.options.forEach(function (o) { OPTS[o.id] = o; });
     readURL();
+    writeURL();  /* normalize: a shared URL carrying a gated answer without its trigger self-cleans */
     /* on phones the interview is OPT-IN: the poster comes first and
        "Find my MiSTer" invites, so the rail never reads as a mandatory
        form (user ruling 2026-07-17). A shared link that already carries

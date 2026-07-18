@@ -8,7 +8,14 @@ renders entirely from that file, so adding/editing hardware never touches
 layout code. The interview questions also live in `hardware.json` (an
 `interview` key: answers carry `require` any-of token groups, `effort`
 allowlists, or a `budget` cap), and options carry an `effort` grade
-(`none | some | diy`) the build question filters on.
+(`none | some | diy`) the build question filters on. A question may carry
+`when: {q, any[]}` - it only renders (and its answer only applies) while
+one of the named answers to the referenced question is picked; unchecking
+the trigger silently drops the gated answer everywhere including the URL.
+Validator-checked. CURRENTLY UNUSED: built for a 24-bit color-depth
+question that the user retired the same day (2026-07-17, "overkill" -
+depth is discovered while browsing entries instead); the mechanism stays
+for future gated questions.
 
 Nav name: **Hardware** (was "Landscape" until 2026-07-17, when the site-wide nav became Zine / Cores / Hardware). Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness stamp (meta.updated, plain muted text, NOT a chip) IS the whole subtitle (scope sentence removed 2026-07-16, de-chipped 2026-07-17); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
 URL: `/hardware-landscape/` (renamed from `/landscape/` on 2026-07-17; a
@@ -190,8 +197,11 @@ ONBOARDING view, not a data dump): photo, price, `what`, generated
 "To get playing" sentence (from to_complete, plus a CRT-budget line when
 Y/C needs parts), `advice`, Versions line, capability chips, then
 everything else (research notes, unverified flags, chains, sources,
-confidence) behind a collapsed disclosure labeled **"Specs and sources"**
-(user rejected "The fine print" — not a contract).
+confidence) behind a collapsed disclosure labeled **"Full specs, part
+paths and sources (N)"** with a source count, styled as an accent CTA
+button (user asked for more call-to-action 2026-07-17; earlier label
+"Specs and sources" was too quiet, and "The fine print" was rejected
+before that — not a contract). Still boots collapsed.
 
 Interview/rail rulings (user, 2026-07-16 overhaul round):
 - Verdict + tally render BELOW the questions. Nothing that appears on
@@ -412,6 +422,23 @@ Field conventions (parts and options both):
   24-bit cores (PSX/N64/Saturn-class) can show the difference; say so
   wherever the axis is raised. Notes carry this on hamgeek-mister,
   qmtech-assembled, io-analog, io-analog-pro, direct-video-dac.
+  NOW MODELED as capability token `analog-24bit` (chips on lane-zoom
+  cards and sheets carry it; the `what` copy on io-analog/io-analog-pro
+  states the 18/24 split). A gated `depth` interview question was built,
+  shipped to staging and RETIRED the same day (user 2026-07-17:
+  "overkill" - people see the depth as they browse entries; don't
+  re-add). Granting policy (user-tuned 2026-07-17): citing a solid
+  source is enough for plain `provides` - scope tests (io-analog-pro),
+  framework docs (direct-video-dac, reflex-prism), vendor-documented
+  DACs (ironclad-dx, mistercade-lite, ultimate-mister-pro +
+  mister-pi-turbo via their A/V Pro 9.2), teardown-verified chip
+  (superstation-one). The `provides_unverified` hedge marks DISPUTES,
+  not the absence of a lab test: qmtech-assembled keeps it (listing
+  says 24-bit, owners report the QMTech/Hamgeek path as 18-bit).
+  io-analog spans both generations so gets NO token (its `what` carries
+  the split); hamgeek gets none (vendor claims nothing). Mainboards
+  correctly have nothing to do with depth - it is the I/O board's or
+  dongle's property.
 
 ## Chain-honesty rules (overnight audit 2026-07-17)
 
@@ -429,6 +456,29 @@ Field conventions (parts and options both):
 - The verdict/tally stay retired; only the dead-end banner renders.
 - Answers may carry `short` - the compact wording used for card info lines
   and failure reasons; `label` stays the full checkbox/radio text.
+- **Sheet "Possible with parts" is DATA-DRIVEN (2026-07-17 evening)**:
+  every non-internal capability in vocabulary order. A hard-coded token
+  list here once silently dropped "composite via adapter" from kit
+  sheets - never re-hardcode it. chainText counts `to_complete` parts
+  as already owned, so "Still needed" keeps sole custody of those.
+- **Direct-provider part highlight only fires for tokens some fitting
+  DIY board LACKS built-in** (2026-07-17): the MiSTercade must not
+  light up on the HDMI answer just because it has HDMI passthrough -
+  a highlighted part must be able to be the thing delivering the
+  answer.
+- **sdram-128-second requires sdram128 AND sdram-slot** (2026-07-17):
+  the chain only offers a second stick where a module socket exists
+  (bare DIY boards); sealed consoles/kits model dual RAM as variants -
+  the sheet used to offer a $20 stick on the SuperStation One.
+- **Y/C active framing is COMPOSITE-centric (user fact 2026-07-17)**:
+  the THS7374 filtering chiefly benefits composite (luma+chroma merge,
+  dot crawl); S-Video keeps them separate and mainly gains correct
+  levels. yc-active-filtered explain + yc-active copy carry this; do
+  not re-frame active as "the cleanest S-Video chain".
+- **io-analog-pro also provides analog-audio + toslink** (vendor page
+  2026-07-17: audio over the Saturn AV port, 3.5mm jack switchable to
+  SPDIF) - the Armor bundle sheet used to claim a dongle was needed
+  for a headphone jack.
 
 ## Known modeling limitation (schema v1)
 

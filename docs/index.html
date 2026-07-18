@@ -191,6 +191,11 @@
                                      box-shadow: .95em 0 0 var(--sw2); }
   .top .theme .menu button:hover { background: var(--hover-bg); }
   .top .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  /* shadow-mask toggle at the bottom of the menu: its dot slot is an on/off
+     indicator (filled when on) instead of a theme's preview-colour pair */
+  .top .theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: .25rem 0 .1rem; }
+  .top .theme .menu button.mask::before { background: transparent; box-shadow: inset 0 0 0 1px var(--muted); }
+  .top .theme .menu button.mask[aria-pressed="true"]::before { background: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
   /* site nav: one segmented control (Zine | Cores | Hardware); current filled.
      The same control on all three pages. */
   .top .segnav { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
@@ -239,6 +244,9 @@
   .shot img { position: absolute; inset: 0; width: 100%; height: 100%; }
   /* CRT slot mask (mask.js) rendered over the still in device pixels */
   .shot canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  /* shadow mask off (theme-menu toggle): hide the canvas, the plain img is
+     underneath -- same presentation as the CORS-taint fallback */
+  html[data-mask="off"] .shot canvas { display: none; }
   /* wide viewports: tate posts grow past the column and go two-column,
      full-size shot left, text beside it; narrow viewports stack */
   @media (min-width: 50rem) {
@@ -290,6 +298,8 @@
           <button type="button" data-set="riso">Riso</button>
           <button type="button" data-set="famicom">Famicom</button>
           <button type="button" data-set="pastel">Pastel</button>
+          <hr class="msep">
+          <button type="button" class="mask" id="maskbtn" aria-pressed="true">Shadow mask</button>
         </div>
       </details>
     </div>
@@ -440,6 +450,28 @@
     lockSummary();
     // re-run once webfonts land: the fallback font's metrics differ
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
+  })();
+  // CRT shadow-mask preference: the toggle at the bottom of the theme menu,
+  // shared with the release tracker via localStorage ('mz-mask'). CSS keys on
+  // html[data-mask="off"] to hide the mask canvases, revealing the plain img
+  // each one covers. mask.js keeps drawing into the hidden canvases, so
+  // toggling back on is instant and needs no re-render. Like a theme pick,
+  // toggling leaves the menu open: the effect previews live behind it.
+  (function () {
+    var btn = document.getElementById('maskbtn');
+    if (!btn) return;
+    function apply(on) {
+      if (on) document.documentElement.removeAttribute('data-mask');
+      else document.documentElement.setAttribute('data-mask', 'off');
+      btn.setAttribute('aria-pressed', on);
+    }
+    var on = true; try { on = localStorage.getItem('mz-mask') !== '0'; } catch (e) {}
+    apply(on);
+    btn.addEventListener('click', function () {
+      on = !on;
+      apply(on);
+      try { localStorage.setItem('mz-mask', on ? '1' : '0'); } catch (e) {}
+    });
   })();
   // EASTER EGG, touch half: a phone has no hover, so mister-kun's lean is driven
   // by an .on class here instead (the CSS hover rule is gated to (hover: hover)).

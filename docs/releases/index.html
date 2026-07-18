@@ -484,6 +484,11 @@
                                 margin-right: .95em; border-radius: 50%; background: var(--sw1);
                                 box-shadow: .95em 0 0 var(--sw2); }
   .theme .menu button:hover { background: var(--hover-bg); }
+  /* shadow-mask toggle at the bottom of the menu: its dot slot is an on/off
+     indicator (filled when on) instead of a theme's preview-colour pair */
+  .theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: 0; width: 100%; }
+  .theme .menu button.mask::before { background: transparent; box-shadow: inset 0 0 0 1px var(--muted); }
+  .theme .menu button.mask[aria-pressed="true"]::before { background: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: var(--row-hover); }
   .build { color: var(--muted); }
@@ -701,6 +706,10 @@
   #panel .sysframe { position: relative; margin: 1.75rem auto .9rem; }
   #panel .sysframe .sysphoto { margin: 0; }
   #panel .sysframe canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  /* shadow mask off (theme-menu toggle): hide the canvases, the plain img is
+     underneath -- same presentation as the CORS-taint fallback */
+  html[data-mask="off"] #panel .frame canvas,
+  html[data-mask="off"] #panel .sysframe canvas { display: none; }
   #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: var(--muted); opacity: .55;
                       font-size: .62rem; }
   #panel .syscredit a { color: inherit; }
@@ -896,6 +905,8 @@
         <button type="button" data-set="riso">Riso</button>
         <button type="button" data-set="famicom">Famicom</button>
         <button type="button" data-set="pastel">Pastel</button>
+        <hr class="msep">
+        <button type="button" class="mask" id="maskbtn" aria-pressed="true">Shadow mask</button>
       </div>
     </details>
       </div>
@@ -2957,6 +2968,26 @@ function lockThemeSummary() {
 applyTheme(localStorage.getItem('mz-theme') || 'dark');
 lockThemeSummary();
 document.fonts?.ready.then(lockThemeSummary);
+
+// CRT shadow-mask preference: the toggle at the bottom of the theme menu,
+// shared with the zine via localStorage ('mz-mask'). CSS keys on
+// html[data-mask="off"] to hide the mask canvases, revealing the plain img
+// each one covers. maskShot keeps drawing into the hidden canvases, so
+// toggling back on is instant and needs no re-render. Like a theme pick,
+// toggling leaves the menu open: the effect previews live behind it.
+const maskBtn = document.getElementById('maskbtn');
+function applyMaskPref(on) {
+  if (on) document.documentElement.removeAttribute('data-mask');
+  else document.documentElement.setAttribute('data-mask', 'off');
+  maskBtn.setAttribute('aria-pressed', on);
+}
+let maskOn = true; try { maskOn = localStorage.getItem('mz-mask') !== '0'; } catch (e) {}
+applyMaskPref(maskOn);
+maskBtn.addEventListener('click', () => {
+  maskOn = !maskOn;
+  applyMaskPref(maskOn);
+  try { localStorage.setItem('mz-mask', maskOn ? '1' : '0'); } catch (e) {}
+});
 
 // wide screens: dock the panel with the empty state by default (no slide-in on first paint)
 if (matchMedia('(min-aspect-ratio: 3/5)').matches) {

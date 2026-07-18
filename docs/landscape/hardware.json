@@ -243,12 +243,13 @@
       "requires": [
         "gpio-header"
       ],
-      "notes": "The VGA-connector generation of analog I/O boards: RGB or YPbPr by cable, analog audio, and the VGA pins the MikeS11 Y/C adapters plug into. Distinct from MiSTer Addons IO Analog Pro (own entry), which has no VGA port. A EUR349.90 price seen in one search result is a stale-snippet artifact. Retro Remake A/V Pro 9.2 sold out at review 2026-07-16. Early A/V Pro 9.2 units shipped with muffled analog audio; the vendor replaced them - if analog audio sounds wrong, claim it (r/MiSTerFPGA, Oct 2024, 114 pts: old.reddit.com/r/MiSTerFPGA/comments/1fuyl9e).",
+      "notes": "The VGA-connector generation of analog I/O boards: RGB or YPbPr by cable, analog audio, and the VGA pins the MikeS11 Y/C adapters plug into. Distinct from MiSTer Addons IO Analog Pro (own entry), which has no VGA port. Color depth splits by generation: official v6-class boards use a resistor-ladder DAC capped at 18-bit color (6 bits per channel over the GPIO pinout - misterfpga.org t=6531), while the A/V Pro 9.2 belongs to the 2024 official redesign with a true 24-bit ADV7125 DAC; only the few 24-bit cores (PSX, N64, Saturn) can show the difference. A EUR349.90 price seen in one search result is a stale-snippet artifact. Retro Remake A/V Pro 9.2 sold out at review 2026-07-16. Early A/V Pro 9.2 units shipped with muffled analog audio; the vendor replaced them - if analog audio sounds wrong, claim it (r/MiSTerFPGA, Oct 2024, 114 pts: old.reddit.com/r/MiSTerFPGA/comments/1fuyl9e).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
         "https://retroremake.co/pages/store",
-        "https://ultimatemister.com/product/ultimate-mister-pro/"
+        "https://ultimatemister.com/product/ultimate-mister-pro/",
+        "https://misterfpga.org/viewtopic.php?t=6531"
       ],
       "category": "io",
       "what": "The VGA-generation analog board: RGB or component by cable, and the VGA pins the MikeS11 Y/C adapters plug into.",
@@ -268,11 +269,12 @@
       "requires": [
         "gpio-header"
       ],
-      "notes": "Current-generation analog board: RGBs (correct 700mV), YPbPr, and NATIVE S-Video/composite (MikeS Y/C core support) through an ADV7125 24-bit DAC and a Saturn Mini-DIN-10 connector - no VGA port, so MikeS11 dongles do not apply to it. HDMI stays live simultaneously. In stock at review (verified on the product page 2026-07-16). Whether the onboard Y/C path is actively filtered to MikeS11-Active standard remains an open question for THIS board (the SuperStation One's version of this question was settled by teardown - its Y/C is THS7374-amplified).",
+      "notes": "Current-generation analog board: RGBs (correct 700mV), YPbPr, and NATIVE S-Video/composite (MikeS Y/C core support) through an ADV7125 24-bit DAC and a Saturn Mini-DIN-10 connector - no VGA port, so MikeS11 dongles do not apply to it. First store build of the 2024 official 24-bit redesign: true 24-bit analog output, scope-verified by RetroRGB (June 2024), where classic v6-class boards cap at 18-bit. HDMI stays live simultaneously. In stock at review (verified on the product page 2026-07-16). Whether the onboard Y/C path is actively filtered to MikeS11-Active standard remains an open question for THIS board (the SuperStation One's version of this question was settled by teardown - its Y/C is THS7374-amplified).",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
-        "https://misteraddons.com/products/mister-fpga-io-analog-pro"
+        "https://misteraddons.com/products/mister-fpga-io-analog-pro",
+        "https://retrorgb.com/misteraddons-24-bit-i-o-board.html"
       ],
       "category": "io",
       "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out of a Saturn-style socket, HDMI stays live.",
@@ -358,7 +360,7 @@
       "requires": [
         "hdmi"
       ],
-      "notes": "Firmware feature (direct_video=1) plus a cheap HDMI-to-VGA dongle: analog RGB without an I/O board, same low latency. While enabled the HDMI port stops being normal HDMI. Some gear wants a 470-ohm inline resistor on sync.",
+      "notes": "Firmware feature (direct_video=1) plus a cheap HDMI-to-VGA dongle: analog RGB without an I/O board, same low latency, and full 24-bit color where classic-design analog I/O boards cap at 18-bit. While enabled the HDMI port stops being normal HDMI. Some gear wants a 470-ohm inline resistor on sync.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -980,7 +982,7 @@
         "sd-card"
       ],
       "to_complete": [],
-      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (24-bit VGA DAC, I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Listing browser-verified 2026-07-17 (desktop-Chrome fetch): base C$273.99 (~$200 converted from CAD as shown at this location), with higher-tier SKUs to ~C$540; prices drift and vary by region. MikeS11 Y/C adapters: a Discord owner reports they work on the V2.1 IO board (relayed by site owner 2026-07-17), but the same channel carries recent reports of iffy QMTech IO-board quality - treat active-adapter support as promising but pending the owner's own investigation; the passive chain applies regardless. Its V2.1 IO board VGA out is the older 18-bit-colour style (community reports); fine on a cab monitor, not the 24-bit path of newer boards.",
+      "notes": "Factory-assembled QMTech MiSTer, specs from the AliExpress listing (supplied by the site owner 2026-07-16): QMTech Cyclone V SoC board with 128MB SDRAM built in, QMTech Official V2.1 IO board (listing-claimed 24-bit VGA DAC - community reports counter that the QMTech/Hamgeek analog path is 18-bit, unverified either way, same question as the Hamgeek; I2S audio via 3.5mm, SNAC, 4-port USB hub, RTC - CR1220 battery not included), PCB-material case, 32GB TF card, USB cable, EU or US 5V PSU. Ultimate MiSTer resells this class of build at EUR199.90 (out of stock at review). Listing browser-verified 2026-07-17 (desktop-Chrome fetch): base C$273.99 (~$200 converted from CAD as shown at this location), with higher-tier SKUs to ~C$540; prices drift and vary by region. MikeS11 Y/C adapters: a Discord owner reports they work on the V2.1 IO board (relayed by site owner 2026-07-17), but the same channel carries recent reports of iffy QMTech IO-board quality - treat active-adapter support as promising but pending the owner's own investigation; the passive chain applies regardless. Its V2.1 IO board VGA out is the older 18-bit-colour style (community reports); fine on a cab monitor, not the 24-bit path of newer boards.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -1067,7 +1069,7 @@
         "sd-card"
       ],
       "to_complete": [],
-      "notes": "A clone of a clone: the QMTech board design (128MB SDRAM integrated) in a case with Hamgeek's analog I/O board, fan and PSU, factory-assembled, sold on Hamgeek's own store (hgeek.com) and AliExpress. $186 on the maker's own store, verified 2026-07-17 (32GB card included; plastic, metal and white shell versions - the checked variant was sold out, others listed); cheaper sightings (~GBP124/$155, Feb 2026 forum) were AliExpress listings, which drift. HISTORY THAT MATTERS: early units had RAM-timing problems on demanding cores (N64/PSX); a core developer confirms the RAM issue is FIXED and affected buyers got free replacement boards - 'Hamgeek clones are fine now' (misterfpga.org t=10139, Feb 2026, TheJesusFish). Community habits: replace the included power supply with a stronger 5V unit; pick the metal case over the plastic one (same price, more robust - Lon.TV review, Apr 2026). VGA analog out for CRTs; combined 3.5mm analog/optical audio jack (optical attested by one owner only, hence hedged); no WiFi/Bluetooth (the USB dongle applies); one unresolved Retrotink 4K handshake thread (r/MiSTerFPGA 1u2x1zm, June 2026). Standing clone caveat from the core dev: cores are not built with clones as their target, so niche titles may behave differently.",
+      "notes": "A clone of a clone: the QMTech board design (128MB SDRAM integrated) in a case with Hamgeek's analog I/O board, fan and PSU, factory-assembled, sold on Hamgeek's own store (hgeek.com) and AliExpress. $186 on the maker's own store, verified 2026-07-17 (32GB card included; plastic, metal and white shell versions - the checked variant was sold out, others listed); cheaper sightings (~GBP124/$155, Feb 2026 forum) were AliExpress listings, which drift. HISTORY THAT MATTERS: early units had RAM-timing problems on demanding cores (N64/PSX); a core developer confirms the RAM issue is FIXED and affected buyers got free replacement boards - 'Hamgeek clones are fine now' (misterfpga.org t=10139, Feb 2026, TheJesusFish). Community habits: replace the included power supply with a stronger 5V unit; pick the metal case over the plastic one (same price, more robust - Lon.TV review, Apr 2026). VGA analog out for CRTs, with one owner-debated caveat: the QMTech/Hamgeek analog path is community-reported as 18-bit color rather than the 24-bit of the current official board design - unverified either way (no teardown or scope test found as of 2026-07-17); the same arrival thread relays the 18-bit claim yet calls N64/PSX on a CRT fantastic, and only a handful of cores (PSX, N64, Saturn-class) output more than 18-bit at all. Full 24-bit analog from any unit: Direct Video plus an HDMI DAC. Combined 3.5mm analog/optical audio jack (optical attested by one owner only, hence hedged); no WiFi/Bluetooth (the USB dongle applies); one unresolved Retrotink 4K handshake thread (r/MiSTerFPGA 1u2x1zm, June 2026). Standing clone caveat from the core dev: cores are not built with clones as their target, so niche titles may behave differently.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [

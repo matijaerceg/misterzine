@@ -398,6 +398,18 @@ Field conventions (parts and options both):
   via VGA+USB, no hardware-verified MiSTer report found). Too thinly
   attested to enter the chain solver - revisit if reports accumulate.
   (Heber's MultiPi JAMMA is Raspberry-Pi-based, not FPGA - ignore.)
+- **Analog color depth axis (2026-07-17, reader-prompted)**: classic
+  v6-class ladder I/O boards are 18-bit (6 bits/channel, GPIO-pinout
+  limit - misterfpga t=6531); Sorg's 2024 redesign added true 24-bit
+  (IO Analog Pro is its first store build, RetroRGB scope-verified
+  June 2024; A/V Pro 9.2 same generation, vendor-stated ADV7125).
+  Direct Video + any HDMI DAC = 24-bit from any unit, clones included.
+  QMTech/Hamgeek analog path: community-reported 18-bit (r/MiSTerFPGA
+  1u2gv60) vs a listing-claimed 24-bit VGA DAC - modeled as UNVERIFIED
+  both ways, don't resolve without a teardown or scope test. Only
+  24-bit cores (PSX/N64/Saturn-class) can show the difference; say so
+  wherever the axis is raised. Notes carry this on hamgeek-mister,
+  qmtech-assembled, io-analog, io-analog-pro, direct-video-dac.
 
 ## Chain-honesty rules (overnight audit 2026-07-17)
 

@@ -3,6 +3,8 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-17
+- Landscape: boards, kits and consoles that deliver full 24-bit analog color now carry a "24-bit analog color" capability chip (dashed with a "?" where the claim is disputed), so color depth reads at a glance while browsing.
+- Landscape: spec sheets now list every capability reachable with parts (composite-via-adapter was silently missing on some kits), the collapsed specs section is a clearer call to action ("Full specs, part paths and sources" with a source count), and the copy now notes the active Y/C adapter's filtering chiefly benefits composite.
 - Landscape: analog color depth is now called out where it differs - classic VGA I/O boards top out at 18-bit color, the 2024 redesign boards (IO Analog Pro, A/V Pro 9.2) and Direct Video HDMI DACs deliver full 24-bit, and the QMTech/Hamgeek clones' analog depth is flagged as an open community question. Only a few cores (PSX, N64, Saturn) can show the difference.
 - The default Light and Dark themes are a touch easier on the eyes: the ink eased off pure black/white and the grounds off pure white/near-black, so both read a little softer while staying crisp and well within the site's contrast floor. The other themes are unchanged.
 - The new 3DO core now fills in its details: original year (1993), manufacturer (Panasonic) and a photo of the Panasonic REAL FZ-1 in its detail panel.

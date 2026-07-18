@@ -68,7 +68,17 @@ for o in d['options']:
         toks(v.get('adds', []), f"option {o['id']} variant {v.get('id')}.adds")
         if not isinstance(v.get('price_delta'), (int, float)):
             errs.append(f"option {o['id']} variant {v.get('id')}: price_delta must be a number")
+qids = {q['id']: q for q in d.get('interview', [])}
 for q in d.get('interview', []):
+    if 'when' in q:  # gated question: must point at a real question and real answer ids
+        w = q['when']
+        if w.get('q') not in qids:
+            errs.append(f"interview {q['id']}: when.q references unknown question {w.get('q')}")
+        else:
+            aids = {a['id'] for a in qids[w['q']]['answers']}
+            for aid in w.get('any', []):
+                if aid not in aids:
+                    errs.append(f"interview {q['id']}: when.any id {aid} not an answer of {w['q']}")
     seen_a = set()
     for a in q['answers']:
         if a['id'] in seen_a: errs.append(f"interview {q['id']}: duplicate answer id {a['id']}")

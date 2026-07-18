@@ -28,7 +28,7 @@
     },
     "yc-active-filtered": {
       "name": "Actively filtered Y/C",
-      "explain": "Y/C through a THS7374-class amplifier stage with NTSC-spec voltage correction, the cleanest chain."
+      "explain": "Y/C through a THS7374-class amplifier stage with NTSC-spec voltage correction. The filtering chiefly benefits COMPOSITE, where luma and chroma merge (dot crawl); S-Video keeps them separate and mainly gains correct levels."
     },
     "yc-source": {
       "name": "Y/C source signal",
@@ -39,6 +39,10 @@
       "name": "Y/C source from analog I/O board",
       "explain": "Internal token: the MikeS11 ACTIVE adapter only accepts this (needs 5V on VGA pin 9, Sync-on-Green off); it rejects Direct Video sources.",
       "internal": true
+    },
+    "analog-24bit": {
+      "name": "24-bit analog color",
+      "explain": "Full-depth color on the analog outputs: the 2024 official redesign boards and Direct Video DACs carry all 24 bits, while classic analog I/O boards top out at 18-bit. Only a few cores (PSX, N64, Saturn-class) output more than 18-bit."
     },
     "sdram128": {
       "name": "128MB SDRAM",
@@ -216,9 +220,10 @@
         "dual-sdram"
       ],
       "requires": [
-        "sdram128"
+        "sdram128",
+        "sdram-slot"
       ],
-      "notes": "A second module is OPTIONAL futureproofing now: Saturn and PSX cores run single-module (owner correction 2026-07-16; older guides overstate this). Needs an I/O board with the second socket (e.g. IO Direct).",
+      "notes": "A second module is OPTIONAL futureproofing now: Saturn and PSX cores run single-module (owner correction 2026-07-16; older guides overstate this). Needs an I/O board with the second socket (e.g. IO Direct). Requires sdram-slot so the chain only offers a second stick where a module socket physically exists (bare DIY boards); sealed consoles and kits model dual RAM as a variant, never a chain (fixed 2026-07-17 - the sheet used to offer a $20 stick on the SuperStation One).",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -252,7 +257,7 @@
         "https://misterfpga.org/viewtopic.php?t=6531"
       ],
       "category": "io",
-      "what": "The VGA-generation analog board: RGB or component by cable, and the VGA pins the MikeS11 Y/C adapters plug into.",
+      "what": "The VGA-generation analog board: RGB or component by cable, and the VGA pins the MikeS11 Y/C adapters plug into (v6-class boards are 18-bit color; the A/V Pro 9.2 is 24-bit).",
       "addon_note": "+ a case: acrylic $10 to aluminum $75",
       "design": "official"
     },
@@ -264,12 +269,15 @@
         "vga-rgb",
         "ypbpr",
         "yc",
-        "composite"
+        "composite",
+        "analog-24bit",
+        "analog-audio",
+        "toslink"
       ],
       "requires": [
         "gpio-header"
       ],
-      "notes": "Current-generation analog board: RGBs (correct 700mV), YPbPr, and NATIVE S-Video/composite (MikeS Y/C core support) through an ADV7125 24-bit DAC and a Saturn Mini-DIN-10 connector - no VGA port, so MikeS11 dongles do not apply to it. First store build of the 2024 official 24-bit redesign: true 24-bit analog output, scope-verified by RetroRGB (June 2024), where classic v6-class boards cap at 18-bit. HDMI stays live simultaneously. In stock at review (verified on the product page 2026-07-16). Whether the onboard Y/C path is actively filtered to MikeS11-Active standard remains an open question for THIS board (the SuperStation One's version of this question was settled by teardown - its Y/C is THS7374-amplified).",
+      "notes": "Current-generation analog board: RGBs (correct 700mV), YPbPr, and NATIVE S-Video/composite (MikeS Y/C core support), plus analog audio over the Saturn AV port and a 3.5mm jack switchable to SPDIF (vendor page, 2026-07-17), through an ADV7125 24-bit DAC and a Saturn Mini-DIN-10 connector - no VGA port, so MikeS11 dongles do not apply to it. First store build of the 2024 official 24-bit redesign: true 24-bit analog output, scope-verified by RetroRGB (June 2024), where classic v6-class boards cap at 18-bit. HDMI stays live simultaneously. In stock at review (verified on the product page 2026-07-16). Whether the onboard Y/C path is actively filtered to MikeS11-Active standard remains an open question for THIS board (the SuperStation One's version of this question was settled by teardown - its Y/C is THS7374-amplified).",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -277,7 +285,7 @@
         "https://retrorgb.com/misteraddons-24-bit-i-o-board.html"
       ],
       "category": "io",
-      "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out of a Saturn-style socket, HDMI stays live.",
+      "what": "The current MiSTer Addons analog board: RGB, component AND native S-Video out of a Saturn-style socket at full 24-bit color, HDMI stays live.",
       "addon_note": "+ a case: acrylic $10 to aluminum $75"
     },
     "reflex-prism": {
@@ -287,7 +295,8 @@
       "provides": [
         "vga-rgb",
         "ypbpr",
-        "yc"
+        "yc",
+        "analog-24bit"
       ],
       "requires": [
         "hdmi"
@@ -355,7 +364,8 @@
       "provides": [
         "vga-rgb",
         "yc-source",
-        "analog-audio"
+        "analog-audio",
+        "analog-24bit"
       ],
       "requires": [
         "hdmi"
@@ -406,7 +416,7 @@
       "requires": [
         "yc-source-io"
       ],
-      "notes": "THS7374 amplifier, NTSC-spec voltage modes, luma trap for clean composite. The Direct Video question is a DOCUMENTED contradiction between two primary sources (both verified 2026-07-16): the official MiSTer CRT guide (MkDocs, co-written by MikeS11) gives a Direct Video configuration section stating \"Active / Passive adapters will include a SOG circuit\" - no active-adapter restriction - while Ultimate MiSTer's SKU page states \"This adapter is not compatible with Direct Video HDMI-to-VGA dongles\" and requires 5V on VGA pin 9 via the analog I/O board's jumper. We model the restrictive reading because it is the shipping SKU's own spec and the physical rationale is plain: the active amp draws its 5V from pin 9, which a bare DV dongle does not supply. EARMARK 2026-07-16: site owner recalls Y/C over a DV dongle working - fully consistent with the PASSIVE adapter, which is documented Direct-Video-compatible everywhere.",
+      "notes": "THS7374 amplifier, NTSC-spec voltage modes, luma trap for clean composite. The active stage matters most for COMPOSITE output; S-Video keeps luma and chroma separate, so it mainly gains correct levels over the passive adapter (site owner assessment 2026-07-17). The Direct Video question is a DOCUMENTED contradiction between two primary sources (both verified 2026-07-16): the official MiSTer CRT guide (MkDocs, co-written by MikeS11) gives a Direct Video configuration section stating \"Active / Passive adapters will include a SOG circuit\" - no active-adapter restriction - while Ultimate MiSTer's SKU page states \"This adapter is not compatible with Direct Video HDMI-to-VGA dongles\" and requires 5V on VGA pin 9 via the analog I/O board's jumper. We model the restrictive reading because it is the shipping SKU's own spec and the physical rationale is plain: the active amp draws its 5V from pin 9, which a bare DV dongle does not supply. EARMARK 2026-07-16: site owner recalls Y/C over a DV dongle working - fully consistent with the PASSIVE adapter, which is documented Direct-Video-compatible everywhere.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -417,7 +427,7 @@
       ],
       "category": "adapter",
       "subcat": "video",
-      "what": "The amplified S-Video/composite adapter (THS7374) for VGA-equipped analog boards."
+      "what": "The amplified adapter (THS7374): the best composite path, plus properly buffered S-Video, for VGA-equipped analog boards."
     },
     "snac-adapter": {
       "name": "SNAC / SNAX / SNAX64 adapter",
@@ -619,7 +629,8 @@
         "usb-hub",
         "rtc",
         "analog-audio",
-        "user-io-port"
+        "user-io-port",
+        "analog-24bit"
       ],
       "requires": [
         "gpio-header"
@@ -675,7 +686,8 @@
         "hdmi",
         "vga-rgb",
         "analog-audio",
-        "toslink"
+        "toslink",
+        "analog-24bit"
       ],
       "requires": [
         "gpio-header"
@@ -821,7 +833,8 @@
         "rtc",
         "ssone-port",
         "ethernet",
-        "yc-active-filtered"
+        "yc-active-filtered",
+        "analog-24bit"
       ],
       "includes": [
         "sd-card"
@@ -914,7 +927,8 @@
       "status": "orderable",
       "provides": [
         "hdmi",
-        "ethernet"
+        "ethernet",
+        "analog-24bit"
       ],
       "includes": [
         "de10-nano",
@@ -978,6 +992,9 @@
         "rtc",
         "analog-audio"
       ],
+      "provides_unverified": [
+        "analog-24bit"
+      ],
       "includes": [
         "sd-card"
       ],
@@ -1005,7 +1022,9 @@
       "vendor": "Retro Remake",
       "price_usd": 190,
       "status": "orderable",
-      "provides": [],
+      "provides": [
+        "analog-24bit"
+      ],
       "includes": [
         "mister-pi",
         "sdram-128",

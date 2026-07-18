@@ -10,9 +10,11 @@ layout code. The interview questions also live in `hardware.json` (an
 allowlists, or a `budget` cap), and options carry an `effort` grade
 (`none | some | diy`) the build question filters on.
 
-Nav name: **Landscape**. Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness stamp (meta.updated, plain muted text, NOT a chip) IS the whole subtitle (scope sentence removed 2026-07-16, de-chipped 2026-07-17); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
-URL: `/landscape/`. Outward copy may say "landscape" or "hardware matrix" —
-never "release tracker" (that term belongs to the releases page).
+Nav name: **Hardware** (was "Landscape" until 2026-07-17, when the site-wide nav became Zine / Cores / Hardware). Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness stamp (meta.updated, plain muted text, NOT a chip) IS the whole subtitle (scope sentence removed 2026-07-16, de-chipped 2026-07-17); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
+URL: `/hardware-landscape/` (renamed from `/landscape/` on 2026-07-17; a
+redirect stub stays at `/landscape/`). Outward copy may say "landscape" or
+"hardware matrix" — never "release tracker" (that term belongs to the
+releases page).
 
 ## Page structure (restructured 2026-07-16, user's design)
 
@@ -100,7 +102,7 @@ are NOT listed anywhere on the landscape. Do not add them on any sweep.**
   tolerates this one non-assembled member by explicit user request). The
   bare board keeps its own DIY-lane card; both wear the restock tag.
   Still never split tiers into separate cards.
-- Options carry `img: "<option-id>.png"` pointing into docs/landscape/img/.
+- Options carry `img: "<option-id>.png"` pointing into docs/hardware-landscape/img/.
   The user sources the images himself (alpha-transparent PNGs, ~160px on the
   long side is plenty; card slot renders 52px contain-fit). A missing file
   self-removes and is remembered (NOPIC) so re-renders fire no repeat 404s -
@@ -440,7 +442,7 @@ a `consumes` field on parts/options that removes socket tokens.
 After ANY edit to hardware.json, run the validator (JSON parse + token/id
 integrity + chain reachability):
 
-    python validate_landscape.py docs/landscape/hardware.json
+    python validate_landscape.py docs/hardware-landscape/hardware.json
 
 ## Research access
 

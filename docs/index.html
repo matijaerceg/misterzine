@@ -160,31 +160,22 @@
      press, and reverses the moment you leave: the setting exists for large unbidden
      movement, not this. */
   /* right side: index link + theme toggle in a row, toggle in the far corner */
-  .top nav { display: flex; align-items: center; gap: .6rem; }
-  /* theme toggle: the same text-based Auto|Light|Dark control as the release index,
-     always visible top-right (a nav flex item here rather than floated) */
-  /* no overflow:hidden (it would clip the absolute theme menu); the group's
-     rounded ends are re-applied to the first/last segments instead */
+  .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  /* theme control: a single dropdown showing the current theme's name; Light,
+     Dark and the fun themes all live in its menu (same control on all pages) */
   .top .theme { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--hair);
                 border-radius: 6px; }
   .top .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
                        background: transparent; color: inherit; cursor: pointer; }
-  .top .theme > button:first-child { border-radius: 5px 0 0 5px; }
-  .top .theme button + button { border-left: 1px solid var(--hair); }
-  .top .theme button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
-  /* fun-theme dropdown: the toggle's third segment; the summary wears the
-     active fun theme's name (same control as the release index) */
   .top .theme details { position: relative; }
-  /* flex + auto margin pins the caret to the segment's right edge: the summary is
-     frozen at its widest label (see lockSummary), so a left-hugging caret would
-     wander inside that fixed box as the active theme's name changes. */
+  /* flex + auto margin pins the caret to the right edge: the summary is frozen at
+     its widest label (see lockSummary), so a left-hugging caret would wander
+     inside that fixed box as the current theme's name changes. */
   .top .theme summary { list-style: none; font-size: .78rem; padding: .3rem .6rem; cursor: pointer;
-                        border-left: 1px solid var(--hair); border-radius: 0 5px 5px 0; user-select: none;
-                        display: flex; align-items: center; }
+                        border-radius: 6px; user-select: none; display: flex; align-items: center; }
   .top .theme summary::-webkit-details-marker { display: none; }
   .top .theme summary::after { content: " \25BE"; opacity: .6; margin-left: auto; padding-left: .4em; }
   .top .theme summary:hover, .top .theme details[open] summary { background: var(--hover-bg); }
-  .top .theme summary.on { background: var(--rule); font-weight: 600; }
   .top .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
                       background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
                       padding: .3rem; display: grid; gap: 2px; min-width: 7.5rem; box-shadow: 0 4px 16px #0004; }
@@ -199,65 +190,23 @@
                                      margin-right: .95em; border-radius: 50%; background: var(--sw1);
                                      box-shadow: .95em 0 0 var(--sw2); }
   .top .theme .menu button:hover { background: var(--hover-bg); }
-  /* index link (marker-set label + live count). inline-flex so the count can take a
-     max-width; centered (not baselined) so the small count sits mid-height against the
-     tall marker label, reading as pill/button text rather than bottom-anchored prose */
-  .top .idx { display: inline-flex; align-items: center;
-              color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap;
-              font-size: calc(.9rem - .12rem * var(--sh));
-              border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 999px;
-              padding: .4rem .9rem; }
-  /* the marker font's tall ascent metric parks the glyphs low in the line box, so at
-     1x desktop DPI the label rounds a pixel below the pill's optical center; nudge it up
-     (reset on mobile, where high-DPI rendering already looks centered) */
-  .top .idx .pm { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400; font-size: 1.3em;
-                  transform: translateY(-2px); }
-  /* the ": N cores & games" tail collapses to nothing on scroll, leaving just the
-     "Release Tracker" label (fade leads the width so you don't read a sliced number;
-     --cnt-w is its natural width, measured in JS so the collapse is proportional) */
-  .top .idx .cnt { font-size: .85em; font-weight: 500; overflow: hidden; white-space: nowrap;
-                   max-width: calc(var(--cnt-w, 20rem) * (1 - min(1, var(--sh) * 1.6)));
-                   opacity: calc(1 - min(1, var(--sh) * 2)); }
-  /* the pill inflates quickly when the pointer lands on it and stays inflated
-     until you leave. Deliberately `scale`, NOT `transform`: the mobile rules below
-     drive this same element's `transform` (its slide up beside the shrunken logo),
-     and a `transform` of our own would win the cascade and fling the pill back to
-     its unscrolled spot while hovered. The individual transform properties compose
-     with `transform` instead of clobbering it.
-     The transition names `scale` and nothing else for the same reason: `all` would
-     sweep up the --sh-driven transform/left/top the mobile rules animate by scroll
-     position, and the pill would lag behind the scroll instead of tracking it. */
-  .top .idx { transition: scale .12s ease-out; }
-  .top .idx:hover { background: color-mix(in srgb, var(--accent) 12%, var(--bg)); scale: 1.055; }
-  /* MOBILE (below ~34rem): logo top-left; theme toggle pinned to the top-right
-     corner and SHRINKING TO NOTHING on scroll; index link stacked below at rest
-     and GLIDING up beside the shrunken logo as you scroll. Toggle + index are
-     positioned independently so the toggle stays in the corner (it used to ride
-     down with the index's column). min-height driven by --sh so the wavy bottom
-     edge tracks the shrink; content stays decoupled (fixed header, const reserve). */
+  .top .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  /* site nav: one segmented control (Zine | Cores | Hardware); current filled.
+     The same control on all three pages. */
+  .top .segnav { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
+                 border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
+  .top .pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; text-align: center;
+               text-transform: uppercase; letter-spacing: .04em; font-size: .78rem; padding: .38rem .95rem; }
+  .top .pill + .pill { border-left: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hair)); }
+  .top .pill:hover { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); }
+  .top .pill[aria-current] { background: var(--accent); color: var(--bg); cursor: default; }
+  /* MOBILE (below ~34rem): logo on its own line; the nav pills + theme wrap onto
+     the line below it. The logo still shrinks on scroll (via --sh) but the nav
+     stays put, so it's always reachable. min-height (driven by --sh) keeps the
+     wavy bottom edge tracking the shrink; content stays decoupled (fixed header). */
   @media (max-width: 34rem) {
-    .top { display: block; min-height: calc(11rem - 6.5rem * var(--sh)); }
-    .top nav { display: contents; }
-    /* toggle: top-right corner, scales to nothing + fades on scroll (gone by ~sh 0.6,
-       before the index reaches the corner area, so they never collide) */
-    .top .theme { position: absolute; top: .55rem; right: 1.25rem; z-index: 2;
-                  transform-origin: top right;
-                  transform: scale(calc(1 - min(1, var(--sh) * 1.7)));
-                  opacity: calc(1 - var(--sh) * 1.7); }
-    /* index: LEFT-ALIGNED below the logo at rest -> RIGHT-ALIGNED top-right at min
-       (where the vanished toggle was). Horizontal finishes by ~sh .5; the sh*sh
-       vertical ease keeps it below the logo until it's already right, so the path
-       is "right, then up" and never drags through the logo. translateX(-100%)
-       right-aligns regardless of the (collapsing) pill width; 100% adapts to vw. */
-    .top .idx { position: absolute;
-                left: calc(1.25rem + (100% - 2.5rem) * min(1, var(--sh) * 4));
-                top:  calc(6.5rem * (1 - var(--sh)) + .75rem * var(--sh));
-                transform: translateX(calc(-100% * min(1, var(--sh) * 4))); }
-    /* collapse the count faster on mobile so the pill is narrow by the time it
-       tucks right, keeping it clear of the logo even on ~320px screens */
-    .top .idx .cnt { max-width: calc(var(--cnt-w, 20rem) * (1 - min(1, var(--sh) * 3.6))); }
-    /* mobile already renders centered (high DPI), so drop the desktop nudge */
-    .top .idx .pm { transform: none; }
+    .top { display: block; min-height: calc(7rem - 2.5rem * var(--sh)); }
+    .top nav { margin-top: .55rem; justify-content: flex-start; }
   }
 
   /* posts: one native-aspect screenshot per story (h = 4:3, v = tate 3:4,
@@ -315,13 +264,17 @@
 <header class="top">
   <a class="home" href="./" aria-label="MiSTerZine home"><span class="peek"><svg class="kun" viewBox="0 0 1000 1000" aria-hidden="true"> <path d="M695.57,43.195c-21.981,27.792-66.513,84.227-90.08,115.014H393.209c-23.568-30.787-68.098-87.222-90.08-115.014 l-7.581-9.585c-14.844-18.769-43.76-17.315-56.647,2.848l-6.581,10.296c-5.389,8.431-46.918,73.781-68.957,119.515 c-19.816,7.428-37.641,19.767-51.665,36.01c-19.903,23.053-30.864,52.535-30.864,83.017v178.969 c-18.924,10.327-35.717,24.583-48.91,41.767C11.039,533.239,0,565.781,0,600.141s11.039,66.903,31.925,94.108 c13.213,17.212,30.04,31.486,49.001,41.817c0.069,24.64,0.123,51.649,0.121,71.876c-8.376,4.272-16.17,9.808-23.131,16.508 c-20.203,19.443-30.525,45.879-28.538,73.662c3.527,49.309,45.513,87.047,94.947,87.047h260.302h33.161l8.801-31.972 c9.039-32.835,39.162-55.767,73.254-55.767s64.215,22.932,73.254,55.767l8.801,31.972h33.161h260.615 c49.435,0,91.421-37.738,94.947-87.047c1.987-27.783-8.335-54.219-28.538-73.662c-6.961-6.699-14.755-12.235-23.131-16.508 c-0.001-20.226,0.052-47.236,0.121-71.876c18.961-10.331,35.788-24.605,49.001-41.817c20.885-27.205,31.925-59.747,31.925-94.108 s-11.039-66.903-31.925-94.108c-13.192-17.184-29.986-31.44-48.91-41.767V285.297c0-30.839-11.19-60.581-31.507-83.749 c-14.319-16.327-32.466-28.608-52.597-35.847c-22.102-45.696-63.323-110.562-68.682-118.946l-6.581-10.297 c-12.887-20.163-41.803-21.617-56.647-2.848L695.57,43.195z"/> <path fill="var(--kun-paper)" d="M875.642,841.084c-0.477,0,0-133.983,0-133.983c46.647-13.214,80.834-56.08,80.834-106.96 s-34.188-93.745-80.834-106.96V285.298c0-42.181-31.259-77.044-71.873-82.733c-15.144-40.185-74.063-132.369-74.063-132.369 s-95.201,120.368-102.423,131.538H371.415c-7.222-11.17-102.423-131.538-102.423-131.538s-59.104,92.471-74.136,132.557 c0.01-0.001,0.033-0.002,0.044-0.004c-39.966,6.254-70.543,40.828-70.543,82.549v207.884c-46.647,13.214-80.834,56.08-80.834,106.96 s34.187,93.745,80.834,106.96c0,0,0.477,133.983,0,133.983c-27.766,0-51.698,22.509-51.698,50.275 c0,27.766,22.509,50.275,50.275,50.275c0.477,0,261.693,0,261.693,0c13.923-50.576,60.216-87.739,115.217-87.739 s101.294,37.163,115.216,87.739c0,0,261.528,0,262.005,0c27.766,0,50.275-22.509,50.275-50.275 C927.341,863.593,903.409,841.084,875.642,841.084z"/> <path d="M571.028,402.073c0.746-1.634,1.42-3.236,2.003-4.779c2.263-3.588,3.585-7.829,3.564-12.39 c-0.057-12.671-10.677-23.119-23.348-22.977c-11.242,0.126-20.534,8.297-22.44,19.022c-2.14,6.085-9.414,21.272-28.671,21.272 c-9.615,0-17.073-3.582-23.469-11.274c-3.142-3.778-5.27-7.71-6.555-10.498c-2.113-10.547-11.411-18.498-22.574-18.524 c-12.436-0.029-22.473,9.466-23.107,21.886c-0.258,5.051,1.129,9.755,3.644,13.663c0.642,1.491,1.365,3.031,2.153,4.598H148.735 c-4.418,0-8,3.582-8,8v28.56c0,44.976,18.511,87.134,52.124,118.708c32.983,30.983,76.678,48.046,123.036,48.046 c17.982,0,35.559-2.578,52.27-7.53c0.584,11.715,4.103,19.725,4.442,20.468c0.546,1.197,1.188,2.346,1.92,3.439 c11.304,16.884,27.351,27.047,46.405,29.395c5.253,0.649,21.19,12.795,27.14,16.364c3.342,2.006,21.609,12.01,53.012,12.01 c30.231,0,47.501-7.511,50.656-9.017c6.503-3.104,28.751-19.004,31.602-19.356c19.053-2.348,35.101-12.511,46.405-29.395 c0.733-1.093,1.374-2.242,1.921-3.439c0.327-0.718,3.619-8.215,4.371-19.278c15.446,4.172,31.586,6.339,48.066,6.339 c46.358,0,90.053-17.063,123.036-48.046c33.613-31.574,52.124-73.732,52.124-118.708v-28.56c0-4.418-3.582-8-8-8H571.028V402.073z" /> <path fill="var(--kun-paper)" d="M479.625,498.499c6.611-16.402,10.475-33.844,11.364-51.82c3.599,0.521,7.356,0.807,11.284,0.807 c2.413,0,4.753-0.111,7.034-0.305c0.922,17.549,4.687,34.58,11.069,50.629C507.199,496.1,492.361,496.335,479.625,498.499z"/> <g> <path fill="var(--kun-paper)" d="M374.154,438.632c-1.822,26.811-24.132,47.998-51.405,47.998s-49.584-21.187-51.405-47.998H181.37 c-2.265,0-4.081,1.882-4.006,4.146c2.331,69.986,63.461,126.049,138.532,126.049c75.07,0,136.201-56.063,138.532-126.049 c0.075-2.264-1.74-4.146-4.006-4.146L374.154,438.632L374.154,438.632z"/> <path fill="var(--kun-paper)" d="M625.846,438.632c1.822,26.811,24.133,47.998,51.405,47.998c27.273,0,49.584-21.187,51.405-47.998h89.974 c2.266,0,4.081,1.882,4.006,4.146c-2.331,69.986-63.461,126.049-138.532,126.049c-75.07,0-136.201-56.063-138.532-126.049 c-0.075-2.264,1.74-4.146,4.006-4.146L625.846,438.632L625.846,438.632z"/> </g> <g> <path d="M224.666,181.628c-2.25,4.625,1.118,10.01,6.262,10.01h96.945c5.64,0,8.94-6.353,5.698-10.967l-17.34-24.677 l-24.663-35.098l-8.49-12.082c-6.1-8.681-19.278-7.626-23.919,1.915L224.666,181.628z"/> <path d="M672.127,191.638h96.945c5.144,0,8.512-5.385,6.262-10.01l-34.492-70.899c-4.641-9.54-17.819-10.595-23.919-1.915 l-50.494,71.856C663.187,185.285,666.487,191.638,672.127,191.638z"/> </g> <g> <polygon fill="var(--kun-paper)" points="255.975,169.006 297.713,169.006 273.049,133.908 "/> <polygon fill="var(--kun-paper)" points="744.025,169.006 702.287,169.006 726.951,133.908 "/> </g> <path fill="var(--kun-paper)" d="M499.961,553.017c-3.076-14.71-22.889-21.334-31.213-23.493c-1.559-0.404-1.764-2.497-0.336-3.242 c13.255-6.92,49.921-6.92,63.176,0c1.428,0.745,1.223,2.838-0.336,3.242c-8.324,2.159-28.137,8.783-31.213,23.493H499.961z"/> <path fill="var(--kun-paper)" d="M459.685,646.622c0,0,9.536-8.063,41.526-8.063s39.104,9.96,39.104,9.96s-13.913,6.64-40.157,6.64 C473.914,655.16,459.685,646.622,459.685,646.622z"/> <path fill="var(--kun-paper)" d="M590.591,558.403c-28.458-24.189-31.778-25.612-31.778-25.612s-0.485,24.663-27.515,24.663 c0,0-3.315,18.498-31.298,18.498s-31.298-18.498-31.298-18.498c-27.029,0-27.514-24.663-27.514-24.663s-3.32,1.423-31.778,25.612 c-28.458,24.189-16.768,49.801-16.768,49.801C426.624,658.954,500,592.553,500,592.553s73.376,66.401,107.358,15.652 C607.358,608.205,619.048,582.593,590.591,558.403z"/> <g> <path d="M322.93,693.112c-0.094,0-0.189-0.002-0.283-0.005c-3.843-0.155-6.834-3.393-6.68-7.237 c2.07-51.759,27.694-81.242,48.826-96.861c22.805-16.855,45.001-21.437,45.934-21.622c3.773-0.767,7.44,1.692,8.195,5.463 c0.753,3.767-1.687,7.433-5.453,8.191c-0.343,0.071-20.576,4.364-40.841,19.499c-26.887,20.078-41.267,48.976-42.745,85.889 C329.733,690.174,326.647,693.112,322.93,693.112z"/> <path d="M358.97,722.833c-3.799,0-6.905-3.05-6.961-6.862c-1.32-89.731,60.515-115.961,63.148-117.034 c3.562-1.45,7.626,0.26,9.077,3.822c1.448,3.553-0.253,7.608-3.8,9.067l0,0c-2.274,0.945-55.674,24.067-54.499,103.941 c0.057,3.846-3.015,7.008-6.861,7.066C359.039,722.833,359.004,722.833,358.97,722.833z"/> <path d="M677.07,693.112c-3.718,0-6.804-2.938-6.953-6.685c-1.476-36.913-15.857-65.81-42.745-85.889 c-20.337-15.187-40.642-19.458-40.844-19.499c-3.762-0.768-6.2-4.439-5.44-8.203c0.762-3.766,4.42-6.214,8.184-5.451 c0.933,0.185,23.13,4.767,45.936,21.622c21.131,15.619,46.755,45.103,48.826,96.861c0.153,3.844-2.838,7.083-6.68,7.237 C677.258,693.11,677.163,693.112,677.07,693.112z"/> <path d="M641.029,722.833c-0.034,0-0.07,0-0.104,0c-3.846-0.058-6.918-3.22-6.862-7.066c1.182-80.321-53.92-103.704-54.476-103.932 c-3.562-1.45-5.274-5.514-3.822-9.075c1.45-3.563,5.515-5.272,9.075-3.822c2.633,1.073,64.469,27.302,63.15,117.034 C647.935,719.783,644.827,722.833,641.029,722.833z"/> </g> </svg></span><svg class="logo" viewBox="38.5 111.3 532.4 354.2" aria-hidden="true" fill="currentColor"><g transform="translate(0,600) scale(0.1,-0.1)"><path d="M2400 4880 c-25 -6 -73 -24 -108 -41 -57 -28 -66 -29 -95 -19 -47 18 -314 25 -390 10 -68 -13 -149 -49 -185 -83 l-22 -21 -28 26 c-77 72 -173 92 -425 86 -209 -5 -261 -19 -341 -89 -86 -76 -95 -106 -192 -654 -52 -293 -86 -516 -86 -555 0 -92 31 -168 92 -227 42 -41 47 -49 39 -72 -23 -69 -61 -320 -57 -381 8 -145 113 -259 271 -295 l50 -11 -185 -166 c-102 -92 -199 -184 -215 -205 -63 -80 -86 -147 -123 -357 -17 -100 -18 -130 -9 -180 22 -124 96 -221 209 -275 l55 -26 730 0 730 0 50 24 c49 23 56 24 275 22 205 -3 231 -1 286 18 l61 20 59 -20 c53 -19 77 -20 264 -17 l205 3 65 35 65 35 69 -35 69 -35 216 0 216 0 65 32 c36 17 80 46 99 64 33 32 34 32 60 15 62 -41 195 -97 277 -118 118 -29 391 -32 527 -5 246 49 408 149 473 290 15 35 34 108 47 183 18 107 19 136 10 201 l-11 75 38 62 c58 93 82 174 88 297 13 301 -145 543 -430 656 -35 14 -69 31 -77 38 -22 21 -6 59 34 78 56 27 121 93 145 148 12 28 30 104 41 168 24 146 29 156 76 172 44 14 101 48 125 75 32 36 68 131 90 236 19 92 21 111 10 160 -33 147 -156 230 -316 213 -85 -9 -84 -9 -211 0 -110 8 -196 -3 -258 -34 -38 -19 -40 -19 -81 -1 -23 10 -67 23 -97 30 l-55 12 0 87 c1 75 -3 93 -27 143 -33 66 -90 119 -156 145 -40 15 -92 18 -422 21 -322 3 -385 1 -440 -13 -83 -21 -77 -22 -199 5 -197 42 -436 28 -597 -36 -66 -27 -68 -26 -123 18 -73 57 -220 89 -320 68z m163 -214 c58 -24 81 -59 85 -130 9 -147 -93 -239 -241 -216 -100 15 -147 87 -126 193 13 70 51 124 102 148 50 22 134 25 180 5z m842 -56 c90 -23 128 -46 134 -81 1 -13 -5 -62 -15 -109 -13 -65 -24 -92 -45 -112 -33 -33 -43 -34 -144 -8 -130 33 -240 22 -259 -26 -12 -31 21 -61 101 -94 177 -72 235 -111 281 -188 25 -43 27 -56 27 -147 -1 -124 -24 -191 -95 -268 -94 -103 -222 -147 -426 -147 -168 0 -320 34 -371 82 -29 27 -29 61 -2 158 35 127 65 141 200 95 135 -46 276 -42 295 10 16 40 -4 62 -83 95 -206 84 -257 118 -298 201 -79 155 -7 383 152 482 136 85 351 107 548 57z m-2005 -5 c16 -8 34 -25 41 -36 6 -12 15 -125 21 -267 5 -136 13 -255 16 -264 5 -12 43 62 121 235 63 139 122 266 133 283 33 57 68 66 254 62 l166 -3 24 -28 c15 -17 24 -41 24 -60 0 -18 -23 -162 -51 -322 -27 -159 -65 -379 -84 -487 -19 -108 -39 -206 -45 -217 -23 -43 -48 -51 -172 -51 -171 0 -175 7 -138 200 38 197 81 443 77 446 -2 2 -63 -134 -137 -302 -90 -204 -142 -312 -159 -325 -19 -15 -40 -19 -112 -19 -134 0 -126 -18 -154 330 -22 283 -28 341 -31 337 -2 -2 -28 -142 -58 -312 -67 -379 -52 -355 -220 -355 -99 0 -115 2 -134 20 -12 11 -24 31 -28 44 -3 13 15 135 40 272 25 137 66 366 91 509 49 271 56 293 110 315 11 5 100 9 198 9 140 1 184 -2 207 -14z m3045 -10 c30 -29 30 -41 6 -163 -26 -132 -40 -145 -166 -150 -54 -3 -98 -9 -103 -16 -5 -6 -18 -65 -31 -131 -12 -66 -42 -230 -66 -365 -25 -135 -48 -253 -51 -263 -3 -10 -20 -27 -37 -38 -27 -16 -51 -19 -160 -19 -122 0 -129 1 -152 25 -16 15 -25 36 -25 55 0 17 29 182 65 367 36 185 65 346 65 359 0 23 -3 24 -72 24 -75 0 -113 12 -132 42 -13 21 18 222 40 252 31 44 41 45 427 46 l368 0 24 -25z m-1884 -364 c16 -16 29 -38 29 -48 0 -44 -112 -651 -125 -681 -8 -18 -26 -37 -41 -42 -35 -14 -227 -13 -258 1 -53 24 -52 40 9 396 38 220 63 336 75 353 28 41 57 50 173 50 107 0 109 0 138 -29z m2171 -16 c104 -36 169 -145 154 -258 -9 -65 -28 -100 -71 -132 -57 -44 -142 -65 -266 -65 -121 0 -129 -5 -85 -57 21 -24 32 -28 93 -31 51 -3 91 2 148 18 l79 22 18 -22 c15 -18 17 -32 12 -74 -11 -83 -19 -100 -54 -123 -66 -45 -215 -70 -319 -54 -132 21 -196 62 -243 159 -30 61 -33 74 -32 162 1 297 181 490 444 475 41 -2 96 -11 122 -20z m484 4 c34 -12 44 -25 44 -59 l1 -25 22 26 c34 41 87 69 133 69 51 0 77 -19 77 -56 0 -42 -32 -178 -46 -198 -8 -11 -36 -20 -75 -26 -72 -10 -113 -35 -136 -85 -9 -19 -30 -107 -46 -195 -31 -169 -39 -193 -70 -210 -25 -13 -196 -13 -221 1 -43 22 -42 45 17 372 30 172 61 326 69 344 10 23 24 35 47 41 48 13 152 14 184 1z m-2365 -901 c90 -30 133 -95 132 -198 -2 -120 -49 -202 -141 -247 -49 -24 -68 -28 -142 -27 -125 1 -191 40 -221 131 -16 49 -5 150 22 207 25 53 93 118 141 133 45 15 168 15 209 1z m-531 -53 c36 -18 60 -62 60 -107 0 -59 -50 -300 -68 -332 -10 -17 -205 -200 -433 -406 l-416 -375 337 -5 c314 -5 339 -6 359 -24 27 -25 27 -63 0 -214 -26 -148 -41 -179 -93 -203 -39 -17 -79 -19 -671 -19 -419 0 -643 4 -669 11 -45 12 -81 48 -89 87 -7 35 36 259 57 301 21 39 -2 18 490 454 l420 372 -350 5 c-192 3 -357 9 -367 14 -23 11 -37 38 -37 73 0 54 49 285 67 316 40 69 16 67 731 67 555 0 647 -2 672 -15z m2837 -353 c124 -39 211 -113 261 -220 24 -50 27 -69 27 -162 0 -95 -3 -111 -28 -162 -46 -94 -128 -150 -275 -190 -60 -16 -121 -22 -272 -27 l-195 -6 3 -25 c3 -29 28 -66 63 -92 68 -51 234 -46 422 11 153 48 180 25 158 -132 -16 -114 -30 -147 -73 -180 -46 -36 -195 -83 -303 -98 -112 -15 -310 -6 -385 16 -242 74 -361 261 -347 545 12 229 99 442 234 572 76 74 204 136 333 164 92 19 296 12 377 -14z m-1145 -8 c65 -22 130 -82 158 -145 31 -74 29 -174 -9 -394 -81 -463 -114 -631 -127 -657 -29 -55 -54 -63 -219 -66 -177 -3 -211 7 -232 70 -11 33 -6 74 47 365 33 180 60 340 60 354 0 45 -31 73 -79 71 -56 -2 -96 -25 -126 -70 -20 -30 -35 -97 -85 -372 -41 -227 -67 -343 -79 -360 -35 -50 -73 -60 -226 -60 -164 0 -201 12 -223 71 -12 33 -6 75 82 563 53 291 102 540 108 554 7 14 26 35 41 46 25 19 45 21 182 24 124 3 159 0 184 -12 33 -18 54 -69 43 -108 -5 -19 3 -15 45 22 129 116 303 156 455 104z m-1190 -144 c20 -6 47 -23 59 -38 18 -23 20 -36 16 -92 -7 -95 -145 -847 -165 -899 -30 -77 -51 -85 -220 -89 -163 -4 -210 5 -241 45 -26 32 -26 65 -2 195 11 57 45 245 76 418 30 173 60 334 66 357 13 49 51 88 99 101 47 14 266 14 312 2z"/><path d="M4516 4009 c-14 -11 -33 -34 -41 -50 l-16 -29 65 0 c78 0 95 6 107 37 22 59 -57 88 -115 42z"/><path d="M4842 2590 c-61 -28 -105 -80 -127 -149 l-7 -24 113 5 c157 6 199 30 199 112 0 68 -90 96 -178 56z"/></g></svg></a>
   <nav>
-    <a class="idx" href="releases/"><span class="pm">Release Tracker</span><span class="cnt">&#160;1,000+ cores &amp; games &#8594;</span></a>
-    <div class="theme" id="theme" role="group" aria-label="Color theme">
-      <button type="button" data-set="light">Light</button>
-      <button type="button" data-set="dark">Dark</button>
+    <span class="segnav">
+      <span class="pill" aria-current="page">Zine</span>
+      <a class="pill" href="releases/">Cores</a>
+      <a class="pill" href="hardware-landscape/">Hardware</a>
+    </span>
+    <div class="theme" id="theme">
       <details id="themedd">
         <summary id="themesum">Theme</summary>
         <div class="menu">
+          <button type="button" data-set="light">Light</button>
+          <button type="button" data-set="dark">Dark</button>
           <button type="button" data-set="virtualboy">Virtual</button>
           <button type="button" data-set="spectrum">ZX</button>
           <button type="button" data-set="amber">Amber</button>
@@ -429,10 +382,10 @@
     }, { passive: true });
     addEventListener('resize', function () { reserve(); apply(); });
   })();
-  // theme toggle: persisted, defaults to dark (same control + behavior as the
-  // release index). Light/Dark are one-click buttons; the fun themes live in a
-  // dropdown whose summary shows the active one. The valid-theme list comes
-  // from the controls themselves, so a new theme = one menu button here + one
+  // theme control: persisted, defaults to dark (same control + behavior as the
+  // release index). A single dropdown whose summary shows the current theme;
+  // Light, Dark and the fun themes all live in its menu. The valid-theme list
+  // comes from the menu itself, so a new theme = one menu button here + one
   // block in theme.css.
   (function () {
     var btns = [].slice.call(document.querySelectorAll('#theme button[data-set]'));
@@ -443,16 +396,13 @@
     function apply(t) {
       if (themes.indexOf(t) < 0) t = 'dark';
       document.documentElement.setAttribute('data-theme', t);
-      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); });
-      var fun = null;
-      btns.forEach(function (b) { if (b.dataset.set === t && dd.contains(b)) fun = b; });
-      sum.textContent = fun ? fun.textContent : 'Theme';
-      sum.classList.toggle('on', !!fun);
+      var cur = null;
+      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); if (b.dataset.set === t) cur = b; });
+      sum.textContent = cur ? cur.textContent : 'Theme';
     }
     // Picking a theme deliberately leaves the menu OPEN: themes apply live, so the
     // list doubles as a preview you click through. The summary label + pressed
-    // state already confirm the pick, and the outside-click handler below still
-    // dismisses it -- including via the Light/Dark buttons, which sit outside it.
+    // state already confirm the pick; the outside-click handler below dismisses it.
     btns.forEach(function (b) { b.addEventListener('click', function () {
       try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
       apply(b.dataset.set);
@@ -467,27 +417,22 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && dd.open) dd.open = false;
     });
-    // The switcher's right edge is pinned (the menu hangs off it at right:0, and on
-    // narrow screens the group itself is right-anchored), so its width is its LEFT
-    // edge: letting the summary resize to each theme's name walks the Light/Dark
-    // buttons ~35px sideways -- which, now that the menu stays open, happens under
-    // the cursor mid-pick. So freeze the summary at its widest label. Measured off
-    // the live DOM rather than tuned, so a new theme still needs only its button.
+    // The dropdown's right edge is pinned (the menu hangs off it at right:0, and on
+    // narrow screens the group is right-anchored), so its width is its LEFT edge:
+    // letting the summary resize to each theme's name would shift the control under
+    // the cursor mid-pick. So freeze the summary at its widest label. The summary
+    // always shows a theme name now, all at the same weight, so measure every label
+    // and freeze to the widest. Measured off the live DOM, not tuned, so a new theme
+    // still needs only its menu button.
     function lockSummary() {
-      var prevText = sum.textContent, prevOn = sum.classList.contains('on'), max = 0;
+      var prevText = sum.textContent, max = 0;
       sum.style.minWidth = '';  // measure the natural widths, not the last lock
-      // Weight is load-bearing: .on renders the label at 600, and a fun theme's name
-      // is ONLY ever shown in that state, so measuring it unbolded under-reserves
-      // and the longest name -- the one that has to fit -- is what overflows.
-      function measure(label, on) {
+      function measure(label) {
         sum.textContent = label;
-        sum.classList.toggle('on', on);
         max = Math.max(max, sum.getBoundingClientRect().width);
       }
-      measure('Theme', false);  // the neutral label only ever shows unbolded
-      btns.forEach(function (b) { if (dd.contains(b)) measure(b.textContent, true); });
+      btns.forEach(function (b) { measure(b.textContent); });
       sum.textContent = prevText;
-      sum.classList.toggle('on', prevOn);
       sum.style.minWidth = Math.ceil(max) + 'px';
     }
     var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
@@ -495,25 +440,6 @@
     lockSummary();
     // re-run once webfonts land: the fallback font's metrics differ
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
-  })();
-  // index pill: fill the live row count, and measure the natural width of the
-  // ": N cores & games" tail into --cnt-w so it collapses proportionally on scroll
-  // (static text is the fallback). Measure with max-width cleared, +2px buffer.
-  (function () {
-    var idx = document.querySelector('.top .idx');
-    var cnt = idx && idx.querySelector('.cnt');
-    if (!cnt) return;
-    function measure() {
-      var prev = cnt.style.maxWidth;
-      cnt.style.maxWidth = 'none';
-      idx.style.setProperty('--cnt-w', Math.ceil(cnt.getBoundingClientRect().width) + 2 + 'px');
-      cnt.style.maxWidth = prev;
-    }
-    measure();
-    fetch('releases/meta.json').then(function (r) { return r.json(); }).then(function (m) {
-      if (m && m.rows) { cnt.textContent = ' ' + m.rows.toLocaleString('en-US') + ' cores & games →'; measure(); }
-    }).catch(function () {});
-    addEventListener('resize', measure);
   })();
   // EASTER EGG, touch half: a phone has no hover, so mister-kun's lean is driven
   // by an .on class here instead (the CSS hover rule is gated to (hover: hover)).

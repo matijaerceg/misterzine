@@ -2,7 +2,7 @@ import sys, io, json
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 from playwright.sync_api import sync_playwright
 
-d = json.load(open('docs/landscape/hardware.json', encoding='utf-8'))
+d = json.load(open('docs/hardware-landscape/hardware.json', encoding='utf-8'))
 targets = []
 for o in d['options']:
     if o.get('url'): targets.append(('option ' + o['id'], o['url']))

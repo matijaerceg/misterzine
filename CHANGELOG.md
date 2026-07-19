@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-19
+- Zine: milestone posts now read "40th anniversary" / "50th anniversary" instead of "40th decadeversary", which double-counted (a decade is ten years, so "40th decadeversary" implied 400).
+
 ## 2026-07-18
 - Zine: the Atari Jaguar and Fairchild Channel F posts now show gameplay screenshots (Tempest 2000 and Maze) instead of hardware photos, and their titles name the maker so it is clear the subject is the system, not the game in the picture.
 - The CRT shadow mask no longer shimmers or shows rainbow banding over screenshots and hardware photos: it was being drawn one lattice slightly too large and squeezed onto the frame, and now lands exactly on the display's pixels.

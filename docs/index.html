@@ -397,7 +397,7 @@
     }).then(function (z) {
       var posts = z.posts, out = [];
       posts.forEach(function (p, i) {
-        var why = p.why === 'decadeversary' ? '&middot; ' + p.nth + 'th decadeversary' : rd(p.debut);
+        var why = p.why === 'decadeversary' ? '&middot; ' + p.nth + 'th anniversary' : rd(p.debut);
         var meta = '<a href="#' + esc(p.id) + '">' + stamp(p.posted) + '</a> ' +
                    '&middot; <a href="releases/#' + esc(p.k) + '">View ' + esc(p.title) +
                    ' in the release tracker</a>';

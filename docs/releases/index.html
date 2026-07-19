@@ -95,6 +95,15 @@
      cores only", "RSS") — they open an in-page popover, unlike the solid
      underline + ↗ links, which navigate away */
   .updated .note .lbl { text-decoration: underline dotted; }
+  /* the Info trigger is the one meta link that spells itself out on wide screens
+     ("Public + JT Beta cores only") and collapses to "Info" under the narrow
+     breakpoint (matchMedia 899px in JS), so the link row stays one line on phones.
+     Two-span CSS toggle so it re-labels on resize with no JS. */
+  .updated #pub-note .lbl-narrow { display: none; }
+  @media (max-width: 899px) {
+    .updated #pub-note .lbl-wide { display: none; }
+    .updated #pub-note .lbl-narrow { display: inline; }
+  }
   .legend { color: var(--muted); font-size: .8rem; margin: .25rem 0 0; }
   .controls { display: flex; flex-wrap: nowrap; gap: .5rem; align-items: center; margin: 0; padding: .6rem 0 .7rem; }
   /* the filter cluster grows to fill the row; the search field grows within it to
@@ -2955,7 +2964,7 @@ function stampMeta(m) {
   }) : m.updated;
   const label = valid ? relUpdated(dt) : m.updated;
   el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + escA(full) + '">' + esc(label) + '</span></span>' +
-    ' <a href="#" class="note" id="pub-note"><span class="lbl">Info</span></a>' +
+    ' <a href="#" class="note" id="pub-note"><span class="lbl"><span class="lbl-wide">Public + JT Beta cores only</span><span class="lbl-narrow">Info</span></span><span class="ext">ⓘ</span></a>' +
     ' <a href="feed.xml" class="note" id="rss-link"><span class="lbl">RSS</span></a>' +
     ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener"><span class="lbl">Traffic</span></a>' +
     ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener"><span class="lbl">Changelog</span></a>' +

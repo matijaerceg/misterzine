@@ -191,11 +191,12 @@
                                      box-shadow: .95em 0 0 var(--sw2); }
   .top .theme .menu button:hover { background: var(--hover-bg); }
   .top .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
-  /* shadow-mask toggle at the bottom of the menu: its dot slot is an on/off
-     indicator (filled when on) instead of a theme's preview-colour pair */
+  input[type=checkbox] { cursor: pointer; accent-color: var(--accent); }  /* toggle, not text entry */
+  /* shadow-mask toggle at the bottom of the menu: a plain checkbox row, same
+     shape as the filter-dropdown checkboxes on the release tracker */
   .top .theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: .25rem 0 .1rem; }
-  .top .theme .menu button.mask::before { background: transparent; box-shadow: inset 0 0 0 1px var(--muted); }
-  .top .theme .menu button.mask[aria-pressed="true"]::before { background: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .top .theme .menu label.mask { display: flex; align-items: center; gap: .5em;
+                                 padding: .3rem .5rem; font-size: .85rem; white-space: nowrap; cursor: pointer; }
   /* site nav: one segmented control (Zine | Cores | Hardware); current filled.
      The same control on all three pages. */
   .top .segnav { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
@@ -299,7 +300,7 @@
           <button type="button" data-set="famicom">Famicom</button>
           <button type="button" data-set="pastel">Pastel</button>
           <hr class="msep">
-          <button type="button" class="mask" id="maskbtn" aria-pressed="true">Shadow mask</button>
+          <label class="mask"><input type="checkbox" id="maskbox" checked> Shadow mask</label>
         </div>
       </details>
     </div>
@@ -458,19 +459,18 @@
   // toggling back on is instant and needs no re-render. Like a theme pick,
   // toggling leaves the menu open: the effect previews live behind it.
   (function () {
-    var btn = document.getElementById('maskbtn');
-    if (!btn) return;
+    var box = document.getElementById('maskbox');
+    if (!box) return;
     function apply(on) {
       if (on) document.documentElement.removeAttribute('data-mask');
       else document.documentElement.setAttribute('data-mask', 'off');
-      btn.setAttribute('aria-pressed', on);
+      box.checked = on;
     }
     var on = true; try { on = localStorage.getItem('mz-mask') !== '0'; } catch (e) {}
     apply(on);
-    btn.addEventListener('click', function () {
-      on = !on;
-      apply(on);
-      try { localStorage.setItem('mz-mask', on ? '1' : '0'); } catch (e) {}
+    box.addEventListener('change', function () {
+      apply(box.checked);
+      try { localStorage.setItem('mz-mask', box.checked ? '1' : '0'); } catch (e) {}
     });
   })();
   // EASTER EGG, touch half: a phone has no hover, so mister-kun's lean is driven

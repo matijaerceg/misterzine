@@ -484,11 +484,12 @@
                                 margin-right: .95em; border-radius: 50%; background: var(--sw1);
                                 box-shadow: .95em 0 0 var(--sw2); }
   .theme .menu button:hover { background: var(--hover-bg); }
-  /* shadow-mask toggle at the bottom of the menu: its dot slot is an on/off
-     indicator (filled when on) instead of a theme's preview-colour pair */
+  /* shadow-mask toggle at the bottom of the menu: a plain checkbox row, same
+     shape as the Types/Columns/Genre filter checkboxes (details.cols .menu
+     label already gives it that chrome; only the font-size needs matching
+     down to the theme buttons' size) */
   .theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: 0; width: 100%; }
-  .theme .menu button.mask::before { background: transparent; box-shadow: inset 0 0 0 1px var(--muted); }
-  .theme .menu button.mask[aria-pressed="true"]::before { background: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .theme .menu label.mask { font-size: .85rem; padding: .3rem .5rem; }
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: var(--row-hover); }
   .build { color: var(--muted); }
@@ -906,7 +907,7 @@
         <button type="button" data-set="famicom">Famicom</button>
         <button type="button" data-set="pastel">Pastel</button>
         <hr class="msep">
-        <button type="button" class="mask" id="maskbtn" aria-pressed="true">Shadow mask</button>
+        <label class="mask"><input type="checkbox" id="maskbox" checked> Shadow mask</label>
       </div>
     </details>
       </div>
@@ -2975,18 +2976,17 @@ document.fonts?.ready.then(lockThemeSummary);
 // each one covers. maskShot keeps drawing into the hidden canvases, so
 // toggling back on is instant and needs no re-render. Like a theme pick,
 // toggling leaves the menu open: the effect previews live behind it.
-const maskBtn = document.getElementById('maskbtn');
+const maskBox = document.getElementById('maskbox');
 function applyMaskPref(on) {
   if (on) document.documentElement.removeAttribute('data-mask');
   else document.documentElement.setAttribute('data-mask', 'off');
-  maskBtn.setAttribute('aria-pressed', on);
+  maskBox.checked = on;
 }
 let maskOn = true; try { maskOn = localStorage.getItem('mz-mask') !== '0'; } catch (e) {}
 applyMaskPref(maskOn);
-maskBtn.addEventListener('click', () => {
-  maskOn = !maskOn;
-  applyMaskPref(maskOn);
-  try { localStorage.setItem('mz-mask', maskOn ? '1' : '0'); } catch (e) {}
+maskBox.addEventListener('change', () => {
+  applyMaskPref(maskBox.checked);
+  try { localStorage.setItem('mz-mask', maskBox.checked ? '1' : '0'); } catch (e) {}
 });
 
 // wide screens: dock the panel with the empty state by default (no slide-in on first paint)

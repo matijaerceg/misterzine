@@ -162,34 +162,9 @@
      movement, not this. */
   /* right side: index link + theme toggle in a row, toggle in the far corner */
   .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
-  /* theme control: the closed control (.theme wrapper + #themesum summary) lives
-     in the shared nav.css; only the OPEN menu chrome is page-specific below.
-     .top .theme button is the base for the menu's theme buttons (transparent bg,
-     inherited colour/cursor) that .menu button doesn't restate — keep it here. */
-  .top .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
-                       background: transparent; color: inherit; cursor: pointer; }
-  .top .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
-                      background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
-                      padding: .3rem; display: grid; gap: 2px; min-width: 7.5rem; box-shadow: 0 4px 16px #0004; }
-  .top .theme .menu button { border: 0; text-align: left; border-radius: 4px; font-size: .85rem;
-                             padding: .3rem .5rem; white-space: nowrap;
-                             display: flex; align-items: center; gap: .5em; }
-  /* each theme's pair of preview dots (the two colours that theme declares as
-     its preview: base first, signature second); the second dot is a box-shadow
-     copy of the first. The colours (--sw1/--sw2) come from the preview-colour
-     table in theme.css, so no literals live here. */
-  .top .theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
-                                     margin-right: .95em; border-radius: 50%; background: var(--sw1);
-                                     box-shadow: .95em 0 0 var(--sw2); }
-  .top .theme .menu button:hover { background: var(--hover-bg); }
-  .top .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
-  input[type=checkbox] { cursor: pointer; accent-color: var(--accent); }  /* toggle, not text entry */
-  /* shadow-mask toggle at the bottom of the menu: a plain checkbox row, same
-     shape as the filter-dropdown checkboxes on the release tracker */
-  .top .theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: .25rem 0 .1rem; }
-  .top .theme .menu label.mask { display: flex; align-items: center; gap: .5em;
-                                 padding: .3rem .5rem; font-size: .85rem; white-space: nowrap; cursor: pointer; }
-  /* site nav (.segnav + .pill) lives in the shared nav.css. */
+  /* site nav (.segnav + .pill) AND the whole theme control (closed summary +
+     open menu, .theme .menu*) live in the shared nav.css; theme.js builds the
+     menu buttons and mask.js wires the shadow-mask row. */
   /* MOBILE (below ~34rem): logo on its own line; the nav pills + theme wrap onto
      the line below it. The logo still shrinks on scroll (via --sh) but the nav
      stays put, so it's always reachable. min-height (driven by --sh) keeps the
@@ -267,26 +242,9 @@
     <div class="theme" id="theme">
       <details id="themedd">
         <summary id="themesum">Theme</summary>
-        <div class="menu">
-          <button type="button" data-set="light">Light</button>
-          <button type="button" data-set="dark">Dark</button>
-          <button type="button" data-set="virtualboy">Virtual</button>
-          <button type="button" data-set="spectrum">ZX</button>
-          <button type="button" data-set="amber">Amber</button>
-          <button type="button" data-set="phosphor">Phosphor</button>
-          <button type="button" data-set="eva">Unit-01</button>
-          <button type="button" data-set="vaporwave">Synth</button>
-          <button type="button" data-set="punchy">MiSTer-y</button>
-          <button type="button" data-set="commodore">C64</button>
-          <button type="button" data-set="workbench">Bench</button>
-          <button type="button" data-set="dmg">Game Boy</button>
-          <button type="button" data-set="pink">Pink</button>
-          <button type="button" data-set="icecream">Gelato</button>
-          <button type="button" data-set="riso">Riso</button>
-          <button type="button" data-set="famicom">Famicom</button>
-          <button type="button" data-set="pastel">Pastel</button>
+        <div class="menu"><!-- theme.js prepends the theme buttons here -->
           <hr class="msep">
-          <label class="mask"><input type="checkbox" id="maskbox" checked> Shadow mask</label>
+          <label class="mask" title="A CRT phosphor pattern drawn over screenshots; off shows them plain."><input type="checkbox" id="maskbox" checked> Shadow mask</label>
         </div>
       </details>
     </div>
@@ -305,6 +263,7 @@
 
 </div>
 <script src="mask.js?v=4"></script>
+<script src="theme.js"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script>
   // CRT slot mask + worn-tube blur over the screenshots, drawn in device
   // pixels (mask.js); tate shots (.shot.v) rotate mask and blur together.
@@ -379,86 +338,9 @@
     }, { passive: true });
     addEventListener('resize', function () { reserve(); apply(); });
   })();
-  // theme control: persisted, defaults to dark (same control + behavior as the
-  // release index). A single dropdown whose summary shows the current theme;
-  // Light, Dark and the fun themes all live in its menu. The valid-theme list
-  // comes from the menu itself, so a new theme = one menu button here + one
-  // block in theme.css.
-  (function () {
-    var btns = [].slice.call(document.querySelectorAll('#theme button[data-set]'));
-    if (!btns.length) return;
-    var dd = document.getElementById('themedd');
-    var sum = document.getElementById('themesum');
-    var themes = btns.map(function (b) { return b.dataset.set; });
-    function apply(t) {
-      if (themes.indexOf(t) < 0) t = 'dark';
-      document.documentElement.setAttribute('data-theme', t);
-      var cur = null;
-      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); if (b.dataset.set === t) cur = b; });
-      sum.textContent = cur ? cur.textContent : 'Theme';
-    }
-    // Picking a theme deliberately leaves the menu OPEN: themes apply live, so the
-    // list doubles as a preview you click through. The summary label + pressed
-    // state already confirm the pick; the outside-click handler below dismisses it.
-    btns.forEach(function (b) { b.addEventListener('click', function () {
-      try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
-      apply(b.dataset.set);
-    }); });
-    // click outside closes the menu
-    document.addEventListener('click', function (e) {
-      if (dd.open && !dd.contains(e.target)) dd.open = false;
-    });
-    // ...and so does Escape, matching the releases picker. That page orders Esc
-    // topmost-first (popover, then dropdown, then search, then panel); here the
-    // menu is the only dismissible thing, so there's nothing to yield to.
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && dd.open) dd.open = false;
-    });
-    // The dropdown's right edge is pinned (the menu hangs off it at right:0, and on
-    // narrow screens the group is right-anchored), so its width is its LEFT edge:
-    // letting the summary resize to each theme's name would shift the control under
-    // the cursor mid-pick. So freeze the summary at its widest label. The summary
-    // always shows a theme name now, all at the same weight, so measure every label
-    // and freeze to the widest. Measured off the live DOM, not tuned, so a new theme
-    // still needs only its menu button.
-    function lockSummary() {
-      var prevText = sum.textContent, max = 0;
-      sum.style.minWidth = '';  // measure the natural widths, not the last lock
-      function measure(label) {
-        sum.textContent = label;
-        max = Math.max(max, sum.getBoundingClientRect().width);
-      }
-      btns.forEach(function (b) { measure(b.textContent); });
-      sum.textContent = prevText;
-      sum.style.minWidth = Math.ceil(max) + 'px';
-    }
-    var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
-    apply(saved);
-    lockSummary();
-    // re-run once webfonts land: the fallback font's metrics differ
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
-  })();
-  // CRT shadow-mask preference: the toggle at the bottom of the theme menu,
-  // shared with the release tracker via localStorage ('mz-mask'). CSS keys on
-  // html[data-mask="off"] to hide the mask canvases, revealing the plain img
-  // each one covers. mask.js keeps drawing into the hidden canvases, so
-  // toggling back on is instant and needs no re-render. Like a theme pick,
-  // toggling leaves the menu open: the effect previews live behind it.
-  (function () {
-    var box = document.getElementById('maskbox');
-    if (!box) return;
-    function apply(on) {
-      if (on) document.documentElement.removeAttribute('data-mask');
-      else document.documentElement.setAttribute('data-mask', 'off');
-      box.checked = on;
-    }
-    var on = true; try { on = localStorage.getItem('mz-mask') !== '0'; } catch (e) {}
-    apply(on);
-    box.addEventListener('change', function () {
-      apply(box.checked);
-      try { localStorage.setItem('mz-mask', box.checked ? '1' : '0'); } catch (e) {}
-    });
-  })();
+  // theme picker (build menu, apply + persist, freeze summary) is the shared
+  // docs/theme.js; the shadow-mask toggle wiring is in docs/mask.js. Both are
+  // linked below. The pre-paint theme guard stays inline in <head>.
   // EASTER EGG, touch half: a phone has no hover, so mister-kun's lean is driven
   // by an .on class here instead (the CSS hover rule is gated to (hover: hover)).
   // The wordmark links to the page it is already on, so a tap has nothing to

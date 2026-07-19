@@ -126,3 +126,27 @@
     return true;
   };
 })();
+
+// CRT shadow-mask on/off preference, wired to the "Shadow mask" toggle at the
+// bottom of the theme menu (zine + release tracker; the hardware page has no
+// mask and no toggle). Shared here so the wiring lives in one place. CSS keys on
+// html[data-mask="off"] to hide the mask canvases, revealing the plain <img>
+// each covers; mzMask keeps drawing into the hidden canvases, so toggling back
+// on is instant. Like a theme pick, toggling leaves the menu open (live preview).
+(function () {
+  'use strict';
+  var box = document.getElementById('maskbox');
+  if (!box) return;
+  function apply(on) {
+    if (on) document.documentElement.removeAttribute('data-mask');
+    else document.documentElement.setAttribute('data-mask', 'off');
+    box.checked = on;
+  }
+  var on = true;
+  try { on = localStorage.getItem('mz-mask') !== '0'; } catch (e) {}
+  apply(on);
+  box.addEventListener('change', function () {
+    apply(box.checked);
+    try { localStorage.setItem('mz-mask', box.checked ? '1' : '0'); } catch (e) {}
+  });
+})();

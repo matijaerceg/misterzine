@@ -1,13 +1,14 @@
-/* Shared closed-control chrome for the site header: the segmented site-nav
-   (Zine | Cores | Hardware) and the theme dropdown's CLOSED appearance. Linked
+/* Shared chrome for the site header: the segmented site-nav (Zine | Cores |
+   Hardware) and the WHOLE theme control (closed summary + open menu). Linked
    render-blocking by all three pages (zine, release tracker, hardware) so the
-   pill/theme sizing is a single source and cannot drift between them.
+   nav/theme look is a single source and cannot drift between them. Behaviour is
+   the shared docs/theme.js; per-theme preview-dot colours are in theme.css.
 
    NOT here (deliberately, stays inline per page): the header FRAME (how the nav
    is positioned relative to the title, plus each page's mobile reorder/stack/
-   shrink), and the OPEN dropdown MENU chrome. The release tracker's theme menu
-   rides the shared details.cols/.menu filter primitive, so this file carries
-   ZERO .menu/details.cols rules and cannot reach the filter UI.
+   shrink). Every theme rule below is scoped under .theme, so it can NEVER match
+   the release tracker's filter dropdowns (details.cols .menu) — those live
+   outside .theme and keep their own chrome + positionMenu().
 
    Colours come from theme.css tokens. The theme summary is targeted by its id
    (#themesum, identical on all three pages): the id beats the release tracker's
@@ -37,3 +38,31 @@
   .pill { padding: .36rem .5rem; letter-spacing: .02em; }
   #themesum { font-size: .72rem; padding: .3rem .45rem; }
 }
+
+/* theme dropdown OPEN menu (scoped to .theme; theme.js builds the buttons). The
+   box hangs off the control's right edge; overflow-y + the max-height theme.js
+   sets on open keep the tall list reachable where the page itself can't scroll
+   (the release tracker's app shell) — replacing the positionMenu() height cap the
+   theme used to borrow from the filter dropdowns. */
+.theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
+                background: transparent; color: inherit; cursor: pointer; }
+.theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 30;
+               background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
+               padding: .3rem; display: grid; gap: 2px; min-width: 7.5rem;
+               overflow-y: auto; box-shadow: 0 4px 16px #0004; }
+.theme .menu button { border: 0; text-align: left; border-radius: 4px; font-size: .85rem;
+                      padding: .3rem .5rem; white-space: nowrap; display: flex; align-items: center; gap: .5em; }
+/* each theme's pair of preview dots: base colour first, signature second (a
+   box-shadow copy of the first). The --sw1/--sw2 values per data-set live in
+   theme.css, so a new theme needs no change here. */
+.theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
+                              margin-right: .95em; border-radius: 50%; background: var(--sw1);
+                              box-shadow: .95em 0 0 var(--sw2); }
+.theme .menu button:hover { background: var(--hover-bg); }
+.theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+/* shadow-mask toggle row at the bottom of the menu (zine + release tracker only;
+   wired by mask.js). Hardware has no mask, so it simply has no such row. */
+.theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: .25rem 0 .1rem; }
+.theme .menu label.mask { display: flex; align-items: center; gap: .5em; padding: .3rem .5rem;
+                          font-size: .85rem; white-space: nowrap; cursor: pointer; }
+.theme .menu input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; }

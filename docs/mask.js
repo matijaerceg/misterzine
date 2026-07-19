@@ -2,13 +2,16 @@
 // Draws the source image into a canvas at DEVICE resolution and applies the
 // phosphor lattice there, so the mask is pixel-crisp at any display scale.
 // Geometry (device px): 3px RGB stripe triads, 4px slots with 1 gap row,
-// alternate triad columns staggered by 2. Energy-normalized in linear light
-// so brightness survives (unlit subpixels get the gamma-squared color, lit
-// ones are amplified).
+// alternate triad columns staggered by 2. Full energy-normalized in linear
+// light so brightness survives (unlit subpixels get the gamma-squared color,
+// lit ones are amplified). Unlike Lottes' RVM mode 2, there is NO headroom
+// factor: RVM scales amp by 1/LIM so a lit subpixel never exceeds 1.0, which
+// cost 10-18% of the picture's light; here amp normalizes the triad average
+// straight back to the input (avg out == in), and the rare bright lit subpixel
+// is allowed to clip. Retains ~97-100% of linear light vs RVM's ~82-89%.
 (function () {
   'use strict';
   var DARK = 7 / 8;
-  var LIM = 1 / (3 / 12 + (9 / 12) * DARK);
   var S2L = new Float32Array(256);
   for (var i = 0; i < 256; i++) {
     var c = i / 255;
@@ -20,8 +23,8 @@
     L2S[j] = Math.round((l < 0.0031308 ? l * 12.92 : 1.055 * Math.pow(l, 1 / 2.4) - 0.055) * 255);
   }
 
-  // Render img into canvas (sized from its parent box * devicePixelRatio) and
-  // mask it. opts.fit: 'cover' | 'fill'; opts.smooth: false = pixelated.
+  // Render img into canvas (sized from the img's own box * devicePixelRatio)
+  // and mask it. opts.fit: 'cover' | 'fill'; opts.smooth: false = pixelated.
   // opts.blur: >1 softens along the scan direction (tent blur of roughly
   // that width in SOURCE pixels, pre-mask — worn-tube look). opts.rot:
   // tate — rotates the lattice AND the blur axis together (same tube).
@@ -35,7 +38,15 @@
     // (A capped-density stretch variant was tried 2026-07-11..14 and reverted:
     // pixel-perfect-but-coarser preferred over slightly-soft-but-finer.)
     var dpr = opts.dpr || window.devicePixelRatio || 1;
-    var box = canvas.parentElement.getBoundingClientRect();
+    // Measure the IMG, not canvas.parentElement: the canvas fills the frame's
+    // CONTENT box (position:absolute; inset:0), but the parent's rect is its
+    // BORDER box. The zine's .shot has a 1px border, so measuring the parent
+    // sized the backing 2 CSS px too big per axis; the browser then squeezed
+    // that lattice onto the smaller display area, crushing the periodic mask
+    // into visible moire/rainbow bands. The img shares the canvas's content
+    // box exactly, and (unlike the canvas) is never display:none when the mask
+    // toggle is off, so its rect stays valid across re-renders.
+    var box = img.getBoundingClientRect();
     var w = Math.max(1, Math.round(box.width * dpr));
     var h = Math.max(1, Math.round(box.height * dpr));
     canvas.width = w; canvas.height = h;
@@ -80,10 +91,11 @@
     try { id = ctx.getImageData(0, 0, w, h); }
     catch (e) { return false; }
     var d = id.data;
-    // Lattice scale: integer multiple of device px (fractional would band).
-    // 1x reads right on desktops up through 2x displays; only genuinely
-    // phone-dense screens (dpr >= 2.5) double it, and 2 is the ceiling.
-    var m = opts.scale || Math.min(2, Math.max(1, Math.round(dpr / 1.5)));
+    // Lattice scale: a 1 device-pixel triad everywhere (user call 2026-07-18,
+    // reversing the 2026-07-15 dpr>=2.25 -> 2x phone bump; the finer mask is
+    // preferred on every display). opts.scale still overrides for experiments.
+    // Must stay an integer -- a fractional lattice bands.
+    var m = opts.scale || 1;
     for (var y = 0; y < h; y++) {
       var row = y * w * 4;
       var yy = (y / m) | 0;
@@ -100,7 +112,11 @@
         var st = a % 3;
         for (var ch = 0; ch < 3; ch++) {
           var c0 = S2L[d[p + ch]];
-          var amp = 1 / (LIM * 3 / 12 + LIM * (9 / 12) * c0);
+          // amp normalizes the triad-average output (1/4 lit + 3/4 unlit) back
+          // to the input value, so mean brightness is preserved with no RVM
+          // headroom. Lit subpixels above ~0.73 linear clip at 1.0 (Math.min
+          // below), the only light loss.
+          var amp = 1 / (3 / 12 + (9 / 12) * DARK * c0);
           var l = (open && ch === st ? c0 : c0 * c0 * DARK) * amp;
           d[p + ch] = L2S[Math.max(0, Math.min(4095, (l * 4095) | 0))];
         }

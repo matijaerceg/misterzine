@@ -54,24 +54,10 @@
   .top h1 .cd { color: var(--accent); }
   .top .scope { display: block; font-family: Roboto, system-ui, sans-serif; font-size: .78rem; font-weight: 400;
                 color: var(--muted); margin-top: .15rem; }
-  /* site nav (.segnav + .pill) and the CLOSED theme control (.theme wrapper +
-     #themesum summary) live in the shared nav.css; only the frame (.top nav) and
-     the OPEN menu chrome are page-specific here. .theme button is the base for
-     the menu's theme buttons (transparent bg, inherited colour/cursor) that
-     .menu button doesn't restate — keep it here with the menu chrome. */
+  /* site nav (.segnav + .pill) AND the whole theme control (closed summary +
+     open menu, .theme .menu*) live in the shared nav.css; theme.js builds the
+     menu buttons. Only the frame (.top nav) is page-specific here. */
   .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
-  .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
-                  background: transparent; color: inherit; cursor: pointer; }
-  .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
-  .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
-                 background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
-                 padding: .3rem; display: grid; gap: 2px; min-width: 7.5rem; box-shadow: 0 4px 16px #0004; }
-  .theme .menu button { border: 0; text-align: left; border-radius: 4px; font-size: .85rem;
-                        padding: .3rem .5rem; white-space: nowrap; display: flex; align-items: center; gap: .5em; }
-  .theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
-                                margin-right: .95em; border-radius: 50%; background: var(--sw1);
-                                box-shadow: .95em 0 0 var(--sw2); }
-  .theme .menu button:hover { background: var(--hover-bg); }
 
   /* ---- shell: interview rail + poster ---- */
   /* rail narrowed 19.5 -> 16.5rem (user: the CTA banner read wider than any
@@ -362,25 +348,7 @@
     <div class="theme" id="theme">
       <details id="themedd">
         <summary id="themesum">Theme</summary>
-        <div class="menu">
-          <button type="button" data-set="light">Light</button>
-          <button type="button" data-set="dark">Dark</button>
-          <button type="button" data-set="virtualboy">Virtual</button>
-          <button type="button" data-set="spectrum">ZX</button>
-          <button type="button" data-set="amber">Amber</button>
-          <button type="button" data-set="phosphor">Phosphor</button>
-          <button type="button" data-set="eva">Unit-01</button>
-          <button type="button" data-set="vaporwave">Synth</button>
-          <button type="button" data-set="punchy">MiSTer-y</button>
-          <button type="button" data-set="commodore">C64</button>
-          <button type="button" data-set="workbench">Bench</button>
-          <button type="button" data-set="dmg">Game Boy</button>
-          <button type="button" data-set="pink">Pink</button>
-          <button type="button" data-set="icecream">Gelato</button>
-          <button type="button" data-set="riso">Riso</button>
-          <button type="button" data-set="famicom">Famicom</button>
-          <button type="button" data-set="pastel">Pastel</button>
-        </div>
+        <div class="menu"><!-- theme.js builds the theme buttons here --></div>
       </details>
     </div>
   </nav>
@@ -1226,47 +1194,10 @@
       '). The raw data is in <a href="hardware.json">hardware.json</a>.</p>';
   });
 
-  /* ---------- theme toggle (same control + behavior as the other pages) ---------- */
-  (function () {
-    var btns = [].slice.call(document.querySelectorAll('#theme button[data-set]'));
-    if (!btns.length) return;
-    var dd = document.getElementById('themedd');
-    var sum = document.getElementById('themesum');
-    var themes = btns.map(function (b) { return b.dataset.set; });
-    function apply(t) {
-      if (themes.indexOf(t) < 0) t = 'dark';
-      document.documentElement.setAttribute('data-theme', t);
-      var cur = null;
-      btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.set === t); if (b.dataset.set === t) cur = b; });
-      sum.textContent = cur ? cur.textContent : 'Theme';
-    }
-    btns.forEach(function (b) { b.addEventListener('click', function () {
-      try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
-      apply(b.dataset.set);
-    }); });
-    document.addEventListener('click', function (e) {
-      if (dd.open && !dd.contains(e.target)) dd.open = false;
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && dd.open) dd.open = false;
-    });
-    function lockSummary() {
-      var prevText = sum.textContent, max = 0;
-      sum.style.minWidth = '';
-      function measure(label) {
-        sum.textContent = label;
-        max = Math.max(max, sum.getBoundingClientRect().width);
-      }
-      btns.forEach(function (b) { measure(b.textContent); });
-      sum.textContent = prevText;
-      sum.style.minWidth = Math.ceil(max) + 'px';
-    }
-    var saved = 'dark'; try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
-    apply(saved);
-    lockSummary();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
-  })();
+  /* theme picker (build menu, apply + persist, freeze summary) is the shared
+     docs/theme.js, linked below. The pre-paint theme guard stays inline in <head>. */
 })();
 </script>
+<script src="../theme.js"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 </body>
 </html>

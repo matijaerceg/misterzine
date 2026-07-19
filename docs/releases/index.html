@@ -456,35 +456,13 @@
   /* flex-wrap + shrink lets the theme pill drop below the nav when the row is
      too narrow (phones); without shrink the group keeps its max width and clips */
   .hctl { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; flex: 0 1 auto; min-width: 0; }
-  /* site nav (.segnav + .pill) and the CLOSED theme control (.theme wrapper +
-     #themesum summary) live in the shared nav.css. Here the theme control is a
-     details.cols, so it inherits the filter dropdowns' outside-click close +
-     positionMenu viewport-fit; the shared #themesum id (specificity 1,0,0) beats
-     the details.cols summary filter-base styling, so the closed control matches
-     the other pages. Only the OPEN menu chrome is page-specific below. .theme
-     button is the base for the menu's theme buttons (transparent bg, inherited
-     colour/cursor) that .menu button doesn't restate — keep it here. */
-  .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
-  .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
-  /* the menu itself keeps the shared details.cols .menu chrome (same box as
-     the Columns dropdown); only its buttons need styling of their own */
-  .theme .menu button { font-size: .85rem; text-align: left; padding: .3rem .5rem;
-                        border: 0; border-radius: 4px; white-space: nowrap;
-                        display: flex; align-items: center; gap: .5em; }
-  /* each theme's pair of preview dots (the two colours that theme declares as
-     its preview: base first, signature second); the second dot is a box-shadow
-     copy of the first. The colours (--sw1/--sw2) come from the preview-colour
-     table in theme.css, so no literals live here. */
-  .theme .menu button::before { content: ""; flex: 0 0 auto; width: .7em; height: .7em;
-                                margin-right: .95em; border-radius: 50%; background: var(--sw1);
-                                box-shadow: .95em 0 0 var(--sw2); }
-  .theme .menu button:hover { background: var(--hover-bg); }
-  /* shadow-mask toggle at the bottom of the menu: a plain checkbox row, same
-     shape as the Types/Columns/Genre filter checkboxes (details.cols .menu
-     label already gives it that chrome; only the font-size needs matching
-     down to the theme buttons' size) */
-  .theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: 0; width: 100%; }
-  .theme .menu label.mask { font-size: .85rem; padding: .3rem .5rem; }
+  /* site nav (.segnav + .pill) AND the whole theme control (closed summary +
+     open menu, .theme .menu*) live in the shared nav.css. The theme dropdown is
+     now a plain <details> (NOT a details.cols) — Tier 2 decoupled it from the
+     filter dropdown system; theme.js gives it its own outside-click + Escape
+     (capture phase, so it wins over the Esc ladder) and the shared .theme .menu
+     max-height replaces positionMenu's height cap. theme.js builds the buttons,
+     mask.js wires the shadow-mask row. */
   td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
   tr:hover td { background: var(--row-hover); }
   .build { color: var(--muted); }
@@ -891,28 +869,11 @@
         <a class="pill" href="../hardware-landscape/">Hardware</a>
       </nav>
       <div class="theme" id="theme">
-    <details class="cols" id="themedd">
+    <details id="themedd"><!-- plain details (not .cols): decoupled from the filter dropdowns -->
       <summary id="themesum">Theme</summary>
-      <div class="menu">
-        <button type="button" data-set="light">Light</button>
-        <button type="button" data-set="dark">Dark</button>
-        <button type="button" data-set="virtualboy">Virtual</button>
-        <button type="button" data-set="spectrum">ZX</button>
-        <button type="button" data-set="amber">Amber</button>
-        <button type="button" data-set="phosphor">Phosphor</button>
-        <button type="button" data-set="eva">Unit-01</button>
-        <button type="button" data-set="vaporwave">Synth</button>
-        <button type="button" data-set="punchy">MiSTer-y</button>
-        <button type="button" data-set="commodore">C64</button>
-        <button type="button" data-set="workbench">Bench</button>
-        <button type="button" data-set="dmg">Game Boy</button>
-        <button type="button" data-set="pink">Pink</button>
-        <button type="button" data-set="icecream">Gelato</button>
-        <button type="button" data-set="riso">Riso</button>
-        <button type="button" data-set="famicom">Famicom</button>
-        <button type="button" data-set="pastel">Pastel</button>
+      <div class="menu"><!-- theme.js prepends the theme buttons here -->
         <hr class="msep">
-        <label class="mask"><input type="checkbox" id="maskbox" checked> Shadow mask</label>
+        <label class="mask" title="A CRT phosphor pattern drawn over screenshots; off shows them plain."><input type="checkbox" id="maskbox" checked> Shadow mask</label>
       </div>
     </details>
       </div>
@@ -989,6 +950,7 @@
 </main>
 <aside id="panel" hidden></aside>
 <script src="../mask.js?v=4"></script>
+<script src="../theme.js"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
@@ -2921,76 +2883,13 @@ function endResize(e) {
 resizer.addEventListener('pointerup', endResize);
 resizer.addEventListener('pointercancel', endResize);
 
-// --- theme control (persisted, defaults to dark). A single details.cols
-// dropdown whose summary shows the current theme; Light, Dark and the fun themes
-// all live in its menu. The valid-theme list comes from the menu itself, so a
-// new theme = one menu button + one theme.css block. ---
-const themeBtns = [...document.querySelectorAll('#theme button[data-set]')];
-const themeDD = document.getElementById('themedd');
-const themeSum = document.getElementById('themesum');
-const THEMES = themeBtns.map(b => b.dataset.set);
-function applyTheme(t) {
-  if (!THEMES.includes(t)) t = 'dark';
-  document.documentElement.setAttribute('data-theme', t);
-  themeBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.set === t));
-  // the summary shows the current theme's name (every theme now lives in the menu)
-  const cur = themeBtns.find(b => b.dataset.set === t);
-  themeSum.textContent = cur ? cur.textContent : 'Theme';
-}
-// Picking a theme deliberately leaves the menu OPEN (like the filter dropdowns):
-// themes apply live, so the list doubles as a preview you click through. The
-// summary label + pressed state already confirm the pick. Outside-click and
-// Escape still close it via the shared details.cols handlers.
-themeBtns.forEach(b => b.addEventListener('click', () => {
-  // apply before persisting: with storage blocked (private mode, quota) a
-  // throwing setItem must cost only the persistence, not the switch itself
-  applyTheme(b.dataset.set);
-  try { localStorage.setItem('mz-theme', b.dataset.set); } catch (e) {}
-}));
-// The switcher floats right, so its width IS its left edge: letting the summary
-// resize to each theme's name would shove the Light/Dark buttons -- and the open
-// menu, which is anchored to the group and only positioned once, on open --
-// sideways under the cursor mid-pick. So freeze the summary at its widest label.
-// Measured off the live DOM rather than tuned, so a new theme still needs only
-// its button + theme.css block; re-run once webfonts land, since the fallback
-// font's metrics differ from Roboto's.
-function lockThemeSummary() {
-  const prevText = themeSum.textContent;
-  themeSum.style.minWidth = '';  // measure the natural widths, not the last lock
-  let max = 0;
-  // The summary always shows a theme name now, all at the same (unbolded) weight,
-  // so measure every label and freeze to the widest. Measured off the live DOM,
-  // not tuned, so a new theme needs only its button + theme.css block.
-  const measure = (label) => {
-    themeSum.textContent = label;
-    max = Math.max(max, themeSum.getBoundingClientRect().width);
-  };
-  for (const b of themeBtns) measure(b.textContent);
-  themeSum.textContent = prevText;
-  themeSum.style.minWidth = Math.ceil(max) + 'px';
-}
-applyTheme(localStorage.getItem('mz-theme') || 'dark');
-lockThemeSummary();
-document.fonts?.ready.then(lockThemeSummary);
-
-// CRT shadow-mask preference: the toggle at the bottom of the theme menu,
-// shared with the zine via localStorage ('mz-mask'). CSS keys on
-// html[data-mask="off"] to hide the mask canvases, revealing the plain img
-// each one covers. maskShot keeps drawing into the hidden canvases, so
-// toggling back on is instant and needs no re-render. Like a theme pick,
-// toggling leaves the menu open: the effect previews live behind it.
-const maskBox = document.getElementById('maskbox');
-function applyMaskPref(on) {
-  if (on) document.documentElement.removeAttribute('data-mask');
-  else document.documentElement.setAttribute('data-mask', 'off');
-  maskBox.checked = on;
-}
-let maskOn = true; try { maskOn = localStorage.getItem('mz-mask') !== '0'; } catch (e) {}
-applyMaskPref(maskOn);
-maskBox.addEventListener('change', () => {
-  applyMaskPref(maskBox.checked);
-  try { localStorage.setItem('mz-mask', maskBox.checked ? '1' : '0'); } catch (e) {}
-});
+// The theme picker (build menu, apply + persist, freeze summary) is the shared
+// docs/theme.js; the shadow-mask toggle wiring is in docs/mask.js. The theme
+// dropdown is a plain <details> here, decoupled from the details.cols filter
+// system: theme.js owns its outside-click + Escape (capture phase, so it beats
+// the Esc ladder below), and the shared .theme .menu max-height replaces the
+// positionMenu height cap it used to borrow. Both files are linked at the end of
+// the body; the pre-paint theme guard stays inline in <head>.
 
 // wide screens: dock the panel with the empty state by default (no slide-in on first paint)
 if (matchMedia('(min-aspect-ratio: 3/5)').matches) {

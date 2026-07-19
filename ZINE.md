@@ -177,6 +177,13 @@ The source link goes **inline at the tail of the body text**, not in the footer.
 
 ## The screenshot
 
+**Always a screenshot, never the hardware.** The picture must be something that
+appears on the screen: in-game action, an OS or GUI screen, or the machine's own
+boot/BIOS screen. Never a photo of the console, computer, or cartridge. For a
+console or computer post, use a game or OS screenshot; when the post is about the
+machine itself, prefer its boot screen or built-in software over an arbitrary
+third-party game, so the picture stands for the system and not one game on it.
+
 **Never use a shot the release index already shows.** Every arcade row may have
 `title`, `snap`, and `ingame` images at `docs/images/{slot}/<img>.png`, where
 `<img>` is the row's `img` field (**not** its `k` - they differ on some rows).
@@ -203,7 +210,8 @@ game the zine has covered before needs a new picture as well as a new fact.
   upload.wikimedia.org URL) - but ONLY freely licensed media. A game
   article's screenshot is almost always a NON-FREE fair-use file that
   Wikipedia policy shrinks to about 0.1 megapixels; it will always fail the
-  size check below. Photos of hardware and freely licensed images are fine.
+  size check below. Freely licensed screenshots are fine; hardware photos are
+  not (see the screenshots-only rule at the top of this section).
 - **Hardcore Gaming 101** article images (`wp-content/uploads`). Exclude
   `-NxN.` size variants. Watch for sidebar thumbs belonging to other games.
 - **GUIdebook** (`guidebookgallery.org`) for computer and OS screenshots. Only
@@ -278,6 +286,14 @@ authoritative example):
 
 - `id` is `YYYYMMDD-<k>` where the date matches `posted`.
 - `k` is the release row's deep-link key; the title links to `releases/#<k>`.
+- **`title`** is the Permanent-Marker heading. For an arcade **game** it is the
+  game's name. For a **console or computer** post (a hardware/system row, not a
+  game) title it with the manufacturer plus the model - "Atari Jaguar",
+  "Fairchild Channel F", "Apple Lisa" - never the bare model. The feed is mostly
+  arcade games shown with their own screenshots, so a hardware post now carries a
+  game or OS screenshot too (see the screenshots-only rule); the maker + model
+  title is what tells a newcomer the subject is the *system*, not the game in the
+  picture.
 - **`why` is exactly one reason per post.** If the game's year is an exact
   multiple of 10 years ago: `"why": "decadeversary"` plus `"nth": 30` (the
   multiple), and the MiSTer debut date appears **nowhere** in the post: the
@@ -338,6 +354,8 @@ inspection; fix and push again.
       with the thing it reacts to, or not at all
 - [ ] The game is not already covered in `docs/zine.json`
 - [ ] No quote is reused from another post
+- [ ] The image is an on-screen capture (game, OS, or boot screen), never a
+      photo of the hardware
 - [ ] The screenshot is not one the release index shows
 - [ ] The screenshot is native resolution, not a downscaled web thumbnail
       (compare against the row's `img_w`/`img_h`)

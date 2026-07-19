@@ -328,12 +328,14 @@ authoritative example):
   title is what tells a newcomer the subject is the *system*, not the game in the
   picture.
 - **`why` is exactly one reason per post.** If the game's year is an exact
-  multiple of 10 years ago: `"why": "decadeversary"` plus `"nth": 30` (the
-  multiple), and the MiSTer debut date appears **nowhere** in the post: the
-  linked release row carries it, so no `debut` field at all. Otherwise:
-  `"why": "debut"` plus `"debut": "YYYY-MM-DD"`. Never two datings on one post.
-  Say **decadeversary**, never "anniversary": we only know the year, not the
-  day, so "anniversary" would falsely imply we are honouring the actual date.
+  multiple of 10 years ago: `"why": "decadeversary"` plus `"nth": 40` (the
+  full year count, e.g. 40 for a 1986 game in 2026), and the MiSTer debut date
+  appears **nowhere** in the post: the linked release row carries it, so no
+  `debut` field at all. Otherwise: `"why": "debut"` plus
+  `"debut": "YYYY-MM-DD"`. Never two datings on one post. `decadeversary` is
+  the internal tag only; the post renders as "Nth anniversary" (using `nth`
+  directly, so `"nth": 40` -> "40th anniversary"). Never render the word
+  "decadeversary" itself: paired with the year count it reads as decades x 40.
 - **`shot`:** `h` = 4:3, `v` = tate (3:4), `w` = multi-screen (8:3). For any
   other true aspect, keep the closest class and add `"aspect": "864 / 224"`
   (the raw pixel dimensions). A tate post also sets `"tate": true`; `v` and

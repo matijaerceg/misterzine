@@ -5,6 +5,9 @@ User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/re
 ## 2026-07-18
 - The CRT shadow mask no longer shimmers or shows rainbow banding over screenshots and hardware photos: it was being drawn one lattice slightly too large and squeezed onto the frame, and now lands exactly on the display's pixels.
 - The CRT shadow mask keeps screenshots noticeably brighter (it no longer reserves headroom that dimmed the picture ~10-18%), and its phosphor triad is now a consistent fine 1:1 pixel size on every display, including high-density phones.
+- Phone header cleanup across all three pages: the Zine / Cores / Hardware nav and the theme picker now sit together on one row at the very top, at a consistent size on every page. This fixes a squeezed, one-word-per-line title on the Hardware page and a theme button that was getting cut off on small phones on the release tracker.
+- Release tracker: the links under the title are shorter and now fit on one line (Info, RSS, Traffic, Changelog, Discord), and the filter buttons read Type / Genre / Year / Col.
+- The Hardware guide shows two cards per row on tablet-width screens, so card titles no longer overlap the product photos, and the zine's post timestamps are a touch larger.
 - The CRT shadow mask over screenshots can now be turned off: a "Shadow mask" toggle sits at the bottom of the theme menu on the zine and the release tracker, and the choice is remembered across both pages.
 
 ## 2026-07-17

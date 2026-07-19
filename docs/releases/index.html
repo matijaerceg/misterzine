@@ -32,6 +32,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
+<link rel="stylesheet" href="../nav.css"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -79,7 +80,10 @@
      above instead of inheriting a leading indent. column-gap gives every item
      the same spacing; the "Updated: <time>" prefix is one item via .upd-stamp. */
   .updated { color: var(--muted); font-size: .8rem; margin: 0; min-height: 1.1em; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .6rem; row-gap: .15rem; }
-  .updated .upd-stamp { white-space: nowrap; }
+  /* the freshness stamp takes its own line so the link row (Info / RSS / Traffic
+     / Changelog / Discord) sits together on one tidy line beneath it, rather than
+     wrapping raggedly after the stamp when the title squeezes the masthead width */
+  .updated .upd-stamp { white-space: nowrap; flex-basis: 100%; }
   .updated a { color: inherit; text-decoration: none; text-underline-offset: 2px; white-space: nowrap; }
   .updated a:hover { color: var(--accent); }
   /* underline the .lbl span, never the anchor, so the line stops at the last
@@ -449,27 +453,18 @@
   .masthead .brand svg { display: block; height: 42px; width: auto; }
   .masthead .brand:hover { color: var(--brand-hover); }
   .masthead .titleblock { min-width: 0; }
-  .hctl { display: flex; align-items: center; gap: .6rem; flex: 0 0 auto; }
-  /* site nav: a pill-shaped segmented control (Zine | Cores | Hardware), the same
-     on all three pages; the current page's segment is filled with the accent. */
-  .pagenav { display: grid; grid-template-columns: repeat(3, 1fr); width: fit-content; overflow: hidden;
-             border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
-  .pagenav .pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; text-align: center;
-                   text-transform: uppercase; letter-spacing: .04em; font-size: .78rem; padding: .38rem .95rem; }
-  .pagenav .pill + .pill { border-left: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hair)); }
-  .pagenav .pill:hover { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); }
-  .pagenav .pill[aria-current] { background: var(--accent); color: var(--bg); cursor: default; }
-  /* theme control: a single dropdown showing the current theme's name; Light,
-     Dark and the fun themes all live in its menu. details.cols gives it the
-     shared outside-click close + viewport-fit positioning. */
-  .theme { flex: 0 0 auto; border: 1px solid var(--hair); border-radius: 6px; }
+  /* flex-wrap + shrink lets the theme pill drop below the nav when the row is
+     too narrow (phones); without shrink the group keeps its max width and clips */
+  .hctl { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; flex: 0 1 auto; min-width: 0; }
+  /* site nav (.segnav + .pill) and the CLOSED theme control (.theme wrapper +
+     #themesum summary) live in the shared nav.css. Here the theme control is a
+     details.cols, so it inherits the filter dropdowns' outside-click close +
+     positionMenu viewport-fit; the shared #themesum id (specificity 1,0,0) beats
+     the details.cols summary filter-base styling, so the closed control matches
+     the other pages. Only the OPEN menu chrome is page-specific below. .theme
+     button is the base for the menu's theme buttons (transparent bg, inherited
+     colour/cursor) that .menu button doesn't restate — keep it here. */
   .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0; background: transparent; color: inherit; cursor: pointer; }
-  /* flex + auto margin pins the caret to the right edge: the summary is frozen at
-     its widest label (see lockThemeSummary), so a left-hugging caret would wander
-     inside that fixed box as the current theme's name changes. */
-  .theme details.cols summary { border: 0; border-radius: 6px; font-size: .78rem; padding: .3rem .6rem;
-                                display: flex; align-items: center; }
-  .theme details.cols summary::after { content: " \25BE"; color: var(--muted); margin-left: auto; padding-left: .4em; }
   .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
   /* the menu itself keeps the shared details.cols .menu chrome (same box as
      the Columns dropdown); only its buttons need styling of their own */
@@ -847,6 +842,16 @@
        still carries it to screen readers, and desktop keeps the arrow. */
     th[aria-sort]::after { content: none; }
   }
+  /* phones: put the domain nav + theme on the TOPMOST row (matching the hardware
+     page), with the title/meta block below it. order:-1 lifts the nav above the
+     masthead and flex-basis:100% gives it its own full-width row (both without
+     markup changes); flex-end right-aligns the pill group; nowrap lets the shared
+     .segnav grid squeeze to fit so the pills and theme stay on ONE row down to the
+     narrowest phones. The pill/theme mobile SIZING is shared (nav.css @media
+     max-width:36rem), matching the zine and hardware pages. */
+  @media (max-width: 36rem) {
+    .hctl { order: -1; flex-basis: 100%; flex-wrap: nowrap; justify-content: flex-end; gap: .4rem; }
+  }
   /* printing: undo the fixed-height app shell so the full row list paginates
      instead of clipping to one screen of the scroller */
   @media print {
@@ -880,7 +885,7 @@
       </div>
     </div>
     <div class="hctl">
-      <nav class="pagenav">
+      <nav class="segnav">
         <a class="pill" href="../">Zine</a>
         <span class="pill" aria-current="page">Cores</span>
         <a class="pill" href="../hardware-landscape/">Hardware</a>
@@ -925,11 +930,11 @@
       <span class="count" id="count"></span>
     </div>
     <details class="cols" id="typedd">
-      <summary id="typesummary">All Core Types</summary>
+      <summary id="typesummary">Type</summary>
       <div class="menu" id="typemenu"></div>
     </details>
     <details class="cols" id="genredd">
-      <summary id="genresummary">All Genres</summary>
+      <summary id="genresummary">Genre</summary>
       <div class="menu" id="genremenu"></div>
     </details>
     <details class="cols" id="yeardd">
@@ -958,7 +963,7 @@
        them. The tally lives inside .searchwrap above. -->
   <span class="ctrlsep tall" aria-hidden="true"></span>
   <details class="cols" id="cols">
-    <summary>Columns</summary>
+    <summary title="Columns">Col.</summary>
     <div class="menu" id="colsmenu"></div>
   </details>
 </div>
@@ -1865,11 +1870,10 @@ typeMenu.innerHTML = TYPES.map(t =>
   '<button class="reset" id="typereset">Show all</button>';
 const typeReset = document.getElementById('typereset');
 function syncTypeSummary() {
-  // empty (= no filter) and full both read as "All Core Types"; partial shows the count
+  // idle (empty = no filter, or every box checked) reads "Type"; a partial
+  // selection shows the count and glows
   const partial = enabledTypes.size !== 0 && enabledTypes.size !== TYPES.length;
-  const name = narrowMQ.matches ? 'Types' : 'Core Types';
-  typeSummary.textContent = partial ? name + ' (' + enabledTypes.size + ')'
-    : (narrowMQ.matches ? name : 'All ' + name);
+  typeSummary.textContent = partial ? 'Type (' + enabledTypes.size + ')' : 'Type';
   typeSummary.classList.toggle('active', partial);  // glow when narrowing, like a non-empty search box
   typeReset.disabled = enabledTypes.size === 0;  // no boxes checked = the default
 }
@@ -2054,8 +2058,7 @@ function syncGenreSummary() {
   // empty (= no filter) and every-genre-checked both read as "All Genres"; a partial
   // selection shows the count and glows, matching the Types dropdown.
   const partial = enabledGenres.size !== 0 && enabledGenres.size !== GENRE_COUNT;
-  genreSummary.textContent = partial ? 'Genres (' + enabledGenres.size + ')'
-    : (narrowMQ.matches ? 'Genres' : 'All Genres');
+  genreSummary.textContent = partial ? 'Genre (' + enabledGenres.size + ')' : 'Genre';
   genreSummary.classList.toggle('active', partial);
   const rst = genreMenu.querySelector('#genrereset');
   if (rst) rst.disabled = enabledGenres.size === 0;
@@ -3053,11 +3056,11 @@ function stampMeta(m) {
   }) : m.updated;
   const label = valid ? relUpdated(dt) : m.updated;
   el.innerHTML = '<span class="upd-stamp">Updated: <span id="updated-rel" title="' + escA(full) + '">' + esc(label) + '</span></span>' +
-    ' <a href="#" class="note" id="pub-note"><span class="lbl">Public + JT Beta cores; no alts</span><span class="ext">ⓘ</span></a>' +
-    ' <a href="feed.xml" class="note" id="rss-link"><span class="lbl">RSS</span><span class="ext">ⓘ</span></a>' +
-    ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener"><span class="lbl">Traffic Stats</span><span class="ext">↗</span></a>' +
-    ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener"><span class="lbl">Changelog (GitHub)</span><span class="ext">↗</span></a>' +
-    ' <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link"><span class="lbl">Discord</span><span class="ext">↗</span></a>';
+    ' <a href="#" class="note" id="pub-note"><span class="lbl">Info</span></a>' +
+    ' <a href="feed.xml" class="note" id="rss-link"><span class="lbl">RSS</span></a>' +
+    ' <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener"><span class="lbl">Traffic</span></a>' +
+    ' <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener"><span class="lbl">Changelog</span></a>' +
+    ' <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link"><span class="lbl">Discord</span></a>';
 }
 // keep a left-open tab honest: refresh the relative label on a slow tick and
 // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.

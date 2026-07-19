@@ -1,0 +1,39 @@
+/* Shared closed-control chrome for the site header: the segmented site-nav
+   (Zine | Cores | Hardware) and the theme dropdown's CLOSED appearance. Linked
+   render-blocking by all three pages (zine, release tracker, hardware) so the
+   pill/theme sizing is a single source and cannot drift between them.
+
+   NOT here (deliberately, stays inline per page): the header FRAME (how the nav
+   is positioned relative to the title, plus each page's mobile reorder/stack/
+   shrink), and the OPEN dropdown MENU chrome. The release tracker's theme menu
+   rides the shared details.cols/.menu filter primitive, so this file carries
+   ZERO .menu/details.cols rules and cannot reach the filter UI.
+
+   Colours come from theme.css tokens. The theme summary is targeted by its id
+   (#themesum, identical on all three pages): the id beats the release tracker's
+   details.cols summary filter-base styling, so the shared rule wins there too. */
+
+/* segmented site-nav */
+.segnav { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
+          border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
+.pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap;
+        text-align: center; text-transform: uppercase; letter-spacing: .04em; font-size: .78rem;
+        padding: .38rem .95rem; }
+.pill + .pill { border-left: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hair)); }
+.pill:hover { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); }
+.pill[aria-current] { background: var(--accent); color: var(--bg); cursor: default; }
+
+/* theme control — closed appearance only (the open menu chrome stays per page) */
+.theme { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--hair); border-radius: 6px; }
+.theme details { position: relative; }
+#themesum { list-style: none; cursor: pointer; user-select: none; display: flex; align-items: center;
+            font-size: .78rem; padding: .3rem .6rem; border: 0; border-radius: 6px; }
+#themesum::-webkit-details-marker { display: none; }
+#themesum::after { content: " \25BE"; color: var(--muted); margin-left: auto; padding-left: .4em; }
+#themesum:hover, #themedd[open] #themesum { background: var(--hover-bg); }
+
+/* unified mobile sizing (one breakpoint for all three; the frames keep their own) */
+@media (max-width: 36rem) {
+  .pill { padding: .36rem .5rem; letter-spacing: .02em; }
+  #themesum { font-size: .72rem; padding: .3rem .45rem; }
+}

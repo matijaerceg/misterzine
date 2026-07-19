@@ -21,6 +21,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
+<link rel="stylesheet" href="../nav.css"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -38,8 +39,9 @@
      wider cards and roomier DIY columns, not into extra grid columns */
   .wrap { max-width: 88rem; margin: 0 auto; padding: .8rem 1.25rem 3rem; }
 
-  /* ---- header: wordmark + title left; pills + theme toggle pinned top-right
-     at every width (nowrap - the nav goes vertical on phones, never below) ---- */
+  /* ---- header: wordmark + title left; pills + theme toggle pinned top-right.
+     From 52rem down to 36rem the nav goes vertical and stays beside the title;
+     below 36rem it takes a full-width first row so the title gets the width ---- */
   .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
          padding: .35rem 0 .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
   .masthead { display: flex; align-items: center; gap: .95rem; min-width: 0; }
@@ -52,26 +54,14 @@
   .top h1 .cd { color: var(--accent); }
   .top .scope { display: block; font-family: Roboto, system-ui, sans-serif; font-size: .78rem; font-weight: 400;
                 color: var(--muted); margin-top: .15rem; }
-  /* site nav: one segmented control (Zine | Cores | Hardware); current filled */
+  /* site nav (.segnav + .pill) and the CLOSED theme control (.theme wrapper +
+     #themesum summary) live in the shared nav.css; only the frame (.top nav) and
+     the OPEN menu chrome are page-specific here. .theme button is the base for
+     the menu's theme buttons (transparent bg, inherited colour/cursor) that
+     .menu button doesn't restate — keep it here with the menu chrome. */
   .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
-  .top .segnav { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
-                 border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
-  .top .pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; text-align: center;
-               text-transform: uppercase; letter-spacing: .04em; font-size: .78rem; padding: .38rem .95rem; }
-  .top .pill + .pill { border-left: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hair)); }
-  .top .pill:hover { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); }
-  .top .pill[aria-current] { background: var(--accent); color: var(--bg); cursor: default; }
-  /* theme control: a single dropdown showing the current theme's name; Light,
-     Dark and the fun themes all live in its menu (same control on all pages) */
-  .theme { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--hair); border-radius: 6px; }
   .theme button { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 0;
                   background: transparent; color: inherit; cursor: pointer; }
-  .theme details { position: relative; }
-  .theme summary { list-style: none; font-size: .78rem; padding: .3rem .6rem; cursor: pointer;
-                   border-radius: 6px; user-select: none; display: flex; align-items: center; }
-  .theme summary::-webkit-details-marker { display: none; }
-  .theme summary::after { content: " \25BE"; opacity: .6; margin-left: auto; padding-left: .4em; }
-  .theme summary:hover, .theme details[open] summary { background: var(--hover-bg); }
   .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
   .theme .menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 20;
                  background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
@@ -300,9 +290,14 @@
               background: var(--surface); color: inherit; border-radius: 6px; padding: .1rem .5rem; cursor: pointer; }
   #sheet .x:hover { background: var(--hover-bg); }
 
+  /* tablet band: rail is folded and cards span full width, but 15rem minimums
+     yield 3 skinny columns whose titles collide with the photos -> force 2 */
+  @media (min-width: 40rem) and (max-width: 52rem) {
+    .cards { grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); }
+  }
   /* ---- mobile: rail folds into a details, chips go sticky ---- */
   @media (max-width: 52rem) {
-    /* nav stays top-right: stack it vertically instead of wrapping below */
+    /* nav goes vertical; at <=36rem it moves onto its own full-width row (below) */
     .top { align-items: flex-start; }
     .top nav { flex-direction: column; align-items: flex-end; gap: .45rem; }
     .masthead { gap: .6rem; }
@@ -322,6 +317,16 @@
                    border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--bg)); border-radius: 999px;
                    background: color-mix(in srgb, var(--accent) 10%, var(--bg)); padding: .18rem .6rem; }
     #chips .chip b { font-weight: 700; margin-left: .35em; }
+  }
+  /* phones: nav takes a full-width first row so its pills + theme sit together on
+     ONE line (no lone theme pill dangling below the segnav); the masthead then
+     gets the whole width beneath instead of ~150px. The pill/theme mobile SIZING
+     is shared (nav.css @media max-width:36rem). */
+  @media (max-width: 36rem) {
+    .top { flex-wrap: wrap; row-gap: .5rem; }
+    .top nav { order: -1; flex-basis: 100%; flex-direction: row; flex-wrap: nowrap;
+               justify-content: flex-end; align-items: center; gap: .4rem; }
+    .masthead { flex-basis: 100%; }
   }
   @media (min-width: 52.01rem) {
     #railfold summary { display: none; }

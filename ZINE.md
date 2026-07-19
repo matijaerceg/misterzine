@@ -136,6 +136,39 @@ cassette, an acronym reverse-engineered from a daughter's name. If the best you
 can find is dry, skip the candidate and pick another. Failing boring is allowed
 and encouraged.
 
+**State the hook in one sentence before you write a word.** Name, in one plain
+sentence, the surprising thing the reader will remember: "Renegade's designer
+based the hero on his own high-school fights", "Sea Wolf was one of the first
+games to save a high score", "the Channel F's pause button was a console
+first". If you cannot write that sentence, there is no post here yet: skip. If
+the sentence is a genre definition, a plot summary, or a spec sheet ("is a
+horizontally scrolling shooter in which the player takes control of..."), it
+is not a hook, it is the boring post wearing a hook's clothes: skip.
+
+**A post is one or two quotes and almost nothing else.** The ideal body is a
+single verbatim quote that delivers the hook, plus the source link. Two quotes
+are allowed only when both serve the same hook. Glue is a few words at most,
+and only when the quotes themselves fail to name the subject or anchor a date;
+"Also:" or "Of one boss:" is a full sentence of glue by this standard. If you
+are writing a sentence to set up, explain, or connect, the post is becoming
+your writing instead of the source's: cut it or skip. A strong quote needs no
+introduction; a quote that needs one is the wrong quote.
+
+**One hook, one payload.** Never stack quotes about different facts: a naming
+story plus a reskin story plus an origin story is three weak posts stapled
+together, not one strong one. Cut everything that does not serve the single
+hook, even if it is good; it can be its own post another day (a repeat with a
+genuinely different focus is legal, see "Picking what to post").
+
+**Short beats long.** A two-sentence post that lands is better than a
+paragraph that has to be followed. If the reader must track two games, two
+dates, or a chain of who-owned-what to get the point, the point is lost: that
+material fails the 12-year-old test no matter how accurate it is. If
+everything you fetched is genre-and-spec, or the hook needs a paragraph of
+setup to work, the candidate is dry: skip it. There are four posts a day and a
+skipped one costs nothing; a flat one sits on the public site until someone
+winces at it. When in doubt, skip. A dull post is worse than no post.
+
 **Two tests for a quote:**
 - A curious 12-year-old with no retro-gaming knowledge should get it on one read.
 - An expert should not be bored.
@@ -350,6 +383,10 @@ inspection; fix and push again.
       row's `date` field in `docs/releases/data.json`, re-read this run. The
       date is the one span in a post that is not quoted from a fetched source,
       which makes it the easiest thing to invent; never type it from memory
+- [ ] The post has a one-sentence hook that is a surprising fact, not a
+      genre/plot/spec description, and the first quote delivers it
+- [ ] The body is one or two quotes serving that single hook, with glue of a
+      few words at most; nothing in it reads as our own prose
 - [ ] Every quote stands on its own: a reaction or punchline ships together
       with the thing it reacts to, or not at all
 - [ ] The game is not already covered in `docs/zine.json`

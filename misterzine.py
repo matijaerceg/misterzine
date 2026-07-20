@@ -410,11 +410,20 @@ def cmd_snapshot(args):
                     system, kind, is_unit = classify(path)
                     if not is_unit:
                         continue
+                    # On CI there is no snapshots/ dir, so old_files falls back
+                    # to the catalog — which keeps rows for vanished paths.
+                    # Without this guard the same removal re-logs every run.
+                    last = con.execute(
+                        "SELECT event_type FROM events WHERE source_id=? AND path=? "
+                        "ORDER BY ts DESC, rowid DESC LIMIT 1",
+                        (source["id"], path)).fetchone()
+                    if last and last["event_type"] == "removed":
+                        continue
                     events.append((ts_iso, source["id"], path, title_from_path(path), system, "removed", None))
 
         # upsert catalog rows for everything currently present
         upsert_catalog(con, source["id"], files, ts_iso, seed, beta_set)
-        upsert_core_files(con, source["id"], files, ts_iso)
+        events += upsert_core_files(con, source["id"], files, ts_iso)
 
         # A core rebuild renames its rbf (PDP1_20190101.rbf -> PDP1_20260702.rbf),
         # which the diff sees as new+removed and upsert_catalog as a brand-new row
@@ -510,8 +519,17 @@ def upsert_core_files(con, source_id, files, ts_iso):
     bit-differently, so `changed` marks "a release wave landed" (useful for a
     future feed), not "this core changed". The table mirrors the current db;
     removed/renamed paths are pruned (a rebuild renames the dated file, and
-    the new row carries the new date)."""
+    the new row carries the new date).
+
+    Returns a list of 'updated' event tuples: a dated rbf replacing an older
+    dated build of the same core (SDGundamPS_20260514 -> SDGundamPS_20260714)
+    is a shipped arcade core update the main diff can't see — the .mra files
+    are untouched, so without this the site's Last Updated column moves but
+    the feeds say nothing (GitHub issue #1). Keying on the filename RENAME,
+    never the hash, keeps Jotego wave rebuilds out by construction: their
+    undated rbfs change hash in place and must stay silent."""
     seen = set()
+    events = []
     for path, meta in files.items():
         low = path.replace("\\", "/").lower()
         if not (low.startswith("_arcade/cores/") and low.endswith(".rbf")):
@@ -522,10 +540,17 @@ def upsert_core_files(con, source_id, files, ts_iso):
             "SELECT hash FROM core_files WHERE source_id=? AND path=?",
             (source_id, path)).fetchone()
         if row is None:
+            rbf, bdate = core_name(stem).lower(), core_build_date(stem)
+            prev = con.execute(
+                "SELECT build_date FROM core_files WHERE source_id=? AND rbf=? "
+                "AND path<>? AND build_date IS NOT NULL",
+                (source_id, rbf, path)).fetchone()
+            if bdate and prev and prev["build_date"] != bdate:
+                events.append((ts_iso, source_id, path, stem, "arcade",
+                               "updated", meta.get("hash")))
             con.execute(
                 "INSERT INTO core_files(source_id,path,rbf,build_date,hash,changed) VALUES(?,?,?,?,?,?)",
-                (source_id, path, core_name(stem).lower(), core_build_date(stem),
-                 meta.get("hash"), None))
+                (source_id, path, rbf, bdate, meta.get("hash"), None))
         elif row["hash"] != meta.get("hash"):
             con.execute(
                 "UPDATE core_files SET hash=?, changed=? WHERE source_id=? AND path=?",
@@ -534,6 +559,7 @@ def upsert_core_files(con, source_id, files, ts_iso):
         "SELECT path FROM core_files WHERE source_id=?", (source_id,)) if r["path"] not in seen]
     con.executemany("DELETE FROM core_files WHERE source_id=? AND path=?",
                     [(source_id, p) for p in stale])
+    return events
 
 
 # --- command: repos (retrospective release dates) -------------------------
@@ -2755,10 +2781,13 @@ def _write_feeds(outdir):
     data = json.loads((outdir / "data.json").read_text(encoding="utf-8"))
     by_title = {}   # arcade rows: raw MRA title (mt when humanized) + display title
     by_core = {}    # non-arcade rows: core token
+    by_rbf = {}     # arcade rows grouped by core rbf token (core-rebuild events)
     for d in data:
         if d.get("base") == "Arcade":
             by_title.setdefault(d.get("mt") or d["title"], d)
             by_title.setdefault(d["title"], d)
+            if d.get("core"):
+                by_rbf.setdefault(d["core"].lower(), []).append(d)
         elif d.get("core"):
             by_core.setdefault(d["core"].lower(), d)
     con = connect()
@@ -2774,31 +2803,69 @@ def _write_feeds(outdir):
         if e["event_type"] == "removed" and classify(e["path"])[1] == "core":
             renamed.add((e["ts"], e["source_id"], e["system"], core_name(e["title"])))
     cutoff = (dt.datetime.fromisoformat(events[0]["ts"]) - dt.timedelta(days=30)).isoformat()
+    core_rebuilds = set()   # (source_id, date, rbf token) with a core-rebuild event
+    for e in events:
+        if e["ts"] < cutoff:
+            break
+        if (e["event_type"] == "updated" and e["system"] == "arcade"
+                and e["path"].replace("\\", "/").lower().startswith("_arcade/cores/")):
+            core_rebuilds.add((e["source_id"], e["ts"][:10], core_name(e["title"]).lower()))
     items = []
+    seen_events = set()
+    seen_items = set()
     for e in events:
         if e["ts"] < cutoff:
             break
         if e["event_type"] == "removed":
             continue
-        # arcade: the event title is the raw MRA stem with region qualifiers
-        # ("Dig Dug (Rev 2)"); site rows show the stripped/humanized base, so
-        # try raw (kept-qualifier collision rows), then the stripped base
-        row = (by_title.get(e["title"]) or by_title.get(_arcade_base(e["title"]))
-               if e["system"] == "arcade"
-               else by_core.get(core_name(e["title"]).lower()))
-        if row is None:
+        # a doubled CI run (same upstream db timestamp) can log the identical
+        # event twice; keep one so the feed never carries duplicate guids
+        ekey = (e["ts"], e["source_id"], e["path"], e["event_type"])
+        if ekey in seen_events:
             continue
+        seen_events.add(ekey)
+        if e["system"] == "arcade" and e["path"].replace("\\", "/").lower().startswith("_arcade/cores/"):
+            # arcade core rebuild (dated rbf rename, see upsert_core_files):
+            # the event title is the rbf stem; the rows are everything that
+            # core serves (a shared rbf backs several games — Salamander
+            # serves both Salamander and Lifeforce). ONE item per rebuild:
+            # a Pac-Man core fix must not spam 22 per-game items.
+            rows = by_rbf.get(core_name(e["title"]).lower(), [])
+        elif e["system"] == "arcade":
+            # the event title is the raw MRA stem with region qualifiers
+            # ("Dig Dug (Rev 2)"); site rows show the stripped/humanized base,
+            # so try raw (kept-qualifier collision rows), then the stripped base
+            row = by_title.get(e["title"]) or by_title.get(_arcade_base(e["title"]))
+            rows = [row] if row else []
+            if (rows and e["event_type"] == "updated"
+                    and (e["source_id"], e["ts"][:10], (row.get("core") or "").lower()) in core_rebuilds):
+                # this game's core also shipped a rebuild today; that item is
+                # the canonical announcement — don't repeat it per MRA
+                continue
+        else:
+            row = by_core.get(core_name(e["title"]).lower())
+            rows = [row] if row else []
         # Patreon-beta rows are on the site (labeled) but never in the feeds:
         # most readers can't download them. Snapshot already logs no events
         # for them; this guards old/edge events too. Graduation is announced
         # naturally — its 'new' event lands in the same run that clears the
         # row's beta flag, so the row passes here by then.
-        if row.get("beta"):
+        rows = [r for r in rows if not r.get("beta")]
+        if not rows:
             continue
         etype = e["event_type"]
         if etype == "new" and (e["ts"], e["source_id"], e["system"], core_name(e["title"])) in renamed:
             etype = "updated"
-        items.append((etype, e, row))
+        # one item per game per day: alternative MRAs strip to the same base
+        # title as the mainline row, so a wave day would otherwise announce
+        # the same game once per variant (events are newest-first, so the
+        # freshest timestamp wins)
+        ikey = (etype, e["source_id"], e["ts"][:10],
+                tuple(sorted(r.get("k") or r["title"] for r in rows)))
+        if ikey in seen_items:
+            continue
+        seen_items.add(ikey)
+        items.append((etype, e, rows))
     from xml.sax.saxutils import escape
     for fname, name, types, chan_desc in FEEDS:
         # cap per feed, after filtering — a burst of updates must not starve
@@ -2814,10 +2881,14 @@ def _write_feeds(outdir):
                f'<atom:link rel="self" type="application/rss+xml" href="{escape(SITE_URL + fname)}"/>']
         if sel:
             xml.append(f'<lastBuildDate>{escape(_rfc822(sel[0][1]["ts"]))}</lastBuildDate>')
-        for etype, e, row in sel:
+        for etype, e, rows in sel:
             label = "New" if etype == "new" else "Updated"
+            rows = sorted(rows, key=lambda r: r["title"])
+            row = rows[0]
             base = row.get("base", "")
             kind = base if base == "Arcade" else f"{base} core"
+            if len(rows) > 1:
+                kind = "Arcade core"
             # the item link opens this row's detail panel on the site (#<k>
             # deep link). The repo's commit-history URL — the release commit
             # sits at its top; an exact-commit link isn't resolvable anyway
@@ -2834,20 +2905,29 @@ def _write_feeds(outdir):
             else:
                 hist = ""
             paras = []
-            bits = [b for b in (row.get("genre"), row.get("year"), row.get("manufacturer")) if b]
-            if bits:
-                paras.append(" / ".join(bits))
-            if base == "Arcade" and row.get("core"):
-                paras.append(f"Core: {row['core']}")
+            if len(rows) > 1:
+                paras.append("Serves: " + ", ".join(r["title"] for r in rows) + ".")
+            else:
+                bits = [b for b in (row.get("genre"), row.get("year"), row.get("manufacturer")) if b]
+                if bits:
+                    paras.append(" / ".join(bits))
+                if base == "Arcade" and row.get("core"):
+                    paras.append(f"Core: {row['core']}")
             paras.append(f"{label} in the public MiSTer databases on {e['ts'][:10]} "
                          f"(source: {e['source_id']}).")
             html = "".join(f"<p>{escape(p)}</p>" for p in paras)
             if hist:
                 html += f'<p><a href="{escape(hist)}">Commit history</a></p>'
-            if row.get("img") and row.get("img_slots"):
+            if len(rows) == 1 and row.get("img") and row.get("img_slots"):
                 slot, img = row["img_slots"][0], urllib.parse.quote(row["img"])
                 html = f'<p><img src="{SITE_ROOT}images/{slot}/{img}.png" alt=""/></p>' + html
-            ititle = f"[{label}] {row['title']} ({kind})"
+            if len(rows) > 1:
+                # a shared-rbf rebuild is one item named after the core (cased
+                # per the rbf filename — row['core'] casing is unreliable);
+                # the link opens the first served row's panel
+                ititle = f"[{label}] {core_name(e['title'])} ({kind}, {len(rows)} games)"
+            else:
+                ititle = f"[{label}] {row['title']} ({kind})"
             guid = e["source_id"] + ":" + e["path"] + ":" + e["ts"]
             xml += ['<item>',
                     f'<title>{escape(ititle)}</title>',

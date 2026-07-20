@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 19 Jul 2026 17:40:40 +0000</lastBuildDate>
+<lastBuildDate>Mon, 20 Jul 2026 12:04:49 +0000</lastBuildDate>
+<item>
+<title>[Updated] Eyes (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#eyes</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Eyes (US, Set 1).mra:2026-07-20T12:04:49+00:00</guid>
+<pubDate>Mon, 20 Jul 2026 12:04:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eyes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Techstar&lt;/p&gt;&lt;p&gt;Core: pacman&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Pacman_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Night Slashers (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#nslasher</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1959 / DEC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PDP1_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Game of Life (Other core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#GameOfLife</link>
-<guid isPermaLink="false">distribution_mister:_Other/GameOfLife_20260702.rbf:2026-07-07T22:19:48+00:00</guid>
-<pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
-<category>updated</category>
-<category>Other core</category>
-<description>&lt;p&gt;Updated in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Life_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -2,6 +2,10 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-20
+- The RSS feeds now announce arcade core updates. A core shipping a new dated build without touching its .mra files was invisible to the feeds, even though the release tracker's Last Updated column showed it (reported in issue #1). Cores that serve several games announce as a single item listing them, and the past month of missed core updates was backfilled into the feeds.
+- Feed cleanup: on big update days a game no longer produces one duplicate feed item per alternative version, so genuinely distinct updates are no longer pushed out of the feeds by duplicates.
+
 ## 2026-07-19
 - Zine: milestone posts now read "40th anniversary" / "50th anniversary" instead of "40th decadeversary", which double-counted (a decade is ten years, so "40th decadeversary" implied 400).
 

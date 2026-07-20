@@ -215,13 +215,22 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzzli2s.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2001 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Big Karnak (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#bigkarnk</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Big Karnak (ver. 1.0, checksum 1e38c94).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
+<title>[New] PDP-1 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PDP1</link>
+<guid isPermaLink="false">distribution_mister:_Computer/PDP1_20260702.rbf:2026-07-07T22:19:48+00:00</guid>
+<pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
 <category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bigkarnk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<category>Computer core</category>
+<description>&lt;p&gt;1959 / DEC&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PDP1_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Game of Life (Other core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#GameOfLife</link>
+<guid isPermaLink="false">distribution_mister:_Other/GameOfLife_20260702.rbf:2026-07-07T22:19:48+00:00</guid>
+<pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
+<category>new</category>
+<category>Other core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Life_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Big Karnak (Arcade)</title>
@@ -242,15 +251,6 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Biomechanical Toy (ver. 1.0.1885, checksum 69f5e032).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
 <title>[New] Cabal (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
 <guid isPermaLink="false">jtbindb:_Arcade/Cabal (World, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
@@ -258,24 +258,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Cabal (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Cabal (World, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Squash (Gaelco 1992) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#squash</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Squash (World, ver. 1.0, checksum 015aef61).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/squash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Squash (Gaelco 1992) (Arcade)</title>
@@ -296,225 +278,9 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thoop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Thunder Hoop (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#thoop</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Thunder Hoop (ver. 1, checksum 02a09f7d).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thoop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1992 / Gaelco&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Biomechanical Toy/Biomechanical Toy (ver. 1.0.1870, checksum ba682195).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Biomechanical Toy/Biomechanical Toy (ver. 1.0.1870, checksum ba682195).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Biomechanical Toy/Biomechanical Toy (ver. 1.0.1878, checksum d84b28ff).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Biomechanical Toy/Biomechanical Toy (ver. 1.0.1878, checksum d84b28ff).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Biomechanical Toy/Biomechanical Toy (ver. 1.0.1884, checksum 3f316c70).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Biomechanical Toy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#biomtoy</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Biomechanical Toy/Biomechanical Toy (ver. 1.0.1884, checksum 3f316c70).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/biomtoy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1995 / Gaelco / Zeus&lt;/p&gt;&lt;p&gt;Core: jtgae1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gae1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Cabal (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Cabal/Cabal (Koreax, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Cabal (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Cabal/Cabal (Koreax, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Cabal (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Cabal/Cabal (UK, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Cabal (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cabal</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Cabal/Cabal (UK, Joystick).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cabal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: jttoki&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/toki"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
 <title>[New] Captain America and The Avengers (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
 <guid isPermaLink="false">coinop:_Arcade/Captain America and The Avengers (US, Rev 1.9).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/Captain America and The Avengers (US, Rev 1.9).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (Asia, Rev 1.0).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (Asia, Rev 1.0).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (Asia, Rev 1.4).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (Asia, Rev 1.4).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (Japan, Rev 0.2).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (Japan, Rev 0.2).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (UK, Rev 1.4).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (UK, Rev 1.4).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (US, Rev 1.4).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (US, Rev 1.4).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (US, Rev 1.6).mra:2026-07-05T01:02:35+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Captain America and The Avengers (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#captavenu</link>
-<guid isPermaLink="false">coinop:_Arcade/_alternatives/_Captain America and The Avengers/Captain America and The Avengers (US, Rev 1.6).mra:2026-07-05T01:02:35+00:00</guid>
 <pubDate>Sun, 05 Jul 2026 01:02:35 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>

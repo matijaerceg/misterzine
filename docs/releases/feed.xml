@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 19 Jul 2026 17:40:40 +0000</lastBuildDate>
+<lastBuildDate>Mon, 20 Jul 2026 12:04:49 +0000</lastBuildDate>
+<item>
+<title>[Updated] Eyes (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#eyes</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Eyes (US, Set 1).mra:2026-07-20T12:04:49+00:00</guid>
+<pubDate>Mon, 20 Jul 2026 12:04:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eyes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Techstar&lt;/p&gt;&lt;p&gt;Core: pacman&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Pacman_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Night Slashers (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#nslasher</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Apple Lisa (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Apple-Lisa</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Apple-Lisa_20260712.rbf:2026-07-13T05:56:57+00:00</guid>
-<pubDate>Mon, 13 Jul 2026 05:56:57 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1983 / Apple&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-13 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-Lisa_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

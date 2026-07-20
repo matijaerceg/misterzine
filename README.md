@@ -301,6 +301,7 @@ data/
                          #   (committed so CI builds match local ones)
   snapshots/<source>/    # timestamped DB snapshots (diff inputs; gitignored)
   repos/                 # sparse Distribution clone for MRA metadata (gitignored)
+LICENSE                  # MIT (code); see License section for data and images
 docs/                    # the site, served by GitHub Pages from main /docs
   index.html             # redirect to /releases/
   fonts/  images/        # self-hosted Roboto + all screenshots/photos
@@ -311,3 +312,16 @@ docs/                    # the site, served by GitHub Pages from main /docs
     feed*.xml            # the three RSS feeds
 CHANGELOG.md             # user-visible site changes
 ```
+
+## License
+
+- **Code** (`misterzine.py`, `tools/`, the site's HTML/CSS/JS): [MIT](LICENSE).
+- **Data** (`docs/releases/data.json`, `meta.json`, the RSS feeds, and everything under
+  `data/exports/`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Use it
+  freely; credit "MiSTerZine by Matija Erceg" and, where practical, link to
+  <https://misterzine.fyi>. Note the data is not a versioned API: fields may be added or
+  renamed without notice, so consume it defensively.
+- **Images and quoted material** (game screenshots, hardware photos, zine quotes) remain
+  the property of their respective owners and are hosted for informational purposes; no
+  license is granted for them. Fonts are Roboto (Apache License 2.0); the CRT mask in
+  `docs/mask.js` is ported from Timothy Lottes' public-domain RVM shader (Unlicense).

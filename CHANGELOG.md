@@ -2,6 +2,10 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-21
+- Hardware landscape: the JAMMA I/O board entries (MiSTercade, JAMMIX) now carry a community tip about the alternative cabinet route - hand-wiring cab controls to GP2040-CE USB encoders with a regular analog I/O board for video.
+- Hardware landscape: the footer's official-design legend now also states that core developers build and test on official-design hardware, and that bugs appearing only on other boards may go unfixed.
+
 ## 2026-07-20
 - The RSS feeds now announce arcade core updates. A core shipping a new dated build without touching its .mra files was invisible to the feeds, even though the release tracker's Last Updated column showed it (reported in issue #1). Cores that serve several games announce as a single item listing them, and the past month of missed core updates was backfilled into the feeds.
 - Feed cleanup: on big update days a game no longer produces one duplicate feed item per alternative version, so genuinely distinct updates are no longer pushed out of the feeds by duplicates.

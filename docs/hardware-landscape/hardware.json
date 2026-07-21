@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema": 1,
-    "updated": "2026-07-17",
+    "updated": "2026-07-21",
     "currency": "USD",
     "price_note": "Typical street prices. Ranges [low,high] where vendors or batches differ. EUR prices converted approximately, marked in notes."
   },
@@ -664,7 +664,7 @@
         "gpio-header"
       ],
       "what": "The I/O board that turns a MiSTer into an ITX-case PC build OR a JAMMA arcade board - buffered RGB out of both ports at once.",
-      "notes": "EUR249.90 excl VAT (~$275) for the rev.2 board at Ultimate MiSTer, in stock at review 2026-07-17. Simultaneous buffered RGB via the JAMMA edge and a VGA port (component via sync-on-Y is an either/or mode), 4V p-p arcade-monitor levels, buffered TTL csync, onboard stereo amp for Neo Geo style cabinets, MVS harness compatible, CHAMMA 6-button support, I2S audio DAC with line in/out, 4+2-port USB hub, Ethernet routed to the IO shield, self-resetting fuses, ATX/JAMMA/5V power with soft power. Complete 'Ultimate JAMMIX' kits run EUR499.90-699.90 and do NOT include the DE10-Nano. The other current JAMMA I/O option alongside the MiSTercade; RetroCastle's earlier JAMMA kit is no longer listed anywhere (their store and the CastleMania listing both come up empty, checked 2026-07-17).",
+      "notes": "EUR249.90 excl VAT (~$275) for the rev.2 board at Ultimate MiSTer, in stock at review 2026-07-17. Simultaneous buffered RGB via the JAMMA edge and a VGA port (component via sync-on-Y is an either/or mode), 4V p-p arcade-monitor levels, buffered TTL csync, onboard stereo amp for Neo Geo style cabinets, MVS harness compatible, CHAMMA 6-button support, I2S audio DAC with line in/out, 4+2-port USB hub, Ethernet routed to the IO shield, self-resetting fuses, ATX/JAMMA/5V power with soft power. Complete 'Ultimate JAMMIX' kits run EUR499.90-699.90 and do NOT include the DE10-Nano. The other current JAMMA I/O option alongside the MiSTercade; RetroCastle's earlier JAMMA kit is no longer listed anywhere (their store and the CastleMania listing both come up empty, checked 2026-07-17). Community tip: a JAMMA I/O board is not the only way into a cabinet - many builders instead wire the cab's controls to one or two GP2040-CE USB encoder boards and drive the monitor from a regular analog I/O board. More hand-wiring, but it fits any cabinet, JAMMA or not.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [
@@ -693,7 +693,7 @@
         "gpio-header"
       ],
       "what": "The I/O board shaped like a JAMMA edge: your MiSTer becomes the game PCB inside a real arcade cabinet.",
-      "notes": "Lite tier: bring your own mainboard and RAM. The $550 Full Kit version includes a DE10-Nano and dual 128MB SDRAM. 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Sold out at review (\"back in soon\"). The Versus 2P sidekick board ($55) is an accessory, not listed. Cabinet not included, obviously. A budget alternative exists but is not listed as a path: a QMTech-branded JAMMA conversion board sells on AliExpress (~C$27, 3 sold as of 2026-07, owner-reported input bugs on player 1 - r/MiSTerFPGA 1pfrd5i) - too thinly attested to put on the map as a reliable JAMMA path.",
+      "notes": "Lite tier: bring your own mainboard and RAM. The $550 Full Kit version includes a DE10-Nano and dual 128MB SDRAM. 24-bit video via dedicated RGB DAC, adjustable 3.3V JAMMA edge, 13.5W mono amp, GP2040-CE sub-1ms controls, 8 buttons/player. Sold out at review (\"back in soon\"). The Versus 2P sidekick board ($55) is an accessory, not listed. Cabinet not included, obviously. A budget alternative exists but is not listed as a path: a QMTech-branded JAMMA conversion board sells on AliExpress (~C$27, 3 sold as of 2026-07, owner-reported input bugs on player 1 - r/MiSTerFPGA 1pfrd5i) - too thinly attested to put on the map as a reliable JAMMA path. Community tip: a JAMMA I/O board is not the only way into a cabinet - many builders instead wire the cab's controls to one or two GP2040-CE USB encoder boards and drive the monitor from a regular analog I/O board. More hand-wiring, but it fits any cabinet, JAMMA or not.",
       "verified": "2026-07",
       "confidence": "high",
       "sources": [

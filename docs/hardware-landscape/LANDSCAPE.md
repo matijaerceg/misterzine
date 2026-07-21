@@ -324,6 +324,12 @@ Field conventions (parts and options both):
   marker kills it. A DE10-vs-clones sub-grouping of the mainboard column
   was considered and NOT done: three boards, and the marker communicates
   lineage without re-architecture.
+  2026-07-21 (user-approved): the footer legend gained one factual
+  sentence - core devs build/test on official designs, bugs appearing
+  only on other boards may go unfixed, some devs decline such reports.
+  This is the WHOLE dev-support caveat: a per-entry warning badge on
+  third-party boards was considered and rejected (would invert/dilute
+  the official marker and collide with the no-editorial-badges ruling).
 - **QMTech mixed-vendor caveat (researched 2026-07-17)**: the Discord
   claim "QMTech boards don't work with normal IO boards" is NOT fully
   true (Irken Labs ran third-party JAMMA/JVS expanders on one), but
@@ -410,6 +416,11 @@ Field conventions (parts and options both):
   via VGA+USB, no hardware-verified MiSTer report found). Too thinly
   attested to enter the chain solver - revisit if reports accumulate.
   (Heber's MultiPi JAMMA is Raspberry-Pi-based, not FPGA - ignore.)
+  2026-07-21 (user-approved): a "Community tip" sentence on BOTH JAMMA
+  I/O parts (mistercade-lite, jammix) notes the non-JAMMA cab route -
+  hand-wire cab controls to GP2040-CE USB encoders + regular analog I/O
+  for video; more work, fits any cabinet. Notes-only per the
+  budget-alternatives precedent, never a chain path.
 - **Analog color depth axis (2026-07-17, reader-prompted)**: classic
   v6-class ladder I/O boards are 18-bit (6 bits/channel, GPIO-pinout
   limit - misterfpga t=6531); Sorg's 2024 redesign added true 24-bit

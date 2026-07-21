@@ -3,6 +3,8 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-21
+- Hardware landscape: capability chips on a product's spec sheet can now be tapped to show what the capability means - the explanations were previously hover-only tooltips, invisible on phones.
+- Hardware landscape: the freshness stamp now separates the last full review of prices and stock from the last page edit, so an edit no longer makes the data look fresher than it is.
 - Hardware landscape: the JAMMA I/O board entries (MiSTercade, JAMMIX) now carry a community tip about the alternative cabinet route - hand-wiring cab controls to GP2040-CE USB encoders with a regular analog I/O board for video.
 - Hardware landscape: the footer's official-design legend now also states that core developers build and test on official-design hardware, and that bugs appearing only on other boards may go unfixed.
 

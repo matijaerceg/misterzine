@@ -265,6 +265,13 @@
   #sheet .cap { font-size: .68rem; border: 1px solid var(--hair); border-radius: 999px; padding: .06rem .45rem;
                 color: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
   #sheet .cap.unv { border-style: dashed; color: var(--muted); }
+  /* sheet chips are tappable buttons: reset the UA button font, keep the
+     .cap chip look; the active chip shows its explain in .capex below */
+  #sheet button.cap { font-family: inherit; background: var(--surface); cursor: pointer; }
+  #sheet button.cap:hover { border-color: var(--btn-border-hover); }
+  #sheet button.cap[aria-expanded="true"] { border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  #sheet .capex { font-size: .78rem; color: var(--muted); margin: .25rem 0 0; }
   /* the receipts live one tap away, not in the greeting */
   #sheet .fine { margin-top: .7rem; border-top: 1px solid var(--rule); padding-top: .5rem; }
   #sheet .fine summary { cursor: pointer; font-size: .8rem; font-weight: 600; user-select: none;
@@ -973,10 +980,14 @@
                          ' on top (parts listed in the full specs below).';
       }
     }
+    /* sheet chips are BUTTONS: tap shows the explain below the row (title
+       tooltips are hover-only, and this page's audience is exactly the
+       visitor who does not know the jargon yet). Card chips stay spans -
+       a card is itself a button and buttons cannot nest. */
     var chips = built.map(function (t) {
-      return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
+      return '<button type="button" class="cap" aria-expanded="false" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</button>'; });
     unv.forEach(function (t) {
-      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
+      chips.push('<button type="button" class="cap unv" aria-expanded="false" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</button>');
     });
     sheet.innerHTML =
       '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +
@@ -1069,6 +1080,20 @@
   });
   sheet.addEventListener('click', function (e) {
     if (e.target === sheet) sheet.close();
+  });
+  /* tapping a capability chip toggles its explanation in a line below the
+     chip row; tapping another chip switches the line to that one */
+  sheet.addEventListener('click', function (e) {
+    var c = e.target.closest('button.cap'); if (!c) return;
+    var caps = c.parentNode;
+    var ex = caps.nextElementSibling && caps.nextElementSibling.classList &&
+             caps.nextElementSibling.classList.contains('capex') ? caps.nextElementSibling : null;
+    var was = c.getAttribute('aria-expanded') === 'true';
+    caps.querySelectorAll('button.cap').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+    if (was) { if (ex) ex.remove(); return; }
+    c.setAttribute('aria-expanded', 'true');
+    if (!ex) { ex = document.createElement('p'); ex.className = 'capex'; caps.insertAdjacentElement('afterend', ex); }
+    ex.textContent = c.textContent.replace(/\?$/, '') + ' - ' + (c.getAttribute('title') || '');
   });
   addEventListener('popstate', function () {
     if (sheet.open && location.hash.slice(1) !== sheetId) {
@@ -1181,11 +1206,16 @@
     document.getElementById('notmister').innerHTML = d.appendix_not_mister.map(function (x) {
       return '<li><b>' + esc(x.name) + '</b> - ' + esc(x.one_liner) + '</li>';
     }).join('');
+    /* recency honesty: "reviewed" is the last FULL sweep of prices and stock;
+       "updated" is merely the last edit. The stamp must never let a copy edit
+       make the data look fresher than it is. */
+    var revd = d.meta.reviewed || d.meta.updated;
     document.getElementById('stamp').textContent =
-      'Every fact on this page carries its own verification date; the dataset was last reviewed ' +
-      d.meta.updated + '. Vendor claims nobody has torn down are marked "claimed, not verified".';
+      'Every fact on this page carries its own verification date; prices and stock were last fully reviewed ' +
+      revd + (d.meta.updated !== revd ? ' (page last edited ' + d.meta.updated + ')' : '') +
+      '. Vendor claims nobody has torn down are marked "claimed, not verified".';
     var vc = document.getElementById('vchip');
-    vc.textContent = 'facts checked ' + d.meta.updated + ' - prices and stock drift';
+    vc.textContent = 'facts checked ' + revd + ' - prices and stock drift';
     vc.hidden = false;
     if (location.hash.length > 1) openByHash(location.hash, false);
   }).catch(function (e) {

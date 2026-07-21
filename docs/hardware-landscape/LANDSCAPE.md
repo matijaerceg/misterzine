@@ -141,7 +141,11 @@ poster is the expert's mental map, the interview prunes it.
 
 Top-level keys:
 
-- `meta` — `{schema, updated, currency}`. Bump `updated` on every edit.
+- `meta` — `{schema, updated, reviewed, currency}`. Bump `updated` on EVERY
+  edit; bump `reviewed` ONLY after a full sweep that re-verifies prices and
+  stock (2026-07-21, user-ordered recency honesty). The freshness stamp and
+  subtitle read `reviewed` - a copy edit must never make the data look
+  fresher than it is.
 - `capabilities` — vocabulary of tokens used in `provides`/`requires`.
   `{id: {name, explain}}`. Add a token here before using it anywhere.
 - `lanes` — ordered `[{id, name, tagline}]`.
@@ -202,6 +206,11 @@ paths and sources (N)"** with a source count, styled as an accent CTA
 button (user asked for more call-to-action 2026-07-17; earlier label
 "Specs and sources" was too quiet, and "The fine print" was rejected
 before that — not a contract). Still boots collapsed.
+Sheet capability chips are BUTTONS (2026-07-21, user-approved): tap
+toggles the chip's explain in a muted .capex line under the chip row
+(title tooltips are hover-only and the audience does not know the
+jargon). Card chips stay spans - a card is itself a button and buttons
+cannot nest. Part sheets have no chips; unchanged.
 
 Interview/rail rulings (user, 2026-07-16 overhaul round):
 - Verdict + tally render BELOW the questions. Nothing that appears on

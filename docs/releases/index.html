@@ -437,11 +437,13 @@
      same core (one build shipped them together). Deliberately quieter than the
      .nb/.bb/.br pills — no border, just muted small text: it's a grouping hint,
      not a novelty or a caution. Hover explains via the shared popover.
-     display:block puts it on its own small line UNDER the date: the column is
-     ~82px at typical widths and the date alone takes ~66px, so an inline word
-     overflows the nowrap cell and collides with the next column's date. */
-  td .xb { display: block; color: var(--muted); font-size: .75em;
-           font-style: italic; line-height: 1.15; cursor: help; }
+     Inline, but the cell is white-space:normal (the date itself is protected by
+     its own nowrap .dv span) with a real space before the badge, so the browser
+     keeps "date batch" on one line where the fixed column has room and drops the
+     badge to a second line only where it doesn't — instead of always breaking or
+     overflowing into the next column. .xb stays nowrap so "batch" never splits. */
+  td .xb { display: inline; white-space: nowrap; color: var(--muted);
+           font-size: .75em; font-style: italic; cursor: help; }
   td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
@@ -481,7 +483,11 @@
      (capture phase, so it wins over the Esc ladder) and the shared .theme .menu
      max-height replaces positionMenu's height cap. theme.js builds the buttons,
      mask.js wires the shadow-mask row. */
-  td.date { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  /* the cell wraps (so the batch badge can drop to a second line when the fixed
+     column is too narrow), but the date value never breaks mid-string at its
+     hyphens — its own .dv span carries the nowrap the cell used to. */
+  td.date { font-variant-numeric: tabular-nums; }
+  td.date .dv { white-space: nowrap; }
   tr:hover td { background: var(--row-hover); }
   .build { color: var(--muted); }
   /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
@@ -1384,7 +1390,7 @@ function batchBadge(d) {
   if (n < 2) return '';
   const tip = 'This update shipped together with ' + (n - 1) + ' other game' + (n === 2 ? '' : 's') +
     ' on the ' + coreLabel(d.core) + ' core (' + d.updated + ')';
-  return '<span class="xb" data-tip="' + escA(tip) + '">batch</span>';
+  return ' <span class="xb" data-tip="' + escA(tip) + '">batch</span>';
 }
 
 // The star sits out of flow in the sticky cell's left padding (see the .fav CSS),
@@ -1450,9 +1456,9 @@ const COLUMNS = [
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
-  { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + batchBadge(d) + '</td>' },
+  { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date"><span class="dv">' + esc(d.updated || '') + '</span>' + batchBadge(d) + '</td>' },
   { k: 'date', label: 'MiSTer Debut', sl: 'Debut', w: 10, mw: 5.5,
-    cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' },
+    cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '"><span class="dv">' + esc(d.date) + '</span></td>' },
   { k: 'year', label: 'Original Year', sl: 'Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
   { k: 'manufacturer', label: 'Manufacturer', w: 19, mw: 8.5, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
   { k: 'core', label: 'FPGA Core', sl: 'Core', w: 24, mw: 10,

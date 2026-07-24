@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-24
+- Releases: the empty detail panel now spells out what selecting a title gets you (details, screenshots, and launching it on your MiSTer), so the launch feature is easier to discover.
+
 ## 2026-07-21
 - Hardware landscape: capability chips on a product's spec sheet can now be tapped to show what the capability means - the explanations were previously hover-only tooltips, invisible on phones.
 - Hardware landscape: the freshness stamp now separates the last full review of prices and stock from the last page edit, so an edit no longer makes the data look fresher than it is.

@@ -17,6 +17,27 @@ question that the user retired the same day (2026-07-17, "overkill" -
 depth is discovered while browsing entries instead); the mechanism stays
 for future gated questions.
 
+**Real-discs question RETIRED (2026-07-24).** Anime0t4ku's community
+`Main_MiSTer_Physical_Disc` firmware (released 2026-07-19, evolving weekly)
+plays real CDs from ANY USB drive on ANY MiSTer - PSX/Mega CD/TG-16 CD/
+Saturn/CD-i/Neo Geo CD (3DO unstable). RetroRGB hands-on confirmed; works
+through the SuperDock too. So `cd-drive` is now reachable everywhere via a
+new commodity part `usb-cd-drive` (provides cd-drive, `requires: []`, ~$20-
+35). The "Play games from real discs?" interview question then pruned
+NOTHING, so it was removed - same reasoning as the retired depth question
+(a capability that no longer discriminates lives in sheets/chips, not the
+rail). Modeling decisions: `usb-cd-drive` is deliberately CHAIN-ONLY (no
+`category`, like superdock - user ruling 2026-07-24: DIY columns are a
+build-anatomy lesson, plug-in peripherals stay sheet-level); it wins the
+SSOne cheapest-chain over the $50 SuperDock on price. Granted as plain
+`provides` per the solid-source policy (RetroRGB test + GitHub releases) -
+the unofficial-firmware dependency rides in the part `notes` and the
+`cd-drive` explain, NOT as `provides_unverified` (that hedge marks disputes,
+and nobody disputes it works). The official MiSTer FAQ says USB drives will
+never be officially supported; that context lives in the notes. RE-CHECK on
+the next sweep: if the firmware project stalls, the honest map regresses to
+SSOne-only and the question would earn its rail slot back (cheap git revert).
+
 Nav name: **Hardware** (was "Landscape" until 2026-07-17, when the site-wide nav became Zine / Cores / Hardware). Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness stamp (meta.updated, plain muted text, NOT a chip) IS the whole subtitle (scope sentence removed 2026-07-16, de-chipped 2026-07-17); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
 URL: `/hardware-landscape/` (renamed from `/landscape/` on 2026-07-17; a
 redirect stub stays at `/landscape/`). Outward copy may say "landscape" or

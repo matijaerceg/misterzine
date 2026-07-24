@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema": 1,
-    "updated": "2026-07-21",
+    "updated": "2026-07-24",
     "reviewed": "2026-07-17",
     "currency": "USD",
     "price_note": "Typical street prices. Ranges [low,high] where vendors or batches differ. EUR prices converted approximately, marked in notes."
@@ -111,7 +111,7 @@
     },
     "cd-drive": {
       "name": "Optical disc drive",
-      "explain": "Load real CDs (PS1 now; Saturn/Sega CD support maturing in firmware)."
+      "explain": "Load real game CDs. Works on any MiSTer with a cheap USB drive plus a free community firmware add-on (unofficial); the SuperStation One's SuperDock builds a tray drive in."
     },
     "m2-slot": {
       "name": "M.2 SSD bay",
@@ -609,7 +609,7 @@
       "requires": [
         "ssone-port"
       ],
-      "notes": "SuperStation One only. Tray-loading DVD-RW, unpopulated M.2 2280 bay, 4 more USB-A, IR remote. Preorder, sold out; disc loading works for PS1, Saturn/Sega CD support still maturing in firmware. Shipped later than the original window.",
+      "notes": "SuperStation One only. Tray-loading DVD-RW, unpopulated M.2 2280 bay, 4 more USB-A, IR remote. Preorder, sold out. Built-in PS1 disc loading works, and Anime0t4ku's community Physical Disc firmware runs through the dock too, covering Sega CD, TG-16 CD, Saturn, CD-i and more. Shipped later than the original window.",
       "verified": "2026-07",
       "confidence": "medium",
       "sources": [
@@ -617,6 +617,25 @@
         "https://blog.lon.tv/2026/06/07/superstation-one-with-dock-mister-review-lots-of-analog-tv-options/"
       ],
       "stock": "waves"
+    },
+    "usb-cd-drive": {
+      "name": "USB CD/DVD drive",
+      "vendor": "any brand",
+      "price_usd": [
+        20,
+        35
+      ],
+      "provides": [
+        "cd-drive"
+      ],
+      "requires": [],
+      "notes": "Any external USB CD/DVD drive, plugged into any MiSTer's USB port. Needs Anime0t4ku's free Physical Disc firmware pack - a community replacement of the MiSTer main binary (extract a zip to the SD card, add two lines to MiSTer.ini); it is NOT part of the official project, which says it will never support USB drives itself. Plays real PlayStation, Sega CD, TurboGrafx-CD, Saturn, CD-i and Neo Geo CD discs (3DO still unstable). Slimline bus-powered drives may need a powered USB hub. Released July 2026 and evolving fast.",
+      "verified": "2026-07",
+      "confidence": "low",
+      "sources": [
+        "https://github.com/Anime0t4ku/Main_MiSTer_Physical_Disc",
+        "https://retrorgb.com/mister-boot-your-disc-based-games-from-any-usb-optical-drive.html"
+      ]
     },
     "ironclad-dx": {
       "name": "d3fmod Ironclad DX",
@@ -846,7 +865,7 @@
       "line_overrides": {
         "snac": "built in (PS1 ports); others via the SuperDock + adapter"
       },
-      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Mini-DIN-10 wired to the SATURN PINOUT (Taki Udon on r/MiSTerFPGA: We used Saturn Pinout). Aftermarket Saturn AV cables with round plugs fit and work - owners report S-Video plus audio over a ten-dollar Saturn cable - but ORIGINAL Sega cables with the flat-keyed shell physically do not fit. PS1 SNAC controller+memory-card ports, NFC loading, wired Ethernet (vendor Ports spec, verified 2026-07-16; cnx-software corroborates the RJ45), WiFi/BT, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 selects the FPGA MikeS-style encoder vs the onboard Sony CXA2075M encoder chip. SETTLED BY TEARDOWN (What's Ken Making, 'Inside the SuperStation One', May 2026): the analog path is an ADV7125 24-bit DAC into an LMH6722 buffer, and ALL analog outputs - both encoder paths included - pass through three TI THS7374 video amplifiers before leaving the board, so the built-in Y/C IS actively filtered; RetroRGB separately scope-verified proper video levels on every output. Ken's counterpoint to the forum consensus (which prefers the MikeS/FPGA path): the FPGA's waveform is quantized, so he expects the Sony chip's encode to be smoother - both paths are amplified, pick by ear/eye via DIP 3. Same-teardown caveats: the stock NFC coil is too small for card-size Zaparoo tokens (buttons/stickers work; a ~$3 larger DigiKey coil fixes cards), and in YPbPr mode the composite/S-Video outputs go dead (mode-exclusive, per RetroRGB's review). Early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026). Field reports on the native S-Video are strong: on a PVM-20L5 one owner rates it very similar to the unit RGB output, and the sub consensus is that no MikeS11 adapter is needed (r/MiSTerFPGA, June 2026). SNAC is PS1-ports-only on the unit itself: other consoles' original pads need the SuperDock's dedicated SNAC port plus a standard SNAC adapter - the USB ports do NOT carry SNAC signals (r/MiSTerFPGA 1obnro9, 1q53mss, 1tjuym2; owners report ordering the dock specifically to get the SNAC port).",
+      "notes": "PSone-shaped complete MiSTer: 128MB RAM, ADV7125 24-bit DAC, HDMI up to 1440p-class, VGA/component/composite/S-Video plus a Mini-DIN-10 wired to the SATURN PINOUT (Taki Udon on r/MiSTerFPGA: We used Saturn Pinout). Aftermarket Saturn AV cables with round plugs fit and work - owners report S-Video plus audio over a ten-dollar Saturn cable - but ORIGINAL Sega cables with the flat-keyed shell physically do not fit. PS1 SNAC controller+memory-card ports, NFC loading, wired Ethernet (vendor Ports spec, verified 2026-07-16; cnx-software corroborates the RJ45), WiFi/BT, 64GB card preinstalled. Y/C is native, no dongle needed; DIP switch 3 selects the FPGA MikeS-style encoder vs the onboard Sony CXA2075M encoder chip. SETTLED BY TEARDOWN (What's Ken Making, 'Inside the SuperStation One', May 2026): the analog path is an ADV7125 24-bit DAC into an LMH6722 buffer, and ALL analog outputs - both encoder paths included - pass through three TI THS7374 video amplifiers before leaving the board, so the built-in Y/C IS actively filtered; RetroRGB separately scope-verified proper video levels on every output. Ken's counterpoint to the forum consensus (which prefers the MikeS/FPGA path): the FPGA's waveform is quantized, so he expects the Sony chip's encode to be smoother - both paths are amplified, pick by ear/eye via DIP 3. Same-teardown caveats: the stock NFC coil is too small for card-size Zaparoo tokens (buttons/stickers work; a ~$3 larger DigiKey coil fixes cards), and in YPbPr mode the composite/S-Video outputs go dead (mode-exclusive, per RetroRGB's review). Early firmware had mono/color-banding glitches on some cores, since patched. RTC needs a user-installed CR1220. No PSU in box. Sells in batches; sold out between batches (Batch 4 gone as of July 2026). Field reports on the native S-Video are strong: on a PVM-20L5 one owner rates it very similar to the unit RGB output, and the sub consensus is that no MikeS11 adapter is needed (r/MiSTerFPGA, June 2026). SNAC is PS1-ports-only on the unit itself: other consoles' original pads need the SuperDock's dedicated SNAC port plus a standard SNAC adapter - the USB ports do NOT carry SNAC signals (r/MiSTerFPGA 1obnro9, 1q53mss, 1tjuym2; owners report ordering the dock specifically to get the SNAC port). For real discs the SuperDock adds an integrated tray drive; any USB drive also works via the same community Physical Disc firmware as every other MiSTer.",
       "verified": "2026-07",
       "sources": [
         "https://retroremake.co/products/superstation-one",
@@ -1710,22 +1729,6 @@
           "stock": [
             "now"
           ]
-        }
-      ]
-    },
-    {
-      "id": "discs",
-      "q": "Play games from real discs?",
-      "answers": [
-        {
-          "id": "yes",
-          "label": "Yes, real discs",
-          "require": [
-            [
-              "cd-drive"
-            ]
-          ],
-          "short": "Real discs"
         }
       ]
     }

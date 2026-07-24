@@ -433,6 +433,15 @@
            color: var(--muted); font-size: .6em; font-weight: 700;
            letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; }
+  /* batch marker: this row's Last Updated date is shared by other games on the
+     same core (one build shipped them together). Deliberately quieter than the
+     .nb/.bb/.br pills — no border, just muted small text: it's a grouping hint,
+     not a novelty or a caution. Hover explains via the shared popover.
+     display:block puts it on its own small line UNDER the date: the column is
+     ~82px at typical widths and the date alone takes ~66px, so an inline word
+     overflows the nowrap cell and collides with the next column's date. */
+  td .xb { display: block; color: var(--muted); font-size: .75em;
+           font-style: italic; line-height: 1.15; cursor: help; }
   td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
@@ -489,6 +498,8 @@
            white-space: nowrap; cursor: help; }
   /* the panel's fuller boot-orientation sentence, under the Rotation value */
   dd .brot { color: var(--muted); font-size: .9em; }
+  /* the panel's "shipped together" line, under the Latest update value */
+  dd .batch { color: var(--muted); font-size: .9em; }
   /* "8 years ago" trailing a panel date. Dimmed like .prov but deliberately NOT
      .prov: that italic means "this value is uncertain", which an age never is. */
   .ago { color: var(--muted); margin-left: .4rem; }
@@ -1240,6 +1251,21 @@ fetch('../images/systems/credits.json')
 // without us hard-coding each. Multi-title cores resolve via CORE_NAMES instead.
 const coreSoleTitle = {};
 
+// core '\0' updated -> how many rows share that Last Updated stamp on that core.
+// An arcade core rebuild stamps every game its rbf serves with one date, so a
+// count > 1 means "these shipped together in one build", not N separate updates.
+// Rebuilt from DATA in ingest(). Debut-floored rows (updated === date, the debut
+// build is itself the newest build) are NOT counted: they're a debut stamp, not
+// a batch ship, and would falsely swell a cluster they only coincide with.
+const updCluster = {};
+
+// 0 for rows with no core, no updated date, or a debut-floored date; otherwise
+// the batch size (1 = shipped alone). Guard matches the ingest() build exactly.
+function clusterN(d) {
+  if (!d.core || !d.updated || d.updated === d.date) return 0;
+  return updCluster[d.core + '\0' + d.updated] || 0;
+}
+
 function coreLabel(core) {
   if (!core) return '';
   if (CORE_NAMES[core]) return CORE_NAMES[core];
@@ -1345,6 +1371,22 @@ function betaBadge(d) {
   return d.beta ? '<span class="bb" data-tip="' + escA(BETA_TIP) + '">beta</span>' : '';
 }
 
+// "batch" marker in the Last Updated cell: this row's date is shared by other
+// games on the same core, i.e. one core build shipped them all at once. Shown on
+// every clustered row (not recency-gated — the batching is as true for an old
+// date as a new one, and gating inverted the meaning once ~70% of the table
+// qualifies). clusterN already excludes debut-floored rows. Neutral wording only
+// — we can't tell a core rebuild from a batched MRA change client-side (Jotego
+// rbfs are undated), so we never say "core rebuild". The panel qualifier
+// (detailHTML) carries the same fact for touch, where the hover tip can't reach.
+function batchBadge(d) {
+  const n = clusterN(d);
+  if (n < 2) return '';
+  const tip = 'This update shipped together with ' + (n - 1) + ' other game' + (n === 2 ? '' : 's') +
+    ' on the ' + coreLabel(d.core) + ' core (' + d.updated + ')';
+  return '<span class="xb" data-tip="' + escA(tip) + '">batch</span>';
+}
+
 // The star sits out of flow in the sticky cell's left padding (see the .fav CSS),
 // so it costs the Title column no width and shifts no text when it appears on
 // hover. Without hover there's nothing to reveal it, so touch gets a plain
@@ -1408,7 +1450,7 @@ const COLUMNS = [
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
-  { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + '</td>' },
+  { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date">' + esc(d.updated || '') + batchBadge(d) + '</td>' },
   { k: 'date', label: 'MiSTer Debut', sl: 'Debut', w: 10, mw: 5.5,
     cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '">' + esc(d.date) + '</td>' },
   { k: 'year', label: 'Original Year', sl: 'Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
@@ -1740,9 +1782,18 @@ function apply() {
       // it; numeric:true gives natural ordering for any number runs in titles.
       const cmp = sortDir * av.localeCompare(bv, undefined, { numeric: true, sensitivity: 'base' });
       if (cmp) return cmp;
-      // Tiebreak equal values by title A–Z: one repo push stamps every row of a
-      // shared arcade core with the same Last Updated date, and without this the
-      // whole block would sit in arbitrary data order.
+      // One repo push stamps every row of a shared arcade core with the same Last
+      // Updated date. When sorting by that column, keep those rows together by
+      // grouping equal dates by core first, so a wave of same-dated rows reads as
+      // per-core batches instead of one alphabetised wall. Not multiplied by
+      // sortDir (like the title tiebreak below): flipping asc/desc reorders the
+      // dates only, leaving each date's block in a stable core-then-title order.
+      if (sortKey === 'updated') {
+        const cc = coreLabel(a.core).localeCompare(coreLabel(b.core), undefined, { numeric: true, sensitivity: 'base' });
+        if (cc) return cc;
+      }
+      // Final tiebreak: title A–Z, so an equal date/core block isn't left in
+      // arbitrary data order.
       return a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' });
     });
   }
@@ -2403,7 +2454,16 @@ function detailHTML(d) {
     esc(d.date) + agoSpan(relAge(d.date) + (debut ? '' : ' (debut unknown)')), true]);
   // 'Latest update' = newest shipped build (what update_all delivers);
   // 'Latest commit' = repo activity, which can run ahead of a shipped build
-  if (d.updated) rows.push(['Latest update', esc(d.updated) + agoSpan(relAge(d.updated)), true]);
+  if (d.updated) {
+    // when other games on this core share this exact date, the build shipped
+    // them together — say so plainly (this line is always shown, unlike the
+    // recency-gated cell marker, so touch gets the fact too)
+    let uv = esc(d.updated) + agoSpan(relAge(d.updated));
+    const bn = clusterN(d);
+    if (bn >= 2) uv += '<br><span class="batch">This update shipped together with ' + (bn - 1) +
+      ' other game' + (bn === 2 ? '' : 's') + ' served by this core.</span>';
+    rows.push(['Latest update', uv, true]);
+  }
   if (d.act) rows.push(['Latest commit', esc(d.act) + agoSpan(relAge(d.act)), true]);
   // which downloader database delivers this entry via update_all
   if (d.src) rows.push(['Source', SRC_NAMES[d.src] || d.src]);
@@ -3027,7 +3087,7 @@ const META_SEL = '#discord-link, #rss-link, #pub-note';
 // META_POP. They stay out of the focus and tap paths below — focusing them
 // would add a dozen tab stops for a date the Debut column already spells out,
 // and on touch a tap in that cell belongs to the row's detail panel.
-const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .br';
+const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .br, td .xb';
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
 let hoverPop = null, hoverPopFor = null;   // hoverPopFor: the trigger element
 function closeHoverPop() {
@@ -3172,6 +3232,14 @@ function ingest(d) {
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
   for (const k in KEY2ROW) delete KEY2ROW[k];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
+  // batch-clustering: count rows sharing a core's Last Updated stamp (see
+  // updCluster / clusterN). Rebuilt, not merged, for the same reason as above.
+  for (const k in updCluster) delete updCluster[k];
+  for (const r of DATA) {
+    if (!r.core || !r.updated || r.updated === r.date) continue;
+    const ck = r.core + '\0' + r.updated;
+    updCluster[ck] = (updCluster[ck] || 0) + 1;
+  }
   // a swap replaces every row object, and the open row is tracked by identity
   // (see render) — re-point it at its replacement or the highlight silently
   // dies under an open panel. A row that's gone keeps its old object.

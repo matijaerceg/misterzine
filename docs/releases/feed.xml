@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 22 Jul 2026 01:06:18 +0000</lastBuildDate>
+<lastBuildDate>Thu, 23 Jul 2026 21:32:22 +0000</lastBuildDate>
+<item>
+<title>[New] Dark Seal (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#darkseal</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Dark Seal (World revision 3).mra:2026-07-23T21:32:22+00:00</guid>
+<pubDate>Thu, 23 Jul 2026 21:32:22 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/darkseal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1990 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: Deco16&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Vapor Trail - Hyper Offence Formation (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#vaportra</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Vapor Trail - Hyper Offence Formation (World revision 1).mra:2026-07-23T21:32:22+00:00</guid>
+<pubDate>Thu, 23 Jul 2026 21:32:22 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vaportra.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: Deco16&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Deco16 (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cninja</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Deco16_20260722.rbf:2026-07-23T21:32:22+00:00</guid>
+<pubDate>Thu, 23 Jul 2026 21:32:22 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Caveman Ninja, Crude Buster, Dark Seal, Vapor Trail - Hyper Offence Formation.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] AtariLynx2P (Console core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#AtariLynx2P</link>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzzli2s.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2001 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] PDP-1 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#PDP1</link>
-<guid isPermaLink="false">distribution_mister:_Computer/PDP1_20260702.rbf:2026-07-07T22:19:48+00:00</guid>
-<pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1959 / DEC&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PDP1_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Game of Life (Other core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#GameOfLife</link>
-<guid isPermaLink="false">distribution_mister:_Other/GameOfLife_20260702.rbf:2026-07-07T22:19:48+00:00</guid>
-<pubDate>Tue, 07 Jul 2026 22:19:48 +0000</pubDate>
-<category>new</category>
-<category>Other core</category>
-<description>&lt;p&gt;New in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Life_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] IGSPGM (Arcade core, 21 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dmnfrnt</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/IGSPGM_20260707.rbf:2026-07-07T00:00:00+00:00</guid>
-<pubDate>Tue, 07 Jul 2026 00:00:00 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Demon Front, DoDonPachi II - Bee Storm, DoDonPachi III, Dragon World 2001, Dragon World 3, Dragon World 3 EX, Espgaluda, Ketsui: Kizuna Jigoku Tachi, Knights of Valour 2, Knights of Valour Super Heroes, Martial Masters, Oriental Legend, Photo Y2K, Puzzle Star, Puzzli 2, Puzzli 2 Super, S.V.G. - Spectral vs Generation, The Gladiator, The Killing Blade, The Killing Blade Plus, Xiyou Shi E Zhuan Super.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

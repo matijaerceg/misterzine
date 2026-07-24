@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 21 Jul 2026 23:39:03 +0000</lastBuildDate>
+<lastBuildDate>Thu, 23 Jul 2026 21:32:22 +0000</lastBuildDate>
+<item>
+<title>[Updated] Deco16 (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cninja</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Deco16_20260722.rbf:2026-07-23T21:32:22+00:00</guid>
+<pubDate>Thu, 23 Jul 2026 21:32:22 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Caveman Ninja, Crude Buster, Dark Seal, Vapor Trail - Hyper Offence Formation.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Apple Lisa (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Apple-Lisa</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toryumon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Tough Turf (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tturfu</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Tough Turf (set 1, US) (8751 317-0099).mra:2026-07-05T21:10:17+00:00</guid>
-<pubDate>Sun, 05 Jul 2026 21:10:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tturfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Sega / Sunsoft&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-05 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

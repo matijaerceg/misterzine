@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-24
+- Release tracker: when a single core build updates all the games it serves on the same day, those games now cluster together under Last Updated instead of scattering alphabetically, and each carries a "batch" marker (hover, or the detail panel, explains how many games shipped together) so a core-wide rebuild no longer reads as dozens of separate game updates.
 - Releases: the empty detail panel now spells out what selecting a title gets you (details, screenshots, and launching it on your MiSTer), so the launch feature is easier to discover.
 - Hardware landscape: playing real discs is no longer a SuperStation One exclusive - a new community firmware lets any USB CD/DVD drive work on any MiSTer, so every spec sheet now shows the real-discs path and the interview question (which no longer narrowed anything) was retired.
 

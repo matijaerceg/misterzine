@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 24 Jul 2026 20:02:11 +0000</lastBuildDate>
+<lastBuildDate>Sat, 25 Jul 2026 18:38:33 +0000</lastBuildDate>
+<item>
+<title>[Updated] UK101 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#UK101</link>
+<guid isPermaLink="false">distribution_mister:_Computer/UK101_20260724.rbf:2026-07-25T18:38:33+00:00</guid>
+<pubDate>Sat, 25 Jul 2026 18:38:33 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1979 / Compukit&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/UK101_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Jungle King (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#jungle-king</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-17 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Karate Champ (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kchamp</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Karate Champ/Karate Champ (US, 2 players).mra:2026-07-17T18:07:32+00:00</guid>
-<pubDate>Fri, 17 Jul 2026 18:07:32 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kchamp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1984 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtkchamp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-17 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kchamp"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

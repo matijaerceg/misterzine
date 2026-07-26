@@ -273,6 +273,14 @@ def norm_key(title):
     return t
 
 
+def _retitle_key(title):
+    """Strict rename-pairing key: punctuation-insensitive but variant-keeping.
+    "Jungle King Japan" and "Jungle King (Japan)" must pair, while "Game (US)"
+    and "Game (World)" must not — so unlike norm_key, parenthesized content
+    stays in the key."""
+    return re.sub(r"[^a-z0-9]+", "", title.lower())
+
+
 # --- fetch + normalize ----------------------------------------------------
 
 def fetch_db(source):
@@ -431,19 +439,32 @@ def cmd_snapshot(args):
         # the site would show the core twice) and stamping today as the new row's
         # release_date (recency inflation). Treat it as a rename instead: carry
         # the old row's debut/first_seen onto the new row, then drop the old row.
+        # MRA retitles ("Jungle King Japan" -> "Jungle King (Japan)") are the
+        # same rename in title-row clothing, but norm_key drops parenthesized
+        # content so it can't pair them; match on a key that keeps it. Only
+        # paths NEW this snapshot are rename candidates — an established row
+        # must never have its dates overwritten by a colliding removed one.
         if not seed:
             current = {}
+            new_titles = {}
             for path in files:
                 system, kind, is_unit = classify(path)
                 if is_unit and kind == "core":
                     current.setdefault((system, core_name(title_from_path(path))), path)
+                elif is_unit and kind == "title" and path not in old_files:
+                    new_titles.setdefault((system, _retitle_key(title_from_path(path))), path)
             for path in old_files:
                 if path in files or path in prev_beta:
                     continue
                 system, kind, is_unit = classify(path)
-                if not (is_unit and kind == "core"):
+                if not is_unit:
                     continue
-                new_path = current.get((system, core_name(title_from_path(path))))
+                if kind == "core":
+                    new_path = current.get((system, core_name(title_from_path(path))))
+                elif kind == "title":
+                    new_path = new_titles.get((system, _retitle_key(title_from_path(path))))
+                else:
+                    continue
                 old_row = con.execute(
                     "SELECT release_date, first_seen FROM catalog WHERE source_id=? AND path=?",
                     (source["id"], path)).fetchone()
@@ -694,10 +715,24 @@ def _repo_key(name):
     return k
 
 
+# Since this date, cmd_snapshot has stamped detection day as release_date on
+# every row first seen via the diff, making that the row's real debut. Any
+# backfill that derives dates from a CORE-level signal (repo first commit,
+# frozen folder date) must not overwrite the per-title debut of a row first
+# seen after this epoch: a new game landing on a long-established core would
+# inherit the core's years-old date (how Operation Wolf, shipped 2026-07-24 on
+# jtrastan, displayed 2022). Rows renamed by the snapshot keep their original
+# first_seen, so retrospectively-dated old rows stay eligible for backfill.
+DETECTION_EPOCH = "2026-07-16"
+
+
 def join_repos_to_catalog(con):
     """Attach repo release dates to arcade catalog rows.
 
     Match priority: the MRA <rbf> core name (most reliable), then the title.
+    Rows first seen after DETECTION_EPOCH keep their own debut (the repo's
+    first commit describes the CORE, not a game added to it later); the repo
+    link and last_update still attach.
     """
     repos = con.execute("SELECT repo, core, first_commit, last_commit FROM arcade_repos").fetchall()
     by_key = {}
@@ -717,8 +752,12 @@ def join_repos_to_catalog(con):
             r = by_key.get(tk) or by_key.get(ARCADE_RBF_ALIASES.get(tk, ""))
         if r:
             con.execute(
-                "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",
-                (r["repo"], r["first_commit"], r["last_commit"], row["source_id"], row["path"]),
+                "UPDATE catalog SET repo=?, last_update=?, "
+                "release_date=CASE WHEN first_seen < ? OR release_date IS NULL "
+                "THEN ? ELSE release_date END "
+                "WHERE source_id=? AND path=?",
+                (r["repo"], r["last_commit"], DETECTION_EPOCH, r["first_commit"],
+                 row["source_id"], row["path"]),
             )
             n += 1
     log(f"  joined {n} arcade titles to a core repo (release dates attached)")
@@ -1186,8 +1225,7 @@ def apply_jt_frozen_dates(con):
     helpers this REPLACES the existing value (the migration date is wrong, not
     merely missing), keyed by the monorepo folder (rbf = jt<folder>).
 
-    Rows first seen after the site began stamping detection-day debuts
-    (2026-07-16, the beta-listing epoch) are excluded: their detection day IS
+    Rows first seen after DETECTION_EPOCH are excluded: their detection day IS
     their real debut, and a new game shipping on a long-established core must
     not inherit that core's date (Operation Wolf landed on jtrastan 2026-07-24
     and was dragged back to the folder's 2022 debut this way)."""
@@ -1195,8 +1233,8 @@ def apply_jt_frozen_dates(con):
     for folder, debut in JT_CORE_FROZEN_DATES.items():
         cur = con.execute(
             "UPDATE catalog SET release_date=? WHERE system='arcade' AND lower(rbf)=? "
-            "AND first_seen < '2026-07-16'",
-            (debut, "jt" + folder),
+            "AND first_seen < ?",
+            (debut, "jt" + folder, DETECTION_EPOCH),
         )
         n += cur.rowcount
     if n:
@@ -2590,6 +2628,29 @@ EXTRA_WEB_ROWS = [
 ]
 
 
+def warn_date_anomalies(con):
+    """Tripwire for the Operation Wolf failure mode: a row that only just
+    appeared (first seen after DETECTION_EPOCH, so its detection-day debut is
+    ground truth) displaying a release_date more than a year older than its
+    arrival means some core-level backfill clobbered the per-title date.
+    Renamed rows are immune (the snapshot carries their original first_seen).
+    Warn-only: on GitHub Actions the ::warning:: line surfaces as a run
+    annotation, so a regression is visible without failing the refresh."""
+    rows = con.execute(
+        "SELECT title, path, release_date, first_seen FROM catalog "
+        "WHERE first_seen >= ? AND release_date IS NOT NULL "
+        "AND date(substr(release_date,1,10)) < date(substr(first_seen,1,10), '-365 days')",
+        (DETECTION_EPOCH,),
+    ).fetchall()
+    for r in rows:
+        msg = (f"DATE ANOMALY: '{r['title']}' ({r['path']}) first seen "
+               f"{r['first_seen'][:10]} but shows debut {r['release_date'][:10]} - "
+               f"a core-level date sweep likely overwrote its detection-day debut")
+        log("  " + msg)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"::warning::{msg}")
+
+
 def cmd_export_web(args):
     con = connect()
     # The site lives at /releases (Pages still serves from docs/); the docs root
@@ -2600,6 +2661,7 @@ def cmd_export_web(args):
     apply_frozen_arcade_core_dates(con)  # and repo-less multi-game arcade cores
     apply_jt_frozen_dates(con)  # correct Jotego cores off the Feb-2023 monorepo-migration date
     apply_jt_beta_frozen_dates(con)  # after the jt pins: per-title beta dates win over folder dates
+    warn_date_anomalies(con)  # tripwire: new row wearing a years-old debut
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
     # repo-link fallbacks for arcade rows whose catalog.repo is empty: Jotego

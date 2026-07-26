@@ -1184,11 +1184,18 @@ def apply_jt_frozen_dates(con):
     """Override the bogus Feb-2023 jtcores-monorepo-migration dates with each
     Jotego core's real debut from JT_CORE_FROZEN_DATES. Unlike the other frozen
     helpers this REPLACES the existing value (the migration date is wrong, not
-    merely missing), keyed by the monorepo folder (rbf = jt<folder>)."""
+    merely missing), keyed by the monorepo folder (rbf = jt<folder>).
+
+    Rows first seen after the site began stamping detection-day debuts
+    (2026-07-16, the beta-listing epoch) are excluded: their detection day IS
+    their real debut, and a new game shipping on a long-established core must
+    not inherit that core's date (Operation Wolf landed on jtrastan 2026-07-24
+    and was dragged back to the folder's 2022 debut this way)."""
     n = 0
     for folder, debut in JT_CORE_FROZEN_DATES.items():
         cur = con.execute(
-            "UPDATE catalog SET release_date=? WHERE system='arcade' AND lower(rbf)=?",
+            "UPDATE catalog SET release_date=? WHERE system='arcade' AND lower(rbf)=? "
+            "AND first_seen < '2026-07-16'",
             (debut, "jt" + folder),
         )
         n += cur.rowcount
@@ -1213,6 +1220,11 @@ JT_BETA_FROZEN_DATES = {
     "_Arcade/Gradius III (World, version R).mra": "2026-05-16",
     "_Arcade/JoJo's Venture (Asia 990128, NO CD).mra": "2026-06-21",
     "_Arcade/Lightning Fighters (World).mra": "2025-06-27",
+    # Not pre-feature: this one's detection-day debut (its real jtbin ship
+    # date) was clobbered by apply_jt_frozen_dates' folder stamp (jtrastan ->
+    # 2022-04-01) before that helper learned to skip post-epoch rows; the pin
+    # heals the stored value.
+    "_Arcade/Operation Wolf (World, rev 2, set 1).mra": "2026-07-24",
     "_Arcade/Premier Soccer (ver EAB).mra": "2026-01-02",
     "_Arcade/Red Earth (Asia 961121, NO CD).mra": "2026-06-12",
     "_Arcade/Street Fighter III 2nd Impact Giant Attack (Asia 970930, NO CD).mra": "2026-06-28",

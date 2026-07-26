@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-26
+- Release tracker: Operation Wolf (a brand-new Jotego beta on the existing Rastan core) wrongly showed released and updated in 2022 - it inherited the core's debut date instead of its own. It now shows its real 2026-07-24 ship date, and future new games on long-established cores keep their own dates too. Thanks to the visitor who reported it.
+
 ## 2026-07-24
 - Release tracker: when a single core build updates all the games it serves on the same day, those games now cluster together under Last Updated instead of scattering alphabetically, and each carries a "batch" marker (hover, or the detail panel, explains how many games shipped together) so a core-wide rebuild no longer reads as dozens of separate game updates.
 - Releases: the empty detail panel now spells out what selecting a title gets you (details, screenshots, and launching it on your MiSTer), so the launch feature is easier to discover.

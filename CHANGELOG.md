@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-26
+- Release tracker: titles the downloader databases no longer ship now drop off the tracker - a removed title cannot be delivered by update_all and its launch link would point at a dead path. Six ghost entries left this way: Jungle Hunt US, Pirate Pete, Jr. Pac-Man (Speedup Hack), Kangaroo (Atari), Kangaroo (Bootleg), and CPS1 Multi Game.
 - Release tracker: Jungle King appeared twice after the upstream distribution retitled its MRA file on 2026-07-24 - the old and new names both showed as rows. It is one row again, with its original 2023 debut date, and file retitles no longer split a game into duplicates (or reset its dates and favorites).
 - Release tracker: Operation Wolf (a brand-new Jotego beta on the existing Rastan core) wrongly showed released and updated in 2022 - it inherited the core's debut date instead of its own. It now shows its real 2026-07-24 ship date, and future new games on long-established cores keep their own dates too. Thanks to the visitor who reported it.
 

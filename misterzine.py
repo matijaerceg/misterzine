@@ -2664,6 +2664,22 @@ def cmd_export_web(args):
     warn_date_anomalies(con)  # tripwire: new row wearing a years-old debut
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
+    # Titles a source no longer ships (last_seen behind that source's latest
+    # snapshot) drop off the site: update_all can't deliver them and their
+    # launch paths are dead. Catalog and events keep the history; only the
+    # export skips them. Per-source cutoffs — the sources refresh at
+    # different times, so a global max would wrongly hide a whole slow source.
+    src_max = dict(con.execute(
+        "SELECT source_id, MAX(last_seen) FROM catalog GROUP BY source_id"))
+    fresh, dropped = [], []
+    for r in rows:
+        ok = (r["last_seen"] or "") >= (src_max.get(r["source_id"]) or "")
+        (fresh if ok else dropped).append(r)
+    if dropped:
+        rows = fresh
+        log(f"  skipped {len(dropped)} no-longer-distributed rows: "
+            + ", ".join(sorted(r["path"].rsplit('/', 1)[-1] for r in dropped)[:8])
+            + ("..." if len(dropped) > 8 else ""))
     # repo-link fallbacks for arcade rows whose catalog.repo is empty: Jotego
     # rbf -> jtcores monorepo folder, and rbf -> arcade_repos by core name
     # (arcade_repos.core is 'Arcade-<Name>'; the rbf is usually '<name>').

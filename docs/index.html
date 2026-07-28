@@ -195,10 +195,12 @@
   /* the card image is a link (same target as the title) */
   .shot { position: relative; display: block; border: 1px solid var(--hair); border-radius: 6px;
           overflow: hidden; background: #140c1c; margin: 0 0 .8rem; }
-  .shot.h { aspect-ratio: 4 / 3; }
-  .shot.h img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  /* tracker card: a page screenshot at its own aspect, shown PLAIN -- it
+     already contains the tracker's own device-px CRT mask, and drawing a
+     second mask over a downscaled bake of the first would moire */
+  .shot.ui img { display: block; width: 100%; height: auto; }
   /* CRT slot mask (mask.js) rendered over the image in device pixels; the
-     canvas fills whatever positioned box wraps its img (.shot.h or .ph) */
+     canvas fills whatever positioned box wraps its img (here .ph) */
   .shot canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
   /* shadow mask off (theme-menu toggle): hide the canvas, the plain img is
      underneath -- same presentation as the CORS-taint fallback */
@@ -243,7 +245,7 @@
 
 <article>
   <h2><a href="releases/">Release Tracker</a> <span class="why" id="cnt">1,000+ cores &amp; games</span></h2>
-  <a class="shot h" href="releases/" tabindex="-1" aria-hidden="true"><img src="images/snap/outrun.png" alt="" loading="eager"></a>
+  <a class="shot ui" href="releases/" tabindex="-1" aria-hidden="true"><img src="images/landing-tracker.png" alt="" loading="eager"></a>
   <p>Every public MiSTer core and arcade game in one sortable, searchable table: real debut
      dates back to 2017, shipped-update dates, screenshots and specs, favorites, RSS feeds,
      and launching games straight on your own MiSTer. It refreshes itself four times a day
@@ -287,7 +289,7 @@
     if (!window.mzMask) return;
     function upgrade(img) {
       var m = img.closest('.shot');
-      if (!m) return;
+      if (!m || m.classList.contains('ui')) return;  // UI screenshots stay plain
       var wrap = img.closest('.ph') || m;
       var cv = wrap.querySelector('canvas');
       if (!cv) { cv = document.createElement('canvas'); img.after(cv); }

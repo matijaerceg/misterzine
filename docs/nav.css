@@ -1,5 +1,6 @@
-/* Shared chrome for the site header: the segmented site-nav (Home | Cores |
-   Hardware) and the WHOLE theme control (closed summary + open menu). Linked
+/* Shared chrome for the site header: the segmented site-nav (Cores | Hardware;
+   the wordmark is the home link) and the WHOLE theme control (closed summary +
+   open menu). Linked
    render-blocking by all three pages (home, release tracker, hardware) so the
    nav/theme look is a single source and cannot drift between them. Behaviour is
    the shared docs/theme.js; per-theme preview-dot colours are in theme.css.
@@ -15,7 +16,7 @@
    details.cols summary filter-base styling, so the shared rule wins there too. */
 
 /* segmented site-nav */
-.segnav { display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
+.segnav { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; overflow: hidden;
           border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
 .pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap;
         text-align: center; text-transform: uppercase; letter-spacing: .04em; font-size: .78rem;

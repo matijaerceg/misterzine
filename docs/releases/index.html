@@ -41,8 +41,6 @@
                font-weight: 100 900; font-display: swap; }
   @font-face { font-family: 'Roboto Condensed'; src: url(../fonts/roboto-condensed-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: 'Permanent Marker'; src: url(../fonts/permanent-marker-latin.woff2) format('woff2');
-               font-weight: 400; font-display: swap; }
   /* all palette values (color-scheme, --bg/--surface/--fg, --accent, the type
      hues, status colors, shadow/watermark tokens) live in ../theme.css — the
      single source of truth for every theme. This block speaks only in tokens. */
@@ -587,15 +585,16 @@
   #panel[hidden] { display: none; }
   #panel .body { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 1rem; scrollbar-width: none; -ms-overflow-style: none; }
   #panel .body::-webkit-scrollbar { display: none; }
+  /* mid-drag (LMB pan, see the drag-scroll JS): show the grab and stop the
+     browser extending a text selection under the moving pointer */
+  #panel .body.dragging { cursor: grabbing; user-select: none; }
   #panel .close { position: sticky; top: 0; float: right; font-size: 1.4rem; line-height: 1;
                   border: 0; background: transparent; color: inherit; cursor: pointer; padding: .1rem .3rem; }
   #panel h2 { font-size: 1.1rem; margin: 0 1.5rem .5rem 0; }
   /* the game title itself (year + copy-link sit beside it at h2's own size).
-     Condensed 700 rather than the marker face: these are humanized MAME descs,
-     the longest and most punctuation-heavy strings on the site, and the marker
-     is a single-weight handwriting face that wraps and scans badly at that
-     length. It also stays the site's voice (wordmark, marker headings) by NOT
-     appearing on every row here. Accent colour still shows off the palette. */
+     Condensed 700, the site's headline face: these are humanized MAME descs,
+     the longest and most punctuation-heavy strings on the site. Accent colour
+     still shows off the palette. */
   #panel h2 .gametitle { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; font-size: 1.35rem;
                          color: var(--accent); }
   #panel dl { margin: 0 0 1rem; display: grid; grid-template-columns: max-content 1fr; gap: .15rem .6rem; font-size: .85rem; }
@@ -2363,6 +2362,54 @@ buildHeader();  // header renders immediately; rows follow once data.json loads
 
 // --- detail panel ---
 const panel = document.getElementById('panel');
+
+// LMB drag pans the panel body: its scrollbar is hidden by design, so the
+// mouse gets the same drag-to-scroll gesture touch has natively. A press on a
+// link/button/input keeps its own behavior; an inert press only becomes a
+// drag past a small threshold, so plain clicks still land. Once dragging, the
+// selection is cleared each frame (the .dragging class stops new selection),
+// native image drag is suppressed, and the click that follows pointerup is
+// swallowed so a drag ending over a link doesn't activate it. Mouse only.
+(function () {
+  // listeners live on #panel (stable) because every open replaces
+  // panel.innerHTML, so the .body element is new each time; the pressed
+  // body is resolved per gesture instead
+  let body = null, dragging = false, swallowClick = false, startY = 0, startTop = 0;
+  panel.addEventListener('pointerdown', e => {
+    swallowClick = false;  // never carry a stale swallow into a fresh press
+    body = null;
+    if (e.pointerType !== 'mouse' || e.button !== 0 ||
+        e.target.closest('a, button, input, select, textarea, label, summary')) return;
+    body = e.target.closest('.body');
+    if (!body) return;
+    dragging = false; startY = e.clientY; startTop = body.scrollTop;
+    try { panel.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+  panel.addEventListener('pointermove', e => {
+    if (!body) return;
+    if (!dragging) {
+      if (Math.abs(e.clientY - startY) < 4) return;  // sub-threshold: still a click
+      dragging = true;
+      body.classList.add('dragging');
+    }
+    const sel = getSelection();
+    if (sel && !sel.isCollapsed) sel.removeAllRanges();
+    body.scrollTop = startTop - (e.clientY - startY);
+  });
+  function release(e) {
+    if (!body) return;
+    if (dragging) { swallowClick = true; dragging = false; }
+    body.classList.remove('dragging');
+    body = null;
+    try { if (panel.hasPointerCapture(e.pointerId)) panel.releasePointerCapture(e.pointerId); } catch (err) {}
+  }
+  panel.addEventListener('pointerup', release);
+  panel.addEventListener('pointercancel', release);
+  panel.addEventListener('dragstart', e => { if (body || dragging) e.preventDefault(); });
+  panel.addEventListener('click', e => {
+    if (swallowClick) { swallowClick = false; e.preventDefault(); e.stopPropagation(); }
+  }, true);
+})();
 
 // CRT slot mask over panel screenshots (mask.js, device-pixel accurate).
 // Game shots also get a worn-tube blur along the scan axis (source-relative),

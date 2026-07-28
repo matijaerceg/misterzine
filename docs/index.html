@@ -35,8 +35,8 @@
 <style>
   @font-face { font-family: Roboto; src: url(fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
-  @font-face { font-family: 'Permanent Marker'; src: url(fonts/permanent-marker-latin.woff2) format('woff2');
-               font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Roboto Condensed'; src: url(fonts/roboto-condensed-latin-var.woff2) format('woff2');
+               font-weight: 100 900; font-display: swap; }
   /* all palette values (incl. --bg/--fg and color-scheme) live in theme.css */
   :root { /* hand-drawn squiggle rule, tiled; drawn as a mask so one gray colors it in both themes
              (path overhangs the tile edges so the repeat has no seams) */
@@ -178,16 +178,17 @@
     .top nav { margin-top: .55rem; justify-content: flex-start; flex-wrap: nowrap; gap: .4rem; }
   }
 
-  /* two cards, one per sub-page, in the zine-era visual language that the rest
-     of the site keeps: marker-font title, masked screenshot, squiggle divider */
+  /* two cards, one per sub-page: condensed title (same face as the sub-page
+     headlines), image link, squiggle divider */
   article { display: flow-root; }
   article:first-of-type { padding-top: 1.4rem; }
   /* squiggle divider between the cards */
   hr.sq { border: 0; height: 11px; margin: 1.95rem auto; max-width: 41.5rem;
           background: var(--muted); -webkit-mask: var(--squig) repeat-x; mask: var(--squig) repeat-x; }
-  /* card title (marker font) + a quiet fact beside it */
-  article h2 { font-family: 'Permanent Marker', Roboto, system-ui, sans-serif; font-weight: 400;
-               font-size: 1.45rem; line-height: 1.3; margin: 0 0 .5rem; letter-spacing: .01em; }
+  /* card title (Roboto Condensed 700, matching the sub-page h1s) + a quiet
+     fact beside it */
+  article h2 { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
+               font-size: 1.4rem; line-height: 1.2; margin: 0 0 .5rem; letter-spacing: .01em; }
   article h2 a { color: var(--accent); text-decoration: none; }
   article h2 a:hover { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); }
   article h2 .why { font-family: Roboto, system-ui, sans-serif; font-weight: 400; font-size: .8rem;

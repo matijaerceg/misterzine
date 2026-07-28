@@ -2390,9 +2390,68 @@ def _dat_field(setname, dat, field):
     return (dat.get(parent) or {}).get(field) or "" if parent else ""
 
 
+def _filter_tag_map():
+    """(source_id, catalog path) -> the update_all download-filter term that
+    selects this file's core.
+
+    update_all's downloader installs only whitelisted cores when downloader.ini
+    carries a `filter` line with positive terms; the terms it matches are the
+    tags each db stamps on its files (Downloader_MiSTer docs/download-filters.md;
+    '-' and '_' are stripped from terms before matching, so the hyphenated
+    forms emitted here equal the dbs' bare dictionary terms). Rows carry the
+    term as `ft` so the site's favorites-export dialog can concatenate a
+    per-db filter string. Tags are read from the live dbs at export time --
+    authoritative, never derived from file names. Granularity is per CORE in
+    every db (an MRA carries its core's tag: arcadejt1942, arcadedecocassette),
+    so one starred game selects the whole core. Fail-soft throughout: a fetch
+    failure or an untagged file just means no `ft`, and the dialog lists those
+    rows as not exportable (three DECO Cassette games genuinely lack a core
+    tag upstream as of 2026-07)."""
+    out = {}
+    generic = {"arcade", "arcadecores", "arcaderbfsonly"}
+    norm = lambda s: re.sub(r"[^a-z0-9]", "", (s or "").lower())
+    rbf_core = re.compile(r"_(?:Console|Computer|Other|Utility)/([^/]+?)(?:_\d{6,8})?\.rbf$")
+    for source in SOURCES:
+        try:
+            raw = http_get(source["db_url"])
+            z = zipfile.ZipFile(BytesIO(raw))
+            d = json.loads(z.read(z.namelist()[0]))
+        except Exception as e:
+            log(f"  filter-tag join: {source['id']} fetch failed ({e}); its rows ship without ft")
+            continue
+        groups = {}  # tag id -> [alias terms]; aliases share one id (nes/nintendo)
+        for term, tid in d.get("tag_dictionary", {}).items():
+            groups.setdefault(tid, []).append(term)
+        n = 0
+        for path, meta in d.get("files", {}).items():
+            aliases = [sorted(groups.get(t, [])) for t in meta.get("tags", [])]
+            term = None
+            if path.endswith(".mra"):
+                # the per-core arcade tag is the only arcade-prefixed one
+                # beyond the generic trio ('arcadia' is a console tag but
+                # doesn't match the prefix). Verified single across all three
+                # dbs; sorted() keeps a hypothetical tie deterministic.
+                cands = sorted(a for al in aliases for a in al
+                               if a.startswith("arcade") and a not in generic)
+                if cands:
+                    term = "arcade-" + cands[0][len("arcade"):]
+            else:
+                m = rbf_core.search(path)
+                if m:
+                    # non-arcade core: the tag whose alias equals the rbf name
+                    # (SNES matches 'snes' among snes/supernintendo/...)
+                    want = norm(m.group(1))
+                    term = next((a for al in aliases for a in al if norm(a) == want), None)
+            if term:
+                out[(source["id"], path)] = term
+                n += 1
+        log(f"  filter-tag join: {source['id']}: {n} files tagged")
+    return out
+
+
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
              repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
-             core_files=None):
+             core_files=None, ft_map=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -2502,6 +2561,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # the frontend maps the raw id to a display name and search tokens.
     if "source_id" in r.keys() and r["source_id"]:
         row["src"] = r["source_id"]
+        # update_all download-filter term for this row's core (_filter_tag_map);
+        # absent when the current db carries no core tag for the file.
+        ft = (ft_map or {}).get((r["source_id"], r["path"]))
+        if ft:
+            row["ft"] = ft
     # Patreon-gated (jtbeta): listed but labeled — the frontend badges the row
     # and the panel explains the beta key requirement. Feeds/zine skip these.
     if "beta" in r.keys() and r["beta"]:
@@ -2727,6 +2791,8 @@ def cmd_export_web(args):
     arcade_specs = local_specs()
     # reverse index for rows with no setname anywhere: recover it from the title
     dat_desc_index = build_dat_desc_index(arcade_meta)
+    # update_all filter terms for the favorites export (fresh db fetch; fail-soft)
+    ft_map = _filter_tag_map()
     # Display the clean mainline name, but keep the qualifier where the stripped
     # base name collides among kept rows (genuinely distinct hardware/publisher
     # versions that share a base, e.g. Kangaroo / Kangaroo (Atari) / (Bootleg)).
@@ -2745,7 +2811,7 @@ def cmd_export_web(args):
             clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
             arcade_titles[(r["source_id"], r["path"])] = b if clean else r["title"]
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
-                     arcade_mad, dat_desc_index, arcade_specs, core_files) for r in rows]
+                     arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map) for r in rows]
     # Human-ideal arcade titles (colons, punctuation, one name per game) from
     # the MAME descs. Must run AFTER _web_row — the setname/genre/screenshot
     # joins above all key on the raw MRA-derived title.
@@ -2769,6 +2835,7 @@ def cmd_export_web(args):
     _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
     log(f"web export written to {outdir}")
     log(f"  data.json: {len(data)} rows")
+    log(f"  update_all filter terms (ft): {sum(1 for d in data if d.get('ft'))}")
     by_base = {}
     for d in data:
         by_base[d["base"]] = by_base.get(d["base"], 0) + 1

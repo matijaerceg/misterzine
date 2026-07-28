@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-28
+- Release tracker: favorites can now be exported as update_all download filters. The star menu's new "Export for update_all" shows one filter string per database (MiSTer Distribution, JTcores, Coin-Op Collection) to paste into downloader.ini, so update_all installs only the cores you starred. Filters work per core: a starred game selects the core it runs on, along with every game that core runs.
+
 ## 2026-07-26
 - Release tracker: titles the downloader databases no longer ship now drop off the tracker - a removed title cannot be delivered by update_all and its launch link would point at a dead path. Six ghost entries left this way: Jungle Hunt US, Pirate Pete, Jr. Pac-Man (Speedup Hack), Kangaroo (Atari), Kangaroo (Bootleg), and CPS1 Multi Game.
 - Release tracker: Jungle King appeared twice after the upstream distribution retitled its MRA file on 2026-07-24 - the old and new names both showed as rows. It is one row again, with its original 2023 debut date, and file retitles no longer split a game into duplicates (or reset its dates and favorites).

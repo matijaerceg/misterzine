@@ -244,6 +244,34 @@
                       background: var(--surface); color: inherit; }
   .favbanner button:hover { background: var(--hover-bg); }
   #favdismiss { margin-left: auto; }
+  /* favorites -> update_all export dialog. Native <dialog> (top layer, inert
+     page behind); padding lives on .fx-in so a backdrop click is detectable
+     as e.target === dialog (the light-dismiss check). */
+  #favexp { padding: 0; border: 1px solid var(--hair); border-radius: 8px;
+            background: var(--surface); color: var(--fg);
+            width: min(36rem, calc(100vw - 2rem)); }
+  #favexp::backdrop { background: rgb(0 0 0 / .45); }  /* shadows stay black on every theme */
+  #favexp .fx-in { padding: 1rem 1.15rem 1.05rem; max-height: min(80vh, 42rem);
+                   overflow: auto; box-sizing: border-box; }
+  #favexp h2 { margin: 0 0 .45rem; font-size: 1.05rem; }
+  #favexp h3 { margin: .9rem 0 .2rem; font-size: .95rem; }
+  #favexp p { margin: .35rem 0; font-size: .88rem; line-height: 1.45; }
+  #favexp p code { background: var(--bg); border: 1px solid var(--hair);
+                   border-radius: 3px; padding: 0 .25rem; font-size: .95em; }
+  #favexp .fx-row { display: flex; gap: .5rem; align-items: flex-start; margin: .4rem 0 .1rem; }
+  #favexp .fx-row code { flex: 1 1 auto; display: block; background: var(--bg);
+                         border: 1px solid var(--hair); border-radius: 4px;
+                         padding: .45rem .55rem; font-size: .82rem; line-height: 1.5;
+                         overflow-wrap: anywhere; user-select: all; }
+  #favexp button { font: inherit; font-size: .85rem; padding: .35rem .6rem; cursor: pointer;
+                   border: 1px solid var(--hair); border-radius: 4px;
+                   background: var(--surface); color: inherit; }
+  #favexp button:hover { background: var(--hover-bg); }
+  #favexp .fx-note, #favexp .fx-warn { color: var(--muted); font-size: .8rem; }
+  #favexp .fx-warn { margin-top: .8rem; padding-top: .5rem; border-top: 1px solid var(--rule); }
+  #favexp .fx-close { margin-top: .8rem; text-align: right; }
+  #favexp a { color: var(--accent); text-decoration: none; }
+  #favexp a .lbl { text-decoration: underline; text-underline-offset: 2px; }
   .yearrow { display: flex; align-items: center; gap: .4rem; }
   .yearrow .ylbl { width: 2.6rem; color: var(--muted); font-size: .9rem; }
   .yearrow input[type=number] { flex: 1; min-width: 0; font-family: inherit; font-size: .9rem;
@@ -940,6 +968,7 @@
         <summary id="favsum" aria-label="Favorites menu"></summary>
         <div class="menu">
           <button type="button" class="reset" id="favcopy" disabled>Copy backup link</button>
+          <button type="button" class="reset" id="favexpbtn" disabled>Export for update_all...</button>
           <button type="button" class="reset" id="favclearall" disabled>Clear all favorites</button>
           <p class="favnote">Favorites are saved in this browser. Keep this link to restore them anywhere.</p>
         </div>
@@ -962,6 +991,23 @@
   <button type="button" id="favadd">Add to my favorites</button>
   <button type="button" id="favdismiss">Dismiss</button>
 </div>
+<!-- favorites -> update_all export: per-database filter strings to paste into
+     downloader.ini. Opened from the favorites menu; content built on open. -->
+<dialog id="favexp" aria-labelledby="favexph">
+  <div class="fx-in">
+    <h2 id="favexph">Export favorites for update_all</h2>
+    <p>update_all can be told to download only the cores you choose, via its
+      <a href="https://github.com/MiSTer-devel/Downloader_MiSTer/blob/main/docs/download-filters.md"
+         target="_blank" rel="noopener"><span class="lbl">download filters</span><span class="ext">↗</span></a>.
+      Filters select whole cores: a starred game exports the core it runs on,
+      and every game that core runs comes along with it.</p>
+    <div id="favexpbody"></div>
+    <p class="fx-warn">Heads up: a filter listing wanted cores is a whitelist.
+      update_all will download only those cores (plus MiSTer system files) from
+      that database and skip everything else in it.</p>
+    <div class="fx-close"><button type="button" id="favexpclose">Close</button></div>
+  </div>
+</dialog>
 </div>
 <div class="tablezone">
 <button id="totop" class="totop" type="button">↑ Scroll to top</button>
@@ -2133,6 +2179,8 @@ const favctl = document.getElementById('favctl');
 const favToggle = document.getElementById('favtoggle');
 const favdd = document.getElementById('favdd');
 const favCopyBtn = document.getElementById('favcopy');
+const favExpBtn = document.getElementById('favexpbtn');
+const favExpDlg = document.getElementById('favexp');
 const favClearBtn = document.getElementById('favclearall');
 function syncFavSummary() {
   // the count is the whole list, not what survives the current filters: it says
@@ -2146,6 +2194,7 @@ function syncFavSummary() {
   favToggle.setAttribute('aria-pressed', favOnly);
   favctl.classList.toggle('active', favOnly);
   favCopyBtn.disabled = n === 0;
+  favExpBtn.disabled = n === 0;
   favClearBtn.disabled = n === 0;
   // a wider count nudges the caret this menu is anchored under
   if (favdd.open) positionMenu(favdd);
@@ -2170,6 +2219,12 @@ favdd.querySelector('.menu').addEventListener('click', e => {
       () => showChip(favCopyBtn, 'Copy failed'));   // insecure context / permission denied
     return;
   }
+  if (e.target.closest('#favexpbtn')) {
+    buildFavExport();
+    favdd.open = false;   // the modal replaces the menu; leaving it open would greet the close
+    favExpDlg.showModal();
+    return;
+  }
   if (e.target.closest('#favclearall')) {
     if (!favClearArmed) { favClearArmed = true; favClearBtn.textContent = 'Really clear all?'; return; }
     FAVS.clear(); favSave(); disarmFavClear();
@@ -2180,6 +2235,62 @@ favdd.querySelector('.menu').addEventListener('click', e => {
   }
 });
 syncFavSummary();  // a returning visitor's count is already known before data loads
+
+// --- favorites -> update_all export dialog -----------------------------------
+// Terms come from each row's `ft` (stamped by export-web from the live
+// downloader dbs' own tags). One string per database: filters are per-db in
+// downloader.ini, and a ready-made [section] block would collide with sections
+// users already have -- so the dialog hands out bare terms plus the sentence
+// saying where they go.
+const FT_SECTIONS = {   // ini section name = each db's db_id
+  distribution_mister: 'distribution_mister',
+  jtbindb: 'jtcores',
+  coinop: 'Coin-OpCollection/Distribution-MiSTerFPGA',
+};
+function buildFavExport() {
+  const terms = new Map();  // src -> Set of filter terms
+  const noTag = [];         // starred and listed, but the db carries no core tag
+  let gone = 0;             // starred keys no longer in the current data
+  for (const k of FAVS) {
+    const d = KEY2ROW[k];
+    if (!d) { gone++; continue; }
+    if (!d.ft || !d.src) { noTag.push(d.title); continue; }
+    let s = terms.get(d.src);
+    if (!s) terms.set(d.src, s = new Set());
+    s.add(d.ft);
+  }
+  let html = '';
+  for (const src of Object.keys(FT_SECTIONS)) {
+    const set = terms.get(src);
+    if (!set) continue;
+    const str = [...set].sort().join(' ');
+    html += '<h3>' + esc(SRC_NAMES[src] || src) + '</h3>' +
+      '<p>Add these terms to the <code>filter</code> line under <code>[' +
+      esc(FT_SECTIONS[src]) + ']</code> in your downloader.ini (create the line if it is missing):</p>' +
+      '<div class="fx-row"><code>' + esc(str) + '</code>' +
+      '<button type="button" class="fx-copy" data-terms="' + escA(str) + '">Copy</button></div>';
+  }
+  if (!html) html = '<p>None of your favorites could be exported.</p>';
+  if (noTag.length) html += '<p class="fx-note">These can\'t be exported (no filter tag in their database): '
+    + esc(noTag.sort().join(', ')) + '.</p>';
+  if (gone) html += '<p class="fx-note">Skipped ' + (gone === 1 ? '1 starred entry that is'
+    : gone + ' starred entries that are') + ' no longer listed on the tracker.</p>';
+  document.getElementById('favexpbody').innerHTML = html;
+}
+// copy feedback is a label swap, not showChip -- the chip element lives in the
+// page below the <dialog> top layer, so it would paint behind the backdrop
+favExpDlg.addEventListener('click', e => {
+  const cp = e.target.closest('.fx-copy');
+  if (cp) {
+    navigator.clipboard.writeText(cp.dataset.terms).then(
+      () => { cp.textContent = 'Copied'; },
+      () => { cp.textContent = 'Copy failed'; }   // insecure context / permission denied
+    ).then(() => setTimeout(() => { cp.textContent = 'Copy'; }, 1200));
+    return;
+  }
+  if (e.target === favExpDlg) favExpDlg.close();  // backdrop click = light dismiss
+});
+document.getElementById('favexpclose').addEventListener('click', () => favExpDlg.close());
 
 // --- arriving on a ?fav= link ------------------------------------------------
 // The param is read once, on load (see the data.json handler — it needs KEY2ROW
@@ -2837,6 +2948,10 @@ function navigate(dir) {  // dir: +1 down, -1 up
 }
 
 document.addEventListener('keydown', e => {
+  // the export dialog is modal: native Esc closes it, and no key may leak to
+  // the Esc ladder, arrow-nav, or type-anywhere while it's up (q.focus() on an
+  // inert page would misfire anyway)
+  if (favExpDlg.open) return;
   if (e.key === 'Escape') {
     if (closePop() || closeHoverPop()) return;  // an open popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it

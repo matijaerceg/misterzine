@@ -40,7 +40,7 @@
     var dpr = opts.dpr || window.devicePixelRatio || 1;
     // Measure the IMG, not canvas.parentElement: the canvas fills the frame's
     // CONTENT box (position:absolute; inset:0), but the parent's rect is its
-    // BORDER box. The zine's .shot has a 1px border, so measuring the parent
+    // BORDER box. The home page's .shot has a 1px border, so measuring the parent
     // sized the backing 2 CSS px too big per axis; the browser then squeezed
     // that lattice onto the smaller display area, crushing the periodic mask
     // into visible moire/rainbow bands. The img shares the canvas's content
@@ -128,7 +128,7 @@
 })();
 
 // CRT shadow-mask on/off preference, wired to the "Shadow mask" toggle at the
-// bottom of the theme menu (zine + release tracker; the hardware page has no
+// bottom of the theme menu (home + release tracker; the hardware page has no
 // mask and no toggle). Shared here so the wiring lives in one place. CSS keys on
 // html[data-mask="off"] to hide the mask canvases, revealing the plain <img>
 // each covers; mzMask keeps drawing into the hidden canvases, so toggling back

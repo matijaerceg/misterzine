@@ -79,14 +79,6 @@ jobs:
       - name: Regenerate the static site
         run: python misterzine.py export-web
 
-      - name: Zine sanity + feed regen (self-healing)
-        # Validates docs/zine.json and regenerates feed-zine.xml from it when
-        # drifted; both are byte-deterministic so a quiet day commits nothing.
-        # Non-fatal: the zine-inbox workflow is the real gate on new posts, and
-        # a zine hiccup must never block the release refresh.
-        continue-on-error: true
-        run: python misterzine.py zine
-
       - name: Commit and publish if anything changed
         run: |
           git config user.name "misterzine-bot"
@@ -105,8 +97,8 @@ jobs:
             # the MAD CSV is the fetch-failure fallback for the arcade metadata.
             git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv data/cache/mame_meta.json.gz data/cache/mame2003_specs.json.gz
             git commit -m "Update: refresh releases ($(date -u +'%Y-%m-%d %H:%M') UTC)"
-            # Retry absorbs a racing push (e.g. a zine post landing on main
-            # between our checkout and push), same as the zine-inbox workflow.
+            # Retry absorbs a racing push landing on main between our
+            # checkout and push.
             for i in 1 2 3; do
               if git push; then exit 0; fi
               git fetch origin main

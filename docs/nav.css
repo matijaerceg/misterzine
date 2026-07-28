@@ -1,6 +1,6 @@
-/* Shared chrome for the site header: the segmented site-nav (Zine | Cores |
+/* Shared chrome for the site header: the segmented site-nav (Home | Cores |
    Hardware) and the WHOLE theme control (closed summary + open menu). Linked
-   render-blocking by all three pages (zine, release tracker, hardware) so the
+   render-blocking by all three pages (home, release tracker, hardware) so the
    nav/theme look is a single source and cannot drift between them. Behaviour is
    the shared docs/theme.js; per-theme preview-dot colours are in theme.css.
 
@@ -60,7 +60,7 @@
                               box-shadow: .95em 0 0 var(--sw2); }
 .theme .menu button:hover { background: var(--hover-bg); }
 .theme .menu button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
-/* shadow-mask toggle row at the bottom of the menu (zine + release tracker only;
+/* shadow-mask toggle row at the bottom of the menu (home + release tracker only;
    wired by mask.js). Hardware has no mask, so it simply has no such row. */
 .theme .menu hr.msep { border: 0; border-top: 1px solid var(--hair); margin: .25rem 0 .1rem; }
 .theme .menu label.mask { display: flex; align-items: center; gap: .5em; padding: .3rem .5rem;

@@ -321,7 +321,7 @@ CHANGELOG.md             # user-visible site changes
   freely; credit "MiSTerZine by Matija Erceg" and, where practical, link to
   <https://misterzine.fyi>. Note the data is not a versioned API: fields may be added or
   renamed without notice, so consume it defensively.
-- **Images and quoted material** (game screenshots, hardware photos, zine quotes) remain
+- **Images** (game screenshots, hardware photos) remain
   the property of their respective owners and are hosted for informational purposes; no
   license is granted for them. Fonts are Roboto (Apache License 2.0); the CRT mask in
   `docs/mask.js` is ported from Timothy Lottes' public-domain RVM shader (Unlicense).

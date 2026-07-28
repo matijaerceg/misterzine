@@ -1,4 +1,4 @@
-/* Shared theme picker for all three pages (zine, release tracker, hardware).
+/* Shared theme picker for all three pages (home, release tracker, hardware).
    Builds the theme menu from THEMES, applies + persists the choice, and freezes
    the summary width. The control is a plain <details id="themedd"> on every page
    (the release tracker's used to be a details.cols wired into the filter dropdown
@@ -22,7 +22,7 @@
   if (!dd || !sum || !menu) return;
 
   // build the theme buttons and prepend them BEFORE any existing menu content,
-  // so the inline shadow-mask row (zine + release tracker) stays after them
+  // so the inline shadow-mask row (home + release tracker) stays after them
   var frag = document.createDocumentFragment();
   var btns = THEMES.map(function (t) {
     var b = document.createElement('button');

@@ -1478,8 +1478,9 @@ function coreCell(d) {
   if (!d.repo) return esc(label);
   // rows whose catalog never captured an rbf: name the link after the repo
   if (!label) label = d.repo.split('/')[1].replace(/^Arcade[-_]/i, '').replace(/[-_]MiSTer$/i, '');
+  // no ↗ tail here (unlike the panel's Repository row): one per row is noise
   return '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
-    '<span class="lbl">' + esc(label) + '</span><span class="ext">↗</span></a>';
+    '<span class="lbl">' + esc(label) + '</span></a>';
 }
 
 // The table's columns, all toggleable via the "Columns" dropdown except Title
@@ -1499,7 +1500,7 @@ const COLUMNS = [
   { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
-  { k: 'core', label: 'FPGA Core', sl: 'Core', w: 24, mw: 10,
+  { k: 'core', label: 'FPGA Core', sl: 'Core', w: 12, mw: 6,
     cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
   { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date"><span class="dv">' + esc(d.updated || '') + '</span>' + batchBadge(d) + '</td>' },

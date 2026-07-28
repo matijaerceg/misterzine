@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 25 Jul 2026 18:38:33 +0000</lastBuildDate>
+<lastBuildDate>Tue, 28 Jul 2026 18:15:43 +0000</lastBuildDate>
+<item>
+<title>[Updated] Aleck64 (Arcade core, 11 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#11beat</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Aleck64_20260725.rbf:2026-07-28T18:15:43+00:00</guid>
+<pubDate>Tue, 28 Jul 2026 18:15:43 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Eleven Beat, Hanabi de Doon! - Don-chan Puzzle, Hi Pai Paradise, Hi Pai Paradise 2, Kurukuru Fever, Magical Tetris Challenge, Mayjinsen 3, Star Soldier: Vanishing Earth, Super Real Mahjong VS, Tower &amp;amp; Shaft, Vivid Dolls.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-28 (source: distribution_mister).&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] UK101 (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#UK101</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Colony 7, Defender, Jin, Mayday.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Defender_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Galaga 3 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gaplus</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Gaplus_20260714.rbf:2026-07-14T00:00:00+00:00</guid>
-<pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gaplus.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1984 / Namco&lt;/p&gt;&lt;p&gt;Core: gaplus&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Gaplus_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

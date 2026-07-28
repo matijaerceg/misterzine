@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-07-28
+- Release tracker: the FPGA Core column now sits right after Core Type instead of at the far end of the table.
 - The daily quote zine is retired. The site root is now a landing page linking the two remaining sections, the release tracker and the hardware landscape; the zine's posts and RSS feed are gone. Thanks for reading.
 - Release tracker: favorites can now be exported as update_all download filters. The star menu's new "Export for update_all" shows one filter string per database (MiSTer Distribution, JTcores, Coin-Op Collection) to paste into downloader.ini, so update_all installs only the cores you starred. Filters work per core: a starred game selects the core it runs on, along with every game that core runs.
 

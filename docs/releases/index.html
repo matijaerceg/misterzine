@@ -88,7 +88,7 @@
   .updated a:hover { color: var(--accent); }
   /* underline the .lbl span, never the anchor, so the line stops at the last
      letter instead of running under the ↗/ⓘ glyph as a detached stub (the
-     two-span pattern is documented at .ext). Also what keeps the Zine Home
+     two-span pattern is documented at .ext). Also what keeps the wordmark Home
      sticker underline-free: no .lbl, no line. */
   .updated a .lbl { text-decoration: underline; }
   /* dotted underline (+ ⓘ) marks the meta-line popover triggers ("Public
@@ -594,7 +594,7 @@
      Condensed 700 rather than the marker face: these are humanized MAME descs,
      the longest and most punctuation-heavy strings on the site, and the marker
      is a single-weight handwriting face that wraps and scans badly at that
-     length. It also stays the zine's voice (wordmark, Zine Home link) by NOT
+     length. It also stays the site's voice (wordmark, marker headings) by NOT
      appearing on every row here. Accent colour still shows off the palette. */
   #panel h2 .gametitle { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700; font-size: 1.35rem;
                          color: var(--accent); }
@@ -881,7 +881,7 @@
      markup changes); flex-end right-aligns the pill group; nowrap lets the shared
      .segnav grid squeeze to fit so the pills and theme stay on ONE row down to the
      narrowest phones. The pill/theme mobile SIZING is shared (nav.css @media
-     max-width:36rem), matching the zine and hardware pages. */
+     max-width:36rem), matching the home and hardware pages. */
   @media (max-width: 36rem) {
     .hctl { order: -1; flex-basis: 100%; flex-wrap: nowrap; justify-content: flex-end; gap: .4rem; }
   }
@@ -919,7 +919,7 @@
     </div>
     <div class="hctl">
       <nav class="segnav">
-        <a class="pill" href="../">Zine</a>
+        <a class="pill" href="../">Home</a>
         <span class="pill" aria-current="page">Cores</span>
         <a class="pill" href="../hardware-landscape/">Hardware</a>
       </nav>

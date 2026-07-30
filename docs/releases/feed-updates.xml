@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 30 Jul 2026 06:13:16 +0000</lastBuildDate>
+<lastBuildDate>Thu, 30 Jul 2026 16:53:45 +0000</lastBuildDate>
+<item>
+<title>[Updated] Tetris (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#atetris</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Tetris.mra:2026-07-30T16:53:45+00:00</guid>
+<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/atetris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Atari&lt;/p&gt;&lt;p&gt;Core: ataritetris&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ATetris_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Darius (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#darius</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Darius_20260730.rbf:2026-07-30T16:53:45+00:00</guid>
+<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/darius.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: Darius&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Darius_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Vastar (Arcade core, 2 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#pprobe</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1983 / Coleco&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/ColecoAdam_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] QBert (Arcade core, 5 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sqbert</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/QBert_20260715.rbf:2026-07-15T00:00:00+00:00</guid>
-<pubDate>Wed, 15 Jul 2026 00:00:00 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Faster, Harder, More Challenging Q*bert, Mad Planets, Q*bert, Q*bert's Qubes, Reactor.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sharp MZ (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SharpMZ</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SharpMZ_20260702.rbf:2026-07-14T08:54:43+00:00</guid>
-<pubDate>Tue, 14 Jul 2026 08:54:43 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

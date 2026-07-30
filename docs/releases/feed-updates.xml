@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 28 Jul 2026 18:15:43 +0000</lastBuildDate>
+<lastBuildDate>Thu, 30 Jul 2026 06:13:16 +0000</lastBuildDate>
+<item>
+<title>[Updated] Vastar (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pprobe</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Vastar_20260730.rbf:2026-07-30T06:13:16+00:00</guid>
+<pubDate>Thu, 30 Jul 2026 06:13:16 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Planet Probe, Vastar.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Vastar_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Tumble Pop (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tumblep</link>
+<guid isPermaLink="false">coinop:_Arcade/cores/tumblep_mister_20260729.rbf:2026-07-30T01:11:10+00:00</guid>
+<pubDate>Thu, 30 Jul 2026 01:11:10 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tumblep.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: tumblep_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-30 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Aleck64 (Arcade core, 11 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#11beat</link>
@@ -405,12 +423,12 @@
 </item>
 <item>
 <title>[Updated] Deco16 (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cninja</link>
+<link>https://misterzine.fyi/releases/?ref=rss#caveman-ninja-world-ver-4</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/cores/Deco16_20260722.rbf:2026-07-23T21:32:22+00:00</guid>
 <pubDate>Thu, 23 Jul 2026 21:32:22 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Caveman Ninja, Crude Buster, Vapor Trail - Hyper Offence Formation.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Caveman Ninja (World ver 4), Crude Buster (World FX version), Vapor Trail - Hyper Offence Formation (World revision 1).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Apple Lisa (Computer core)</title>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Breakout (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#breakout</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Breakout_20260714.rbf:2026-07-14T00:00:00+00:00</guid>
-<pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/breakout.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Ball &amp;amp; Paddle / 1976 / Atari&lt;/p&gt;&lt;p&gt;Core: breakout&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Breakout_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Defender (Arcade core, 4 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#colony7</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Defender_20260714.rbf:2026-07-14T00:00:00+00:00</guid>
-<pubDate>Tue, 14 Jul 2026 00:00:00 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Colony 7, Defender, Jin, Mayday.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Defender_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

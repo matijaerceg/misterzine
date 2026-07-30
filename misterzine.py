@@ -205,6 +205,10 @@ CREATE TABLE IF NOT EXISTS events (
     ts TEXT, source_id TEXT, path TEXT, title TEXT, system TEXT,
     event_type TEXT, hash TEXT
 );
+CREATE TABLE IF NOT EXISTS row_keys (
+    source_id TEXT, path TEXT, k TEXT UNIQUE, assigned_at TEXT,
+    PRIMARY KEY (source_id, path)
+);
 CREATE INDEX IF NOT EXISTS idx_events_ts ON events(ts);
 CREATE INDEX IF NOT EXISTS idx_catalog_title ON catalog(title);
 """
@@ -216,10 +220,13 @@ def _ensure_columns(con):
     CREATE TABLE IF NOT EXISTS won't alter an already-created table, so add new
     columns idempotently (the ALTER no-ops/raises if the column already exists).
     """
-    for col, decl in [("setname", "TEXT"), ("genre", "TEXT"),
-                      ("beta", "INTEGER DEFAULT 0")]:
+    for table, col, decl in [("catalog", "setname", "TEXT"),
+                             ("catalog", "genre", "TEXT"),
+                             ("catalog", "beta", "INTEGER DEFAULT 0"),
+                             ("arcade_repos", "is_fork", "INTEGER"),
+                             ("arcade_repos", "parent_owner", "TEXT")]:
         try:
-            con.execute(f"ALTER TABLE catalog ADD COLUMN {col} {decl}")
+            con.execute(f"ALTER TABLE {table} ADD COLUMN {col} {decl}")
         except sqlite3.OperationalError:
             pass  # column already present
 
@@ -476,6 +483,12 @@ def cmd_snapshot(args):
                         (old_row["release_date"], old_row["first_seen"], source["id"], new_path))
                     con.execute("DELETE FROM catalog WHERE source_id=? AND path=?",
                                 (source["id"], path))
+                    # Deep-link key follows the row across the rename; on a
+                    # conflict the stale entry stays and the export's adoption
+                    # rule reclaims it.
+                    con.execute(
+                        "UPDATE OR IGNORE row_keys SET path=? WHERE source_id=? AND path=?",
+                        (new_path, source["id"], path))
 
         if not seed:
             con.executemany(
@@ -682,11 +695,39 @@ def cmd_repos(args):
     if skipped:
         log(f"  skipped {skipped} repos unchanged since last crawl")
     con.commit()
+    _sweep_fork_parents(con, repos)
+    con.commit()
     join_repos_to_catalog(con)
     apply_frozen_arcade_core_dates(con)
     con.commit()
     con.close()
     log("repos crawl done.")
+
+
+def _sweep_fork_parents(con, repos):
+    """Record which MiSTer-devel arcade repos are GitHub forks and who owns the
+    fork parent. The parent owner is the core's actual author (e.g. rmonic79
+    behind MiSTer-devel/Arcade-BoogieWings_MiSTer) and feeds _core_label when a
+    same-game collision needs a per-core qualifier. is_fork comes free from the
+    org listing already fetched; the parent owner costs one API call per fork,
+    once (NULL rows retry next run). Fail-soft: a missed lookup just leaves the
+    label to fall back, never blocks the crawl."""
+    for r in repos:
+        con.execute("UPDATE arcade_repos SET is_fork=? WHERE repo=?",
+                    (1 if r.get("fork") else 0, r["full_name"]))
+    todo = [row["repo"] for row in con.execute(
+        "SELECT repo FROM arcade_repos WHERE is_fork=1 AND parent_owner IS NULL")]
+    for full in todo:
+        try:
+            data = gh_api(f"/repos/{full}")
+            owner = ((data or {}).get("parent") or {}).get("owner", {}).get("login")
+        except Exception as e:
+            log(f"  fork-parent lookup failed for {full}: {e}")
+            continue
+        if owner:
+            con.execute("UPDATE arcade_repos SET parent_owner=? WHERE repo=?",
+                        (owner, full))
+            log(f"  fork parent: {full} -> {owner}")
 
 
 # MRA <rbf> core names that don't normalize to their repo's core name
@@ -733,6 +774,12 @@ def join_repos_to_catalog(con):
     Rows first seen after DETECTION_EPOCH keep their own debut (the repo's
     first commit describes the CORE, not a game added to it later); the repo
     link and last_update still attach.
+
+    Distribution rows only: the title fallback strips parentheses, so a
+    third-party row for a game a MiSTer-devel repo also implements would
+    title-match the wrong project (Coin-Op's "Boogie Wings (USA, v1.7...)"
+    once landed on rmonic79's Arcade-BoogieWings). jtbindb rows are joined by
+    cmd_jtcores, coinop rows by join_coinop_to_catalog.
     """
     repos = con.execute("SELECT repo, core, first_commit, last_commit FROM arcade_repos").fetchall()
     by_key = {}
@@ -741,7 +788,8 @@ def join_repos_to_catalog(con):
         by_key.setdefault(key, r)  # first wins
     n = 0
     for row in con.execute(
-        "SELECT source_id, path, title, rbf FROM catalog WHERE system='arcade'"
+        "SELECT source_id, path, title, rbf FROM catalog "
+        "WHERE system='arcade' AND source_id='distribution_mister'"
     ).fetchall():
         r = None
         if row["rbf"]:
@@ -1397,6 +1445,9 @@ _COINOP_FROZEN_NORM = {norm_key(k): v for k, v in COINOP_FROZEN_DATES.items()}
 
 def join_coinop_to_catalog(con):
     """Attach Coin-Op release dates to coinop catalog titles by normalized prefix."""
+    # Every coinop row links Coin-Op's own distribution repo (their cores have
+    # no per-core public repos); the date joins below only refine dates.
+    con.execute("UPDATE catalog SET repo=? WHERE source_id='coinop'", (COINOP_REPO,))
     rels = con.execute("SELECT title, release_date, commit_date FROM coinop_releases").fetchall()
     # index by normalized key; release titles are the short/canonical form.
     # Sort keys longest-first so the most specific release name wins (e.g.
@@ -2279,6 +2330,45 @@ ARCADE_TITLES = {
     "polyplay2": "Poly-Play 2",
 }
 
+# Escape hatch for the same-game qualifier labels below, keyed by lowercase
+# rbf: when _core_label's automatic chain (source name -> fork parent owner ->
+# repo name) picks a label that reads wrong, pin the right one here. Ships
+# empty on purpose — the chain resolves everything known today. (ARCADE_TITLES
+# above stays the escape hatch for whole-title pins; it can't split same-sn
+# pairs, this can't do more than the parenthetical.)
+CORE_LABELS = {}
+
+
+def _core_label(r, fork_info, repo_maps):
+    """How the community refers to a catalog row's core, for the same-game
+    qualifier ("Caveman Ninja (Coin-Op Collection)" vs "(Deco16)"). Chain,
+    first hit wins: CORE_LABELS pin; the source's brand for third-party dbs
+    (their rows are all that team's work); for Distribution rows, the fork
+    parent's owner when the MiSTer-devel repo is a fork (the actual author,
+    e.g. rmonic79 behind Arcade-BoogieWings); else the repo name stripped of
+    Arcade-/-MiSTer dressing (case-insensitively — arcade_repos.core keeps a
+    stray _Mister casing); else the rbf. '' when nothing resolves."""
+    rbf = (r["rbf"] or "").strip()
+    if rbf.lower() in CORE_LABELS:
+        return CORE_LABELS[rbf.lower()]
+    if r["source_id"] == "coinop":
+        return "Coin-Op Collection"
+    if r["source_id"] == "jtbindb":
+        return "Jotego"
+    repo = (r["repo"] or "").strip()
+    if not repo and rbf:
+        repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
+    if repo:
+        fi = (fork_info or {}).get(repo.lower())
+        if fi is not None and fi["is_fork"] and fi["parent_owner"]:
+            return fi["parent_owner"]
+        name = repo.rsplit("/", 1)[-1]
+        name = re.sub(r"^arcade[-_]", "", name, flags=re.I)
+        name = re.sub(r"[-_]mister$", "", name, flags=re.I)
+        if name:
+            return name
+    return rbf
+
 
 def _strip_trailing_parens(s):
     """Drop trailing (...) qualifier groups, tolerating nesting: MAME descs like
@@ -2372,7 +2462,9 @@ def _humanize_arcade_titles(data, arcade_meta):
         counts = all_counts if r.get("beta") else pub_counts
         if new == r["title"] or counts[new] > 1:
             continue
-        r["mt"] = r["title"]
+        # a same-game retitle already stashed the raw MRA title in mt — that
+        # one is the join key/alias and must survive a second rename here
+        r.setdefault("mt", r["title"])
         r["title"] = new
         n += 1
     log(f"  humanized {n} arcade titles from MAME descriptions")
@@ -2457,8 +2549,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     base = _BASE_LABEL.get(system, system.title())
     manufacturer = r["manufacturer"] or ""
     sn = ""
+    forced_mt = None
     if system == "arcade":
-        title = (arcade_titles or {}).get((r["source_id"], r["path"]), r["title"])
+        title, forced_mt = (arcade_titles or {}).get(
+            (r["source_id"], r["path"]), (r["title"], None))
         date = (r["release_date"] or "")[:10]
         date_kind = "debut" if date else ""
         # setname for metadata joins: prefer catalog.setname, else the image
@@ -2581,6 +2675,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # site's launch-on-MiSTer button needs the real path shipped explicitly
         if "path" in r.keys() and r["path"]:
             row["mra"] = r["path"]
+        # same-game retitles keep the raw MRA title as mt: manifest join key,
+        # feeds event-matching key, and hidden search alias
+        if forced_mt and forced_mt != title:
+            row["mt"] = forced_mt
         # the row's own MAME setname ("ROM name"). Distinct from the screenshot
         # key (img), which can be a shared/borrowed setname.
         if sn:
@@ -2692,6 +2790,20 @@ EXTRA_WEB_ROWS = [
 ]
 
 
+def repair_coinop_rows(con):
+    """Idempotent self-heal: before join_repos_to_catalog was scoped to the
+    Distribution source, its parentheses-stripping title fallback matched a few
+    coinop rows to unrelated MiSTer-devel repos (Coin-Op's Boogie Wings landed
+    on rmonic79's Arcade-BoogieWings), dragging that repo's commit date in as
+    the panel's "Latest commit". Clear the leak, then give every coinop row
+    Coin-Op's own distribution repo — they publish no per-core repos, so that
+    is the one right link. Runs every export; matches nothing once healed."""
+    con.execute("UPDATE catalog SET last_update=NULL "
+                "WHERE source_id='coinop' AND repo LIKE 'MiSTer-devel/%'")
+    con.execute("UPDATE catalog SET repo=? WHERE source_id='coinop'",
+                (COINOP_REPO,))
+
+
 def warn_date_anomalies(con):
     """Tripwire for the Operation Wolf failure mode: a row that only just
     appeared (first seen after DETECTION_EPOCH, so its detection-day debut is
@@ -2725,6 +2837,7 @@ def cmd_export_web(args):
     apply_frozen_arcade_core_dates(con)  # and repo-less multi-game arcade cores
     apply_jt_frozen_dates(con)  # correct Jotego cores off the Feb-2023 monorepo-migration date
     apply_jt_beta_frozen_dates(con)  # after the jt pins: per-title beta dates win over folder dates
+    repair_coinop_rows(con)  # coinop rows: fix mis-joined repos, pin their distribution repo
     warn_date_anomalies(con)  # tripwire: new row wearing a years-old debut
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
@@ -2768,6 +2881,9 @@ def cmd_export_web(args):
         cur = core_files.setdefault(r["rbf"], {})
         if r["build_date"] > cur.get(r["source_id"], ""):
             cur[r["source_id"]] = r["build_date"]
+    # fork parentage for _core_label: who really authored a MiSTer-devel fork
+    fork_info = {r["repo"].lower(): r for r in con.execute(
+        "SELECT repo, is_fork, parent_owner FROM arcade_repos")}
     con.close()
     # Drop arcade region/revision/bootleg variants (MiSTer files them under
     # _Arcade/_alternatives/); the site shows only the mainline title per game.
@@ -2804,14 +2920,58 @@ def cmd_export_web(args):
                      if r["system"] == "arcade" and not r["beta"])
     beta_counts = Counter(_arcade_base(r["title"]) for r in rows
                           if r["system"] == "arcade" and r["beta"])
+    # Same-game pairs from different databases (official Deco16 vs Coin-Op's
+    # dedicated core) read better labeled by core than by ROM-set qualifier:
+    # "Caveman Ninja (Deco16)" vs "Caveman Ninja (Coin-Op Collection)". A
+    # colliding-base group qualifies only when every row has a setname, all
+    # setnames share one parent/clone root (same GAME — not different games
+    # sharing a name, like the three Tetrises), and the rows span >= 2 sources
+    # (single-source groups like Darius II / Burger Time are deliberate variant
+    # listings whose qualifiers carry the meaning). Betas never participate: a
+    # beta arriving or leaving must not change what a public row displays. Any
+    # doubt — missing setname, unresolvable/duplicate/degenerate labels —
+    # keeps today's raw titles for the whole group, with a log line.
+    same_game_labels = {}  # (source_id, path) -> qualifier label
+    groups = {}
+    for r in rows:
+        if r["system"] == "arcade" and not r["beta"]:
+            groups.setdefault(_arcade_base(r["title"]), []).append(r)
+    for b, grp in groups.items():
+        if len(grp) < 2:
+            continue
+        sns = [(r["setname"] or "").lower() for r in grp]
+        if not all(sns):
+            continue
+        roots = {(arcade_meta.get(s) or {}).get("parent") or s for s in sns}
+        if len(roots) != 1 or len({r["source_id"] for r in grp}) < 2:
+            continue
+        labels = [_core_label(r, fork_info, repo_maps) for r in grp]
+        if (any(not l for l in labels) or len(set(labels)) != len(labels)
+                or any(norm_key(l) == norm_key(b) for l in labels)):
+            log(f"  same-game group {b!r} kept raw titles (labels {labels})")
+            continue
+        for r, l in zip(grp, labels):
+            same_game_labels[(r["source_id"], r["path"])] = l
+            log(f"  same-game retitle: {r['title']} -> {b} ({l}) [{r['source_id']}]")
+    # arcade_titles: (display title, raw title to keep as `mt` or None). The
+    # raw MRA title must survive as mt on retitled rows — it is the image-
+    # manifest join key, the feeds' event-matching key and the search alias.
     arcade_titles = {}
     for r in rows:
         if r["system"] == "arcade":
             b = _arcade_base(r["title"])
-            clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
-            arcade_titles[(r["source_id"], r["path"])] = b if clean else r["title"]
+            label = same_game_labels.get((r["source_id"], r["path"]))
+            if label:
+                arcade_titles[(r["source_id"], r["path"])] = (f"{b} ({label})", r["title"])
+            else:
+                clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
+                arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map) for r in rows]
+    # deep-link key persistence needs each row's catalog identity; stripped
+    # again before data.json is written (_assign_row_keys pops them)
+    for r, d in zip(rows, data):
+        d["_src"], d["_path"] = r["source_id"], r["path"]
     # Human-ideal arcade titles (colons, punctuation, one name per game) from
     # the MAME descs. Must run AFTER _web_row — the setname/genre/screenshot
     # joins above all key on the raw MRA-derived title.
@@ -2819,7 +2979,9 @@ def cmd_export_web(args):
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
-    _assign_row_keys(data)  # 'k': the per-row deep-link fragment (#<k>)
+    pending_keys = _assign_row_keys(data, outdir)  # 'k': the per-row deep-link fragment (#<k>)
+    _check_key_stability(outdir / "data.json", data)  # hard gate: keys never move
+    _flush_row_keys(pending_keys)
     (outdir / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     # NOTE: outdir/index.html is a hand-maintained static page and the single
     # source of truth. export-web deliberately does NOT regenerate it — it used
@@ -2879,27 +3041,58 @@ def _rfc822(iso):
         dt.datetime.fromisoformat((iso or "").replace("Z", "+00:00")))
 
 
-def _assign_row_keys(data):
+def _assign_row_keys(data, outdir=None):
     """Stamp a stable, unique, URL-safe deep-link key ('k') on every row: the
     site opens #<k> as that row's detail panel, and the RSS items link there.
 
-    Arcade rows use the MAME setname (short, familiar, and already the site's
-    join key everywhere); non-arcade rows use the core token (unique today,
-    and stable in a way titles aren't). The leftovers — rows with no setname
-    and shared-setname pairs like btime — fall back to a slugified title.
-    Keys must never move once shared, so they derive only from stable fields;
-    residual collisions get a deterministic numeric suffix (data is already
-    in its final sorted order) plus a log warning rather than a crash, so a
-    weird upstream row can't take down the daily CI run."""
+    Keys are PERSISTED in the row_keys table: a row keeps the key it first
+    published forever, however its display title changes later (favorites,
+    #-deep-links, shared ?fav= URLs and the seen-state divider all hang off
+    k). A stored key wins unconditionally; only rows without one derive a key,
+    using the original chain — MAME setname (short, familiar) for arcade rows
+    with a unique sn, the core token for non-arcade rows, slugified title
+    otherwise, numeric suffix + log warning on residual collisions. A derived
+    key currently owned by a row ABSENT from this export is adopted (moved to
+    the new owner): dated rbf paths churn on every rebuild, and a core that
+    vanishes for a snapshot and returns must reclaim its key, not mint '-2'.
+    On an empty table the previous published data.json seeds it, so the very
+    first run can retitle rows without moving anything. Returns the planned
+    table writes for the caller to flush AFTER its key-move tripwire passes;
+    also strips the transient _src/_path identity fields off the rows."""
     slug = lambda s: re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+    con = connect()
+    stored = {(r["source_id"], r["path"]): r["k"] for r in
+              con.execute("SELECT source_id, path, k FROM row_keys")}
+    con.close()
+    pending = []
+    if not stored and outdir is not None:
+        prev = Path(outdir) / "data.json"
+        if prev.exists():
+            for d in json.loads(prev.read_text(encoding="utf-8")):
+                if d.get("src") and d.get("mra") and d.get("k"):
+                    stored[(d["src"], d["mra"])] = d["k"]
+                    # seeded mappings go to the table too (incl. currently
+                    # absent rows, whose keys stay reclaimable), else the next
+                    # run would find a half-filled table and re-derive
+                    pending.append(("insert", (d["src"], d["mra"]), d["k"]))
+            log(f"  seeded {len(stored)} row keys from published data.json")
+    owners = {k: ident for ident, k in stored.items()}
+    present = {(d["_src"], d["_path"]) for d in data if d.get("_path")}
+    # keys of surviving rows are spoken for before any derivation runs
+    taken = {k for k, ident in owners.items() if ident in present}
     sn_counts = Counter(d.get("sn") for d in data if d.get("sn"))
-    # keys must never move: a Patreon beta sharing a public row's setname
-    # (Jotego's tmnt2 beta vs Coin-Op's public tmnt2) must not cost the public
-    # row its bare-setname key — the public row keeps it, the beta slugs.
+    # a Patreon beta sharing a public row's setname (Jotego's tmnt2 beta vs
+    # Coin-Op's public tmnt2) must not cost the public row its bare-setname
+    # key — the public row keeps it, the beta slugs.
     pub_sn_counts = Counter(d.get("sn") for d in data
                             if d.get("sn") and not d.get("beta"))
-    taken = set()
+    n_stored, n_new = 0, 0
     for d in data:
+        ident = (d.pop("_src", None), d.pop("_path", None))
+        if ident[1] and ident in stored:
+            d["k"] = stored[ident]
+            n_stored += 1
+            continue
         sn = d.get("sn")
         if d["base"] == "Arcade" and sn and (
                 sn_counts[sn] == 1
@@ -2918,6 +3111,69 @@ def _assign_row_keys(data):
             n += 1
         taken.add(k)
         d["k"] = k
+        if ident[1]:
+            n_new += 1
+            if k in owners:  # held by a departed row: move it, don't re-insert
+                pending.append(("adopt", ident, k))
+            else:
+                pending.append(("insert", ident, k))
+            owners[k] = ident
+    log(f"  row keys: {n_stored} stored, {n_new} derived")
+    return pending
+
+
+def _flush_row_keys(pending):
+    """Persist the key assignments _assign_row_keys planned. Called only after
+    the key-move tripwire passed. Fail-soft per row: a constraint surprise
+    logs and skips (the key is already in this export's data.json; derivation
+    reruns next export), never takes down the publish."""
+    if not pending:
+        return
+    con = connect()
+    ts = now_iso()
+    done = 0
+    for op, (src, path), k in pending:
+        try:
+            if op == "adopt":
+                con.execute("UPDATE row_keys SET source_id=?, path=?, assigned_at=? WHERE k=?",
+                            (src, path, ts, k))
+            else:
+                con.execute("INSERT INTO row_keys(source_id, path, k, assigned_at) "
+                            "VALUES(?,?,?,?)", (src, path, k, ts))
+            done += 1
+        except sqlite3.Error as e:
+            log(f"  WARNING: row_keys write failed for {k!r}: {e}")
+    con.commit()
+    con.close()
+    log(f"  row_keys: {done} recorded")
+
+
+def _check_key_stability(prev_path, data):
+    """The one deliberate CI blocker: a published deep-link key must never
+    move (favorites, #-links, shared ?fav= URLs and seen-state would silently
+    break for every visitor). Compares against the previously published
+    data.json by row identity — arcade rows on (src, mra), non-arcade on
+    (src, core), extras on title — and aborts the export before anything is
+    written if a surviving row changed k. If a key change is ever truly
+    intended, edit the row_keys table and commit the DB with the change."""
+    if not prev_path.exists():
+        return
+    def ident(d):
+        if d.get("mra"):
+            return ("mra", d.get("src"), d["mra"])
+        if d.get("core"):
+            return ("core", d.get("src"), d.get("base"), d["core"])
+        return ("title", d.get("title"))
+    old = {}
+    for d in json.loads(prev_path.read_text(encoding="utf-8")):
+        old.setdefault(ident(d), d.get("k"))
+    moved = [f"{d.get('title')}: {old[ident(d)]} -> {d.get('k')}"
+             for d in data
+             if old.get(ident(d)) and d.get("k") != old[ident(d)]]
+    if moved:
+        raise SystemExit("ROW KEY MOVED (would break favorites/deep links): "
+                         + "; ".join(moved[:10]))
+    log("  row keys: 0 moved")
 
 
 def _write_feeds(outdir):

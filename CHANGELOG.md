@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-07-30
+- Release tracker: when the same arcade game ships from two databases on different cores, the two rows are now labeled by core instead of raw ROM-set qualifiers - Caveman Ninja (Deco16) vs Caveman Ninja (Coin-Op Collection), Boogie Wings (rmonic79) vs Boogie Wings (Coin-Op Collection), and likewise Crude Buster and Vapor Trail, following Coin-Op Collection's DECO-16 release. Genuinely different games sharing a name (Tetris, Squash, Darius II, ...) are unchanged, and the old names still work in search. Also fixed: Coin-Op's Boogie Wings row wrongly linked rmonic79's unrelated core repository; Coin-Op rows now always link the Coin-Op Collection distribution.
+
 ## 2026-07-28
 - Release tracker: the detail panel can now be scrolled by holding the left mouse button and dragging anywhere that is not a link or button - it has no scrollbar, so the mouse gets the same pan gesture touch always had.
 - Release tracker: the FPGA Core column now sits right after Core Type instead of at the far end of the table.

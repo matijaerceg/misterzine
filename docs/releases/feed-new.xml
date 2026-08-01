@@ -6,7 +6,34 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Fri, 31 Jul 2026 06:44:18 +0000</lastBuildDate>
+<lastBuildDate>Sat, 01 Aug 2026 00:05:22 +0000</lastBuildDate>
+<item>
+<title>[New] Double Wings (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dblewingb</link>
+<guid isPermaLink="false">coinop:_Arcade/Double Wings (Asia).mra:2026-08-01T00:05:22+00:00</guid>
+<pubDate>Sat, 01 Aug 2026 00:05:22 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dblewingb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1994 / Mitchell&lt;/p&gt;&lt;p&gt;Core: dblewing&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-01 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Mutant Fighter (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mutantf</link>
+<guid isPermaLink="false">coinop:_Arcade/Mutant Fighter (World, Ver. EM-5).mra:2026-08-01T00:05:22+00:00</guid>
+<pubDate>Sat, 01 Aug 2026 00:05:22 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mutantf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: mutantf_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-01 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Nitro Ball (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#nitrobal</link>
+<guid isPermaLink="false">coinop:_Arcade/Nitro Ball (World, Set 1).mra:2026-08-01T00:05:22+00:00</guid>
+<pubDate>Sat, 01 Aug 2026 00:05:22 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/nitrobal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: nitrobal_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-01 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Major Havoc (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mhavoc</link>
@@ -15,15 +42,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mhavoc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Atari&lt;/p&gt;&lt;p&gt;Core: MajorHavoc&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MajorHavoc_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] '99: The Last War (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#99lstwar</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/99 The Last War.mra:2026-07-30T16:53:45+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/99lstwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1985 / Crux / Proma&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Airwolf (Arcade)</title>
@@ -78,15 +96,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/srdmissn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Taito&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Son of Phoenix (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sonofphx</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Son of Phoenix.mra:2026-07-30T16:53:45+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sonofphx.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1985 / bootleg (Associated Overseas MFR, Inc.)&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Boogie Wings (Coin-Op Collection) (Arcade)</title>

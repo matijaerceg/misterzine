@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sun, 02 Aug 2026 13:29:20 +0000</lastBuildDate>
+<lastBuildDate>Mon, 03 Aug 2026 22:39:54 +0000</lastBuildDate>
+<item>
+<title>[New] VirtualBoy (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#VirtualBoy</link>
+<guid isPermaLink="false">distribution_mister:_Console/VirtualBoy_20260803.rbf:2026-08-03T22:39:54+00:00</guid>
+<pubDate>Mon, 03 Aug 2026 22:39:54 +0000</pubDate>
+<category>new</category>
+<category>Console core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-08-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VirtualBoy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Rohga: Armor Force (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#rohga</link>
@@ -546,24 +555,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/captavenu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: captaven&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-05 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Boogie Wings (rmonic79) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#boogwing</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Boogie Wings (Euro v1.5, 92.12.07).mra:2026-07-04T19:53:04+00:00</guid>
-<pubDate>Sat, 04 Jul 2026 19:53:04 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/boogwing.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: BoogieWings&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BoogieWings_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Gulf War II (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gulfwar2</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Gulf War II (set 1).mra:2026-07-04T19:53:04+00:00</guid>
-<pubDate>Sat, 04 Jul 2026 19:53:04 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gulfwar2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1991 / Comad&lt;/p&gt;&lt;p&gt;Core: GulfWarII&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-GulfWarII_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

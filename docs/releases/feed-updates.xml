@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 04 Aug 2026 08:08:01 +0000</lastBuildDate>
+<lastBuildDate>Tue, 04 Aug 2026 17:23:38 +0000</lastBuildDate>
+<item>
+<title>[Updated] SNK6502 (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasyu</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/SNK6502_20260804.rbf:2026-08-04T17:23:38+00:00</guid>
+<pubDate>Tue, 04 Aug 2026 17:23:38 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] VirtualBoy (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#VirtualBoy</link>
+<guid isPermaLink="false">distribution_mister:_Console/VirtualBoy_20260804.rbf:2026-08-04T17:23:38+00:00</guid>
+<pubDate>Tue, 04 Aug 2026 17:23:38 +0000</pubDate>
+<category>updated</category>
+<category>Console core</category>
+<description>&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VirtualBoy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Galaga 3 (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gaplus</link>
@@ -15,24 +33,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gaplus.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1984 / Namco&lt;/p&gt;&lt;p&gt;Core: gaplus&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Gaplus_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sasuke vs. Commander (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sasuke</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Sasuke.mra:2026-08-04T05:35:31+00:00</guid>
-<pubDate>Tue, 04 Aug 2026 05:35:31 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sasuke.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / SNK&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Satan of Saturn (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#satansat</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Satan Of Saturn.mra:2026-08-04T05:35:31+00:00</guid>
-<pubDate>Tue, 04 Aug 2026 05:35:31 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/satansat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / SNK&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] SNK6502 (Arcade core, 6 games)</title>

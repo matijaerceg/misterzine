@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Mon, 03 Aug 2026 16:25:16 +0000</lastBuildDate>
+<lastBuildDate>Mon, 03 Aug 2026 22:39:54 +0000</lastBuildDate>
+<item>
+<title>[Updated] SNK6502 (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasyu</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/SNK6502_20260803.rbf:2026-08-03T22:39:54+00:00</guid>
+<pubDate>Mon, 03 Aug 2026 22:39:54 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] PlayStation (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PSX</link>
+<guid isPermaLink="false">distribution_mister:_Console/PSX_20260729.rbf:2026-08-03T22:39:54+00:00</guid>
+<pubDate>Mon, 03 Aug 2026 22:39:54 +0000</pubDate>
+<category>updated</category>
+<category>Console core</category>
+<description>&lt;p&gt;1994 / Sony&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PSX_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] VirtualBoy (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#VirtualBoy</link>
+<guid isPermaLink="false">distribution_mister:_Console/VirtualBoy_20260803.rbf:2026-08-03T22:39:54+00:00</guid>
+<pubDate>Mon, 03 Aug 2026 22:39:54 +0000</pubDate>
+<category>new</category>
+<category>Console core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-08-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VirtualBoy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Freeze (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#freeze</link>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mhavoc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Atari&lt;/p&gt;&lt;p&gt;Core: MajorHavoc&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MajorHavoc_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Nintendo 64 (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#N64</link>
-<guid isPermaLink="false">distribution_mister:_Console/N64_20260726.rbf:2026-07-30T22:45:49+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 22:45:49 +0000</pubDate>
-<category>updated</category>
-<category>Console core</category>
-<description>&lt;p&gt;1996 / Nintendo&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/N64_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Airwolf (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#airwolf</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Airwolf.mra:2026-07-30T16:53:45+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/airwolf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Kyugo&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Flashgal (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#flashgal</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Flashgal.mra:2026-07-30T16:53:45+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/flashgal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1985 / Sega&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -1104,7 +1104,18 @@ def cmd_enrich_mra(args):
                 meta[mra.name] = {"year": gx("year"), "manufacturer": gx("manufacturer"),
                                   "rbf": gx("rbf"), "setname": gx("setname")}
             except Exception:
-                continue
+                # Some upstream MRAs are not well-formed XML (e.g. "--" inside a
+                # comment, which is illegal). Skipping left setname NULL forever
+                # (Ocean to Ocean, 2026-08), so fall back to flat-tag regexes.
+                try:
+                    txt = mra.read_text(encoding="utf-8", errors="ignore")
+                except OSError:
+                    continue
+                def gr(tag):
+                    m = re.search(r"<%s>\s*([^<]+?)\s*</%s>" % (tag, tag), txt)
+                    return m.group(1) if m else None
+                meta[mra.name] = {"year": gr("year"), "manufacturer": gr("manufacturer"),
+                                  "rbf": gr("rbf"), "setname": gr("setname")}
         n = 0
         for row in con.execute(
             "SELECT path FROM catalog WHERE system='arcade' AND source_id=?", (source_id,)
@@ -1363,8 +1374,17 @@ def cmd_coinop(args):
             m = COINOP_RE.match(msg)
             if m:
                 ymd = m.group(2)
-                rel_date = f"{ymd[0:4]}-{ymd[4:6]}-{ymd[6:8]}"
                 cdate = c["commit"]["committer"]["date"]
+                try:
+                    dt.datetime.strptime(ymd, "%Y%m%d")
+                    rel_date = f"{ymd[0:4]}-{ymd[4:6]}-{ymd[6:8]}"
+                except ValueError:
+                    # Subject has malformed date digits (e.g. "Diet Go Go
+                    # Release 202060801", 9 digits, which sliced to the
+                    # impossible 2020-60-80). The commit day is the shipping
+                    # day, so use it instead.
+                    rel_date = cdate[:10]
+                    log(f"  bad date {ymd!r} in {msg!r}; using commit day {rel_date}")
                 for raw in COINOP_SPLIT.split(m.group(1).strip()):
                     title = raw.strip(" !")
                     key = norm_key(title)

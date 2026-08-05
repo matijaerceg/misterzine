@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 05 Aug 2026 06:13:37 +0000</lastBuildDate>
+<lastBuildDate>Wed, 05 Aug 2026 17:09:51 +0000</lastBuildDate>
+<item>
+<title>[New] Asteroids Deluxe (v3 green) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#asteroids-deluxe-v3-green</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Asteroids Deluxe (v3 green).mra:2026-08-05T17:09:51+00:00</guid>
+<pubDate>Wed, 05 Aug 2026 17:09:51 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/astdelux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / Atari&lt;/p&gt;&lt;p&gt;Core: Asteroids&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Asteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Asteroids Deluxe (v3 orange) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#asteroids-deluxe-v3-orange</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Asteroids Deluxe (v3 orange).mra:2026-08-05T17:09:51+00:00</guid>
+<pubDate>Wed, 05 Aug 2026 17:09:51 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/astdelux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / Atari&lt;/p&gt;&lt;p&gt;Core: Asteroids&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Asteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Asteroids (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#asteroid</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Asteroids_20260804.rbf:2026-08-05T17:09:51+00:00</guid>
+<pubDate>Wed, 05 Aug 2026 17:09:51 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Asteroids, Asteroids Deluxe (v3 green), Asteroids Deluxe (v3 orange), Lunar Lander.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Asteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] DECOCassette (Arcade core, 38 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cprogolf18</link>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cptennis.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1982 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Rootin' Tootin' (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#clapapa2</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Rootin' Tootin' (DECO).mra:2026-07-31T20:47:33+00:00</guid>
-<pubDate>Fri, 31 Jul 2026 20:47:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/clapapa2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1983 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Scrum Try (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cscrtry</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Scrum Try (DECO).mra:2026-07-31T20:47:33+00:00</guid>
-<pubDate>Fri, 31 Jul 2026 20:47:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cscrtry.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Skater (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cskater</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Skater (DECO).mra:2026-07-31T20:47:33+00:00</guid>
-<pubDate>Fri, 31 Jul 2026 20:47:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cskater.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,34 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 04 Aug 2026 17:23:38 +0000</lastBuildDate>
+<lastBuildDate>Wed, 05 Aug 2026 06:13:37 +0000</lastBuildDate>
+<item>
+<title>[Updated] DECOCassette (Arcade core, 38 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cprogolf18</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/DECOCassette_20260804.rbf:2026-08-05T06:13:37+00:00</guid>
+<pubDate>Wed, 05 Aug 2026 06:13:37 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: 18 Challenge Pro Golf, Angler Dangler, Astro Fantasia, Boulder Dash, Bump 'n' Jump, Burger Time (DECO), Burnin' Rubber (DECO), Cluster Buster, DECO Cassette System ROM Multigame, DECO Test Tape, DS Telejan, Fighting Ice Hockey, Flash Boy, Flying Ball, Hamburger, Highway Chase, Lock'n'Chase, Lucky Poker, Manhattan, Mission-X, Nebula, Night Star, Ocean to Ocean, Oozumou - The Grand Sumo, Peter Pepper's Ice Cream Factory, Pro Bowling, Pro Soccer, Pro Tennis, Rootin' Tootin', Scrum Try, Skater, Super Astro Fighter, Super Doubles Tennis, Sweet Heart, Terranean, The Tower, Tornado, Tournament Pro Golf.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Qix (Arcade core, 8 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#complexx</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Qix_20260804.rbf:2026-08-05T06:13:37+00:00</guid>
+<pubDate>Wed, 05 Aug 2026 06:13:37 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcadia 2001 (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Arcadia</link>
+<guid isPermaLink="false">distribution_mister:_Console/Arcadia_20260803.rbf:2026-08-05T06:13:37+00:00</guid>
+<pubDate>Wed, 05 Aug 2026 06:13:37 +0000</pubDate>
+<category>updated</category>
+<category>Console core</category>
+<description>&lt;p&gt;1982 / Emerson&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcadia_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] SNK6502 (Arcade core, 6 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#fantasyu</link>
@@ -17,13 +44,13 @@
 <description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] VirtualBoy (Console core)</title>
+<title>[Updated] Virtual Boy (Console core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#VirtualBoy</link>
 <guid isPermaLink="false">distribution_mister:_Console/VirtualBoy_20260804.rbf:2026-08-04T17:23:38+00:00</guid>
 <pubDate>Tue, 04 Aug 2026 17:23:38 +0000</pubDate>
 <category>updated</category>
 <category>Console core</category>
-<description>&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VirtualBoy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;1995 / Nintendo&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VirtualBoy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Galaga 3 (Arcade)</title>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Planet Probe, Vastar.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Vastar_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Tumble Pop (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tumblep</link>
-<guid isPermaLink="false">coinop:_Arcade/cores/tumblep_mister_20260729.rbf:2026-07-30T01:11:10+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 01:11:10 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tumblep.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: tumblep_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-30 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Aleck64 (Arcade core, 11 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#11beat</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Aleck64_20260725.rbf:2026-07-28T18:15:43+00:00</guid>
-<pubDate>Tue, 28 Jul 2026 18:15:43 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Eleven Beat, Hanabi de Doon! - Don-chan Puzzle, Hi Pai Paradise, Hi Pai Paradise 2, Kurukuru Fever, Magical Tetris Challenge, Mayjinsen 3, Star Soldier: Vanishing Earth, Super Real Mahjong VS, Tower &amp;amp; Shaft, Vivid Dolls.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-28 (source: distribution_mister).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] UK101 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#UK101</link>
-<guid isPermaLink="false">distribution_mister:_Computer/UK101_20260724.rbf:2026-07-25T18:38:33+00:00</guid>
-<pubDate>Sat, 25 Jul 2026 18:38:33 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1979 / Compukit&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/UK101_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

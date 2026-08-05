@@ -1952,6 +1952,7 @@ CONSOLE_MANUFACTURER = {
     "NES": "Nintendo", "SNES": "Nintendo", "N64": "Nintendo", "Gameboy": "Nintendo",
     "Gameboy2P": "Nintendo", "GBA": "Nintendo", "GBA2P": "Nintendo", "SGB": "Nintendo",
     "PokemonMini": "Nintendo", "GameAndWatch": "Nintendo", "GnW": "Nintendo",
+    "VirtualBoy": "Nintendo",
     "SMS": "Sega", "GameGear2P": "Sega", "MegaDrive": "Sega", "MegaCD": "Sega",
     "S32X": "Sega", "Saturn": "Sega",
     "Atari5200": "Atari", "Atari7800": "Atari", "AtariLynx": "Atari", "Jaguar": "Atari",
@@ -2021,7 +2022,7 @@ CORE_YEAR = {
     # consoles
     "NES": "1983", "SNES": "1990", "N64": "1996", "Gameboy": "1989", "Gameboy2P": "1989",
     "GBA": "2001", "GBA2P": "2001", "SGB": "1994", "PokemonMini": "2001",
-    "GameAndWatch": "1980", "GnW": "1980",
+    "GameAndWatch": "1980", "GnW": "1980", "VirtualBoy": "1995",
     "SMS": "1985", "GameGear2P": "1990", "MegaDrive": "1988", "MegaCD": "1991",
     "S32X": "1994", "Saturn": "1994",
     "Atari5200": "1982", "Atari7800": "1986", "AtariLynx": "1989", "Jaguar": "1993",
@@ -2102,6 +2103,7 @@ SYSTEM_TITLES = {
     "SuperVision": "Supervision",
     "TurboGrafx16": "TurboGrafx-16",
     "VC4000": "VC 4000",
+    "VirtualBoy": "Virtual Boy",
     # computers
     "AcornAtom": "Acorn Atom",
     "AcornElectron": "Acorn Electron",

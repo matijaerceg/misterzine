@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 05 Aug 2026 22:58:54 +0000</lastBuildDate>
+<lastBuildDate>Thu, 06 Aug 2026 06:16:32 +0000</lastBuildDate>
+<item>
+<title>[Updated] Galaga 3 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gaplus</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Gaplus_20260805.rbf:2026-08-06T06:16:32+00:00</guid>
+<pubDate>Thu, 06 Aug 2026 06:16:32 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gaplus.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1984 / Namco&lt;/p&gt;&lt;p&gt;Core: gaplus&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Gaplus_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Sky Smasher (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#skysmash</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cprobowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Pro Soccer (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cpsoccer</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Pro Soccer (DECO).mra:2026-07-31T20:47:33+00:00</guid>
-<pubDate>Fri, 31 Jul 2026 20:47:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cpsoccer.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-07-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

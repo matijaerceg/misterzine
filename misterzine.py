@@ -1994,7 +1994,7 @@ COMPUTER_MANUFACTURER = {
     "Atari800": "Atari", "AtariST": "Atari",
     "CoCo2": "Tandy", "CoCo3": "Tandy", "TRS-80": "Tandy", "Tandy1000": "Tandy",
     "AliceMC10": "Tandy / Matra",
-    "PCXT": "IBM", "PCjr": "IBM",
+    "PCXT": "IBM", "PCXT-EGA": "IBM", "PCjr": "IBM",
     "PDP1": "DEC", "VT52": "DEC",
     "SharpMZ": "Sharp", "X68000": "Sharp",
     "PC88": "NEC",
@@ -2041,7 +2041,7 @@ CORE_YEAR = {
     "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
     "Amstrad": "1984", "Amstrad-PCW": "1985", "Atari800": "1979", "AtariST": "1985",
     "CoCo2": "1983", "CoCo3": "1986", "TRS-80": "1977", "Tandy1000": "1984", "AliceMC10": "1983",
-    "PCXT": "1983", "PCjr": "1984", "PDP1": "1959", "VT52": "1975", "SharpMZ": "1978",
+    "PCXT": "1983", "PCXT-EGA": "1984", "PCjr": "1984", "PDP1": "1959", "VT52": "1975", "SharpMZ": "1978",
     "X68000": "1987", "PC88": "1981", "Ti994a": "1981", "ColecoAdam": "1983", "Aquarius": "1983",
     "TomyTutor": "1982", "Casio_PV-2000": "1983", "SordM5": "1982", "Svi328": "1983",
     "Laser310": "1983", "eg2000": "1982", "RX78": "1983", "TatungEinstein": "1984",
@@ -2142,6 +2142,7 @@ SYSTEM_TITLES = {
     "ORAO": "Orao",
     "PC88": "PC-8801",
     "PCXT": "PC/XT",
+    "PCXT-EGA": "PC/XT (EGA)",
     "PDP1": "PDP-1",
     "PET2001": "PET 2001",
     "PMD85": "PMD 85",
@@ -2173,6 +2174,8 @@ CORE_NOTES = {
     "GBA": "A 2-player link-cable variant core (GBA2P) is also available.",
     "GameGear2P": "This is the 2-player link-cable core; the regular 1-player Game Gear is built into the SMS core.",
     "SMS": "Also plays Game Gear games (a separate 2-player Game Gear core exists).",
+    "PCXT": "A separate EGA-video variant core (PCXT-EGA) is also available.",
+    "PCXT-EGA": "EGA-video variant of the PC/XT core (which is CGA-based).",
 }
 
 

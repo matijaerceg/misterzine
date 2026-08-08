@@ -2061,7 +2061,7 @@ CORE_YEAR = {
 # a CORE_NOTES pointer so the variant stays discoverable. GameGear2P is NOT
 # here: it's the only standalone Game Gear core (1-player Game Gear is built
 # into the SMS core), so its row stays, retitled via SYSTEM_TITLES.
-DUPLICATE_VARIANT_CORES = {"Gameboy2P", "GBA2P"}
+DUPLICATE_VARIANT_CORES = {"Gameboy2P", "GBA2P", "AtariLynx2P"}
 
 # Human display titles for console/computer/other rows whose rbf name isn't the
 # name a person would use. Keyed by core_name; presentation-only (repo links,
@@ -2174,6 +2174,7 @@ CORE_NOTES = {
     "GBA": "A 2-player link-cable variant core (GBA2P) is also available.",
     "GameGear2P": "This is the 2-player link-cable core; the regular 1-player Game Gear is built into the SMS core.",
     "SMS": "Also plays Game Gear games (a separate 2-player Game Gear core exists).",
+    "AtariLynx": "A 2-player ComLynx link variant core (AtariLynx2P) is also available.",
     "PCXT": "A separate EGA-video variant core (PCXT-EGA) is also available.",
     "PCXT-EGA": "EGA-video variant of the PC/XT core (which is CGA-based).",
 }

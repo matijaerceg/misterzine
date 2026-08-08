@@ -2648,10 +2648,13 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     else:
         updated = core_build_date(r["title"]) or commit_d
     # last link in the fallback chain: the debut build is itself a shipped
-    # build, so a row with no other shipped signal floors at its debut date
-    # (a real shipped signal overwrites this the moment one exists; rows whose
-    # genuine shipped file PREDATES their debut are deliberately left alone)
-    updated = updated or date
+    # build, so updated floors at the debut date. max() (not `or`) also floors
+    # rows whose shipped file predates their debut (title added later to an
+    # already-built shared core): at debut update_all delivers the row's full
+    # deliverable for the first time, so a row-level last-shipped date earlier
+    # than the row's existence is a paradox, not information. One-time clamp
+    # against the frozen debut; later signals still only move it forward.
+    updated = max(updated, date) if (updated and date) else (updated or date)
     repo = _repo_for(r, core, repo_maps or {})
     row = {
         "title": title,

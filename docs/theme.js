@@ -1,6 +1,8 @@
 /* Shared theme picker for all three pages (home, release tracker, hardware).
-   Builds the theme menu from THEMES, applies + persists the choice, and freezes
-   the summary width. The control is a plain <details id="themedd"> on every page
+   Builds the theme menu from THEMES and applies + persists the choice. The
+   closed summary is a static "Theme" label straight from the markup (the active
+   theme shows via the page itself + the highlighted menu row), so no width
+   freeze is needed. The control is a plain <details id="themedd"> on every page
    (the release tracker's used to be a details.cols wired into the filter dropdown
    system; Tier 2 decoupled it). The pre-paint <script> in each <head> (reads
    mz-theme with a /^[a-z]+$/ guard) still sets data-theme before first paint.
@@ -38,13 +40,9 @@
   function applyTheme(t) {
     if (slugs.indexOf(t) < 0) t = 'dark';
     document.documentElement.setAttribute('data-theme', t);
-    var cur = null;
     btns.forEach(function (b) {
-      var on = b.dataset.set === t;
-      b.setAttribute('aria-pressed', on);
-      if (on) cur = b;
+      b.setAttribute('aria-pressed', b.dataset.set === t);
     });
-    sum.textContent = cur ? cur.textContent : 'Theme';
   }
 
   // picking a theme leaves the menu OPEN on purpose: themes apply live, so the
@@ -84,25 +82,7 @@
     }
   }, true);
 
-  // The menu hangs off the control's right edge (right:0), so the summary's width
-  // is its left edge: letting it resize per theme name would shove the control and
-  // the open menu under the cursor mid-pick. Freeze to the widest label, measured
-  // live off the DOM (so a new theme needs only its THEMES entry); re-run once the
-  // webfonts land, since the fallback metrics differ from Roboto's.
-  function lockSummary() {
-    var prev = sum.textContent, max = 0;
-    sum.style.minWidth = '';
-    btns.forEach(function (b) {
-      sum.textContent = b.textContent;
-      max = Math.max(max, sum.getBoundingClientRect().width);
-    });
-    sum.textContent = prev;
-    sum.style.minWidth = Math.ceil(max) + 'px';
-  }
-
   var saved = 'dark';
   try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
   applyTheme(saved);
-  lockSummary();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockSummary);
 })();

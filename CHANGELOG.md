@@ -2,6 +2,10 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-08-08
+- Release tracker: a game's Last Updated date can no longer show earlier than its MiSTer Release date. When a title is added to an already-built shared core (Pretty Soldier Sailor Moon landed in August on the CaveBanpresto core built in June), its Last Updated now starts at its release date instead of the older core file's date - 24 rows corrected.
+- All pages: the theme dropdown is now labeled "Theme" instead of showing the active theme's name, so first-time visitors can tell what the control does. The active theme is still highlighted inside the open menu.
+
 ## 2026-08-04
 - Release tracker: the new Virtual Boy core fills in its details: display name (Virtual Boy), original year (1995), manufacturer (Nintendo) and a hardware photo in its detail panel.
 

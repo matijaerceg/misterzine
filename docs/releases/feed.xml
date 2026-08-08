@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 08 Aug 2026 07:49:44 +0000</lastBuildDate>
+<lastBuildDate>Sat, 08 Aug 2026 16:32:49 +0000</lastBuildDate>
+<item>
+<title>[Updated] Boogie Wings (rmonic79) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#boogwing</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Boogie Wings (Euro v1.5, 92.12.07).mra:2026-08-08T16:32:49+00:00</guid>
+<pubDate>Sat, 08 Aug 2026 16:32:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/boogwing.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: BoogieWings&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BoogieWings_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Night Slashers (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#nslasher</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Night Slashers (Korea Rev 1.3, DE-0397-0 PCB).mra:2026-08-08T16:32:49+00:00</guid>
+<pubDate>Sat, 08 Aug 2026 16:32:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/nslasher.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: NightSlashers&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-NightSlashers_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Trio The Punch - Never Forget Me... (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#triothep</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Trio The Punch (World).mra:2026-08-08T16:32:49+00:00</guid>
+<pubDate>Sat, 08 Aug 2026 16:32:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/triothep.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: TrioThePunch&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TrioThePunch_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Galaga 3 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gaplus</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Gaplus_20260807.rbf:2026-08-08T16:32:49+00:00</guid>
+<pubDate>Sat, 08 Aug 2026 16:32:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gaplus.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1984 / Namco&lt;/p&gt;&lt;p&gt;Core: gaplus&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Gaplus_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] PlayStation (Console core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#PSX</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cocean1a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Gambling / 1981 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Oozumou - The Grand Sumo (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#coozumou</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Oozumou - Grand Sumo (DECO).mra:2026-08-02T04:46:08+00:00</guid>
-<pubDate>Sun, 02 Aug 2026 04:46:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/coozumou.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Peter Pepper's Ice Cream Factory (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cppicf</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Peter Pepper's Ice Cream Factory (DECO).mra:2026-08-02T04:46:08+00:00</guid>
-<pubDate>Sun, 02 Aug 2026 04:46:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cppicf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1984 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Pro Bowling (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cprobowl</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Pro Bowling (DECO).mra:2026-08-02T04:46:08+00:00</guid>
-<pubDate>Sun, 02 Aug 2026 04:46:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cprobowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Pro Soccer (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cpsoccer</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Pro Soccer (DECO).mra:2026-08-02T04:46:08+00:00</guid>
-<pubDate>Sun, 02 Aug 2026 04:46:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cpsoccer.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -1871,6 +1871,7 @@ def local_specs():
 # the comment; still provisional (gray, MAD-wins), so they self-heal like the
 # rest. Issue #8.
 SPECS_CORRECTIONS = {
+    "godzilla": {"plr": "2 (simultaneous)", "ctl": "8-way · 3 buttons"},  # legionna.cpp: 2P, B1-B3
     "nibbler":  {"ctl": "4-way"},             # snk6502.cpp: PORT_4WAY, no buttons
     "sasuke":   {"ctl": "2-way · 1 button"},   # snk6502.cpp: PORT_MODIFY drops B2
     "satansat": {"ctl": "2-way · 2 buttons"},  # snk6502.cpp: PORT_2WAY + B1/B2

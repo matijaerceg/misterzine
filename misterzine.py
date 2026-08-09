@@ -1866,16 +1866,28 @@ def local_specs():
     return json.loads(gzip.decompress(SPECS_GZ.read_bytes()).decode("utf-8"))
 
 
+# mame2003-plus values that contradict the current MAME driver source (0.78-era
+# data predates later input research). Hand-verified against the driver named in
+# the comment; still provisional (gray, MAD-wins), so they self-heal like the
+# rest. Issue #8.
+SPECS_CORRECTIONS = {
+    "nibbler":  {"ctl": "4-way"},             # snk6502.cpp: PORT_4WAY, no buttons
+    "sasuke":   {"ctl": "2-way · 2 buttons"},  # snk6502.cpp: satansat ports
+    "satansat": {"ctl": "2-way · 2 buttons"},  # snk6502.cpp: PORT_2WAY + B1/B2
+}
+
+
 def specs_for(setname, specs, dat):
     """Provisional-specs entry for a setname, falling back to its DAT parent's."""
     if not setname:
         return {}
     sl = setname.lower()
     e = specs.get(sl)
-    if e:
-        return e
-    parent = (dat.get(sl) or {}).get("parent")
-    return specs.get(parent, {}) if parent else {}
+    if not e:
+        parent = (dat.get(sl) or {}).get("parent")
+        e = specs.get(parent, {}) if parent else {}
+    fix = SPECS_CORRECTIONS.get(sl)
+    return {**e, **fix} if fix else e
 
 
 def cmd_specs(args):

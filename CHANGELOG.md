@@ -3,7 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-08-09
-- Release tracker: corrected the Controls column for three SNK6502-core games against the current MAME driver source: Nibbler is a 4-way joystick (was shown 8-way; thanks febs for the report), and Sasuke vs. Commander and Satan of Saturn are 2-way with 2 buttons. The wrong values came from the MAME 0.78-era data used to gray-fill games the MiSTer Arcade Database has not catalogued yet.
+- Release tracker: corrected the Controls column for three SNK6502-core games against the current MAME driver source: Nibbler is a 4-way joystick (was shown 8-way; thanks febs for the report), Sasuke vs. Commander is 2-way with 1 button, and Satan of Saturn is 2-way with 2 buttons. The wrong values came from the MAME 0.78-era data used to gray-fill games the MiSTer Arcade Database has not catalogued yet.
 
 ## 2026-08-08
 - Release tracker: the new MacLC core fills in its details: display name (Macintosh LC), original year (1990), manufacturer (Apple) and a hardware photo in its detail panel.

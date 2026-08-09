@@ -1872,7 +1872,7 @@ def local_specs():
 # rest. Issue #8.
 SPECS_CORRECTIONS = {
     "nibbler":  {"ctl": "4-way"},             # snk6502.cpp: PORT_4WAY, no buttons
-    "sasuke":   {"ctl": "2-way · 2 buttons"},  # snk6502.cpp: satansat ports
+    "sasuke":   {"ctl": "2-way · 1 button"},   # snk6502.cpp: PORT_MODIFY drops B2
     "satansat": {"ctl": "2-way · 2 buttons"},  # snk6502.cpp: PORT_2WAY + B1/B2
 }
 

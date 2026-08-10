@@ -2,6 +2,10 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-08-10
+- Release tracker: filled in the new Neo Geo Pocket Color core's details (title, SNK, 1999, repo link) and gave it a system photo; the Neo Geo Pocket row now shows the monochrome model's photo (it previously showed a Color unit).
+- Release tracker: the two new CPS1 hack rows now show the Fighter genre, and Street Fighter II' Special Champion Edition got screenshots from the hack author's own captures (the hacks are not in MAME, so the usual screenshot sources cannot cover them).
+
 ## 2026-08-09
 - Release tracker: corrected the new Godzilla core's provisional details against current MAME: 2 players simultaneous (was 4) and 3 buttons (was 2).
 - Release tracker: corrected the Controls column for three SNK6502-core games against the current MAME driver source: Nibbler is a 4-way joystick (was shown 8-way; thanks febs for the report), Sasuke vs. Commander is 2-way with 1 button, and Satan of Saturn is 2-way with 2 buttons. The wrong values came from the MAME 0.78-era data used to gray-fill games the MiSTer Arcade Database has not catalogued yet.

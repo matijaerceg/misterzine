@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Tue, 11 Aug 2026 05:54:27 +0000</lastBuildDate>
+<lastBuildDate>Wed, 12 Aug 2026 18:13:07 +0000</lastBuildDate>
+<item>
+<title>[New] Klax (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#klax</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Klax.mra:2026-08-12T18:13:07+00:00</guid>
+<pubDate>Wed, 12 Aug 2026 18:13:07 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/klax.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Klax&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Klax_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] MultiComp (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MultiComp</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MultiComp_20260809.rbf:2026-08-12T18:13:07+00:00</guid>
+<pubDate>Wed, 12 Aug 2026 18:13:07 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;2013 / DIY (Grant Searle)&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MultiComp_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Jaguar (Console core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Jaguar</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cnightst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Ocean to Ocean (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cocean1a</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Ocean to Ocean (DECO).mra:2026-08-07T00:42:16+00:00</guid>
-<pubDate>Fri, 07 Aug 2026 00:42:16 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cocean1a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Gambling / 1981 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Oozumou - The Grand Sumo (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#coozumou</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Oozumou - Grand Sumo (DECO).mra:2026-08-07T00:42:16+00:00</guid>
-<pubDate>Fri, 07 Aug 2026 00:42:16 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/coozumou.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Data East&lt;/p&gt;&lt;p&gt;Core: DECOCassette&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,34 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Wed, 12 Aug 2026 18:13:07 +0000</lastBuildDate>
+<lastBuildDate>Fri, 14 Aug 2026 22:42:19 +0000</lastBuildDate>
+<item>
+<title>[New] Thunder Zone (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#thndzone</link>
+<guid isPermaLink="false">coinop:_Arcade/Thunder Zone (World, Rev 1).mra:2026-08-14T22:42:19+00:00</guid>
+<pubDate>Fri, 14 Aug 2026 22:42:19 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thndzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1991 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: thndzone_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-14 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Star Trek (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#startrek</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Star Trek.mra:2026-08-14T21:57:33+00:00</guid>
+<pubDate>Fri, 14 Aug 2026 21:57:33 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/startrek.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaG80V&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-14 (source: distribution_mister).&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Tac/Scan (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tacscan</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Tac-Scan.mra:2026-08-14T21:57:33+00:00</guid>
+<pubDate>Fri, 14 Aug 2026 21:57:33 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tacscan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaG80V&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-14 (source: distribution_mister).&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Klax (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#klax</link>
@@ -537,15 +564,6 @@
 <category>new</category>
 <category>Console core</category>
 <description>&lt;p&gt;1993 / Panasonic&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/3DO_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Heated Barrel (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#heatbrl</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Heated Barrel (World version 3).mra:2026-07-15T18:35:56+00:00</guid>
-<pubDate>Wed, 15 Jul 2026 18:35:56 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heatbrl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / TAD Corporation&lt;/p&gt;&lt;p&gt;Core: HeatedBarrel&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-HeatedBarrel_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

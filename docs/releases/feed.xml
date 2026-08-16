@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 15 Aug 2026 20:46:25 +0000</lastBuildDate>
+<lastBuildDate>Sun, 16 Aug 2026 13:49:58 +0000</lastBuildDate>
+<item>
+<title>[New] Toobin' (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#toobin</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Toobin.mra:2026-08-16T13:49:58+00:00</guid>
+<pubDate>Sun, 16 Aug 2026 13:49:58 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toobin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Toobin&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Toobin_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] StarWars (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#starwars</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/StarWars_20260816.rbf:2026-08-16T13:49:58+00:00</guid>
+<pubDate>Sun, 16 Aug 2026 13:49:58 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Star Wars, The Empire Strikes Back.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-StarWars_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] G.I. Joe (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gijoe</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toryumon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Turbo Out Run (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#toutrun</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Turbo Out Run (Out Run upgrade) (FD1094 317-0118).mra:2026-08-09T20:24:39+00:00</guid>
-<pubDate>Sun, 09 Aug 2026 20:24:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toutrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jtoutrun&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/outrun"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Wonder Boy III - Monster Lair (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wb3</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Wonder Boy III - Monster Lair (set 6, World, System 16B) (8751 317-0098).mra:2026-08-09T20:24:39+00:00</guid>
-<pubDate>Sun, 09 Aug 2026 20:24:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wb3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

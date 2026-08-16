@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 14 Aug 2026 15:18:56 +0000</lastBuildDate>
+<lastBuildDate>Sun, 16 Aug 2026 13:49:58 +0000</lastBuildDate>
+<item>
+<title>[Updated] StarWars (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#starwars</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/StarWars_20260816.rbf:2026-08-16T13:49:58+00:00</guid>
+<pubDate>Sun, 16 Aug 2026 13:49:58 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Star Wars, The Empire Strikes Back.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-StarWars_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/atetris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Atari&lt;/p&gt;&lt;p&gt;Core: ataritetris&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ATetris_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Trojan (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#trojan</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Trojan/Trojan (Romstar, set 1).mra:2026-08-09T20:24:39+00:00</guid>
-<pubDate>Sun, 09 Aug 2026 20:24:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/trojan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

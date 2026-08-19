@@ -36,6 +36,7 @@ import urllib.request
 import urllib.error
 import urllib.parse
 import zipfile
+import zlib
 from collections import Counter
 from io import BytesIO
 from pathlib import Path
@@ -3454,10 +3455,31 @@ def _libretro_slug(s):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
+def _png_is_blank(body):
+    """True when a PNG decodes to nothing but zero bytes, i.e. an all-black
+    frame. Laserdisc games (Space Ace, Dragon's Lair) are the reason: MAME only
+    drives their control board, so every upstream capture of them is a black
+    screen that passes the magic-byte check and lands on the site as an empty
+    popup. Any parse trouble answers False: never reject a real capture."""
+    try:
+        pos, raw = 8, b""
+        while pos + 8 <= len(body):
+            n = int.from_bytes(body[pos:pos + 4], "big")
+            kind = body[pos + 4:pos + 8]
+            if kind == b"IDAT":
+                raw += body[pos + 8:pos + 8 + n]
+            elif kind == b"IEND":
+                break
+            pos += 12 + n  # length + type + data + crc
+        return bool(raw) and max(zlib.decompress(raw)) == 0
+    except Exception:
+        return False
+
+
 def _fetch_png(url, dest, headers=None, label=""):
     """Download one screenshot to dest. Returns True on a valid PNG (magic-checked
-    so an HTML error page never lands on disk). Skips if a non-empty file is
-    already there."""
+    so an HTML error page never lands on disk, and blank-checked so an all-black
+    capture is treated as a miss). Skips if a non-empty file is already there."""
     if dest.exists() and dest.stat().st_size > 0:
         return True
     try:
@@ -3466,6 +3488,9 @@ def _fetch_png(url, dest, headers=None, label=""):
         log(f"    {label} miss: {e}")
         return False
     if not body or body[:8] != b"\x89PNG\r\n\x1a\n":
+        return False
+    if _png_is_blank(body):
+        log(f"    {label} blank (all-black capture), skipped")
         return False
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_bytes(body)

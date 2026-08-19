@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-08-19
+- Release tracker: Space Ace now shows real title and gameplay screenshots. Its shots were black frames: MAME only drives the laserdisc board, so every upstream capture of the game is an empty screen. The new pair comes from the game's own NTSC laserdisc video, the same footage the MiSTer core plays.
+
 ## 2026-08-10
 - Release tracker: filled in the new Neo Geo Pocket Color core's details (title, SNK, 1999, repo link) and gave it a system photo; the Neo Geo Pocket row now shows the monochrome model's photo (it previously showed a Color unit).
 - Release tracker: the two new CPS1 hack rows now show the Fighter genre, and Street Fighter II' Champion Re-Edit got verified title and player-select screenshots (the hacks are not in MAME, so the usual screenshot sources cannot cover them).

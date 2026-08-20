@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 16 Aug 2026 19:29:14 +0000</lastBuildDate>
+<lastBuildDate>Thu, 20 Aug 2026 14:35:45 +0000</lastBuildDate>
+<item>
+<title>[Updated] LaserdiscGames (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dlair</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20260820.rbf:2026-08-20T14:35:45+00:00</guid>
+<pubDate>Thu, 20 Aug 2026 14:35:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Dragon's Lair, Space Ace.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Star Trek (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#startrek</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Console core</category>
 <description>&lt;p&gt;1999 / SNK&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-14 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ngpc"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Neo Geo Pocket (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#NeoGeoPocket</link>
-<guid isPermaLink="false">jtbindb:_Console/NeoGeoPocket.rbf:2026-08-14T15:18:56+00:00</guid>
-<pubDate>Fri, 14 Aug 2026 15:18:56 +0000</pubDate>
-<category>updated</category>
-<category>Console core</category>
-<description>&lt;p&gt;1998 / SNK&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-14 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ngp"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

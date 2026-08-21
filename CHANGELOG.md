@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-08-21
+- Release tracker: the five Atari System 2 games (Paperboy, Super Sprint, Championship Sprint, 720 Degrees and APB) now link to their core's repository. Their core's repository name spells out "AtariSystem2" while the games' core file is named atarisys2, so the two never matched up.
+
 ## 2026-08-19
 - Release tracker: Space Ace now shows real title and gameplay screenshots. Its shots were black frames: MAME only drives the laserdisc board, so every upstream capture of the game is an empty screen. The new pair comes from the game's own NTSC laserdisc video, the same footage the MiSTer core plays.
 

@@ -740,6 +740,7 @@ def _sweep_fork_parents(con, repos):
 ARCADE_RBF_ALIASES = {
     "taitosj": "taitosystemsj",   # Arcade-TaitoSystemSJ
     "atarisys1": "atarisystem1",  # Arcade-Atari-system1
+    "atarisys2": "atarisystem2",  # Arcade-AtariSystem2
     "sdgundamps": "gundamsd",     # Arcade-GundamSD
     "ataritetris": "atetris",     # Arcade-ATetris
     "rshnatk": "rushnattack",     # Arcade-RushnAttack

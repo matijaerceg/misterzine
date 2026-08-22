@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 21 Aug 2026 14:41:35 +0000</lastBuildDate>
+<lastBuildDate>Sat, 22 Aug 2026 03:25:08 +0000</lastBuildDate>
+<item>
+<title>[Updated] Kangaroo (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fnkyfish</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Kangaroo_20260821.rbf:2026-08-22T03:25:08+00:00</guid>
+<pubDate>Sat, 22 Aug 2026 03:25:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Funky Fish, Kangaroo.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-22 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kangaroo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Toobin' (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#toobin</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Toobin_20260821.rbf:2026-08-22T03:25:08+00:00</guid>
+<pubDate>Sat, 22 Aug 2026 03:25:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toobin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Toobin&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-22 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Toobin_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/quartet.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Quartet 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#quartet2a</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Quartet 2 (World, S16A) [No Protection].mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/quartet2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Riot City (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#riotcity</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Riot City (Japan).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/riotcity.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

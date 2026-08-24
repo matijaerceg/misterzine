@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 24 Aug 2026 03:54:29 +0000</lastBuildDate>
+<lastBuildDate>Mon, 24 Aug 2026 16:45:49 +0000</lastBuildDate>
+<item>
+<title>[Updated] Tutankham (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tutankhm</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Tutankham_20260824.rbf:2026-08-24T16:45:49+00:00</guid>
+<pubDate>Mon, 24 Aug 2026 16:45:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tutankhm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Konami&lt;/p&gt;&lt;p&gt;Core: Tutankham&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Tutankham_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Fantasy (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#fantasyu</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/insectx.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Taito Corporation Japan&lt;/p&gt;&lt;p&gt;Core: jtkiwi&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kiwi"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kageki (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kageki</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Kageki (World).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kageki.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Kaneko / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: jtkiwi&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kiwi"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Tue, 25 Aug 2026 11:49:48 +0000</lastBuildDate>
+<lastBuildDate>Tue, 25 Aug 2026 17:40:42 +0000</lastBuildDate>
+<item>
+<title>[New] Raiden DX (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#raidendx</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Raiden DX (UK).mra:2026-08-25T17:40:42+00:00</guid>
+<pubDate>Tue, 25 Aug 2026 17:40:42 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raidendx.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1994 / Seibu Kaihatsu&lt;/p&gt;&lt;p&gt;Core: Raiden2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Raiden2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Raiden II (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#raiden2</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Raiden II (US, set 1).mra:2026-08-25T17:40:42+00:00</guid>
+<pubDate>Tue, 25 Aug 2026 17:40:42 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raiden2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / Seibu Kaihatsu (Fabtek license)&lt;/p&gt;&lt;p&gt;Core: Raiden2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Raiden2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] JR100 (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#JR100</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mvp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-21 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Passing Shot (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#passsht</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Passing Shot/Passing Shot (Japan, 4 Players) (FD1094 317-0070).mra:2026-08-21T14:41:35+00:00</guid>
-<pubDate>Fri, 21 Aug 2026 14:41:35 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/passsht.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-21 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Quartet (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#quartet</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Quartet/Quartet (4p, World, S16A) [8751 315-5194].mra:2026-08-21T14:41:35+00:00</guid>
-<pubDate>Fri, 21 Aug 2026 14:41:35 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/quartet.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-21 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

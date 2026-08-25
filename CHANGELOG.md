@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-08-25
+- Release tracker: on Chrome and Edge, the Launch button now sends the game to your MiSTer silently in the background (after a one-time "devices on your network" permission), instead of flashing a popup window. This also fixes the installed app on Android getting stuck on a black "Launching" screen until you pressed back. Firefox and Safari keep the popup, which those browsers still require.
+
 ## 2026-08-21
 - Release tracker: the five Atari System 2 games (Paperboy, Super Sprint, Championship Sprint, 720 Degrees and APB) now link to their core's repository. Their core's repository name spells out "AtariSystem2" while the games' core file is named atarisys2, so the two never matched up.
 

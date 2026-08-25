@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 24 Aug 2026 16:45:49 +0000</lastBuildDate>
+<lastBuildDate>Mon, 24 Aug 2026 23:28:34 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arabian (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Arabian_20260824.rbf:2026-08-24T23:28:34+00:00</guid>
+<pubDate>Mon, 24 Aug 2026 23:28:34 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arabian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arabian&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] BluePrint (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#blueprnt</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/BluePrint_20260824.rbf:2026-08-24T23:28:34+00:00</guid>
+<pubDate>Mon, 24 Aug 2026 23:28:34 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Blue Print, Grasspin, Saturn.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BluePrint_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] DECOCassette (Arcade core, 42 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cprogolf18</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/DECOCassette_20260824.rbf:2026-08-24T23:28:34+00:00</guid>
+<pubDate>Mon, 24 Aug 2026 23:28:34 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: 18 Challenge Pro Golf, Angler Dangler, Astro Fantasia, Boulder Dash, Bump 'n' Jump, Burger Time (DECO), Burnin' Rubber (DECO), Cluster Buster, DECO Darksoft Multigame, DECO Test Tape, DECO Widel Multigame, DS Telejan, Explorer, Fighting Ice Hockey, Flash Boy, Flying Ball, Hamburger, Highway Chase, Lock'n'Chase, Lucky Poker, Manhattan, Mission-X, Nebula, Night Star, Ocean to Ocean, Oozumou - The Grand Sumo, Peter Pepper's Ice Cream Factory, Pro Bowling, Pro Soccer, Pro Tennis, Rootin' Tootin', Scrum Try, Skater, Super Astro Fighter, Super Doubles Tennis, Sweet Heart, Terranean, The Tower, Tornado, Tournament Pro Golf, Treasure Island, Zeroize.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Kangaroo (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fnkyfish</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Kangaroo_20260824.rbf:2026-08-24T23:28:34+00:00</guid>
+<pubDate>Mon, 24 Aug 2026 23:28:34 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Funky Fish, Kangaroo.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kangaroo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Tutankham (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#tutankhm</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/extrmatn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Taito Corporation Japan&lt;/p&gt;&lt;p&gt;Core: jtkiwi&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kiwi"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Fantasy Zone (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantzone</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Fantasy Zone (Rev A, World, S16A) [No Protection].mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Fantasy Zone II - The Tears of Opa-Opa (System 16C version) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantzn2x</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Fantasy Zone II - The Tears of Opa-Opa (System 16C version).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzn2x.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 2008 / Sega / M2&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Heavy Barrel (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hbarrel</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Heavy Barrel (World).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hbarrel.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Insector X (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#insectx</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Insector X (World).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/insectx.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Taito Corporation Japan&lt;/p&gt;&lt;p&gt;Core: jtkiwi&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kiwi"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

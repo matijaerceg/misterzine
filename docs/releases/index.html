@@ -743,8 +743,8 @@
   #panel .syscredit a { color: inherit; }
 
   /* Launch on MiSTer: split button under the panel title; chooser/manager
-     reuses the .rsspop popover chrome. Transport is a GET navigation
-     (window.open + auto-close) — see the launch section in the JS. */
+     reuses the .rsspop popover chrome. Transport is an LNA fetch on Chromium,
+     else a GET navigation (window.open + auto-close) — see the launch JS. */
   #panel .launchrow { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 0; }
   #panel .launchrow button { font: inherit; font-size: .78rem; padding: .28rem .65rem; cursor: pointer;
     border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface); color: inherit; }
@@ -2473,12 +2473,19 @@ const ZAP_ICON = '<svg class="zapbolt" viewBox="0 0 24 24" aria-hidden="true"><p
 // absolute file path or a **system:<id> script (mrext's LaunchToken dialect —
 // NOT ZapScript: launch.system is "unknown command" here, and padded base64
 // is rejected). Bare /l/ must be avoided: the SPA serves every unknown route
-// with a 200, which looks like success and launches nothing. A GET
-// *navigation* is deliberately the transport — this https page may not
-// fetch() an http LAN address (mixed content), but it may navigate to one, so
-// the button window.open()s the URL and closes the tab a beat later. No
-// response is readable (fire-and-forget); failures (missing file on the SD,
-// device off) only flash their error text in the tab before it closes.
+// with a 200, which looks like success and launches nothing. Two transports:
+// on Chromium, the Local Network Access permission (Chrome 142+) lets this
+// https page fetch() a private-IP http URL after a one-time prompt, so the
+// button fires an invisible GET — no popup, and it survives the installed
+// PWA on Android, where opening a popup backgrounds+freezes this page so an
+// opener-side auto-close timer never runs (the pre-LNA bug: a stuck black
+// "Launching" window until the user pressed back). Everywhere else (Firefox/
+// Safari have no LNA, so the fetch is blocked mixed content) the transport
+// is the original GET *navigation* — the page may not fetch() http but may
+// navigate to it, so the button window.open()s the URL and closes the popup
+// a beat later. No response is readable on either path (fire-and-forget);
+// failures (missing file on the SD, device off) only flash their error text
+// in the fallback popup before it closes.
 // Devices persist per-browser in localStorage (mz-misters / mz-mister-last).
 
 // core/rbf name → mrext system id (pkg/games/systems.go), for non-arcade rows:
@@ -2530,26 +2537,52 @@ const saveMisters = () => {
 const b64url = s => btoa(Array.from(new TextEncoder().encode(s), b => String.fromCharCode(b)).join(''))
   .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
-function fireLaunch(dev, script, btn) {
+// LNA probe: Chromium exposes Request.targetAddressSpace alongside its Local
+// Network Access machinery. Browsers without it (Firefox, Safari) never try
+// the fetch — their popup must stay synchronous inside the tap gesture or the
+// popup blocker eats it, so they go straight to popupLaunch.
+const hasLNA = (() => {
+  try { return 'targetAddressSpace' in new Request('https://x/'); } catch (e) { return false; }
+})();
+let popupLate = false;  // a late fallback popup got blocked once: popup-first from then on
+
+function popupLaunch(dev, url) {
   // small popup (not a full tab), pre-painted dark before it navigates to the
-  // http:// LAN URL (top-level navigation is the only mixed-content-legal
-  // transport; the Remote response page itself can't be styled or read).
+  // http:// LAN URL (top-level navigation is mixed-content-legal even where
+  // fetch isn't; the Remote response page can't be styled or read).
   // 4s before auto-close: enough to read Remote's plain-text 500 on a miss.
   const w = window.open('', '_blank', 'popup,width=280,height=120');
-  if (w) {
-    try {
-      w.document.write('<title>Launching…</title><body style="margin:0;display:grid;' +
-        'place-items:center;height:100vh;background:#141414;color:#999;' +
-        'font:13px system-ui">Launching on ' + dev.n.replace(/[<>&]/g, '') + '…</body>');
-    } catch (e) {}
-    w.location.replace('http://' + dev.h + '/api/l/' + b64url(script));
-    setTimeout(() => { try { w.close(); } catch (e) {} }, 4000);
-  }
-  if (btn) {  // its own swap, not the copy fields' chip: this one names the device
+  if (!w) return false;
+  try {
+    w.document.write('<title>Launching…</title><body style="margin:0;display:grid;' +
+      'place-items:center;height:100vh;background:#141414;color:#999;' +
+      'font:13px system-ui">Launching on ' + dev.n.replace(/[<>&]/g, '') + '…</body>');
+  } catch (e) {}
+  w.location.replace(url);
+  setTimeout(() => { try { w.close(); } catch (e) {} }, 4000);
+  return true;
+}
+
+function fireLaunch(dev, script, btn) {
+  const url = 'http://' + dev.h + '/api/l/' + b64url(script);
+  const flash = (txt, ok) => {  // its own swap, not the copy fields' chip: this one names the device
+    if (!btn) return;
     if (!btn.dataset.orig) btn.dataset.orig = btn.textContent;
-    btn.classList.add('sent'); btn.textContent = 'Sent to ' + dev.n + ' ✓';
+    btn.classList.toggle('sent', ok); btn.textContent = txt;
     setTimeout(() => { btn.classList.remove('sent'); btn.textContent = btn.dataset.orig; }, 1600);
-  }
+  };
+  if (hasLNA && !popupLate) {
+    // fetch first: with the LNA permission denied or undecided-instantly the
+    // rejection lands while the tap's transient activation still allows the
+    // popup fallback. The 10s abort covers a granted-but-unreachable device
+    // (OS connect timeouts run far longer); by then the activation is gone,
+    // so a blocked fallback flips popupLate and asks for a second tap.
+    fetch(url, { mode: 'no-cors', signal: AbortSignal.timeout(10000) })
+      .catch(() => {
+        if (!popupLaunch(dev, url)) { popupLate = true; flash('Blocked - tap again', false); }
+      });
+  } else if (!popupLaunch(dev, url)) return;
+  flash('Sent to ' + dev.n + ' ✓', true);
 }
 
 const launchRowHTML = () => {

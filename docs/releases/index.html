@@ -532,6 +532,8 @@
   dd .brot { color: var(--muted); font-size: .9em; }
   /* the panel's "shipped together" line, under the Latest update value */
   dd .batch { color: var(--muted); font-size: .9em; }
+  /* the panel's opt-in-database note, under the Source value */
+  dd .optin { color: var(--muted); font-size: .9em; }
   /* "8 years ago" trailing a panel date. Dimmed like .prov but deliberately NOT
      .prov: that italic means "this value is uncertain", which an age never is. */
   .ago { color: var(--muted); margin-left: .4rem; }
@@ -1186,6 +1188,8 @@ const CORE_NAMES = {
   // Sega
   'ST-V': 'Sega ST-V', 'jts16': 'Sega System 16A', 'jts16b': 'Sega System 16B', 'jts18': 'Sega System 18',
   'segasys1': 'Sega System 1', 'SMS': 'Sega System E', 'jtoutrun': 'Sega (Out Run)',
+  'Arcade-SegaSystem32': 'Sega System 32', 'Arcade-SegaSystem32Multi': 'Sega Multi 32',
+  'Arcade-Segas24': 'Sega System 24',
   'jtshanon': 'Sega (Super Hang-On)', 'zaxxon': 'Sega (Zaxxon)', 'bankpanic': 'Sega (Bank Panic)',
   'CongoBongo': 'Sega (Congo Bongo)', 'SegaVICZ80': 'Sega VIC Dual',
   // Namco
@@ -1233,6 +1237,8 @@ const CORE_NAMES = {
   'naughtyboy': 'Jaleco (Naughty Boy)', 'megasys1_a': 'Jaleco Mega System 1', 'polyplay': 'VEB Poly-Play',
   'phoenix': 'Amstar (Phoenix HW)', 'crazykong': 'Crazy Kong', 'donkeykong': 'Nintendo (Donkey Kong)',
   'popeye': 'Nintendo (Popeye)',
+  'Arcade-SSV': 'Sammy/Seta/Visco SSV', 'Arcade-DoCastle': "Universal (Do's Castle HW)",
+  'Arcade-Ikki': 'Sun Electronics (Ikki HW)',
 };
 
 // Which downloader database ships each entry (d.src, raw source id from the
@@ -1243,11 +1249,13 @@ const SRC_NAMES = {
   distribution_mister: 'MiSTer Distribution',
   jtbindb: 'Jotego (JTcores)',
   coinop: 'Coin-Op Collection',
+  meathax: 'Meathax (MeatCores)',
 };
 const SRC_SEARCH = {
   distribution_mister: 'distribution',
   jtbindb: 'jotego jtcores',
   coinop: 'coin-op collection',
+  meathax: 'meathax meatcores',
 };
 
 // Per-setname display-aspect escape hatch — for the handful of cases the normal
@@ -2245,6 +2253,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   distribution_mister: 'distribution_mister',
   jtbindb: 'jtcores',
   coinop: 'Coin-OpCollection/Distribution-MiSTerFPGA',
+  meathax: 'meathax/meatcores',
 };
 function buildFavExport() {
   const terms = new Map();  // src -> Set of filter terms
@@ -2268,6 +2277,12 @@ function buildFavExport() {
       esc(FT_SECTIONS[src]) + ']</code> in your downloader.ini (create the line if it is missing):</p>' +
       '<div class="fx-row"><code>' + esc(str) + '</code>' +
       '<button type="button" class="fx-copy" data-terms="' + escA(str) + '">Copy</button></div>';
+    // MeatCores is a manual opt-in database (no update_all settings toggle), so
+    // spell out the section it needs in case the visitor has not added it yet.
+    if (src === 'meathax') html +=
+      '<p class="fx-note">MeatCores is not bundled with update_all. If downloader.ini has no ' +
+      '<code>[meathax/meatcores]</code> section yet, add it with this line: ' +
+      '<code>db_url = https://raw.githubusercontent.com/meathax/meatcores/db/db.json.zip</code></p>';
   }
   if (!html) html = '<p>None of your favorites could be exported.</p>';
   if (noTag.length) html += '<p class="fx-note">These can\'t be exported (no filter tag in their database): '
@@ -2687,8 +2702,14 @@ function detailHTML(d) {
     rows.push(['Latest update', uv, true]);
   }
   if (d.act) rows.push(['Latest commit', esc(d.act) + agoSpan(relAge(d.act)), true]);
-  // which downloader database delivers this entry via update_all
-  if (d.src) rows.push(['Source', SRC_NAMES[d.src] || d.src]);
+  // which downloader database delivers this entry via update_all. MeatCores has
+  // no update_all settings toggle, so its rows say how to opt in.
+  if (d.src === 'meathax') {
+    rows.push(['Source', esc(SRC_NAMES[d.src]) + '<br><span class="optin">Opt-in database: add a ' +
+      '[meathax/meatcores] section to downloader.ini to receive it via update_all.</span>', true]);
+  } else if (d.src) {
+    rows.push(['Source', SRC_NAMES[d.src] || d.src]);
+  }
   // show the repo slug (jtcores deep links keep the full path in the href only)
   if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
     '<span class="lbl">' + esc(d.repo.split('/').slice(0, 2).join('/')) + '</span><span class="ext">↗</span></a>', true]);

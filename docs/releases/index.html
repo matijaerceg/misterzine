@@ -2546,20 +2546,45 @@ const hasLNA = (() => {
 })();
 let popupLate = false;  // a late fallback popup got blocked once: popup-first from then on
 
+// reaper: when this page comes back into view (Android back press, tab switch)
+// close any leftover launch window that the frozen-opener case (see below)
+// kept us from closing on time. No-ops when the window is already gone.
+let lastLaunchW = null;
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && lastLaunchW) { try { lastLaunchW.close(); } catch (e) {} lastLaunchW = null; }
+});
+
 function popupLaunch(dev, url) {
   // small popup (not a full tab), pre-painted dark before it navigates to the
   // http:// LAN URL (top-level navigation is mixed-content-legal even where
   // fetch isn't; the Remote response page can't be styled or read).
-  // 4s before auto-close: enough to read Remote's plain-text 500 on a miss.
-  const w = window.open('', '_blank', 'popup,width=280,height=120');
+  const w = window.open('', '_blank', 'popup,width=280,height=170');
   if (!w) return false;
   try {
-    w.document.write('<title>Launching…</title><body style="margin:0;display:grid;' +
+    // The interstitial holds ~1s before navigating so the press-back hint is
+    // readable: once the (cross-origin, unstylable, usually blank) Remote
+    // response replaces it, nothing we control is on screen. The delayed
+    // navigation MUST run inside the popup's own document, not out here: in
+    // an installed PWA this opener page freezes the moment the popup covers
+    // it, so an opener-side timer would never navigate at all - the same
+    // freeze that keeps the 4s close below from running there (Android
+    // Firefox-app black-screen report, 2026-08-25; the popup can't close
+    // itself either, navigation destroys its document).
+    w.document.write('<title>Launching...</title><body style="margin:0;display:grid;' +
       'place-items:center;height:100vh;background:#141414;color:#999;' +
-      'font:13px system-ui">Launching on ' + dev.n.replace(/[<>&]/g, '') + '…</body>');
-  } catch (e) {}
-  w.location.replace(url);
+      'font:13px system-ui;text-align:center"><div style="padding:0 14px">' +
+      'Launching on ' + dev.n.replace(/[<>&]/g, '') + '...' +
+      '<br><span style="font-size:11px;color:#777">If this window stays open, ' +
+      'press back to return to the tracker.</span></div>' +
+      '<script>setTimeout(function(){location.replace(' +
+      JSON.stringify(url).replace(/</g, '\\u003c') + ')},900)<\/script></body>');
+  } catch (e) {
+    w.location.replace(url);  // interstitial failed: launch anyway, undecorated
+  }
+  // 4s before auto-close (where the opener stays alive): still ~3s of the
+  // Remote plain-text 500 on a miss, after the 0.9s interstitial hold.
   setTimeout(() => { try { w.close(); } catch (e) {} }, 4000);
+  lastLaunchW = w;
   return true;
 }
 

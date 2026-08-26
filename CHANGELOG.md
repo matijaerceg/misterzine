@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-08-25
+- Release tracker: on browsers that still launch through a popup window (Firefox, Safari), the window now explains itself for a moment ("Launching on X... if this window stays open, press back to return to the tracker") before contacting the MiSTer, and any leftover launch window is closed when you come back to the page. In the installed app on those browsers the window cannot close itself; this makes the back press expected instead of mysterious.
 - Release tracker: on Chrome and Edge, the Launch button now sends the game to your MiSTer silently in the background (after a one-time "devices on your network" permission), instead of flashing a popup window. This also fixes the installed app on Android getting stuck on a black "Launching" screen until you pressed back. Firefox and Safari keep the popup, which those browsers still require.
 
 ## 2026-08-21

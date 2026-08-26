@@ -860,6 +860,7 @@ CORE_REPO_OVERRIDES = {
     "Ti994a": "TI-99_4A",
     "RX78": "RX-78",
     "GameOfLife": "Life",
+    "Studio-II": "StudioII",  # rbf is Studio-II, repo is StudioII_MiSTer
 }
 
 # Hand-verified MiSTer debut dates for cores the repo crawl can't reach via the
@@ -1971,8 +1972,9 @@ CONSOLE_MANUFACTURER = {
     "SMS": "Sega", "GameGear2P": "Sega", "MegaDrive": "Sega", "MegaCD": "Sega",
     "S32X": "Sega", "Saturn": "Sega",
     "Atari5200": "Atari", "Atari7800": "Atari", "AtariLynx": "Atari", "Jaguar": "Atari",
-    "NeoGeo": "SNK", "NeoGeoPocket": "SNK", "NeoGeoPocket-Color": "SNK",
+    "NeoGeo": "SNK", "NeoGeoPocket": "SNK", "NeoGeoPocket-Color": "SNK", "NGPC": "SNK",
     "TurboGrafx16": "NEC",
+    "Studio-II": "RCA",
     "PSX": "Sony",
     "3DO": "Panasonic",  # licensed standard (The 3DO Company); reference unit = Panasonic REAL FZ-1
     "CDi": "Philips",
@@ -2042,8 +2044,8 @@ CORE_YEAR = {
     "SMS": "1985", "GameGear2P": "1990", "MegaDrive": "1988", "MegaCD": "1991",
     "S32X": "1994", "Saturn": "1994",
     "Atari5200": "1982", "Atari7800": "1986", "AtariLynx": "1989", "Jaguar": "1993",
-    "NeoGeo": "1990", "NeoGeoPocket": "1998", "NeoGeoPocket-Color": "1999",
-    "TurboGrafx16": "1987", "PSX": "1994",
+    "NeoGeo": "1990", "NeoGeoPocket": "1998", "NeoGeoPocket-Color": "1999", "NGPC": "1999",
+    "TurboGrafx16": "1987", "PSX": "1994", "Studio-II": "1977",
     "3DO": "1993",  # Panasonic REAL FZ-1, Oct 1993
     "CDi": "1991", "Intellivision": "1979", "ColecoVision": "1982", "Odyssey2": "1978",
     "ChannelF": "1976", "Astrocade": "1978", "Arcadia": "1982", "Vectrex": "1982",
@@ -2109,8 +2111,12 @@ SYSTEM_TITLES = {
     "N64": "Nintendo 64",
     "NeoGeo": "Neo Geo",
     "NeoGeoPocket": "Neo Geo Pocket",
-    "NeoGeoPocket-Color": "Neo Geo Pocket Color",
+    # two competing NGPC cores (same disambiguation style as Game & Watch):
+    # jotego's jtcores port vs Jamie Blanks (Kitrinx)'s NGPC_MiSTer
+    "NeoGeoPocket-Color": "Neo Geo Pocket Color (Jotego)",
+    "NGPC": "Neo Geo Pocket Color (Kitrinx)",
     "Odyssey2": "Odyssey 2",
+    "Studio-II": "Studio II",
     "PokemonMini": "Pokémon Mini",
     "PSX": "PlayStation",
     "S32X": "32X",

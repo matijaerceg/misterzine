@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-08-25
+- Release tracker: the new RCA Studio II core got its full details (RCA, 1977, repository link) and a system photo. The new second Neo Geo Pocket Color core got its details too (SNK, 1999, system photo), and the two competing cores are now titled by author to tell them apart: Neo Geo Pocket Color (Kitrinx) vs Neo Geo Pocket Color (Jotego).
 - Release tracker: on browsers that still launch through a popup window (Firefox, Safari), the window now explains itself for a moment ("Launching on X... if this window stays open, press back to return to the tracker") before contacting the MiSTer, and any leftover launch window is closed when you come back to the page. In the installed app on those browsers the window cannot close itself; this makes the back press expected instead of mysterious.
 - Release tracker: on Chrome and Edge, the Launch button now sends the game to your MiSTer silently in the background (after a one-time "devices on your network" permission), instead of flashing a popup window. This also fixes the installed app on Android getting stuck on a black "Launching" screen until you pressed back. Firefox and Safari keep the popup, which those browsers still require.
 

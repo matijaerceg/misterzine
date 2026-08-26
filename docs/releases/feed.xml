@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Tue, 25 Aug 2026 17:40:42 +0000</lastBuildDate>
+<lastBuildDate>Tue, 25 Aug 2026 23:58:04 +0000</lastBuildDate>
+<item>
+<title>[Updated] CaveBanpresto (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#agallet</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/CaveBanpresto_20260825.rbf:2026-08-25T23:58:04+00:00</guid>
+<pubDate>Tue, 25 Aug 2026 23:58:04 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Gallet, Hotdog Storm, Mazinger Z, Metamoqester, Pretty Soldier Sailor Moon.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-CaveBanpresto_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Raiden DX (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#raidendx</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hbarrel.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-21 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] MVP (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mvp</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_MVP/MVP (set 1, Japan) (FD1094 317-0142).mra:2026-08-21T14:41:35+00:00</guid>
-<pubDate>Fri, 21 Aug 2026 14:41:35 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mvp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-21 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

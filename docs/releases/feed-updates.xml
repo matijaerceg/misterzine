@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 25 Aug 2026 05:17:11 +0000</lastBuildDate>
+<lastBuildDate>Tue, 25 Aug 2026 23:58:04 +0000</lastBuildDate>
+<item>
+<title>[Updated] CaveBanpresto (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#agallet</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/CaveBanpresto_20260825.rbf:2026-08-25T23:58:04+00:00</guid>
+<pubDate>Tue, 25 Aug 2026 23:58:04 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Gallet, Hotdog Storm, Mazinger Z, Metamoqester, Pretty Soldier Sailor Moon.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-CaveBanpresto_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arabian (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/alexkidd.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Altered Beast (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#altbeast</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Altered Beast (set 8) (8751 317-0078).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/altbeast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

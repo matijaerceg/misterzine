@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 25 Aug 2026 23:58:04 +0000</lastBuildDate>
+<lastBuildDate>Wed, 26 Aug 2026 06:45:57 +0000</lastBuildDate>
+<item>
+<title>[Updated] Cave (Arcade core, 10 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ddonpach</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Cave_20260825.rbf:2026-08-26T06:45:57+00:00</guid>
+<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: DoDonPachi, DonPachi, ESP Ra.De., Fever SOS, Gaia Crusaders, Gogetsuji Legends, Guwange, Power Instinct 2, Puzzle Uo Poko, Thunder Heroes.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Deco16 (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#caveman-ninja-world-ver-4</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Deco16_20260826.rbf:2026-08-26T06:45:57+00:00</guid>
+<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Caveman Ninja (Deco16), Crude Buster (Deco16), The Cliffhanger - Edward Randy (Deco16), Vapor Trail - Hyper Offence Formation (Deco16).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] CaveBanpresto (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#agallet</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tacscan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Sega&lt;/p&gt;&lt;p&gt;Core: SegaG80V&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
-<guid isPermaLink="false">jtbindb:_Arcade/1943 Kai Midway Kaisen (Japan).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943kai.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Alex Kidd: The Lost Stars (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#alexkidd</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Alex Kidd The Lost Stars (Set 2, World, S16A) [No Protection].mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/alexkidd.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

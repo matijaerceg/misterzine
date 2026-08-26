@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-08-26
+- Release tracker: now also tracks Meathax's MeatCores database - 42 new arcade games across nine cores, including Sega System 32 (SegaSonic The Hedgehog, Golden Axe: The Revenge of Death Adder, Spider-Man: The Videogame), Sega Multi 32 (OutRunners, Hard Dunk), Sega System 24 (Bonanza Bros, Crack Down), the Sammy/Seta/Visco SSV board (Vasara 1 and 2, Storm Blade), NARC, Bucky O'Hare, and Universal's Do's Castle hardware. MeatCores is an opt-in database with no update_all settings toggle, so its rows explain how to add it to downloader.ini; debut dates come from each game's first appearance in the database's history, and future releases and updates will flow into the tracker and feeds automatically.
+
 ## 2026-08-25
 - Release tracker: the new RCA Studio II core got its full details (RCA, 1977, repository link) and a system photo. The new second Neo Geo Pocket Color core got its details too (SNK, 1999, system photo), and the two competing cores are now titled by author to tell them apart: Neo Geo Pocket Color (Kitrinx) vs Neo Geo Pocket Color (Jotego).
 - Release tracker: on browsers that still launch through a popup window (Firefox, Safari), the window now explains itself for a moment ("Launching on X... if this window stays open, press back to return to the tracker") before contacting the MiSTer, and any leftover launch window is closed when you come back to the page. In the installed app on those browsers the window cannot close itself; this makes the back press expected instead of mysterious.

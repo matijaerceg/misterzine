@@ -4,8 +4,9 @@ misterzine - a release database for MiSTer FPGA cores (arcade-focused).
 
 Builds and maintains a local database of MiSTer releases from three angles:
 
-  1. catalog  - the *current* set of titles across the three public DBs
-                (MiSTer Distribution, JTcores public, Coin-Op Collection).
+  1. catalog  - the *current* set of titles across the four public DBs
+                (MiSTer Distribution, JTcores public, Coin-Op Collection,
+                MeatCores).
   2. repos    - the *retrospective* real release dates, mined from the
                 per-core GitHub repos (MiSTer-devel/Arcade-*), whose first
                 commit == the core's MiSTer debut (history goes back years).
@@ -66,6 +67,16 @@ SOURCES = [
         "id": "coinop",
         "name": "Coin-Op Collection",
         "db_url": "https://raw.githubusercontent.com/Coin-OpCollection/Distribution-MiSTerFPGA/db/db.json.zip",
+    },
+    {
+        # Meathax's arcade cores (Sega System 32 / Multi 32 / System 24, SSV,
+        # NARC, Do's Castle HW, ...). A standard downloader db (generated from
+        # theypsilon's DB-Template, same as Coin-Op) but NOT toggleable inside
+        # update_all's settings UI — users opt in by adding the [meathax/meatcores]
+        # section to downloader.ini by hand; update_all then delivers it.
+        "id": "meathax",
+        "name": "MeatCores (Meathax)",
+        "db_url": "https://raw.githubusercontent.com/meathax/meatcores/db/db.json.zip",
     },
 ]
 
@@ -1031,25 +1042,28 @@ def join_core_repos_to_catalog(con):
 # --- command: enrich-mra (year / manufacturer from MRA XML) ---------------
 
 # Repos that ship the MRA XML for a given source (for year/manufacturer/rbf).
+# 4th field: the folder holding the mainline MRAs (meathax nests his under a
+# vendor subfolder; everyone else uses the _Arcade root).
 MRA_REPOS = [
-    ("distribution_mister", "MiSTer-devel/Distribution_MiSTer", "main"),
-    ("jtbindb", "jotego/jtcores_mister", "main"),
+    ("distribution_mister", "MiSTer-devel/Distribution_MiSTer", "main", "_Arcade"),
+    ("jtbindb", "jotego/jtcores_mister", "main", "_Arcade"),
     # Coin-Op keeps db.json.zip on the `db` branch but the MRAs live on
     # `develop`; parsing them fills the rbf (Core column), setname, year and
     # manufacturer for the ~57 Coin-Op rows that used to have none — the
     # blank rbf was why their Core cell fell back to the repo-name label
     # "Distribution-MiSTerFPGA".
-    ("coinop", "Coin-OpCollection/Distribution-MiSTerFPGA", "develop"),
+    ("coinop", "Coin-OpCollection/Distribution-MiSTerFPGA", "develop", "_Arcade"),
+    ("meathax", "meathax/meatcores", "main", "_Arcade/_MeatCores"),
 ]
 
 
-def _sparse_arcade_clone(full_name, branch):
-    """Blobless sparse clone of a repo's _Arcade folder; returns the local dir."""
+def _sparse_arcade_clone(full_name, branch, mradir="_Arcade"):
+    """Blobless sparse clone of a repo's MRA folder; returns the local dir."""
     name = full_name.split("/")[-1]
     repodir = DATA / "repos" / name
     if not (repodir / ".git").exists():
         repodir.parent.mkdir(parents=True, exist_ok=True)
-        log(f"cloning {full_name} (blobless, sparse _Arcade/*.mra) ...")
+        log(f"cloning {full_name} (blobless, sparse {mradir}/*.mra) ...")
         subprocess.check_call([
             "git", "clone", "--filter=blob:none", "--no-checkout", "--depth", "1",
             "--single-branch", "-b", branch,
@@ -1057,7 +1071,7 @@ def _sparse_arcade_clone(full_name, branch):
         ])
         # Non-cone pattern: only top-level MRAs. Skips nested dirs like
         # _Arcade/_alternatives/_M.I.A./ whose trailing-dot names are illegal on NTFS.
-        subprocess.check_call(["git", "-C", str(repodir), "sparse-checkout", "set", "--no-cone", "/_Arcade/*.mra"])
+        subprocess.check_call(["git", "-C", str(repodir), "sparse-checkout", "set", "--no-cone", f"/{mradir}/*.mra"])
         # protectNTFS=false lets checkout proceed past NTFS-illegal paths in
         # excluded subdirs (e.g. _alternatives/_M.I.A./); sparse skips writing them.
         subprocess.check_call(["git", "-C", str(repodir), "-c", "core.protectNTFS=false", "checkout"])
@@ -1071,7 +1085,7 @@ def _sparse_arcade_clone(full_name, branch):
         if pull.returncode != 0:
             log(f"  {full_name}: ff-only pull failed (force-push?); re-cloning fresh")
             _rmtree_force(repodir)
-            return _sparse_arcade_clone(full_name, branch)
+            return _sparse_arcade_clone(full_name, branch, mradir)
     return repodir
 
 
@@ -1095,10 +1109,10 @@ def cmd_enrich_mra(args):
 
     con = connect()
     grand = 0
-    for source_id, full_name, branch in MRA_REPOS:
-        repodir = _sparse_arcade_clone(full_name, branch)
+    for source_id, full_name, branch, mradir in MRA_REPOS:
+        repodir = _sparse_arcade_clone(full_name, branch, mradir)
         meta = {}
-        for mra in (repodir / "_Arcade").glob("*.mra"):
+        for mra in (repodir / mradir).glob("*.mra"):
             try:
                 root = ET.parse(mra).getroot()
                 def gx(tag):
@@ -1503,6 +1517,93 @@ def join_coinop_to_catalog(con):
             )
             n += 1
     log(f"  joined {n} Coin-Op titles to release dates")
+
+
+# --- meathax (MeatCores) repo links + frozen debut dates -------------------
+
+MEATHAX_REPO = "meathax/meatcores"
+# Per-core source repos under github.com/meathax, keyed by lowercased MRA rbf.
+# Cores without a public per-core repo fall back to the distribution repo.
+MEATHAX_CORE_REPOS = {
+    "arcade-segasystem32": "meathax/s32",
+    "arcade-segasystem32multi": "meathax/s32multi",
+    "arcade-segas24": "meathax/s24",
+    "arcade-ssv": "meathax/SVV",
+    "arcade-narc": "meathax/narc",
+    "arcade-docastle": "meathax/mrdo",
+    "arcade-bucky": "meathax/Bucky",
+}
+
+# Debut dates for the meatcores initial import (2026-08-26 seed): the source
+# was added to misterzine after these games shipped, so their seed rows carry
+# no detection-day date. Derived objectively from each mainline MRA's
+# first-add commit in meathax/meatcores@main (git log --follow --diff-filter=A,
+# normalized to UTC dates; mined 2026-08-26) — the day update_all could first
+# deliver the game. Frozen here so they never drift; titles added after this
+# import need no entry (their detection-day stamp IS the debut).
+MEATHAX_FROZEN_DATES = {
+    "American Soccer.mra": "2026-08-07",
+    "Do! Run Run.mra": "2026-08-07",
+    "Dyna Gear.mra": "2026-08-07",
+    "Farmers Rebellion.mra": "2026-08-07",
+    "Golden Axe The Revenge of Death Adder.mra": "2026-08-07",
+    "Holosseum.mra": "2026-08-07",
+    "Ikki.mra": "2026-08-07",
+    "Indoor Soccer.mra": "2026-08-07",
+    "Jumping Jack.mra": "2026-08-07",
+    "Kick Rider.mra": "2026-08-07",
+    "Mr. Do! vs. Unicorns.mra": "2026-08-07",
+    "Mr. Do's Castle.mra": "2026-08-07",
+    "Mr. Do's Wild Ride.mra": "2026-08-07",
+    "NARC.mra": "2026-08-07",
+    "Spider-Man The Videogame.mra": "2026-08-07",
+    "Super Pierrot.mra": "2026-08-07",
+    "Yellow Cab.mra": "2026-08-07",
+    "Bonanza Bros.mra": "2026-08-09",
+    "Crack Down.mra": "2026-08-09",
+    "Bucky O'Hare.mra": "2026-08-12",
+    "Arabian Fight.mra": "2026-08-15",
+    "Dark Edge.mra": "2026-08-15",
+    "Alien3 The Gun.mra": "2026-08-17",
+    "Burning Rival.mra": "2026-08-17",
+    "Jurassic Park.mra": "2026-08-17",
+    "Rad Rally.mra": "2026-08-17",
+    "Slip Stream.mra": "2026-08-17",
+    "Super Visual Football European Sega Cup.mra": "2026-08-17",
+    "Super Visual Soccer Sega Cup.mra": "2026-08-17",
+    "The J.League 1994.mra": "2026-08-17",
+    "Change Air Blade.mra": "2026-08-19",
+    "Drift Out '94 - The Hard Order.mra": "2026-08-19",
+    "Storm Blade.mra": "2026-08-19",
+    "Twin Eagle II - The Rescue Mission.mra": "2026-08-19",
+    "Ultra X Weapons - Ultra Keibitai.mra": "2026-08-19",
+    "Vasara 2.mra": "2026-08-19",
+    "Vasara.mra": "2026-08-19",
+    "OutRunners.mra": "2026-08-23",
+    "Hard Dunk.mra": "2026-08-24",
+    "Stadium Cross.mra": "2026-08-24",
+    "Title Fight.mra": "2026-08-24",
+    "SegaSonic The Hedgehog.mra": "2026-08-25",
+}
+
+
+def join_meathax_rows(con):
+    """Pin every meathax row's repo link (per-core repo when one exists, the
+    meatcores distribution repo otherwise) and its frozen import debut.
+    Idempotent; runs every export like repair_coinop_rows. The frozen date
+    wins unconditionally (never drifts with upstream renames); rows not in
+    the dict keep whatever they have — for post-import titles that is the
+    detection-day stamp, which IS their real debut."""
+    for row in con.execute(
+        "SELECT path, rbf, release_date FROM catalog WHERE source_id='meathax'"
+    ).fetchall():
+        repo = MEATHAX_CORE_REPOS.get((row["rbf"] or "").strip().lower(), MEATHAX_REPO)
+        frozen = MEATHAX_FROZEN_DATES.get(row["path"].replace("\\", "/").rsplit("/", 1)[-1])
+        con.execute(
+            "UPDATE catalog SET repo=?, release_date=COALESCE(?, release_date) "
+            "WHERE source_id='meathax' AND path=?",
+            (repo, frozen, row["path"]),
+        )
 
 
 # --- command: genre (arcade genre from MAME catver.ini, joined on setname) -
@@ -2368,6 +2469,7 @@ ARCADE_TITLES = {
     "ctsttape": "DECO Test Tape",          # bare "Test Tape" loses all context
     "nspiritj": "Ninja Spirit",            # Japan set; DAT names it "Saigo no Nindou"
     "nomnlnd": "No Man's Land",            # DAT names it "Sengoku no Jieitai"
+    "narc": "NARC",                        # DAT titlecases the acronym to "Narc"
     "warofbug": "War of the Bugs",         # "...or Monsterous Manouvers in a Mushroom Maze"
     "znpwfv": "Zen Nippon Pro-Wrestling Featuring Virtua",  # DAT truncates "Pro-Wres"
     "cburnrub": "Burnin' Rubber (DECO)",   # cassette version; plain name collides with brubber
@@ -2408,6 +2510,8 @@ def _core_label(r, fork_info, repo_maps):
         return "Coin-Op Collection"
     if r["source_id"] == "jtbindb":
         return "Jotego"
+    if r["source_id"] == "meathax":
+        return "Meathax"
     repo = (r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -2706,7 +2810,7 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         row["act"] = commit_d
     if repo:
         row["repo"] = repo
-    # which downloader database ships this entry. The three ingested dbs are
+    # which downloader database ships this entry. The ingested dbs are
     # disjoint (no title appears in two), so one value is the whole truth;
     # the frontend maps the raw id to a display name and search tokens.
     if "source_id" in r.keys() and r["source_id"]:
@@ -2895,6 +2999,7 @@ def cmd_export_web(args):
     apply_jt_frozen_dates(con)  # correct Jotego cores off the Feb-2023 monorepo-migration date
     apply_jt_beta_frozen_dates(con)  # after the jt pins: per-title beta dates win over folder dates
     repair_coinop_rows(con)  # coinop rows: fix mis-joined repos, pin their distribution repo
+    join_meathax_rows(con)  # meathax rows: per-core repo links + frozen import debuts
     warn_date_anomalies(con)  # tripwire: new row wearing a years-old debut
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()

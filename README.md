@@ -79,6 +79,17 @@ Setup (once per browser):
 
 Notes:
 
+- Android 16/17 (Pixels first) added a "local network" permission per app, and until
+  your browser has it, launches fail silently. Launch once from a regular browser tab
+  and tap Allow when Android asks about finding and connecting to nearby devices. If
+  you use the site as an installed home-screen app, do that first launch in the
+  regular browser: the permission prompt never appears inside the installed app, it
+  just fails quietly. If no prompt appears at all, grant it manually under Android
+  Settings > Apps > your browser > Permissions > Local network (or Nearby devices).
+- On desktop and in regular browser tabs the launch window closes itself and returns
+  you to the tracker. In an installed home-screen app on Firefox it cannot (the
+  system freezes the tracker page while the launch window is up), so the window
+  stays with a note; press back to return. The game launches either way.
 - Multiple MiSTers are supported: the ▾ chevron next to the button adds, removes, and
   switches devices; picking one launches on it and makes it the new default.
 - Device addresses live only in your browser's local storage; nothing is sent anywhere

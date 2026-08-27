@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Launching...</title>
+<style>
+  /* transient launch interstitial: always dark, matches the old inline popup */
+  body { margin: 0; display: grid; place-items: center; min-height: 100vh;
+         background: #141414; color: #999; font: 13px system-ui; text-align: center; }
+  .hint { font-size: 11px; color: #777; }
+  div { padding: 0 14px; }
+</style>
+</head>
+<body>
+<div id="m">Launching...</div>
+<script>
+// Opened by the release tracker's Launch button (popup transport - browsers
+// without Chromium's Local Network Access fetch). The hash carries
+// b64url(JSON {n: device name, u: http://<mister>/api/l/<payload>}). This is
+// a real same-origin page rather than a document.write into about:blank
+// because Firefox for Android's installed-app (PWA) windows never render a
+// written about:blank document - the visitor stared at a pure black window
+// (bug hunt 2026-08-26). We show the message, then navigate THIS window to
+// the LAN URL; the delay makes the press-back hint readable, and running the
+// timer in here (not the opener) matters because the opener page freezes the
+// moment this window covers it in an installed PWA.
+(function () {
+  var el = document.getElementById('m');
+  var cfg = null;
+  try {
+    var b64 = location.hash.slice(1).replace(/-/g, '+').replace(/_/g, '/');
+    cfg = JSON.parse(decodeURIComponent(escape(atob(b64))));
+  } catch (e) {}
+  // only ever navigate to an http(s) target (the hash is attacker-suppliable
+  // via a crafted link; never allow javascript: etc.)
+  if (!cfg || !/^https?:\/\//.test(cfg.u || '')) {
+    el.textContent = 'Nothing to launch. You can close this window.';
+    return;
+  }
+  var name = String(cfg.n || 'MiSTer').slice(0, 40);
+  el.innerHTML = 'Launching on <span id="dn"></span>...' +
+    '<br><span class="hint">If this window stays open, press back to return to the tracker.</span>';
+  document.getElementById('dn').textContent = name;
+  setTimeout(function () { location.replace(cfg.u); }, 900);
+})();
+</script>
+</body>
+</html>

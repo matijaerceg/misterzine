@@ -3,6 +3,9 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-08-26
+- Release tracker: the launch window is now a real page on the site, so the installed app on Firefox for Android finally shows "Launching on your device... press back to return" instead of a pure black window (Firefox never rendered the old inline version there). Also documented in the README: newer Android versions ask for a per-app "local network" permission, and launches fail silently until the browser has it - launch once from a regular browser tab and tap Allow.
+
+## 2026-08-26
 - Release tracker: now also tracks Meathax's MeatCores database - 42 new arcade games across nine cores, including Sega System 32 (SegaSonic The Hedgehog, Golden Axe: The Revenge of Death Adder, Spider-Man: The Videogame), Sega Multi 32 (OutRunners, Hard Dunk), Sega System 24 (Bonanza Bros, Crack Down), the Sammy/Seta/Visco SSV board (Vasara 1 and 2, Storm Blade), NARC, Bucky O'Hare, and Universal's Do's Castle hardware. MeatCores is an opt-in database with no update_all settings toggle, so its rows explain how to add it to downloader.ini; debut dates come from each game's first appearance in the database's history, and future releases and updates will flow into the tracker and feeds automatically.
 
 ## 2026-08-25

@@ -756,6 +756,7 @@ ARCADE_RBF_ALIASES = {
     "ataritetris": "atetris",     # Arcade-ATetris
     "rshnatk": "rushnattack",     # Arcade-RushnAttack
     "spacedemon": "spacefirebird",  # Arcade-SpaceFirebird (shared hardware)
+    "arcadesegaxboard": "segaxboard",  # MRA rbf carries the Arcade- prefix
 }
 
 

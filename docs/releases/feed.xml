@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 28 Aug 2026 07:05:59 +0000</lastBuildDate>
+<lastBuildDate>Fri, 28 Aug 2026 12:56:54 +0000</lastBuildDate>
+<item>
+<title>[New] Dragon Ball Z: V.R. V.S. (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dbzvrvs</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Dragon Ball Z V.R. V.S..mra:2026-08-28T12:56:54+00:00</guid>
+<pubDate>Fri, 28 Aug 2026 12:56:54 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dbzvrvs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1994 / Sega / Banpresto&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaSystem32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-28 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] A.B. Cop (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#abcop</link>
@@ -143,13 +152,13 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/radm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaSystem32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-28 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Arcade-SegaSystem32 (Arcade core, 13 games)</title>
+<title>[Updated] Arcade-SegaSystem32 (Arcade core, 14 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#alien3</link>
 <guid isPermaLink="false">meathax:_Arcade/cores/Arcade-SegaSystem32_20260828.rbf:2026-08-28T01:46:58+00:00</guid>
 <pubDate>Fri, 28 Aug 2026 01:46:58 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-28 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-28 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] A.B. Cop (Arcade)</title>
@@ -341,13 +350,13 @@
 <description>&lt;p&gt;Serves: Air Duel, Armed Police Unit Gallop, Dragon Breed, Hammerin' Harry, Image Fight, Legend of Hero Tonma, Mr. HELI no Daibouken, Ninja Spirit, R-Type, R-Type II, X Multiply.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-27 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Arcade-SegaSystem32 (Arcade core, 13 games)</title>
+<title>[Updated] Arcade-SegaSystem32 (Arcade core, 14 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#alien3</link>
 <guid isPermaLink="false">meathax:_Arcade/cores/Arcade-SegaSystem32_20260827.rbf:2026-08-27T06:19:22+00:00</guid>
 <pubDate>Thu, 27 Aug 2026 06:19:22 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-27 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-27 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Arcade-SSV (Arcade core, 9 games)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Astro Flash, Fantasy Zone II - The Tears of Opa-Opa, Hang-On Jr., Megumi Rescue, Opa Opa, Riddle of Pythagoras, Slap Shooter, Tetris (Sega System E), Transformer.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SMS_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SegaG80V (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#startrek</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/SegaG80V_20260823.rbf:2026-08-23T23:20:54+00:00</guid>
-<pubDate>Sun, 23 Aug 2026 23:20:54 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Star Trek, Tac/Scan, Zektor.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

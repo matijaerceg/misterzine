@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Fri, 28 Aug 2026 12:56:54 +0000</lastBuildDate>
+<lastBuildDate>Sat, 29 Aug 2026 09:24:12 +0000</lastBuildDate>
+<item>
+<title>[New] Salamander (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#salamand</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Salamander (version D).mra:2026-08-29T09:24:12+00:00</guid>
+<pubDate>Sat, 29 Aug 2026 09:24:12 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/salamandj.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Konami&lt;/p&gt;&lt;p&gt;Core: Salamander&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-29 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Salamander_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Air Rescue (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Air Rescue (World).mra:2026-08-29T07:14:37+00:00</guid>
+<pubDate>Sat, 29 Aug 2026 07:14:37 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arescue.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaSystem32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-29 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Dragon Ball Z: V.R. V.S. (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#dbzvrvs</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/legend.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Repulse (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#repulse</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Repulse.mra:2026-07-30T16:53:45+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/repulse.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1985 / Sega&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] S.R.D. Mission (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#srdmissn</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/SRD Mission.mra:2026-07-30T16:53:45+00:00</guid>
-<pubDate>Thu, 30 Jul 2026 16:53:45 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/srdmissn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Taito&lt;/p&gt;&lt;p&gt;Core: Kyugo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-07-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kyugo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

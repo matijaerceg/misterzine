@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 30 Aug 2026 06:50:20 +0000</lastBuildDate>
+<lastBuildDate>Sun, 30 Aug 2026 16:59:16 +0000</lastBuildDate>
+<item>
+<title>[Updated] Commodore 128 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#C128</link>
+<guid isPermaLink="false">distribution_mister:_Computer/C128_20260830.rbf:2026-08-30T16:59:16+00:00</guid>
+<pubDate>Sun, 30 Aug 2026 16:59:16 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1985 / Commodore&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/C128_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-SegaSystem32Multi (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#harddunk</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-SegaSystem32Multi_20260830.rbf:2026-08-30T13:09:50+00:00</guid>
+<pubDate>Sun, 30 Aug 2026 13:09:50 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Hard Dunk, OutRunners, Stadium Cross, Title Fight.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32multi/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] LaserdiscGames (Arcade core, 2 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#dlair</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/slither.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Century II (GDI license)&lt;/p&gt;&lt;p&gt;Core: Qix&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Vanguard (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vanguard</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Vanguard.mra:2026-08-24T03:54:29+00:00</guid>
-<pubDate>Mon, 24 Aug 2026 03:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vanguard.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1981 / SNK&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Vastar (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vastar</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Vastar.mra:2026-08-24T03:54:29+00:00</guid>
-<pubDate>Mon, 24 Aug 2026 03:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vastar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Orca (Sesame Japan license)&lt;/p&gt;&lt;p&gt;Core: Vastar&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Vastar_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

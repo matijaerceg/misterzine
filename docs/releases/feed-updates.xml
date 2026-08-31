@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 30 Aug 2026 22:07:30 +0000</lastBuildDate>
+<lastBuildDate>Mon, 31 Aug 2026 06:13:08 +0000</lastBuildDate>
+<item>
+<title>[Updated] PC/XT (EGA) (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PCXT-EGA</link>
+<guid isPermaLink="false">distribution_mister:_Computer/PCXT-EGA_20260830.rbf:2026-08-31T06:13:08+00:00</guid>
+<pubDate>Mon, 31 Aug 2026 06:13:08 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1984 / IBM&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PCXT-EGA_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Studio II (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Studio-II</link>
+<guid isPermaLink="false">distribution_mister:_Console/Studio-II_20260830.rbf:2026-08-31T06:13:08+00:00</guid>
+<pubDate>Mon, 31 Aug 2026 06:13:08 +0000</pubDate>
+<category>updated</category>
+<category>Console core</category>
+<description>&lt;p&gt;1977 / RCA&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/StudioII_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Complex X (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#complexx</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Atari 800 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Atari800</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Atari800_20260823.rbf:2026-08-23T17:55:42+00:00</guid>
-<pubDate>Sun, 23 Aug 2026 17:55:42 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1979 / Atari&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Atari800_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Commodore 64 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#C64</link>
-<guid isPermaLink="false">distribution_mister:_Computer/C64_20260823.rbf:2026-08-23T17:55:42+00:00</guid>
-<pubDate>Sun, 23 Aug 2026 17:55:42 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1982 / Commodore&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/C64_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

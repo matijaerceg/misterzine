@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Mon, 31 Aug 2026 11:51:31 +0000</lastBuildDate>
+<lastBuildDate>Mon, 31 Aug 2026 14:03:36 +0000</lastBuildDate>
+<item>
+<title>[New] Ring King (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ringking</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/ringking.mra:2026-08-31T14:03:36+00:00</guid>
+<pubDate>Mon, 31 Aug 2026 14:03:36 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ringking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Data East&lt;/p&gt;&lt;p&gt;Core: ringking&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-31 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-RingKing_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arcade-SegaSystem32Multi (Arcade core, 4 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#harddunk</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tutankhm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Konami&lt;/p&gt;&lt;p&gt;Core: Tutankham&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Tutankham_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Vastar (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pprobe</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Vastar_20260825.rbf:2026-08-25T05:17:11+00:00</guid>
-<pubDate>Tue, 25 Aug 2026 05:17:11 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Planet Probe, Vastar.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Vastar_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

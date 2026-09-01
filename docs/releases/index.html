@@ -763,8 +763,31 @@
      green "Sent" reads as a state change, not green-on-accent */
   #panel .launchrow .go.sent { background: var(--surface); color: var(--ok);
     border-color: color-mix(in srgb, var(--ok) 53.33%, transparent); }
+  /* Zaparoo launches get real answers, so the button walks through a waiting
+     state and lands on success or a plain-words failure (LAN launches keep
+     the fire-and-forget "Sent" flash above) */
+  #panel .launchrow .go.wait { background: var(--surface); color: var(--muted);
+    border-color: var(--btn-border); cursor: progress; }
+  #panel .launchrow .go.fail { background: var(--surface); color: var(--danger);
+    border-color: color-mix(in srgb, var(--danger) 53.33%, transparent); }
+  /* header "My MiSTers": the closed theme control's look (nav.css #themesum) */
+  #mymisters { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 1px solid var(--hair);
+    border-radius: 6px; background: transparent; color: inherit; cursor: pointer;
+    white-space: nowrap; flex: 0 0 auto; }
+  #mymisters:hover { background: var(--hover-bg); }
+  @media (max-width: 36rem) {
+    #mymisters { font-size: .72rem; padding: .3rem .45rem; }
+    #mymisters .full { display: none; }
+  }
   /* must clear the panel (and its resizer, z 101) — the launch button lives inside the panel */
   .misterpop { width: min(22rem, calc(100vw - 2rem)); z-index: 102; }
+  .misterpop h4 { margin: .7rem 0 .25rem; font-size: .76rem; font-weight: 600; }
+  .misterpop .tabs { display: flex; gap: .3rem; margin: 0 0 .4rem; }
+  .misterpop .tabs .tab.on { background: var(--hover-bg); border-color: var(--btn-border-hover); font-weight: 600; }
+  .misterpop .devrow b.nm { flex: none; font-weight: 600; }
+  .misterpop .adder .zk { flex: 1; font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .misterpop .err { color: var(--danger); font-size: .74rem; margin: .3rem 0 0; }
+  .misterpop .found { margin-top: .2rem; }
   .misterpop .devrow { display: flex; gap: .45rem; align-items: center; margin: .35rem 0; }
   .misterpop button { font: inherit; font-size: .78rem; padding: .22rem .55rem; cursor: pointer;
     border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface); color: inherit; }
@@ -925,6 +948,8 @@
         <span class="pill" aria-current="page">Cores</span>
         <a class="pill" href="../hardware-landscape/">Hardware</a>
       </nav>
+      <!-- saved devices manager (same popover the panel's launch row opens) -->
+      <button type="button" id="mymisters" title="Your saved MiSTers"><span class="full">My </span>MiSTers</button>
       <div class="theme" id="theme">
     <details id="themedd"><!-- plain details (not .cols): decoupled from the filter dropdowns -->
       <summary id="themesum">Theme</summary>
@@ -2620,20 +2645,42 @@ const MISTER_SYS = Object.fromEntries([
     'N64': 'Nintendo64', 'S32X': 'Sega32X', 'SGB': 'SuperGameboy', 'SMS': 'MasterSystem',
   }),
 ]);
+// core/rbf name → Zaparoo system id (zaparoo-core systemdefs). mrext's ids are
+// Zaparoo's for everything above, so this is MISTER_SYS plus the systems only
+// Zaparoo knows (verified against a Core v2.17.0 `systems` reply on a MiSTer).
+const ZAP_SYS = Object.assign({}, MISTER_SYS, {
+  '3DO': '3DO', 'Apple-IIgs': 'AppleIIGS', 'Apple-Lisa': 'AppleLisa',
+  'NeoGeoPocket': 'NeoGeoPocket', 'NeoGeoPocket-Color': 'NeoGeoPocketColor',
+  'NGPC': 'NeoGeoPocketColor', 'VirtualBoy': 'VirtualBoy', 'ao486': 'DOS',
+});
 // what a row launches: arcade → its MRA's SD-card path; others → their system
 const launchScript = d => d.base === 'Arcade'
   ? (d.mra ? '/media/fat/' + d.mra : null)
   : (MISTER_SYS[d.core] ? '**system:' + MISTER_SYS[d.core] : null);
+// same row as a Zaparoo Online remote operation ({t: operation_type, v: value}):
+// arcade → `launch` with the MRA's absolute path; others → `launch.system`
+// with the system id. Null = Zaparoo can't launch this row.
+const zapLaunchOp = d => d.base === 'Arcade'
+  ? (d.mra ? { t: 'launch', v: '/media/fat/' + d.mra } : null)
+  : (ZAP_SYS[d.core] ? { t: 'launch.system', v: ZAP_SYS[d.core] } : null);
 // same row → its Zaparoo ZapScript token (to persist on an NFC tag / playlist,
 // not launch live): arcade → the bare SD-relative .mra (Zaparoo auto-launch, no
 // /media/fat/ prefix); others → **launch.system:<id> (ZapScript's dialect, vs
-// mrext's **system: above). Same coverage gate; mrext ids double as Zaparoo ids.
+// mrext's **system: above).
 const zapScript = d => d.base === 'Arcade'
   ? (d.mra || null)
-  : (MISTER_SYS[d.core] ? '**launch.system:' + MISTER_SYS[d.core] : null);
+  : (ZAP_SYS[d.core] ? '**launch.system:' + ZAP_SYS[d.core] : null);
 
+// A saved device is one of two kinds, told apart by the `z` field:
+//   LAN (mrext Remote):  {n: name, h: 'host:8182'}
+//   Zaparoo Online:      {n: name, z: {key: 'zpk1_...', dev: '<device short id>'}}
+// Both stay in this browser only; nothing about a device is ever sent to
+// misterzine. The Zaparoo kind launches through user.api.zaparoo.com (plain
+// https, so it works in every browser and off the home network); the device
+// itself keeps an outbound link to Zaparoo Online and polls for operations.
 let misters = [];
 try { misters = JSON.parse(localStorage.getItem('mz-misters') || '[]') || []; } catch (e) {}
+const isZap = m => !!(m && m.z);
 let lastMister = +localStorage.getItem('mz-mister-last') || 0;
 if (lastMister >= misters.length) lastMister = 0;
 const saveMisters = () => {
@@ -2704,17 +2751,121 @@ function fireLaunch(dev, script, btn) {
   flash('Sent to ' + dev.n + ' ✓', true);
 }
 
-const launchRowHTML = () => {
+// --- Zaparoo Online transport ------------------------------------------------
+// POST an operation to the device, then long-poll its status until the target
+// reports a terminal state. Every step is a plain https fetch to the cloud API
+// (wildcard CORS, bearer key), so no LAN access, popup or permission prompt is
+// involved. Rate limits (30 ops/min per key) are far above human pace.
+const ZAPI = 'https://user.api.zaparoo.com/v1';
+async function zapApi(key, method, path, body) {
+  const r = await fetch(ZAPI + path, {
+    method, headers: Object.assign({ Authorization: 'Bearer ' + key },
+      body ? { 'Content-Type': 'application/json' } : {}),
+    body: body ? JSON.stringify(body) : undefined,
+    signal: AbortSignal.timeout(method === 'GET' && /\/wait\?/.test(path) ? 32000 : 15000),
+  });
+  if (r.status === 204) return null;
+  let j = null;
+  try { j = await r.json(); } catch (e) {}
+  if (!r.ok) {
+    const err = new Error((j && j.error && (j.error.message || j.error)) || ('HTTP ' + r.status));
+    err.status = r.status; throw err;
+  }
+  return j;
+}
+// human words for what came back; the device name is always in the message so
+// a household with two MiSTers can tell which one answered
+function zapOutcome(dev, target) {
+  const n = dev.n;
+  switch (target && target.status) {
+    case 'succeeded': return ['Launched on ' + n + ' ✓', true];
+    case 'busy': return [n + ' is busy, try again', false];
+    case 'unreachable': return [n + ' is offline', false];
+    case 'expired': case 'outcome_unknown': return ['No answer from ' + n, false];
+    case 'failed':
+      switch (target.error_code) {
+        case 'media_not_found': return ['Not found on ' + n, false];
+        case 'disabled': return ['Remote control is off on ' + n, false];
+        case 'unsupported': return [n + ' can\'t run this', false];
+        default: return ['Failed on ' + n + (target.error_code ? ' (' + target.error_code + ')' : ''), false];
+      }
+    default: return ['No answer from ' + n, false];
+  }
+}
+function zapHttpError(dev, e) {
+  switch (e.status) {
+    case 401: return 'Key rejected - re-add ' + dev.n;
+    case 403: return dev.n + ' isn\'t your remote device';
+    case 429: return 'Too many launches, wait a minute';
+    case undefined: return 'Can\'t reach Zaparoo Online';
+    default: return 'Zaparoo Online error ' + e.status;
+  }
+}
+// fire one operation at a Zaparoo device and resolve to [message, ok]
+async function zapOperation(dev, type, value, extra) {
+  const params = Object.assign(value != null ? { value } : {}, extra || {});
+  const op = await zapApi(dev.z.key, 'POST', '/devices/' + encodeURIComponent(dev.z.dev) + '/operations',
+    { operation_type: type, params, deadline_seconds: 60 });
+  const terminal = new Set(['succeeded', 'failed', 'busy', 'unreachable', 'expired', 'outcome_unknown']);
+  const opDone = new Set(['completed', 'partial', 'canceled', 'expired']);
+  let snap = op, cursor = op.revision, t;
+  const t0 = Date.now();
+  for (;;) {
+    t = (snap.targets || []).find(x => x.device === dev.z.dev) || (snap.targets || [])[0];
+    if ((t && terminal.has(t.status)) || opDone.has(snap.status)) return { target: t, op: snap };
+    if (Date.now() - t0 > 70000) return { target: t, op: snap };
+    const next = await zapApi(dev.z.key, 'GET', '/operations/' + encodeURIComponent(op.operation_id) +
+      '/wait?cursor=' + cursor + '&timeout=25');
+    if (next) { snap = next; cursor = next.revision; }
+  }
+}
+async function zapLaunch(dev, type, value, btn) {
+  const orig = btn ? (btn.dataset.orig || btn.textContent) : '';
+  const show = (txt, cls) => {
+    if (!btn) return;
+    btn.dataset.orig = orig;
+    btn.classList.remove('sent', 'fail', 'wait'); if (cls) btn.classList.add(cls);
+    btn.textContent = txt;
+  };
+  const done = (txt, ok) => {
+    show(txt, ok ? 'sent' : 'fail');
+    if (btn) { btn.disabled = false; setTimeout(() => show(orig, null), ok ? 1600 : 3200); }
+  };
+  if (btn) btn.disabled = true;
+  show('Sending to ' + dev.n + '…', 'wait');
+  try {
+    const { target } = await zapOperation(dev, type, value);
+    const [msg, ok] = zapOutcome(dev, target);
+    done(msg, ok);
+    return ok;
+  } catch (e) {
+    done(zapHttpError(dev, e), false);
+    return false;
+  }
+}
+
+// launch a row on a saved device, whichever kind it is. `lr` is the row's
+// .launchrow (or the popover carrying its data-* copy).
+function fireAt(m, lr, btn) {
+  if (isZap(m)) { if (lr.dataset.zt) zapLaunch(m, lr.dataset.zt, lr.dataset.zv, btn); }
+  else if (lr.dataset.script) fireLaunch(m, lr.dataset.script, btn);
+}
+// can this device launch the row described by these data-* attributes?
+const canLaunchWith = (m, ds) => isZap(m) ? !!ds.zt : !!ds.script;
+
+const launchRowHTML = ds => {
   if (!misters.length)
     return '<button class="go" data-mi="-1">▶ Launch on MiSTer…</button>';
-  // one Launch button per saved device (fires straight at it), + manager chevron
-  return misters.map((m, i) =>
-      '<button class="go" data-mi="' + i + '">▶ Launch on ' + esc(m.n) + '</button>').join('') +
+  // one Launch button per saved device that can launch this row (fires straight
+  // at it), + manager chevron. A device that can't (a system only the other
+  // transport knows) simply has no button on this row.
+  return misters.map((m, i) => canLaunchWith(m, ds)
+      ? '<button class="go" data-mi="' + i + '">▶ Launch on ' + esc(m.n) + '</button>' : '').join('') +
     '<button class="more" aria-label="Manage MiSTers">▾</button>';
 };
 function updateLaunchRow() {
   const lr = panel.querySelector('.launchrow');
-  if (lr) lr.innerHTML = launchRowHTML();
+  if (lr) lr.innerHTML = launchRowHTML(lr.dataset);
 }
 
 function detailHTML(d) {
@@ -2872,9 +3023,14 @@ function detailHTML(d) {
   // .body scrolls; .hint is docked below it (built as a sibling, outside .body).
   // launchable rows get the Launch-on-MiSTer split button under the title;
   // the script rides along as a data attribute so the click handler needs no row lookup
-  const script = launchScript(d);
-  const launcher = script
-    ? '<div class="launchrow" data-script="' + escA(script) + '">' + launchRowHTML() + '</div>'
+  // both transports' payloads ride along: mrext script for LAN devices, the
+  // Zaparoo operation type + value for Online ones. A row either kind can
+  // launch gets the row; each device's button appears only if its kind can.
+  const script = launchScript(d), zop = zapLaunchOp(d);
+  const lds = { script: script || '', zt: zop ? zop.t : '', zv: zop ? zop.v : '' };
+  const launcher = (script || zop)
+    ? '<div class="launchrow" data-script="' + escA(lds.script) + '" data-zt="' + escA(lds.zt) +
+      '" data-zv="' + escA(lds.zv) + '">' + launchRowHTML(lds) + '</div>'
     : '';
 
   // the title doubles as the permalink's copy field (it has no text of its own
@@ -3104,7 +3260,7 @@ panel.addEventListener('click', e => {
     if (go) {
       const mi = +go.dataset.mi;
       if (mi < 0 || !misters[mi]) { openMisterPop(lr); return; }  // nothing saved yet
-      closePop(); fireLaunch(misters[mi], lr.dataset.script, go);
+      closePop(); fireAt(misters[mi], lr, go);
     }
     return;
   }
@@ -3466,28 +3622,83 @@ document.addEventListener('click', e => {
   // popover — but not a click inside either, nor the .launchrow click that
   // just opened the MiSTer one (this document handler runs after panel's)
   if (hoverPop && !e.target.closest('.rsspop') && !e.target.closest(META_SEL)) closeHoverPop();
-  if (metapop && !e.target.closest('.rsspop') && !e.target.closest('.launchrow')) closePop();
+  if (metapop && !e.target.closest('.rsspop') && !e.target.closest('.launchrow') &&
+      !e.target.closest('#mymisters')) closePop();
 });
 
 // --- MiSTer device popover: chooser + manager for the Launch button ---------
 // Shares metapop/closePop with the meta-line popovers, so outside-click and
-// Esc handling come for free. Picking a device launches on it AND makes it
-// the default; the adder normalizes pasted addresses and assumes port 8182.
+// Esc handling come for free. Opens from a row's launch row (then each device
+// has a ▶ pick that launches on it AND makes it the default) or from the
+// header's My MiSTers button (manager only, no row to launch). The adder has
+// two tabs, one per device kind; the tab that will actually work in this
+// browser comes first (no LNA = Firefox/Safari, and Android's per-app local
+// network permission makes the LAN path fail silently there).
+const preferZap = !hasLNA || /Android/i.test(navigator.userAgent);
+let popMode = preferZap ? 'zap' : 'lan';
+let zapFound = null;   // {key, devs} after a successful device lookup
+let zapKeyDraft = '', zapErr = '', zapBusy = false;
 function misterPopHTML() {
-  return (misters.length
-      ? '<p>Launch on:</p>' + misters.map((m, i) =>
-          '<div class="devrow"><button class="pick" data-i="' + i + '">▶ ' + esc(m.n) + '</button>' +
-          '<code>' + esc(m.h) + '</code>' +
-          '<button class="rm" data-i="' + i + '" aria-label="Remove ' + escA(m.n) + '">✕</button></div>').join('')
-      : '<p>Add your MiSTer to launch games straight from this page ' +
-        '(works when you’re on the same network as it).</p>') +
-    '<div class="devrow adder"><input class="nm" placeholder="Name (optional)">' +
-    '<input class="ad" placeholder="mister.local or IP">' +
-    '<button class="add">Add</button></div>' +
-    '<p class="note">Each MiSTer needs wizzo’s free Remote service: run it once from the Scripts ' +
-    'menu and let it enable startup, no other setup. ' +
-    '<a href="https://github.com/matijaerceg/misterzine#launch-on-your-mister" ' +
-    'target="_blank" rel="noopener"><span class="lbl">Setup guide</span><span class="ext">↗</span></a></p>';
+  const ds = metapop.dataset;
+  const hasCtx = !!(ds.script || ds.zt);   // opened from a launch row
+  const rows = misters.map((m, i) =>
+    '<div class="devrow">' +
+    (hasCtx && canLaunchWith(m, ds)
+      ? '<button class="pick" data-i="' + i + '">▶ ' + esc(m.n) + '</button>'
+      : '<b class="nm">' + esc(m.n) + '</b>') +
+    '<code>' + (isZap(m) ? 'Zaparoo · ' + esc(m.z.dev) : esc(m.h)) + '</code>' +
+    '<button class="rm" data-i="' + i + '" aria-label="Remove ' + escA(m.n) + '">✕</button></div>').join('');
+  const intro = misters.length
+    ? '<p>' + (hasCtx ? 'Launch on:' : 'Your MiSTers:') + '</p>' + rows
+    : '<p>Add your MiSTer to launch games straight from this page.</p>';
+  const tab = (k, label) => '<button class="tab' + (popMode === k ? ' on' : '') + '" data-mode="' + k +
+    '" aria-pressed="' + (popMode === k) + '">' + label + '</button>';
+  const tabs = '<h4>Add a MiSTer</h4><div class="tabs">' +
+    (preferZap ? tab('zap', 'Through Zaparoo') + tab('lan', 'On this network')
+               : tab('lan', 'On this network') + tab('zap', 'Through Zaparoo')) + '</div>';
+  const guide = '<a href="https://github.com/matijaerceg/misterzine#launch-on-your-mister" ' +
+    'target="_blank" rel="noopener"><span class="lbl">Setup guide</span><span class="ext">↗</span></a>';
+  let form;
+  if (popMode === 'lan') {
+    form = '<div class="devrow adder"><input class="nm" placeholder="Name (optional)">' +
+      '<input class="ad" placeholder="mister.local or IP">' +
+      '<button class="add">Add</button></div>' +
+      '<p class="note">Works while you’re on the same network. Each MiSTer needs wizzo’s free Remote ' +
+      'service: run it once from the Scripts menu and let it enable startup. ' + guide + '</p>';
+  } else {
+    const devs = zapFound ? zapFound.devs.filter(d => (d.platform || '').toLowerCase() === 'mister') : null;
+    form = '<div class="devrow adder"><input class="zk" type="password" autocomplete="off" spellcheck="false" ' +
+      'placeholder="Paste your Zaparoo User API key" value="' + escA(zapKeyDraft) + '">' +
+      '<button class="find"' + (zapBusy ? ' disabled' : '') + '>' + (zapBusy ? 'Looking…' : 'Find devices') + '</button></div>' +
+      (zapErr ? '<p class="err">' + esc(zapErr) + '</p>' : '') +
+      (devs ? '<div class="found">' + (devs.length
+        ? devs.map(d => '<div class="devrow"><button class="zadd" data-id="' + escA(d.short_id) +
+            '" data-name="' + escA(d.name || d.short_id) + '">+ Add ' + esc(d.name || d.short_id) + '</button>' +
+            '<code>' + esc(d.short_id) + '</code></div>').join('')
+        : '<p class="err">No MiSTer is linked to this account yet.</p>') + '</div>' : '') +
+      '<p class="note">' + (preferZap ? 'Recommended for this browser: works from anywhere, no network permission needed. ' : 'Works from anywhere. ') +
+      'Needs Zaparoo Core 2.17 or newer on the MiSTer, linked to Zaparoo Online with Remote control ' +
+      'switched on (free accounts: one device). Create the key at Zaparoo Online under Account, User API, ' +
+      'with the <b>devices:launch</b> and <b>read:devices</b> scopes. The key stays in this browser. ' + guide + '</p>';
+  }
+  return intro + tabs + form;
+}
+function rerenderMisterPop() {
+  if (metapop && metapopFor === 'mister') metapop.innerHTML = misterPopHTML();
+}
+async function zapFindDevices(key) {
+  zapBusy = true; zapErr = ''; zapFound = null; rerenderMisterPop();
+  try {
+    const j = await zapApi(key, 'GET', '/devices?limit=50');
+    const devs = Array.isArray(j) ? j : ((j && (j.items || j.devices)) || []);
+    zapFound = { key, devs };
+  } catch (e) {
+    zapErr = e.status === 401 ? 'Zaparoo Online rejected that key.'
+      : e.status === 403 ? 'That key can’t list devices - it needs the read:devices scope.'
+      : e.status ? 'Zaparoo Online error ' + e.status + '.' : 'Couldn’t reach Zaparoo Online.';
+  }
+  zapBusy = false; rerenderMisterPop();
+  const zk = metapop && metapop.querySelector('.zk'); if (zk && !zapFound) zk.focus();
 }
 function onMisterPop(e) {
   // handled clicks re-render the popover, detaching e.target — the document
@@ -3497,7 +3708,7 @@ function onMisterPop(e) {
   if (pick) {
     lastMister = +pick.dataset.i;
     saveMisters(); updateLaunchRow();
-    fireLaunch(misters[lastMister], metapop.dataset.script,
+    fireAt(misters[lastMister], metapop,
       panel.querySelector('.launchrow .go[data-mi="' + lastMister + '"]') || panel.querySelector('.launchrow .go'));
     closePop(); return;
   }
@@ -3505,8 +3716,10 @@ function onMisterPop(e) {
   if (rm) {
     misters.splice(+rm.dataset.i, 1);
     if (lastMister >= misters.length) lastMister = 0;
-    saveMisters(); metapop.innerHTML = misterPopHTML(); updateLaunchRow(); return;
+    saveMisters(); rerenderMisterPop(); updateLaunchRow(); return;
   }
+  const tab = e.target.closest('.tab');
+  if (tab) { popMode = tab.dataset.mode; zapErr = ''; rerenderMisterPop(); return; }
   if (e.target.closest('.add')) {
     const nm = metapop.querySelector('.nm'), ad = metapop.querySelector('.ad');
     let h = ad.value.trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
@@ -3514,28 +3727,52 @@ function onMisterPop(e) {
     if (!/:\d+$/.test(h)) h += ':8182';
     misters.push({ n: nm.value.trim() || h.replace(/:\d+$/, ''), h });
     lastMister = misters.length - 1;
-    saveMisters(); metapop.innerHTML = misterPopHTML(); updateLaunchRow();
+    saveMisters(); rerenderMisterPop(); updateLaunchRow(); return;
+  }
+  if (e.target.closest('.find')) {
+    const zk = metapop.querySelector('.zk');
+    zapKeyDraft = zk.value.trim();
+    if (!zapKeyDraft) { zk.focus(); return; }
+    zapFindDevices(zapKeyDraft); return;
+  }
+  const zadd = e.target.closest('.zadd');
+  if (zadd && zapFound) {
+    misters.push({ n: zadd.dataset.name, z: { key: zapFound.key, dev: zadd.dataset.id } });
+    lastMister = misters.length - 1;
+    zapFound = null; zapKeyDraft = '';
+    saveMisters(); rerenderMisterPop(); updateLaunchRow();
   }
 }
+let misterPopAnchor = null;
+// anchor: a row's .launchrow (launch context rides along on its data-*) or
+// the header button (manager only)
 function openMisterPop(anchor) {
-  const again = metapopFor === 'mister' && metapop;
+  const again = metapopFor === 'mister' && metapop && misterPopAnchor === anchor;
   closePop();
-  if (again) { metapopFor = null; return; }  // second click on the trigger toggles it shut
-  metapopFor = 'mister';
+  if (again) { metapopFor = null; misterPopAnchor = null; return; }  // second click on the trigger toggles it shut
+  metapopFor = 'mister'; misterPopAnchor = anchor;
   metapop = document.createElement('div');
   metapop.className = 'rsspop misterpop';
-  metapop.dataset.script = anchor.dataset.script;
+  for (const k of ['script', 'zt', 'zv']) if (anchor.dataset[k]) metapop.dataset[k] = anchor.dataset[k];
   metapop.innerHTML = misterPopHTML();
   metapop.addEventListener('click', onMisterPop);
-  metapop.addEventListener('keydown', e => {  // Enter in either field = Add
-    if (e.key === 'Enter' && e.target.closest('input')) { e.preventDefault(); onMisterPop({ target: metapop.querySelector('.add') }); }
+  metapop.addEventListener('keydown', e => {  // Enter in a field = its Add / Find
+    if (e.key !== 'Enter' || !e.target.closest('input')) return;
+    e.preventDefault();
+    onMisterPop({ target: metapop.querySelector(e.target.classList.contains('zk') ? '.find' : '.add') });
   });
-  const r = anchor.getBoundingClientRect();
-  metapop.style.left = Math.max(8, Math.min(r.left, innerWidth - 360)) + 'px';
-  metapop.style.top = (r.bottom + 6) + 'px';
   document.body.appendChild(metapop);
-  if (!misters.length) metapop.querySelector('.ad').focus();
+  // measure after insert (need the popover's width) and keep it on-screen:
+  // the header button sits at the right edge, the launch row at the left
+  const r = anchor.getBoundingClientRect(), w = metapop.offsetWidth;
+  metapop.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
+  metapop.style.top = (r.bottom + 6) + 'px';
+  if (!misters.length) { const f = metapop.querySelector('.ad, .zk'); if (f) f.focus(); }
 }
+document.getElementById('mymisters').addEventListener('click', e => {
+  e.stopPropagation();  // not an "outside" click for the popover it opens
+  openMisterPop(e.currentTarget);
+});
 
 // Everything the page does with a data.json — the arrival load and a live swap
 // run this same path, which is what makes swapping cheap and safe: apply()

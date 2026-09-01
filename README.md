@@ -64,23 +64,45 @@ dashboard is public, linked as "Traffic Stats" in the header).
 ### Launch on your MiSTer
 
 Every launchable entry's panel has a "▶ Launch on MiSTer" button that starts it on real
-hardware over your local network: arcade entries launch the actual game (the `.mra` must
-be on your SD card), console/computer entries load the core.
+hardware: arcade entries launch the actual game (the `.mra` must be on your SD card),
+console/computer entries load the core. There are two ways to connect a MiSTer, and
+you can save several devices of either kind; the **My MiSTers** button in the header
+(and the ▾ chevron next to any Launch button) adds and removes them.
 
-Setup (once per browser):
+**Through Zaparoo** (works from anywhere, in every browser, with a real answer back):
+
+1. On the MiSTer, install [Zaparoo Core](https://zaparoo.org/docs/platforms/mister/)
+   2.17 or newer (it is in `update_all`'s MiSTer Extensions / Zaparoo repo) and run it
+   once from the Scripts menu so it starts on boot.
+2. Link it to a free [Zaparoo Online](https://online.zaparoo.com) account (Core's
+   Settings > Online shows a code to approve on the website), then switch on
+   **Remote control** in the same Settings > Online screen. Free accounts can remote
+   control one device at a time; pick it on Zaparoo Online.
+3. On Zaparoo Online, open Account > User API and create a key with the
+   `devices:launch` and `read:devices` scopes. Copy it right away (it is shown once).
+4. On the site, open My MiSTers, choose "Through Zaparoo", paste the key and click
+   Find devices, then add your MiSTer from the list.
+
+Clicking Launch then sends the request through Zaparoo's cloud to your MiSTer and the
+button tells you what happened: launched, not found on that SD card, the MiSTer is
+offline, or busy. The key stays in your browser's local storage; misterzine never sees
+it and the site has no server of its own.
+
+**On this network** (no account, works while you are on the same network):
 
 1. On the MiSTer, install and run **Remote** from
    [MiSTer Extensions (mrext)](https://github.com/wizzomafizzo/mrext): available in
-   `update_all` (MiSTer Extensions repo), then Scripts → `remote`. It starts a small web
+   `update_all` (MiSTer Extensions repo), then Scripts > `remote`. It starts a small web
    service on port 8182 and offers to keep itself running after reboots.
-2. On the site, open any entry, click the Launch button, and add your MiSTer's address
-   (hostname or IP; `mister.local` works on a stock setup, and the port defaults
-   to 8182). Give it a name if you have several.
-3. Click Launch. A tab flashes for a second while the request is handed to the MiSTer
-   (a browser page can't quietly talk to a local device, so the brief tab *is* the
-   request), then the game appears on your TV.
+2. On the site, open My MiSTers, choose "On this network", and add your MiSTer's
+   address (hostname or IP; `mister.local` works on a stock setup, and the port
+   defaults to 8182). Give it a name if you have several.
+3. Click Launch. On Chrome and Edge the request goes out silently after a one-time
+   "devices on your network" permission; other browsers flash a small window for a
+   second while the request is handed to the MiSTer (a web page can't quietly talk to
+   a local device there, so the brief window *is* the request).
 
-Notes:
+Notes for the network method:
 
 - Android 16/17 (Pixels first) added a "local network" permission per app, and until
   your browser has it, launches fail silently. Launch once from a regular browser tab
@@ -89,14 +111,18 @@ Notes:
   regular browser: the permission prompt never appears inside the installed app, it
   just fails quietly. If no prompt appears at all, grant it manually under Android
   Settings > Apps > your browser > Permissions > Local network (or Nearby devices).
+  (Or connect through Zaparoo instead, which needs no network permission at all.)
 - On desktop and in regular browser tabs the launch window closes itself and returns
   you to the tracker. In an installed home-screen app on Firefox it cannot (the
   system freezes the tracker page while the launch window is up), so the window
   stays with a note; press back to return. The game launches either way.
-- Multiple MiSTers are supported: the ▾ chevron next to the button adds, removes, and
-  switches devices; picking one launches on it and makes it the new default.
 - Device addresses live only in your browser's local storage; nothing is sent anywhere
   except to your own MiSTer, on your own network.
+
+A few systems are launchable only through Zaparoo (it knows more MiSTer cores than
+Remote does, for example Neo Geo Pocket, Virtual Boy, Apple IIgs and ao486), so a row
+may show a Launch button for one saved device and not another. Picking a device from
+the ▾ chevron launches on it and makes it the default.
 - Launching a game you don't have on the SD card fails politely: the flashed tab shows
   Remote's error text before closing.
 - Console/computer launches need that core installed on the MiSTer. A brief

@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-09-01
+- Release tracker: the Launch button can now reach your MiSTer through Zaparoo Online, next to the existing on-your-network method. A Zaparoo-connected MiSTer launches from anywhere, in every browser (no popup window, no Android "local network" permission), and the button reports what happened: launched, not on that SD card, MiSTer offline, or busy. Setup: Zaparoo Core 2.17+ linked to a free Zaparoo Online account with Remote control switched on, then paste a User API key into the new My MiSTers button in the header and pick your device. Keys and device addresses stay in your browser. Zaparoo also launches a few systems the network method never could (Neo Geo Pocket, Virtual Boy, Apple IIgs, ao486 and more).
 - Release tracker: new Source filter next to Type, with one box per downloader database (MiSTer Distribution, Jotego, Coin-Op Collection, Meathax) and a row count for each. Uncheck MiSTer Distribution to see exactly what a stock update_all does not deliver, then star and export those cores. The Type, Source, and Genre menus now start with every box checked: unchecking a box hides those rows, unchecking everything shows nothing, and each menu has All / None buttons. Genre gained a "No genre" box that covers consoles, computers, and other cores, so unchecking an arcade genre never hides them.
 
 ## 2026-08-26

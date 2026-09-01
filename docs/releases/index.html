@@ -2795,7 +2795,11 @@ function zapOutcome(dev, target) {
 function zapHttpError(dev, e) {
   switch (e.status) {
     case 401: return 'Key rejected - re-add ' + dev.n;
-    case 403: return dev.n + ' isn\'t your remote device';
+    // 403 is either a key without the launch scope ("API key missing scope:
+    // devices:launch") or, on a free account, a device that isn't the one
+    // selected for remote control ("device is not the account's remote slot")
+    case 403: return /scope/i.test(e.message) ? 'Key lacks the devices:launch scope'
+      : dev.n + ' isn\'t your remote device';
     case 429: return 'Too many launches, wait a minute';
     case undefined: return 'Can\'t reach Zaparoo Online';
     default: return 'Zaparoo Online error ' + e.status;

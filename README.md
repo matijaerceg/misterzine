@@ -66,7 +66,7 @@ dashboard is public, linked as "Traffic Stats" in the header).
 Every launchable entry's panel has a "▶ Launch on MiSTer" button that starts it on real
 hardware: arcade entries launch the actual game (the `.mra` must be on your SD card),
 console/computer entries load the core. There are two ways to connect a MiSTer, and
-you can save several devices of either kind; the **My MiSTers** button in the header
+you can save several devices of either kind; the **My MiSTer(s)** button in the header
 (and the ▾ chevron next to any Launch button) adds and removes them.
 
 **Through Zaparoo** (works from anywhere, in every browser, with a real answer back):
@@ -80,7 +80,7 @@ you can save several devices of either kind; the **My MiSTers** button in the he
    control one device at a time; pick it on Zaparoo Online.
 3. On Zaparoo Online, open Account > User API and create a key with the
    `devices:launch` and `read:devices` scopes. Copy it right away (it is shown once).
-4. On the site, open My MiSTers, choose "Through Zaparoo", paste the key and click
+4. On the site, open My MiSTer(s), choose "Through Zaparoo", paste the key and click
    Find devices, then add your MiSTer from the list.
 
 Clicking Launch then sends the request through Zaparoo's cloud to your MiSTer and the
@@ -94,7 +94,7 @@ it and the site has no server of its own.
    [MiSTer Extensions (mrext)](https://github.com/wizzomafizzo/mrext): available in
    `update_all` (MiSTer Extensions repo), then Scripts > `remote`. It starts a small web
    service on port 8182 and offers to keep itself running after reboots.
-2. On the site, open My MiSTers, choose "On this network", and add your MiSTer's
+2. On the site, open My MiSTer(s), choose "On this network", and add your MiSTer's
    address (hostname or IP; `mister.local` works on a stock setup, and the port
    defaults to 8182). Give it a name if you have several.
 3. Click Launch. On Chrome and Edge the request goes out silently after a one-time

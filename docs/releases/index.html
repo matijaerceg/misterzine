@@ -787,7 +787,10 @@
   .misterpop .devrow b.nm { flex: none; font-weight: 600; }
   .misterpop .adder .zk { flex: 1; font-family: ui-monospace, Menlo, Consolas, monospace; }
   .misterpop .err { color: var(--danger); font-size: .74rem; margin: .3rem 0 0; }
-  .misterpop .found { margin-top: .2rem; }
+  .misterpop .ok { color: var(--ok); font-weight: 600; margin: .1rem 0 .3rem; }
+  .misterpop .zfound .zn { flex: 1; }
+  .misterpop .zfound code { flex: none; font-size: .7rem; }
+  .misterpop .note a.zreset { color: var(--muted); text-decoration: underline; }
   .misterpop .devrow { display: flex; gap: .45rem; align-items: center; margin: .35rem 0; }
   .misterpop button { font: inherit; font-size: .78rem; padding: .22rem .55rem; cursor: pointer;
     border: 1px solid var(--btn-border); border-radius: 6px; background: var(--surface); color: inherit; }
@@ -3671,19 +3674,28 @@ function misterPopHTML() {
       'service: run it once from the Scripts menu and let it enable startup. ' + guide + '</p>';
   } else {
     const devs = zapFound ? zapFound.devs.filter(d => (d.platform || '').toLowerCase() === 'mister') : null;
-    form = '<div class="devrow adder"><input class="zk" type="password" autocomplete="off" spellcheck="false" ' +
-      'placeholder="Paste your Zaparoo User API key" value="' + escA(zapKeyDraft) + '">' +
-      '<button class="find"' + (zapBusy ? ' disabled' : '') + '>' + (zapBusy ? 'Looking…' : 'Find devices') + '</button></div>' +
-      (zapErr ? '<p class="err">' + esc(zapErr) + '</p>' : '') +
-      (devs ? '<div class="found">' + (devs.length
-        ? devs.map(d => '<div class="devrow"><button class="zadd" data-id="' + escA(d.short_id) +
-            '" data-name="' + escA(d.name || d.short_id) + '">+ Add ' + esc(d.name || d.short_id) + '</button>' +
-            '<code>' + esc(d.short_id) + '</code></div>').join('')
-        : '<p class="err">No MiSTer is linked to this account yet.</p>') + '</div>' : '') +
-      '<p class="note">' + (preferZap ? 'Recommended for this browser: works from anywhere, no network permission needed. ' : 'Works from anywhere. ') +
-      'Needs Zaparoo Core 2.17 or newer on the MiSTer, linked to Zaparoo Online with Remote control ' +
-      'switched on (free accounts: one device). Create the key at Zaparoo Online under Account, User API, ' +
-      'with the <b>devices:launch</b> and <b>read:devices</b> scopes. The key stays in this browser. ' + guide + '</p>';
+    if (devs && devs.length) {
+      // found: the key step is done, so it steps aside. One row per MiSTer on
+      // the account: a name field (prefilled with its Zaparoo name, editable)
+      // and Add. The device id sits at the end as the quiet identifier.
+      form = '<p class="ok">' + (devs.length === 1 ? 'MiSTer found!' : devs.length + ' MiSTers found!') +
+        ' Name it and add it:</p>' +
+        devs.map(d => '<div class="devrow zfound"><input class="zn" placeholder="Name" value="' +
+          escA(d.name || d.short_id) + '"><button class="zadd" data-id="' + escA(d.short_id) +
+          '" data-name="' + escA(d.name || d.short_id) + '">Add</button>' +
+          '<code title="Zaparoo device id">' + esc(d.short_id) + '</code></div>').join('') +
+        '<p class="note"><a href="#" class="zreset">Use a different key</a></p>';
+    } else {
+      form = '<div class="devrow adder"><input class="zk" type="password" autocomplete="off" spellcheck="false" ' +
+        'placeholder="Paste your Zaparoo User API key" value="' + escA(zapKeyDraft) + '">' +
+        '<button class="find"' + (zapBusy ? ' disabled' : '') + '>' + (zapBusy ? 'Looking…' : 'Find devices') + '</button></div>' +
+        (zapErr ? '<p class="err">' + esc(zapErr) + '</p>' : '') +
+        (devs ? '<p class="err">No MiSTer is linked to this Zaparoo Online account yet.</p>' : '') +
+        '<p class="note">' + (preferZap ? 'Recommended for this browser: works from anywhere, no network permission needed. ' : 'Works from anywhere. ') +
+        'Needs Zaparoo Core 2.17 or newer on the MiSTer, linked to Zaparoo Online with Remote control ' +
+        'switched on (free accounts: one device). Create the key at Zaparoo Online under Account, User API, ' +
+        'with the <b>devices:launch</b> and <b>read:devices</b> scopes. The key stays in this browser. ' + guide + '</p>';
+    }
   }
   return intro + tabs + form;
 }
@@ -3741,10 +3753,17 @@ function onMisterPop(e) {
   }
   const zadd = e.target.closest('.zadd');
   if (zadd && zapFound) {
-    misters.push({ n: zadd.dataset.name, z: { key: zapFound.key, dev: zadd.dataset.id } });
+    const zn = zadd.parentElement.querySelector('.zn');
+    const name = (zn && zn.value.trim()) || zadd.dataset.name;
+    misters.push({ n: name, z: { key: zapFound.key, dev: zadd.dataset.id } });
     lastMister = misters.length - 1;
     zapFound = null; zapKeyDraft = '';
-    saveMisters(); rerenderMisterPop(); updateLaunchRow();
+    saveMisters(); rerenderMisterPop(); updateLaunchRow(); return;
+  }
+  if (e.target.closest('.zreset')) {
+    if (e.preventDefault) e.preventDefault();
+    zapFound = null; zapErr = ''; rerenderMisterPop();
+    const zk = metapop.querySelector('.zk'); if (zk) zk.focus();
   }
 }
 let misterPopAnchor = null;
@@ -3763,7 +3782,10 @@ function openMisterPop(anchor) {
   metapop.addEventListener('keydown', e => {  // Enter in a field = its Add / Find
     if (e.key !== 'Enter' || !e.target.closest('input')) return;
     e.preventDefault();
-    onMisterPop({ target: metapop.querySelector(e.target.classList.contains('zk') ? '.find' : '.add') });
+    const t = e.target.classList.contains('zk') ? metapop.querySelector('.find')
+      : e.target.classList.contains('zn') ? e.target.parentElement.querySelector('.zadd')
+      : metapop.querySelector('.add');
+    if (t) onMisterPop({ target: t });
   });
   document.body.appendChild(metapop);
   // measure after insert (need the popover's width) and keep it on-screen:

@@ -203,6 +203,8 @@
                               color: var(--accent); cursor: pointer; }
   details.cols .menu .reset:hover:not(:disabled) { text-decoration: underline; }
   details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
+  /* the All / None pair closing each multi-select menu (Type, Source, Genre) */
+  details.cols .menu .resets { display: flex; gap: 1rem; }
   /* "Year" dropdown: From/To numeric range inputs + one-tap decade chips. Inputs
      (not selects) so any boundary year is enterable, including decade edges like
      2010/2019 that no game in the data happens to carry; the per-field x shows
@@ -859,12 +861,13 @@
        the dropdowns always start a fresh row instead of trailing the search box */
     .ctrlsep.tall { order: 3; flex-basis: 100%; width: auto; height: 0; background: none; align-self: auto; }
     #typedd { order: 4; }
-    #genredd { order: 5; }
-    #yeardd { order: 6; }
-    button.clear { order: 7; }
-    .favctl { order: 8; }
+    #srcdd { order: 5; }
+    #genredd { order: 6; }
+    #yeardd { order: 7; }
+    button.clear { order: 8; }
+    .favctl { order: 9; }
     /* Columns keeps its far-right anchoring, now against whatever row it lands on */
-    #cols { order: 9; margin-left: auto; align-self: center; }
+    #cols { order: 10; margin-left: auto; align-self: center; }
     /* a notch tighter so the filter cluster fits one line on a ~390px phone. Only
        the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
        the tap targets keep their height. */
@@ -948,6 +951,10 @@
     <details class="cols" id="typedd">
       <summary id="typesummary">Type</summary>
       <div class="menu" id="typemenu"></div>
+    </details>
+    <details class="cols" id="srcdd">
+      <summary id="srcsummary">Source</summary>
+      <div class="menu" id="srcmenu"></div>
     </details>
     <details class="cols" id="genredd">
       <summary id="genresummary">Genre</summary>
@@ -1725,16 +1732,19 @@ function render() {
   // would close it, so retire it here rather than leave one floating
   if (hoverPopFor && hoverPopFor.closest('#rows')) closeHoverPop();
   // zero results is never left as a silent blank table: name the query AND any
-  // active type/genre filter (an invisible narrower is the sneaky way to get here)
+  // active type/source/genre filter (an invisible narrower is the sneaky way to get here)
   if (!view.length && DATA.length) {
     const q = document.getElementById('q').value.trim();
-    const partial = enabledTypes.size && enabledTypes.size < TYPES.length;
-    const types = partial ? TYPES.filter(t => enabledTypes.has(t)).join(', ') : '';
-    const genres = enabledGenres.size ? [...enabledGenres].join(', ') : '';
+    // a multi-select reads as a narrower only while boxes are unchecked: a partial
+    // pick lists what is still checked (in menu order), an empty pick says so outright
+    const pickMsg = (keys, set, label, name) => set.size >= keys.length ? ''
+      : set.size ? ' in ' + esc(keys.filter(k => set.has(k)).map(label).join(', '))
+      : ' (no ' + name + ' selected)';
     tb.innerHTML = '<tr class="nomatch"><td colspan="' + cols.length + '"><div class="msg">' +
       'No matches' + (q ? ' for <b>"' + esc(q) + '"</b>' : '') +
-      (types ? ' in ' + esc(types) : '') +
-      (genres ? ' in ' + esc(genres) : '') +
+      pickMsg(TYPES, enabledTypes, t => t, 'type') +
+      pickMsg(SRC_KEYS, enabledSrcs, s => SRC_NAMES[s] || s, 'source') +
+      pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -1794,21 +1804,24 @@ function apply() {
   // the global "Clear filters" button is always present; it's armed (enabled) only
   // while a filter is narrowing results, and grayed/disabled otherwise
   document.getElementById('clear').disabled =
-    !(qEl.value || enabledTypes.size || enabledGenres.size || yearFrom != null || yearTo != null
+    !(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
       || favOnly || favView);
-  // Types filter: an empty set means "no filter" (show all) — which coincides
-  // with every type being checked. Any partial selection narrows to those bases.
+  // Type / Source / Genre: every box checked is the default (no filter); any
+  // unchecked box narrows to the checked ones, and an all-unchecked menu shows
+  // nothing (see pickNarrows and the menus below).
   view = DATA.filter(d => {
     // favorites: someone else's shared link (favView) and your own toggle are
     // separate narrowers — a shared link is a view of THEIR list, and starring
     // things while reading it mustn't change what the link shows
     if (favView && !(d.k && favView.has(d.k))) return false;
     if (favOnly && !(d.k && FAVS.has(d.k))) return false;
-    if (enabledTypes.size && !enabledTypes.has(d.base)) return false;
-    // Genre filter: like Types, an empty set is "no filter". A selection narrows to
-    // those genres — rows with no genre (everything non-arcade) drop out, same as a
-    // type filter shrinking the set.
-    if (enabledGenres.size && !enabledGenres.has(d.genre)) return false;
+    if (!enabledTypes.has(d.base)) return false;
+    // Source: a row with no source (a retired, hand-listed core) passes only while
+    // the menu is untouched; any narrowing means "just these databases"
+    if (SRC_KEYS.length && (d.src ? !enabledSrcs.has(d.src) : enabledSrcs.size < SRC_KEYS.length)) return false;
+    // Genre: rows without one (everything non-arcade) sit under the menu's own
+    // "No genre" box, so unchecking a real genre never hides a console core
+    if (GENRE_KEYS.length && !enabledGenres.has(d.genre || NO_GENRE)) return false;
     // Year range: rows with no numeric Original Year drop out while a bound is set
     if (yearFrom != null || yearTo != null) {
       const y = +d.year;
@@ -1879,12 +1892,12 @@ function clearSearch() {
   recenterOpen();  // the full list just replaced the filtered one; keep the user's place
 }
 document.getElementById('qx').addEventListener('click', clearSearch);
-// the far-right "Clear filters" button resets every filter at once (text + all three dropdowns);
-// resetTypes/resetGenres/resetYear are state-only helpers defined with each dropdown below
+// the far-right "Clear filters" button resets every filter at once (text + every dropdown);
+// resetTypes/resetSrcs/resetGenres/resetYear are state-only helpers defined with each dropdown below
 function clearAllFilters() {
   const q = document.getElementById('q');
   q.value = '';
-  resetTypes(); resetGenres(); resetYear();
+  resetTypes(); resetSrcs(); resetGenres(); resetYear();
   // both favorites narrowers go too (the saved list itself is untouched) — a
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
@@ -1926,19 +1939,54 @@ document.getElementById('hrow').addEventListener('click', e => {
   else document.querySelector('.tablewrap').scrollTop = 0;
 });
 
-// --- "Types" dropdown: multi-select filter over the four base types ---
-// enabledTypes holds the checked bases; an empty set is "no filter" (all rows),
-// which is intentionally the same result as every box checked.
+// --- "Type" dropdown: multi-select filter over the four base types ---
+// enabledTypes holds the checked bases. Every box starts checked (= no filter);
+// unchecking narrows to the checked ones, and unchecking everything shows nothing,
+// so the menu always means exactly "show what is ticked". Source and Genre below
+// follow the same model, sharing the helpers defined here.
 const TYPES = ['Arcade', 'Console', 'Computer', 'Other'];
-// The Types/Genres/Year filters deliberately do NOT persist across reloads — a page
-// refresh starts unfiltered (only the Columns display pref survives, see mz-cols2).
-// So each begins empty here: an empty set / null bound means "no filter". The Genre
-// option list is data-seeded (arcade genres from MAME's catver.ini) so its menu is
-// built on load by buildGenreMenu(); the Year selects are populated by buildYearMenu()
-// once the real year span is known (both in the data-load handler).
-let enabledTypes = new Set();
+// The Type/Source/Genre/Year filters deliberately do NOT persist across reloads — a
+// page refresh starts unfiltered (only the Columns display pref survives, see mz-cols2).
+// Type's option list is fixed, so it starts fully checked right here. Source and Genre
+// are data-seeded (databases present; arcade genres from MAME's catver.ini), so their
+// sets start empty and buildSrcMenu()/buildGenreMenu() fill them fully checked once
+// data lands; the Year inputs are populated by buildYearMenu() the same way (all in
+// the data-load handler).
+let enabledTypes = new Set(TYPES);
+let enabledSrcs = new Set();
 let enabledGenres = new Set();
 let yearFrom = null, yearTo = null, YEAR_MIN = null, YEAR_MAX = null;
+// true while any multi-select is narrowing (some box unchecked). A menu that has no
+// keys yet (data not landed) cannot narrow.
+function pickNarrows() {
+  return enabledTypes.size < TYPES.length
+    || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length)
+    || (GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length);
+}
+// shared chrome for the three multi-select menus: the All / None pair closing each
+// menu, the summary text + glow + button states after any change, and the All/None
+// click handling (state-only; callers apply and recenter)
+const pickButtons = id => '<div class="resets">' +
+  '<button class="reset" data-pick="all" id="' + id + 'all">All</button>' +
+  '<button class="reset" data-pick="none" id="' + id + 'none">None</button></div>';
+function syncPick(summary, menu, label, set, total) {
+  // idle (every box checked) reads the bare label; anything unchecked shows the
+  // checked count and glows, like a non-empty search box
+  const narrow = set.size < total;
+  summary.textContent = narrow ? label + ' (' + set.size + ')' : label;
+  summary.classList.toggle('active', narrow);
+  const all = menu.querySelector('[data-pick=all]'), none = menu.querySelector('[data-pick=none]');
+  if (all) all.disabled = !narrow;
+  if (none) none.disabled = set.size === 0;
+}
+function pickAllNone(menu, set, keys, e) {
+  const b = e.target.closest('[data-pick]');
+  if (!b) return false;
+  set.clear();
+  if (b.dataset.pick === 'all') for (const k of keys) set.add(k);
+  for (const cb of menu.querySelectorAll('input')) cb.checked = set.size > 0;
+  return true;
+}
 
 const typeMenu = document.getElementById('typemenu');
 const typeSummary = document.getElementById('typesummary');
@@ -1948,17 +1996,8 @@ typeMenu.innerHTML = TYPES.map(t =>
   '<label><input type="checkbox" data-t="' + t + '"' +
   (enabledTypes.has(t) ? ' checked' : '') + '>' +
   '<span class="tico t-' + t.toLowerCase() + '" aria-hidden="true">' + (TYPE_ICONS[t] || '') + '</span>' +
-  t + '</label>').join('') +
-  '<button class="reset" id="typereset">Show all</button>';
-const typeReset = document.getElementById('typereset');
-function syncTypeSummary() {
-  // idle (empty = no filter, or every box checked) reads "Type"; a partial
-  // selection shows the count and glows
-  const partial = enabledTypes.size !== 0 && enabledTypes.size !== TYPES.length;
-  typeSummary.textContent = partial ? 'Type (' + enabledTypes.size + ')' : 'Type';
-  typeSummary.classList.toggle('active', partial);  // glow when narrowing, like a non-empty search box
-  typeReset.disabled = enabledTypes.size === 0;  // no boxes checked = the default
-}
+  t + '</label>').join('') + pickButtons('type');
+function syncTypeSummary() { syncPick(typeSummary, typeMenu, 'Type', enabledTypes, TYPES.length); }
 typeMenu.addEventListener('change', e => {
   const t = e.target.dataset.t;
   if (!t) return;
@@ -1967,14 +2006,17 @@ typeMenu.addEventListener('change', e => {
   apply();
   recenterOpen();  // adding/removing whole types moves the selected row — follow it
 });
-// state-only reset (no apply/recenter) so the in-menu button and the global
+// state-only reset (no apply/recenter) so the in-menu All button and the global
 // "Clear filters" can both reuse it
 function resetTypes() {
-  enabledTypes.clear();
-  for (const cb of typeMenu.querySelectorAll('input')) cb.checked = false;
+  for (const t of TYPES) enabledTypes.add(t);
+  for (const cb of typeMenu.querySelectorAll('input')) cb.checked = true;
   syncTypeSummary();
 }
-typeReset.addEventListener('click', () => { resetTypes(); apply(); recenterOpen(); });
+typeMenu.addEventListener('click', e => {
+  if (!pickAllNone(typeMenu, enabledTypes, TYPES, e)) return;
+  syncTypeSummary(); apply(); recenterOpen();
+});
 syncTypeSummary();
 
 // --- "Columns" dropdown: toggle any column (Title stays locked on) ---
@@ -2128,36 +2170,87 @@ yearMenu.addEventListener('click', e => {
   syncYear(); apply(); recenterOpen();
 });
 
+// --- "Source" dropdown: multi-select filter over the downloader databases ---
+// One box per database present in DATA (d.src), in SRC_NAMES order with any unknown
+// id appended, each with a row count. Rebuilt on load (buildSrcMenu) so a newly
+// tracked database shows up by itself. Every box checked = no filter, like Type.
+// The use case: uncheck MiSTer Distribution to see exactly what a stock update_all
+// does NOT deliver (the opt-in databases), then star and export those.
+const srcMenu = document.getElementById('srcmenu');
+const srcSummary = document.getElementById('srcsummary');
+let SRC_KEYS = [];  // menu order, filled by buildSrcMenu; empty until data lands
+function syncSrcSummary() { syncPick(srcSummary, srcMenu, 'Source', enabledSrcs, SRC_KEYS.length); }
+function buildSrcMenu() {
+  const counts = {};
+  for (const d of DATA) if (d.src) counts[d.src] = (counts[d.src] || 0) + 1;
+  const srcs = Object.keys(SRC_NAMES).filter(s => counts[s])
+    .concat(Object.keys(counts).filter(s => !SRC_NAMES[s]).sort());
+  // one database (or none) leaves nothing to choose between
+  if (srcs.length < 2) { document.getElementById('srcdd').hidden = true; SRC_KEYS = []; return; }
+  // a live data swap keeps the visitor's picks: an untouched menu (everything
+  // checked, or never built) checks any newcomer too; a narrowed one leaves new
+  // databases unchecked and drops retired ones
+  const untouched = !SRC_KEYS.length || SRC_KEYS.every(s => enabledSrcs.has(s));
+  SRC_KEYS = srcs;
+  enabledSrcs = new Set(untouched ? srcs : srcs.filter(s => enabledSrcs.has(s)));
+  srcMenu.innerHTML = srcs.map(s =>
+    '<label><input type="checkbox" data-s="' + escA(s) + '"' +
+    (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
+    '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src');
+  syncSrcSummary();
+}
+// delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
+srcMenu.addEventListener('change', e => {
+  const s = e.target.dataset.s;
+  if (!s) return;
+  if (e.target.checked) enabledSrcs.add(s); else enabledSrcs.delete(s);
+  syncSrcSummary();
+  apply();
+  recenterOpen();  // adding/removing whole databases moves the selected row — follow it
+});
+// state-only reset (no apply/recenter) shared by the in-menu All and "Clear filters"
+function resetSrcs() {
+  for (const s of SRC_KEYS) enabledSrcs.add(s);
+  for (const cb of srcMenu.querySelectorAll('input')) cb.checked = true;
+  syncSrcSummary();
+}
+srcMenu.addEventListener('click', e => {
+  if (!pickAllNone(srcMenu, enabledSrcs, SRC_KEYS, e)) return;
+  syncSrcSummary(); apply(); recenterOpen();
+});
+syncSrcSummary();  // initial state before data loads (reads "Source" / no glow)
+
 // --- "Genre" dropdown: multi-select filter over arcade genres, seeded from data ---
 // The option list is the genres actually present in DATA (arcade rows carry a genre
-// from MAME's catver.ini; everything else has none), ordered most-common-first with a
-// per-genre row count, and rebuilt on load (buildGenreMenu) so genres added or retired
-// upstream reflow automatically. Empty selection = no filter, exactly like Types.
+// from MAME's catver.ini), ordered most-common-first with a per-genre row count, plus
+// a closing "No genre" box for every row without one (consoles, computers, other), so
+// unchecking a real genre never hides a console core. Rebuilt on load (buildGenreMenu)
+// so genres added or retired upstream reflow automatically. Every box checked = no
+// filter, exactly like Type.
 const genreMenu = document.getElementById('genremenu');
 const genreSummary = document.getElementById('genresummary');
-let GENRE_COUNT = 0;  // distinct genres present, so "all checked" can read as "All Genres"
-function syncGenreSummary() {
-  // empty (= no filter) and every-genre-checked both read as "All Genres"; a partial
-  // selection shows the count and glows, matching the Types dropdown.
-  const partial = enabledGenres.size !== 0 && enabledGenres.size !== GENRE_COUNT;
-  genreSummary.textContent = partial ? 'Genre (' + enabledGenres.size + ')' : 'Genre';
-  genreSummary.classList.toggle('active', partial);
-  const rst = genreMenu.querySelector('#genrereset');
-  if (rst) rst.disabled = enabledGenres.size === 0;
-}
+const NO_GENRE = '__none__';  // menu key for rows without a genre (never a real catver name)
+let GENRE_KEYS = [];  // menu order, filled by buildGenreMenu; empty until data lands
+function syncGenreSummary() { syncPick(genreSummary, genreMenu, 'Genre', enabledGenres, GENRE_KEYS.length); }
 function buildGenreMenu() {
   const counts = {};
-  for (const d of DATA) if (d.genre) counts[d.genre] = (counts[d.genre] || 0) + 1;
-  const genres = Object.keys(counts);
-  if (!genres.length) { document.getElementById('genredd').hidden = true; return; }
-  GENRE_COUNT = genres.length;
-  // most-populated first; ties fall back to A-Z so the order is stable run to run
+  for (const d of DATA) { const g = d.genre || NO_GENRE; counts[g] = (counts[g] || 0) + 1; }
+  const genres = Object.keys(counts).filter(g => g !== NO_GENRE);
+  if (!genres.length) { document.getElementById('genredd').hidden = true; GENRE_KEYS = []; return; }
+  // most-populated first; ties fall back to A-Z so the order is stable run to run;
+  // "No genre" always closes the list
   genres.sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+  if (counts[NO_GENRE]) genres.push(NO_GENRE);
+  // a live data swap keeps the visitor's picks: an untouched menu (everything
+  // checked, or never built) checks any newcomer too; a narrowed one leaves new
+  // genres unchecked and drops retired ones
+  const untouched = !GENRE_KEYS.length || GENRE_KEYS.every(g => enabledGenres.has(g));
+  GENRE_KEYS = genres;
+  enabledGenres = new Set(untouched ? genres : genres.filter(g => enabledGenres.has(g)));
   genreMenu.innerHTML = genres.map(g =>
     '<label><input type="checkbox" data-g="' + escA(g) + '"' +
-    (enabledGenres.has(g) ? ' checked' : '') + '> ' + esc(g) +
-    '<span class="gcount">' + counts[g] + '</span></label>').join('') +
-    '<button class="reset" id="genrereset">Show all</button>';
+    (enabledGenres.has(g) ? ' checked' : '') + '> ' + (g === NO_GENRE ? 'No genre' : esc(g)) +
+    '<span class="gcount">' + counts[g] + '</span></label>').join('') + pickButtons('genre');
   syncGenreSummary();
 }
 // delegated so the listeners survive buildGenreMenu() rebuilding the innerHTML
@@ -2169,17 +2262,17 @@ genreMenu.addEventListener('change', e => {
   apply();
   recenterOpen();  // adding/removing whole genres moves the selected row — follow it
 });
-// state-only reset (no apply/recenter) shared by the in-menu Reset and "Clear filters"
+// state-only reset (no apply/recenter) shared by the in-menu All and "Clear filters"
 function resetGenres() {
-  enabledGenres.clear();
-  for (const cb of genreMenu.querySelectorAll('input')) cb.checked = false;
+  for (const g of GENRE_KEYS) enabledGenres.add(g);
+  for (const cb of genreMenu.querySelectorAll('input')) cb.checked = true;
   syncGenreSummary();
 }
 genreMenu.addEventListener('click', e => {
-  if (!e.target.closest('#genrereset')) return;
-  resetGenres(); apply(); recenterOpen();
+  if (!pickAllNone(genreMenu, enabledGenres, GENRE_KEYS, e)) return;
+  syncGenreSummary(); apply(); recenterOpen();
 });
-syncGenreSummary();  // initial state before data loads (reads "All Genres" / no glow)
+syncGenreSummary();  // initial state before data loads (reads "Genre" / no glow)
 
 // --- favorites control: filter toggle + housekeeping menu ---------------------
 const favctl = document.getElementById('favctl');
@@ -3478,6 +3571,7 @@ function ingest(d) {
   // dies under an open panel. A row that's gone keeps its old object.
   if (openRow && openRow.k) openRow = KEY2ROW[openRow.k] || openRow;
   buildYearMenu();
+  buildSrcMenu();
   buildGenreMenu();
   buildHeader();
   apply();

@@ -26,8 +26,11 @@ dashboard is public, linked as "Traffic Stats" in the header).
 **The table**
 - One row per core or arcade title: 896 arcade, 69 computer, 44 console, 12 other
   (1,021 rows, all but a handful carrying a real dated debut).
-- Sortable columns, multi-select Type filter, and **type-anywhere search**: stray
-  keystrokes go straight into the search box. Search ignores accents.
+- Sortable columns, multi-select Type / Source / Genre filters (every box starts
+  checked; uncheck to hide), a Year range, and **type-anywhere search**: stray
+  keystrokes go straight into the search box. Search ignores accents. The Source
+  filter names the downloader database behind each row, so unchecking MiSTer
+  Distribution shows exactly what a stock update_all does not deliver.
 - Default sort is **Last Updated**, newest first; the Title column stays pinned while
   scrolling horizontally; every column header explains itself on hover.
 - **Type** reads `Arcade, <genre>` for arcade titles (genre from MAME's catver.ini) and

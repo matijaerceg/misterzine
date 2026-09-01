@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-09-01
+- Release tracker: new Source filter next to Type, with one box per downloader database (MiSTer Distribution, Jotego, Coin-Op Collection, Meathax) and a row count for each. Uncheck MiSTer Distribution to see exactly what a stock update_all does not deliver, then star and export those cores. The Type, Source, and Genre menus now start with every box checked: unchecking a box hides those rows, unchecking everything shows nothing, and each menu has All / None buttons. Genre gained a "No genre" box that covers consoles, computers, and other cores, so unchecking an arcade genre never hides them.
+
 ## 2026-08-26
 - Release tracker: the launch window is now a real page on the site, so the installed app on Firefox for Android finally shows "Launching on your device... press back to return" instead of a pure black window (Firefox never rendered the old inline version there). Also documented in the README: newer Android versions ask for a per-app "local network" permission, and launches fail silently until the browser has it - launch once from a regular browser tab and tap Allow.
 

@@ -55,11 +55,12 @@ Do these early; several workstreams block on them.
 4. Hand me the four values (Google client id + secret, GitHub client id +
    secret) through the Cloudflare secrets UI or a wrangler secret command
    you run; I never need to see them in chat or in the repo.
-5. Zaparoo test rig: update one MiSTer (the DE10, not the tate Pi) to
-   Zaparoo Core v2.17.0, link it to your Zaparoo Online account, turn on
-   the "Remote control" toggle, create a User API key with scopes
-   devices:launch, read:devices, devices:scripts. Free tier allows one
-   remote device; pick the DE10.
+5. Zaparoo test rig: the MisterPi ONLY (the DE10 is in use for other work).
+   Core v2.17.0 is installed on the Pi (done 2026-09-01). Still yours: link
+   it to your Zaparoo Online account (approve the code the Pi shows), then
+   create a User API key with scopes devices:launch, read:devices,
+   devices:scripts. Free tier allows one remote device; pick the Pi. The
+   Pi is tate, so test launches are vertical games only.
 6. Tell wizzo developers.zaparoo.com is still missing standalone.js (the
    spec loads, the page renders blank).
 

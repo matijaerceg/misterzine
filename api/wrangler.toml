@@ -1,0 +1,30 @@
+# misterzine account service (Cloudflare Worker + D1). See README.md.
+name = "misterzine-api"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Served at api.misterzine.fyi (a Workers custom domain; the zone must be on
+# Cloudflare DNS). Comment this block out to deploy on the workers.dev URL first.
+routes = [
+  { pattern = "api.misterzine.fyi", custom_domain = true }
+]
+
+[vars]
+# the only origin allowed to call the JSON API from a browser
+SITE_ORIGIN = "https://misterzine.fyi"
+# this service's own public origin (used as the OAuth redirect_uri base)
+API_ORIGIN = "https://api.misterzine.fyi"
+# comma-separated extra origins for local testing, e.g. "http://localhost:8012"
+DEV_ORIGINS = ""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "misterzine"
+# paste the id printed by `npx wrangler d1 create misterzine`
+database_id = "00000000-0000-0000-0000-000000000000"
+
+# Secrets (set with `npx wrangler secret put NAME`, never in this file):
+#   GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET   Google OAuth client (Web application)
+#   GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET   GitHub OAuth App
+#   SESSION_SECRET                           random string, signs the sign-in state cookie
+# For `wrangler dev`, put the same names in api/.dev.vars (gitignored).

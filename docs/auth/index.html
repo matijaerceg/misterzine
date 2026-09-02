@@ -127,24 +127,32 @@
   catch (e) { return fail('Your browser would not store the sign-in (private window, or storage is blocked). Favorites cannot follow you here.'); }
   // the token must not linger in the history entry
   history.replaceState(null, '', location.pathname);
-  if (!isNew) return location.replace(r);
 
-  // first sign-in: whatever this browser had starred becomes the account's
-  // list (union on the server side, so nothing is lost either way)
+  // Whatever this browser had starred becomes the account's list on a first
+  // sign-in (union on the server side, so nothing is lost either way). The same
+  // goes for signing in to an account that holds nothing yet: the tracker is
+  // about to replace this browser's list with the account's, and replacing a
+  // real list with an empty one would throw the stars away. An account that
+  // already has favorites is left alone (it is the truth from here on).
   var keys = [];
   try { keys = JSON.parse(localStorage.getItem('mz-favs') || '[]') || []; } catch (e) {}
   keys = keys.filter(function (k) { return typeof k === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(k); });
   if (!keys.length) return location.replace(r);
-  status.textContent = 'Adding the favorites saved in this browser to your account...';
-  // a flag the tracker clears once the import has definitely landed, so a
-  // dropped request here is retried there instead of silently forgotten
-  try { localStorage.setItem('mz-fav-import', '1'); } catch (e) {}
-  fetch(API + '/favorites/import', {
-    method: 'POST', headers: { Authorization: 'Bearer ' + t, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ keys: keys }),
-  }).then(function (res) {
-    if (res.ok) { try { localStorage.removeItem('mz-fav-import'); } catch (e) {} }
-  }).catch(function () {}).then(function () { location.replace(r); });
+  var headers = { Authorization: 'Bearer ' + t, 'Content-Type': 'application/json' };
+  var need = isNew ? Promise.resolve(true)
+    : fetch(API + '/favorites', { headers: headers }).then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (j) { return !!j && Array.isArray(j.keys) && j.keys.length === 0; })
+        .catch(function () { return false; });   // unreachable: the tracker keeps the local list until it can sync
+  need.then(function (go) {
+    if (!go) return location.replace(r);
+    status.textContent = 'Adding the favorites saved in this browser to your account...';
+    // a flag the tracker clears once the import has definitely landed, so a
+    // dropped request here is retried there instead of silently forgotten
+    try { localStorage.setItem('mz-fav-import', '1'); } catch (e) {}
+    return fetch(API + '/favorites/import', { method: 'POST', headers: headers, body: JSON.stringify({ keys: keys }) })
+      .then(function (res) { if (res.ok) { try { localStorage.removeItem('mz-fav-import'); } catch (e) {} } })
+      .catch(function () {}).then(function () { location.replace(r); });
+  });
 })();
 </script>
 </body>

@@ -229,9 +229,9 @@
   .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
   /* sized and ruled off like the Columns menu's footnote (.colnote) */
-  .favctl .menu .favnote { margin: .35rem 0 0; padding-top: .4rem; border-top: 1px solid var(--rule);
+  .favctl .menu .favnote { margin: 0 0 .35rem; padding: .3rem .5rem .4rem; border-bottom: 1px solid var(--rule);
                            font-size: .78rem; line-height: 1.35; color: var(--muted);
-                           max-width: 15rem; white-space: normal; }
+                           min-width: 11.5rem; max-width: 15rem; white-space: normal; }
   .favctl .menu .favnote a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
   /* the ?fav= arrival banner, in the topbar's flow directly above the table it's
      describing (the topbar is flex:none, so it simply shortens the scroller) */
@@ -1007,10 +1007,12 @@
       <details class="cols" id="favdd">
         <summary id="favsum" aria-label="Favorites menu"></summary>
         <div class="menu">
-          <button type="button" class="reset" id="favcopy" disabled>Copy backup link</button>
+          <!-- where the list lives + the account action; filled by syncAcct() -->
+          <p class="favnote"></p>
           <button type="button" class="reset" id="favexpbtn" disabled>Export for update_all...</button>
+          <button type="button" class="reset" id="favcopy" disabled
+                  title="Copies a link that restores your favorites anywhere">Copy backup link</button>
           <button type="button" class="reset" id="favclearall" disabled>Clear all favorites</button>
-          <p class="favnote">Favorites are saved in this browser. Keep this link to restore them anywhere.</p>
         </div>
       </details>
     </div>
@@ -1133,8 +1135,8 @@ function syncAcct() {
   // the list lives and offers the way to the other place (static markup, no
   // user data goes through innerHTML)
   favNote.innerHTML = TOKEN
-    ? 'Favorites are saved to your account and follow you wherever you sign in. <a href="../account/">Manage account</a>'
-    : 'Favorites are saved in this browser. Keep this link to restore them anywhere, or <a href="../account/">sign in</a> to keep them across devices.';
+    ? 'Saved to your account. <a href="../account/">Manage account</a>'
+    : 'Saved in this browser only. <a href="../account/">Sign in</a> to keep favorites across devices.';
 }
 // resolves to the Response, or null when signed out / offline. A 401 means the
 // session is gone (signed out elsewhere, deleted, expired): forget the token

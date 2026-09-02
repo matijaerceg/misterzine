@@ -60,6 +60,8 @@ dashboard is public, linked as "Traffic Stats" in the header).
   panel); a 🔗 button copies it, and the browser Back gesture closes the panel on mobile.
 - Esc closes, arrow keys walk rows, theme toggle: auto / light / dark.
 - A **Launch button** that starts the game or core on your own MiSTer (see below).
+- **Favorites** (star any row) live in the browser, or follow you across devices when you
+  **sign in** with Google or GitHub (see below).
 
 ### Launch on your MiSTer
 
@@ -137,6 +139,24 @@ the ▾ chevron launches on it and makes it the default.
   no workaround short of also installing the official cores. Arcade launches are not
   affected.
 - Works from a phone on the same wifi too.
+
+### Accounts (favorites that follow you)
+
+Favorites work without an account: stars are saved in the browser, and the star menu's
+backup link restores them anywhere. Signing in ("Sign in" in the header, Google or
+GitHub, no password) makes the same favorites follow you across browsers and devices:
+
+- The first sign-in adds whatever the browser already had starred to the account. After
+  that, every star is saved to the account as you click it; a star that could not be
+  saved (offline) reverts and says so.
+- Signing out keeps a copy in that browser. Deleting the account (on `/account/`) removes
+  everything from the service immediately.
+- Google and GitHub sign-ins are separate accounts; there is no linking.
+
+The account service is a small Cloudflare Worker with a D1 database, source in
+[`api/`](api/). It stores the provider's user id, the email the provider passes along,
+and the list of starred entry keys. Nothing else: no names, no saved MiSTers, no Zaparoo
+keys. The [privacy page](https://misterzine.fyi/privacy/) is the user-facing version.
 
 **RSS feeds** (last 30 days / 100 items, autodiscoverable from the page or via the
 header's "RSS" link; items deep-link to the entry on the site):

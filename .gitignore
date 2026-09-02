@@ -35,3 +35,8 @@ __pycache__/
 
 # local credentials (Reddit API keys etc.) - never committed
 .secrets/
+
+# account service (Cloudflare Worker): local secrets + wrangler state
+api/.dev.vars
+api/.wrangler/
+api/node_modules/

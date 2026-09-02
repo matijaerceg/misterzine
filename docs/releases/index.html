@@ -232,6 +232,7 @@
   .favctl .menu .favnote { margin: .35rem 0 0; padding-top: .4rem; border-top: 1px solid var(--rule);
                            font-size: .78rem; line-height: 1.35; color: var(--muted);
                            max-width: 15rem; white-space: normal; }
+  .favctl .menu .favnote a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
   /* the ?fav= arrival banner, in the topbar's flow directly above the table it's
      describing (the topbar is flex:none, so it simply shortens the scroller) */
   .favbanner[hidden] { display: none; }   /* the display below outranks the UA's [hidden] rule */
@@ -1128,8 +1129,12 @@ const favNote = document.querySelector('#favdd .favnote');
 function syncAcct() {
   acctLink.textContent = TOKEN ? 'Account' : 'Sign in';
   acctLink.title = TOKEN ? 'Your account: favorites, sign out' : 'Sign in to keep favorites across devices';
-  favNote.textContent = TOKEN ? 'Favorites are saved to your account. The link restores them anywhere.'
-    : 'Favorites are saved in this browser. Keep this link to restore them anywhere.';
+  // the note is the one place the star menu meets the account: it says where
+  // the list lives and offers the way to the other place (static markup, no
+  // user data goes through innerHTML)
+  favNote.innerHTML = TOKEN
+    ? 'Favorites are saved to your account and follow you wherever you sign in. <a href="../account/">Manage account</a>'
+    : 'Favorites are saved in this browser. Keep this link to restore them anywhere, or <a href="../account/">sign in</a> to keep them across devices.';
 }
 // resolves to the Response, or null when signed out / offline. A 401 means the
 // session is gone (signed out elsewhere, deleted, expired): forget the token
@@ -1220,7 +1225,7 @@ function toggleFav(d, anchor) {
   if (on && !localStorage.getItem('mz-fav-hint')) {
     try { localStorage.setItem('mz-fav-hint', '1'); } catch (e) {}
     showChip(anchor, IOS_BROWSER ? 'Saved. Add to Home Screen to keep favorites safe'
-                                 : 'Saved in this browser');
+                                 : 'Saved in this browser. Sign in to keep favorites across devices');
   }
 }
 // repaint the two stars that can show one row's state, without rebuilding the

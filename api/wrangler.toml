@@ -21,7 +21,7 @@ DEV_ORIGINS = ""
 binding = "DB"
 database_name = "misterzine"
 # paste the id printed by `npx wrangler d1 create misterzine`
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "a1074cb1-feee-4ad0-92a0-fee4f9fe37b9"
 
 # Secrets (set with `npx wrangler secret put NAME`, never in this file):
 #   GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET   Google OAuth client (Web application)

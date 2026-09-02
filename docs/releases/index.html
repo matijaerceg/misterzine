@@ -770,13 +770,14 @@
     border-color: var(--btn-border); cursor: progress; }
   #panel .launchrow .go.fail { background: var(--surface); color: var(--danger);
     border-color: color-mix(in srgb, var(--danger) 53.33%, transparent); }
-  /* header "My MiSTers": the closed theme control's look (nav.css #themesum) */
-  #mymisters { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 1px solid var(--hair);
+  /* header "My MiSTers" + the account link: the closed theme control's look
+     (nav.css #themesum). #acct is an <a>, hence the text-decoration reset. */
+  #mymisters, #acct { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 1px solid var(--hair);
     border-radius: 6px; background: transparent; color: inherit; cursor: pointer;
-    white-space: nowrap; flex: 0 0 auto; }
-  #mymisters:hover { background: var(--hover-bg); }
+    white-space: nowrap; flex: 0 0 auto; text-decoration: none; }
+  #mymisters:hover, #acct:hover { background: var(--hover-bg); color: inherit; }
   @media (max-width: 36rem) {
-    #mymisters { font-size: .72rem; padding: .3rem .45rem; }
+    #mymisters, #acct { font-size: .72rem; padding: .3rem .45rem; }
     #mymisters .full { display: none; }
   }
   /* must clear the panel (and its resizer, z 101) — the launch button lives inside the panel */
@@ -953,6 +954,9 @@
       </nav>
       <!-- saved devices manager (same popover the panel's launch row opens) -->
       <button type="button" id="mymisters" title="Your saved MiSTers"><span class="full">My </span>MiSTer(s)</button>
+      <!-- accounts: "Sign in" when signed out, "Account" when signed in; both
+           go to /account/ (the sign-in buttons live there). Text set by syncAcct. -->
+      <a id="acct" href="../account/" title="Sign in to keep favorites across devices">Sign in</a>
       <div class="theme" id="theme">
     <details id="themedd"><!-- plain details (not .cols): decoupled from the filter dropdowns -->
       <summary id="themesum">Theme</summary>
@@ -1105,6 +1109,98 @@ function favSave() {
 const favURL = () => location.origin + location.pathname + '?fav=' +
   [...FAVS].map(encodeURIComponent).join(',');
 
+// --- account: favorites that follow you --------------------------------------
+// Signed in (a session token in localStorage mz-token, put there by /auth/),
+// the account service is the truth for FAVS and localStorage becomes a paint
+// cache: the page paints from the cache at once, then replaces it with the
+// server's set. Writes are per item (PUT/DELETE one key) and a failed write
+// reverts the star it just painted. No queue, no merge: a write that fails is
+// simply not saved, and the visitor is told. Signed out, nothing here runs and
+// favorites behave exactly as before (browser-local). Everything downstream
+// (favOnly, favView, ?fav= links, the export dialog) keeps reading FAVS.
+const LOCAL_HOST = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+let API = 'https://api.misterzine.fyi';
+try { if (LOCAL_HOST && localStorage.getItem('mz-api')) API = localStorage.getItem('mz-api'); } catch (e) {}
+let TOKEN = null;
+try { TOKEN = localStorage.getItem('mz-token'); } catch (e) {}
+const acctLink = document.getElementById('acct');
+const favNote = document.querySelector('#favdd .favnote');
+function syncAcct() {
+  acctLink.textContent = TOKEN ? 'Account' : 'Sign in';
+  acctLink.title = TOKEN ? 'Your account: favorites, sign out' : 'Sign in to keep favorites across devices';
+  favNote.textContent = TOKEN ? 'Favorites are saved to your account. The link restores them anywhere.'
+    : 'Favorites are saved in this browser. Keep this link to restore them anywhere.';
+}
+// resolves to the Response, or null when signed out / offline. A 401 means the
+// session is gone (signed out elsewhere, deleted, expired): forget the token
+// and fall back to browser-local favorites, keeping the list as it stands.
+function apiFetch(path, opts) {
+  if (!TOKEN) return Promise.resolve(null);
+  opts = opts || {};
+  opts.headers = Object.assign({ Authorization: 'Bearer ' + TOKEN }, opts.headers || {});
+  return fetch(API + path, opts).then(res => {
+    if (res.status === 401) { dropSession(); return null; }
+    return res;
+  }).catch(() => null);
+}
+function dropSession() {
+  TOKEN = null;
+  try { localStorage.removeItem('mz-token'); } catch (e) {}
+  syncAcct();
+}
+// replace FAVS with the account's set and repaint whatever shows a star
+function adoptServerFavs(keys) {
+  const next = new Set(keys);
+  if (next.size === FAVS.size && [...next].every(k => FAVS.has(k))) return;
+  FAVS = next;
+  favSave();
+  syncFavSummary();
+  if (!booted) return;   // the first render (after data arrives) reads FAVS itself
+  apply(); recenterOpen();
+  if (openRow) syncFavStars(openRow);
+}
+// pull the account's list; also finishes a first-sign-in import that /auth/
+// could not confirm (the flag it leaves behind)
+let favSyncing = null;
+function syncServerFavs() {
+  if (!TOKEN || favSyncing) return favSyncing;
+  let pending = false;
+  try { pending = localStorage.getItem('mz-fav-import') === '1'; } catch (e) {}
+  const first = pending && FAVS.size
+    ? apiFetch('/favorites/import', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ keys: [...FAVS].filter(k => /^[A-Za-z0-9_-]{1,64}$/.test(k)) }) })
+      .then(res => { if (res && res.ok) try { localStorage.removeItem('mz-fav-import'); } catch (e) {} })
+    : Promise.resolve();
+  favSyncing = first.then(() => apiFetch('/favorites')).then(res => res && res.ok ? res.json() : null)
+    .then(j => { if (j && Array.isArray(j.keys)) adoptServerFavs(j.keys); })
+    .catch(() => {})
+    .then(() => { favSyncing = null; });
+  return favSyncing;
+}
+// one write for one star; on failure undo the local change and say so
+function favWrite(d, on, anchor) {
+  return apiFetch('/favorites/' + encodeURIComponent(d.k), { method: on ? 'PUT' : 'DELETE' }).then(res => {
+    if (res && res.ok) return true;
+    if (on) FAVS.delete(d.k); else FAVS.add(d.k);
+    favSave();
+    syncFavStars(d);
+    syncFavSummary();
+    if (favOnly || favView) { apply(); recenterOpen(); }
+    showChip(anchor, !TOKEN ? 'Signed out elsewhere. Sign in again to save to your account'
+      : res ? 'Could not save to your account' : 'Offline: could not save to your account');
+    return false;
+  });
+}
+syncAcct();
+syncServerFavs();
+// signed in or out on the account page in another tab: follow it
+window.addEventListener('storage', e => {
+  if (e.key !== 'mz-token') return;
+  TOKEN = e.newValue;
+  syncAcct();
+  if (TOKEN) syncServerFavs();
+});
+
 function toggleFav(d, anchor) {
   if (!d || !d.k) return;
   const on = !FAVS.has(d.k);
@@ -1115,6 +1211,7 @@ function toggleFav(d, anchor) {
   // unstarring while the list is narrowed to favorites drops the row out from
   // under the click, which is the honest result — re-run the filter to show it
   if (favOnly || favView) { apply(); recenterOpen(); }
+  if (TOKEN) { favWrite(d, on, anchor); return; }   // the account is the truth; the cache write is best effort
   if (!saved) { showChip(anchor, 'Could not save (private window?)'); return; }
   // where the list lives is worth saying once, the first time it matters; the
   // star menu carries the rest (the backup link) from then on. On iOS Safari
@@ -2355,11 +2452,24 @@ favdd.querySelector('.menu').addEventListener('click', e => {
   }
   if (e.target.closest('#favclearall')) {
     if (!favClearArmed) { favClearArmed = true; favClearBtn.textContent = 'Really clear all?'; return; }
+    const cleared = [...FAVS];
     FAVS.clear(); favSave(); disarmFavClear();
     resetFavOnly();   // an empty favorites-only list is a dead end to strand anyone in
     syncFavSummary();
     if (openRow) syncFavStars(openRow);
     apply(); recenterOpen();   // rebuilds every row's star from the now-empty set
+    // signed in: the service has no bulk delete, so one DELETE per key, a few
+    // at a time; whatever it still holds afterwards comes back via the resync
+    if (TOKEN && cleared.length) {
+      let i = 0, failed = false;
+      const next = () => i < cleared.length
+        ? apiFetch('/favorites/' + encodeURIComponent(cleared[i++]), { method: 'DELETE' })
+            .then(res => { if (!res || !res.ok) failed = true; }).then(next)
+        : Promise.resolve();
+      Promise.all([next(), next(), next(), next()]).then(() => syncServerFavs()).then(() => {
+        if (failed) showChip(favToggle, 'Some favorites could not be removed from your account');
+      });
+    }
   }
 });
 syncFavSummary();  // a returning visitor's count is already known before data loads
@@ -2444,12 +2554,25 @@ function dismissFavView() {
   stripFavParam();
 }
 document.getElementById('favadd').addEventListener('click', () => {
+  const added = [...favView].filter(k => !FAVS.has(k));
   for (const k of favView) FAVS.add(k);
   const saved = favSave();
   syncFavSummary();
   if (openRow) syncFavStars(openRow);
   dismissFavView();
   apply(); recenterOpen();
+  if (TOKEN) {
+    // one import call for the whole list; a failure resyncs to what the
+    // account really holds (which reverts the stars just painted)
+    apiFetch('/favorites/import', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ keys: added.filter(k => /^[A-Za-z0-9_-]{1,64}$/.test(k)) }) })
+      .then(res => {
+        if (res && res.ok) return;
+        showChip(favToggle, TOKEN ? 'Could not save to your account' : 'Signed out elsewhere. Sign in again to save to your account');
+        return syncServerFavs();
+      });
+    return;
+  }
   if (!saved) showChip(favToggle, 'Could not save (private window?)');
 });
 document.getElementById('favdismiss').addEventListener('click', () => {

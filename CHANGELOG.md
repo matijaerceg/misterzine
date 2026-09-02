@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-09-02
+- Release tracker: sign in with Google or GitHub (the new "Sign in" button in the header) and your favorites follow you across browsers and devices. The first sign-in adds the favorites already saved in that browser to the account; from then on every star is saved as you click it, and a star that could not be saved reverts and says so. A new account page (misterzine.fyi/account/) shows what the account holds, copies a backup link, signs out, or deletes the account outright. No password, no name, no email sending; the privacy page has the details. Signed out, nothing changes: favorites stay in the browser as before.
+
 ## 2026-09-01
 - All pages: a privacy page (misterzine.fyi/privacy/) spells out what the site stores and where: nothing about you outside your own browser, unless you sign in to the upcoming account feature, and then only your favorites. Linked from the release tracker's meta line and the home page.
 - Release tracker: the Launch button can now reach your MiSTer through Zaparoo Online, next to the existing on-your-network method. A Zaparoo-connected MiSTer launches from anywhere, in every browser (no popup window, no Android "local network" permission), and the button reports what happened: launched, not on that SD card, MiSTer offline, or busy. Setup: Zaparoo Core 2.17+ linked to a free Zaparoo Online account with Remote control switched on, then paste a User API key into the new My MiSTer(s) button in the header and pick your device. Keys and device addresses stay in your browser. Zaparoo also launches a few systems the network method never could (Neo Geo Pocket, Virtual Boy, Apple IIgs, ao486 and more).

@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 02 Sep 2026 00:33:54 +0000</lastBuildDate>
+<lastBuildDate>Wed, 02 Sep 2026 05:04:09 +0000</lastBuildDate>
+<item>
+<title>[Updated] APB - All Points Bulletin (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#apb</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/APB - All Points Bulletin (rev 7).mra:2026-09-02T05:04:09+00:00</guid>
+<pubDate>Wed, 02 Sep 2026 05:04:09 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/apb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1987 / Atari Games&lt;/p&gt;&lt;p&gt;Core: atarisys2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-AtariSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ChampionBaseball (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#champbas</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/ChampionBaseball_20260901.rbf:2026-09-02T05:04:09+00:00</guid>
+<pubDate>Wed, 02 Sep 2026 05:04:09 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Champion Base Ball, Champion Base Ball Part-2, Exciting Soccer, Exciting Soccer II, Talbot.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ChampionBaseball_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arabian (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SMS (Arcade core, 8 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantzn2</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/SMS_20260823.rbf:2026-08-23T23:20:54+00:00</guid>
-<pubDate>Sun, 23 Aug 2026 23:20:54 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Fantasy Zone II - The Tears of Opa-Opa, Hang-On Jr., Megumi Rescue, Opa Opa, Riddle of Pythagoras, Slap Shooter, Tetris (Sega System E), Transformer.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SMS_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SegaG80V (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#startrek</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/SegaG80V_20260823.rbf:2026-08-23T23:20:54+00:00</guid>
-<pubDate>Sun, 23 Aug 2026 23:20:54 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Star Trek, Tac/Scan, Zektor.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

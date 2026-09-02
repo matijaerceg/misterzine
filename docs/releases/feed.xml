@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 02 Sep 2026 00:33:54 +0000</lastBuildDate>
+<lastBuildDate>Wed, 02 Sep 2026 05:04:09 +0000</lastBuildDate>
+<item>
+<title>[Updated] APB - All Points Bulletin (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#apb</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/APB - All Points Bulletin (rev 7).mra:2026-09-02T05:04:09+00:00</guid>
+<pubDate>Wed, 02 Sep 2026 05:04:09 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/apb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1987 / Atari Games&lt;/p&gt;&lt;p&gt;Core: atarisys2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-AtariSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ChampionBaseball (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#champbas</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/ChampionBaseball_20260901.rbf:2026-09-02T05:04:09+00:00</guid>
+<pubDate>Wed, 02 Sep 2026 05:04:09 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Champion Base Ball, Champion Base Ball Part-2, Exciting Soccer, Exciting Soccer II, Talbot.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ChampionBaseball_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Ark Area (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arkarea</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: DoDonPachi, DonPachi, ESP Ra.De., Fever SOS, Gaia Crusaders, Gogetsuji Legends, Guwange, Power Instinct 2, Puzzle Uo Poko, Thunder Heroes.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Deco16 (Arcade core, 4 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#caveman-ninja-world-ver-4</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Deco16_20260826.rbf:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Caveman Ninja (Deco16), Crude Buster (Deco16), The Cliffhanger - Edward Randy (Deco16), Vapor Trail - Hyper Offence Formation (Deco16).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] CaveBanpresto (Arcade core, 5 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#agallet</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/CaveBanpresto_20260825.rbf:2026-08-25T23:58:04+00:00</guid>
-<pubDate>Tue, 25 Aug 2026 23:58:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Gallet, Hotdog Storm, Mazinger Z, Metamoqester, Pretty Soldier Sailor Moon.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-CaveBanpresto_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

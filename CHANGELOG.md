@@ -2,6 +2,9 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-09-03
+- Release tracker: the Meathax database is now tracked for its arcade cores only. Meathax has started shipping "MiSTer Frontier" hybrid cores (NBlood first): a stub core file that hands off to a Linux program running on the MiSTer's ARM side. Those are software ports, not FPGA cores, so they are not listed and do not appear in the feeds.
+
 ## 2026-09-02
 - Release tracker: sign in with Google or GitHub (the new "Sign in" button in the header) and your favorites follow you across browsers and devices. The first sign-in adds the favorites already saved in that browser to the account; from then on every star is saved as you click it, and a star that could not be saved reverts and says so. A new account page (misterzine.fyi/account/) shows what the account holds, copies a backup link, signs out, or deletes the account outright. No password, no name, no email sending; the privacy page has the details. Signed out, nothing changes: favorites stay in the browser as before.
 

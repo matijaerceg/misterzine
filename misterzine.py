@@ -80,6 +80,18 @@ SOURCES = [
     },
 ]
 
+# Sources tracked only in part: source id -> the systems we list. A source
+# absent from this map is tracked in full.
+#
+# Meathax's db also carries "MiSTer Frontier" hybrid cores: a stub .rbf whose
+# only job is to wake a background daemon that runs an ARM Linux binary on the
+# HPS (NBlood, OpenBOR, ...), shipped alongside the daemon, its installer and
+# the game binaries. Those are software ports, not FPGA cores, and this is a
+# tracker of FPGA core releases — so only his arcade rows are listed.
+SOURCE_SYSTEMS = {
+    "meathax": {"arcade"},
+}
+
 # GitHub org + name prefix where the retrospective arcade release dates live.
 ARCADE_REPO_ORG = "MiSTer-devel"
 ARCADE_REPO_PREFIX = "Arcade-"
@@ -275,6 +287,38 @@ def classify(path):
     return "support", "support", False
 
 
+def tracked_path(source_id, path):
+    """False for db entries a partly-tracked source ships that we don't list."""
+    allowed = SOURCE_SYSTEMS.get(source_id)
+    return allowed is None or classify(path)[0] in allowed
+
+
+def tracked_files(source_id, files):
+    """Filter a snapshot's path->meta map down to what this source is tracked
+    for. Applied to BOTH sides of the snapshot diff so an untracked path is
+    simply invisible: it never seeds a row, and it never looks 'removed'."""
+    if source_id not in SOURCE_SYSTEMS:
+        return files
+    return {p: m for p, m in files.items() if tracked_path(source_id, p)}
+
+
+def purge_untracked(con, source_id):
+    """Sweep rows a source shipped before we narrowed what we track (or that
+    landed from an interleaved run of an older build). Idempotent, and cheap
+    enough to run every snapshot — the filter above keeps it a no-op."""
+    if source_id not in SOURCE_SYSTEMS:
+        return 0
+    gone = set()
+    for table in ("catalog", "events", "row_keys"):
+        gone |= {r[0] for r in con.execute(
+            f"SELECT DISTINCT path FROM {table} WHERE source_id=?", (source_id,))
+            if not tracked_path(source_id, r[0])}
+    for table in ("catalog", "events", "row_keys"):
+        con.executemany(f"DELETE FROM {table} WHERE source_id=? AND path=?",
+                        [(source_id, p) for p in sorted(gone)])
+    return len(gone)
+
+
 def title_from_path(path):
     stem = Path(path.replace("\\", "/")).name
     for ext in (".mra", ".rbf"):
@@ -368,6 +412,10 @@ def cmd_snapshot(args):
     total_events = 0
     for source in SOURCES:
         ts, files, beta_paths = fetch_db(source)
+        files = tracked_files(source["id"], files)
+        swept = purge_untracked(con, source["id"])
+        if swept:
+            log(f"  {source['name']}: purged {swept} untracked row(s)")
         prev = latest_snapshot(source["id"])
         ts_iso = epoch_to_iso(ts) or now_iso()
 
@@ -406,6 +454,9 @@ def cmd_snapshot(args):
             # still works; only a genuinely empty catalog is a true first seed.
             old_files = catalog_files(con, source["id"])
             seed = not old_files
+        # An on-disk snapshot predating a SOURCE_SYSTEMS narrowing still lists
+        # the untracked paths; drop them so they can't read as 'removed'.
+        old_files = tracked_files(source["id"], old_files)
         events = []
 
         for path, meta in files.items():

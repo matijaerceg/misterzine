@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 02 Sep 2026 05:04:09 +0000</lastBuildDate>
+<lastBuildDate>Thu, 03 Sep 2026 05:32:47 +0000</lastBuildDate>
+<item>
+<title>[New] Escape from the Planet of the Robot Monsters (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#eprom</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Escape from the Planet of the Robot Monsters (set 1).mra:2026-09-03T05:32:47+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 05:32:47 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eprom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Arcade-Escape&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] APB - All Points Bulletin (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#apb</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/edrandy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1990 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: deco16&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Cave (Arcade core, 10 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ddonpach</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Cave_20260825.rbf:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: DoDonPachi, DonPachi, ESP Ra.De., Fever SOS, Gaia Crusaders, Gogetsuji Legends, Guwange, Power Instinct 2, Puzzle Uo Poko, Thunder Heroes.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

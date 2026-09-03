@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Wed, 02 Sep 2026 00:33:54 +0000</lastBuildDate>
+<lastBuildDate>Thu, 03 Sep 2026 05:32:47 +0000</lastBuildDate>
+<item>
+<title>[New] Escape from the Planet of the Robot Monsters (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#eprom</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Escape from the Planet of the Robot Monsters (set 1).mra:2026-09-03T05:32:47+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 05:32:47 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eprom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Arcade-Escape&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Ark Area (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arkarea</link>
@@ -870,15 +879,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sailormn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1995 / Gazelle (Banpresto license)&lt;/p&gt;&lt;p&gt;Core: CaveBanpresto&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-CaveBanpresto_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Virtual Boy (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#VirtualBoy</link>
-<guid isPermaLink="false">distribution_mister:_Console/VirtualBoy_20260803.rbf:2026-08-03T22:39:54+00:00</guid>
-<pubDate>Mon, 03 Aug 2026 22:39:54 +0000</pubDate>
-<category>new</category>
-<category>Console core</category>
-<description>&lt;p&gt;1995 / Nintendo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VirtualBoy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 03 Sep 2026 05:32:47 +0000</lastBuildDate>
+<lastBuildDate>Thu, 03 Sep 2026 10:23:47 +0000</lastBuildDate>
+<item>
+<title>[New] Escape Kids (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#esckids</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Escape Kids.mra:2026-09-03T10:23:47+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 10:23:47 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/esckids.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-EscapeKids&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-03 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] NBlood (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#NBlood</link>
+<guid isPermaLink="false">meathax:_Computer/NBlood.rbf:2026-09-03T10:23:47+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 10:23:47 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-09-03 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Escape from the Planet of the Robot Monsters (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#eprom</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Escape from the Planet of the Robot Monsters (set 1).mra:2026-09-03T10:06:24+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 10:06:24 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eprom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Escape&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Escape_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Ring King (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ringking</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/RingKing_20260903.rbf:2026-09-03T10:06:24+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 10:06:24 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ringking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Data East&lt;/p&gt;&lt;p&gt;Core: ringking&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-RingKing_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Escape from the Planet of the Robot Monsters (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#eprom</link>
@@ -14,7 +50,7 @@
 <pubDate>Thu, 03 Sep 2026 05:32:47 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eprom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Arcade-Escape&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eprom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Escape&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Escape_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] APB - All Points Bulletin (Arcade)</title>
@@ -870,42 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddonpach.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1997 / CAVE&lt;/p&gt;&lt;p&gt;Core: cave&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] ESP Ra.De. (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#esprade</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/ESP Ra.De. (World, 1998 4-22 International Ver.).mra:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/esprade.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1998 / CAVE&lt;/p&gt;&lt;p&gt;Core: cave&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Fever SOS (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#feversos</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Fever SOS (World, 98-09-25 VER).mra:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/feversos.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1998 / CAVE&lt;/p&gt;&lt;p&gt;Core: cave&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Guwange (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#guwange</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Guwange (Japan, 1999 6-24 Master Ver 16-55).mra:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/guwange.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1999 / CAVE&lt;/p&gt;&lt;p&gt;Core: cave&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] The Cliffhanger - Edward Randy (Deco16) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#the-cliffhanger-edward-randy-deco16</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/The Cliffhanger - Edward Randy (World ver 3).mra:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/edrandy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1990 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: deco16&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Deco16_Mister/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

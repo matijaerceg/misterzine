@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 02 Sep 2026 05:04:09 +0000</lastBuildDate>
+<lastBuildDate>Thu, 03 Sep 2026 10:06:24 +0000</lastBuildDate>
+<item>
+<title>[Updated] Escape from the Planet of the Robot Monsters (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#eprom</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Escape from the Planet of the Robot Monsters (set 1).mra:2026-09-03T10:06:24+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 10:06:24 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eprom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Escape&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Escape_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Ring King (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ringking</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/RingKing_20260903.rbf:2026-09-03T10:06:24+00:00</guid>
+<pubDate>Thu, 03 Sep 2026 10:06:24 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ringking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Data East&lt;/p&gt;&lt;p&gt;Core: ringking&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-03 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-RingKing_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] APB - All Points Bulletin (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#apb</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzlstar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1999 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Puzzli 2 Super (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#puzzli2s</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Puzzli 2 Super (ver. 200, WORLD).mra:2026-08-23T23:20:54+00:00</guid>
-<pubDate>Sun, 23 Aug 2026 23:20:54 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzzli2s.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2001 / IGS (Metro license)&lt;/p&gt;&lt;p&gt;Core: IGSPGM&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Qix (Arcade core, 8 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#complexx</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Qix_20260823.rbf:2026-08-23T23:20:54+00:00</guid>
-<pubDate>Sun, 23 Aug 2026 23:20:54 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

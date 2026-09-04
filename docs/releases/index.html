@@ -398,7 +398,8 @@
     color: var(--muted); }
   /* the divider: a small uppercase label with the rule running out from it
      (render only emits the row under the default Last Updated sort, where "the
-     top of the list" and "the new stuff" are the same set) */
+     top of the list" and "the new stuff" are the same set). The same row also
+     serves as the "nothing new" marker above the first data row. */
   tr.newsplit td { border-bottom: 0; padding: 0; }
   tr.newsplit .msg { display: flex; align-items: center; gap: .5rem; padding: .3rem .6rem;
     font-size: .68rem; letter-spacing: .05em;
@@ -1275,6 +1276,7 @@ const favBtnHTML = d => '<button type="button" class="fav' + (FAVS.has(d.k) ? ' 
 const SEEN_KEY = 'mz-seen';
 const SEEN_HOLD_MIN = 60;   // a return within the hour is the same visit, not a new one
 let baseRows = null;        // k -> updated, as of the previous visit (null = first visit, no divider)
+let baseTime = null;        // ISO clock of that previous visit; labels the divider ("2 days ago")
 let seenState = null;       // the stored record, held so a live swap can bank into it
 
 const rowMap = rows => {
@@ -1292,11 +1294,14 @@ function initSeen(rows) {
   const t = s && Date.parse(s.t);
   const sameVisit = !!(t && Date.now() - t < SEEN_HOLD_MIN * 60000);
   baseRows = s ? (sameVisit ? s.base : s.cur) || null : null;
+  // the baseline's own clock rides along with it: a new visit inherits the
+  // previous record's stamp, a same-visit reload keeps the one already held
+  baseTime = s ? (sameVisit ? s.bt : s.t) || null : null;
   // an EMPTY snapshot (a visit that loaded no rows, e.g. mid-deploy) must read
   // as "no baseline", or every row counts as unseen and the divider fences off
   // the entire table
   if (baseRows && !Object.keys(baseRows).length) baseRows = null;
-  seenState = { t: new Date().toISOString(), base: baseRows, cur: rowMap(rows) };
+  seenState = { t: new Date().toISOString(), bt: baseTime, base: baseRows, cur: rowMap(rows) };
   saveSeen(seenState);
 }
 // Rows that land mid-visit are banked as seen for NEXT time, but deliberately
@@ -1308,12 +1313,27 @@ function bankSeen(rows) {
   // tab's own divider is untouched — baseRows was fixed at its load)
   try {
     const s = JSON.parse(localStorage.getItem(SEEN_KEY) || 'null');
-    if (s && Date.parse(s.t) > Date.parse(seenState.t)) { seenState.t = s.t; seenState.base = s.base; }
+    if (s && Date.parse(s.t) > Date.parse(seenState.t)) { seenState.t = s.t; seenState.bt = s.bt; seenState.base = s.base; }
   } catch (e) {}
   seenState.cur = rowMap(rows);
   saveSeen(seenState);
 }
 const isUnseen = d => !!(baseRows && d.k && baseRows[d.k] !== (d.updated || ''));
+
+// "2 hours ago" / "3 days ago" for the last-visit marker. A visit is a clock
+// reading, so under a day it borrows relUpdated()'s minute/hour ladder; from a
+// day up it hands over to relAge()'s day/month/year one instead of relUpdated's
+// absolute-date fallback, because "your last visit, Jul 11" reads like a diary
+// while "3 days ago" answers the question the marker exists for.
+function visitAgo(iso) {
+  const t = iso && Date.parse(iso);
+  if (!t) return '';
+  return Date.now() - t < 864e5 ? relUpdated(new Date(t)) : relAge(iso);
+}
+// The marker only makes sense under the default Last Updated sort (see
+// splitAt): under any other order the line would fence off nothing.
+const visitMarkerOn = () => !!(baseRows && sortKey === 'updated' && sortDir === -1);
+const visitLabel = () => { const a = visitAgo(baseTime); return 'your last visit' + (a ? ', ' + a : ''); };
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
 // the raw value stays visible as a tooltip. Only multi-game hardware families
@@ -1884,12 +1904,20 @@ function render() {
     setCount(0);
     return;
   }
+  // The divider is a timeline marker: the rule is the moment of the previous
+  // visit, and the default sort puts everything newer above it. When no row is
+  // newer, the same marker sits at the very top and says so, because an absent
+  // line can't be told apart from a first visit or a blocked localStorage, and
+  // nobody should have to scroll to learn that nothing changed.
   const split = splitAt();
-  tb.innerHTML = view.map((d, i) =>
+  const top = split < 0 && visitMarkerOn()
+    ? '<tr class="newsplit"><td colspan="' + cols.length + '">' +
+      '<div class="msg">nothing new since ' + visitLabel() + '</div></td></tr>' : '';
+  tb.innerHTML = top + view.map((d, i) =>
     '<tr' + (d === openRow ? ' class="open"' : '') + ' data-i="' + i + '">' +
     cols.map(c => c.cell(d)).join('') + '</tr>' +
     (i === split ? '<tr class="newsplit"><td colspan="' + cols.length + '">' +
-      '<div class="msg">above: new since your last visit</div></td></tr>' : '')
+      '<div class="msg">' + visitLabel() + '</div></td></tr>' : '')
   ).join('');
   setCount(view.length);
 }

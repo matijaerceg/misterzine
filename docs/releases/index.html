@@ -358,8 +358,9 @@
     width: var(--hint-l-w, 12px); pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
     background: linear-gradient(to right, var(--hint-shadow), transparent); }
   .tablezone.more-l::before { opacity: 1; }
-  /* Floating pills over the table: "Scroll to top" (top right, revealed by the
-     .scrolled class whenever the list is more than about a row from the top)
+  /* Floating pills over the table: the jump stack (top right: Scroll to top /
+     Last visit / Selected, always present, each one disabled while it has
+     nowhere to go - see syncJumps)
      and the "new data landed" notice (bottom centre, shown after a live swap
      brought in rows worth mentioning). One shared neutral chrome — --surface +
      border, like the topbar buttons; an accent-colored pill floating over the
@@ -370,33 +371,22 @@
      covers that row's title outright). Down at the bottom it clears .totop's
      corner too, and --sbh (measured by syncScrollHints) keeps it off the
      horizontal scrollbar. */
-  .totop, .tovisit, .torow, .newspill { position: absolute; z-index: 17;
+  .jumps button, .newspill { z-index: 17;
     font: inherit; font-size: .8rem;
     border: 1px solid var(--hair); border-radius: 999px;
     background: color-mix(in srgb, var(--fg) 7%, var(--surface)); color: inherit; box-shadow: 0 2px 8px #0003; }
-  .totop:hover, .tovisit:hover, .torow:hover, .newspill:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
-  .totop { top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem; cursor: pointer;
-    padding: .45rem .85rem;
-    opacity: 0; pointer-events: none; transition: opacity .15s; }
-  .tablezone.scrolled .totop { opacity: 1; pointer-events: auto; }
-  /* "Last visit" jump: same chrome, stacked under Scroll-to-top while that one
-     shows, and taking its slot while it doesn't (at the very top of the list
-     the divider can still be below the fold after a busy week, which is the
-     whole reason this button exists). Shown only while the divider is off
-     screen; the arrow says which way it lies. */
-  .tovisit { top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem; cursor: pointer;
-    padding: .45rem .85rem;
-    opacity: 0; pointer-events: none; transition: opacity .15s, top .15s; }
-  .tablezone.scrolled .tovisit { top: calc(var(--theadh, 2.2rem) + 3.2rem); }
-  .tablezone.visit-off .tovisit { opacity: 1; pointer-events: auto; }
-  /* "Selected" jump: third in the stack, shown while the open (highlighted)
-     row is off screen. Its slot is however many of the two above are showing. */
-  .torow { top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem; cursor: pointer;
-    padding: .45rem .85rem;
-    opacity: 0; pointer-events: none; transition: opacity .15s, top .15s; }
-  .tablezone.scrolled .torow, .tablezone.visit-off .torow { top: calc(var(--theadh, 2.2rem) + 3.2rem); }
-  .tablezone.scrolled.visit-off .torow { top: calc(var(--theadh, 2.2rem) + 5.8rem); }
-  .tablezone.row-off .torow { opacity: 1; pointer-events: auto; }
+  .jumps button:not(:disabled):hover, .newspill:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
+  /* The jump stack: a fixed column, one slot per button, so nothing ever
+     moves. A button with nowhere to go (top of the list already; no divider,
+     or one in view; no selection, or one in view) stays put but disabled and
+     dimmed - the user asked for a stable stack over appearing/vanishing pills.
+     The arrow on the two "find it" buttons says which way the target lies and
+     drops off while disabled. Buttons stretch to one shared width. */
+  .jumps { position: absolute; z-index: 17; top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem;
+    display: flex; flex-direction: column; align-items: stretch; gap: .4rem; }
+  .jumps button { cursor: pointer; padding: .45rem .85rem; white-space: nowrap;
+    transition: opacity .15s; }
+  .jumps button:disabled { cursor: default; opacity: .4; box-shadow: none; }
   .newspill { bottom: calc(var(--sbh, 0px) + .8rem); left: 50%; transform: translateX(-50%);
     display: none; align-items: center; gap: .35rem; max-width: calc(100% - 2rem);
     padding: .35rem .45rem .35rem .85rem; }
@@ -1071,9 +1061,11 @@
 </dialog>
 </div>
 <div class="tablezone">
-<button id="totop" class="totop" type="button">↑ Scroll to top</button>
-<button id="tovisit" class="tovisit" type="button">↓ Last visit</button>
-<button id="torow" class="torow" type="button">↓ Selected</button>
+<div class="jumps">
+<button id="totop" type="button" disabled>↑ Scroll to top</button>
+<button id="tovisit" type="button" disabled>Last visit</button>
+<button id="torow" type="button" disabled>Selected</button>
+</div>
 <div id="newspill" class="newspill"><span class="txt"></span><button type="button" class="x" title="Dismiss">x</button></div>
 <div class="tablewrap">
 <table>
@@ -1841,9 +1833,7 @@ function syncScrollHints() {
   const w = document.querySelector('.tablewrap'), z = document.querySelector('.tablezone');
   z.classList.toggle('more-l', w.scrollLeft > 0);
   z.classList.toggle('more-r', w.scrollLeft + w.clientWidth < w.scrollWidth - 1);
-  z.classList.toggle('scrolled', w.scrollTop > 30);  // ~a row down reveals "Scroll to top"
-  syncVisitBtn(w, z);
-  syncRowBtn(w, z);
+  syncJumps(w, z);
   // taper both hints near their end of the scroll range: each one's width
   // tracks the distance to its edge (full width until the last ~6% / 48px
   // minimum, then shrinking to 0), so they grow/shrink with scroll position
@@ -1896,39 +1886,32 @@ document.querySelector('.tablewrap').addEventListener('scroll', () => {
   }, 900);
 }, { passive: true });
 
-// The "Last visit" jump button: offered only while the divider (the one under
-// the new rows, never the "nothing new" marker, which lives at the top where
-// Scroll-to-top already goes) is outside the scrollport. The sticky header
-// covers the top of the scrollport, so a divider hiding under it counts as
-// above. Runs from syncScrollHints, so scrolling, resizing and every re-render
-// (the table ResizeObserver) keep it honest.
-function syncVisitBtn(w, z) {
-  const btn = document.getElementById('tovisit');
-  const row = document.querySelector('#rows tr.newsplit:not(:first-child)');
-  let off = false, above = false;
-  if (row) {
-    const r = row.getBoundingClientRect(), v = w.getBoundingClientRect();
-    const top = v.top + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
-    above = r.bottom <= top;
-    off = above || r.top >= v.bottom;
-  }
-  z.classList.toggle('visit-off', off);
-  if (off) btn.textContent = (above ? '↑' : '↓') + ' Last visit';
-}
-// Same idea for the selected (open) row: offered while its highlighted <tr> is
-// off screen. A row that was filtered out of the view has no <tr>, so no button.
-function syncRowBtn(w, z) {
-  const btn = document.getElementById('torow');
-  const row = document.querySelector('#rows tr.open');
-  let off = false, above = false;
-  if (row) {
-    const r = row.getBoundingClientRect(), v = w.getBoundingClientRect();
-    const top = v.top + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
-    above = r.bottom <= top;
-    off = above || r.top >= v.bottom;
-  }
-  z.classList.toggle('row-off', off);
-  if (off) btn.textContent = (above ? '↑' : '↓') + ' Selected';
+// The jump stack. Scroll-to-top is live once the list is about a row down.
+// "Last visit" is live while the divider (the one under the new rows, never
+// the "nothing new" marker, which lives at the top where Scroll-to-top already
+// goes) is outside the scrollport; "Selected" likewise for the open row's
+// highlighted <tr> (a row filtered out of the view has no <tr>, so: disabled).
+// The sticky header covers the top of the scrollport, so a target hiding under
+// it counts as above; the arrow says which way. Runs from syncScrollHints, so
+// scrolling, resizing and every re-render (the table ResizeObserver) keep it
+// honest; markOpenRow/closePanel call it too since a highlight moves no pixels.
+function syncJumps(w, z) {
+  document.getElementById('totop').disabled = !(w.scrollTop > 30);
+  const v = w.getBoundingClientRect();
+  const top = v.top + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
+  const sync = (id, sel, label) => {
+    const btn = document.getElementById(id), row = document.querySelector(sel);
+    let off = false, above = false;
+    if (row) {
+      const r = row.getBoundingClientRect();
+      above = r.bottom <= top;
+      off = above || r.top >= v.bottom;
+    }
+    btn.disabled = !off;
+    btn.textContent = off ? (above ? '↑ ' : '↓ ') + label : label;
+  };
+  sync('tovisit', '#rows tr.newsplit:not(:first-child)', 'Last visit');
+  sync('torow', '#rows tr.open', 'Selected');
 }
 document.getElementById('torow').addEventListener('click', () => {
   const tr = document.querySelector('#rows tr.open');
@@ -1996,6 +1979,7 @@ function render() {
       '<div class="msg">' + visitLabel() + '</div></td></tr>' : '')
   ).join('');
   setCount(view.length);
+  syncScrollHints();  // the jump stack re-reads its targets; a same-height re-render escapes the ResizeObserver
 }
 // Index of the last row the visitor hasn't seen — the divider goes right after
 // it, so everything above the line is news. -1 = draw no divider.

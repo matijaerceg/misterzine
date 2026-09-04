@@ -5,8 +5,7 @@ User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/re
 ## 2026-09-04
 - Release tracker: the "new since your last visit" line is now a timeline marker that names the moment ("your last visit, 2 days ago"), with everything above it newer. When nothing is new, the same marker sits at the top of the table and says so, so there is no need to scroll down to find out.
 - Release tracker: a new optional Source column (off by default, enable it under Columns) shows which downloader database ships each entry, the same fact the Source filter narrows on. It sorts by name.
-- Release tracker: a "Last visit" button under "Scroll to top" appears whenever the last-visit marker is off screen, with an arrow saying which way, and jumps to it in one tap.
-- Release tracker: a third "Selected" button in the same stack appears when the highlighted row has scrolled off screen and brings it back to the middle of the view.
+- Release tracker: "Scroll to top" is now a stack of three buttons that are always on screen: "Scroll to top", "Last visit" (jumps to the last-visit marker) and "Selected" (brings the highlighted row back to the middle of the view). Each one is grayed out while it has nowhere to go, and the arrow on the lower two says which way the target lies.
 
 ## 2026-09-03
 - Hardware guide: the Hamgeek MiSTer now lists optical audio as confirmed rather than unverified (Lon.TV review plus two owner reports). Its entry also says the jack is mini-TOSLINK, so a full-size optical cable needs an adapter.

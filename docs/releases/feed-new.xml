@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Thu, 03 Sep 2026 18:05:32 +0000</lastBuildDate>
+<lastBuildDate>Fri, 04 Sep 2026 16:24:17 +0000</lastBuildDate>
+<item>
+<title>[New] Pocket Gal (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pcktgal</link>
+<guid isPermaLink="false">jtbindb:_Arcade/Pocket Gal (Japan).mra:2026-09-04T16:24:17+00:00</guid>
+<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pcktgal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtpktgal&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/pktgal"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Ring King (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ringking</link>
@@ -852,33 +861,6 @@
 <category>new</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1990 / Apple&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacLC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Asteroids Deluxe (v3 green) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#asteroids-deluxe-v3-green</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Asteroids Deluxe (v3 green).mra:2026-08-05T17:09:51+00:00</guid>
-<pubDate>Wed, 05 Aug 2026 17:09:51 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/astdelux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / Atari&lt;/p&gt;&lt;p&gt;Core: Asteroids&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Asteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Asteroids Deluxe (v3 orange) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#asteroids-deluxe-v3-orange</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Asteroids Deluxe (v3 orange).mra:2026-08-05T17:09:51+00:00</guid>
-<pubDate>Wed, 05 Aug 2026 17:09:51 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/astdelux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / Atari&lt;/p&gt;&lt;p&gt;Core: Asteroids&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Asteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] PC/XT (EGA) (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#PCXT-EGA</link>
-<guid isPermaLink="false">distribution_mister:_Computer/PCXT-EGA_20260804.rbf:2026-08-05T06:13:37+00:00</guid>
-<pubDate>Wed, 05 Aug 2026 06:13:37 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1984 / IBM&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PCXT-EGA_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

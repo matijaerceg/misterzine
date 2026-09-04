@@ -370,11 +370,11 @@
      covers that row's title outright). Down at the bottom it clears .totop's
      corner too, and --sbh (measured by syncScrollHints) keeps it off the
      horizontal scrollbar. */
-  .totop, .tovisit, .newspill { position: absolute; z-index: 17;
+  .totop, .tovisit, .torow, .newspill { position: absolute; z-index: 17;
     font: inherit; font-size: .8rem;
     border: 1px solid var(--hair); border-radius: 999px;
     background: color-mix(in srgb, var(--fg) 7%, var(--surface)); color: inherit; box-shadow: 0 2px 8px #0003; }
-  .totop:hover, .tovisit:hover, .newspill:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
+  .totop:hover, .tovisit:hover, .torow:hover, .newspill:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
   .totop { top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem; cursor: pointer;
     padding: .45rem .85rem;
     opacity: 0; pointer-events: none; transition: opacity .15s; }
@@ -389,6 +389,14 @@
     opacity: 0; pointer-events: none; transition: opacity .15s, top .15s; }
   .tablezone.scrolled .tovisit { top: calc(var(--theadh, 2.2rem) + 3.2rem); }
   .tablezone.visit-off .tovisit { opacity: 1; pointer-events: auto; }
+  /* "Selected" jump: third in the stack, shown while the open (highlighted)
+     row is off screen. Its slot is however many of the two above are showing. */
+  .torow { top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem; cursor: pointer;
+    padding: .45rem .85rem;
+    opacity: 0; pointer-events: none; transition: opacity .15s, top .15s; }
+  .tablezone.scrolled .torow, .tablezone.visit-off .torow { top: calc(var(--theadh, 2.2rem) + 3.2rem); }
+  .tablezone.scrolled.visit-off .torow { top: calc(var(--theadh, 2.2rem) + 5.8rem); }
+  .tablezone.row-off .torow { opacity: 1; pointer-events: auto; }
   .newspill { bottom: calc(var(--sbh, 0px) + .8rem); left: 50%; transform: translateX(-50%);
     display: none; align-items: center; gap: .35rem; max-width: calc(100% - 2rem);
     padding: .35rem .45rem .35rem .85rem; }
@@ -1065,6 +1073,7 @@
 <div class="tablezone">
 <button id="totop" class="totop" type="button">↑ Scroll to top</button>
 <button id="tovisit" class="tovisit" type="button">↓ Last visit</button>
+<button id="torow" class="torow" type="button">↓ Selected</button>
 <div id="newspill" class="newspill"><span class="txt"></span><button type="button" class="x" title="Dismiss">x</button></div>
 <div class="tablewrap">
 <table>
@@ -1834,6 +1843,7 @@ function syncScrollHints() {
   z.classList.toggle('more-r', w.scrollLeft + w.clientWidth < w.scrollWidth - 1);
   z.classList.toggle('scrolled', w.scrollTop > 30);  // ~a row down reveals "Scroll to top"
   syncVisitBtn(w, z);
+  syncRowBtn(w, z);
   // taper both hints near their end of the scroll range: each one's width
   // tracks the distance to its edge (full width until the last ~6% / 48px
   // minimum, then shrinking to 0), so they grow/shrink with scroll position
@@ -1905,6 +1915,25 @@ function syncVisitBtn(w, z) {
   z.classList.toggle('visit-off', off);
   if (off) btn.textContent = (above ? '↑' : '↓') + ' Last visit';
 }
+// Same idea for the selected (open) row: offered while its highlighted <tr> is
+// off screen. A row that was filtered out of the view has no <tr>, so no button.
+function syncRowBtn(w, z) {
+  const btn = document.getElementById('torow');
+  const row = document.querySelector('#rows tr.open');
+  let off = false, above = false;
+  if (row) {
+    const r = row.getBoundingClientRect(), v = w.getBoundingClientRect();
+    const top = v.top + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
+    above = r.bottom <= top;
+    off = above || r.top >= v.bottom;
+  }
+  z.classList.toggle('row-off', off);
+  if (off) btn.textContent = (above ? '↑' : '↓') + ' Selected';
+}
+document.getElementById('torow').addEventListener('click', () => {
+  const tr = document.querySelector('#rows tr.open');
+  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
+});
 document.getElementById('tovisit').addEventListener('click', () => {
   const w = document.querySelector('.tablewrap');
   const row = document.querySelector('#rows tr.newsplit:not(:first-child)');
@@ -3325,9 +3354,11 @@ window.addEventListener('popstate', e => {
 
 function markOpenRow() {
   document.querySelectorAll('#rows tr.open').forEach(tr => tr.classList.remove('open'));
+  syncScrollHints();  // retire the "Selected" jump button with the highlight
   if (openRow == null) return;
   const i = view.findIndex(d => d === openRow);
   if (i >= 0) { const tr = document.querySelector('#rows tr[data-i="' + i + '"]'); if (tr) tr.classList.add('open'); }
+  syncScrollHints();  // the "Selected" jump button follows the highlight, not the scroll
 }
 
 // debossed logo watermark for the empty panel (filter = inner top shadow + bottom sheen)

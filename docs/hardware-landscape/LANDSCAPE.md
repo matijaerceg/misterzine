@@ -520,6 +520,15 @@ Field conventions (parts and options both):
   2026-07-17: audio over the Saturn AV port, 3.5mm jack switchable to
   SPDIF) - the Armor bundle sheet used to claim a dongle was needed
   for a headphone jack.
+- **hamgeek-mister toslink promoted to plain `provides` (2026-09-03)**:
+  hedged since the clone sweep because one owner had attested it. The
+  Lon.TV review (Apr 2026, already a cited source) states "analog/optical
+  audio outputs via a combined 3.5mm jack" outright and a second owner
+  confirmed it on Discord (relayed by site owner). No dispute exists, so
+  per the granting policy the hedge no longer applies. Notes and advice
+  now carry the practical catch: it is mini-TOSLINK, so a full-size
+  optical cable does not fit. Vendor page (hgeek.com) still lists no
+  audio spec at all - the grant rests on reviewer + owner reports.
 
 ## Known modeling limitation (schema v1)
 

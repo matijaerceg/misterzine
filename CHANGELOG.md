@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-09-03
+- Hardware guide: the Hamgeek MiSTer now lists optical audio as confirmed rather than unverified (Lon.TV review plus two owner reports). Its entry also says the jack is mini-TOSLINK, so a full-size optical cable needs an adapter.
 - Release tracker: the Meathax database is now tracked for its arcade cores only. Meathax has started shipping "MiSTer Frontier" hybrid cores (NBlood first): a stub core file that hands off to a Linux program running on the MiSTer's ARM side. Those are software ports, not FPGA cores, so they are not listed and do not appear in the feeds.
 
 ## 2026-09-02

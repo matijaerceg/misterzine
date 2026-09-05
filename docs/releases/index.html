@@ -1681,6 +1681,10 @@ const COLUMNS = [
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
   { k: 'core', label: 'FPGA Core', sl: 'Core', w: 12, mw: 6,
     cell: d => '<td class="core"' + (d.core ? ' title="' + escA(d.core) + '"' : '') + '>' + coreCell(d) + '</td>' },
+  // the same fact the Source filter narrows on, for visitors who want it on
+  // every row; sorts by display name (see keyOf), not the raw pipeline id
+  { k: 'src', label: 'Source', w: 12, mw: 6.5, opt: true,
+    cell: d => '<td class="src">' + esc(d.src ? SRC_NAMES[d.src] || d.src : '') + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
   { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date"><span class="dv">' + esc(d.updated || '') + '</span>' + batchBadge(d) + '</td>' },
   { k: 'date', label: 'MiSTer Debut', sl: 'Debut', w: 10, mw: 5.5,
@@ -1694,10 +1698,6 @@ const COLUMNS = [
   { k: 'ctl',  label: 'Controls',   w: 13, mw: 5, opt: true },
   { k: 'spc',  label: 'Special Controls', sl: 'Special', w: 10, mw: 5, opt: true },
   { k: 'flip', label: 'Flip', w: 6, mw: 5, opt: true },
-  // the same fact the Source filter narrows on, for visitors who want it on
-  // every row; sorts by display name (see keyOf), not the raw pipeline id
-  { k: 'src', label: 'Source', w: 12, mw: 6.5, opt: true,
-    cell: d => '<td class="src">' + esc(d.src ? SRC_NAMES[d.src] || d.src : '') + '</td>' },
 ];
 // Header tooltips (title attributes on the <th>s, rendered by buildHeader).
 // Kept out of COLUMNS so the config rows above stay scannable. Touch devices

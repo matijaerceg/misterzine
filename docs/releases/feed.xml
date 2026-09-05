@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 05 Sep 2026 00:39:06 +0000</lastBuildDate>
+<lastBuildDate>Sat, 05 Sep 2026 03:55:03 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-MCR68 (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#archrivl</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-MCR68_20260905.rbf:2026-09-05T03:55:03+00:00</guid>
+<pubDate>Sat, 05 Sep 2026 03:55:03 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Arch Rivals, Blasted, Pigskin 621AD, Xenophobe.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-05 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Marble Madness II (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#marblmd2</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/nibbler.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Rock-Ola&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Pioneer Balloon (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pballoon</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Pioneer Balloon.mra:2026-08-30T22:07:30+00:00</guid>
-<pubDate>Sun, 30 Aug 2026 22:07:30 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pballoon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / SNK&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

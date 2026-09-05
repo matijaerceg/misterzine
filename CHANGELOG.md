@@ -3,6 +3,7 @@
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
 ## 2026-09-04
+- Release tracker: the three cores that landed today (Tiger's Game.com, the Timetop GameKing and Sony's PocketStation) now have hardware photos in their detail panels, and their Original Year and Manufacturer columns are filled in. The Game.com row is titled the way the machine is spelled rather than by its core file name.
 - Release tracker: the "new since your last visit" line is now a timeline marker that names the moment ("your last visit, 2 days ago"), with everything above it newer. When nothing is new, the same marker sits at the top of the table and says so, so there is no need to scroll down to find out.
 - Release tracker: a new optional Source column (off by default, enable it under Columns) shows which downloader database ships each entry, the same fact the Source filter narrows on. It sorts by name.
 - Release tracker: "Scroll to top" is now a stack of three buttons that are always on screen: "Scroll to top", "Last visit" (jumps to the last-visit marker) and "Selected" (brings the highlighted row back to the middle of the view). Each one is grayed out while it has nowhere to go, and the arrow on the lower two says which way the target lies.

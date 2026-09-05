@@ -347,7 +347,11 @@ def _retitle_key(title):
 # --- fetch + normalize ----------------------------------------------------
 
 def fetch_db(source):
-    """Download a db.json.zip, return (timestamp, {path: {hash,size}}, [beta_paths]).
+    """Download a db.json.zip, return (ts, {path: {hash,size}}, [beta_paths], tag_seen).
+
+    tag_seen says whether the db declared a 'jtbeta' tag id at all — the
+    difference between "Jotego freed everything" and "the tag key moved and we
+    are about to mass-graduate 20 rows by accident" (see cmd_snapshot's guard).
 
     Jotego marks Patreon-only cores with the 'jtbeta' tag in the db's
     tag_dictionary: the MRA ships in the public db but the core requires the
@@ -371,7 +375,7 @@ def fetch_db(source):
         files[path] = {"hash": meta.get("hash"), "size": meta.get("size")}
     if beta_paths:
         log(f"    {len(beta_paths)} jtbeta (Patreon-gated) files flagged")
-    return d.get("timestamp"), files, beta_paths
+    return d.get("timestamp"), files, beta_paths, beta_tag is not None
 
 
 def latest_snapshot(source_id):
@@ -411,7 +415,7 @@ def cmd_snapshot(args):
     con = connect()
     total_events = 0
     for source in SOURCES:
-        ts, files, beta_paths = fetch_db(source)
+        ts, files, beta_paths, beta_tag_seen = fetch_db(source)
         files = tracked_files(source["id"], files)
         swept = purge_untracked(con, source["id"])
         if swept:
@@ -432,6 +436,27 @@ def cmd_snapshot(args):
         beta_set = set(beta_paths)
         prev_beta = {r["path"] for r in con.execute(
             "SELECT path FROM catalog WHERE source_id=? AND beta=1", (source["id"],))}
+        # Tripwire: the flag is derived from a single dictionary lookup
+        # (tag_dictionary['jtbeta']), so if Jotego ever renames or restructures
+        # that key the lookup quietly yields nothing, EVERY badged row
+        # "graduates" in one crawl, and the feeds announce a wave of releases
+        # that never happened. A genuine mass-graduation is possible but has
+        # never occurred (they trickle out one core at a time), so treat a
+        # total collapse as a schema change and stop rather than publish it.
+        # Clearing it is deliberate: confirm against the live db, then either
+        # fix the tag lookup or, if Jotego really did free them all, run the
+        # snapshot once with MZ_ALLOW_BETA_COLLAPSE=1.
+        if prev_beta and not beta_set and not os.environ.get("MZ_ALLOW_BETA_COLLAPSE"):
+            raise SystemExit(
+                f"JTBETA TAG COLLAPSE ({source['id']}): {len(prev_beta)} rows were "
+                "Patreon-beta last crawl, none are now. "
+                + ("The db no longer declares a 'jtbeta' tag id, so the tag was "
+                   "renamed or moved; fix fetch_db"
+                   if not beta_tag_seen else
+                   "The tag id still exists but no file carries it")
+                + ". Refusing to mass-graduate them (it would announce "
+                  f"{len(prev_beta & set(files))} false 'new' releases in the feeds). "
+                  "Set MZ_ALLOW_BETA_COLLAPSE=1 if this is real.")
         graduated = (prev_beta & set(files)) - beta_set
         for path in prev_beta - set(files):
             con.execute("DELETE FROM catalog WHERE source_id=? AND path=?",

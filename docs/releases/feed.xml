@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 04 Sep 2026 18:19:00 +0000</lastBuildDate>
+<lastBuildDate>Sat, 05 Sep 2026 00:39:06 +0000</lastBuildDate>
+<item>
+<title>[Updated] Marble Madness II (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#marblmd2</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Marble Madness II (prototype).mra:2026-09-05T00:39:06+00:00</guid>
+<pubDate>Sat, 05 Sep 2026 00:39:06 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/marblmd2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1991 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Arcade-MarbleMadness2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MarbleMadness2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] GameCom (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#GameCom</link>
+<guid isPermaLink="false">distribution_mister:_Console/GameCom_20260903.rbf:2026-09-05T00:39:06+00:00</guid>
+<pubDate>Sat, 05 Sep 2026 00:39:06 +0000</pubDate>
+<category>new</category>
+<category>Console core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/GameCom_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] GameKing (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#GameKing</link>
+<guid isPermaLink="false">distribution_mister:_Console/GameKing_20260903.rbf:2026-09-05T00:39:06+00:00</guid>
+<pubDate>Sat, 05 Sep 2026 00:39:06 +0000</pubDate>
+<category>new</category>
+<category>Console core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/GameKing_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] PocketStation (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PocketStation</link>
+<guid isPermaLink="false">distribution_mister:_Console/PocketStation_20260903.rbf:2026-09-05T00:39:06+00:00</guid>
+<pubDate>Sat, 05 Sep 2026 00:39:06 +0000</pubDate>
+<category>new</category>
+<category>Console core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PocketStation_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Macintosh LC (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#MacLC</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pballoon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / SNK&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Qix (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#qix</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Qix (set 1).mra:2026-08-30T22:07:30+00:00</guid>
-<pubDate>Sun, 30 Aug 2026 22:07:30 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/qix.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1981 / Taito America Corporation&lt;/p&gt;&lt;p&gt;Core: Qix&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Qix II (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#qix2</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Qix II (Tournament).mra:2026-08-30T22:07:30+00:00</guid>
-<pubDate>Sun, 30 Aug 2026 22:07:30 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/qix2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1981 / Taito America Corporation&lt;/p&gt;&lt;p&gt;Core: Qix&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sasuke vs. Commander (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sasuke</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Sasuke.mra:2026-08-30T22:07:30+00:00</guid>
-<pubDate>Sun, 30 Aug 2026 22:07:30 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sasuke.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / SNK&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Satan of Saturn (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#satansat</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Satan Of Saturn.mra:2026-08-30T22:07:30+00:00</guid>
-<pubDate>Sun, 30 Aug 2026 22:07:30 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/satansat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1980 / SNK&lt;/p&gt;&lt;p&gt;Core: SNK6502&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-08-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

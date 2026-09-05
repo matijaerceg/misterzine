@@ -2149,6 +2149,9 @@ CONSOLE_MANUFACTURER = {
     "AY-3-8500": "General Instrument",
     "MyVision": "Nichibutsu",
     "BBCBridgeCompanion": "BBC Enterprises",
+    "GameCom": "Tiger Electronics",
+    "GameKing": "Timetop",  # designer/brand; built by Guangzhou Panyu Gaoming Electronics
+    "PocketStation": "Sony",
 }
 
 # Hardware maker per computer core (keyed by core_name); same rationale as above.
@@ -2205,6 +2208,9 @@ CORE_YEAR = {
     "WonderSwan": "1999", "Super_Vision_8000": "1979", "SuperVision": "1992", "SCV": "1984",
     "CreatiVision": "1982", "Casio_PV-1000": "1983", "VC4000": "1978", "AdventureVision": "1982",
     "Gamate": "1990", "AY-3-8500": "1976", "MyVision": "1983", "BBCBridgeCompanion": "1985",
+    "GameCom": "1997",  # Tiger game.com, US launch 1997-09-12
+    "GameKing": "2004",  # GameKing I (GM-218) shipped Sep 2004; Timetop designed it in 2003
+    "PocketStation": "1999",  # Japan-only, 1999-01-23
     # computers
     "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
     "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-IIgs": "1986",
@@ -2252,6 +2258,7 @@ SYSTEM_TITLES = {
     "BBCBridgeCompanion": "BBC Bridge Companion",
     "Casio_PV-1000": "PV-1000",
     "CDi": "CD-i",
+    "GameCom": "Game.com",
     "ChannelF": "Channel F",
     "GameAndWatch": "Game & Watch (agg23)",
     "GnW": "Game & Watch (GnW)",

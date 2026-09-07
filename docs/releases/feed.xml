@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Mon, 07 Sep 2026 11:03:04 +0000</lastBuildDate>
+<lastBuildDate>Mon, 07 Sep 2026 17:38:08 +0000</lastBuildDate>
+<item>
+<title>[Updated] Moon Patrol (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mpatrol</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/MoonPatrol_20260828.rbf:2026-09-07T17:38:08+00:00</guid>
+<pubDate>Mon, 07 Sep 2026 17:38:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mpatrol.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Irem&lt;/p&gt;&lt;p&gt;Core: moonpatrol&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MoonPatrol_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Amiga (Minimig) (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Minimig</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Minimig_20260907.rbf:2026-09-07T17:38:08+00:00</guid>
+<pubDate>Mon, 07 Sep 2026 17:38:08 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1985 / Commodore&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Minimig-AGA_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/trojan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Vendetta (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vendetta</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Vendetta (World, 4 Players, ver. T).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vendetta.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtsimson&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/simson"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] X-Men (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#xmen</link>
-<guid isPermaLink="false">jtbindb:_Arcade/X-Men (4 Players ver EBA).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/xmen.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1992 / Konami&lt;/p&gt;&lt;p&gt;Core: jtxmen&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/xmen"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

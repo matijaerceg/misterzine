@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 07 Sep 2026 11:03:04 +0000</lastBuildDate>
+<lastBuildDate>Mon, 07 Sep 2026 17:38:08 +0000</lastBuildDate>
+<item>
+<title>[Updated] Moon Patrol (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mpatrol</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/MoonPatrol_20260828.rbf:2026-09-07T17:38:08+00:00</guid>
+<pubDate>Mon, 07 Sep 2026 17:38:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mpatrol.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Irem&lt;/p&gt;&lt;p&gt;Core: moonpatrol&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MoonPatrol_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Amiga (Minimig) (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Minimig</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Minimig_20260907.rbf:2026-09-07T17:38:08+00:00</guid>
+<pubDate>Mon, 07 Sep 2026 17:38:08 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1985 / Commodore&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Minimig-AGA_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/robocop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SDI - Strategic Defense Initiative (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sdi</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_SDI/SDI - Strategic Defense Initiative (System 16B, FD1089A 317-0028).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sdi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Tetris (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#atetris</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Tetris/Tetris (Set 3, Japan, S16A) [FD1094 317-0093a].mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/atetris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Atari&lt;/p&gt;&lt;p&gt;Core: ataritetris&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ATetris_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sat, 05 Sep 2026 23:35:49 +0000</lastBuildDate>
+<lastBuildDate>Sun, 06 Sep 2026 18:54:05 +0000</lastBuildDate>
+<item>
+<title>[New] Metamorphic Force (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#metamrph</link>
+<guid isPermaLink="false">coinop:_Arcade/Metamorphic Force (World, EAA).mra:2026-09-06T18:54:05+00:00</guid>
+<pubDate>Sun, 06 Sep 2026 18:54:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metamrph.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: metamrph_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-06 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Mystic Warriors (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mystwarr</link>
+<guid isPermaLink="false">coinop:_Arcade/Mystic Warriors (World, EAA).mra:2026-09-06T18:54:05+00:00</guid>
+<pubDate>Sun, 06 Sep 2026 18:54:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mystwarr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: mystwarr_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-06 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Battle K-Road (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#btlkroad</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tmnt2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtriders&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/riders"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Thunder Cross II (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#thndrx2</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Thunder Cross II (World).mra:2026-08-09T20:24:39+00:00</guid>
-<pubDate>Sun, 09 Aug 2026 20:24:39 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thndrx2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jttmnt&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/tmnt"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Out Run (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#outrun</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Out Run/Out Run (sitdown-upright, Rev B) (added music).mra:2026-08-09T20:24:39+00:00</guid>
-<pubDate>Sun, 09 Aug 2026 20:24:39 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/outrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jtoutrun&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-09 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/outrun"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -1917,19 +1917,35 @@ document.getElementById('torow').addEventListener('click', () => {
   const tr = document.querySelector('#rows tr.open');
   if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
 });
-document.getElementById('tovisit').addEventListener('click', () => {
+// park a row about 40% down the scrollport, so what sits above and below it are
+// both on screen
+function parkRow(row) {
   const w = document.querySelector('.tablewrap');
-  const row = document.querySelector('#rows tr.newsplit:not(:first-child)');
-  if (!row) return;
-  // park the divider about 40% down the scrollport, so the last few new rows
-  // above it and the first old rows below it are both on screen
   const thead = parseFloat(getComputedStyle(document.querySelector('.tablezone')).getPropertyValue('--theadh')) || 0;
   const y = row.getBoundingClientRect().top - w.getBoundingClientRect().top + w.scrollTop - thead - w.clientHeight * .4;
   w.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+}
+document.getElementById('tovisit').addEventListener('click', () => {
+  const row = document.querySelector('#rows tr.newsplit:not(:first-child)');
+  if (row) parkRow(row);  // the last few new rows above the line and the first old ones below it
 });
 
-// shared by the Scroll-to-top button and the "new data landed" notice, whose
-// news sits at the top of the list under the default sort
+// The notice pill's action. It used to scroll to the top of the table on the
+// assumption that its news was up there; Last Updated is day-granular, so a row
+// that arrives carrying an earlier date lands wherever that date already sits,
+// which has measured as far down as row 452. Jump to the topmost row this swap
+// actually changed instead, falling back to the top only when a filter or the
+// search box is hiding every one of them.
+function jumpToNews(keys) {
+  const want = new Set(keys);
+  for (const tr of document.querySelectorAll('#rows tr[data-i]')) {
+    const d = view[+tr.dataset.i];
+    if (d && want.has(d.k)) return parkRow(tr);
+  }
+  scrollTableTop();
+}
+
+// the Scroll-to-top button, and where jumpToNews lands when its rows are filtered out
 function scrollTableTop() {
   document.querySelector('.tablewrap').scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2075,12 +2091,24 @@ function apply() {
       // it; numeric:true gives natural ordering for any number runs in titles.
       const cmp = sortDir * av.localeCompare(bv, undefined, { numeric: true, sensitivity: 'base' });
       if (cmp) return cmp;
+      // Inside one date, newest arrival first. `b` is the refresh run that first
+      // shipped this row's Last Updated value (see _assign_update_batches): the
+      // tracker checks four times a day but the stamp only carries a day, so
+      // without this a row found at 18:30 slots alphabetically into rows that
+      // have been showing that date since 06:30 — landing below rows the visitor
+      // already read. Rows from one run share a number and stay a block, so the
+      // core grouping below still runs inside it.
+      if (sortKey === 'updated') {
+        const ab = a.b || 0, bb = b.b || 0;
+        if (ab !== bb) return bb - ab;
+      }
       // One repo push stamps every row of a shared arcade core with the same Last
       // Updated date. When sorting by that column, keep those rows together by
       // grouping equal dates by core first, so a wave of same-dated rows reads as
       // per-core batches instead of one alphabetised wall. Not multiplied by
-      // sortDir (like the title tiebreak below): flipping asc/desc reorders the
-      // dates only, leaving each date's block in a stable core-then-title order.
+      // sortDir (like the batch stage above and the title tiebreak below):
+      // flipping asc/desc reorders the dates only, leaving each date's block in a
+      // stable arrival-then-core-then-title order.
       if (sortKey === 'updated') {
         const cc = coreLabel(a.core).localeCompare(coreLabel(b.core), undefined, { numeric: true, sensitivity: 'base' });
         if (cc) return cc;
@@ -4147,27 +4175,27 @@ function check() {
 }
 window.mzCheck = check;  // hook for testing a swap without waiting for a publish
 
-// What just landed, phrased for the pill, or '' if there's nothing a visitor
-// would care about. Compares against the rows on screen (KEY2ROW) — this
+// What just landed: { text } for the pill and { keys } for its jump, or null if
+// there's nothing a visitor would care about. Compares against the rows on screen (KEY2ROW) — this
 // answers "what changed just now", where the divider answers "what's new since
 // you last looked".
 function diffNews(d) {
-  const fresh = [], built = [];
+  const fresh = [], built = [], keys = [];
   for (const r of d) {
     if (!r.k) continue;
     const old = KEY2ROW[r.k];
-    if (!old) fresh.push(r.title);
-    else if ((old.updated || '') !== (r.updated || '')) built.push(r.title);
+    if (!old) { fresh.push(r.title); keys.push(r.k); }
+    else if ((old.updated || '') !== (r.updated || '')) { built.push(r.title); keys.push(r.k); }
   }
-  if (!fresh.length && !built.length) return '';
+  if (!fresh.length && !built.length) return null;
   // both kinds at once: counts only. Naming two sets in one pill is a mouthful,
   // and the divider is about to show exactly which rows they are.
-  if (fresh.length && built.length) return fresh.length + ' new, ' + built.length + ' updated';
+  if (fresh.length && built.length) return { text: fresh.length + ' new, ' + built.length + ' updated', keys };
   const names = fresh.length ? fresh : built;
   const noun = fresh.length ? ' new: ' : ' updated: ';
   // a Jotego wave rebuilds dozens of cores at once, so the tail is always capped
   const rest = names.length - Math.min(names.length, 3);
-  return names.length + noun + names.slice(0, 3).join(', ') + (rest ? ' +' + rest + ' more' : '');
+  return { text: names.length + noun + names.slice(0, 3).join(', ') + (rest ? ' +' + rest + ' more' : ''), keys };
 }
 
 // Keep the visitor's place when rows appear above them. At the very top we
@@ -4206,7 +4234,7 @@ function swapIn(d, m) {
     // Noise filter: the hash also moves for things the table doesn't show (a
     // fresh commit stamp behind the panel's "Latest commit", say). Those swap in
     // silently — a pill that cries about nothing teaches people to ignore it.
-    if (news) showPill(news, scrollTableTop);
+    if (news) showPill(news.text, () => jumpToNews(news.keys));
   } catch (e) {
     // this page's JS meeting a data shape it doesn't know (the site itself was
     // redeployed under the tab). Don't limp on half-swapped state: put the rows

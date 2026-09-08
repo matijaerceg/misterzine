@@ -233,6 +233,9 @@ CREATE TABLE IF NOT EXISTS row_keys (
     source_id TEXT, path TEXT, k TEXT UNIQUE, assigned_at TEXT,
     PRIMARY KEY (source_id, path)
 );
+CREATE TABLE IF NOT EXISTS row_batches (
+    k TEXT PRIMARY KEY, updated TEXT, batch INTEGER, stamped_at TEXT
+);
 CREATE INDEX IF NOT EXISTS idx_events_ts ON events(ts);
 CREATE INDEX IF NOT EXISTS idx_catalog_title ON catalog(title);
 """
@@ -3228,6 +3231,7 @@ def cmd_export_web(args):
     pending_keys = _assign_row_keys(data, outdir)  # 'k': the per-row deep-link fragment (#<k>)
     _check_key_stability(outdir / "data.json", data)  # hard gate: keys never move
     _flush_row_keys(pending_keys)
+    _assign_update_batches(data)  # 'b': which refresh first shipped this row's Last Updated
     (outdir / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     # NOTE: outdir/index.html is a hand-maintained static page and the single
     # source of truth. export-web deliberately does NOT regenerate it — it used
@@ -3392,6 +3396,68 @@ def _flush_row_keys(pending):
     con.commit()
     con.close()
     log(f"  row_keys: {done} recorded")
+
+
+def _assign_update_batches(data):
+    """Stamp every row with the publish run its CURRENT Last Updated value first
+    went live ('b'), so the site can order one date's block by arrival instead
+    of alphabetically.
+
+    Why: the tracker refreshes 4x a day but `updated` is day-granular, so a row
+    found in the afternoon used to slot alphabetically into rows that had been
+    showing that date since the morning. Measured over the 21 days to
+    2026-09-08: of 885 rows arriving in a later same-day run, 626 (71%) landed
+    BELOW rows already on screen, a median of 5 and up to 205 rows deep. The
+    batch number is minted per export run, so every row of one run ties exactly
+    and later runs sort strictly above earlier ones inside the same date.
+
+    Assigned once and never revised: a row keeps its number until `updated`
+    itself moves, so a block's order is permanent — the same property the core
+    tiebreak was written to protect. Deliberately per ROW, not per core cluster:
+    sharing one number across a core's same-day rows would let one late arrival
+    drag rows the visitor already read back up the table, and would mean a row's
+    position could change without the row changing.
+
+    Persisted in row_batches keyed on `k`, the one identity the pipeline
+    guarantees stable (_check_key_stability is its hard CI gate) — dated rbf
+    paths churn on every rebuild, so (source_id, path) would not do. The sqlite
+    is committed by CI, which is the whole persistence mechanism. On an empty
+    table every row is new and ties at batch 1, so the first export after this
+    lands renders in exactly today's order; real ordering starts with the next
+    run that moves any row's `updated`. Fail-soft: a DB write that goes wrong
+    logs and leaves the value in this export's data.json (it re-derives next
+    run), it never takes down the publish."""
+    con = connect()
+    stored = {r["k"]: (r["updated"], r["batch"]) for r in
+              con.execute("SELECT k, updated, batch FROM row_batches")}
+    nxt = max((b for _, b in stored.values()), default=0) + 1
+    pending = []
+    for d in data:
+        k = d.get("k")
+        if not k:
+            continue
+        upd = d.get("updated") or ""
+        prev = stored.get(k)
+        if prev and prev[0] == upd:
+            d["b"] = prev[1]
+            continue
+        d["b"] = nxt
+        pending.append((k, upd, nxt))
+    if not pending:
+        con.close()
+        return
+    ts = now_iso()
+    done = 0
+    for k, upd, b in pending:
+        try:
+            con.execute("INSERT OR REPLACE INTO row_batches(k, updated, batch, stamped_at) "
+                        "VALUES(?,?,?,?)", (k, upd, b, ts))
+            done += 1
+        except sqlite3.Error as e:
+            log(f"  WARNING: row_batches write failed for {k!r}: {e}")
+    con.commit()
+    con.close()
+    log(f"  update batches: {done} rows entered batch {nxt}")
 
 
 def _check_key_stability(prev_path, data):

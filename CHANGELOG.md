@@ -4,6 +4,8 @@ User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/re
 
 ## 2026-09-08
 
+- Release tracker: rows found later in the day now sit at the top of their Last Updated date instead of being filed alphabetically among the rows that have been showing that date since morning. The list is checked four times a day but the date only carries a day, so an afternoon arrival used to land in the middle of the morning's rows, below entries you had already read. Same-core rows still group together inside each arrival.
+- Release tracker: the "new data landed" notice now jumps to the row that actually arrived, wherever it sits, instead of scrolling to the top of the table.
 - Release tracker: now runs on the MiSTer itself. A Scripts-menu app for 240p CRTs (horizontal and tate) shows the same rows in the same order, marks what is on your card and whether it is the current build, and launches the game. One database line in downloader.ini installs it: https://github.com/matijaerceg/misterzine-on-device
 
 ## 2026-09-04

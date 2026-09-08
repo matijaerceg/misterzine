@@ -173,6 +173,11 @@ header's "RSS" link; items deep-link to the entry on the site):
   delivers (filename suffix for cores, the referenced core `.rbf`'s date for arcade
   rows). It is deliberately *not* the repo's latest commit, which often lands before or
   without a shipped build; that shows separately in the panel as "Latest commit".
+- A Last Updated stamp carries a **day, not a clock**, but the site refreshes four times
+  a day. So inside one date, rows are ordered by the refresh that first shipped them
+  (`b`, the batch counter): what arrived at 18:12 sits above what has been showing since
+  06:12, rather than slotting alphabetically into it. Assigned once per row and never
+  revised, so a date's order is settled the moment it is published.
 
 ## How it stays fresh
 
@@ -344,6 +349,8 @@ run on Actions); the native-res progettoSNAPS pass stays a manual local step.
 - `core_files`: dated shipped files per core, harvested at snapshot (feeds the site's
   Last Updated column).
 - `events`: dated change log (the going-forward feed; feeds the RSS).
+- `row_batches`: per deep-link key, which refresh run first shipped that row's current
+  Last Updated value (the site's within-date arrival order).
 
 ## Layout
 

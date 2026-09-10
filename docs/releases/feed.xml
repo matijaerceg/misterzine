@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 10 Sep 2026 05:38:18 +0000</lastBuildDate>
+<lastBuildDate>Thu, 10 Sep 2026 10:04:32 +0000</lastBuildDate>
+<item>
+<title>[Updated] Kick and Run (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#kicknrun</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Kick And Run.mra:2026-09-10T10:04:32+00:00</guid>
+<pubDate>Thu, 10 Sep 2026 10:04:32 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kicknrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Taito&lt;/p&gt;&lt;p&gt;Core: KickAndRun&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-KickAndRun_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Son Son (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#sonson</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hippodrm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kicker (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kicker</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Kicker.mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kicker.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1985 / Konami&lt;/p&gt;&lt;p&gt;Core: jtkicker&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kicker"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

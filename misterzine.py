@@ -1923,11 +1923,12 @@ def parse_mad(text):
             e["res"] = res
         if val("players"):
             e["plr"] = val("players")
-        # combined controls: move inputs + button count ('8-way · 3 buttons');
-        # 0 buttons just means no fire button — showing the stick alone reads best
+        # Preserve an explicit zero separately from a missing count. The numeric
+        # field is for filtering; ctl remains readable by existing clients.
         move, btn = val("move_inputs"), val("num_buttons")
         ctl = [move] if move else []
-        if btn and btn != "0":
+        if btn.isdigit():
+            e["buttons"] = int(btn)
             ctl.append(btn + (" button" if btn == "1" else " buttons"))
         if ctl:
             e["ctl"] = " · ".join(ctl)
@@ -2032,8 +2033,9 @@ def parse_specs(text):
                 e["spc"] = _SPECS_SPECIAL[control]
             bt = re.search(r'buttons="(\d+)"', ia)
             ctl = [move] if move else []
-            if bt and bt.group(1) != "0":
+            if bt:
                 n = bt.group(1)
+                e["buttons"] = int(n)
                 ctl.append(n + (" button" if n == "1" else " buttons"))
             if ctl:
                 e["ctl"] = " · ".join(ctl)
@@ -2055,10 +2057,10 @@ def local_specs():
 # the comment; still provisional (gray, MAD-wins), so they self-heal like the
 # rest. Issue #8.
 SPECS_CORRECTIONS = {
-    "godzilla": {"plr": "2 (simultaneous)", "ctl": "8-way · 3 buttons"},  # legionna.cpp: 2P, B1-B3
-    "nibbler":  {"ctl": "4-way"},             # snk6502.cpp: PORT_4WAY, no buttons
-    "sasuke":   {"ctl": "2-way · 1 button"},   # snk6502.cpp: PORT_MODIFY drops B2
-    "satansat": {"ctl": "2-way · 2 buttons"},  # snk6502.cpp: PORT_2WAY + B1/B2
+    "godzilla": {"plr": "2 (simultaneous)", "ctl": "8-way · 3 buttons", "buttons": 3},  # legionna.cpp: 2P, B1-B3
+    "nibbler":  {"ctl": "4-way · 0 buttons", "buttons": 0},  # snk6502.cpp: PORT_4WAY, no buttons
+    "sasuke":   {"ctl": "2-way · 1 button", "buttons": 1},   # snk6502.cpp: PORT_MODIFY drops B2
+    "satansat": {"ctl": "2-way · 2 buttons", "buttons": 2},  # snk6502.cpp: PORT_2WAY + B1/B2
 }
 
 
@@ -2486,7 +2488,7 @@ ARCADE_SPECS_BY_SETNAME = {
     "fantasyu": {"rot": "Vertical", "plr": "2", "ctl": "8-way"},  # = old 'fantasy' mame2003 entry
 }
 ARCADE_SPECS_BY_NAME = {
-    "Computer Space": {"rot": "Horizontal", "plr": "1", "ctl": "4 buttons"},  # rotate x2/thrust/fire
+    "Computer Space": {"rot": "Horizontal", "plr": "1", "ctl": "buttons only · 4 buttons", "buttons": 4},  # rotate x2/thrust/fire
     # per its own attract screen: joy1 moves, joy2-right jumps (Pac-Man cocktail panel)
     "Pac-Manic Miner": {"rot": "Vertical", "plr": "1", "ctl": "Double 4-way"},
 }
@@ -2955,6 +2957,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
                 if not row.get(k) and sp.get(k)]
         for k in prov:
             row[k] = sp[k]
+        # Zero is a supplied value. Never replace a curated zero with a MAME
+        # count, or infer zero from an older cached description that omitted it.
+        if "buttons" not in row and "buttons" in sp:
+            row["buttons"] = sp["buttons"]
+            prov.append("buttons")
         if prov:
             row["prov"] = prov
         # hardware-verified boot orientation where the core boots the opposite

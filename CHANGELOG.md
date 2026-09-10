@@ -2,6 +2,11 @@
 
 User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
 
+## 2026-09-10
+
+- Arcade controls preserve explicit zero-button counts separately from missing
+  information, including in the shared feed used by the on-device browser.
+
 ## 2026-09-08
 
 - Release tracker: rows found later in the day now sit at the top of their Last Updated date instead of being filed alphabetically among the rows that have been showing that date since morning. The list is checked four times a day but the date only carries a day, so an afternoon arrival used to land in the middle of the morning's rows, below entries you had already read. Same-core rows still group together inside each arrival.

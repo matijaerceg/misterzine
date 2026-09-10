@@ -380,6 +380,16 @@ docs/                    # the site, served by GitHub Pages from main /docs
 CHANGELOG.md             # user-visible site changes
 ```
 
+## Release feed
+
+The release feed includes an optional numeric `buttons` field for arcade games.
+Zero means a confirmed zero-button count; an absent field means unknown. The
+readable `ctl` description also preserves explicit zero counts, and `spc`
+contains separately recorded special controls such as paddles and spinners.
+`prov` identifies fallback values, including `buttons` when applicable. Curated
+Arcade Database values take precedence, including zero. Check this contract with
+`python -m unittest test_controls`.
+
 ## License
 
 - **Code** (`misterzine.py`, `tools/`, the site's HTML/CSS/JS): [MIT](LICENSE).

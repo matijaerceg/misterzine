@@ -38,7 +38,7 @@ never be officially supported; that context lives in the notes. RE-CHECK on
 the next sweep: if the firmware project stalls, the honest map regresses to
 SSOne-only and the question would earn its rail slot back (cheap git revert).
 
-Nav name: **Hardware** (was "Landscape" until 2026-07-17, when the site-wide nav became Zine / Cores / Hardware). Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness stamp (meta.updated, plain muted text, NOT a chip) IS the whole subtitle (scope sentence removed 2026-07-16, de-chipped 2026-07-17); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
+Nav name: **Hardware** (was "Landscape" until 2026-07-17, when the site-wide nav became Zine / Cores / Hardware; Cores / Frontend / Hardware since 2026-09-10). Page title: "The MiSTer FPGA Hardware Landscape" (user added FPGA 2026-07-16). Header: MiSTerZine wordmark top-left links home; the freshness stamp (meta.updated, plain muted text, NOT a chip) IS the whole subtitle (scope sentence removed 2026-07-16, de-chipped 2026-07-17); pills + theme toggle stay pinned top-right at every width; the zero state shows no fit-count line.
 URL: `/hardware-landscape/` (renamed from `/landscape/` on 2026-07-17; a
 redirect stub stays at `/landscape/`). Outward copy may say "landscape" or
 "hardware matrix" — never "release tracker" (that term belongs to the

@@ -140,6 +140,17 @@ the ▾ chevron launches on it and makes it the default.
   affected.
 - Works from a phone on the same wifi too.
 
+### MisterZine Frontend (the tracker on the MiSTer itself)
+
+The same tracker also runs on the MiSTer, from the main menu, as
+[MisterZine Frontend](https://github.com/matijaerceg/misterzine-on-device) (its own repo;
+the site's [/frontend/](https://misterzine.fyi/frontend/) page is the landing page for it).
+It consumes this site's published files directly: `releases/meta.json` (freshness hash),
+`releases/data.json` (rows, same keys as the web table) and the PNGs under `images/`.
+**Those files are a contract now.** Binaries on SD cards do not update with the site, so
+field names, date formats, row keys and image file names must stay stable: add fields
+freely, never rename or remove one without a deprecation period.
+
 ### Accounts (favorites that follow you)
 
 Favorites work without an account: stars are saved in the browser, and the star menu's
@@ -395,7 +406,7 @@ Arcade Database values take precedence, including zero. Check this contract with
 - **Code** (`misterzine.py`, `tools/`, the site's HTML/CSS/JS): [MIT](LICENSE).
 - **Data** (`docs/releases/data.json`, `meta.json`, the RSS feeds, and everything under
   `data/exports/`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Use it
-  freely; credit "MiSTerZine by Matija Erceg" and, where practical, link to
+  freely; credit "MisterZine by Matija Erceg" and, where practical, link to
   <https://misterzine.fyi>. Note the data is not a versioned API: fields may be added or
   renamed without notice, so consume it defensively.
 - **Images** (game screenshots, hardware photos) remain

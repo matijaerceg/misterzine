@@ -1,9 +1,15 @@
 # Changelog
 
-User-visible changes to the [MiSTerZine Releases site](https://misterzine.fyi/releases/).
+User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-09-10
 
+- MisterZine Frontend, the tracker that runs on the MiSTer itself, now has a home on the site at
+  misterzine.fyi/frontend/: screenshots, what it does, the current release, and where to get it.
+  It is the middle pill in the site nav (Cores, Frontend, Hardware), the middle card on the landing
+  page, and the "Add a MiSTer" chooser under every Launch button points to it as the no-browser way.
+- The site's name is spelled MisterZine everywhere now (page titles, the installed-app name, privacy
+  and account pages). The wordmark is unchanged.
 - Arcade controls preserve explicit zero-button counts separately from missing
   information, including in the shared feed used by the on-device browser.
 

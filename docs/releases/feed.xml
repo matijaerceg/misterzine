@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 10 Sep 2026 10:04:32 +0000</lastBuildDate>
+<lastBuildDate>Fri, 11 Sep 2026 05:39:21 +0000</lastBuildDate>
+<item>
+<title>[Updated] LaserdiscGames (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20260910.rbf:2026-09-11T05:39:21+00:00</guid>
+<pubDate>Fri, 11 Sep 2026 05:39:21 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Space Ace.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] I, Robot (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#irobot</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-I-Robot_20260911.rbf:2026-09-11T04:41:47+00:00</guid>
+<pubDate>Fri, 11 Sep 2026 04:41:47 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/irobot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Atari&lt;/p&gt;&lt;p&gt;Core: Arcade-I-Robot&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-11 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Kick and Run (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#kicknrun</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/glfgreat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtriders&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/riders"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Haunted Castle (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hcastle</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Haunted Castle (version M).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hcastle.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Konami&lt;/p&gt;&lt;p&gt;Core: jtcastle&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/castle"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hippodrome (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hippodrm</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Hippodrome (US).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hippodrm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

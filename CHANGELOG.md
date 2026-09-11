@@ -2,6 +2,11 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-11
+
+- The new NeXT core now shows a NeXTcube photo in its detail panel, plus its original year (1988)
+  and maker.
+
 ## 2026-09-10
 
 - Unit-01 (purple ground, acid-green accents) is now the default theme for new visitors. A theme

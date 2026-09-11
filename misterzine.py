@@ -2189,7 +2189,7 @@ CONSOLE_MANUFACTURER = {
 COMPUTER_MANUFACTURER = {
     "C64": "Commodore", "C128": "Commodore", "C16": "Commodore", "VIC20": "Commodore",
     "PET2001": "Commodore", "Minimig": "Commodore",
-    "Apple-I": "Apple", "Apple-II": "Apple", "Apple-IIgs": "Apple", "Apple-Lisa": "Apple", "MacPlus": "Apple",
+    "Apple-I": "Apple", "Apple-II": "Apple", "Apple-IIgs": "Apple", "Apple-Lisa": "Apple", "NeXT": "NeXT", "MacPlus": "Apple",
     "MacLC": "Apple",
     "ZX-Spectrum": "Sinclair", "ZX81": "Sinclair", "QL": "Sinclair",
     "ZXNext": "SpecNext", "SAMCoupe": "MGT", "TSConf": "TS-Labs",
@@ -2244,7 +2244,7 @@ CORE_YEAR = {
     # computers
     "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
     "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-IIgs": "1986",
-    "Apple-Lisa": "1983", "MacPlus": "1986", "MacLC": "1990",
+    "Apple-Lisa": "1983", "NeXT": "1988", "MacPlus": "1986", "MacLC": "1990",
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
     "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
     "Amstrad": "1984", "Amstrad-PCW": "1985", "Atari800": "1979", "AtariST": "1985",
@@ -2330,7 +2330,7 @@ SYSTEM_TITLES = {
     "Apple-I": "Apple I",
     "Apple-II": "Apple II",
     "Apple-IIgs": "Apple IIGS",
-    "Apple-Lisa": "Apple Lisa",
+    "Apple-Lisa": "Apple Lisa", "NeXT": "NeXT Computer",
     "Archie": "Acorn Archimedes",
     "Atari800": "Atari 800",
     "AtariST": "Atari ST",

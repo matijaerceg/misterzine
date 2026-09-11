@@ -40,8 +40,8 @@ jobs:
       - name: Snapshot upstream DBs (detect new/updated releases)
         run: python misterzine.py snapshot
 
-      - name: Check control metadata export
-        run: python -m unittest test_controls
+      - name: Check feed field exports
+        run: python -m unittest test_controls test_card_status
 
       - name: Enrich new arcade titles (year/manufacturer/rbf/setname)
         run: python misterzine.py enrich-mra

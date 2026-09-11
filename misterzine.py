@@ -2789,7 +2789,7 @@ def _filter_tag_map():
 
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
              repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
-             core_files=None, ft_map=None):
+             core_files=None, ft_map=None, core_hashes=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -2860,9 +2860,25 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # per-folder commit date is the best per-core signal that exists;
     # NeoGeoPocket's undated filename).
     commit_d = (r["last_update"] or "")[:10] if "last_update" in r.keys() else ""
+    # bd/bh: the shipped rbf's own build date and md5, kept apart from the
+    # MRA/debut adjustments below. They exist for the on-device app's card
+    # status: `updated` answers "what's new" (it moves on an MRA-only fix and
+    # floors at the debut commit date), so comparing it with the card's rbf
+    # filename date reads as "older build" when nothing newer ships. bh is the
+    # only per-build signal for undated rbfs (Jotego), where the card is
+    # current exactly when its file matches the db's hash.
+    bd, bh = "", ""
     if system == "arcade":
         srcs = (core_files or {}).get(core.lower(), {})
-        updated = srcs.get(r["source_id"]) or max(srcs.values(), default="")
+        bd = srcs.get(r["source_id"]) or max(srcs.values(), default="")
+        hashes = (core_hashes or {}).get(core.lower(), {})
+        if r["source_id"] in hashes:
+            bh = hashes[r["source_id"]]
+        elif hashes:
+            # no own-source file: follow the newest dated build, else any
+            best = max(hashes, key=lambda sid: srcs.get(sid, ""))
+            bh = hashes[best]
+        updated = bd
         # an MRA hash change after ingest is a shipped update to this title
         # (equal first_seen/last_changed just means "never touched since seed")
         fs, lc = r["first_seen"] or "", r["last_changed"] or ""
@@ -2870,7 +2886,9 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
             updated = max(updated, lc[:10])
         updated = updated or commit_d
     else:
-        updated = core_build_date(r["title"]) or commit_d
+        bd = core_build_date(r["title"]) or ""
+        bh = (r["hash"] or "") if "hash" in r.keys() else ""
+        updated = bd or commit_d
     # last link in the fallback chain: the debut build is itself a shipped
     # build, so updated floors at the debut date. max() (not `or`) also floors
     # rows whose shipped file predates their debut (title added later to an
@@ -2894,6 +2912,12 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # updated == date just means "never touched since debut" — still worth a cell
     if updated:
         row["updated"] = updated
+    # shipped rbf build date/md5 for the on-device card status (see above);
+    # absent when the current dbs ship no core file for the row
+    if bd:
+        row["bd"] = bd
+    if bh:
+        row["bh"] = bh
     # repo activity (latest commit) — panel-only, omitted when it adds nothing
     if commit_d and commit_d != updated:
         row["act"] = commit_d
@@ -3137,6 +3161,12 @@ def cmd_export_web(args):
         cur = core_files.setdefault(r["rbf"], {})
         if r["build_date"] > cur.get(r["source_id"], ""):
             cur[r["source_id"]] = r["build_date"]
+    # md5 of each source's newest rbf per core name (undated files included:
+    # they are Jotego's whole inventory). Feeds the bh card-status field.
+    core_hashes = {}
+    for r in con.execute("SELECT source_id, rbf, build_date, hash FROM core_files "
+                         "WHERE hash IS NOT NULL ORDER BY build_date"):
+        core_hashes.setdefault(r["rbf"], {})[r["source_id"]] = r["hash"]
     # fork parentage for _core_label: who really authored a MiSTer-devel fork
     fork_info = {r["repo"].lower(): r for r in con.execute(
         "SELECT repo, is_fork, parent_owner FROM arcade_repos")}
@@ -3223,7 +3253,8 @@ def cmd_export_web(args):
                 clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
-                     arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map) for r in rows]
+                     arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map,
+                     core_hashes) for r in rows]
     # deep-link key persistence needs each row's catalog identity; stripped
     # again before data.json is written (_assign_row_keys pops them)
     for r, d in zip(rows, data):

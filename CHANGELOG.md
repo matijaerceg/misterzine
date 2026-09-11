@@ -4,6 +4,9 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-09-11
 
+- Fixed the "new releases landed" notice on the tracker: since 2026-09-04 it rendered as a blank
+  half-width bar wedged between the filters and the table header after a background update. It is
+  back to a floating pill at the bottom centre of the table.
 - The new NeXT core now shows a NeXTcube photo in its detail panel, plus its original year (1988)
   and maker.
 

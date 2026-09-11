@@ -4,6 +4,11 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-09-10
 
+- Unit-01 (purple ground, acid-green accents) is now the default theme for new visitors. A theme
+  you already picked is untouched. The landing page's tracker screenshot is refreshed to match.
+- The Light and Dark themes trade their bright blue accent for a quiet slate gray, so page titles,
+  links and the active nav pill no longer shout on the two plain themes. Both rows in the Theme
+  menu now carry preview dots like every other theme.
 - MisterZine Frontend, the tracker that runs on the MiSTer itself, now has a home on the site at
   misterzine.fyi/frontend/: screenshots, what it does, the current release, and where to get it.
   It is the middle pill in the site nav (Cores, Frontend, Hardware), the middle card on the landing

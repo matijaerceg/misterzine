@@ -58,7 +58,7 @@ dashboard is public, linked as "Traffic Stats" in the header).
   (prefilled GitHub issue).
 - **Every entry has a shareable deep link** (e.g. `releases/#pacman` opens Pac-Man's
   panel); a 🔗 button copies it, and the browser Back gesture closes the panel on mobile.
-- Esc closes, arrow keys walk rows, theme toggle: auto / light / dark.
+- Esc closes, arrow keys walk rows, a Theme menu with 17 palettes (Unit-01 by default).
 - A **Launch button** that starts the game or core on your own MiSTer (see below).
 - **Favorites** (star any row) live in the browser, or follow you across devices when you
   **sign in** with Google or GitHub (see below).

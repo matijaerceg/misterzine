@@ -38,7 +38,7 @@
 
   var slugs = THEMES.map(function (t) { return t[0]; });
   function applyTheme(t) {
-    if (slugs.indexOf(t) < 0) t = 'dark';
+    if (slugs.indexOf(t) < 0) t = 'eva';  // Unit-01 is the site default (since 2026-09-10)
     document.documentElement.setAttribute('data-theme', t);
     btns.forEach(function (b) {
       b.setAttribute('aria-pressed', b.dataset.set === t);
@@ -82,7 +82,7 @@
     }
   }, true);
 
-  var saved = 'dark';
-  try { saved = localStorage.getItem('mz-theme') || 'dark'; } catch (e) {}
+  var saved = 'eva';
+  try { saved = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {}
   applyTheme(saved);
 })();

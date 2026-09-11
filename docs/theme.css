@@ -27,15 +27,23 @@
   --btn-border-hover: color-mix(in srgb, var(--line) 80%,    transparent);
 }
 
-/* ---- light (also the auto default; auto's dark half is the media block) */
+/* ---- light. Also what a bare :root (no data-theme) resolves to, which only
+   happens when storage is unreadable: the pre-paint script in every <head>
+   and theme.js both default to Unit-01 ("eva") since 2026-09-10. The OS
+   prefers-color-scheme auto mode that used to live here was removed the same
+   day; it had been dead since the default stopped being "auto". */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --bg: #fafafa;            /* page/table ground (eased off pure white) */
   --surface: #fafafa;       /* raised chrome: topbar, header row, panel, popovers */
   --fg: #202020;            /* primary text / ink (softened off pure black) */
   --muted: #888;            /* secondary text and icons */
   --line: #888;             /* base for the alpha borders/washes above */
-  --accent: #0066ff;        /* the site blue: links, focus, active filters */
+  --accent: #626c7a;        /* links, focus, active filters, the big titles.
+                               Deliberately near-gray (a faint slate): Light and
+                               Dark are the quiet pair, so the h1/card titles
+                               must not shout. Was the site blue #0066ff until
+                               2026-09-10. 5.1:1 on --bg; keep >= 4.5. */
   --accent-on: #fff;        /* text/icons sitting ON an --accent fill */
   --brand-hover: #514689;   /* wordmark hover: official MiSTer purple */
   --type-arcade: #e8a317;   /* the four core-type hues (badges + icons) */
@@ -54,21 +62,15 @@
   --stamp-sheen: rgb(255 255 255 / .55);
 }
 
-/* ---- dark values, shared by auto-when-OS-is-dark and explicit dark */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --bg: #181818; --surface: #181818; --fg: #e6e6e6;
-    --brand-hover: #8b7fd0;
-    --hint-shadow: rgb(0 0 0 / .75);
-    --watermark: color-mix(in srgb, #000 11%, var(--surface));
-    --stamp-shade: rgb(0 0 0 / .33);
-    --stamp-sheen: rgb(255 255 255 / .05);
-  }
-}
+/* ---- dark: the same quiet pair, inverted. --accent is the light-ground
+   slate lifted for a dark ground (7.0:1 on --bg); --accent-on flips to the
+   ground colour because white on that slate would only reach 2.5:1. */
 :root[data-theme="light"] { color-scheme: light; }
 :root[data-theme="dark"] {
   color-scheme: dark;
   --bg: #181818; --surface: #181818; --fg: #e6e6e6;
+  --accent: #98a4b4;
+  --accent-on: #181818;
   --brand-hover: #8b7fd0;
   --hint-shadow: rgb(0 0 0 / .75);
   --watermark: color-mix(in srgb, #000 11%, var(--surface));
@@ -601,7 +603,13 @@
    looks mid-bright and sorts at 0.42969, between the dark grounds and the
    near-white ones. An earlier version sorted by fg/bg CONTRAST instead and
    was replaced — don't reintroduce it. A NEW theme slots in by its measured
-   --bg luminance, not by when it was added. */
+   --bg luminance, not by when it was added.
+   Light and Dark sit ABOVE that order, pinned at the top of the menu as the
+   plain pair; they are not part of the luminance sort. Their first dots are
+   a step off their own ground (#fafafa / #181818) purely so the dot does not
+   vanish into the active row, per the constraint above. */
+.menu button[data-set="light"]      { --sw1: #e8e8e8; --sw2: #626c7a; } /* near-white + slate */
+.menu button[data-set="dark"]       { --sw1: #282828; --sw2: #98a4b4; } /* near-black + slate */
 .menu button[data-set="virtualboy"] { --sw1: #000000; --sw2: #ff2a2a; } /* black + LED red */
 .menu button[data-set="spectrum"]   { --sw1: #000000; --sw2: #00ffff; } /* black + cyan */
 .menu button[data-set="amber"]      { --sw1: #100b04; --sw2: #ffb000; } /* black + amber */

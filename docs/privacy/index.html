@@ -14,7 +14,7 @@
 <meta property="og:description" content="What MisterZine stores, where, and how to delete it.">
 <meta property="og:url" content="https://misterzine.fyi/privacy/">
 <script>/* apply saved theme before first paint to avoid a flash */
-  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
 <link rel="stylesheet" href="../nav.css"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>

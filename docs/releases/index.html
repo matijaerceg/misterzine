@@ -30,7 +30,7 @@
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: New cores &amp; games" href="feed-new.xml">
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: Updates only" href="feed-updates.xml">
 <script>/* apply saved theme before first paint to avoid a flash */
-  try { var t = localStorage.getItem('mz-theme') || 'dark'; if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+  var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
 <link rel="stylesheet" href="../nav.css"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>

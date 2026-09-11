@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 11 Sep 2026 05:39:21 +0000</lastBuildDate>
+<lastBuildDate>Fri, 11 Sep 2026 10:02:37 +0000</lastBuildDate>
+<item>
+<title>[New] Seibu Cup Soccer (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cupsoc</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Seibu Cup Soccer (set 1).mra:2026-09-11T10:02:37+00:00</guid>
+<pubDate>Fri, 11 Sep 2026 10:02:37 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cupsoc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Seibu Kaihatsu&lt;/p&gt;&lt;p&gt;Core: SeibuCupSoccer&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SeibuCupSoccer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] LaserdiscGames (Arcade core, 3 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/goldnaxe.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Golfing Greats (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#glfgreat</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Golfing Greats (World, version L).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/glfgreat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtriders&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/riders"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

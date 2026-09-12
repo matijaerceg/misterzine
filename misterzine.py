@@ -2747,9 +2747,9 @@ def _humanize_arcade_titles(data, arcade_meta):
     doubles as a hidden search alias, so a discarded alt name ("Puck Man",
     "Green Beret") still finds the row. A rename is skipped when it would
     collide with another row's title — distinct rows must stay distinct."""
-    # rmcores rows keep their "rm <Title>" MRA name: the prefix is the brand
-    # (it is what the MiSTer menu shows) and the only thing telling the rm
-    # build apart from the Distribution row of the same game at a glance.
+    # rmcores rows are already retitled "<Game> (rmCores)" by export-web's
+    # arcade_titles pass; leave that alone rather than let MAME's description
+    # re-derive a name that collides with the Distribution row.
     rows = [r for r in data if r.get("base") == "Arcade" and r.get("src") != "rmcores"]
     proposed = {id(r): _ideal_arcade_title(r["title"], r.get("sn"), arcade_meta)
                 for r in rows}
@@ -3314,6 +3314,14 @@ def cmd_export_web(args):
             label = same_game_labels.get((r["source_id"], r["path"]))
             if label:
                 arcade_titles[(r["source_id"], r["path"])] = (f"{b} ({label})", r["title"])
+            elif r["source_id"] == "rmcores" and b.lower().startswith("rm "):
+                # Site convention: a title starts with the game, the dev's mark
+                # is a trailing qualifier -- "Night Slashers (rmCores)" sorts and
+                # reads next to the Distribution row instead of under "r". The
+                # raw "rm ..." MRA name survives as mt (search alias / manifest
+                # key), so typing what the MiSTer menu shows still finds it.
+                arcade_titles[(r["source_id"], r["path"])] = (
+                    f"{b[3:]} ({_core_label(r, fork_info, repo_maps)})", r["title"])
             else:
                 clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)

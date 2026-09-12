@@ -1422,12 +1422,32 @@ const SRC_NAMES = {
   jtbindb: 'Jotego (JTcores)',
   coinop: 'Coin-Op Collection',
   meathax: 'Meathax (MeatCores)',
+  rmcores: 'rmCores (rmonic79)',
 };
 const SRC_SEARCH = {
   distribution_mister: 'distribution',
   jtbindb: 'jotego jtcores',
   coinop: 'coin-op collection',
   meathax: 'meathax meatcores',
+  rmcores: 'rmcores rmonic79',
+};
+// Databases update_all has no settings toggle for: the visitor must hand-add
+// the [section] to downloader.ini. The panel's Source row and the favorites
+// export dialog spell that out, plus a one-line "what is this" for dbs whose
+// rows double a game the Distribution already lists.
+const OPTIN_DBS = {
+  meathax: {
+    section: 'meathax/meatcores',
+    url: 'https://raw.githubusercontent.com/meathax/meatcores/db/db.json.zip',
+    what: '',
+  },
+  rmcores: {
+    section: 'rmonic79/rmcores',
+    url: 'https://raw.githubusercontent.com/rmonic79/rmcores/db/db.json.zip',
+    what: 'rmonic79\'s own builds of his cores, with CRT Adjust and V-Size on the analog output ' +
+      '(HDMI untouched) and a pause overlay. The same games also ship in the MiSTer Distribution ' +
+      'without those extras; the rm build has its own rbf name, so both can sit on one card.',
+  },
 };
 
 // Per-setname display-aspect escape hatch — for the handful of cases the normal
@@ -2610,6 +2630,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   jtbindb: 'jtcores',
   coinop: 'Coin-OpCollection/Distribution-MiSTerFPGA',
   meathax: 'meathax/meatcores',
+  rmcores: 'rmonic79/rmcores',
 };
 function buildFavExport() {
   const terms = new Map();  // src -> Set of filter terms
@@ -2633,12 +2654,13 @@ function buildFavExport() {
       esc(FT_SECTIONS[src]) + ']</code> in your downloader.ini (create the line if it is missing):</p>' +
       '<div class="fx-row"><code>' + esc(str) + '</code>' +
       '<button type="button" class="fx-copy" data-terms="' + escA(str) + '">Copy</button></div>';
-    // MeatCores is a manual opt-in database (no update_all settings toggle), so
-    // spell out the section it needs in case the visitor has not added it yet.
-    if (src === 'meathax') html +=
-      '<p class="fx-note">MeatCores is not bundled with update_all. If downloader.ini has no ' +
-      '<code>[meathax/meatcores]</code> section yet, add it with this line: ' +
-      '<code>db_url = https://raw.githubusercontent.com/meathax/meatcores/db/db.json.zip</code></p>';
+    // Opt-in databases (no update_all settings toggle): spell out the section
+    // they need in case the visitor has not added it yet.
+    const opt = OPTIN_DBS[src];
+    if (opt) html +=
+      '<p class="fx-note">' + esc(SRC_NAMES[src]) + ' is not bundled with update_all. If downloader.ini has no ' +
+      '<code>[' + esc(opt.section) + ']</code> section yet, add it with this line: ' +
+      '<code>db_url = ' + esc(opt.url) + '</code></p>';
   }
   if (!html) html = '<p>None of your favorites could be exported.</p>';
   if (noTag.length) html += '<p class="fx-note">These can\'t be exported (no filter tag in their database): '
@@ -3187,11 +3209,14 @@ function detailHTML(d) {
     rows.push(['Latest update', uv, true]);
   }
   if (d.act) rows.push(['Latest commit', esc(d.act) + agoSpan(relAge(d.act)), true]);
-  // which downloader database delivers this entry via update_all. MeatCores has
-  // no update_all settings toggle, so its rows say how to opt in.
-  if (d.src === 'meathax') {
-    rows.push(['Source', esc(SRC_NAMES[d.src]) + '<br><span class="optin">Opt-in database: add a ' +
-      '[meathax/meatcores] section to downloader.ini to receive it via update_all.</span>', true]);
+  // which downloader database delivers this entry via update_all. Opt-in
+  // databases have no update_all settings toggle, so their rows say how to
+  // opt in (and, for rmCores, what the rm build is).
+  if (d.src && OPTIN_DBS[d.src]) {
+    const opt = OPTIN_DBS[d.src];
+    rows.push(['Source', esc(SRC_NAMES[d.src]) + '<br><span class="optin">' +
+      (opt.what ? esc(opt.what) + ' ' : '') + 'Opt-in database: add a [' + esc(opt.section) +
+      '] section to downloader.ini to receive it via update_all.</span>', true]);
   } else if (d.src) {
     rows.push(['Source', SRC_NAMES[d.src] || d.src]);
   }

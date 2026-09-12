@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-09-12
 
+- Release tracker: now also tracks rmonic79's rmCores database, his own "rm" builds of cores he already ships through the MiSTer Distribution (rm Night Slashers and rm Seibu Cup Soccer today). The rm builds add CRT Adjust and V-Size on the analog output plus a pause overlay, under a separate rbf name so both builds fit on one card, which is why those games now appear twice, told apart by the rm prefix and the Source column. rmCores is an opt-in database with no update_all settings toggle, so its rows explain how to add it to downloader.ini; debut dates come from each game's first appearance in the database's history, and future rm releases and updates flow into the tracker and feeds automatically.
 - The two brand-new console cores are filled in: they now read "Casio Loopy" and "Super A'Can"
   instead of their raw core names, carry their original year (both 1995) and maker (Casio,
   Funtech), and show a hardware photo in the detail panel.

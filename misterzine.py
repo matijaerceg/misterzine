@@ -78,6 +78,22 @@ SOURCES = [
         "name": "MeatCores (Meathax)",
         "db_url": "https://raw.githubusercontent.com/meathax/meatcores/db/db.json.zip",
     },
+    {
+        # rmonic79's "rm" builds. NOT new games: his cores ship upstream
+        # through MiSTer-devel (Night Slashers, Seibu Cup Soccer, Raiden, the
+        # Darius line, ...) and this db carries the same cores rebuilt with
+        # two sys/ framework features MiSTer-devel won't take: CRT Adjust /
+        # V-Size on the analog output (HDMI untouched) and a pause overlay.
+        # Different rbf name (rmNightSlashers) so both builds coexist on one
+        # card; MRAs nest under _Arcade/_rmCores/ with an "rm " title prefix.
+        # Same opt-in model as MeatCores: no update_all toggle, users hand-add
+        # the [rmonic79/rmcores] section to downloader.ini. Every rm row is
+        # therefore a deliberate second listing of a game the Distribution
+        # already has -- the Source chip and the panel's opt-in note say so.
+        "id": "rmcores",
+        "name": "rmCores (rmonic79)",
+        "db_url": "https://raw.githubusercontent.com/rmonic79/rmcores/db/db.json.zip",
+    },
 ]
 
 # Sources tracked only in part: source id -> the systems we list. A source
@@ -1134,6 +1150,7 @@ MRA_REPOS = [
     # "Distribution-MiSTerFPGA".
     ("coinop", "Coin-OpCollection/Distribution-MiSTerFPGA", "develop", "_Arcade"),
     ("meathax", "meathax/meatcores", "main", "_Arcade/_MeatCores"),
+    ("rmcores", "rmonic79/rmcores", "main", "_Arcade/_rmCores"),
 ]
 
 
@@ -1599,7 +1616,12 @@ def join_coinop_to_catalog(con):
     log(f"  joined {n} Coin-Op titles to release dates")
 
 
-# --- meathax (MeatCores) repo links + frozen debut dates -------------------
+# --- opt-in third-party dbs: repo links + frozen debut dates ---------------
+# MeatCores and rmCores are standard downloader dbs with no MiSTer-devel repo
+# behind their rows, so join_repos_to_catalog can't link or date them. Each
+# gets: its distribution repo, an optional per-core repo map (lowercased MRA
+# rbf -> repo), and frozen import debuts for the rows that were seeded after
+# their games had already shipped (see MEATHAX_FROZEN_DATES for the recipe).
 
 MEATHAX_REPO = "meathax/meatcores"
 # Per-core source repos under github.com/meathax, keyed by lowercased MRA rbf.
@@ -1667,23 +1689,45 @@ MEATHAX_FROZEN_DATES = {
 }
 
 
-def join_meathax_rows(con):
-    """Pin every meathax row's repo link (per-core repo when one exists, the
-    meatcores distribution repo otherwise) and its frozen import debut.
-    Idempotent; runs every export like repair_coinop_rows. The frozen date
-    wins unconditionally (never drifts with upstream renames); rows not in
-    the dict keep whatever they have — for post-import titles that is the
+RMCORES_REPO = "rmonic79/rmcores"
+# Per-core source repos under github.com/rmonic79, keyed by lowercased MRA rbf
+# (his naming is rm_<Title>_MiSTer or rm-<Title>_MiSTer; the rbf is rm<Title>).
+RMCORES_CORE_REPOS = {
+    "rmnightslashers": "rmonic79/rm_NightSlashers_MiSTer",
+    "rmseibucupsoccer": "rmonic79/rm-SeibuCupSoccer_MiSTer",
+}
+# Debut dates for the rmcores initial import (2026-09-12 seed), mined the
+# same way as MEATHAX_FROZEN_DATES: each mainline MRA's first-add commit in
+# rmonic79/rmcores@main, UTC date. The db itself was created 2026-08-31.
+RMCORES_FROZEN_DATES = {
+    "rm Night Slashers (Korea Rev 1.3, DE-0397-0 PCB).mra": "2026-08-31",
+    "rm Seibu Cup Soccer (set 1).mra": "2026-09-11",
+}
+
+OPTIN_DB_SOURCES = {
+    "meathax": (MEATHAX_REPO, MEATHAX_CORE_REPOS, MEATHAX_FROZEN_DATES),
+    "rmcores": (RMCORES_REPO, RMCORES_CORE_REPOS, RMCORES_FROZEN_DATES),
+}
+
+
+def join_optin_db_rows(con):
+    """Pin every opt-in-db row's repo link (per-core repo when one exists, the
+    distribution repo otherwise) and its frozen import debut. Idempotent;
+    runs every export like repair_coinop_rows. The frozen date wins
+    unconditionally (never drifts with upstream renames); rows not in the
+    dict keep whatever they have — for post-import titles that is the
     detection-day stamp, which IS their real debut."""
-    for row in con.execute(
-        "SELECT path, rbf, release_date FROM catalog WHERE source_id='meathax'"
-    ).fetchall():
-        repo = MEATHAX_CORE_REPOS.get((row["rbf"] or "").strip().lower(), MEATHAX_REPO)
-        frozen = MEATHAX_FROZEN_DATES.get(row["path"].replace("\\", "/").rsplit("/", 1)[-1])
-        con.execute(
-            "UPDATE catalog SET repo=?, release_date=COALESCE(?, release_date) "
-            "WHERE source_id='meathax' AND path=?",
-            (repo, frozen, row["path"]),
-        )
+    for source_id, (dist_repo, core_repos, frozen_dates) in OPTIN_DB_SOURCES.items():
+        for row in con.execute(
+            "SELECT path, rbf, release_date FROM catalog WHERE source_id=?", (source_id,)
+        ).fetchall():
+            repo = core_repos.get((row["rbf"] or "").strip().lower(), dist_repo)
+            frozen = frozen_dates.get(row["path"].replace("\\", "/").rsplit("/", 1)[-1])
+            con.execute(
+                "UPDATE catalog SET repo=?, release_date=COALESCE(?, release_date) "
+                "WHERE source_id=? AND path=?",
+                (repo, frozen, source_id, row["path"]),
+            )
 
 
 # --- command: genre (arcade genre from MAME catver.ini, joined on setname) -
@@ -2606,6 +2650,11 @@ def _core_label(r, fork_info, repo_maps):
         return "Jotego"
     if r["source_id"] == "meathax":
         return "Meathax"
+    if r["source_id"] == "rmcores":
+        # NOT "rmonic79": that label already means his MAINLINE core (the
+        # fork-parent rule on MiSTer-devel/Arcade-NightSlashers etc.), and the
+        # same-game gate needs the two builds to label differently.
+        return "rmCores"
     repo = (r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -2698,7 +2747,10 @@ def _humanize_arcade_titles(data, arcade_meta):
     doubles as a hidden search alias, so a discarded alt name ("Puck Man",
     "Green Beret") still finds the row. A rename is skipped when it would
     collide with another row's title — distinct rows must stay distinct."""
-    rows = [r for r in data if r.get("base") == "Arcade"]
+    # rmcores rows keep their "rm <Title>" MRA name: the prefix is the brand
+    # (it is what the MiSTer menu shows) and the only thing telling the rm
+    # build apart from the Distribution row of the same game at a glance.
+    rows = [r for r in data if r.get("base") == "Arcade" and r.get("src") != "rmcores"]
     proposed = {id(r): _ideal_arcade_title(r["title"], r.get("sn"), arcade_meta)
                 for r in rows}
     # Public rows resolve collisions among themselves only, so a Patreon beta
@@ -2765,6 +2817,11 @@ def _filter_tag_map():
         groups = {}  # tag id -> [alias terms]; aliases share one id (nes/nintendo)
         for term, tid in d.get("tag_dictionary", {}).items():
             groups.setdefault(tid, []).append(term)
+        # Dbs that skip the arcade<core> convention (rmcores tags both the
+        # MRA and its rbf 'rmnightslashers'): the per-core term is the tag
+        # named after a shipped _Arcade/cores rbf, date suffix stripped.
+        rbf_stems = {norm(core_name(title_from_path(p))) for p in d.get("files", {})
+                     if "/cores/" in p.lower() and p.lower().endswith(".rbf")}
         n = 0
         for path, meta in d.get("files", {}).items():
             aliases = [sorted(groups.get(t, [])) for t in meta.get("tags", [])]
@@ -2778,6 +2835,9 @@ def _filter_tag_map():
                                if a.startswith("arcade") and a not in generic)
                 if cands:
                     term = "arcade-" + cands[0][len("arcade"):]
+                else:
+                    named = sorted(a for al in aliases for a in al if norm(a) in rbf_stems)
+                    term = named[0] if named else None
             else:
                 m = rbf_core.search(path)
                 if m:
@@ -3122,7 +3182,7 @@ def cmd_export_web(args):
     apply_jt_frozen_dates(con)  # correct Jotego cores off the Feb-2023 monorepo-migration date
     apply_jt_beta_frozen_dates(con)  # after the jt pins: per-title beta dates win over folder dates
     repair_coinop_rows(con)  # coinop rows: fix mis-joined repos, pin their distribution repo
-    join_meathax_rows(con)  # meathax rows: per-core repo links + frozen import debuts
+    join_optin_db_rows(con)  # meathax/rmcores rows: per-core repo links + frozen import debuts
     warn_date_anomalies(con)  # tripwire: new row wearing a years-old debut
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()

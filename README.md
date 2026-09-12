@@ -209,13 +209,21 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The three sources (all public, no betas)
+## The five sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
-2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's *free* cores)
+2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
+   are listed but labeled, see below)
 3. **Coin-Op Collection**: `Distribution-MiSTerFPGA` `db` branch (public arcade cores)
+4. **MeatCores (Meathax)**: `meathax/meatcores` `db` branch, arcade rows only (opt-in: no
+   update_all toggle, users add the `[meathax/meatcores]` section to downloader.ini by hand)
+5. **rmCores (rmonic79)**: `rmonic79/rmcores` `db` branch (opt-in like MeatCores, section
+   `[rmonic79/rmcores]`). Not new games: rmonic79's cores ship upstream through
+   MiSTer-devel, and this db carries the same cores rebuilt with CRT Adjust / V-Size on the
+   analog output and a pause overlay, under an `rm` rbf prefix so both builds coexist on one
+   card. Each rm row is a deliberate second listing of a game the Distribution already has.
 
-All three publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All five publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

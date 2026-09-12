@@ -1,6 +1,6 @@
 name: Release update
 
-# Checks the three upstream MiSTer DBs four times a day, records any new/updated
+# Checks the five upstream MiSTer DBs four times a day, records any new/updated
 # releases (dated), enriches + regenerates the site, and commits the result.
 # Pages serves from main /docs, so the push publishes the refreshed site.
 

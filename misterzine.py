@@ -2172,7 +2172,8 @@ CONSOLE_MANUFACTURER = {
     "SuperVision": "Watara",
     "SCV": "Epoch",
     "CreatiVision": "VTech",
-    "Casio_PV-1000": "Casio",
+    "Casio_PV-1000": "Casio", "Loopy": "Casio",
+    "SuperAcan": "Funtech",  # Funtech Entertainment, Taiwan (UMC subsidiary)
     "VC4000": "Interton",
     "AdventureVision": "Entex",
     "Gamate": "Bit Corporation",
@@ -2241,6 +2242,8 @@ CORE_YEAR = {
     "GameCom": "1997",  # Tiger game.com, US launch 1997-09-12
     "GameKing": "2004",  # GameKing I (GM-218) shipped Sep 2004; Timetop designed it in 2003
     "PocketStation": "1999",  # Japan-only, 1999-01-23
+    "Loopy": "1995",  # Casio Loopy, Japan-only, Oct 1995
+    "SuperAcan": "1995",  # Funtech Super A'Can, Taiwan, 1995
     # computers
     "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
     "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-IIgs": "1986",
@@ -2295,6 +2298,7 @@ SYSTEM_TITLES = {
     "Gameboy": "Game Boy",
     "GameGear2P": "Game Gear",
     "GBA": "Game Boy Advance",
+    "Loopy": "Casio Loopy",
     "MegaCD": "Mega CD",
     "MegaDrive": "Mega Drive",
     "MyVision": "My Vision",
@@ -2313,6 +2317,7 @@ SYSTEM_TITLES = {
     "SCV": "Super Cassette Vision",
     "SGB": "Super Game Boy",
     "SMS": "Master System",
+    "SuperAcan": "Super A'Can",
     "Super_Vision_8000": "Super Vision 8000",
     "SuperVision": "Supervision",
     "TurboGrafx16": "TurboGrafx-16",

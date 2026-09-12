@@ -2,6 +2,12 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-12
+
+- The two brand-new console cores are filled in: they now read "Casio Loopy" and "Super A'Can"
+  instead of their raw core names, carry their original year (both 1995) and maker (Casio,
+  Funtech), and show a hardware photo in the detail panel.
+
 ## 2026-09-11
 
 - Fixed the "new releases landed" notice on the tracker: since 2026-09-04 it rendered as a blank

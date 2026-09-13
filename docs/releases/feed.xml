@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 12 Sep 2026 18:45:55 +0000</lastBuildDate>
+<lastBuildDate>Sun, 13 Sep 2026 06:19:02 +0000</lastBuildDate>
+<item>
+<title>[Updated] LaserdiscGames (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20260912.rbf:2026-09-13T06:19:02+00:00</guid>
+<pubDate>Sun, 13 Sep 2026 06:19:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Space Ace.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-13 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Studio II (Console core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Studio-II</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bullet.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Combat School (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#combatsc</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Combat School (joystick).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/combatsc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Konami&lt;/p&gt;&lt;p&gt;Core: jtcomsc&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/comsc"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

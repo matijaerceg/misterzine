@@ -74,7 +74,7 @@
     .hero .shot:first-child, .hero .shot:last-child { flex: none; }
     .hero .shot:last-child { max-width: 75%; margin: 0 auto; }
   }
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin: 1rem 0; align-items: start; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .8rem; margin: 1rem 0; align-items: start; }
   /* (align-items: start matters: a stretched figure would make the mask canvas
      paint the 4:3 shots into a taller box, i.e. squash them; the tate shot
      sets the row height) */
@@ -137,9 +137,9 @@
 <main>
 
 <div class="hero">
-  <figure class="shot"><img src="img/list.png" width="640" height="480" alt="The release list on a horizontal 240p screen: titles with update dates, a divider marking your last look, and a screenshot pane with specs" loading="eager">
+  <figure class="shot"><img src="img/list.png" width="640" height="480" alt="The release list on a horizontal 240p screen: titles with update dates, Line of Fire selected, and a picture pane with its specs" loading="eager">
     <figcaption>Horizontal CRT or HDMI</figcaption></figure>
-  <figure class="shot"><img src="img/details-tate.png" width="480" height="640" alt="Game details on a rotated (tate) 240p screen" loading="eager">
+  <figure class="shot"><img src="img/list-tate.png" width="480" height="640" alt="The same release list on a rotated (tate) 240p screen, Strikers 1945 selected, the picture pane below the titles" loading="eager">
     <figcaption>Tate</figcaption></figure>
 </div>
 
@@ -186,8 +186,9 @@
 </div>
 
 <div class="gallery">
-  <figure class="shot"><img src="img/artwork.png" width="640" height="480" alt="Full-screen game artwork" loading="lazy"><figcaption>Full-screen artwork</figcaption></figure>
-  <figure class="shot"><img src="img/options.png" width="640" height="480" alt="The Options screen" loading="lazy"><figcaption>Options</figcaption></figure>
+  <figure class="shot"><img src="img/details-tate.png" width="480" height="640" alt="Raiden II's details on a tate screen: dates, maker, core and controls, and a version line offering 41 MRAs to launch" loading="lazy"><figcaption>Details, every version</figcaption></figure>
+  <figure class="shot"><img src="img/artwork.png" width="640" height="480" alt="Robotron: 2084 artwork filling the screen" loading="lazy"><figcaption>Full-screen artwork</figcaption></figure>
+  <figure class="shot"><img src="img/options.png" width="640" height="480" alt="The Options screen with the screensaver setting selected" loading="lazy"><figcaption>Options</figcaption></figure>
   <figure class="shot"><img src="img/filters-tate.png" width="480" height="640" alt="Filters on a tate screen" loading="lazy"><figcaption>Filters, tate</figcaption></figure>
 </div>
 

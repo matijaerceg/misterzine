@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-14
+
+- Release tracker: the Core column now names the core file a database actually ships, resolved the way MiSTer's own MRA loader does, so seven Coin-Op games (Black Heart, Captain America and The Avengers, Double Wings, Diet Go Go, Mania Challenge, Mat Mania, Thunder Dragon) read blkheart_mister and so on instead of the shorter name inside their MRA. MisterZine Frontend reported those games as not found on the card because it looked for the shorter name (issues #9 and #10); their Last Updated dates now follow the shipped builds too, as do Out Zone, Truxton and Hellfire, which pin an older Zero Wing build.
+
 ## 2026-09-12
 
 - Release tracker: now also tracks rmonic79's rmCores database, his own "rm" builds of cores he already ships through the MiSTer Distribution (Night Slashers and Seibu Cup Soccer today). The rm builds add CRT Adjust and V-Size on the analog output plus a pause overlay, under a separate rbf name so both builds fit on one card, which is why those games now appear twice, the rm build carrying an (rmCores) qualifier after the title. rmCores is an opt-in database with no update_all settings toggle, so its rows explain how to add it to downloader.ini; debut dates come from each game's first appearance in the database's history, and future rm releases and updates flow into the tracker and feeds automatically.

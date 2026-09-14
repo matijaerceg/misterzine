@@ -2852,15 +2852,64 @@ def _filter_tag_map():
     return out
 
 
+def _shipped_rbf_index(con):
+    """{source_id: {stem_lower: (rbf_key, display_stem)}} of every _Arcade/cores
+    file each db ships (core_files, dated or not). Feeds _resolve_shipped_rbf."""
+    idx = {}
+    for r in con.execute("SELECT source_id, path, rbf FROM core_files"):
+        stem = title_from_path(r["path"])
+        idx.setdefault(r["source_id"], {})[stem.lower()] = (r["rbf"], core_name(stem))
+    return idx
+
+
+def _resolve_shipped_rbf(source_id, tag, shipped):
+    """Resolve an MRA's <rbf> tag to the core file its db actually ships, the
+    way MiSTer's MRA loader does (support/arcade/mra_loader.cpp get_rbf): a
+    file matches when its name starts with the tag followed by `_` or `.`
+    (also with an `Arcade-` prefix), case-insensitive, and the greatest
+    filename wins. One deliberate difference: a tag that names a shipped core
+    outright keeps it (key-stable for every existing row) even when a longer
+    sibling would win MiSTer's tie-break; the prefix walk only runs when the
+    tag names nothing. Coin-Op leans on that rule: its MRAs say <rbf>blkheart</rbf>
+    while the file is blkheart_mister_20260909.rbf, so the tag alone matches
+    nothing on a card or in core_files (GitHub issues #9/#10: the on-device
+    app read those games as not installed, and the site never joined their
+    build date). Returns (core, rbf_key): `core` is what data.json shows and
+    the app looks for on the card (the tag when it already names a shipped
+    file, else the resolved stem minus its date), `rbf_key` the date-stripped
+    lowercase key core_files/core_hashes use. None when the db ships no
+    matching file (unresolved tags keep the raw value; see the export tripwire)."""
+    stems = (shipped or {}).get(source_id) or {}
+    if not tag or not stems:
+        return None
+    tl = tag.lower()
+    if tl in stems:  # names a shipped file outright (zerowing_20240404 pins)
+        return tag, stems[tl][0]
+    for key, disp in stems.values():
+        if key == tl:  # names a shipped core (the common case)
+            return tag, key
+    best = None
+    for stem in stems:
+        if stem.startswith(tl + "_") or stem.startswith("arcade-" + tl + "_") \
+                or stem == "arcade-" + tl:
+            if best is None or stem > best:
+                best = stem
+    if best is None:
+        return None
+    key, disp = stems[best]
+    return disp, key
+
+
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
              repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
-             core_files=None, ft_map=None, core_hashes=None):
+             core_files=None, ft_map=None, core_hashes=None, shipped_rbfs=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
     manufacturer = r["manufacturer"] or ""
     sn = ""
     forced_mt = None
+    core_key = None  # core_files/core_hashes key once the rbf tag is resolved
     if system == "arcade":
         title, forced_mt = (arcade_titles or {}).get(
             (r["source_id"], r["path"]), (r["title"], None))
@@ -2885,6 +2934,13 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # explains/disambiguates those clumps. Blank for the ~58 setname-less
         # Toaplan/SNK titles whose catalog row never captured an rbf.
         core = (r["rbf"] or "").strip()
+        # The tag names the core the way MiSTer resolves it, which need not be
+        # a filename (Coin-Op's <rbf>blkheart</rbf> loads blkheart_mister_*.rbf
+        # by prefix). Export the shipped file's name so the on-device app finds
+        # it on the card, and key the build-date/hash joins below on it too.
+        hit = _resolve_shipped_rbf(r["source_id"], core, shipped_rbfs)
+        if hit:
+            core, core_key = hit
     else:
         # the Core column shows (and links) the core name for non-arcade rows too
         core = core_name(r["title"])
@@ -2934,9 +2990,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # current exactly when its file matches the db's hash.
     bd, bh = "", ""
     if system == "arcade":
-        srcs = (core_files or {}).get(core.lower(), {})
+        core_key = core_key or core.lower()
+        srcs = (core_files or {}).get(core_key, {})
         bd = srcs.get(r["source_id"]) or max(srcs.values(), default="")
-        hashes = (core_hashes or {}).get(core.lower(), {})
+        hashes = (core_hashes or {}).get(core_key, {})
         if r["source_id"] in hashes:
             bh = hashes[r["source_id"]]
         elif hashes:
@@ -3171,6 +3228,28 @@ def warn_date_anomalies(con):
             print(f"::warning::{msg}")
 
 
+def warn_unshipped_rbfs(rows, shipped):
+    """Tripwire for the Black Heart failure mode (issues #9/#10): an arcade row
+    whose MRA <rbf> tag resolves to none of the files its db ships, even by
+    MiSTer's prefix rule (_resolve_shipped_rbf). Such a row exports a core
+    name nobody can find on a card, so the on-device app reads the game as
+    missing and the build-date join stays blank. Warn-only, like
+    warn_date_anomalies: on Actions the line surfaces as a run annotation.
+    Sources with no core_files at all are skipped (nothing to resolve
+    against), as are rows with no tag (the setname-less Toaplan/SNK rows)."""
+    for r in rows:
+        tag = (r["rbf"] or "").strip() if r["system"] == "arcade" else ""
+        if not tag or not shipped.get(r["source_id"]):
+            continue
+        if _resolve_shipped_rbf(r["source_id"], tag, shipped) is None:
+            msg = (f"UNSHIPPED RBF: '{r['title']}' ({r['source_id']} {r['path']}) names "
+                   f"core '{tag}' but its db ships no matching _Arcade/cores file - "
+                   f"the row exports a core nothing on a card will match")
+            log("  " + msg)
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::warning::{msg}")
+
+
 def cmd_export_web(args):
     con = connect()
     # The site lives at /releases (Pages still serves from docs/); the docs root
@@ -3232,6 +3311,9 @@ def cmd_export_web(args):
     for r in con.execute("SELECT source_id, rbf, build_date, hash FROM core_files "
                          "WHERE hash IS NOT NULL ORDER BY build_date"):
         core_hashes.setdefault(r["rbf"], {})[r["source_id"]] = r["hash"]
+    # every shipped _Arcade/cores file per db, for resolving MRA <rbf> tags
+    # that name a core by prefix rather than by filename (_resolve_shipped_rbf)
+    shipped_rbfs = _shipped_rbf_index(con)
     # fork parentage for _core_label: who really authored a MiSTer-devel fork
     fork_info = {r["repo"].lower(): r for r in con.execute(
         "SELECT repo, is_fork, parent_owner FROM arcade_repos")}
@@ -3247,6 +3329,7 @@ def cmd_export_web(args):
     # Drop 2-player link-cable duplicates of handhelds already listed 1-player.
     rows = [r for r in rows if not (
         r["kind"] == "core" and core_name(r["title"]) in DUPLICATE_VARIANT_CORES)]
+    warn_unshipped_rbfs(rows, shipped_rbfs)
     # arcade fill sources (cached; no-op if absent): DAT for year/manufacturer/
     # parent, catver for genre, and the image manifest's resolved setnames (many
     # backfilled rows carry a setname only there, not in catalog.setname).
@@ -3327,7 +3410,7 @@ def cmd_export_web(args):
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map,
-                     core_hashes) for r in rows]
+                     core_hashes, shipped_rbfs) for r in rows]
     # deep-link key persistence needs each row's catalog identity; stripped
     # again before data.json is written (_assign_row_keys pops them)
     for r, d in zip(rows, data):
@@ -3623,7 +3706,10 @@ def _write_feeds(outdir):
             by_title.setdefault(d.get("mt") or d["title"], d)
             by_title.setdefault(d["title"], d)
             if d.get("core"):
-                by_rbf.setdefault(d["core"].lower(), []).append(d)
+                # date-stripped: a row pinned to zerowing_20240404 belongs to
+                # the zerowing core's rebuild events (the event title is the
+                # new dated stem, keyed the same way below)
+                by_rbf.setdefault(core_name(d["core"]).lower(), []).append(d)
         elif d.get("core"):
             by_core.setdefault(d["core"].lower(), d)
     con = connect()

@@ -71,3 +71,64 @@ class CardStatusFieldTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ShippedRbfResolutionTests(unittest.TestCase):
+    """MRA <rbf> tags resolve to the db's shipped file the way MiSTer's loader
+    does (prefix + `_`/`.`, greatest filename wins); issues #9/#10."""
+    shipped = {"coinop": {
+        "blkheart_mister_20260909": ("blkheart_mister", "blkheart_mister"),
+        "zerowing_20240404": ("zerowing", "zerowing"),
+        "zerowing_mister_20251119": ("zerowing_mister", "zerowing_mister"),
+        "tdragon_mister_20260908": ("tdragon_mister", "tdragon_mister"),
+    }, "meathax": {
+        "arcade-bucky_20260812": ("arcade-bucky", "Arcade-Bucky"),
+    }}
+
+    def test_prefix_tag_exports_shipped_stem_and_joins_build(self):
+        row = mz._web_row(
+            arcade(source_id="coinop", rbf="blkheart", release_date="2026-09-09"),
+            core_files={"blkheart_mister": {"coinop": "2026-09-09"}},
+            core_hashes={"blkheart_mister": {"coinop": "dd" * 16}},
+            shipped_rbfs=self.shipped)
+        self.assertEqual(row["core"], "blkheart_mister")
+        self.assertEqual(row["bd"], "2026-09-09")
+        self.assertEqual(row["bh"], "dd" * 16)
+
+    def test_exact_core_tag_is_untouched(self):
+        self.assertEqual(mz._resolve_shipped_rbf("coinop", "Zerowing_Mister", self.shipped),
+                         ("Zerowing_Mister", "zerowing_mister"))
+
+    def test_dated_pin_keeps_its_name_but_keys_the_core(self):
+        # Out Zone pins zerowing_20240404; the card file IS that stem, the
+        # build-date join is on the zerowing core
+        self.assertEqual(mz._resolve_shipped_rbf("coinop", "zerowing_20240404", self.shipped),
+                         ("zerowing_20240404", "zerowing"))
+
+    def test_named_core_beats_longer_sibling(self):
+        # a bare 'zerowing' tag names a shipped core outright, so it stays that
+        # core (key-stable for every existing row) even though MiSTer's
+        # greatest-filename tie-break would load zerowing_mister_* from a card
+        # holding both; the prefix walk only runs when the tag names nothing
+        self.assertEqual(mz._resolve_shipped_rbf("coinop", "zerowing", self.shipped),
+                         ("zerowing", "zerowing"))
+
+    def test_prefix_picks_greatest_filename_like_mister(self):
+        shipped = {"x": {"foo_a_20250101": ("foo_a", "foo_a"), "foo_b_20240101": ("foo_b", "foo_b")}}
+        self.assertEqual(mz._resolve_shipped_rbf("x", "foo", shipped), ("foo_b", "foo_b"))
+
+    def test_prefix_needs_separator(self):
+        # 'tdrago' is not a prefix match: MiSTer wants `_` or `.` right after
+        self.assertIsNone(mz._resolve_shipped_rbf("coinop", "tdrago", self.shipped))
+
+    def test_arcade_prefixed_file(self):
+        self.assertEqual(mz._resolve_shipped_rbf("meathax", "bucky", self.shipped),
+                         ("Arcade-Bucky", "arcade-bucky"))
+
+    def test_unshipped_and_unknown_source_resolve_to_none(self):
+        self.assertIsNone(mz._resolve_shipped_rbf("coinop", "captaven", self.shipped))
+        self.assertIsNone(mz._resolve_shipped_rbf("jtbindb", "jt1942", self.shipped))
+        row = mz._web_row(arcade(source_id="coinop", rbf="captaven", release_date="2026-07-05"),
+                          core_files={}, core_hashes={}, shipped_rbfs=self.shipped)
+        self.assertEqual(row["core"], "captaven")
+        self.assertNotIn("bd", row)

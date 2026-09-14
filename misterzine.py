@@ -94,6 +94,11 @@ SOURCES = [
         "name": "rmCores (rmonic79)",
         "db_url": "https://raw.githubusercontent.com/rmonic79/rmcores/db/db.json.zip",
     },
+    {
+        "id": "theypsilon_unofficial_distribution",
+        "name": "theypsilon Unofficial Distribution",
+        "db_url": "https://raw.githubusercontent.com/theypsilon/Unofficial_Distribution_MiSTer/main/unofficialdb.json.zip",
+    },
 ]
 
 # Sources tracked only in part: source id -> the systems we list. A source
@@ -105,6 +110,8 @@ SOURCES = [
 # the game binaries. Those are software ports, not FPGA cores, and this is a
 # tracker of FPGA core releases — so only his arcade rows are listed.
 SOURCE_SYSTEMS = {
+    # MacLC also ships here; keep the existing official system listing.
+    "theypsilon_unofficial_distribution": {"arcade"},
     "meathax": {"arcade"},
 }
 
@@ -1141,6 +1148,7 @@ def join_core_repos_to_catalog(con):
 # 4th field: the folder holding the mainline MRAs (meathax nests his under a
 # vendor subfolder; everyone else uses the _Arcade root).
 MRA_REPOS = [
+    ("theypsilon_unofficial_distribution", "theypsilon/Unofficial_Distribution_MiSTer", "main", "_Arcade"),
     ("distribution_mister", "MiSTer-devel/Distribution_MiSTer", "main", "_Arcade"),
     ("jtbindb", "jotego/jtcores_mister", "main", "_Arcade"),
     # Coin-Op keeps db.json.zip on the `db` branch but the MRAs live on
@@ -1704,7 +1712,13 @@ RMCORES_FROZEN_DATES = {
     "rm Seibu Cup Soccer (set 1).mra": "2026-09-11",
 }
 
+# First public version: GX400-Friends/gx400-bin CHANGELOG.md, 2022-03-14.
+# The distribution import in 2026 is not the core's debut.
 OPTIN_DB_SOURCES = {
+    "theypsilon_unofficial_distribution": (
+        "GX400-Friends/gx400-bin", {},
+        {"Nemesis (ROM Version).mra": "2022-03-14",
+         "Nemesis (World, ROM Version).mra": "2022-03-14"}),
     "meathax": (MEATHAX_REPO, MEATHAX_CORE_REPOS, MEATHAX_FROZEN_DATES),
     "rmcores": (RMCORES_REPO, RMCORES_CORE_REPOS, RMCORES_FROZEN_DATES),
 }

@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-09-14
 
+- Added Nemesis from theypsilon’s Unofficial Distribution, available through Update All. Its original 2022 debut and shipped build date are preserved. Only arcade entries are tracked from this database; Macintosh LC remains listed through the official distribution.
+
 - Release tracker: the Core column now names the core file a database actually ships, resolved the way MiSTer's own MRA loader does, so seven Coin-Op games (Black Heart, Captain America and The Avengers, Double Wings, Diet Go Go, Mania Challenge, Mat Mania, Thunder Dragon) read blkheart_mister and so on instead of the shorter name inside their MRA. MisterZine Frontend reported those games as not found on the card because it looked for the shorter name (issues #9 and #10); their Last Updated dates now follow the shipped builds too, as do Out Zone, Truxton and Hellfire, which pin an older Zero Wing build.
 
 ## 2026-09-12

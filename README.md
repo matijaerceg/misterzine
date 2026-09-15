@@ -42,11 +42,32 @@ dashboard is public, linked as "Traffic Stats" in the header).
 - **Opt-in columns** via the Columns dropdown: Genre, ROM Name (MAME setname), and the
   arcade metadata set (Resolution, Rotation, Players, Controls, Flip) from the curated
   [MiSTer Arcade Database](https://github.com/Toryalai1/MiSTer_ArcadeDatabase). Titles MAD
-  hasn't catalogued yet show provisional gray values from mame2003-plus, replaced
-  automatically once verified data lands.
+  hasn't catalogued yet show provisional gray values from MAME, explicit core
+  launch-file metadata, and reviewed documentation. MAD replaces each fallback
+  automatically once it supplies that field.
 - Arcade titles are written the way humans write them, from MAME's descriptions
   ("Pac-Man", "Street Fighter II: The World Warrior"), not raw MRA filenames; discarded
   alternate names stay searchable.
+
+### Provisional arcade metadata
+
+MAD remains authoritative per field. Before MAD covers a game, current MAME
+supplements the legacy mame2003-plus cache; explicit MRA metadata can fill gaps,
+while existing legacy descriptions and hand-reviewed corrections are preserved.
+The `specs` command checks the latest official MAME release and derives a slim
+cache only when that release changes. `enrich-mra` saves launch-file specs by
+source and full path, so identically named files cannot cross-contaminate cores.
+
+Resolution accepts explicit MRA scan classes (15/24/31 kHz) or entries in
+`data/provisional_specs.json`, which records the reviewed sets and evidence.
+Pixel dimensions, screenshots and MAME presentation timings never imply a scan
+class. Flip remains MAD-only. MRA button totals that include Coin/Start or other
+system controls are rejected, and absent button counts are not interpreted as
+zero. Dedicated Mahjong panels retain their special-control description.
+
+The public feed keeps the existing `prov` array and adds `prov_src`, a map from
+provisional field names to source URLs (newline-separated when a description
+combines sources). Both markers disappear per field when MAD supplies it.
 
 **The detail panel**
 - Every row opens a panel: arcade titles show self-hosted native-resolution screenshots
@@ -287,7 +308,7 @@ python misterzine.py jtcores      # Jotego dates from the jtcores monorepo (incr
 python misterzine.py coinop       # Coin-Op dates from develop commit messages
 python misterzine.py genre        # arcade genre from MAME catver.ini (joined on setname)
 python misterzine.py mad          # arcade rotation/resolution/players/controls from MAD
-python misterzine.py specs        # provisional specs (mame2003-plus) for rows not in MAD
+python misterzine.py specs        # provisional specs from legacy/current MAME
 python misterzine.py mame-meta    # derive committed mame_meta.json.gz from the raw MAME DAT (local pass)
 python misterzine.py export       # write JSON/JSONL exports from the db
 python misterzine.py export-web   # write the static site (docs/) for GitHub Pages
@@ -383,7 +404,8 @@ data/
   exports/               # JSON/JSONL outputs (committed)
   cache/                 # gitignored except: image_manifest.json,
                          #   ArcadeDatabase.csv (MAD fallback),
-                         #   mame_meta.json.gz, mame2003_specs.json.gz
+                         #   mame_meta.json.gz, mame2003_specs.json.gz,
+                         #   mame_current_specs.json.gz, mra_specs.json
                          #   (committed so CI builds match local ones)
   snapshots/<source>/    # timestamped DB snapshots (diff inputs; gitignored)
   repos/                 # sparse Distribution clone for MRA metadata (gitignored)

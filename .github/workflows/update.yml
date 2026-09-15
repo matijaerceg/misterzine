@@ -41,7 +41,7 @@ jobs:
         run: python misterzine.py snapshot
 
       - name: Check feed field exports
-        run: python -m unittest test_controls test_card_status
+        run: python -m unittest test_controls test_card_status test_arcade_specs
 
       - name: Enrich new arcade titles (year/manufacturer/rbf/setname)
         run: python misterzine.py enrich-mra
@@ -69,10 +69,10 @@ jobs:
         continue-on-error: true
         run: python misterzine.py mad
 
-      - name: Provisional arcade specs (mame2003-plus)
-        # Refreshes the committed derived gz (rotation/players/controls per
-        # setname) used to gray-fill spec cells for titles MAD hasn't catalogued
-        # yet. Non-fatal: on a fetch hiccup export falls back to the checked-out gz.
+      - name: Provisional arcade specs (legacy and current MAME)
+        # Checks the latest official MAME release and downloads listxml only
+        # when it changes; refreshes legacy metadata independently. Both slim
+        # caches are committed so an upstream outage keeps the previous data.
         continue-on-error: true
         run: python misterzine.py specs
 
@@ -98,7 +98,7 @@ jobs:
             # events/dates, image_manifest.json records the screenshot backfill
             # (adb/libretro matches AND misses; misses on young rows retry), and
             # the MAD CSV is the fetch-failure fallback for the arcade metadata.
-            git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv data/cache/mame_meta.json.gz data/cache/mame2003_specs.json.gz
+            git add data/misterzine.sqlite data/cache/image_manifest.json data/cache/ArcadeDatabase.csv data/cache/mame_meta.json.gz data/cache/mame2003_specs.json.gz data/cache/mame_current_specs.json.gz data/cache/mra_specs.json
             git commit -m "Update: refresh releases ($(date -u +'%Y-%m-%d %H:%M') UTC)"
             # Retry absorbs a racing push landing on main between our
             # checkout and push.

@@ -22,6 +22,8 @@ data/cache/*
 # provisional gray-fill for arcade rows the curated Arcade Database hasn't
 # reached yet; committed so the daily build works even if the fetch fails.
 !data/cache/mame2003_specs.json.gz
+!data/cache/mame_current_specs.json.gz
+!data/cache/mra_specs.json
 __pycache__/
 *.pyc
 

@@ -528,7 +528,7 @@
   td.date .dv { white-space: nowrap; }
   tr:hover td { background: var(--row-hover); }
   .build { color: var(--muted); }
-  /* provisional spec cells (mame2003-plus, pending the curated Arcade Database) */
+  /* provisional spec cells (pending the curated Arcade Database) */
   td.prov, .prov { color: var(--muted); font-style: italic; }
   .prov em { font-style: normal; opacity: .7; font-size: .85em; }
   /* boot-rotation pill: rides the Rotation value like the NEW/beta badges when
@@ -1745,9 +1745,9 @@ const HEADER_TIPS = {
   src: 'Which downloader database ships this entry',
 };
 // Default renderer for the optional spec columns. Cells filled provisionally
-// from mame2003-plus (pending the curated Arcade Database) render grayed with a
+// from supplemental sources (pending the curated Arcade Database) render grayed with a
 // tooltip; d.prov lists which keys on this row are provisional.
-const PROV_TITLE = 'Provisional: from MAME data, pending the Arcade Database';
+const PROV_TITLE = 'Provisional: from MAME, core launch files or reviewed documentation; pending the Arcade Database';
 for (const c of COLUMNS) if (!c.cell) c.cell = d =>
   (d.prov && d.prov.includes(c.k))
     ? '<td class="prov" title="' + PROV_TITLE + '">' + esc(d[c.k] || '') + '</td>'
@@ -2299,7 +2299,7 @@ colsMenu.innerHTML = COLUMNS.map(c =>
   '> ' + c.label + '</label>').join('') +
   '<button class="reset" id="colsreset">Reset to default</button>' +
   '<p class="colnote"><span class="prov">Grayed</span> spec values are provisional ' +
-  '(from MAME data), pending the curated Arcade Database.</p>';
+  '(from MAME, core launch files or reviewed documentation), pending the curated Arcade Database.</p>';
 const colsReset = document.getElementById('colsreset');
 function syncColsReset() {
   const def = defaultCols();
@@ -3167,7 +3167,7 @@ function detailHTML(d) {
   if (d.year) rows.push(['Original year', esc(d.year) + agoSpan(yearAge(d.year)), true]);
   // arcade hardware metadata (MiSTer Arcade Database) — always shown here,
   // even when the matching table columns are toggled off. Provisional values
-  // (mame2003-plus, pending the curated DB) render grayed with a "(provisional)" tag.
+  // (pending the curated DB) render grayed with a "(provisional)" tag.
   const specRow = (label, key) => {
     if (!d[key]) return;
     if (d.prov && d.prov.includes(key))

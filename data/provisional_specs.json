@@ -1,0 +1,42 @@
+{
+  "description": "Reviewed blank-fill metadata. MAD always wins. Resolution describes the native scan class, not optional scaling or every supported output mode. No automatic inference from MAME raster dimensions.",
+  "reviewed": "2026-09-14",
+  "groups": [
+    {
+      "setnames": ["abcop", "aburner", "aburner2", "gpriders", "lastsurv", "loffire", "rachero", "smgp", "thndrbld"],
+      "values": {"res": "15kHz"},
+      "sources": ["https://github.com/mamedev/mame/blob/mame0289/src/mame/sega/segaxbd.cpp"],
+      "evidence": "X Board raw screen clock 50 MHz / 8, 400 clocks per line: 15.625 kHz. Applies only to these reviewed mainline sets."
+    },
+    {
+      "setnames": ["dynagear", "cairblad", "drifto94", "stmblade", "twineag2", "ultrax", "vasara", "vasara2", "mslider"],
+      "values": {"res": "15kHz"},
+      "sources": ["https://github.com/meathax/SVV/blob/main/README.md", "https://github.com/mamedev/mame/blob/mame0289/src/mame/seta/ssv.cpp"],
+      "evidence": "Core README explicitly describes native 15 kHz with scandoubling off. MAME: 42.954545 MHz / 6 / 454 = 15.77 kHz."
+    },
+    {
+      "setnames": ["dorunrun", "idsoccer", "jjack", "kickridr", "docastle", "dowild"],
+      "values": {"res": "15kHz"},
+      "sources": ["https://github.com/mamedev/mame/blob/mame0289/src/mame/universal/docastle.cpp"],
+      "evidence": "Native CRTC timing: 9.828 MHz / 2 / 312 = 15.75 kHz. Hardware-source provisional value; optional FPGA output modes are not asserted."
+    },
+    {
+      "setnames": ["btlkroad", "gunbird", "samuraia", "s1945", "tengai"],
+      "values": {"res": "15kHz"},
+      "sources": ["https://github.com/mamedev/mame/blob/mame0289/src/mame/psikyo/psikyo.cpp"],
+      "evidence": "Raw screen timing: 14.318181 MHz / 2 / 456 = 15.70 kHz. PCB sync measurements in the same driver corroborate this."
+    },
+    {
+      "setnames": ["jojoban"],
+      "values": {"res": "15kHz", "buttons": 4},
+      "sources": ["https://github.com/mamedev/mame/blob/mame0289/src/mame/capcom/cps3.cpp"],
+      "evidence": "CPS3 native H sync is approximately 15.734 kHz. cps3_jojo names Light, Medium, Strong and Stand; the generic six-button port definition also includes unused inputs, so the listxml count is not the action count."
+    },
+    {
+      "setnames": ["elim2", "elim2a"],
+      "values": {"ctl": "buttons only · 4 buttons", "buttons": 4},
+      "sources": ["https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/master/README.md", "https://github.com/mamedev/mame/blob/mame0289/src/mame/sega/segag80v.cpp"],
+      "evidence": "Left/right are physical buttons, plus the two action inputs. Do not describe the cabinet as an 8-way joystick. Resolution remains unspecified: this vector core supports multiple raster scan classes."
+    }
+  ]
+}

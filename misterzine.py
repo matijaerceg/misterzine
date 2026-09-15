@@ -41,6 +41,7 @@ import zlib
 from collections import Counter
 from io import BytesIO
 from pathlib import Path
+from arcade_specs import merge_specs, parse_mra_specs, parse_current_specs
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
@@ -1214,10 +1215,17 @@ def cmd_enrich_mra(args):
 
     con = connect()
     grand = 0
+    mra_specs = local_mra_specs()
     for source_id, full_name, branch, mradir in MRA_REPOS:
         repodir = _sparse_arcade_clone(full_name, branch, mradir)
         meta = {}
+        source_specs = {}
         for mra in (repodir / mradir).glob("*.mra"):
+            spec = parse_mra_specs(mra.read_text(encoding="utf-8", errors="ignore"),
+                f"https://github.com/{full_name}/blob/{branch}/" +
+                urllib.parse.quote(f"{mradir}/{mra.name}"))
+            if spec:
+                source_specs[f"{mradir}/{mra.name}"] = spec
             try:
                 root = ET.parse(mra).getroot()
                 def gx(tag):
@@ -1251,6 +1259,11 @@ def cmd_enrich_mra(args):
                 n += 1
         log(f"  {source_id}: enriched {n} titles from {len(meta)} MRAs")
         grand += n
+        mra_specs[source_id] = source_specs
+        # Persist completed sources independently if a later clone fails.
+        CACHEDIR.mkdir(parents=True, exist_ok=True)
+        MRA_SPECS_JSON.write_text(json.dumps(mra_specs, ensure_ascii=False, sort_keys=True,
+            separators=(",", ":")), encoding="utf-8")
     con.commit()
     con.close()
     log(f"enrich-mra done: {grand} arcade titles enriched.")
@@ -2043,11 +2056,15 @@ def cmd_mad(args):
 # Rotation/Players/Controls/Special cells for brand-new arcade titles MAD hasn't
 # catalogued yet. Values are shown grayed (provisional) and MAD overwrites them
 # the moment it catches up. Only ~22 MB, so we derive a slim gz and commit that
-# (like mame_meta.json.gz); resolution (a CRT scan class) and flip aren't
-# derivable here and stay MAD-only.
+# (like mame_meta.json.gz). Current MAME supplements the legacy data; reviewed
+# native signal classes and explicit MRA specs fill additional gaps. Flip
+# remains MAD-only. Never derive a scan class from MAME's presentation raster.
 SPECS_URL = ("https://raw.githubusercontent.com/libretro/mame2003-plus-libretro"
              "/master/metadata/mame2003-plus.xml")
 SPECS_GZ = CACHEDIR / "mame2003_specs.json.gz"
+CURRENT_SPECS_GZ = CACHEDIR / "mame_current_specs.json.gz"
+MRA_SPECS_JSON = CACHEDIR / "mra_specs.json"
+REVIEWED_SPECS_JSON = DATA / "provisional_specs.json"
 _SPECS_GAME = re.compile(r'<game\s+name="([^"]+)"[^>]*>(.*?)</game>', re.S)
 # movement controls -> the "move" half of the Controls cell (parse_mad's format)
 _SPECS_MOVE = {
@@ -2103,11 +2120,31 @@ def parse_specs(text):
 
 
 def local_specs():
-    """Provisional-specs map from the committed gz only (no network); {} if absent."""
-    if not SPECS_GZ.exists():
-        return {}
+    """Merge committed sources offline; reviewed values take precedence."""
     import gzip
-    return json.loads(gzip.decompress(SPECS_GZ.read_bytes()).decode("utf-8"))
+    legacy = json.loads(gzip.decompress(SPECS_GZ.read_bytes())) if SPECS_GZ.exists() else {}
+    current = json.loads(gzip.decompress(CURRENT_SPECS_GZ.read_bytes()))["specs"] if CURRENT_SPECS_GZ.exists() else {}
+    out = {}
+    for sn in legacy.keys() | current.keys():
+        old = {**legacy[sn], "_source": SPECS_URL} if sn in legacy else {}
+        # Supplement existing provisional descriptions rather than replacing
+        # them wholesale with generic emulator input layouts. Corrections are
+        # reviewed explicitly; current MAME resolves new names and omissions.
+        out[sn] = {**merge_specs(current.get(sn), old), "_legacy": old}
+    if REVIEWED_SPECS_JSON.exists():
+        for group in json.loads(REVIEWED_SPECS_JSON.read_text(encoding="utf-8"))["groups"]:
+            for sn in group["setnames"]:
+                previous = out.get(sn, {}).get("_reviewed", {})
+                reviewed = {**previous, **group["values"], "_sources": {
+                    **previous.get("_sources", {}),
+                    **{k: "\n".join(group["sources"]) for k in group["values"]}}}
+                out[sn] = {**merge_specs(out.get(sn), reviewed), "_reviewed": reviewed,
+                           "_legacy": out.get(sn, {}).get("_legacy", {})}
+    return out
+
+
+def local_mra_specs():
+    return json.loads(MRA_SPECS_JSON.read_text(encoding="utf-8")) if MRA_SPECS_JSON.exists() else {}
 
 
 # mame2003-plus values that contradict the current MAME driver source (0.78-era
@@ -2132,16 +2169,49 @@ def specs_for(setname, specs, dat):
         parent = (dat.get(sl) or {}).get("parent")
         e = specs.get(parent, {}) if parent else {}
     fix = SPECS_CORRECTIONS.get(sl)
-    return {**e, **fix} if fix else e
+    if fix:
+        driver = "seibu/legionna.cpp" if sl == "godzilla" else "snk/snk6502.cpp"
+        reviewed = {**fix, "_source": "https://github.com/mamedev/mame/blob/master/src/mame/" + driver}
+        return {**merge_specs(e, reviewed), "_reviewed": reviewed}
+    return e
 
 
 def cmd_specs(args):
     import gzip
-    specs = parse_specs(http_get(SPECS_URL).decode("utf-8", errors="ignore"))
-    blob = json.dumps(specs, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
-    SPECS_GZ.write_bytes(gzip.compress(blob, mtime=0))
-    log(f"specs: {len(specs)} setname->specs from mame2003-plus.xml "
-        f"-> {SPECS_GZ} ({SPECS_GZ.stat().st_size/1024:.0f} KB gz)")
+    CACHEDIR.mkdir(parents=True, exist_ok=True)
+    # Independent refreshes: an outage at one host must not prevent the other.
+    errors = []
+    try:
+        specs = parse_specs(http_get(SPECS_URL).decode("utf-8", errors="ignore"))
+        if not specs:
+            raise ValueError("empty legacy specs response")
+        blob = json.dumps(specs, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        SPECS_GZ.write_bytes(gzip.compress(blob, mtime=0))
+        log(f"specs: {len(specs)} legacy MAME entries")
+    except Exception as exc:
+        errors.append(f"legacy MAME: {exc}")
+    try:
+        release = gh_api("/repos/mamedev/mame/releases/latest")
+        tag = release["tag_name"]
+        cached = json.loads(gzip.decompress(CURRENT_SPECS_GZ.read_bytes())) if CURRENT_SPECS_GZ.exists() else {}
+        if cached.get("release") != tag or cached.get("schema") != 1:
+            asset = next(a for a in release["assets"] if a["name"] == tag + "lx.zip")
+            log(f"  fetching official {tag} listxml ...")
+            with zipfile.ZipFile(BytesIO(http_get(asset["browser_download_url"]))) as archive:
+                with archive.open(next(n for n in archive.namelist() if n.endswith(".xml"))) as xml:
+                    specs = parse_current_specs(xml, tag)
+            if len(specs) < 1000:
+                raise ValueError("incomplete current MAME specs response")
+            blob = json.dumps({"schema": 1, "release": tag, "specs": specs}, ensure_ascii=False,
+                              sort_keys=True, separators=(",", ":")).encode("utf-8")
+            CURRENT_SPECS_GZ.write_bytes(gzip.compress(blob, mtime=0))
+            log(f"specs: {len(specs)} current MAME entries")
+        else:
+            log(f"specs: {tag} already cached")
+    except Exception as exc:
+        errors.append(f"current MAME: {exc}")
+    if errors:
+        raise RuntimeError("; ".join(errors) + "; retained existing caches")
 
 
 # --- command: export ------------------------------------------------------
@@ -2916,7 +2986,7 @@ def _resolve_shipped_rbf(source_id, tag, shipped):
 
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
              repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
-             core_files=None, ft_map=None, core_hashes=None, shipped_rbfs=None):
+             core_files=None, ft_map=None, core_hashes=None, shipped_rbfs=None, mra_specs=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -3102,28 +3172,37 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
             row["scr"] = scr
         # MAD metadata (rotation/resolution/players/controls/flip), display-ready
         row.update(mad_for(sn, arcade_mad or {}, arcade_meta or {}))
-        # provisional fill for cells MAD hasn't catalogued yet: mame2003-plus
-        # supplies rotation/players/controls/special for brand-new titles. MAD
+        # Provisional MAME, explicit launch-file and reviewed source metadata.
+        # Resolution is reviewed separately, never guessed from pixel size. MAD
         # always wins (we only fill blanks); `prov` flags these for gray display
         # and they self-heal — once MAD has the value, the cell is no longer
         # blank so no provisional fill happens.
         sp = specs_for(sn, arcade_specs or {}, arcade_meta or {})
-        # hand-pinned specs for rows absent from both sources; real MAME data
-        # (sp) wins over a pin for any field both carry
+        # Keep previously hand-reviewed descriptions when modern MAME adds a
+        # generic input layout for the same game.
         pin = arcade_specs_pin(sn, title)
-        if pin:
-            sp = {**pin, **sp}
-        prov = [k for k in ("rot", "plr", "ctl", "spc")
+        mra = (mra_specs or {}).get(r["source_id"], {}).get(r["path"], {})
+        reviewed = sp.get("_reviewed", {})
+        legacy = sp.get("_legacy", {})
+        sp = merge_specs(sp, mra, legacy,
+                         {**pin, "_source": "https://github.com/matijaerceg/misterzine/blob/main/misterzine.py"}, reviewed)
+        prov = [k for k in ("rot", "res", "plr", "ctl", "spc")
                 if not row.get(k) and sp.get(k)]
         for k in prov:
             row[k] = sp[k]
         # Zero is a supplied value. Never replace a curated zero with a MAME
         # count, or infer zero from an older cached description that omitted it.
-        if "buttons" not in row and "buttons" in sp:
+        # Don't introduce generic current-MAME button slots into a curated
+        # movement-only description. Preserve legacy numeric fills already in
+        # the public feed; their later correction is a separate reviewed change.
+        legacy_buttons = legacy.get("buttons")
+        if "buttons" not in row and "buttons" in sp and (
+                not row.get("ctl") or "ctl" in prov or legacy_buttons is not None):
             row["buttons"] = sp["buttons"]
             prov.append("buttons")
         if prov:
             row["prov"] = prov
+            row["prov_src"] = {k: sp["_sources"][k] for k in prov if sp["_sources"].get(k)}
         # hardware-verified boot orientation where the core boots the opposite
         # vertical rotation from the cabinet (see ARCADE_BOOT_ROTATION).
         # Compared against the row's final rot (MAD or provisional) each build,
@@ -3353,6 +3432,7 @@ def cmd_export_web(args):
     arcade_mad = local_mad()
     # provisional specs (rotation/players/controls) for rows MAD hasn't reached
     arcade_specs = local_specs()
+    mra_specs = local_mra_specs()
     # reverse index for rows with no setname anywhere: recover it from the title
     dat_desc_index = build_dat_desc_index(arcade_meta)
     # update_all filter terms for the favorites export (fresh db fetch; fail-soft)
@@ -3424,7 +3504,7 @@ def cmd_export_web(args):
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map,
-                     core_hashes, shipped_rbfs) for r in rows]
+                     core_hashes, shipped_rbfs, mra_specs) for r in rows]
     # deep-link key persistence needs each row's catalog identity; stripped
     # again before data.json is written (_assign_row_keys pops them)
     for r, d in zip(rows, data):
@@ -4168,7 +4248,7 @@ def cmd_build(args):
         cmd_enrich_mra(args)   # year/manufacturer/rbf/setname from MRA XML (clones repos)
     cmd_genre(args)            # arcade genre from cached catver + DAT parent fallback (offline)
     cmd_mad(args)              # arcade metadata (rotation/players/controls) from MAD
-    cmd_specs(args)            # provisional specs (mame2003-plus) for rows not yet in MAD
+    cmd_specs(args)            # legacy/current MAME supplemental specs
     cmd_export(args)
     cmd_export_web(args)       # also re-tags screenshot dims via _retag_image_dims()
     cmd_stats(args)
@@ -4208,7 +4288,7 @@ def main():
     mp = sub.add_parser("mad", help="fetch arcade metadata (rotation/players/controls) from the MiSTer Arcade Database")
     mp.set_defaults(func=cmd_mad)
 
-    spp = sub.add_parser("specs", help="fetch provisional arcade specs (mame2003-plus) for rows not yet in MAD")
+    spp = sub.add_parser("specs", help="refresh legacy/current MAME provisional arcade specs")
     spp.set_defaults(func=cmd_specs)
 
     mmp = sub.add_parser("mame-meta", help="derive committed mame_meta.json.gz from the local raw MAME DAT (local pass)")

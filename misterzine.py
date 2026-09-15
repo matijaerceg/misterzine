@@ -2984,9 +2984,36 @@ def _resolve_shipped_rbf(source_id, tag, shipped):
     return disp, key
 
 
+def arcade_family(sn, meta):
+    """Known MAME clone root; unknown or broken ancestry has no family."""
+    name = (sn or "").strip().lower()
+    seen = set()
+    while name and name not in seen:
+        entry = (meta or {}).get(name)
+        if entry is None:
+            return ""
+        seen.add(name)
+        parent = (entry.get("parent") or "").strip().lower()
+        if not parent or parent == name:
+            return name
+        name = parent
+    return ""
+
+
+def arcade_family_members(meta):
+    """Known clone setnames per root, for MRAs without parent/ZIP metadata."""
+    members = {}
+    for name in meta or {}:
+        root = arcade_family(name, meta)
+        if root and name != root:
+            members.setdefault(root, []).append(name)
+    return {root: sorted(names) for root, names in members.items()}
+
+
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
              repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
-             core_files=None, ft_map=None, core_hashes=None, shipped_rbfs=None, mra_specs=None):
+             core_files=None, ft_map=None, core_hashes=None, shipped_rbfs=None, mra_specs=None,
+             family_members=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -3162,6 +3189,13 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # key (img), which can be a shared/borrowed setname.
         if sn:
             row["sn"] = sn
+            family = arcade_family(sn, arcade_meta)
+            if family:
+                row["family"] = family
+                members = (family_members if family_members is not None
+                           else arcade_family_members(arcade_meta)).get(family, [])
+                if members:
+                    row["family_sets"] = members
         # multi-monitor cabinets: 2 or 3 screens, from the MAME desc qualifier
         # ("(dual screen)"/"(triple screen)") or the ARCADE_SCREENS pins;
         # omitted for ordinary single-screen games
@@ -3502,9 +3536,10 @@ def cmd_export_web(args):
             else:
                 clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
+    family_members = arcade_family_members(arcade_meta)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map,
-                     core_hashes, shipped_rbfs, mra_specs) for r in rows]
+                     core_hashes, shipped_rbfs, mra_specs, family_members) for r in rows]
     # deep-link key persistence needs each row's catalog identity; stripped
     # again before data.json is written (_assign_row_keys pops them)
     for r, d in zip(rows, data):

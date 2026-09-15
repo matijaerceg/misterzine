@@ -41,7 +41,7 @@ jobs:
         run: python misterzine.py snapshot
 
       - name: Check feed field exports
-        run: python -m unittest test_controls test_card_status test_arcade_specs
+        run: python -m unittest test_controls test_card_status test_arcade_specs test_family
 
       - name: Enrich new arcade titles (year/manufacturer/rbf/setname)
         run: python misterzine.py enrich-mra

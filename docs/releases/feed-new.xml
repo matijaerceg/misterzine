@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sat, 12 Sep 2026 16:24:02 +0000</lastBuildDate>
+<lastBuildDate>Wed, 16 Sep 2026 03:52:34 +0000</lastBuildDate>
+<item>
+<title>[New] Appoooh (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#appoooh</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Appoooh.mra:2026-09-16T03:52:34+00:00</guid>
+<pubDate>Wed, 16 Sep 2026 03:52:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;Sports / 1984 / Sanritsu / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-Appoooh&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-16 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Robo Wres 2001 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#robowres</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Robo Wres 2001.mra:2026-09-16T03:52:34+00:00</guid>
+<pubDate>Wed, 16 Sep 2026 03:52:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/robowres.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Sanritsu / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-Appoooh&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-16 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Super A'Can (Console core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#SuperAcan</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hgkairak.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop / 1998 / Psikyo&lt;/p&gt;&lt;p&gt;Core: PsikyoSH2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Tetris: The Absolute - The Grand Master 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tgm2</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Tetris The Absolute - The Grand Master 2.mra:2026-08-17T21:01:43+00:00</guid>
-<pubDate>Mon, 17 Aug 2026 21:01:43 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tgm2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2000 / Arika&lt;/p&gt;&lt;p&gt;Core: PsikyoSH2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Chuka Taisen (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#chukatai</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Chuka Taisen (World) (P0-028-A PCB).mra:2026-08-16T19:16:34+00:00</guid>
-<pubDate>Sun, 16 Aug 2026 19:16:34 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/chukatai.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Taito Corporation Japan&lt;/p&gt;&lt;p&gt;Core: jtkiwi&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-16 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kiwi"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

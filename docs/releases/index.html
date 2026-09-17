@@ -32,7 +32,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="../nav.css"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="../nav.css?v=2"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -1090,7 +1090,7 @@
 </main>
 <aside id="panel" hidden></aside>
 <script src="../mask.js?v=4"></script>
-<script src="../theme.js"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
+<script src="../theme.js?v=2"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)

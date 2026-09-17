@@ -21,7 +21,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=2"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -232,7 +232,7 @@
 
 </div>
 <script src="../mask.js?v=4"></script>
-<script src="../theme.js"></script><!-- shared theme picker -->
+<script src="../theme.js?v=2"></script><!-- shared theme picker -->
 <script>
   // CRT slot mask over the app screenshots, in device pixels (mask.js). No
   // worn-tube blur: these are UI frames whose 6 px text must stay readable.

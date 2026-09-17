@@ -16,7 +16,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=2"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -113,7 +113,7 @@
 </footer>
 
 </div>
-<script src="../theme.js"></script>
+<script src="../theme.js?v=2"></script>
 <script>
 (function () {
   // the account service; a localhost copy of the site may point at a local

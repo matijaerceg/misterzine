@@ -172,6 +172,11 @@ It consumes this site's published files directly: `releases/meta.json` (freshnes
 field names, date formats, row keys and image file names must stay stable: add fields
 freely, never rename or remove one without a deprecation period.
 
+For arcade games it finds on the card that the catalogue does not list, the Frontend asks
+a separate image service, `images.misterzine.fyi/snap/<setname>.png`, a Cloudflare Worker
+over an R2 bucket seeded from the progettoSNAPS packs; source and setup in
+[`images/`](images/). `docs/images` is unchanged by it.
+
 ### Accounts (favorites that follow you)
 
 Favorites work without an account: stars are saved in the browser, and the star menu's
@@ -373,6 +378,9 @@ Arcade screenshots are self-hosted at native resolution under
   to canvas and rendered at the viewer's native device pixels.
 - `data/cache/image_manifest.json` (committed) ties images to rows and records misses so
   runs don't re-resolve them.
+- `tools/seed_r2.py`: fills the image service's R2 bucket with the whole snap and title
+  packs by setname (see [`images/README.md`](images/README.md)); a manual local step
+  like the progettoSNAPS pass, rerun on a pack version bump.
 
 The daily CI job auto-fetches libretro shots for brand-new titles (progettoSNAPS can't
 run on Actions); the native-res progettoSNAPS pass stays a manual local step.

@@ -42,3 +42,13 @@ __pycache__/
 api/.dev.vars
 api/.wrangler/
 api/node_modules/
+
+# image service (Cloudflare Worker + R2): wrangler state and test tooling
+images/.dev.vars
+images/.wrangler/
+images/node_modules/
+images/package-lock.json
+# ...and the seeder's staging area (whole progettoSNAPS packs, extracted)
+data/cache/r2_stage/
+# ...but keep the seed summary, which /healthz mirrors
+!data/cache/r2_seed.json

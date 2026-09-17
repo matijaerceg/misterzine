@@ -134,10 +134,14 @@ your browser. Signing in with Google one day and GitHub another creates two sepa
 <h2>MisterZine Frontend (the app on your MiSTer)</h2>
 <p>The <a href="../frontend/">Frontend</a> runs on your own MiSTer and stores everything it keeps (favorites,
    filters, settings, the cached catalogue and pictures) on your SD card. To stay current it fetches the
-   catalogue and screenshots from misterzine.fyi when it starts and every thirty minutes. Those requests
-   carry no account, device identifier or anything else about you; they are ordinary downloads served by
-   GitHub Pages. It sends nothing anywhere else, and it has no analytics. Running Update All from inside it
-   runs your own Downloader with your own settings. Uninstalling removes its files from the card.</p>
+   catalogue and screenshots from misterzine.fyi (GitHub Pages) when it starts and every thirty minutes.
+   For arcade games on your card that the catalogue does not list, it asks images.misterzine.fyi (a
+   Cloudflare Worker with storage) for a screenshot by the game's MAME set name. Those requests carry no
+   account, device identifier or anything else about you; the image service keeps no logs beyond
+   Cloudflare's aggregate analytics. When it lacks a picture, the service itself may fetch it once from
+   Arcade Database or libretro-thumbnails; your MiSTer never contacts them. The app sends nothing anywhere
+   else, and it has no analytics. Running Update All from inside it runs your own Downloader with your own
+   settings. Uninstalling removes its files from the card.</p>
 
 <h2>Analytics</h2>
 <p>Page views are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>,
@@ -149,7 +153,7 @@ There are no ads and no other trackers.</p>
 <ul>
   <li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> serves the site and, like any web host, sees the usual server logs.</li>
   <li>Google and GitHub handle sign-in under their own policies. MisterZine asks them only for your ID and email.</li>
-  <li>Cloudflare hosts the account service.</li>
+  <li>Cloudflare hosts the account service and the image service used by the Frontend.</li>
   <li>Zaparoo Online is contacted only when you choose to launch through it.</li>
 </ul>
 

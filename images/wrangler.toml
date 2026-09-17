@@ -1,0 +1,31 @@
+# misterzine image service (Cloudflare Worker + R2). See README.md.
+name = "misterzine-images"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Served at images.misterzine.fyi (a Workers custom domain; the zone is on
+# Cloudflare DNS). Comment this block out to deploy on the workers.dev URL first.
+routes = [
+  { pattern = "images.misterzine.fyi", custom_domain = true }
+]
+
+[vars]
+# the site, for the CORS allow-list of non-image routes
+SITE_ORIGIN = "https://misterzine.fyi"
+DEV_ORIGINS = ""
+# "1" lets a miss fetch the picture once from Arcade Database, then
+# libretro-thumbnails, and keep it; "0" serves the seed only
+UPSTREAM_ENABLED = "0"
+# at most this many upstream fetches per hour across the whole service
+UPSTREAM_HOURLY_CAP = "60"
+# a miss is remembered this long before it is tried again, and after
+# NEG_MAX_TRIES misses it is remembered for good
+NEG_TTL_DAYS = "30"
+NEG_MAX_TRIES = "3"
+# how long one in-flight upstream fetch blocks a second one for the same key
+LOCK_SECONDS = "30"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "misterzine-images"
+preview_bucket_name = "misterzine-images-dev"

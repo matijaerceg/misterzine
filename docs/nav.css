@@ -20,8 +20,9 @@
 .segnav { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; overflow: hidden;
           border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
 .pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap;
-        text-align: center; text-transform: uppercase; letter-spacing: .04em; font-size: .78rem;
-        padding: .38rem .95rem; }
+        font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;  /* narrow face: the row wraps later (every page loads it) */
+        text-align: center; text-transform: uppercase; letter-spacing: .04em; font-size: .82rem;
+        padding: .38rem .85rem; }
 .pill + .pill { border-left: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hair)); }
 .pill:hover { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); }
 .pill[aria-current] { background: var(--accent); color: var(--bg); cursor: default; }

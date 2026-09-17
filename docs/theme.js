@@ -31,10 +31,13 @@
     var room = document.documentElement.clientHeight - mlist.getBoundingClientRect().top - 8;
     if (mlist.scrollHeight > room) mlist.style.maxHeight = room + 'px';
   }
-  // hover tips for menu rows carrying data-tip (the Discord rows): our own
-  // popover, never the native title tooltip. It sits beside the menu, to its
-  // left, level with the row; with no room there (phones) it goes under the
-  // menu. Click-through, so leaving the row closes it at once.
+  // Hover tips: our own popover for every element carrying data-tip (header
+  // buttons, menu rows, the status line), never the native title tooltip. A
+  // site-menu row's tip sits beside the menu, to its left, level with the row
+  // (under the menu when there's no room, i.e. phones); anything else gets it
+  // just below itself, kept on-screen. Click-through, so leaving the element
+  // closes it at once. The release tracker's table badges (td *) keep their
+  // own popover and are skipped here.
   var tip = null;
   function closeTip() { if (tip) { tip.remove(); tip = null; } }
   function openTip(a) {
@@ -43,25 +46,32 @@
     tip.className = 'menutip';
     tip.textContent = a.getAttribute('data-tip');
     document.body.appendChild(tip);
-    var m = mlist.getBoundingClientRect(), r = a.getBoundingClientRect();
-    var w = tip.offsetWidth, h = tip.offsetHeight;
-    if (m.left - w - 6 >= 8) {
-      tip.style.left = (m.left - w - 6) + 'px';
+    var r = a.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    var list = mlist && mlist.contains(a) ? mlist.getBoundingClientRect() : null;
+    if (list && list.left - w - 6 >= 8) {
+      tip.style.left = (list.left - w - 6) + 'px';
       tip.style.top = Math.max(8, Math.min(r.top, innerHeight - h - 8)) + 'px';
+    } else if (list) {
+      tip.style.left = Math.max(8, list.right - w) + 'px';
+      tip.style.top = (list.bottom + 6) + 'px';
     } else {
-      tip.style.left = Math.max(8, m.right - w) + 'px';
-      tip.style.top = (m.bottom + 6) + 'px';
+      tip.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
+      tip.style.top = (r.bottom + 6 + h <= innerHeight ? r.bottom + 6 : Math.max(8, r.top - h - 6)) + 'px';
     }
   }
-  function tipTarget(e) { return e.target.closest ? e.target.closest('[data-tip]') : null; }
+  function tipTarget(e) {
+    var a = e.target.closest ? e.target.closest('[data-tip]') : null;
+    return a && !a.closest('td') ? a : null;
+  }
   function leaveTip(e) { var a = tipTarget(e); if (a && !a.contains(e.relatedTarget)) closeTip(); }
+  if (matchMedia('(hover: hover)').matches) {
+    document.addEventListener('mouseover', function (e) { var a = tipTarget(e); if (a) openTip(a); });
+    document.addEventListener('mouseout', leaveTip);
+  }
+  document.addEventListener('focusin', function (e) { var a = tipTarget(e); if (a) openTip(a); });
+  document.addEventListener('focusout', leaveTip);
+  document.addEventListener('click', closeTip);  // a click acts; the tip has said its piece
   if (mdd && mlist) {
-    if (matchMedia('(hover: hover)').matches) {
-      mlist.addEventListener('mouseover', function (e) { var a = tipTarget(e); if (a) openTip(a); });
-      mlist.addEventListener('mouseout', leaveTip);
-    }
-    mlist.addEventListener('focusin', function (e) { var a = tipTarget(e); if (a) openTip(a); });
-    mlist.addEventListener('focusout', leaveTip);
     mdd.addEventListener('toggle', function () {
       closeTip();
       if (mdd.open) capMenu();

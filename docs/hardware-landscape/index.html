@@ -699,9 +699,9 @@
        perception in one muted phrase, distinct from the sheet's what */
     if (o.tag) bits.push('<span class="tagl">' + esc(o.tag) + '</span>');
     var chips = Object.keys(builtIn(o)).filter(function (t) { return CAPS[t] && !CAPS[t].internal; })
-      .map(function (t) { return '<span class="cap" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
+      .map(function (t) { return '<span class="cap" data-tip="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</span>'; });
     (o.provides_unverified || []).forEach(function (t) {
-      chips.push('<span class="cap unv" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
+      chips.push('<span class="cap unv" data-tip="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</span>');
     });
     if (chips.length) bits.push('<span class="caps">' + chips.join('') + '</span>');
     if (r.ghost || !r.in) {
@@ -997,9 +997,9 @@
        visitor who does not know the jargon yet). Card chips stay spans -
        a card is itself a button and buttons cannot nest. */
     var chips = built.map(function (t) {
-      return '<button type="button" class="cap" aria-expanded="false" title="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</button>'; });
+      return '<button type="button" class="cap" aria-expanded="false" data-tip="' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '</button>'; });
     unv.forEach(function (t) {
-      chips.push('<button type="button" class="cap unv" aria-expanded="false" title="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</button>');
+      chips.push('<button type="button" class="cap unv" aria-expanded="false" data-tip="Claimed, not verified: ' + esc(CAPS[t].explain) + '">' + esc(CAPS[t].name) + '?</button>');
     });
     sheet.innerHTML =
       '<button type="button" class="x" id="sheetx" aria-label="Close">x</button>' +

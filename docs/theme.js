@@ -31,8 +31,39 @@
     var room = document.documentElement.clientHeight - mlist.getBoundingClientRect().top - 8;
     if (mlist.scrollHeight > room) mlist.style.maxHeight = room + 'px';
   }
+  // hover tips for menu rows carrying data-tip (the Discord rows): our own
+  // popover, never the native title tooltip. It sits beside the menu, to its
+  // left, level with the row; with no room there (phones) it goes under the
+  // menu. Click-through, so leaving the row closes it at once.
+  var tip = null;
+  function closeTip() { if (tip) { tip.remove(); tip = null; } }
+  function openTip(a) {
+    closeTip();
+    tip = document.createElement('div');
+    tip.className = 'menutip';
+    tip.textContent = a.getAttribute('data-tip');
+    document.body.appendChild(tip);
+    var m = mlist.getBoundingClientRect(), r = a.getBoundingClientRect();
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    if (m.left - w - 6 >= 8) {
+      tip.style.left = (m.left - w - 6) + 'px';
+      tip.style.top = Math.max(8, Math.min(r.top, innerHeight - h - 8)) + 'px';
+    } else {
+      tip.style.left = Math.max(8, m.right - w) + 'px';
+      tip.style.top = (m.bottom + 6) + 'px';
+    }
+  }
+  function tipTarget(e) { return e.target.closest ? e.target.closest('[data-tip]') : null; }
+  function leaveTip(e) { var a = tipTarget(e); if (a && !a.contains(e.relatedTarget)) closeTip(); }
   if (mdd && mlist) {
+    if (matchMedia('(hover: hover)').matches) {
+      mlist.addEventListener('mouseover', function (e) { var a = tipTarget(e); if (a) openTip(a); });
+      mlist.addEventListener('mouseout', leaveTip);
+    }
+    mlist.addEventListener('focusin', function (e) { var a = tipTarget(e); if (a) openTip(a); });
+    mlist.addEventListener('focusout', leaveTip);
     mdd.addEventListener('toggle', function () {
+      closeTip();
       if (mdd.open) capMenu();
       else if (dd && dd.open) dd.open = false;
     });

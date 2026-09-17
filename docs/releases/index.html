@@ -984,7 +984,7 @@
       <a href="#" id="pub-note">Public + JT Beta cores only<span class="ext">ⓘ</span></a>
       <a href="feed.xml" id="rss-link">RSS feeds<span class="ext">ⓘ</span></a>
       <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog<span class="ext">↗</span></a>
-      <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" id="discord-link">Discord<span class="ext">↗</span></a>
+      <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" data-tip="The MisterZine thread on the official MiSTer Discord: the tracker, the site and the Arcade Frontend.">Discord<span class="ext">↗</span></a>
       <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic<span class="ext">↗</span></a>
       <a href="../privacy/">Privacy</a>
         </div>
@@ -3862,8 +3862,9 @@ function tickMeta() {
 setInterval(tickMeta, 60000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) tickMeta(); });
 
-// --- site-menu hover popovers: Discord, RSS and "Public cores only" all
-// reveal their content on hover (or keyboard focus) — our own popup, so
+// --- site-menu hover popovers: RSS and "Public cores only" (the Discord row
+// uses the shared menu tip in theme.js, like every other page's) reveal their
+// content on hover (or keyboard focus) — our own popup, so
 // there's none of the native-title delay and no click needed. RSS lists the
 // three feeds with copy buttons (readers also autodiscover them from the
 // <link rel=alternate> tags in <head>; the href on the RSS link stays for
@@ -3888,7 +3889,6 @@ const PUB_NOTE_HTML =
   'so where a Region is shown it is the region of the mainline set, not ' +
   'every version the game shipped in.</p>';
 const META_POP = {
-  'discord-link': () => '<p>The MisterZine thread on the official MiSTer Discord: the tracker, the site and the Arcade Frontend.</p>',
   'pub-note': () => PUB_NOTE_HTML,
   'rss-link': () =>
     '<p>RSS feeds: paste a URL into your reader (most readers also ' +
@@ -3899,7 +3899,7 @@ const META_POP = {
         'Copy ' + name + ' feed URL', 'feedrow');
     }).join(''),
 };
-const META_SEL = '#discord-link, #rss-link, #pub-note';
+const META_SEL = '#rss-link, #pub-note';
 // The NEW badges borrow this same chrome, but as pointer triggers only: they're
 // per-row and re-rendered on every sort and filter, so they're tracked by
 // element and carry their own text in data-tip rather than being ids in

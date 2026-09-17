@@ -103,3 +103,11 @@
 @media (max-width: 36rem) {
   #menusum { font-size: .72rem; padding: .3rem .45rem; }
 }
+
+/* hover tip for a menu row (data-tip; theme.js positions it beside the menu).
+   Same chrome as the release tracker's popovers; click-through. z-index clears
+   the tracker's docked detail panel (100) and its resizer (101). */
+.menutip { position: fixed; z-index: 102; max-width: 20rem; pointer-events: none;
+           background: var(--surface); color: var(--muted); border: 1px solid var(--hair);
+           border-radius: 6px; padding: .5rem .7rem; font-size: .8rem; line-height: 1.4;
+           box-shadow: 0 4px 16px #0004; }

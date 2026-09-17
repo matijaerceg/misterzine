@@ -691,6 +691,8 @@
   /* beside the site menu (opened from one of its rows): the bridge moves to the
      right edge, where the pointer crosses from the row into the popover */
   .rsspop.hoverpop.sidepop::before { left: auto; right: -8px; top: 0; bottom: 0; width: 8px; height: auto; }
+  /* it can reach over the docked detail panel (z 100 + its resizer 101) */
+  .rsspop.sidepop { z-index: 102; }
   /* the NEW badge's age tip is read-only, so it never needs to be travelled
      into: click-through keeps it from swallowing clicks on the row it covers
      (it opens right over the next one) and drops the bridge with it */

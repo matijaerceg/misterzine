@@ -6,6 +6,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - The new FM-7 core is filled in: Fujitsu's 1982 home computer now carries its original
   year and maker, and shows a hardware photo (an FM-NEW7) in its detail panel.
+- Release tracker: rows added or updated since your last visit now carry a dot before the title and a count in a status line at the top of the list, under any sort; the last-visit divider line is gone. The NEW pill now reads DEBUT, and the jump button is now Since visit, landing on the furthest changed row.
 
 ## 2026-09-14
 

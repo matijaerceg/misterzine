@@ -359,7 +359,7 @@
     background: linear-gradient(to right, var(--hint-shadow), transparent); }
   .tablezone.more-l::before { opacity: 1; }
   /* Floating pills over the table: the jump stack (top right: Scroll to top /
-     Last visit / Selected, always present, each one disabled while it has
+     Since visit / Selected, always present, each one disabled while it has
      nowhere to go - see syncJumps)
      and the "new data landed" notice (bottom centre, shown after a live swap
      brought in rows worth mentioning). One shared neutral chrome — --surface +
@@ -404,10 +404,11 @@
   tr.newsplit:hover td, tr.nomatch:hover td { background: none; }
   tr.newsplit .msg, tr.nomatch .msg { position: sticky; left: 0; max-width: calc(100vw - 1rem);
     color: var(--muted); }
-  /* the divider: a small uppercase label with the rule running out from it
-     (render only emits the row under the default Last Updated sort, where "the
-     top of the list" and "the new stuff" are the same set). The same row also
-     serves as the "nothing new" marker above the first data row. */
+  /* the since-visit status row: a small uppercase label with the rule running
+     out from it, always the first row of the body once a baseline exists
+     ("2 added, 1 updated since your last visit, yesterday"). Until 2026-09-17
+     the same chrome was also the in-list divider; the per-row dot (td .sv)
+     replaced that. */
   tr.newsplit td { border-bottom: 0; padding: 0; }
   tr.newsplit .msg { display: flex; align-items: center; gap: .5rem; padding: .3rem .6rem;
     font-size: .68rem; letter-spacing: .05em;
@@ -455,15 +456,26 @@
           color: color-mix(in srgb, var(--h) 80%, var(--fg)); }
   .tico svg { width: 1rem; height: 1rem; }
   td .dep { color: var(--muted); font-size: .82em; margin-left: .35rem; }
-  /* NEW badge: our own pill, where the NEW emoji it replaces was a fixed blue
-     that ignored every theme. Outlined in --accent, which is already vetted
-     against the surface in each theme, so there's no second fill/text token to
-     keep legible; age fades the whole pill via an inline opacity. */
+  /* DEBUT badge (was NEW until 2026-09-17): our own pill, where the NEW emoji
+     it replaced was a fixed blue that ignored every theme. Outlined in
+     --accent, which is already vetted against the surface in each theme, so
+     there's no second fill/text token to keep legible; age fades the whole
+     pill via an inline opacity. Set in Roboto Condensed (already loaded for
+     every column after Title) so the longer word stays a small pill. */
   td .nb { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
            border: 1px solid var(--accent); border-radius: .2rem;
            color: var(--accent); font-size: .6em; font-weight: 700;
+           font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;
            letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; }
+  /* since-visit dot: the row was added to the site, or got a new build, since
+     the previous visit (see isUnseen). One accent-colored dot before the title
+     under ANY sort, where the old divider line only worked under the default
+     order and fenced in unchanged rows that merely sorted above the last
+     changed one. Hover explains which kind via the shared popover. */
+  td .sv { display: inline-block; width: .5em; height: .5em; border-radius: 50%;
+           background: var(--accent); margin-right: .4rem; vertical-align: middle;
+           position: relative; top: -.05em; }
   /* Patreon-beta chip: the NEW badge's pill, but dashed and muted — "not fully
      here yet" rather than "look at me". Hover explains via the shared popover. */
   td .bb { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
@@ -1064,7 +1076,7 @@
 <div class="tablezone">
 <div class="jumps">
 <button id="totop" type="button" disabled>↑ Scroll to top</button>
-<button id="tovisit" type="button" disabled>Last visit</button>
+<button id="tovisit" type="button" disabled title="Furthest row added or updated since your last visit">Since visit</button>
 <button id="torow" type="button" disabled>Selected</button>
 </div>
 <div id="newspill" class="newspill"><span class="txt"></span><button type="button" class="x" title="Dismiss">x</button></div>
@@ -1270,26 +1282,27 @@ const favBtnHTML = d => '<button type="button" class="fav' + (FAVS.has(d.k) ? ' 
 
 // --- "new since your last visit" baseline -------------------------------
 // What this browser had already seen when it last looked: every row's k mapped
-// to its `updated` stamp, plus when the snapshot was taken. render() fences the
-// rows that differ from it behind a divider, and the live update check diffs
+// to its `updated` stamp, plus when the snapshot was taken. render() marks the
+// rows that differ from it with a since-visit dot (dotHTML) and counts them in
+// the status row at the top (visitSummary); the live update check diffs
 // against it too. One comparison covers both kinds of news: an unknown k is a
 // new release, a known k with a different stamp is a new build.
 //
 // Deliberately NOT advanced by a live swap: rows that land while the tab is
-// open stay unseen, so the divider means "since you last looked" rather than
-// "since this page loaded", and the notice pill and the divider agree.
+// open stay unseen, so the dots mean "since you last looked" rather than
+// "since this page loaded", and the notice pill and the dots agree.
 // Two snapshots are kept, and both are load-bearing:
 //   cur  — the rows as of this visit. Becomes the next visit's baseline.
-//   base — the rows as of the PREVIOUS visit. What the divider compares against.
+//   base — the rows as of the PREVIOUS visit. What the dots compare against.
 // One snapshot can't do the job: the moment a visit banks what it can see, it
-// has erased the very difference the divider is drawing, so a reload a minute
-// later would silently lose the line the visitor came back to read. Splitting
+// has erased the very difference the dots are drawing, so a reload a minute
+// later would silently lose the marks the visitor came back to read. Splitting
 // them lets the baseline hold still for a whole visit and advance only when a
 // real gap says the visitor went away and came back.
 const SEEN_KEY = 'mz-seen';
 const SEEN_HOLD_MIN = 60;   // a return within the hour is the same visit, not a new one
-let baseRows = null;        // k -> updated, as of the previous visit (null = first visit, no divider)
-let baseTime = null;        // ISO clock of that previous visit; labels the divider ("2 days ago")
+let baseRows = null;        // k -> updated, as of the previous visit (null = first visit, no dots)
+let baseTime = null;        // ISO clock of that previous visit; labels the status row ("2 days ago")
 let seenState = null;       // the stored record, held so a live swap can bank into it
 
 const rowMap = rows => {
@@ -1343,10 +1356,24 @@ function visitAgo(iso) {
   if (!t) return '';
   return Date.now() - t < 864e5 ? relUpdated(new Date(t)) : relAge(iso);
 }
-// The marker only makes sense under the default Last Updated sort (see
-// splitAt): under any other order the line would fence off nothing.
-const visitMarkerOn = () => !!(baseRows && sortKey === 'updated' && sortDir === -1);
+// The top-of-table status line is a fixed fixture, always the first row of
+// the body, under any sort: the dots it counts are per row, so the order
+// doesn't matter. Counted over the whole list, not the filtered view, so a
+// search can't make it lie. With no baseline (first visit, cleared or blocked
+// storage: the page can't tell these apart) it says so instead of vanishing,
+// so the table's first line never shifts between visits (user's call,
+// 2026-09-17). "new" is deliberately absent from this copy: it means the
+// DEBUT pill now.
 const visitLabel = () => { const a = visitAgo(baseTime); return 'your last visit' + (a ? ', ' + a : ''); };
+function visitSummary() {
+  if (!baseRows) return 'First visit. Next visit, updated rows get a dot.';
+  let added = 0, built = 0;
+  for (const d of DATA) if (isUnseen(d)) { if (baseRows[d.k] === undefined) added++; else built++; }
+  const parts = [];
+  if (added) parts.push(added + ' added');
+  if (built) parts.push(built + ' updated');
+  return (parts.length ? parts.join(', ') : 'nothing added or updated') + ' since ' + visitLabel();
+}
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
 // the raw value stays visible as a tooltip. Only multi-game hardware families
@@ -1600,19 +1627,29 @@ function yearAge(y) {
 // "198145 years old". Empty age = no span and no stray space.
 const agoSpan = s => s ? ' <span class="ago">' + s + '</span>' : '';
 
-// The NEW badge rides for four weeks, fading with age to NEW_FLOOR and then
+// The DEBUT badge rides for two weeks (four until 2026-09-17), fading with age to NEW_FLOOR and then
 // going entirely rather than reaching 0: a pill faded to nothing would still
 // answer the hover, popping a tip up off what looks like blank space. Its
 // popover text is baked in here, so the shared hover handler only has to read
 // data-tip back out.
-const NEW_DAYS = 28, NEW_FLOOR = 0.15;
+const NEW_DAYS = 14, NEW_FLOOR = 0.15;  // the DEBUT pill's ride (function + class names predate the rename)
 function newBadge(d) {
   const age = debutAgeDays(d);
   if (age < 0 || age >= NEW_DAYS) return '';
   const op  = (1 - (1 - NEW_FLOOR) * age / NEW_DAYS).toFixed(2);
   const tip = age === 0 ? 'Debuted today'
             : age + (age === 1 ? ' day' : ' days') + ' old (debuted ' + d.date + ')';
-  return '<span class="nb" style="opacity:' + op + '" data-tip="' + escA(tip) + '">NEW</span>';
+  return '<span class="nb" style="opacity:' + op + '" data-tip="' + escA(tip) + '">DEBUT</span>';
+}
+
+// The since-visit dot. Same test the live-update diff uses, split by kind for
+// the tooltip: an unknown k was added to the site since the previous visit, a
+// known k with a moved stamp got a new build. Cleared by the next visit's
+// baseline (initSeen), never by a click.
+function dotHTML(d) {
+  if (!isUnseen(d)) return '';
+  const tip = baseRows[d.k] === undefined ? 'Added since your last visit' : 'New build since your last visit';
+  return '<span class="sv" data-tip="' + tip + '" role="img" aria-label="' + tip + '"></span>';
 }
 
 // Patreon-beta chip: rides next to the title like the NEW badge and answers
@@ -1649,7 +1686,7 @@ function titleCell(d) {
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
     : FAVS.has(d.k) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
-  return fav + esc(d.title) + newBadge(d) + betaBadge(d) + dep;
+  return fav + dotHTML(d) + esc(d.title) + newBadge(d) + betaBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -1910,9 +1947,10 @@ document.querySelector('.tablewrap').addEventListener('scroll', () => {
 }, { passive: true });
 
 // The jump stack. Scroll-to-top is live once the list is about a row down.
-// "Last visit" is live while the divider (the one under the new rows, never
-// the "nothing new" marker, which lives at the top where Scroll-to-top already
-// goes) is outside the scrollport; "Selected" likewise for the open row's
+// "Since visit" targets the FURTHEST-DOWN row carrying a since-visit dot (a
+// late-arriving build with an older stamp can sit hundreds of rows deep, and
+// that is the one the visitor would otherwise never find) and is live while it
+// is outside the scrollport; "Selected" likewise for the open row's
 // highlighted <tr> (a row filtered out of the view has no <tr>, so: disabled).
 // The sticky header covers the top of the scrollport, so a target hiding under
 // it counts as above; the arrow says which way. Runs from syncScrollHints, so
@@ -1922,8 +1960,8 @@ function syncJumps(w, z) {
   document.getElementById('totop').disabled = !(w.scrollTop > 30);
   const v = w.getBoundingClientRect();
   const top = v.top + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
-  const sync = (id, sel, label) => {
-    const btn = document.getElementById(id), row = document.querySelector(sel);
+  const sync = (id, find, label) => {
+    const btn = document.getElementById(id), row = find();
     let off = false, above = false;
     if (row) {
       const r = row.getBoundingClientRect();
@@ -1933,8 +1971,8 @@ function syncJumps(w, z) {
     btn.disabled = !off;
     btn.textContent = off ? (above ? '↑ ' : '↓ ') + label : label;
   };
-  sync('tovisit', '#rows tr.newsplit:not(:first-child)', 'Last visit');
-  sync('torow', '#rows tr.open', 'Selected');
+  sync('tovisit', lastDotRow, 'Since visit');
+  sync('torow', () => document.querySelector('#rows tr.open'), 'Selected');
 }
 document.getElementById('torow').addEventListener('click', () => {
   const tr = document.querySelector('#rows tr.open');
@@ -1948,9 +1986,14 @@ function parkRow(row) {
   const y = row.getBoundingClientRect().top - w.getBoundingClientRect().top + w.scrollTop - thead - w.clientHeight * .4;
   w.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
 }
+// the deepest dotted row in the rendered (filtered, sorted) list, or null
+function lastDotRow() {
+  const dots = document.querySelectorAll('#rows tr[data-i] .sv');
+  return dots.length ? dots[dots.length - 1].closest('tr') : null;
+}
 document.getElementById('tovisit').addEventListener('click', () => {
-  const row = document.querySelector('#rows tr.newsplit:not(:first-child)');
-  if (row) parkRow(row);  // the last few new rows above the line and the first old ones below it
+  const row = lastDotRow();
+  if (row) parkRow(row);  // the deepest change and the rows around it both on screen
 });
 
 // The notice pill's action. It used to scroll to the top of the table on the
@@ -2002,41 +2045,20 @@ function render() {
     setCount(0);
     return;
   }
-  // The divider is a timeline marker: the rule is the moment of the previous
-  // visit, and the default sort puts everything newer above it. When no row is
-  // newer, the same marker sits at the very top and says so, because an absent
-  // line can't be told apart from a first visit or a blocked localStorage, and
-  // nobody should have to scroll to learn that nothing changed.
-  const split = splitAt();
-  const top = split < 0 && visitMarkerOn()
-    ? '<tr class="newsplit"><td colspan="' + cols.length + '">' +
-      '<div class="msg">nothing new since ' + visitLabel() + '</div></td></tr>' : '';
+  // One status row at the very top: what changed since the previous visit and
+  // when that was, or the first-visit line (see visitSummary). The rows
+  // themselves carry the since-visit dot (dotHTML); the in-list divider that
+  // used to fence them off is gone since 2026-09-17, it only worked under one
+  // sort and swept in unchanged rows that sorted above a late-arriving
+  // older-dated build.
+  const top = '<tr class="newsplit"><td colspan="' + cols.length + '">' +
+      '<div class="msg">' + visitSummary() + '</div></td></tr>';
   tb.innerHTML = top + view.map((d, i) =>
     '<tr' + (d === openRow ? ' class="open"' : '') + ' data-i="' + i + '">' +
-    cols.map(c => c.cell(d)).join('') + '</tr>' +
-    (i === split ? '<tr class="newsplit"><td colspan="' + cols.length + '">' +
-      '<div class="msg">' + visitLabel() + '</div></td></tr>' : '')
+    cols.map(c => c.cell(d)).join('') + '</tr>'
   ).join('');
   setCount(view.length);
   syncScrollHints();  // the jump stack re-reads its targets; a same-height re-render escapes the ResizeObserver
-}
-// Index of the last row the visitor hasn't seen — the divider goes right after
-// it, so everything above the line is news. -1 = draw no divider.
-//
-// Only under the default Last Updated sort: under any other order the unseen
-// rows aren't a contiguous block at the top, so no single line can fence them.
-// The scan stops at SPLIT_SCAN rows, because one backfilled row carrying an old
-// date would otherwise drag the divider halfway down the table; past that depth
-// a stray unseen row just goes unfenced. Same-day rows interleave seen with
-// unseen (the stamps are day-granular), so the line lands approximately on busy
-// days — that's accepted, it's a hint and not an audit.
-const SPLIT_SCAN = 200;
-function splitAt() {
-  if (!baseRows || sortKey !== 'updated' || sortDir !== -1) return -1;
-  let last = -1;
-  const n = Math.min(view.length, SPLIT_SCAN);
-  for (let i = 0; i < n; i++) if (isUnseen(view[i])) last = i;
-  return last;
 }
 // tally: rendered inside the search box (see .count CSS). "142 of 1025" while
 // the list is narrowed; just the bare total when everything shows, since
@@ -3855,7 +3877,7 @@ const META_SEL = '#discord-link, #rss-link, #pub-note';
 // META_POP. They stay out of the focus and tap paths below — focusing them
 // would add a dozen tab stops for a date the Debut column already spells out,
 // and on touch a tap in that cell belongs to the row's detail panel.
-const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .br, td .xb';
+const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .br, td .xb, td .sv';
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
 let hoverPop = null, hoverPopFor = null;   // hoverPopFor: the trigger element
 function closeHoverPop() {

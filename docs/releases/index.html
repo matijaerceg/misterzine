@@ -1644,11 +1644,13 @@ function newBadge(d) {
 
 // The since-visit dot. Same test the live-update diff uses, split by kind for
 // the tooltip: an unknown k was added to the site since the previous visit, a
-// known k with a moved stamp got a new build. Cleared by the next visit's
-// baseline (initSeen), never by a click.
+// known k with a moved stamp got a new build. Both tooltips name the SITE's
+// action ("added to the site", "picked up"): a build's stamped date is often
+// older than the visit, it's the site noticing it that is new (user, 2026-09-17).
+// Cleared by the next visit's baseline (initSeen), never by a click.
 function dotHTML(d) {
   if (!isUnseen(d)) return '';
-  const tip = baseRows[d.k] === undefined ? 'Added since your last visit' : 'New build since your last visit';
+  const tip = baseRows[d.k] === undefined ? 'Added to the site since your last visit' : 'New build, picked up since your last visit';
   return '<span class="sv" data-tip="' + tip + '" role="img" aria-label="' + tip + '"></span>';
 }
 

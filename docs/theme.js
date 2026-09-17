@@ -36,8 +36,10 @@
       if (mdd.open) capMenu();
       else if (dd && dd.open) dd.open = false;
     });
+    // (a click inside a popover a menu row opened, e.g. the RSS copy buttons,
+    // is not an outside click either)
     document.addEventListener('click', function (e) {
-      if (mdd.open && !mdd.contains(e.target)) mdd.open = false;
+      if (mdd.open && !mdd.contains(e.target) && !e.target.closest('.rsspop')) mdd.open = false;
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && mdd.open) {

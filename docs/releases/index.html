@@ -688,6 +688,9 @@
      this invisible strip bridges that gap so travelling link->popover never
      leaves the hover region, letting the popover close instantly otherwise */
   .rsspop.hoverpop::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
+  /* beside the site menu (opened from one of its rows): the bridge moves to the
+     right edge, where the pointer crosses from the row into the popover */
+  .rsspop.hoverpop.sidepop::before { left: auto; right: -8px; top: 0; bottom: 0; width: 8px; height: auto; }
   /* the NEW badge's age tip is read-only, so it never needs to be travelled
      into: click-through keeps it from swallowing clicks on the row it covers
      (it opens right over the next one) and drops the bridge with it */
@@ -3931,6 +3934,23 @@ function openHoverPop(a) {
   document.body.appendChild(hoverPop);
   const r = a.getBoundingClientRect();
   const w = hoverPop.offsetWidth;  // measure after insert so we can keep the bridge under the link
+  const list = a.closest('#menudd .mlist');
+  if (list) {
+    // a site-menu row: the popover must not cover the rows under it, so it
+    // sits BESIDE the menu, to its left, level with the row (the bridge then
+    // spans the gap on its right edge). No room on the left (phones): it goes
+    // under the whole menu instead, right-aligned with it.
+    const m = list.getBoundingClientRect();
+    if (m.left - w - 6 >= 8) {
+      hoverPop.classList.add('sidepop');
+      hoverPop.style.left = (m.left - w - 6) + 'px';
+      hoverPop.style.top = Math.max(8, Math.min(r.top, innerHeight - hoverPop.offsetHeight - 8)) + 'px';
+    } else {
+      hoverPop.style.left = Math.max(8, m.right - w) + 'px';
+      hoverPop.style.top = (m.bottom + 6) + 'px';
+    }
+    return;
+  }
   hoverPop.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
   hoverPop.style.top = (r.bottom + 6) + 'px';
 }

@@ -3752,9 +3752,10 @@ def _assign_update_batches(data):
     logs and leaves the value in this export's data.json (it re-derives next
     run), it never takes down the publish."""
     con = connect()
-    stored = {r["k"]: (r["updated"], r["batch"]) for r in
-              con.execute("SELECT k, updated, batch FROM row_batches")}
-    nxt = max((b for _, b in stored.values()), default=0) + 1
+    stored = {r["k"]: (r["updated"], r["batch"], r["stamped_at"]) for r in
+              con.execute("SELECT k, updated, batch, stamped_at FROM row_batches")}
+    nxt = max((b for _, b, _ in stored.values()), default=0) + 1
+    ts = now_iso()
     pending = []
     for d in data:
         k = d.get("k")
@@ -3764,13 +3765,14 @@ def _assign_update_batches(data):
         prev = stored.get(k)
         if prev and prev[0] == upd:
             d["b"] = prev[1]
+            d["mz"] = _mz_date(prev[1], prev[2])
             continue
         d["b"] = nxt
+        d["mz"] = _mz_date(nxt, ts)
         pending.append((k, upd, nxt))
     if not pending:
         con.close()
         return
-    ts = now_iso()
     done = 0
     for k, upd, b in pending:
         try:
@@ -3782,6 +3784,19 @@ def _assign_update_batches(data):
     con.commit()
     con.close()
     log(f"  update batches: {done} rows entered batch {nxt}")
+
+
+def _mz_date(batch, stamped_at):
+    """'mz' = the day MisterZine last logged a change to this row (new listing
+    or new build): the row_batches stamp, day-granular like the other date
+    columns, the batch number staying the within-day tiebreak. Batch 1 is the
+    2026-09-09 cold start that stamped every then-existing row at once, which
+    is not a change date anyone observed, so those rows export blank rather
+    than 1184 rows all reading the same fake day (no recency inflation). The
+    site shows this as the opt-in 'Changed on MisterZine' column."""
+    if not stamped_at or not batch or batch <= 1:
+        return ""
+    return str(stamped_at)[:10]
 
 
 def _check_key_stability(prev_path, data):

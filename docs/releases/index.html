@@ -1650,7 +1650,7 @@ function newBadge(d) {
 // Cleared by the next visit's baseline (initSeen), never by a click.
 function dotHTML(d) {
   if (!isUnseen(d)) return '';
-  const tip = baseRows[d.k] === undefined ? 'Added to the site since your last visit' : 'New build, picked up since your last visit';
+  const tip = baseRows[d.k] === undefined ? 'Added to MisterZine since your last visit.' : 'New build, picked up by MisterZine since your last visit.';
   return '<span class="sv" data-tip="' + tip + '" role="img" aria-label="' + tip + '"></span>';
 }
 
@@ -1748,7 +1748,15 @@ const COLUMNS = [
   { k: 'src', label: 'Source', w: 12, mw: 6.5, opt: true,
     cell: d => '<td class="src">' + esc(d.src ? SRC_NAMES[d.src] || d.src : '') + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
-  { k: 'updated', label: 'Last Updated', sl: 'Updated', w: 10, mw: 5.5, cell: d => '<td class="date"><span class="dv">' + esc(d.updated || '') + '</span>' + batchBadge(d) + '</td>' },
+  // 'Build Date' (was 'Last Updated' until 2026-09-17: "updated by whom?" was
+  // the recurring confusion): the dated build file update_all delivers.
+  { k: 'updated', label: 'Build Date', sl: 'Build', w: 10, mw: 5.5, cell: d => '<td class="date"><span class="dv">' + esc(d.updated || '') + '</span>' + batchBadge(d) + '</td>' },
+  // the day MisterZine last logged a change to the row (new listing or new
+  // build), from the export's row_batches stamp. A build's own date is often
+  // older than the day the tracker picked it up, which is what this column
+  // separates. Blank for rows tracked before the stamp existed (Sep 2026).
+  { k: 'mz', label: 'Changed on MZ', sl: 'MZ Change', w: 10, mw: 5.5, opt: true,
+    cell: d => '<td class="date"><span class="dv">' + esc(d.mz || '') + '</span></td>' },
   { k: 'date', label: 'MiSTer Debut', sl: 'Debut', w: 10, mw: 5.5,
     cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '"><span class="dv">' + esc(d.date) + '</span></td>' },
   { k: 'year', label: 'Original Year', sl: 'Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
@@ -1771,6 +1779,7 @@ const HEADER_TIPS = {
   genre: "Arcade genre, from MAME's catver.ini",
   date: 'When this title first became publicly playable on MiSTer',
   updated: 'Newest shipped build, what update_all installs',
+  mz: 'When MisterZine last logged a change to this entry, a new listing or a new build. Blank for entries tracked before Sep 2026.',
   year: 'Year the original game or hardware was released',
   manufacturer: 'Original manufacturer',
   core: 'The FPGA core that runs this title, linked to its GitHub repository',
@@ -2145,7 +2154,9 @@ function apply() {
       // have been showing that date since 06:30 — landing below rows the visitor
       // already read. Rows from one run share a number and stay a block, so the
       // core grouping below still runs inside it.
-      if (sortKey === 'updated') {
+      // The same stage orders 'Changed on MisterZine': that column IS the
+      // batch stamp's day, so the batch number is its natural within-day order.
+      if (sortKey === 'updated' || sortKey === 'mz') {
         const ab = a.b || 0, bb = b.b || 0;
         if (ab !== bb) return bb - ab;
       }
@@ -2156,7 +2167,7 @@ function apply() {
       // sortDir (like the batch stage above and the title tiebreak below):
       // flipping asc/desc reorders the dates only, leaving each date's block in a
       // stable arrival-then-core-then-title order.
-      if (sortKey === 'updated') {
+      if (sortKey === 'updated' || sortKey === 'mz') {
         const cc = coreLabel(a.core).localeCompare(coreLabel(b.core), undefined, { numeric: true, sensitivity: 'base' });
         if (cc) return cc;
       }
@@ -2224,7 +2235,7 @@ document.getElementById('hrow').addEventListener('click', e => {
   // Date columns default to descending (most recent first) when first selected;
   // every other column defaults to ascending. A click on the already-active
   // column always just flips the current direction.
-  const DATE_COLS = new Set(['date', 'updated']);
+  const DATE_COLS = new Set(['date', 'updated', 'mz']);
   sortDir = (sortKey === k) ? -sortDir : (DATE_COLS.has(k) ? -1 : 1);
   sortKey = k;
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
@@ -3223,7 +3234,7 @@ function detailHTML(d) {
   const debut = d.date_kind === 'debut';
   rows.push([debut ? 'MiSTer debut' : 'Latest build',
     esc(d.date) + agoSpan(relAge(d.date) + (debut ? '' : ' (debut unknown)')), true]);
-  // 'Latest update' = newest shipped build (what update_all delivers);
+  // 'Build date' = newest shipped build (what update_all delivers);
   // 'Latest commit' = repo activity, which can run ahead of a shipped build
   if (d.updated) {
     // when other games on this core share this exact date, the build shipped
@@ -3233,8 +3244,11 @@ function detailHTML(d) {
     const bn = clusterN(d);
     if (bn >= 2) uv += '<br><span class="batch">This update shipped together with ' + (bn - 1) +
       ' other game' + (bn === 2 ? '' : 's') + ' served by this core.</span>';
-    rows.push(['Latest update', uv, true]);
+    rows.push(['Build date', uv, true]);
   }
+  // the day the tracker itself last logged a change to this row; blank (and
+  // so omitted) for rows tracked before the stamp existed
+  if (d.mz) rows.push(['Changed on MisterZine', esc(d.mz) + agoSpan(relAge(d.mz)), true]);
   if (d.act) rows.push(['Latest commit', esc(d.act) + agoSpan(relAge(d.act)), true]);
   // which downloader database delivers this entry via update_all. Opt-in
   // databases have no update_all settings toggle, so their rows say how to

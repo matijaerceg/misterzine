@@ -31,7 +31,7 @@ dashboard is public, linked as "Traffic Stats" in the header).
   keystrokes go straight into the search box. Search ignores accents. The Source
   filter names the downloader database behind each row, so unchecking MiSTer
   Distribution shows exactly what a stock update_all does not deliver.
-- Default sort is **Last Updated**, newest first; the Title column stays pinned while
+- Default sort is **Build Date**, newest first; the Title column stays pinned while
   scrolling horizontally; every column header explains itself on hover.
 - **Type** reads `Arcade, <genre>` for arcade titles (genre from MAME's catver.ini) and
   `Console core` / `Computer core` / `Other core` for cores.

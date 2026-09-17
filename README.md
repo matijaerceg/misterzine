@@ -443,10 +443,15 @@ Arcade Database values take precedence, including zero. Check this contract with
 
 - **Code** (`misterzine.py`, `tools/`, the site's HTML/CSS/JS): [MIT](LICENSE).
 - **Data** (`docs/releases/data.json`, `meta.json`, the RSS feeds, and everything under
-  `data/exports/`): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Use it
-  freely; credit "MisterZine by Matija Erceg" and, where practical, link to
-  <https://misterzine.fyi>. Note the data is not a versioned API: fields may be added or
-  renamed without notice, so consume it defensively.
+  `data/exports/`): the [MiSTerZine Catalogue Licence](LICENSE-CATALOGUE), also served at
+  <https://misterzine.fyi/releases/LICENSE.txt>. It is the CC BY 4.0 terms plus one
+  condition, source neutrality: anyone who reuses the catalogue must treat entries the
+  same whatever database they come from and whether or not they are installed, must not
+  hide or single out entries by default on either basis, and may not distribute a subset
+  chosen that way. Filters for those are fine as long as they are off by default. Credit
+  "MisterZine by Matija Erceg" and, where practical, link to <https://misterzine.fyi>.
+  Versions published before 2026-09-17 stay CC BY 4.0. Note the data is not a versioned
+  API: fields may be added or renamed without notice, so consume it defensively.
 - **Images** (game screenshots, hardware photos) remain
   the property of their respective owners and are hosted for informational purposes; no
   license is granted for them. Fonts are Roboto (Apache License 2.0); the CRT mask in

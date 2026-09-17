@@ -1,0 +1,45 @@
+MiSTerZine Catalogue Licence
+
+Copyright (c) 2026 Matija Erceg
+
+This licence covers the MiSTerZine catalogue: the release data published at
+https://misterzine.fyi (data.json, meta.json, the feeds and the exports) and
+any copy of it bundled with, cached by or embedded in software.
+
+The catalogue is licensed under the terms of the Creative Commons Attribution
+4.0 International licence (https://creativecommons.org/licenses/by/4.0/legalcode),
+subject to one additional condition, the Source neutrality condition below.
+Because of that condition this is not a Creative Commons licence and must not
+be described as CC BY; the Creative Commons name and marks are not used to
+label it. Where this text and the CC BY 4.0 terms conflict, this text governs.
+
+Attribution: credit "MiSTerZine by Matija Erceg" and, where practical, link to
+https://misterzine.fyi.
+
+Source neutrality. If you use the MiSTerZine catalogue, in any part, as a
+source of entries in your own software, service or dataset, you must treat
+entries equally regardless of the database they come from (the "src"
+field) and regardless of whether they are installed on the user's MiSTer.
+
+By default you must show all of the catalogue's entries or none of them.
+You must not, by default, hide, demote, separate or label entries because
+of their database, or because of which databases or cores the user's own
+MiSTer has enabled or installed.
+
+You may offer the user a control to filter by database or by installed
+status, provided that control is off by default.
+
+You must not distribute a subset of the catalogue chosen by database or
+installed status, whether presented as the MiSTerZine catalogue or under
+another name. These conditions apply to every copy, adaptation and
+derived dataset, however obtained and through any number of
+intermediaries, and a fork or redistribution may not be used to avoid
+them.
+
+Catalogue versions published before 2026-09-17 were released under CC BY
+4.0 alone and remain so; this licence applies to versions published from
+that date.
+
+The catalogue is not a versioned API: fields may be added or renamed without
+notice, so consume it defensively. Screenshots and hardware photos are not
+part of the catalogue and remain the property of their owners.

@@ -2,6 +2,11 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-17
+
+- The new FM-7 core is filled in: Fujitsu's 1982 home computer now carries its original
+  year and maker, and shows a hardware photo (an FM-NEW7) in its detail panel.
+
 ## 2026-09-14
 
 - Release tracker: fills more provisional arcade specs from current MAME and core launch files, adds reviewed native resolution values, and records each fallback's sources. Curated Arcade Database values still take precedence.

@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 16 Sep 2026 21:56:34 +0000</lastBuildDate>
+<lastBuildDate>Thu, 17 Sep 2026 09:57:33 +0000</lastBuildDate>
+<item>
+<title>[New] Xybots (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#xybots</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Xybots.mra:2026-09-17T09:57:33+00:00</guid>
+<pubDate>Thu, 17 Sep 2026 09:57:33 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/xybots.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Xybots&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Xybots_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] FM-7 (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943mii.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Action Fighter (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#afighter</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Action Fighter (World, S16A) [FD1089A 317-0018].mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

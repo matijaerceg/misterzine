@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-09-17
 
+- Site header: the links (changelog, Discord, traffic, privacy, the tracker's RSS feeds and public-cores note), the theme picker and the tracker's My MiSTer(s) button now live in one Menu button on every page. The tracker's status line sits under the page title: when the data was last updated and what was added or updated since your last visit; that line is no longer a row inside the table. The logo now spans the title and the line beneath it. The Frontend page menu links its own changelog and GitHub issues; the Hardware page menu links its own Discord thread.
 - Release tracker: the Last Updated column is now called Build Date, since it is the date on the build file update_all delivers. A new opt-in column, Changed on MisterZine, shows the day the tracker itself last logged a change to a row (a new listing or a new build), which can be days after the build's own date; it is blank for rows tracked before September 2026. The detail panel shows both dates.
 - The new FM-7 core is filled in: Fujitsu's 1982 home computer now carries its original
   year and maker, and shows a hardware photo (an FM-NEW7) in its detail panel.

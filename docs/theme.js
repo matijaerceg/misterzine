@@ -18,6 +18,49 @@
     ['pink', 'Pink'], ['icecream', 'Gelato'], ['riso', 'Riso'],
     ['famicom', 'Famicom'], ['pastel', 'Pastel']
   ];
+  // the site Menu (every page, since 2026-09-17): outside click and Escape
+  // close it; on open its list is capped to the room below so it stays
+  // reachable where the page itself can't scroll (the tracker's app shell).
+  // Closing it also folds the theme picker nested inside, so the menu always
+  // reopens on its top level.
+  var mdd = document.getElementById('menudd');
+  var mlist = mdd && mdd.querySelector('.mlist');
+  function capMenu() {
+    if (!mlist) return;
+    mlist.style.maxHeight = '';
+    var room = document.documentElement.clientHeight - mlist.getBoundingClientRect().top - 8;
+    if (mlist.scrollHeight > room) mlist.style.maxHeight = room + 'px';
+  }
+  if (mdd && mlist) {
+    mdd.addEventListener('toggle', function () {
+      if (mdd.open) capMenu();
+      else if (dd && dd.open) dd.open = false;
+    });
+    document.addEventListener('click', function (e) {
+      if (mdd.open && !mdd.contains(e.target)) mdd.open = false;
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mdd.open) {
+        mdd.open = false;
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    }, true);
+  }
+
+  // header logo height (every page with a masthead): the logo spans the title
+  // block, top of the title to the bottom of the line under it. Each page's
+  // CSS seeds --titleh with the one-line sum; this keeps it equal to the
+  // block's real height, so a wrapped title (tablet widths, long titles) or a
+  // late-filled byline grows the logo with it.
+  var mast = document.querySelector('.masthead');
+  var block = mast && mast.querySelector(':scope > :not(.brand)');
+  if (mast && block && 'ResizeObserver' in window) {
+    new ResizeObserver(function () {
+      mast.style.setProperty('--titleh', block.getBoundingClientRect().height + 'px');
+    }).observe(block);
+  }
+
   var dd = document.getElementById('themedd');
   var sum = document.getElementById('themesum');
   var menu = dd && dd.querySelector('.menu');
@@ -62,6 +105,7 @@
   // menu is right-anchored (CSS right:0), so no horizontal clamp is needed.
   dd.addEventListener('toggle', function () {
     if (!dd.open) return;
+    if (mdd && mdd.contains(dd)) { capMenu(); return; }  // nested: the fold grows the site menu's list, cap THAT
     menu.style.maxHeight = '';
     var room = document.documentElement.clientHeight - menu.getBoundingClientRect().top - 8;
     if (menu.scrollHeight > room) menu.style.maxHeight = room + 'px';

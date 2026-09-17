@@ -44,16 +44,19 @@
      below 36rem it takes a full-width first row so the title gets the width ---- */
   .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
          padding: .35rem 0 .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
-  .masthead { display: flex; align-items: center; gap: .95rem; min-width: 0; }
+  /* the logo spans the title + byline block exactly (explicit line-heights
+     summed in --titleh), the shared header layout since 2026-09-17 */
+  .masthead { display: flex; align-items: flex-start; gap: .95rem; min-width: 0;
+              --titleh: calc(1.75rem * 1.15 + .15rem + 1.2rem); }
   .top .brand { display: block; flex: 0 0 auto; color: var(--fg); }
-  .top .brand svg { display: block; height: 48px; width: auto; }
+  .top .brand svg { display: block; height: var(--titleh); width: auto; }
   .top .brand:hover { color: var(--brand-hover); }
   /* the freshness stamp IS the subtitle: plain muted text, not a chip (user ruling) */
   .vchip { display: inline-block; }
   .top h1 { font-size: 1.75rem; margin: 0; line-height: 1.15; letter-spacing: .01em; }
   .top h1 .cd { color: var(--accent); }
   .top .scope { display: block; font-family: Roboto, system-ui, sans-serif; font-size: .78rem; font-weight: 400;
-                color: var(--muted); margin-top: .15rem; }
+                color: var(--muted); margin-top: .15rem; line-height: 1.2rem; min-height: 1.2rem; }
   /* site nav (.segnav + .pill) AND the whole theme control (closed summary +
      open menu, .theme .menu*) live in the shared nav.css; theme.js builds the
      menu buttons. Only the frame (.top nav) is page-specific here. */
@@ -294,7 +297,7 @@
     .top { align-items: flex-start; }
     .top nav { flex-direction: column; align-items: flex-end; gap: .45rem; }
     .masthead { gap: .6rem; }
-    .top .brand svg { height: 34px; }
+    .masthead { --titleh: calc(1.1rem * 1.15 + .15rem + 1.2rem); }
     .top h1 { font-size: 1.1rem; }
     .shell { grid-template-columns: 1fr; }
     #rail { position: static; max-height: none; overflow: visible; }
@@ -352,12 +355,21 @@
       <a class="pill" href="../frontend/">Frontend</a>
       <span class="pill" aria-current="page">Hardware</span>
     </span>
-    <div class="theme" id="theme">
-      <details id="themedd">
-        <summary id="themesum">Theme</summary>
-        <div class="menu"><!-- theme.js builds the theme buttons here --></div>
-      </details>
-    </div>
+    <details class="sitemenu" id="menudd">
+      <summary id="menusum">Menu</summary>
+      <div class="mlist">
+        <div class="theme" id="theme">
+          <details id="themedd">
+            <summary id="themesum">Theme</summary>
+            <div class="menu"><!-- theme.js prepends the theme buttons here --></div>
+          </details>
+        </div>
+        <hr class="msep">
+      <a href="https://discord.com/channels/647909397477195803/1530263863411474442" target="_blank" rel="noopener">Discord<span class="ext">↗</span></a>
+      <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic<span class="ext">↗</span></a>
+      <a href="../privacy/">Privacy</a>
+      </div>
+    </details>
   </nav>
 </header>
 

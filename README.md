@@ -458,6 +458,17 @@ Arcade Database values take precedence, including zero. Check this contract with
   "MisterZine by Matija Erceg" and, where practical, link to <https://misterzine.fyi>.
   Versions published before 2026-09-17 stay CC BY 4.0. Note the data is not a versioned
   API: fields may be added or renamed without notice, so consume it defensively.
+
+  **Why the catalogue has a neutrality condition.** MisterZine exists so that anyone can
+  see every core the MiSTer ecosystem has produced, whichever database publishes it and
+  whether or not their own MiSTer has it. I have put many days of work into gathering and
+  checking that picture, and its value rests on it striving to be complete. What someone
+  has installed usually reflects the defaults they started with, not a survey of
+  everything available, so a catalogue view that starts from "what's installed" quietly
+  inherits those defaults and stops doing the job. The condition asks one thing of
+  software that builds on the catalogue: start from the whole catalogue, and let the user
+  narrow it, rather than narrowing it for them. It does not restrict what anyone builds
+  from their own data, and versions published before 2026-09-17 stay plain CC BY 4.0.
 - **Images** (game screenshots, hardware photos) remain
   the property of their respective owners and are hosted for informational purposes; no
   license is granted for them. Fonts are Roboto (Apache License 2.0); the CRT mask in

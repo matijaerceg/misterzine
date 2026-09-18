@@ -20,14 +20,25 @@ Source neutrality. If you use the MiSTerZine catalogue, in any part, as a
 source of entries in your own software, service or dataset, you must treat
 entries equally regardless of the database they come from (the "src"
 field) and regardless of whether they are installed on the user's MiSTer.
+This applies wherever the catalogue is used in your software, not only in
+views presented as MiSTerZine: any list, count, badge, recommendation or
+decision that draws on catalogue data is covered. It does not govern data
+you obtain independently of the catalogue.
 
 By default you must show all of the catalogue's entries or none of them.
-You must not, by default, hide, demote, separate or label entries because
-of their database, or because of which databases or cores the user's own
-MiSTer has enabled or installed.
+You must not, by default, hide, demote, separate, disparage or label
+entries because of their database, or because of which databases or cores
+the user's own MiSTer has enabled or installed.
 
 You may offer the user a control to filter by database or by installed
 status, provided that control is off by default.
+
+Setup, first run and onboarding count as the default. You must not, at
+any point before the user has browsed the full catalogue, prompt,
+recommend, pre-select or otherwise steer the user toward filtering by
+database or installed status, or characterise any database or its
+entries so as to invite such filtering. A filter the user turns on must
+be one the user sought out, not one the software offered.
 
 You must not distribute a subset of the catalogue chosen by database or
 installed status, whether presented as the MiSTerZine catalogue or under

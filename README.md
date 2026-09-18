@@ -448,7 +448,8 @@ Arcade Database values take precedence, including zero. Check this contract with
   condition, source neutrality: anyone who reuses the catalogue must treat entries the
   same whatever database they come from and whether or not they are installed, must not
   hide or single out entries by default on either basis, and may not distribute a subset
-  chosen that way. Filters for those are fine as long as they are off by default. Credit
+  chosen that way. Filters for those are fine as long as they are off by default and the
+  user seeks them out; setup flows may not suggest them. Credit
   "MisterZine by Matija Erceg" and, where practical, link to <https://misterzine.fyi>.
   Versions published before 2026-09-17 stay CC BY 4.0. Note the data is not a versioned
   API: fields may be added or renamed without notice, so consume it defensively.

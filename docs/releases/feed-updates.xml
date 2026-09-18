@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 16 Sep 2026 15:03:32 +0000</lastBuildDate>
+<lastBuildDate>Fri, 18 Sep 2026 05:54:26 +0000</lastBuildDate>
+<item>
+<title>[Updated] Hishou Zame (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hishouza</link>
+<guid isPermaLink="false">coinop:_Arcade/cores/fshark_mister_20260917.rbf:2026-09-18T05:54:26+00:00</guid>
+<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hishouza.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Toaplan / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: fshark_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Kyukyoku Tiger (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ktiger</link>
+<guid isPermaLink="false">coinop:_Arcade/cores/twincobr_mister_20260917.rbf:2026-09-18T05:54:26+00:00</guid>
+<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ktiger.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Toaplan / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: twincobr_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Moon Patrol (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mpatrol</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/punkshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Konami&lt;/p&gt;&lt;p&gt;Core: jttmnt&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/tmnt"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Quartet 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#quartet2a</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Quartet 2 (World, S16A) [No Protection].mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/quartet2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Secret Agent (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#secretag</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Secret Agent (World, revision 3).mra:2026-09-04T16:24:17+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 16:24:17 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

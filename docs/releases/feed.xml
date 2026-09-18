@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 17 Sep 2026 14:03:19 +0000</lastBuildDate>
+<lastBuildDate>Fri, 18 Sep 2026 05:54:26 +0000</lastBuildDate>
+<item>
+<title>[New] Wardner (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#wardner</link>
+<guid isPermaLink="false">coinop:_Arcade/Wardner (World).mra:2026-09-18T05:54:26+00:00</guid>
+<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wardner.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1987 / Toaplan / Taito Corporation Japan&lt;/p&gt;&lt;p&gt;Core: wardner_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Hishou Zame (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hishouza</link>
+<guid isPermaLink="false">coinop:_Arcade/cores/fshark_mister_20260917.rbf:2026-09-18T05:54:26+00:00</guid>
+<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hishouza.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Toaplan / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: fshark_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Kyukyoku Tiger (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ktiger</link>
+<guid isPermaLink="false">coinop:_Arcade/cores/twincobr_mister_20260917.rbf:2026-09-18T05:54:26+00:00</guid>
+<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ktiger.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Toaplan / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: twincobr_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Vindicators (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#vindictr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Vindicators.mra:2026-09-18T03:16:47+00:00</guid>
+<pubDate>Fri, 18 Sep 2026 03:16:47 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vindictr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Vindicators&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Vindicators_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Cosmo Police Galivan (rmCores) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cosmo-police-galivan-rmcores</link>
@@ -870,42 +906,6 @@
 <category>new</category>
 <category>Console core</category>
 <description>&lt;p&gt;1997 / Tiger Electronics&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/GameCom_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] GameKing (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#GameKing</link>
-<guid isPermaLink="false">distribution_mister:_Console/GameKing_20260903.rbf:2026-09-05T00:39:06+00:00</guid>
-<pubDate>Sat, 05 Sep 2026 00:39:06 +0000</pubDate>
-<category>new</category>
-<category>Console core</category>
-<description>&lt;p&gt;2004 / Timetop&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/GameKing_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] PocketStation (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#PocketStation</link>
-<guid isPermaLink="false">distribution_mister:_Console/PocketStation_20260903.rbf:2026-09-05T00:39:06+00:00</guid>
-<pubDate>Sat, 05 Sep 2026 00:39:06 +0000</pubDate>
-<category>new</category>
-<category>Console core</category>
-<description>&lt;p&gt;1999 / Sony&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PocketStation_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Macintosh LC (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacLC</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacLC_20260827.rbf:2026-09-04T18:19:00+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 18:19:00 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1990 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacLC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] PC/XT (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#PCXT</link>
-<guid isPermaLink="false">distribution_mister:_Computer/PCXT_20260904.rbf:2026-09-04T18:19:00+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 18:19:00 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1983 / IBM&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PCXT_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -2,6 +2,11 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-18
+
+- Release tracker: now also tracks TheJesusFish's Slop-Core database, a sixth source - 9 new arcade games across seven cores, none listed anywhere else: six Toaplan boards (Batsugun, Dogyuun, FixEight, Ghox, Grind Stormer, Knuckle Bash) and the Incredible Technologies 32-bit hardware (BloodStorm, Street Fighter: The Movie, Time Killers). His repo describes the cores as vibe coded and MAME-based; the detail panel says so. Like MeatCores it is an opt-in database with no update_all settings toggle, so its rows explain how to add it to downloader.ini; debut dates come from each game's first appearance in the database's history.
+- Release tracker: the tooltip on the status line under the title now shows only the exact time of the last data update. It used to repeat the whole visible line as well.
+
 ## 2026-09-17
 
 - New image service at images.misterzine.fyi for the Arcade Frontend: screenshots by MAME set name for arcade games on a card that the tracker does not list, served from storage seeded with the progettoSNAPS packs, so nobody installs image packs and no third-party site is hit more than once per game. Source and setup under `images/`; the privacy page describes what the Frontend sends.

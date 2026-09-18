@@ -1384,8 +1384,11 @@ function syncStatus() {
   if (!v) return;
   const full = capFirst(visitSummary(false)), brief = capFirst(visitSummary(true));
   v.innerHTML = '<span class="w">' + esc(full) + '</span><span class="n">' + esc(brief) + '</span>' + (full.endsWith('.') ? '' : '.');
+  // The tooltip adds only what the line doesn't show: the exact local stamp
+  // behind the relative "Updated 3 hours ago". The visit sentence is already
+  // under the cursor in full, so repeating it there was pure noise.
   const p = document.getElementById('updated');
-  p.dataset.tip = (metaFull ? 'Updated ' + metaFull + '. ' : '') + full + (full.endsWith('.') ? '' : '.');
+  if (metaFull) p.dataset.tip = 'Updated ' + metaFull + '.'; else p.removeAttribute('data-tip');
 }
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
@@ -1416,6 +1419,8 @@ const CORE_NAMES = {
   'TaitoF2': 'Taito F2', 'TaitoSJ': 'Taito SJ', 'jtkiwi': 'Taito (TNZS HW)', 'jtflstory': 'Taito (Fairyland Story HW)',
   'jtbubl': 'Taito (Bubble Bobble HW)', 'spaceinvaders': 'Taito 8080 (Space Invaders)', 'Qix': 'Taito (Qix HW)',
   'Darius': 'Taito (Darius)', 'Darius2WarriorBlade': 'Taito (Darius II)', 'Darius2NinjaWarriors': 'Taito (Ninja Warriors)',
+  // Incredible Technologies (Slop Cores)
+  'ITech32': 'Incredible Technologies 32-bit',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -1463,6 +1468,7 @@ const SRC_NAMES = {
   coinop: 'Coin-Op Collection',
   meathax: 'Meathax (MeatCores)',
   rmcores: 'rmCores (rmonic79)',
+  slopcore: 'Slop Cores (TheJesusFish)',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1471,6 +1477,7 @@ const SRC_SEARCH = {
   coinop: 'coin-op collection',
   meathax: 'meathax meatcores',
   rmcores: 'rmcores rmonic79',
+  slopcore: 'slop cores thejesusfish jesusfish',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1489,6 +1496,12 @@ const OPTIN_DBS = {
     what: 'rmonic79\'s own builds of his cores, with CRT Adjust and V-Size on the analog output ' +
       '(HDMI untouched) and a pause overlay. The same games also ship in the MiSTer Distribution ' +
       'without those extras; the rm build has its own rbf name, so both can sit on one card.',
+  },
+  slopcore: {
+    section: 'TheJesusFish/Slop-Core',
+    url: 'https://raw.githubusercontent.com/TheJesusFish/Slop-Core/db/db.json.zip',
+    what: 'TheJesusFish\'s MAME-based cores, written with AI assistance (his repo calls them slop). ' +
+      'New games, not in any other database.',
   },
 };
 
@@ -2679,6 +2692,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   coinop: 'Coin-OpCollection/Distribution-MiSTerFPGA',
   meathax: 'meathax/meatcores',
   rmcores: 'rmonic79/rmcores',
+  slopcore: 'TheJesusFish/Slop-Core',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -3827,7 +3841,7 @@ function relUpdated(dt, short) {
 // they're delegated from the document and keyed on element ids, not bound to
 // the elements this replaces.
 let metaDt = null;   // date behind the relative label; a swap moves it
-let metaFull = '';   // the exact local stamp, for the status line's tooltip
+let metaFull = '';   // the exact local stamp, the status line's whole tooltip
 function stampMeta(m) {
   const el = document.getElementById('updated');
   if (!el || !m.updated) return;
@@ -3881,7 +3895,7 @@ const PUB_NOTE_HTML =
   "databases: the main MiSTer distribution, Jotego's (including his Patreon " +
   "betas, which his public database announces early; those rows are marked " +
   "beta and need his beta key until the public release), Coin-Op Collection's " +
-  "public releases, MeatCores, rmCores and theypsilon's Unofficial " +
+  "public releases, MeatCores, rmCores, TheJesusFish's Slop Cores and theypsilon's Unofficial " +
   "Distribution. Cores that only ever ship behind a paywall, like Coin-Op " +
   "Collection betas, never touch a public database and so cannot be listed.</p>" +
   "<p>Each arcade game is listed once, as its mainline version. Regional and " +

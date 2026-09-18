@@ -96,6 +96,19 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/rmonic79/rmcores/db/db.json.zip",
     },
     {
+        # TheJesusFish's "Slop-Core": his own words, "vibe coded, MAME-based
+        # MiSTer FPGA cores". NEW games, none in any other db (Toaplan v2
+        # boards: Batsugun, Dogyuun, FixEight, Ghox, Grind Stormer, Knuckle
+        # Bash; and Incredible Technologies 32-bit: BloodStorm, Street
+        # Fighter: The Movie, Time Killers). Standard DB-Template db, MRAs at
+        # the _Arcade root, one repo per core under github.com/TheJesusFish.
+        # Same opt-in model as MeatCores: no update_all toggle, users hand-add
+        # the [TheJesusFish/Slop-Core] section to downloader.ini.
+        "id": "slopcore",
+        "name": "Slop Cores (TheJesusFish)",
+        "db_url": "https://raw.githubusercontent.com/TheJesusFish/Slop-Core/db/db.json.zip",
+    },
+    {
         "id": "theypsilon_unofficial_distribution",
         "name": "theypsilon Unofficial Distribution",
         "db_url": "https://raw.githubusercontent.com/theypsilon/Unofficial_Distribution_MiSTer/main/unofficialdb.json.zip",
@@ -1160,6 +1173,7 @@ MRA_REPOS = [
     ("coinop", "Coin-OpCollection/Distribution-MiSTerFPGA", "develop", "_Arcade"),
     ("meathax", "meathax/meatcores", "main", "_Arcade/_MeatCores"),
     ("rmcores", "rmonic79/rmcores", "main", "_Arcade/_rmCores"),
+    ("slopcore", "TheJesusFish/Slop-Core", "main", "_Arcade"),
 ]
 
 
@@ -1725,6 +1739,35 @@ RMCORES_FROZEN_DATES = {
     "rm Seibu Cup Soccer (set 1).mra": "2026-09-11",
 }
 
+SLOPCORE_REPO = "TheJesusFish/Slop-Core"
+# Per-core source repos under github.com/TheJesusFish, keyed by lowercased
+# MRA rbf. He follows the MiSTer-devel naming (Arcade-<Core>_MiSTer), one
+# repo per core; ITech32 is the multi-game one.
+SLOPCORE_CORE_REPOS = {
+    "batsugun": "TheJesusFish/Arcade-Batsugun_MiSTer",
+    "dogyuun": "TheJesusFish/Arcade-Dogyuun_MiSTer",
+    "fixeight": "TheJesusFish/Arcade-FixEight_MiSTer",
+    "ghox": "TheJesusFish/Arcade-Ghox_MiSTer",
+    "grindstormer": "TheJesusFish/Arcade-GrindStormer_MiSTer",
+    "itech32": "TheJesusFish/Arcade-ITech32_MiSTer",
+    "knucklebash": "TheJesusFish/Arcade-KnuckleBash_MiSTer",
+}
+# Debut dates for the Slop-Core initial import (2026-09-18 seed), mined the
+# same way as MEATHAX_FROZEN_DATES: each mainline MRA's first-add commit in
+# TheJesusFish/Slop-Core@main (GitHub commits API, path-filtered, oldest
+# commit), UTC date.
+SLOPCORE_FROZEN_DATES = {
+    "Batsugun.mra": "2026-07-17",
+    "Dogyuun.mra": "2026-08-08",
+    "Grind Stormer.mra": "2026-08-29",
+    "FixEight.mra": "2026-09-03",
+    "Ghox (Joystick).mra": "2026-09-03",
+    "Knuckle Bash.mra": "2026-09-03",
+    "BloodStorm (v2.22).mra": "2026-09-04",
+    "Street Fighter - The Movie (v1.12).mra": "2026-09-04",
+    "Time Killers (v1.32).mra": "2026-09-04",
+}
+
 # First public version: GX400-Friends/gx400-bin CHANGELOG.md, 2022-03-14.
 # The distribution import in 2026 is not the core's debut.
 OPTIN_DB_SOURCES = {
@@ -1734,6 +1777,7 @@ OPTIN_DB_SOURCES = {
          "Nemesis (World, ROM Version).mra": "2022-03-14"}),
     "meathax": (MEATHAX_REPO, MEATHAX_CORE_REPOS, MEATHAX_FROZEN_DATES),
     "rmcores": (RMCORES_REPO, RMCORES_CORE_REPOS, RMCORES_FROZEN_DATES),
+    "slopcore": (SLOPCORE_REPO, SLOPCORE_CORE_REPOS, SLOPCORE_FROZEN_DATES),
 }
 
 
@@ -2740,6 +2784,8 @@ def _core_label(r, fork_info, repo_maps):
         # fork-parent rule on MiSTer-devel/Arcade-NightSlashers etc.), and the
         # same-game gate needs the two builds to label differently.
         return "rmCores"
+    if r["source_id"] == "slopcore":
+        return "TheJesusFish"
     repo = (r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")

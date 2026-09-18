@@ -235,7 +235,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The five sources (all public)
+## The six sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -248,8 +248,13 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    MiSTer-devel, and this db carries the same cores rebuilt with CRT Adjust / V-Size on the
    analog output and a pause overlay, under an `rm` rbf prefix so both builds coexist on one
    card. Each rm row is a deliberate second listing of a game the Distribution already has.
+6. **Slop Cores (TheJesusFish)**: `TheJesusFish/Slop-Core` `db` branch (opt-in like MeatCores,
+   section `[TheJesusFish/Slop-Core]`). His own words: "vibe coded, MAME-based" cores. New
+   games in no other db: six Toaplan v2 boards (Batsugun, Dogyuun, FixEight, Ghox, Grind
+   Stormer, Knuckle Bash) and Incredible Technologies 32-bit (BloodStorm, Street Fighter:
+   The Movie, Time Killers). One `Arcade-<Core>_MiSTer` repo per core under his account.
 
-All five publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All six publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

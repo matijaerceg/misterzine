@@ -287,6 +287,7 @@ def _ensure_columns(con):
     for table, col, decl in [("catalog", "setname", "TEXT"),
                              ("catalog", "genre", "TEXT"),
                              ("catalog", "beta", "INTEGER DEFAULT 0"),
+                             ("catalog", "gate", "TEXT"),
                              ("arcade_repos", "is_fork", "INTEGER"),
                              ("arcade_repos", "parent_owner", "TEXT")]:
         try:
@@ -386,36 +387,67 @@ def _retitle_key(title):
 
 # --- fetch + normalize ----------------------------------------------------
 
+def _gate_terms(d):
+    """Map each Patreon-gate filter term in the db's default_options.filter to
+    its tag id, e.g. {"jtbeta": 128, "coinop-collection-beta": 101}.
+
+    A downloader db hides paywalled cores from non-patrons by shipping a
+    default filter that negates a tag ("[MiSTer] !jtbeta",
+    "[MiSTer] !coinop-collection-beta !coinop-collection-alpha"); patrons
+    override the filter and unlock the core with a per-device key. The gate is
+    therefore defined by the filter, not by tag names: Coin-Op's dictionary
+    also holds 'arcadealpha68k' (the Alpha68k core), which any name-based
+    "contains alpha" rule would wrongly paywall. Dictionary keys drop the
+    hyphens the filter terms keep, so match on a normalised spelling."""
+    filt = (d.get("default_options") or {}).get("filter") or ""
+    td = d.get("tag_dictionary", {}) or {}
+    norm = lambda t: re.sub(r"[^a-z0-9]", "", t.lower())
+    by_norm = {norm(k): v for k, v in td.items()}
+    gates = {}
+    for tok in filt.split():
+        if tok.startswith("!") and len(tok) > 1:
+            tid = by_norm.get(norm(tok[1:]))
+            if tid is not None:
+                gates[tok[1:]] = tid
+    return gates
+
+
 def fetch_db(source):
-    """Download a db.json.zip, return (ts, {path: {hash,size}}, [beta_paths], tag_seen).
+    """Download a db.json.zip, return (ts, {path: {hash,size}}, {path: gate}, gates).
 
-    tag_seen says whether the db declared a 'jtbeta' tag id at all — the
-    difference between "Jotego freed everything" and "the tag key moved and we
-    are about to mass-graduate 20 rows by accident" (see cmd_snapshot's guard).
+    gates is {filter term: tag id} for every gate the db declares
+    (_gate_terms); the third value maps each gated path to its term. The
+    difference between "the source freed everything" and "the tag key moved
+    and we are about to mass-graduate 20 rows by accident" is whether the
+    term is still declared (see cmd_snapshot's guard).
 
-    Jotego marks Patreon-only cores with the 'jtbeta' tag in the db's
-    tag_dictionary: the MRA ships in the public db but the core requires the
-    jtbeta.zip key (a Patreon reward), so it's effectively paywalled. Since
-    2026-07-16 these are INGESTED and listed (labeled "beta" on the site)
-    rather than dropped — the returned beta_paths tell cmd_snapshot which rows
-    to flag. When a core graduates to free, Jotego removes the tag; the row's
-    flag clears, its beta-debut date stays (no recency inflation), and the
-    graduation logs a 'new' event so the feeds announce it going public."""
+    Patreon-gated cores ship in the public db but need a key to run
+    (Jotego's jtbeta.zip; Coin-Op's per-device licence), so they're
+    effectively paywalled. Since 2026-07-16 these are INGESTED and listed
+    (labeled on the site) rather than dropped - the returned map tells
+    cmd_snapshot which rows to flag. When a core graduates to free, the
+    source removes the tag; the row's flag clears, its gated-debut date stays
+    (no recency inflation), and the graduation logs a 'new' event so the
+    feeds announce it going public."""
     log(f"  fetching {source['name']} ...")
     raw = http_get(source["db_url"])
     z = zipfile.ZipFile(BytesIO(raw))
     inner = z.read(z.namelist()[0])
     d = json.loads(inner)
-    beta_tag = d.get("tag_dictionary", {}).get("jtbeta")
+    gates = _gate_terms(d)
+    by_id = {tid: term for term, tid in gates.items()}
     files = {}
-    beta_paths = []
+    gated = {}
     for path, meta in d.get("files", {}).items():
-        if beta_tag is not None and beta_tag in meta.get("tags", []):
-            beta_paths.append(path)
+        for tid in meta.get("tags", []):
+            if tid in by_id:
+                gated[path] = by_id[tid]
+                break
         files[path] = {"hash": meta.get("hash"), "size": meta.get("size")}
-    if beta_paths:
-        log(f"    {len(beta_paths)} jtbeta (Patreon-gated) files flagged")
-    return d.get("timestamp"), files, beta_paths, beta_tag is not None
+    if gated:
+        per = Counter(gated.values())
+        log("    " + ", ".join(f"{n} {t}" for t, n in sorted(per.items())) + " (Patreon-gated) files flagged")
+    return d.get("timestamp"), files, gated, gates
 
 
 def latest_snapshot(source_id):
@@ -455,7 +487,7 @@ def cmd_snapshot(args):
     con = connect()
     total_events = 0
     for source in SOURCES:
-        ts, files, beta_paths, beta_tag_seen = fetch_db(source)
+        ts, files, gated, gates = fetch_db(source)
         files = tracked_files(source["id"], files)
         swept = purge_untracked(con, source["id"])
         if swept:
@@ -463,40 +495,51 @@ def cmd_snapshot(args):
         prev = latest_snapshot(source["id"])
         ts_iso = epoch_to_iso(ts) or now_iso()
 
-        # Patreon-gated (jtbeta) bookkeeping. Beta rows are listed (labeled) since
-        # 2026-07-16, so instead of purging we track the flag across snapshots:
-        # - graduated: was beta, still shipped, tag gone -> now public. Flag
+        # Patreon-gated bookkeeping (jtbeta, coinop-collection-beta/alpha).
+        # Gated rows are listed (labeled) since 2026-07-16, so instead of
+        # purging we track the flag across snapshots:
+        # - graduated: was gated, still shipped, tag gone -> now public. Flag
         #   clears via upsert_catalog below; log it as a 'new' event (it IS newly
-        #   public — that's the release feed readers care about). The row itself
-        #   persists, so its beta-debut date never inflates to graduation day.
-        # - vanished: was beta, no longer in the db at all (pulled upstream).
-        #   Purge the row like the old filter did — a paywalled core that even
-        #   patrons no longer receive has no business on the site — and stay
+        #   public - that's the release feed readers care about). The row itself
+        #   persists, so its gated-debut date never inflates to graduation day.
+        # - vanished: was gated, no longer in the db at all (pulled upstream).
+        #   Purge the row like the old filter did - a paywalled core that even
+        #   patrons no longer receive has no business on the site - and stay
         #   quiet: no 'removed' event for something that was never public.
-        beta_set = set(beta_paths)
-        prev_beta = {r["path"] for r in con.execute(
-            "SELECT path FROM catalog WHERE source_id=? AND beta=1", (source["id"],))}
-        # Tripwire: the flag is derived from a single dictionary lookup
-        # (tag_dictionary['jtbeta']), so if Jotego ever renames or restructures
-        # that key the lookup quietly yields nothing, EVERY badged row
+        beta_set = set(gated)
+        prev_gate = {r["path"]: r["gate"] for r in con.execute(
+            "SELECT path, gate FROM catalog WHERE source_id=? AND beta=1", (source["id"],))}
+        prev_beta = set(prev_gate)
+        # Tripwire, per gate term: the flag is derived from the db's filter and
+        # tag dictionary, so if a source ever renames or restructures a term
+        # the lookup quietly yields nothing, EVERY row badged with it
         # "graduates" in one crawl, and the feeds announce a wave of releases
         # that never happened. A genuine mass-graduation is possible but has
         # never occurred (they trickle out one core at a time), so treat a
-        # total collapse as a schema change and stop rather than publish it.
-        # Clearing it is deliberate: confirm against the live db, then either
-        # fix the tag lookup or, if Jotego really did free them all, run the
-        # snapshot once with MZ_ALLOW_BETA_COLLAPSE=1.
-        if prev_beta and not beta_set and not os.environ.get("MZ_ALLOW_BETA_COLLAPSE"):
-            raise SystemExit(
-                f"JTBETA TAG COLLAPSE ({source['id']}): {len(prev_beta)} rows were "
-                "Patreon-beta last crawl, none are now. "
-                + ("The db no longer declares a 'jtbeta' tag id, so the tag was "
-                   "renamed or moved; fix fetch_db"
-                   if not beta_tag_seen else
-                   "The tag id still exists but no file carries it")
-                + ". Refusing to mass-graduate them (it would announce "
-                  f"{len(prev_beta & set(files))} false 'new' releases in the feeds). "
-                  "Set MZ_ALLOW_BETA_COLLAPSE=1 if this is real.")
+        # total collapse of any one term as a schema change and stop rather
+        # than publish it. Per term, because Coin-Op declares two: its alpha
+        # tier emptying legitimately must not be masked by its beta tier, nor
+        # vice versa. Clearing it is deliberate: confirm against the live db,
+        # then either fix the lookup or, if the source really did free them
+        # all, run the snapshot once with MZ_ALLOW_BETA_COLLAPSE=1.
+        if not os.environ.get("MZ_ALLOW_BETA_COLLAPSE"):
+            live_terms = set(gated.values())
+            for term, n_prev in Counter(prev_gate.values()).items():
+                # term None = rows flagged before the gate column existed;
+                # they answer to whichever term the db declares now
+                if term in live_terms or (term is None and live_terms):
+                    continue
+                raise SystemExit(
+                    f"GATE TAG COLLAPSE ({source['id']}/{term}): {n_prev} rows carried "
+                    "this gate last crawl, none do now. "
+                    + ("The db no longer declares the term in default_options.filter "
+                       "or tag_dictionary, so it was renamed or moved; fix fetch_db"
+                       if term not in gates else
+                       "The term still exists but no file carries its tag")
+                    + ". Refusing to mass-graduate them (it would announce "
+                      f"{sum(1 for p, t in prev_gate.items() if t == term and p in files)} "
+                      "false 'new' releases in the feeds). "
+                      "Set MZ_ALLOW_BETA_COLLAPSE=1 if this is real.")
         graduated = (prev_beta & set(files)) - beta_set
         for path in prev_beta - set(files):
             con.execute("DELETE FROM catalog WHERE source_id=? AND path=?",
@@ -565,7 +608,7 @@ def cmd_snapshot(args):
                     events.append((ts_iso, source["id"], path, title_from_path(path), system, "removed", None))
 
         # upsert catalog rows for everything currently present
-        upsert_catalog(con, source["id"], files, ts_iso, seed, beta_set)
+        upsert_catalog(con, source["id"], files, ts_iso, seed, gated)
         events += upsert_core_files(con, source["id"], files, ts_iso)
 
         # A core rebuild renames its rbf (PDP1_20190101.rbf -> PDP1_20260702.rbf),
@@ -635,13 +678,17 @@ def cmd_snapshot(args):
     log(f"snapshot done. {total_events} new dated events logged.")
 
 
-def upsert_catalog(con, source_id, files, ts_iso, seed, beta_set=frozenset()):
+def upsert_catalog(con, source_id, files, ts_iso, seed, gated=None):
+    """gated: {path: gate term} from fetch_db. beta=1 for any gated row keeps
+    every downstream test on `beta` working; `gate` carries which term."""
+    gated = gated or {}
     for path, meta in files.items():
         system, kind, is_unit = classify(path)
         if not is_unit:
             continue
         title = title_from_path(path)
-        beta = 1 if path in beta_set else 0
+        gate = gated.get(path)
+        beta = 1 if gate else 0
         row = con.execute(
             "SELECT hash, first_seen FROM catalog WHERE source_id=? AND path=?",
             (source_id, path),
@@ -656,17 +703,17 @@ def upsert_catalog(con, source_id, files, ts_iso, seed, beta_set=frozenset()):
             # when patrons first got them, not when the tag came off.)
             release_date = None if seed else ts_iso
             con.execute(
-                "INSERT INTO catalog(source_id,path,system,kind,title,hash,size,release_date,first_seen,last_seen,last_changed,beta) "
-                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO catalog(source_id,path,system,kind,title,hash,size,release_date,first_seen,last_seen,last_changed,beta,gate) "
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 (source_id, path, system, kind, title, meta.get("hash"), meta.get("size"),
-                 release_date, ts_iso, ts_iso, ts_iso, beta),
+                 release_date, ts_iso, ts_iso, ts_iso, beta, gate),
             )
         else:
             changed = row["hash"] != meta.get("hash")
             con.execute(
-                "UPDATE catalog SET hash=?, size=?, system=?, kind=?, title=?, last_seen=?, beta=?, "
+                "UPDATE catalog SET hash=?, size=?, system=?, kind=?, title=?, last_seen=?, beta=?, gate=?, "
                 "last_changed=CASE WHEN ? THEN ? ELSE last_changed END WHERE source_id=? AND path=?",
-                (meta.get("hash"), meta.get("size"), system, kind, title, ts_iso, beta,
+                (meta.get("hash"), meta.get("size"), system, kind, title, ts_iso, beta, gate,
                  changed, ts_iso, source_id, path),
             )
 
@@ -3216,10 +3263,14 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         ft = (ft_map or {}).get((r["source_id"], r["path"]))
         if ft:
             row["ft"] = ft
-    # Patreon-gated (jtbeta): listed but labeled — the frontend badges the row
-    # and the panel explains the beta key requirement. Feeds skip these.
+    # Patreon-gated: listed but labeled - the frontend badges the row and the
+    # panel explains the key requirement per source. Feeds skip these. `gate`
+    # is the source's filter term (jtbeta, coinop-collection-alpha, ...); the
+    # frontend and the device app word the badge and the Details line from it.
     if "beta" in r.keys() and r["beta"]:
         row["beta"] = True
+        if "gate" in r.keys() and r["gate"]:
+            row["gate"] = r["gate"]
     # system rows only: arcade rows share rbfs with these (System E games run on
     # the SMS core), and a console-flavoured note is wrong on a game row. If a
     # per-arcade-core note ever lands (e.g. jts18 CRT sync), give it its own dict.

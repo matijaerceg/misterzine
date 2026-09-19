@@ -1683,9 +1683,39 @@ function dotHTML(d) {
 // Patreon-beta chip: rides next to the title like the NEW badge and answers
 // hover with the same shared popover (data-tip). Rendered per-row, so like the
 // NEW badge it stays out of META_POP and the focus/tap paths.
-const BETA_TIP = 'Patreon early access from Jotego: running it needs his beta key file (jtbeta.zip). It stays listed here and goes public when the beta ends.';
+// One concept, one chip: a Patreon-gated row. `gate` is the source's own
+// download-filter term (jtbeta, coinop-collection-beta, coinop-collection-alpha,
+// ...); the chip shows the stage the term ends in, so Coin-Op's alpha reads
+// "alpha" and everything else "beta". Wording per source lives in GATE_INFO;
+// an unknown term (a new source, or an old export without `gate`) falls back
+// to the generic line rather than misattributing the key to Jotego.
+const GATE_INFO = {
+  jtbeta: {
+    who: 'Jotego', url: 'https://www.patreon.com/jotego',
+    tip: 'Patreon early access from Jotego: running it needs his beta key file (jtbeta.zip). It stays listed here and goes public when the beta ends.',
+    how: 'running it needs the beta key file (jtbeta.zip) from his ',
+  },
+  'coinop-collection-beta': {
+    who: 'Coin-Op Collection', url: 'https://www.patreon.com/coinopcollection',
+    tip: 'Patreon early access from Coin-Op Collection: update_all only downloads it with the Coin-Op filter overridden, and running it needs a licence key for your MiSTer from their portal. It stays listed here and goes public when the beta ends.',
+    how: 'update_all only downloads it once you override the Coin-Op filter in downloader.ini, and running it needs a per-device licence key from their ',
+  },
+};
+GATE_INFO['coinop-collection-alpha'] = Object.assign({}, GATE_INFO['coinop-collection-beta'], {
+  tip: GATE_INFO['coinop-collection-beta'].tip.replace('beta ends', 'alpha ends'),
+});
+const GATE_GENERIC = {
+  who: 'its author', url: '',
+  tip: 'Patreon early access: the public database announces it, but running it needs a key from the author. It stays listed here and goes public when the early access ends.',
+  how: 'running it needs a key from the author\'s ',
+};
+function gateStage(d) {
+  const t = d.gate || 'beta';
+  return /alpha$/.test(t) ? 'alpha' : 'beta';
+}
+function gateInfo(d) { return GATE_INFO[d.gate || 'jtbeta'] || GATE_GENERIC; }
 function betaBadge(d) {
-  return d.beta ? '<span class="bb" data-tip="' + escA(BETA_TIP) + '">beta</span>' : '';
+  return d.beta ? '<span class="bb" data-tip="' + escA(gateInfo(d).tip) + '">' + gateStage(d) + '</span>' : '';
 }
 
 // "batch" marker in the Last Updated cell: this row's date is shared by other
@@ -2151,7 +2181,7 @@ function apply() {
             (d.rot || '') + ' ' + (d.brot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
             (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
             (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
-            (d.beta ? 'beta patreon' : '') + ' ' +
+            (d.beta ? gateStage(d) + ' patreon' : '') + ' ' +
             (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
   });
@@ -3213,11 +3243,14 @@ function detailHTML(d) {
   // Patreon-beta rows lead with what the chip can only hint at: who gates it,
   // what unlocks it, and where to subscribe. First row so it reads before the
   // Launch button gets tried on a MiSTer without the key.
-  if (d.beta) rows.push(['Patreon beta',
-    'Early access from Jotego: running it needs the beta key file (jtbeta.zip) from his ' +
-    '<a href="https://www.patreon.com/jotego" target="_blank" rel="noopener">' +
-    '<span class="lbl">Patreon</span><span class="ext">↗</span></a>. ' +
-    'It stays listed here and goes public when the beta ends.', true]);
+  if (d.beta) {
+    const g = gateInfo(d), st = gateStage(d);
+    rows.push(['Patreon ' + st,
+      'Early access from ' + esc(g.who) + ': ' + g.how +
+      (g.url ? '<a href="' + escA(g.url) + '" target="_blank" rel="noopener">' +
+               '<span class="lbl">Patreon</span><span class="ext">↗</span></a>' : 'Patreon') + '. ' +
+      'It stays listed here and goes public when the ' + st + ' ends.', true]);
+  }
   rows.push(['Type', typeLabel(d)]);
   if (d.genre) rows.push(['Genre', d.genre]);
   if (d.manufacturer) rows.push(['Manufacturer', d.manufacturer]);
@@ -3892,12 +3925,12 @@ const FEED_LIST = [
 ];
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
-  "databases: the main MiSTer distribution, Jotego's (including his Patreon " +
-  "betas, which his public database announces early; those rows are marked " +
-  "beta and need his beta key until the public release), Coin-Op Collection's " +
-  "public releases, MeatCores, rmCores, TheJesusFish's Slop Cores and theypsilon's Unofficial " +
-  "Distribution. Cores that only ever ship behind a paywall, like Coin-Op " +
-  "Collection betas, never touch a public database and so cannot be listed.</p>" +
+  "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores and theypsilon's Unofficial " +
+  "Distribution. Jotego and Coin-Op announce their Patreon early-access cores " +
+  "in those same public databases (hidden by a default download filter); such " +
+  "rows are marked alpha or beta and need the author's key until the public " +
+  "release. Cores that never touch a public database cannot be listed.</p>" +
   "<p>Each arcade game is listed once, as its mainline version. Regional and " +
   "revision variants, clones and bootlegs (MiSTer's _alternatives) fold into " +
   "that one row, so a shown Region is the mainline set's.</p>";

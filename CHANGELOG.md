@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-19
+
+- Release tracker: Coin-Op Collection's Patreon early-access cores are now marked as such, like Jotego's betas have been since July. Black Heart, Mystic Warriors and Thunder Dragon carry a beta chip, Metamorphic Force an alpha chip; the chip and the detail panel say whose key unlocks it and how, and these rows stay out of the RSS feeds until they go public. They had been listed and announced as free since early September. The tracker now reads each database's own download filter to find gated cores, so any source that gates the same way is covered without a hand list.
+
 ## 2026-09-18
 
 - The new SGI Indy core is filled in: Silicon Graphics' 1993 workstation now carries

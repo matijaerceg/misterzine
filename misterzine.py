@@ -2376,6 +2376,7 @@ COMPUTER_MANUFACTURER = {
     "SharpMZ": "Sharp", "X68000": "Sharp",
     "PC88": "NEC",
     "FM-7": "Fujitsu",
+    "SGIIndy": "Silicon Graphics",
     "Ti994a": "Texas Instruments",
     "ColecoAdam": "Coleco", "Aquarius": "Mattel", "TomyTutor": "Tomy",
     "Casio_PV-2000": "Casio", "SordM5": "Sord", "Svi328": "Spectravideo",
@@ -2421,6 +2422,7 @@ CORE_YEAR = {
     "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
     "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-IIgs": "1986",
     "Apple-Lisa": "1983", "NeXT": "1988", "MacPlus": "1986", "MacLC": "1990",
+    "SGIIndy": "1993",  # SGI Indy announced 1993-07-12
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
     "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
     "Amstrad": "1984", "Amstrad-PCW": "1985", "Atari800": "1979", "AtariST": "1985",
@@ -2542,6 +2544,7 @@ SYSTEM_TITLES = {
     "QL": "Sinclair QL",
     "RX78": "RX-78 Gundam",
     "SAMCoupe": "SAM Coupé",
+    "SGIIndy": "SGI Indy",
     "SharpMZ": "Sharp MZ",
     "SordM5": "Sord M5",
     "Svi328": "SV-328",

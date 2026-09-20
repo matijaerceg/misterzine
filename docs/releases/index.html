@@ -1421,6 +1421,9 @@ const CORE_NAMES = {
   'Darius': 'Taito (Darius)', 'Darius2WarriorBlade': 'Taito (Darius II)', 'Darius2NinjaWarriors': 'Taito (Ninja Warriors)',
   // Incredible Technologies (Slop Cores)
   'ITech32': 'Incredible Technologies 32-bit',
+  // NMK16 family (kuzecores); shipped rbf names carry the Arcade- prefix
+  'Arcade-NMK16_Gunnail': 'NMK16 (GunNail HW)', 'Arcade-NMK16_Macross2': 'NMK16 (Macross II HW)',
+  'Arcade-NMK16_Raphero': 'NMK16 (Rapid Hero HW)', 'Arcade-NMK16_Afega': 'NMK16 (Afega HW)',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -1469,6 +1472,7 @@ const SRC_NAMES = {
   meathax: 'Meathax (MeatCores)',
   rmcores: 'rmCores (rmonic79)',
   slopcore: 'Slop Cores (TheJesusFish)',
+  kuzecores: 'kuzecores (kuzearcade)',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1478,6 +1482,7 @@ const SRC_SEARCH = {
   meathax: 'meathax meatcores',
   rmcores: 'rmcores rmonic79',
   slopcore: 'slop cores thejesusfish jesusfish',
+  kuzecores: 'kuzecores kuzearcade kuze nmk16',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1502,6 +1507,13 @@ const OPTIN_DBS = {
     url: 'https://raw.githubusercontent.com/TheJesusFish/Slop-Core/db/db.json.zip',
     what: 'TheJesusFish\'s MAME-based cores, written with AI assistance (his repo calls them slop). ' +
       'New games, not in any other database.',
+  },
+  kuzecores: {
+    section: 'kuzearcade/kuzecores',
+    url: 'https://raw.githubusercontent.com/kuzearcade/kuzecores/db/db.json.zip',
+    what: 'kuzearcade\'s cores, written with AI assistance (his repo says so). So far the NMK16 ' +
+      'board family as four cores; apart from Black Heart and Thunder Dragon, which Coin-Op ' +
+      'Collection also ships, these games are in no other database.',
   },
 };
 
@@ -2532,9 +2544,11 @@ yearMenu.addEventListener('click', e => {
 });
 
 // --- "Source" dropdown: multi-select filter over the downloader databases ---
-// One box per database present in DATA (d.src), in SRC_NAMES order with any unknown
-// id appended, each with a row count. Rebuilt on load (buildSrcMenu) so a newly
-// tracked database shows up by itself. Every box checked = no filter, like Type.
+// One box per database present in DATA (d.src), biggest first (row count, the
+// number shown beside each name explains the order), SRC_NAMES order breaking
+// ties so near-equal small databases don't swap on every refresh, any unknown
+// id appended. Rebuilt on load (buildSrcMenu) so a newly tracked database
+// shows up by itself. Every box checked = no filter, like Type.
 // The use case: uncheck MiSTer Distribution to see exactly what a stock update_all
 // does NOT deliver (the opt-in databases), then star and export those.
 const srcMenu = document.getElementById('srcmenu');
@@ -2544,7 +2558,9 @@ function syncSrcSummary() { syncPick(srcSummary, srcMenu, 'Source', enabledSrcs,
 function buildSrcMenu() {
   const counts = {};
   for (const d of DATA) if (d.src) counts[d.src] = (counts[d.src] || 0) + 1;
-  const srcs = Object.keys(SRC_NAMES).filter(s => counts[s])
+  const known = Object.keys(SRC_NAMES);
+  const srcs = known.filter(s => counts[s])
+    .sort((a, b) => counts[b] - counts[a] || known.indexOf(a) - known.indexOf(b))
     .concat(Object.keys(counts).filter(s => !SRC_NAMES[s]).sort());
   // one database (or none) leaves nothing to choose between
   if (srcs.length < 2) { document.getElementById('srcdd').hidden = true; SRC_KEYS = []; return; }
@@ -2723,6 +2739,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   meathax: 'meathax/meatcores',
   rmcores: 'rmonic79/rmcores',
   slopcore: 'TheJesusFish/Slop-Core',
+  kuzecores: 'kuzearcade/kuzecores',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -3926,7 +3943,7 @@ const FEED_LIST = [
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
-  "MeatCores, rmCores, TheJesusFish's Slop Cores and theypsilon's Unofficial " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores and theypsilon's Unofficial " +
   "Distribution. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +

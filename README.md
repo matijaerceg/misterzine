@@ -235,7 +235,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The six sources (all public)
+## The seven sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -253,8 +253,16 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    games in no other db: six Toaplan v2 boards (Batsugun, Dogyuun, FixEight, Ghox, Grind
    Stormer, Knuckle Bash) and Incredible Technologies 32-bit (BloodStorm, Street Fighter:
    The Movie, Time Killers). One `Arcade-<Core>_MiSTer` repo per core under his account.
+7. **kuzecores (kuzearcade)**: `kuzearcade/kuzecores` `db` branch (opt-in like MeatCores,
+   section `[kuzearcade/kuzecores]`), published 2026-09-19 after we asked. So far one core
+   family, `Arcade-NMK16_MiSTer`: four bitstreams covering 97 MAME sets of the NMK16 68000
+   boards (GunNail, Macross, Macross II, Thunder Dragon 1 and 2, Rapid Hero, Bombjack Twin,
+   Power Instinct, Task Force Harrier, the Afega line). His repo says "Claude assisted". The
+   MRAs sit in the db repo; the rbfs are `external_files.csv` entries pinned to a commit of
+   the core repo, named `Arcade-NMK16_<family>_<date>.rbf` against `<rbf>NMK16_<family>`
+   in the MRAs (MiSTer's prefix rule resolves them).
 
-All six publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All seven publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

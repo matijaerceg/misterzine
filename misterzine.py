@@ -109,6 +109,23 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/TheJesusFish/Slop-Core/db/db.json.zip",
     },
     {
+        # kuzearcade's db, published 2026-09-19 after we asked (his issue #6).
+        # One core family so far: Arcade-NMK16_MiSTer, the NMK16 68000 boards
+        # (GunNail, Macross, Macross II, Thunder Dragon 1+2, Rapid Hero,
+        # Bombjack Twin, Power Instinct, Task Force Harrier, the Afega line),
+        # four bitstreams / 97 MAME sets, his repo says "Claude assisted".
+        # NEW games bar two: Coin-Op also ships Black Heart and Thunder
+        # Dragon (Patreon-gated there, free here). Standard DB-Template db;
+        # the MRAs live in the db repo, the rbfs are external_files.csv
+        # entries pinned to a commit of the core repo, so the shipped file is
+        # Arcade-NMK16_<family>_<date>.rbf while the MRAs tag <rbf>NMK16_<family>
+        # (MiSTer's prefix rule; _resolve_shipped_rbf handles it). Same opt-in
+        # model as MeatCores: users hand-add [kuzearcade/kuzecores].
+        "id": "kuzecores",
+        "name": "kuzecores (kuzearcade)",
+        "db_url": "https://raw.githubusercontent.com/kuzearcade/kuzecores/db/db.json.zip",
+    },
+    {
         "id": "theypsilon_unofficial_distribution",
         "name": "theypsilon Unofficial Distribution",
         "db_url": "https://raw.githubusercontent.com/theypsilon/Unofficial_Distribution_MiSTer/main/unofficialdb.json.zip",
@@ -1221,6 +1238,7 @@ MRA_REPOS = [
     ("meathax", "meathax/meatcores", "main", "_Arcade/_MeatCores"),
     ("rmcores", "rmonic79/rmcores", "main", "_Arcade/_rmCores"),
     ("slopcore", "TheJesusFish/Slop-Core", "main", "_Arcade"),
+    ("kuzecores", "kuzearcade/kuzecores", "main", "_Arcade"),
 ]
 
 
@@ -1815,6 +1833,55 @@ SLOPCORE_FROZEN_DATES = {
     "Time Killers (v1.32).mra": "2026-09-04",
 }
 
+KUZECORES_REPO = "kuzearcade/kuzecores"
+# Keyed by lowercased MRA rbf tag (NMK16_<family>, no Arcade- prefix); all
+# four bitstreams come out of the one NMK16 repo.
+KUZECORES_CORE_REPOS = {
+    "nmk16_afega": "kuzearcade/Arcade-NMK16_MiSTer",
+    "nmk16_gunnail": "kuzearcade/Arcade-NMK16_MiSTer",
+    "nmk16_macross2": "kuzearcade/Arcade-NMK16_MiSTer",
+    "nmk16_raphero": "kuzearcade/Arcade-NMK16_MiSTer",
+}
+# Debut dates for the kuzecores initial import (2026-09-19 seed). The db
+# repo is a day old, so its own history says nothing; the games were public
+# before it as manual downloads from the core repo's releases/ folder, and
+# that is where these come from: each parent MRA's first-add commit in
+# kuzearcade/Arcade-NMK16_MiSTer@master (GitHub commits API, path-filtered,
+# oldest commit), UTC date. Post-import titles need no entry.
+KUZECORES_FROZEN_DATES = {
+    "GunNail (28th May. 1992).mra": "2026-09-09",
+    "Rapid Hero (NMK).mra": "2026-09-09",
+    "Super Spacefortress Macross II - Chou-Jikuu Yousai Macross II.mra": "2026-09-09",
+    "Thunder Dragon 2 (9th Nov. 1993).mra": "2026-09-09",
+    "Acrobat Mission.mra": "2026-09-11",
+    "Bio-ship Paladin.mra": "2026-09-11",
+    "Black Heart.mra": "2026-09-11",
+    "Bombjack Twin (set 1).mra": "2026-09-11",
+    "Hacha Mecha Fighter (19th Sep. 1991, protected, set 1).mra": "2026-09-11",
+    "Koutetsu Yousai Strahl (World).mra": "2026-09-11",
+    "Nouryoku Koujou Iinkai.mra": "2026-09-11",
+    "Power Instinct (USA).mra": "2026-09-11",
+    "Saboten Bombers (set 1).mra": "2026-09-11",
+    "Super Spacefortress Macross - Chou-Jikuu Yousai Macross.mra": "2026-09-11",
+    "Task Force Harrier.mra": "2026-09-11",
+    "Thunder Dragon (8th Jan. 1992, unprotected).mra": "2026-09-11",
+    "US AAF Mustang (25th May. 1990).mra": "2026-09-11",
+    "Vandyke (Japan).mra": "2026-09-11",
+    "Bubble 2000.mra": "2026-09-12",
+    "Guardian Storm (horizontal, not encrypted).mra": "2026-09-12",
+    "Mang-Chi.mra": "2026-09-12",
+    "Pop's Pop's.mra": "2026-09-12",
+    "Spectrum 2000 (vertical, Korea).mra": "2026-09-12",
+    "Stagger I (Japan).mra": "2026-09-12",
+    "Tom Tom Magic.mra": "2026-09-12",
+    "Air Attack (set 1).mra": "2026-09-14",
+    "Dolmen.mra": "2026-09-14",
+    "Many Block.mra": "2026-09-14",
+    "Puzzle World.mra": "2026-09-14",
+    "S.S. Mission.mra": "2026-09-14",
+    "Twin Action.mra": "2026-09-14",
+}
+
 # First public version: GX400-Friends/gx400-bin CHANGELOG.md, 2022-03-14.
 # The distribution import in 2026 is not the core's debut.
 OPTIN_DB_SOURCES = {
@@ -1825,6 +1892,7 @@ OPTIN_DB_SOURCES = {
     "meathax": (MEATHAX_REPO, MEATHAX_CORE_REPOS, MEATHAX_FROZEN_DATES),
     "rmcores": (RMCORES_REPO, RMCORES_CORE_REPOS, RMCORES_FROZEN_DATES),
     "slopcore": (SLOPCORE_REPO, SLOPCORE_CORE_REPOS, SLOPCORE_FROZEN_DATES),
+    "kuzecores": (KUZECORES_REPO, KUZECORES_CORE_REPOS, KUZECORES_FROZEN_DATES),
 }
 
 
@@ -2836,6 +2904,8 @@ def _core_label(r, fork_info, repo_maps):
         return "rmCores"
     if r["source_id"] == "slopcore":
         return "TheJesusFish"
+    if r["source_id"] == "kuzecores":
+        return "kuzearcade"
     repo = (r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")

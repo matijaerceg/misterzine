@@ -132,3 +132,18 @@ class ShippedRbfResolutionTests(unittest.TestCase):
                           core_files={}, core_hashes={}, shipped_rbfs=self.shipped)
         self.assertEqual(row["core"], "captaven")
         self.assertNotIn("bd", row)
+
+
+class DuplicateTitleTests(unittest.TestCase):
+    def test_exact_duplicates_only(self):
+        data = [{"title": "Black Heart", "src": "coinop", "core": "blkheart_mister", "sn": "blkheart"},
+                {"title": "Black Heart", "src": "kuzecores", "core": "Arcade-NMK16_Gunnail", "sn": "blkheart"},
+                {"title": "Thunder Dragon", "src": "kuzecores"},
+                {"title": "Thunder Dragon (8th Jan. 1992)", "src": "coinop"},
+                {"title": "", "src": "x"}, {"title": "", "src": "y"}]
+        dupes = mz.duplicate_titles(data)
+        self.assertEqual(list(dupes), ["Black Heart"])
+        self.assertEqual([d["src"] for d in dupes["Black Heart"]], ["coinop", "kuzecores"])
+
+    def test_clean_export_has_none(self):
+        self.assertEqual(mz.duplicate_titles([{"title": "A"}, {"title": "B"}]), {})

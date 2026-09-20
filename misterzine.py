@@ -2868,6 +2868,10 @@ ARCADE_TITLES = {
     "darius2d": "Darius II (Dual Screen)", # was "(Japan, dual screen, rev 2)"
     "polyplay": "Poly-Play",               # both Poly-Plays share one DAT desc
     "polyplay2": "Poly-Play 2",
+    "saturnzi": "Saturn (Zilec)",        # 1983 maze game; bare "Saturn" collides with the
+                                         # Sega Saturn console row (SYSTEM_TITLES drops makers,
+                                         # so the console side stays). Matches the Distribution's
+                                         # own MRA name, "Saturn (Zilec).mra".
 }
 
 # Escape hatch for the same-game qualifier labels below, keyed by lowercase
@@ -3526,6 +3530,30 @@ def warn_date_anomalies(con):
             print(f"::warning::{msg}")
 
 
+def duplicate_titles(data):
+    """{title: [rows]} for every display title more than one exported row
+    carries. Two rows reading the same in the table, the panel header and a
+    shared link is the failure mode the same-game gate, the gated-row
+    qualifier and the ARCADE_TITLES pins exist to prevent; whatever slips past
+    all three shows up here."""
+    groups = {}
+    for d in data:
+        groups.setdefault(d.get("title") or "", []).append(d)
+    return {t: g for t, g in groups.items() if t and len(g) > 1}
+
+
+def warn_duplicate_titles(data):
+    """Warn-only tripwire like warn_unshipped_rbfs: one line per duplicated
+    display title, naming each row's db/core/setname so the fix (a pin, a
+    label) is obvious from the log."""
+    for title, grp in sorted(duplicate_titles(data).items()):
+        who = ", ".join(f"{d.get('src')}/{d.get('core')}/{d.get('sn')}" for d in grp)
+        msg = f"DUPLICATE TITLE: {title!r} shipped by {len(grp)} rows ({who})"
+        log("  " + msg)
+        if os.environ.get("GITHUB_ACTIONS"):
+            print(f"::warning::{msg}")
+
+
 def warn_unshipped_rbfs(rows, shipped):
     """Tripwire for the Black Heart failure mode (issues #9/#10): an arcade row
     whose MRA <rbf> tag resolves to none of the files its db ships, even by
@@ -3661,7 +3689,9 @@ def cmd_export_web(args):
     # sharing a name, like the three Tetrises), and the rows span >= 2 sources
     # (single-source groups like Darius II / Burger Time are deliberate variant
     # listings whose qualifiers carry the meaning). Betas never participate: a
-    # beta arriving or leaving must not change what a public row displays. Any
+    # beta arriving or leaving must not change what a public row displays (a
+    # beta that would duplicate a public title gets its own label further
+    # down, alone). Any
     # doubt — missing setname, unresolvable/duplicate/degenerate labels —
     # keeps today's raw titles for the whole group, with a log line.
     same_game_labels = {}  # (source_id, path) -> qualifier label
@@ -3690,9 +3720,11 @@ def cmd_export_web(args):
     # raw MRA title must survive as mt on retitled rows — it is the image-
     # manifest join key, the feeds' event-matching key and the search alias.
     arcade_titles = {}
+    beta_by_key = {}
     for r in rows:
         if r["system"] == "arcade":
             b = _arcade_base(r["title"])
+            beta_by_key[(r["source_id"], r["path"])] = bool(r["beta"])
             label = same_game_labels.get((r["source_id"], r["path"]))
             if label:
                 arcade_titles[(r["source_id"], r["path"])] = (f"{b} ({label})", r["title"])
@@ -3707,6 +3739,30 @@ def cmd_export_web(args):
             else:
                 clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
+    # A gated row may still end up with the exact title of a public row: the
+    # same-game gate skips betas, and the clean-base rule lets a beta keep the
+    # base when the public row kept its own raw title, or when both raw titles
+    # are already bare (Coin-Op's beta Black Heart next to kuzecores' public
+    # Black Heart). Two identical rows is worse than a qualifier, so the GATED
+    # row alone takes its database's label -- "Black Heart (Coin-Op
+    # Collection)" -- and the public row is never touched, which keeps the
+    # rule above intact. When the beta graduates its flag clears and the
+    # ordinary both-labeled gate takes over.
+    public_titles = {t for (sid, p), (t, _) in arcade_titles.items()
+                     if not beta_by_key[(sid, p)]}
+    for r in rows:
+        if r["system"] != "arcade" or not r["beta"]:
+            continue
+        key = (r["source_id"], r["path"])
+        title, _ = arcade_titles[key]
+        if title not in public_titles:
+            continue
+        label = _core_label(r, fork_info, repo_maps)
+        if not label or norm_key(label) == norm_key(title):
+            log(f"  duplicate title {title!r}: gated row kept it (label {label!r}) [{r['source_id']}]")
+            continue
+        arcade_titles[key] = (f"{title} ({label})", r["title"])
+        log(f"  gated-row retitle: {r['title']} -> {title} ({label}) [{r['source_id']}]")
     family_members = arcade_family_members(arcade_meta)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map,
@@ -3737,6 +3793,7 @@ def cmd_export_web(args):
     # 2026-07-28), not a redirect — export-web must never write it.
     _backfill_arcade_images(data)  # give brand-new arcade titles an ADB/libretro shot
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
+    warn_duplicate_titles(data)
     _write_feeds(outdir)  # RSS feeds from the events table (needs final data.json)
     _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
     log(f"web export written to {outdir}")
@@ -4013,11 +4070,14 @@ def _write_feeds(outdir):
       Plain 'removed' events make no items.
     Runs AFTER the image re-tag so data.json rows carry img/img_slots."""
     data = json.loads((outdir / "data.json").read_text(encoding="utf-8"))
+    by_path = {}    # arcade rows: (source, MRA path), the event's own identity
     by_title = {}   # arcade rows: raw MRA title (mt when humanized) + display title
     by_core = {}    # non-arcade rows: core token
     by_rbf = {}     # arcade rows grouped by core rbf token (core-rebuild events)
     for d in data:
         if d.get("base") == "Arcade":
+            if d.get("src") and d.get("mra"):
+                by_path[(d["src"], d["mra"])] = d
             by_title.setdefault(d.get("mt") or d["title"], d)
             by_title.setdefault(d["title"], d)
             if d.get("core"):
@@ -4069,10 +4129,16 @@ def _write_feeds(outdir):
             # a Pac-Man core fix must not spam 22 per-game items.
             rows = by_rbf.get(core_name(e["title"]).lower(), [])
         elif e["system"] == "arcade":
-            # the event title is the raw MRA stem with region qualifiers
-            # ("Dig Dug (Rev 2)"); site rows show the stripped/humanized base,
-            # so try raw (kept-qualifier collision rows), then the stripped base
-            row = by_title.get(e["title"]) or by_title.get(_arcade_base(e["title"]))
+            # the event names its row outright (source + MRA path); titles
+            # are only a fallback for events older than that pairing. Title
+            # matching is source-blind, so two dbs shipping the same MRA name
+            # (Black Heart: Coin-Op and kuzecores) both landed on whichever
+            # row came first. The event title is the raw MRA stem with region
+            # qualifiers ("Dig Dug (Rev 2)"); site rows show the stripped/
+            # humanized base, so try raw (kept-qualifier collision rows), then
+            # the stripped base.
+            row = (by_path.get((e["source_id"], e["path"]))
+                   or by_title.get(e["title"]) or by_title.get(_arcade_base(e["title"])))
             rows = [row] if row else []
             if (rows and e["event_type"] == "updated"
                     and (e["source_id"], e["ts"][:10], (row.get("core") or "").lower()) in core_rebuilds):

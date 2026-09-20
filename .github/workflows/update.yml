@@ -41,7 +41,7 @@ jobs:
         run: python misterzine.py snapshot
 
       - name: Check feed field exports
-        run: python -m unittest test_controls test_card_status test_arcade_specs test_family test_seed_r2
+        run: python -m unittest test_controls test_card_status test_arcade_specs test_family test_seed_r2 test_supporters
 
       - name: Enrich new arcade titles (year/manufacturer/rbf/setname)
         run: python misterzine.py enrich-mra
@@ -76,6 +76,21 @@ jobs:
         continue-on-error: true
         run: python misterzine.py specs
 
+      - name: Supporter credits (Patreon members)
+        # Merges the campaign's member list into data/supporters.json and
+        # publishes docs/supporters.json for the credits page and the app.
+        # Non-fatal: a Patreon hiccup keeps yesterday's list. When the
+        # monthly token refresh happens, GH_SECRETS_TOKEN (a fine-grained
+        # PAT with secrets write on this repo) stores the new pair.
+        continue-on-error: true
+        env:
+          PATREON_ACCESS_TOKEN: ${{ secrets.PATREON_ACCESS_TOKEN }}
+          PATREON_REFRESH_TOKEN: ${{ secrets.PATREON_REFRESH_TOKEN }}
+          PATREON_CLIENT_ID: ${{ secrets.PATREON_CLIENT_ID }}
+          PATREON_CLIENT_SECRET: ${{ secrets.PATREON_CLIENT_SECRET }}
+          GH_SECRETS_TOKEN: ${{ secrets.GH_SECRETS_TOKEN }}
+        run: python tools/patreon_supporters.py
+
       - name: Regenerate JSON exports
         run: python misterzine.py export
 
@@ -90,7 +105,7 @@ jobs:
           # sources.last_fetch every run, so the DB always shows a diff even on a
           # quiet day. Only when exports/site actually change do we also commit
           # the DB (which then carries the new events/dates worth persisting).
-          git add data/exports docs
+          git add data/exports data/supporters.json docs
           if git diff --cached --quiet; then
             echo "No new or updated releases today — nothing to publish."
           else

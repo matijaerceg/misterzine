@@ -110,7 +110,7 @@ SOURCES = [
     },
     {
         # kuzearcade's db, published 2026-09-19 after we asked (his issue #6).
-        # One core family so far: Arcade-NMK16_MiSTer, the NMK16 68000 boards
+        # First core family: Arcade-NMK16_MiSTer, the NMK16 68000 boards
         # (GunNail, Macross, Macross II, Thunder Dragon 1+2, Rapid Hero,
         # Bombjack Twin, Power Instinct, Task Force Harrier, the Afega line),
         # four bitstreams / 97 MAME sets, his repo says "Claude assisted".
@@ -1834,13 +1834,15 @@ SLOPCORE_FROZEN_DATES = {
 }
 
 KUZECORES_REPO = "kuzearcade/kuzecores"
-# Keyed by lowercased MRA rbf tag (NMK16_<family>, no Arcade- prefix); all
-# four bitstreams come out of the one NMK16 repo.
+# Keyed by lowercased MRA rbf tag (no Arcade- prefix): the four NMK16
+# bitstreams come out of one repo; each later core gets its own
+# Arcade-<Core>_MiSTer repo (Sand Scorpion, 2026-09-20).
 KUZECORES_CORE_REPOS = {
     "nmk16_afega": "kuzearcade/Arcade-NMK16_MiSTer",
     "nmk16_gunnail": "kuzearcade/Arcade-NMK16_MiSTer",
     "nmk16_macross2": "kuzearcade/Arcade-NMK16_MiSTer",
     "nmk16_raphero": "kuzearcade/Arcade-NMK16_MiSTer",
+    "sandscrp": "kuzearcade/Arcade-SandScrp_MiSTer",
 }
 # Debut dates for the kuzecores initial import (2026-09-19 seed). The db
 # repo is a day old, so its own history says nothing; the games were public

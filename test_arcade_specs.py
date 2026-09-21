@@ -1,7 +1,10 @@
 """Provisional feed contracts: precedence, provenance and conservative parsing."""
+import gzip
 import io
 import json
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 import misterzine as mz
@@ -17,6 +20,18 @@ def row(curated=None, fallback=None, launch=None):
                    rbf="unit", release_date="2026-09-01")
     return mz._web_row(catalog, arcade_mad={"unit": curated or {}},
         arcade_specs={"unit": fallback or {}}, mra_specs=launch or {})
+
+
+def local_specs(legacy, current):
+    """Run local_specs() over in-memory legacy/current MAME caches."""
+    with tempfile.TemporaryDirectory() as tmp:
+        old_gz, cur_gz = Path(tmp) / "old.gz", Path(tmp) / "cur.gz"
+        old_gz.write_bytes(gzip.compress(json.dumps(legacy).encode("utf-8")))
+        cur_gz.write_bytes(gzip.compress(json.dumps({"specs": current}).encode("utf-8")))
+        with patch.object(mz, "SPECS_GZ", old_gz), \
+             patch.object(mz, "CURRENT_SPECS_GZ", cur_gz), \
+             patch.object(mz, "REVIEWED_SPECS_JSON", Path(tmp) / "absent.json"):
+            return mz.local_specs()
 
 
 class ArcadeSpecsTests(unittest.TestCase):
@@ -121,6 +136,26 @@ class ArcadeSpecsTests(unittest.TestCase):
         self.assertEqual(len(resolutions), 30)
         self.assertTrue(all(g["sources"] and g["evidence"] for g in groups))
         self.assertTrue(resolutions.isdisjoint({"cliffhgr", "elim2", "bonanza", "crkdown"}))
+
+    def test_current_mame_rotation_beats_the_legacy_set_label(self):
+        # 0.78 called spec2k horizontal; MAME has since separated Afega's
+        # horizontal and vertical builds, and rotation is a hardware fact
+        # rather than the input opinion legacy is kept on top for.
+        merged = local_specs({"spec2k": {"rot": "Horizontal", "plr": "2"}},
+                             {"spec2k": {"rot": "Vertical", "_sources": {"rot": "nmk16.cpp"}}})
+        self.assertEqual(merged["spec2k"]["rot"], "Vertical")
+        self.assertEqual(merged["spec2k"]["_sources"]["rot"], "nmk16.cpp")
+
+    def test_legacy_rotation_still_fills_sets_current_mame_dropped(self):
+        merged = local_specs({"gone": {"rot": "Vertical"}}, {})
+        self.assertEqual(merged["gone"]["rot"], "Vertical")
+        self.assertEqual(merged["gone"]["_sources"]["rot"], mz.SPECS_URL)
+
+    def test_legacy_still_outranks_current_mame_on_control_descriptions(self):
+        merged = local_specs({"unit": {"ctl": "4-way · 1 button", "buttons": 1}},
+                             {"unit": {"rot": "Horizontal", "ctl": "8-way · 3 buttons", "buttons": 3}})
+        self.assertEqual(merged["unit"]["ctl"], "4-way · 1 button")
+        self.assertEqual(merged["unit"]["rot"], "Horizontal")
 
 
 if __name__ == "__main__":

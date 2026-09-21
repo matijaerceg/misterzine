@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-21
+
+- Release tracker: two provisional rotations corrected. Spectrum 2000 is vertical and Guardian Storm is horizontal, not the other way round. Where a game has no entry in the MiSTer Arcade Database yet, we gray-fill its rotation from MAME; the older 2003-era MAME data we use for control descriptions was overriding the current one, and it had those two Afega games labelled backwards because MAME has since separated their horizontal and vertical builds. Current MAME now decides rotation, and the provisional tooltip cites the driver or MRA the value actually came from.
+
 ## 2026-09-19
 
 - Release tracker: now also tracks kuzearcade's kuzecores database, a seventh source, published today after we asked for it. It carries his NMK16 family cores: four bitstreams covering 97 MAME sets of the NMK16 boards (GunNail, Macross, Macross II, Thunder Dragon 1 and 2, Rapid Hero, Bombjack Twin, Power Instinct, Task Force Harrier and the Afega line), 31 games listed. Apart from Black Heart and Thunder Dragon, which Coin-Op Collection also ships, none of them were in any tracked database. His repo describes the cores as written with AI assistance; the detail panel says so. Like MeatCores it is an opt-in database with no update_all settings toggle, so its rows explain how to add it to downloader.ini; debut dates come from each game's first appearance in the core repo's releases folder, which predates the database.

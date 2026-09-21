@@ -2288,6 +2288,13 @@ def local_specs():
     out = {}
     for sn in legacy.keys() | current.keys():
         old = {**legacy[sn], "_source": SPECS_URL} if sn in legacy else {}
+        # Rotation is a hardware fact, not an input description: where the two
+        # MAME generations disagree it is because 0.78 mislabelled a set that
+        # has since been split or re-dumped (Afega shipped horizontal AND
+        # vertical builds of the same game under names 0.78 assigned the other
+        # way round). Current MAME wins on `rot` whenever it has the setname.
+        if (current.get(sn) or {}).get("rot"):
+            old.pop("rot", None)
         # Supplement existing provisional descriptions rather than replacing
         # them wholesale with generic emulator input layouts. Corrections are
         # reviewed explicitly; current MAME resolves new names and omissions.

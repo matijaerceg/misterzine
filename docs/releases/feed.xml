@@ -6,33 +6,42 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 20 Sep 2026 17:35:00 +0000</lastBuildDate>
+<lastBuildDate>Sun, 20 Sep 2026 21:16:53 +0000</lastBuildDate>
 <item>
-<title>[Updated] Dolmen (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dolmen</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Dolmen.mra:2026-09-20T17:35:00+00:00</guid>
-<pubDate>Sun, 20 Sep 2026 17:35:00 +0000</pubDate>
+<title>[Updated] Arcade-NMK16_Afega (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bubl2000</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Afega_20260920.rbf:2026-09-20T21:16:53+00:00</guid>
+<pubDate>Sun, 20 Sep 2026 21:16:53 +0000</pubDate>
 <category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dolmen.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1995 / Afega&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Gunnail&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Bubble 2000, Guardian Storm, Mang-Chi, Pop's Pop's, Spectrum 2000, Stagger I.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Many Block (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#manybloc</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Many Block.mra:2026-09-20T17:35:00+00:00</guid>
-<pubDate>Sun, 20 Sep 2026 17:35:00 +0000</pubDate>
+<title>[Updated] Arcade-NMK16_Gunnail (Arcade core, 21 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#acrobatm</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20260920.rbf:2026-09-20T21:16:53+00:00</guid>
+<pubDate>Sun, 20 Sep 2026 21:16:53 +0000</pubDate>
 <category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/manybloc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Bee-Oh&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Gunnail&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Acrobat Mission, Air Attack, Bio-ship Paladin, Black Heart, Bombjack Twin, Dolmen, GunNail, Hacha Mecha Fighter, Koutetsu Yousai Strahl, Many Block, Nouryoku Koujou Iinkai, Puzzle World, S.S. Mission, Saboten Bombers, Super Spacefortress Macross, Task Force Harrier, Thunder Dragon, Tom Tom Magic, Twin Action, US AAF Mustang, Vandyke.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Puzzle World (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#puzlwrld</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Puzzle World.mra:2026-09-20T17:35:00+00:00</guid>
-<pubDate>Sun, 20 Sep 2026 17:35:00 +0000</pubDate>
+<title>[Updated] Arcade-NMK16_Macross2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#powerins</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Macross2_20260920.rbf:2026-09-20T21:16:53+00:00</guid>
+<pubDate>Sun, 20 Sep 2026 21:16:53 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Power Instinct, Super Spacefortress Macross II, Thunder Dragon 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rapid Hero (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#raphero</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Raphero_20260920.rbf:2026-09-20T21:16:53+00:00</guid>
+<pubDate>Sun, 20 Sep 2026 21:16:53 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;Puzzle / 1996 / Afega&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Gunnail&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raphero.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1994 / NMK&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Raphero&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Sand Scorpion (Arcade)</title>
@@ -42,24 +51,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sandscrp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Face&lt;/p&gt;&lt;p&gt;Core: Arcade-SandScrp&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-SandScrp_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Task Force Harrier (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tharrier</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Task Force Harrier.mra:2026-09-20T17:35:00+00:00</guid>
-<pubDate>Sun, 20 Sep 2026 17:35:00 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tharrier.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / UPL&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Gunnail&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Twin Action (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#twinactn</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Twin Action.mra:2026-09-20T17:35:00+00:00</guid>
-<pubDate>Sun, 20 Sep 2026 17:35:00 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/twinactn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1995 / Afega&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Gunnail&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-20 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Dogyuun (Arcade)</title>
@@ -906,6 +897,15 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Change Air Blade, Drift Out '94 - The Hard Order, Dyna Gear, Monster Slider, Storm Blade, Twin Eagle II - The Rescue Mission, Ultra X Weapons, Vasara, Vasara 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/SVV/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Psikyo (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btlkroad</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Psikyo_20260906.rbf:2026-09-06T14:15:44+00:00</guid>
+<pubDate>Sun, 06 Sep 2026 14:15:44 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Battle K-Road, Gunbird, Samurai Aces, Strikers 1945, Tengai.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Psikyo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

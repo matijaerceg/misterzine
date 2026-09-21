@@ -34,6 +34,21 @@ def local_specs(legacy, current):
             return mz.local_specs()
 
 
+def rotation_warnings(**over):
+    """warn_provisional_rotation's output for one data.json row."""
+    d = {"title": "Unit", "src": "kuzecores", "sn": "unit", "rot": "Horizontal",
+         "prov": ["rot"], "prov_src": {"rot": "nmk16.cpp"},
+         "mra": "_Arcade/Unit.mra", "img_w": 256, "img_h": 224}
+    d.update(over)
+    with tempfile.TemporaryDirectory() as tmp:
+        outdir = Path(tmp)
+        (outdir / "data.json").write_text(json.dumps([d]), encoding="utf-8")
+        lines = []
+        with patch.object(mz, "log", lines.append):
+            mz.warn_provisional_rotation(outdir)
+    return [line for line in lines if "PROVISIONAL ROTATION" in line]
+
+
 class ArcadeSpecsTests(unittest.TestCase):
     def test_launch_mapping_slots_are_not_action_buttons(self):
         self.assertEqual(parse_mra_specs('<misterrom><buttons names="Fire,Coin,Start,Pause"/></misterrom>', "mra"), {})
@@ -150,6 +165,30 @@ class ArcadeSpecsTests(unittest.TestCase):
         merged = local_specs({"gone": {"rot": "Vertical"}}, {})
         self.assertEqual(merged["gone"]["rot"], "Vertical")
         self.assertEqual(merged["gone"]["_sources"]["rot"], mz.SPECS_URL)
+
+    def test_tall_screenshot_under_a_horizontal_guess_is_flagged(self):
+        [line] = rotation_warnings(img_w=224, img_h=256)
+        self.assertIn("224x256 screenshot is vertical", line)
+
+    def test_mra_filename_qualifier_is_flagged(self):
+        # The Spectrum 2000 shape: the core author's own word for the build.
+        [line] = rotation_warnings(mra="_Arcade/Unit (vertical, Korea).mra")
+        self.assertIn("named 'vertical'", line)
+
+    def test_agreeing_evidence_is_silent(self):
+        self.assertEqual(rotation_warnings(), [])
+        self.assertEqual(rotation_warnings(rot="Vertical", img_w=224, img_h=256,
+                                           mra="_Arcade/Unit (vertical).mra"), [])
+
+    def test_square_screenshots_prove_nothing(self):
+        self.assertEqual(rotation_warnings(img_w=240, img_h=240), [])
+
+    def test_curated_and_hand_pinned_rotations_are_not_second_guessed(self):
+        # MAD outranks the evidence by design; a pin was already read off the
+        # driver source (Pac-Manic Miner's shot is MAME's unrotated bitmap).
+        self.assertEqual(rotation_warnings(prov=["plr"], img_w=224, img_h=256), [])
+        self.assertEqual(rotation_warnings(prov_src={"rot": mz.PIN_SOURCE},
+                                           rot="Vertical", img_w=288, img_h=224), [])
 
     def test_legacy_still_outranks_current_mame_on_control_descriptions(self):
         merged = local_specs({"unit": {"ctl": "4-way · 1 button", "buttons": 1}},

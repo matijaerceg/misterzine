@@ -2226,6 +2226,8 @@ SPECS_GZ = CACHEDIR / "mame2003_specs.json.gz"
 CURRENT_SPECS_GZ = CACHEDIR / "mame_current_specs.json.gz"
 MRA_SPECS_JSON = CACHEDIR / "mra_specs.json"
 REVIEWED_SPECS_JSON = DATA / "provisional_specs.json"
+# Cited as the source of a hand-pinned provisional value (arcade_specs_pin).
+PIN_SOURCE = "https://github.com/matijaerceg/misterzine/blob/main/misterzine.py"
 _SPECS_GAME = re.compile(r'<game\s+name="([^"]+)"[^>]*>(.*?)</game>', re.S)
 # movement controls -> the "move" half of the Controls cell (parse_mad's format)
 _SPECS_MOVE = {
@@ -2293,12 +2295,19 @@ def local_specs():
         # has since been split or re-dumped (Afega shipped horizontal AND
         # vertical builds of the same game under names 0.78 assigned the other
         # way round). Current MAME wins on `rot` whenever it has the setname.
+        # The overruled value is kept for the export diagnostic: each one is
+        # either a MAME correction we want to have noticed, or a parse bug.
+        superseded = None
         if (current.get(sn) or {}).get("rot"):
-            old.pop("rot", None)
+            dropped = old.pop("rot", None)
+            if dropped and dropped != current[sn]["rot"]:
+                superseded = dropped
         # Supplement existing provisional descriptions rather than replacing
         # them wholesale with generic emulator input layouts. Corrections are
         # reviewed explicitly; current MAME resolves new names and omissions.
         out[sn] = {**merge_specs(current.get(sn), old), "_legacy": old}
+        if superseded:
+            out[sn]["_rot_superseded"] = superseded
     if REVIEWED_SPECS_JSON.exists():
         for group in json.loads(REVIEWED_SPECS_JSON.read_text(encoding="utf-8"))["groups"]:
             for sn in group["setnames"]:
@@ -3403,7 +3412,7 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         reviewed = sp.get("_reviewed", {})
         legacy = sp.get("_legacy", {})
         sp = merge_specs(sp, mra, legacy,
-                         {**pin, "_source": "https://github.com/matijaerceg/misterzine/blob/main/misterzine.py"}, reviewed)
+                         {**pin, "_source": PIN_SOURCE}, reviewed)
         prov = [k for k in ("rot", "res", "plr", "ctl", "spc")
                 if not row.get(k) and sp.get(k)]
         for k in prov:
@@ -3561,6 +3570,60 @@ def warn_duplicate_titles(data):
         log("  " + msg)
         if os.environ.get("GITHUB_ACTIONS"):
             print(f"::warning::{msg}")
+
+
+# The rotation qualifier core authors put in an MRA filename ("(vertical,
+# Korea)", "(horizontal, not encrypted)"): their own word for which build of a
+# game the core runs, and for some Afega sets the only place it is written down.
+_MRA_ROTATION_WORD = re.compile(r"\((?:[^()]*,\s*)?(vertical|horizontal)\b", re.I)
+
+
+def warn_provisional_rotation(outdir):
+    """Tripwire for the Spectrum 2000 failure mode: a gray-filled rotation that
+    contradicts evidence we already ship. Two independent checks:
+
+      * the screenshot's own pixel aspect - a tall shot filed as Horizontal
+      * the MRA filename's qualifier - '(vertical, Korea)' filed as Horizontal
+
+    Scoped to rows whose rotation is a guess taken from MAME or an MRA. MAD
+    rows are excluded (a curated rotation outranks both signals by design), and
+    so are our own hand-pinned rows, which were read off the driver source and
+    the game's attract screen when they were written. Both exclusions matter
+    because the aspect test has a real false-positive mode: some screenshots
+    are MAME's raw bitmap rather than the rotated presentation, which is why
+    Pac-Manic Miner (a Pac-Man hack, vertical, shot 288x224) looks wrong and
+    is not.
+
+    Warn-only like warn_unshipped_rbfs. Neither signal is strong enough to stop
+    an unattended 4x-daily refresh - a stale screenshot or a renamed MRA would
+    wedge the whole site rather than mislabel one cell - and the gray fill
+    self-heals the moment MAD reaches the setname.
+
+    Reads the finished data.json rather than the in-memory rows: the screenshot
+    dimensions are re-applied to the file afterwards by _retag_image_dims()."""
+    try:
+        data = json.loads((outdir / "data.json").read_text(encoding="utf-8"))
+    except Exception as exc:
+        log(f"  (skipping provisional-rotation check: {exc})")
+        return
+    for d in data:
+        if "rot" not in (d.get("prov") or []):
+            continue
+        if (d.get("prov_src") or {}).get("rot", "") == PIN_SOURCE:
+            continue
+        vertical = d["rot"].startswith("Vertical")
+        disputes, w, h = [], d.get("img_w"), d.get("img_h")
+        if w and h and w != h and (h > w) != vertical:
+            disputes.append(f"its {w}x{h} screenshot is {'vertical' if h > w else 'horizontal'}")
+        named = _MRA_ROTATION_WORD.search(os.path.basename(d.get("mra") or ""))
+        if named and (named.group(1).lower() == "vertical") != vertical:
+            disputes.append(f"its MRA is named '{named.group(1).lower()}'")
+        if disputes:
+            msg = (f"PROVISIONAL ROTATION: '{d['title']}' ({d.get('src')} {d.get('sn')}) is "
+                   f"gray-filled {d['rot']} but " + " and ".join(disputes))
+            log("  " + msg)
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::warning::{msg}")
 
 
 def warn_unshipped_rbfs(rows, shipped):
@@ -3803,6 +3866,7 @@ def cmd_export_web(args):
     _backfill_arcade_images(data)  # give brand-new arcade titles an ADB/libretro shot
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
     warn_duplicate_titles(data)
+    warn_provisional_rotation(outdir)  # needs the dims the re-tag just restored
     _write_feeds(outdir)  # RSS feeds from the events table (needs final data.json)
     _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
     log(f"web export written to {outdir}")
@@ -3822,6 +3886,15 @@ def cmd_export_web(args):
     n_prov = sum(1 for d in data if d.get("prov"))
     log(f"  arcade with rotation: {n_rot}/{by_base.get('Arcade', 0)} "
         f"({n_prov} rows carry provisional specs)")
+    # Shipped rows where current MAME overruled the 2003-era rotation. A short,
+    # reviewable list by design: anything new here is either a MAME correction
+    # (which we now follow) or a parsing regression (which we would not).
+    overruled = sorted({(d["title"], (d.get("sn") or "").lower()) for d in data
+                        if (arcade_specs.get((d.get("sn") or "").lower()) or {}).get("_rot_superseded")})
+    log(f"  rotation, current MAME over mame2003-plus: {len(overruled)} shipped rows")
+    for title, sn in overruled:
+        was = arcade_specs[sn]["_rot_superseded"]
+        log(f"    {title} [{sn}]: {was} -> {arcade_specs[sn]['rot']}")
     n_brot = sum(1 for d in data if d.get("brot"))
     log(f"  boot-rotation markers (brot): {n_brot}/{len(ARCADE_BOOT_ROTATION)} curated")
 

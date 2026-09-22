@@ -1,10 +1,10 @@
 import { env, SELF } from 'cloudflare:test';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { MAGIC, normalizeCode, reports } from '../src/reports.js';
+import { ALPHABET, MAGIC, normalizeCode, reports } from '../src/reports.js';
 
 const ADMIN = { Authorization: 'Bearer test-admin-token' };
 const BODY = MAGIC + '\nApp: misterzine v1.1.2-dev (abc1234, 2026-09-22)\n\nSYSTEM\n...\n';
-const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{4}$/;
+const CODE_RE = /^[34679ACEFHJKMNPRTWXY]{4}$/; // what uploads are given: no look-alikes
 const DAY = 86400000;
 
 // st reads the body before the status: an unread R2 stream breaks the test
@@ -115,6 +115,24 @@ describe('thirty days', () => {
 });
 
 describe('codes', () => {
+  it('gives uploads only characters nothing can be mistaken for', async () => {
+    const seen = new Set();
+    for (let i = 0; i < 40; i++) {
+      const code = await send();
+      expect(code).toMatch(CODE_RE);
+      for (const ch of code) seen.add(ch);
+    }
+    expect(ALPHABET).toBe('34679ACEFHJKMNPRTWXY');
+    for (const ch of '0OQD1IL2Z5S8BGUV') expect(seen.has(ch), ch).toBe(false);
+  });
+
+  it('still reads a report filed under the old alphabet, however it is typed', async () => {
+    await env.REPORTS.put('r/K1B0.txt', BODY);
+    for (const typed of ['K1B0', 'k1b0', 'KIB0', 'klbo', 'K1-B0']) {
+      expect(await st(call('GET', '/reports/' + typed, { headers: ADMIN })), typed).toBe(200);
+    }
+  });
+
   it('reads what people type and rejects the rest', () => {
     expect(normalizeCode('k7q2')).toBe('K7Q2');
     expect(normalizeCode('K7-Q2')).toBe('K7Q2');

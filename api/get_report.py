@@ -1,8 +1,8 @@
 """Fetch, list or delete the reports players send from MisterZine.
 
-    python api/get_report.py K7Q2             print the report and keep a copy
+    python api/get_report.py K7M4             print the report and keep a copy
     python api/get_report.py --list           the reports of the last 30 days
-    python api/get_report.py --delete K7Q2
+    python api/get_report.py --delete K7M4
 
 The admin token is the Worker secret REPORTS_TOKEN. It is read from
 MZ_REPORTS_TOKEN, else from .secrets/reports.json ({"token": "..."}) in the
@@ -67,7 +67,7 @@ def call(method, path, tok, api):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument('code', nargs='?', help='the code the player posted, e.g. K7Q2')
+    p.add_argument('code', nargs='?', help='the code the player posted, e.g. K7M4')
     p.add_argument('--list', action='store_true', help='list the reports of the last 30 days')
     p.add_argument('--delete', metavar='CODE', help='delete one report now')
     p.add_argument('--api', default=API, help=argparse.SUPPRESS)

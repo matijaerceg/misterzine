@@ -83,16 +83,18 @@ into `sessions` with the sha256 of any token and use that token as the bearer.
 When a player chooses Options -> Troubleshooting -> Send a report, the Frontend
 uploads a plain-text description of their card (`POST /reports`: app version,
 settings, filters, which game files are not listed and why, recent log lines)
-and shows them a four-character code such as `K7Q2`. The report holds no account and no
+and shows them a four-character code such as `K7M4`. The report holds no account and no
 IP address; the rate limiter keys on the address in memory only. Only the
 developer can read reports, with the `REPORTS_TOKEN` secret.
 
 Reports live in the private R2 bucket `misterzine-reports`, never the public
 image bucket. Its lifecycle rule deletes each one 30 days after upload, and the
 read routes refuse anything older, since the rule runs about once a day.
-Codes are four Crockford base32 characters, about a million of them. An
-upload claims its code with a put that succeeds only while the key is free, so
-two uploads never share one. A code can be drawn again once its report has
+Codes are four characters from `34679ACEFHJKMNPRTWXY`, which leaves out every
+character something else could be mistaken for (0/O/Q/D, 1/I/L, 2/Z, 5/S, 8/B,
+6/G, U/V): 160,000 codes. Reading still accepts the Crockford base32 codes
+issued before the alphabet narrowed. An upload claims its code with a put that
+succeeds only while the key is free, so two uploads never share one. A code can be drawn again once its report has
 expired, which is why `get_report.py` prints each report's upload date.
 `REPORTS_ENABLED = "0"` in `wrangler.toml` switches uploads off (503) without
 an app release; `REPORT_MAX_BYTES` caps their size.
@@ -110,9 +112,9 @@ Keep the same token in `.secrets/reports.json` as `{"token": "..."}` in the main
 checkout (gitignored). Then:
 
 ```bash
-python api/get_report.py K7Q2             # print it; a copy lands in .secrets/reports/
+python api/get_report.py K7M4             # print it; a copy lands in .secrets/reports/
 python api/get_report.py --list           # the last 30 days
-python api/get_report.py --delete K7Q2
+python api/get_report.py --delete K7M4
 ```
 
 The routes are tested with `npm test` (vitest with the Workers pool, local R2).

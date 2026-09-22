@@ -21,11 +21,16 @@
 
 export const REPORT_DAYS = 30;
 export const MAGIC = 'MisterZine report v1';
-const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // Crockford base32: no I, L, O, U
-// Four characters: a code is an identifier, not a key (reading needs the admin
-// token), and 32^4 codes are plenty for thirty days of reports. A code can
-// come back after its report expires, so a reader checks the upload date.
+// New codes use only characters nothing else can be mistaken for in the
+// MiSTer's font or a forum post: no 0/O/Q/D, 1/I/L, 2/Z, 5/S, 8/B, 6/G, U/V.
+// Twenty of them make 20^4 = 160,000 four-character codes, plenty for thirty
+// days of reports: a code is an identifier, not a key (reading needs the
+// admin token). A code can come back after its report expires, so a reader
+// checks the upload date.
+export const ALPHABET = '34679ACEFHJKMNPRTWXY';
 const CODE_LEN = 4;
+// Reading accepts any Crockford base32 code, so reports filed before the
+// alphabet narrowed (their codes may hold 0, 1, B, ...) stay readable.
 const CODE_RE = new RegExp('^[0-9A-HJKMNP-TV-Z]{' + CODE_LEN + '}$');
 const DAY_MS = 86400000;
 
@@ -130,10 +135,19 @@ function appLine(text) {
   return '';
 }
 
+// newCode draws CODE_LEN characters uniformly from ALPHABET: a random byte
+// counts only below the largest multiple of the alphabet's size.
 function newCode() {
-  const b = new Uint8Array(CODE_LEN);
-  crypto.getRandomValues(b);
-  return [...b].map(x => ALPHABET[x & 31]).join('');
+  const limit = 256 - (256 % ALPHABET.length);
+  let code = '';
+  while (code.length < CODE_LEN) {
+    const b = new Uint8Array(CODE_LEN * 2);
+    crypto.getRandomValues(b);
+    for (const x of b) {
+      if (x < limit && code.length < CODE_LEN) code += ALPHABET[x % ALPHABET.length];
+    }
+  }
+  return code;
 }
 
 // normalizeCode accepts what a person types: any case, dashes and spaces,

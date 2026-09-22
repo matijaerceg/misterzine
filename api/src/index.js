@@ -1,8 +1,11 @@
 // misterzine account service: a Cloudflare Worker in front of a D1 database.
 //
 // What it does: signs people in with Google or GitHub (OAuth, no passwords),
-// and stores their release-tracker favorites. That is the whole job. It holds
-// no device addresses, no Zaparoo keys, no names, no avatars.
+// and stores their release-tracker favorites. It holds no device addresses,
+// no Zaparoo keys, no names, no avatars. Its one other job is taking the
+// diagnostic reports a player sends from the MisterZine Frontend's
+// Troubleshooting screen (src/reports.js): kept 30 days in a private R2
+// bucket, readable only by the developer, and never tied to an account.
 //
 // Routes (all JSON unless noted; CORS is limited to SITE_ORIGIN + DEV_ORIGINS):
 //   GET    /                          service info
@@ -17,12 +20,16 @@
 //   PUT    /favorites/{key}           add one
 //   DELETE /favorites/{key}           remove one
 //   POST   /favorites/import          {keys: [...]} union into the account (first sign-in)
+//   POST   /reports                   device report upload; the rest of /reports is
+//                                     developer-only (see src/reports.js)
 //
 // Auth for the JSON routes: `Authorization: Bearer <session token>`. The
 // token is 32 random bytes (base64url); only its sha256 is stored. Sessions
 // expire 90 days after last use. The OAuth start/callback pair is tied
 // together by a signed, short-lived cookie (state + PKCE verifier + return
 // path), so no server-side state is needed for sign-in.
+
+import { reports } from './reports.js';
 
 const KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;      // release tracker row keys (data.json `k`)
 const MAX_FAVORITES = 5000;
@@ -57,6 +64,9 @@ async function route(request, env, url) {
   let mm;
   if (m === 'GET' && (mm = p.match(/^\/auth\/(google|github)$/))) return startOAuth(mm[1], env, url);
   if (m === 'GET' && (mm = p.match(/^\/auth\/(google|github)\/callback$/))) return finishOAuth(mm[1], env, url, request);
+
+  // --- device reports: their own auth, never a session ------------------------
+  if (p === '/reports' || p.startsWith('/reports/')) return reports(request, env, m, p);
 
   // --- everything below needs a session -------------------------------------
   const user = await authenticate(request, env);

@@ -145,6 +145,15 @@ your browser. Signing in with Google one day and GitHub another creates two sepa
    Arcade Database or libretro-thumbnails; your MiSTer never contacts them. The app sends nothing anywhere
    else, and it has no analytics. Running Update All from inside it runs your own Downloader with your own
    settings. Uninstalling removes its files from the card.</p>
+<p>The one exception is a report you choose to send. Options &rarr; Troubleshooting &rarr; Send a report
+   describes your card to the developer, so a problem can be looked into: the app version, its settings and
+   filters, which game files on the card it lists or leaves out and why (their file names), and its recent log
+   lines. It carries no account, no Wi-Fi details or passwords, and none of the addresses in your Downloader
+   settings. The app says what goes into it before anything is sent and keeps a copy on your SD card. It
+   goes to api.misterzine.fyi, which stores it privately on Cloudflare R2 under a short code and records
+   nothing about who sent it, not even the IP address, beyond Cloudflare's aggregate analytics. Only the
+   developer can read it, using the code you post, and it is deleted 30 days after it arrives. Nothing is
+   sent until you choose to send it.</p>
 
 <h2>Analytics</h2>
 <p>Page views are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>,
@@ -156,7 +165,8 @@ There are no ads and no other trackers.</p>
 <ul>
   <li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> serves the site and, like any web host, sees the usual server logs.</li>
   <li>Google and GitHub handle sign-in under their own policies. MisterZine asks them only for your ID and email.</li>
-  <li>Cloudflare hosts the account service and the image service used by the Frontend.</li>
+  <li>Cloudflare hosts the account service, the image service used by the Frontend, and the reports you
+    choose to send from it.</li>
   <li>Zaparoo Online is contacted only when you choose to launch through it.</li>
 </ul>
 

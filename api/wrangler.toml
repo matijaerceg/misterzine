@@ -16,6 +16,24 @@ SITE_ORIGIN = "https://misterzine.fyi"
 API_ORIGIN = "https://api.misterzine.fyi"
 # comma-separated extra origins for local testing, e.g. "http://localhost:8012"
 DEV_ORIGINS = ""
+# device reports (src/reports.js): "1" takes uploads, anything else answers 503
+REPORTS_ENABLED = "1"
+# the largest report accepted, in bytes
+REPORT_MAX_BYTES = "524288"
+
+# device reports: a private bucket whose lifecycle rule deletes each object 30
+# days after upload (`npx wrangler r2 bucket lifecycle add misterzine-reports
+# expire-30d --expire-days 30`). Never the image bucket, which is served publicly.
+[[r2_buckets]]
+binding = "REPORTS"
+bucket_name = "misterzine-reports"
+preview_bucket_name = "misterzine-reports-dev"
+
+# uploads per sender address per minute; the address is held in memory only
+[[ratelimits]]
+name = "REPORT_LIMIT"
+namespace_id = "1001"
+simple = { limit = 3, period = 60 }
 
 [[d1_databases]]
 binding = "DB"
@@ -27,4 +45,5 @@ database_id = "a1074cb1-feee-4ad0-92a0-fee4f9fe37b9"
 #   GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET   Google OAuth client (Web application)
 #   GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET   GitHub OAuth App
 #   SESSION_SECRET                           random string, signs the sign-in state cookie
+#   REPORTS_TOKEN                            random string, the developer's key to read reports
 # For `wrangler dev`, put the same names in api/.dev.vars (gitignored).

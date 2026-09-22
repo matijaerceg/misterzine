@@ -4,7 +4,7 @@ import { MAGIC, normalizeCode, reports } from '../src/reports.js';
 
 const ADMIN = { Authorization: 'Bearer test-admin-token' };
 const BODY = MAGIC + '\nApp: misterzine v1.1.2-dev (abc1234, 2026-09-22)\n\nSYSTEM\n...\n';
-const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{8}$/;
+const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{4}$/;
 const DAY = 86400000;
 
 // st reads the body before the status: an unread R2 stream breaks the test
@@ -116,11 +116,24 @@ describe('thirty days', () => {
 
 describe('codes', () => {
   it('reads what people type and rejects the rest', () => {
-    expect(normalizeCode('7k2q-9xmb')).toBe('7K2Q9XMB');
-    expect(normalizeCode('7K2Q 9XMB')).toBe('7K2Q9XMB');
-    expect(normalizeCode('oIl0-0000')).toBe('0110' + '0000');
-    expect(normalizeCode('7K2Q9XM')).toBe('');
-    expect(normalizeCode('7K2Q9XMBU')).toBe('');
+    expect(normalizeCode('k7q2')).toBe('K7Q2');
+    expect(normalizeCode('K7-Q2')).toBe('K7Q2');
+    expect(normalizeCode(' K7Q2 ')).toBe('K7Q2');
+    expect(normalizeCode('oIl0')).toBe('0110');
+    expect(normalizeCode('K7Q')).toBe('');
+    expect(normalizeCode('K7Q2X')).toBe('');
+    expect(normalizeCode('K7QU')).toBe('');
+    expect(normalizeCode('7K2Q9XMB')).toBe(''); // the first service's length is gone
     expect(normalizeCode('../../x')).toBe('');
+  });
+});
+
+describe('claiming a code', () => {
+  it('never lets a second upload take a code that is held', async () => {
+    const opts = { onlyIf: new Headers({ 'If-None-Match': '*' }) };
+    expect(await env.REPORTS.put('r/K7Q2.txt', 'first', opts)).not.toBeNull();
+    expect(await env.REPORTS.put('r/K7Q2.txt', 'second', opts)).toBeNull();
+    const kept = await env.REPORTS.get('r/K7Q2.txt');
+    expect(await kept.text()).toBe('first');
   });
 });

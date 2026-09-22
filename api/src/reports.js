@@ -22,7 +22,11 @@
 export const REPORT_DAYS = 30;
 export const MAGIC = 'MisterZine report v1';
 const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'; // Crockford base32: no I, L, O, U
-const CODE_RE = /^[0-9A-HJKMNP-TV-Z]{8}$/;
+// Four characters: a code is an identifier, not a key (reading needs the admin
+// token), and 32^4 codes are plenty for thirty days of reports. A code can
+// come back after its report expires, so a reader checks the upload date.
+const CODE_LEN = 4;
+const CODE_RE = new RegExp('^[0-9A-HJKMNP-TV-Z]{' + CODE_LEN + '}$');
 const DAY_MS = 86400000;
 
 // reports answers every /reports route; now is injectable for tests.
@@ -64,17 +68,19 @@ async function upload(request, env) {
   if (!bytes) return json({ error: 'too_large' }, 413);
   const text = new TextDecoder().decode(bytes);
   if (!text.startsWith(MAGIC)) return json({ error: 'not_a_report' }, 400);
-  let code = '';
-  for (let i = 0; i < 5 && !code; i++) {
-    const c = newCode();
-    if (!(await env.REPORTS.head(key(c)))) code = c;
-  }
-  if (!code) return json({ error: 'internal' }, 500);
-  await env.REPORTS.put(key(code), bytes, {
+  // A code is claimed by a put that succeeds only while no object has the
+  // key, so two uploads at once can never share one: a taken code (live, or
+  // expired and not yet swept) just means another draw.
+  const opts = {
     httpMetadata: { contentType: 'text/plain; charset=utf-8' },
     customMetadata: { app: appLine(text) },
-  });
-  return json({ code }, 201);
+    onlyIf: new Headers({ 'If-None-Match': '*' }),
+  };
+  for (let i = 0; i < 10; i++) {
+    const code = newCode();
+    if (await env.REPORTS.put(key(code), bytes, opts)) return json({ code }, 201);
+  }
+  return json({ error: 'internal' }, 500);
 }
 
 async function listReports(env, now) {
@@ -125,7 +131,7 @@ function appLine(text) {
 }
 
 function newCode() {
-  const b = new Uint8Array(8);
+  const b = new Uint8Array(CODE_LEN);
   crypto.getRandomValues(b);
   return [...b].map(x => ALPHABET[x & 31]).join('');
 }

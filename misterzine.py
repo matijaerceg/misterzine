@@ -2708,6 +2708,19 @@ CORE_NOTES = {
     "PCXT-EGA": "EGA-video variant of the PC/XT core (which is CGA-based).",
 }
 
+# Cores their author has withdrawn while the distributing db still ships the
+# file, keyed by core_name (the rbf). The row stays listed (update_all still
+# delivers it, launch still works) but is flagged deprecated with the reason as
+# its panel note; once the db drops the file the row leaves the site anyway
+# (export-web's per-source last_seen gate), so entries here are transitional.
+# Jotego pair: cores/ngp/cfg/macros.def gained a [mister] JTFRAME_SKIP on
+# 2026-09-13 ("There is a better core out there, leaving this one out for
+# now"); ngpc includes ngp's macros, so both stop building. Revisit ~Nov 2026.
+DEPRECATED_CORES = {
+    "NeoGeoPocket": "Jotego withdrew this core from MiSTer on 2026-09-13 in favour of Kitrinx's Neo Geo Pocket Color core, which also plays monochrome games. It stays installable until his database is rebuilt.",
+    "NeoGeoPocket-Color": "Jotego withdrew this core from MiSTer on 2026-09-13 in favour of Kitrinx's Neo Geo Pocket Color core. It stays installable until his database is rebuilt.",
+}
+
 
 # Multi-screen cabinets whose MAME desc doesn't carry a "(dual screen)" /
 # "(triple screen)" qualifier (they had no single-screen sibling to
@@ -3368,6 +3381,9 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     # per-arcade-core note ever lands (e.g. jts18 CRT sync), give it its own dict.
     if system != "arcade" and core in CORE_NOTES:
         row["note"] = CORE_NOTES[core]
+    if system != "arcade" and core in DEPRECATED_CORES:
+        row["deprecated"] = True
+        row["note"] = DEPRECATED_CORES[core]
     if system == "arcade":
         # SD-card-relative MRA path (e.g. "_Arcade/Defender (Red Label).mra"):
         # the display title strips the qualifiers the filename carries, so the

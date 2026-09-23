@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-23
+
+- Release tracker: Jotego's Neo Geo Pocket and Neo Geo Pocket Color cores are marked deprecated. On 2026-09-13 he switched off their MiSTer builds in favour of Kitrinx's Neo Geo Pocket Color core ("there is a better core out there"). His database still ships both files, so they remain installable and launchable for now; the rows carry a deprecated marker next to the title and the detail panel says why. Once his database is rebuilt without them they leave the list, as any withdrawn file does. Thanks to ac3 on Discord for flagging it.
+
 ## 2026-09-21
 
 - Release tracker: two provisional rotations corrected. Spectrum 2000 is vertical and Guardian Storm is horizontal, not the other way round. Where a game has no entry in the MiSTer Arcade Database yet, we gray-fill its rotation from MAME; the older 2003-era MAME data we use for control descriptions was overriding the current one, and it had those two Afega games labelled backwards because MAME has since separated their horizontal and vertical builds. Current MAME now decides rotation, and the provisional tooltip cites the driver or MRA the value actually came from.

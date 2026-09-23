@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 23 Sep 2026 06:05:58 +0000</lastBuildDate>
+<lastBuildDate>Wed, 23 Sep 2026 08:07:17 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-SegaSystem32 (Arcade core, 15 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-SegaSystem32_20260923.rbf:2026-09-23T08:07:17+00:00</guid>
+<pubDate>Wed, 23 Sep 2026 08:07:17 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-23 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/s32/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] DECOCassette (Arcade core, 39 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cadanglr</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shinobi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sonic Boom (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sonicbom</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Sonic Boom (FD1094 317-0053).mra:2026-09-07T11:03:04+00:00</guid>
-<pubDate>Mon, 07 Sep 2026 11:03:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sonicbom.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 23 Sep 2026 16:10:13 +0000</lastBuildDate>
+<lastBuildDate>Wed, 23 Sep 2026 22:43:06 +0000</lastBuildDate>
+<item>
+<title>[Updated] Pole Position (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#polepos</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/PolePosition_20260923.rbf:2026-09-23T22:43:06+00:00</guid>
+<pubDate>Wed, 23 Sep 2026 22:43:06 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/polepos.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1982 / Namco&lt;/p&gt;&lt;p&gt;Core: PolePosition&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PolePosition_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Qix (Arcade core, 8 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#complexx</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Qix_20260923.rbf:2026-09-23T22:43:06+00:00</guid>
+<pubDate>Wed, 23 Sep 2026 22:43:06 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-23 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] DECOCassette (Arcade core, 39 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cadanglr</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/marblmd2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1991 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Arcade-MarbleMadness2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MarbleMadness2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Macintosh LC (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacLC</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacLC_20260827.rbf:2026-09-04T18:19:00+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 18:19:00 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1990 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacLC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] PC/XT (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#PCXT</link>
-<guid isPermaLink="false">distribution_mister:_Computer/PCXT_20260904.rbf:2026-09-04T18:19:00+00:00</guid>
-<pubDate>Fri, 04 Sep 2026 18:19:00 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1983 / IBM&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PCXT_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

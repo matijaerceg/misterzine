@@ -163,9 +163,12 @@ SOURCE_SYSTEMS = {
 }
 
 # Dbs that ship a game's regional/revision sets as sibling MRAs instead of
-# filing the extras under _Arcade/_alternatives/ (blahm1d's Night Slashers:
-# Japan, Korea and Over Sea side by side). The site lists each game once, so
-# export-web folds them the way it drops alternatives (fold_sibling_variants).
+# filing the extras under _Arcade/_alternatives/. The site lists each game
+# once, so export-web folds them the way it drops alternatives
+# (fold_sibling_variants). blahm1d seeded Night Slashers' Japan, Korea and
+# Over Sea sets side by side; his 2026-09-25 rebuild moved Japan and Korea
+# into _alternatives, which leaves the fold idle, but it stays in case a
+# later rebuild puts them back.
 SIBLING_VARIANT_SOURCES = {"blahm1d"}
 
 # GitHub org + name prefix where the retrospective arcade release dates live.
@@ -421,8 +424,9 @@ def _retitle_key(title):
     "Jungle King Japan" and "Jungle King (Japan)" must pair, while "Game (US)"
     and "Game (World)" must not — so unlike norm_key, parenthesized content
     stays in the key. A trailing build stamp is not part of the name
-    (blahm1d's RevX_09132026.mra will be RevX_<next date>.mra after a
-    rebuild), so it is dropped and the rebuilt MRA pairs with the old one."""
+    (blahm1d seeded RevX_09132026.mra), so it is dropped and an MRA restamped
+    with a later date pairs with the old one. A rename that keeps the bytes
+    (his rebuild made that file Revolution X.mra) pairs by hash in snapshot."""
     return re.sub(r"[^a-z0-9]+", "", re.sub(r"_\d{8}$", "", title).lower())
 
 
@@ -663,15 +667,24 @@ def cmd_snapshot(args):
         # content so it can't pair them; match on a key that keeps it. Only
         # paths NEW this snapshot are rename candidates — an established row
         # must never have its dates overwritten by a colliding removed one.
+        # An MRA whose bytes reappear at a new path was moved, not released
+        # (blahm1d flattened his per-core folders and renamed
+        # RevX_09132026.mra to Revolution X.mra, identical content): pair it
+        # by hash first, whatever its name, and log nothing for the pair, so
+        # the feeds never announce a folder reshuffle as a wave of new games.
+        moved = set()
         if not seed:
             current = {}
             new_titles = {}
+            new_by_hash = {}
             for path in files:
                 system, kind, is_unit = classify(path)
                 if is_unit and kind == "core":
                     current.setdefault((system, core_name(title_from_path(path))), path)
                 elif is_unit and kind == "title" and path not in old_files:
                     new_titles.setdefault((system, _retitle_key(title_from_path(path))), path)
+                    if files[path].get("hash"):
+                        new_by_hash.setdefault((system, files[path]["hash"]), path)
             for path in old_files:
                 if path in files or path in prev_beta:
                     continue
@@ -681,11 +694,16 @@ def cmd_snapshot(args):
                 if kind == "core":
                     new_path = current.get((system, core_name(title_from_path(path))))
                 elif kind == "title":
-                    new_path = new_titles.get((system, _retitle_key(title_from_path(path))))
+                    h = old_files[path].get("hash")
+                    new_path = new_by_hash.get((system, h)) if h else None
+                    if new_path:
+                        moved.update((path, new_path))
+                    else:
+                        new_path = new_titles.get((system, _retitle_key(title_from_path(path))))
                 else:
                     continue
                 old_row = con.execute(
-                    "SELECT release_date, first_seen FROM catalog WHERE source_id=? AND path=?",
+                    "SELECT release_date, first_seen, last_changed FROM catalog WHERE source_id=? AND path=?",
                     (source["id"], path)).fetchone()
                 if new_path and old_row:
                     # release_date is copied verbatim (even NULL: an undated old
@@ -693,6 +711,11 @@ def cmd_snapshot(args):
                     con.execute(
                         "UPDATE catalog SET release_date=?, first_seen=? WHERE source_id=? AND path=?",
                         (old_row["release_date"], old_row["first_seen"], source["id"], new_path))
+                    if path in moved:
+                        # same bytes: nothing shipped, so Updated must not move
+                        con.execute(
+                            "UPDATE catalog SET last_changed=? WHERE source_id=? AND path=?",
+                            (old_row["last_changed"], source["id"], new_path))
                     con.execute("DELETE FROM catalog WHERE source_id=? AND path=?",
                                 (source["id"], path))
                     # Deep-link key follows the row across the rename; on a
@@ -702,6 +725,9 @@ def cmd_snapshot(args):
                         "UPDATE OR IGNORE row_keys SET path=? WHERE source_id=? AND path=?",
                         (new_path, source["id"], path))
 
+        if moved:
+            events = [e for e in events if not (e[2] in moved and e[5] in ("new", "removed"))]
+            log(f"  {source['name']}: {len(moved) // 2} MRA(s) moved or renamed, content unchanged")
         if not seed:
             con.executemany(
                 "INSERT INTO events(ts,source_id,path,title,system,event_type,hash) VALUES(?,?,?,?,?,?,?)",
@@ -1263,8 +1289,9 @@ MRA_REPOS = [
     ("rmcores", "rmonic79/rmcores", "main", "_Arcade/_rmCores"),
     ("slopcore", "TheJesusFish/Slop-Core", "main", "_Arcade"),
     ("kuzecores", "kuzearcade/kuzecores", "main", "_Arcade"),
-    # No repo: blahm1d's MRAs exist only as files of his db, one subfolder
-    # per core under _Arcade/_blahm1d/ (_db_hosted_mras flattens them).
+    # No repo: blahm1d's MRAs exist only as files of his db, all in
+    # _Arcade/_blahm1d/ since his 2026-09-25 rebuild (it seeded with a
+    # subfolder per core; _db_hosted_mras flattens either layout).
     ("blahm1d", None, None, "_Arcade/_blahm1d"),
 ]
 

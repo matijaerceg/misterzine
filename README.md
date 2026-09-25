@@ -265,11 +265,14 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    `[blahm1d]`). The one db with no GitHub behind it: the db and every file it lists are
    served from a Cloudflare R2 bucket, so `enrich-mra` downloads his MRAs by the db's own
    file urls and his rows carry no repo link. Midway Y, T, X and Wolf Unit, Cruis'n USA,
-   NARC, Exidy 440, Gladiator, The Legend of Kage (bootleg) and Night Slashers, one
-   subfolder per core under `_Arcade/_blahm1d/`. Each game first shipped as a free-tier
-   Patreon post, which is where the frozen debut dates come from. Tags are plain strings
-   with no `tag_dictionary`, and his region sets sit side by side instead of under
-   `_alternatives`, so export-web folds same-named ones into one row.
+   NARC, Exidy 440, Gladiator, The Legend of Kage (bootleg) and Night Slashers, all in
+   `_Arcade/_blahm1d/` with the extra region sets under its `_alternatives`. Each game
+   first shipped as a free-tier Patreon post, which is where the frozen debut dates come
+   from. Tags are plain strings with no `tag_dictionary`. The db seeded with a subfolder
+   per core and Night Slashers' region sets side by side, and was rebuilt flat minutes
+   later: `snapshot` pairs an MRA whose bytes reappear at a new path as a move (dates,
+   key and Updated kept, no feed events), and export-web still folds side-by-side region
+   sets for this source should they come back.
 
 All eight publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.

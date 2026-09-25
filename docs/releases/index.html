@@ -1426,6 +1426,11 @@ const CORE_NAMES = {
   // NMK16 family (kuzecores); shipped rbf names carry the Arcade- prefix
   'Arcade-NMK16_Gunnail': 'NMK16 (GunNail HW)', 'Arcade-NMK16_Macross2': 'NMK16 (Macross II HW)',
   'Arcade-NMK16_Raphero': 'NMK16 (Rapid Hero HW)', 'Arcade-NMK16_Afega': 'NMK16 (Afega HW)',
+  // blahm1d's boards (his own rbf names); single-game cores read as the game
+  'blahm1d_yunit': 'Midway Y Unit', 'blahm1d_yunitadpcm': 'Midway Y Unit (ADPCM)',
+  'blahm1d_tunit': 'Midway T Unit', 'blahm1d_tunitdcs': 'Midway T Unit (DCS)',
+  'blahm1d_wolfunit': 'Midway Wolf Unit', 'blahm1d_exidy440': 'Exidy 440',
+  'blahm1d_gladiator': 'Gladiator',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -1475,6 +1480,7 @@ const SRC_NAMES = {
   rmcores: 'rmCores (rmonic79)',
   slopcore: 'Slop Cores (TheJesusFish)',
   kuzecores: 'kuzecores (kuzearcade)',
+  blahm1d: 'blahm1d',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1485,6 +1491,7 @@ const SRC_SEARCH = {
   rmcores: 'rmcores rmonic79',
   slopcore: 'slop cores thejesusfish jesusfish',
   kuzecores: 'kuzecores kuzearcade kuze nmk16',
+  blahm1d: 'blahm1d blahmid',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1516,6 +1523,14 @@ const OPTIN_DBS = {
     what: 'kuzearcade\'s cores, written with AI assistance (his repo says so). So far the NMK16 ' +
       'board family as four cores; apart from Black Heart and Thunder Dragon, which Coin-Op ' +
       'Collection also ships, these games are in no other database.',
+  },
+  blahm1d: {
+    section: 'blahm1d',
+    url: 'https://mister.blahm1d.com/db.json.zip',
+    what: 'blahm1d\'s cores: Midway\'s Y, T, X and Wolf Unit boards, Cruis\'n USA, NARC, Exidy 440, ' +
+      'Gladiator, The Legend of Kage (bootleg) and Night Slashers, each first posted as a free ' +
+      'download on his Patreon. NARC and Night Slashers also ship in other databases as other ' +
+      'builds; the rest are in no other database.',
   },
 };
 
@@ -2742,6 +2757,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   rmcores: 'rmonic79/rmcores',
   slopcore: 'TheJesusFish/Slop-Core',
   kuzecores: 'kuzearcade/kuzecores',
+  blahm1d: 'blahm1d',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -3945,7 +3961,7 @@ const FEED_LIST = [
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
-  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores and theypsilon's Unofficial " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's cores and theypsilon's Unofficial " +
   "Distribution. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +

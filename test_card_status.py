@@ -147,3 +147,42 @@ class DuplicateTitleTests(unittest.TestCase):
 
     def test_clean_export_has_none(self):
         self.assertEqual(mz.duplicate_titles([{"title": "A"}, {"title": "B"}]), {})
+
+
+class SiblingVariantFoldTests(unittest.TestCase):
+    META = {"nslasher": {"parent": None}, "nslasherj": {"parent": "nslasher"},
+            "nslashers": {"parent": "nslasher"}, "nbahangt": {"parent": None},
+            "nbamht": {"parent": "nbahangt"}, "mk": {"parent": None}}
+
+    def blahm1d(self, title, sn, rbf):
+        return arcade(source_id="blahm1d", title=title, setname=sn, rbf=rbf,
+                      path=f"_Arcade/_blahm1d/{rbf}/{title}.mra")
+
+    def test_region_sets_fold_to_the_parent(self):
+        rows = [self.blahm1d("Night Slashers (Japan Rev 1.2)", "nslasherj", "blahm1d_ns"),
+                self.blahm1d("Night Slashers (Korea Rev 1.3)", "nslasher", "blahm1d_ns"),
+                self.blahm1d("Night Slashers (Over Sea Rev 1.2)", "nslashers", "blahm1d_ns")]
+        kept = mz.fold_sibling_variants(rows, self.META)
+        self.assertEqual([r["setname"] for r in kept], ["nslasher"])
+
+    def test_distinct_names_and_cores_stay(self):
+        rows = [self.blahm1d("NBA Hangtime (L1.3)", "nbahangt", "blahm1d_wolfunit"),
+                self.blahm1d("NBA Maximum Hangtime (L1.03)", "nbamht", "blahm1d_wolfunit"),
+                self.blahm1d("Mortal Kombat (rev 5.0 T-Unit)", "mk", "blahm1d_tunit"),
+                self.blahm1d("Mortal Kombat (rev 4.0, Y-Unit)", "mk", "blahm1d_yunitadpcm")]
+        self.assertEqual(len(mz.fold_sibling_variants(rows, self.META)), 4)
+
+    def test_other_sources_are_untouched(self):
+        # the Distribution's two Asteroids Deluxe colours are a deliberate pair
+        rows = [arcade(title="Asteroids Deluxe (v3 green)", setname="astdelux", path="a"),
+                arcade(title="Asteroids Deluxe (v3 orange)", setname="astdelux", path="b")]
+        self.assertEqual(len(mz.fold_sibling_variants(rows, {"astdelux": {}})), 2)
+
+
+class RetitleKeyTests(unittest.TestCase):
+    def test_build_stamp_is_not_part_of_the_name(self):
+        self.assertEqual(mz._retitle_key("RevX_09132026"), mz._retitle_key("RevX_09302026"))
+
+    def test_region_qualifiers_still_split(self):
+        self.assertEqual(mz._retitle_key("Jungle King Japan"), mz._retitle_key("Jungle King (Japan)"))
+        self.assertNotEqual(mz._retitle_key("Game (US)"), mz._retitle_key("Game (World)"))

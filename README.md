@@ -235,7 +235,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The seven sources (all public)
+## The eight sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -261,8 +261,17 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    MRAs sit in the db repo; the rbfs are `external_files.csv` entries pinned to a commit of
    the core repo, named `Arcade-NMK16_<family>_<date>.rbf` against `<rbf>NMK16_<family>`
    in the MRAs (MiSTer's prefix rule resolves them).
+8. **blahm1d**: `https://mister.blahm1d.com/db.json.zip` (opt-in like MeatCores, section
+   `[blahm1d]`). The one db with no GitHub behind it: the db and every file it lists are
+   served from a Cloudflare R2 bucket, so `enrich-mra` downloads his MRAs by the db's own
+   file urls and his rows carry no repo link. Midway Y, T, X and Wolf Unit, Cruis'n USA,
+   NARC, Exidy 440, Gladiator, The Legend of Kage (bootleg) and Night Slashers, one
+   subfolder per core under `_Arcade/_blahm1d/`. Each game first shipped as a free-tier
+   Patreon post, which is where the frozen debut dates come from. Tags are plain strings
+   with no `tag_dictionary`, and his region sets sit side by side instead of under
+   `_alternatives`, so export-web folds same-named ones into one row.
 
-All seven publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All eight publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

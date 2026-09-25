@@ -126,6 +126,22 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/kuzearcade/kuzecores/db/db.json.zip",
     },
     {
+        # blahm1d's cores: the Midway boards (Y Unit, T Unit, X Unit, Wolf
+        # Unit, Cruis'n USA), Williams' NARC, Exidy 440, Taito's Gladiator,
+        # The Legend of Kage (bootleg) and Data East's Night Slashers. The
+        # one db here with no GitHub behind it: db.json.zip and every file
+        # are served from a Cloudflare R2 bucket (his GitHub account, which
+        # held wolf-unit, gladiator and MiSTer-cores, is gone), so enrich-mra
+        # downloads the MRAs by the db's own file urls (MRA_REPOS, no repo),
+        # and his rows carry no repo link. Tags are plain strings with no
+        # tag_dictionary; the per-core one ('wolfunit') is the filter term.
+        # Same opt-in model as MeatCores: users hand-add the [blahm1d]
+        # section to downloader.ini.
+        "id": "blahm1d",
+        "name": "blahm1d",
+        "db_url": "https://mister.blahm1d.com/db.json.zip",
+    },
+    {
         "id": "theypsilon_unofficial_distribution",
         "name": "theypsilon Unofficial Distribution",
         "db_url": "https://raw.githubusercontent.com/theypsilon/Unofficial_Distribution_MiSTer/main/unofficialdb.json.zip",
@@ -145,6 +161,12 @@ SOURCE_SYSTEMS = {
     "theypsilon_unofficial_distribution": {"arcade"},
     "meathax": {"arcade"},
 }
+
+# Dbs that ship a game's regional/revision sets as sibling MRAs instead of
+# filing the extras under _Arcade/_alternatives/ (blahm1d's Night Slashers:
+# Japan, Korea and Over Sea side by side). The site lists each game once, so
+# export-web folds them the way it drops alternatives (fold_sibling_variants).
+SIBLING_VARIANT_SOURCES = {"blahm1d"}
 
 # GitHub org + name prefix where the retrospective arcade release dates live.
 ARCADE_REPO_ORG = "MiSTer-devel"
@@ -398,8 +420,10 @@ def _retitle_key(title):
     """Strict rename-pairing key: punctuation-insensitive but variant-keeping.
     "Jungle King Japan" and "Jungle King (Japan)" must pair, while "Game (US)"
     and "Game (World)" must not — so unlike norm_key, parenthesized content
-    stays in the key."""
-    return re.sub(r"[^a-z0-9]+", "", title.lower())
+    stays in the key. A trailing build stamp is not part of the name
+    (blahm1d's RevX_09132026.mra will be RevX_<next date>.mra after a
+    rebuild), so it is dropped and the rebuilt MRA pairs with the old one."""
+    return re.sub(r"[^a-z0-9]+", "", re.sub(r"_\d{8}$", "", title).lower())
 
 
 # --- fetch + normalize ----------------------------------------------------
@@ -1239,7 +1263,49 @@ MRA_REPOS = [
     ("rmcores", "rmonic79/rmcores", "main", "_Arcade/_rmCores"),
     ("slopcore", "TheJesusFish/Slop-Core", "main", "_Arcade"),
     ("kuzecores", "kuzearcade/kuzecores", "main", "_Arcade"),
+    # No repo: blahm1d's MRAs exist only as files of his db, one subfolder
+    # per core under _Arcade/_blahm1d/ (_db_hosted_mras flattens them).
+    ("blahm1d", None, None, "_Arcade/_blahm1d"),
 ]
+
+
+def _db_hosted_mras(source_id, mradir):
+    """Download the MRAs a db serves under mradir by its own per-file urls,
+    for a source with no git repo behind it; returns the local dir holding
+    them flat under mradir (the enrich loop globs one level, and keys MRAs
+    by file name). Files are kept by hash, so a warm cache refetches only
+    what changed and a dropped MRA leaves the folder."""
+    source = next(s for s in SOURCES if s["id"] == source_id)
+    raw = http_get(source["db_url"])
+    z = zipfile.ZipFile(BytesIO(raw))
+    d = json.loads(z.read(z.namelist()[0]))
+    outdir = DATA / "repos" / source_id / mradir
+    outdir.mkdir(parents=True, exist_ok=True)
+    want, urls = {}, {}
+    for path, meta in d.get("files", {}).items():
+        if not (path.startswith(mradir + "/") and path.lower().endswith(".mra")):
+            continue
+        name = path.rsplit("/", 1)[-1]
+        if name in want:
+            log(f"  {source_id}: two MRAs named {name}; keeping {want[name][0]}")
+            continue
+        want[name] = (path, meta)
+    for old in outdir.glob("*.mra"):
+        if old.name not in want:
+            old.unlink()
+    got = 0
+    for name, (path, meta) in want.items():
+        dest = outdir / name
+        urls[name] = meta.get("url") or ""
+        if dest.exists() and hashlib.md5(dest.read_bytes()).hexdigest() == meta.get("hash"):
+            continue
+        if not urls[name]:
+            log(f"  {source_id}: {path} has no url in the db; skipped")
+            continue
+        dest.write_bytes(http_get(urls[name]))
+        got += 1
+    log(f"  {source_id}: {len(want)} MRAs from the db ({got} downloaded)")
+    return DATA / "repos" / source_id, urls
 
 
 def _sparse_arcade_clone(full_name, branch, mradir="_Arcade"):
@@ -1296,11 +1362,21 @@ def cmd_enrich_mra(args):
     grand = 0
     mra_specs = local_mra_specs()
     for source_id, full_name, branch, mradir in MRA_REPOS:
-        repodir = _sparse_arcade_clone(full_name, branch, mradir)
+        if full_name is None:
+            # a one-person host: an outage skips this source for the run
+            # (its rows keep the last enrichment) instead of failing CI
+            try:
+                repodir, mra_urls = _db_hosted_mras(source_id, mradir)
+            except Exception as e:
+                log(f"  {source_id}: MRA download failed ({e}); rows keep their last enrichment")
+                continue
+        else:
+            repodir, mra_urls = _sparse_arcade_clone(full_name, branch, mradir), {}
         meta = {}
         source_specs = {}
         for mra in (repodir / mradir).glob("*.mra"):
             spec = parse_mra_specs(mra.read_text(encoding="utf-8", errors="ignore"),
+                mra_urls.get(mra.name) or
                 f"https://github.com/{full_name}/blob/{branch}/" +
                 urllib.parse.quote(f"{mradir}/{mra.name}"))
             if spec:
@@ -1884,6 +1960,64 @@ KUZECORES_FROZEN_DATES = {
     "Twin Action.mra": "2026-09-14",
 }
 
+# Debut dates for the blahm1d initial import (2026-09-25 seed). The db went
+# up on 2026-09-14 and his GitHub is gone, but every game was a download
+# before that: each one first shipped as an attachment to a free-tier post on
+# his Patreon (patreon.com/blahm1d, the posts API's published_at plus the
+# attachment upload time), UTC date. Commits of OngoGablogian/MiSTer_Ongo,
+# which repackaged each drop within hours, confirm every date as an upper
+# bound. A game keeps the day it first shipped even when it moved cores
+# later (Smash T.V. started on its own rbf, now on Y Unit; Mortal Kombat II
+# first ran on the plain T Unit rbf, the DCS one came 2026-08-27). Night
+# Slashers' rbf is byte-identical to the v1.4 build of a Night Slashers core
+# published on its own, whose v1.0 went public 2026-07-02 with all three
+# region MRAs; that is its debut. Post-import titles need no entry.
+BLAHM1D_FROZEN_DATES = {
+    "Night Slashers (Korea Rev 1.3, DE-0397-0 PCB).mra": "2026-07-02",
+    "Night Slashers (Japan Rev 1.2, DE-0397-0 PCB).mra": "2026-07-02",
+    "Night Slashers (Over Sea Rev 1.2, DE-0397-0 PCB).mra": "2026-07-02",
+    "NBA Hangtime (L1.3).mra": "2026-07-20",
+    "The Legend of Kage (bootleg set 1).mra": "2026-07-21",
+    "Ultimate Mortal Kombat 3.mra": "2026-07-22",
+    "Smash T.V. (rev 8.00).mra": "2026-07-22",
+    "Rampage World Tour.mra": "2026-07-22",
+    "Mortal Kombat 3 (rev 2.1).mra": "2026-07-28",
+    "NHL Open Ice - 2 on 2 Challenge (rev 1.21).mra": "2026-07-28",
+    "WWF WrestleMania (rev 1.30 08-10-95).mra": "2026-07-28",
+    "NBA Maximum Hangtime (L1.03 06-09-97).mra": "2026-07-28",
+    "Gladiator (US).mra": "2026-07-30",
+    "Ougon no Shiro (Japan).mra": "2026-07-30",
+    "Narc (rev 7.00).mra": "2026-07-31",
+    "Judge Dredd (rev TA1 7-12-92, location test).mra": "2026-08-08",
+    "Mortal Kombat (rev 5.0 T-Unit 03-19-93).mra": "2026-08-08",
+    "NBA Jam (rev 3.01 4-07-93).mra": "2026-08-08",
+    "NBA Jam Tournament Edition (rev 4.0 3-23-94).mra": "2026-08-08",
+    "Mortal Kombat II (rev L3.1).mra": "2026-08-08",
+    "Trog (rev LA5 3-29-91).mra": "2026-08-08",
+    "Total Carnage (rev LA1 03-10-92).mra": "2026-08-29",
+    # the Y Unit post's original attachment was replaced, so these six rest
+    # on its 20:11 UTC publish time; the repackage landed 2026-09-06
+    "High Impact Football (rev LA5 02-15-91).mra": "2026-09-05",
+    "Super High Impact (rev LA2 10-22-91).mra": "2026-09-05",
+    "Strike Force (rev 1 02-25-91).mra": "2026-09-05",
+    "Saurian Front (proto v5.0 08-07-90).mra": "2026-09-05",
+    "Mortal Kombat (rev 4.0 09-28-92, Y-Unit).mra": "2026-09-05",
+    "Terminator 2 - Judgment Day (rev LA4 08-03-92).mra": "2026-09-05",
+    "Chiller.mra": "2026-09-07",
+    "Catch-22.mra": "2026-09-07",
+    "Cheyenne.mra": "2026-09-07",
+    "Clay Pigeon.mra": "2026-09-07",
+    "Combat.mra": "2026-09-07",
+    "Crackshot.mra": "2026-09-07",
+    "Crossbow.mra": "2026-09-07",
+    "Hit 'n Miss.mra": "2026-09-07",
+    "Showdown.mra": "2026-09-07",
+    "Top Secret.mra": "2026-09-07",
+    "Who Dunit.mra": "2026-09-07",
+    "RevX_09132026.mra": "2026-09-14",
+    "Cruis'n USA (rev L4.4).mra": "2026-09-24",
+}
+
 # First public version: GX400-Friends/gx400-bin CHANGELOG.md, 2022-03-14.
 # The distribution import in 2026 is not the core's debut.
 OPTIN_DB_SOURCES = {
@@ -1895,6 +2029,8 @@ OPTIN_DB_SOURCES = {
     "rmcores": (RMCORES_REPO, RMCORES_CORE_REPOS, RMCORES_FROZEN_DATES),
     "slopcore": (SLOPCORE_REPO, SLOPCORE_CORE_REPOS, SLOPCORE_FROZEN_DATES),
     "kuzecores": (KUZECORES_REPO, KUZECORES_CORE_REPOS, KUZECORES_FROZEN_DATES),
+    # no repo to link: his GitHub is gone and the db lives on R2
+    "blahm1d": (None, {}, BLAHM1D_FROZEN_DATES),
 }
 
 
@@ -2873,6 +3009,38 @@ def _arcade_base(title):
     return re.sub(r"\s*[\(\[].*$", "", title).strip()
 
 
+def fold_sibling_variants(rows, arcade_meta):
+    """Drop the extra region/revision sets a SIBLING_VARIANT_SOURCES db ships
+    beside the mainline one, as if they sat in _alternatives: per source and
+    core, rows sharing a base title (case-insensitively) and a MAME family
+    are one game, listed once -- as the family's parent set when shipped,
+    else the first path. Distinct names on one core (NBA Hangtime and NBA
+    Maximum Hangtime, Gladiator and Ougon no Shiro) stay separate rows; so
+    do same-named games on different cores (Mortal Kombat on T and Y Unit)."""
+    groups = {}
+    for r in rows:
+        if r["system"] != "arcade" or r["source_id"] not in SIBLING_VARIANT_SOURCES:
+            continue
+        sn = (r["setname"] or "").lower()
+        if not sn:
+            continue
+        root = (arcade_meta.get(sn) or {}).get("parent") or sn
+        key = (r["source_id"], (r["rbf"] or "").lower(),
+               _arcade_base(r["title"]).casefold(), root)
+        groups.setdefault(key, []).append(r)
+    drop = set()
+    for (sid, _, _, root), grp in groups.items():
+        if len(grp) < 2:
+            continue
+        keep = (next((r for r in grp if (r["setname"] or "").lower() == root), None)
+                or min(grp, key=lambda r: r["path"]))
+        for r in grp:
+            if r is not keep:
+                drop.add((sid, r["path"]))
+                log(f"  sibling variant folded: {r['title']} -> {keep['title']} [{sid}]")
+    return [r for r in rows if (r["source_id"], r["path"]) not in drop]
+
+
 # Human-ideal display titles the MAME-description derivation below gets wrong,
 # keyed by setname. MAME's canonical name usually wins (it restores the colons,
 # punctuation and capitalisation that MRA filenames can't carry), but for these
@@ -2941,6 +3109,8 @@ def _core_label(r, fork_info, repo_maps):
         return "TheJesusFish"
     if r["source_id"] == "kuzecores":
         return "kuzearcade"
+    if r["source_id"] == "blahm1d":
+        return "blahm1d"
     repo = (r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -2974,6 +3144,13 @@ def _strip_trailing_parens(s):
             break
         s = s[:i].strip()
     return s
+
+
+def _same_game_base(r, arcade_meta):
+    """The game name a same-game label hangs off: the row's mainline base in
+    its human-ideal form, so a case-blind pair reads alike ("NARC (Meathax)",
+    "NARC (blahm1d)") and an ARCADE_TITLES pin still applies under the label."""
+    return _ideal_arcade_title(_arcade_base(r["title"]), r["setname"], arcade_meta)
 
 
 def _ideal_arcade_title(raw, sn, arcade_meta):
@@ -3103,6 +3280,18 @@ def _filter_tag_map():
         groups = {}  # tag id -> [alias terms]; aliases share one id (nes/nintendo)
         for term, tid in d.get("tag_dictionary", {}).items():
             groups.setdefault(tid, []).append(term)
+        # Dbs with no tag_dictionary (blahm1d) tag files with plain strings,
+        # which the downloader matches as-is. There the per-core term is the
+        # tag an MRA shares with exactly one shipped _Arcade/cores rbf, minus
+        # tags on every file ('arcade', the db's own name).
+        core_tags = set()
+        if not d.get("tag_dictionary"):
+            files = d.get("files", {})
+            on_rbfs = Counter(t for p, m in files.items()
+                              if "/cores/" in p.lower() and p.lower().endswith(".rbf")
+                              for t in set(m.get("tags", [])) if isinstance(t, str))
+            everywhere = set.intersection(*(set(m.get("tags", [])) for m in files.values())) if files else set()
+            core_tags = {t for t, n in on_rbfs.items() if n == 1 and t not in everywhere}
         # Dbs that skip the arcade<core> convention (rmcores tags both the
         # MRA and its rbf 'rmnightslashers'): the per-core term is the tag
         # named after a shipped _Arcade/cores rbf, date suffix stripped.
@@ -3123,6 +3312,7 @@ def _filter_tag_map():
                     term = "arcade-" + cands[0][len("arcade"):]
                 else:
                     named = sorted(a for al in aliases for a in al if norm(a) in rbf_stems)
+                    named = named or sorted(t for t in meta.get("tags", []) if t in core_tags)
                     term = named[0] if named else None
             else:
                 m = rbf_core.search(path)
@@ -3748,6 +3938,7 @@ def cmd_export_web(args):
     # parent, catver for genre, and the image manifest's resolved setnames (many
     # backfilled rows carry a setname only there, not in catalog.setname).
     arcade_meta = load_arcade_dat_meta()
+    rows = fold_sibling_variants(rows, arcade_meta)
     arcade_cats = local_catver()
     arcade_setnames = load_manifest_setnames()
     arcade_mad = local_mad()
@@ -3786,7 +3977,10 @@ def cmd_export_web(args):
     groups = {}
     for r in rows:
         if r["system"] == "arcade" and not r["beta"]:
-            groups.setdefault(_arcade_base(r["title"]), []).append(r)
+            # case-blind: MRA names disagree on acronyms (Meathax's "NARC",
+            # blahm1d's "Narc (rev 7.00)"); the setname check below still
+            # decides whether it is one game
+            groups.setdefault(_arcade_base(r["title"]).casefold(), []).append(r)
     for b, grp in groups.items():
         if len(grp) < 2:
             continue
@@ -3803,7 +3997,8 @@ def cmd_export_web(args):
             continue
         for r, l in zip(grp, labels):
             same_game_labels[(r["source_id"], r["path"])] = l
-            log(f"  same-game retitle: {r['title']} -> {b} ({l}) [{r['source_id']}]")
+            log(f"  same-game retitle: {r['title']} -> {_same_game_base(r, arcade_meta)} ({l}) "
+                f"[{r['source_id']}]")
     # arcade_titles: (display title, raw title to keep as `mt` or None). The
     # raw MRA title must survive as mt on retitled rows — it is the image-
     # manifest join key, the feeds' event-matching key and the search alias.
@@ -3815,7 +4010,8 @@ def cmd_export_web(args):
             beta_by_key[(r["source_id"], r["path"])] = bool(r["beta"])
             label = same_game_labels.get((r["source_id"], r["path"]))
             if label:
-                arcade_titles[(r["source_id"], r["path"])] = (f"{b} ({label})", r["title"])
+                arcade_titles[(r["source_id"], r["path"])] = (
+                    f"{_same_game_base(r, arcade_meta)} ({label})", r["title"])
             elif r["source_id"] == "rmcores" and b.lower().startswith("rm "):
                 # Site convention: a title starts with the game, the dev's mark
                 # is a trailing qualifier -- "Night Slashers (rmCores)" sorts and

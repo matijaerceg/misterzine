@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-24
+
+- Release tracker: now also tracks blahm1d's database, an eighth source, with 39 games: Midway's Y Unit (Smash T.V., Total Carnage, Terminator 2, the first Mortal Kombat and more), T Unit (Mortal Kombat, Mortal Kombat II, NBA Jam, NBA Jam Tournament Edition, Judge Dredd), X Unit (Revolution X) and Wolf Unit (Mortal Kombat 3, Ultimate Mortal Kombat 3, NBA Hangtime, NBA Maximum Hangtime, NHL Open Ice, WWF WrestleMania, Rampage World Tour), plus Cruis'n USA, NARC, eleven Exidy 440 games, Gladiator, a bootleg of The Legend of Kage and Night Slashers. Like MeatCores it is an opt-in database with no update_all settings toggle, so its rows explain how to add it to downloader.ini. The database only went up on 2026-09-14, but every game was a free download on his Patreon before that, so the debut dates are those first posts. NARC and Night Slashers were already listed from other databases, so those rows now say whose build each one is: "NARC (Meathax)" and "NARC (blahm1d)", "Night Slashers (rmonic79)" and "Night Slashers (blahm1d)". His database carries Night Slashers' three regional sets side by side; they show as one row, the way every other game's regional versions do.
+
 ## 2026-09-23
 
 - Release tracker: Jotego's Neo Geo Pocket and Neo Geo Pocket Color cores are marked deprecated. On 2026-09-13 he switched off their MiSTer builds in favour of Kitrinx's Neo Geo Pocket Color core ("there is a better core out there"). His database still ships both files, so they remain installable and launchable for now; the rows carry a deprecated marker next to the title and the detail panel says why. Once his database is rebuilt without them they leave the list, as any withdrawn file does. Thanks to ac3 on Discord for flagging it.

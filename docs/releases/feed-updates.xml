@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 25 Sep 2026 06:36:34 +0000</lastBuildDate>
+<lastBuildDate>Fri, 25 Sep 2026 14:50:15 +0000</lastBuildDate>
+<item>
+<title>[Updated] Cruis'n USA (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#crusnusa44</link>
+<guid isPermaLink="false">blahm1d:_Arcade/cores/blahm1d_cruisinusa_20260925.rbf:2026-09-25T14:50:15+00:00</guid>
+<pubDate>Fri, 25 Sep 2026 14:50:15 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crusnusa44.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1994 / Midway&lt;/p&gt;&lt;p&gt;Core: blahm1d_cruisinusa&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-25 (source: blahm1d).&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ITech32 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bloodstm</link>
+<guid isPermaLink="false">slopcore:_Arcade/cores/ITech32_20260925.rbf:2026-09-25T13:40:04+00:00</guid>
+<pubDate>Fri, 25 Sep 2026 13:40:04 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Blood Storm, Street Fighter: The Movie, Time Killers.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-25 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Asura Blade - Sword of Dynasty (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#asurabld</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/timescan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Pinball / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Wonder Boy III - Monster Lair (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wb3</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Wonder Boy III - Monster Lair (set 6, World, System 16B) (8751 317-0098).mra:2026-09-07T11:03:04+00:00</guid>
-<pubDate>Mon, 07 Sep 2026 11:03:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wb3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Wrestle War (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wrestwar</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Wrestle War (set 3, World) (8751 317-0103).mra:2026-09-07T11:03:04+00:00</guid>
-<pubDate>Mon, 07 Sep 2026 11:03:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wrestwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Thu, 24 Sep 2026 16:34:20 +0000</lastBuildDate>
+<lastBuildDate>Fri, 25 Sep 2026 13:57:42 +0000</lastBuildDate>
+<item>
+<title>[New] Ginga Ninkyouden (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ginganin</link>
+<guid isPermaLink="false">kuzecores:_Arcade/Ginga Ninkyouden (set 1).mra:2026-09-25T13:57:42+00:00</guid>
+<pubDate>Fri, 25 Sep 2026 13:57:42 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ginganin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1987 / Jaleco&lt;/p&gt;&lt;p&gt;Core: Arcade-GingaNin&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-25 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Asura Blade - Sword of Dynasty (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#asurabld</link>
@@ -888,24 +897,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thndrbld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: SegaXBoard&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-27 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaXBoard_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] DoDonPachi (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ddonpach</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/DoDonPachi (World, 1997 2-5 Master Ver.).mra:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddonpach.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1997 / CAVE&lt;/p&gt;&lt;p&gt;Core: cave&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] ESP Ra.De. (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#esprade</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/ESP Ra.De. (World, 1998 4-22 International Ver.).mra:2026-08-26T06:45:57+00:00</guid>
-<pubDate>Wed, 26 Aug 2026 06:45:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/esprade.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1998 / CAVE&lt;/p&gt;&lt;p&gt;Core: cave&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-08-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

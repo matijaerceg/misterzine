@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 25 Sep 2026 06:36:34 +0000</lastBuildDate>
+<lastBuildDate>Fri, 25 Sep 2026 14:50:15 +0000</lastBuildDate>
+<item>
+<title>[Updated] Cruis'n USA (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#crusnusa44</link>
+<guid isPermaLink="false">blahm1d:_Arcade/cores/blahm1d_cruisinusa_20260925.rbf:2026-09-25T14:50:15+00:00</guid>
+<pubDate>Fri, 25 Sep 2026 14:50:15 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crusnusa44.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1994 / Midway&lt;/p&gt;&lt;p&gt;Core: blahm1d_cruisinusa&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-25 (source: blahm1d).&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Ginga Ninkyouden (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ginganin</link>
+<guid isPermaLink="false">kuzecores:_Arcade/Ginga Ninkyouden (set 1).mra:2026-09-25T13:57:42+00:00</guid>
+<pubDate>Fri, 25 Sep 2026 13:57:42 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ginganin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1987 / Jaleco&lt;/p&gt;&lt;p&gt;Core: Arcade-GingaNin&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-25 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ITech32 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bloodstm</link>
+<guid isPermaLink="false">slopcore:_Arcade/cores/ITech32_20260925.rbf:2026-09-25T13:40:04+00:00</guid>
+<pubDate>Fri, 25 Sep 2026 13:40:04 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Blood Storm, Street Fighter: The Movie, Time Killers.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-25 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Asura Blade - Sword of Dynasty (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#asurabld</link>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dangar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Nichibutsu&lt;/p&gt;&lt;p&gt;Core: rmGalivan&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-17 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Xybots (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#xybots</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Xybots.mra:2026-09-17T09:57:33+00:00</guid>
-<pubDate>Thu, 17 Sep 2026 09:57:33 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/xybots.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Xybots&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Xybots_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] FM-7 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
-<guid isPermaLink="false">distribution_mister:_Computer/FM-7_20260916.rbf:2026-09-16T21:56:34+00:00</guid>
-<pubDate>Wed, 16 Sep 2026 21:56:34 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1982 / Fujitsu&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/FM-7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Moon Patrol (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mpatrol</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/MoonPatrol_20260911.rbf:2026-09-16T15:03:32+00:00</guid>
-<pubDate>Wed, 16 Sep 2026 15:03:32 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mpatrol.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Irem&lt;/p&gt;&lt;p&gt;Core: moonpatrol&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MoonPatrol_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

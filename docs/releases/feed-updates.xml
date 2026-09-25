@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 24 Sep 2026 16:34:20 +0000</lastBuildDate>
+<lastBuildDate>Thu, 24 Sep 2026 22:17:31 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-NamcoND1 (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ncv1</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-NamcoND1_20260925.rbf:2026-09-24T22:17:31+00:00</guid>
+<pubDate>Thu, 24 Sep 2026 22:17:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Namco Classic Collection Vol.1, Namco Classic Collection Vol.2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-24 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-SegaSystem24 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bnzabros</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-SegaSystem24_20260925.rbf:2026-09-24T22:17:31+00:00</guid>
+<pubDate>Thu, 24 Sep 2026 22:17:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Bonanza Bros, Crack Down, Gain Ground.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-24 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Dogyuun (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dogyuun</link>
+<guid isPermaLink="false">slopcore:_Arcade/cores/Dogyuun_20260923.rbf:2026-09-24T21:58:08+00:00</guid>
+<pubDate>Thu, 24 Sep 2026 21:58:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dogyuun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Toaplan&lt;/p&gt;&lt;p&gt;Core: Dogyuun&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-24 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-Dogyuun_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] FixEight (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fixeight</link>
+<guid isPermaLink="false">slopcore:_Arcade/cores/FixEight_20260923.rbf:2026-09-24T21:58:08+00:00</guid>
+<pubDate>Thu, 24 Sep 2026 21:58:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fixeight.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Toaplan&lt;/p&gt;&lt;p&gt;Core: FixEight&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-24 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-FixEight_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Coleco Adam (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ColecoAdam</link>
@@ -51,24 +87,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/zektor.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1982 / Sega&lt;/p&gt;&lt;p&gt;Core: SegaG80V&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Bonanza Bros (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#bnzabros</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Bonanza Bros.mra:2026-09-24T10:29:37+00:00</guid>
-<pubDate>Thu, 24 Sep 2026 10:29:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bnzabros.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaSystem24&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-24 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Crack Down (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#crkdown</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Crack Down.mra:2026-09-24T10:29:37+00:00</guid>
-<pubDate>Thu, 24 Sep 2026 10:29:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crkdown.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaSystem24&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-24 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Arcade-SegaSystem32Multi (Arcade core, 4 games)</title>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mvp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Quartet 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#quartet2a</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Quartet/Quartet 2 (World, S16A) [8751 317-0010].mra:2026-09-07T11:03:04+00:00</guid>
-<pubDate>Mon, 07 Sep 2026 11:03:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/quartet2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Robocop (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#robocop</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Robocop/Robocop (Japan).mra:2026-09-07T11:03:04+00:00</guid>
-<pubDate>Mon, 07 Sep 2026 11:03:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/robocop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

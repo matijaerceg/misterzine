@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 25 Sep 2026 23:32:55 +0000</lastBuildDate>
+<lastBuildDate>Sat, 26 Sep 2026 03:53:10 +0000</lastBuildDate>
+<item>
+<title>[New] Raiden (rmCores) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#raiden-rmcores</link>
+<guid isPermaLink="false">rmcores:_Arcade/_rmCores/rm Raiden (World).mra:2026-09-26T03:53:10+00:00</guid>
+<pubDate>Sat, 26 Sep 2026 03:53:10 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raiden.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Seibu Kaihatsu&lt;/p&gt;&lt;p&gt;Core: rmRaiden&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-26 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] rmNeoGeo (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rmNeoGeo</link>
+<guid isPermaLink="false">rmcores:_Console/rmNeoGeo_20260806.rbf:2026-09-26T03:53:10+00:00</guid>
+<pubDate>Sat, 26 Sep 2026 03:53:10 +0000</pubDate>
+<category>new</category>
+<category>Console core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-09-26 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Psikyo (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btlkroad</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Psikyo_20260926.rbf:2026-09-26T01:59:23+00:00</guid>
+<pubDate>Sat, 26 Sep 2026 01:59:23 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Battle K-Road, Gunbird, Samurai Aces, Strikers 1945, Tengai.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Psikyo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Guardians (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#grdians</link>
@@ -46,11 +73,11 @@
 <item>
 <title>[Updated] Cruis'n USA (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#crusnusa44</link>
-<guid isPermaLink="false">blahm1d:_Arcade/cores/blahm1d_cruisinusa_20260925.rbf:2026-09-25T14:50:15+00:00</guid>
+<guid isPermaLink="false">blahm1d:_Arcade/_blahm1d/Cruis'n USA (rev L4.4).mra:2026-09-25T14:50:15+00:00</guid>
 <pubDate>Fri, 25 Sep 2026 14:50:15 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crusnusa44.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1994 / Midway&lt;/p&gt;&lt;p&gt;Core: blahm1d_cruisinusa&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-25 (source: blahm1d).&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crusnusa44.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1994 / Midway&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-25 (source: blahm1d).&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Ginga Ninkyouden (Arcade)</title>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blstroid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Blasteroids&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Blasteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Wardner (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wardner</link>
-<guid isPermaLink="false">coinop:_Arcade/Wardner (World).mra:2026-09-18T05:54:26+00:00</guid>
-<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wardner.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1987 / Toaplan / Taito Corporation Japan&lt;/p&gt;&lt;p&gt;Core: wardner_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hishou Zame (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hishouza</link>
-<guid isPermaLink="false">coinop:_Arcade/cores/fshark_mister_20260917.rbf:2026-09-18T05:54:26+00:00</guid>
-<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hishouza.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Toaplan / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: fshark_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kyukyoku Tiger (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ktiger</link>
-<guid isPermaLink="false">coinop:_Arcade/cores/twincobr_mister_20260917.rbf:2026-09-18T05:54:26+00:00</guid>
-<pubDate>Fri, 18 Sep 2026 05:54:26 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ktiger.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Toaplan / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: twincobr_mister&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-18 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

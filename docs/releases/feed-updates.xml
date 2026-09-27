@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 26 Sep 2026 16:33:25 +0000</lastBuildDate>
+<lastBuildDate>Sat, 26 Sep 2026 22:13:49 +0000</lastBuildDate>
+<item>
+<title>[Updated] FM-7 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
+<guid isPermaLink="false">distribution_mister:_Computer/FM-7_20260926.rbf:2026-09-26T22:13:49+00:00</guid>
+<pubDate>Sat, 26 Sep 2026 22:13:49 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1982 / Fujitsu&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/FM-7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Studio II (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Studio-II</link>
+<guid isPermaLink="false">distribution_mister:_Console/Studio-II_20260926.rbf:2026-09-26T22:13:49+00:00</guid>
+<pubDate>Sat, 26 Sep 2026 22:13:49 +0000</pubDate>
+<category>updated</category>
+<category>Console core</category>
+<description>&lt;p&gt;1977 / RCA&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/StudioII_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] NeXT Computer (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#NeXT</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sdi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Secret Agent (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#secretag</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Secret Agent (World, revision 3).mra:2026-09-07T11:03:04+00:00</guid>
-<pubDate>Mon, 07 Sep 2026 11:03:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Shinobi (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#shinobi</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Shinobi (Set 6, World, S16A) [No Protection].mra:2026-09-07T11:03:04+00:00</guid>
-<pubDate>Mon, 07 Sep 2026 11:03:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shinobi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-07 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

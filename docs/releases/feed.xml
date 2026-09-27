@@ -6,7 +6,61 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 27 Sep 2026 06:15:58 +0000</lastBuildDate>
+<lastBuildDate>Sun, 27 Sep 2026 17:05:00 +0000</lastBuildDate>
+<item>
+<title>[New] Hyper Duel (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hyprduel</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Hyper Duel.mra:2026-09-27T17:05:00+00:00</guid>
+<pubDate>Sun, 27 Sep 2026 17:05:00 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hyprduel.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / Technosoft&lt;/p&gt;&lt;p&gt;Core: hyprduel&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-HyperDuel_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Lucky &amp; Wild (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#luckywld</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_LW_20260927.rbf:2026-09-27T14:19:02+00:00</guid>
+<pubDate>Sun, 27 Sep 2026 14:19:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/luckywld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1992 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_LW&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Metal Hawk (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#metlhawk</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_MH_20260927.rbf:2026-09-27T14:19:02+00:00</guid>
+<pubDate>Sun, 27 Sep 2026 14:19:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metlhawk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_MH&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NamcoS2_SG (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sgunner</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_SG_20260927.rbf:2026-09-27T14:19:02+00:00</guid>
+<pubDate>Sun, 27 Sep 2026 14:19:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Steel Gunner, Steel Gunner 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NamcoS2_STD (Arcade core, 22 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#assault</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_STD_20260927.rbf:2026-09-27T14:19:02+00:00</guid>
+<pubDate>Sun, 27 Sep 2026 14:19:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Assault, Bubble Trouble - Golly! Ghost! 2, Burning Force, Cosmo Gang the Video, Dirt Fox, Dragon Saber, Final Lap, Final Lap 2, Final Lap 3, Finest Hour, Four Trax, Golly! Ghost!, Kyuukai Douchuuki, Marvel Land, Mirai Ninja, Ordyne, Phelios, Rolling Thunder 2, Super World Stadium, Super World Stadium '92, Super World Stadium '93, Valkyrie no Densetsu.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NamcoS2_SZ (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#suzuka8h</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_SZ_20260927.rbf:2026-09-27T14:19:02+00:00</guid>
+<pubDate>Sun, 27 Sep 2026 14:19:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Suzuka 8 Hours, Suzuka 8 Hours 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Xybots (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#xybots</link>
@@ -852,60 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sws93.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1993 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super World Stadium (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sws</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Super World Stadium (Japan).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sws.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Suzuka 8 Hours (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#suzuka8h</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Suzuka 8 Hours (World, Rev C).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/suzuka8h.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1992 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_SZ&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Suzuka 8 Hours 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#suzuk8h2</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Suzuka 8 Hours 2 (World, Rev B).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/suzuk8h2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1993 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_SZ&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Valkyrie no Densetsu (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#valkyrie</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Valkyrie no Densetsu (Japan).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/valkyrie.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] FM-7 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
-<guid isPermaLink="false">distribution_mister:_Computer/FM-7_20260926.rbf:2026-09-26T22:13:49+00:00</guid>
-<pubDate>Sat, 26 Sep 2026 22:13:49 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1982 / Fujitsu&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/FM-7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Studio II (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Studio-II</link>
-<guid isPermaLink="false">distribution_mister:_Console/Studio-II_20260926.rbf:2026-09-26T22:13:49+00:00</guid>
-<pubDate>Sat, 26 Sep 2026 22:13:49 +0000</pubDate>
-<category>updated</category>
-<category>Console core</category>
-<description>&lt;p&gt;1977 / RCA&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/StudioII_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

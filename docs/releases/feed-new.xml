@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sun, 27 Sep 2026 05:54:31 +0000</lastBuildDate>
+<lastBuildDate>Sun, 27 Sep 2026 17:05:00 +0000</lastBuildDate>
+<item>
+<title>[New] Hyper Duel (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hyprduel</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Hyper Duel.mra:2026-09-27T17:05:00+00:00</guid>
+<pubDate>Sun, 27 Sep 2026 17:05:00 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hyprduel.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / Technosoft&lt;/p&gt;&lt;p&gt;Core: hyprduel&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-HyperDuel_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Cruis'n World (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#crusnwld</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/drmicro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1983 / Sanritsu&lt;/p&gt;&lt;p&gt;Core: Arcade-DrMicro&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-07 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Battle K-Road (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#btlkroad</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Battle K-Road.mra:2026-09-05T23:35:49+00:00</guid>
-<pubDate>Sat, 05 Sep 2026 23:35:49 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/btlkroad.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1994 / Psikyo&lt;/p&gt;&lt;p&gt;Core: Psikyo&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Psikyo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

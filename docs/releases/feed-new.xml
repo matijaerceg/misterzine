@@ -6,7 +6,34 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sun, 27 Sep 2026 23:09:42 +0000</lastBuildDate>
+<lastBuildDate>Mon, 28 Sep 2026 04:32:09 +0000</lastBuildDate>
+<item>
+<title>[New] Thunder Dragon 2 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tdragon2</link>
+<guid isPermaLink="false">kuzecores:_Arcade/_alternatives/_Thunder Dragon 2/Thunder Dragon 2 (Mikejmoffitt Enhanced).mra:2026-09-28T04:32:09+00:00</guid>
+<pubDate>Mon, 28 Sep 2026 04:32:09 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tdragon2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / NMK&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Macross2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Valkyrie no Densetsu (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#valkyrie</link>
+<guid isPermaLink="false">kuzecores:_Arcade/_alternatives/_Valkyrie no Densetsu/Valkyrie no Densetsu (English Translation by A-M).mra:2026-09-28T04:32:09+00:00</guid>
+<pubDate>Mon, 28 Sep 2026 04:32:09 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/valkyrie.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Pole Position II (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#polepos2</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Pole Position II.mra:2026-09-28T01:46:32+00:00</guid>
+<pubDate>Mon, 28 Sep 2026 01:46:32 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/polepos2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1983 / Namco&lt;/p&gt;&lt;p&gt;Core: PolePosition&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PolePosition_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Magical Error wo Sagase (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#magerror</link>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cupsoc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Seibu Kaihatsu&lt;/p&gt;&lt;p&gt;Core: SeibuCupSoccer&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SeibuCupSoccer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] NeXT Computer (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#NeXT</link>
-<guid isPermaLink="false">distribution_mister:_Computer/NeXT_20260908.rbf:2026-09-10T05:38:18+00:00</guid>
-<pubDate>Thu, 10 Sep 2026 05:38:18 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1988 / NeXT&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/NeXT_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] I, Robot (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#irobot</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/I, Robot.mra:2026-09-09T07:40:44+00:00</guid>
-<pubDate>Wed, 09 Sep 2026 07:40:44 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/irobot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Atari&lt;/p&gt;&lt;p&gt;Core: Arcade-I-Robot&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-09 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Cliff Hanger (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Cliff Hanger.mra:2026-09-09T05:13:56+00:00</guid>
-<pubDate>Wed, 09 Sep 2026 05:13:56 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cliffhgr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1983 / Stern&lt;/p&gt;&lt;p&gt;Core: LaserdiscGames&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

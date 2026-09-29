@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 28 Sep 2026 18:50:50 +0000</lastBuildDate>
+<lastBuildDate>Tue, 29 Sep 2026 04:02:36 +0000</lastBuildDate>
+<item>
+<title>[Updated] War Gods (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#wargods</link>
+<guid isPermaLink="false">blahm1d:_Arcade/War Gods (HD 10-09-1996 - Dual Resolution) [blahm1d].mra:2026-09-29T04:02:36+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 04:02:36 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wargods.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1995 / Midway&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: blahm1d).&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] SGI Indy (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SGIIndy</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SGIIndy_20260928.rbf:2026-09-29T02:19:06+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 02:19:06 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1993 / Silicon Graphics&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SGIIndy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Narc (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#narc-blahm1d</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/outrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jtoutrun&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/outrun"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Passing Shot (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#passsht</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Passing Shot (World, 2 Players) (FD1094 317-0080).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/passsht.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Pnickies (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pnickj</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Pnickies (Japan 940608).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pnickj.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtcps1&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cps1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

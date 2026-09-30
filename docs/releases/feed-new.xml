@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Mon, 28 Sep 2026 04:32:09 +0000</lastBuildDate>
+<lastBuildDate>Wed, 30 Sep 2026 00:08:49 +0000</lastBuildDate>
+<item>
+<title>[New] Survival Arts (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#survarts</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Survival Arts.mra:2026-09-30T00:08:49+00:00</guid>
+<pubDate>Wed, 30 Sep 2026 00:08:49 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/survarts.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Sammy&lt;/p&gt;&lt;p&gt;Core: Arcade-SSV&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-30 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/SVV/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Thunder Dragon 2 (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#tdragon2</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Console core</category>
 <description>&lt;p&gt;1995 / Casio&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Loopy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Seibu Cup Soccer (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cupsoc</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Seibu Cup Soccer (set 1).mra:2026-09-11T10:02:37+00:00</guid>
-<pubDate>Fri, 11 Sep 2026 10:02:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cupsoc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Seibu Kaihatsu&lt;/p&gt;&lt;p&gt;Core: SeibuCupSoccer&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SeibuCupSoccer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

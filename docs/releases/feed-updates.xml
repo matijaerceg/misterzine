@@ -6,7 +6,70 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 29 Sep 2026 04:02:36 +0000</lastBuildDate>
+<lastBuildDate>Wed, 30 Sep 2026 00:08:49 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-SSV (Arcade core, 10 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cairblad</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-SSV_20260930.rbf:2026-09-30T00:08:49+00:00</guid>
+<pubDate>Wed, 30 Sep 2026 00:08:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Change Air Blade, Drift Out '94 - The Hard Order, Dyna Gear, Monster Slider, Storm Blade, Survival Arts, Twin Eagle II - The Rescue Mission, Ultra X Weapons, Vasara, Vasara 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-30 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/SVV/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Qix (Arcade core, 8 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#complexx</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Qix_20260929.rbf:2026-09-29T23:48:16+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 23:48:16 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Lucky &amp; Wild (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#luckywld</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_LW_20260929.rbf:2026-09-29T19:47:59+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 19:47:59 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/luckywld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1992 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_LW&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Metal Hawk (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#metlhawk</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_MH_20260929.rbf:2026-09-29T19:47:59+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 19:47:59 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metlhawk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_MH&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NamcoS2_SG (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sgunner</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_SG_20260929.rbf:2026-09-29T19:47:59+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 19:47:59 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Steel Gunner, Steel Gunner 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NamcoS2_STD (Arcade core, 22 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#assault</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_STD_20260929.rbf:2026-09-29T19:47:59+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 19:47:59 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Assault, Bubble Trouble - Golly! Ghost! 2, Burning Force, Cosmo Gang the Video, Dirt Fox, Dragon Saber, Final Lap, Final Lap 2, Final Lap 3, Finest Hour, Four Trax, Golly! Ghost!, Kyuukai Douchuuki, Marvel Land, Mirai Ninja, Ordyne, Phelios, Rolling Thunder 2, Super World Stadium, Super World Stadium '92, Super World Stadium '93, Valkyrie no Densetsu.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NamcoS2_SZ (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#suzuka8h</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_SZ_20260929.rbf:2026-09-29T19:47:59+00:00</guid>
+<pubDate>Tue, 29 Sep 2026 19:47:59 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Suzuka 8 Hours, Suzuka 8 Hours 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-29 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] War Gods (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#wargods</link>
@@ -843,69 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gunsmoke.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1985 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtgunsmk&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gunsmk"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hyper Dyne Side Arms (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sidearms</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Hyper Dyne Side Arms (World, 861129).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sidearms.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtsarms&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/sarms"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hyper Sports (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hyperspt</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Hyper Sports.mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hyperspt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Konami (Centuri license)&lt;/p&gt;&lt;p&gt;Core: jtroadf&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/roadf"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Karate Champ (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kchamp</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Karate Champ (US).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kchamp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1984 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtkchamp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kchamp"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Karate Champ: Player Vs Player (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kchampvs</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Karate Champ Player Vs Player (US, set 1).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kchampvs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1984 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtkchamp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kchamp"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Konami's Ping-Pong (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pingpong</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Konami's Ping-Pong.mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pingpong.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Konami&lt;/p&gt;&lt;p&gt;Core: jtpinpon&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/pinpon"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Legendary Wings (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#lwings</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Legendary Wings (US, rev. C).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/lwings.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtsectnz&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/sectnz"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Out Run (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#outrun</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Out Run (sitdown-upright, Rev B).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/outrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jtoutrun&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/outrun"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

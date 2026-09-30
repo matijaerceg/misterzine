@@ -2,6 +2,11 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-09-30
+
+- Site: MisterZine Plex Core has a page at [/plex/](https://misterzine.fyi/plex/), with a photo and clips of it running on a CRT, what it does, and what is free versus Patreon early access. The home page gains a Plex card and a line saying what MisterZine makes.
+- Site: the header nav is now plain text links: Core Tracker, Arcade Frontend, Plex and Patreon (Cores and Frontend where space is short). Hardware Landscape moved into the Menu.
+
 ## 2026-09-24
 
 - Release tracker: blahm1d reorganised his database minutes after it joined the tracker. His games now sit in one _blahm1d folder instead of a subfolder per board, Revolution X's file is now called Revolution X, and the Japanese Gladiator (Ougon no Shiro) plus two of Night Slashers' three regional sets moved into his alternatives folder. The rows follow the files, so Launch on MiSTer opens the right one. Ougon no Shiro is now a version of Gladiator rather than a row of its own, and Night Slashers (blahm1d) launches the Over Sea set. A file that is only moved or renamed, with its contents unchanged, no longer counts as a new release, so the feeds did not announce his 39 games as new releases and their dates stayed put.

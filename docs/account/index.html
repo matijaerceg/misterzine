@@ -16,7 +16,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css?v=2"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=3"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -78,9 +78,10 @@
   </div>
   <nav>
     <span class="segnav">
-      <a class="pill" href="../releases/">Cores</a>
-      <a class="pill" href="../frontend/">Frontend</a>
-      <a class="pill" href="../hardware-landscape/">Hardware</a>
+      <a class="pill" href="../releases/"><span class="long">Core Tracker</span><span class="short">Cores</span></a>
+      <a class="pill" href="../frontend/"><span class="long">Arcade </span>Frontend</a>
+      <a class="pill" href="../plex/">Plex</a>
+      <a class="pill" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-goatcounter-click="patreon-nav" data-tip="Members get Plex early access; supporters are thanked on the Credits page and in both apps.">Patreon</a>
     </span>
     <details class="sitemenu" id="menudd">
       <summary id="menusum">Menu</summary>
@@ -94,8 +95,8 @@
         <hr class="msep">
       <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog<span class="ext">↗</span></a>
       <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" data-tip="The MisterZine thread on the official MiSTer Discord: the tracker, the site and the Arcade Frontend.">Discord<span class="ext">↗</span></a>
-      <a href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-tip="Support MisterZine on Patreon. Supporters are thanked on the Credits page and in the Frontend.">Patreon<span class="ext">↗</span></a>
       <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic<span class="ext">↗</span></a>
+      <a href="../hardware-landscape/">Hardware Landscape</a>
       <a href="../credits/">Credits</a>
       <a href="../privacy/">Privacy</a>
       </div>
@@ -159,7 +160,7 @@
 </footer>
 
 </div>
-<script src="../theme.js?v=2"></script>
+<script src="../theme.js?v=3"></script>
 <script>
 (function () {
   var LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';

@@ -16,7 +16,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css?v=2"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=3"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -67,9 +67,10 @@
   </div>
   <nav>
     <span class="segnav">
-      <a class="pill" href="../releases/">Cores</a>
-      <a class="pill" href="../frontend/">Frontend</a>
-      <a class="pill" href="../hardware-landscape/">Hardware</a>
+      <a class="pill" href="../releases/"><span class="long">Core Tracker</span><span class="short">Cores</span></a>
+      <a class="pill" href="../frontend/"><span class="long">Arcade </span>Frontend</a>
+      <a class="pill" href="../plex/">Plex</a>
+      <a class="pill" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-goatcounter-click="patreon-nav" data-tip="Members get Plex early access; supporters are thanked on the Credits page and in both apps.">Patreon</a>
     </span>
     <details class="sitemenu" id="menudd">
       <summary id="menusum">Menu</summary>
@@ -83,8 +84,8 @@
         <hr class="msep">
       <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog<span class="ext">↗</span></a>
       <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" data-tip="The MisterZine thread on the official MiSTer Discord: the tracker, the site and the Arcade Frontend.">Discord<span class="ext">↗</span></a>
-      <a href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-tip="Support MisterZine on Patreon. Supporters are thanked on the Credits page and in the Frontend.">Patreon<span class="ext">↗</span></a>
       <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic<span class="ext">↗</span></a>
+      <a href="../hardware-landscape/">Hardware Landscape</a>
       <a href="../credits/">Credits</a>
       <a href="../privacy/">Privacy</a>
       </div>
@@ -155,6 +156,26 @@ your browser. Signing in with Google one day and GitHub another creates two sepa
    developer can read it, using the code you post, and it is deleted 30 days after it arrives. Nothing is
    sent until you choose to send it.</p>
 
+<h2>MisterZine Plex Core (the Plex app on your MiSTer)</h2>
+<p>The <a href="../plex/">Plex app</a> runs on your own MiSTer and talks to Plex directly. You sign in at
+   plex.tv/link, and the app keeps the sign-in token Plex gives it, the server you chose, your settings and
+   its caches on your SD card. It browses and plays from your Plex server and tells that server what you
+   watched (resume points and watched marks), as any Plex app does. plex.tv and your server see the
+   device name and app identifier every Plex app sends; Plex's own
+   <a href="https://www.plex.tv/about/privacy-legal/" target="_blank" rel="noopener">privacy policy</a> applies
+   there. MisterZine is not in that path and never sees your sign-in, your server or what you watch.</p>
+<p>Besides Plex, the app only fetches things that carry nothing about you: the list of releases from GitHub
+   when it checks for updates, the supporter list for its Patreon page from misterzine.fyi, and, when you
+   install or update, the release files from GitHub and a video decoder from johnvansickle.com. A Patreon
+   early-access code is checked on the MiSTer itself and never sent anywhere. The app has no analytics.
+   MisterZine-Plex-Uninstall removes it and keeps your settings unless you choose to remove all Plex data.</p>
+<p>Reports work like the Frontend's. Options &rarr; Send a report (or the MisterZine-Plex-Diagnostics script)
+   sends the app and launcher logs, the video settings from your MiSTer INI, which MiSTer main is running and
+   the state of the display. It can name media titles and playback details; sign-in tokens, the server
+   address and account files are never included. It goes to api.misterzine.fyi under a short code, with
+   nothing kept about who sent it, is deleted after 30 days, and a copy stays on your SD card. Nothing is
+   sent until you choose to send it.</p>
+
 <h2>Analytics</h2>
 <p>Page views are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>,
 which uses no cookies and no fingerprinting. It records the page, the referrer, browser type,
@@ -166,7 +187,8 @@ There are no ads and no other trackers.</p>
   <li><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> serves the site and, like any web host, sees the usual server logs.</li>
   <li>Google and GitHub handle sign-in under their own policies. MisterZine asks them only for your ID and email.</li>
   <li>Cloudflare hosts the account service, the image service used by the Frontend, and the reports you
-    choose to send from it.</li>
+    choose to send from either app.</li>
+  <li>Plex (plex.tv and your own Plex server) is contacted by the Plex app, under Plex's own policy.</li>
   <li>Zaparoo Online is contacted only when you choose to launch through it.</li>
 </ul>
 
@@ -181,6 +203,6 @@ The site's code and this page are public there, so any change to this policy sho
 </footer>
 
 </div>
-<script src="../theme.js?v=2"></script>
+<script src="../theme.js?v=3"></script>
 </body>
 </html>

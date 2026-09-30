@@ -32,7 +32,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="../nav.css?v=2"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="../nav.css?v=3"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -957,9 +957,10 @@
     </div>
     <div class="hctl">
       <nav class="segnav">
-        <span class="pill" aria-current="page">Cores</span>
-        <a class="pill" href="../frontend/">Frontend</a>
-        <a class="pill" href="../hardware-landscape/">Hardware</a>
+        <span class="pill" aria-current="page"><span class="long">Core Tracker</span><span class="short">Cores</span></span>
+        <a class="pill" href="../frontend/"><span class="long">Arcade </span>Frontend</a>
+        <a class="pill" href="../plex/">Plex</a>
+        <a class="pill" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-goatcounter-click="patreon-nav" data-tip="Members get Plex early access; supporters are thanked on the Credits page and in both apps.">Patreon</a>
       </nav>
       <!-- accounts: "Sign in" when signed out, "Account" when signed in; both
            go to /account/ (the sign-in buttons live there). Text set by syncAcct. -->
@@ -985,8 +986,8 @@
       <a href="feed.xml" id="rss-link">RSS feeds<span class="ext">ⓘ</span></a>
       <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog<span class="ext">↗</span></a>
       <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" data-tip="The MisterZine thread on the official MiSTer Discord: the tracker, the site and the Arcade Frontend.">Discord<span class="ext">↗</span></a>
-      <a href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-tip="Support MisterZine on Patreon. Supporters are thanked on the Credits page and in the Frontend.">Patreon<span class="ext">↗</span></a>
       <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic<span class="ext">↗</span></a>
+      <a href="../hardware-landscape/">Hardware Landscape</a>
       <a href="../credits/">Credits</a>
       <a href="../privacy/">Privacy</a>
         </div>
@@ -1092,7 +1093,7 @@
 </main>
 <aside id="panel" hidden></aside>
 <script src="../mask.js?v=4"></script>
-<script src="../theme.js?v=2"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
+<script src="../theme.js?v=3"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
@@ -1391,6 +1392,7 @@ function syncStatus() {
   // under the cursor in full, so repeating it there was pure noise.
   const p = document.getElementById('updated');
   if (metaFull) p.dataset.tip = 'Updated ' + metaFull + '.'; else p.removeAttribute('data-tip');
+  fitSupport();  // the visit half's length just changed
 }
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
@@ -3931,9 +3933,32 @@ function stampMeta(m) {
   // the data clock, wide and phone spellings, then the slot syncStatus fills
   el.innerHTML = '<span class="upd-stamp"><span class="w">Updated <span id="updated-rel">' + esc(valid ? relUpdated(dt) : m.updated) + '</span>.</span>' +
     '<span class="n">Upd. <span id="updated-rel-n">' + esc(valid ? relUpdated(dt, true) : m.updated) + '</span>.</span></span>' +
-    ' <span id="visit-line"></span>';
+    ' <span id="visit-line"></span> <span id="support-line">' + supportHTML() + '</span>';
   syncStatus();
 }
+// Patreon at the tail of the status line (the nav's Patreon link is the one
+// every width sees). Shown only when the whole line fits: below ~1024px the line
+// already ellipsizes its own visit tally, so a half-cut link would be all that
+// showed. fitSupport() re-checks whenever the line's text or width changes. Its
+// own data-tip wins over the line's "Updated <stamp>" tip (theme.js takes the
+// closest [data-tip]).
+function supportHTML() {
+  return 'Kept going by <a href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener"' +
+    ' data-tip="Members get Plex early access; supporters are thanked on the Credits page and in both apps.">Patreon supporters</a>.';
+}
+function fitSupport() {
+  const u = document.getElementById('updated'), s = document.getElementById('support-line');
+  if (!u || !s) return;
+  s.hidden = false;
+  if (u.scrollWidth > u.clientWidth + 1) s.hidden = true;
+}
+{ let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fitSupport, 150); }); }
+// the line is rebuilt by stampMeta, so count clicks by delegation rather than
+// count.js's load-time data-goatcounter-click binding
+document.addEventListener('click', e => {
+  if (e.target.closest && e.target.closest('#support-line a') && window.goatcounter && window.goatcounter.count)
+    window.goatcounter.count({ path: 'patreon-tracker', title: 'Patreon link', event: true });
+});
 // keep a left-open tab honest: refresh the relative label on a slow tick and
 // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
 // Armed once, outside stampMeta: a re-stamp must not stack a second interval.

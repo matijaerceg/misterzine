@@ -1,5 +1,6 @@
-/* Shared chrome for the site header: the segmented site-nav (Cores | Frontend |
-   Hardware; the wordmark is the home link), the site Menu (one "Menu" control
+/* Shared chrome for the site header: the site-nav (Cores | Arcade Frontend |
+   Plex | Patreon; the wordmark is the home link, Hardware Landscape is a Menu
+   row), the site Menu (one "Menu" control
    per page holding the low-frequency links, the tracker's My MiSTer(s) button
    and the theme picker as a nested fold) and the theme picker itself. Linked
    render-blocking by every page so the header look is a single source and
@@ -16,16 +17,26 @@
    (#themesum, identical on all three pages): the id beats the release tracker's
    details.cols summary filter-base styling, so the shared rule wins there too. */
 
-/* segmented site-nav */
-.segnav { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; overflow: hidden;
-          border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--hair)); border-radius: 999px; }
+/* site-nav: plain text links since Plex arrived. The bordered pill group
+   needed ~258px for four labels, which no longer fit a 360px phone beside the
+   Menu control; bare words need no padding or dividers. The class names
+   (.segnav/.pill) stay so no page CSS or JS has to change. The current page is
+   the one in body ink with the accent underline. Patreon is the one link that
+   leaves the site (new tab). Phones get shorter labels: a .long span is
+   dropped ("Arcade " off ARCADE FRONTEND) and a .short one stands in for it
+   (CORES for CORE TRACKER). */
+.segnav { display: flex; align-items: center; gap: 1.1rem; min-width: 0; }
 .pill { color: var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap;
         font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;  /* narrow face: the row wraps later (every page loads it) */
-        text-align: center; text-transform: uppercase; letter-spacing: .04em; font-size: .82rem;
-        padding: .38rem .85rem; }
-.pill + .pill { border-left: 1px solid color-mix(in srgb, var(--accent) 30%, var(--hair)); }
-.pill:hover { background: color-mix(in srgb, var(--accent) 14%, var(--bg)); }
-.pill[aria-current] { background: var(--accent); color: var(--bg); cursor: default; }
+        text-transform: uppercase; letter-spacing: .04em; font-size: .86rem;
+        padding: .38rem 0; text-underline-offset: .4em; text-decoration-thickness: 2px; }
+.pill:hover { color: color-mix(in srgb, var(--accent) 70%, var(--fg)); text-decoration: underline;
+              text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.pill .short { display: none; }
+/* theme.js sets html.navshort when the long labels would push Menu onto a second row */
+.navshort .pill .long { display: none; }
+.navshort .pill .short { display: inline; }
+.pill[aria-current] { color: var(--fg); text-decoration: underline; text-decoration-color: var(--accent); cursor: default; }
 
 /* theme control — closed appearance only (the open menu chrome stays per page) */
 .theme { display: inline-flex; flex: 0 0 auto; border: 1px solid var(--hair); border-radius: 6px; }
@@ -38,7 +49,10 @@
 
 /* unified mobile sizing (one breakpoint for all three; the frames keep their own) */
 @media (max-width: 36rem) {
-  .pill { padding: .36rem .5rem; letter-spacing: .02em; }
+  .segnav { gap: min(.8rem, 2.6vw); }  /* 360px tracker row: nav + Sign in + Menu, measured 9px short at .8rem */
+  .pill .long { display: none; }
+  .pill .short { display: inline; }
+  .pill { padding: .36rem 0; letter-spacing: .02em; font-size: .82rem; }
   #themesum { font-size: .72rem; padding: .3rem .45rem; }
 }
 

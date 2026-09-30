@@ -104,6 +104,28 @@
     }).observe(block);
   }
 
+  // site-nav labels (nav.css .pill .long/.short): the long ones (CORE TRACKER,
+  // ARCADE FRONTEND) only while the nav and the controls beside it (Sign in,
+  // Menu) still share one row; otherwise html.navshort swaps in the short ones
+  // phones always get. Each check starts from the long labels, so widening the
+  // window brings them back. The header is observed rather than the window
+  // because the tracker's docked panel narrows it without a resize; the check
+  // is a pure function of the header's width, so its own reflow settles.
+  var seg = document.querySelector('.segnav');
+  var navrow = seg && (seg.closest('.hctl') || seg.parentElement);
+  var hdr = seg && seg.closest('header');
+  if (navrow && hdr) {
+    var fitNav = function () {
+      var root = document.documentElement;
+      root.classList.remove('navshort');
+      var first = navrow.firstElementChild, last = navrow.lastElementChild;
+      if (last.getBoundingClientRect().top >= first.getBoundingClientRect().bottom - 2) root.classList.add('navshort');
+    };
+    fitNav();
+    if ('ResizeObserver' in window) new ResizeObserver(fitNav).observe(hdr);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitNav);  // the condensed face changes the widths
+  }
+
   var dd = document.getElementById('themedd');
   var sum = document.getElementById('themesum');
   var menu = dd && dd.querySelector('.menu');

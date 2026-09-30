@@ -1893,11 +1893,18 @@ MEATHAX_FROZEN_DATES = {
 
 
 RMCORES_REPO = "rmonic79/rmcores"
-# Per-core source repos under github.com/rmonic79, keyed by lowercased MRA rbf
-# (his naming is rm_<Title>_MiSTer or rm-<Title>_MiSTer; the rbf is rm<Title>).
+# Per-core source repos under github.com/rmonic79, keyed by lowercased rbf
+# (the MRA's for arcade rows, the core name for console rows). His naming is
+# rm_<Title>_MiSTer or rm-<Title>_MiSTer for his arcade cores; his builds of
+# Distribution console cores are GitHub forks named rm<Core>_MiSTer.
 RMCORES_CORE_REPOS = {
     "rmnightslashers": "rmonic79/rm_NightSlashers_MiSTer",
     "rmseibucupsoccer": "rmonic79/rm-SeibuCupSoccer_MiSTer",
+    "rmgalivan": "rmonic79/rm-Galivan_MiSTer",
+    "rmtaitoasuka": "rmonic79/rm-TaitoAsuka_MiSTer",
+    "rmboogiewings": "rmonic79/rm-BoogieWings_MiSTer",
+    "rmraiden": "rmonic79/rm-Raiden_MiSTer",
+    "rmneogeo": "rmonic79/rmNeoGeo_MiSTer",
 }
 # Debut dates for the rmcores initial import (2026-09-12 seed), mined the
 # same way as MEATHAX_FROZEN_DATES: each mainline MRA's first-add commit in
@@ -2070,9 +2077,11 @@ def join_optin_db_rows(con):
     detection-day stamp, which IS their real debut."""
     for source_id, (dist_repo, core_repos, frozen_dates) in OPTIN_DB_SOURCES.items():
         for row in con.execute(
-            "SELECT path, rbf, release_date FROM catalog WHERE source_id=?", (source_id,)
+            "SELECT path, title, rbf, release_date FROM catalog WHERE source_id=?", (source_id,)
         ).fetchall():
-            repo = core_repos.get((row["rbf"] or "").strip().lower(), dist_repo)
+            # console/computer rows carry no MRA rbf: the core name is the rbf
+            rbf = row["rbf"] or core_name(row["title"])
+            repo = core_repos.get(rbf.strip().lower(), dist_repo)
             frozen = frozen_dates.get(row["path"].replace("\\", "/").rsplit("/", 1)[-1])
             con.execute(
                 "UPDATE catalog SET repo=?, release_date=COALESCE(?, release_date) "
@@ -3429,6 +3438,20 @@ def arcade_family_members(meta):
     return {root: sorted(names) for root, names in members.items()}
 
 
+def _built_from_core(source_id, core):
+    """The Distribution core a third-party console/computer rbf is a build of,
+    or '' when the rbf is its own machine. rmCores ships rmonic79's builds of
+    MiSTer-devel cores under an rm-prefixed rbf (rmNeoGeo = the NeoGeo core
+    plus his CRT geometry), so both coexist on one card; the row borrows the
+    base core's title, year, maker and photo. Only cores we already describe
+    qualify, so an rm core for a machine we have never listed stays raw."""
+    if source_id == "rmcores" and core.startswith("rm"):
+        base = core[2:]
+        if base in CORE_YEAR or base in CONSOLE_MANUFACTURER or base in COMPUTER_MANUFACTURER:
+            return base
+    return ""
+
+
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
              repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
              core_files=None, ft_map=None, core_hashes=None, shipped_rbfs=None, mra_specs=None,
@@ -3440,6 +3463,7 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     sn = ""
     forced_mt = None
     core_key = None  # core_files/core_hashes key once the rbf tag is resolved
+    built_from = ""  # non-arcade: the Distribution core this rbf is a build of
     if system == "arcade":
         title, forced_mt = (arcade_titles or {}).get(
             (r["source_id"], r["path"]), (r["title"], None))
@@ -3477,6 +3501,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # cores: strip the date suffix from the display name (date has its own
         # column), then swap in the human title where the rbf name isn't one
         title = SYSTEM_TITLES.get(core, _CORE_DATE_RE.sub("", r["title"]).rstrip("_ "))
+        built_from = _built_from_core(r["source_id"], core)
+        if built_from:
+            # "Neo Geo (rmCores)": the machine first, the build's db as the
+            # trailing qualifier, like the rm arcade rows
+            title = f"{SYSTEM_TITLES.get(built_from, built_from)} ({_core_label(r, None, {})})"
         # prefer the real MiSTer debut (per-core repo) over the build-date suffix
         debut = (r["release_date"] or "")[:10]
         if debut:
@@ -3485,7 +3514,7 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
             date = core_build_date(r["title"]) or ""
             date_kind = "build" if date else ""
         genre = ""
-        cn = core_name(r["title"])
+        cn = built_from or core
         if not manufacturer:
             if system == "console":
                 manufacturer = CONSOLE_MANUFACTURER.get(cn, "")
@@ -3493,7 +3522,7 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
                 manufacturer = COMPUTER_MANUFACTURER.get(cn, "")
     year = r["year"] or ""
     if not year and system in ("console", "computer"):
-        year = CORE_YEAR.get(core_name(r["title"]), "")
+        year = CORE_YEAR.get(built_from or core_name(r["title"]), "")
     # '?' also covers placeholder MRA years like '20??' (cps1mult), which the
     # frozen override table should beat
     if system == "arcade" and (not year or "?" in year):
@@ -3575,6 +3604,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         row["act"] = commit_d
     if repo:
         row["repo"] = repo
+    # a build of another core (rmNeoGeo -> NeoGeo): the panel shows that
+    # machine's photo. `core` stays the shipped rbf, which launch buttons and
+    # the on-device app match on (launching NeoGeo would start the other build)
+    if built_from:
+        row["sys"] = built_from
     # which downloader database ships this entry. The ingested dbs are
     # disjoint (no title appears in two), so one value is the whole truth;
     # the frontend maps the raw id to a display name and search tokens.

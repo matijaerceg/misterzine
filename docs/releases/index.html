@@ -1507,9 +1507,9 @@ const OPTIN_DBS = {
   rmcores: {
     section: 'rmonic79/rmcores',
     url: 'https://raw.githubusercontent.com/rmonic79/rmcores/db/db.json.zip',
-    what: 'rmonic79\'s own builds of his cores, with CRT Adjust and V-Size on the analog output ' +
-      '(HDMI untouched) and a pause overlay. The same games also ship in the MiSTer Distribution ' +
-      'without those extras; the rm build has its own rbf name, so both can sit on one card.',
+    what: 'rmonic79\'s own builds, with CRT Adjust and V-Size on the analog output (HDMI untouched); ' +
+      'most also add a pause overlay. The same cores also ship in the MiSTer Distribution without ' +
+      'those extras; the rm build has its own rbf name, so both can sit on one card.',
   },
   slopcore: {
     section: 'TheJesusFish/Slop-Core',
@@ -3412,10 +3412,12 @@ function detailHTML(d) {
   ).join('');
   // console/computer rows: hardware photo instead of screenshots, with a
   // Commons attribution caption (required for the CC BY-SA photos)
+  // d.sys: the core this rbf is a build of (rmNeoGeo -> NeoGeo), same machine
   let sysphoto = '';
-  if (!d.img && SYSTEM_IMGS.has(d.core)) {
-    sysphoto = '<img class="sysphoto" loading="lazy" src="../images/systems/' + escA(d.core) + '.png" alt="">';
-    const cr = SYSTEM_CREDITS[d.core];
+  const syskey = d.sys || d.core;
+  if (!d.img && SYSTEM_IMGS.has(syskey)) {
+    sysphoto = '<img class="sysphoto" loading="lazy" src="../images/systems/' + escA(syskey) + '.png" alt="">';
+    const cr = SYSTEM_CREDITS[syskey];
     if (cr && cr.file) {
       // artist is HTML from Commons extmetadata (links, entities) — reduce it
       // to plain text with an inert DOMParser, then esc() re-escapes below

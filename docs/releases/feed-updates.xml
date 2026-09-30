@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 30 Sep 2026 00:08:49 +0000</lastBuildDate>
+<lastBuildDate>Wed, 30 Sep 2026 04:03:38 +0000</lastBuildDate>
+<item>
+<title>[Updated] Guardians (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#grdians</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Guardians (Denjin Makai II).mra:2026-09-30T04:03:38+00:00</guid>
+<pubDate>Wed, 30 Sep 2026 04:03:38 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/grdians.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1995 / Winkysoft (Banpresto license)&lt;/p&gt;&lt;p&gt;Core: Guardians&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-30 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Guardians_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] S.T.U.N. Runner (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#stunrun</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/S.T.U.N. Runner.mra:2026-09-30T02:16:46+00:00</guid>
+<pubDate>Wed, 30 Sep 2026 02:16:46 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/stunrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Arcade-StunRunner&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-30 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arcade-SSV (Arcade core, 10 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cairblad</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzn2x.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 2008 / Sega / M2&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Forgotten Worlds (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#forgottn</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Forgotten Worlds (World, newer).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/forgottn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtcps1&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cps1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Gun.Smoke (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gunsmoke</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Gun.Smoke (World, 1985-11-15).mra:2026-09-27T05:14:39+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 05:14:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gunsmoke.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1985 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtgunsmk&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gunsmk"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

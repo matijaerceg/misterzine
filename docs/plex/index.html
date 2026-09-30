@@ -62,11 +62,12 @@
   .shot figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: .3rem .55rem; font-size: .72rem;
                      color: #e9e3f6; background: linear-gradient(transparent, rgba(0,0,0,.7)); pointer-events: none; }
   /* three short loops of the real output (MP4s of the Patreon launch GIFs, a
-     tenth of the bytes). Muted autoplay; a click pauses or resumes one. No
-     reduced-motion gate on purpose: they are small, silent and in their own box,
-     and the site keeps its motion (see the home page's mister-kun note). */
+     tenth of the bytes). Muted autoplay, no controls and nothing to click: they
+     just play, like the GIFs did. No reduced-motion gate on purpose: they are
+     small, silent and in their own box, and the site keeps its motion (see the
+     home page's mister-kun note). */
   .clips { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin: 0 0 1.2rem; align-items: start; }
-  .clips .shot { margin: 0; cursor: pointer; }
+  .clips .shot { margin: 0; }
   @media (max-width: 40rem) { .clips { grid-template-columns: 1fr; } }
 
   /* ---- get-it box: the button and version, then the two ways to run it.
@@ -247,12 +248,6 @@
 
 </div>
 <script src="../theme.js?v=3"></script><!-- shared theme picker -->
-<script>
-  // a click on a clip pauses it, another resumes
-  document.querySelectorAll('.clips video').forEach(function (v) {
-    v.closest('.shot').addEventListener('click', function () { if (v.paused) v.play(); else v.pause(); });
-  });
-</script>
 <script>
   // Versions, straight from GitHub: the baked beta above is only the fallback
   // for when the API call fails (offline, rate-limited). One list call answers

@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Thu, 01 Oct 2026 00:31:05 +0000</lastBuildDate>
+<lastBuildDate>Thu, 01 Oct 2026 14:29:29 +0000</lastBuildDate>
+<item>
+<title>[New] Violent Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Violent Storm.mra:2026-10-01T14:29:29+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 14:29:29 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-01 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Ironman Ivan Stewart's Super Off-Road (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#offroad</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/robowres.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Sanritsu / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-Appoooh&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-16 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super A'Can (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SuperAcan</link>
-<guid isPermaLink="false">distribution_mister:_Console/SuperAcan_20260911.rbf:2026-09-12T16:24:02+00:00</guid>
-<pubDate>Sat, 12 Sep 2026 16:24:02 +0000</pubDate>
-<category>new</category>
-<category>Console core</category>
-<description>&lt;p&gt;1995 / Funtech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SuperAcan_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

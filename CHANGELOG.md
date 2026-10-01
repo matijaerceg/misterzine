@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-01
+
+- Release tracker: three arcade games that MiSTer ships only as an alternative version, with no mainline set, now have rows of their own: Cue Brick (Jotego), Super Champion Baseball (Coin-Op Collection) and Space Invaders II, Midway's two-player cocktail game. The tracker files every alternative under its game's mainline row, so these had none, and the Arcade Frontend showed them as bare local entries. Each was checked to install from its database with its ROMs available; their dates are when they first shipped, and the feeds do not announce them as new.
+
 ## 2026-09-30
 
 - Site: MisterZine Plex Core has a page at [/plex/](https://misterzine.fyi/plex/), with a photo and clips of it running on a CRT, what it does, and what is free versus Patreon early access. The home page gains a Plex card and a line saying what MisterZine makes.

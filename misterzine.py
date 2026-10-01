@@ -171,6 +171,44 @@ SOURCE_SYSTEMS = {
 # later rebuild puts them back.
 SIBLING_VARIANT_SOURCES = {"blahm1d"}
 
+# Games MiSTer ships ONLY as an _Arcade/_alternatives MRA (the core authors
+# carry a regional set and no mainline one). export-web drops alternatives, so
+# these had no row, and the on-device app showed them as bare "Local" rows.
+# Each entry passed the 2026-09-30 review of every db's alternatives: it
+# installs from a db we crawl and its core ships in that same db; its setname
+# is a MAME game (no hacks, systems or BIOS); no served row shares its
+# setname, MAME parent or family; every ROM zip its MRA names is in the Arcade
+# ROMs db update_all installs; and the owner approved it. Each is listed like
+# any arcade row, but yields its clean title to an existing row (export-web),
+# so a late listing never retitles a game already on the site. Keyed
+# (source_id, catalog path):
+#   setname, rbf -- from the MRA, pinned because enrich-mra reads only the
+#     top-level MRAs;
+#   debut -- the game's first MiSTer appearance, from the repo history;
+#   listed -- the day the row joined the site. The feeds skip its events from
+#     before then, so an old game getting a row is never announced as news.
+# Distribution packs its alternatives into the mra_alternatives archive rather
+# than listing them as db files, so fetch_db reads that archive's summary for
+# its entries here (_archived_orphans).
+ORPHAN_ALTERNATIVES = {
+    # Midway's own two-player cocktail game, not Taito's Part II (MAME:
+    # "Space Invaders II (Midway, cocktail)", no parent). Shipped as
+    # releases/Space Invaders II (Midway, cocktail).mra in the core repo's
+    # first commit (MiSTer-devel/Arcade-SpaceInvaders_MiSTer ba6f59ce), moved
+    # to MRA-Alternatives_MiSTer 2021-06-04. Launch-tested on the MisterPi.
+    ("distribution_mister",
+     "_Arcade/_alternatives/_Space Invaders/Space Invaders Part II (Midway, Cocktail).mra"):
+        {"setname": "invad2ct", "rbf": "spaceinvaders", "debut": "2020-12-24", "listed": "2026-10-01"},
+    # first public jtbin commit of the MRA (jotego/jtbin ffbbc188; the
+    # jttwin16 MRAs entered jtbin 2024-12-31, no earlier Cue Brick path)
+    ("jtbindb", "_Arcade/_alternatives/_Cuebrick/Cue Brick (Japan).mra"):
+        {"setname": "cuebrickj", "rbf": "jttwin16", "debut": "2025-01-24", "listed": "2026-10-01"},
+    # Coin-Op's "ALPHA68K 20221116" release (85126a11, as _Super Baseball
+    # Champion/, renamed the next day), alongside Gang Wars and Sky Adventure
+    ("coinop", "_Arcade/_alternatives/_Super Champion Baseball/Super Champion Baseball (Japan).mra"):
+        {"setname": "sbasebalj", "rbf": "alpha68k", "debut": "2022-11-16", "listed": "2026-10-01"},
+}
+
 # GitHub org + name prefix where the retrospective arcade release dates live.
 ARCADE_REPO_ORG = "MiSTer-devel"
 ARCADE_REPO_PREFIX = "Arcade-"
@@ -457,6 +495,39 @@ def _gate_terms(d):
     return gates
 
 
+def _archived_orphans(source_id, d):
+    """{path: file entry} for this source's ORPHAN_ALTERNATIVES entries that
+    its db ships inside an archive (Distribution's mra_alternatives) instead of
+    as plain files, read from the archive's summary file (a zipped json whose
+    entries have db.json's file shape: hash, size, tags against the same
+    tag_dictionary). Only the pinned paths are taken: the other
+    alternatives would never be shown, and ingesting a thousand of them would
+    only grow the catalog. A summary that fails to load maps each wanted path
+    to None; cmd_snapshot then carries the catalog's last values forward, so a
+    blip never reads as the game leaving the db."""
+    wanted = {p for sid, p in ORPHAN_ALTERNATIVES
+              if sid == source_id and p not in d.get("files", {})}
+    if not wanted:
+        return {}
+    out = {}
+    try:
+        for arc in (d.get("archives") or {}).values():
+            url = (arc.get("summary_file") or {}).get("url")
+            if not url:
+                continue
+            raw = http_get(url)
+            if raw[:2] == b"PK":
+                z = zipfile.ZipFile(BytesIO(raw))
+                raw = z.read(z.namelist()[0])
+            listed = json.loads(raw).get("files", {})
+            for p in wanted & set(listed):
+                out[p] = listed[p]
+    except Exception as e:
+        log(f"  {source_id}: archive summary unreadable ({e}); keeping the last values")
+        return {p: None for p in wanted}
+    return out
+
+
 def fetch_db(source):
     """Download a db.json.zip, return (ts, {path: {hash,size}}, {path: gate}, gates).
 
@@ -489,6 +560,8 @@ def fetch_db(source):
                 gated[path] = by_id[tid]
                 break
         files[path] = {"hash": meta.get("hash"), "size": meta.get("size")}
+    for path, meta in _archived_orphans(source["id"], d).items():
+        files[path] = meta and {"hash": meta.get("hash"), "size": meta.get("size")}
     if gated:
         per = Counter(gated.values())
         log("    " + ", ".join(f"{n} {t}" for t, n in sorted(per.items())) + " (Patreon-gated) files flagged")
@@ -533,6 +606,14 @@ def cmd_snapshot(args):
     total_events = 0
     for source in SOURCES:
         ts, files, gated, gates = fetch_db(source)
+        # an archived orphan whose summary failed to load: last crawl's values
+        for path in [p for p, meta in files.items() if meta is None]:
+            row = con.execute("SELECT hash, size FROM catalog WHERE source_id=? AND path=?",
+                              (source["id"], path)).fetchone()
+            if row:
+                files[path] = {"hash": row["hash"], "size": row["size"]}
+            else:
+                del files[path]
         files = tracked_files(source["id"], files)
         swept = purge_untracked(con, source["id"])
         if swept:
@@ -623,6 +704,10 @@ def cmd_snapshot(args):
                 etype = None
             elif path in graduated:
                 etype = "new"  # tag dropped: newly public, whatever the hash did
+            elif old is None and (source["id"], path) in ORPHAN_ALTERNATIVES:
+                # first crawl of a pinned archive entry: an old game the
+                # catalog only now reads, not a release
+                etype = None
             elif old is None:
                 etype = "seed" if seed else "new"
             elif old.get("hash") != meta.get("hash"):
@@ -3334,7 +3419,10 @@ def _filter_tag_map():
         rbf_stems = {norm(core_name(title_from_path(p))) for p in d.get("files", {})
                      if "/cores/" in p.lower() and p.lower().endswith(".rbf")}
         n = 0
-        for path, meta in d.get("files", {}).items():
+        # pinned alternatives-only games an archive carries (Distribution's
+        # mra_alternatives) are rows too, tagged like any db file
+        archived = {p: m for p, m in _archived_orphans(source["id"], d).items() if m}
+        for path, meta in {**d.get("files", {}), **archived}.items():
             aliases = [sorted(groups.get(t, [])) for t in meta.get("tags", [])]
             term = None
             if path.endswith(".mra"):
@@ -3792,21 +3880,36 @@ def repair_coinop_rows(con):
                 (COINOP_REPO,))
 
 
+def apply_orphan_alternatives(con):
+    """Pin each ORPHAN_ALTERNATIVES row's setname, rbf and debut onto its
+    catalog row. enrich-mra never reads alternative MRAs, and a row first
+    crawled after seeding is stamped with crawl day as its debut, so without
+    this the row would lack its MAME joins and show a fresh date for an old
+    game. Runs every export; a no-op until the snapshot has the row."""
+    for (sid, path), pin in ORPHAN_ALTERNATIVES.items():
+        con.execute("UPDATE catalog SET setname=?, rbf=?, release_date=? "
+                    "WHERE source_id=? AND path=?",
+                    (pin["setname"], pin["rbf"], pin["debut"], sid, path))
+
+
 def warn_date_anomalies(con):
     """Tripwire for the Operation Wolf failure mode: a row that only just
     appeared (first seen after DETECTION_EPOCH, so its detection-day debut is
     ground truth) displaying a release_date more than a year older than its
     arrival means some core-level backfill clobbered the per-title date.
-    Renamed rows are immune (the snapshot carries their original first_seen).
-    Warn-only: on GitHub Actions the ::warning:: line surfaces as a run
-    annotation, so a regression is visible without failing the refresh."""
+    Renamed rows are immune (the snapshot carries their original first_seen),
+    and so are ORPHAN_ALTERNATIVES rows: an old game read late, its debut
+    hand-verified. Warn-only: on GitHub Actions the ::warning:: line surfaces
+    as a run annotation, so a regression is visible without failing the refresh."""
     rows = con.execute(
-        "SELECT title, path, release_date, first_seen FROM catalog "
+        "SELECT source_id, title, path, release_date, first_seen FROM catalog "
         "WHERE first_seen >= ? AND release_date IS NOT NULL "
         "AND date(substr(release_date,1,10)) < date(substr(first_seen,1,10), '-365 days')",
         (DETECTION_EPOCH,),
     ).fetchall()
     for r in rows:
+        if (r["source_id"], r["path"]) in ORPHAN_ALTERNATIVES:
+            continue
         msg = (f"DATE ANOMALY: '{r['title']}' ({r['path']}) first seen "
                f"{r['first_seen'][:10]} but shows debut {r['release_date'][:10]} - "
                f"a core-level date sweep likely overwrote its detection-day debut")
@@ -3927,6 +4030,7 @@ def cmd_export_web(args):
     apply_jt_beta_frozen_dates(con)  # after the jt pins: per-title beta dates win over folder dates
     repair_coinop_rows(con)  # coinop rows: fix mis-joined repos, pin their distribution repo
     join_optin_db_rows(con)  # meathax/rmcores rows: per-core repo links + frozen import debuts
+    apply_orphan_alternatives(con)  # alternatives-only games: setname/rbf/debut pins
     warn_date_anomalies(con)  # tripwire: new row wearing a years-old debut
     con.commit()
     rows = con.execute("SELECT * FROM catalog").fetchall()
@@ -3985,8 +4089,11 @@ def cmd_export_web(args):
     con.close()
     # Drop arcade region/revision/bootleg variants (MiSTer files them under
     # _Arcade/_alternatives/); the site shows only the mainline title per game.
+    # The exception is a game that ships with no mainline set at all
+    # (ORPHAN_ALTERNATIVES): its alternative is the only row it can have.
     rows = [r for r in rows if not (
-        r["system"] == "arcade" and "/_alternatives/" in r["path"].replace("\\", "/"))]
+        r["system"] == "arcade" and "/_alternatives/" in r["path"].replace("\\", "/")
+        and (r["source_id"], r["path"]) not in ORPHAN_ALTERNATIVES)]
     # Drop arcade BIOS/placeholder rows that aren't games (e.g. the IGS PGM BIOS,
     # which has no year/screenshot and just clutters the list).
     rows = [r for r in rows if not (
@@ -4016,11 +4123,18 @@ def cmd_export_web(args):
     # Beta rows are counted separately so a Patreon beta arriving (or leaving)
     # can never change what an already-public row displays: the public counts
     # ignore betas, and a beta takes the clean base only when no public row
-    # uses it and no other beta wants it.
+    # uses it and no other beta wants it. An ORPHAN_ALTERNATIVES row yields the
+    # same way, for the same reason: listing an old game late must not retitle
+    # a row already on the site (Midway's "Space Invaders Part II (Midway,
+    # Cocktail)" would otherwise strip Taito's row back to its raw MRA name).
+    def orphan(r):
+        return (r["source_id"], r["path"]) in ORPHAN_ALTERNATIVES
     counts = Counter(_arcade_base(r["title"]) for r in rows
-                     if r["system"] == "arcade" and not r["beta"])
+                     if r["system"] == "arcade" and not r["beta"] and not orphan(r))
     beta_counts = Counter(_arcade_base(r["title"]) for r in rows
                           if r["system"] == "arcade" and r["beta"])
+    orphan_counts = Counter(_arcade_base(r["title"]) for r in rows
+                            if r["system"] == "arcade" and not r["beta"] and orphan(r))
     # Same-game pairs from different databases (official Deco16 vs Coin-Op's
     # dedicated core) read better labeled by core than by ROM-set qualifier:
     # "Caveman Ninja (Deco16)" vs "Caveman Ninja (Coin-Op Collection)". A
@@ -4082,7 +4196,12 @@ def cmd_export_web(args):
                 arcade_titles[(r["source_id"], r["path"])] = (
                     f"{b[3:]} ({_core_label(r, fork_info, repo_maps)})", r["title"])
             else:
-                clean = (counts[b] == 0 and beta_counts[b] == 1) if r["beta"] else counts[b] == 1
+                if r["beta"]:
+                    clean = counts[b] + orphan_counts[b] == 0 and beta_counts[b] == 1
+                elif orphan(r):
+                    clean = counts[b] == 0 and orphan_counts[b] == 1
+                else:
+                    clean = counts[b] == 1
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
     # A gated row may still end up with the exact title of a public row: the
     # same-game gate skips betas, and the clean-base rule lets a beta keep the
@@ -4425,6 +4544,7 @@ def _write_feeds(outdir):
       Plain 'removed' events make no items.
     Runs AFTER the image re-tag so data.json rows carry img/img_slots."""
     data = json.loads((outdir / "data.json").read_text(encoding="utf-8"))
+    orphan_listed = {k: v["listed"] for k, v in ORPHAN_ALTERNATIVES.items()}
     by_path = {}    # arcade rows: (source, MRA path), the event's own identity
     by_title = {}   # arcade rows: raw MRA title (mt when humanized) + display title
     by_core = {}    # non-arcade rows: core token
@@ -4509,6 +4629,10 @@ def _write_feeds(outdir):
         # naturally — its 'new' event lands in the same run that clears the
         # row's beta flag, so the row passes here by then.
         rows = [r for r in rows if not r.get("beta")]
+        # An ORPHAN_ALTERNATIVES row is an old game listed late: its events
+        # from before the listing (an MRA fix, a core rebuild it shared) are
+        # not news, and must not join or change items already published.
+        rows = [r for r in rows if e["ts"][:10] >= orphan_listed.get((r.get("src"), r.get("mra")), "")]
         if not rows:
             continue
         etype = e["event_type"]

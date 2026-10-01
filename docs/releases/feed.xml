@@ -6,7 +6,52 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 30 Sep 2026 12:40:07 +0000</lastBuildDate>
+<lastBuildDate>Thu, 01 Oct 2026 00:31:05 +0000</lastBuildDate>
+<item>
+<title>[New] Ironman Ivan Stewart's Super Off-Road (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#offroad</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Ironman Ivan Stewart's Super Off-Road (rev 4).mra:2026-10-01T00:31:05+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 00:31:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/offroad.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1989 / Leland Corp.&lt;/p&gt;&lt;p&gt;Core: Leland&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Leland_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Ironman Ivan Stewart's Super Off-Road Track-Pak (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#offroadt</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Ironman Ivan Stewart's Super Off-Road Track-Pak (rev 4).mra:2026-10-01T00:31:05+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 00:31:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/offroadt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1989 / Leland Corp.&lt;/p&gt;&lt;p&gt;Core: Leland&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Leland_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Pig Out: Dine Like a Swine! (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pigout</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Pig Out Dine Like a Swine! (rev 2).mra:2026-10-01T00:31:05+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 00:31:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pigout.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1990 / Leland Corp.&lt;/p&gt;&lt;p&gt;Core: Leland&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Leland_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Primal Rage (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#primrage</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Primal Rage (version 2.3, Jan 1995).mra:2026-10-01T00:31:05+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 00:31:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/primrage.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1994 / Atari Games&lt;/p&gt;&lt;p&gt;Core: PrimalRage&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Intellivision (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Intellivision</link>
+<guid isPermaLink="false">distribution_mister:_Console/Intellivision_20261001.rbf:2026-10-01T00:31:05+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 00:31:05 +0000</pubDate>
+<category>updated</category>
+<category>Console core</category>
+<description>&lt;p&gt;1979 / Mattel&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Intv_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arcade-NamcoND1 (Arcade core, 2 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ncv1</link>
@@ -861,51 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Wonder Boy III - Monster Lair (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wb3</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Wonder Boy III/Wonder Boy III - Monster Lair (set 2, Japan, System 16B) (FD1094 317-0085).mra:2026-09-27T19:05:26+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 19:05:26 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wb3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Wrestle War (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wrestwar</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Wrestle War/Wrestle War (set 1, Japan) (FD1094 317-0090).mra:2026-09-27T19:05:26+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 19:05:26 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wrestwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Hyper Duel (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hyprduel</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Hyper Duel.mra:2026-09-27T17:05:00+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 17:05:00 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hyprduel.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / Technosoft&lt;/p&gt;&lt;p&gt;Core: hyprduel&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-HyperDuel_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Lucky &amp; Wild (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#luckywld</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_LW_20260927.rbf:2026-09-27T14:19:02+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 14:19:02 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/luckywld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1992 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_LW&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Metal Hawk (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#metlhawk</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_MH_20260927.rbf:2026-09-27T14:19:02+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 14:19:02 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metlhawk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_MH&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

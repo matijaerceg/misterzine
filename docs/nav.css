@@ -22,7 +22,7 @@
    Menu control; bare words need no padding or dividers. The class names
    (.segnav/.pill) stay so no page CSS or JS has to change. The current page is
    the one in body ink with the accent underline. Patreon is the one link that
-   leaves the site (new tab). Phones get shorter labels: a .long span is
+   leaves the site (new tab), by way of the .patpop note below. Phones get shorter labels: a .long span is
    dropped ("Arcade " off ARCADE FRONTEND) and a .short one stands in for it
    (CORES for CORE TRACKER). */
 .segnav { display: flex; align-items: center; gap: 1.1rem; min-width: 0; }
@@ -117,6 +117,20 @@
 @media (max-width: 36rem) {
   #menusum { font-size: .72rem; padding: .3rem .45rem; }
 }
+
+/* Patreon note (theme.js): what a header Patreon link opens instead of leaving
+   the site. The Menu list's chrome, fixed just under its link; the way through
+   is a solid accent button like the tracker panel's Launch. z-index as the tips. */
+.patpop { position: fixed; z-index: 102; box-sizing: border-box; width: min(19rem, calc(100vw - 16px));
+          background: var(--surface); color: var(--fg); border: 1px solid var(--hair); border-radius: 6px;
+          padding: .75rem .85rem .85rem; box-shadow: 0 4px 16px #0004;
+          font-size: .85rem; line-height: 1.45; text-align: left; text-transform: none; letter-spacing: normal; }
+.patpop p { margin: 0 0 .65rem; }
+.patpop .pph { font-weight: 700; }
+.patpop a { color: var(--accent); }
+.patpop .ppgo { display: inline-flex; align-items: center; gap: .45em; padding: .4rem .8rem; border-radius: 6px;
+                background: var(--accent); color: var(--accent-on); font-weight: 700; text-decoration: none; }
+.patpop .ppgo:hover { background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
 
 /* hover tip for any data-tip element (theme.js; beside the site menu for its rows, under the element otherwise).
    Same chrome as the release tracker's popovers; click-through. z-index clears

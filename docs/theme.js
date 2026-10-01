@@ -91,6 +91,85 @@
     }, true);
   }
 
+  // Patreon links in the header (the nav's on every page, the tracker's status
+  // line) carry data-patreon: a click opens a short note on what supporting
+  // gets you, with the way through to Patreon, instead of dropping the visitor
+  // on another site. They stay plain hrefs, so without JS, or with a modifier
+  // key, they go straight there. Closes like the Menu (outside click, Escape
+  // first in capture phase) and on the way through. data-patreon names the
+  // spot: GoatCounter's 'patreon-<spot>' still counts clicks through to
+  // Patreon, as the links' own data-goatcounter-click did before the note.
+  var here = (document.currentScript && document.currentScript.src) || location.href;
+  var pat = null, patFrom = null, patKey = false;
+  function countPat(a) {
+    if (window.goatcounter && window.goatcounter.count)
+      window.goatcounter.count({ path: 'patreon-' + a.getAttribute('data-patreon'), title: 'Patreon link', event: true });
+  }
+  function placePat() {
+    if (!pat) return;
+    if (!patFrom.isConnected) { closePat(); return; }  // the tracker rebuilds its status line
+    var r = patFrom.getBoundingClientRect(), w = pat.offsetWidth;
+    pat.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
+    pat.style.top = (r.bottom + 6) + 'px';
+  }
+  function closePat(refocus) {
+    var p = pat, from = patFrom;
+    if (!p) return;
+    pat = patFrom = null;  // first: removing a focused node can fire focusout into here
+    p.remove();
+    from.setAttribute('aria-expanded', 'false');
+    if (refocus) from.focus();
+  }
+  function openPat(a, kbd) {
+    closePat();
+    closeTip();
+    patFrom = a;
+    pat = document.createElement('div');
+    pat.className = 'patpop';
+    pat.setAttribute('role', 'dialog');
+    pat.setAttribute('aria-label', 'MisterZine on Patreon');
+    pat.innerHTML =
+      '<p class="pph">MisterZine on Patreon</p>' +
+      '<p>Members get early access and additional features, as well as in-app and <a href="' +
+      new URL('credits/', here).pathname + '">website credits</a>.</p>' +
+      '<a class="ppgo" target="_blank" rel="noopener">Visit Patreon<span>↗</span></a>';
+    var go = pat.querySelector('.ppgo');
+    go.href = a.href;
+    // close after the click has opened Patreon's tab, not during it
+    go.addEventListener('click', function () { countPat(a); setTimeout(closePat, 0); });
+    // tabbing out closes it; focus going nowhere (a click on its own text,
+    // leaving the window) doesn't, and outside clicks close it below
+    pat.addEventListener('focusout', function (e) {
+      var to = e.relatedTarget;
+      if (pat && to && !pat.contains(to) && to !== patFrom) closePat();
+    });
+    document.body.appendChild(pat);
+    a.setAttribute('aria-expanded', 'true');
+    placePat();
+    if (kbd) go.focus();
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-patreon]') : null;
+    if (a) {
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) { countPat(a); return; }  // asked for Patreon itself
+      e.preventDefault();
+      if (patFrom === a) closePat(); else openPat(a, patKey || e.detail === 0);
+    } else if (pat && !pat.contains(e.target)) closePat();
+    patKey = false;
+  });
+  // opened from the keyboard, focus goes into the note (Firefox reports an
+  // Enter-made click with detail 1, so the key itself is the signal)
+  document.addEventListener('keydown', function (e) {
+    patKey = e.key === 'Enter' && !!(e.target.closest && e.target.closest('a[data-patreon]'));
+    if (e.key === 'Escape' && pat) {
+      closePat(pat.contains(document.activeElement));  // hand focus back only if it was inside
+      e.stopImmediatePropagation();
+      e.preventDefault();
+    }
+  }, true);
+  addEventListener('resize', placePat);
+  addEventListener('scroll', placePat, true);
+
   // header logo height (every page with a masthead): the logo spans the title
   // block, top of the title to the bottom of the line under it. Each page's
   // CSS seeds --titleh with the one-line sum; this keeps it equal to the

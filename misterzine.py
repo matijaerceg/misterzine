@@ -1677,6 +1677,16 @@ JT_CORE_FROZEN_DATES = {
     "vigil":  "2022-07-01",  # Irem Vigilante, public Jul 2022; HIGH
     "pang":   "2022-08-05",  # Mitchell Pang!, public Aug 5 2022; HIGH
     "kiwi":   "2022-11-12",  # Taito New Zealand Story, beta Nov 12 2022; HIGH
+    # Folders opened long before the core first shipped (the cps3 pattern):
+    # dated by the first jotego/jtbin commit of mister/jt<folder>.rbf, beta
+    # ships included (jtbin carries the betas, e.g. X-Men's MRA needs
+    # jtbeta.zip). jtbin's history starts at its 2024-05-17 squash (ce875275);
+    # xmen and twin16 are absent from that snapshot and from every later tree
+    # until these dates. Checked 2026-10-01; HIGH.
+    "xmen":    "2024-10-11",  # Konami X-Men (folder 2023-07-03)
+    "twin16":  "2024-12-31",  # Devil World; Vulcan Venture 2025-01-17 (folder 2023-08-27)
+    "flstory": "2024-12-14",  # The FairyLand Story family (folder 2024-05-18)
+    "rungun":  "2025-11-07",  # Run and Gun (folder 2025-07-18)
 }
 
 

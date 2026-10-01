@@ -196,9 +196,14 @@
   if (navrow && hdr) {
     var fitNav = function () {
       var root = document.documentElement;
-      root.classList.remove('navshort');
+      root.classList.remove('navshort', 'navwrap');
       var first = navrow.firstElementChild, last = navrow.lastElementChild;
-      if (last.getBoundingClientRect().top >= first.getBoundingClientRect().bottom - 2) root.classList.add('navshort');
+      var below = function () { return last.getBoundingClientRect().top >= first.getBoundingClientRect().bottom - 2; };
+      if (below()) root.classList.add('navshort');
+      // still below with the short labels (or stacked by page CSS, as the
+      // hardware page does at tablet widths): nav.css hides the rule that
+      // splits the links from the controls, which would end a line there
+      if (below()) root.classList.add('navwrap');
     };
     fitNav();
     if ('ResizeObserver' in window) new ResizeObserver(fitNav).observe(hdr);

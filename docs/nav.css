@@ -90,11 +90,24 @@
    whose list opens INLINE below its row (two deep, no second flyout). theme.js
    wires open/close for both levels and caps the list to the room below it. */
 .sitemenu { position: relative; flex: 0 0 auto; }
-#menusum { list-style: none; cursor: pointer; user-select: none; display: flex; align-items: center;
-           font-size: .78rem; padding: .3rem .6rem; border: 1px solid var(--hair); border-radius: 6px; }
+/* The closed Menu (and the tracker's Sign in / Account link, #acct) wear the
+   nav's lettering in body ink rather than the accent: the same family as the
+   links, but read as controls, not places. A thin rule after the nav splits the
+   two groups (.segnav::after); theme.js sets html.navwrap when the controls
+   wrap below the links, where the rule would dangle at a line end. */
+#menusum, #acct { list-style: none; cursor: pointer; user-select: none; display: flex; align-items: center;
+                  font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
+                  text-transform: uppercase; letter-spacing: .04em; font-size: .86rem; padding: .38rem 0;
+                  color: var(--fg); text-decoration: none; white-space: nowrap; flex: 0 0 auto;
+                  text-underline-offset: .4em; text-decoration-thickness: 2px; }
 #menusum::-webkit-details-marker { display: none; }
-#menusum::after { content: " \25BE"; color: var(--muted); margin-left: auto; padding-left: .4em; }
-#menusum:hover, #menudd[open] #menusum { background: var(--hover-bg); }
+#menusum::after { content: " \25BE"; color: var(--muted); margin-left: auto; padding-left: .35em; }
+#menudd[open] #menusum::after { content: " \25B4"; }
+#menusum:hover, #acct:hover, #menudd[open] #menusum {
+  text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.segnav::after { content: ""; align-self: center; width: 1px; height: 1.1em; margin-right: .5rem;
+                 background: color-mix(in srgb, var(--line) 60%, transparent); }
+.navwrap .segnav::after { display: none; }
 .sitemenu .mlist { position: absolute; top: calc(100% + 6px); right: 0; z-index: 30;
                    background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
                    padding: .3rem; display: grid; gap: 2px; min-width: 13rem;
@@ -115,7 +128,9 @@
 .sitemenu .theme .menu { position: static; border: 0; box-shadow: none; border-radius: 0;
                          padding: .2rem 0 .2rem .8rem; overflow: visible; max-height: none !important; }
 @media (max-width: 36rem) {
-  #menusum { font-size: .72rem; padding: .3rem .45rem; }
+  #menusum, #acct { padding: .36rem 0; letter-spacing: .02em; font-size: .82rem; }
+  /* the row's gap is .4rem here: the rule's margin evens out the space around it */
+  .segnav::after { margin-right: calc(min(.8rem, 2.6vw) - .4rem); }
 }
 
 /* Patreon note (theme.js): what a header Patreon link opens instead of leaving

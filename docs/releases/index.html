@@ -32,7 +32,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="../nav.css?v=4"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="../nav.css?v=5"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -776,16 +776,9 @@
     border-color: var(--btn-border); cursor: progress; }
   #panel .launchrow .go.fail { background: var(--surface); color: var(--danger);
     border-color: color-mix(in srgb, var(--danger) 53.33%, transparent); }
-  /* header account link: the closed Menu control's look (nav.css #menusum).
-     It's an <a>, hence the text-decoration reset. (My MiSTer(s) is a row inside
-     the site Menu since 2026-09-17; nav.css styles it there.) */
-  #acct { font: inherit; font-size: .78rem; padding: .3rem .6rem; border: 1px solid var(--hair);
-    border-radius: 6px; background: transparent; color: inherit; cursor: pointer;
-    white-space: nowrap; flex: 0 0 auto; text-decoration: none; }
-  #acct:hover { background: var(--hover-bg); color: inherit; }
-  @media (max-width: 36rem) {
-    #acct { font-size: .72rem; padding: .3rem .45rem; }
-  }
+  /* header account link (#acct): styled with the closed Menu in nav.css.
+     (My MiSTer(s) is a row inside the site Menu since 2026-09-17; nav.css
+     styles it there.) */
   /* must clear the panel (and its resizer, z 101) — the launch button lives inside the panel */
   .misterpop { width: min(22rem, calc(100vw - 2rem)); z-index: 102; }
   .misterpop h4 { margin: .7rem 0 .25rem; font-size: .76rem; font-weight: 600; }
@@ -1093,7 +1086,7 @@
 </main>
 <aside id="panel" hidden></aside>
 <script src="../mask.js?v=4"></script>
-<script src="../theme.js?v=4"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
+<script src="../theme.js?v=5"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)

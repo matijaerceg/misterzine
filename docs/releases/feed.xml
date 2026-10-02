@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 01 Oct 2026 14:29:29 +0000</lastBuildDate>
+<lastBuildDate>Thu, 01 Oct 2026 23:17:26 +0000</lastBuildDate>
+<item>
+<title>[New] T-MEK (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tmek</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/T-MEK (v5.1, The Warlords).mra:2026-10-01T23:17:26+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 23:17:26 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tmek.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1994 / Atari Games&lt;/p&gt;&lt;p&gt;Core: PrimalRage&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] PrimalRage (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#primrage</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/PrimalRage_20261002.rbf:2026-10-01T23:17:26+00:00</guid>
+<pubDate>Thu, 01 Oct 2026 23:17:26 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Primal Rage, T-MEK.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Violent Storm (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
@@ -15,15 +33,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-01 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Primal Rage (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#primrage</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/PrimalRage_20261001.rbf:2026-10-01T13:54:50+00:00</guid>
-<pubDate>Thu, 01 Oct 2026 13:54:50 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/primrage.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1994 / Atari Games&lt;/p&gt;&lt;p&gt;Core: PrimalRage&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-01 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Lucky &amp; Wild (Arcade)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/afighter.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Alien Syndrome (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#aliensyn</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Alien Syndrome/Alien Syndrome (Set 1, Japan, S16A) [FD1089A 317-0033].mra:2026-09-27T19:05:26+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 19:05:26 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aliensyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

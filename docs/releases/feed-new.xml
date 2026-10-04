@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sat, 03 Oct 2026 23:10:29 +0000</lastBuildDate>
+<lastBuildDate>Sun, 04 Oct 2026 02:45:55 +0000</lastBuildDate>
+<item>
+<title>[New] Rampart (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rampart</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Rampart.mra:2026-10-04T02:45:55+00:00</guid>
+<pubDate>Sun, 04 Oct 2026 02:45:55 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/rampart.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Rampart&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Rampart_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Batman (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#batman</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/earthjkr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / Visco&lt;/p&gt;&lt;p&gt;Core: TaitoAsuka&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TaitoAsuka_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Gain Ground (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gground</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Gain Ground.mra:2026-09-24T10:29:37+00:00</guid>
-<pubDate>Thu, 24 Sep 2026 10:29:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gground.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: Arcade-SegaSystem24&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-24 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

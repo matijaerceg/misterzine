@@ -6,12 +6,12 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Mon, 05 Oct 2026 01:54:50 +0000</lastBuildDate>
+<lastBuildDate>Mon, 05 Oct 2026 12:33:31 +0000</lastBuildDate>
 <item>
 <title>[Updated] Arcade-NMK16_Afega (Arcade core, 6 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bubl2000</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Afega_20261004.rbf:2026-10-05T01:54:50+00:00</guid>
-<pubDate>Mon, 05 Oct 2026 01:54:50 +0000</pubDate>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Afega_20261005.rbf:2026-10-05T12:33:31+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 12:33:31 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Bubble 2000, Guardian Storm, Mang-Chi, Pop's Pop's, Spectrum 2000, Stagger I.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
@@ -19,11 +19,38 @@
 <item>
 <title>[Updated] Arcade-NMK16_Gunnail (Arcade core, 21 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#acrobatm</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20261004.rbf:2026-10-05T01:54:50+00:00</guid>
-<pubDate>Mon, 05 Oct 2026 01:54:50 +0000</pubDate>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20261005.rbf:2026-10-05T12:33:31+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 12:33:31 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Acrobat Mission, Air Attack, Bio-ship Paladin, Black Heart, Bombjack Twin, Dolmen, GunNail, Hacha Mecha Fighter, Koutetsu Yousai Strahl, Many Block, Nouryoku Koujou Iinkai, Puzzle World, S.S. Mission, Saboten Bombers, Super Spacefortress Macross, Task Force Harrier, Thunder Dragon, Tom Tom Magic, Twin Action, US AAF Mustang, Vandyke.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NMK16_Macross2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#powerins</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Macross2_20261005.rbf:2026-10-05T12:33:31+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 12:33:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Power Instinct, Super Spacefortress Macross II, Thunder Dragon 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rapid Hero (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#raphero</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Raphero_20261005.rbf:2026-10-05T12:33:31+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 12:33:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raphero.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1994 / NMK&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Raphero&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NMKBP964 (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#macrossp</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMKBP964_20261005.rbf:2026-10-05T12:33:31+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 12:33:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Macross Plus, Quiz Bishoujo Senshi Sailor Moon - Chiryoku Tairyoku Toki no Un.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Violent Storm (Arcade)</title>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metlsavr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1994 / First Amusement&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Pang Pang (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pangpang</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Pang Pang.mra:2026-10-02T11:06:57+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 11:06:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pangpang.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1994 / Dong Gue La Mi Ltd.&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] SD Fighters (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sdfight</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/SD Fighters.mra:2026-10-02T11:06:57+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 11:06:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sdfight.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1996 / SemiCom / Tirano&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super Trio (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#suprtrio</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Super Trio.mra:2026-10-02T11:06:57+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 11:06:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/suprtrio.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1994 / Gameace&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

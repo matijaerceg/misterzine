@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 04 Oct 2026 06:11:24 +0000</lastBuildDate>
+<lastBuildDate>Sun, 04 Oct 2026 23:04:13 +0000</lastBuildDate>
+<item>
+<title>[Updated] Violent Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-VioStorm_20261005.rbf:2026-10-04T23:04:13+00:00</guid>
+<pubDate>Sun, 04 Oct 2026 23:04:13 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-04 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] SegaXBoard (Arcade core, 9 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#abcop</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/SegaXBoard_20261004.rbf:2026-10-04T21:56:46+00:00</guid>
+<pubDate>Sun, 04 Oct 2026 21:56:46 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: A.B. Cop, After Burner, After Burner II, GP Rider, Last Survivor, Line of Fire, Racing Hero, Super Monaco GP, Thunder Blade.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaXBoard_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Lucky &amp; Wild (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#luckywld</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tumbleb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / bootleg&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Violent Storm (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Violent Storm.mra:2026-10-02T11:06:57+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 11:06:57 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Color Computer 3 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#CoCo3</link>
-<guid isPermaLink="false">distribution_mister:_Computer/CoCo3_20260927.rbf:2026-10-02T08:42:20+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 08:42:20 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1986 / Tandy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/CoCo3_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 04 Oct 2026 06:11:24 +0000</lastBuildDate>
+<lastBuildDate>Sun, 04 Oct 2026 23:04:13 +0000</lastBuildDate>
+<item>
+<title>[Updated] Violent Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-VioStorm_20261005.rbf:2026-10-04T23:04:13+00:00</guid>
+<pubDate>Sun, 04 Oct 2026 23:04:13 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-04 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] SegaXBoard (Arcade core, 9 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#abcop</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/SegaXBoard_20261004.rbf:2026-10-04T21:56:46+00:00</guid>
+<pubDate>Sun, 04 Oct 2026 21:56:46 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: A.B. Cop, After Burner, After Burner II, GP Rider, Last Survivor, Line of Fire, Racing Hero, Super Monaco GP, Thunder Blade.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-04 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaXBoard_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Lucky &amp; Wild (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#luckywld</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/64street.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Jaleco&lt;/p&gt;&lt;p&gt;Core: Arcade-JalecoMS1BCD&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Avenging Spirit (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#avspirit</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Avenging Spirit.mra:2026-09-28T04:32:09+00:00</guid>
-<pubDate>Mon, 28 Sep 2026 04:32:09 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/avspirit.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / Jaleco&lt;/p&gt;&lt;p&gt;Core: Arcade-JalecoMS1BCD&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Chimera Beast (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#chimerab</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Chimera Beast (Japan, prototype, set 1).mra:2026-09-28T04:32:09+00:00</guid>
-<pubDate>Mon, 28 Sep 2026 04:32:09 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/chimerab.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / Jaleco&lt;/p&gt;&lt;p&gt;Core: Arcade-JalecoMS1BCD&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

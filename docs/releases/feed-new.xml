@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sun, 04 Oct 2026 02:45:55 +0000</lastBuildDate>
+<lastBuildDate>Mon, 05 Oct 2026 14:55:15 +0000</lastBuildDate>
+<item>
+<title>[New] Blaster (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#blaster</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Blaster.mra:2026-10-05T14:55:15+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 14:55:15 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blaster.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Williams&lt;/p&gt;&lt;p&gt;Core: robotron&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Robotron_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Rampart (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#rampart</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/spacfury.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1981 / Sega&lt;/p&gt;&lt;p&gt;Core: SegaG80V&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] U.N. Defense Force: Earth Joker (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#u-n-defense-force-earth-joker</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/U.N. Defense Force - Earth Joker (US-Japan, set 1).mra:2026-09-24T11:57:52+00:00</guid>
-<pubDate>Thu, 24 Sep 2026 11:57:52 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/earthjkr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1993 / Visco&lt;/p&gt;&lt;p&gt;Core: TaitoAsuka&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TaitoAsuka_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

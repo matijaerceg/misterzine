@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 04 Oct 2026 23:04:13 +0000</lastBuildDate>
+<lastBuildDate>Mon, 05 Oct 2026 01:54:50 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-NMK16_Afega (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bubl2000</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Afega_20261004.rbf:2026-10-05T01:54:50+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 01:54:50 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Bubble 2000, Guardian Storm, Mang-Chi, Pop's Pop's, Spectrum 2000, Stagger I.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NMK16_Gunnail (Arcade core, 21 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#acrobatm</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20261004.rbf:2026-10-05T01:54:50+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 01:54:50 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Acrobat Mission, Air Attack, Bio-ship Paladin, Black Heart, Bombjack Twin, Dolmen, GunNail, Hacha Mecha Fighter, Koutetsu Yousai Strahl, Many Block, Nouryoku Koujou Iinkai, Puzzle World, S.S. Mission, Saboten Bombers, Super Spacefortress Macross, Task Force Harrier, Thunder Dragon, Tom Tom Magic, Twin Action, US AAF Mustang, Vandyke.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Violent Storm (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/suprtrio.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1994 / Gameace&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Tumble Pop (bootleg with PIC) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tumbleb2</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Tumble Pop (bootleg with PIC).mra:2026-10-02T11:06:57+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 11:06:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tumbleb2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / bootleg&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Tumble Pop (bootleg) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tumbleb</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Tumble Pop (bootleg).mra:2026-10-02T11:06:57+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 11:06:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tumbleb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1991 / bootleg&lt;/p&gt;&lt;p&gt;Core: Arcade-Tumble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

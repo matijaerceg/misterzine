@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 04 Oct 2026 23:04:13 +0000</lastBuildDate>
+<lastBuildDate>Mon, 05 Oct 2026 01:54:50 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-NMK16_Afega (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bubl2000</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Afega_20261004.rbf:2026-10-05T01:54:50+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 01:54:50 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Bubble 2000, Guardian Storm, Mang-Chi, Pop's Pop's, Spectrum 2000, Stagger I.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NMK16_Gunnail (Arcade core, 21 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#acrobatm</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20261004.rbf:2026-10-05T01:54:50+00:00</guid>
+<pubDate>Mon, 05 Oct 2026 01:54:50 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Acrobat Mission, Air Attack, Bio-ship Paladin, Black Heart, Bombjack Twin, Dolmen, GunNail, Hacha Mecha Fighter, Koutetsu Yousai Strahl, Many Block, Nouryoku Koujou Iinkai, Puzzle World, S.S. Mission, Saboten Bombers, Super Spacefortress Macross, Task Force Harrier, Thunder Dragon, Tom Tom Magic, Twin Action, US AAF Mustang, Vandyke.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-05 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Violent Storm (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Suzuka 8 Hours, Suzuka 8 Hours 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SGI Indy (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SGIIndy</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SGIIndy_20260927.rbf:2026-09-28T16:51:12+00:00</guid>
-<pubDate>Mon, 28 Sep 2026 16:51:12 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1993 / Silicon Graphics&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SGIIndy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] 64th. Street: A Detective Story (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#64street</link>
-<guid isPermaLink="false">kuzecores:_Arcade/64th. Street- A Detective Story (World).mra:2026-09-28T04:32:09+00:00</guid>
-<pubDate>Mon, 28 Sep 2026 04:32:09 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/64street.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Jaleco&lt;/p&gt;&lt;p&gt;Core: Arcade-JalecoMS1BCD&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-09-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

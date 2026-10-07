@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Tue, 06 Oct 2026 20:57:32 +0000</lastBuildDate>
+<lastBuildDate>Wed, 07 Oct 2026 01:34:29 +0000</lastBuildDate>
+<item>
+<title>[New] The Legend of Kage (Rev 2) [CoC] (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#lkage</link>
+<guid isPermaLink="false">coinop:_Arcade/The Legend of Kage (Rev 2) [CoC].mra:2026-10-07T01:34:29+00:00</guid>
+<pubDate>Wed, 07 Oct 2026 01:34:29 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/lkage.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1984 / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: lkage_mister&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-07 (source: coinop).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Coin-OpCollection/Distribution-MiSTerFPGA/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Victory (Exidy) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#victory</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/quizmoon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Quiz / 1997 / Banpresto&lt;/p&gt;&lt;p&gt;Core: Arcade-NMKBP964&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-24 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Namco Classic Collection Vol.1 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ncv1</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Namco Classic Collection Vol.1.mra:2026-09-24T13:20:48+00:00</guid>
-<pubDate>Thu, 24 Sep 2026 13:20:48 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ncv1.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;MultiGame / 1995 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoND1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-24 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

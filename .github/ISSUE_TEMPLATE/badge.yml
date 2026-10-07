@@ -1,0 +1,51 @@
+name: Propose a Hardware Verified badge
+description: Nominate an arcade core that was built and checked against the real board or its schematics.
+title: "[Hardware Verified] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Hardware Verified is the release tracker's seal for arcade cores whose author built them and checked them against the real hardware: an owned or borrowed board, their own PAL or PROM dumps, the original schematics, logic analyzer or scope captures, or a write-up of how the logic was derived from the board. What it means and what counts: https://misterzine.fyi/badge/
+
+        The evidence must be the core author's own public words (README, docs, release notes, blog or posts). Every proposal is checked against its links before an entry is added.
+  - type: input
+    id: game
+    attributes:
+      label: Game
+      description: The game as the release tracker lists it. A link to its row (the tracker's copy-link button) is perfect.
+      placeholder: "Ghosts'n Goblins, or https://misterzine.fyi/releases/#gng"
+    validations:
+      required: true
+  - type: input
+    id: core
+    attributes:
+      label: Core and where it comes from
+      description: The core's name or repository, and the database that ships it (MiSTer main distribution, Jotego, Coin-Op Collection, ...).
+      placeholder: "jtgng, Jotego's jtcores"
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Evidence links
+      description: One link per line, each to the author's own words about the hardware work.
+      placeholder: |
+        https://github.com/...
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: What the links show
+      description: A sentence or two in plain words, for example "The author worked from Capcom's original schematics and checked the core against his own board."
+    validations:
+      required: true
+  - type: dropdown
+    id: who
+    attributes:
+      label: Are you the core's author?
+      options:
+        - "No"
+        - "Yes, this is my core"
+    validations:
+      required: false

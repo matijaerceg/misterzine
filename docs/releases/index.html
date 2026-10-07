@@ -102,8 +102,13 @@
   .ctrlsep.tall { align-self: stretch; height: auto; }
   #cols { flex: none; align-self: flex-start; }
   /* the search box carries its own inline clear-x, so it lives in a relative wrapper
-     that takes the grow-to-fill role the bare input used to have */
-  .searchwrap { position: relative; display: flex; flex: 1; min-width: 16rem; }
+     that takes the grow-to-fill role the bare input used to have. Its floor was
+     16rem until the hardware badge toggle joined the row (2026-10-07): the floor
+     paid for the toggle's ~4rem, so the one-row desktop cluster wraps at the same
+     window widths as before (measured 900-1920px, panel closed and docked) and
+     the header is never taller. 12rem still clears the "Find anything"
+     placeholder beside the tally; the floor only binds right at the wrap edge. */
+  .searchwrap { position: relative; display: flex; flex: 1; min-width: 12rem; }
   input[type=search] { padding: .4rem .6rem; flex: 1; min-width: 0;
                        /* right padding = the clear-x slot + the tally's measured width
                           (--countw, set by setCount) + a breathing gap, so typed
@@ -213,6 +218,26 @@
   .favctl.active { border-color: var(--accent2, var(--accent)); }
   .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
+  /* hardware badge filter: a single toggle in the favorites toggle's shape
+     (seal + count). display:inline-flex would defeat the hidden attribute,
+     hence the explicit [hidden] rule. Pressed wears the filters' accent glow. */
+  .hvtoggle[hidden] { display: none; }
+  .hvtoggle { display: inline-flex; align-items: center; gap: .3rem; align-self: center;
+              font: inherit; font-size: .9rem; padding: .4rem .55rem; cursor: pointer;
+              border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit;
+              font-variant-numeric: tabular-nums; }
+  .hvtoggle:hover { background: var(--hover-bg); }
+  .hvtoggle .hvseal { width: 1.05em; height: 1.05em; flex: none; }
+  .hvtoggle.active { border-color: var(--accent2, var(--accent));
+                     background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
+  .hvtoggle.active:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
+  /* the seal itself (table, toggle, panel): a filled rosette in --accent with
+     the check in --accent-on, the pair already vetted for a mark ON an accent
+     fill in every theme (the Launch button and Copied chip use it). --accent,
+     never --accent2: a solid glyph needs the token with a contrast floor. */
+  .hvseal { display: block; }
+  .hvseal .r { fill: var(--accent); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; }
+  .hvseal .c { fill: none; stroke: var(--accent-on); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
   /* sized and ruled off like the Columns menu's footnote (.colnote) */
   .favctl .menu .favnote { margin: 0 0 .35rem; padding: .3rem .5rem .4rem; border-bottom: 1px solid var(--rule);
                            font-size: .78rem; line-height: 1.35; color: var(--muted);
@@ -468,6 +493,13 @@
      overflowing into the next column. .xb stays nowrap so "batch" never splits. */
   td .xb { display: inline; white-space: nowrap; color: var(--muted);
            font-size: .75em; font-style: italic; cursor: help; }
+  /* the hardware badge's seal after a title (hvBadge): text-sized, sitting on
+     the baseline like a glyph. Its tip is the shared popover (td [data-tip]).
+     .hvglue keeps it on the same line as the title's last word. */
+  td .hvglue { white-space: nowrap; }
+  td .hv { display: inline-block; width: 1em; height: 1em; margin-left: .3rem;
+           vertical-align: -.15em; }
+  td .hv .hvseal { width: 100%; height: 100%; }
   td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
@@ -710,6 +742,22 @@
     direction: rtl; flex: 1; color: var(--muted); }  /* rtl ellipsis keeps the distinctive tail (…feed-new.xml) visible */
   @media (max-width: 480px) { .rsspop { left: 1rem !important; right: 1rem; } }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
+  /* the hardware badge's panel section (hvHTML): a ruled box in a faint accent
+     wash, headed like a stamp (condensed caps beside the seal), holding the
+     full reason, the evidence links and the criteria-page pointer */
+  #panel .hvbox { margin: .9rem 0 1rem; padding: .6rem .75rem .65rem; font-size: .85rem; line-height: 1.45;
+                  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 6px;
+                  background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+  #panel .hvbox h3 { display: flex; align-items: center; gap: .45rem; margin: 0 0 .4rem;
+                     font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: .95rem;
+                     font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); }
+  #panel .hvbox h3 .hvseal { width: 1.35em; height: 1.35em; flex: none; }
+  #panel .hvbox p { margin: 0 0 .45rem; }
+  #panel .hvbox ul { margin: 0 0 .45rem; padding-left: 1.1rem; }
+  #panel .hvbox li { margin: .1rem 0; }
+  #panel .hvbox a { color: var(--accent); text-decoration: none; }
+  #panel .hvbox a .lbl { text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+  #panel .hvbox .hvmeta { margin: 0; color: var(--muted); font-size: .8rem; }
   #panel .report { color: var(--muted); font-size: .8rem; margin: 1.25rem 0 0; }
   #panel .report a { color: inherit; text-decoration: none; text-underline-offset: 2px; white-space: nowrap; }
   #panel .report a .lbl { text-decoration: underline; }
@@ -890,14 +938,15 @@
     #srcdd { order: 5; }
     #genredd { order: 6; }
     #yeardd { order: 7; }
-    button.clear { order: 8; }
-    .favctl { order: 9; }
+    #hvtoggle { order: 8; }
+    button.clear { order: 9; }
+    .favctl { order: 10; }
     /* Columns keeps its far-right anchoring, now against whatever row it lands on */
-    #cols { order: 10; margin-left: auto; align-self: center; }
+    #cols { order: 11; margin-left: auto; align-self: center; }
     /* a notch tighter so the filter cluster fits one line on a ~390px phone. Only
        the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
        the tap targets keep their height. */
-    details.cols summary, button.clear, .favctl > button { font-size: .85rem; padding: .35rem .45rem; }
+    details.cols summary, button.clear, .favctl > button, .hvtoggle { font-size: .85rem; padding: .35rem .45rem; }
     .favctl > button { min-width: 3em; }
     /* the sort arrow is dropped here: at this width it's the thing that wraps the
        header onto a second sticky line, and the accent color already says which
@@ -1014,6 +1063,10 @@
       <summary id="yearsummary">Year</summary>
       <div class="menu" id="yearmenu"></div>
     </details>
+    <!-- hardware badge filter: shows only the rows wearing the curated seal.
+         Seal, count, tip and label are filled by syncHvSummary (the badge's
+         name lives in the JS); hidden until the data carries a badge. -->
+    <button type="button" id="hvtoggle" class="hvtoggle" aria-pressed="false" hidden></button>
     <button type="button" id="clear" class="clear" disabled>Clear filters</button>
     <!-- favorites: the left segment filters the list down to starred rows, the
          caret opens the housekeeping (backup link, clear). Same split shape as
@@ -1742,6 +1795,62 @@ function betaBadge(d) {
   return d.beta ? '<span class="bb" data-tip="' + escA(gateInfo(d).tip) + '">' + gateStage(d) + '</span>' : '';
 }
 
+// --- the hardware badge ------------------------------------------------------
+// A curated seal on arcade rows whose core was built and checked against the
+// real board or its schematics. The entries live in data/badges.json, which
+// export-web checks against the rows (a stale entry stops the refresh) and
+// stamps onto each badged row as `hv` = {reason, links, granted}; the same
+// file is published as releases/badges.json for third parties. Positive-only:
+// a row without it says nothing either way, so nothing here ever renders an
+// "absent" state. BADGE_NAME is the ONLY place this page spells the badge's
+// name: every tip, label, heading and search alias reads it from here, so a
+// rename is this one string plus the criteria page BADGE_PAGE points at.
+const BADGE_NAME = 'Hardware Verified';
+const BADGE_PAGE = '../badge/';
+// Lucide badge-check (ISC), drawn filled: the rosette takes --accent and the
+// check --accent-on (the token for marks drawn ON an accent fill), so it reads
+// as a stamped seal in every theme rather than as one more outline icon.
+const BADGE_SVG = '<svg class="hvseal" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+  '<path class="r" d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>' +
+  '<path class="c" d="m9 12 2 2 4-4"/></svg>';
+const BADGE_URL_RE = /https?:\/\/[^\s<>"]+/g;
+// The hover tip is the reason's first sentence (entries are written so that
+// sentence stands alone, with no URL in it); the full reason and its sources
+// are the panel's job, which is also where touch gets them.
+function hvSummary(d) {
+  const r = d.hv.reason.replace(BADGE_URL_RE, '').replace(/\s+/g, ' ').trim();
+  const m = r.match(/^.+?[.!?](?=\s|$)/);
+  return m ? m[0] : r;
+}
+function hvBadge(d) {
+  if (!d.hv) return '';
+  return '<span class="hv" role="img" aria-label="' + escA(BADGE_NAME) + '" data-tip="' +
+    escA(BADGE_NAME + ': ' + hvSummary(d)) + '">' + BADGE_SVG + '</span>';
+}
+// The panel section: the full reason (its URLs made live), every evidence link,
+// the grant date and a pointer to the criteria page. URLs are matched in the
+// already-escaped text, so an & in a link is &amp; there, which is exactly
+// what an href attribute wants; trailing punctuation stays outside the link.
+function hvHTML(d) {
+  if (!d.hv) return '';
+  const ext = '<span class="ext">↗</span>';
+  const reason = esc(d.hv.reason).replace(BADGE_URL_RE, u => {
+    const tail = (u.match(/[.,;:!?)\]]+$/) || [''])[0];
+    const url = tail ? u.slice(0, -tail.length) : u;
+    return '<a href="' + url + '" target="_blank" rel="noopener"><span class="lbl">' + url + '</span>' + ext + '</a>' + tail;
+  });
+  // evidence links are pinned permalinks (they keep proving the claim after the README
+  // moves on); the label shortens the 40-char commit to 7 and drops GitHub's ?plain=1
+  const label = u => u.replace(/^https?:\/\/(www\.)?/, '')
+    .replace(/\/(blob|tree)\/([0-9a-f]{7})[0-9a-f]{33}\//, '/$1/$2/').replace('?plain=1', '').replace(/\/$/, '');
+  const links = (d.hv.links || []).map(u => '<li><a href="' + escA(u) + '" target="_blank" rel="noopener">' +
+    '<span class="lbl">' + esc(label(u)) + '</span>' + ext + '</a></li>').join('');
+  return '<section class="hvbox" aria-label="' + escA(BADGE_NAME) + '"><h3>' + BADGE_SVG + esc(BADGE_NAME) + '</h3>' +
+    '<p>' + reason + '</p>' + (links ? '<ul>' + links + '</ul>' : '') +
+    '<p class="hvmeta">Granted ' + esc(d.hv.granted) + '. <a href="' + BADGE_PAGE + '">' +
+    '<span class="lbl">What this badge means</span></a></p></section>';
+}
+
 // "batch" marker in the Last Updated cell: this row's date is shared by other
 // games on the same core, i.e. one core build shipped them all at once. Shown on
 // every clustered row (not recency-gated — the batching is as true for an old
@@ -1768,7 +1877,15 @@ function titleCell(d) {
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
     : FAVS.has(d.k) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
-  return fav + dotHTML(d) + esc(d.title) + newBadge(d) + betaBadge(d) + dep;
+  // the seal is an atomic inline, so the line breaker may strand it alone on a
+  // wrapped title's last line; gluing it to the title's last word (nowrap span)
+  // keeps the two together at every column width
+  let t = esc(d.title);
+  if (d.hv) {
+    const i = d.title.lastIndexOf(' ');
+    t = esc(d.title.slice(0, i + 1)) + '<span class="hvglue">' + esc(d.title.slice(i + 1)) + hvBadge(d) + '</span>';
+  }
+  return fav + dotHTML(d) + t + newBadge(d) + betaBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -2131,6 +2248,7 @@ function render() {
       pickMsg(SRC_KEYS, enabledSrcs, s => SRC_NAMES[s] || s, 'source') +
       pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
+      (hvOnly ? ' among ' + esc(BADGE_NAME) + ' games' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
         ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
@@ -2175,7 +2293,7 @@ function apply() {
   // while a filter is narrowing results, and grayed/disabled otherwise
   document.getElementById('clear').disabled =
     !(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
-      || favOnly || favView);
+      || favOnly || favView || hvOnly);
   // Type / Source / Genre: every box checked is the default (no filter); any
   // unchecked box narrows to the checked ones, and an all-unchecked menu shows
   // nothing (see pickNarrows and the menus below).
@@ -2185,6 +2303,7 @@ function apply() {
     // things while reading it mustn't change what the link shows
     if (favView && !(d.k && favView.has(d.k))) return false;
     if (favOnly && !(d.k && FAVS.has(d.k))) return false;
+    if (hvOnly && !d.hv) return false;
     if (!enabledTypes.has(d.base)) return false;
     // Source: a row with no source (a retired, hand-listed core) passes only while
     // the menu is untouched; any narrowing means "just these databases"
@@ -2206,6 +2325,7 @@ function apply() {
             (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
             (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
             (d.beta ? gateStage(d) + ' patreon' : '') + ' ' +
+            (d.hv ? BADGE_NAME : '') + ' ' +
             (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
   });
@@ -2287,6 +2407,7 @@ function clearAllFilters() {
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
   if (favView) dismissFavView();
+  resetHvOnly();
   apply();
   recenterOpen();
 }
@@ -2738,6 +2859,42 @@ favdd.querySelector('.menu').addEventListener('click', e => {
 });
 syncFavSummary();  // a returning visitor's count is already known before data loads
 
+// --- hardware badge filter: show only the badged rows --------------------------
+// A plain toggle shaped like the favorites one: the seal plus how many rows wear
+// it. Session-only like every other filter, reset by Clear filters, and armed
+// on arrival by a ?hv link (the criteria page's "see them all"). Hidden while
+// the data carries no badge at all, so an older data.json never shows a dead
+// control; never hidden while it is the thing doing the narrowing.
+let hvOnly = false;
+const hvToggle = document.getElementById('hvtoggle');
+function syncHvSummary() {
+  const n = DATA.reduce((a, d) => a + (d.hv ? 1 : 0), 0);
+  hvToggle.innerHTML = BADGE_SVG + '<span>' + n + '</span>';
+  hvToggle.hidden = n === 0 && !hvOnly;
+  hvToggle.dataset.tip = 'Show only ' + BADGE_NAME + ' games (' + n + ')';
+  hvToggle.setAttribute('aria-label', BADGE_NAME + ' only (' + n + ')');
+  hvToggle.setAttribute('aria-pressed', hvOnly);
+  hvToggle.classList.toggle('active', hvOnly);
+}
+hvToggle.addEventListener('click', () => {
+  hvOnly = !hvOnly;
+  syncHvSummary(); apply(); recenterOpen();
+});
+// state-only reset (no apply/recenter), matching resetFavOnly and friends
+function resetHvOnly() { hvOnly = false; syncHvSummary(); }
+syncHvSummary();
+// Arrival-only, like adoptFavParam: a ?hv in the URL switches the filter on and
+// is then removed from the address bar, so a refresh starts unfiltered (the
+// page's rule for every filter). A link that arrives while no row carries the
+// badge just lands on the full list.
+function adoptHvParam() {
+  if (!new URLSearchParams(location.search).has('hv')) return;
+  stripParam('hv');
+  if (!DATA.some(d => d.hv)) return;
+  hvOnly = true;
+  syncHvSummary(); apply();
+}
+
 // --- favorites -> update_all export dialog -----------------------------------
 // Terms come from each row's `ft` (stamped by export-web from the live
 // downloader dbs' own tags). One string per database: filters are per-db in
@@ -2813,11 +2970,16 @@ document.getElementById('favexpclose').addEventListener('click', () => favExpDlg
 // until it's adopted or dismissed. Either way the URL is cleaned up afterwards,
 // so a refresh doesn't ask again and the address bar stops advertising a list
 // that may no longer be what's on screen.
-function stripFavParam() {
-  // fav is the only query param this page has ever read, so dropping the whole
-  // search string is safe; a second one would need a real URLSearchParams delete
-  history.replaceState(history.state, '', location.pathname + location.hash);
+// The page reads two query params now (fav and hv), so each is deleted on its
+// own; the rest of the search string and the #hash survive.
+function stripParam(name) {
+  const p = new URLSearchParams(location.search);
+  if (!p.has(name)) return;
+  p.delete(name);
+  const s = p.toString();
+  history.replaceState(history.state, '', location.pathname + (s ? '?' + s : '') + location.hash);
 }
+function stripFavParam() { stripParam('fav'); }
 function dismissFavView() {
   favView = null;
   document.getElementById('favbanner').hidden = true;
@@ -3359,6 +3521,7 @@ function detailHTML(d) {
     '<span class="lbl">Arcade Database</span><span class="ext">↗</span></a>', true]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
   if (d.note) rows.push(['Note', d.note]);
+  // (the hardware badge gets its own section above this list, see hvHTML)
   // Zaparoo ZapScript token for this row (copy to persist on an NFC tag /
   // playlist, then tap to launch) — same coverage as the Launch button: arcade
   // → bare .mra path, others → **launch.system:<id>. Rendered like Core/ROM
@@ -3454,7 +3617,7 @@ function detailHTML(d) {
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2' + (d.k ? ' class="starred"' : '') + '>' +
     (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
-    launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
+    launcher + sysphoto + shots + hvHTML(d) + dl + prose + report + '</div>' + hint;
 }
 
 function openPanel(d, fromHistory) {
@@ -4285,6 +4448,7 @@ function ingest(d) {
   buildYearMenu();
   buildSrcMenu();
   buildGenreMenu();
+  syncHvSummary();  // the badge count (and whether the toggle shows at all) is per data.json
   buildHeader();
   apply();
 }
@@ -4492,6 +4656,7 @@ function boot() {
     booted = true;
     hidePill();       // a retry just succeeded; don't leave its failure pill up
     adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
+    adoptHvParam();   // a ?hv link (the criteria page's "see them all"): badge filter on
     // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
     // the entry we arrived on already IS the panel state (in overlay mode Back
     // correctly leaves the site, i.e. returns where the visitor came from).

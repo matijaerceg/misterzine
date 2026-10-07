@@ -434,6 +434,7 @@ misterzine.py            # the tool (stdlib only; uses `gh` or GH_TOKEN for the 
 tools/                   # image pipeline (manifest build, fetchers, matching)
 data/
   misterzine.sqlite      # the database (committed)
+  badges.json            # Hardware Verified entries (hand-edited; see below)
   exports/               # JSON/JSONL outputs (committed)
   cache/                 # gitignored except: image_manifest.json,
                          #   ArcadeDatabase.csv (MAD fallback),
@@ -450,9 +451,32 @@ docs/                    # the site, served by GitHub Pages from main /docs
     index.html           # the app (single file, vanilla JS)
     data.json            # one slim record per row
     meta.json            # build stamp (staleness checks)
+    badges.json          # data/badges.json as checked by export-web
     feed*.xml            # the three RSS feeds
+  badge/index.html       # what the Hardware Verified seal means
 CHANGELOG.md             # user-visible site changes
 ```
+
+## Hardware Verified
+
+A positive-only seal for arcade games whose core was built and checked against the
+real board or its schematics, according to the core author's own public words. The
+criteria are on the site at [/badge/](https://misterzine.fyi/badge/); proposals come in
+through the "Propose a Hardware Verified badge" issue form.
+
+Entries live in `data/badges.json`, edited by hand: one per tracker row, keyed by the
+row's `k`, with the row's shipped core name(s) in `rbfs` and MAME set name(s) in
+`setnames`, plus `granted`, `proposed_by`, `reason` and `links`. Evidence links are
+pinned commit permalinks so they keep proving the claim after a README changes. The
+first sentence of `reason` is the hover tip on the tracker, so it must stand alone.
+
+`export-web` checks every entry against the rows it is about to publish and **stops
+with an error** if a key no longer exists, a listed core or set name no longer matches
+the row, the row is not an arcade game, or a field is missing or malformed. Fix or
+remove the entry and re-run. A changed title only warns. Matching rows gain an `hv`
+object in `data.json` (`reason`, `links`, `granted`), and the file itself is published
+unchanged (line endings normalised) as `releases/badges.json` for third parties. The
+contract is tested by `test_badges.py`.
 
 ## Release feed
 
@@ -467,7 +491,7 @@ Arcade Database values take precedence, including zero. Check this contract with
 ## License
 
 - **Code** (`misterzine.py`, `tools/`, the site's HTML/CSS/JS): [MIT](LICENSE).
-- **Data** (`docs/releases/data.json`, `meta.json`, the RSS feeds, and everything under
+- **Data** (`docs/releases/data.json`, `meta.json`, `badges.json`, the RSS feeds, and everything under
   `data/exports/`): the [MiSTerZine Catalogue Licence](LICENSE-CATALOGUE), also served at
   <https://misterzine.fyi/releases/LICENSE.txt>. It is the CC BY 4.0 terms plus one
   condition, source neutrality: anyone who reuses the catalogue must treat entries the

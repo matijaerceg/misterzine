@@ -4028,6 +4028,145 @@ def warn_unshipped_rbfs(rows, shipped):
                 print(f"::warning::{msg}")
 
 
+# --- the hardware badge -------------------------------------------------------
+# A hand-curated, positive-only seal on arcade rows whose core was built and
+# checked against the real board or its schematics (the public criteria live
+# on docs/badge/index.html; the display name lives only in the site's JS and
+# that page, so nothing here depends on it). data/badges.json is the single
+# source, hand-edited: each entry names its row by the deep-link key `k` AND
+# by the row's shipped core (`rbfs`) and MAME setname (`setnames`), so third
+# parties can use the published copy (docs/releases/badges.json) without the
+# key. export-web refuses to publish when any entry no longer matches its
+# row: a stale badge must surface as a failed refresh, never ride silently
+# onto a different game or vanish. Rows that carry one get `hv` = {reason,
+# links, granted} in data.json, which is all the site needs (one fetch, and
+# the live-update path picks badges up like any other field).
+BADGES_JSON = DATA / "badges.json"
+BADGE_FIELDS = ("k", "title", "rbfs", "setnames", "granted", "proposed_by", "reason", "links")
+_ISO_DAY = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+_BADGE_URL = re.compile(r"^https?://[^\s<>\"]+$")
+
+
+def badge_problems(doc, data):
+    """Every way a parsed badges.json disagrees with itself or with the
+    export's final rows, as plain sentences; an empty list means publishable.
+    Pure (no I/O): _apply_badges turns a non-empty result into a hard stop,
+    the tests feed it fixtures. Unknown fields count as problems on purpose,
+    so a typo ("setname") fails loudly instead of being ignored."""
+    if not isinstance(doc, dict) or not isinstance(doc.get("badges"), list):
+        return ["the top level must be an object with a 'badges' list"]
+    rows = {d.get("k"): d for d in data if d.get("k")}
+    probs, seen = [], set()
+    for i, b in enumerate(doc["badges"], 1):
+        if not isinstance(b, dict):
+            probs.append(f"badge #{i}: not an object")
+            continue
+        k = b.get("k")
+        where = f"badge #{i} (k={k!r})"
+        missing = [f for f in BADGE_FIELDS if f not in b]
+        extra = sorted(set(b) - set(BADGE_FIELDS))
+        if missing:
+            probs.append(f"{where}: missing {', '.join(missing)}")
+        if extra:
+            probs.append(f"{where}: unknown field(s) {', '.join(extra)}")
+        for f in ("k", "title", "proposed_by", "reason"):
+            if f in b and (not isinstance(b[f], str) or not b[f].strip()):
+                probs.append(f"{where}: {f} must be a non-empty string")
+        if "granted" in b:
+            g = b["granted"]
+            try:
+                ok = isinstance(g, str) and bool(_ISO_DAY.match(g)) and bool(dt.date.fromisoformat(g))
+            except ValueError:
+                ok = False
+            if not ok:
+                probs.append(f"{where}: granted must be a real YYYY-MM-DD date")
+        if "links" in b:
+            links = b["links"]
+            if (not isinstance(links, list) or not links
+                    or not all(isinstance(u, str) and _BADGE_URL.match(u) for u in links)):
+                probs.append(f"{where}: links must be a non-empty list of http(s) URLs")
+        names = {}
+        for f in ("rbfs", "setnames"):
+            v = b.get(f, [])
+            if not isinstance(v, list) or not all(isinstance(x, str) and x for x in v):
+                probs.append(f"{where}: {f} must be a list of names")
+                v = []
+            names[f] = v
+        if not isinstance(k, str) or not k:
+            continue
+        if k in seen:
+            probs.append(f"{where}: the same key is listed twice")
+            continue
+        seen.add(k)
+        d = rows.get(k)
+        if d is None:
+            probs.append(f"{where}: no row on the tracker has this key any more")
+            continue
+        if d.get("base") != "Arcade":
+            probs.append(f"{where}: '{d.get('title')}' is not an arcade game")
+        # each listed name must be the row's own, and a row that HAS a core or
+        # a setname must be named by it, so the published file works for
+        # someone who only knows the rbf or only the setname
+        for f, field, label in (("rbfs", "core", "core"), ("setnames", "sn", "setname")):
+            own = d.get(field) or ""
+            for x in names[f]:
+                if x != own:
+                    probs.append(f"{where}: {f} lists '{x}' but '{d.get('title')}' "
+                                 f"has {label} '{own or '(none)'}'")
+            if own and own not in names[f]:
+                probs.append(f"{where}: {f} must list the row's {label} '{own}'")
+    return probs
+
+
+def _apply_badges(data, path=BADGES_JSON):
+    """Check data/badges.json against the final rows and stamp each badged row
+    with `hv`. Returns the bytes to publish as releases/badges.json (line
+    endings normalised, so a Windows checkout publishes what CI publishes),
+    or None when there is no badge file. Runs BEFORE anything is written: a
+    problem stops the whole export (SystemExit), so the live site keeps its
+    previous, consistent data while someone fixes the entry. Title drift is
+    only a warning: display titles get humanized and relabeled over time,
+    and the key plus core/setname are what identify the row."""
+    if not path.exists():
+        return None
+    raw = path.read_bytes().replace(b"\r\n", b"\n")
+    try:
+        doc = json.loads(raw.decode("utf-8"))
+    except ValueError as exc:
+        raise SystemExit(f"BADGE FILE UNREADABLE: {path}: {exc}")
+    probs = badge_problems(doc, data)
+    if probs:
+        for p in probs:
+            log("  BADGE: " + p)
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::error::BADGE: {p}")
+        raise SystemExit(f"BADGE CHECK FAILED: {len(probs)} problem(s) in {path.name} "
+                         f"(first: {probs[0]}). Fix or remove the entry, then re-run export-web.")
+    rows = {d["k"]: d for d in data if d.get("k")}
+    for b in doc["badges"]:
+        d = rows[b["k"]]
+        d["hv"] = {"reason": b["reason"], "links": list(b["links"]), "granted": b["granted"]}
+        if b["title"] != d.get("title"):
+            msg = (f"BADGE TITLE: badge {b['k']!r} says '{b['title']}' but the row now "
+                   f"reads '{d.get('title')}' (key, core and setname still match)")
+            log("  " + msg)
+            if os.environ.get("GITHUB_ACTIONS"):
+                print(f"::warning::{msg}")
+    log(f"  badges: {len(doc['badges'])} rows carry the hardware badge")
+    return raw
+
+
+def _publish_badges(outdir, raw):
+    """Publish the checked badge file next to data.json, touching it only when
+    its bytes change (keeps re-runs quiet)."""
+    if raw is None:
+        return
+    dest = outdir / "badges.json"
+    if not dest.exists() or dest.read_bytes() != raw:
+        dest.write_bytes(raw)
+        log(f"  badges.json: written ({len(raw)} bytes)")
+
+
 def cmd_export_web(args):
     con = connect()
     # The site lives at /releases (Pages still serves from docs/); the docs root
@@ -4254,9 +4393,11 @@ def cmd_export_web(args):
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
     pending_keys = _assign_row_keys(data, outdir)  # 'k': the per-row deep-link fragment (#<k>)
     _check_key_stability(outdir / "data.json", data)  # hard gate: keys never move
+    badge_bytes = _apply_badges(data)  # hard gate: every badge still names its row; stamps 'hv'
     _flush_row_keys(pending_keys)
     _assign_update_batches(data)  # 'b': which refresh first shipped this row's Last Updated
     (outdir / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    _publish_badges(outdir, badge_bytes)  # releases/badges.json: the checked file, for third parties
     # NOTE: outdir/index.html is a hand-maintained static page and the single
     # source of truth. export-web deliberately does NOT regenerate it — it used
     # to write a duplicate copy of the HTML kept in a Python constant, which

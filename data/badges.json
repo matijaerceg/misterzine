@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "name": "Hardware Verified",
+  "description": "Arcade games on the MisterZine release tracker whose core was built and checked against the real board or its schematics: an owned or borrowed PCB, the author's own PAL/PROM dumps, the original schematics, logic analyzer or scope captures, or a published write-up of how the logic was derived from the board. Verified means built and checked against the real hardware, not that every behavior was tested. Positive only: a game without an entry means nothing. Entries are curated by hand from the core author's own public words, and each lists the links it rests on.",
+  "criteria": "https://misterzine.fyi/badge/",
+  "license": "MiSTerZine Catalogue Licence (the CC BY 4.0 terms plus a source-neutrality condition), https://misterzine.fyi/releases/LICENSE.txt. Credit \"MisterZine by Matija Erceg\" and, where practical, link to https://misterzine.fyi.",
+  "fields": {
+    "k": "the release tracker's row key: the k field of releases/data.json and the #k deep link (https://misterzine.fyi/releases/#k)",
+    "title": "the game's title on the tracker when the entry was made (informational; titles can change, the key does not)",
+    "rbfs": "the shipped core file name(s) without the date stamp and .rbf extension (data.json core)",
+    "setnames": "the MAME set name(s) of the row (data.json sn)",
+    "granted": "the day the entry was added, YYYY-MM-DD",
+    "proposed_by": "who proposed it",
+    "reason": "what the evidence shows, in plain words",
+    "links": "the evidence: the core author's own public pages"
+  },
+  "badges": [
+    {
+      "k": "mwalk",
+      "title": "Michael Jackson's Moonwalker",
+      "rbfs": [
+        "jts18"
+      ],
+      "setnames": [
+        "mwalk"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built with a real Sega Moonwalker board on loan to the JT team. The System 18 schematics in the core's repository were reverse engineered during that hardware study, and the sync captures and screenshots used for comparison are published in its doc folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s18/README.md?plain=1#L65",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s18/doc"
+      ]
+    },
+    {
+      "k": "kicker",
+      "title": "Kicker",
+      "rbfs": [
+        "jtkicker"
+      ],
+      "setnames": [
+        "kicker"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The JT team extracted full schematics from a Kicker board donated by Brian Schinzel. They also burnt test EPROMs to probe the custom chips, and reported what they found to the MAME team.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kicker/README.md?plain=1#L4",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kicker/README.md?plain=1#L44"
+      ]
+    },
+    {
+      "k": "kchampvs",
+      "title": "Karate Champ: Player Vs Player",
+      "rbfs": [
+        "jtkchamp"
+      ],
+      "setnames": [
+        "kchampvs"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built from the published schematics and an original two-player board donated by DJ Hardrich. The README says that hardware reference covers this two-player version, while the single-player Karate Champ was derived from MAME, so only this version carries the seal.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kchamp/README.md?plain=1#L15",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kchamp/README.md?plain=1#L3"
+      ]
+    },
+    {
+      "k": "exedexes",
+      "title": "Exed Exes",
+      "rbfs": [
+        "jtexed"
+      ],
+      "setnames": [
+        "exedexes"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "No schematics were available, so Jotego extracted them from an original Exed Exes board and built the core from them rather than from emulators. The extracted schematics are published with the core.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/exed/README.md?plain=1#L33",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/exed/sch"
+      ]
+    },
+    {
+      "k": "flstory",
+      "title": "The FairyLand Story",
+      "rbfs": [
+        "jtflstory"
+      ],
+      "setnames": [
+        "flstory"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Based on schematics the JT team drew from an original FairyLand Story arcade board. The README notes the board turned out to be full of surprises.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/flstory/README.md?plain=1#L3",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/flstory/sch"
+      ]
+    },
+    {
+      "k": "vigilant",
+      "title": "Vigilante",
+      "rbfs": [
+        "jtvigil"
+      ],
+      "setnames": [
+        "vigilant"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The JT team analysed an original Vigilante board together with the official schematics. The video timing was measured on the board and checked against the schematics.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/vigil/README.md?plain=1#L3",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/vigil/README.md?plain=1#L24"
+      ]
+    },
+    {
+      "k": "rastan",
+      "title": "Rastan",
+      "rbfs": [
+        "jtrastan"
+      ],
+      "setnames": [
+        "rastan"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The JT team analysed an original Rastan Saga board together with the official schematics.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/README.md?plain=1#L3"
+      ]
+    },
+    {
+      "k": "ikari3",
+      "title": "Ikari III - The Rescue",
+      "rbfs": [
+        "SNK68"
+      ],
+      "setnames": [
+        "ikari3"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Verified against an Ikari III board donated to the project and against the Ikari III (A7007) schematics. Timing measurements were also taken from P.O.W. and Street Smart boards.",
+      "links": [
+        "https://github.com/va7deo/SNK68/blob/566133699ecd2ec2aa6897de6f0995ebefb60624/README.md?plain=1#L4",
+        "https://github.com/va7deo/SNK68/blob/566133699ecd2ec2aa6897de6f0995ebefb60624/README.md?plain=1#L6"
+      ]
+    },
+    {
+      "k": "p47j",
+      "title": "P-47: The Freedom Fighter",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "p47j"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Verified against an authentic P-47: The Freedom Fighter board bought by atrac17 for the project. The README also publishes the board's video timings, measured with a logic analyzer.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65"
+      ]
+    },
+    {
+      "k": "vimanaj",
+      "title": "Vimana",
+      "rbfs": [
+        "vimana"
+      ],
+      "setnames": [
+        "vimanaj"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built from the OutZone (TP-018) schematics and verified against two loaned Vimana (TP-019) boards.",
+      "links": [
+        "https://github.com/va7deo/vimana/blob/129c8b6551242d5f546eb731665f5912c80239fd/README.md?plain=1#L4",
+        "https://github.com/va7deo/vimana/blob/129c8b6551242d5f546eb731665f5912c80239fd/README.md?plain=1#L166"
+      ]
+    },
+    {
+      "k": "terrafj",
+      "title": "Terra Force",
+      "rbfs": [
+        "armedf"
+      ],
+      "setnames": [
+        "terrafj"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Verified against an authentic Nichibutsu Terra Force board and a bootleg board.",
+      "links": [
+        "https://github.com/va7deo/ArmedF/blob/7866a484aeb59eb90798eb0855e4b90721cb60aa/README.md?plain=1#L41"
+      ]
+    },
+    {
+      "k": "tnextspcj",
+      "title": "The Next Space",
+      "rbfs": [
+        "nextspace"
+      ],
+      "setnames": [
+        "tnextspcj"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Verified against an authentic The Next Space (A8004-1) board bought by atrac17.",
+      "links": [
+        "https://github.com/va7deo/NextSpace/blob/160fe8273395f715ea8dadc8b043c444358b4074/README.md?plain=1#L4"
+      ]
+    },
+    {
+      "k": "nemesis",
+      "title": "Nemesis",
+      "rbfs": [
+        "nemesis"
+      ],
+      "setnames": [
+        "nemesis"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Based on Konami's Nemesis schematics and verified against several real boards: a Bubble System, a Salamander and a Salamander bootleg. The authors drew full schematics of the graphics board, modelled its chips from waveform captures of the originals, and wrote their own test program to measure sprites on a real board.",
+      "links": [
+        "https://github.com/GX400-Friends/gx400-bin/blob/1a4b36335b3e65551a3d2ceaa158021590fb95d3/README.md?plain=1#L3",
+        "https://github.com/GX400-Friends/gx400-bin/blob/1a4b36335b3e65551a3d2ceaa158021590fb95d3/README.md?plain=1#L28"
+      ]
+    },
+    {
+      "k": "aso",
+      "title": "ASO - Armored Scrum Object",
+      "rbfs": [
+        "SNK_TripleZ80"
+      ],
+      "setnames": [
+        "aso"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The author captured the PAL chips of his own working Alpha Mission (ASO) board with a logic analyzer while building this core, and corrected their equations. The fixed equations were burnt to GAL chips and tested in the original board.",
+      "links": [
+        "https://github.com/RndMnkIII/AlphaMission_PALs/blob/92e16eb180dd67fc3df0a128a857bd625a546f28/README.md?plain=1#L2",
+        "https://github.com/MiSTer-devel/Arcade-SNK_TripleZ80_MiSTer/blob/bd2e2846ffac1caa21a235eaac7c42eaec2ebd73/Readme.md"
+      ]
+    },
+    {
+      "k": "twinbeeb",
+      "title": "TwinBee (Bubble System)",
+      "rbfs": [
+        "BubSys"
+      ],
+      "setnames": [
+        "twinbeeb"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built with a real Konami Bubble System board at hand, which the source code cites when explaining its bubble memory timing. The bubble memory controller chip is rebuilt cell by cell from a photo of its die.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BubSys_MiSTer/blob/e3d32e8a4bb252d57a8fc027cf58a3aee7f6524d/rtl/BubSys_bbd8/BubSys_bbd8.v#L228",
+        "https://github.com/MiSTer-devel/Arcade-BubSys_MiSTer/blob/e3d32e8a4bb252d57a8fc027cf58a3aee7f6524d/rtl/ipcores/K005297/K005297.v#L74"
+      ]
+    },
+    {
+      "k": "jackal",
+      "title": "Jackal",
+      "rbfs": [
+        "Jackal"
+      ],
+      "setnames": [
+        "jackal"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "A bootleg Jackal board was sourced for reverse engineering, and the logic is modelled to match the original board design as closely as possible. The audio filters are tuned to match both bootleg and original boards.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Jackal_MiSTer/blob/f5a6d0bb07da6827761aeda7153359856d8761d5/README.md?plain=1#L8"
+      ]
+    },
+    {
+      "k": "computer-space",
+      "title": "Computer Space",
+      "rbfs": [
+        "computerspace"
+      ],
+      "setnames": [],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The original schematics were copied wire by wire and gate by gate, so the core is a circuit-level copy of the machine. Timer values, the star field and the video sync were checked against measurements taken from real Computer Space boards.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-ComputerSpace_MiSTer/blob/8487fb22f11a40c456a507768180845ee2933439/rtl/computer_space_top.vhd#L9",
+        "https://github.com/MiSTer-devel/Arcade-ComputerSpace_MiSTer/blob/8487fb22f11a40c456a507768180845ee2933439/rtl/computer_space_top.vhd#L30"
+      ]
+    },
+    {
+      "k": "klax",
+      "title": "Klax",
+      "rbfs": [
+        "Klax"
+      ],
+      "setnames": [
+        "klax"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built from the Klax board schematics and the dumped on-board PALs, with MAME only as a cross-reference. Where the two disagree the core follows the hardware, and each difference is documented.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Klax_MiSTer/blob/7b30962e02f40387954bed03911b21178c3ea481/README.md?plain=1#L8"
+      ]
+    },
+    {
+      "k": "starwars",
+      "title": "Star Wars",
+      "rbfs": [
+        "StarWars"
+      ],
+      "setnames": [
+        "starwars"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The vector generator is rebuilt cycle-exact from the original Atari schematics. The author published his hand-verified transcription of that logic, the blueprint the core was built from.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-StarWars_MiSTer/blob/64aaa04aaf333c013c1b521abb68260165fcfa01/README.md?plain=1#L29"
+      ]
+    },
+    {
+      "k": "pong",
+      "title": "Pong",
+      "rbfs": [
+        "pong"
+      ],
+      "setnames": [
+        "pong"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "A Verilog implementation based on the original Atari schematics. Pong's analog circuits are simulated in digital logic, and the author says every signal should be accurate to the edges of the system clock.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Pong_MiSTer/blob/9414834ac955f03d59eb35d71857d723b9b7ee66/README.txt#L39"
+      ]
+    }
+  ]
+}

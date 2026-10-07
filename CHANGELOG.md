@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-07
+
+- Release tracker: a Hardware Verified seal marks arcade games whose core was built and checked against the real board or its schematics, in the core author's own words: a donated or borrowed board, the original schematics, dumped PALs, or logic analyzer and scope captures. The seal sits beside the title, the game's panel gives the reason with links to the author's evidence, and a seal button beside Clear filters shows only those games (or open the tracker with ?hv=1). Twenty games carry it to start, from MiSTer's main distribution, Jotego, the Coin-Op Collection and the GX400 Friends' Nemesis core. A game without the seal means nothing either way: the seal only records hardware work an author has published. What it means and how to propose a game: [/badge/](https://misterzine.fyi/badge/).
+
 ## 2026-10-01
 
 - Release tracker: three arcade games that MiSTer ships only as an alternative version, with no mainline set, now have rows of their own: Cue Brick (Jotego), Super Champion Baseball (Coin-Op Collection) and Space Invaders II, Midway's two-player cocktail game. The tracker files every alternative under its game's mainline row, so these had none, and the Arcade Frontend showed them as bare local entries. Each was checked to install from its database with its ROMs available; their dates are when they first shipped, and the feeds do not announce them as new.

@@ -5,9 +5,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        Hardware Verified is the release tracker's seal for arcade cores whose author built them and checked them against the real hardware: an owned or borrowed board, their own PAL or PROM dumps, the original schematics, logic analyzer or scope captures, or a write-up of how the logic was derived from the board. What it means and what counts: https://misterzine.fyi/badge/
+        Hardware Verified is the release tracker's seal for arcade cores built and checked against the real hardware: an owned or borrowed board, PAL or PROM dumps, the original schematics, logic analyzer or scope captures, or a write-up of how the logic was derived from the board. What it means and what counts: https://misterzine.fyi/badge/
 
-        The evidence must be the core author's own public words (README, docs, release notes, blog or posts). Every proposal is checked against its links before an entry is added.
+        Evidence can come from anyone, not only the core's author: board owners, schematic holders and testers count too. It must cite something factual and checkable (a named board, a schematic set, a dump, a capture, a comparison write-up, a post describing the work); a bare claim that a core is accurate is not evidence. Every proposal is checked against its links before an entry is added.
   - type: input
     id: game
     attributes:
@@ -28,7 +28,7 @@ body:
     id: links
     attributes:
       label: Evidence links
-      description: One link per line, each to the author's own words about the hardware work.
+      description: One link per line, each to a public page describing the hardware work.
       placeholder: |
         https://github.com/...
     validations:
@@ -37,7 +37,7 @@ body:
     id: reason
     attributes:
       label: What the links show
-      description: A sentence or two in plain words, for example "The author worked from Capcom's original schematics and checked the core against his own board."
+      description: A sentence or two in plain words, for example "The core was built from Capcom's original schematics and checked against a real board."
     validations:
       required: true
   - type: dropdown

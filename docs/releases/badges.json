@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "Hardware Verified",
-  "description": "Arcade games on the MisterZine release tracker whose core was built and checked against the real board or its schematics: an owned or borrowed PCB, the author's own PAL/PROM dumps, the original schematics, logic analyzer or scope captures, or a published write-up of how the logic was derived from the board. Verified means built and checked against the real hardware, not that every behavior was tested. Positive only: a game without an entry means nothing. Entries are curated by hand from the core author's own public words, and each lists the links it rests on.",
+  "description": "Arcade games on the MisterZine release tracker whose core was built and checked against the real board or its schematics: an owned or borrowed PCB, PAL/PROM dumps, the original schematics, logic analyzer or scope captures, or a published write-up of how the logic was derived from the board. Verified means built and checked against the real hardware, not that every behavior was tested. Positive only: a game without an entry means nothing. Entries are curated by hand from public, checkable evidence of that work, from the core's author or anyone else who did or documented it, and each lists the links it rests on.",
   "criteria": "https://misterzine.fyi/badge/",
   "license": "MiSTerZine Catalogue Licence (the CC BY 4.0 terms plus a source-neutrality condition), https://misterzine.fyi/releases/LICENSE.txt. Credit \"MisterZine by Matija Erceg\" and, where practical, link to https://misterzine.fyi.",
   "fields": {
@@ -10,9 +10,9 @@
     "rbfs": "the shipped core file name(s) without the date stamp and .rbf extension (data.json core)",
     "setnames": "the MAME set name(s) of the row (data.json sn)",
     "granted": "the day the entry was added, YYYY-MM-DD",
-    "proposed_by": "who proposed it",
+    "proposed_by": "who proposed the entry (anyone; 'misterzine' for entries added by the tracker itself)",
     "reason": "what the evidence shows, in plain words",
-    "links": "the evidence: the core author's own public pages"
+    "links": "the evidence: public pages citing the concrete hardware work (the core's author's or anyone else's)"
   },
   "badges": [
     {
@@ -869,6 +869,22 @@
       ]
     },
     {
+      "k": "roadblst",
+      "title": "Road Blasters",
+      "rbfs": [
+        "atarisys1"
+      ],
+      "setnames": [
+        "roadblst"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built primarily from Atari's SP-280 and SP-286 System 1 schematics, with further support from SP-277 and SP-298.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Atari-system1_MiSTer/blob/4fc5ed8f661b1af0526c7aa3bff6dc92cbad2353/README.md?plain=1#L5"
+      ]
+    },
+    {
       "k": "breakout",
       "title": "Breakout",
       "rbfs": [
@@ -1381,10 +1397,28 @@
       ],
       "granted": "2026-10-07",
       "proposed_by": "misterzine",
-      "reason": "A conversion of the circuits on the Tiger Road board, with sound clocks and timing measured on a real bootleg board.",
+      "reason": "Jotego owned a Tiger Road board (a bootleg) and says it is the basis of the core, together with other Capcom schematics. The README records sound clocks and timing measured on it.",
       "links": [
+        "https://www.patreon.com/jotego/posts/tiger-road-30706602",
         "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tora/README.md?plain=1#L7",
         "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tora/README.md?plain=1#L38"
+      ]
+    },
+    {
+      "k": "f1dream",
+      "title": "F-1 Dream",
+      "rbfs": [
+        "jttora"
+      ],
+      "setnames": [
+        "f1dream"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Jotego bought an F-1 Dream board, which runs on the Tiger Road hardware, and says it served to create both this core and Tiger Road.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/f1-dream-public-32584196",
+        "https://www.patreon.com/jotego/posts/arcade-pcbs-from-28295503"
       ]
     },
     {
@@ -1785,9 +1819,10 @@
       ],
       "granted": "2026-10-07",
       "proposed_by": "misterzine",
-      "reason": "Verified with timing measurements taken from a real Gang Wars board, alongside the Sky Adventure schematics the core was checked against.",
+      "reason": "Verified with timing measurements taken from an authentic Gang Wars board bought by atrac17, alongside the Sky Adventure schematics the core was checked against.",
       "links": [
-        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6"
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6",
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L8"
       ]
     },
     {
@@ -1801,9 +1836,347 @@
       ],
       "granted": "2026-10-07",
       "proposed_by": "misterzine",
-      "reason": "Verified against the Sky Adventure schematics, with timing measurements taken from real boards of the same hardware.",
+      "reason": "Verified against the Sky Adventure schematics, with a Sky Adventure board (a bootleg) bought for the core.",
       "links": [
-        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6"
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6",
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L8"
+      ]
+    },
+    {
+      "k": "skysoldr",
+      "title": "Sky Soldiers",
+      "rbfs": [
+        "alpha68k"
+      ],
+      "setnames": [
+        "skysoldr"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Verified with timing measurements taken from an authentic Sky Soldiers board bought by atrac17, alongside the Sky Adventure schematics the core was checked against.",
+      "links": [
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6",
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L8"
+      ]
+    },
+    {
+      "k": "rallybik",
+      "title": "Rally Bike",
+      "rbfs": [
+        "rallybike"
+      ],
+      "setnames": [
+        "rallybik"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built from the Out Zone schematics of the same Toaplan hardware and verified against a real Rally Bike (TP-012) board, whose sync timing was measured.",
+      "links": [
+        "https://github.com/va7deo/rallybike/blob/00735dcd63ee5ee01a720806b89f7a836d5fd2a5/README.md?plain=1#L4",
+        "https://github.com/va7deo/rallybike/blob/00735dcd63ee5ee01a720806b89f7a836d5fd2a5/README.md?plain=1#L40"
+      ]
+    },
+    {
+      "k": "terracre",
+      "title": "Terra Cresta",
+      "rbfs": [
+        "terracresta"
+      ],
+      "setnames": [
+        "terracre"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built with a Terra Cresta board donated by atrac17 and DJ Hardrich; the board's sync timing was measured with a logic analyzer.",
+      "links": [
+        "https://github.com/va7deo/TerraCresta/blob/c358459ef2eac573fb74abb0933d2999ec6f789e/README.md?plain=1#L4",
+        "https://github.com/va7deo/TerraCresta/blob/c358459ef2eac573fb74abb0933d2999ec6f789e/README.md?plain=1#L54"
+      ]
+    },
+    {
+      "k": "secretag",
+      "title": "Secret Agent",
+      "rbfs": [
+        "jtslyspy"
+      ],
+      "setnames": [
+        "secretag"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built on schematics the JT team drew from a Sly Spy board (DE-0322-3) donated by DJ Hardrich. Secret Agent is the same game's world release.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/slyspy/sch/slyspy.kicad_sch#L12",
+        "https://www.patreon.com/jotego/posts/research-63047827"
+      ]
+    },
+    {
+      "k": "outrun",
+      "title": "Out Run",
+      "rbfs": [
+        "jtoutrun"
+      ],
+      "setnames": [
+        "outrun"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The JT team's System 16 and Out Run project was developed with an Out Run board donated by Travis Brown.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8"
+      ]
+    },
+    {
+      "k": "sidearms",
+      "title": "Hyper Dyne Side Arms",
+      "rbfs": [
+        "jtsarms"
+      ],
+      "setnames": [
+        "sidearms"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built from the Side Arms schematics, which the JT team then verified chip by chip on a real board at Museo Arcade. The board was later loaned to their lab, where the star field was corrected.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/tracking-down-60035054",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/sarms/sch"
+      ]
+    },
+    {
+      "k": "gunsmoke",
+      "title": "Gun.Smoke",
+      "rbfs": [
+        "jtgunsmk"
+      ],
+      "setnames": [
+        "gunsmoke"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Jotego bought a Gun.Smoke board to make this core, and the README records its DMA timing as measured.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/gunsmoke-vulgus-30573465",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/gunsmk/README.md?plain=1#L43"
+      ]
+    },
+    {
+      "k": "vulgus",
+      "title": "Vulgus",
+      "rbfs": [
+        "jt1942"
+      ],
+      "setnames": [
+        "vulgus"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Jotego bought a Vulgus board, compared it carefully with the 1942 schematics and took measurements to adapt the 1942 core.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/vulgus-beta-plus-30127559",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/1942/sch/vulgus"
+      ]
+    },
+    {
+      "k": "1942",
+      "title": "1942",
+      "rbfs": [
+        "jt1942"
+      ],
+      "setnames": [
+        "1942"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built purely from Capcom's 1942 schematics. The README traces a flip-mode logo glitch to a genuine bug of the original hardware, found on schematics sheet 5.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/1942-logo-vs-27973746",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/1942/README.md?plain=1#L14"
+      ]
+    },
+    {
+      "k": "commando",
+      "title": "Commando",
+      "rbfs": [
+        "jtcommnd"
+      ],
+      "setnames": [
+        "commando"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Built from Capcom's Commando schematics, as a conversion of the board's circuits to FPGA.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/new-core-28206598",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/commnd/README.md?plain=1#L7"
+      ]
+    },
+    {
+      "k": "glfgreat",
+      "title": "Golfing Greats",
+      "rbfs": [
+        "jtriders"
+      ],
+      "setnames": [
+        "glfgreat"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The JT team worked out Golfing Greats' schematics for this core, published in its repository. That work showed how the hardware tracks the ball on screen, which was not known before.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/jotegos-2025-147100206",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/riders/sch/glfgreat"
+      ]
+    },
+    {
+      "k": "sharrier",
+      "title": "Space Harrier",
+      "rbfs": [
+        "jtharier"
+      ],
+      "setnames": [
+        "sharrier"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Based on the schematics for Space Harrier, with parts of the graphics and sound taken from the JT team's System 16 and Out Run cores.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/harier/README.md?plain=1#L5"
+      ]
+    },
+    {
+      "k": "cupsoc",
+      "title": "Seibu Cup Soccer",
+      "rbfs": [
+        "SeibuCupSoccer"
+      ],
+      "setnames": [
+        "cupsoc"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Checked against an original Seibu Cup Soccer board (SYS68C2). Its owner, who had never seen the core, judged it in line with the board, and the README shows the board the findings were checked against.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SeibuCupSoccer_MiSTer/blob/52c9fa22482d381db1c442c50339518a11178f5d/README.md?plain=1#L28",
+        "https://github.com/MiSTer-devel/Arcade-SeibuCupSoccer_MiSTer/blob/52c9fa22482d381db1c442c50339518a11178f5d/README.md?plain=1#L164",
+        "https://github.com/MiSTer-devel/Arcade-SeibuCupSoccer_MiSTer/blob/52c9fa22482d381db1c442c50339518a11178f5d/README.md?plain=1#L175"
+      ]
+    },
+    {
+      "k": "kicknrun",
+      "title": "Kick and Run",
+      "rbfs": [
+        "KickAndRun"
+      ],
+      "setnames": [
+        "kicknrun"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "A reproduction of the Kick and Run board from the original design document published in its repository. The author notes he replaced the PAL chips with simple logic and added one DMA.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-KickAndRun_MiSTer/blob/4ab435aaf3e9319a5703911b4f43f0a38f5de7d8/Readme.md?plain=1#L7",
+        "https://github.com/MiSTer-devel/Arcade-KickAndRun_MiSTer/blob/4ab435aaf3e9319a5703911b4f43f0a38f5de7d8/doc/KickAndRun.pdf"
+      ]
+    },
+    {
+      "k": "bankp",
+      "title": "Bank Panic",
+      "rbfs": [
+        "bankpanic"
+      ],
+      "setnames": [
+        "bankp"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "A reproduction of the Bank Panic board kept as close to the original hardware as possible, using its schematic and the equations of its PAL 315-5075 shared by Mark Haysman of RetroClinic.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BankPanic_MiSTer/blob/e262cf9e1e31163eb4e2dd634d91534e846ed43e/Readme.md?plain=1#L4",
+        "https://github.com/MiSTer-devel/Arcade-BankPanic_MiSTer/blob/e262cf9e1e31163eb4e2dd634d91534e846ed43e/doc/schematic.png"
+      ]
+    },
+    {
+      "k": "dkong",
+      "title": "Donkey Kong",
+      "rbfs": [
+        "donkeykong"
+      ],
+      "setnames": [
+        "dkong"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's logic is largely based on Nintendo's TKG4 Donkey Kong schematics, with chips named by their positions on the board.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-DonkeyKong_MiSTer/blob/737a576b0b5510a71f0aea68a3d5b5560ed5d468/rtl/dkong_top.v#L24"
+      ]
+    },
+    {
+      "k": "bombjack",
+      "title": "Bomb Jack",
+      "rbfs": [
+        "bombjack"
+      ],
+      "setnames": [
+        "bombjack"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Translated from the Bomb Jack schematic to VHDL by d18c7db.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BombJack_MiSTer/blob/cc821f3cc203be311825c8ec5f98079c74f8a80e/rtl/bombjack/bombjack.vhd#L15"
+      ]
+    },
+    {
+      "k": "popeye",
+      "title": "Popeye",
+      "rbfs": [
+        "popeye"
+      ],
+      "setnames": [
+        "popeye"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Dar wrote this core from Nintendo's TPP2 Popeye schematics, and its logic refers to chips by their schematic positions.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Popeye_MiSTer/blob/6ec68829310c9b2d15fde38ba8184cfeb1a74cdb/rtl/popeye.vhd#L51",
+        "https://github.com/MiSTer-devel/Arcade-Popeye_MiSTer/blob/6ec68829310c9b2d15fde38ba8184cfeb1a74cdb/rtl/popeye.vhd#L53"
+      ]
+    },
+    {
+      "k": "xsleenaba",
+      "title": "Xain'd Sleena",
+      "rbfs": [
+        "XSleena"
+      ],
+      "setnames": [
+        "xsleenaba"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Based on the Solar Warrior (Xain'd Sleena) schematics, with the main clock checked against a measurement from a real board.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-XSleena_MiSTer/blob/e207265c2a04e4d44f72b7f2c54ba131e0632ae0/XSleenaCore_tb.sv#L53",
+        "https://github.com/MiSTer-devel/Arcade-XSleena_MiSTer/blob/e207265c2a04e4d44f72b7f2c54ba131e0632ae0/XSleenaCore_tb.sv#L95"
+      ]
+    },
+    {
+      "k": "tnk3",
+      "title": "T.N.K III",
+      "rbfs": [
+        "TNKIII"
+      ],
+      "setnames": [
+        "tnk3"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Derived from the T.N.K III schematics, with a clock-enable signal fixed from a logic analyzer capture.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TNKIII_MiSTer/blob/5eda8899e5d34cbc2444ba56f5c8ff3ba6707285/rtl/cpuA_B/A5001_2.v#L3",
+        "https://github.com/MiSTer-devel/Arcade-TNKIII_MiSTer/blob/5eda8899e5d34cbc2444ba56f5c8ff3ba6707285/rtl/clocks/A5001_1.v#L116"
       ]
     }
   ]

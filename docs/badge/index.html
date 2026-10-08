@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hardware Verified - MisterZine</title>
-<meta name="description" content="Hardware Verified is the MisterZine release tracker's seal for arcade cores built and checked against the real board or its schematics. What it means, what counts as evidence, and how to propose one.">
+<meta name="description" content="Hardware Verified is the MisterZine release tracker's seal for arcade cores built and checked against the real board or its schematics. What it means and what counts as evidence.">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="canonical" href="https://misterzine.fyi/badge/">
@@ -55,14 +55,19 @@
   th { font-weight: 600; white-space: nowrap; }
   code { font-size: .88em; background: color-mix(in srgb, var(--fg) 7%, var(--bg)); padding: .05em .3em; border-radius: 3px; }
   footer { margin-top: 2.5rem; padding-top: .8rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .82rem; }
-  /* the seal (Lucide badge-check, ISC, drawn filled): the same rosette the
-     release tracker shows beside a badged title, at emblem size */
-  .sealhead { display: flex; align-items: flex-start; gap: 1.1rem; margin: .4rem 0 1rem; }
-  .seal { flex: none; width: 4.2rem; height: 4.2rem; margin-top: .2rem; }
-  .seal .r { fill: var(--accent); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; }
-  .seal .c { fill: none; stroke: var(--accent-on); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
-  .sealhead .lead { margin: 0; }
-  .def { margin: 1rem 0; padding: .7rem .9rem; border-radius: 6px;
+  /* the seal: the same shape the release tracker shows in its Hardware
+     Verified column, at emblem size. One #hvseal-sym in the svgdefs block at
+     the top of <body>, filled with --accent, check knocked out. At this size it
+     carries the subtle shade: a second pass of the path under #hvseal-shade,
+     --stamp-shade fading in toward the bottom-right so that corner sits ~15%
+     darker than the accent (the tracker keeps it off at 16px; see there). */
+  .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
+  .hvs0 { stop-color: var(--stamp-shade); stop-opacity: 0; }
+  .hvs1 { stop-color: var(--stamp-shade); stop-opacity: .35; }
+  .hvshade { opacity: var(--hv-shade, 0); }
+  .sealhead { display: flex; align-items: center; gap: 1.1rem; margin: .4rem 0 1rem; }
+  .seal { flex: none; width: 4.2rem; height: 4.2rem; fill: var(--accent); --hv-shade: 1; }
+  .def { margin: 0; padding: .7rem .9rem; border-radius: 6px; font-size: 1.05rem;
          border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
          background: color-mix(in srgb, var(--accent) 8%, var(--bg)); }
   a.go { font-weight: 600; }
@@ -73,6 +78,12 @@
 </style>
 </head>
 <body>
+<!-- the seal, defined once (shape: checkmark-filled, 20x20, one evenodd path,
+     check knocked out); the inner <use> repaints it with the shade gradient -->
+<svg class="svgdefs" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="hvseal-shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="hvs0"/><stop offset="1" class="hvs1"/></linearGradient>
+  <symbol id="hvseal-sym" viewBox="0 0 20 20"><path id="hvseal-path" fill-rule="evenodd" clip-rule="evenodd" d="M3.213 5.8c.015.759-.398 1.785-.935 2.321a2.66 2.66 0 0 0 0 3.76c.53.528.92 1.444.935 2.192c.014.662.273 1.32.778 1.824a2.65 2.65 0 0 0 1.748.775c.791.04 1.827.5 2.387 1.06a2.66 2.66 0 0 0 3.759 0c.56-.56 1.596-1.02 2.387-1.06a2.65 2.65 0 0 0 1.748-.775a2.65 2.65 0 0 0 .777-1.826c.015-.746.4-1.656.929-2.184a2.663 2.663 0 0 0 .006-3.766c-.536-.535-.95-1.562-.934-2.32a2.65 2.65 0 0 0-.778-1.932a2.65 2.65 0 0 0-2.015-.775c-.714.036-1.615-.31-2.12-.816a2.66 2.66 0 0 0-3.76 0c-.504.505-1.406.852-2.12.816a2.65 2.65 0 0 0-2.014.775A2.65 2.65 0 0 0 3.213 5.8m9.828.826a1 1 0 0 1 .389 1.36l-2.768 4.982a1 1 0 0 1-.298.343a1 1 0 0 1-1.23-.045l-2.759-2.207a1 1 0 1 1 1.25-1.562l1.853 1.483l2.203-3.966a1 1 0 0 1 1.36-.388"/><use class="hvshade" href="#hvseal-path" fill="url(#hvseal-shade)"/></symbol>
+</defs></svg>
 <div class="wrap">
 
 <header class="top">
@@ -110,58 +121,52 @@
 
 <main>
 <div class="sealhead">
-  <svg class="seal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="r" d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path class="c" d="m9 12 2 2 4-4"/></svg>
-  <p class="lead">Some arcade cores are built the hard way: a real board on the bench, its schematics
-  spread out beside it, a logic analyzer clipped to the pins. Hardware Verified is the release tracker's
-  seal for that work. It marks a core whose author built it and checked it against the real hardware,
-  and says so in public.</p>
+  <svg class="seal" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><use href="#hvseal-sym"/></svg>
+  <p class="def"><strong>Hardware Verified</strong> means the core was built and checked against the real
+  board or its schematics; it does not claim that every behavior was tested, and absence of the badge
+  means nothing.</p>
 </div>
 
-<p class="def"><strong>"Verified"</strong> means the core was built and checked against the real board or
-its schematics, not that every behavior was tested; absence of the badge means nothing.</p>
+<p>The seal appears in the release tracker on arcade games with public, checkable evidence that the
+core was built or checked against the original hardware. Each entry gives the reason and links to that
+evidence in the game's detail panel, and covers the games that run on the hardware the evidence
+describes.</p>
 
 <p><a class="go" href="../releases/?hv=1">See every Hardware Verified game in the release tracker</a></p>
 
 <h2>What earns it</h2>
-<p>The author went to the source, beyond MAME's code, gameplay videos and the ROMs on their own. Any one
-of these, in the author's own words, is enough:</p>
+<p>The core was built or checked using the original hardware or its documentation, not only MAME's
+code, gameplay videos or the ROMs. Any one of these is enough:</p>
 <ul>
-  <li>they own or borrowed the original board and used it to build or check the core,</li>
-  <li>they dumped the board's PALs, PROMs or other chips themselves,</li>
-  <li>they worked from the manufacturer's original schematics,</li>
-  <li>they took logic analyzer or oscilloscope captures from a working board,</li>
-  <li>they published a write-up of how the logic was worked out from the hardware.</li>
+  <li>an original board, owned or borrowed, was used to build or check the core,</li>
+  <li>the board's PALs, PROMs or other chips were dumped for it,</li>
+  <li>it was built from the manufacturer's original schematics,</li>
+  <li>logic analyzer or oscilloscope captures were taken from a working board,</li>
+  <li>a write-up shows how the logic was worked out from the hardware.</li>
 </ul>
-<p>Where the core started does not matter. A core that began from MAME's documentation earns the seal
-once its author checks it against a board.</p>
+<p>Where the core started does not matter. A core that began from MAME's documentation qualifies once
+it has been checked against a board.</p>
+<p>The use of AI tools in a core's development is irrelevant in itself. What matters is verification
+against real hardware, as evidence that accuracy to the original experience was paramount in the
+development process.</p>
 
 <h2>What it does not mean</h2>
 <ul>
   <li>It is not a score and not a promise of perfection. A Hardware Verified core can still have bugs,
     and the seal does not claim every behavior was tested.</li>
-  <li>It does not rank cores. An unbadged core is not worse, less accurate or less loved.</li>
-  <li>No badge means nothing at all. Many fine cores are built exactly this way and simply have no entry
-    yet: the core is new, nobody has proposed it, or the author never wrote the work down.</li>
+  <li>It does not rank cores. A core without the seal is not worse or less accurate.</li>
+  <li>Absence of the seal means nothing. A core can have no entry because it is new, or because the
+    hardware work behind it has not been documented in public.</li>
 </ul>
-<p>The seal only ever says something good. It is never taken away as a judgement; an entry is only
-corrected if its evidence turns out to be wrong.</p>
+<p>An entry is never removed as a judgement; it is corrected only if its evidence turns out to be
+wrong.</p>
 
 <h2>What counts as evidence</h2>
-<p>The author's own public words: the core's README or documentation, release notes, the author's blog,
-site or public posts. Claims made by other people about a core do not count, however likely they are.
-Every entry carries a short reason and the links it rests on, so anyone can check it; open a badged
-game's detail panel in the release tracker to read them.</p>
-
-<h2>How entries are made</h2>
-<p>Entries are curated by hand and each proposal is reviewed against its links before it is added. A
-seal sits on one game's entry: the board the evidence covers. When one core runs many games, the
-evidence decides which of them it reaches, so more entries can follow as more work is documented.</p>
-
-<h2>Propose one</h2>
-<p>Know a core that deserves it, or wrote one yourself? Open a
-<a href="https://github.com/matijaerceg/misterzine/issues/new?template=badge.yml" target="_blank" rel="noopener">proposal on GitHub</a>
-with the game, the core and where it comes from, the links to the author's own words, and a sentence on
-what they show. Authors proposing their own cores are very welcome.</p>
+<p>Evidence can come from anyone, not only the core's author. The community is small, and board
+owners, schematic holders and testers often contribute alongside developers. What matters is that the
+evidence cites something factual and checkable: a named board in someone's hands, a schematic set, a
+dump, a capture, a comparison write-up, or a post describing the work. A bare assertion that a core is
+accurate is not evidence; a citation of concrete work is, and gets the benefit of the doubt.</p>
 
 <h2>For developers</h2>
 <p>The full list is published as <a href="../releases/badges.json"><code>releases/badges.json</code></a>,

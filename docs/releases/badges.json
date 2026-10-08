@@ -3242,6 +3242,551 @@
         "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Taito/PC060HA",
         "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/cfg/files.yaml#L16"
       ]
+    },
+    {
+      "k": "aliensyn",
+      "title": "Alien Syndrome",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "aliensyn"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "altbeast",
+      "title": "Altered Beast",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "altbeast"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "aurail",
+      "title": "Aurail",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "aurail"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "bayroute",
+      "title": "Bay Route",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "bayroute"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "bullet",
+      "title": "Bullet",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "bullet"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "cotton",
+      "title": "Cotton",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "cotton"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "eswat",
+      "title": "Cyber Police ESWAT",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "eswat"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "dunkshot",
+      "title": "Dunk Shot",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "dunkshot"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "ddux",
+      "title": "Dynamite Dux",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "ddux"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "exctleag",
+      "title": "Excite League",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "exctleag"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "fantzn2x",
+      "title": "Fantasy Zone II - The Tears of Opa-Opa (System 16C version)",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "fantzn2x"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "fpoint",
+      "title": "Flash Point",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "fpoint"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "goldnaxe",
+      "title": "Golden Axe",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "goldnaxe"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "mvp",
+      "title": "MVP",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "mvp"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "passsht",
+      "title": "Passing Shot",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "passsht"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "riotcity",
+      "title": "Riot City",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "riotcity"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "ryukyu",
+      "title": "RyuKyu",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "ryukyu"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "sonicbom",
+      "title": "Sonic Boom",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "sonicbom"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "sjryuko",
+      "title": "Sukeban Jansi Ryuko",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "sjryuko"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "suprleag",
+      "title": "Super League",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "suprleag"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "timescan",
+      "title": "Time Scanner",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "timescan"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "toryumon",
+      "title": "Toryumon",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "toryumon"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "tturfu",
+      "title": "Tough Turf",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "tturfu"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "wb3",
+      "title": "Wonder Boy III - Monster Lair",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "wb3"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "wrestwar",
+      "title": "Wrestle War",
+      "rbfs": [
+        "jts16b"
+      ],
+      "setnames": [
+        "wrestwar"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core was developed with a Sega System 16B board (model 171-5358) lent by FunkyCochise, and this game runs on System 16B hardware. The core's 315-5195 memory mapper also draws on Furrtek's count of the chip's logic from a die photo.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/README.md?plain=1#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/s16b/hdl/jts16b_mapper.v#L15"
+      ]
+    },
+    {
+      "k": "ballbros",
+      "title": "Balloon Brothers",
+      "rbfs": [
+        "jttaitox"
+      ],
+      "setnames": [
+        "ballbros"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's sprite logic, shared with the Kiwi core, draws on a die shot of the board's Seta X1-001 sprite chip. The credit lives in the Kiwi core's folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/taitox/cfg/files.yaml#L6"
+      ]
+    },
+    {
+      "k": "gigandes",
+      "title": "Gigandes",
+      "rbfs": [
+        "jttaitox"
+      ],
+      "setnames": [
+        "gigandes"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's sprite logic, shared with the Kiwi core, draws on a die shot of the board's Seta X1-001 sprite chip. The credit lives in the Kiwi core's folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/taitox/cfg/files.yaml#L6"
+      ]
+    },
+    {
+      "k": "kyustrkr",
+      "title": "Last Striker",
+      "rbfs": [
+        "jttaitox"
+      ],
+      "setnames": [
+        "kyustrkr"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's sprite logic, shared with the Kiwi core, draws on a die shot of the board's Seta X1-001 sprite chip. The credit lives in the Kiwi core's folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/taitox/cfg/files.yaml#L6"
+      ]
+    },
+    {
+      "k": "superman",
+      "title": "Superman",
+      "rbfs": [
+        "jttaitox"
+      ],
+      "setnames": [
+        "superman"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's sprite logic, shared with the Kiwi core, draws on a die shot of the board's Seta X1-001 sprite chip. The credit lives in the Kiwi core's folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/taitox/cfg/files.yaml#L6"
+      ]
+    },
+    {
+      "k": "twinhawk",
+      "title": "Twin Hawk",
+      "rbfs": [
+        "jttaitox"
+      ],
+      "setnames": [
+        "twinhawk"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's sprite logic, shared with the Kiwi core, draws on a die shot of the board's Seta X1-001 sprite chip. The credit lives in the Kiwi core's folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/taitox/cfg/files.yaml#L6"
+      ]
+    },
+    {
+      "k": "calibr50",
+      "title": "Caliber 50",
+      "rbfs": [
+        "jtcal50"
+      ],
+      "setnames": [
+        "calibr50"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's sprite logic, shared with the Kiwi core, draws on a die shot of the board's Seta X1-001 sprite chip. The credit lives in the Kiwi core's folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cal50/cfg/files.yaml#L5"
+      ]
+    },
+    {
+      "k": "volfied",
+      "title": "Volfied",
+      "rbfs": [
+        "jtvlfied"
+      ],
+      "setnames": [
+        "volfied"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's Taito PC060HA chip, shared with the Rastan core, comes with Furrtek's logic for that chip, reverse engineered from a decap. The credit lives in the Rastan core's folder.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/doc/pc060ha_decap_furrtek.v#L1",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Taito/PC060HA",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/vlfied/cfg/files.yaml#L12"
+      ]
     }
   ]
 }

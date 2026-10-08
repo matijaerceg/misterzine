@@ -57,21 +57,20 @@
   footer { margin-top: 2.5rem; padding-top: .8rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .82rem; }
   /* the seal: the same shape the release tracker shows in its Hardware
      Verified column, at emblem size. One #hvseal-sym in the svgdefs block at
-     the top of <body>, filled with --accent, check knocked out. At this size it
-     carries the sheen: a second, opaque pass of the path under #hvseal-shade,
-     the accent lightened 15% toward white at the top-left and darkened 16%
-     toward black at the bottom-right (the most every theme allows at 3:1), white and black taken from the
-     --stamp-sheen / --stamp-shade tokens with their alpha dropped (the tracker
-     keeps it off at 16px; see there). */
+     the top of <body>, filled with --accent, check knocked out, with the same
+     sheen as every seal in the tracker: a second, opaque pass of the path under
+     #hvseal-shade, the accent mixed --hv-light toward white at the top-left and
+     --hv-dark toward black at the bottom-right (theme.css tokens), plain accent
+     under the check. See the tracker's seal CSS for the details. */
   .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
   .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
   @supports (color: rgb(from currentColor r g b)) {
-    .hvs0 { stop-color: color-mix(in srgb, var(--accent) 85%, rgb(from var(--stamp-sheen) r g b / 1)); }
-    .hvs2 { stop-color: color-mix(in srgb, var(--accent) 84%, rgb(from var(--stamp-shade) r g b / 1)); }
+    .hvs0 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-sheen) r g b / 1) var(--hv-light, 30%)); }
+    .hvs2 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-shade) r g b / 1) var(--hv-dark, 40%)); }
   }
-  .hvshade { opacity: var(--hv-shade, 0); }
+  .hvshade { opacity: var(--hv-shade, 1); }
   .sealhead { display: flex; align-items: center; gap: 1.1rem; margin: .4rem 0 1rem; }
-  .seal { flex: none; width: 4.2rem; height: 4.2rem; fill: var(--accent); --hv-shade: 1; }
+  .seal { flex: none; width: 4.2rem; height: 4.2rem; fill: var(--accent); }
   .trial { margin: 0 0 1rem; color: var(--muted); font-size: .9rem; }
   .def { margin: 0; padding: .7rem .9rem; border-radius: 6px; font-size: 1.05rem;
          border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
@@ -87,7 +86,7 @@
 <!-- the seal, defined once (shape: checkmark-filled, 20x20, one evenodd path,
      check knocked out); the inner <use> repaints it with the shade gradient -->
 <svg class="svgdefs" aria-hidden="true" focusable="false"><defs>
-  <linearGradient id="hvseal-shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="hvs0"/><stop offset=".5" class="hvs1"/><stop offset="1" class="hvs2"/></linearGradient>
+  <linearGradient id="hvseal-shade" x1=".143" y1=".143" x2=".85" y2=".85"><stop offset="0" class="hvs0"/><stop offset=".5" class="hvs1"/><stop offset="1" class="hvs2"/></linearGradient>
   <symbol id="hvseal-sym" viewBox="0 0 20 20"><path id="hvseal-path" fill-rule="evenodd" clip-rule="evenodd" d="M3.213 5.8c.015.759-.398 1.785-.935 2.321a2.66 2.66 0 0 0 0 3.76c.53.528.92 1.444.935 2.192c.014.662.273 1.32.778 1.824a2.65 2.65 0 0 0 1.748.775c.791.04 1.827.5 2.387 1.06a2.66 2.66 0 0 0 3.759 0c.56-.56 1.596-1.02 2.387-1.06a2.65 2.65 0 0 0 1.748-.775a2.65 2.65 0 0 0 .777-1.826c.015-.746.4-1.656.929-2.184a2.663 2.663 0 0 0 .006-3.766c-.536-.535-.95-1.562-.934-2.32a2.65 2.65 0 0 0-.778-1.932a2.65 2.65 0 0 0-2.015-.775c-.714.036-1.615-.31-2.12-.816a2.66 2.66 0 0 0-3.76 0c-.504.505-1.406.852-2.12.816a2.65 2.65 0 0 0-2.014.775A2.65 2.65 0 0 0 3.213 5.8m9.828.826a1 1 0 0 1 .389 1.36l-2.768 4.982a1 1 0 0 1-.298.343a1 1 0 0 1-1.23-.045l-2.759-2.207a1 1 0 1 1 1.25-1.562l1.853 1.483l2.203-3.966a1 1 0 0 1 1.36-.388"/><use class="hvshade" href="#hvseal-path" fill="url(#hvseal-shade)"/></symbol>
 </defs></svg>
 <div class="wrap">

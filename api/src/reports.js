@@ -102,8 +102,9 @@ async function listReports(env, now) {
   return out.sort((a, b) => (a.uploaded < b.uploaded ? 1 : -1));
 }
 
-// readCapped reads the body, or returns null once it passes max bytes.
-async function readCapped(request, max) {
+// readCapped reads the body, or returns null once it passes max bytes
+// (also used by src/feedback.js).
+export async function readCapped(request, max) {
   if (!request.body) return new Uint8Array(0);
   const reader = request.body.getReader();
   const chunks = [];
@@ -160,7 +161,7 @@ export function normalizeCode(s) {
 const key = code => 'r/' + code + '.txt';
 const expired = (uploaded, now) => now - uploaded.getTime() > REPORT_DAYS * DAY_MS;
 
-async function isAdmin(request, env) {
+export async function isAdmin(request, env) {
   const want = env.REPORTS_TOKEN;
   const bearer = /^Bearer\s+(\S+)\s*$/i.exec(request.headers.get('Authorization') || '');
   const got = bearer ? bearer[1] : '';

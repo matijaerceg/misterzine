@@ -7,7 +7,8 @@ The site talks to it from the browser at `https://api.misterzine.fyi`.
 
 It also takes the diagnostic reports players send from the MisterZine
 Frontend (Options -> Troubleshooting -> Send a report), in `src/reports.js`:
-see [Device reports](#device-reports).
+see [Device reports](#device-reports). And it takes the site's feedback form,
+in `src/feedback.js`: see [Site feedback](#site-feedback).
 
 The full route list and the security model are at the top of `src/index.js`.
 The user-facing description is the site's [privacy page](../docs/privacy/index.html).
@@ -117,4 +118,86 @@ python api/get_report.py --list           # the last 30 days
 python api/get_report.py --delete K7M4
 ```
 
-The routes are tested with `npm test` (vitest with the Workers pool, local R2).
+## Site feedback
+
+The feedback form on the site posts to `POST /feedback`. Each message is
+stored in the D1 table `feedback` and then forwarded to a private Discord
+channel through a webhook. If Discord is down or the webhook is missing, the
+message is still stored, the visitor still sees success, and the row keeps
+`discord_ok = 0`. Anonymous messages work; when the request carries a valid
+session (`Authorization: Bearer <mz-token>`) the account id is recorded too.
+
+What a row holds: the text, the optional contact box (email or Discord
+handle, as typed), the page, the tracker row key, the theme, the account id if
+signed in, the first 256 characters of the User-Agent, and `ip_hash`, an HMAC
+of the sender's address keyed with `SESSION_SECRET` (IPv6 cut to its /64).
+Never the address itself. Rotating `SESSION_SECRET` only resets the rate-limit
+history, since old hashes stop matching.
+
+The request, JSON:
+
+| field | | |
+|---|---|---|
+| `text` | required | 1 to 4000 characters after trimming; at most 5 links (`http://`, `https://`, `www.`) across text and contact |
+| `contact` | optional | at most 200 characters |
+| `page` | optional | the page URL; kept only when it is on the site's own origin (or a `DEV_ORIGINS` one), cut to 500 characters |
+| `key` | optional | the tracker row key (data.json `k`), dropped if it is not one |
+| `theme` | optional | the theme slug, dropped if it is not `[A-Za-z0-9_-]{1,32}` |
+| `website` | honeypot | hide it from people; anything in it answers success and stores nothing |
+
+The answers: `201 {"ok":true}`; `400 {"error": "no_text" | "text_too_long" |
+"too_many_links" | "contact_too_long" | "bad_contact" | "bad_json"}`;
+`403 {"error":"origin"}` for a browser on another site; `413 {"error":"too_large"}`
+over 32 KB; `429 {"error":"rate_limited","retry_after":<seconds>}` (also a
+`Retry-After` header); `503 {"error":"disabled"}` when `FEEDBACK_ENABLED` is
+not `"1"` in `wrangler.toml`.
+
+Limits, per address: 5 messages in any 10 minutes and 30 in any 24 hours,
+counted from the stored rows (refused and honeypot requests do not count).
+The count and the insert are one SQL statement, so a burst cannot slip past.
+
+One-time setup, from this `api/` folder (never the repo root). The table must
+exist before the new code is deployed, or the form answers 500:
+
+```bash
+npx wrangler d1 execute misterzine --remote --file=schema.sql   # adds the feedback table; safe to re-run
+npx wrangler secret put DISCORD_FEEDBACK_WEBHOOK                # prompts; paste the webhook URL yourself
+npx wrangler deploy
+```
+
+The webhook URL comes from Discord: the channel's Edit Channel ->
+Integrations -> Webhooks -> New Webhook -> Copy Webhook URL. Treat it as a
+password (anyone holding it can post to the channel); it lives only in the
+Worker secret, never in a file.
+
+Test after deploying (it counts toward your own address's limit):
+
+```bash
+curl -i https://api.misterzine.fyi/feedback -H 'Content-Type: application/json' -d '{"text":"Test from curl, please ignore","contact":"me"}'
+```
+
+That answers `201 {"ok":true}` and the message appears in the Discord channel.
+
+Reading every message (the `REPORTS_TOKEN` is the same developer key as for
+device reports; `?since=<id>` returns only newer ones):
+
+```bash
+curl -s https://api.misterzine.fyi/feedback/export -H "Authorization: Bearer $REPORTS_TOKEN"
+```
+
+Or without the token, straight from D1:
+
+```bash
+npx wrangler d1 execute misterzine --remote --json --command "SELECT * FROM feedback ORDER BY id"
+npx wrangler d1 execute misterzine --remote --command "DELETE FROM feedback WHERE id = 1"   # drop a test message
+```
+
+To switch the form off without a code change, set `FEEDBACK_ENABLED = "0"` in
+`wrangler.toml` and deploy. For `wrangler dev`, `.dev.vars` needs
+`SESSION_SECRET`; `DISCORD_FEEDBACK_WEBHOOK` is optional, and the locally
+served site's origin must be in `DEV_ORIGINS`.
+
+## Tests
+
+The report and feedback routes are tested with `npm test` (vitest with the
+Workers pool, local R2 and D1; the feedback tests apply `schema.sql` themselves).

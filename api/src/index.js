@@ -5,7 +5,9 @@
 // no Zaparoo keys, no names, no avatars. Its one other job is taking the
 // diagnostic reports a player sends from the MisterZine Frontend's
 // Troubleshooting screen (src/reports.js): kept 30 days in a private R2
-// bucket, readable only by the developer, and never tied to an account.
+// bucket, readable only by the developer, and never tied to an account. And
+// it takes the site's feedback form (src/feedback.js): stored in D1 and
+// forwarded to a private Discord channel.
 //
 // Routes (all JSON unless noted; CORS is limited to SITE_ORIGIN + DEV_ORIGINS):
 //   GET    /                          service info
@@ -22,6 +24,9 @@
 //   POST   /favorites/import          {keys: [...]} union into the account (first sign-in)
 //   POST   /reports                   device report upload; the rest of /reports is
 //                                     developer-only (see src/reports.js)
+//   POST   /feedback                  site feedback form, anonymous or signed in;
+//                                     GET /feedback/export is developer-only
+//                                     (see src/feedback.js)
 //
 // Auth for the JSON routes: `Authorization: Bearer <session token>`. The
 // token is 32 random bytes (base64url); only its sha256 is stored. Sessions
@@ -30,6 +35,7 @@
 // path), so no server-side state is needed for sign-in.
 
 import { reports } from './reports.js';
+import { feedback } from './feedback.js';
 
 const KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;      // release tracker row keys (data.json `k`)
 const MAX_FAVORITES = 5000;
@@ -67,6 +73,10 @@ async function route(request, env, url) {
 
   // --- device reports: their own auth, never a session ------------------------
   if (p === '/reports' || p.startsWith('/reports/')) return reports(request, env, m, p);
+
+  // --- site feedback: anonymous works; a valid session adds the account id ----
+  if (p === '/feedback' || p.startsWith('/feedback/'))
+    return feedback(request, env, m, p, { authenticate: () => authenticate(request, env) });
 
   // --- everything below needs a session -------------------------------------
   const user = await authenticate(request, env);

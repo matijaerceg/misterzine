@@ -20,6 +20,8 @@ DEV_ORIGINS = ""
 REPORTS_ENABLED = "1"
 # the largest report accepted, in bytes
 REPORT_MAX_BYTES = "524288"
+# site feedback form (src/feedback.js): "1" takes messages, anything else answers 503
+FEEDBACK_ENABLED = "1"
 
 # device reports: a private bucket whose lifecycle rule deletes each object 30
 # days after upload (`npx wrangler r2 bucket lifecycle add misterzine-reports
@@ -45,5 +47,9 @@ database_id = "a1074cb1-feee-4ad0-92a0-fee4f9fe37b9"
 #   GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET   Google OAuth client (Web application)
 #   GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET   GitHub OAuth App
 #   SESSION_SECRET                           random string, signs the sign-in state cookie
+#                                            (and keys the feedback address hash)
 #   REPORTS_TOKEN                            random string, the developer's key to read reports
+#                                            (and to export feedback)
+#   DISCORD_FEEDBACK_WEBHOOK                 Discord webhook URL that feedback is forwarded to
+#                                            (optional: without it feedback is only stored)
 # For `wrangler dev`, put the same names in api/.dev.vars (gitignored).

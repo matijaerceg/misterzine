@@ -1042,6 +1042,7 @@
         <summary id="menusum">Menu</summary>
         <div class="mlist">
       <button type="button" id="mymisters" data-tip="Your saved MiSTers">My MiSTer(s)</button>
+      <button type="button" id="shareview" data-tip="Copy a link to exactly this view: the search, filters, sort and open game">Share this view</button>
           <div class="theme" id="theme">
             <details id="themedd">
               <summary id="themesum">Theme</summary>
@@ -1171,6 +1172,7 @@
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
+let viewURLOn = false, viewURLT = 0;  // the address bar mirrors the view once arrival has read it (see writeViewURL)
 // deep links: every row carries a stable key (d.k, stamped by export-web);
 // #<k> in the URL opens that row's panel, and opening a panel writes it back
 const KEY2ROW = {};  // filled when data.json loads
@@ -1202,7 +1204,7 @@ const IOS_BROWSER = !STANDALONE && (/iP(hone|ad|od)/.test(navigator.userAgent) |
 // answers persist() with a permission popup a drive-by tab hasn't earned
 if (STANDALONE && navigator.storage && navigator.storage.persist)
   navigator.storage.persist().catch(() => {});
-let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter but Hardware Verified (mz-hv)
+let favOnly = false;   // the "show only favorites" toggle — not stored; like every filter it rides in the URL (f=1, see writeViewURL)
 let favView = null;    // Set of keys while viewing someone's ?fav= link, else null
 // unlike the page's other writes (prefs, all replaceable) this one is the user's
 // own data: a silent failure would lose what the UI just claimed to have saved,
@@ -2416,6 +2418,7 @@ function apply() {
     });
   }
   render();
+  writeViewURL();  // the address bar follows every change (debounced; see the view URL block)
 }
 
 // Keep the still-selected row in view after any reshuffle of the list (search,
@@ -2493,8 +2496,9 @@ document.getElementById('hrow').addEventListener('click', e => {
 // so the menu always means exactly "show what is ticked". Source and Genre below
 // follow the same model, sharing the helpers defined here.
 const TYPES = ['Arcade', 'Console', 'Computer', 'Other'];
-// The Type/Source/Genre/Year filters deliberately do NOT persist across reloads — a
-// page refresh starts unfiltered (only the Columns display pref survives, see mz-cols2).
+// The Type/Source/Genre/Year filters are never stored in localStorage. They live in
+// the address bar instead (see writeViewURL), so a reload or a shared link brings
+// them back, while a bare /releases/ (the title link) starts unfiltered.
 // Type's option list is fixed, so it starts fully checked right here. Source and Genre
 // are data-seeded (databases present; arcade genres from MAME's catver.ini), so their
 // sets start empty and buildSrcMenu()/buildGenreMenu() fill them fully checked once
@@ -2908,8 +2912,9 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 // --- hardware badge filter: show only the badged rows --------------------------
 // A plain toggle shaped like the favorites one: the seal plus how many rows wear
 // it. Unlike the other filters it is REMEMBERED across visits ('mz-hv', '1' or
-// '0'; off for a first-time visitor): a click, a ?hv arrival link (the criteria
-// page's "see them all") and Clear filters each store the state they leave.
+// '0'; off for a first-time visitor): a click, an hv= arrival link (a shared
+// view, or the criteria page's "see them all") and Clear filters each store the
+// state they leave. A URL without hv= leaves the remembered state alone.
 // Hidden while the data carries no badge at all, so an older data.json never
 // shows a dead control; never hidden while it is the thing doing the narrowing.
 const HV_KEY = 'mz-hv';
@@ -2935,24 +2940,161 @@ hvToggle.addEventListener('click', () => {
 // one caller is Clear filters, which leaves the filter off for the next visit too.
 function resetHvOnly() { hvOnly = false; saveHvOnly(); syncHvSummary(); }
 syncHvSummary();
-// Runs once, after the first data load. A ?hv in the URL switches the filter on
-// and is stored like a click; the param itself is removed from the address bar
-// (the state now lives in 'mz-hv', so a refresh keeps it either way). If the data
-// carries no badge at all (an older data.json), a remembered or linked "on"
-// would strand the visitor on an empty list: drop it for this load, without
-// storing, and land on the full list.
+// Runs once, after the first data load. An hv= in the URL sets the filter (on,
+// unless it reads hv=0) and is stored like a click; it stays in the address bar,
+// which writeViewURL keeps in step from then on. If the data carries no badge at
+// all (an older data.json), a remembered or linked "on" would strand the visitor
+// on an empty list: drop it for this load, without storing, and land on the
+// full list.
 function adoptHvParam() {
-  const linked = new URLSearchParams(location.search).has('hv');
-  if (linked) stripParam('hv');
+  const p = new URLSearchParams(location.search);
   if (!DATA.some(d => d.hv)) {
     if (hvOnly) { hvOnly = false; syncHvSummary(); apply(); }
     return;
   }
-  if (!linked) return;
-  hvOnly = true;
+  if (!p.has('hv')) return;
+  hvOnly = p.get('hv') !== '0';
   saveHvOnly();
   syncHvSummary(); apply();
 }
+
+// --- shareable view URLs ------------------------------------------------------
+// The address bar always carries the current view, so copying it (or the Menu's
+// "Share this view") hands someone exactly this table. It is rewritten with
+// replaceState, never pushState (filtering must not fill Back/Forward), a beat
+// after the last change so typing a search doesn't rewrite it per keystroke
+// (browsers rate-limit history calls). Anything at its default is left out, so
+// the default view is a bare /releases/. The keys:
+//   q    search text                           q=street+fighter
+//   t    Type menu                             t=arcade,console   t=-other
+//   src  Source menu (database ids)            src=-distribution_mister
+//   g    Genre menu (slugs; none = No genre)   g=shooter,maze
+//   y    Original Year range                   y=1980-1989  y=1990-  y=-1985  y=1987
+//   s    sort column, leading - = descending   s=title  s=-hv  (-updated, the default, is left out)
+//   hv   Hardware Verified only                hv=1
+//   f    favorites only (the VISITOR'S own)    f=1
+// A menu writes whichever is shorter: the ticked boxes, or "-" and the unticked
+// ones; "t=" alone means None ticked. Other params (fav, v, ref) pass through
+// untouched and the #key panel hash rides alongside. Read once on arrival by
+// adoptViewParams: the URL wins wherever it says something, the badge filter
+// falls back to its remembered state (mz-hv) and the columns to theirs.
+const VIEW_KEYS = ['q', 't', 'src', 'g', 'y', 's', 'hv', 'f'];
+const typeSlug = t => t.toLowerCase();
+const srcSlug = s => s;
+const genreSlug = g => g === NO_GENRE ? 'none'
+  : g.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+function paramName(pair) {
+  try { return decodeURIComponent(pair.split('=')[0].replace(/\+/g, ' ')); } catch (e) { return pair; }
+}
+function pickParam(set, keys, slug) {
+  if (!keys.length || keys.every(k => set.has(k))) return null;
+  const enc = k => encodeURIComponent(slug(k));
+  const on = keys.filter(k => set.has(k)).map(enc).join(',');
+  const off = '-' + keys.filter(k => !set.has(k)).map(enc).join(',');
+  return on.length <= off.length ? on : off;
+}
+function viewParams() {
+  const out = [];
+  const q = document.getElementById('q').value.trim();
+  if (q) out.push(['q', encodeURIComponent(q).replace(/%20/g, '+')]);
+  for (const [k, v] of [['t', pickParam(enabledTypes, TYPES, typeSlug)],
+                        ['src', pickParam(enabledSrcs, SRC_KEYS, srcSlug)],
+                        ['g', pickParam(enabledGenres, GENRE_KEYS, genreSlug)]])
+    if (v != null) out.push([k, v]);
+  if (yearFrom != null || yearTo != null)
+    out.push(['y', yearFrom != null && yearFrom === yearTo ? '' + yearFrom
+      : (yearFrom != null ? yearFrom : '') + '-' + (yearTo != null ? yearTo : '')]);
+  if (sortKey && !(sortKey === 'updated' && sortDir === -1))
+    out.push(['s', (sortDir < 0 ? '-' : '') + sortKey]);
+  if (hvOnly) out.push(['hv', '1']);
+  if (favOnly) out.push(['f', '1']);
+  return out;
+}
+// the query string for the current view, keeping every param that isn't a view
+// key as it was typed (minus any named in drop)
+function viewSearch(drop) {
+  const keep = location.search.slice(1).split('&').filter(pr => pr &&
+    !VIEW_KEYS.includes(paramName(pr)) && !(drop && drop.includes(paramName(pr))));
+  const parts = viewParams().map(([k, v]) => k + '=' + v).concat(keep);
+  return parts.length ? '?' + parts.join('&') : '';
+}
+function writeViewURL(now) {
+  if (!viewURLOn) return;
+  clearTimeout(viewURLT);
+  if (!now) { viewURLT = setTimeout(writeViewURL, 250, true); return; }
+  const qs = viewSearch();
+  if (qs === location.search) return;
+  try { history.replaceState(history.state, '', location.pathname + qs + location.hash); } catch (e) {}
+}
+// what Share hands out: this view and the open row, without the cache-buster
+// or the RSS ref tag (they describe how this tab arrived, not the view)
+const shareURL = () => location.origin + location.pathname + viewSearch(['v', 'ref']) + location.hash;
+// one pick menu from its URL value; names that no longer exist are skipped, and
+// a value naming nothing that exists leaves the menu untouched
+function adoptPick(raw, set, keys, slug, menu, attr) {
+  if (raw == null || !keys.length) return;
+  const bySlug = new Map(keys.map(k => [slug(k), k]));
+  const neg = raw.startsWith('-');
+  const items = (neg ? raw.slice(1) : raw).split(',').filter(Boolean);
+  const named = new Set(items.map(x => bySlug.get(x.toLowerCase())).filter(k => k !== undefined));
+  if (items.length && !named.size) return;
+  set.clear();
+  for (const k of keys) if (neg !== named.has(k)) set.add(k);
+  for (const cb of menu.querySelectorAll('input[' + attr + ']')) cb.checked = set.has(cb.getAttribute(attr));
+}
+// Runs once, after the first data load (the Source/Genre/Year menus are built
+// from the data). The badge filter and a ?fav= list have their own readers
+// (adoptHvParam / adoptFavParam).
+function adoptViewParams() {
+  const p = new URLSearchParams(location.search);
+  const q = p.get('q');
+  if (q) document.getElementById('q').value = q;
+  adoptPick(p.get('t'), enabledTypes, TYPES, typeSlug, typeMenu, 'data-t'); syncTypeSummary();
+  adoptPick(p.get('src'), enabledSrcs, SRC_KEYS, srcSlug, srcMenu, 'data-s'); syncSrcSummary();
+  adoptPick(p.get('g'), enabledGenres, GENRE_KEYS, genreSlug, genreMenu, 'data-g'); syncGenreSummary();
+  const y = /^(\d{1,4})?(-)?(\d{1,4})?$/.exec((p.get('y') || '').trim());
+  if (y && (y[1] || y[3]) && YEAR_MIN != null) {
+    const clamp = v => Math.min(Math.max(Math.round(+v), YEAR_MIN), YEAR_MAX);
+    yearFrom = y[1] ? clamp(y[1]) : null;
+    yearTo = y[2] ? (y[3] ? clamp(y[3]) : null) : yearFrom;   // a bare year is that one year
+    const f = yearMenu.querySelector('.yfrom'), t = yearMenu.querySelector('.yto');
+    if (f) f.value = yearFrom == null ? '' : yearFrom;
+    if (t) t.value = yearTo == null ? '' : yearTo;
+    syncYear();
+  }
+  const sv = p.get('s');
+  if (sv) {
+    const desc = sv.startsWith('-'), k = desc ? sv.slice(1) : sv;
+    if (COLUMNS.some(c => c.k === k)) {
+      sortKey = k; sortDir = desc ? -1 : 1;
+      // a sort on a column this visitor keeps hidden would be invisible: show
+      // it for this visit (not saved unless they change the columns themselves)
+      if (!activeColumns().some(c => c.k === k)) {
+        enabledCols.add(k);
+        const cb = colsMenu.querySelector('input[data-k="' + k + '"]');
+        if (cb) cb.checked = true;
+        syncColsReset();
+      }
+      buildHeader();
+    }
+  }
+  if (p.has('f') && p.get('f') !== '0') { favOnly = true; syncFavSummary(); }
+  apply();
+}
+document.getElementById('shareview').addEventListener('click', e => {
+  const b = e.currentTarget;
+  writeViewURL(true);
+  const url = shareURL();
+  // phones get the share sheet when the clipboard is out of reach
+  const canSheet = !!navigator.share && matchMedia('(pointer: coarse)').matches;
+  const sheet = () => navigator.share({ title: document.title, url })
+    .catch(err => { if (err && err.name !== 'AbortError') showChip(b, 'Copy failed'); });
+  if (navigator.clipboard && navigator.clipboard.writeText)
+    navigator.clipboard.writeText(url).then(() => showChip(b, 'Link copied'),
+      () => { if (canSheet) sheet(); else showChip(b, 'Copy failed'); });
+  else if (canSheet) sheet();
+  else showChip(b, 'Copy failed');
+});
 
 // --- favorites -> update_all export dialog -----------------------------------
 // Terms come from each row's `ft` (stamped by export-web from the live
@@ -3029,14 +3171,13 @@ document.getElementById('favexpclose').addEventListener('click', () => favExpDlg
 // until it's adopted or dismissed. Either way the URL is cleaned up afterwards,
 // so a refresh doesn't ask again and the address bar stops advertising a list
 // that may no longer be what's on screen.
-// The page reads two query params now (fav and hv), so each is deleted on its
-// own; the rest of the search string and the #hash survive.
+// Only fav is deleted; the view keys (see writeViewURL), any other param and the
+// #hash survive exactly as they were typed.
 function stripParam(name) {
-  const p = new URLSearchParams(location.search);
-  if (!p.has(name)) return;
-  p.delete(name);
-  const s = p.toString();
-  history.replaceState(history.state, '', location.pathname + (s ? '?' + s : '') + location.hash);
+  const parts = location.search.slice(1).split('&').filter(Boolean);
+  const keep = parts.filter(pr => paramName(pr) !== name);
+  if (keep.length === parts.length) return;
+  history.replaceState(history.state, '', location.pathname + (keep.length ? '?' + keep.join('&') : '') + location.hash);
 }
 function stripFavParam() { stripParam('fav'); }
 function dismissFavView() {
@@ -3741,6 +3882,9 @@ window.addEventListener('popstate', e => {
   const d = KEY2ROW[hashKey()];
   if (d) { openPanel(d, true); recenterOpen(); }  // Forward (or hash edit) re-opens
   else if (document.body.classList.contains('panel-open')) closePanel();
+  // the entry Back/Forward landed on carries the query from when it was made;
+  // the view itself never moved, so put the address bar back in step with it
+  writeViewURL(true);
 });
 
 function markOpenRow() {
@@ -4664,7 +4808,9 @@ function swapIn(d, m) {
     // actually fixes things — cache-busted, keeping any open deep link.
     try { ingest(prev); } catch (e2) {}
     showPill('Site updated, refresh for the latest', () => {
-      location.href = location.pathname + '?v=' + encodeURIComponent(m.hash) + location.hash;
+      const rest = viewSearch(['v']);   // the view rides along, so the reload lands on it
+      location.href = location.pathname + '?v=' + encodeURIComponent(m.hash) +
+        (rest ? '&' + rest.slice(1) : '') + location.hash;
     }, true);
   }
 }
@@ -4714,8 +4860,11 @@ function boot() {
     ingest(d);
     booted = true;
     hidePill();       // a retry just succeeded; don't leave its failure pill up
+    adoptViewParams();  // search, menus, year, sort and favorites-only from the URL
     adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
-    adoptHvParam();   // a ?hv link (the criteria page's "see them all"): badge filter on
+    adoptHvParam();   // hv= (a shared view, or the criteria page's "see them all")
+    viewURLOn = true;   // from here the address bar mirrors the view
+    writeViewURL(true); // tidy the arrival URL into canonical form (unknown names dropped)
     // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
     // the entry we arrived on already IS the panel state (in overlay mode Back
     // correctly leaves the site, i.e. returns where the visitor came from).

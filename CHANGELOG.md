@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-08
+
+- Release tracker: 313 games now carry the Hardware Verified seal, up from 222. 36 run on the same board as a verified game, and 55 more, among them Qix, Elevator Action, Zaxxon, Bubble Bobble and Mario Bros., were found through the [FPGA Verified Against](https://alamone.github.io/fpga-verified-against/) project's survey of core sources.
+
 ## 2026-10-07
 
 - Release tracker: Clear filters now also resets the sort, and lights up in the theme accent with an x in front whenever there is something to clear: a search, a filter, a toggle, or a sort other than the default. With nothing to clear it stays a plain, faded button.

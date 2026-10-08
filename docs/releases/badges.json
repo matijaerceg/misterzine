@@ -4439,6 +4439,1010 @@
         "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Taito/PC060HA",
         "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/vlfied/cfg/files.yaml#L12"
       ]
+    },
+    {
+      "k": "qix",
+      "title": "Qix",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "qix"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "qix2",
+      "title": "Qix II",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "qix2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito America's Qix hardware, the same boards as Qix. The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "complexx",
+      "title": "Complex X",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "complexx"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito America's Qix hardware, the same boards as Qix. The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "elecyoyo",
+      "title": "The Electric Yo-Yo",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "elecyoyo"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito America's Qix hardware, the same boards as Qix. The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "sdungeon",
+      "title": "Space Dungeon",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "sdungeon"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito America's Qix hardware, the same boards as Qix. The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "zookeep",
+      "title": "Zoo Keeper",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "zookeep"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito America's Qix hardware, the same boards as Qix. The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "kram",
+      "title": "Kram",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "kram"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito America's Qix hardware, the same boards as Qix. The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Kram's speech wiring follows the Kram schematic. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_Sound.sv#L235",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "slither",
+      "title": "Slither",
+      "rbfs": [
+        "Qix"
+      ],
+      "setnames": [
+        "slither"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito America's Qix hardware, the same boards as Qix. The core's CPU logic cites the Qix schematics by figure and chip position, such as the FIRQ flip-flops at U7 and U8 from Figure 13. Slither's own I/O follows its schematic, sheet DSR 2/2. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix.sv#L168",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L127",
+        "https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/blob/cd3ca5520be3d9d9cd779383cd027c5f535c28b9/rtl/Qix_CPU.sv#L226",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Qix"
+      ]
+    },
+    {
+      "k": "turbo",
+      "title": "Turbo",
+      "rbfs": [
+        "segavco"
+      ],
+      "setnames": [
+        "turbo"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Turbo's discrete sound board is rebuilt from Sega's original schematics, circuit by circuit (oscillators, 555 timers, one-shots, noise), with in-tolerance values measured from a cabinet recording; the README says what is schematic and what is not. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SegaVCO_MiSTer/blob/a7536fc38c9b00d6fd72b6795c9906408aa27b8d/README.md?plain=1#L12",
+        "https://github.com/MiSTer-devel/Arcade-SegaVCO_MiSTer/blob/a7536fc38c9b00d6fd72b6795c9906408aa27b8d/README.md?plain=1#L29",
+        "https://github.com/MiSTer-devel/Arcade-SegaVCO_MiSTer/blob/a7536fc38c9b00d6fd72b6795c9906408aa27b8d/README.md?plain=1#L37",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SegaVCO"
+      ]
+    },
+    {
+      "k": "buckrogn",
+      "title": "Buck Rogers: Planet of Zoom",
+      "rbfs": [
+        "segavco"
+      ],
+      "setnames": [
+        "buckrogn"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Buck Rogers' discrete sound board is rebuilt from Sega's original schematics, circuit by circuit (oscillators, 555 timers, one-shots, noise); the README says what is schematic and what is not. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SegaVCO_MiSTer/blob/a7536fc38c9b00d6fd72b6795c9906408aa27b8d/README.md?plain=1#L12",
+        "https://github.com/MiSTer-devel/Arcade-SegaVCO_MiSTer/blob/a7536fc38c9b00d6fd72b6795c9906408aa27b8d/README.md?plain=1#L29",
+        "https://github.com/MiSTer-devel/Arcade-SegaVCO_MiSTer/blob/a7536fc38c9b00d6fd72b6795c9906408aa27b8d/README.md?plain=1#L37",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SegaVCO"
+      ]
+    },
+    {
+      "k": "bwidow",
+      "title": "Black Widow",
+      "rbfs": [
+        "blackwidow"
+      ],
+      "setnames": [
+        "bwidow"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The vector generator is modelled from Atari's schematics, citing page, figure and chip position, such as the LS175 at 6L (page 25, figure 1). Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BlackWidow_MiSTer/blob/e560fd8b83b22fc503c94d3221e11013ed41df0e/rtl/avg/avg_prom_core.vhd#L105",
+        "https://github.com/MiSTer-devel/Arcade-BlackWidow_MiSTer/blob/e560fd8b83b22fc503c94d3221e11013ed41df0e/rtl/avg/avg_prom_core.vhd#L114",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-BlackWidow"
+      ]
+    },
+    {
+      "k": "gravitar",
+      "title": "Gravitar",
+      "rbfs": [
+        "blackwidow"
+      ],
+      "setnames": [
+        "gravitar"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Atari vector hardware as Black Widow. The vector generator is modelled from Atari's schematics, citing page, figure and chip position, such as the LS175 at 6L (page 25, figure 1). Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BlackWidow_MiSTer/blob/e560fd8b83b22fc503c94d3221e11013ed41df0e/rtl/avg/avg_prom_core.vhd#L105",
+        "https://github.com/MiSTer-devel/Arcade-BlackWidow_MiSTer/blob/e560fd8b83b22fc503c94d3221e11013ed41df0e/rtl/avg/avg_prom_core.vhd#L114",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-BlackWidow"
+      ]
+    },
+    {
+      "k": "ddribble",
+      "title": "Double Dribble",
+      "rbfs": [
+        "jtddrbl"
+      ],
+      "setnames": [
+        "ddribble"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Built from the Double Dribble schematics page by page, with the 007552 address-decoder PAL taken from a jedutil decode of its JEDEC dump. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/ddrbl/hdl/jtddrbl_main.v#L4",
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/ddrbl/hdl/jtddrbl_main.v#L13",
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/ddrbl/doc/Konami_007552_equations.txt#L1",
+        "https://alamone.github.io/fpga-verified-against/results/#jt-jtddrbl"
+      ]
+    },
+    {
+      "k": "elevator",
+      "title": "Elevator Action",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "elevator"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "junglek",
+      "title": "Jungle King",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "junglek"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "frontlin",
+      "title": "Front Line",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "frontlin"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "alpine",
+      "title": "Alpine Ski",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "alpine"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "adcanoe",
+      "title": "Adventure Canoe",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "adcanoe"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "bioatack",
+      "title": "Bio Attack",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "bioatack"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "hwrace",
+      "title": "High Way Race",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "hwrace"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "sfposeid",
+      "title": "Sea Fighter Poseidon",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "sfposeid"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "spacecr",
+      "title": "Space Cruiser",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "spacecr"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "spaceskr",
+      "title": "Space Seeker",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "spaceskr"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "timetunl",
+      "title": "Time Tunnel",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "timetunl"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "tinstar",
+      "title": "The Tin Star",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "tinstar"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "waterski",
+      "title": "Water Ski",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "waterski"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "wwestern",
+      "title": "Wild Western",
+      "rbfs": [
+        "TaitoSJ"
+      ],
+      "setnames": [
+        "wwestern"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Taito's System SJ. The core replicates the MCU daughterboard gate by gate from the Taito SJ schematic, and follows board wiring such as the 74LS273 at U83. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/mcu_glue.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer/blob/121cf1d566db75f7ae69e31287fbfa932d3faedc/rtl/TaitoSJ_objbus.v#L125",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoSJ"
+      ]
+    },
+    {
+      "k": "athena",
+      "title": "Athena",
+      "rbfs": [
+        "Athena"
+      ],
+      "setnames": [
+        "athena"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The board's A6001-1 PAL is converted from a JEDEC dump, and the final video stage is derived from the T.N.K III schematics and a dumped PAL. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Athena_MiSTer/blob/c475eba6c6f4034f5ebac91aafd2aa0b525ec210/rtl/clocks/A6001_1.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-Athena_MiSTer/blob/c475eba6c6f4034f5ebac91aafd2aa0b525ec210/rtl/final_video/A5001_3.v#L4",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Athena"
+      ]
+    },
+    {
+      "k": "fitegolf",
+      "title": "Lee Trevino's Fighting Golf",
+      "rbfs": [
+        "Athena"
+      ],
+      "setnames": [
+        "fitegolf"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same SNK A6001 boards as Athena, with the same A6001-1 PAL. The board's A6001-1 PAL is converted from a JEDEC dump, and the final video stage is derived from the T.N.K III schematics and a dumped PAL. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Athena_MiSTer/blob/c475eba6c6f4034f5ebac91aafd2aa0b525ec210/rtl/clocks/A6001_1.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-Athena_MiSTer/blob/c475eba6c6f4034f5ebac91aafd2aa0b525ec210/rtl/final_video/A5001_3.v#L4",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Athena"
+      ]
+    },
+    {
+      "k": "ikari",
+      "title": "Ikari Warriors",
+      "rbfs": [
+        "IkariWarriors"
+      ],
+      "setnames": [
+        "ikari"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The A5004-1 PAL is converted from a JEDEC dump of Ikari Warriors' own PAL, the logic is built from the board's TTL chips, and an edited Ikari Warriors schematic ships with the core. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IkariWarriors_MiSTer/blob/3e5f3457e93aaf7d34131f611a8f89268f041076/rtl/clocks/A5004_1.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-IkariWarriors_MiSTer/blob/3e5f3457e93aaf7d34131f611a8f89268f041076/docs/IkariWarriorsSchematic_RndMnkIII_edited.pdf",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-IkariWarriors"
+      ]
+    },
+    {
+      "k": "hyprduel",
+      "title": "Hyper Duel",
+      "rbfs": [
+        "hyprduel"
+      ],
+      "setnames": [
+        "hyprduel"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The Imagetek I4220 video chip was built against MAME, then checked against photos of a TEC442-A board and recordings of real boards; the 60.24 Hz refresh and the 2 MHz OKI clock are measured from those recordings. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-HyperDuel_MiSTer/blob/7f154f1e856ce5863f962821f2b330d1e8a85727/README.md?plain=1#L13",
+        "https://github.com/MiSTer-devel/Arcade-HyperDuel_MiSTer/blob/7f154f1e856ce5863f962821f2b330d1e8a85727/README.md?plain=1#L64",
+        "https://github.com/MiSTer-devel/Arcade-HyperDuel_MiSTer/blob/7f154f1e856ce5863f962821f2b330d1e8a85727/rtl/hyprduel_sys.sv#L400",
+        "https://github.com/MiSTer-devel/Arcade-HyperDuel_MiSTer/blob/7f154f1e856ce5863f962821f2b330d1e8a85727/docs/ACCURACY.md?plain=1#L24",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Hyprduel"
+      ]
+    },
+    {
+      "k": "elim2a",
+      "title": "Eliminator",
+      "rbfs": [
+        "SegaG80V"
+      ],
+      "setnames": [
+        "elim2a"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Sega's G80 vector hardware. The core is cross-checked against MAME and Sega's schematics, down to the X-Y control board (drawing 800-0163), and its audio filtering follows the Sega schematics and manuals. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/sega_game_pkg.sv#L7",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/xy/sega_xy_top.sv#L6",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/README.md?plain=1#L37",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SegaG80V"
+      ]
+    },
+    {
+      "k": "spacfury",
+      "title": "Space Fury",
+      "rbfs": [
+        "SegaG80V"
+      ],
+      "setnames": [
+        "spacfury"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Sega's G80 vector hardware. The core is cross-checked against MAME and Sega's schematics, down to the X-Y control board (drawing 800-0163), and its audio filtering follows the Sega schematics and manuals. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/sega_game_pkg.sv#L7",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/xy/sega_xy_top.sv#L6",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/README.md?plain=1#L37",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SegaG80V"
+      ]
+    },
+    {
+      "k": "startrek",
+      "title": "Star Trek",
+      "rbfs": [
+        "SegaG80V"
+      ],
+      "setnames": [
+        "startrek"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Sega's G80 vector hardware. The core is cross-checked against MAME and Sega's schematics, down to the X-Y control board (drawing 800-0163), and its audio filtering follows the Sega schematics and manuals. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/sega_game_pkg.sv#L7",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/xy/sega_xy_top.sv#L6",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/README.md?plain=1#L37",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SegaG80V"
+      ]
+    },
+    {
+      "k": "tacscan",
+      "title": "Tac/Scan",
+      "rbfs": [
+        "SegaG80V"
+      ],
+      "setnames": [
+        "tacscan"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Sega's G80 vector hardware. The core is cross-checked against MAME and Sega's schematics, down to the X-Y control board (drawing 800-0163), and its audio filtering follows the Sega schematics and manuals. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/sega_game_pkg.sv#L7",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/xy/sega_xy_top.sv#L6",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/README.md?plain=1#L37",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SegaG80V"
+      ]
+    },
+    {
+      "k": "zektor",
+      "title": "Zektor",
+      "rbfs": [
+        "SegaG80V"
+      ],
+      "setnames": [
+        "zektor"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Sega's G80 vector hardware. The core is cross-checked against MAME and Sega's schematics, down to the X-Y control board (drawing 800-0163), and its audio filtering follows the Sega schematics and manuals. Zektor's discrete audio is rebuilt from its original schematics. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/sega_game_pkg.sv#L7",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/rtl/xy/sega_xy_top.sv#L6",
+        "https://github.com/MiSTer-devel/Arcade-SegaG80V_MiSTer/blob/96b82aa2822f4cae0e6c9ea3b347e2e7afb4b10b/README.md?plain=1#L37",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SegaG80V"
+      ]
+    },
+    {
+      "k": "tutankhm",
+      "title": "Tutankham",
+      "rbfs": [
+        "Tutankham"
+      ],
+      "setnames": [
+        "tutankhm"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The Konami 084 custom chip's pinout is confirmed against the C.R.T. board schematic in Stern's Tutankham service manual (34D-0126-S), which also corrects two pins in the pinout circulated with MAME. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Tutankham_MiSTer/blob/9cf75dc30549f81028a74beccf5835a646536aaf/rtl/custom/k084.sv#L31",
+        "https://github.com/MiSTer-devel/Arcade-Tutankham_MiSTer/blob/9cf75dc30549f81028a74beccf5835a646536aaf/rtl/custom/k084.sv#L231",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Tutankham"
+      ]
+    },
+    {
+      "k": "bionicc",
+      "title": "Bionic Commando",
+      "rbfs": [
+        "jtbiocom"
+      ],
+      "setnames": [
+        "bionicc"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The colour resistor values were measured on a PCB by Caius, the core's folder holds logic analyser captures of the board's blanking signals, and the interrupt timing is checked against the Bionic Commando schematics and a board measurement. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/biocom/hdl/jtbiocom_colmix.v#L5",
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/biocom/hdl/jtbiocom_main.v#L397",
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/biocom/doc/LVBL.jpeg",
+        "https://alamone.github.io/fpga-verified-against/results/#jt-jtbiocom"
+      ]
+    },
+    {
+      "k": "junofrst",
+      "title": "Juno First",
+      "rbfs": [
+        "JunoFirst"
+      ],
+      "setnames": [
+        "junofrst"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The I/O decoding follows the Juno First schematics, and the sound CPU's wiring is checked against the 8039's pins on the same schematic. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-JunoFirst_MiSTer/blob/efeb8e4689a0e157d8df59a017dbbc4821009ef5/rtl/JunoFirst_CPU.sv#L223",
+        "https://github.com/MiSTer-devel/Arcade-JunoFirst_MiSTer/blob/efeb8e4689a0e157d8df59a017dbbc4821009ef5/rtl/JunoFirst_SND.sv#L275",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-JunoFirst"
+      ]
+    },
+    {
+      "k": "troangel",
+      "title": "Tropical Angel",
+      "rbfs": [
+        "TropicalAngel"
+      ],
+      "setnames": [
+        "troangel"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The audio clock (3.579545 MHz divided by 4) comes from measurements on a PCB by Corrado (kold666). Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TropicalAngel_MiSTer/blob/3fe315d746c8719e7b4ef13a84911ead7365fae7/Arcade-TropicalAngel.sv#L413",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TropicalAngel"
+      ]
+    },
+    {
+      "k": "pingpong",
+      "title": "Konami's Ping-Pong",
+      "rbfs": [
+        "jtpinpon"
+      ],
+      "setnames": [
+        "pingpong"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Built from a Ping-Pong PCB lent by supercrow123: the core's folder has the analysis report, with full schematics extracted from the board and measurements taken on it, and the redrawn KiCad schematics. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/pinpon/doc/Konami%27s%20Ping%20Pong%20Report.pdf",
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/pinpon/sch/pwb400322.kicad_sch",
+        "https://alamone.github.io/fpga-verified-against/results/#jt-jtpinpon"
+      ]
+    },
+    {
+      "k": "bublbobl",
+      "title": "Bubble Bobble",
+      "rbfs": [
+        "jtbubl"
+      ],
+      "setnames": [
+        "bublbobl"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's folder carries the equations of the board's PALs (IC12, IC41, IC43 and IC49) with schematic sheet references, from the JAMMArcade wiki, and the logic follows the schematics down to a board jumper. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/bubl/doc/pld.txt#L1",
+        "https://github.com/jotego/jtcores/blob/b672aca509474559def2f6caec51fcd52cceee62/cores/bubl/hdl/jtbubl_main.v#L412",
+        "https://alamone.github.io/fpga-verified-against/results/#jt-jtbubl"
+      ]
+    },
+    {
+      "k": "airass",
+      "title": "Air Assault",
+      "rbfs": [
+        "IremM107"
+      ],
+      "setnames": [
+        "airass"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Irem's M107 hardware. The core was built with an M107 PCB acquired for it, M107 PAL information from the PLD Archive, and global signals taken from the schematics. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM107_MiSTer/blob/bfdfd292188186a5d3ce8eddfac5ee13d81e4202/Readme.md?plain=1#L15",
+        "https://github.com/MiSTer-devel/Arcade-IremM107_MiSTer/blob/bfdfd292188186a5d3ce8eddfac5ee13d81e4202/Readme.md?plain=1#L24",
+        "https://github.com/MiSTer-devel/Arcade-IremM107_MiSTer/blob/bfdfd292188186a5d3ce8eddfac5ee13d81e4202/rtl/m107.sv#L166",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-IremM107"
+      ]
+    },
+    {
+      "k": "dsoccr94",
+      "title": "Dream Soccer '94",
+      "rbfs": [
+        "IremM107"
+      ],
+      "setnames": [
+        "dsoccr94"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Irem's M107 hardware. The core was built with an M107 PCB acquired for it, M107 PAL information from the PLD Archive, and global signals taken from the schematics. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM107_MiSTer/blob/bfdfd292188186a5d3ce8eddfac5ee13d81e4202/Readme.md?plain=1#L15",
+        "https://github.com/MiSTer-devel/Arcade-IremM107_MiSTer/blob/bfdfd292188186a5d3ce8eddfac5ee13d81e4202/Readme.md?plain=1#L24",
+        "https://github.com/MiSTer-devel/Arcade-IremM107_MiSTer/blob/bfdfd292188186a5d3ce8eddfac5ee13d81e4202/rtl/m107.sv#L166",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-IremM107"
+      ]
+    },
+    {
+      "k": "arabian",
+      "title": "Arabian",
+      "rbfs": [
+        "Arabian"
+      ],
+      "setnames": [
+        "arabian"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core cites the SP-237 schematic sheets: the 12 MHz master clock from sheet 8B, and the colour derivation confirmed against sheet 11B. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/blob/42fef5ac8033e14f1341df1e8c620551af114ebb/rtl/Arabian_CPU.sv#L366",
+        "https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/blob/42fef5ac8033e14f1341df1e8c620551af114ebb/rtl/Arabian_CPU.sv#L783",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Arabian"
+      ]
+    },
+    {
+      "k": "timeplt",
+      "title": "Time Pilot",
+      "rbfs": [
+        "timepilot"
+      ],
+      "setnames": [
+        "timeplt"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The board's two Konami PLAs, the 526 and 528, are converted from dumps of Time Pilot's own chips at the PLD Archive. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TimePilot_MiSTer/blob/97033775806823ce3387595a459597d02e546261/rtl/custom/k526.sv#L5",
+        "https://github.com/MiSTer-devel/Arcade-TimePilot_MiSTer/blob/97033775806823ce3387595a459597d02e546261/rtl/custom/k528.sv#L5",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TimePilot"
+      ]
+    },
+    {
+      "k": "canyon",
+      "title": "Canyon Bomber",
+      "rbfs": [
+        "canyonbomber"
+      ],
+      "setnames": [
+        "canyon"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "James Sweet built the core from the Canyon Bomber schematics, naming signals as drawn there, and notes the steering and thrust inputs the schematic wires to an input selector the game never reads. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-CanyonBomber_MiSTer/blob/0e83812f548b5c5c6bcb005eea9281e4434854f0/rtl/cpu_mem.vhd#L447",
+        "https://github.com/MiSTer-devel/Arcade-CanyonBomber_MiSTer/blob/0e83812f548b5c5c6bcb005eea9281e4434854f0/rtl/playfield.vhd#L31",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-CanyonBomber"
+      ]
+    },
+    {
+      "k": "dominos",
+      "title": "Dominos",
+      "rbfs": [
+        "dominos"
+      ],
+      "setnames": [
+        "dominos"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "James Sweet built the core from the Dominos schematics; its signals are named by chip designator and pin number as drawn there. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Dominos_MiSTer/blob/faa35f901cca10ff8126ae42657ec81d0d58b78e/rtl/playfield.vhd#L70",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Dominos"
+      ]
+    },
+    {
+      "k": "sprint1",
+      "title": "Sprint 1",
+      "rbfs": [
+        "sprint1"
+      ],
+      "setnames": [
+        "sprint1"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "James Sweet built the core from the Sprint 1 schematics chip by chip, such as the 74LS279 latch at H6, and notes an error in the original schematic at F8. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Sprint1_MiSTer/blob/fc0e81806a38f61ebda2f265e27b710a270ee1f1/rtl/collision.vhd#L7",
+        "https://github.com/MiSTer-devel/Arcade-Sprint1_MiSTer/blob/fc0e81806a38f61ebda2f265e27b710a270ee1f1/rtl/collision.vhd#L63",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Sprint1"
+      ]
+    },
+    {
+      "k": "sprint2",
+      "title": "Sprint 2",
+      "rbfs": [
+        "sprint2"
+      ],
+      "setnames": [
+        "sprint2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "James Sweet built the core from the Sprint 2 schematics, naming signals by chip designator and pin number, and notes an error in the original schematic at F8. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Sprint2_MiSTer/blob/cd2b0025e1683ec9c1ccf68d5cdd8268eaade74a/rtl/collision.vhd#L7",
+        "https://github.com/MiSTer-devel/Arcade-Sprint2_MiSTer/blob/cd2b0025e1683ec9c1ccf68d5cdd8268eaade74a/rtl/playfield.vhd#L73",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Sprint2"
+      ]
+    },
+    {
+      "k": "subs",
+      "title": "Subs",
+      "rbfs": [
+        "subs"
+      ],
+      "setnames": [
+        "subs"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "James Sweet built the core from the Subs schematics and manual: the video output follows Figure 4-11, and signals are named as on the schematic. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Subs_MiSTer/blob/2d7bc75a6d6abd72138dc54b70cd694b4e6eaac6/rtl/subs_core.vhd#L17",
+        "https://github.com/MiSTer-devel/Arcade-Subs_MiSTer/blob/2d7bc75a6d6abd72138dc54b70cd694b4e6eaac6/rtl/input.vhd#L119",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Subs"
+      ]
+    },
+    {
+      "k": "ultratnk",
+      "title": "Ultra Tank",
+      "rbfs": [
+        "ultratank"
+      ],
+      "setnames": [
+        "ultratnk"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "James Sweet built the core from the Ultra Tank schematics; its signals are named by chip designator and pin number as drawn there. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Ultratank_MiSTer/blob/54e8136f0210245e97d325c605cf00b1d1a6dab6/rtl/playfield.vhd#L86",
+        "https://github.com/MiSTer-devel/Arcade-Ultratank_MiSTer/blob/54e8136f0210245e97d325c605cf00b1d1a6dab6/rtl/playfield.vhd#L164",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Ultratank"
+      ]
+    },
+    {
+      "k": "mario",
+      "title": "Mario Bros.",
+      "rbfs": [
+        "mariobros"
+      ],
+      "setnames": [
+        "mario"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The address decoder is built chip by chip from the board's schematics, such as the 74LS139 at 4A, with notes where the schematics are misnumbered or wrong. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-MarioBros_MiSTer/blob/a934eecfb83a18f68b14c52380f3bfda153dcc99/rtl/mario_adec.v#L111",
+        "https://github.com/MiSTer-devel/Arcade-MarioBros_MiSTer/blob/a934eecfb83a18f68b14c52380f3bfda153dcc99/rtl/mario_adec.v#L263",
+        "https://github.com/MiSTer-devel/Arcade-MarioBros_MiSTer/blob/a934eecfb83a18f68b14c52380f3bfda153dcc99/rtl/mario_vram.v#L107",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-MarioBros"
+      ]
+    },
+    {
+      "k": "zaxxon",
+      "title": "Zaxxon",
+      "rbfs": [
+        "zaxxon"
+      ],
+      "setnames": [
+        "zaxxon"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Dar built the core from the Zaxxon board schematics (834-0214, 834-0257 and 834-0211) and lists where they are incomplete or wrong, by sheet and chip position. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Zaxxon_MiSTer/blob/0bc93064fe2a3a8418a096b0260f9a646fc79276/rtl/zaxxon.vhd#L74",
+        "https://github.com/MiSTer-devel/Arcade-Zaxxon_MiSTer/blob/0bc93064fe2a3a8418a096b0260f9a646fc79276/rtl/zaxxon.vhd#L79",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Zaxxon"
+      ]
+    },
+    {
+      "k": "szaxxon",
+      "title": "Super Zaxxon",
+      "rbfs": [
+        "zaxxon"
+      ],
+      "setnames": [
+        "szaxxon"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Sega hardware as Zaxxon, with an encrypted CPU. Dar built the core from the Zaxxon board schematics (834-0214, 834-0257 and 834-0211) and lists where they are incomplete or wrong, by sheet and chip position. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Zaxxon_MiSTer/blob/0bc93064fe2a3a8418a096b0260f9a646fc79276/rtl/zaxxon.vhd#L74",
+        "https://github.com/MiSTer-devel/Arcade-Zaxxon_MiSTer/blob/0bc93064fe2a3a8418a096b0260f9a646fc79276/rtl/zaxxon.vhd#L79",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-Zaxxon"
+      ]
     }
   ]
 }

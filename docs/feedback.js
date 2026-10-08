@@ -84,7 +84,7 @@
   dlg.innerHTML =
     '<form class="fb-in" novalidate>' +
       '<h2 id="fbh">Feedback</h2>' +
-      '<p class="fb-note">A bug, a wrong entry, a missing core or an idea: it goes straight to the developer.</p>' +
+      '<p class="fb-note">A bug, error, idea, suggestion, whatever: goes straight to Matija, the developer of MisterZine.</p>' +
       '<label class="fb-lbl" for="fbtext">Your message</label>' +
       '<textarea id="fbtext" name="text" rows="6" maxlength="' + TEXT_MAX + '" required aria-describedby="fbcount"></textarea>' +
       '<div class="fb-count" id="fbcount"></div>' +

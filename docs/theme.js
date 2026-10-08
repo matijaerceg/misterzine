@@ -91,8 +91,8 @@
     }, true);
   }
 
-  // Patreon links in the header (the nav's on every page, the tracker's status
-  // line) carry data-patreon: a click opens a short note on what supporting
+  // Patreon links in the header (the nav's, on every page) carry
+  // data-patreon: a click opens a short note on what supporting
   // gets you, with the way through to Patreon, instead of dropping the visitor
   // on another site. They stay plain hrefs, so without JS, or with a modifier
   // key, they go straight there. Closes like the Menu (outside click, Escape
@@ -107,7 +107,7 @@
   }
   function placePat() {
     if (!pat) return;
-    if (!patFrom.isConnected) { closePat(); return; }  // the tracker rebuilds its status line
+    if (!patFrom.isConnected) { closePat(); return; }  // its link left the page
     var r = patFrom.getBoundingClientRect(), w = pat.offsetWidth;
     pat.style.left = Math.max(8, Math.min(r.left, innerWidth - w - 8)) + 'px';
     pat.style.top = (r.bottom + 6) + 'px';

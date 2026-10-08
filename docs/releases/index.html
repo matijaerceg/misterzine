@@ -146,19 +146,24 @@
            color: var(--muted); font-size: .8rem; white-space: nowrap;
            font-variant-numeric: tabular-nums; pointer-events: none; }
   #q:not(:placeholder-shown) ~ .count { right: 1.45rem; }
-  /* "Clear filters" is an ACTION, not a status, so it gets a warmer, heavier
-     treatment than the blue active-filter glow: amber fill + amber border +
-     amber text reads as "press me to undo", and the distinct hue keeps it from
-     being mistaken for a fourth active filter. Theme-aware via color-mix. */
-  button.clear { font: inherit; font-size: .9rem; padding: .4rem .7rem; cursor: pointer;
-                 border-radius: 4px;
-                 border: 1px solid color-mix(in srgb, var(--reset) 65%, var(--fg));
-                 background: color-mix(in srgb, var(--reset) 20%, var(--surface));
-                 color: color-mix(in srgb, var(--reset) 72%, var(--fg)); }
-  button.clear:not(:disabled):hover { background: color-mix(in srgb, var(--reset) 32%, var(--surface)); }
-  /* always present, but grayed + inert until a filter is actually narrowing the
-     list (JS toggles [disabled]); the amber above is the "armed" state */
-  button.clear:disabled { border-color: var(--hair); background: transparent; color: var(--muted); cursor: default; }
+  /* "Clear filters" has two states, and is clickable in both. Idle (nothing to
+     clear: no search, no narrowing filter, the default sort) it is the dropdown
+     summaries' neutral chrome, a notch faded. Armed (JS toggles .active) it is
+     an ACTION, not a status: the solid accent fill with --accent-on text (the
+     pair with a contrast floor, as on the panel's Launch button) and a small x
+     in front, so "press me to undo" stands apart from the filters' accent tint.
+     The x's slot (--clx) is held in both states, idle padding it out evenly on
+     both sides, so arming never nudges the rest of the row. */
+  button.clear { --clx: .75rem; --clpad: .7rem;
+                 font: inherit; font-size: .9rem; padding: .4rem var(--clpad); cursor: pointer;
+                 border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit;
+                 opacity: .75; }
+  button.clear:not(.active) { padding-inline: calc(var(--clpad) + var(--clx) / 2); }
+  button.clear:not(.active) .clx { display: none; }
+  button.clear:hover { background: var(--hover-bg); }
+  button.clear .clx { display: inline-block; width: var(--clx); font-size: .85em; font-weight: 700; }
+  button.clear.active { opacity: 1; border-color: var(--accent); background: var(--accent); color: var(--accent-on); }
+  button.clear.active:hover { background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
   /* "Columns" dropdown: opt-in arcade metadata columns (default all off) */
   details.cols { position: relative; }
   details.cols summary { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
@@ -978,6 +983,7 @@
        the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
        the tap targets keep their height. */
     details.cols summary, button.clear, .favctl > button, .hvtoggle { font-size: .85rem; padding: .35rem .45rem; }
+    button.clear { --clpad: .45rem; }
     .favctl > button { min-width: 3em; }
     /* the sort arrow is dropped here: at this width it's the thing that wraps the
        header onto a second sticky line, and the accent color already says which
@@ -1106,7 +1112,7 @@
          Seal, count, tip and label are filled by syncHvSummary (the badge's
          name lives in the JS); hidden until the data carries a badge. -->
     <button type="button" id="hvtoggle" class="hvtoggle" aria-pressed="false" hidden></button>
-    <button type="button" id="clear" class="clear" disabled>Clear filters</button>
+    <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
     <!-- favorites: the left segment filters the list down to starred rows, the
          caret opens the housekeeping (backup link, clear). Same split shape as
          the theme toggle in the header. -->
@@ -1481,7 +1487,6 @@ function syncStatus() {
   // under the cursor in full, so repeating it there was pure noise.
   const p = document.getElementById('updated');
   if (metaFull) p.dataset.tip = 'Updated ' + metaFull + '.'; else p.removeAttribute('data-tip');
-  fitSupport();  // the visit half's length just changed
 }
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;
@@ -2344,11 +2349,13 @@ function apply() {
   // matching both, in any field, in any order); each term is an independent
   // substring so multi-word values still match ("street fighter" hits the title)
   const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
-  // the global "Clear filters" button is always present; it's armed (enabled) only
-  // while a filter is narrowing results, and grayed/disabled otherwise
-  document.getElementById('clear').disabled =
-    !(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
-      || favOnly || favView || hvOnly);
+  // the global "Clear filters" button is always present and clickable; it's
+  // armed (accent fill + x) while anything differs from a fresh load: a search,
+  // a narrowing filter or toggle, or a sort other than the default
+  const [dk, dd] = defaultSort();
+  document.getElementById('clear').classList.toggle('active',
+    !!(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
+      || favOnly || favView || hvOnly || sortKey !== dk || sortDir !== dd));
   // Type / Source / Genre: every box checked is the default (no filter); any
   // unchecked box narrows to the checked ones, and an all-unchecked menu shows
   // nothing (see pickNarrows and the menus below).
@@ -2453,8 +2460,9 @@ function clearSearch() {
   recenterOpen();  // the full list just replaced the filtered one; keep the user's place
 }
 document.getElementById('qx').addEventListener('click', clearSearch);
-// the far-right "Clear filters" button resets every filter at once (text + every dropdown);
-// resetTypes/resetSrcs/resetGenres/resetYear are state-only helpers defined with each dropdown below
+// the far-right "Clear filters" button resets every filter at once (text + every
+// dropdown + the toggles) and the sort; resetTypes/resetSrcs/resetGenres/resetYear
+// are state-only helpers defined with each dropdown below
 function clearAllFilters() {
   const q = document.getElementById('q');
   q.value = '';
@@ -2464,6 +2472,10 @@ function clearAllFilters() {
   resetFavOnly();
   if (favView) dismissFavView();
   resetHvOnly();
+  // the sort goes back to the default too, so the button means "the list as a
+  // fresh load shows it" (columns, theme and the favorites list are prefs, not view)
+  const [k, d] = defaultSort();
+  if (sortKey !== k || sortDir !== d) { sortKey = k; sortDir = d; buildHeader(); }
   apply();
   recenterOpen();
 }
@@ -2474,7 +2486,7 @@ document.getElementById('clear').addEventListener('click', clearAllFilters);
 // this button's text, hence the helper.
 function syncClearLabel() {
   const b = document.getElementById('clear');
-  b.textContent = narrowMQ.matches ? 'Clear' : 'Clear filters';
+  b.querySelector('.cll').textContent = narrowMQ.matches ? 'Clear' : 'Clear filters';
   if (narrowMQ.matches) b.dataset.tip = 'Clear filters'; else b.removeAttribute('data-tip');
 }
 syncClearLabel();
@@ -2598,15 +2610,17 @@ function syncColsReset() {
   const def = defaultCols();
   colsReset.disabled = enabledCols.size === def.size && [...enabledCols].every(k => def.has(k));
 }
-// sorting by a column that was just hidden would be invisible — fall back to
-// last-updated (the site default) if visible, then debut date, else the
-// always-on title column
+// the sort a fresh load lands on, given the visible columns: last-updated (the
+// site default) if shown, then debut date, else the always-on title column.
+// "Clear filters" resets to it and arms itself whenever the sort differs.
+function defaultSort() {
+  const on = k => activeColumns().some(c => c.k === k);
+  return on('updated') ? ['updated', -1] : on('date') ? ['date', -1] : ['title', 1];
+}
+// sorting by a column that was just hidden would be invisible: fall back to the
+// default sort for the columns still shown
 function fixSortThenRebuild() {
-  if (!activeColumns().some(c => c.k === sortKey)) {
-    if (activeColumns().some(c => c.k === 'updated')) { sortKey = 'updated'; sortDir = -1; }
-    else if (activeColumns().some(c => c.k === 'date')) { sortKey = 'date'; sortDir = -1; }
-    else { sortKey = 'title'; sortDir = 1; }
-  }
+  if (!activeColumns().some(c => c.k === sortKey)) [sortKey, sortDir] = defaultSort();
   buildHeader();
   apply();
   // adding/removing columns changes row heights (in-cell wrapping), which can
@@ -4298,28 +4312,9 @@ function stampMeta(m) {
   // the data clock, wide and phone spellings, then the slot syncStatus fills
   el.innerHTML = '<span class="upd-stamp"><span class="w">Updated <span id="updated-rel">' + esc(valid ? relUpdated(dt) : m.updated) + '</span>.</span>' +
     '<span class="n">Upd. <span id="updated-rel-n">' + esc(valid ? relUpdated(dt, true) : m.updated) + '</span>.</span></span>' +
-    ' <span id="visit-line"></span> <span id="support-line">' + supportHTML() + '</span>';
+    ' <span id="visit-line"></span>';
   syncStatus();
 }
-// Patreon at the tail of the status line (the nav's Patreon link is the one
-// every width sees). Shown only when the whole line fits: below ~1024px the line
-// already ellipsizes its own visit tally, so a half-cut link would be all that
-// showed. fitSupport() re-checks whenever the line's text or width changes. Its
-// own data-tip wins over the line's "Updated <stamp>" tip (theme.js takes the
-// closest [data-tip]). Like the nav's, a click opens theme.js's Patreon note
-// (data-patreon), which also counts the click through as patreon-tracker.
-function supportHTML() {
-  return 'Kept going by <a href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener"' +
-    ' data-patreon="tracker" aria-haspopup="dialog" aria-expanded="false"' +
-    ' data-tip="Patreon members get early access and additional features.">Patreon supporters</a>.';
-}
-function fitSupport() {
-  const u = document.getElementById('updated'), s = document.getElementById('support-line');
-  if (!u || !s) return;
-  s.hidden = false;
-  if (u.scrollWidth > u.clientWidth + 1) s.hidden = true;
-}
-{ let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fitSupport, 150); }); }
 // keep a left-open tab honest: refresh the relative label on a slow tick and
 // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
 // Armed once, outside stampMeta: a re-stamp must not stack a second interval.

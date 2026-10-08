@@ -61,13 +61,11 @@
   --stamp-shade: rgb(0 0 0 / .42);
   --stamp-sheen: rgb(255 255 255 / .55);
   /* the Hardware Verified seal's sheen: how far its top-left corner mixes
-     toward white and its bottom-right toward black. A theme overrides one only
-     where that corner would fall under 2:1 against a table row (plain, hovered
-     or selected) at 16px, i.e. start to melt into it: dmg and riso clamp the
-     light corner, workbench and commodore the dark one, each only as far as
-     that floor needs. */
-  --hv-light: 30%;
-  --hv-dark: 40%;
+     toward white and its bottom-right toward black. A theme would override one
+     only where that corner fell under 2:1 against a table row (plain, hovered
+     or selected) at 16px; at 15/25 every theme clears it, so none does. */
+  --hv-light: 15%;
+  --hv-dark: 25%;
 }
 
 /* ---- dark: the same quiet pair, inverted. --accent is the light-ground
@@ -315,7 +313,6 @@
   --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
   --stamp-shade: rgb(0 0 0 / .42);
   --stamp-sheen: rgb(255 255 255 / .55);
-  --hv-light: 25%;  /* seal sheen clamp: the light (top-left) corner keeps 2:1 on every row state (plain, hover, selected) at 16px */
 }
 
 /* ---- spectrum: ZX Spectrum BRIGHT set on black paper. The one theme whose
@@ -380,7 +377,6 @@
   --watermark: color-mix(in srgb, #000 22%, var(--surface));
   --stamp-shade: rgb(0 0 0 / .45);
   --stamp-sheen: rgb(255 255 255 / .06);
-  --hv-dark: 31%;  /* seal sheen clamp: the dark (bottom-right) corner keeps 2:1 on every row state (plain, hover, selected) at 16px */
 }
 
 /* ---- commodore (menu label "C64"): the VIC-II boot screen — 352879 screen,
@@ -412,7 +408,6 @@
   --watermark: color-mix(in srgb, #000 22%, var(--surface));
   --stamp-shade: rgb(0 0 0 / .45);
   --stamp-sheen: rgb(255 255 255 / .06);
-  --hv-dark: 36%;  /* seal sheen clamp: the dark (bottom-right) corner keeps 2:1 on every row state (plain, hover, selected) at 16px */
 }
 
 /* ---- riso: risograph print. Newsprint ground, soft-black ink, and exactly
@@ -445,7 +440,6 @@
   --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
   --stamp-shade: rgb(0 0 0 / .42);
   --stamp-sheen: rgb(255 255 255 / .55);
-  --hv-light: 29%;  /* seal sheen clamp: the light (top-left) corner keeps 2:1 on every row state (plain, hover, selected) at 16px */
 }
 
 /* ---- amber: the other monochrome terminal, a P3 amber phosphor. Same

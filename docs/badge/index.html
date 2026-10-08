@@ -65,8 +65,8 @@
   .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
   .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
   @supports (color: rgb(from currentColor r g b)) {
-    .hvs0 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-sheen) r g b / 1) var(--hv-light, 30%)); }
-    .hvs2 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-shade) r g b / 1) var(--hv-dark, 40%)); }
+    .hvs0 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-sheen) r g b / 1) var(--hv-light, 15%)); }
+    .hvs2 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-shade) r g b / 1) var(--hv-dark, 25%)); }
   }
   .hvshade { opacity: var(--hv-shade, 1); }
   .sealhead { display: flex; align-items: center; gap: 1.1rem; margin: .4rem 0 1rem; }

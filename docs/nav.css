@@ -165,7 +165,9 @@
    it in with --fb-right and gives it back its full border. */
 .fbtab { position: fixed; z-index: 20; right: var(--fb-right, 0px); top: var(--fb-top, 45%);
          writing-mode: vertical-rl; transform: rotate(180deg);
-         font: inherit; font-size: .78rem; line-height: 1; letter-spacing: .03em; color: var(--fg);
+         /* lettered like the site-nav links (.pill above) */
+         font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-weight: 700;
+         text-transform: uppercase; letter-spacing: .04em; font-size: .86rem; line-height: 1; color: var(--fg);
          padding: .75rem .42rem; cursor: pointer;
          border: 1px solid var(--hair); border-left: 0; border-radius: 0 6px 6px 0;
          background: color-mix(in srgb, var(--fg) 7%, var(--surface)); box-shadow: 0 2px 8px #0003; }

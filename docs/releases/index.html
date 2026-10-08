@@ -237,12 +237,11 @@
      token with a contrast floor) and the check is knocked out, so it shows
      whatever the seal sits on (row, hover, selection). The sheen is a second,
      opaque pass of the same path under #hvseal-shade, on at every size: the
-     accent mixed --hv-light (30%) toward white at the top-left, plain accent at
+     accent mixed --hv-light (15%) toward white at the top-left, plain accent at
      the middle (under the check, so the knockout reads exactly as on a flat
-     seal) and --hv-dark (40%) toward black at the bottom-right. The amounts
-     are theme tokens (theme.css); four themes clamp one corner where it would
-     fall under 2:1 against a row (dmg, riso light; workbench, commodore
-     dark). White and black come from --stamp-sheen /
+     seal) and --hv-dark (25%) toward black at the bottom-right. The amounts
+     are theme tokens (theme.css), so a theme can clamp its own; at these
+     amounts none needs to (every corner keeps 2:1 against a row). White and black come from --stamp-sheen /
      --stamp-shade with their alpha dropped (relative color syntax), so no
      literal colour is involved; browsers without that syntax keep all three
      stops at --accent, i.e. flat. The gradient's ends sit on the rosette's own
@@ -251,8 +250,8 @@
   .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
   .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
   @supports (color: rgb(from currentColor r g b)) {
-    .hvs0 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-sheen) r g b / 1) var(--hv-light, 30%)); }
-    .hvs2 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-shade) r g b / 1) var(--hv-dark, 40%)); }
+    .hvs0 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-sheen) r g b / 1) var(--hv-light, 15%)); }
+    .hvs2 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-shade) r g b / 1) var(--hv-dark, 25%)); }
   }
   .hvseal { display: block; fill: var(--accent); }
   .hvshade { opacity: var(--hv-shade, 1); }
@@ -1184,7 +1183,6 @@
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
-let viewURLOn = false, viewURLT = 0;  // the address bar mirrors the view once arrival has read it (see writeViewURL)
 // deep links: every row carries a stable key (d.k, stamped by export-web);
 // #<k> in the URL opens that row's panel, and opening a panel writes it back
 const KEY2ROW = {};  // filled when data.json loads
@@ -1219,7 +1217,7 @@ const IOS_BROWSER = !STANDALONE && (/iP(hone|ad|od)/.test(navigator.userAgent) |
 // answers persist() with a permission popup a drive-by tab hasn't earned
 if (STANDALONE && navigator.storage && navigator.storage.persist)
   navigator.storage.persist().catch(() => {});
-let favOnly = false;   // the "show only favorites" toggle — not stored; like every filter it rides in the URL (f=1, see writeViewURL)
+let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter but Hardware Verified (mz-hv)
 let favView = null;    // Set of keys while viewing someone's ?fav= link, else null
 // unlike the page's other writes (prefs, all replaceable) this one is the user's
 // own data: a silent failure would lose what the UI just claimed to have saved,
@@ -2433,7 +2431,6 @@ function apply() {
     });
   }
   render();
-  writeViewURL();  // the address bar follows every change (debounced; see the view URL block)
 }
 
 // Keep the still-selected row in view after any reshuffle of the list (search,
@@ -2511,9 +2508,10 @@ document.getElementById('hrow').addEventListener('click', e => {
 // so the menu always means exactly "show what is ticked". Source and Genre below
 // follow the same model, sharing the helpers defined here.
 const TYPES = ['Arcade', 'Console', 'Computer', 'Other'];
-// The Type/Source/Genre/Year filters are never stored in localStorage. They live in
-// the address bar instead (see writeViewURL), so a reload or a shared link brings
-// them back, while a bare /releases/ (the title link) starts unfiltered.
+// The Type/Source/Genre/Year filters deliberately do NOT persist across reloads — a
+// page refresh starts unfiltered (only the Columns display pref survives, see mz-cols2).
+// A "Share this view" link applies them once on arrival (adoptViewParams), then
+// leaves the address bar, so a refresh after it resets too.
 // Type's option list is fixed, so it starts fully checked right here. Source and Genre
 // are data-seeded (databases present; arcade genres from MAME's catver.ini), so their
 // sets start empty and buildSrcMenu()/buildGenreMenu() fill them fully checked once
@@ -2956,11 +2954,11 @@ hvToggle.addEventListener('click', () => {
 function resetHvOnly() { hvOnly = false; saveHvOnly(); syncHvSummary(); }
 syncHvSummary();
 // Runs once, after the first data load. An hv= in the URL sets the filter (on,
-// unless it reads hv=0) and is stored like a click; it stays in the address bar,
-// which writeViewURL keeps in step from then on. If the data carries no badge at
-// all (an older data.json), a remembered or linked "on" would strand the visitor
-// on an empty list: drop it for this load, without storing, and land on the
-// full list.
+// unless it reads hv=0) and is stored like a click; stripViewParams then removes
+// it from the address bar with the other view keys (the state lives in 'mz-hv',
+// so a refresh keeps it either way). If the data carries no badge at all (an
+// older data.json), a remembered or linked "on" would strand the visitor on an
+// empty list: drop it for this load, without storing, and land on the full list.
 function adoptHvParam() {
   const p = new URLSearchParams(location.search);
   if (!DATA.some(d => d.hv)) {
@@ -2973,13 +2971,13 @@ function adoptHvParam() {
   syncHvSummary(); apply();
 }
 
-// --- shareable view URLs ------------------------------------------------------
-// The address bar always carries the current view, so copying it (or the Menu's
-// "Share this view") hands someone exactly this table. It is rewritten with
-// replaceState, never pushState (filtering must not fill Back/Forward), a beat
-// after the last change so typing a search doesn't rewrite it per keystroke
-// (browsers rate-limit history calls). Anything at its default is left out, so
-// the default view is a bare /releases/. The keys:
+// --- shareable view links ------------------------------------------------------
+// One-shot links: the Menu's "Share this view" builds a URL from the current
+// view and copies it (the address bar itself never follows the filters). An
+// arriving link applies its view once (adoptViewParams) and the keys are then
+// stripped with replaceState (stripViewParams), like ?fav= and ?hv=, so a
+// refresh starts over as it always has. Anything at its default is left out,
+// so sharing the default view gives a bare /releases/. The keys:
 //   q    search text                           q=street+fighter
 //   t    Type menu                             t=arcade,console   t=-other
 //   src  Source menu (database ids)            src=-distribution_mister
@@ -2989,10 +2987,10 @@ function adoptHvParam() {
 //   hv   Hardware Verified only                hv=1
 //   f    favorites only (the VISITOR'S own)    f=1
 // A menu writes whichever is shorter: the ticked boxes, or "-" and the unticked
-// ones; "t=" alone means None ticked. Other params (fav, v, ref) pass through
-// untouched and the #key panel hash rides alongside. Read once on arrival by
-// adoptViewParams: the URL wins wherever it says something, the badge filter
-// falls back to its remembered state (mz-hv) and the columns to theirs.
+// ones; "t=" alone means None ticked. The #key of the open row rides along, and
+// a ?fav= list being viewed stays in. On arrival the link wins wherever it says
+// something; the badge filter falls back to its remembered state (mz-hv) and
+// the columns to theirs.
 const VIEW_KEYS = ['q', 't', 'src', 'g', 'y', 's', 'hv', 'f'];
 const typeSlug = t => t.toLowerCase();
 const srcSlug = s => s;
@@ -3025,25 +3023,22 @@ function viewParams() {
   if (favOnly) out.push(['f', '1']);
   return out;
 }
-// the query string for the current view, keeping every param that isn't a view
-// key as it was typed (minus any named in drop)
-function viewSearch(drop) {
-  const keep = location.search.slice(1).split('&').filter(pr => pr &&
-    !VIEW_KEYS.includes(paramName(pr)) && !(drop && drop.includes(paramName(pr))));
-  const parts = viewParams().map(([k, v]) => k + '=' + v).concat(keep);
-  return parts.length ? '?' + parts.join('&') : '';
+// what Share hands out: the view's keys, a ?fav= list if one is on screen, and
+// the open row's #key. Nothing else in the address bar (the ?v= cache-buster,
+// the RSS ref tag) describes the view, so it stays behind.
+function shareURL() {
+  const fav = location.search.slice(1).split('&').filter(pr => paramName(pr) === 'fav');
+  const parts = viewParams().map(([k, v]) => k + '=' + v).concat(fav);
+  return location.origin + location.pathname + (parts.length ? '?' + parts.join('&') : '') + location.hash;
 }
-function writeViewURL(now) {
-  if (!viewURLOn) return;
-  clearTimeout(viewURLT);
-  if (!now) { viewURLT = setTimeout(writeViewURL, 250, true); return; }
-  const qs = viewSearch();
-  if (qs === location.search) return;
-  try { history.replaceState(history.state, '', location.pathname + qs + location.hash); } catch (e) {}
+// after arrival: the view keys come out of the address bar (everything else,
+// a ?fav= list included, and the #hash stay)
+function stripViewParams() {
+  const parts = location.search.slice(1).split('&').filter(Boolean);
+  const keep = parts.filter(pr => !VIEW_KEYS.includes(paramName(pr)));
+  if (keep.length === parts.length) return;
+  history.replaceState(history.state, '', location.pathname + (keep.length ? '?' + keep.join('&') : '') + location.hash);
 }
-// what Share hands out: this view and the open row, without the cache-buster
-// or the RSS ref tag (they describe how this tab arrived, not the view)
-const shareURL = () => location.origin + location.pathname + viewSearch(['v', 'ref']) + location.hash;
 // one pick menu from its URL value; names that no longer exist are skipped, and
 // a value naming nothing that exists leaves the menu untouched
 function adoptPick(raw, set, keys, slug, menu, attr) {
@@ -3098,7 +3093,6 @@ function adoptViewParams() {
 }
 document.getElementById('shareview').addEventListener('click', e => {
   const b = e.currentTarget;
-  writeViewURL(true);
   const url = shareURL();
   // phones get the share sheet when the clipboard is out of reach
   const canSheet = !!navigator.share && matchMedia('(pointer: coarse)').matches;
@@ -3186,8 +3180,8 @@ document.getElementById('favexpclose').addEventListener('click', () => favExpDlg
 // until it's adopted or dismissed. Either way the URL is cleaned up afterwards,
 // so a refresh doesn't ask again and the address bar stops advertising a list
 // that may no longer be what's on screen.
-// Only fav is deleted; the view keys (see writeViewURL), any other param and the
-// #hash survive exactly as they were typed.
+// Only fav is deleted; any other param and the #hash survive exactly as they
+// were typed.
 function stripParam(name) {
   const parts = location.search.slice(1).split('&').filter(Boolean);
   const keep = parts.filter(pr => paramName(pr) !== name);
@@ -3897,9 +3891,6 @@ window.addEventListener('popstate', e => {
   const d = KEY2ROW[hashKey()];
   if (d) { openPanel(d, true); recenterOpen(); }  // Forward (or hash edit) re-opens
   else if (document.body.classList.contains('panel-open')) closePanel();
-  // the entry Back/Forward landed on carries the query from when it was made;
-  // the view itself never moved, so put the address bar back in step with it
-  writeViewURL(true);
 });
 
 function markOpenRow() {
@@ -4823,9 +4814,7 @@ function swapIn(d, m) {
     // actually fixes things — cache-busted, keeping any open deep link.
     try { ingest(prev); } catch (e2) {}
     showPill('Site updated, refresh for the latest', () => {
-      const rest = viewSearch(['v']);   // the view rides along, so the reload lands on it
-      location.href = location.pathname + '?v=' + encodeURIComponent(m.hash) +
-        (rest ? '&' + rest.slice(1) : '') + location.hash;
+      location.href = location.pathname + '?v=' + encodeURIComponent(m.hash) + location.hash;
     }, true);
   }
 }
@@ -4875,11 +4864,10 @@ function boot() {
     ingest(d);
     booted = true;
     hidePill();       // a retry just succeeded; don't leave its failure pill up
-    adoptViewParams();  // search, menus, year, sort and favorites-only from the URL
+    adoptViewParams();  // a shared view: search, menus, year, sort, favorites-only
     adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
     adoptHvParam();   // hv= (a shared view, or the criteria page's "see them all")
-    viewURLOn = true;   // from here the address bar mirrors the view
-    writeViewURL(true); // tidy the arrival URL into canonical form (unknown names dropped)
+    stripViewParams();  // one-shot: the view is applied, the address bar goes back to plain
     // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
     // the entry we arrived on already IS the panel state (in overlay mode Back
     // correctly leaves the site, i.e. returns where the visitor came from).

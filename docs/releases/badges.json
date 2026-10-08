@@ -5443,6 +5443,232 @@
         "https://github.com/MiSTer-devel/Arcade-Zaxxon_MiSTer/blob/0bc93064fe2a3a8418a096b0260f9a646fc79276/rtl/zaxxon.vhd#L79",
         "https://alamone.github.io/fpga-verified-against/results/#dist-Zaxxon"
       ]
+    },
+    {
+      "k": "cadash",
+      "title": "Cadash",
+      "rbfs": [
+        "TaitoAsuka"
+      ],
+      "setnames": [
+        "cadash"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "On a real Cadash board the sprites shift slightly while the screen scrolls; this was confirmed on a genuine PCB, MAME does not reproduce it, and the core offers it as a Cadash-only option. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TaitoAsuka_MiSTer/blob/747a777b411c952b7666a66023ec6019f22a4fd0/README.md?plain=1#L126",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-TaitoAsuka"
+      ]
+    },
+    {
+      "k": "brubber",
+      "title": "Burnin' Rubber",
+      "rbfs": [
+        "burningrubber"
+      ],
+      "setnames": [
+        "brubber"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Dar built the video scanner from the schematics of Bump 'n' Jump, the same board as Burnin' Rubber. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BurningRubber_MiSTer/blob/55212a978597f011152a70861cb21b26ec8b3e1f/rtl/burnin_rubber.vhd#L248",
+        "https://github.com/MiSTer-devel/Arcade-BurningRubber_MiSTer/blob/55212a978597f011152a70861cb21b26ec8b3e1f/rtl/burnin_rubber.vhd#L260",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-BurningRubber"
+      ]
+    },
+    {
+      "k": "dkongjr",
+      "title": "Donkey Kong Junior",
+      "rbfs": [
+        "donkeykongjunior"
+      ],
+      "setnames": [
+        "dkongjr"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The sound DAC's capacitor discharge circuit is modelled from components R20, C32 and Q4 on the schematics. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-DonkeyKongJunior_MiSTer/blob/8d576e702174f3c5f94326772dc33af1d6d3265e/rtl/dkongjr_dac.sv#L8",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-DonkeyKongJunior"
+      ]
+    },
+    {
+      "k": "ladybug",
+      "title": "Lady Bug",
+      "rbfs": [
+        "ladybug"
+      ],
+      "setnames": [
+        "ladybug"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's video timing cites the Lady Bug schematics for its blanking signal. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-LadyBug_MiSTer/blob/c91b62672e3e01786a85438a39ced828f2936494/rtl/ladybug_video_timing.vhd#L353",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-LadyBug"
+      ]
+    },
+    {
+      "k": "cavenger",
+      "title": "Cosmic Avenger",
+      "rbfs": [
+        "ladybug"
+      ],
+      "setnames": [
+        "cavenger"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Universal's Lady Bug hardware. The core's video timing cites the Lady Bug schematics for its blanking signal. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-LadyBug_MiSTer/blob/c91b62672e3e01786a85438a39ced828f2936494/rtl/ladybug_video_timing.vhd#L353",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-LadyBug"
+      ]
+    },
+    {
+      "k": "snapjack",
+      "title": "Snap Jack",
+      "rbfs": [
+        "ladybug"
+      ],
+      "setnames": [
+        "snapjack"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Universal's Lady Bug hardware. The core's video timing cites the Lady Bug schematics for its blanking signal. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-LadyBug_MiSTer/blob/c91b62672e3e01786a85438a39ced828f2936494/rtl/ladybug_video_timing.vhd#L353",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-LadyBug"
+      ]
+    },
+    {
+      "k": "dorodon",
+      "title": "Dorodon",
+      "rbfs": [
+        "ladybug"
+      ],
+      "setnames": [
+        "dorodon"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Universal's Lady Bug hardware, with encrypted opcodes. The core's video timing cites the Lady Bug schematics for its blanking signal. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-LadyBug_MiSTer/blob/c91b62672e3e01786a85438a39ced828f2936494/rtl/ladybug_video_timing.vhd#L353",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-LadyBug"
+      ]
+    },
+    {
+      "k": "kick",
+      "title": "Kick",
+      "rbfs": [
+        "mcr1"
+      ],
+      "setnames": [
+        "kick"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Dar's core notes what he read on the Midway MCR schematics, such as the 74LS86 at G1 on the video generation board and the CTC channel wiring. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-MCR1_MiSTer/blob/7cc5f8698ba7c28c2aaf6dc10dedc8602c60c225/rtl/mcr1.vhd#L61",
+        "https://github.com/MiSTer-devel/Arcade-MCR1_MiSTer/blob/7cc5f8698ba7c28c2aaf6dc10dedc8602c60c225/rtl/mcr1.vhd#L75",
+        "https://github.com/MiSTer-devel/Arcade-MCR1_MiSTer/blob/7cc5f8698ba7c28c2aaf6dc10dedc8602c60c225/rtl/mcr1.vhd#L101",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-MCR1"
+      ]
+    },
+    {
+      "k": "solarfox",
+      "title": "Solar Fox",
+      "rbfs": [
+        "mcr1"
+      ],
+      "setnames": [
+        "solarfox"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Midway's MCR (90009) hardware, the same as Kick. Dar's core notes what he read on the Midway MCR schematics, such as the 74LS86 at G1 on the video generation board and the CTC channel wiring. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-MCR1_MiSTer/blob/7cc5f8698ba7c28c2aaf6dc10dedc8602c60c225/rtl/mcr1.vhd#L61",
+        "https://github.com/MiSTer-devel/Arcade-MCR1_MiSTer/blob/7cc5f8698ba7c28c2aaf6dc10dedc8602c60c225/rtl/mcr1.vhd#L75",
+        "https://github.com/MiSTer-devel/Arcade-MCR1_MiSTer/blob/7cc5f8698ba7c28c2aaf6dc10dedc8602c60c225/rtl/mcr1.vhd#L101",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-MCR1"
+      ]
+    },
+    {
+      "k": "mpatrol",
+      "title": "Moon Patrol",
+      "rbfs": [
+        "moonpatrol"
+      ],
+      "setnames": [
+        "mpatrol"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The video counter's start value is taken from the schematics of Irem's M52, Moon Patrol's board. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-MoonPatrol_MiSTer/blob/ff2845ca7db5e7faf0201fe90d0fac5b5d3cd24a/rtl/iremm52_video_controller.vhd#L68",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-MoonPatrol"
+      ]
+    },
+    {
+      "k": "dlair",
+      "title": "Dragon's Lair",
+      "rbfs": [
+        "LaserdiscGames"
+      ],
+      "setnames": [
+        "dlair"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The CPU board's device select lines follow the schematics. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/blob/d0ba4d41aeac5ed6248ac8240a193227326608a9/rtl/DragonsLair_CPU.sv#L162",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-LaserdiscGames"
+      ]
+    },
+    {
+      "k": "spaceace",
+      "title": "Space Ace",
+      "rbfs": [
+        "LaserdiscGames"
+      ],
+      "setnames": [
+        "spaceace"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Cinematronics hardware as Dragon's Lair. The CPU board's device select lines follow the schematics. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/blob/d0ba4d41aeac5ed6248ac8240a193227326608a9/rtl/DragonsLair_CPU.sv#L162",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-LaserdiscGames"
+      ]
+    },
+    {
+      "k": "spacefb",
+      "title": "Space Firebird",
+      "rbfs": [
+        "SpaceFirebird"
+      ],
+      "setnames": [
+        "spacefb"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The README checks the bullet colour against the Space Firebird schematics, which show orange or yellow, and traces MAME's red to a resistor mislabelled there; the colour is a DIP setting. Found through the FPGA Verified Against project.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SpaceFirebird_MiSTer/blob/ea952fe3c9e8b9ed92e478abf513bed2e5ee5509/README.txt#L20",
+        "https://alamone.github.io/fpga-verified-against/results/#dist-SpaceFirebird"
+      ]
     }
   ]
 }

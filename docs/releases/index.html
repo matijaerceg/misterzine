@@ -168,10 +168,10 @@
      the dropdown summaries' neutral chrome. Kept an inline box (no flex) so the
      line's strut sets its height, the same as every text button in the row; the
      glyph rides on the text line like the seal does. */
-  .sharebtn { font: inherit; font-size: .9rem; padding: .4rem .55rem; cursor: pointer;
+  .viewlinkbtn { font: inherit; font-size: .9rem; padding: .4rem .55rem; cursor: pointer;
               border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit; }
-  .sharebtn:hover { background: var(--hover-bg); }
-  .sharebtn svg { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
+  .viewlinkbtn:hover { background: var(--hover-bg); }
+  .viewlinkbtn svg { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
   /* "Columns" dropdown: opt-in arcade metadata columns (default all off) */
   details.cols { position: relative; }
   details.cols summary { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
@@ -987,14 +987,14 @@
     #genredd { order: 6; }
     #yeardd { order: 7; }
     #hvtoggle { order: 8; }
-    button.clear, #sharebtn { order: 9; }
+    button.clear, #viewlinkbtn { order: 9; }
     .favctl { order: 10; }
     /* Columns keeps its far-right anchoring, now against whatever row it lands on */
     #cols { order: 11; margin-left: auto; align-self: center; }
     /* a notch tighter so the filter cluster fits one line on a ~390px phone. Only
        the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
        the tap targets keep their height. */
-    details.cols summary, button.clear, .favctl > button, .hvtoggle, .sharebtn { font-size: .85rem; padding: .35rem .45rem; }
+    details.cols summary, button.clear, .favctl > button, .hvtoggle, .viewlinkbtn { font-size: .85rem; padding: .35rem .45rem; }
     button.clear { --clpad: .45rem; }
     .favctl > button { min-width: 3em; }
     /* the sort arrow is dropped here: at this width it's the thing that wraps the
@@ -1126,7 +1126,7 @@
     <button type="button" id="hvtoggle" class="hvtoggle" aria-pressed="false" hidden></button>
     <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
     <!-- the Menu's "Share this view", one tap away (same handler) -->
-    <button type="button" id="sharebtn" class="sharebtn" data-tip="Share this view" aria-label="Share this view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg></button>
+    <button type="button" id="viewlinkbtn" class="viewlinkbtn" data-tip="Share this view" aria-label="Share this view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg></button>
     <!-- favorites: the left segment filters the list down to starred rows, the
          caret opens the housekeeping (backup link, clear). Same split shape as
          the theme toggle in the header. -->
@@ -3141,7 +3141,7 @@ function shareView(e) {
   else showChip(b, 'Copy failed');
 }
 document.getElementById('shareview').addEventListener('click', shareView);
-document.getElementById('sharebtn').addEventListener('click', shareView);
+document.getElementById('viewlinkbtn').addEventListener('click', shareView);
 
 // --- favorites -> update_all export dialog -----------------------------------
 // Terms come from each row's `ft` (stamped by export-web from the live

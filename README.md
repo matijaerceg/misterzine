@@ -462,7 +462,8 @@ CHANGELOG.md             # user-visible site changes
 A positive-only seal for arcade games whose core was built and checked against the
 real board or its schematics, backed by public, checkable evidence of that work
 (from the core's author or anyone else who did or documented it). The
-criteria are on the site at [/badge/](https://misterzine.fyi/badge/).
+criteria are on the site at [/badge/](https://misterzine.fyi/badge/). It is a trial
+feature: it may change or be removed.
 
 Entries live in `data/badges.json`, edited by hand: one per tracker row, keyed by the
 row's `k`, with the row's shipped core name(s) in `rbfs` and MAME set name(s) in

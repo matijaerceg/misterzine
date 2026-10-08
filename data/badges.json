@@ -2477,6 +2477,771 @@
         "https://github.com/MiSTer-devel/Arcade-CityConnection_MiSTer/blob/bde03e78c327a3af7dcecc1406112d10baf9c5f4/README.md?plain=1#L17",
         "https://github.com/MiSTer-devel/Arcade-CityConnection_MiSTer/blob/bde03e78c327a3af7dcecc1406112d10baf9c5f4/README.md?plain=1#L58"
       ]
+    },
+    {
+      "k": "salamand",
+      "title": "Salamander",
+      "rbfs": [
+        "Salamander"
+      ],
+      "setnames": [
+        "salamand"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's Konami 007232 sound chip is modelled on Furrtek's schematics of that chip, drawn from its die shots.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Salamander_MiSTer/blob/e3db8984bbaa00debf346a0f7326093a3082ce0b/rtl/ipcores/K007232.v#L34"
+      ]
+    },
+    {
+      "k": "shangon",
+      "title": "Super Hang-On",
+      "rbfs": [
+        "jtshanon"
+      ],
+      "setnames": [
+        "shangon"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's Sega 315-5242 colour chip is modelled on Furrtek's reverse engineering of its silicon, including the chip's grey-out logic.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shanon/hdl/jtshanon_coldac.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shanon/hdl/jtshanon_coldac.v#L33",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Sega/315-5242"
+      ]
+    },
+    {
+      "k": "airduelm72",
+      "title": "Air Duel",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "airduelm72"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "gallopm72",
+      "title": "Armed Police Unit Gallop",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "gallopm72"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "dbreedjm72",
+      "title": "Dragon Breed",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "dbreedjm72"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "hharryu",
+      "title": "Hammerin' Harry",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "hharryu"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "imgfight",
+      "title": "Image Fight",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "imgfight"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "lohtj",
+      "title": "Legend of Hero Tonma",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "lohtj"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "mrheli",
+      "title": "Mr. HELI no Daibouken",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "mrheli"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "nspiritj",
+      "title": "Ninja Spirit",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "nspiritj"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "rtype",
+      "title": "R-Type",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "rtype"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "rtype2",
+      "title": "R-Type II",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "rtype2"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "xmultiplm72",
+      "title": "X Multiply",
+      "rbfs": [
+        "IremM72"
+      ],
+      "setnames": [
+        "xmultiplm72"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's reverse engineering of the board's Nanao KNA70H015 video timing chip, which the core implements as its video counter generator.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/Readme.md?plain=1#L33",
+        "https://github.com/MiSTer-devel/Arcade-IremM72_MiSTer/blob/15c370e6e034a5e8baeea5a6fa651ff95b216c2b/rtl/kna70h015.sv#L2",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Nanao/KNA70H015(11)"
+      ]
+    },
+    {
+      "k": "contra",
+      "title": "Contra",
+      "rbfs": [
+        "jtcontra"
+      ],
+      "setnames": [
+        "contra"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's full reverse engineering of Konami's 007121 graphics chip, the board's video chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/contra/README.md?plain=1#L78",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Konami/007121"
+      ]
+    },
+    {
+      "k": "hcastle",
+      "title": "Haunted Castle",
+      "rbfs": [
+        "jtcastle"
+      ],
+      "setnames": [
+        "hcastle"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's full reverse engineering of Konami's 007121 graphics chip, the board's video chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/castle/README.md?plain=1#L108",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Konami/007121"
+      ]
+    },
+    {
+      "k": "combatsc",
+      "title": "Combat School",
+      "rbfs": [
+        "jtcomsc"
+      ],
+      "setnames": [
+        "combatsc"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's full reverse engineering of Konami's 007121 graphics chip, the board's video chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/comsc/README.md?plain=1#L78",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Konami/007121"
+      ]
+    },
+    {
+      "k": "fastlane",
+      "title": "Fast Lane",
+      "rbfs": [
+        "jtflane"
+      ],
+      "setnames": [
+        "fastlane"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's full reverse engineering of Konami's 007121 graphics chip, the board's video chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/flane/README.md?plain=1#L78",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Konami/007121"
+      ]
+    },
+    {
+      "k": "tricktrp",
+      "title": "Trick Trap",
+      "rbfs": [
+        "jtlabrun"
+      ],
+      "setnames": [
+        "tricktrp"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's full reverse engineering of Konami's 007121 graphics chip, the board's video chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/labrun/README.md?plain=1#L78",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Konami/007121"
+      ]
+    },
+    {
+      "k": "mx5000",
+      "title": "MX5000",
+      "rbfs": [
+        "jtmx5k"
+      ],
+      "setnames": [
+        "mx5000"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's README credits Furrtek's full reverse engineering of Konami's 007121 graphics chip, the board's video chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/mx5k/README.md?plain=1#L78",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Konami/007121"
+      ]
+    },
+    {
+      "k": "ga2",
+      "title": "Golden Axe: The Revenge of Death Adder",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "ga2"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "holo",
+      "title": "Holosseum",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "holo"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "spidman",
+      "title": "Spider-Man: The Videogame",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "spidman"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "arabfgt",
+      "title": "Arabian Fight",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "arabfgt"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "darkedge",
+      "title": "Dark Edge",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "darkedge"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "alien3",
+      "title": "Alien3: The Gun",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "alien3"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "brival",
+      "title": "Burning Rival",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "brival"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "jpark",
+      "title": "Jurassic Park",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "jpark"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "radr",
+      "title": "Rad Rally",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "radr"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "slipstrm",
+      "title": "Slip Stream",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "slipstrm"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "svf",
+      "title": "Super Visual Football: European Sega Cup",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "svf"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "sonic",
+      "title": "SegaSonic The Hedgehog",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "sonic"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "dbzvrvs",
+      "title": "Dragon Ball Z: V.R. V.S.",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "dbzvrvs"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "radm",
+      "title": "Rad Mobile",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "radm"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "arescue",
+      "title": "Air Rescue",
+      "rbfs": [
+        "Arcade-SegaSystem32"
+      ],
+      "setnames": [
+        "arescue"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System 32 board schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L63",
+        "https://github.com/meathax/s32/blob/512b5470869b0ee72ba4f99d0d0c79b4c86296ca/README.md?plain=1#L67"
+      ]
+    },
+    {
+      "k": "orunners",
+      "title": "OutRunners",
+      "rbfs": [
+        "Arcade-SegaSystem32Multi"
+      ],
+      "setnames": [
+        "orunners"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System Multi 32 schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L59",
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L61"
+      ]
+    },
+    {
+      "k": "harddunk",
+      "title": "Hard Dunk",
+      "rbfs": [
+        "Arcade-SegaSystem32Multi"
+      ],
+      "setnames": [
+        "harddunk"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System Multi 32 schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L59",
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L61"
+      ]
+    },
+    {
+      "k": "scross",
+      "title": "Stadium Cross",
+      "rbfs": [
+        "Arcade-SegaSystem32Multi"
+      ],
+      "setnames": [
+        "scross"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System Multi 32 schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L59",
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L61"
+      ]
+    },
+    {
+      "k": "titlef",
+      "title": "Title Fight",
+      "rbfs": [
+        "Arcade-SegaSystem32Multi"
+      ],
+      "setnames": [
+        "titlef"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Implemented from Sega's System Multi 32 schematics, with the colour output drawn from Furrtek's silicon reverse engineering of the 315-5242 chip.",
+      "links": [
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L59",
+        "https://github.com/meathax/s32multi/blob/02942d4e21b83c2d299fb9ae84764a4934a06bfb/README.md?plain=1#L61"
+      ]
+    },
+    {
+      "k": "drtoppel",
+      "title": "Dr. Toppel's Adventure",
+      "rbfs": [
+        "jtkiwi"
+      ],
+      "setnames": [
+        "drtoppel"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core keeps Furrtek's model of the board's Seta X1-007 video chip, reverse engineered from its silicon, and its sprite logic draws on a die shot of the Seta X1-001 chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/doc/x1-007.v#L1",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Seta/X1-007",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9"
+      ]
+    },
+    {
+      "k": "kageki",
+      "title": "Kageki",
+      "rbfs": [
+        "jtkiwi"
+      ],
+      "setnames": [
+        "kageki"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core keeps Furrtek's model of the board's Seta X1-007 video chip, reverse engineered from its silicon, and its sprite logic draws on a die shot of the Seta X1-001 chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/doc/x1-007.v#L1",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Seta/X1-007",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9"
+      ]
+    },
+    {
+      "k": "chukatai",
+      "title": "Chuka Taisen",
+      "rbfs": [
+        "jtkiwi"
+      ],
+      "setnames": [
+        "chukatai"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core keeps Furrtek's model of the board's Seta X1-007 video chip, reverse engineered from its silicon, and its sprite logic draws on a die shot of the Seta X1-001 chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/doc/x1-007.v#L1",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Seta/X1-007",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kiwi/hdl/jtkiwi_gfx.v#L9"
+      ]
+    },
+    {
+      "k": "opwolf",
+      "title": "Operation Wolf",
+      "rbfs": [
+        "jtrastan"
+      ],
+      "setnames": [
+        "opwolf"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core keeps Furrtek's logic for the board's Taito PC060HA chip, which links the main and sound CPUs, reverse engineered from a decap of the chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/doc/pc060ha_decap_furrtek.v#L1",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Taito/PC060HA",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/cfg/files.yaml#L16"
+      ]
+    },
+    {
+      "k": "rbisland",
+      "title": "Rainbow Islands",
+      "rbfs": [
+        "jtrastan"
+      ],
+      "setnames": [
+        "rbisland"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core keeps Furrtek's logic for the board's Taito PC060HA chip, which links the main and sound CPUs, reverse engineered from a decap of the chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/doc/pc060ha_decap_furrtek.v#L1",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Taito/PC060HA",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/cfg/files.yaml#L16"
+      ]
+    },
+    {
+      "k": "rbislande",
+      "title": "Rainbow Islands - Extra Version",
+      "rbfs": [
+        "jtrastan"
+      ],
+      "setnames": [
+        "rbislande"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core keeps Furrtek's logic for the board's Taito PC060HA chip, which links the main and sound CPUs, reverse engineered from a decap of the chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/doc/pc060ha_decap_furrtek.v#L1",
+        "https://github.com/furrtek/SiliconRE/tree/c926ce92fdebd7613c8712b42c45a059d63548e0/Taito/PC060HA",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rastan/cfg/files.yaml#L16"
+      ]
     }
   ]
 }

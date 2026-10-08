@@ -238,7 +238,9 @@
      whatever the seal sits on (row, hover, selection). The sheen is a second,
      opaque pass of the same path under #hvseal-shade: the accent lightened 15%
      toward white at the top-left, plain at the middle (where the check sits),
-     darkened 30% toward black at the bottom-right. White and black come from
+     darkened 16% toward black at the bottom-right. 16% is the most the dark
+     corner can take while every theme keeps the seal's edge at 3:1 or better
+     against the panel (Workbench binds: orange on blue, 3.0 at 16%). White and black come from
      the theme tokens --stamp-sheen / --stamp-shade with their alpha dropped
      (relative color syntax), so no literal colour is involved; browsers without
      that syntax keep all three stops at --accent, i.e. flat. It is off by
@@ -250,7 +252,7 @@
   .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
   @supports (color: rgb(from currentColor r g b)) {
     .hvs0 { stop-color: color-mix(in srgb, var(--accent) 85%, rgb(from var(--stamp-sheen) r g b / 1)); }
-    .hvs2 { stop-color: color-mix(in srgb, var(--accent) 70%, rgb(from var(--stamp-shade) r g b / 1)); }
+    .hvs2 { stop-color: color-mix(in srgb, var(--accent) 84%, rgb(from var(--stamp-shade) r g b / 1)); }
   }
   .hvseal { display: block; fill: var(--accent); }
   .hvshade { opacity: var(--hv-shade, 0); }

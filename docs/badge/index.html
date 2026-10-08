@@ -59,15 +59,15 @@
      Verified column, at emblem size. One #hvseal-sym in the svgdefs block at
      the top of <body>, filled with --accent, check knocked out. At this size it
      carries the sheen: a second, opaque pass of the path under #hvseal-shade,
-     the accent lightened 15% toward white at the top-left and darkened 30%
-     toward black at the bottom-right, white and black taken from the
+     the accent lightened 15% toward white at the top-left and darkened 16%
+     toward black at the bottom-right (the most every theme allows at 3:1), white and black taken from the
      --stamp-sheen / --stamp-shade tokens with their alpha dropped (the tracker
      keeps it off at 16px; see there). */
   .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
   .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
   @supports (color: rgb(from currentColor r g b)) {
     .hvs0 { stop-color: color-mix(in srgb, var(--accent) 85%, rgb(from var(--stamp-sheen) r g b / 1)); }
-    .hvs2 { stop-color: color-mix(in srgb, var(--accent) 70%, rgb(from var(--stamp-shade) r g b / 1)); }
+    .hvs2 { stop-color: color-mix(in srgb, var(--accent) 84%, rgb(from var(--stamp-shade) r g b / 1)); }
   }
   .hvshade { opacity: var(--hv-shade, 0); }
   .sealhead { display: flex; align-items: center; gap: 1.1rem; margin: .4rem 0 1rem; }
@@ -142,14 +142,17 @@ describes.</p>
 <p><a class="go" href="../releases/?hv=1">See every Hardware Verified game in the release tracker</a></p>
 
 <h2>What earns it</h2>
-<p>The core was built or checked using the original hardware or its documentation, not only MAME's
-code, gameplay videos or the ROMs. Any one of these is enough:</p>
+<p>The core was built or checked using the original hardware or its documentation. The work went beyond
+what MAME's code, the ROMs or watching the game on video can show on their own. Any one of these is
+enough:</p>
 <ul>
   <li>an original board, owned, borrowed or lent to them, was used to build or check the core, including
     timing measurements,</li>
   <li>the board's PALs, PROMs or other chips were dumped for it,</li>
   <li>custom chips, PALs or PROMs were decapped, photographed or analyzed, and the core's logic derived
-    from that,</li>
+    from that (a credit to that work on the board's own custom chips, such as its video, system, timing
+    or rotation chips, is enough; models of generic parts used on many boards, such as Yamaha sound
+    chips or CPUs, do not count on their own),</li>
   <li>it was built from the manufacturer's original schematics,</li>
   <li>captures or recordings from a working board were compared against the core, with the differences
     documented,</li>

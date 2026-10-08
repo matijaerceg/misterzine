@@ -16,7 +16,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css?v=5"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=6"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -126,6 +126,14 @@ in, the account service stores:</p>
 your browser. Signing in with Google one day and GitHub another creates two separate accounts.</p>
 <p>The account service runs on Cloudflare (Workers and a D1 database). Traffic to it is encrypted.</p>
 
+<h2>Feedback</h2>
+<p>The Feedback form (in the Menu, and the tab at the edge of the screen) sends your message to the developer
+through the same service. Stored with it: the page you sent it from, your theme and, unless you untick it, the
+game you had open; the contact you typed, if any; your browser's user-agent string; a hashed form of your
+network address, used only to limit how many messages one sender can post (the address itself is never
+stored); and your account ID if you are signed in. A copy goes to a private Discord channel. Nothing is sent
+until you press Send.</p>
+
 <h2>Deleting your data</h2>
 <ul>
   <li><strong>Account:</strong> open your <a href="../account/">account page</a> and choose "Delete account".
@@ -204,5 +212,6 @@ The site's code and this page are public there, so any change to this policy sho
 
 </div>
 <script src="../theme.js?v=5"></script>
+<script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 </body>
 </html>

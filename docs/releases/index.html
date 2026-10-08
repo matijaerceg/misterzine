@@ -32,7 +32,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="../nav.css?v=5"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="../nav.css?v=6"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -419,6 +419,17 @@
     display: none; align-items: center; gap: .35rem; max-width: calc(100% - 2rem);
     padding: .35rem .45rem .35rem .85rem; }
   .newspill.on { display: flex; }
+  /* the site feedback tab (feedback.js, nav.css): on wide screens it moves in off
+     the viewport edge, where this page's vertical scrollbar lane is (the floating
+     thumb at right 2px, or a platform overlay bar that widens on hover), and so
+     floats with a full border. On phones it is the round corner button, and the
+     notice pill narrows to stay clear of it. */
+  @media (min-width: 36.0625rem) {
+    .fbtab { --fb-right: 16px; border-left: 1px solid var(--hair); border-radius: 6px; }
+  }
+  @media (max-width: 36rem) {
+    .newspill { max-width: calc(100% - 8.5rem); }
+  }
   .newspill .txt { cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .newspill .x { flex: none; cursor: pointer; border: 0; background: none; color: var(--muted);
     font: inherit; font-size: .95rem; line-height: 1; padding: .1rem .3rem; }
@@ -1151,7 +1162,7 @@
 </dialog>
 </div>
 <div class="tablezone">
-<div class="jumps">
+<div class="jumps" data-fb-clear><!-- data-fb-clear: the feedback tab (feedback.js) stays below this stack -->
 <button id="totop" type="button" disabled>↑ Scroll to top</button>
 <button id="tovisit" type="button" disabled data-tip="Furthest row added or updated since your last visit">Since visit</button>
 <button id="torow" type="button" disabled>Selected</button>
@@ -1169,6 +1180,7 @@
 <aside id="panel" hidden></aside>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=5"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
+<script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
@@ -1177,6 +1189,9 @@ let viewURLOn = false, viewURLT = 0;  // the address bar mirrors the view once a
 // #<k> in the URL opens that row's panel, and opening a panel writes it back
 const KEY2ROW = {};  // filled when data.json loads
 const rowURL = d => location.origin + location.pathname + '#' + d.k;
+// the site feedback form (feedback.js) offers to attach the game whose panel is open
+window.mzFeedbackGame = () => document.body.classList.contains('panel-open') && openRow && openRow.k
+  ? { key: openRow.k, title: openRow.title } : null;
 // the deep-link key carried in the URL hash; '' when there is none. Malformed
 // %-sequences in a mangled link would make decodeURIComponent throw, and both
 // callers sit in paths that must survive that (the arrival chain still has to
@@ -4091,7 +4106,7 @@ document.addEventListener('keydown', e => {
   // the export dialog is modal: native Esc closes it, and no key may leak to
   // the Esc ladder, arrow-nav, or type-anywhere while it's up (q.focus() on an
   // inert page would misfire anyway)
-  if (favExpDlg.open) return;
+  if (favExpDlg.open || document.querySelector('dialog.fbdlg[open]')) return;  // same for the feedback form
   if (e.key === 'Escape') {
     if (closePop() || closeHoverPop()) return;  // an open popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it

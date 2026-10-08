@@ -16,7 +16,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css?v=5"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=6"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -136,6 +136,7 @@ going because people chip in: with testing, with feedback, and on
 
 </div>
 <script src="../theme.js?v=5"></script>
+<script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 <script>
 (function () {
   function fill(id, people, withUntil, none) {

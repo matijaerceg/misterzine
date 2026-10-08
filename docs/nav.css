@@ -154,3 +154,74 @@
            background: var(--surface); color: var(--muted); border: 1px solid var(--hair);
            border-radius: 6px; padding: .5rem .7rem; font-size: .8rem; line-height: 1.4;
            box-shadow: 0 4px 16px #0004; }
+
+/* ---- site feedback (feedback.js): the edge tab, the phone button and the form.
+   The tab is neutral chrome, the tracker's floating-pill look. z 20 keeps it over
+   page content and the tracker's floating table chrome (17) but under the site
+   Menu's list (30) and the tracker's detail panel (100). It is rotated a half
+   turn so the label reads bottom to top; after the turn the box's LEFT side is
+   the one on the screen edge, so that side has no border and square corners.
+   A page whose own scrollbar lane sits at the viewport edge (the tracker) moves
+   it in with --fb-right and gives it back its full border. */
+.fbtab { position: fixed; z-index: 20; right: var(--fb-right, 0px); top: var(--fb-top, 45%);
+         writing-mode: vertical-rl; transform: rotate(180deg);
+         font: inherit; font-size: .78rem; line-height: 1; letter-spacing: .03em; color: var(--fg);
+         padding: .75rem .42rem; cursor: pointer;
+         border: 1px solid var(--hair); border-left: 0; border-radius: 0 6px 6px 0;
+         background: color-mix(in srgb, var(--fg) 7%, var(--surface)); box-shadow: 0 2px 8px #0003; }
+.fbtab:hover { background: color-mix(in srgb, var(--fg) 14%, var(--surface)); }
+.fbtab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fbtab .fbico { display: none; width: 1.3rem; height: 1.3rem; }
+/* phones: a round button in the bottom-right corner instead, over the tracker's
+   full-screen panel too (z 101), so feedback about the open game stays one tap away */
+@media (max-width: 36rem) {
+  .fbtab { writing-mode: horizontal-tb; transform: none; top: auto; z-index: 101;
+           right: calc(.9rem + env(safe-area-inset-right, 0px)); bottom: calc(.9rem + env(safe-area-inset-bottom, 0px));
+           width: 2.9rem; height: 2.9rem; padding: 0; border-left: 1px solid var(--hair); border-radius: 50%;
+           display: grid; place-items: center; }
+  .fbtab .fbico { display: block; }
+  .fbtab .fbtxt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+/* nothing floats over an open Menu or the form */
+body:has(#menudd[open]) .fbtab, body:has(dialog.fbdlg[open]) .fbtab { visibility: hidden; }
+@media print { .fbtab { display: none; } }
+
+/* the form: a native modal <dialog>; padding lives on the inner blocks so a
+   click whose target is the dialog itself can only be the backdrop */
+.fbdlg { padding: 0; border: 1px solid var(--hair); border-radius: 8px;
+         background: var(--surface); color: var(--fg);
+         width: min(28rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto;
+         box-shadow: 0 8px 32px #0006; }
+.fbdlg::backdrop { background: rgb(0 0 0 / .45); }  /* shadows stay black on every theme */
+.fbdlg .fb-in { padding: 1rem 1.15rem 1.05rem; display: flex; flex-direction: column; gap: .3rem; }
+.fbdlg .fb-in[hidden], .fbdlg .fb-thanks[hidden], .fbdlg .fb-game[hidden] { display: none; }
+.fbdlg h2 { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+.fbdlg .fb-note { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.fbdlg .fb-lbl { font-size: .85rem; margin-top: .5rem; }
+.fbdlg textarea, .fbdlg input[type=text] { font: inherit; font-size: .9rem; color: inherit; width: 100%;
+         box-sizing: border-box; background: var(--bg); border: 1px solid var(--btn-border);
+         border-radius: 4px; padding: .45rem .55rem; cursor: text; }
+.fbdlg textarea { resize: vertical; min-height: 7.5rem; line-height: 1.45; }
+.fbdlg textarea:focus-visible, .fbdlg input[type=text]:focus-visible { outline: 2px solid var(--accent); outline-offset: -1px; }
+.fbdlg ::placeholder { color: var(--muted); opacity: 1; }
+.fbdlg .fb-count { align-self: flex-end; min-height: 1.1em; font-size: .75rem; color: var(--muted);
+         font-variant-numeric: tabular-nums; }
+.fbdlg .fb-att { margin: .55rem 0 0; font-size: .8rem; color: var(--muted); line-height: 1.45; }
+.fbdlg .fb-game { display: flex; gap: .45rem; align-items: baseline; font-size: .8rem; color: var(--muted); cursor: pointer; }
+.fbdlg .fb-game input { accent-color: var(--accent); margin: 0; flex: none; }
+.fbdlg .fb-game b { color: var(--fg); font-weight: 600; }
+.fbdlg .fb-hv { margin-top: .5rem; }
+.fbdlg .fb-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.fbdlg .fb-msg { margin: .35rem 0 0; min-height: 1.3em; font-size: .85rem; line-height: 1.4; }
+.fbdlg .fb-msg.err { font-weight: 600; }
+.fbdlg .fb-act { display: flex; justify-content: flex-end; gap: .5rem; margin-top: .25rem; }
+.fbdlg button { font: inherit; font-size: .85rem; padding: .42rem .9rem; cursor: pointer;
+         border: 1px solid var(--btn-border); border-radius: 4px; background: var(--surface); color: inherit; }
+.fbdlg button:hover { background: var(--hover-bg); }
+.fbdlg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fbdlg .fb-send { background: var(--accent); color: var(--accent-on); border-color: var(--accent); font-weight: 600; }
+.fbdlg .fb-send:hover { background: color-mix(in srgb, var(--accent) 85%, var(--fg)); }
+.fbdlg .fb-send:disabled { opacity: .6; cursor: default; }
+.fbdlg .fb-thanks { padding: 1.6rem 1.15rem 1.7rem; text-align: center; }
+.fbdlg .fb-thanks h2 { outline: none; margin-bottom: .35rem; }
+.fbdlg .fb-thanks p { margin: 0; color: var(--muted); font-size: .9rem; }

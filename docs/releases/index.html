@@ -535,11 +535,15 @@
   td .xb { display: inline; white-space: nowrap; color: var(--muted);
            font-size: .75em; font-style: italic; cursor: help; }
   /* the hardware badge column (COLUMNS 'hv'): a seal-only cell under a seal-only
-     header. Tighter side padding than the text columns so the seal plus the
-     sort arrow fit the column's narrow weight; the seal sits on the first text
-     line like a glyph. Its tip is the shared popover (td [data-tip]). */
-  th[data-k="hv"], td.hvc { padding-left: .45rem; padding-right: .45rem; }
+     header, at a FIXED width (COLUMNS fixed: the seal plus this side padding,
+     set in buildHeader's colgroup), so it never grows or shrinks with the table.
+     The seal is centred and sits on the first text line like a glyph. Its tip is
+     the shared popover (td [data-tip]). There is no room for the sort arrow, so
+     a sort on this column is marked by an accent bar under the seal instead. */
+  th[data-k="hv"], td.hvc { padding-left: .45rem; padding-right: .45rem; text-align: center; }
   th[data-k="hv"] { white-space: nowrap; }
+  th[data-k="hv"][aria-sort]::after { content: none; }
+  th[data-k="hv"][aria-sort] { box-shadow: inset 0 -2px 0 var(--accent2, var(--accent)); }
   th[data-k="hv"] .hvseal { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
   td .hv { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
   td .hv .hvseal { width: 100%; height: 100%; }
@@ -1976,8 +1980,9 @@ function coreCell(d) {
 // live in that cell). The base eight default on; the arcade-metadata columns
 // (opt: true, from the MiSTer Arcade Database) and Source default off; the
 // visible set persists in localStorage. Widths are weights, normalized to 100% over
-// whichever columns are enabled (the table uses table-layout:fixed); mw is
-// each column's contribution (rem) to the table's min-width floor.
+// whichever columns are enabled (the table uses table-layout:fixed); a column
+// with `fixed` takes that exact CSS width instead and the weights share what is
+// left. mw is each column's contribution (rem) to the table's min-width floor.
 // Optional columns without a cell() render their data key as plain text.
 // sl is a one-word header used on narrow screens only (see narrowMQ): at the mw
 // floor a two-word label wraps, and since the header row is sticky that second
@@ -1986,10 +1991,12 @@ function coreCell(d) {
 const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
   // the Hardware Verified seal (hvBadge), beside the title it vouches for. The
-  // header is the seal too (th; the Columns menu shows the label), so the
-  // column stays about as narrow as Core Type. Sorting puts badged rows first,
-  // newest grant first (see keyOf and DATE_COLS; blanks always sink).
-  { k: 'hv', label: BADGE_NAME, w: 4.5, mw: 3,
+  // header is the seal too (th; the Columns menu shows the label). Fixed at the
+  // seal (1.1em of the table's 14px) plus its cell's .45rem side padding, so it
+  // is the same width at every table width; mw is that width in rem (15.4px +
+  // 14.4px). Sorting puts badged rows first, newest grant first (see keyOf and
+  // DATE_COLS; blanks always sink).
+  { k: 'hv', label: BADGE_NAME, fixed: 'calc(1.1em + .9rem)', mw: 1.8625,
     th: BADGE_SVG.replace('aria-hidden="true"', 'role="img" aria-label="' + BADGE_NAME + '"'),
     cell: d => '<td class="hvc">' + hvBadge(d) + '</td>' },
   { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
@@ -2093,9 +2100,12 @@ const narrowMQ = matchMedia('(max-width: 899px)');
 
 function buildHeader() {
   const cols = activeColumns();
-  const total = cols.reduce((s, c) => s + c.w, 0);
+  // fixed columns get their own width; the percentages of the rest add up to
+  // 100%, which table-layout:fixed scales into the width the fixed ones leave
+  // (checked in Firefox and Chromium; WebKit's fixed layout does the same)
+  const total = cols.reduce((s, c) => s + (c.fixed ? 0 : c.w), 0);
   document.getElementById('cg').innerHTML = cols.map(c =>
-    '<col style="width:' + (c.w / total * 100).toFixed(2) + '%">').join('');
+    '<col style="width:' + (c.fixed || (c.w / total * 100).toFixed(2) + '%') + '">').join('');
   document.getElementById('hrow').innerHTML = cols.map(c =>
     '<th data-k="' + c.k + '"' + (c.k === sortKey
       ? ' aria-sort="' + (sortDir === 1 ? 'ascending' : 'descending') + '"' : '') +

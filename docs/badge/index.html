@@ -58,12 +58,17 @@
   /* the seal: the same shape the release tracker shows in its Hardware
      Verified column, at emblem size. One #hvseal-sym in the svgdefs block at
      the top of <body>, filled with --accent, check knocked out. At this size it
-     carries the subtle shade: a second pass of the path under #hvseal-shade,
-     --stamp-shade fading in toward the bottom-right so that corner sits ~15%
-     darker than the accent (the tracker keeps it off at 16px; see there). */
+     carries the sheen: a second, opaque pass of the path under #hvseal-shade,
+     the accent lightened 15% toward white at the top-left and darkened 30%
+     toward black at the bottom-right, white and black taken from the
+     --stamp-sheen / --stamp-shade tokens with their alpha dropped (the tracker
+     keeps it off at 16px; see there). */
   .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
-  .hvs0 { stop-color: var(--stamp-shade); stop-opacity: 0; }
-  .hvs1 { stop-color: var(--stamp-shade); stop-opacity: .35; }
+  .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
+  @supports (color: rgb(from currentColor r g b)) {
+    .hvs0 { stop-color: color-mix(in srgb, var(--accent) 85%, rgb(from var(--stamp-sheen) r g b / 1)); }
+    .hvs2 { stop-color: color-mix(in srgb, var(--accent) 70%, rgb(from var(--stamp-shade) r g b / 1)); }
+  }
   .hvshade { opacity: var(--hv-shade, 0); }
   .sealhead { display: flex; align-items: center; gap: 1.1rem; margin: .4rem 0 1rem; }
   .seal { flex: none; width: 4.2rem; height: 4.2rem; fill: var(--accent); --hv-shade: 1; }
@@ -82,7 +87,7 @@
 <!-- the seal, defined once (shape: checkmark-filled, 20x20, one evenodd path,
      check knocked out); the inner <use> repaints it with the shade gradient -->
 <svg class="svgdefs" aria-hidden="true" focusable="false"><defs>
-  <linearGradient id="hvseal-shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="hvs0"/><stop offset="1" class="hvs1"/></linearGradient>
+  <linearGradient id="hvseal-shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="hvs0"/><stop offset=".5" class="hvs1"/><stop offset="1" class="hvs2"/></linearGradient>
   <symbol id="hvseal-sym" viewBox="0 0 20 20"><path id="hvseal-path" fill-rule="evenodd" clip-rule="evenodd" d="M3.213 5.8c.015.759-.398 1.785-.935 2.321a2.66 2.66 0 0 0 0 3.76c.53.528.92 1.444.935 2.192c.014.662.273 1.32.778 1.824a2.65 2.65 0 0 0 1.748.775c.791.04 1.827.5 2.387 1.06a2.66 2.66 0 0 0 3.759 0c.56-.56 1.596-1.02 2.387-1.06a2.65 2.65 0 0 0 1.748-.775a2.65 2.65 0 0 0 .777-1.826c.015-.746.4-1.656.929-2.184a2.663 2.663 0 0 0 .006-3.766c-.536-.535-.95-1.562-.934-2.32a2.65 2.65 0 0 0-.778-1.932a2.65 2.65 0 0 0-2.015-.775c-.714.036-1.615-.31-2.12-.816a2.66 2.66 0 0 0-3.76 0c-.504.505-1.406.852-2.12.816a2.65 2.65 0 0 0-2.014.775A2.65 2.65 0 0 0 3.213 5.8m9.828.826a1 1 0 0 1 .389 1.36l-2.768 4.982a1 1 0 0 1-.298.343a1 1 0 0 1-1.23-.045l-2.759-2.207a1 1 0 1 1 1.25-1.562l1.853 1.483l2.203-3.966a1 1 0 0 1 1.36-.388"/><use class="hvshade" href="#hvseal-path" fill="url(#hvseal-shade)"/></symbol>
 </defs></svg>
 <div class="wrap">
@@ -140,12 +145,19 @@ describes.</p>
 <p>The core was built or checked using the original hardware or its documentation, not only MAME's
 code, gameplay videos or the ROMs. Any one of these is enough:</p>
 <ul>
-  <li>an original board, owned or borrowed, was used to build or check the core,</li>
+  <li>an original board, owned, borrowed or lent to them, was used to build or check the core, including
+    timing measurements,</li>
   <li>the board's PALs, PROMs or other chips were dumped for it,</li>
+  <li>custom chips, PALs or PROMs were decapped, photographed or analyzed, and the core's logic derived
+    from that,</li>
   <li>it was built from the manufacturer's original schematics,</li>
-  <li>logic analyzer or oscilloscope captures were taken from a working board,</li>
-  <li>a write-up shows how the logic was worked out from the hardware.</li>
+  <li>captures or recordings from a working board were compared against the core, with the differences
+    documented,</li>
+  <li>a write-up shows how the logic was worked out from the hardware,</li>
+  <li>it runs on identical hardware to a game that has already earned the seal.</li>
 </ul>
+<p>Games that run on identical hardware inherit the seal once one of them earns it. Identical means the
+same board and custom chips, not a similar one.</p>
 <p>Where the core started does not matter. A core that began from MAME's documentation qualifies once
 it has been checked against a board.</p>
 <p>The use of AI tools in a core's development is irrelevant in itself. What matters is verification

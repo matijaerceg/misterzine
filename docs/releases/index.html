@@ -235,17 +235,23 @@
      <use> of the one #hvseal-sym in the svgdefs block at the top of <body>.
      The rosette fills with --accent (never --accent2: a solid glyph needs the
      token with a contrast floor) and the check is knocked out, so it shows
-     whatever the seal sits on (row, hover, selection). The subtle gradient is a
-     second pass of the same path under #hvseal-shade: --stamp-shade (black at
-     .33-.45 in every theme) fading in toward the bottom-right corner, so the
-     corner ends up ~15% darker than the accent. It is off by default
-     (--hv-shade: 0) because at 16px the darker corner breaks the accent/bg
-     contrast floor in Workbench (3.7 vs ~4.4) and Virtual Boy, and is invisible
-     anyway; sizes that can carry it switch it on (the panel heading here, the
+     whatever the seal sits on (row, hover, selection). The sheen is a second,
+     opaque pass of the same path under #hvseal-shade: the accent lightened 15%
+     toward white at the top-left, plain at the middle (where the check sits),
+     darkened 30% toward black at the bottom-right. White and black come from
+     the theme tokens --stamp-sheen / --stamp-shade with their alpha dropped
+     (relative color syntax), so no literal colour is involved; browsers without
+     that syntax keep all three stops at --accent, i.e. flat. It is off by
+     default (--hv-shade: 0): at 16px the darker corner breaks the accent/bg
+     contrast floor in Workbench and Virtual Boy and the sheen cannot be seen
+     anyway. Sizes that can carry it switch it on (the panel heading here, the
      criteria page's hero). */
   .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
-  .hvs0 { stop-color: var(--stamp-shade); stop-opacity: 0; }
-  .hvs1 { stop-color: var(--stamp-shade); stop-opacity: .35; }
+  .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
+  @supports (color: rgb(from currentColor r g b)) {
+    .hvs0 { stop-color: color-mix(in srgb, var(--accent) 85%, rgb(from var(--stamp-sheen) r g b / 1)); }
+    .hvs2 { stop-color: color-mix(in srgb, var(--accent) 70%, rgb(from var(--stamp-shade) r g b / 1)); }
+  }
   .hvseal { display: block; fill: var(--accent); }
   .hvshade { opacity: var(--hv-shade, 0); }
   /* sized and ruled off like the Columns menu's footnote (.colnote) */
@@ -1002,7 +1008,7 @@
      Shape: checkmark-filled (20x20, one evenodd path, check knocked out). The
      inner <use> repaints the path with #hvseal-shade, gated by --hv-shade. -->
 <svg class="svgdefs" aria-hidden="true" focusable="false"><defs>
-  <linearGradient id="hvseal-shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="hvs0"/><stop offset="1" class="hvs1"/></linearGradient>
+  <linearGradient id="hvseal-shade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="hvs0"/><stop offset=".5" class="hvs1"/><stop offset="1" class="hvs2"/></linearGradient>
   <symbol id="hvseal-sym" viewBox="0 0 20 20"><path id="hvseal-path" fill-rule="evenodd" clip-rule="evenodd" d="M3.213 5.8c.015.759-.398 1.785-.935 2.321a2.66 2.66 0 0 0 0 3.76c.53.528.92 1.444.935 2.192c.014.662.273 1.32.778 1.824a2.65 2.65 0 0 0 1.748.775c.791.04 1.827.5 2.387 1.06a2.66 2.66 0 0 0 3.759 0c.56-.56 1.596-1.02 2.387-1.06a2.65 2.65 0 0 0 1.748-.775a2.65 2.65 0 0 0 .777-1.826c.015-.746.4-1.656.929-2.184a2.663 2.663 0 0 0 .006-3.766c-.536-.535-.95-1.562-.934-2.32a2.65 2.65 0 0 0-.778-1.932a2.65 2.65 0 0 0-2.015-.775c-.714.036-1.615-.31-2.12-.816a2.66 2.66 0 0 0-3.76 0c-.504.505-1.406.852-2.12.816a2.65 2.65 0 0 0-2.014.775A2.65 2.65 0 0 0 3.213 5.8m9.828.826a1 1 0 0 1 .389 1.36l-2.768 4.982a1 1 0 0 1-.298.343a1 1 0 0 1-1.23-.045l-2.759-2.207a1 1 0 1 1 1.25-1.562l1.853 1.483l2.203-3.966a1 1 0 0 1 1.36-.388"/><use class="hvshade" href="#hvseal-path" fill="url(#hvseal-shade)"/></symbol>
 </defs></svg>
 <main>
@@ -1194,7 +1200,7 @@ const IOS_BROWSER = !STANDALONE && (/iP(hone|ad|od)/.test(navigator.userAgent) |
 // answers persist() with a permission popup a drive-by tab hasn't earned
 if (STANDALONE && navigator.storage && navigator.storage.persist)
   navigator.storage.persist().catch(() => {});
-let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter
+let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter but Hardware Verified (mz-hv)
 let favView = null;    // Set of keys while viewing someone's ?fav= link, else null
 // unlike the page's other writes (prefs, all replaceable) this one is the user's
 // own data: a silent failure would lose what the UI just claimed to have saved,
@@ -2899,11 +2905,15 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 
 // --- hardware badge filter: show only the badged rows --------------------------
 // A plain toggle shaped like the favorites one: the seal plus how many rows wear
-// it. Session-only like every other filter, reset by Clear filters, and armed
-// on arrival by a ?hv link (the criteria page's "see them all"). Hidden while
-// the data carries no badge at all, so an older data.json never shows a dead
-// control; never hidden while it is the thing doing the narrowing.
+// it. Unlike the other filters it is REMEMBERED across visits ('mz-hv', '1' or
+// '0'; off for a first-time visitor): a click, a ?hv arrival link (the criteria
+// page's "see them all") and Clear filters each store the state they leave.
+// Hidden while the data carries no badge at all, so an older data.json never
+// shows a dead control; never hidden while it is the thing doing the narrowing.
+const HV_KEY = 'mz-hv';
 let hvOnly = false;
+try { hvOnly = localStorage.getItem(HV_KEY) === '1'; } catch (e) {}
+function saveHvOnly() { try { localStorage.setItem(HV_KEY, hvOnly ? '1' : '0'); } catch (e) {} }
 const hvToggle = document.getElementById('hvtoggle');
 function syncHvSummary() {
   const n = DATA.reduce((a, d) => a + (d.hv ? 1 : 0), 0);
@@ -2916,20 +2926,29 @@ function syncHvSummary() {
 }
 hvToggle.addEventListener('click', () => {
   hvOnly = !hvOnly;
+  saveHvOnly();
   syncHvSummary(); apply(); recenterOpen();
 });
-// state-only reset (no apply/recenter), matching resetFavOnly and friends
-function resetHvOnly() { hvOnly = false; syncHvSummary(); }
+// state-only reset (no apply/recenter), matching resetFavOnly and friends. Its
+// one caller is Clear filters, which leaves the filter off for the next visit too.
+function resetHvOnly() { hvOnly = false; saveHvOnly(); syncHvSummary(); }
 syncHvSummary();
-// Arrival-only, like adoptFavParam: a ?hv in the URL switches the filter on and
-// is then removed from the address bar, so a refresh starts unfiltered (the
-// page's rule for every filter). A link that arrives while no row carries the
-// badge just lands on the full list.
+// Runs once, after the first data load. A ?hv in the URL switches the filter on
+// and is stored like a click; the param itself is removed from the address bar
+// (the state now lives in 'mz-hv', so a refresh keeps it either way). If the data
+// carries no badge at all (an older data.json), a remembered or linked "on"
+// would strand the visitor on an empty list: drop it for this load, without
+// storing, and land on the full list.
 function adoptHvParam() {
-  if (!new URLSearchParams(location.search).has('hv')) return;
-  stripParam('hv');
-  if (!DATA.some(d => d.hv)) return;
+  const linked = new URLSearchParams(location.search).has('hv');
+  if (linked) stripParam('hv');
+  if (!DATA.some(d => d.hv)) {
+    if (hvOnly) { hvOnly = false; syncHvSummary(); apply(); }
+    return;
+  }
+  if (!linked) return;
   hvOnly = true;
+  saveHvOnly();
   syncHvSummary(); apply();
 }
 

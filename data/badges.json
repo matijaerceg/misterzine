@@ -2179,6 +2179,304 @@
         "https://github.com/MiSTer-devel/Arcade-TNKIII_MiSTer/blob/5eda8899e5d34cbc2444ba56f5c8ff3ba6707285/rtl/cpuA_B/A5001_2.v#L3",
         "https://github.com/MiSTer-devel/Arcade-TNKIII_MiSTer/blob/5eda8899e5d34cbc2444ba56f5c8ff3ba6707285/rtl/clocks/A5001_1.v#L116"
       ]
+    },
+    {
+      "k": "aliens",
+      "title": "Aliens",
+      "rbfs": [
+        "jtaliens"
+      ],
+      "setnames": [
+        "aliens"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots. The Aliens board's PALs were dumped by Caius, and their equations are documented with the core.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/README.md?plain=1#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/README.md?plain=1#L5"
+      ]
+    },
+    {
+      "k": "crimfght",
+      "title": "Crime Fighters",
+      "rbfs": [
+        "jtaliens"
+      ],
+      "setnames": [
+        "crimfght"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/README.md?plain=1#L7"
+      ]
+    },
+    {
+      "k": "gbusters",
+      "title": "Gang Busters",
+      "rbfs": [
+        "jtaliens"
+      ],
+      "setnames": [
+        "gbusters"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/README.md?plain=1#L7"
+      ]
+    },
+    {
+      "k": "scontra",
+      "title": "Super Contra",
+      "rbfs": [
+        "jtaliens"
+      ],
+      "setnames": [
+        "scontra"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/README.md?plain=1#L7"
+      ]
+    },
+    {
+      "k": "thunderx",
+      "title": "Thunder Cross",
+      "rbfs": [
+        "jtaliens"
+      ],
+      "setnames": [
+        "thunderx"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots. Thunder Cross's 052591 chip, which handles collision detection, comes from the same silicon work.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/README.md?plain=1#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052591.v#L5"
+      ]
+    },
+    {
+      "k": "mia",
+      "title": "M.I.A. - Missing in Action",
+      "rbfs": [
+        "jttmnt"
+      ],
+      "setnames": [
+        "mia"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tmnt/cfg/files.yaml#L17",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tmnt/README.md?plain=1#L20"
+      ]
+    },
+    {
+      "k": "punkshot",
+      "title": "Punk Shot",
+      "rbfs": [
+        "jttmnt"
+      ],
+      "setnames": [
+        "punkshot"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tmnt/cfg/files.yaml#L17",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tmnt/README.md?plain=1#L20"
+      ]
+    },
+    {
+      "k": "thndrx2",
+      "title": "Thunder Cross II",
+      "rbfs": [
+        "jttmnt"
+      ],
+      "setnames": [
+        "thndrx2"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots. Its sound balance was measured on a Thunder Cross II board.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tmnt/cfg/files.yaml#L17",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/tmnt/README.md?plain=1#L32"
+      ]
+    },
+    {
+      "k": "vendetta",
+      "title": "Vendetta",
+      "rbfs": [
+        "jtsimson"
+      ],
+      "setnames": [
+        "vendetta"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap chips (Konami 052109 and 051962) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/simson/cfg/files.yaml#L22"
+      ]
+    },
+    {
+      "k": "escape-kids-asia-4-players",
+      "title": "Escape Kids (Asia, 4 Players)",
+      "rbfs": [
+        "jtsimson"
+      ],
+      "setnames": [
+        "esckids"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap chips (Konami 052109 and 051962) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/simson/cfg/files.yaml#L22"
+      ]
+    },
+    {
+      "k": "ssriders",
+      "title": "Sunset Riders",
+      "rbfs": [
+        "jtriders"
+      ],
+      "setnames": [
+        "ssriders"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap chips (Konami 052109 and 051962) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/riders/cfg/common.yaml#L14"
+      ]
+    },
+    {
+      "k": "lgtnfght",
+      "title": "Lightning Fighters",
+      "rbfs": [
+        "jtriders"
+      ],
+      "setnames": [
+        "lgtnfght"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap chips (Konami 052109 and 051962) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/riders/cfg/common.yaml#L14"
+      ]
+    },
+    {
+      "k": "teenage-mutant-ninja-turtles-turtles-in-time",
+      "title": "Teenage Mutant Ninja Turtles Turtles in Time",
+      "rbfs": [
+        "jtriders"
+      ],
+      "setnames": [
+        "tmnt2"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap chips (Konami 052109 and 051962) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/riders/cfg/common.yaml#L14"
+      ]
+    },
+    {
+      "k": "ajax",
+      "title": "Ajax",
+      "rbfs": [
+        "jtajax"
+      ],
+      "setnames": [
+        "ajax"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap and sprite chips (Konami 052109, 051962 and 051960) are modelled on Furrtek's reverse engineering of their die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/ajax/cfg/files.yaml#L8"
+      ]
+    },
+    {
+      "k": "prmrsocr",
+      "title": "Premier Soccer",
+      "rbfs": [
+        "jtprmr"
+      ],
+      "setnames": [
+        "prmrsocr"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap chips (Konami 052109 and 051962) and its 053936 rotation chip are modelled on Furrtek's reverse engineering of the chips' die shots.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/aliens/hdl/jt052109.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/prmr/cfg/files.yaml#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/prmr/cfg/files.yaml#L13",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rungun/hdl/jt053936.v#L5",
+        "https://github.com/furrtek/SiliconRE/blob/c926ce92fdebd7613c8712b42c45a059d63548e0/README.md?plain=1#L3"
+      ]
+    },
+    {
+      "k": "rungun",
+      "title": "Run and Gun",
+      "rbfs": [
+        "jtrungun"
+      ],
+      "setnames": [
+        "rungun"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "The core's 053936 rotation chip is based on Furrtek's model of it, reverse engineered from pictures of the chip's die. Its 053252 timing chip is tested against Furrtek's model of that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rungun/hdl/jt053936.v#L5",
+        "https://github.com/furrtek/SiliconRE/blob/c926ce92fdebd7613c8712b42c45a059d63548e0/README.md?plain=1#L3",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/rungun/ver/k053252/test.v#L103"
+      ]
+    },
+    {
+      "k": "citycon",
+      "title": "City Connection",
+      "rbfs": [
+        "CityConnection"
+      ],
+      "setnames": [
+        "citycon"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Validated pixel by pixel against a recording of an original Jaleco City Connection board. The recording showed that the board outputs 247 pixels per line, not the 240 MAME shows, and the core follows the board.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-CityConnection_MiSTer/blob/bde03e78c327a3af7dcecc1406112d10baf9c5f4/README.md?plain=1#L17",
+        "https://github.com/MiSTer-devel/Arcade-CityConnection_MiSTer/blob/bde03e78c327a3af7dcecc1406112d10baf9c5f4/README.md?plain=1#L58"
+      ]
     }
   ]
 }

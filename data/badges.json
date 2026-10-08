@@ -5669,6 +5669,3049 @@
         "https://github.com/MiSTer-devel/Arcade-SpaceFirebird_MiSTer/blob/ea952fe3c9e8b9ed92e478abf513bed2e5ee5509/README.txt#L20",
         "https://alamone.github.io/fpga-verified-against/results/#dist-SpaceFirebird"
       ]
+    },
+    {
+      "k": "1941",
+      "title": "1941: Counter Attack",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "1941"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "3wonders",
+      "title": "Three Wonders",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "3wonders"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "captcomm",
+      "title": "Captain Commando",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "captcomm"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "cawing",
+      "title": "Carrier Air Wing",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "cawing"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "cworld2j",
+      "title": "Adventure Quiz Capcom World 2",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "cworld2j"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "dynwar",
+      "title": "Dynasty Wars",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "dynwar"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "ffight",
+      "title": "Final Fight",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "ffight"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "forgottn",
+      "title": "Forgotten Worlds",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "forgottn"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "ghouls",
+      "title": "Ghouls'n Ghosts",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "ghouls"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "gulunpa",
+      "title": "Gulun.Pa!",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "gulunpa"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "knights",
+      "title": "Knights of the Round",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "knights"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "kod",
+      "title": "The King of Dragons",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "kod"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "megaman",
+      "title": "Mega Man: The Power Battle",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "megaman"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "mercs",
+      "title": "Mercs",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "mercs"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "mpumpkin",
+      "title": "Magical Pumpkin: Puroland de Daibouken",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "mpumpkin"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "msword",
+      "title": "Magic Sword: Heroic Fantasy",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "msword"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "mtwins",
+      "title": "Mega Twins",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "mtwins"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "nemo",
+      "title": "Nemo",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "nemo"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "pang3",
+      "title": "Pang! 3",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "pang3"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "pnickj",
+      "title": "Pnickies",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "pnickj"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "pokonyan",
+      "title": "Pokonyan! Balloon",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "pokonyan"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "qad",
+      "title": "Quiz & Dragons: Capcom Quiz Game",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "qad"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "qtono2j",
+      "title": "Quiz Tonosama no Yabou 2: Zenkoku-ban",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "qtono2j"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "sf2",
+      "title": "Street Fighter II: The World Warrior",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "sf2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. Street Fighter II itself runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "sf2ce",
+      "title": "Street Fighter II': Champion Edition",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "sf2ce"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "sf2hf",
+      "title": "Street Fighter II': Hyper Fighting",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "sf2hf"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "strider",
+      "title": "Strider",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "strider"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "unsquad",
+      "title": "U.N. Squadron",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "unsquad"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "varth",
+      "title": "Varth: Operation Thunderstorm",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "varth"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "willow",
+      "title": "Willow",
+      "rbfs": [
+        "jtcps1"
+      ],
+      "setnames": [
+        "willow"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada measured the DMA timing of a real Street Fighter II (CP System) board with an oscilloscope, published the captures in the original JTCPS repository, and tuned the core until a DMA test ran within 0.68% of the real PCB. The core's DMA module records the measured values, and its credits thank Jimmy Goodboy and Laurent Herledan for the PCBs. This game runs on the same CP System hardware.",
+      "links": [
+        "https://github.com/jotego/jtcps/commit/21f7fc39927ccf0a7a1b00b97d18cf230881c414",
+        "https://github.com/jotego/jtcps/commit/1e6184160a66bdc7b08547338f3dd9717a37080f",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/hdl/jtcps1_dma.v#L6",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps1/cfg/msg#L6"
+      ]
+    },
+    {
+      "k": "1944",
+      "title": "1944: The Loop Master",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "1944"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "19xx",
+      "title": "19XX: The War Against Destiny",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "19xx"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "armwar",
+      "title": "Armored Warriors",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "armwar"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "avsp",
+      "title": "Alien vs. Predator",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "avsp"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "batcir",
+      "title": "Battle Circuit",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "batcir"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "choko",
+      "title": "Janpai Puzzle Choukou",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "choko"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "csclub",
+      "title": "Capcom Sports Club",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "csclub"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "cybots",
+      "title": "Cyberbots: Fullmetal Madness",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "cybots"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "ddsom",
+      "title": "Dungeons & Dragons: Shadow over Mystara",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "ddsom"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "ddtod",
+      "title": "Dungeons & Dragons: Tower of Doom",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "ddtod"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "dimahoo",
+      "title": "Dimahoo",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "dimahoo"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "dstlk",
+      "title": "Darkstalkers: The Night Warriors",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "dstlk"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "ecofghtr",
+      "title": "Eco Fighters",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "ecofghtr"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "gigawing",
+      "title": "Giga Wing",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "gigawing"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "hsf2",
+      "title": "Hyper Street Fighter II: The Anniversary Edition",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "hsf2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "jyangoku",
+      "title": "Jyangokushi: Haoh no Saihai",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "jyangoku"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "megaman2",
+      "title": "Mega Man 2: The Power Fighters",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "megaman2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "mmatrix",
+      "title": "Mars Matrix: Hyper Solid Shooting",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "mmatrix"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "mpang",
+      "title": "Mighty! Pang",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "mpang"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "msh",
+      "title": "Marvel Super Heroes",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "msh"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "mshvsf",
+      "title": "Marvel Super Heroes Vs. Street Fighter",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "mshvsf"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "mvsc",
+      "title": "Marvel Vs. Capcom: Clash of Super Heroes",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "mvsc"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "nwarr",
+      "title": "Night Warriors: Darkstalkers' Revenge",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "nwarr"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "progear",
+      "title": "Progear",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "progear"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "pzloop2",
+      "title": "Puzz Loop 2",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "pzloop2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "qndream",
+      "title": "Quiz Nanairo Dreams: Nijiirochou no Kiseki",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "qndream"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "ringdest",
+      "title": "Ring of Destruction: Slammasters II",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "ringdest"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "sfa",
+      "title": "Street Fighter Alpha: Warriors' Dreams",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "sfa"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "sfa2",
+      "title": "Street Fighter Alpha 2",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "sfa2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "sfa3",
+      "title": "Street Fighter Alpha 3",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "sfa3"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "sfz2al",
+      "title": "Street Fighter Zero 2 Alpha",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "sfz2al"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "sgemf",
+      "title": "Super Gem Fighter: Mini Mix",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "sgemf"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "spf2t",
+      "title": "Super Puzzle Fighter II Turbo",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "spf2t"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "ssf2",
+      "title": "Super Street Fighter II: The New Challengers",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "ssf2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "ssf2t",
+      "title": "Super Street Fighter II Turbo",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "ssf2t"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "vhunt2",
+      "title": "Vampire Hunter 2: Darkstalkers Revenge",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "vhunt2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "vsav",
+      "title": "Vampire Savior: The Lord of Vampire",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "vsav"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "vsav2",
+      "title": "Vampire Savior 2: The Lord of Vampire",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "vsav2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "xmcota",
+      "title": "X-Men: Children of the Atom",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "xmcota"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "xmvsf",
+      "title": "X-Men Vs. Street Fighter",
+      "rbfs": [
+        "jtcps2"
+      ],
+      "setnames": [
+        "xmvsf"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's bus acknowledge timing and bus request logic follow Loic Petit's schematic of the CPS2 B-board custom chip DL-1827, which he reverse engineered from the decapped chip, and the source credits that schematic. The original JTCPS repository also carried PDF schematics of the CPS2 boards and chips and linked Loic Petit's cps2-reverse project. This game runs on the CPS2 hardware, whose game boards all carry that chip.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_dtack.v#L4",
+        "https://gitlab.com/loic.petit/cps2-reverse/-/blob/6d375e427d267bfdc08ab35274b4623c3c9815fc/DLs/README.md#L26",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps2/hdl/jtcps2_main.v#L444",
+        "https://github.com/jotego/jtcps/tree/7d43855eb0aa9037dfc2c4d9044ad80994d6ffbb/doc/cps2"
+      ]
+    },
+    {
+      "k": "jojoban",
+      "title": "JoJo no Kimyou na Bouken: Mirai e no Isan",
+      "rbfs": [
+        "jtcps3"
+      ],
+      "setnames": [
+        "jojoban"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew full KiCad schematics of the CP System III board, published in the core's sch folder. The core's credits list CPS3 PCBs donated by Jose A. Cruz and Julius Lagula and die shots by Furrtek, and a commit records the core's video timing being matched to the PCB. All CPS3 games run on this same board.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/cfg/msg#L12",
+        "https://github.com/jotego/jtcores/commit/de210765b00f98670486e6f6141b056c32adc381"
+      ]
+    },
+    {
+      "k": "jojon",
+      "title": "JoJo's Venture",
+      "rbfs": [
+        "jtcps3"
+      ],
+      "setnames": [
+        "jojon"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew full KiCad schematics of the CP System III board, published in the core's sch folder. The core's credits list CPS3 PCBs donated by Jose A. Cruz and Julius Lagula and die shots by Furrtek, and a commit records the core's video timing being matched to the PCB. All CPS3 games run on this same board.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/cfg/msg#L12",
+        "https://github.com/jotego/jtcores/commit/de210765b00f98670486e6f6141b056c32adc381"
+      ]
+    },
+    {
+      "k": "redearthn",
+      "title": "Red Earth",
+      "rbfs": [
+        "jtcps3"
+      ],
+      "setnames": [
+        "redearthn"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew full KiCad schematics of the CP System III board, published in the core's sch folder. The core's credits list CPS3 PCBs donated by Jose A. Cruz and Julius Lagula and die shots by Furrtek, and a commit records the core's video timing being matched to the PCB. All CPS3 games run on this same board.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/cfg/msg#L12",
+        "https://github.com/jotego/jtcores/commit/de210765b00f98670486e6f6141b056c32adc381"
+      ]
+    },
+    {
+      "k": "sfiii2n",
+      "title": "Street Fighter III 2nd Impact: Giant Attack",
+      "rbfs": [
+        "jtcps3"
+      ],
+      "setnames": [
+        "sfiii2n"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew full KiCad schematics of the CP System III board, published in the core's sch folder. The core's credits list CPS3 PCBs donated by Jose A. Cruz and Julius Lagula and die shots by Furrtek, and a commit records the core's video timing being matched to the PCB. All CPS3 games run on this same board.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/cfg/msg#L12",
+        "https://github.com/jotego/jtcores/commit/de210765b00f98670486e6f6141b056c32adc381"
+      ]
+    },
+    {
+      "k": "sfiii3n",
+      "title": "Street Fighter III 3rd Strike: Fight for the Future",
+      "rbfs": [
+        "jtcps3"
+      ],
+      "setnames": [
+        "sfiii3n"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew full KiCad schematics of the CP System III board, published in the core's sch folder. The core's credits list CPS3 PCBs donated by Jose A. Cruz and Julius Lagula and die shots by Furrtek, and a commit records the core's video timing being matched to the PCB. All CPS3 games run on this same board.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/cfg/msg#L12",
+        "https://github.com/jotego/jtcores/commit/de210765b00f98670486e6f6141b056c32adc381"
+      ]
+    },
+    {
+      "k": "sfiiin",
+      "title": "Street Fighter III: New Generation",
+      "rbfs": [
+        "jtcps3"
+      ],
+      "setnames": [
+        "sfiiin"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew full KiCad schematics of the CP System III board, published in the core's sch folder. The core's credits list CPS3 PCBs donated by Jose A. Cruz and Julius Lagula and die shots by Furrtek, and a commit records the core's video timing being matched to the PCB. All CPS3 games run on this same board.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cps3/cfg/msg#L12",
+        "https://github.com/jotego/jtcores/commit/de210765b00f98670486e6f6141b056c32adc381"
+      ]
+    },
+    {
+      "k": "circusc",
+      "title": "Circus Charlie",
+      "rbfs": [
+        "jtcircus"
+      ],
+      "setnames": [
+        "circusc"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Fulvio Venturelli donated a Circus Charlie PCB, credited on the core's credits screen. The core's lab folder holds oscilloscope captures of the board's sync signals, and the core's 60.6 Hz frame rate matches the 60.5 Hz they show. Konami's Circus Charlie schematics were also added to the JT team's earlier JTKICKER repository.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/circus/cfg/msg#L1",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/circus/doc/lab",
+        "https://github.com/jotego/jtkicker/blob/ba9626d1615b917f1dc3b099bdbceedca76717e0/doc/sch/Circus%20Charlie.pdf"
+      ]
+    },
+    {
+      "k": "galpanic",
+      "title": "Gals Panic",
+      "rbfs": [
+        "jtgals"
+      ],
+      "setnames": [
+        "galpanic"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's folder holds oscilloscope captures of the Gals Panic board's video sync, and its credits screen says it is based on PCB measurements and MAME documentation. The core runs at the measured 59.2 Hz rather than the 60 Hz that MAME uses.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/gals/doc/scope",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/gals/cfg/msg#L9",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/gals/cfg/macros.def#L6"
+      ]
+    },
+    {
+      "k": "robocop",
+      "title": "Robocop",
+      "rbfs": [
+        "jtcop"
+      ],
+      "setnames": [
+        "robocop"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Gabriel DiGennaro donated a Robocop PCB to the JT team, as the core's credits say. The core's code cites the Robocop schematics, down to a protection chip on page 26.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/cfg/msg#L10",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/hdl/jtcop_prot.v#L11",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/hdl/jtcop_main.v#L105"
+      ]
+    },
+    {
+      "k": "hippodrm",
+      "title": "Hippodrome",
+      "rbfs": [
+        "jtcop"
+      ],
+      "setnames": [
+        "hippodrm"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Hippodrome runs on Data East's MEC-M1 main board, the same main board as Robocop, whose PCB Gabriel DiGennaro donated to the JT team and whose schematics the core cites. Only the plug-in game board, which carries the ROMs and the protection chip, differs, and the core shares the JTCOP code.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/doc/dec0.cpp#L81",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/cfg/msg#L10",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/hdl/jtcop_prot.v#L11"
+      ]
+    },
+    {
+      "k": "baddudes",
+      "title": "Bad Dudes vs. Dragonninja",
+      "rbfs": [
+        "jtninja"
+      ],
+      "setnames": [
+        "baddudes"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Bad Dudes vs. Dragonninja runs on Data East's MEC-M1 main board, the same main board as Robocop, whose PCB Gabriel DiGennaro donated to the JT team and whose schematics the core cites. Only the plug-in game board, which carries the ROMs and the protection chip, differs, and the core shares the JTCOP code.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/doc/dec0.cpp#L81",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/cfg/msg#L10",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/hdl/jtcop_prot.v#L11"
+      ]
+    },
+    {
+      "k": "hbarrel",
+      "title": "Heavy Barrel",
+      "rbfs": [
+        "jtninja"
+      ],
+      "setnames": [
+        "hbarrel"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Heavy Barrel runs on Data East's MEC-M1 main board, the same main board as Robocop, whose PCB Gabriel DiGennaro donated to the JT team and whose schematics the core cites. Only the plug-in game board, which carries the ROMs and the protection chip, differs, and the core shares the JTCOP code.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/doc/dec0.cpp#L81",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/cfg/msg#L10",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/cop/hdl/jtcop_prot.v#L11"
+      ]
+    },
+    {
+      "k": "renegade",
+      "title": "Renegade",
+      "rbfs": [
+        "jtkunio"
+      ],
+      "setnames": [
+        "renegade"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew full KiCad schematics of the Renegade board (Jose Tejada, 2022), published in the core's sch folder. The core's video timer uses line counts and blanking widths measured on the hardware.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kunio/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kunio/sch/kunio.kicad_sch#L8",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/kunio/hdl/jtkunio_video.v#L70"
+      ]
+    },
+    {
+      "k": "wwfsstar",
+      "title": "WWF Superstars",
+      "rbfs": [
+        "jtwwfss"
+      ],
+      "setnames": [
+        "wwfsstar"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Gabriel DiGennaro donated a WWF Superstars PCB, and the core's credits say it is based on the PCB schematics and chip measurements. The JT team drew the board's schematics, published in the core's sch folder, and the code notes where the PCB differs from MAME.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/wwfss/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/wwfss/sch",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/wwfss/hdl/jtwwfss_main.v#L121"
+      ]
+    },
+    {
+      "k": "parodius",
+      "title": "Parodius Da!: Shinwa kara Owarai e",
+      "rbfs": [
+        "jtparoda"
+      ],
+      "setnames": [
+        "parodius"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The JT team drew KiCad schematics of the Parodius Da! board (Jose Tejada, 2023), published in the core's sch folder. The core's credits say it is based on PCB schematics, chip data from Furrtek and Caius, PAL equations and the team's own lab research.",
+      "links": [
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/paroda/sch/parodius",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/paroda/cfg/msg#L7"
+      ]
+    },
+    {
+      "k": "trackfld",
+      "title": "Track & Field",
+      "rbfs": [
+        "jttrack"
+      ],
+      "setnames": [
+        "trackfld"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Gyrrus donated an original Track & Field PCB to the JT team, credited on the core's credits screen. Konami's Track and Field schematics were published in the JTKICKER repository, where the core was first developed.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/track/cfg/msg#L9",
+        "https://github.com/jotego/jtkicker/blob/ba9626d1615b917f1dc3b099bdbceedca76717e0/doc/sch/Track%20and%20Field.pdf"
+      ]
+    },
+    {
+      "k": "roadf",
+      "title": "Road Fighter",
+      "rbfs": [
+        "jtroadf"
+      ],
+      "setnames": [
+        "roadf"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Built from Konami's Road Fighter schematics, published in the JT team's JTKICKER repository; the code cites chip positions on the video board schematic. A code note also records that the PCB the team got had the part at position G13 missing.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/roadf/hdl/jtroadf_scroll.v#L69",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/roadf/hdl/jtroadf_main.v#L80",
+        "https://github.com/jotego/jtkicker/blob/ba9626d1615b917f1dc3b099bdbceedca76717e0/doc/sch/Road%20Fighter.pdf"
+      ]
+    },
+    {
+      "k": "hyperspt",
+      "title": "Hyper Sports",
+      "rbfs": [
+        "jtroadf"
+      ],
+      "setnames": [
+        "hyperspt"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Hyper Sports runs on the same board as Road Fighter, with a different ROM jumper on the video board, as the core's README notes. The core is built from Konami's Road Fighter and Hyper Sports schematics, published in the JT team's JTKICKER repository, and its code cites chip positions on the video board schematic.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/roadf/README.md?plain=1#L35",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/roadf/hdl/jtroadf_scroll.v#L69",
+        "https://github.com/jotego/jtkicker/blob/ba9626d1615b917f1dc3b099bdbceedca76717e0/doc/sch/Hyper%20Sports.pdf"
+      ]
+    },
+    {
+      "k": "sbasketb",
+      "title": "Super Basketball",
+      "rbfs": [
+        "jtsbaskt"
+      ],
+      "setnames": [
+        "sbasketb"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Konami's Super Basketball schematics were published in the JT team's JTKICKER repository, and a commit sizes the sound RAM after a jumper seen on those schematics.",
+      "links": [
+        "https://github.com/jotego/jtkicker/blob/ba9626d1615b917f1dc3b099bdbceedca76717e0/doc/sch/Super%20Basketball%20Schematics.pdf",
+        "https://github.com/jotego/jtkicker/commit/4356920fd991dc4b5ac421b0850f7be170124ecf"
+      ]
+    },
+    {
+      "k": "yiear",
+      "title": "Yie Ar Kung-Fu",
+      "rbfs": [
+        "jtyiear"
+      ],
+      "setnames": [
+        "yiear"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Jose Tejada added Konami's Yie Ar Kung-Fu schematics to the JTKICKER repository, and in the same commit noted how an original Yie Ar Kung-Fu PCB behaved when connected through an OSSC.",
+      "links": [
+        "https://github.com/jotego/jtkicker/commit/248fbef5286825feb28959f5e2667f20214f8819",
+        "https://github.com/jotego/jtkicker/blob/ba9626d1615b917f1dc3b099bdbceedca76717e0/doc/sch/yie%20ar%20kung-fu.pdf"
+      ]
+    },
+    {
+      "k": "karnov",
+      "title": "Karnov",
+      "rbfs": [
+        "jtkarnov"
+      ],
+      "setnames": [
+        "karnov"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's code cites the Karnov schematics (the tile mapper mux on sheet 7 of 16), and its credits say it is based on the PCB schematics and chip measurements, with a PCB donated by DJ Hard Rich.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/hdl/jtkarnov_main.v#L103",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/cfg/msg#L7"
+      ]
+    },
+    {
+      "k": "chelnov",
+      "title": "Atomic Runner Chelnov",
+      "rbfs": [
+        "jtkarnov"
+      ],
+      "setnames": [
+        "chelnov"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Atomic Runner Chelnov runs on the same Data East DE-0248 main board and DE-0249 video board as Karnov, per the MAME notes kept with the core. The core's code cites the Karnov schematics, and its credits say it is based on the PCB schematics and chip measurements, with a PCB donated by DJ Hard Rich.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/doc/karnov.cpp#L12",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/hdl/jtkarnov_main.v#L103",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/cfg/msg#L7"
+      ]
+    },
+    {
+      "k": "wndrplnt",
+      "title": "Wonder Planet",
+      "rbfs": [
+        "jtkarnov"
+      ],
+      "setnames": [
+        "wndrplnt"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Wonder Planet runs on the same Data East DE-0248 main board and DE-0249 video board as Karnov, per the MAME notes kept with the core. The core's code cites the Karnov schematics, and its credits say it is based on the PCB schematics and chip measurements, with a PCB donated by DJ Hard Rich.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/doc/karnov.cpp#L12",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/hdl/jtkarnov_main.v#L103",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/karnov/cfg/msg#L7"
+      ]
+    },
+    {
+      "k": "rthunder",
+      "title": "Rolling Thunder",
+      "rbfs": [
+        "jtthundr"
+      ],
+      "setnames": [
+        "rthunder"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's credits say it is based on PCB schematics, with PCB support from hoov1972. Its code uses the schematic names and board positions of the Namco System 86 custom chips and marks the CPU interrupt as verified on the PCB. Rolling Thunder runs on Namco System 86.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtcus41.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtthundr_main.v#L218"
+      ]
+    },
+    {
+      "k": "genpeitd",
+      "title": "Genpei ToumaDen",
+      "rbfs": [
+        "jtthundr"
+      ],
+      "setnames": [
+        "genpeitd"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's credits say it is based on PCB schematics, with PCB support from hoov1972. Its code uses the schematic names and board positions of the Namco System 86 custom chips and marks the CPU interrupt as verified on the PCB. Genpei ToumaDen runs on Namco System 86.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtcus41.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtthundr_main.v#L218"
+      ]
+    },
+    {
+      "k": "wndrmomo",
+      "title": "Wonder Momo",
+      "rbfs": [
+        "jtthundr"
+      ],
+      "setnames": [
+        "wndrmomo"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's credits say it is based on PCB schematics, with PCB support from hoov1972. Its code uses the schematic names and board positions of the Namco System 86 custom chips and marks the CPU interrupt as verified on the PCB. Wonder Momo runs on Namco System 86.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtcus41.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtthundr_main.v#L218"
+      ]
+    },
+    {
+      "k": "hopmappy",
+      "title": "Hopping Mappy",
+      "rbfs": [
+        "jtthundr"
+      ],
+      "setnames": [
+        "hopmappy"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's credits say it is based on PCB schematics, with PCB support from hoov1972. Its code uses the schematic names and board positions of the Namco System 86 custom chips and marks the CPU interrupt as verified on the PCB. Hopping Mappy runs on Namco System 86.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtcus41.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtthundr_main.v#L218"
+      ]
+    },
+    {
+      "k": "skykiddx",
+      "title": "Sky Kid Deluxe",
+      "rbfs": [
+        "jtthundr"
+      ],
+      "setnames": [
+        "skykiddx"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's credits say it is based on PCB schematics, with PCB support from hoov1972. Its code uses the schematic names and board positions of the Namco System 86 custom chips and marks the CPU interrupt as verified on the PCB. Sky Kid Deluxe runs on Namco System 86.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtcus41.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtthundr_main.v#L218"
+      ]
+    },
+    {
+      "k": "roishtar",
+      "title": "The Return of Ishtar",
+      "rbfs": [
+        "jtthundr"
+      ],
+      "setnames": [
+        "roishtar"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's credits say it is based on PCB schematics, with PCB support from hoov1972. Its code uses the schematic names and board positions of the Namco System 86 custom chips and marks the CPU interrupt as verified on the PCB. The Return of Ishtar runs on Namco System 86.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtcus41.v#L5",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/thundr/hdl/jtthundr_main.v#L218"
+      ]
+    },
+    {
+      "k": "pacland",
+      "title": "Pac-Land",
+      "rbfs": [
+        "jtpaclan"
+      ],
+      "setnames": [
+        "pacland"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's credits say it is based on the PCB schematics and MAME documents, and its sprite logic follows the double-line buffer memories shown for the Pac-Land PCB.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/paclan/cfg/msg#L7",
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/paclan/hdl/jtpaclan_obj.v#L5"
+      ]
+    },
+    {
+      "k": "gunbird2",
+      "title": "Gunbird 2",
+      "rbfs": [
+        "PsikyoSH2"
+      ],
+      "setnames": [
+        "gunbird2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Psikyo's PS5 board. The PS6406B video timing was changed to match oscilloscope captures that invzim took on a real Strikers 1999 PS5 board (commit 'Match PS6406B 224-line timing to hardware'). The repository also holds a PS5 board schematic and bus captures in its hw folder, and progmem's sync measurement of a real TGM2 board.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/90443b9b2f9b901c2987b6c289ca27e97a5d6804",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/blob/c0d6144eb01a062b17cb6d8904125969cc228510/rtl/PSH2/PS6406B.sv#L236",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/81c140e612ade464abe17e2385e591f0239fbeea",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/tree/c0d6144eb01a062b17cb6d8904125969cc228510/hw"
+      ]
+    },
+    {
+      "k": "s1945iii",
+      "title": "Strikers 1945 III",
+      "rbfs": [
+        "PsikyoSH2"
+      ],
+      "setnames": [
+        "s1945iii"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Psikyo's PS5 board. The PS6406B video timing was changed to match oscilloscope captures that invzim took on a real Strikers 1999 PS5 board (commit 'Match PS6406B 224-line timing to hardware'). The repository also holds a PS5 board schematic and bus captures in its hw folder, and progmem's sync measurement of a real TGM2 board.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/90443b9b2f9b901c2987b6c289ca27e97a5d6804",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/blob/c0d6144eb01a062b17cb6d8904125969cc228510/rtl/PSH2/PS6406B.sv#L236",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/81c140e612ade464abe17e2385e591f0239fbeea",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/tree/c0d6144eb01a062b17cb6d8904125969cc228510/hw"
+      ]
+    },
+    {
+      "k": "dragnblz",
+      "title": "Dragon Blaze",
+      "rbfs": [
+        "PsikyoSH2"
+      ],
+      "setnames": [
+        "dragnblz"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Psikyo's PS5V2 board, which MAME describes as only physically different from the PS5. The PS6406B video timing was changed to match oscilloscope captures of a real Strikers 1999 PS5 board by invzim, and progmem measured the sync of a real TGM2 board. The repository also holds a PS5 board schematic and bus captures in its hw folder.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/90443b9b2f9b901c2987b6c289ca27e97a5d6804",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/blob/c0d6144eb01a062b17cb6d8904125969cc228510/rtl/PSH2/PS6406B.sv#L236",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/81c140e612ade464abe17e2385e591f0239fbeea",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/tree/c0d6144eb01a062b17cb6d8904125969cc228510/hw",
+        "https://github.com/mamedev/mame/blob/774a180df2b6ef9c53e48337792256817c50f768/src/mame/psikyo/psikyosh.cpp#L31-L43"
+      ]
+    },
+    {
+      "k": "tgm2",
+      "title": "Tetris: The Absolute - The Grand Master 2",
+      "rbfs": [
+        "PsikyoSH2"
+      ],
+      "setnames": [
+        "tgm2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Psikyo's PS5V2 board, which MAME describes as only physically different from the PS5. The PS6406B video timing was changed to match oscilloscope captures of a real Strikers 1999 PS5 board by invzim, and progmem measured the sync of a real TGM2 board. The repository also holds a PS5 board schematic and bus captures in its hw folder.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/90443b9b2f9b901c2987b6c289ca27e97a5d6804",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/blob/c0d6144eb01a062b17cb6d8904125969cc228510/rtl/PSH2/PS6406B.sv#L236",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/81c140e612ade464abe17e2385e591f0239fbeea",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/tree/c0d6144eb01a062b17cb6d8904125969cc228510/hw",
+        "https://github.com/mamedev/mame/blob/774a180df2b6ef9c53e48337792256817c50f768/src/mame/psikyo/psikyosh.cpp#L31-L43"
+      ]
+    },
+    {
+      "k": "gnbarich",
+      "title": "Gunbarich",
+      "rbfs": [
+        "PsikyoSH2"
+      ],
+      "setnames": [
+        "gnbarich"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Psikyo's PS5V2 board, which MAME describes as only physically different from the PS5. The PS6406B video timing was changed to match oscilloscope captures of a real Strikers 1999 PS5 board by invzim, and progmem measured the sync of a real TGM2 board. The repository also holds a PS5 board schematic and bus captures in its hw folder.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/90443b9b2f9b901c2987b6c289ca27e97a5d6804",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/blob/c0d6144eb01a062b17cb6d8904125969cc228510/rtl/PSH2/PS6406B.sv#L236",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/81c140e612ade464abe17e2385e591f0239fbeea",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/tree/c0d6144eb01a062b17cb6d8904125969cc228510/hw",
+        "https://github.com/mamedev/mame/blob/774a180df2b6ef9c53e48337792256817c50f768/src/mame/psikyo/psikyosh.cpp#L31-L43"
+      ]
+    },
+    {
+      "k": "mjgtaste",
+      "title": "Mahjong G-Taste",
+      "rbfs": [
+        "PsikyoSH2"
+      ],
+      "setnames": [
+        "mjgtaste"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Psikyo's PS5V2 board, which MAME describes as only physically different from the PS5. The PS6406B video timing was changed to match oscilloscope captures of a real Strikers 1999 PS5 board by invzim, and progmem measured the sync of a real TGM2 board. The repository also holds a PS5 board schematic and bus captures in its hw folder.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/90443b9b2f9b901c2987b6c289ca27e97a5d6804",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/blob/c0d6144eb01a062b17cb6d8904125969cc228510/rtl/PSH2/PS6406B.sv#L236",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/commit/81c140e612ade464abe17e2385e591f0239fbeea",
+        "https://github.com/MiSTer-devel/Arcade-PsikyoSH2_MiSTer/tree/c0d6144eb01a062b17cb6d8904125969cc228510/hw",
+        "https://github.com/mamedev/mame/blob/774a180df2b6ef9c53e48337792256817c50f768/src/mame/psikyo/psikyosh.cpp#L31-L43"
+      ]
+    },
+    {
+      "k": "dmnfrnt",
+      "title": "Demon Front",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "dmnfrnt"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "ddp2",
+      "title": "DoDonPachi II - Bee Storm",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "ddp2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "ddp3",
+      "title": "DoDonPachi III",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "ddp3"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "dw2001",
+      "title": "Dragon World 2001",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "dw2001"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "drgw3",
+      "title": "Dragon World 3",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "drgw3"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "dwex",
+      "title": "Dragon World 3 EX",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "dwex"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "espgal",
+      "title": "Espgaluda",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "espgal"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "ket",
+      "title": "Ketsui: Kizuna Jigoku Tachi",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "ket"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "kov2",
+      "title": "Knights of Valour 2",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "kov2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "kovsh",
+      "title": "Knights of Valour Super Heroes",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "kovsh"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "martmast",
+      "title": "Martial Masters",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "martmast"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "orlegend",
+      "title": "Oriental Legend",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "orlegend"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "photoy2k",
+      "title": "Photo Y2K",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "photoy2k"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "puzlstar",
+      "title": "Puzzle Star",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "puzlstar"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "puzzli2",
+      "title": "Puzzli 2",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "puzzli2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "svg",
+      "title": "S.V.G. - Spectral vs Generation",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "svg"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "theglad",
+      "title": "The Gladiator",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "theglad"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "killbld",
+      "title": "The Killing Blade",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "killbld"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "killbldp",
+      "title": "The Killing Blade Plus",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "killbldp"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "olds103t",
+      "title": "Xiyou Shi E Zhuan Super",
+      "rbfs": [
+        "IGSPGM"
+      ],
+      "setnames": [
+        "olds103t"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Martin Donlon rebuilt the IGS023 video chip's CPU and VRAM arbitration from DSLogic logic analyzer captures of a real PGM board running his own test program, and tuned the ICS2115 sound clock and volume table from hardware measurements. All PGM games run on the same motherboard; the cartridges add the ROMs and protection chips.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ad804669de82023f15683a6497cbdbe68accbd6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/blob/6f757e42779a93e940134018c25f08aafaf95b93/util/vram_bench/results/LA_FINDINGS.md?plain=1#L1-L6",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/cfab2c4f27c6c0a933dae585fffab2c084f554db",
+        "https://github.com/MiSTer-devel/Arcade-IGSPGM_MiSTer/commit/7ffe31845c4554780f2a7398bdcc787c954522bc"
+      ]
+    },
+    {
+      "k": "majtitl2",
+      "title": "Major Title 2",
+      "rbfs": [
+        "IremM92"
+      ],
+      "setnames": [
+        "majtitl2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Major Title 2 runs on Irem's M92-A-B main board with the M92-B-F game board, the exact pair Martin Donlon drew as KiCad schematics in the core's docs folder (m92_A-B_B-F). The repository also holds his chip-by-chip notes on the main board and PAL equations decompiled from PLD Archive dumps of the M92 boards.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IremM92_MiSTer/tree/68a4683e237eafca02e3df56dd84bacc255fba55/docs/m92_A-B_B-F",
+        "https://github.com/MiSTer-devel/Arcade-IremM92_MiSTer/blob/68a4683e237eafca02e3df56dd84bacc255fba55/docs/ic_notes.md?plain=1#L1-L5",
+        "https://github.com/MiSTer-devel/Arcade-IremM92_MiSTer/commit/2464fb5df27e02867caecc4c85c837d1720dd519",
+        "https://github.com/mamedev/mame/blob/774a180df2b6ef9c53e48337792256817c50f768/src/mame/irem/m92.cpp#L21-L22"
+      ]
+    },
+    {
+      "k": "feversos",
+      "title": "Fever SOS",
+      "rbfs": [
+        "cave"
+      ],
+      "setnames": [
+        "feversos"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Fever SOS is the export version of Dangun Feveron, on the same Cave board. Joshua Bassett set the core's video timing from his own Dangun Feveron PCB: 'These values were probed from a Dangun Feveron PCB' and 'The vertical frequency should be 57.444Hz, as measured on my Dangun Feveron PCB.'",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commit/ddac25d0b6c54e9010e0ff9ea2dd30194dfc86fc",
+        "https://github.com/MiSTer-devel/Arcade-Cave_MiSTer/commit/f7d99559b31fc7133f2ab0f0bf9b09c5192d0025"
+      ]
+    },
+    {
+      "k": "alcon",
+      "title": "Alcon (Bootleg)",
+      "rbfs": [
+        "SlapFight"
+      ],
+      "setnames": [
+        "alcon"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Anton Gale built the core with preliminary schematics and a diagnostic ROM from Neil Ward, and ships their KiCad redraw of the board (titled 'Slapfight Arcade PCB', 'Schematics created by Neil Ward & Anton Gale'), which he kept correcting with IC locations during development. The Alcon MRA runs the MCU-free bootleg program ROM on that board logic.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SlapFight_MiSTer/blob/f6f503bebe3f4b83b82dbca27f5934687e5de44d/README.md?plain=1#L2",
+        "https://github.com/MiSTer-devel/Arcade-SlapFight_MiSTer/blob/f6f503bebe3f4b83b82dbca27f5934687e5de44d/docs/KiCAD/SlapFight/SlapFight.pdf",
+        "https://github.com/MiSTer-devel/Arcade-SlapFight_MiSTer/commit/0f173a02e7100540f339b001fdddea60c523ae0c"
+      ]
+    },
+    {
+      "k": "gradius",
+      "title": "Gradius",
+      "rbfs": [
+        "BubSysROM"
+      ],
+      "setnames": [
+        "gradius"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Raki built the core around the GX400 graphics board that the Bubble System shares with its ROM versions. He reverse-engineered the K005293 priority chip with a brute-force test program run on his own Bubble System, and fixed the K005292 sync and sprite double buffering to match the real machine, adding waveform captures to the repository. It also ships his KiCad schematics of the system.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/blob/b97e66a6bcdfc0bbbd038664d306b7aa408cab07/rtl/GX400_video/K005293.v#L164-L175",
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/commit/621be7f0581df830dd31fa5e413193d4269affa4",
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/commit/cb7e6e8d9b57e240183b86428d97a4956e142d59",
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/blob/b97e66a6bcdfc0bbbd038664d306b7aa408cab07/resources/BubbleSystemROM_schematics.pdf"
+      ]
+    },
+    {
+      "k": "twinbee",
+      "title": "TwinBee",
+      "rbfs": [
+        "BubSysROM"
+      ],
+      "setnames": [
+        "twinbee"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Raki built the core around the GX400 graphics board that the Bubble System shares with its ROM versions. He reverse-engineered the K005293 priority chip with a brute-force test program run on his own Bubble System, and fixed the K005292 sync and sprite double buffering to match the real machine, adding waveform captures to the repository. It also ships his KiCad schematics of the system.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/blob/b97e66a6bcdfc0bbbd038664d306b7aa408cab07/rtl/GX400_video/K005293.v#L164-L175",
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/commit/621be7f0581df830dd31fa5e413193d4269affa4",
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/commit/cb7e6e8d9b57e240183b86428d97a4956e142d59",
+        "https://github.com/MiSTer-devel/Arcade-BubSysROM_MiSTer/blob/b97e66a6bcdfc0bbbd038664d306b7aa408cab07/resources/BubbleSystemROM_schematics.pdf"
+      ]
+    },
+    {
+      "k": "travrusa",
+      "title": "Traverse USA",
+      "rbfs": [
+        "traverseusa"
+      ],
+      "setnames": [
+        "travrusa"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Dar's core lists 'Schematics remarks' from the Irem M52-A and M52-B board schematics, for example 'My M52-A schematic clearly shows 18.432/6' for the CPU clock, and works around the sprite RAM layout the M52-B sheet shows.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TraverseUSA_MiSTer/blob/b119f658d6ab0259ca9dcc57d085d73aa0300b87/rtl/traverse_usa.vhd#L73-L90"
+      ]
+    },
+    {
+      "k": "naughtyb",
+      "title": "Naughty Boy",
+      "rbfs": [
+        "naughtyboy"
+      ],
+      "setnames": [
+        "naughtyb"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Dar's sound notes map the TMS3615 melody chip from the Naughty Boy schematic, citing the LS145s at IC38 and IC39 on the 8201 CPU board and pin numbers 'from NB schematic', and resolve a pin mismatch between that schematic and TI's datasheet.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-NaughtyBoy_MiSTer/blob/519a5a6e2ffc78caffd45eeb03414c651409cade/doc/Naughty_Boy_melody_commented.txt#L310-L321"
+      ]
+    },
+    {
+      "k": "qbert",
+      "title": "Q*bert",
+      "rbfs": [
+        "qbert"
+      ],
+      "setnames": [
+        "qbert"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Pierco describes the core as 'a reproduction of the original PCBs rather than a reinterpretation'. The main board logic is modelled chip by chip at board positions such as A8, B5 and E17, and the README places the unimplemented NVRAM at 'C5/C6 on schematics'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L4",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L18",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/rtl/mylstar_board.v#L140-L148"
+      ]
+    },
+    {
+      "k": "qbertqub",
+      "title": "Q*bert's Qubes",
+      "rbfs": [
+        "qbert"
+      ],
+      "setnames": [
+        "qbertqub"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Gottlieb hardware as Q*bert. Pierco describes the core as 'a reproduction of the original PCBs rather than a reinterpretation'. The main board logic is modelled chip by chip at board positions such as A8, B5 and E17, and the README places the unimplemented NVRAM at 'C5/C6 on schematics'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L4",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L18",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/rtl/mylstar_board.v#L140-L148"
+      ]
+    },
+    {
+      "k": "sqbert",
+      "title": "Faster, Harder, More Challenging Q*bert",
+      "rbfs": [
+        "qbert"
+      ],
+      "setnames": [
+        "sqbert"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Gottlieb hardware as Q*bert. Pierco describes the core as 'a reproduction of the original PCBs rather than a reinterpretation'. The main board logic is modelled chip by chip at board positions such as A8, B5 and E17, and the README places the unimplemented NVRAM at 'C5/C6 on schematics'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L4",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L18",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/rtl/mylstar_board.v#L140-L148"
+      ]
+    },
+    {
+      "k": "mplanets",
+      "title": "Mad Planets",
+      "rbfs": [
+        "qbert"
+      ],
+      "setnames": [
+        "mplanets"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Gottlieb hardware as Q*bert. Pierco describes the core as 'a reproduction of the original PCBs rather than a reinterpretation'. The main board logic is modelled chip by chip at board positions such as A8, B5 and E17, and the README places the unimplemented NVRAM at 'C5/C6 on schematics'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L4",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/Readme.md?plain=1#L18",
+        "https://github.com/MiSTer-devel/Arcade-QBert_MiSTer/blob/100303616014441cf1c74549456333b95a05dfc2/rtl/mylstar_board.v#L140-L148"
+      ]
+    },
+    {
+      "k": "venture",
+      "title": "Venture",
+      "rbfs": [
+        "Exidy2"
+      ],
+      "setnames": [
+        "venture"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Anton Gale's core follows Exidy's original schematics, and its control port latch records an error found in them: 'swapped M2R & M1R for giggles, turns out this is correct & the original schematics are wrong'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Exidy2_MiSTer/blob/bfd1b5c2a1ea7607f3cf7255b01a8dc2a11f8236/rtl/Exidy2.v#L161"
+      ]
+    },
+    {
+      "k": "mtrap",
+      "title": "Mouse Trap",
+      "rbfs": [
+        "Exidy2"
+      ],
+      "setnames": [
+        "mtrap"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Anton Gale's core follows Exidy's original schematics, and its control port latch records an error found in them: 'swapped M2R & M1R for giggles, turns out this is correct & the original schematics are wrong'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Exidy2_MiSTer/blob/bfd1b5c2a1ea7607f3cf7255b01a8dc2a11f8236/rtl/Exidy2.v#L161"
+      ]
+    },
+    {
+      "k": "pepper2",
+      "title": "Pepper II",
+      "rbfs": [
+        "Exidy2"
+      ],
+      "setnames": [
+        "pepper2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Anton Gale's core follows Exidy's original schematics, and its control port latch records an error found in them: 'swapped M2R & M1R for giggles, turns out this is correct & the original schematics are wrong'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Exidy2_MiSTer/blob/bfd1b5c2a1ea7607f3cf7255b01a8dc2a11f8236/rtl/Exidy2.v#L161"
+      ]
+    },
+    {
+      "k": "hardhat",
+      "title": "Hard Hat",
+      "rbfs": [
+        "Exidy2"
+      ],
+      "setnames": [
+        "hardhat"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Anton Gale's core follows Exidy's original schematics, and its control port latch records an error found in them: 'swapped M2R & M1R for giggles, turns out this is correct & the original schematics are wrong'.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Exidy2_MiSTer/blob/bfd1b5c2a1ea7607f3cf7255b01a8dc2a11f8236/rtl/Exidy2.v#L161"
+      ]
+    },
+    {
+      "k": "vanguard",
+      "title": "Vanguard",
+      "rbfs": [
+        "SNK6502"
+      ],
+      "setnames": [
+        "vanguard"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The speech board's output stage and external pitch oscillator are derived from the SNK SK-6 schematic and parts list in the Vanguard manual, which ships in the repository; the notes trace sheet 375-17-0300 and take values such as C14 0.1uF and R13 5.6K from it. The HD38880 speech synthesis was fitted to recordings of real hardware.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/rtl/sound/hd38880/parcor_lattice.v#L33-L35",
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/rtl/sound/hd38880/hd38880_unpack.v#L201-L208",
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/Useful%20Information/Ian%20Suggestions/README.md?plain=1#L137-L139",
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/Useful%20Information/schematics/Vanguard.pdf"
+      ]
+    },
+    {
+      "k": "fantasyu",
+      "title": "Fantasy",
+      "rbfs": [
+        "SNK6502"
+      ],
+      "setnames": [
+        "fantasyu"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Fantasy uses the same SNK SK-6 speech board as Vanguard. The speech board's output stage and external pitch oscillator are derived from the SNK SK-6 schematic and parts list in the Vanguard manual, which ships in the repository; the notes trace sheet 375-17-0300 and take values such as C14 0.1uF and R13 5.6K from it. The HD38880 speech synthesis was fitted to recordings of real hardware.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/rtl/sound/hd38880/parcor_lattice.v#L33-L35",
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/rtl/sound/hd38880/hd38880_unpack.v#L201-L208",
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/Useful%20Information/Ian%20Suggestions/README.md?plain=1#L137-L139",
+        "https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/blob/50b6bfc0c0d9a38fc7eed0f9dbdb74bc25ce4677/Useful%20Information/schematics/Vanguard.pdf"
+      ]
+    },
+    {
+      "k": "sbrkout",
+      "title": "Super Breakout",
+      "rbfs": [
+        "superbreakout"
+      ],
+      "setnames": [
+        "sbrkout"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "James Sweet built the core from the Super Breakout schematics, naming its signals as drawn there (256H*, VBLANK*, COMP SYNC*). The ball position counters reproduce the pairs of 74LS163s at board locations R5/R6, P5/P6 and N5/N6.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SuperBreakout_MiSTer/blob/ec08090c52a39b3b8cb91c7ec77e1e1265862761/rtl/playfield.vhd#L29-L36",
+        "https://github.com/MiSTer-devel/Arcade-SuperBreakout_MiSTer/blob/ec08090c52a39b3b8cb91c7ec77e1e1265862761/rtl/motion.vhd#L184"
+      ]
+    },
+    {
+      "k": "dkong3",
+      "title": "Donkey Kong 3",
+      "rbfs": [
+        "donkeykong3"
+      ],
+      "setnames": [
+        "dkong3"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "gaz68 built the core chip by chip from the Donkey Kong 3 schematics, such as the 74LS139 at 3B and the 74LS138s at 2A, 3A, 4E and 4F in the address decoder. The source cites the schematics' CL1 palette link and notes a signal at 2K that goes nowhere on the schematic.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-DonkeyKong3_MiSTer/blob/ee6c35acf1e5c373d535658e6fd45f2a883261b2/rtl/dkong3_adec.v#L102",
+        "https://github.com/MiSTer-devel/Arcade-DonkeyKong3_MiSTer/blob/ee6c35acf1e5c373d535658e6fd45f2a883261b2/rtl/dkong3_col_pal.v#L28",
+        "https://github.com/MiSTer-devel/Arcade-DonkeyKong3_MiSTer/blob/ee6c35acf1e5c373d535658e6fd45f2a883261b2/rtl/dkong3_vram.v#L195"
+      ]
+    },
+    {
+      "k": "mrdo",
+      "title": "Mr. Do!",
+      "rbfs": [
+        "mrdo"
+      ],
+      "setnames": [
+        "mrdo"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Darren Olafson modelled the Mr. Do! video hardware from its schematics. The source cites schematic signal names such as VADLAY and the pad counter, and names chips by board position, such as the G9 mux and the F8 and G8 counters.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-MrDo_MiSTer/blob/3d60852b205ded0876a3c5c604786929ae8df4e1/Arcade-MrDo.sv#L720",
+        "https://github.com/MiSTer-devel/Arcade-MrDo_MiSTer/blob/3d60852b205ded0876a3c5c604786929ae8df4e1/Arcade-MrDo.sv#L828"
+      ]
+    },
+    {
+      "k": "inferno",
+      "title": "Inferno",
+      "rbfs": [
+        "inferno"
+      ],
+      "setnames": [
+        "inferno"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The repository ships Williams' Inferno manual with its schematics. birdybro's commit states that the core's colour lookup table is derived from the schematics, the RGB circuit being the same across Inferno, Joust 2, Mystic Marathon and Turkey Shoot.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Inferno_MiSTer/blob/7b85212b3c08aa03c09f17b708c423af6f886137/doc/Inferno%20Manual%20and%20Schematics.pdf",
+        "https://github.com/MiSTer-devel/Arcade-Inferno_MiSTer/commit/3513f1ca57ef9611c86176cbd05ff20e5f776b04"
+      ]
+    },
+    {
+      "k": "joust2",
+      "title": "Joust 2 - Survival of the Fittest",
+      "rbfs": [
+        "joust2"
+      ],
+      "setnames": [
+        "joust2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Joust 2 runs on the same Williams second-generation board as Inferno, and the Inferno schematics ship in this core's doc folder. The colour lookup table is derived from the schematics; birdybro notes the RGB circuit is the same across Inferno, Joust 2, Mystic Marathon and Turkey Shoot.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Joust2_MiSTer/blob/dd09dfa56d6a9acca70173df2a9005cb94f1f11c/doc/inferno-schematics.pdf",
+        "https://github.com/MiSTer-devel/Arcade-Inferno_MiSTer/commit/3513f1ca57ef9611c86176cbd05ff20e5f776b04"
+      ]
+    },
+    {
+      "k": "mysticm",
+      "title": "Mystic Marathon",
+      "rbfs": [
+        "MysticMarathon"
+      ],
+      "setnames": [
+        "mysticm"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's doc folder holds Williams' Mystic Marathon drawing set (16-3008-103) and its RGB circuit, and birdybro's release commit updates the colour lookup table from the RGB schematics, crediting Kitrinx. Dar's source also names board chips, such as the 74LS85 at IC79 that sets the background colour bank.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-MysticMarathon_MiSTer/blob/7dd6b413ada0da6ede7ae3f59438cb96cb7c87b8/doc/Mystic_Marathon_Drawing_Set_16-3008-103_May_15_1984.pdf",
+        "https://github.com/MiSTer-devel/Arcade-MysticMarathon_MiSTer/blob/7dd6b413ada0da6ede7ae3f59438cb96cb7c87b8/rtl/williams2.vhd#L418",
+        "https://github.com/MiSTer-devel/Arcade-MysticMarathon_MiSTer/commit/3f415b862ce0ef72d50f1c57fff23e43f7947441"
+      ]
+    },
+    {
+      "k": "tshoot",
+      "title": "Turkey Shoot - The Day They Took Over",
+      "rbfs": [
+        "TurkeyShoot"
+      ],
+      "setnames": [
+        "tshoot"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Turkey Shoot runs on the same Williams second-generation board as Inferno, whose schematics ship with the Inferno core. birdybro's commit there states that the colour lookup table these cores share is derived from the schematics, with the same RGB circuit on Turkey Shoot, Mystic Marathon, Joust 2 and Inferno.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Inferno_MiSTer/commit/3513f1ca57ef9611c86176cbd05ff20e5f776b04",
+        "https://github.com/MiSTer-devel/Arcade-Inferno_MiSTer/blob/7b85212b3c08aa03c09f17b708c423af6f886137/doc/Inferno%20Manual%20and%20Schematics.pdf"
+      ]
+    },
+    {
+      "k": "victroad",
+      "title": "Victory Road",
+      "rbfs": [
+        "IkariWarriors"
+      ],
+      "setnames": [
+        "victroad"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Victory Road runs on the same three SNK boards as the JAMMA Ikari Warriors (CPU A6002UP03-02, middle A5004UP02-02, video A5004UP01-02), with a Y8950 in place of the second YM3526. The shared core converts the A5004-1 PAL from a JEDEC dump of Ikari Warriors' own PAL, builds the logic from the board's TTL chips and ships an edited Ikari Warriors schematic.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-IkariWarriors_MiSTer/blob/3e5f3457e93aaf7d34131f611a8f89268f041076/rtl/clocks/A5004_1.v#L4",
+        "https://github.com/MiSTer-devel/Arcade-IkariWarriors_MiSTer/blob/3e5f3457e93aaf7d34131f611a8f89268f041076/docs/IkariWarriorsSchematic_RndMnkIII_edited.pdf",
+        "https://github.com/mamedev/mame/blob/774a180df2b6ef9c53e48337792256817c50f768/src/mame/snk/snk.cpp#L5343-L5350",
+        "https://github.com/mamedev/mame/blob/774a180df2b6ef9c53e48337792256817c50f768/src/mame/snk/snk.cpp#L5685-L5690"
+      ]
+    },
+    {
+      "k": "psychic5",
+      "title": "Psychic 5",
+      "rbfs": [
+        "Psychic5"
+      ],
+      "setnames": [
+        "psychic5"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Raki drew KiCad schematics of the Psychic 5 CPU and video boards and ships them with the core, whose video logic names chips by board position, such as the LS74 at 7H. He also notes checking an original Japanese PCB, which carries a 512K sound ROM where MAME assumes 256K.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Psychic5_MiSTer/blob/99bd590ff1061687e63d57987b9405ecedf1b1b9/resources/Psychic5_CPU.pdf",
+        "https://github.com/MiSTer-devel/Arcade-Psychic5_MiSTer/blob/99bd590ff1061687e63d57987b9405ecedf1b1b9/resources/Psychic5_Video.pdf",
+        "https://github.com/MiSTer-devel/Arcade-Psychic5_MiSTer/blob/99bd590ff1061687e63d57987b9405ecedf1b1b9/rtl/Psychic5_emu.v#L226",
+        "https://github.com/MiSTer-devel/Arcade-Psychic5_MiSTer/blob/99bd590ff1061687e63d57987b9405ecedf1b1b9/rtl/Psychic5_videoboard/Psychic5_video.v#L289"
+      ]
+    },
+    {
+      "k": "suprloco",
+      "title": "Super Locomotive",
+      "rbfs": [
+        "SuprLoco"
+      ],
+      "setnames": [
+        "suprloco"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Raki ships a KiCad schematic of the Super Locomotive board together with sigrok logic analyzer captures of its 74LS321 clock chip and its PA-5016 and PA-5017 PALs. The RTL points to the LS321 capture to explain the clock phases it reproduces.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-SuprLoco_MiSTer/blob/294223862c435a019f38dc5488e5580d35223b50/docs/SuperLocomotive.pdf",
+        "https://github.com/MiSTer-devel/Arcade-SuprLoco_MiSTer/tree/294223862c435a019f38dc5488e5580d35223b50/docs/sigrok",
+        "https://github.com/MiSTer-devel/Arcade-SuprLoco_MiSTer/blob/294223862c435a019f38dc5488e5580d35223b50/rtl/SuprLoco_top.v#L56"
+      ]
+    },
+    {
+      "k": "tankbatt",
+      "title": "Tank Battalion",
+      "rbfs": [
+        "TankBattalion"
+      ],
+      "setnames": [
+        "tankbatt"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core models the Tank Battalion board as TTL chips at their board positions, such as the 74LS139 at C3. Its engine, shot and hit sounds are fixed-point models of the board's analog circuits taken from the PCB schematic, down to parts such as R58, R60, R61 and C13 (commit by shimian5).",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-TankBattalion_MiSTer/blob/d176dadb3fc9fc7ea683e2058ba17686758cf53c/rtl/Tankb_fpga.v#L97",
+        "https://github.com/MiSTer-devel/Arcade-TankBattalion_MiSTer/commit/87d78a3b5a0301a89ab5947cbec61036b12cefcd"
+      ]
+    },
+    {
+      "k": "offtwall",
+      "title": "Off the Wall",
+      "rbfs": [
+        "OffTheWall"
+      ],
+      "setnames": [
+        "offtwall"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Built from Atari's schematics and the equations of the board's GAL chips (136090-1003, -1006, -1007 and the JSA III's 136085-1038 and -1039), with MAME only as a cross-reference where the published documents are silent. The README lists which sections follow the schematics and where Atari's own sheets were never published.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-OffTheWall_MiSTer/blob/bf0f92818cb4cf0567651bb9a763f7330588dd52/README.md?plain=1#L7-L11",
+        "https://github.com/MiSTer-devel/Arcade-OffTheWall_MiSTer/blob/bf0f92818cb4cf0567651bb9a763f7330588dd52/README.md?plain=1#L131-L137"
+      ]
+    },
+    {
+      "k": "relief",
+      "title": "Relief Pitcher",
+      "rbfs": [
+        "ReliefPitcher"
+      ],
+      "setnames": [
+        "relief"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Built from the schematic sheets in Atari's TM-376 manual and the logic read from the board's GAL chips. MAME 0.289 served only as a reference where those are silent.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-ReliefPitcher_MiSTer/blob/ca23f162fc53a66e4aa4d76bc1bc20990e9e5f55/README.md?plain=1#L9-L11"
+      ]
+    },
+    {
+      "k": "shuuz",
+      "title": "Shuuz",
+      "rbfs": [
+        "Shuuz"
+      ],
+      "setnames": [
+        "shuuz"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Built from the schematics in Atari's TM-358 manual and the board's dumped GALs, with MAME 0.289 only as a cross-check and as the source for the unpublished video chips. RTL comments name board parts by PCB location, such as the 74LS163A at 50B, and signals by their schematic names.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-Shuuz_MiSTer/blob/4fb3ba9ed4bf0e470c8ef5fc87e42430d5ed5dec/README.md?plain=1#L9-L12",
+        "https://github.com/MiSTer-devel/Arcade-Shuuz_MiSTer/blob/4fb3ba9ed4bf0e470c8ef5fc87e42430d5ed5dec/README.md?plain=1#L221-L223"
+      ]
+    },
+    {
+      "k": "batriderj",
+      "title": "Armed Police Batrider",
+      "rbfs": [
+        "batrider_mister"
+      ],
+      "setnames": [
+        "batriderj"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Pramod Somashekar reverse engineered part of the Armed Police Batrider (RA9704) board's schematic for his Verilog implementation of it. The Coin-Op Collection team later published a full reverse-engineered RA9704 schematic and PCB layout by Brandon Arnold, which credits that partial schematic.",
+      "links": [
+        "https://github.com/Coin-OpCollection/Development-Documentation/blob/c6d053905cd84e55d1bc6edce9335f0ca3678099/Toaplan2/Raizing/RA9704/README.md?plain=1#L50",
+        "https://github.com/Coin-OpCollection/Development-Documentation/blob/c6d053905cd84e55d1bc6edce9335f0ca3678099/Toaplan2/Raizing/RA9704/README.md?plain=1#L24"
+      ]
+    },
+    {
+      "k": "mahoudai",
+      "title": "Mahou Daisakusen",
+      "rbfs": [
+        "sstriker_mister"
+      ],
+      "setnames": [
+        "mahoudai"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's author, Pramod Somashekar, writes that atrac17 traced the Z80 sound sections of the Sorcer Striker and Kingdom Grandprix boards to fix the sound speed in these games. That trace showed the Z80 WAIT signal comes from the YM2151's inverted DOUT pin, which the core follows.",
+      "links": [
+        "https://github.com/Coin-OpCollection/Development-Documentation/blob/c6d053905cd84e55d1bc6edce9335f0ca3678099/Toaplan2/Raizing/toaplan2_raizing.md?plain=1#L235",
+        "https://github.com/Coin-OpCollection/Development-Documentation/blob/c6d053905cd84e55d1bc6edce9335f0ca3678099/Toaplan2/Raizing/toaplan2_raizing.md?plain=1#L237"
+      ]
+    },
+    {
+      "k": "shippumd",
+      "title": "Shippu Mahou Daisakusen",
+      "rbfs": [
+        "kingdmgp_mister"
+      ],
+      "setnames": [
+        "shippumd"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's author, Pramod Somashekar, writes that atrac17 traced the Z80 sound sections of the Sorcer Striker and Kingdom Grandprix boards to fix the sound speed in these games. That trace showed the Z80 WAIT signal comes from the YM2151's inverted DOUT pin, which the core follows.",
+      "links": [
+        "https://github.com/Coin-OpCollection/Development-Documentation/blob/c6d053905cd84e55d1bc6edce9335f0ca3678099/Toaplan2/Raizing/toaplan2_raizing.md?plain=1#L235",
+        "https://github.com/Coin-OpCollection/Development-Documentation/blob/c6d053905cd84e55d1bc6edce9335f0ca3678099/Toaplan2/Raizing/toaplan2_raizing.md?plain=1#L237"
+      ]
+    },
+    {
+      "k": "zerowing",
+      "title": "Zero Wing",
+      "rbfs": [
+        "zerowing_mister"
+      ],
+      "setnames": [
+        "zerowing"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Verified against an OutZone conversion running on a Zero Wing (TP-015) board, loaned by @owlnonymous; the timing of that board was captured with a DSLogic logic analyzer. The core was built from the OutZone (TP-018) schematics in its repository.",
+      "links": [
+        "https://github.com/va7deo/zerowing/blob/cb3a5537d97cf78859e35421894d1259147a13dd/README.md?plain=1#L4",
+        "https://github.com/va7deo/zerowing/blob/cb3a5537d97cf78859e35421894d1259147a13dd/README.md?plain=1#L169",
+        "https://github.com/va7deo/zerowing/commit/c5399588c43e5b8c7f23662956bb6f9e0acab6c2"
+      ]
+    },
+    {
+      "k": "truxton2",
+      "title": "Truxton II",
+      "rbfs": [
+        "truxton2"
+      ],
+      "setnames": [
+        "truxton2"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "atrac17 developed the core with Toaplan V2 hardware loaned by @90s_cyber_thriller. Its README gives the Tatsujin Oh (TP-024) board's sync rates as measured with a DSLogic logic analyzer, and photos of that board are in its doc folder. atrac17's own Toaplan2 repository is gone; the links point to a public copy that holds his commits.",
+      "links": [
+        "https://github.com/Abadede/Toaplan2/blob/93019cef1c393795cb96eb0340288ba4c803a2c8/README.md?plain=1#L68",
+        "https://github.com/Abadede/Toaplan2/blob/93019cef1c393795cb96eb0340288ba4c803a2c8/README.md?plain=1#L143",
+        "https://github.com/Abadede/Toaplan2/tree/93019cef1c393795cb96eb0340288ba4c803a2c8/doc/TP-024/PCB"
+      ]
+    },
+    {
+      "k": "cadash-rmcores",
+      "title": "Cadash (rmCores)",
+      "rbfs": [
+        "rmTaitoAsuka"
+      ],
+      "setnames": [
+        "cadash"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "On a real Cadash board the sprites shift slightly while the screen scrolls; the rmCores README says this was confirmed on a genuine PCB, that MAME does not reproduce it, and offers it as a Cadash-only option because Cadash is the board the evidence comes from. This is the same evidence as the Distribution Cadash entry, stated in this core's own repository.",
+      "links": [
+        "https://github.com/rmonic79/rm-TaitoAsuka_MiSTer/blob/9f09620f53f3ec14852c16d3881aba68e036fde7/README.md?plain=1#L171",
+        "https://github.com/rmonic79/rm-TaitoAsuka_MiSTer/blob/9f09620f53f3ec14852c16d3881aba68e036fde7/README.md?plain=1#L174"
+      ]
+    },
+    {
+      "k": "rm-seibu-cup-soccer",
+      "title": "Seibu Cup Soccer (rmCores)",
+      "rbfs": [
+        "rmSeibuCupSoccer"
+      ],
+      "setnames": [
+        "cupsoc"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "Checked against an original Seibu Cup Soccer board (SYS68C2). The rmCores README quotes the board's owner, who had never seen the core, judging its coprocessor-driven play in line with the PCB, and shows photos of the board the findings were checked against.",
+      "links": [
+        "https://github.com/rmonic79/rm-SeibuCupSoccer_MiSTer/blob/40c5963b31408f2f4554d84a857f340a46af17a8/README.md?plain=1#L82",
+        "https://github.com/rmonic79/rm-SeibuCupSoccer_MiSTer/blob/40c5963b31408f2f4554d84a857f340a46af17a8/README.md?plain=1#L218",
+        "https://github.com/rmonic79/rm-SeibuCupSoccer_MiSTer/blob/40c5963b31408f2f4554d84a857f340a46af17a8/README.md?plain=1#L229"
+      ]
+    },
+    {
+      "k": "esckids",
+      "title": "Escape Kids",
+      "rbfs": [
+        "Arcade-EscapeKids"
+      ],
+      "setnames": [
+        "esckids"
+      ],
+      "granted": "2026-10-08",
+      "proposed_by": "misterzine",
+      "reason": "The core's model of the board's K053252 timing chip is bounded by Furrtek's reverse engineering of that chip's die, as the PCB accuracy table in its README states. Its Konami 052109 and 051962 tilemap chips use the JT modules modelled on Furrtek's die shot work.",
+      "links": [
+        "https://github.com/meathax/escapekids/blob/93c70a6fa31e682ab50b6322b79eb3d1649bde13/README.md?plain=1#L42",
+        "https://github.com/meathax/escapekids/blob/93c70a6fa31e682ab50b6322b79eb3d1649bde13/rtl/vendor/jtcores/cores/aliens/hdl/jt052109.v#L19"
+      ]
     }
   ]
 }

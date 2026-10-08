@@ -493,12 +493,14 @@
      overflowing into the next column. .xb stays nowrap so "batch" never splits. */
   td .xb { display: inline; white-space: nowrap; color: var(--muted);
            font-size: .75em; font-style: italic; cursor: help; }
-  /* the hardware badge's seal after a title (hvBadge): text-sized, sitting on
-     the baseline like a glyph. Its tip is the shared popover (td [data-tip]).
-     .hvglue keeps it on the same line as the title's last word. */
-  td .hvglue { white-space: nowrap; }
-  td .hv { display: inline-block; width: 1em; height: 1em; margin-left: .3rem;
-           vertical-align: -.15em; }
+  /* the hardware badge column (COLUMNS 'hv'): a seal-only cell under a seal-only
+     header. Tighter side padding than the text columns so the seal plus the
+     sort arrow fit the column's narrow weight; the seal sits on the first text
+     line like a glyph. Its tip is the shared popover (td [data-tip]). */
+  th[data-k="hv"], td.hvc { padding-left: .45rem; padding-right: .45rem; }
+  th[data-k="hv"] { white-space: nowrap; }
+  th[data-k="hv"] .hvseal { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
+  td .hv { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
   td .hv .hvseal { width: 100%; height: 100%; }
   td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
@@ -1877,15 +1879,7 @@ function titleCell(d) {
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
     : FAVS.has(d.k) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
-  // the seal is an atomic inline, so the line breaker may strand it alone on a
-  // wrapped title's last line; gluing it to the title's last word (nowrap span)
-  // keeps the two together at every column width
-  let t = esc(d.title);
-  if (d.hv) {
-    const i = d.title.lastIndexOf(' ');
-    t = esc(d.title.slice(0, i + 1)) + '<span class="hvglue">' + esc(d.title.slice(i + 1)) + hvBadge(d) + '</span>';
-  }
-  return fav + dotHTML(d) + t + newBadge(d) + betaBadge(d) + dep;
+  return fav + dotHTML(d) + esc(d.title) + newBadge(d) + betaBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -1923,7 +1917,7 @@ function coreCell(d) {
 
 // The table's columns, all toggleable via the "Columns" dropdown except Title
 // (lock: true — a table without titles is meaningless, and row-click/detail
-// live in that cell). The base seven default on; the arcade-metadata columns
+// live in that cell). The base eight default on; the arcade-metadata columns
 // (opt: true, from the MiSTer Arcade Database) and Source default off; the
 // visible set persists in localStorage. Widths are weights, normalized to 100% over
 // whichever columns are enabled (the table uses table-layout:fixed); mw is
@@ -1935,6 +1929,13 @@ function coreCell(d) {
 // Columns menu always shows the full label.
 const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
+  // the Hardware Verified seal (hvBadge), beside the title it vouches for. The
+  // header is the seal too (th; the Columns menu shows the label), so the
+  // column stays about as narrow as Core Type. Sorting puts badged rows first,
+  // newest grant first (see keyOf and DATE_COLS; blanks always sink).
+  { k: 'hv', label: BADGE_NAME, w: 4.5, mw: 3,
+    th: BADGE_SVG.replace('aria-hidden="true"', 'role="img" aria-label="' + BADGE_NAME + '"'),
+    cell: d => '<td class="hvc">' + hvBadge(d) + '</td>' },
   { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
@@ -1971,6 +1972,7 @@ const COLUMNS = [
 // never see these; the detail panel spells out the date semantics there.
 const HEADER_TIPS = {
   title: 'Game or system name.',
+  hv: BADGE_NAME + ': the core was built and checked against the real board or its schematics. Sorts those games first.',
   sn: 'MAME setname, the ROM identifier',
   typesort: 'Arcade game, console core, computer core, or other',
   genre: "Arcade genre, from MAME's catver.ini",
@@ -2003,11 +2005,23 @@ const defaultCols = () => new Set(COLUMNS.filter(c => !c.opt).map(c => c.k));
 // only the enabled *optional* columns (base ones weren't toggleable) — migrate
 // it by unioning with the base defaults, or a returning visitor would load a
 // table stripped to their optional picks.
+// A saved set only covers the columns that existed when it was saved, so on its
+// own it would keep a later default-on column (the hardware badge, 2026-10-07)
+// hidden from everyone who ever touched the menu. 'mz-cols-seen' records which
+// columns the saved set was chosen from; any column outside it takes its
+// default on load. Sets saved before that key existed were chosen from
+// COLS_BEFORE_SEEN, the columns as of 2026-10-07 — a literal on purpose, so a
+// column added after today also counts as unseen for those visitors.
+const COLS_BEFORE_SEEN = ['title', 'sn', 'typesort', 'core', 'src', 'genre', 'updated', 'mz',
+  'date', 'year', 'manufacturer', 'reg', 'rot', 'res', 'plr', 'ctl', 'spc', 'flip'];
 let enabledCols;
 try {
   const v2 = localStorage.getItem('mz-cols2');
-  if (v2 !== null) enabledCols = new Set(JSON.parse(v2));
-  else enabledCols = new Set([...defaultCols(),
+  if (v2 !== null) {
+    enabledCols = new Set(JSON.parse(v2));
+    const seen = new Set(JSON.parse(localStorage.getItem('mz-cols-seen') || 'null') || COLS_BEFORE_SEEN);
+    for (const c of COLUMNS) if (!c.opt && !seen.has(c.k)) enabledCols.add(c.k);
+  } else enabledCols = new Set([...defaultCols(),
     ...JSON.parse(localStorage.getItem('mz-cols') || '[]')]);
 } catch (e) { enabledCols = defaultCols(); }
 
@@ -2030,7 +2044,7 @@ function buildHeader() {
     '<th data-k="' + c.k + '"' + (c.k === sortKey
       ? ' aria-sort="' + (sortDir === 1 ? 'ascending' : 'descending') + '"' : '') +
     (HEADER_TIPS[c.k] ? ' data-tip="' + escA(HEADER_TIPS[c.k]) + '"' : '') +
-    '>' + ((narrowMQ.matches && c.sl) || c.label) + '</th>').join('');
+    '>' + (c.th || (narrowMQ.matches && c.sl) || c.label) + '</th>').join('');
   // each column contributes its mw to the table's width floor so cells don't
   // crush (the 5rem on the metadata columns keeps the nowrap date columns from
   // colliding with all 6 on); an over-wide table scrolls horizontally inside
@@ -2333,6 +2347,7 @@ function apply() {
     const keyOf = x => sortKey === 'typesort' ? typeLabel(x)
       : sortKey === 'core' ? coreLabel(x.core)
       : sortKey === 'src' ? (x.src ? SRC_NAMES[x.src] || x.src : '')
+      : sortKey === 'hv' ? (x.hv ? x.hv.granted : '')
       : (x[sortKey] || '');
     view.sort((a, b) => {
       const av = keyOf(a), bv = keyOf(b);
@@ -2433,8 +2448,9 @@ document.getElementById('hrow').addEventListener('click', e => {
   const k = th.dataset.k;
   // Date columns default to descending (most recent first) when first selected;
   // every other column defaults to ascending. A click on the already-active
-  // column always just flips the current direction.
-  const DATE_COLS = new Set(['date', 'updated', 'mz']);
+  // column always just flips the current direction. 'hv' sorts by grant date,
+  // so it counts as one: newest seals first (unbadged rows sink either way).
+  const DATE_COLS = new Set(['date', 'updated', 'mz', 'hv']);
   sortDir = (sortKey === k) ? -sortDir : (DATE_COLS.has(k) ? -1 : 1);
   sortKey = k;
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
@@ -2559,7 +2575,10 @@ colsMenu.addEventListener('change', e => {
   if (!k) return;
   if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
   // tolerated failure: blocked storage loses the pref, not the toggle
-  try { localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols])); } catch (e) {}
+  try {
+    localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
+    localStorage.setItem('mz-cols-seen', JSON.stringify(COLUMNS.map(c => c.k)));
+  } catch (e) {}
   syncColsReset();
   fixSortThenRebuild();
 });
@@ -2569,6 +2588,7 @@ colsReset.addEventListener('click', () => {
   // would resurrect the old picks on next load) — reset means "never customized"
   localStorage.removeItem('mz-cols2');
   localStorage.removeItem('mz-cols');
+  localStorage.removeItem('mz-cols-seen');
   for (const cb of colsMenu.querySelectorAll('input:not(:disabled)'))
     cb.checked = enabledCols.has(cb.dataset.k);
   syncColsReset();

@@ -170,6 +170,177 @@
       ]
     },
     {
+      "k": "rodland",
+      "title": "Rod-Land",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "rodland"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L26",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "soldam",
+      "title": "Soldam",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "soldam"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L30",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "lordofk",
+      "title": "The Lord of King",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "lordofk"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L21",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "stdragon",
+      "title": "Saint Dragon",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "stdragon"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L25",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "iganinju",
+      "title": "Iga Ninjyutsuden",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "iganinju"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L20",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "hachoo",
+      "title": "Hachoo!",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "hachoo"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L22",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "inyourfa",
+      "title": "In Your Face",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "inyourfa"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L29",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "jitsupro",
+      "title": "Jitsuryoku!! Pro Yakyuu",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "jitsupro"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L23",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
+      "k": "plusalph",
+      "title": "Plus Alpha",
+      "rbfs": [
+        "megasys1_a"
+      ],
+      "setnames": [
+        "plusalph"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Jaleco's Mega System 1 Type A hardware, the same MB8842 mother board as P-47, which the core was verified against on an authentic P-47 board, with the board's video timings measured. Type A games differ in their ROM boards, which carry the game's encryption chip and, on some, a protection MCU.",
+      "links": [
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L4",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L65",
+        "https://github.com/va7deo/MegaSys1_A/blob/66a9edd177ce0a14f70ff8bf9fb595ef26a6ab40/README.md?plain=1#L24",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/jaleco/megasys1.cpp#L18-L38"
+      ]
+    },
+    {
       "k": "vimanaj",
       "title": "Vimana",
       "rbfs": [
@@ -1285,6 +1456,91 @@
       ]
     },
     {
+      "k": "spang",
+      "title": "Super Pang",
+      "rbfs": [
+        "jtpang"
+      ],
+      "setnames": [
+        "spang"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Super Pang runs on the same Mitchell hardware as Pang!, the board Skutis extracted the core's schematics from. The games differ in their ROMs and in the key of the board's Kabuki encrypted CPU.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/pang/README.md?plain=1#L16",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/capcom/mitchell.cpp#L4-L8"
+      ]
+    },
+    {
+      "k": "block",
+      "title": "Block Block",
+      "rbfs": [
+        "jtpang"
+      ],
+      "setnames": [
+        "block"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Block Block runs on the same Mitchell hardware as Pang!, the board Skutis extracted the core's schematics from. The games differ in their ROMs and in the key of the board's Kabuki encrypted CPU.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/pang/README.md?plain=1#L16",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/capcom/mitchell.cpp#L4-L8"
+      ]
+    },
+    {
+      "k": "cworld",
+      "title": "Capcom World",
+      "rbfs": [
+        "jtpang"
+      ],
+      "setnames": [
+        "cworld"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Capcom World runs on the same Mitchell hardware as Pang!, the board Skutis extracted the core's schematics from. The games differ in their ROMs and in the key of the board's Kabuki encrypted CPU.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/pang/README.md?plain=1#L16",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/capcom/mitchell.cpp#L4-L8"
+      ]
+    },
+    {
+      "k": "dokaben",
+      "title": "Dokaben",
+      "rbfs": [
+        "jtpang"
+      ],
+      "setnames": [
+        "dokaben"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Dokaben runs on the same Mitchell hardware as Pang!, the board Skutis extracted the core's schematics from. The games differ in their ROMs and in the key of the board's Kabuki encrypted CPU.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/pang/README.md?plain=1#L16",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/capcom/mitchell.cpp#L4-L8"
+      ]
+    },
+    {
+      "k": "dokaben2",
+      "title": "Dokaben 2",
+      "rbfs": [
+        "jtpang"
+      ],
+      "setnames": [
+        "dokaben2"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Dokaben 2 runs on the same Mitchell hardware as Pang!, the board Skutis extracted the core's schematics from. The games differ in their ROMs and in the key of the board's Kabuki encrypted CPU.",
+      "links": [
+        "https://github.com/jotego/jtcores/blob/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/pang/README.md?plain=1#L16",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/capcom/mitchell.cpp#L4-L8"
+      ]
+    },
+    {
       "k": "gradius3",
       "title": "Gradius III",
       "rbfs": [
@@ -1591,6 +1847,330 @@
       ]
     },
     {
+      "k": "bakutotu",
+      "title": "Bakutotsu Kijuutei",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "bakutotu"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "blastoff",
+      "title": "Blast Off",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "blastoff"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "blazer",
+      "title": "Blazer",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "blazer"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "boxyboy",
+      "title": "Boxy Boy",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "boxyboy"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "berabohm",
+      "title": "Chou Zetsurinjin Berabowman",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "berabohm"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "dangseed",
+      "title": "Dangerous Seed",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "dangseed"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "dspirit",
+      "title": "Dragon Spirit",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "dspirit"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "faceoff",
+      "title": "Face Off",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "faceoff"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "galaga88",
+      "title": "Galaga '88",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "galaga88"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "mmaze",
+      "title": "Marchen Maze",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "mmaze"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "pacmania",
+      "title": "Pac-Mania",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "pacmania"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "pistoldm",
+      "title": "Pistol Daimyo no Bouken",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "pistoldm"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "wldcourt",
+      "title": "Pro Tennis World Court",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "wldcourt"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "ws",
+      "title": "Pro Yakyuu World Stadium",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "ws"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "quester",
+      "title": "Quester",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "quester"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game. Quester adds a sub board for its paddle controls.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "rompers",
+      "title": "Rompers",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "rompers"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "shadowld",
+      "title": "Shadowland",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "shadowld"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
+      "k": "tankfrce",
+      "title": "Tank Force",
+      "rbfs": [
+        "jtshouse"
+      ],
+      "setnames": [
+        "tankfrce"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Runs on Namco System 1, the same hardware as Splatterhouse, whose board LightCaster Games sent the JT team for analysis and core development. System 1 games share every custom chip except the protection key, which changes from game to game.",
+      "links": [
+        "https://www.patreon.com/jotego/posts/konami-cpu-and-78516563",
+        "https://github.com/jotego/jtcores/tree/548b87b32a1b528a16cb41f689accb179e85d1a8/cores/shouse/doc/meas",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/namco/namcos1.cpp#L41-L58"
+      ]
+    },
+    {
       "k": "suratk",
       "title": "Surprise Attack",
       "rbfs": [
@@ -1810,6 +2390,24 @@
       ]
     },
     {
+      "k": "searchar",
+      "title": "SAR - Search And Rescue",
+      "rbfs": [
+        "SNK68"
+      ],
+      "setnames": [
+        "searchar"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "SAR runs on SNK's A8007 board, the board Street Smart first shipped on and the one the core's Street Smart timing measurements were taken from. The core itself was built against the Ikari III board and schematics.",
+      "links": [
+        "https://github.com/va7deo/SNK68/blob/566133699ecd2ec2aa6897de6f0995ebefb60624/README.md?plain=1#L4",
+        "https://github.com/va7deo/SNK68/blob/566133699ecd2ec2aa6897de6f0995ebefb60624/README.md?plain=1#L20",
+        "https://github.com/va7deo/SNK68/blob/566133699ecd2ec2aa6897de6f0995ebefb60624/README.md?plain=1#L54"
+      ]
+    },
+    {
       "k": "gangwars",
       "title": "Gang Wars",
       "rbfs": [
@@ -1858,6 +2456,42 @@
       "links": [
         "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6",
         "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L8"
+      ]
+    },
+    {
+      "k": "timesold",
+      "title": "Time Soldiers",
+      "rbfs": [
+        "alpha68k"
+      ],
+      "setnames": [
+        "timesold"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Time Soldiers runs on the same ALPHA-68K96II board as Sky Soldiers, whose authentic board atrac17 bought for the core and the core's timing measurements were taken from.",
+      "links": [
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6",
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L8",
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L24-L25"
+      ]
+    },
+    {
+      "k": "sbasebalj",
+      "title": "Super Champion Baseball",
+      "rbfs": [
+        "alpha68k"
+      ],
+      "setnames": [
+        "sbasebalj"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Super Champion Baseball runs on the same ALPHA-68K96V board as Gang Wars and Sky Adventure. The core was checked against the Sky Adventure schematics, with timing measured on an authentic Gang Wars board.",
+      "links": [
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L6",
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L8",
+        "https://github.com/va7deo/alpha68k/blob/d3d0839730f153c63e84eb4c37dd1822374312c0/README.md?plain=1#L21-L22"
       ]
     },
     {
@@ -2095,6 +2729,24 @@
       "links": [
         "https://github.com/MiSTer-devel/Arcade-BankPanic_MiSTer/blob/e262cf9e1e31163eb4e2dd634d91534e846ed43e/Readme.md?plain=1#L4",
         "https://github.com/MiSTer-devel/Arcade-BankPanic_MiSTer/blob/e262cf9e1e31163eb4e2dd634d91534e846ed43e/doc/schematic.png"
+      ]
+    },
+    {
+      "k": "combh",
+      "title": "Combat Hawk",
+      "rbfs": [
+        "bankpanic"
+      ],
+      "setnames": [
+        "combh"
+      ],
+      "granted": "2026-10-07",
+      "proposed_by": "misterzine",
+      "reason": "Combat Hawk runs on the Bank Panic board itself: its PCB is screened BANK PANIC (C2-00170-A) and carries the same PALs, so it shares the board this core reproduces from its schematic and PAL equations.",
+      "links": [
+        "https://github.com/MiSTer-devel/Arcade-BankPanic_MiSTer/blob/e262cf9e1e31163eb4e2dd634d91534e846ed43e/Readme.md?plain=1#L4",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/sanritsu/bankp.cpp#L15-L19",
+        "https://github.com/mamedev/mame/blob/285ea99fd1adc509a4319077cf0d8a0e83ee2c83/src/mame/sanritsu/bankp.cpp#L658-L661"
       ]
     },
     {

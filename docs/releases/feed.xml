@@ -6,7 +6,52 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 07 Oct 2026 08:21:37 +0000</lastBuildDate>
+<lastBuildDate>Thu, 08 Oct 2026 05:53:29 +0000</lastBuildDate>
+<item>
+<title>[New] Off the Wall (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#offtwall</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Off the Wall.mra:2026-10-08T05:53:29+00:00</guid>
+<pubDate>Thu, 08 Oct 2026 05:53:29 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/offtwall.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Ball &amp;amp; Paddle / 1991 / Atari Games&lt;/p&gt;&lt;p&gt;Core: OffTheWall&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-OffTheWall_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Relief Pitcher (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#relief</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Relief Pitcher.mra:2026-10-08T05:53:29+00:00</guid>
+<pubDate>Thu, 08 Oct 2026 05:53:29 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/relief.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1992 / Atari Games&lt;/p&gt;&lt;p&gt;Core: ReliefPitcher&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ReliefPitcher_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Shuuz (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#shuuz</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Shuuz.mra:2026-10-08T05:53:29+00:00</guid>
+<pubDate>Thu, 08 Oct 2026 05:53:29 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shuuz.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Shuuz&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Shuuz_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] The Crystal of Kings (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#crysking</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/The Crystal of Kings.mra:2026-10-08T04:41:29+00:00</guid>
+<pubDate>Thu, 08 Oct 2026 04:41:29 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crysking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 2001 / BrezzaSoft&lt;/p&gt;&lt;p&gt;Core: Arcade-CrystalSystem_20261008b&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Violent Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-VioStorm_20261008.rbf:2026-10-08T04:41:29+00:00</guid>
+<pubDate>Thu, 08 Oct 2026 04:41:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Ginga Ninkyouden (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ginganin</link>
@@ -861,51 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/drgnbstr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1984 / Namco&lt;/p&gt;&lt;p&gt;Core: jtskykid&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/skykid"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Dunk Shot (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dunkshot</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Dunk Shot (Rev C, FD1089A 317-0022).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dunkshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Excite League (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#exctleag</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Excite League (FD1094 317-0079).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/exctleag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Fantasy Zone II - The Tears of Opa-Opa (System 16C version) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantzn2x</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Fantasy Zone II - The Tears of Opa-Opa (System 16C version).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzn2x.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 2008 / Sega / M2&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Flash Point (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fpoint</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Flash Point (set 2, Japan) (FD1094 317-0127A).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fpoint.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Golden Axe (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#goldnaxe</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Golden Axe (set 6, US) (8751 317-123A).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/goldnaxe.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

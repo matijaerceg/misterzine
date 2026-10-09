@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 08 Oct 2026 23:51:53 +0000</lastBuildDate>
+<lastBuildDate>Fri, 09 Oct 2026 11:32:32 +0000</lastBuildDate>
+<item>
+<title>[Updated] PC/XT (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PCXT</link>
+<guid isPermaLink="false">distribution_mister:_Computer/PCXT_20261008.rbf:2026-10-09T11:32:32+00:00</guid>
+<pubDate>Fri, 09 Oct 2026 11:32:32 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / IBM&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PCXT_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-Simple156 (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#charlien</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-Simple156_20261009.rbf:2026-10-09T09:08:25+00:00</guid>
+<pubDate>Fri, 09 Oct 2026 09:08:25 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Charlie Ninja, Joe &amp;amp; Mac Returns, Joe &amp;amp; Mac Returns (World, Master Version 1.1, 1994.05.27), Osman, Osman (World).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-09 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Violent Storm (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddux.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Fantasy Zone II - The Tears of Opa-Opa (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantzn2</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Fantasy Zone II/Fantasy Zone II - The Tears of Opa-Opa (System 16C version, prototype).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzn2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: SMS&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SMS_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Fantasy Zone (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantzone</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Fantasy Zone/Fantasy Zone (Prototype, S16A) [No Protection].mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzone.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

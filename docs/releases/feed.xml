@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 08 Oct 2026 05:53:29 +0000</lastBuildDate>
+<lastBuildDate>Thu, 08 Oct 2026 23:51:53 +0000</lastBuildDate>
+<item>
+<title>[Updated] Violent Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-VioStorm_20261009.rbf:2026-10-08T23:51:53+00:00</guid>
+<pubDate>Thu, 08 Oct 2026 23:51:53 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Marble Madness II (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#marblmd2</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Marble Madness II (prototype).mra:2026-10-08T22:11:25+00:00</guid>
+<pubDate>Thu, 08 Oct 2026 22:11:25 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/marblmd2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1991 / Atari Games&lt;/p&gt;&lt;p&gt;Core: MarbleMadness2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MarbleMadness2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Off the Wall (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#offtwall</link>
@@ -42,15 +60,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crysking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 2001 / BrezzaSoft&lt;/p&gt;&lt;p&gt;Core: Arcade-CrystalSystem_20261008b&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Violent Storm (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#viostorm</link>
-<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-VioStorm_20261008.rbf:2026-10-08T04:41:29+00:00</guid>
-<pubDate>Thu, 08 Oct 2026 04:41:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-VioStorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Ginga Ninkyouden (Arcade)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1987 / Technos Japan (Taito license)&lt;/p&gt;&lt;p&gt;Core: jtdd&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Dragon Buster (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#drgnbstr</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Dragon Buster.mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/drgnbstr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1984 / Namco&lt;/p&gt;&lt;p&gt;Core: jtskykid&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/skykid"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

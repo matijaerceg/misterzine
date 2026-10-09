@@ -8695,6 +8695,398 @@
         "https://github.com/rmonic79/rm-SeibuCupSoccer_MiSTer/blob/40c5963b31408f2f4554d84a857f340a46af17a8/README.md?plain=1#L218",
         "https://github.com/rmonic79/rm-SeibuCupSoccer_MiSTer/blob/40c5963b31408f2f4554d84a857f340a46af17a8/README.md?plain=1#L229"
       ]
+    },
+    {
+      "k": "lkage",
+      "title": "The Legend of Kage (Rev 2) [CoC]",
+      "rbfs": [
+        "lkage_mister"
+      ],
+      "setnames": [
+        "lkage"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The core's author traced the Taito A54 board set into schematics and built the core from them. The video timings were taken from the PCB, and the sound section's control curves were matched against a recording of the PCB.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-171645916"
+      ]
+    },
+    {
+      "k": "darkmist",
+      "title": "The Lost Castle In Darkmist",
+      "rbfs": [
+        "darkmist_mister"
+      ],
+      "setnames": [
+        "darkmist"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Built against the author's own Lost Castle in Darkmist (SEI-8608) board, with footage from it in the release post; the audio output chain was modelled stage by stage from the board's schematic.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-171590587"
+      ]
+    },
+    {
+      "k": "bubble-bobble-japan-ver-0-1-coc",
+      "title": "Bubble Bobble (Japan, Ver 0.1) [CoC]",
+      "rbfs": [
+        "bublbobl_mister"
+      ],
+      "setnames": [
+        "bublbobl"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The core's timings were taken from the schematic and the author's PCB, the microcontroller interrupt delay was measured on the PCB (about 96 us after vertical blank), and the release post shows the core and the PCB running side by side.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-170932574"
+      ]
+    },
+    {
+      "k": "kikikai",
+      "title": "KiKi KaiKai",
+      "rbfs": [
+        "kikikai_mister"
+      ],
+      "setnames": [
+        "kikikai"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The CPU, screen RAM and object pipeline sheets were traced from the author's own KiKi KaiKai PCB, and the video timings were measured from it.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-170181323"
+      ]
+    },
+    {
+      "k": "wardner",
+      "title": "Wardner",
+      "rbfs": [
+        "wardner_mister"
+      ],
+      "setnames": [
+        "wardner"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author measured video timings from Wardner's TP-009 board alongside the TP-007 and TP-011 boards, traced its clocks, bus and interrupt paths, and measured its audio filter chain with an oscilloscope and a spectrum analyzer.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-169847528"
+      ]
+    },
+    {
+      "k": "hishouza",
+      "title": "Hishou Zame",
+      "rbfs": [
+        "fshark_mister"
+      ],
+      "setnames": [
+        "hishouza"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Built from the TP-007 schematics and verified against the author's own TP-007 (Sky Shark) PCB; its video timings and audio filter chain were measured from the board with an oscilloscope and a spectrum analyzer.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-148132654",
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-169847528"
+      ]
+    },
+    {
+      "k": "ktiger",
+      "title": "Kyukyoku Tiger",
+      "rbfs": [
+        "twincobr_mister"
+      ],
+      "setnames": [
+        "ktiger"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author rewrote the core from the Sky Shark schematics and verified it against their own TP-007 (Sky Shark) and TP-011 (Twin Cobra) PCBs; the TP-011's video timings and audio filter chain were measured from the board.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-145440329",
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-169847528"
+      ]
+    },
+    {
+      "k": "mystwarr",
+      "title": "Mystic Warriors",
+      "rbfs": [
+        "mystwarr_mister"
+      ],
+      "setnames": [
+        "mystwarr"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author traced the GX128 (Mystic Warriors) PCB and measured its bus timings against the PAL decode, using a World Mystic Warriors board as the reference for the core.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-168773668"
+      ]
+    },
+    {
+      "k": "metamrph",
+      "title": "Metamorphic Force",
+      "rbfs": [
+        "metamrph_mister"
+      ],
+      "setnames": [
+        "metamrph"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Built with a Japanese Metamorphic Force PCB as the reference: alpha levels are clamped from PCB measurements, per-voice audio gains are set from measurements taken off the PCB, and the release post compares the core and the PCB against MAME.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-168773668"
+      ]
+    },
+    {
+      "k": "gijoe",
+      "title": "G.I. Joe",
+      "rbfs": [
+        "gijoe_mister"
+      ],
+      "setnames": [
+        "gijoe"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Built with a G.I. Joe PCB and its schematics from team member Pramod; the author verified the core's video timing and audio points against the original PCB and remeasured the refresh rate off its CSYNC line.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-162913259",
+        "https://www.patreon.com/atrac17/posts/coin-op-updates-166711268"
+      ]
+    },
+    {
+      "k": "captavenu",
+      "title": "Captain America and The Avengers",
+      "rbfs": [
+        "captaven_mister"
+      ],
+      "setnames": [
+        "captavenu"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The core departs from MAME's unconfirmed graphics and sprite paths in five places, each verified against the original Captain America and The Avengers PCB.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-161557018"
+      ]
+    },
+    {
+      "k": "crude-buster-world-fx-version-2",
+      "title": "Crude Buster (Coin-Op Collection)",
+      "rbfs": [
+        "cbuster_mister"
+      ],
+      "setnames": [
+        "cbuster"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Crude Buster is on the author's list of DECO-16 PCBs remeasured with a logic analyzer for the platform's video timing, and the author captured audio from the board to model its filtering.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-updates-165187605"
+      ]
+    },
+    {
+      "k": "edrandy",
+      "title": "The Cliffhanger - Edward Randy (Coin-Op Collection)",
+      "rbfs": [
+        "edrandy_mister"
+      ],
+      "setnames": [
+        "edrandy"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The core's graphics path was verified frame by frame against the original Edward Randy board, and the author's own board is on their list of DECO-16 PCBs remeasured with a logic analyzer.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-159235419",
+        "https://www.patreon.com/atrac17/posts/coin-op-updates-165187605"
+      ]
+    },
+    {
+      "k": "robocop2u",
+      "title": "Robocop 2",
+      "rbfs": [
+        "robocop2_mister"
+      ],
+      "setnames": [
+        "robocop2u"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author verified the DECO 55 tilemap and DECO 52 sprite chips against their own RoboCop 2 PCB, which is also on their list of DECO-16 PCBs remeasured with a logic analyzer.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-154549361",
+        "https://www.patreon.com/atrac17/posts/coin-op-updates-165187605"
+      ]
+    },
+    {
+      "k": "tumblep",
+      "title": "Tumble Pop (World)",
+      "rbfs": [
+        "tumblep_mister"
+      ],
+      "setnames": [
+        "tumblep"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Tumble Pop is on the author's list of DECO-16 PCBs remeasured with a logic analyzer for the platform's video timing.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-updates-165187605"
+      ]
+    },
+    {
+      "k": "supbtime",
+      "title": "Super Burger Time",
+      "rbfs": [
+        "supbtime_mister"
+      ],
+      "setnames": [
+        "supbtime"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Super Burger Time runs on the same DE-0343 board as Tumble Pop, whose PCB the author measured; the author also verified the game's behavior on a Super Burger Time PCB at Galloping Ghost Arcade.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-165488642",
+        "https://www.patreon.com/atrac17/posts/coin-op-updates-165187605"
+      ]
+    },
+    {
+      "k": "dietgo",
+      "title": "Diet Go Go",
+      "rbfs": [
+        "dietgo_mister"
+      ],
+      "setnames": [
+        "dietgo"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Diet Go Go is on the author's list of DECO-16 PCBs remeasured with a logic analyzer for the platform's video timing.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-updates-165187605"
+      ]
+    },
+    {
+      "k": "cobracom",
+      "title": "Cobra-Command",
+      "rbfs": [
+        "cobracom_mister"
+      ],
+      "setnames": [
+        "cobracom"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author bought the Cobra-Command schematic, attached it to the release post, and used it to verify the core against their own Cobra-Command PCB.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-157835003"
+      ]
+    },
+    {
+      "k": "oscar",
+      "title": "Psycho-Nics Oscar",
+      "rbfs": [
+        "oscar_mister"
+      ],
+      "setnames": [
+        "oscar"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The core's tilemap, sprite and palette chips were developed from the Psycho-Nics Oscar schematics, and the release post reproduces the schematic sections for the sub-CPU and its cross-interrupt handshake.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-154650413"
+      ]
+    },
+    {
+      "k": "maniach",
+      "title": "Mania Challenge",
+      "rbfs": [
+        "maniach_mister"
+      ],
+      "setnames": [
+        "maniach"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author traced and measured the CPU's four-line vertical blank window on their own TA-0017 (Mania Challenge) PCB, restoring the crowd effects emulation misses.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-154419170"
+      ]
+    },
+    {
+      "k": "matmania",
+      "title": "Mat Mania",
+      "rbfs": [
+        "matmania_mister"
+      ],
+      "setnames": [
+        "matmania"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Mat Mania shares its bottom board (TA-0015-P1-0, main CPU and video) with Mania Challenge, whose PCB the author traced and measured for the CPU's vertical blank window.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-154419170"
+      ]
+    },
+    {
+      "k": "snowbrosj",
+      "title": "Snow Bros. - Nick & Tom",
+      "rbfs": [
+        "snowbros_mister"
+      ],
+      "setnames": [
+        "snowbrosj"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author brought the core up by comparing its boot sequence against their own Snow Bros. PCB, and later corrected the YM3812 timing from PCB measurements.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-146666786",
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-148132654"
+      ]
+    },
+    {
+      "k": "tmnt2",
+      "title": "Teenage Mutant Ninja Turtles - Turtles in Time",
+      "rbfs": [
+        "tmnt2_mister"
+      ],
+      "setnames": [
+        "tmnt2"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Developed against the team's own Turtles in Time PCB; after repairing it, the team recorded audio from its sound output and matched the core's mix and stereo balance to it.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-126878799",
+        "https://www.patreon.com/atrac17/posts/coin-op-update-t-141097408"
+      ]
+    },
+    {
+      "k": "tekipaki",
+      "title": "Teki Paki",
+      "rbfs": [
+        "tekipaki"
+      ],
+      "setnames": [
+        "tekipaki"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The author wrote the core with their own Teki Paki PCB as a reference alongside the FBNeo and MAME sources.",
+      "links": [
+        "https://www.patreon.com/atrac17/posts/coin-op-presents-104073971"
+      ]
     }
   ]
 }

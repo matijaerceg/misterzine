@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-09
+
+- Release tracker: 514 games now carry the Hardware Verified seal, up from 490. 24 Coin-Op Collection games, among them The Legend of Kage, Bubble Bobble, Captain America and The Avengers, Turtles in Time and the DECO-16 boards the developer measured, earned it from the board tracing, PCB measurements and side-by-side captures in the developer's public Patreon posts.
+
 ## 2026-10-08
 
 - Hardware Verified: the definition on the [criteria page](https://misterzine.fyi/badge/) now reads plainly: the real thing was consulted while building the core for this board, meaning a board in hand, its schematics, or decaps of its own chips. Using another project's hardware-derived chip models does not count by itself. Escape Kids (MeatCores) loses the seal under that reading; 490 games keep it.

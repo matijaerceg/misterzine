@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-09
 
+- Release tracker: 524 games now carry the Hardware Verified seal, up from 514. Galaxian and six games on identical Galaxian hardware, among them Black Hole and War of the Bugs, earn it from Katsumi Degawa's original FPGA design, which he built from the board and its schematics and which the MiSTer core still runs. Phoenix earns it for DAR's analog sound work from the Centuri schematic, and I, Robot (MeatCores) for its build from Atari's SP-251 schematics.
 - Release tracker: 514 games now carry the Hardware Verified seal, up from 490. 24 Coin-Op Collection games, among them The Legend of Kage, Bubble Bobble, Captain America and The Avengers, Turtles in Time and the DECO-16 boards the developer measured, earned it from the board tracing, PCB measurements and side-by-side captures in the developer's public Patreon posts.
 
 ## 2026-10-08

@@ -9087,6 +9087,177 @@
       "links": [
         "https://www.patreon.com/atrac17/posts/coin-op-presents-104073971"
       ]
+    },
+    {
+      "k": "galaxian",
+      "title": "Galaxian",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "galaxian"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Katsumi Degawa, whose 2004 FPGA Galaxian this MiSTer core is a port of (his copyright is still in its source), writes that he designed it in Verilog HDL from the board and its schematics.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/MiSTer-devel/Arcade-Galaxian_MiSTer/blob/e6b4dc5e7a89b2f9aceeed338eab71ea9b5624aa/rtl/mc_adec.vhd#L6"
+      ]
+    },
+    {
+      "k": "phoenix",
+      "title": "Phoenix",
+      "rbfs": [
+        "phoenix"
+      ],
+      "setnames": [
+        "phoenix"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The core's analog sound effects come from DAR's Phoenix design, whose sound write-up states the analysis is based on the Centuri schematic, naming board parts such as the NE555 at IC48; the resulting component values are in the MiSTer core.",
+      "links": [
+        "https://sourceforge.net/projects/darfpga/files/Software%20VHDL/phoenix/vhdl_phoenix_V00.zip/download",
+        "https://darfpga.blogspot.com/2016/04/phoenix-fpga-arcade-game-on-de2-35.html",
+        "https://github.com/MiSTer-devel/Arcade-Phoenix_MiSTer/blob/17edc4cf319f572d01d1339b8d0e93463c310516/rtl/phoenix_effect1.vhd#L122"
+      ]
+    },
+    {
+      "k": "irobot",
+      "title": "I, Robot",
+      "rbfs": [
+        "Arcade-I-Robot"
+      ],
+      "setnames": [
+        "irobot"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "The core's author built it from Atari's engineering documents, the SP-251 schematics, the CO-251-02 corrections sheet, the TM-251 operator's manual and dumps of the board's programmed parts.",
+      "links": [
+        "https://www.patreon.com/Meathax/posts/i-robot-1984-169005879"
+      ]
+    },
+    {
+      "k": "blkhole",
+      "title": "Black Hole",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "blkhole"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Galaxian hardware as Galaxian (MAME uses the identical machine configuration), whose FPGA design Katsumi Degawa built from the board and its schematics; this MiSTer core is a port of that design.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/mamedev/mame/blob/1e3244a07eb04e0f9b98516e533de358afa785c9/src/mame/galaxian/galaxian.cpp#L17026"
+      ]
+    },
+    {
+      "k": "orbitron",
+      "title": "Orbitron",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "orbitron"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Galaxian hardware as Galaxian (MAME uses the identical machine configuration), whose FPGA design Katsumi Degawa built from the board and its schematics; this MiSTer core is a port of that design.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/mamedev/mame/blob/1e3244a07eb04e0f9b98516e533de358afa785c9/src/mame/galaxian/galaxian.cpp#L17027"
+      ]
+    },
+    {
+      "k": "luctoday",
+      "title": "Lucky Today",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "luctoday"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Galaxian hardware as Galaxian (MAME uses the identical machine configuration), whose FPGA design Katsumi Degawa built from the board and its schematics; this MiSTer core is a port of that design.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/mamedev/mame/blob/1e3244a07eb04e0f9b98516e533de358afa785c9/src/mame/galaxian/galaxian.cpp#L17028"
+      ]
+    },
+    {
+      "k": "catacomb",
+      "title": "Catacomb",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "catacomb"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Galaxian hardware as Galaxian (MAME uses the identical machine configuration), whose FPGA design Katsumi Degawa built from the board and its schematics; this MiSTer core is a port of that design.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/mamedev/mame/blob/1e3244a07eb04e0f9b98516e533de358afa785c9/src/mame/galaxian/galaxian.cpp#L17030"
+      ]
+    },
+    {
+      "k": "warofbug",
+      "title": "War of the Bugs",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "warofbug"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Galaxian hardware as Galaxian (MAME uses the identical machine configuration), whose FPGA design Katsumi Degawa built from the board and its schematics; this MiSTer core is a port of that design.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/mamedev/mame/blob/1e3244a07eb04e0f9b98516e533de358afa785c9/src/mame/galaxian/galaxian.cpp#L17044"
+      ]
+    },
+    {
+      "k": "azurian",
+      "title": "Azurian Attack",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "azurian"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "Runs on the same Galaxian hardware as Galaxian (MAME uses the identical machine configuration), whose FPGA design Katsumi Degawa built from the board and its schematics; this MiSTer core is a port of that design.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/mamedev/mame/blob/1e3244a07eb04e0f9b98516e533de358afa785c9/src/mame/galaxian/galaxian.cpp#L17060"
+      ]
+    },
+    {
+      "k": "mooncrgx",
+      "title": "Moon Cresta",
+      "rbfs": [
+        "galaxian"
+      ],
+      "setnames": [
+        "mooncrgx"
+      ],
+      "granted": "2026-10-09",
+      "proposed_by": "misterzine",
+      "reason": "This Moon Cresta runs on Galaxian hardware (MAME uses the identical machine configuration), whose FPGA design Katsumi Degawa built from the board and its schematics; he wrote the same of his Moon Cresta build. This MiSTer core is a port of that design.",
+      "links": [
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/altera_fpga_galaxian.txt#L7-L8",
+        "https://github.com/GadgetFactory/Papilio-Arcade/blob/55389bf3284aa27be9ce9cdae5a9258556da2c08/galaxian_papilio/doc/xilinx_fpga_galaxian.txt#L7-L8",
+        "https://github.com/mamedev/mame/blob/1e3244a07eb04e0f9b98516e533de358afa785c9/src/mame/galaxian/galaxian.cpp#L17168"
+      ]
     }
   ]
 }

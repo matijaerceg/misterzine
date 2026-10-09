@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 09 Oct 2026 11:32:32 +0000</lastBuildDate>
+<lastBuildDate>Fri, 09 Oct 2026 17:34:54 +0000</lastBuildDate>
+<item>
+<title>[New] MacSE30 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261009.rbf:2026-10-09T17:34:54+00:00</guid>
+<pubDate>Fri, 09 Oct 2026 17:34:54 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] PC/XT (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#PCXT</link>
@@ -35,13 +44,13 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/zeroteam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Seibu Kaihatsu (Fabtek license)&lt;/p&gt;&lt;p&gt;Core: Arcade-ZeroTeam&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-09 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Arcade-Simple156 (Arcade core, 5 games)</title>
+<title>[Updated] Arcade-Simple156 (Arcade core, 4 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#charlien</link>
 <guid isPermaLink="false">meathax:_Arcade/cores/Arcade-Simple156_20261009.rbf:2026-10-09T09:08:25+00:00</guid>
 <pubDate>Fri, 09 Oct 2026 09:08:25 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Charlie Ninja, Joe &amp;amp; Mac Returns, Joe &amp;amp; Mac Returns (World, Master Version 1.1, 1994.05.27), Osman, Osman (World).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-09 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Charlie Ninja, Joe &amp;amp; Mac Returns, Osman, Osman (World).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-09 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Violent Storm (Arcade)</title>
@@ -224,8 +233,8 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sandscrp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Face&lt;/p&gt;&lt;p&gt;Core: Arcade-SandScrp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-07 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-SandScrp_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Joe &amp; Mac Returns (World, Master Version 1.1, 1994.05.27) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#joe-mac-returns-world-master-version-1-1-1994-05-27</link>
+<title>[New] Joe &amp; Mac Returns (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#joemacr</link>
 <guid isPermaLink="false">meathax:_Arcade/_MeatCores/Joe &amp; Mac Returns (World, Master Version 1.1, 1994.05.27).mra:2026-10-07T06:53:44+00:00</guid>
 <pubDate>Wed, 07 Oct 2026 06:53:44 +0000</pubDate>
 <category>new</category>
@@ -242,13 +251,13 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/osman.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1996 / Mitchell&lt;/p&gt;&lt;p&gt;Core: Arcade-Simple156&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-07 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Arcade-Simple156 (Arcade core, 5 games)</title>
+<title>[Updated] Arcade-Simple156 (Arcade core, 4 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#charlien</link>
 <guid isPermaLink="false">meathax:_Arcade/cores/Arcade-Simple156_20261007.rbf:2026-10-07T06:53:44+00:00</guid>
 <pubDate>Wed, 07 Oct 2026 06:53:44 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Charlie Ninja, Joe &amp;amp; Mac Returns, Joe &amp;amp; Mac Returns (World, Master Version 1.1, 1994.05.27), Osman, Osman (World).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-07 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Charlie Ninja, Joe &amp;amp; Mac Returns, Osman, Osman (World).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-07 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Violent Storm (Arcade)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/avengers.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Bad Dudes vs. Dragonninja (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#baddudes</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Bad Dudes vs. Dragonninja (US, revision 1).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/baddudes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

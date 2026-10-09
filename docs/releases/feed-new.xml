@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Fri, 09 Oct 2026 09:08:25 +0000</lastBuildDate>
+<lastBuildDate>Fri, 09 Oct 2026 17:34:54 +0000</lastBuildDate>
+<item>
+<title>[New] MacSE30 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261009.rbf:2026-10-09T17:34:54+00:00</guid>
+<pubDate>Fri, 09 Oct 2026 17:34:54 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Zero Team USA (4 players) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#zero-team-usa-4-players</link>
@@ -62,8 +71,8 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crysking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 2001 / BrezzaSoft&lt;/p&gt;&lt;p&gt;Core: Arcade-CrystalSystem_20261008b&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Joe &amp; Mac Returns (World, Master Version 1.1, 1994.05.27) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#joe-mac-returns-world-master-version-1-1-1994-05-27</link>
+<title>[New] Joe &amp; Mac Returns (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#joemacr</link>
 <guid isPermaLink="false">meathax:_Arcade/_MeatCores/Joe &amp; Mac Returns (World, Master Version 1.1, 1994.05.27).mra:2026-10-07T06:53:44+00:00</guid>
 <pubDate>Wed, 07 Oct 2026 06:53:44 +0000</pubDate>
 <category>new</category>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Console core</category>
 <description>&lt;p&gt;1990 / SNK&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-26 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmNeoGeo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Guardians (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#grdians</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Guardians (Denjin Makai II).mra:2026-09-25T23:32:55+00:00</guid>
-<pubDate>Fri, 25 Sep 2026 23:32:55 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/grdians.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1995 / Winkysoft (Banpresto license)&lt;/p&gt;&lt;p&gt;Core: Guardians&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Guardians_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

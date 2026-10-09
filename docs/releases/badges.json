@@ -8695,23 +8695,6 @@
         "https://github.com/rmonic79/rm-SeibuCupSoccer_MiSTer/blob/40c5963b31408f2f4554d84a857f340a46af17a8/README.md?plain=1#L218",
         "https://github.com/rmonic79/rm-SeibuCupSoccer_MiSTer/blob/40c5963b31408f2f4554d84a857f340a46af17a8/README.md?plain=1#L229"
       ]
-    },
-    {
-      "k": "esckids",
-      "title": "Escape Kids",
-      "rbfs": [
-        "Arcade-EscapeKids"
-      ],
-      "setnames": [
-        "esckids"
-      ],
-      "granted": "2026-10-08",
-      "proposed_by": "misterzine",
-      "reason": "The core's model of the board's K053252 timing chip is bounded by Furrtek's reverse engineering of that chip's die, as the PCB accuracy table in its README states. Its Konami 052109 and 051962 tilemap chips use the JT modules modelled on Furrtek's die shot work.",
-      "links": [
-        "https://github.com/meathax/escapekids/blob/93c70a6fa31e682ab50b6322b79eb3d1649bde13/README.md?plain=1#L42",
-        "https://github.com/meathax/escapekids/blob/93c70a6fa31e682ab50b6322b79eb3d1649bde13/rtl/vendor/jtcores/cores/aliens/hdl/jt052109.v#L19"
-      ]
     }
   ]
 }

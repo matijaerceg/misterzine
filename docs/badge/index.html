@@ -127,9 +127,9 @@
 <main>
 <div class="sealhead">
   <svg class="seal" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><use href="#hvseal-sym"/></svg>
-  <p class="def"><strong>Hardware Verified</strong> means the core was built and checked against the real
-  board or its schematics; it does not claim that every behavior was tested, and absence of the badge
-  means nothing.</p>
+  <p class="def"><strong>Hardware Verified</strong> means the real thing was consulted while building the
+  core for this board: a board in hand, its schematics, or decaps of its own chips. It does not claim
+  that every behavior was tested, and absence of the badge means nothing.</p>
 </div>
 <p class="trial"><strong>Trial:</strong> Hardware Verified is a trial feature. It may change or be removed.</p>
 
@@ -151,9 +151,9 @@ enough:</p>
   <li>custom chips, PALs or PROMs were decapped, photographed or analyzed, and the core's logic derived
     from that (a credit to that work on the board's own custom chips, such as its video, system, timing
     or rotation chips, is enough; models of generic parts used on many boards, such as Yamaha sound
-    chips or CPUs, do not count on their own; the work also has to have been applied to this board by
-    the core's own author, so a core that only imports another project's chip models does not inherit
-    their evidence),</li>
+    chips or CPUs, do not count on their own; using another project's hardware-derived chip models
+    does not count by itself either: the author of this core has to have done the checking against
+    this board),</li>
   <li>it was built from the manufacturer's original schematics,</li>
   <li>captures or recordings from a working board were compared against the core, with the differences
     documented,</li>

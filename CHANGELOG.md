@@ -4,7 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-08
 
-- Hardware Verified criteria: decap evidence has to have been applied to the board by the core's own author. A core that only imports another project's chip models does not inherit their evidence. Escape Kids (MeatCores) loses the seal under this rule; 490 games keep it.
+- Hardware Verified: the definition on the [criteria page](https://misterzine.fyi/badge/) now reads plainly: the real thing was consulted while building the core for this board, meaning a board in hand, its schematics, or decaps of its own chips. Using another project's hardware-derived chip models does not count by itself. Escape Kids (MeatCores) loses the seal under that reading; 490 games keep it.
 - Release tracker: 491 games now carry the Hardware Verified seal, up from 326. A search of every public core repository, including commit messages and the credits screens built into the cores, surfaced evidence for the CPS1, CPS2, CPS3, IGS PGM, Psikyo SH2 and Williams second-generation boards among others.
 - Release tracker: 326 games now carry the Hardware Verified seal, up from 222. 36 run on the same board as a verified game, and 68 more, among them Qix, Elevator Action, Zaxxon, Bubble Bobble and Mario Bros., were found through the [FPGA Verified Against](https://alamone.github.io/fpga-verified-against/) project's survey of core sources.
 

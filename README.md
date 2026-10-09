@@ -459,9 +459,10 @@ CHANGELOG.md             # user-visible site changes
 
 ## Hardware Verified
 
-A positive-only seal for arcade games whose core was built and checked against the
-real board or its schematics, backed by public, checkable evidence of that work
-(from the core's author or anyone else who did or documented it). The
+A positive-only seal for arcade games where the real thing was consulted while
+building the core for this board: a board in hand, its schematics, or decaps of its
+own chips, backed by public, checkable evidence of that work (from the core's author
+or anyone else who did or documented it). The
 criteria are on the site at [/badge/](https://misterzine.fyi/badge/). It is a trial
 feature: it may change or be removed.
 

@@ -1905,7 +1905,7 @@ function hvBadge(d) {
 // already-escaped text, so an & in a link is &amp; there, which is exactly
 // what an href attribute wants; trailing punctuation stays outside the link.
 function hvHTML(d) {
-  if (!d.hv) return '';
+  if (!d.hv || !enabledCols.has('hv')) return '';
   const ext = '<span class="ext">↗</span>';
   const reason = esc(d.hv.reason).replace(BADGE_URL_RE, u => {
     const tail = (u.match(/[.,;:!?)\]]+$/) || [''])[0];
@@ -2008,7 +2008,10 @@ const COLUMNS = [
   // is the same width at every table width; mw is that width in rem (15.4px +
   // 14.4px). Sorting puts badged rows first, newest grant first (see keyOf and
   // DATE_COLS; blanks always sink).
-  { k: 'hv', label: BADGE_NAME, fixed: 'calc(1.1em + .9rem)', mw: 1.8625,
+  // Default OFF since 2026-10-10 (the badge is paused while it is a trial): the
+  // filter toggle and the panel section follow the column, so turning it on in
+  // Columns brings the whole feature back.
+  { k: 'hv', label: BADGE_NAME, fixed: 'calc(1.1em + .9rem)', mw: 1.8625, opt: true,
     th: BADGE_SVG.replace('aria-hidden="true"', 'role="img" aria-label="' + BADGE_NAME + '"'),
     cell: d => '<td class="hvc">' + hvBadge(d) + '</td>' },
   { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
@@ -2099,6 +2102,18 @@ try {
   } else enabledCols = new Set([...defaultCols(),
     ...JSON.parse(localStorage.getItem('mz-cols') || '[]')]);
 } catch (e) { enabledCols = defaultCols(); }
+// 2026-10-10: the badge column went default-off and the feature is paused. Every
+// returning visitor (who got it switched on by the mz-cols-seen upgrade above, or
+// had it in a saved set) starts with it hidden once; 'mz-hv-paused' marks the
+// reset so a visitor who then turns it back on in Columns keeps it.
+try {
+  if (!localStorage.getItem('mz-hv-paused')) {
+    if (enabledCols.delete('hv') && localStorage.getItem('mz-cols2') !== null)
+      localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
+    localStorage.removeItem('mz-hv');
+    localStorage.setItem('mz-hv-paused', '1');
+  }
+} catch (e) { enabledCols.delete('hv'); }
 
 const activeColumns = () => COLUMNS.filter(c => c.lock || enabledCols.has(c.k));
 
@@ -2663,6 +2678,13 @@ colsMenu.addEventListener('change', e => {
   const k = e.target.dataset.k;
   if (!k) return;
   if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
+  // the badge filter and the panel section ride on the column: hiding it drops
+  // the filter too, and the open panel is redrawn either way
+  if (k === 'hv') {
+    if (!e.target.checked && hvOnly) { hvOnly = false; saveHvOnly(); }
+    syncHvSummary();
+    if (openRow) panel.innerHTML = detailHTML(openRow);
+  }
   // tolerated failure: blocked storage loses the pref, not the toggle
   try {
     localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
@@ -2673,6 +2695,9 @@ colsMenu.addEventListener('change', e => {
 });
 colsReset.addEventListener('click', () => {
   enabledCols = defaultCols();
+  if (hvOnly) { hvOnly = false; saveHvOnly(); }
+  syncHvSummary();
+  if (openRow) panel.innerHTML = detailHTML(openRow);
   // remove both keys (incl. the legacy pre-2026-07 one, or the migration path
   // would resurrect the old picks on next load) — reset means "never customized"
   localStorage.removeItem('mz-cols2');
@@ -2984,7 +3009,8 @@ const hvToggle = document.getElementById('hvtoggle');
 function syncHvSummary() {
   const n = DATA.reduce((a, d) => a + (d.hv ? 1 : 0), 0);
   hvToggle.innerHTML = BADGE_SVG + '<span>' + n + '</span>';
-  hvToggle.hidden = n === 0 && !hvOnly;
+  // the filter only exists while its column is showing (Columns menu)
+  hvToggle.hidden = !enabledCols.has('hv') || (n === 0 && !hvOnly);
   hvToggle.dataset.tip = 'Show only ' + BADGE_NAME + ' games (' + n + ')';
   hvToggle.setAttribute('aria-label', BADGE_NAME + ' only (' + n + ')');
   hvToggle.setAttribute('aria-pressed', hvOnly);
@@ -3014,6 +3040,18 @@ function adoptHvParam() {
   if (!p.has('hv')) return;
   hvOnly = p.get('hv') !== '0';
   saveHvOnly();
+  // the link means "show me the badge": switch its column on (and remember it,
+  // like a Columns pick), otherwise the filter it sets would have no control
+  if (hvOnly && !enabledCols.has('hv')) {
+    enabledCols.add('hv');
+    try {
+      localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
+      localStorage.setItem('mz-cols-seen', JSON.stringify(COLUMNS.map(c => c.k)));
+    } catch (e) {}
+    for (const cb of colsMenu.querySelectorAll('input[data-k="hv"]')) cb.checked = true;
+    syncColsReset();
+    buildHeader();
+  }
   syncHvSummary(); apply();
 }
 

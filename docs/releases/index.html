@@ -2817,10 +2817,10 @@ yearMenu.addEventListener('click', e => {
 // ties so near-equal small databases don't swap on every refresh, any unknown
 // id appended. Rebuilt on load (buildSrcMenu) so a newly tracked database
 // shows up by itself. Every box checked = no filter, like Type.
-// Repository acceptance, not developer-wide approval or a per-core review.
+// Repository inclusion in the built-in selection, not a per-core review.
 // Verified against Update_All_MiSTer/src/update_all/databases.py on 2026-10-10.
-// Keep explicit: a newly tracked source must not silently count as accepted.
-const UPDATE_ALL_ACCEPTED = new Set([
+// Keep explicit: a newly tracked source must not silently count as included.
+const UPDATE_ALL_INCLUDED = new Set([
   'distribution_mister', 'jtbindb', 'coinop', 'theypsilon_unofficial_distribution',
 ]);
 const srcMenu = document.getElementById('srcmenu');
@@ -2846,8 +2846,8 @@ function buildSrcMenu() {
     '<label><input type="checkbox" data-s="' + escA(s) + '"' +
     (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
     '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src',
-      '<button type="button" class="reset" data-src-preset="accepted" data-tip="Select only source repositories accepted into update_all\'s built-in selection. You may still need to enable a source in its settings.">Accepted into update_all</button>' +
-      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only source repositories outside update_all\'s built-in selection. These can be added manually; being outside does not mean a repository was submitted and rejected.">Outside update_all</button>');
+      '<button type="button" class="reset" data-src-preset="inside" data-tip="Select only sources included in update_all\'s built-in selection. You may need to enable a source in update_all settings to receive its cores.">Inside update_all</button>' +
+      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>');
   syncSrcSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
@@ -2868,9 +2868,9 @@ function resetSrcs() {
 srcMenu.addEventListener('click', e => {
   const preset = e.target.closest('[data-src-preset]');
   if (preset) {
-    const accepted = preset.dataset.srcPreset === 'accepted';
+    const inside = preset.dataset.srcPreset === 'inside';
     enabledSrcs.clear();
-    for (const s of SRC_KEYS) if (UPDATE_ALL_ACCEPTED.has(s) === accepted) enabledSrcs.add(s);
+    for (const s of SRC_KEYS) if (UPDATE_ALL_INCLUDED.has(s) === inside) enabledSrcs.add(s);
     for (const cb of srcMenu.querySelectorAll('input')) cb.checked = enabledSrcs.has(cb.dataset.s);
   } else if (!pickAllNone(srcMenu, enabledSrcs, SRC_KEYS, e)) return;
   syncSrcSummary(); apply(); recenterOpen();

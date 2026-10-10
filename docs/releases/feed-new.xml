@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Fri, 09 Oct 2026 17:34:54 +0000</lastBuildDate>
+<lastBuildDate>Sat, 10 Oct 2026 14:40:22 +0000</lastBuildDate>
+<item>
+<title>[New] Shogun Warriors (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#shogwarr</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Shogun Warriors (World).mra:2026-10-10T14:40:22+00:00</guid>
+<pubDate>Sat, 10 Oct 2026 14:40:22 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shogwarr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1992 / Kaneko&lt;/p&gt;&lt;p&gt;Core: ShogunWarriors_bazset&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Twin Hawk (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#twin-hawk</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Twin Hawk (US).mra:2026-10-10T14:40:22+00:00</guid>
+<pubDate>Sat, 10 Oct 2026 14:40:22 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/twinhawk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Toaplan / Taito&lt;/p&gt;&lt;p&gt;Core: TwinHawk_bazset&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Macintosh SE/30 (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raiden.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Seibu Kaihatsu&lt;/p&gt;&lt;p&gt;Core: rmRaiden&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-26 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rm-Raiden_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Neo Geo (rmCores) (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#rmNeoGeo</link>
-<guid isPermaLink="false">rmcores:_Console/rmNeoGeo_20260806.rbf:2026-09-26T03:53:10+00:00</guid>
-<pubDate>Sat, 26 Sep 2026 03:53:10 +0000</pubDate>
-<category>new</category>
-<category>Console core</category>
-<description>&lt;p&gt;1990 / SNK&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-26 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmNeoGeo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Guardians (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#grdians</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Guardians (Denjin Makai II).mra:2026-09-25T23:32:55+00:00</guid>
-<pubDate>Fri, 25 Sep 2026 23:32:55 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/grdians.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1995 / Winkysoft (Banpresto license)&lt;/p&gt;&lt;p&gt;Core: Guardians&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Guardians_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

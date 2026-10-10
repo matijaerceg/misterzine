@@ -2846,8 +2846,8 @@ function buildSrcMenu() {
     '<label><input type="checkbox" data-s="' + escA(s) + '"' +
     (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
     '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src',
-      '<button type="button" class="reset" data-src-preset="inside" data-tip="Select only sources included in update_all\'s built-in selection. You may need to enable a source in update_all settings to receive its cores.">Inside update_all</button>' +
-      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>');
+      '<button type="button" class="reset" data-src-preset="inside" data-tip="Select only sources included in update_all\'s curated built-in selection. You may need to enable a source in update_all settings to receive its cores.">Inside update_all</button>' +
+      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s curated built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>');
   syncSrcSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML

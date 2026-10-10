@@ -208,6 +208,7 @@
   details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
   /* the All / None pair closing each multi-select menu (Type, Source, Genre) */
   details.cols .menu .resets { display: flex; gap: 1rem; }
+  #srcmenu .resets { flex-wrap: wrap; gap: .35rem 1rem; }
   /* "Year" dropdown: From/To numeric range inputs + one-tap decade chips. Inputs
      (not selects) so any boundary year is enterable, including decade edges like
      2010/2019 that no game in the data happens to carry; the per-field x shows
@@ -2590,9 +2591,9 @@ function pickNarrows() {
 // shared chrome for the three multi-select menus: the All / None pair closing each
 // menu, the summary text + glow + button states after any change, and the All/None
 // click handling (state-only; callers apply and recenter)
-const pickButtons = id => '<div class="resets">' +
+const pickButtons = (id, extra = '') => '<div class="resets">' +
   '<button class="reset" data-pick="all" id="' + id + 'all">All</button>' +
-  '<button class="reset" data-pick="none" id="' + id + 'none">None</button></div>';
+  '<button class="reset" data-pick="none" id="' + id + 'none">None</button>' + extra + '</div>';
 function syncPick(summary, menu, label, set, total) {
   // idle (every box checked) reads the bare label; anything unchecked shows the
   // checked count and glows, like a non-empty search box
@@ -2816,8 +2817,12 @@ yearMenu.addEventListener('click', e => {
 // ties so near-equal small databases don't swap on every refresh, any unknown
 // id appended. Rebuilt on load (buildSrcMenu) so a newly tracked database
 // shows up by itself. Every box checked = no filter, like Type.
-// The use case: uncheck MiSTer Distribution to see exactly what a stock update_all
-// does NOT deliver (the opt-in databases), then star and export those.
+// Repository acceptance, not developer-wide approval or a per-core review.
+// Verified against Update_All_MiSTer/src/update_all/databases.py on 2026-10-10.
+// Keep explicit: a newly tracked source must not silently count as accepted.
+const UPDATE_ALL_ACCEPTED = new Set([
+  'distribution_mister', 'jtbindb', 'coinop', 'theypsilon_unofficial_distribution',
+]);
 const srcMenu = document.getElementById('srcmenu');
 const srcSummary = document.getElementById('srcsummary');
 let SRC_KEYS = [];  // menu order, filled by buildSrcMenu; empty until data lands
@@ -2840,7 +2845,9 @@ function buildSrcMenu() {
   srcMenu.innerHTML = srcs.map(s =>
     '<label><input type="checkbox" data-s="' + escA(s) + '"' +
     (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
-    '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src');
+    '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src',
+      '<button type="button" class="reset" data-src-preset="accepted" data-tip="Select only source repositories accepted into update_all\'s built-in selection. You may still need to enable a source in its settings.">Accepted into update_all</button>' +
+      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only source repositories outside update_all\'s built-in selection. These can be added manually; being outside does not mean a repository was submitted and rejected.">Outside update_all</button>');
   syncSrcSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
@@ -2859,7 +2866,13 @@ function resetSrcs() {
   syncSrcSummary();
 }
 srcMenu.addEventListener('click', e => {
-  if (!pickAllNone(srcMenu, enabledSrcs, SRC_KEYS, e)) return;
+  const preset = e.target.closest('[data-src-preset]');
+  if (preset) {
+    const accepted = preset.dataset.srcPreset === 'accepted';
+    enabledSrcs.clear();
+    for (const s of SRC_KEYS) if (UPDATE_ALL_ACCEPTED.has(s) === accepted) enabledSrcs.add(s);
+    for (const cb of srcMenu.querySelectorAll('input')) cb.checked = enabledSrcs.has(cb.dataset.s);
+  } else if (!pickAllNone(srcMenu, enabledSrcs, SRC_KEYS, e)) return;
   syncSrcSummary(); apply(); recenterOpen();
 });
 syncSrcSummary();  // initial state before data loads (reads "Source" / no glow)

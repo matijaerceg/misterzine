@@ -2,6 +2,11 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-10
+
+- Release tracker: now also tracks bazset's database, a ninth source, with 28 games: Taito's Chase H.Q., Continental Circus, Night Striker, S.C.I., Rainbow Islands and its Extra Version, Volfied, Superman, Gigandes and the Asuka & Asuka boards (Asuka & Asuka, Bonze Adventure, Cadash, Galmedes, Maze of Flott, Earth Joker), Kaneko's B.Rap Boys and Bonk's Adventure, Ordyne, Krull, and nine of Comad's adult strip-puzzle games (Fantasia, Super Model and others) on his EXPRO-02 core. It is opt-in: add the [bazset/MiSTer_BAZSET] section to downloader.ini, or drop in his downloader ini. Where another database ships the same game, both rows carry a label, for example Rainbow Islands (Jotego) and Rainbow Islands (bazset).
+- Release tracker: blahm1d's games show their core and full details again. He renamed his folder and files on 2026-10-09, which had left the Core column empty for his 43 games, Night Slashers and The Legend of Kage under raw file names, and Night Slashers without screenshots.
+
 ## 2026-10-09
 
 - Release tracker: 524 games now carry the Hardware Verified seal, up from 514. Galaxian and six games on identical Galaxian hardware, among them Black Hole and War of the Bugs, earn it from Katsumi Degawa's original FPGA design, which he built from the board and its schematics and which the MiSTer core still runs. Phoenix earns it for DAR's analog sound work from the Centuri schematic, and I, Robot (MeatCores) for its build from Atari's SP-251 schematics.

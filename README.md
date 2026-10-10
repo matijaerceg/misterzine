@@ -235,7 +235,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The eight sources (all public)
+## The nine sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -272,7 +272,18 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    per core and Night Slashers' region sets side by side, and was rebuilt flat minutes
    later: `snapshot` pairs an MRA whose bytes reappear at a new path as a move (dates,
    key and Updated kept, no feed events), and export-web still folds side-by-side region
-   sets for this source should they come back.
+   sets for this source should they come back. On 2026-10-09 the folder became
+   `_Blahm1d` and every file gained a ` [blahm1d]` suffix; the MRA download matches the
+   folder case-blind.
+9. **bazset**: `bazset/MiSTer_BAZSET` `db` branch (opt-in like MeatCores, section
+   `[bazset/MiSTer_BAZSET]`), opened 2026-10-01. Taito boards (Chase H.Q., Night Striker,
+   S.C.I., Rainbow Islands, Volfied, Superman, Gigandes, the Asuka & Asuka family), Kaneko's
+   B.Rap Boys and Bonk's Adventure, Namco's Ordyne, Gottlieb's Krull and Comad's
+   strip-puzzle games on his EXPRO-02 core. MRAs in `_Arcade/_BAZSET/`, rbfs in the db repo;
+   six cores also have a `<Game>-FPGA` repo. About half the games double another db's core
+   (same-game labels apply). The db also ships the MAME ROM zips via `external_files.csv`;
+   those are support files, never rows. Each game first shipped as a beta post on his
+   Patreon (free-member posts), which is where the frozen debut dates come from.
 
 All eight publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.

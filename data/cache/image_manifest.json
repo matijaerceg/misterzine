@@ -11602,28 +11602,28 @@
  },
  {
   "title": "Night Slashers (Over Sea Rev 1.2, DE-0397-0 PCB) [blahm1d]",
-  "setname": null,
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
-  "third_img": null,
-  "third_pack": null
+  "setname": "nslasher",
+  "source": "psnaps",
+  "title_img": "titles/nslasher.png",
+  "snap_img": "snap/nslasher.png",
+  "third_img": "gameover/nslasher.png",
+  "third_pack": "gameover"
  },
  {
   "title": "Mortal Kombat (rev 5.0 T-Unit 03-19-93) [blahm1d]",
-  "setname": null,
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "setname": "mk",
+  "source": "adb",
+  "title_img": "titles/mk.png",
+  "snap_img": "ingames/mk.png",
   "third_img": null,
   "third_pack": null
  },
  {
   "title": "Mortal Kombat (rev 4.0 09-28-92, Y-Unit) [blahm1d]",
-  "setname": null,
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "setname": "mk",
+  "source": "adb",
+  "title_img": "titles/mk.png",
+  "snap_img": "ingames/mk.png",
   "third_img": null,
   "third_pack": null
  },
@@ -12070,7 +12070,7 @@
  },
  {
   "title": "The Legend of Kage (bootleg set 1) [blahm1d]",
-  "setname": null,
+  "setname": "lkagebl1",
   "source": null,
   "title_img": null,
   "snap_img": null,
@@ -12155,6 +12155,276 @@
   "source": "adb",
   "title_img": "titles/zeroteam.png",
   "snap_img": "ingames/zeroteam.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Narc (rev 7.00) [blahm1d]",
+  "setname": "narc",
+  "source": "adb",
+  "title_img": "titles/narc.png",
+  "snap_img": "ingames/narc.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rainbow Islands (World, rev 2, set 1)",
+  "setname": "rbisland",
+  "source": "adb",
+  "title_img": "titles/rbisland.png",
+  "snap_img": "ingames/rbisland.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Volfied (World, rev 1)",
+  "setname": "volfied",
+  "source": "adb",
+  "title_img": "titles/volfied.png",
+  "snap_img": "ingames/volfied.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rainbow Islands (rev 1)",
+  "setname": "rbisland",
+  "source": "adb",
+  "title_img": "titles/rbisland.png",
+  "snap_img": "ingames/rbisland.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Superman (World)",
+  "setname": "superman",
+  "source": "adb",
+  "title_img": "titles/superman.png",
+  "snap_img": "ingames/superman.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Krull",
+  "setname": "krull",
+  "source": "adb",
+  "title_img": "titles/krull.png",
+  "snap_img": "ingames/krull.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Bonze Adventure (World)",
+  "setname": "bonzeadv",
+  "source": "adb",
+  "title_img": "titles/bonzeadv.png",
+  "snap_img": "ingames/bonzeadv.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Galmedes (Japan)",
+  "setname": "galmedes",
+  "source": "adb",
+  "title_img": "titles/galmedes.png",
+  "snap_img": "ingames/galmedes.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "U.N. Defense Force - Earth Joker (US-Japan, set 1)",
+  "setname": "earthjkr",
+  "source": "adb",
+  "title_img": "titles/earthjkr.png",
+  "snap_img": "ingames/earthjkr.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Asuka & Asuka (World)",
+  "setname": "asuka",
+  "source": "adb",
+  "title_img": "titles/asuka.png",
+  "snap_img": "ingames/asuka.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Cadash (World)",
+  "setname": "cadash",
+  "source": "adb",
+  "title_img": "titles/cadash.png",
+  "snap_img": "ingames/cadash.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Maze of Flott (Japan)",
+  "setname": "mofflott",
+  "source": "adb",
+  "title_img": "titles/mofflott.png",
+  "snap_img": "ingames/mofflott.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Fantasia",
+  "setname": "fantasia",
+  "source": "adb",
+  "title_img": "titles/fantasia.png",
+  "snap_img": "ingames/fantasia.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Bonze Adventure (World, rev 1)",
+  "setname": "bonzeadv",
+  "source": "adb",
+  "title_img": "titles/bonzeadv.png",
+  "snap_img": "ingames/bonzeadv.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Miss Mister World '96",
+  "setname": "missmw96",
+  "source": "adb",
+  "title_img": "titles/missmw96.png",
+  "snap_img": "ingames/missmw96.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "New Fantasia",
+  "setname": "newfant",
+  "source": "adb",
+  "title_img": "titles/newfant.png",
+  "snap_img": "ingames/newfant.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Pocket Gals V.I.P",
+  "setname": "pgalvip",
+  "source": "adb",
+  "title_img": "titles/pgalvip.png",
+  "snap_img": "ingames/pgalvip.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Super Miss World",
+  "setname": "smissw",
+  "source": "adb",
+  "title_img": "titles/smissw.png",
+  "snap_img": "ingames/smissw.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Super Model",
+  "setname": "supmodel",
+  "source": "adb",
+  "title_img": "titles/supmodel.png",
+  "snap_img": "ingames/supmodel.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Super Model II",
+  "setname": "supmodl2",
+  "source": "adb",
+  "title_img": "titles/supmodl2.png",
+  "snap_img": "ingames/supmodl2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "WOW New Fantasia",
+  "setname": "wownfant",
+  "source": "adb",
+  "title_img": "titles/wownfant.png",
+  "snap_img": "ingames/wownfant.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Zip & Zap",
+  "setname": "zipzap",
+  "source": "adb",
+  "title_img": "titles/zipzap.png",
+  "snap_img": "ingames/zipzap.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Ordyne (World)",
+  "setname": "ordyne",
+  "source": "adb",
+  "title_img": "titles/ordyne.png",
+  "snap_img": "ingames/ordyne.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Ordyne (Japan, English Version)",
+  "setname": "ordyneje",
+  "source": "adb",
+  "title_img": "titles/ordyneje.png",
+  "snap_img": "ingames/ordyneje.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Chase HQ",
+  "setname": "chasehq",
+  "source": "adb",
+  "title_img": "titles/chasehq.png",
+  "snap_img": "ingames/chasehq.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Night Striker",
+  "setname": "nightstr",
+  "source": "adb",
+  "title_img": "titles/nightstr.png",
+  "snap_img": "ingames/nightstr.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "B.Rap Boys",
+  "setname": "brapboys",
+  "source": "adb",
+  "title_img": "titles/brapboys.png",
+  "snap_img": "ingames/brapboys.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "SCI",
+  "setname": "sci",
+  "source": "adb",
+  "title_img": "titles/sci.png",
+  "snap_img": "ingames/sci.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Bonk's Adventure",
+  "setname": "bonkadv",
+  "source": "adb",
+  "title_img": "titles/bonkadv.png",
+  "snap_img": "ingames/bonkadv.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Continental Circus",
+  "setname": "contcirc",
+  "source": "adb",
+  "title_img": "titles/contcirc.png",
+  "snap_img": "ingames/contcirc.png",
   "third_img": null,
   "third_pack": null
  }

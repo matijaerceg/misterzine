@@ -1541,6 +1541,8 @@ const CORE_NAMES = {
   'blahm1d_tunit': 'Midway T Unit', 'blahm1d_tunitdcs': 'Midway T Unit (DCS)',
   'blahm1d_wolfunit': 'Midway Wolf Unit', 'blahm1d_exidy440': 'Exidy 440',
   'blahm1d_gladiator': 'Gladiator',
+  // bazset's EXPRO-02 core (Comad's strip-puzzle games); his other cores are single-game
+  'EXPRO02_bazset': 'Kaneko EXPRO-02',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -1591,6 +1593,7 @@ const SRC_NAMES = {
   slopcore: 'Slop Cores (TheJesusFish)',
   kuzecores: 'kuzecores (kuzearcade)',
   blahm1d: 'blahm1d',
+  bazset: 'bazset',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1602,6 +1605,7 @@ const SRC_SEARCH = {
   slopcore: 'slop cores thejesusfish jesusfish',
   kuzecores: 'kuzecores kuzearcade kuze nmk16',
   blahm1d: 'blahm1d blahmid',
+  bazset: 'bazset',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1641,6 +1645,14 @@ const OPTIN_DBS = {
       'Gladiator, The Legend of Kage (bootleg) and Night Slashers, each first posted as a free ' +
       'download on his Patreon. NARC and Night Slashers also ship in other databases as other ' +
       'builds; the rest are in no other database.',
+  },
+  bazset: {
+    section: 'bazset/MiSTer_BAZSET',
+    url: 'https://raw.githubusercontent.com/bazset/MiSTer_BAZSET/db/db.json.zip',
+    what: 'bazset\'s cores, each first posted as a beta on his Patreon: Taito boards (Chase H.Q., ' +
+      'Night Striker, S.C.I., Rainbow Islands, Volfied, Superman, the Asuka & Asuka family), ' +
+      'Kaneko\'s B.Rap Boys and Bonk\'s Adventure, Ordyne, Krull and Comad\'s strip-puzzle games. ' +
+      'Many of these games also ship in other databases as other cores.',
   },
 };
 
@@ -3158,6 +3170,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   slopcore: 'TheJesusFish/Slop-Core',
   kuzecores: 'kuzearcade/kuzecores',
   blahm1d: 'blahm1d',
+  bazset: 'bazset/MiSTer_BAZSET',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -4368,7 +4381,7 @@ const FEED_LIST = [
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
-  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's cores and theypsilon's Unofficial " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's and bazset's cores and theypsilon's Unofficial " +
   "Distribution. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +

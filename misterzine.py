@@ -142,6 +142,22 @@ SOURCES = [
         "db_url": "https://mister.blahm1d.com/db.json.zip",
     },
     {
+        # bazset's cores, opened 2026-10-01 (announced on his Patreon as
+        # "Downloader INI File"): Taito boards (Chase H.Q., Night Striker,
+        # Rainbow Islands, Volfied, Superman, the Asuka & Asuka family, ...),
+        # Kaneko (B.Rap Boys, Bonk's Adventure), Namco's Ordyne, Gottlieb's
+        # Krull, and Comad's strip-puzzle games on his EXPRO-02 core. Many
+        # double a game the Distribution, Jotego, rmCores or kuzecores
+        # already ship as another core. Standard DB-Template db; MRAs nest
+        # under _Arcade/_BAZSET/, rbfs live in the db repo. It also ships the
+        # MAME ROM zips (external_files.csv, archive.org links); only the
+        # MRA rows are listed. Same opt-in model as MeatCores: users hand-add
+        # [bazset/MiSTer_BAZSET] (or drop in his downloader ini).
+        "id": "bazset",
+        "name": "bazset",
+        "db_url": "https://raw.githubusercontent.com/bazset/MiSTer_BAZSET/db/db.json.zip",
+    },
+    {
         "id": "theypsilon_unofficial_distribution",
         "name": "theypsilon Unofficial Distribution",
         "db_url": "https://raw.githubusercontent.com/theypsilon/Unofficial_Distribution_MiSTer/main/unofficialdb.json.zip",
@@ -1376,8 +1392,10 @@ MRA_REPOS = [
     ("kuzecores", "kuzearcade/kuzecores", "main", "_Arcade"),
     # No repo: blahm1d's MRAs exist only as files of his db, all in
     # _Arcade/_blahm1d/ since his 2026-09-25 rebuild (it seeded with a
-    # subfolder per core; _db_hosted_mras flattens either layout).
+    # subfolder per core; _db_hosted_mras flattens either layout). Matched
+    # case-blind: the folder became _Blahm1d on 2026-10-09.
     ("blahm1d", None, None, "_Arcade/_blahm1d"),
+    ("bazset", "bazset/MiSTer_BAZSET", "main", "_Arcade/_BAZSET"),
 ]
 
 
@@ -1395,7 +1413,8 @@ def _db_hosted_mras(source_id, mradir):
     outdir.mkdir(parents=True, exist_ok=True)
     want, urls = {}, {}
     for path, meta in d.get("files", {}).items():
-        if not (path.startswith(mradir + "/") and path.lower().endswith(".mra")):
+        # case-blind: blahm1d renamed _blahm1d to _Blahm1d on 2026-10-09
+        if not (path.lower().startswith(mradir.lower() + "/") and path.lower().endswith(".mra")):
             continue
         name = path.rsplit("/", 1)[-1]
         if name in want:
@@ -2147,6 +2166,56 @@ BLAHM1D_FROZEN_DATES = {
     "Cruis'n USA (rev L4.4).mra": "2026-09-24",
 }
 
+BAZSET_REPO = "bazset/MiSTer_BAZSET"
+# Keyed by lowercased MRA rbf tag: the cores he keeps in a public repo of
+# their own (named <Game>-FPGA). The rest live only in the db repo.
+BAZSET_CORE_REPOS = {
+    "chase_hq_bazset": "bazset/Chase.HQ-FPGA",
+    "gigandes_bazset": "bazset/Gigandes-FPGA",
+    "rainbowislands_bazset": "bazset/Rainbow-Islands-FPGA",
+    "rainbowislands_bazset._20261008": "bazset/Rainbow-Islands-FPGA",
+    "superman_bazset": "bazset/Superman-FPGA",
+    "volfied": "bazset/Volfied-FPGA",
+}
+# Debut dates for the bazset initial import (2026-10-10 seed). The db went
+# up on 2026-10-01, but every game was a download before that: each first
+# shipped as the rbf + MRA attachment of a beta post on his Patreon
+# (patreon.com/bazset, campaign 16535534; free-member posts), and the date
+# is that post's published_at, UTC. The posts API lists them logged out
+# (titles and dates, not the bodies). Fantasia had its own core on
+# 2026-09-22; the other EXPRO-02 games came with the platform core two days
+# later (the b05 post lists every MRA). Post-import titles need no entry.
+BAZSET_FROZEN_DATES = {
+    "Rainbow Islands (World, rev 2, set 1).mra": "2026-08-05",
+    "Rainbow Islands - Extra Version.mra": "2026-08-06",
+    "Volfied (World, rev 1).mra": "2026-08-07",
+    "Superman.mra": "2026-08-18",
+    "Gigandes (World).mra": "2026-09-06",
+    "Krull.mra": "2026-09-11",
+    "Bonze Adventure (World).mra": "2026-09-18",
+    "U.N. Defense Force - Earth Joker (US-Japan, set 1).mra": "2026-09-19",
+    "Galmedes (Japan).mra": "2026-09-19",
+    "Asuka & Asuka (World).mra": "2026-09-20",
+    "Cadash (World).mra": "2026-09-20",
+    "Maze of Flott (Japan).mra": "2026-09-20",
+    "Fantasia (940429 PCB, set 1).mra": "2026-09-22",
+    "Miss Mister World '96 (Nude, bazset).mra": "2026-09-24",
+    "New Fantasia (1995 copyrigh).mra": "2026-09-24",
+    "Pocket Gals V.I.P (set 1).mra": "2026-09-24",
+    "Super Miss World.mra": "2026-09-24",
+    "Super Model.mra": "2026-09-24",
+    "Super Model II.mra": "2026-09-24",
+    "WOW New Fantasia (Explicit).mra": "2026-09-24",
+    "Zip & Zap (Explicit).mra": "2026-09-24",
+    "Ordyne (Japan, English Version).mra": "2026-09-30",
+    "Chase HQ (World).mra": "2026-10-01",
+    "Night Striker (World).mra": "2026-10-05",
+    "B.Rap Boys (World).mra": "2026-10-06",
+    "SCI (World).mra": "2026-10-08",
+    "Bonk's Adventure (World).mra": "2026-10-10",
+    "Continental Circus (World).mra": "2026-10-10",
+}
+
 # First public version: GX400-Friends/gx400-bin CHANGELOG.md, 2022-03-14.
 # The distribution import in 2026 is not the core's debut.
 OPTIN_DB_SOURCES = {
@@ -2160,6 +2229,7 @@ OPTIN_DB_SOURCES = {
     "kuzecores": (KUZECORES_REPO, KUZECORES_CORE_REPOS, KUZECORES_FROZEN_DATES),
     # no repo to link: his GitHub is gone and the db lives on R2
     "blahm1d": (None, {}, BLAHM1D_FROZEN_DATES),
+    "bazset": (BAZSET_REPO, BAZSET_CORE_REPOS, BAZSET_FROZEN_DATES),
 }
 
 
@@ -3202,6 +3272,8 @@ ARCADE_TITLES = {
                                          # Sega Saturn console row (SYSTEM_TITLES drops makers,
                                          # so the console side stays). Matches the Distribution's
                                          # own MRA name, "Saturn (Zilec).mra".
+    "bonkadv": "Bonk's Adventure",         # DAT leads with the Europe name, "B.C. Kid"; the
+                                           # MRA and the US name are Bonk's Adventure
 }
 
 # Escape hatch for the same-game qualifier labels below, keyed by lowercase
@@ -3242,6 +3314,8 @@ def _core_label(r, fork_info, repo_maps):
         return "kuzearcade"
     if r["source_id"] == "blahm1d":
         return "blahm1d"
+    if r["source_id"] == "bazset":
+        return "bazset"
     repo = (r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -4697,15 +4771,15 @@ def _write_feeds(outdir):
     data = json.loads((outdir / "data.json").read_text(encoding="utf-8"))
     orphan_listed = {k: v["listed"] for k, v in ORPHAN_ALTERNATIVES.items()}
     by_path = {}    # arcade rows: (source, MRA path), the event's own identity
-    by_title = {}   # arcade rows: raw MRA title (mt when humanized) + display title
+    by_title = {}   # arcade rows: (source, raw MRA title (mt when humanized) / display title)
     by_core = {}    # non-arcade rows: core token
     by_rbf = {}     # arcade rows grouped by core rbf token (core-rebuild events)
     for d in data:
         if d.get("base") == "Arcade":
             if d.get("src") and d.get("mra"):
                 by_path[(d["src"], d["mra"])] = d
-            by_title.setdefault(d.get("mt") or d["title"], d)
-            by_title.setdefault(d["title"], d)
+            by_title.setdefault((d.get("src"), d.get("mt") or d["title"]), d)
+            by_title.setdefault((d.get("src"), d["title"]), d)
             if d.get("core"):
                 # date-stripped: a row pinned to zerowing_20240404 belongs to
                 # the zerowing core's rebuild events (the event title is the
@@ -4757,14 +4831,17 @@ def _write_feeds(outdir):
         elif e["system"] == "arcade":
             # the event names its row outright (source + MRA path); titles
             # are only a fallback for events older than that pairing. Title
-            # matching is source-blind, so two dbs shipping the same MRA name
-            # (Black Heart: Coin-Op and kuzecores) both landed on whichever
-            # row came first. The event title is the raw MRA stem with region
-            # qualifiers ("Dig Dug (Rev 2)"); site rows show the stripped/
-            # humanized base, so try raw (kept-qualifier collision rows), then
-            # the stripped base.
-            row = (by_path.get((e["source_id"], e["path"]))
-                   or by_title.get(e["title"]) or by_title.get(_arcade_base(e["title"])))
+            # matching stays inside the event's own db: source-blind, two dbs
+            # shipping the same MRA name (Black Heart: Coin-Op and kuzecores)
+            # both landed on whichever row came first, and kuzecores' Ordyne
+            # ALTERNATIVE (hidden) announced itself as bazset's mainline
+            # Ordyne, whose MRA has the same name. The event title is the raw
+            # MRA stem with region qualifiers ("Dig Dug (Rev 2)"); site rows
+            # show the stripped/humanized base, so try raw (kept-qualifier
+            # collision rows), then the stripped base.
+            sid = e["source_id"]
+            row = (by_path.get((sid, e["path"]))
+                   or by_title.get((sid, e["title"])) or by_title.get((sid, _arcade_base(e["title"]))))
             rows = [row] if row else []
             if (rows and e["event_type"] == "updated"
                     and (e["source_id"], e["ts"][:10], (row.get("core") or "").lower()) in core_rebuilds):

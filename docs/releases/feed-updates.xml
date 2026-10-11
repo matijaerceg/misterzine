@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 11 Oct 2026 06:10:51 +0000</lastBuildDate>
+<lastBuildDate>Sun, 11 Oct 2026 07:20:09 +0000</lastBuildDate>
+<item>
+<title>[Updated] Vastar (Arcade core, 7 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dogfight</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Vastar_20261010.rbf:2026-10-11T07:20:09+00:00</guid>
+<pubDate>Sun, 11 Oct 2026 07:20:09 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Dog Fight, Mogu Chan, Planet Probe, The Bounty, The Percussor, Vastar, Zodiack.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Vastar_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Ikki (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ikki</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/altbeast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Boulder Dash - Boulder Dash Part 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#bouldash</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Boulder Dash/Boulder Dash - Boulder Dash Part 2 (Japan).mra:2026-10-02T17:22:33+00:00</guid>
-<pubDate>Fri, 02 Oct 2026 17:22:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bouldash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1990 / Data East Corporation (licensed from First Star)&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-02 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -2825,6 +2825,7 @@ CONSOLE_MANUFACTURER = {
     "GameCom": "Tiger Electronics",
     "GameKing": "Timetop",  # designer/brand; built by Guangzhou Panyu Gaoming Electronics
     "PocketStation": "Sony",
+    "Marty": "Fujitsu",
 }
 
 # Hardware maker per computer core (keyed by core_name); same rationale as above.
@@ -2832,7 +2833,7 @@ CONSOLE_MANUFACTURER = {
 COMPUTER_MANUFACTURER = {
     "C64": "Commodore", "C128": "Commodore", "C16": "Commodore", "VIC20": "Commodore",
     "PET2001": "Commodore", "Minimig": "Commodore",
-    "Apple-I": "Apple", "Apple-II": "Apple", "Apple-IIgs": "Apple", "Apple-Lisa": "Apple", "NeXT": "NeXT", "MacPlus": "Apple",
+    "Apple-I": "Apple", "Apple-II": "Apple", "Apple-III": "Apple", "Apple-IIgs": "Apple", "Apple-Lisa": "Apple", "NeXT": "NeXT", "MacPlus": "Apple",
     "MacLC": "Apple", "MacSE30": "Apple",
     "ZX-Spectrum": "Sinclair", "ZX81": "Sinclair", "QL": "Sinclair",
     "ZXNext": "SpecNext", "SAMCoupe": "MGT", "TSConf": "TS-Labs",
@@ -2888,9 +2889,10 @@ CORE_YEAR = {
     "PocketStation": "1999",  # Japan-only, 1999-01-23
     "Loopy": "1995",  # Casio Loopy, Japan-only, Oct 1995
     "SuperAcan": "1995",  # Funtech Super A'Can, Taiwan, 1995
+    "Marty": "1993",  # FM Towns Marty, Japan-only, Feb 1993
     # computers
     "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
-    "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-IIgs": "1986",
+    "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-III": "1980", "Apple-IIgs": "1986",
     "Apple-Lisa": "1983", "NeXT": "1988", "MacPlus": "1986", "MacLC": "1990", "MacSE30": "1989",
     "SGIIndy": "1993",  # SGI Indy announced 1993-07-12
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
@@ -2943,6 +2945,7 @@ SYSTEM_TITLES = {
     "Gameboy": "Game Boy",
     "GameGear2P": "Game Gear",
     "GBA": "Game Boy Advance",
+    "Marty": "FM Towns Marty",
     "Loopy": "Casio Loopy",
     "MegaCD": "Mega CD",
     "MegaDrive": "Mega Drive",
@@ -2979,6 +2982,7 @@ SYSTEM_TITLES = {
     "Apogee": "Apogee BK-01",
     "Apple-I": "Apple I",
     "Apple-II": "Apple II",
+    "Apple-III": "Apple III",
     "Apple-IIgs": "Apple IIGS",
     "Apple-Lisa": "Apple Lisa", "NeXT": "NeXT Computer",
     "Archie": "Acorn Archimedes",

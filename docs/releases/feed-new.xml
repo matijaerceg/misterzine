@@ -6,7 +6,34 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sat, 10 Oct 2026 18:44:03 +0000</lastBuildDate>
+<lastBuildDate>Sun, 11 Oct 2026 06:10:51 +0000</lastBuildDate>
+<item>
+<title>[New] BanBam (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#banbam</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/BanBam.mra:2026-10-11T06:10:51+00:00</guid>
+<pubDate>Sun, 11 Oct 2026 06:10:51 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/banbam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1984 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arcade-IkkiSunsoft&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-11 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Markham (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#markham</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Markham.mra:2026-10-11T06:10:51+00:00</guid>
+<pubDate>Sun, 11 Oct 2026 06:10:51 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/markham.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arcade-IkkiSunsoft&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-11 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Strength &amp; Skill (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#strnskil</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Strength &amp; Skill.mra:2026-10-11T06:10:51+00:00</guid>
+<pubDate>Sun, 11 Oct 2026 06:10:51 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/strnskil.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arcade-IkkiSunsoft&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-11 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Tank II (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#tankii</link>
@@ -149,7 +176,7 @@
 <pubDate>Thu, 08 Oct 2026 04:41:29 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crysking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 2001 / BrezzaSoft&lt;/p&gt;&lt;p&gt;Core: Arcade-CrystalSystem_20261008b&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crysking.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 2001 / BrezzaSoft&lt;/p&gt;&lt;p&gt;Core: Arcade-CrystalSystem&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-08 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Joe &amp; Mac Returns (Arcade)</title>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ordyne.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Phelios (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#phelios</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Phelios.mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/phelios.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Rolling Thunder 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#rthun2</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Rolling Thunder 2.mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/rthun2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1990 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Steel Gunner (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sgunner</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Steel Gunner (Rev B).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sgunner.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_SG&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

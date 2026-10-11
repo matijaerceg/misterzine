@@ -2849,6 +2849,7 @@ COMPUTER_MANUFACTURER = {
     "FM-7": "Fujitsu",
     "SGIIndy": "Silicon Graphics",
     "Sun-2": "Sun Microsystems",
+    "Sun-3": "Sun Microsystems",
     "Ti994a": "Texas Instruments",
     "ColecoAdam": "Coleco", "Aquarius": "Mattel", "TomyTutor": "Tomy",
     "Casio_PV-2000": "Casio", "SordM5": "Sord", "Svi328": "Spectravideo",
@@ -2897,6 +2898,7 @@ CORE_YEAR = {
     "Apple-Lisa": "1983", "NeXT": "1988", "NeXT-Color": "1992", "MacPlus": "1986", "MacLC": "1990", "MacSE30": "1989", "MacQuadra800": "1993",
     "SGIIndy": "1993",  # SGI Indy announced 1993-07-12
     "Sun-2": "1983",
+    "Sun-3": "1985",
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
     "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
     "Amstrad": "1984", "Amstrad-PCW": "1985", "Atari800": "1979", "AtariST": "1985",

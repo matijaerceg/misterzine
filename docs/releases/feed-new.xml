@@ -6,7 +6,34 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sun, 11 Oct 2026 20:39:44 +0000</lastBuildDate>
+<lastBuildDate>Mon, 12 Oct 2026 16:36:53 +0000</lastBuildDate>
+<item>
+<title>[New] Caliber 50 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#calibr50</link>
+<guid isPermaLink="false">jtbindb:_Arcade/Caliber 50 (Ver. 1.01).mra:2026-10-12T16:36:53+00:00</guid>
+<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/calibr50.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Seta&lt;/p&gt;&lt;p&gt;Core: jtcal50&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cal50"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Gals Panic (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#galpanic</link>
+<guid isPermaLink="false">jtbindb:_Arcade/Gals Panic (unprotected, ver. 2.0).mra:2026-10-12T16:36:53+00:00</guid>
+<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/galpanic.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Kaneko&lt;/p&gt;&lt;p&gt;Core: jtgals&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/gals"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] The Simpsons (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#the-simpsons</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/The Simpsons.mra:2026-10-12T09:59:08+00:00</guid>
+<pubDate>Mon, 12 Oct 2026 09:59:08 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/simpsons.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-Simpsons&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-12 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Blood Warrior (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bloodwar</link>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dirtfoxj.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1989 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Dragon Saber (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dsaber</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Dragon Saber (World, DO2).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dsaber.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1990 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Final Lap (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#finallap</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Final Lap (Rev E).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/finallap.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1987 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Final Lap 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#finalap2</link>
-<guid isPermaLink="false">kuzecores:_Arcade/Final Lap 2 (World, Rev B).mra:2026-09-27T03:00:18+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 03:00:18 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/finalap2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1990 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_STD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

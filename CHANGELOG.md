@@ -7,6 +7,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 - Release tracker: the Hardware Verified trial is retired. The seal, its column, its filter, its panel section and the criteria page are gone.
 - Release tracker: now also tracks rossops' Sega Y Board database, a tenth source, with six games: Galaxy Force II, Power Drift, G-LOC Air Battle, G-LOC R360, Rail Chase and Strike Fighter. It is opt-in: add the [rossops/Arcade-SegaYBoard_MiSTer] section to downloader.ini. If the MiSTer Distribution later adopts one of these games, as it did with the same author's X Board core, the tracker switches to the Distribution's row on its own, keeping the original release date, favorites and links.
 - Release tracker: a Mature games switch in the Menu shows, blurs or hides the 29 games MAME marks as mature, mostly strip puzzle and mahjong games such as Gals Panic, Fantasia and Super Model. Blur, the default, covers their screenshots in the game panel until you click one; Hide takes them out of the list, the counts and the menus. The choice is remembered in this browser. The data marks those games for the MisterZine app too.
+- Release tracker: lists Phantasm and E.D.F.: Earth Defense Force (Coin-Op Collection), which Coin-Op ships only as extra versions on its Mega System 1 core, beside Kuze's Avenging Spirit and E.D.F. on another core. On a card they no longer show as bare local games in the MisterZine app. Both start from the ROM zips Update All installs. Reported by Gadget.
 
 ## 2026-10-10
 

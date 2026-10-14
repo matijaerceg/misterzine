@@ -242,6 +242,17 @@ ORPHAN_ALTERNATIVES = {
     # Champion/, renamed the next day), alongside Gang Wars and Sky Adventure
     ("coinop", "_Arcade/_alternatives/_Super Champion Baseball/Super Champion Baseball (Japan).mra"):
         {"setname": "sbasebalj", "rbf": "alpha68k", "debut": "2022-11-16", "listed": "2026-10-01"},
+    # Rule 4 relaxed 2026-10-14: a game whose only served rows run on another
+    # core gets its own row (kuzecores serves the parents, avspirit and edf,
+    # on Arcade-JalecoMS1BCD; these two run on Coin-Op's Mega System 1).
+    # Reported by Gadget on the misterfpga.org thread. Debuts are Coin-Op's
+    # first (beta) commits, the convention its other Mega System 1 rows use.
+    # Both launch-tested on the MisterPi from the parent zips Update All
+    # installs (avspirit.zip, edf.zip are merged sets).
+    ("coinop", "_Arcade/_alternatives/_Avenging Spirit/Phantasm (Japan).mra"):
+        {"setname": "phantasm", "rbf": "megasys1_a", "debut": "2023-07-08", "listed": "2026-10-14"},
+    ("coinop", "_Arcade/_alternatives/_E.D.F. - Earth Defense Force/E.D.F. -  Earth Defense Force (Japan, Prototype).mra"):
+        {"setname": "edfp", "rbf": "megasys1_a", "debut": "2024-01-01", "listed": "2026-10-14"},
 }
 
 # GitHub org + name prefix where the retrospective arcade release dates live.
@@ -3436,6 +3447,9 @@ ARCADE_TITLES = {
                                            # MRA and the US name are Bonk's Adventure
     "gforce2": "Galaxy Force II",          # DAT says "Galaxy Force 2"; the marquee and the
                                            # MRA use the numeral
+    "edfp": "E.D.F.: Earth Defense Force (Coin-Op Collection)",  # the prototype on Coin-Op's
+                                           # Mega System 1 core; kuzecores' edf keeps the bare
+                                           # name (the Black Heart convention)
 }
 
 # Escape hatch for the same-game qualifier labels below, keyed by lowercase

@@ -235,7 +235,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The nine sources (all public)
+## The ten sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -284,8 +284,16 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    (same-game labels apply). The db also ships the MAME ROM zips via `external_files.csv`;
    those are support files, never rows. Each game first shipped as a beta post on his
    Patreon (free-member posts), which is where the frozen debut dates come from.
+10. **rossops (Sega Y Board)**: `rossops/Arcade-SegaYBoard_MiSTer` `main` branch (opt-in,
+   section `[rossops/Arcade-SegaYBoard_MiSTer]`), since 2026-08-27. One core, six games:
+   Galaxy Force II, Power Drift, G-LOC Air Battle, G-LOC R360, Rail Chase, Strike Fighter.
+   The db lives in the core repo and points each file at `releases/` by its own url.
+   The same author's X Board core went into the Distribution as a MiSTer-devel fork, so
+   this source is in `DISTRIBUTION_TAKES_OVER`: once the Distribution ships one of its
+   games (same MAME setname, or same family and base title), export-web lists only the
+   Distribution row, which keeps the earlier debut and inherits the row's deep-link key.
 
-All eight publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All ten publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

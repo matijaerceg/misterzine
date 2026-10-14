@@ -1517,7 +1517,7 @@ const CORE_NAMES = {
   'ST-V': 'Sega ST-V', 'jts16': 'Sega System 16A', 'jts16b': 'Sega System 16B', 'jts18': 'Sega System 18',
   'segasys1': 'Sega System 1', 'SMS': 'Sega System E', 'jtoutrun': 'Sega (Out Run)',
   'Arcade-SegaSystem32': 'Sega System 32', 'Arcade-SegaSystem32Multi': 'Sega Multi 32',
-  'Arcade-Segas24': 'Sega System 24',
+  'Arcade-Segas24': 'Sega System 24', 'SegaXBoard': 'Sega X Board', 'Arcade-SegaYBoard': 'Sega Y Board',
   'jtshanon': 'Sega (Super Hang-On)', 'zaxxon': 'Sega (Zaxxon)', 'bankpanic': 'Sega (Bank Panic)',
   'CongoBongo': 'Sega (Congo Bongo)', 'SegaVICZ80': 'Sega VIC Dual',
   // Namco
@@ -1595,6 +1595,7 @@ const SRC_NAMES = {
   kuzecores: 'kuzecores (kuzearcade)',
   blahm1d: 'blahm1d',
   bazset: 'bazset',
+  rossops: 'rossops (Sega Y Board)',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1607,6 +1608,7 @@ const SRC_SEARCH = {
   kuzecores: 'kuzecores kuzearcade kuze nmk16',
   blahm1d: 'blahm1d blahmid',
   bazset: 'bazset',
+  rossops: 'rossops y board yboard',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1654,6 +1656,13 @@ const OPTIN_DBS = {
       'Night Striker, S.C.I., Rainbow Islands, Volfied, Superman, the Asuka & Asuka family), ' +
       'Kaneko\'s B.Rap Boys and Bonk\'s Adventure, Ordyne, Krull and Comad\'s strip-puzzle games. ' +
       'Many of these games also ship in other databases as other cores.',
+  },
+  rossops: {
+    section: 'rossops/Arcade-SegaYBoard_MiSTer',
+    url: 'https://raw.githubusercontent.com/rossops/Arcade-SegaYBoard_MiSTer/main/db.json.zip',
+    what: 'rossops\' Sega Y Board core: Galaxy Force II, Power Drift, G-LOC Air Battle, G-LOC R360, ' +
+      'Rail Chase and Strike Fighter, in no other database yet. If the MiSTer Distribution adopts a ' +
+      'game, as it did with the same author\'s X Board core, its row here gives way to the Distribution\'s.',
   },
 };
 
@@ -3222,6 +3231,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   kuzecores: 'kuzearcade/kuzecores',
   blahm1d: 'blahm1d',
   bazset: 'bazset/MiSTer_BAZSET',
+  rossops: 'rossops/Arcade-SegaYBoard_MiSTer',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -4432,7 +4442,7 @@ const FEED_LIST = [
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
-  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's and bazset's cores and theypsilon's Unofficial " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's and bazset's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
   "Distribution. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +

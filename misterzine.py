@@ -158,6 +158,19 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/bazset/MiSTer_BAZSET/db/db.json.zip",
     },
     {
+        # rossops' Sega Y Board core (Galaxy Force II, Power Drift, G-LOC,
+        # Rail Chase, Strike Fighter), a db of its own in the core repo since
+        # 2026-08-27, rebuilt by hand with tools/make_db.py. Files sit under
+        # releases/ and the db names each one by its own url (base_files_url
+        # + path 404s). The same author's X Board core was forked into
+        # MiSTer-devel, so this one may follow: DISTRIBUTION_TAKES_OVER hides
+        # each game here once the Distribution ships it. Same opt-in model as
+        # MeatCores: users hand-add [rossops/Arcade-SegaYBoard_MiSTer].
+        "id": "rossops",
+        "name": "rossops (Sega Y Board)",
+        "db_url": "https://raw.githubusercontent.com/rossops/Arcade-SegaYBoard_MiSTer/main/db.json.zip",
+    },
+    {
         "id": "theypsilon_unofficial_distribution",
         "name": "theypsilon Unofficial Distribution",
         "db_url": "https://raw.githubusercontent.com/theypsilon/Unofficial_Distribution_MiSTer/main/unofficialdb.json.zip",
@@ -186,6 +199,12 @@ SOURCE_SYSTEMS = {
 # into _alternatives, which leaves the fold idle, but it stays in case a
 # later rebuild puts them back.
 SIBLING_VARIANT_SOURCES = {"blahm1d"}
+
+# Opt-in dbs whose games may move into the MiSTer Distribution later
+# (MiSTer-devel forked rossops' X Board core; Y Board may follow). Once the
+# Distribution ships one of their games, export-web lists only the
+# Distribution's row (distribution_takeovers); nothing to do by hand.
+DISTRIBUTION_TAKES_OVER = {"rossops"}
 
 # Games MiSTer ships ONLY as an _Arcade/_alternatives MRA (the core authors
 # carry a regional set and no mainline one). export-web drops alternatives, so
@@ -1398,6 +1417,8 @@ MRA_REPOS = [
     # case-blind: the folder became _Blahm1d on 2026-10-09.
     ("blahm1d", None, None, "_Arcade/_blahm1d"),
     ("bazset", "bazset/MiSTer_BAZSET", "main", "_Arcade/_BAZSET"),
+    # the db installs them to _Arcade/, but the repo keeps them in releases/
+    ("rossops", "rossops/Arcade-SegaYBoard_MiSTer", "main", "releases"),
 ]
 
 
@@ -2218,6 +2239,20 @@ BAZSET_FROZEN_DATES = {
     "Continental Circus (World).mra": "2026-10-10",
 }
 
+ROSSOPS_REPO = "rossops/Arcade-SegaYBoard_MiSTer"
+# Debut dates for the rossops initial import (2026-10-14 seed): the day each
+# MRA was first committed to releases/ of the core repo, which is also where
+# the db points (UTC). Galaxy Force II went up with the db on 2026-08-27
+# (attract mode only until v1.1.0); the other five came together in v1.1.0.
+ROSSOPS_FROZEN_DATES = {
+    "Galaxy Force II.mra": "2026-08-27",
+    "G-LOC Air Battle.mra": "2026-08-29",
+    "G-LOC R360.mra": "2026-08-29",
+    "Power Drift.mra": "2026-08-29",
+    "Rail Chase.mra": "2026-08-29",
+    "Strike Fighter.mra": "2026-08-29",
+}
+
 # First public version: GX400-Friends/gx400-bin CHANGELOG.md, 2022-03-14.
 # The distribution import in 2026 is not the core's debut.
 OPTIN_DB_SOURCES = {
@@ -2232,6 +2267,8 @@ OPTIN_DB_SOURCES = {
     # no repo to link: his GitHub is gone and the db lives on R2
     "blahm1d": (None, {}, BLAHM1D_FROZEN_DATES),
     "bazset": (BAZSET_REPO, BAZSET_CORE_REPOS, BAZSET_FROZEN_DATES),
+    # db and core share one repo, so the fallback link is already the core
+    "rossops": (ROSSOPS_REPO, {}, ROSSOPS_FROZEN_DATES),
 }
 
 
@@ -3259,6 +3296,60 @@ def fold_sibling_variants(rows, arcade_meta):
     return [r for r in rows if (r["source_id"], r["path"]) not in drop]
 
 
+def distribution_takeovers(rows, arcade_meta):
+    """Hide a DISTRIBUTION_TAKES_OVER source's game once the Distribution
+    lists it too, so the site shows the one row everyone gets. Same game =
+    same MAME setname, or same MAME family AND same base title (the
+    Distribution may pick another region as its mainline set); family alone
+    is not enough, since G-LOC R360 is a MAME clone of G-LOC Air Battle. Per
+    game, so a partial adoption hides only what moved, and a source that
+    never gets adopted is never touched.
+
+    The Distribution row keeps the earlier debut (moving into the
+    Distribution is not the game's MiSTer debut, as with GX400) and inherits
+    the hidden row's deep-link key, so favorites and shared links follow the
+    game. Returns (rows, heirs): heirs maps the Distribution row's (source,
+    path) to the hidden row's, for _assign_row_keys."""
+    def same_game(r):
+        sn = (r["setname"] or "").lower()
+        if r["system"] != "arcade" or not sn:
+            return None, None
+        root = (arcade_meta.get(sn) or {}).get("parent") or sn
+        return sn, (root, _arcade_base(r["title"]).casefold())
+    dist_sn, dist_fam = {}, {}
+    for r in rows:
+        if r["source_id"] == "distribution_mister":
+            sn, fam = same_game(r)
+            if sn:
+                dist_sn.setdefault(sn, r)
+                dist_fam.setdefault(fam, r)
+    hidden, heirs, debuts = set(), {}, {}
+    for r in rows:
+        if r["source_id"] not in DISTRIBUTION_TAKES_OVER:
+            continue
+        sn, fam = same_game(r)
+        d = (dist_sn.get(sn) or dist_fam.get(fam)) if sn else None
+        if d is None:
+            continue
+        ident = (d["source_id"], d["path"])
+        hidden.add((r["source_id"], r["path"]))
+        heirs.setdefault(ident, (r["source_id"], r["path"]))
+        mine, theirs = (r["release_date"] or "")[:10], (d["release_date"] or "")[:10]
+        if mine and (not theirs or mine < theirs):
+            debuts[ident] = min(mine, debuts.get(ident, mine))
+        log(f"  taken over by the Distribution: {r['title']} [{r['source_id']}] -> {d['title']}")
+    out = []
+    for r in rows:
+        ident = (r["source_id"], r["path"])
+        if ident in hidden:
+            continue
+        if ident in debuts:
+            r = dict(r)
+            r["release_date"] = debuts[ident]
+        out.append(r)
+    return out, heirs
+
+
 # Human-ideal display titles the MAME-description derivation below gets wrong,
 # keyed by setname. MAME's canonical name usually wins (it restores the colons,
 # punctuation and capitalisation that MRA filenames can't carry), but for these
@@ -3291,6 +3382,8 @@ ARCADE_TITLES = {
                                          # own MRA name, "Saturn (Zilec).mra".
     "bonkadv": "Bonk's Adventure",         # DAT leads with the Europe name, "B.C. Kid"; the
                                            # MRA and the US name are Bonk's Adventure
+    "gforce2": "Galaxy Force II",          # DAT says "Galaxy Force 2"; the marquee and the
+                                           # MRA use the numeral
 }
 
 # Escape hatch for the same-game qualifier labels below, keyed by lowercase
@@ -3333,7 +3426,9 @@ def _core_label(r, fork_info, repo_maps):
         return "blahm1d"
     if r["source_id"] == "bazset":
         return "bazset"
-    repo = (r["repo"] or "").strip()
+    if r["source_id"] == "rossops":
+        return "rossops"
+    repo =(r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
     if repo:
@@ -4347,6 +4442,7 @@ def cmd_export_web(args):
     # backfilled rows carry a setname only there, not in catalog.setname).
     arcade_meta = load_arcade_dat_meta()
     rows = fold_sibling_variants(rows, arcade_meta)
+    rows, heirs = distribution_takeovers(rows, arcade_meta)
     arcade_cats = local_catver()
     arcade_setnames = load_manifest_setnames()
     arcade_mad = local_mad()
@@ -4475,6 +4571,9 @@ def cmd_export_web(args):
     # again before data.json is written (_assign_row_keys pops them)
     for r, d in zip(rows, data):
         d["_src"], d["_path"] = r["source_id"], r["path"]
+        heir_of = heirs.get((r["source_id"], r["path"]))
+        if heir_of:
+            d["_heir_of"] = heir_of
     # Human-ideal arcade titles (colons, punctuation, one name per game) from
     # the MAME descs. Must run AFTER _web_row — the setname/genre/screenshot
     # joins above all key on the raw MRA-derived title.
@@ -4573,9 +4672,11 @@ def _assign_row_keys(data, outdir=None):
     the new owner): dated rbf paths churn on every rebuild, and a core that
     vanishes for a snapshot and returns must reclaim its key, not mint '-2'.
     On an empty table the previous published data.json seeds it, so the very
-    first run can retitle rows without moving anything. Returns the planned
-    table writes for the caller to flush AFTER its key-move tripwire passes;
-    also strips the transient _src/_path identity fields off the rows."""
+    first run can retitle rows without moving anything. A row marked _heir_of
+    (distribution_takeovers) adopts the hidden row's key the same way. Returns
+    the planned table writes for the caller to flush AFTER its key-move
+    tripwire passes; also strips the transient _src/_path/_heir_of fields off
+    the rows."""
     slug = lambda s: re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
     con = connect()
     stored = {(r["source_id"], r["path"]): r["k"] for r in
@@ -4606,12 +4707,18 @@ def _assign_row_keys(data, outdir=None):
     n_stored, n_new = 0, 0
     for d in data:
         ident = (d.pop("_src", None), d.pop("_path", None))
+        heir_of = d.pop("_heir_of", None)
         if ident[1] and ident in stored:
             d["k"] = stored[ident]
             n_stored += 1
             continue
         sn = d.get("sn")
-        if d["base"] == "Arcade" and sn and (
+        if heir_of in stored and stored[heir_of] not in taken:
+            # a Distribution row taking over another db's game
+            # (distribution_takeovers): the game's key follows it even when
+            # the Distribution's set derives another one
+            k = stored[heir_of]
+        elif d["base"] == "Arcade" and sn and (
                 sn_counts[sn] == 1
                 or (not d.get("beta") and pub_sn_counts[sn] == 1)):
             k = sn

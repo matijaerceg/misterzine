@@ -10487,9 +10487,9 @@
  {
   "title": "Puzzle World",
   "setname": "puzlwrld",
-  "source": null,
+  "source": "adb",
   "title_img": null,
-  "snap_img": null,
+  "snap_img": "ingames/puzlwrld.png",
   "third_img": null,
   "third_pack": null
  },
@@ -12731,6 +12731,60 @@
   "source": "adb",
   "title_img": "titles/metamrph.png",
   "snap_img": "ingames/metamrph.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Galaxy Force II",
+  "setname": "gforce2",
+  "source": "adb",
+  "title_img": "titles/gforce2.png",
+  "snap_img": "ingames/gforce2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "G-LOC Air Battle",
+  "setname": "gloc",
+  "source": "adb",
+  "title_img": "titles/gloc.png",
+  "snap_img": "ingames/gloc.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "G-LOC R360",
+  "setname": "glocr360",
+  "source": "adb",
+  "title_img": "titles/glocr360.png",
+  "snap_img": "ingames/glocr360.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Power Drift",
+  "setname": "pdrift",
+  "source": "adb",
+  "title_img": "titles/pdrift.png",
+  "snap_img": "ingames/pdrift.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rail Chase",
+  "setname": "rchase",
+  "source": "adb",
+  "title_img": "titles/rchase.png",
+  "snap_img": "ingames/rchase.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Strike Fighter",
+  "setname": "strkfgtr",
+  "source": "adb",
+  "title_img": "titles/strkfgtr.png",
+  "snap_img": "ingames/strkfgtr.png",
   "third_img": null,
   "third_pack": null
  }

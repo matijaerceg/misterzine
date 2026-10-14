@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-14
+
+- Release tracker: now also tracks rossops' Sega Y Board database, a tenth source, with six games: Galaxy Force II, Power Drift, G-LOC Air Battle, G-LOC R360, Rail Chase and Strike Fighter. It is opt-in: add the [rossops/Arcade-SegaYBoard_MiSTer] section to downloader.ini. If the MiSTer Distribution later adopts one of these games, as it did with the same author's X Board core, the tracker switches to the Distribution's row on its own, keeping the original release date, favorites and links.
+
 ## 2026-10-10
 
 - Release tracker: the Source filter now has Inside update_all and Outside update_all presets beside All and None. Each selects the matching source repositories, with tooltips explaining built-in inclusion and manual installation.

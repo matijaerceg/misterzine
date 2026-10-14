@@ -96,6 +96,13 @@
              flex: 1 1 auto; min-width: 0; }
   /* thin divider; flex:none keeps it (and the Columns pref after it) from ever
      wrapping, so Columns stays pinned to the far right no matter how filters wrap */
+  /* the Patches menu made the one-line filter bar ~110px wider; between the
+     phone layout and ~1500px tighten the gaps and summary padding so it still
+     fits one line down to 1366px (search keeps its 12rem floor) */
+  @media (min-width: 900px) and (max-width: 1500px) {
+    .controls, .filters { gap: .3rem; }
+    .controls details.cols > summary { padding-left: .5rem; padding-right: .5rem; }
+  }
   .ctrlsep { flex: none; align-self: center; width: 1px; height: 1.5rem; background: var(--hair); }
   /* the divider before Columns spans the full row height (stretches down with any
      wrapped filter rows); Columns itself top-aligns with the filters, not centered */

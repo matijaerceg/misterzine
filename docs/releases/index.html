@@ -4773,10 +4773,16 @@ matSeg.addEventListener('click', e => {
   recenterOpen();
 });
 syncMature();
-// Blur: a click on a covered screenshot shows that one frame (until the panel redraws)
+// Blur: a click on a covered screenshot shows that one frame (until the panel
+// redraws). The panel's mouse drag-to-scroll captures the pointer on press, so
+// a mouse click arrives targeted at #panel itself: the frame comes from the
+// press. A drag swallows its click before this listener runs.
+let matPressed = null;
+panel.addEventListener('pointerdown', e => { matPressed = e.target.closest('.frame.mat'); });
 panel.addEventListener('click', e => {
-  const f = e.target.closest('.frame.mat');
-  if (f && matMode === 'blur') f.classList.add('reveal');
+  const f = e.target.closest('.frame.mat') || (e.target === panel ? matPressed : null);
+  matPressed = null;
+  if (f && f.isConnected && matMode === 'blur') f.classList.add('reveal');
 });
 
 // Everything the page does with a data.json — the arrival load and a live swap

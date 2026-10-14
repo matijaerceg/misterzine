@@ -60,12 +60,6 @@
   --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
   --stamp-shade: rgb(0 0 0 / .42);
   --stamp-sheen: rgb(255 255 255 / .55);
-  /* the Hardware Verified seal's sheen: how far its top-left corner mixes
-     toward white and its bottom-right toward black. A theme would override one
-     only where that corner fell under 2:1 against a table row (plain, hovered
-     or selected) at 16px; at 15/25 every theme clears it, so none does. */
-  --hv-light: 15%;
-  --hv-dark: 25%;
 }
 
 /* ---- dark: the same quiet pair, inverted. --accent is the light-ground

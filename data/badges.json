@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "Hardware Verified",
-  "status": "trial: Hardware Verified is a trial feature. It may change or be removed.",
+  "status": "retired: the Hardware Verified trial ended on 2026-10-14. This file is kept as research notes; nothing on the site reads it.",
   "description": "Arcade games on the MisterZine release tracker where the real thing was consulted while building the core for this board: a board in hand (owned or borrowed), its schematics, or decaps of its own chips, with logic analyzer or scope captures, PAL/PROM dumps or a published write-up as the evidence. Using another project's hardware-derived chip models does not count by itself; the author of this core has to have done the checking against this board. Verified means the real hardware was consulted, not that every behavior was tested. Positive only: a game without an entry means nothing. Entries are curated by hand from public, checkable evidence, from the core's author or anyone else who did or documented the work, and each lists the links it rests on.",
   "criteria": "https://misterzine.fyi/badge/",
   "license": "MiSTerZine Catalogue Licence (the CC BY 4.0 terms plus a source-neutrality condition), https://misterzine.fyi/releases/LICENSE.txt. Credit \"MisterZine by Matija Erceg\" and, where practical, link to https://misterzine.fyi.",

@@ -212,7 +212,6 @@ body:has(#menudd[open]) .fbtab, body:has(dialog.fbdlg[open]) .fbtab { visibility
 .fbdlg .fb-game { display: flex; gap: .45rem; align-items: baseline; font-size: .8rem; color: var(--muted); cursor: pointer; }
 .fbdlg .fb-game input { accent-color: var(--accent); margin: 0; flex: none; }
 .fbdlg .fb-game b { color: var(--fg); font-weight: 600; }
-.fbdlg .fb-hv { margin-top: .5rem; }
 .fbdlg .fb-hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .fbdlg .fb-msg { margin: .35rem 0 0; min-height: 1.3em; font-size: .85rem; line-height: 1.4; }
 .fbdlg .fb-msg.err { font-weight: 600; }

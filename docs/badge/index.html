@@ -3,16 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hardware Verified - MisterZine</title>
-<meta name="description" content="Hardware Verified is the MisterZine release tracker's seal for arcade cores built and checked against the real board or its schematics. What it means and what counts as evidence.">
+<title>Hardware Verified (retired) - MisterZine</title>
+<meta name="description" content="Hardware Verified was a trial seal on the MisterZine release tracker. It was retired on 2026-10-14.">
+<meta name="robots" content="noindex, follow">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<link rel="canonical" href="https://misterzine.fyi/badge/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="MisterZine">
-<meta property="og:title" content="Hardware Verified - MisterZine">
-<meta property="og:description" content="The release tracker's seal for arcade cores built and checked against the real hardware.">
-<meta property="og:url" content="https://misterzine.fyi/badge/">
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
@@ -55,40 +50,10 @@
   th { font-weight: 600; white-space: nowrap; }
   code { font-size: .88em; background: color-mix(in srgb, var(--fg) 7%, var(--bg)); padding: .05em .3em; border-radius: 3px; }
   footer { margin-top: 2.5rem; padding-top: .8rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .82rem; }
-  /* the seal: the same shape the release tracker shows in its Hardware
-     Verified column, at emblem size. One #hvseal-sym in the svgdefs block at
-     the top of <body>, filled with --accent, check knocked out, with the same
-     sheen as every seal in the tracker: a second, opaque pass of the path under
-     #hvseal-shade, the accent mixed --hv-light toward white at the top-left and
-     --hv-dark toward black at the bottom-right (theme.css tokens), plain accent
-     under the check. See the tracker's seal CSS for the details. */
-  .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
-  .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
-  @supports (color: rgb(from currentColor r g b)) {
-    .hvs0 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-sheen) r g b / 1) var(--hv-light, 15%)); }
-    .hvs2 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-shade) r g b / 1) var(--hv-dark, 25%)); }
-  }
-  .hvshade { opacity: var(--hv-shade, 1); }
-  .sealhead { display: flex; align-items: center; gap: 1.1rem; margin: .4rem 0 1rem; }
-  .seal { flex: none; width: 4.2rem; height: 4.2rem; fill: var(--accent); }
-  .trial { margin: 0 0 1rem; color: var(--muted); font-size: .9rem; }
-  .def { margin: 0; padding: .7rem .9rem; border-radius: 6px; font-size: 1.05rem;
-         border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-         background: color-mix(in srgb, var(--accent) 8%, var(--bg)); }
-  a.go { font-weight: 600; }
-  @media (max-width: 36rem) {
-    .seal { width: 3.2rem; height: 3.2rem; }
-    .sealhead { gap: .8rem; }
-  }
+  .lead { font-size: 1.05rem; }
 </style>
 </head>
 <body>
-<!-- the seal, defined once (shape: checkmark-filled, 20x20, one evenodd path,
-     check knocked out); the inner <use> repaints it with the shade gradient -->
-<svg class="svgdefs" aria-hidden="true" focusable="false"><defs>
-  <linearGradient id="hvseal-shade" x1=".143" y1=".143" x2=".85" y2=".85"><stop offset="0" class="hvs0"/><stop offset=".5" class="hvs1"/><stop offset="1" class="hvs2"/></linearGradient>
-  <symbol id="hvseal-sym" viewBox="0 0 20 20"><path id="hvseal-path" fill-rule="evenodd" clip-rule="evenodd" d="M3.213 5.8c.015.759-.398 1.785-.935 2.321a2.66 2.66 0 0 0 0 3.76c.53.528.92 1.444.935 2.192c.014.662.273 1.32.778 1.824a2.65 2.65 0 0 0 1.748.775c.791.04 1.827.5 2.387 1.06a2.66 2.66 0 0 0 3.759 0c.56-.56 1.596-1.02 2.387-1.06a2.65 2.65 0 0 0 1.748-.775a2.65 2.65 0 0 0 .777-1.826c.015-.746.4-1.656.929-2.184a2.663 2.663 0 0 0 .006-3.766c-.536-.535-.95-1.562-.934-2.32a2.65 2.65 0 0 0-.778-1.932a2.65 2.65 0 0 0-2.015-.775c-.714.036-1.615-.31-2.12-.816a2.66 2.66 0 0 0-3.76 0c-.504.505-1.406.852-2.12.816a2.65 2.65 0 0 0-2.014.775A2.65 2.65 0 0 0 3.213 5.8m9.828.826a1 1 0 0 1 .389 1.36l-2.768 4.982a1 1 0 0 1-.298.343a1 1 0 0 1-1.23-.045l-2.759-2.207a1 1 0 1 1 1.25-1.562l1.853 1.483l2.203-3.966a1 1 0 0 1 1.36-.388"/><use class="hvshade" href="#hvseal-path" fill="url(#hvseal-shade)"/></symbol>
-</defs></svg>
 <div class="wrap">
 
 <header class="top">
@@ -125,74 +90,10 @@
 </header>
 
 <main>
-<div class="sealhead">
-  <svg class="seal" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><use href="#hvseal-sym"/></svg>
-  <p class="def"><strong>Hardware Verified</strong> means the real thing was consulted while building the
-  core for this board: a board in hand, its schematics, or decaps of its own chips. It does not claim
-  that every behavior was tested, and absence of the badge means nothing.</p>
-</div>
-<p class="trial"><strong>Trial:</strong> Hardware Verified is a trial feature. It may change or be removed.</p>
-
-<p>The seal appears in the release tracker on arcade games with public, checkable evidence that the
-core was built or checked against the original hardware. Each entry gives the reason and links to that
-evidence in the game's detail panel, and covers the games that run on the hardware the evidence
-describes.</p>
-
-<p><a class="go" href="../releases/?hv=1">See every Hardware Verified game in the release tracker</a></p>
-
-<h2>What earns it</h2>
-<p>The core was built or checked using the original hardware or its documentation. The work went beyond
-what MAME's code, the ROMs or watching the game on video can show on their own. Any one of these is
-enough:</p>
-<ul>
-  <li>an original board, owned, borrowed or lent to them, was used to build or check the core, including
-    timing measurements,</li>
-  <li>the board's PALs, PROMs or other chips were dumped for it,</li>
-  <li>custom chips, PALs or PROMs were decapped, photographed or analyzed, and the core's logic derived
-    from that (a credit to that work on the board's own custom chips, such as its video, system, timing
-    or rotation chips, is enough; models of generic parts used on many boards, such as Yamaha sound
-    chips or CPUs, do not count on their own; using another project's hardware-derived chip models
-    does not count by itself either: the author of this core has to have done the checking against
-    this board),</li>
-  <li>it was built from the manufacturer's original schematics,</li>
-  <li>captures or recordings from a working board were compared against the core, with the differences
-    documented,</li>
-  <li>a write-up shows how the logic was worked out from the hardware,</li>
-  <li>it runs on identical hardware to a game that has already earned the seal.</li>
-</ul>
-<p>Games that run on identical hardware inherit the seal once one of them earns it. Identical means the
-same board and custom chips, not a similar one.</p>
-<p>Where the core started does not matter. A core that began from MAME's documentation qualifies once
-it has been checked against a board.</p>
-<p>The use of AI tools in a core's development is irrelevant in itself. What matters is verification
-against real hardware, as evidence that accuracy to the original experience was paramount in the
-development process.</p>
-
-<h2>What it does not mean</h2>
-<ul>
-  <li>It is not a score and not a promise of perfection. A Hardware Verified core can still have bugs,
-    and the seal does not claim every behavior was tested.</li>
-  <li>It does not rank cores. A core without the seal is not worse or less accurate.</li>
-  <li>Absence of the seal means nothing. A core can have no entry because it is new, or because the
-    hardware work behind it has not been documented in public.</li>
-</ul>
-<p>An entry is never removed as a judgement; it is corrected only if its evidence turns out to be
-wrong.</p>
-
-<h2>What counts as evidence</h2>
-<p>Evidence can come from anyone, not only the core's author. The community is small, and board
-owners, schematic holders and testers often contribute alongside developers. What matters is that the
-evidence cites something factual and checkable: a named board in someone's hands, a schematic set, a
-dump, a capture, a comparison write-up, or a post describing the work. A bare assertion that a core is
-accurate is not evidence; a citation of concrete work is, and gets the benefit of the doubt.</p>
-
-<h2>For developers</h2>
-<p>The full list is published as <a href="../releases/badges.json"><code>releases/badges.json</code></a>,
-under the same <a href="../releases/LICENSE.txt">catalogue licence</a> as the rest of the release data.
-Each entry names its game three ways: the tracker's entry key (<code>k</code>, the same key as
-<code>#k</code> deep links and <code>data.json</code>), the shipped core file name without its date
-(<code>rbfs</code>) and the MAME set name (<code>setnames</code>), with the reason, the evidence links and
-the date it was granted.</p>
+<!-- The Hardware Verified trial (2026-10-07 to 2026-10-14) is over. This page
+     stays only so links shared during the trial land somewhere that says so. -->
+<p class="lead">Hardware Verified was a trial on the release tracker. It was retired on 14 October 2026.</p>
+<p><a href="../releases/">Back to the release tracker</a></p>
 </main>
 
 <footer>

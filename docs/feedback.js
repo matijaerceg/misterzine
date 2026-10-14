@@ -92,7 +92,6 @@
       '<input type="text" id="fbcontact" name="contact" maxlength="200" autocomplete="email" placeholder="Email or Discord name">' +
       '<p class="fb-att" id="fbatt"></p>' +
       '<label class="fb-game" hidden><input type="checkbox" id="fbgame" checked> <span>The game you have open: <b id="fbgamet"></b></span></label>' +
-      '<p class="fb-note fb-hv">Proposals for the Hardware Verified seal are welcome here too: name the game and link the evidence.</p>' +
       '<div class="fb-hp" aria-hidden="true"><label>Website <input type="text" id="fbweb" name="website" tabindex="-1" autocomplete="off"></label></div>' +
       '<p class="fb-msg" id="fbmsg" role="status" aria-live="polite"></p>' +
       '<div class="fb-act"><button type="button" class="fb-cancel">Cancel</button><button type="submit" class="fb-send">Send</button></div>' +

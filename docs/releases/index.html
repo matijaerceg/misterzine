@@ -103,11 +103,9 @@
   #cols { flex: none; align-self: flex-start; }
   /* the search box carries its own inline clear-x, so it lives in a relative wrapper
      that takes the grow-to-fill role the bare input used to have. Its floor was
-     16rem until the hardware badge toggle joined the row (2026-10-07): the floor
-     paid for the toggle's ~4rem, so the one-row desktop cluster wraps at the same
-     window widths as before (measured 900-1920px, panel closed and docked) and
-     the header is never taller. 12rem still clears the "Find anything"
-     placeholder beside the tally; the floor only binds right at the wrap edge. */
+     16rem until the Share button joined the row (2026-10-07). 12rem still clears
+     the "Find anything" placeholder beside the tally; the floor only binds right
+     at the wrap edge. */
   .searchwrap { position: relative; display: flex; flex: 1; min-width: 12rem; }
   input[type=search] { padding: .4rem .6rem; flex: 1; min-width: 0;
                        /* right padding = the clear-x slot + the tally's measured width
@@ -232,43 +230,6 @@
   .favctl.active { border-color: var(--accent2, var(--accent)); }
   .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
-  /* hardware badge filter: a single toggle in the favorites toggle's shape
-     (seal + count). display:inline-flex would defeat the hidden attribute,
-     hence the explicit [hidden] rule. Pressed wears the filters' accent glow. */
-  .hvtoggle[hidden] { display: none; }
-  .hvtoggle { display: inline-flex; align-items: center; gap: .3rem; align-self: center;
-              font: inherit; font-size: .9rem; padding: .4rem .55rem; cursor: pointer;
-              border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit;
-              font-variant-numeric: tabular-nums; }
-  .hvtoggle:hover { background: var(--hover-bg); }
-  .hvtoggle .hvseal { width: 1.05em; height: 1.05em; flex: none; }
-  .hvtoggle.active { border-color: var(--accent2, var(--accent));
-                     background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
-  .hvtoggle.active:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
-  /* the seal itself (table, column header, toggle, panel): every copy is a
-     <use> of the one #hvseal-sym in the svgdefs block at the top of <body>.
-     The rosette fills with --accent (never --accent2: a solid glyph needs the
-     token with a contrast floor) and the check is knocked out, so it shows
-     whatever the seal sits on (row, hover, selection). The sheen is a second,
-     opaque pass of the same path under #hvseal-shade, on at every size: the
-     accent mixed --hv-light (15%) toward white at the top-left, plain accent at
-     the middle (under the check, so the knockout reads exactly as on a flat
-     seal) and --hv-dark (25%) toward black at the bottom-right. The amounts
-     are theme tokens (theme.css), so a theme can clamp its own; at these
-     amounts none needs to (every corner keeps 2:1 against a row). White and black come from --stamp-sheen /
-     --stamp-shade with their alpha dropped (relative color syntax), so no
-     literal colour is involved; browsers without that syntax keep all three
-     stops at --accent, i.e. flat. The gradient's ends sit on the rosette's own
-     diagonal extent (x1/y1 .143, x2/y2 .85 of the path's bounding box, measured
-     from the path), so the full light and dark amounts land on the shape. */
-  .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
-  .hvs0, .hvs1, .hvs2 { stop-color: var(--accent); }
-  @supports (color: rgb(from currentColor r g b)) {
-    .hvs0 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-sheen) r g b / 1) var(--hv-light, 15%)); }
-    .hvs2 { stop-color: color-mix(in srgb, var(--accent), rgb(from var(--stamp-shade) r g b / 1) var(--hv-dark, 25%)); }
-  }
-  .hvseal { display: block; fill: var(--accent); }
-  .hvshade { opacity: var(--hv-shade, 1); }
   /* sized and ruled off like the Columns menu's footnote (.colnote) */
   .favctl .menu .favnote { margin: 0 0 .35rem; padding: .3rem .5rem .4rem; border-bottom: 1px solid var(--rule);
                            font-size: .78rem; line-height: 1.35; color: var(--muted);
@@ -535,19 +496,6 @@
      overflowing into the next column. .xb stays nowrap so "batch" never splits. */
   td .xb { display: inline; white-space: nowrap; color: var(--muted);
            font-size: .75em; font-style: italic; cursor: help; }
-  /* the hardware badge column (COLUMNS 'hv'): a seal-only cell under a seal-only
-     header, at a FIXED width (COLUMNS fixed: the seal plus this side padding,
-     set in buildHeader's colgroup), so it never grows or shrinks with the table.
-     The seal is centred and sits on the first text line like a glyph. Its tip is
-     the shared popover (td [data-tip]). There is no room for the sort arrow, so
-     a sort on this column is marked by an accent bar under the seal instead. */
-  th[data-k="hv"], td.hvc { padding-left: .45rem; padding-right: .45rem; text-align: center; }
-  th[data-k="hv"] { white-space: nowrap; }
-  th[data-k="hv"][aria-sort]::after { content: none; }
-  th[data-k="hv"][aria-sort] { box-shadow: inset 0 -2px 0 var(--accent2, var(--accent)); }
-  th[data-k="hv"] .hvseal { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
-  td .hv { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
-  td .hv .hvseal { width: 100%; height: 100%; }
   td.core { color: var(--fg); font-size: .92em; cursor: default; }
   /* repo links keep the column's muted look; underline only on hover */
   td.core a { color: var(--accent); text-decoration: none; }
@@ -790,23 +738,6 @@
     direction: rtl; flex: 1; color: var(--muted); }  /* rtl ellipsis keeps the distinctive tail (…feed-new.xml) visible */
   @media (max-width: 480px) { .rsspop { left: 1rem !important; right: 1rem; } }
   #panel .detail { font-size: .9rem; margin: 0 0 1rem; }
-  /* the hardware badge's panel section (hvHTML): a ruled box in a faint accent
-     wash, headed like a stamp (condensed caps beside the seal), holding the
-     full reason, the evidence links and the criteria-page pointer */
-  #panel .hvbox { margin: .9rem 0 1rem; padding: .6rem .75rem .65rem; font-size: .85rem; line-height: 1.45;
-                  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 6px;
-                  background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-  #panel .hvbox h3 { display: flex; align-items: center; gap: .45rem; margin: 0 0 .4rem;
-                     font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: .95rem;
-                     font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent); }
-  #panel .hvbox h3 .hvseal { width: 1.35em; height: 1.35em; flex: none; }
-  #panel .hvbox p { margin: 0 0 .45rem; }
-  #panel .hvbox ul { margin: 0 0 .45rem; padding-left: 1.1rem; }
-  #panel .hvbox li { margin: .1rem 0; }
-  #panel .hvbox a { color: var(--accent); text-decoration: none; }
-  #panel .hvbox a .lbl { text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
-  #panel .hvbox .hvmeta { margin: 0; color: var(--muted); font-size: .8rem; }
-  #panel .hvbox .hvmeta + .hvmeta { margin-top: .2rem; }
   #panel .report { color: var(--muted); font-size: .8rem; margin: 1.25rem 0 0; }
   #panel .report a { color: inherit; text-decoration: none; text-underline-offset: 2px; white-space: nowrap; }
   #panel .report a .lbl { text-decoration: underline; }
@@ -1007,7 +938,6 @@
     #srcdd { order: 5; }
     #genredd { order: 6; }
     #yeardd { order: 7; }
-    #hvtoggle { order: 8; }
     button.clear, #viewlinkbtn { order: 9; }
     .favctl { order: 10; }
     /* Columns keeps its far-right anchoring, now against whatever row it lands on */
@@ -1015,7 +945,7 @@
     /* a notch tighter so the filter cluster fits one line on a ~390px phone. Only
        the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
        the tap targets keep their height. */
-    details.cols summary, button.clear, .favctl > button, .hvtoggle, .viewlinkbtn { font-size: .85rem; padding: .35rem .45rem; }
+    details.cols summary, button.clear, .favctl > button, .viewlinkbtn { font-size: .85rem; padding: .35rem .45rem; }
     button.clear { --clpad: .45rem; }
     .favctl > button { min-width: 3em; }
     /* the sort arrow is dropped here: at this width it's the thing that wraps the
@@ -1055,13 +985,6 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
-<!-- the Hardware Verified seal, defined once: BADGE_SVG <use>s #hvseal-sym.
-     Shape: checkmark-filled (20x20, one evenodd path, check knocked out). The
-     inner <use> repaints the path with #hvseal-shade (--hv-shade: 0 turns it off). -->
-<svg class="svgdefs" aria-hidden="true" focusable="false"><defs>
-  <linearGradient id="hvseal-shade" x1=".143" y1=".143" x2=".85" y2=".85"><stop offset="0" class="hvs0"/><stop offset=".5" class="hvs1"/><stop offset="1" class="hvs2"/></linearGradient>
-  <symbol id="hvseal-sym" viewBox="0 0 20 20"><path id="hvseal-path" fill-rule="evenodd" clip-rule="evenodd" d="M3.213 5.8c.015.759-.398 1.785-.935 2.321a2.66 2.66 0 0 0 0 3.76c.53.528.92 1.444.935 2.192c.014.662.273 1.32.778 1.824a2.65 2.65 0 0 0 1.748.775c.791.04 1.827.5 2.387 1.06a2.66 2.66 0 0 0 3.759 0c.56-.56 1.596-1.02 2.387-1.06a2.65 2.65 0 0 0 1.748-.775a2.65 2.65 0 0 0 .777-1.826c.015-.746.4-1.656.929-2.184a2.663 2.663 0 0 0 .006-3.766c-.536-.535-.95-1.562-.934-2.32a2.65 2.65 0 0 0-.778-1.932a2.65 2.65 0 0 0-2.015-.775c-.714.036-1.615-.31-2.12-.816a2.66 2.66 0 0 0-3.76 0c-.504.505-1.406.852-2.12.816a2.65 2.65 0 0 0-2.014.775A2.65 2.65 0 0 0 3.213 5.8m9.828.826a1 1 0 0 1 .389 1.36l-2.768 4.982a1 1 0 0 1-.298.343a1 1 0 0 1-1.23-.045l-2.759-2.207a1 1 0 1 1 1.25-1.562l1.853 1.483l2.203-3.966a1 1 0 0 1 1.36-.388"/><use class="hvshade" href="#hvseal-path" fill="url(#hvseal-shade)"/></symbol>
-</defs></svg>
 <main>
 <div class="topbar">
 <header>
@@ -1148,10 +1071,6 @@
       <summary id="yearsummary">Year</summary>
       <div class="menu" id="yearmenu"></div>
     </details>
-    <!-- hardware badge filter: shows only the rows wearing the curated seal.
-         Seal, count, tip and label are filled by syncHvSummary (the badge's
-         name lives in the JS); hidden until the data carries a badge. -->
-    <button type="button" id="hvtoggle" class="hvtoggle" aria-pressed="false" hidden></button>
     <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
     <!-- the Menu's "Share this view", one tap away (same handler) -->
     <button type="button" id="viewlinkbtn" class="viewlinkbtn" data-tip="Share this view" aria-label="Share this view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg></button>
@@ -1272,7 +1191,7 @@ const IOS_BROWSER = !STANDALONE && (/iP(hone|ad|od)/.test(navigator.userAgent) |
 // answers persist() with a permission popup a drive-by tab hasn't earned
 if (STANDALONE && navigator.storage && navigator.storage.persist)
   navigator.storage.persist().catch(() => {});
-let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter but Hardware Verified (mz-hv)
+let favOnly = false;   // the "show only favorites" toggle — session-only, like every other filter
 let favView = null;    // Set of keys while viewing someone's ?fav= link, else null
 // unlike the page's other writes (prefs, all replaceable) this one is the user's
 // own data: a silent failure would lose what the UI just claimed to have saved,
@@ -1913,62 +1832,6 @@ function betaBadge(d) {
   return d.beta ? '<span class="bb" data-tip="' + escA(gateInfo(d).tip) + '">' + gateStage(d) + '</span>' : '';
 }
 
-// --- the hardware badge ------------------------------------------------------
-// A curated seal on arcade rows whose core was built and checked against the
-// real board or its schematics. The entries live in data/badges.json, which
-// export-web checks against the rows (a stale entry stops the refresh) and
-// stamps onto each badged row as `hv` = {reason, links, granted}; the same
-// file is published as releases/badges.json for third parties. Positive-only:
-// a row without it says nothing either way, so nothing here ever renders an
-// "absent" state. BADGE_NAME is the ONLY place this page spells the badge's
-// name: every tip, label, heading and search alias reads it from here, so a
-// rename is this one string plus the criteria page BADGE_PAGE points at.
-const BADGE_NAME = 'Hardware Verified';
-const BADGE_PAGE = '../badge/';
-// The seal: a filled rosette in --accent with the check knocked out. The shape
-// is defined once, as #hvseal-sym at the top of <body>; every seal on the page
-// (row cell, column header, filter toggle, panel heading) is a <use> of it.
-const BADGE_SVG = '<svg class="hvseal" viewBox="0 0 20 20" aria-hidden="true" focusable="false">' +
-  '<use href="#hvseal-sym"/></svg>';
-const BADGE_URL_RE = /https?:\/\/[^\s<>"]+/g;
-// The hover tip is the reason's first sentence (entries are written so that
-// sentence stands alone, with no URL in it); the full reason and its sources
-// are the panel's job, which is also where touch gets them.
-function hvSummary(d) {
-  const r = d.hv.reason.replace(BADGE_URL_RE, '').replace(/\s+/g, ' ').trim();
-  const m = r.match(/^.+?[.!?](?=\s|$)/);
-  return m ? m[0] : r;
-}
-function hvBadge(d) {
-  if (!d.hv) return '';
-  return '<span class="hv" role="img" aria-label="' + escA(BADGE_NAME) + '" data-tip="' +
-    escA(BADGE_NAME + ': ' + hvSummary(d)) + '">' + BADGE_SVG + '</span>';
-}
-// The panel section: the full reason (its URLs made live), every evidence link,
-// the grant date and a pointer to the criteria page. URLs are matched in the
-// already-escaped text, so an & in a link is &amp; there, which is exactly
-// what an href attribute wants; trailing punctuation stays outside the link.
-function hvHTML(d) {
-  if (!d.hv || !enabledCols.has('hv')) return '';
-  const ext = '<span class="ext">↗</span>';
-  const reason = esc(d.hv.reason).replace(BADGE_URL_RE, u => {
-    const tail = (u.match(/[.,;:!?)\]]+$/) || [''])[0];
-    const url = tail ? u.slice(0, -tail.length) : u;
-    return '<a href="' + url + '" target="_blank" rel="noopener"><span class="lbl">' + url + '</span>' + ext + '</a>' + tail;
-  });
-  // evidence links are pinned permalinks (they keep proving the claim after the README
-  // moves on); the label shortens the 40-char commit to 7 and drops GitHub's ?plain=1
-  const label = u => u.replace(/^https?:\/\/(www\.)?/, '')
-    .replace(/\/(blob|tree)\/([0-9a-f]{7})[0-9a-f]{33}\//, '/$1/$2/').replace('?plain=1', '').replace(/\/$/, '');
-  const links = (d.hv.links || []).map(u => '<li><a href="' + escA(u) + '" target="_blank" rel="noopener">' +
-    '<span class="lbl">' + esc(label(u)) + '</span>' + ext + '</a></li>').join('');
-  return '<section class="hvbox" aria-label="' + escA(BADGE_NAME) + '"><h3>' + BADGE_SVG + esc(BADGE_NAME) + '</h3>' +
-    '<p>' + reason + '</p>' + (links ? '<ul>' + links + '</ul>' : '') +
-    '<p class="hvmeta">Granted ' + esc(d.hv.granted) + '. <a href="' + BADGE_PAGE + '">' +
-    '<span class="lbl">What this badge means</span></a></p>' +
-    '<p class="hvmeta">' + esc(BADGE_NAME) + ' is a trial feature. It may change or be removed.</p></section>';
-}
-
 // "batch" marker in the Last Updated cell: this row's date is shared by other
 // games on the same core, i.e. one core build shipped them all at once. Shown on
 // every clustered row (not recency-gated — the batching is as true for an old
@@ -2046,18 +1909,6 @@ function coreCell(d) {
 // Columns menu always shows the full label.
 const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
-  // the Hardware Verified seal (hvBadge), beside the title it vouches for. The
-  // header is the seal too (th; the Columns menu shows the label). Fixed at the
-  // seal (1.1em of the table's 14px) plus its cell's .45rem side padding, so it
-  // is the same width at every table width; mw is that width in rem (15.4px +
-  // 14.4px). Sorting puts badged rows first, newest grant first (see keyOf and
-  // DATE_COLS; blanks always sink).
-  // Default OFF since 2026-10-10 (the badge is paused while it is a trial): the
-  // filter toggle and the panel section follow the column, so turning it on in
-  // Columns brings the whole feature back.
-  { k: 'hv', label: BADGE_NAME, fixed: 'calc(1.1em + .9rem)', mw: 1.8625, opt: true,
-    th: BADGE_SVG.replace('aria-hidden="true"', 'role="img" aria-label="' + BADGE_NAME + '"'),
-    cell: d => '<td class="hvc">' + hvBadge(d) + '</td>' },
   { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
@@ -2094,7 +1945,6 @@ const COLUMNS = [
 // never see these; the detail panel spells out the date semantics there.
 const HEADER_TIPS = {
   title: 'Game or system name.',
-  hv: BADGE_NAME + ': the core was built and checked against the real board or its schematics. Sorts those games first.',
   sn: 'MAME setname, the ROM identifier',
   typesort: 'Arcade game, console core, computer core, or other',
   genre: "Arcade genre, from MAME's catver.ini",
@@ -2146,18 +1996,11 @@ try {
   } else enabledCols = new Set([...defaultCols(),
     ...JSON.parse(localStorage.getItem('mz-cols') || '[]')]);
 } catch (e) { enabledCols = defaultCols(); }
-// 2026-10-10: the badge column went default-off and the feature is paused. Every
-// returning visitor (who got it switched on by the mz-cols-seen upgrade above, or
-// had it in a saved set) starts with it hidden once; 'mz-hv-paused' marks the
-// reset so a visitor who then turns it back on in Columns keeps it.
-try {
-  if (!localStorage.getItem('mz-hv-paused')) {
-    if (enabledCols.delete('hv') && localStorage.getItem('mz-cols2') !== null)
-      localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
-    localStorage.removeItem('mz-hv');
-    localStorage.setItem('mz-hv-paused', '1');
-  }
-} catch (e) { enabledCols.delete('hv'); }
+// The Hardware Verified badge was retired on 2026-10-14. Its column key may
+// still sit in a saved set (harmless: activeColumns only shows real columns),
+// but the badge's own keys are dropped so they don't linger in storage.
+try { localStorage.removeItem('mz-hv'); localStorage.removeItem('mz-hv-paused'); } catch (e) {}
+enabledCols.delete('hv');
 
 const activeColumns = () => COLUMNS.filter(c => c.lock || enabledCols.has(c.k));
 
@@ -2399,7 +2242,6 @@ function render() {
       pickMsg(SRC_KEYS, enabledSrcs, s => SRC_NAMES[s] || s, 'source') +
       pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
-      (hvOnly ? ' among ' + esc(BADGE_NAME) + ' games' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
         ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
@@ -2446,7 +2288,7 @@ function apply() {
   const [dk, dd] = defaultSort();
   document.getElementById('clear').classList.toggle('active',
     !!(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
-      || favOnly || favView || hvOnly || sortKey !== dk || sortDir !== dd));
+      || favOnly || favView || sortKey !== dk || sortDir !== dd));
   // Type / Source / Genre: every box checked is the default (no filter); any
   // unchecked box narrows to the checked ones, and an all-unchecked menu shows
   // nothing (see pickNarrows and the menus below).
@@ -2456,7 +2298,6 @@ function apply() {
     // things while reading it mustn't change what the link shows
     if (favView && !(d.k && favView.has(d.k))) return false;
     if (favOnly && !(d.k && FAVS.has(d.k))) return false;
-    if (hvOnly && !d.hv) return false;
     if (!enabledTypes.has(d.base)) return false;
     // Source: a row with no source (a retired, hand-listed core) passes only while
     // the menu is untouched; any narrowing means "just these databases"
@@ -2478,7 +2319,6 @@ function apply() {
             (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
             (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
             (d.beta ? gateStage(d) + ' patreon' : '') + ' ' +
-            (d.hv ? BADGE_NAME : '') + ' ' +
             (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
   });
@@ -2486,7 +2326,6 @@ function apply() {
     const keyOf = x => sortKey === 'typesort' ? typeLabel(x)
       : sortKey === 'core' ? coreLabel(x.core)
       : sortKey === 'src' ? (x.src ? SRC_NAMES[x.src] || x.src : '')
-      : sortKey === 'hv' ? (x.hv ? x.hv.granted : '')
       : (x[sortKey] || '');
     view.sort((a, b) => {
       const av = keyOf(a), bv = keyOf(b);
@@ -2562,7 +2401,6 @@ function clearAllFilters() {
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
   if (favView) dismissFavView();
-  resetHvOnly();
   // the sort goes back to the default too, so the button means "the list as a
   // fresh load shows it" (columns, theme and the favorites list are prefs, not view)
   const [k, d] = defaultSort();
@@ -2592,9 +2430,8 @@ document.getElementById('hrow').addEventListener('click', e => {
   const k = th.dataset.k;
   // Date columns default to descending (most recent first) when first selected;
   // every other column defaults to ascending. A click on the already-active
-  // column always just flips the current direction. 'hv' sorts by grant date,
-  // so it counts as one: newest seals first (unbadged rows sink either way).
-  const DATE_COLS = new Set(['date', 'updated', 'mz', 'hv']);
+  // column always just flips the current direction.
+  const DATE_COLS = new Set(['date', 'updated', 'mz']);
   sortDir = (sortKey === k) ? -sortDir : (DATE_COLS.has(k) ? -1 : 1);
   sortKey = k;
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
@@ -2722,13 +2559,6 @@ colsMenu.addEventListener('change', e => {
   const k = e.target.dataset.k;
   if (!k) return;
   if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
-  // the badge filter and the panel section ride on the column: hiding it drops
-  // the filter too, and the open panel is redrawn either way
-  if (k === 'hv') {
-    if (!e.target.checked && hvOnly) { hvOnly = false; saveHvOnly(); }
-    syncHvSummary();
-    if (openRow) panel.innerHTML = detailHTML(openRow);
-  }
   // tolerated failure: blocked storage loses the pref, not the toggle
   try {
     localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
@@ -2739,9 +2569,6 @@ colsMenu.addEventListener('change', e => {
 });
 colsReset.addEventListener('click', () => {
   enabledCols = defaultCols();
-  if (hvOnly) { hvOnly = false; saveHvOnly(); }
-  syncHvSummary();
-  if (openRow) panel.innerHTML = detailHTML(openRow);
   // remove both keys (incl. the legacy pre-2026-07 one, or the migration path
   // would resurrect the old picks on next load) — reset means "never customized"
   localStorage.removeItem('mz-cols2');
@@ -3049,73 +2876,11 @@ favdd.querySelector('.menu').addEventListener('click', e => {
 });
 syncFavSummary();  // a returning visitor's count is already known before data loads
 
-// --- hardware badge filter: show only the badged rows --------------------------
-// A plain toggle shaped like the favorites one: the seal plus how many rows wear
-// it. Unlike the other filters it is REMEMBERED across visits ('mz-hv', '1' or
-// '0'; off for a first-time visitor): a click, an hv= arrival link (a shared
-// view, or the criteria page's "see them all") and Clear filters each store the
-// state they leave. A URL without hv= leaves the remembered state alone.
-// Hidden while the data carries no badge at all, so an older data.json never
-// shows a dead control; never hidden while it is the thing doing the narrowing.
-const HV_KEY = 'mz-hv';
-let hvOnly = false;
-try { hvOnly = localStorage.getItem(HV_KEY) === '1'; } catch (e) {}
-function saveHvOnly() { try { localStorage.setItem(HV_KEY, hvOnly ? '1' : '0'); } catch (e) {} }
-const hvToggle = document.getElementById('hvtoggle');
-function syncHvSummary() {
-  const n = DATA.reduce((a, d) => a + (d.hv ? 1 : 0), 0);
-  hvToggle.innerHTML = BADGE_SVG + '<span>' + n + '</span>';
-  // the filter only exists while its column is showing (Columns menu)
-  hvToggle.hidden = !enabledCols.has('hv') || (n === 0 && !hvOnly);
-  hvToggle.dataset.tip = 'Show only ' + BADGE_NAME + ' games (' + n + ')';
-  hvToggle.setAttribute('aria-label', BADGE_NAME + ' only (' + n + ')');
-  hvToggle.setAttribute('aria-pressed', hvOnly);
-  hvToggle.classList.toggle('active', hvOnly);
-}
-hvToggle.addEventListener('click', () => {
-  hvOnly = !hvOnly;
-  saveHvOnly();
-  syncHvSummary(); apply(); recenterOpen();
-});
-// state-only reset (no apply/recenter), matching resetFavOnly and friends. Its
-// one caller is Clear filters, which leaves the filter off for the next visit too.
-function resetHvOnly() { hvOnly = false; saveHvOnly(); syncHvSummary(); }
-syncHvSummary();
-// Runs once, after the first data load. An hv= in the URL sets the filter (on,
-// unless it reads hv=0) and is stored like a click; stripViewParams then removes
-// it from the address bar with the other view keys (the state lives in 'mz-hv',
-// so a refresh keeps it either way). If the data carries no badge at all (an
-// older data.json), a remembered or linked "on" would strand the visitor on an
-// empty list: drop it for this load, without storing, and land on the full list.
-function adoptHvParam() {
-  const p = new URLSearchParams(location.search);
-  if (!DATA.some(d => d.hv)) {
-    if (hvOnly) { hvOnly = false; syncHvSummary(); apply(); }
-    return;
-  }
-  if (!p.has('hv')) return;
-  hvOnly = p.get('hv') !== '0';
-  saveHvOnly();
-  // the link means "show me the badge": switch its column on (and remember it,
-  // like a Columns pick), otherwise the filter it sets would have no control
-  if (hvOnly && !enabledCols.has('hv')) {
-    enabledCols.add('hv');
-    try {
-      localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
-      localStorage.setItem('mz-cols-seen', JSON.stringify(COLUMNS.map(c => c.k)));
-    } catch (e) {}
-    for (const cb of colsMenu.querySelectorAll('input[data-k="hv"]')) cb.checked = true;
-    syncColsReset();
-    buildHeader();
-  }
-  syncHvSummary(); apply();
-}
-
 // --- shareable view links ------------------------------------------------------
 // One-shot links: the Menu's "Share this view" builds a URL from the current
 // view and copies it (the address bar itself never follows the filters). An
 // arriving link applies its view once (adoptViewParams) and the keys are then
-// stripped with replaceState (stripViewParams), like ?fav= and ?hv=, so a
+// stripped with replaceState (stripViewParams), like ?fav=, so a
 // refresh starts over as it always has. Anything at its default is left out,
 // so sharing the default view gives a bare /releases/. The keys:
 //   q    search text                           q=street+fighter
@@ -3123,14 +2888,13 @@ function adoptHvParam() {
 //   src  Source menu (database ids)            src=-distribution_mister
 //   g    Genre menu (slugs; none = No genre)   g=shooter,maze
 //   y    Original Year range                   y=1980-1989  y=1990-  y=-1985  y=1987
-//   s    sort column, leading - = descending   s=title  s=-hv  (-updated, the default, is left out)
-//   hv   Hardware Verified only                hv=1
+//   s    sort column, leading - = descending   s=title  s=-date  (-updated, the default, is left out)
 //   f    favorites only (the VISITOR'S own)    f=1
 // A menu writes whichever is shorter: the ticked boxes, or "-" and the unticked
 // ones; "t=" alone means None ticked. The #key of the open row rides along, and
 // a ?fav= list being viewed stays in. On arrival the link wins wherever it says
-// something; the badge filter falls back to its remembered state (mz-hv) and
-// the columns to theirs.
+// something; the columns fall back to their remembered state. hv (the retired
+// Hardware Verified filter, 2026-10-14) is still stripped so old links come out clean.
 const VIEW_KEYS = ['q', 't', 'src', 'g', 'y', 's', 'hv', 'f'];
 const typeSlug = t => t.toLowerCase();
 const srcSlug = s => s;
@@ -3159,7 +2923,6 @@ function viewParams() {
       : (yearFrom != null ? yearFrom : '') + '-' + (yearTo != null ? yearTo : '')]);
   if (sortKey && !(sortKey === 'updated' && sortDir === -1))
     out.push(['s', (sortDir < 0 ? '-' : '') + sortKey]);
-  if (hvOnly) out.push(['hv', '1']);
   if (favOnly) out.push(['f', '1']);
   return out;
 }
@@ -3193,8 +2956,7 @@ function adoptPick(raw, set, keys, slug, menu, attr) {
   for (const cb of menu.querySelectorAll('input[' + attr + ']')) cb.checked = set.has(cb.getAttribute(attr));
 }
 // Runs once, after the first data load (the Source/Genre/Year menus are built
-// from the data). The badge filter and a ?fav= list have their own readers
-// (adoptHvParam / adoptFavParam).
+// from the data). A ?fav= list has its own reader (adoptFavParam).
 function adoptViewParams() {
   const p = new URLSearchParams(location.search);
   const q = p.get('q');
@@ -3876,7 +3638,6 @@ function detailHTML(d) {
     '<span class="lbl">Arcade Database</span><span class="ext">↗</span></a>', true]);
   if (d.deprecated) rows.push(['Status', 'Deprecated']);
   if (d.note) rows.push(['Note', d.note]);
-  // (the hardware badge gets its own section above this list, see hvHTML)
   // Zaparoo ZapScript token for this row (copy to persist on an NFC tag /
   // playlist, then tap to launch) — same coverage as the Launch button: arcade
   // → bare .mra path, others → **launch.system:<id>. Rendered like Core/ROM
@@ -3973,7 +3734,7 @@ function detailHTML(d) {
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2' + (d.k ? ' class="starred"' : '') + '>' +
     (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
-    launcher + sysphoto + shots + hvHTML(d) + dl + prose + report + '</div>' + hint;
+    launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
 }
 
 function openPanel(d, fromHistory) {
@@ -4825,7 +4586,6 @@ function ingest(d) {
   buildYearMenu();
   buildSrcMenu();
   buildGenreMenu();
-  syncHvSummary();  // the badge count (and whether the toggle shows at all) is per data.json
   buildHeader();
   apply();
 }
@@ -5035,7 +4795,6 @@ function boot() {
     hidePill();       // a retry just succeeded; don't leave its failure pill up
     adoptViewParams();  // a shared view: search, menus, year, sort, favorites-only
     adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
-    adoptHvParam();   // hv= (a shared view, or the criteria page's "see them all")
     stripViewParams();  // one-shot: the view is applied, the address bar goes back to plain
     // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
     // the entry we arrived on already IS the panel state (in overlay mode Back

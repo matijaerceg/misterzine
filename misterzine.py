@@ -3193,6 +3193,58 @@ def arcade_genre(setname, title):
     return _ARCADE_GENRE_BY_NAME_NORM.get(norm_key(title), "")
 
 
+# Mature content (data.json "mat": 1): catver.ini ends a set's category with
+# "* Mature *" for nudity and strip games. The site's show/blur/hide control
+# and the on-device app's Options switch read the flag. These pins settle the
+# sets catver gets wrong or cannot reach (hacks with no MAME setname); True
+# flags a set, False clears catver's marker. By lowercase setname, with the
+# reason, hand-checked 2026-10-14 against every served arcade row.
+MATURE_OVERRIDES = {
+    "srmvs": True,   # Seta's strip mahjong series; catver marks only the srmvsa clone
+}
+
+
+def parse_catver_mature(text):
+    """Setnames (lowercase) whose catver [Category] value carries the
+    '* Mature *' marker that parse_catver drops."""
+    out = set()
+    section = None
+    for line in text.splitlines():
+        if line.startswith("["):
+            section = line.strip("[]")
+            continue
+        if section == "Category" and "=" in line:
+            k, v = line.split("=", 1)
+            if "* Mature *" in v:
+                out.add(k.strip().lower())
+    return out
+
+
+def local_catver_mature():
+    """catver's mature setnames from the local cache only (no network)."""
+    cache = CACHEDIR / "catver.ini"
+    if not cache.exists():
+        return set()
+    return parse_catver_mature(cache.read_text(encoding="utf-8", errors="ignore"))
+
+
+def mature_for(setname, mature, cats, dat):
+    """True when the set is mature: a MATURE_OVERRIDES pin first, else
+    catver's marker on the set, else (only for a set catver does not list)
+    on its DAT parent, the same fallback genre_for uses."""
+    if not setname:
+        return False
+    sl = setname.lower()
+    if sl in MATURE_OVERRIDES:
+        return MATURE_OVERRIDES[sl]
+    if sl in mature:
+        return True
+    if sl in cats:
+        return False
+    parent = (dat.get(sl) or {}).get("parent")
+    return bool(parent) and MATURE_OVERRIDES.get(parent, parent in mature)
+
+
 # Rotation/players/controls for the handful of rows absent from BOTH MAD and
 # mame2003-plus: setname renames where the modern name is the parent (so the
 # clone-parent fallback can't reach the old entry), multi-carts, TTL games and
@@ -3739,7 +3791,7 @@ def _built_from_core(source_id, core):
 def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_setnames=None,
              repo_maps=None, arcade_mad=None, dat_desc_index=None, arcade_specs=None,
              core_files=None, ft_map=None, core_hashes=None, shipped_rbfs=None, mra_specs=None,
-             family_members=None):
+             family_members=None, arcade_mature=None):
     """Map a catalog row to the slim record the site renders."""
     system = r["system"]
     base = _BASE_LABEL.get(system, system.title())
@@ -3988,6 +4040,10 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         boot = ARCADE_BOOT_ROTATION.get(sn.lower()) if sn else None
         if boot and row.get("rot") and boot != row["rot"] and row.get("flip") != "Yes":
             row["brot"] = boot
+        # mature content (catver marker or a MATURE_OVERRIDES pin); absent
+        # otherwise. The site and the on-device app can blur or hide it.
+        if mature_for(sn, arcade_mature or set(), arcade_cats or {}, arcade_meta or {}):
+            row["mat"] = 1
     return row
 
 
@@ -4444,6 +4500,7 @@ def cmd_export_web(args):
     rows = fold_sibling_variants(rows, arcade_meta)
     rows, heirs = distribution_takeovers(rows, arcade_meta)
     arcade_cats = local_catver()
+    arcade_mature = local_catver_mature()
     arcade_setnames = load_manifest_setnames()
     arcade_mad = local_mad()
     # provisional specs (rotation/players/controls) for rows MAD hasn't reached
@@ -4566,7 +4623,8 @@ def cmd_export_web(args):
     family_members = arcade_family_members(arcade_meta)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map,
-                     core_hashes, shipped_rbfs, mra_specs, family_members) for r in rows]
+                     core_hashes, shipped_rbfs, mra_specs, family_members, arcade_mature)
+            for r in rows]
     # deep-link key persistence needs each row's catalog identity; stripped
     # again before data.json is written (_assign_row_keys pops them)
     for r, d in zip(rows, data):
@@ -4630,6 +4688,7 @@ def cmd_export_web(args):
         log(f"    {title} [{sn}]: {was} -> {arcade_specs[sn]['rot']}")
     n_brot = sum(1 for d in data if d.get("brot"))
     log(f"  boot-rotation markers (brot): {n_brot}/{len(ARCADE_BOOT_ROTATION)} curated")
+    log(f"  mature rows (mat): {sum(1 for d in data if d.get('mat'))}")
 
 
 SITE_ROOT = "https://misterzine.fyi/"

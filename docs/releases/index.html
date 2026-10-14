@@ -845,6 +845,26 @@
      underneath -- same presentation as the CORS-taint fallback */
   html[data-mask="off"] #panel .frame canvas,
   html[data-mask="off"] #panel .sysframe canvas { display: none; }
+  /* Mature games: Blur (site Menu) covers a mature row's screenshots until a
+     click reveals that one frame. filter, not a transform: the mask canvas is
+     sized from the img's box, which a scale would change. */
+  #panel .frame.mat { overflow: hidden; }
+  html[data-mature="blur"] #panel .frame.mat:not(.reveal) { cursor: pointer; }
+  html[data-mature="blur"] #panel .frame.mat:not(.reveal) img,
+  html[data-mature="blur"] #panel .frame.mat:not(.reveal) canvas { filter: blur(24px) saturate(.5); }
+  html[data-mature="blur"] #panel .frame.mat:not(.reveal)::after {
+    content: "Mature: click to show"; position: absolute; inset: 0; display: grid; place-items: center;
+    color: #fff; font-size: .8rem; letter-spacing: .03em; text-shadow: 0 1px 3px #000; pointer-events: none; }
+  /* the Menu's three-way Mature games switch, styled like the theme rows */
+  .sitemenu .matrow { display: flex; align-items: center; gap: .6rem; padding: .35rem .6rem;
+                      font-size: .85rem; white-space: nowrap; }
+  .sitemenu .matseg { display: inline-flex; margin-left: auto; border: 1px solid var(--hair);
+                      border-radius: 4px; overflow: hidden; }
+  .sitemenu .matseg button { font: inherit; font-size: .78rem; padding: .2rem .5rem; border: 0;
+                             background: transparent; color: inherit; cursor: pointer; }
+  .sitemenu .matseg button + button { border-left: 1px solid var(--hair); }
+  .sitemenu .matseg button:hover { background: var(--hover-bg); }
+  .sitemenu .matseg button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
   #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: var(--muted); opacity: .55;
                       font-size: .62rem; }
   #panel .syscredit a { color: inherit; }
@@ -1081,6 +1101,13 @@
               </div>
             </details>
           </div>
+          <!-- mature content (data.json mat): show, blur the screenshots, or hide
+               the rows. Remembered per browser (mz-mature); wired by syncMature. -->
+          <div class="matrow" role="group" aria-labelledby="matlbl"
+               data-tip="Games MAME marks as mature, mostly strip puzzle and mahjong games. Blur covers their screenshots (click one to reveal it); Hide removes them from the list.">
+            <span id="matlbl">Mature games</span>
+            <span class="matseg" id="matseg"><button type="button" data-mat="show">Show</button><button type="button" data-mat="blur">Blur</button><button type="button" data-mat="hide">Hide</button></span>
+          </div>
           <hr class="msep">
       <a href="#" id="pub-note">What's listed<span class="ext">ⓘ</span></a>
       <a href="feed.xml" id="rss-link">RSS feeds<span class="ext">ⓘ</span></a>
@@ -1203,6 +1230,13 @@
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
+// the last data.json as loaded; DATA is it minus mature rows while Mature games
+// is set to Hide (see ingest and syncMature)
+let RAW = [];
+const MAT_KEY = 'mz-mature', MAT_MODES = ['show', 'blur', 'hide'];
+let matMode = 'show';
+try { const m = localStorage.getItem(MAT_KEY); if (MAT_MODES.includes(m)) matMode = m; } catch (e) {}
+document.documentElement.setAttribute('data-mature', matMode);
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
 // deep links: every row carries a stable key (d.k, stamped by export-web);
 // #<k> in the URL opens that row's panel, and opening a panel writes it back
@@ -3886,7 +3920,8 @@ function detailHTML(d) {
   // dimension fallback) carry .vert so the CRT mask + tube blur rotate with
   // the monitor
   const shots = (d.img_slots || []).map(s =>
-    '<div class="frame' + (ratio === '3 / 4' ? ' vert' : '') + '" style="aspect-ratio:' + ratio + '">' +
+    '<div class="frame' + (ratio === '3 / 4' ? ' vert' : '') + (d.mat ? ' mat' : '') +
+    '" style="aspect-ratio:' + ratio + '">' +
     '<img loading="lazy" src="../images/' + s + '/' + escA(d.img) + '.png" alt="' + escA(s) + '"></div>'
   ).join('');
   // console/computer rows: hardware photo instead of screenshots, with a
@@ -4714,12 +4749,46 @@ document.getElementById('mymisters').addEventListener('click', e => {
   document.getElementById('menudd').open = false;  // the row sits in the site Menu; the popover replaces it
 });
 
+// --- Mature games (site Menu): show / blur / hide ---
+// Rows data.json marks mat (MAME's catver "Mature" marker plus the site's own
+// pins). Blur is pure CSS on html[data-mature]; Hide re-ingests without those
+// rows. Like a theme pick, choosing leaves the Menu open (live preview).
+const matSeg = document.getElementById('matseg');
+function syncMature() {
+  for (const b of matSeg.querySelectorAll('button')) b.setAttribute('aria-pressed', b.dataset.mat === matMode);
+}
+matSeg.addEventListener('click', e => {
+  const b = e.target.closest('[data-mat]');
+  if (!b || b.dataset.mat === matMode) return;
+  const hideChanged = (matMode === 'hide') !== (b.dataset.mat === 'hide');
+  matMode = b.dataset.mat;
+  document.documentElement.setAttribute('data-mature', matMode);
+  try { localStorage.setItem(MAT_KEY, matMode); } catch (e) {}
+  syncMature();
+  if (!hideChanged) return;
+  // an open panel on a row that is now hidden would describe a row the list
+  // no longer has: close it
+  if (matMode === 'hide' && openRow && openRow.mat && document.body.classList.contains('panel-open')) closePanel();
+  if (RAW.length) ingest(RAW);
+  recenterOpen();
+});
+syncMature();
+// Blur: a click on a covered screenshot shows that one frame (until the panel redraws)
+panel.addEventListener('click', e => {
+  const f = e.target.closest('.frame.mat');
+  if (f && matMode === 'blur') f.classList.add('reveal');
+});
+
 // Everything the page does with a data.json — the arrival load and a live swap
 // run this same path, which is what makes swapping cheap and safe: apply()
 // re-derives the view from module state, so the visitor's sort, search and
 // filters all survive without any reconciling of their own.
 function ingest(d) {
-  DATA = d;
+  // Mature games -> Hide drops those rows here, before anything counts them, so
+  // the tally, the menus' counts, the since-visit line and deep links all agree
+  // with the list. RAW keeps the full set for switching the mode back.
+  RAW = d;
+  DATA = matMode === 'hide' ? d.filter(r => !r.mat) : d;
   // index cores that map to exactly one title, so single-game cores read as
   // the game name without hard-coding each (see coreLabel / CORE_NAMES).
   const seen = {};
@@ -4847,7 +4916,8 @@ window.mzCheck = check;  // hook for testing a swap without waiting for a publis
 function diffNews(d) {
   const fresh = [], built = [], keys = [];
   for (const r of d) {
-    if (!r.k) continue;
+    // a row Mature games -> Hide keeps out of the list is no news here
+    if (!r.k || (r.mat && matMode === 'hide')) continue;
     const old = KEY2ROW[r.k];
     if (!old) { fresh.push(r.title); keys.push(r.k); }
     else if ((old.updated || '') !== (r.updated || '')) { built.push(r.title); keys.push(r.k); }
@@ -4883,7 +4953,7 @@ function restoreAnchor(a) {
 }
 
 function swapIn(d, m) {
-  const prev = DATA;
+  const prev = RAW;  // the unfiltered set: ingest re-applies Mature games -> Hide
   try {
     // diffNews INSIDE the try: unknown-shaped data throws right here, and this
     // is the very failure the catch below exists to surface

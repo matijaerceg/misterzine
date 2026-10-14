@@ -2834,7 +2834,7 @@ COMPUTER_MANUFACTURER = {
     "C64": "Commodore", "C128": "Commodore", "C16": "Commodore", "VIC20": "Commodore",
     "PET2001": "Commodore", "Minimig": "Commodore",
     "Apple-I": "Apple", "Apple-II": "Apple", "Apple-III": "Apple", "Apple-IIgs": "Apple", "Apple-Lisa": "Apple", "NeXT": "NeXT", "NeXT-Color": "NeXT", "MacPlus": "Apple",
-    "MacLC": "Apple", "MacSE30": "Apple", "MacQuadra800": "Apple",
+    "MacLC": "Apple", "MacSE30": "Apple", "MacQuadra800": "Apple", "MacIIcx": "Apple",
     "ZX-Spectrum": "Sinclair", "ZX81": "Sinclair", "QL": "Sinclair",
     "ZXNext": "SpecNext", "SAMCoupe": "MGT", "TSConf": "TS-Labs",
     "AcornAtom": "Acorn", "AcornElectron": "Acorn", "BBCMicro": "Acorn", "Archie": "Acorn",
@@ -2850,6 +2850,7 @@ COMPUTER_MANUFACTURER = {
     "SGIIndy": "Silicon Graphics",
     "Sun-2": "Sun Microsystems",
     "Sun-3": "Sun Microsystems",
+    "JR100": "Panasonic",  # sold as the National JR-100 in Japan (Matsushita)
     "Ti994a": "Texas Instruments",
     "ColecoAdam": "Coleco", "Aquarius": "Mattel", "TomyTutor": "Tomy",
     "Casio_PV-2000": "Casio", "SordM5": "Sord", "Svi328": "Spectravideo",
@@ -2895,10 +2896,11 @@ CORE_YEAR = {
     # computers
     "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
     "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-III": "1980", "Apple-IIgs": "1986",
-    "Apple-Lisa": "1983", "NeXT": "1988", "NeXT-Color": "1992", "MacPlus": "1986", "MacLC": "1990", "MacSE30": "1989", "MacQuadra800": "1993",
+    "Apple-Lisa": "1983", "NeXT": "1988", "NeXT-Color": "1992", "MacPlus": "1986", "MacLC": "1990", "MacSE30": "1989", "MacQuadra800": "1993", "MacIIcx": "1989",
     "SGIIndy": "1993",  # SGI Indy announced 1993-07-12
     "Sun-2": "1983",
     "Sun-3": "1985",
+    "JR100": "1981",
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
     "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
     "Amstrad": "1984", "Amstrad-PCW": "1985", "Atari800": "1979", "AtariST": "1985",
@@ -3012,10 +3014,12 @@ SYSTEM_TITLES = {
     "MacPlus": "Macintosh Plus",
     "MacSE30": "Macintosh SE/30",
     "MacQuadra800": "Macintosh Quadra 800",
+    "MacIIcx": "Macintosh IIcx",
     "Minimig": "Amiga (Minimig)",
     "MSX": "MSX2",  # this core is the MSX2/2+/3 machine; the separate MSX1 core is first-gen
     "Ondra_SPO186": "Ondra SPO 186",
     "ORAO": "Orao",
+    "JR100": "JR-100",
     "PC88": "PC-8801",
     "PCXT": "PC/XT",
     "PCXT-EGA": "PC/XT (EGA)",

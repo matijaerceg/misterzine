@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Wed, 14 Oct 2026 02:25:02 +0000</lastBuildDate>
+<lastBuildDate>Wed, 14 Oct 2026 08:10:38 +0000</lastBuildDate>
+<item>
+<title>[New] Metamorphic Force (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#metamorphic-force</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Metamorphic Force.mra:2026-10-14T08:10:38+00:00</guid>
+<pubDate>Wed, 14 Oct 2026 08:10:38 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metamrph.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-MetamorphicForce&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-14 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Juezhan Tianhuang (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#jzth</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/polepos2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Driving / 1983 / Namco&lt;/p&gt;&lt;p&gt;Core: PolePosition&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PolePosition_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Magical Error wo Sagase (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#magerror</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Magical Error wo Sagase.mra:2026-09-27T23:09:42+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 23:09:42 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/magerror.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Technosoft / Jaleco&lt;/p&gt;&lt;p&gt;Core: hyprduel&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: distribution_mister).&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

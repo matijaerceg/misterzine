@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Tue, 13 Oct 2026 23:30:08 +0000</lastBuildDate>
+<lastBuildDate>Wed, 14 Oct 2026 02:25:02 +0000</lastBuildDate>
+<item>
+<title>[New] Juezhan Tianhuang (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#jzth</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Juezhan Tianhuang.mra:2026-10-14T02:25:02+00:00</guid>
+<pubDate>Wed, 14 Oct 2026 02:25:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jzth.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 2000 / Yuvo / bootleg hardware&lt;/p&gt;&lt;p&gt;Core: Juezhan_Tianhuang_b03&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-14 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Argus (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#argus</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/magerror.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Technosoft / Jaleco&lt;/p&gt;&lt;p&gt;Core: hyprduel&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: distribution_mister).&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Block Out (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#blockout</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Block Out (set 1).mra:2026-09-27T19:05:26+00:00</guid>
-<pubDate>Sun, 27 Sep 2026 19:05:26 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blockout.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Technos Japan / California Dreams&lt;/p&gt;&lt;p&gt;Core: jtblkout&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-09-27 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/blkout"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

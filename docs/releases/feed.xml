@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 14 Oct 2026 00:37:37 +0000</lastBuildDate>
+<lastBuildDate>Wed, 14 Oct 2026 05:22:45 +0000</lastBuildDate>
+<item>
+<title>[Updated] DECOCassette (Arcade core, 39 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cadanglr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/DECOCassette_20261013.rbf:2026-10-14T05:22:45+00:00</guid>
+<pubDate>Wed, 14 Oct 2026 05:22:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Angler Dangler, Astro Fantasia, Boulder Dash, Burger Time (DECO), Burnin' Rubber (DECO), Cluster Buster, DECO Darksoft Multigame, DECO Test Tape, DECO Widel Multigame, DS Telejan, Explorer, Fighting Ice Hockey, Flash Boy, Flying Ball, Highway Chase, Lock'n'Chase, Lucky Poker, Manhattan, Mission-X, Nebula, Night Star, Ocean to Ocean, Oozumou - The Grand Sumo, Peter Pepper's Ice Cream Factory, Pro Bowling, Pro Soccer, Pro Tennis, Rootin' Tootin', Scrum Try, Skater, Super Astro Fighter, Super Doubles Tennis, Sweet Heart, Terranean, The Tower, Tornado, Tournament Pro Golf, Treasure Island, Zeroize.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Juezhan Tianhuang (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#jzth</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Juezhan Tianhuang.mra:2026-10-14T02:25:02+00:00</guid>
+<pubDate>Wed, 14 Oct 2026 02:25:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jzth.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 2000 / Yuvo / bootleg hardware&lt;/p&gt;&lt;p&gt;Core: Juezhan_Tianhuang_b03&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-14 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arabian (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/twinhawk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1989 / Toaplan / Taito&lt;/p&gt;&lt;p&gt;Core: TwinHawk_bazset&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Zero Team USA (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#zero-team-usa</link>
-<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-ZeroTeam_20261010.rbf:2026-10-10T02:18:37+00:00</guid>
-<pubDate>Sat, 10 Oct 2026 02:18:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/zeroteam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighter / 1993 / Seibu Kaihatsu (Fabtek license)&lt;/p&gt;&lt;p&gt;Core: Arcade-ZeroTeam&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-10 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Macintosh SE/30 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261009.rbf:2026-10-09T17:34:54+00:00</guid>
-<pubDate>Fri, 09 Oct 2026 17:34:54 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

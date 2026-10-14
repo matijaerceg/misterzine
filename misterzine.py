@@ -1204,6 +1204,7 @@ CORE_REPO_OVERRIDES = {
     "RX78": "RX-78",
     "GameOfLife": "Life",
     "Studio-II": "StudioII",  # rbf is Studio-II, repo is StudioII_MiSTer
+    "MacIIcx": "MacSE30",      # IIcx and SE/30 cores build from one source tree
 }
 
 # Hand-verified MiSTer debut dates for cores the repo crawl can't reach via the
@@ -1246,6 +1247,7 @@ CORE_FROZEN_DATES = {
     "Jaguar":        "2026-05-26",  # years of WIP; actually launched May 2026
     "GameAndWatch":  "2026-05-10",  # new core; repo had imported dev history from 2023
     "Tamagotchi":    "2026-05-15",  # new core; repo had imported dev history from 2023
+    "MacIIcx":       "2026-10-12",  # ships from the SE/30 repo; IIcx core itself arrived Oct 2026
 }
 
 

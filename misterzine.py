@@ -2597,6 +2597,169 @@ def cmd_mad(args):
     log(f"mad: {len(mad)} setname->metadata entries from ArcadeDatabase.csv")
 
 
+# --- command: patches (Arcade Patches fan patches, per-row enrichment) -------
+
+# Fan patches for arcade games by strygo, published at https://arcadepatches.com
+# (Arcade Patches, repo github.com/strygo/arcade-patches; listing approved by
+# the author in his issue #5). Credit "Arcade Patches (strygo)" wherever shown.
+# This is an ENRICHMENT, never a Source: patches ship as build-it-yourself kits,
+# not through update_all, so they add no rows, events, feed items or dates. Each
+# patch attaches to every arcade row of its base game (MAME parent of the
+# patched base set) as a `pt` list, and its new setnames join `family_sets` so
+# the on-device app files a built patch MRA as a version of that game.
+ARCADE_PATCHES_URL = ("https://raw.githubusercontent.com/strygo/arcade-patches/"
+                      "master/data/patches.json")
+ARCADE_PATCHES_CACHE = CACHEDIR / "arcade_patches.json"  # committed: CI's last good copy
+ARCADE_PATCHES_SITE = "https://arcadepatches.com/"
+# Entries whose base MAME set is not in the structured fields (`set` missing or
+# a placeholder dash, and no builds[].mame_set). Read off each entry's romset
+# requirements on 2026-10-14. Keyed on slug; value = base setname.
+ARCADE_PATCHES_BASE_PINS = {
+    "final-fight-ex": "ffight",   # needs the ffight/ffightu/ffightj romsets
+    "vsav-arrange": "vsavj",      # PS2 Arrange backport, built from vsavj + vsav2
+    "vsav2-arrange": "vsav2",
+    "vhunt2-arrange": "vhunt2",
+}
+# Projects covering many games (one patch, many rows). ng-plus is skipped: its
+# Neo Geo cartridge games are not individual rows on the tracker.
+ARCADE_PATCHES_PROJECTS = ("cps-plus",)
+
+
+def fetch_arcade_patches():
+    """Refresh the committed patches.json copy. Keeps the last good copy on any
+    fetch or schema failure; never raises."""
+    try:
+        doc = json.loads(http_get(ARCADE_PATCHES_URL).decode("utf-8"))
+        if not isinstance(doc.get("patches"), list) or not isinstance(doc.get("projects"), list):
+            raise ValueError("unexpected schema (patches/projects not lists)")
+        if not arcade_patch_entries(doc):
+            raise ValueError("no usable patch entries")
+    except Exception as e:  # noqa: BLE001 - fail-soft by design
+        log(f"patches: fetch failed ({e}); keeping the last good copy")
+        return False
+    CACHEDIR.mkdir(parents=True, exist_ok=True)
+    ARCADE_PATCHES_CACHE.write_text(json.dumps(doc, ensure_ascii=False, indent=1, sort_keys=True),
+                                    encoding="utf-8")
+    return True
+
+
+def local_arcade_patches():
+    """The committed patches.json copy, or {} when absent/unreadable."""
+    try:
+        return json.loads(ARCADE_PATCHES_CACHE.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def _patch_type(p):
+    """One of translation / restoration / enhanced / arrange."""
+    section = (p.get("section") or "").lower()
+    if section == "enhanced":
+        return "enhanced"
+    if section == "arrangements":
+        return "arrange"
+    words = f"{p.get('subtitle') or ''} {p.get('patch_kind') or ''}".lower()
+    return "translation" if "translation" in words else "restoration"
+
+
+def _is_setname(s):
+    return isinstance(s, str) and re.fullmatch(r"[a-z0-9_]+", s.strip().lower()) is not None
+
+
+def arcade_patch_entries(doc):
+    """[(entry, [base sets], [patched setnames])] for usable entries: not
+    hidden, not in development, not hardware articles, MiSTer-deliverable."""
+    out = []
+    for p in (doc or {}).get("patches") or []:
+        if not isinstance(p, dict) or not p.get("slug") or p.get("hidden"):
+            continue
+        if (p.get("status") or "") == "in-development" or (p.get("section") or "") == "hardware":
+            continue
+        # NAOMI GD-ROM patches (sfz3ugd) have no MiSTer MRA or kit
+        if "chd_patch" in p or "naomi" in (p.get("hardware") or "").lower():
+            continue
+        builds = [b for b in p.get("builds") or [] if isinstance(b, dict)]
+        bases = []
+        if _is_setname(p.get("set")):
+            bases.append(p["set"].strip().lower())
+        bases += [b["mame_set"].strip().lower() for b in builds if _is_setname(b.get("mame_set"))]
+        if not bases and p["slug"] in ARCADE_PATCHES_BASE_PINS:
+            bases.append(ARCADE_PATCHES_BASE_PINS[p["slug"]])
+        new = []
+        mra = p.get("mra") if isinstance(p.get("mra"), dict) else {}
+        if _is_setname(mra.get("setname")):
+            new.append(mra["setname"].strip().lower())
+        new += [b["hbmame_set"].strip().lower() for b in builds if _is_setname(b.get("hbmame_set"))]
+        if bases:
+            out.append((p, bases, new))
+    for p in (doc or {}).get("projects") or []:
+        if not isinstance(p, dict) or p.get("slug") not in ARCADE_PATCHES_PROJECTS or p.get("hidden"):
+            continue
+        for cov in p.get("coverage") or []:
+            sets = [s.strip().lower() for s in str((cov or {}).get("sets") or "").split(",")
+                    if _is_setname(s)]
+            if sets:
+                # covered sets are join candidates; the non-MAME ones (ffightus01,
+                # sfa2g, ...) are strygo's own builds and join family_sets
+                out.append((p, sets, sets))
+    return out
+
+
+def build_arcade_patches(doc, meta):
+    """{family_root: ([pt objects], {extra setnames})} from patches.json."""
+    by_root = {}
+    for p, bases, new in arcade_patch_entries(doc):
+        roots = {arcade_family(b, meta) for b in bases} - {""}
+        if not roots:
+            continue
+        is_proj = p.get("slug") in ARCADE_PATCHES_PROJECTS
+        obj = {
+            "t": _patch_type(p),
+            "n": str(p.get("title") or "").strip(),
+            "s": "" if is_proj else str(p.get("subtitle") or "").strip(),
+            "v": str(p.get("version") or "").strip(),
+            "d": str(p.get("date") or "").strip()[:10],
+            "u": f"{ARCADE_PATCHES_SITE}{p['slug']}/",
+            "sn": "" if is_proj else (new[0] if new else ""),
+        }
+        for root in roots:
+            pts, extra = by_root.setdefault(root, ([], set()))
+            if obj not in pts:
+                pts.append(obj)
+            extra.update(s for s in new if s not in meta)
+    for pts, _ in by_root.values():
+        pts.sort(key=lambda o: o["n"].lower())
+        pts.sort(key=lambda o: o["d"], reverse=True)
+    return by_root
+
+
+def attach_arcade_patches(data, meta, doc=None):
+    """Stamp `pt` on arcade rows and add patched setnames to `family_sets`."""
+    by_root = build_arcade_patches(local_arcade_patches() if doc is None else doc, meta)
+    n = 0
+    for d in data:
+        if d.get("base") != "Arcade" or not d.get("sn"):
+            continue
+        hit = by_root.get(d.get("family") or arcade_family(d["sn"], meta))
+        if not hit:
+            continue
+        pts, extra = hit
+        d["pt"] = [dict(o) for o in pts]
+        have = set(d.get("family_sets") or [])
+        add = {s for s in extra if s not in have and s != d["sn"]}
+        if add:
+            d["family_sets"] = sorted(have | add)
+        n += 1
+    log(f"patches: {n} arcade rows carry Arcade Patches entries")
+    return n
+
+
+def cmd_patches(args):
+    if fetch_arcade_patches():
+        log(f"patches: {len(arcade_patch_entries(local_arcade_patches()))} usable entries "
+            "cached from Arcade Patches")
+
+
 # --- command: specs (provisional arcade specs for rows not yet in MAD) -----
 
 # libretro's mame2003-plus listxml (same host as catver) carries orientation,
@@ -4511,6 +4674,7 @@ def cmd_export_web(args):
     # the MAME descs. Must run AFTER _web_row — the setname/genre/screenshot
     # joins above all key on the raw MRA-derived title.
     _humanize_arcade_titles(data, arcade_meta)
+    attach_arcade_patches(data, arcade_meta)  # `pt` + patched family_sets
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))
@@ -5338,6 +5502,8 @@ def main():
     mp = sub.add_parser("mad", help="fetch arcade metadata (rotation/players/controls) from the MiSTer Arcade Database")
     mp.set_defaults(func=cmd_mad)
 
+    ptp = sub.add_parser("patches", help="refresh the Arcade Patches (strygo) fan-patch list")
+    ptp.set_defaults(func=cmd_patches)
     spp = sub.add_parser("specs", help="refresh legacy/current MAME provisional arcade specs")
     spp.set_defaults(func=cmd_specs)
 

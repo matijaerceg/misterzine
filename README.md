@@ -70,6 +70,11 @@ provisional field names to source URLs (newline-separated when a description
 combines sources). Both markers disappear per field when MAD supplies it.
 
 **The detail panel**
+- Arcade games with fan patches from [Arcade Patches](https://arcadepatches.com/) by strygo
+  (translations, restorations, enhanced editions, CPS+ arranged soundtracks) list them in a
+  Patches section, and a Patches filter narrows the list. Data field `pt` (type `t`, title
+  `n`, subtitle `s`, version `v`, date `d`, page `u`, patched setname `sn`); the patched
+  setnames also join `family_sets`. Neo Geo NG+ is not mapped yet.
 - Every row opens a panel: arcade titles show self-hosted native-resolution screenshots
   (title / snap / in-game, ~920 titles covered); console and computer cores show a photo
   of the actual hardware (127 systems, in a deliberately lo-fi 16-color dithered style).
@@ -226,7 +231,8 @@ header's "RSS" link; items deep-link to the entry on the site):
 3. `repos` / `core-repos` / `jtcores` / `coinop`: incremental repo crawls for debut and
    last-update dates. Each crawl skips every repo not pushed since its last crawl, so a
    typical day costs a handful of API calls (non-fatal on hiccups).
-4. `genre`, `mad`, `specs`: refresh genre, arcade metadata, and provisional specs.
+4. `genre`, `patches`, `mad`, `specs`: refresh genre, fan patches, arcade metadata, and
+   provisional specs.
 5. `export` + `export-web`: regenerate the JSON exports and the static site.
 6. Commit and push only if the published outputs actually changed (a quiet run publishes
    nothing). Pages serves `main /docs`, so the push *is* the deploy.
@@ -356,6 +362,7 @@ python misterzine.py core-repos   # console/computer/other core debut dates (inc
 python misterzine.py jtcores      # Jotego dates from the jtcores monorepo (incremental)
 python misterzine.py coinop       # Coin-Op dates from develop commit messages
 python misterzine.py genre        # arcade genre from MAME catver.ini (joined on setname)
+python misterzine.py patches      # fan patches from Arcade Patches (strygo), per-row `pt`
 python misterzine.py mad          # arcade rotation/resolution/players/controls from MAD
 python misterzine.py specs        # provisional specs from legacy/current MAME
 python misterzine.py mame-meta    # derive committed mame_meta.json.gz from the raw MAME DAT (local pass)

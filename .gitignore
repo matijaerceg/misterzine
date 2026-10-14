@@ -24,6 +24,7 @@ data/cache/*
 !data/cache/mame2003_specs.json.gz
 !data/cache/mame_current_specs.json.gz
 !data/cache/mra_specs.json
+!data/cache/arcade_patches.json
 __pycache__/
 *.pyc
 

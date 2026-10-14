@@ -565,6 +565,7 @@
   dd .batch { color: var(--muted); font-size: .9em; }
   /* the panel's opt-in-database note, under the Source value */
   dd .optin { color: var(--muted); font-size: .9em; }
+  dd .ptcredit { color: var(--muted); font-size: .9em; }
   /* "8 years ago" trailing a panel date. Dimmed like .prov but deliberately NOT
      .prov: that italic means "this value is uncertain", which an age never is. */
   .ago { color: var(--muted); margin-left: .4rem; }
@@ -937,6 +938,7 @@
     #typedd { order: 4; }
     #srcdd { order: 5; }
     #genredd { order: 6; }
+    #patchdd { order: 6; }
     #yeardd { order: 7; }
     button.clear, #viewlinkbtn { order: 9; }
     .favctl { order: 10; }
@@ -1066,6 +1068,10 @@
     <details class="cols" id="genredd">
       <summary id="genresummary">Genre</summary>
       <div class="menu" id="genremenu"></div>
+    </details>
+    <details class="cols" id="patchdd">
+      <summary id="patchsummary">Patches</summary>
+      <div class="menu" id="patchmenu"></div>
     </details>
     <details class="cols" id="yeardd">
       <summary id="yearsummary">Year</summary>
@@ -2241,6 +2247,7 @@ function render() {
       pickMsg(TYPES, enabledTypes, t => t, 'type') +
       pickMsg(SRC_KEYS, enabledSrcs, s => SRC_NAMES[s] || s, 'source') +
       pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
+      pickMsg(PATCH_KEYS, enabledPatches, k => PATCH_LABELS[k], 'patch type') +
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -2305,6 +2312,10 @@ function apply() {
     // Genre: rows without one (everything non-arcade) sit under the menu's own
     // "No genre" box, so unchecking a real genre never hides a console core
     if (GENRE_KEYS.length && !enabledGenres.has(d.genre || NO_GENRE)) return false;
+    // Patches: a row passes while any of its patch types (or, with none, the
+    // "No patches" box) is checked
+    if (PATCH_KEYS.length && enabledPatches.size < PATCH_KEYS.length &&
+        !patchKeysOf(d).some(k => enabledPatches.has(k))) return false;
     // Year range: rows with no numeric Original Year drop out while a bound is set
     if (yearFrom != null || yearTo != null) {
       const y = +d.year;
@@ -2396,7 +2407,7 @@ document.getElementById('qx').addEventListener('click', clearSearch);
 function clearAllFilters() {
   const q = document.getElementById('q');
   q.value = '';
-  resetTypes(); resetSrcs(); resetGenres(); resetYear();
+  resetTypes(); resetSrcs(); resetGenres(); resetPatches(); resetYear();
   // both favorites narrowers go too (the saved list itself is untouched) — a
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
@@ -2460,13 +2471,15 @@ const TYPES = ['Arcade', 'Console', 'Computer', 'Other'];
 let enabledTypes = new Set(TYPES);
 let enabledSrcs = new Set();
 let enabledGenres = new Set();
+let enabledPatches = new Set();
 let yearFrom = null, yearTo = null, YEAR_MIN = null, YEAR_MAX = null;
 // true while any multi-select is narrowing (some box unchecked). A menu that has no
 // keys yet (data not landed) cannot narrow.
 function pickNarrows() {
   return enabledTypes.size < TYPES.length
     || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length)
-    || (GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length);
+    || (GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length)
+    || (PATCH_KEYS.length > 0 && enabledPatches.size < PATCH_KEYS.length);
 }
 // shared chrome for the three multi-select menus: the All / None pair closing each
 // menu, the summary text + glow + button states after any change, and the All/None
@@ -2801,6 +2814,56 @@ genreMenu.addEventListener('click', e => {
 });
 syncGenreSummary();  // initial state before data loads (reads "Genre" / no glow)
 
+// --- "Patches" dropdown: fan patches from Arcade Patches (strygo), row field pt ---
+// Same all-checked model as Genre: one box per patch type present in the data plus
+// a closing "No patches" box for every row without one, so unchecking a type never
+// hides unrelated rows. A row with several patch types shows while any is checked.
+const patchMenu = document.getElementById('patchmenu');
+const patchSummary = document.getElementById('patchsummary');
+const NO_PATCH = '__none__';
+const PATCH_LABELS = { translation: 'Translation', restoration: 'Restoration',
+  enhanced: 'Enhanced', arrange: 'Arranged soundtrack', [NO_PATCH]: 'No patches' };
+const PATCH_ORDER = ['translation', 'restoration', 'enhanced', 'arrange'];
+let PATCH_KEYS = [];  // menu order, filled by buildPatchMenu; empty until data lands
+const patchKeysOf = d => d.pt && d.pt.length ? [...new Set(d.pt.map(p => p.t))] : [NO_PATCH];
+function syncPatchSummary() { syncPick(patchSummary, patchMenu, 'Patches', enabledPatches, PATCH_KEYS.length); }
+function buildPatchMenu() {
+  const counts = {};
+  for (const d of DATA) for (const k of patchKeysOf(d)) counts[k] = (counts[k] || 0) + 1;
+  const keys = PATCH_ORDER.filter(k => counts[k]);
+  if (!keys.length) { document.getElementById('patchdd').hidden = true; PATCH_KEYS = []; return; }
+  document.getElementById('patchdd').hidden = false;
+  if (counts[NO_PATCH]) keys.push(NO_PATCH);
+  // live data swap keeps picks, exactly like buildGenreMenu
+  const untouched = !PATCH_KEYS.length || PATCH_KEYS.every(k => enabledPatches.has(k));
+  PATCH_KEYS = keys;
+  enabledPatches = new Set(untouched ? keys : keys.filter(k => enabledPatches.has(k)));
+  patchMenu.innerHTML = keys.map(k =>
+    '<label><input type="checkbox" data-p="' + k + '"' +
+    (enabledPatches.has(k) ? ' checked' : '') + '> ' + PATCH_LABELS[k] +
+    '<span class="gcount">' + counts[k] + '</span></label>').join('') + pickButtons('patch');
+  syncPatchSummary();
+}
+patchMenu.addEventListener('change', e => {
+  const k = e.target.dataset.p;
+  if (!k) return;
+  if (e.target.checked) enabledPatches.add(k); else enabledPatches.delete(k);
+  syncPatchSummary();
+  apply();
+  recenterOpen();
+});
+// state-only reset (no apply/recenter) shared by the in-menu All and "Clear filters"
+function resetPatches() {
+  for (const k of PATCH_KEYS) enabledPatches.add(k);
+  for (const cb of patchMenu.querySelectorAll('input')) cb.checked = true;
+  syncPatchSummary();
+}
+patchMenu.addEventListener('click', e => {
+  if (!pickAllNone(patchMenu, enabledPatches, PATCH_KEYS, e)) return;
+  syncPatchSummary(); apply(); recenterOpen();
+});
+syncPatchSummary();
+
 // --- favorites control: filter toggle + housekeeping menu ---------------------
 const favctl = document.getElementById('favctl');
 const favToggle = document.getElementById('favtoggle');
@@ -2895,7 +2958,8 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 // a ?fav= list being viewed stays in. On arrival the link wins wherever it says
 // something; the columns fall back to their remembered state. hv (the retired
 // Hardware Verified filter, 2026-10-14) is still stripped so old links come out clean.
-const VIEW_KEYS = ['q', 't', 'src', 'g', 'y', 's', 'hv', 'f'];
+const VIEW_KEYS = ['q', 't', 'src', 'g', 'p', 'y', 's', 'hv', 'f'];
+const patchSlug = k => k === NO_PATCH ? 'none' : k;
 const typeSlug = t => t.toLowerCase();
 const srcSlug = s => s;
 const genreSlug = g => g === NO_GENRE ? 'none'
@@ -2916,7 +2980,8 @@ function viewParams() {
   if (q) out.push(['q', encodeURIComponent(q).replace(/%20/g, '+')]);
   for (const [k, v] of [['t', pickParam(enabledTypes, TYPES, typeSlug)],
                         ['src', pickParam(enabledSrcs, SRC_KEYS, srcSlug)],
-                        ['g', pickParam(enabledGenres, GENRE_KEYS, genreSlug)]])
+                        ['g', pickParam(enabledGenres, GENRE_KEYS, genreSlug)],
+                        ['p', pickParam(enabledPatches, PATCH_KEYS, patchSlug)]])
     if (v != null) out.push([k, v]);
   if (yearFrom != null || yearTo != null)
     out.push(['y', yearFrom != null && yearFrom === yearTo ? '' + yearFrom
@@ -2964,6 +3029,7 @@ function adoptViewParams() {
   adoptPick(p.get('t'), enabledTypes, TYPES, typeSlug, typeMenu, 'data-t'); syncTypeSummary();
   adoptPick(p.get('src'), enabledSrcs, SRC_KEYS, srcSlug, srcMenu, 'data-s'); syncSrcSummary();
   adoptPick(p.get('g'), enabledGenres, GENRE_KEYS, genreSlug, genreMenu, 'data-g'); syncGenreSummary();
+  adoptPick(p.get('p'), enabledPatches, PATCH_KEYS, patchSlug, patchMenu, 'data-p'); syncPatchSummary();
   const y = /^(\d{1,4})?(-)?(\d{1,4})?$/.exec((p.get('y') || '').trim());
   if (y && (y[1] || y[3]) && YEAR_MIN != null) {
     const clamp = v => Math.min(Math.max(Math.round(+v), YEAR_MIN), YEAR_MAX);
@@ -3593,6 +3659,14 @@ function detailHTML(d) {
   specRow('Controls', 'ctl');
   specRow('Special controls', 'spc');
   specRow('Screen flip', 'flip');
+  // fan patches for this game (Arcade Patches by strygo; pipeline field pt).
+  // Kits the player builds from their own ROMs, so no dates or table marker.
+  if (d.pt && d.pt.length) rows.push(['Patches', d.pt.map(p =>
+    esc(PATCH_LABELS[p.t] || p.t) + ': <a href="' + escA(p.u) + '" target="_blank" rel="noopener">' +
+    '<span class="lbl">' + esc(p.n) + '</span><span class="ext">↗</span></a>' +
+    [p.s, p.v, p.d].filter(Boolean).map(x => ' ' + esc(x)).join(',')).join('<br>') +
+    '<br><span class="ptcredit">From <a href="https://arcadepatches.com/" target="_blank" rel="noopener">' +
+    '<span class="lbl">Arcade Patches (strygo)</span><span class="ext">↗</span></a></span>', true]);
   // The label carries the debut-vs-fallback distinction, so the value doesn't
   // have to: a row reading "MiSTer release ... (MiSTer debut)" said MiSTer twice
   // to disambiguate from a case that no current row is in (every row in the data
@@ -4152,6 +4226,7 @@ narrowMQ.addEventListener('change', () => {
   buildHeader();
   syncTypeSummary();
   syncGenreSummary();
+  syncPatchSummary();
   syncYear();
   syncClearLabel();
 });
@@ -4586,6 +4661,7 @@ function ingest(d) {
   buildYearMenu();
   buildSrcMenu();
   buildGenreMenu();
+  buildPatchMenu();
   buildHeader();
   apply();
 }

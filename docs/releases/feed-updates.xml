@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 15 Oct 2026 12:30:21 +0000</lastBuildDate>
+<lastBuildDate>Thu, 15 Oct 2026 16:47:37 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-NMK16_Gunnail (Arcade core, 21 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#acrobatm</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20261015.rbf:2026-10-15T16:47:37+00:00</guid>
+<pubDate>Thu, 15 Oct 2026 16:47:37 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Acrobat Mission, Air Attack, Bio-ship Paladin, Black Heart, Bombjack Twin, Dolmen, GunNail, Hacha Mecha Fighter, Koutetsu Yousai Strahl, Many Block, Nouryoku Koujou Iinkai, Puzzle World, S.S. Mission, Saboten Bombers, Super Spacefortress Macross, Task Force Harrier, Thunder Dragon, Tom Tom Magic, Twin Action, US AAF Mustang, Vandyke.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] LaserdiscGames (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261015.rbf:2026-10-15T15:09:19+00:00</guid>
+<pubDate>Thu, 15 Oct 2026 15:09:19 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Space Ace, Super Don Quix-ote.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Ginga Ninkyouden (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ginganin</link>
@@ -69,15 +87,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sandscrp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1992 / Face&lt;/p&gt;&lt;p&gt;Core: Arcade-SandScrp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-SandScrp_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] LaserdiscGames (Arcade core, 4 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261014.rbf:2026-10-15T05:35:57+00:00</guid>
-<pubDate>Thu, 15 Oct 2026 05:35:57 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Space Ace, Super Don Quix-ote.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Apple II (Computer core)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ginganin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1987 / Jaleco&lt;/p&gt;&lt;p&gt;Core: Arcade-GingaNin&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-06 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-NMKBP964 (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#macrossp</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMKBP964_20261006.rbf:2026-10-06T17:08:06+00:00</guid>
-<pubDate>Tue, 06 Oct 2026 17:08:06 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Macross Plus, Quiz Bishoujo Senshi Sailor Moon - Chiryoku Tairyoku Toki no Un.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-06 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/kuzecores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

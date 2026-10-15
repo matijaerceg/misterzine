@@ -4124,7 +4124,9 @@ document.getElementById('rows').addEventListener('click', e => {
   const tr = e.target.closest('tr[data-i]');
   if (!tr) return;
   const d = flat[+tr.dataset.i];
-  if (d && d.grp) toggleGroup(d);  // an umbrella opens its members and its panel
+  // an umbrella click is a selection first: closed -> open + select; open but
+  // not selected -> select only; open and already selected -> close
+  if (d && d.grp) toggleGroup(d, !expanded.has(d.g) || openRow !== d ? true : false);
   else openPanel(d);
 });
 // EASTER EGG: the ZapScript token takes a jolt of current when you touch it, and

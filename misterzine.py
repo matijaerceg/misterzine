@@ -2754,6 +2754,62 @@ def attach_arcade_patches(data, meta, doc=None):
     return n
 
 
+def attach_same_game_groups(data, meta):
+    """Stamp `g` on arcade rows that are one game shipped on several cores,
+    so the site can fold them under one umbrella row. Same game = same MAME
+    setname, or same one-hop MAME parent AND same base title (the rule
+    distribution_takeovers already uses; family alone would merge G-LOC with
+    its R360 clone, base title alone would merge Squash on Gaelco with Squash
+    on Bagman hardware). A group must span two distinct (source, core) pairs:
+    a single core listing two revisions of one set (Asteroids Deluxe green and
+    orange, Kickle Cubicle and Meikyu Jima) is a deliberate variant listing,
+    not a game on several cores. `g` is the shared parent setname; two groups
+    under one parent (none today) get the base title slugged on. Deterministic
+    from sorted inputs, so data.json bytes do not churn between quiet runs."""
+    def root(sn):
+        return (meta.get(sn) or {}).get("parent") or sn
+    rows = sorted((d for d in data if d.get("base") == "Arcade" and d.get("sn")),
+                  key=lambda d: (d["sn"].lower(), d.get("src") or "", d.get("core") or "",
+                                 d["title"]))
+    parent = list(range(len(rows)))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    seen = {}
+    for i, d in enumerate(rows):
+        sn = d["sn"].lower()
+        for key in (("sn", sn), ("fam", root(sn), _arcade_base(d.get("mt") or d["title"]).casefold())):
+            j = seen.setdefault(key, i)
+            if j != i:
+                parent[find(i)] = find(j)
+    groups = {}
+    for i, d in enumerate(rows):
+        groups.setdefault(find(i), []).append(d)
+    kept = []
+    for grp in groups.values():
+        if len(grp) < 2 or len({(d.get("src"), d.get("core")) for d in grp}) < 2:
+            continue
+        kept.append((root(grp[0]["sn"].lower()), grp))
+    by_root = Counter(r for r, _ in kept)
+    n = 0
+    for r, grp in sorted(kept, key=lambda t: t[0]):
+        g = r
+        if by_root[r] > 1:
+            base = _arcade_base(grp[0].get("mt") or grp[0]["title"]).casefold()
+            g = r + "-" + re.sub(r"[^a-z0-9]+", "-", base).strip("-")
+        for d in grp:
+            d["g"] = g
+        n += len(grp)
+        log("  same-game group: " + g + " = " +
+            ", ".join(f"{d['title']} [{d.get('src')}/{d.get('core')}]" for d in grp))
+    log(f"same-game groups: {len(kept)} games on several cores, {n} rows carry g")
+    return len(kept)
+
+
 def cmd_patches(args):
     if fetch_arcade_patches():
         log(f"patches: {len(arcade_patch_entries(local_arcade_patches()))} usable entries "
@@ -4675,6 +4731,7 @@ def cmd_export_web(args):
     # joins above all key on the raw MRA-derived title.
     _humanize_arcade_titles(data, arcade_meta)
     attach_arcade_patches(data, arcade_meta)  # `pt` + patched family_sets
+    attach_same_game_groups(data, arcade_meta)  # `g`: one game on several cores
     data.extend(EXTRA_WEB_ROWS)
     # sort: arcade first by date then title, cores after; keep it stable/predictable
     data.sort(key=lambda d: (d["base"], d["date"] or "9999", d["title"].lower()))

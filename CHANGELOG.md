@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-15
+
+- Release tracker: an arcade game that ships on more than one core (Bubble Bobble on Jotego and Coin-Op, Galivan on the Distribution and rmCores, 37 games today) is now one row that expands into its per-core builds. The row sorts by its newest build and earliest debut; its panel shows the game once with a section per core. Favorites, links and the update_all export stay on the individual builds.
+
 ## 2026-10-14
 
 - Release tracker: arcade fan patches from [Arcade Patches](https://arcadepatches.com/) (strygo), such as English translations, restorations, enhanced editions and the CPS+ arranged soundtracks, now appear in a game's panel, with a Patches filter.

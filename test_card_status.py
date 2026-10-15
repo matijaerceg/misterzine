@@ -186,3 +186,57 @@ class RetitleKeyTests(unittest.TestCase):
     def test_region_qualifiers_still_split(self):
         self.assertEqual(mz._retitle_key("Jungle King Japan"), mz._retitle_key("Jungle King (Japan)"))
         self.assertNotEqual(mz._retitle_key("Game (US)"), mz._retitle_key("Game (World)"))
+
+
+class SameGameGroupTests(unittest.TestCase):
+    """`g` folds one game on several cores; see attach_same_game_groups."""
+    META = {"bublbobl": {"parent": ""}, "boblbobl": {"parent": "bublbobl"},
+            "sprint1": {"parent": ""}, "sprint2": {"parent": "sprint1"}}
+
+    @staticmethod
+    def web(title, sn, src, core, mt=None):
+        d = {"base": "Arcade", "title": title, "sn": sn, "src": src, "core": core}
+        if mt:
+            d["mt"] = mt
+        return d
+
+    def test_same_setname_groups_across_cores(self):
+        data = [self.web("Bubble Bobble", "bublbobl", "jtbindb", "jtbubl"),
+                self.web("Bubble Bobble (Japan) [CoC]", "bublbobl", "coinop", "bublbobl_mister")]
+        self.assertEqual(mz.attach_same_game_groups(data, self.META), 1)
+        self.assertEqual([d["g"] for d in data], ["bublbobl", "bublbobl"])
+
+    def test_same_parent_and_base_title_groups(self):
+        data = [self.web("Bubble Bobble", "bublbobl", "jtbindb", "jtbubl"),
+                self.web("Bubble Bobble (bootleg)", "boblbobl", "meathax", "Arcade-Bobble")]
+        mz.attach_same_game_groups(data, self.META)
+        self.assertEqual([d.get("g") for d in data], ["bublbobl", "bublbobl"])
+
+    def test_same_parent_different_base_title_stays_apart(self):
+        data = [self.web("Sprint 1", "sprint1", "distribution_mister", "sprint1"),
+                self.web("Sprint 2", "sprint2", "distribution_mister", "sprint2")]
+        self.assertEqual(mz.attach_same_game_groups(data, self.META), 0)
+        self.assertTrue(all("g" not in d for d in data))
+
+    def test_one_core_variant_pair_stays_apart(self):
+        data = [self.web("Asteroids Deluxe (green)", "astdelux", "distribution_mister", "Asteroids"),
+                self.web("Asteroids Deluxe (orange)", "astdelux", "distribution_mister", "Asteroids")]
+        self.assertEqual(mz.attach_same_game_groups(data, {}), 0)
+
+    def test_raw_mt_title_wins_over_display_title(self):
+        # a retitled row keeps its raw MRA title in mt; grouping reads that
+        data = [self.web("Bubble Bobble (Jotego)", "bublbobl", "jtbindb", "jtbubl", mt="Bubble Bobble"),
+                self.web("Bubble Bobble (Coin-Op)", "boblbobl", "coinop", "bb_mister", mt="Bubble Bobble")]
+        mz.attach_same_game_groups(data, self.META)
+        self.assertEqual(data[0]["g"], "bublbobl")
+
+    def test_deterministic_regardless_of_input_order(self):
+        rows = [self.web("Bubble Bobble", "bublbobl", "jtbindb", "jtbubl"),
+                self.web("Bubble Bobble (Japan) [CoC]", "bublbobl", "coinop", "bublbobl_mister"),
+                self.web("Sprint 1", "sprint1", "distribution_mister", "sprint1")]
+        a = [dict(d) for d in rows]
+        b = [dict(d) for d in reversed(rows)]
+        mz.attach_same_game_groups(a, self.META)
+        mz.attach_same_game_groups(b, self.META)
+        self.assertEqual(sorted((d["title"], d.get("g")) for d in a),
+                         sorted((d["title"], d.get("g")) for d in b))

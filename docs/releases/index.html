@@ -615,6 +615,35 @@
     #rows tr:hover td:first-child .fav { visibility: visible; }
     td:first-child .fav:hover { color: var(--accent); }
   }
+  /* same-game groups: the umbrella row (tr.grp, .x while expanded) and the
+     member rows listed under it (tr.member). The chevron sits where the star
+     gutter would put a star (an umbrella has none); members step in behind a
+     short accent rule so the tree reads at a glance. Chip chrome copies .bb
+     (muted pill): a count, not a novelty. */
+  tr.grp td:first-child { font-weight: 600; }
+  tr.grp .tw { position: absolute; left: .45rem; top: 0; bottom: 0; width: 1rem;
+               display: flex; align-items: center; justify-content: center;
+               color: var(--muted); font-size: .8em; }
+  td .gc { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
+           border: 1px solid var(--muted); border-radius: .2rem;
+           color: var(--muted); font-size: .6em; font-weight: 700;
+           font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;
+           letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
+           white-space: nowrap; cursor: help; }
+  tr.member td:first-child { padding-left: 2.6rem; }
+  tr.member td:first-child::before { content: ''; position: absolute; left: 1.75rem; top: 0; bottom: 0;
+                                     border-left: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+  /* the group panel: a note under the title, then one card per member build */
+  #panel .grpnote { color: var(--muted); font-size: .85rem; margin: 0 0 .8rem; }
+  #panel .corecard { border-top: 1px solid var(--rule); padding-top: .6rem; margin-top: .4rem; }
+  #panel .corecard h3 { font-size: 1rem; margin: 0 0 .4rem; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 .35rem;
+                        font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
+  #panel .corecard h3 .openm { color: var(--accent); text-decoration: none; }
+  #panel .corecard h3 .openm:hover { text-decoration: underline; }
+  #panel .corecard h3 .fav { font: inherit; font-size: 1.1rem; line-height: 1; flex: none; border: 0; padding: 0;
+                             margin-left: auto; background: none; color: var(--muted); cursor: pointer; }
+  #panel .corecard h3 .fav.on { color: var(--accent); }
+  #panel .corecard .launchrow { margin-bottom: .5rem; }
 
   /* --- detail panel: slides in from the left --- */
   #panel { position: fixed; top: 0; left: 0; height: 100vh; height: 100dvh; width: var(--pw, round(calc(100vw / 3), 1px));
@@ -1173,7 +1202,20 @@ let openRow = null;  // the selected data object (unique & stable; d.img is NOT 
 // deep links: every row carries a stable key (d.k, stamped by export-web);
 // #<k> in the URL opens that row's panel, and opening a panel writes it back
 const KEY2ROW = {};  // filled when data.json loads
-const rowURL = d => location.origin + location.pathname + '#' + d.k;
+// Same-game groups: arcade rows carrying the same `g` (export-web
+// attach_same_game_groups) are one game shipped on several cores. After the
+// filters run, two or more surviving members fold under one umbrella object
+// (makeUmbrella; grp: true) that sorts by the group's best value and expands
+// inline into its members; a lone survivor is just its own row. `view` is the
+// sorted top level, `flat` the rendered sequence (umbrella, then members while
+// expanded) — every data-i indexes flat. The umbrella is a container, not a
+// release: no favorite star, no k; its permalink is #g:<g>.
+let flat = [];
+const expanded = new Set();  // g of every open umbrella; survives re-renders and live swaps
+const ALLG = {};   // g -> every member row in DATA (ingest), for deep links to a filtered-away group
+const G2ROW = {};  // g -> the umbrella object of the current apply()
+const rowHash = d => d.grp ? '#g:' + d.g : d.k ? '#' + d.k : '';
+const rowURL = d => location.origin + location.pathname + rowHash(d);
 // the site feedback form (feedback.js) offers to attach the game whose panel is open
 window.mzFeedbackGame = () => document.body.classList.contains('panel-open') && openRow && openRow.k
   ? { key: openRow.k, title: openRow.title } : null;
@@ -1183,6 +1225,11 @@ window.mzFeedbackGame = () => document.body.classList.contains('panel-open') && 
 // arm the update checker, popstate still has to close the panel).
 function hashKey() {
   try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; }
+}
+// the row (or umbrella, #g:<g>) the URL hash names, or undefined
+function hashRow() {
+  const h = hashKey();
+  return h.startsWith('g:') ? G2ROW[h.slice(2)] : KEY2ROW[h];
 }
 
 // --- favorites ---------------------------------------------------------------
@@ -1867,6 +1914,16 @@ function batchBadge(d) {
 // marker on favorited rows and does its starring in the detail panel; a live
 // button there would only compete with the row's own tap target.
 function titleCell(d) {
+  // umbrella: disclosure chevron, the game's base title, a "N cores" chip, and
+  // the dot/DEBUT pill speaking for the group (any member unseen; the game's
+  // own debut). No star: favorites live on the member builds.
+  if (d.grp) {
+    const dot = d.members.some(isUnseen)
+      ? '<span class="sv" data-tip="A build of this game was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
+    return '<span class="tw" aria-hidden="true">' + (expanded.has(d.g) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
+      '<span class="gc" data-tip="' + escA('This game ships on ' + d.members.length + ' cores. Select the row to list them.') + '">' +
+      d.members.length + ' cores</span>' + newBadge(d);
+  }
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
@@ -1898,6 +1955,7 @@ function rotCell(d) {
 }
 
 function coreCell(d) {
+  if (d.grp) return esc(d.cores);  // the member cores, named; each member row links its own
   let label = coreLabel(d.core);
   if (!d.repo) return esc(label);
   // rows whose catalog never captured an rbf: name the link after the repo
@@ -1930,7 +1988,7 @@ const COLUMNS = [
   // the same fact the Source filter narrows on, for visitors who want it on
   // every row; sorts by display name (see keyOf), not the raw pipeline id
   { k: 'src', label: 'Source', w: 12, mw: 6.5, opt: true,
-    cell: d => '<td class="src">' + esc(d.src ? SRC_NAMES[d.src] || d.src : '') + '</td>' },
+    cell: d => '<td class="src">' + esc(d.grp ? d.srcs : d.src ? SRC_NAMES[d.src] || d.src : '') + '</td>' },
   { k: 'genre', label: 'Genre', w: 10, mw: 5, opt: true },
   // 'Build Date' (was 'Last Updated' until 2026-09-17: "updated by whom?" was
   // the recurring confusion): the dated build file update_all delivers.
@@ -2219,8 +2277,13 @@ document.getElementById('tovisit').addEventListener('click', () => {
 // search box is hiding every one of them.
 function jumpToNews(keys) {
   const want = new Set(keys);
+  // a changed build folded under a collapsed umbrella has no row to park on:
+  // open its group first
+  let opened = false;
+  for (const u of view) if (u.grp && !expanded.has(u.g) && u.members.some(m => want.has(m.k))) { expanded.add(u.g); opened = true; }
+  if (opened) render();
   for (const tr of document.querySelectorAll('#rows tr[data-i]')) {
-    const d = view[+tr.dataset.i];
+    const d = flat[+tr.dataset.i];
     if (d && want.has(d.k)) return parkRow(tr);
   }
   scrollTableTop();
@@ -2267,11 +2330,22 @@ function render() {
   // render). The in-list divider that used to fence them off is gone since
   // 2026-09-17: it only worked under one sort and swept in unchanged rows that
   // sorted above a late-arriving older-dated build.
-  tb.innerHTML = view.map((d, i) =>
-    '<tr' + (d === openRow ? ' class="open"' : '') + ' data-i="' + i + '">' +
-    cols.map(c => c.cell(d)).join('') + '</tr>'
-  ).join('');
-  setCount(view.length);
+  // flat = what the tbody shows: each top-level entry, then its members while
+  // the umbrella is expanded. Member rows get .member only here (a promoted
+  // lone survivor keeps its g but sits at the top level as a plain row).
+  flat = [];
+  const cls = [];
+  for (const d of view) {
+    flat.push(d); cls.push(d.grp ? 'grp' + (expanded.has(d.g) ? ' x' : '') : '');
+    if (d.grp && expanded.has(d.g)) for (const m of d.members) { flat.push(m); cls.push('member'); }
+  }
+  tb.innerHTML = flat.map((d, i) => {
+    const c = cls[i] + (d === openRow ? ' open' : '');
+    return '<tr' + (c.trim() ? ' class="' + c.trim() + '"' : '') + ' data-i="' + i + '">' +
+      cols.map(x => x.cell(d)).join('') + '</tr>';
+  }).join('');
+  // the tally counts releases, not umbrellas, so "N of M" keeps meaning rows
+  setCount(view.reduce((n, d) => n + (d.grp ? d.members.length : 1), 0));
   syncScrollHints();  // the jump stack re-reads its targets; a same-height re-render escapes the ResizeObserver
 }
 // tally: rendered inside the search box (see .count CSS). "142 of 1025" while
@@ -2340,12 +2414,27 @@ function apply() {
             (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
   });
+  // fold same-game survivors under one umbrella (see makeUmbrella); a group the
+  // filters cut to one member is promoted to a plain row. Umbrellas are minted
+  // per apply, so the open one and the deep-link map are re-pointed here.
+  const buckets = {}, top = [];
+  for (const d of view) {
+    if (!d.g) { top.push(d); continue; }
+    let b = buckets[d.g];
+    if (!b) { b = buckets[d.g] = []; top.push(b); }
+    b.push(d);
+  }
+  view = top.map(x => Array.isArray(x) ? (x.length > 1 ? makeUmbrella(x) : x[0]) : x);
+  for (const g in G2ROW) delete G2ROW[g];
+  for (const d of view) if (d.grp) G2ROW[d.g] = d;
+  for (const g in ALLG) if (!G2ROW[g]) G2ROW[g] = makeUmbrella(ALLG[g]);  // filtered away: still linkable
+  if (openRow && openRow.grp) openRow = G2ROW[openRow.g] || openRow;
   if (sortKey) {
     const keyOf = x => sortKey === 'typesort' ? typeLabel(x)
-      : sortKey === 'core' ? coreLabel(x.core)
-      : sortKey === 'src' ? (x.src ? SRC_NAMES[x.src] || x.src : '')
+      : sortKey === 'core' ? (x.grp ? x.cores : coreLabel(x.core))
+      : sortKey === 'src' ? (x.grp ? x.srcs : x.src ? SRC_NAMES[x.src] || x.src : '')
       : (x[sortKey] || '');
-    view.sort((a, b) => {
+    const cmp = (a, b) => {
       const av = keyOf(a), bv = keyOf(b);
       // Blank cells always sink to the bottom, regardless of sort direction, so
       // "no data" never heads the list (e.g. sorting Players ascending still
@@ -2383,8 +2472,47 @@ function apply() {
       // Final tiebreak: title A–Z, so an equal date/core block isn't left in
       // arbitrary data order.
       return a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' });
-    });
+    };
+    view.sort(cmp);
+    for (const u of view) if (u.grp) u.members.sort(cmp);  // members follow the table's order
   }
+  render();
+}
+
+// The umbrella for one same-game group. Sorts by the group's best value
+// (newest build / change, earliest debut, newest batch), so a game surfaces
+// wherever its most recent core would; the title is the base title of the
+// member that debuted first (shortest on a tie), the chip and panel name the
+// members. Shared facts (genre, year, specs...) are copied only when every
+// member agrees; the screenshot is any member's (it is the same game).
+const baseTitle = t => t.replace(/\s*[\(\[].*$/, '').trim();
+function makeUmbrella(ms) {
+  const same = k => ms.every(m => (m[k] || '') === (ms[0][k] || '')) ? ms[0][k] : undefined;
+  const max = k => ms.reduce((v, m) => (m[k] || '') > v ? m[k] : v, '');
+  const min = k => ms.reduce((v, m) => m[k] && (!v || m[k] < v) ? m[k] : v, '');
+  const lead = ms.slice().sort((a, b) => (a.date || '9').localeCompare(b.date || '9')
+    || baseTitle(a.title).length - baseTitle(b.title).length)[0];
+  const u = { grp: true, g: ms[0].g, members: ms, title: baseTitle(lead.title), base: 'Arcade',
+    date: min('date'), updated: max('updated'), mz: max('mz'), b: Math.max(...ms.map(m => m.b || 0)),
+    date_kind: ms.every(m => m.date_kind === 'debut') ? 'debut' : 'build', core: '', src: '',
+    mat: ms.some(m => m.mat) };
+  for (const k of ['genre', 'year', 'manufacturer', 'reg', 'rot', 'res', 'plr', 'ctl', 'spc', 'flip', 'sn', 'scr']) {
+    const v = same(k); if (v !== undefined && v !== '') u[k] = v;
+  }
+  const pic = ms.find(m => m.img);
+  if (pic) for (const k of ['img', 'img_slots', 'img_w', 'img_h']) u[k] = pic[k];
+  // a single-game core reads as its game's name (coreSoleTitle), which in an
+  // umbrella cell just repeats the title: name the source instead
+  u.cores = [...new Set(ms.map(m => { const l = coreLabel(m.core) || m.core;
+    return l === m.title ? (SRC_NAMES[m.src] || l) : l; }))].join(' · ');
+  u.srcs = [...new Set(ms.map(m => SRC_NAMES[m.src] || m.src))].join(' · ');
+  return u;
+}
+// open or close an umbrella; selecting it also shows the group panel
+function toggleGroup(u, force) {
+  const on = force === undefined ? !expanded.has(u.g) : force;
+  if (on) expanded.add(u.g); else expanded.delete(u.g);
+  if (openRow !== u) openPanel(u);
   render();
 }
 
@@ -3616,11 +3744,86 @@ const launchRowHTML = ds => {
     '<button class="more" aria-label="Manage MiSTers">▾</button>';
 };
 function updateLaunchRow() {
-  const lr = panel.querySelector('.launchrow');
-  if (lr) lr.innerHTML = launchRowHTML(lr.dataset);
+  // one per panel, or one per member card in a group panel
+  for (const lr of panel.querySelectorAll('.launchrow')) lr.innerHTML = launchRowHTML(lr.dataset);
+}
+
+// The umbrella panel: one game, several cores. The shared facts once, then a
+// card per member build in the table's order, each with its own permalink,
+// star, launch row and dates — so everything about the game sits in one
+// stack. No star on the umbrella: favorites belong to the builds.
+function groupHTML(u) {
+  const rows = [['Type', typeLabel(u)]];
+  if (u.genre) rows.push(['Genre', u.genre]);
+  if (u.manufacturer) rows.push(['Manufacturer', u.manufacturer]);
+  if (u.year) rows.push(['Original year', esc(u.year) + agoSpan(yearAge(u.year)), true]);
+  const specRow = (label, key) => { if (u[key]) rows.push([label, u[key]]); };
+  specRow('Region', 'reg');
+  specRow('Rotation', 'rot');
+  if (u.scr) rows.push(['Screens', u.scr === 3 ? 'Triple screen (3)' : 'Dual screen (2)']);
+  specRow('Resolution', 'res');
+  specRow('Players', 'plr');
+  specRow('Controls', 'ctl');
+  specRow('Special controls', 'spc');
+  specRow('Screen flip', 'flip');
+  if (u.date) rows.push(['MiSTer debut', esc(u.date) + agoSpan(relAge(u.date)), true]);
+  rows.push(['Cores', u.members.length + ', listed below']);
+  if (u.sn) rows.push(['More info', '<a href="https://adb.arcadeitalia.net/dettaglio_mame.php?game_name=' +
+    encodeURIComponent(u.sn) + '&lang=en" target="_blank" rel="noopener">' +
+    '<span class="lbl">Arcade Database</span><span class="ext">↗</span></a>', true]);
+  const dl = rows => '<dl>' + rows.map(([k, v, html]) =>
+    '<dt>' + esc(k) + '</dt><dd>' + (html ? v : esc(v)) + '</dd>').join('') + '</dl>';
+  const cards = u.members.map(m => {
+    const r = [];
+    if (m.beta) r.push(['Patreon ' + gateStage(m), 'Early access from ' + gateInfo(m).who]);
+    r.push(['FPGA core', cfield(m.core, esc(coreLabel(m.core)) +
+      (coreLabel(m.core) !== m.core ? ' (' + esc(m.core) + ')' : ''), 'Copy core name'), true]);
+    if (m.src) r.push(['Source', SRC_NAMES[m.src] || m.src]);
+    if (m.sn && m.sn !== u.sn) r.push(['ROM name', cfield(m.sn, '<span class="rom">' + esc(m.sn) + '</span>', 'Copy ROM name'), true]);
+    for (const k of ['reg', 'rot', 'res', 'plr', 'ctl', 'spc', 'flip']) {
+      if (m[k] && m[k] !== u[k]) r.push([COLUMNS.find(c => c.k === k).label, m[k]]);  // only where the builds differ
+    }
+    if (m.date) r.push([m.date_kind === 'debut' ? 'MiSTer debut' : 'Latest build', esc(m.date) + agoSpan(relAge(m.date)), true]);
+    if (m.updated) r.push(['Build date', esc(m.updated) + agoSpan(relAge(m.updated)), true]);
+    if (m.mz) r.push(['Changed on MisterZine', esc(m.mz) + agoSpan(relAge(m.mz)), true]);
+    if (m.act) r.push(['Latest commit', esc(m.act) + agoSpan(relAge(m.act)), true]);
+    if (m.repo) r.push(['Repository', '<a href="' + escA(repoURL(m)) + '" target="_blank" rel="noopener">' +
+      '<span class="lbl">' + esc(m.repo.split('/').slice(0, 2).join('/')) + '</span><span class="ext">↗</span></a>', true]);
+    if (m.pt && m.pt.length) r.push(['Patches', m.pt.length + ' fan patch' + (m.pt.length === 1 ? '' : 'es') + ', see the build’s own entry']);
+    if (m.deprecated) r.push(['Status', 'Deprecated']);
+    if (m.note) r.push(['Note', m.note]);
+    const script = launchScript(m), zop = zapLaunchOp(m);
+    const lds = { script: script || '', zt: zop ? zop.t : '', zv: zop ? zop.v : '' };
+    const launcher = (script || zop)
+      ? '<div class="launchrow" data-script="' + escA(lds.script) + '" data-zt="' + escA(lds.zt) +
+        '" data-zv="' + escA(lds.zv) + '">' + launchRowHTML(lds) + '</div>' : '';
+    // the card's heading is the member's own entry: a link into its panel
+    return '<section class="corecard"><h3>' +
+      '<a class="openm" href="' + escA(rowHash(m)) + '" data-k="' + escA(m.k) + '">' + esc(m.title) + '</a>' +
+      betaBadge(m) + newBadge(m) + favBtnHTML(m) + '</h3>' + launcher + dl(r) + '</section>';
+  }).join('');
+  const overlay = window.matchMedia('(max-aspect-ratio: 3/5)').matches;
+  const hint = overlay
+    ? '<p class="hint"><em>Swipe or Back to close</em></p>'
+    : '<p class="hint"><kbd>↑</kbd> <kbd>↓</kbd> browse rows · <kbd>→</kbd> <kbd>←</kbd> open or close the group · <kbd>Esc</kbd> to close</p>';
+  const ratio = ASPECT_OVERRIDE[u.img] || (u.scr === 3 ? '12 / 3' : u.scr === 2 ? '8 / 3'
+    : (u.img_h && u.img_w / u.img_h >= 2.4) ? '8 / 3'
+    : u.rot ? (u.rot.startsWith('Vertical') ? '3 / 4' : '4 / 3')
+    : (u.img_w > u.img_h ? '4 / 3' : '3 / 4'));
+  const shots = (u.img_slots || []).map(s =>
+    '<div class="frame' + (ratio === '3 / 4' ? ' vert' : '') + (u.mat ? ' mat' : '') +
+    '" style="aspect-ratio:' + ratio + '">' +
+    '<img loading="lazy" src="../images/' + s + '/' + escA(u.img) + '.png" alt="' + escA(s) + '"></div>').join('');
+  const titleHTML = '<span class="gametitle">' + esc(u.title) + '</span>' +
+    (u.year ? ' <span style="color:var(--muted);font-weight:normal">(' + esc(u.year) + ')</span>' : '');
+  return '<div class="body"><button class="close" aria-label="Close">×</button>' +
+    '<h2>' + cfield(rowURL(u), titleHTML, 'Copy link to this game') + '</h2>' +
+    '<p class="grpnote">One game, ' + u.members.length + ' cores. Each build below has its own entry, star and launch button.</p>' +
+    shots + dl(rows) + cards + '</div>' + hint;
 }
 
 function detailHTML(d) {
+  if (d.grp) return groupHTML(d);
   const rows = [];
   // Patreon-beta rows lead with what the chip can only hint at: who gates it,
   // what unlocks it, and where to subscribe. First row so it reads before the
@@ -3864,7 +4067,7 @@ function closePanel() {
 // the #key in the address bar via replaceState so every state is shareable.
 let panelHist = false;
 function pushPanelState() {
-  const url = openRow && openRow.k ? '#' + openRow.k : null;
+  const url = openRow ? rowHash(openRow) || null : null;
   if (!panelHist && matchMedia('(max-aspect-ratio: 3/5)').matches) {
     if (url) history.pushState({ mzPanel: true }, '', url);
     else history.pushState({ mzPanel: true }, '');
@@ -3877,7 +4080,7 @@ window.addEventListener('popstate', e => {
   // panelHist mirrors "does the CURRENT entry back a panel" — set it before
   // any closePanel so a Back-close can't history.back() a second time
   panelHist = !!(e.state && e.state.mzPanel);
-  const d = KEY2ROW[hashKey()];
+  const d = hashRow();
   if (d) { openPanel(d, true); recenterOpen(); }  // Forward (or hash edit) re-opens
   else if (document.body.classList.contains('panel-open')) closePanel();
 });
@@ -3886,7 +4089,14 @@ function markOpenRow() {
   document.querySelectorAll('#rows tr.open').forEach(tr => tr.classList.remove('open'));
   syncScrollHints();  // retire the "Selected" jump button with the highlight
   if (openRow == null) return;
-  const i = view.findIndex(d => d === openRow);
+  // a selected member implies its group is open: expand a collapsed umbrella
+  // so the highlight has a row to land on (deep links, arrow keys, panel cards)
+  if (openRow.g && !openRow.grp && !expanded.has(openRow.g) && view.includes(G2ROW[openRow.g])) {
+    expanded.add(openRow.g);
+    render();  // stamps .open itself
+    return;
+  }
+  const i = flat.findIndex(d => d === openRow);
   if (i >= 0) { const tr = document.querySelector('#rows tr[data-i="' + i + '"]'); if (tr) tr.classList.add('open'); }
   syncScrollHints();  // the "Selected" jump button follows the highlight, not the scroll
 }
@@ -3912,7 +4122,10 @@ document.getElementById('rows').addEventListener('click', e => {
   const fb = e.target.closest('button.fav');  // starring is not a row selection
   if (fb) { toggleFav(KEY2ROW[fb.dataset.k], fb); return; }
   const tr = e.target.closest('tr[data-i]');
-  if (tr) openPanel(view[+tr.dataset.i]);
+  if (!tr) return;
+  const d = flat[+tr.dataset.i];
+  if (d && d.grp) toggleGroup(d);  // an umbrella opens its members and its panel
+  else openPanel(d);
 });
 // EASTER EGG: the ZapScript token takes a jolt of current when you touch it, and
 // another when you copy it. Keyframes are minted per fire (Web Animations, not a
@@ -4024,7 +4237,10 @@ document.addEventListener('click', e => {
 panel.addEventListener('click', e => {
   // on touch this is the only way to star anything (rows have no hover to reveal one)
   const fb = e.target.closest('button.fav');
-  if (fb) { toggleFav(openRow, fb); return; }
+  if (fb) { toggleFav(KEY2ROW[fb.dataset.k] || openRow, fb); return; }  // a group card stars its own member
+  // a group card's heading opens that member's own panel
+  const om = e.target.closest('a.openm');
+  if (om) { e.preventDefault(); const m = KEY2ROW[om.dataset.k]; if (m) { openPanel(m); recenterOpen(); } return; }
   const lr = e.target.closest('.launchrow');
   if (lr) {
     // chevron opens the device manager popover; each Launch button fires
@@ -4043,7 +4259,7 @@ panel.addEventListener('click', e => {
 
 // --- arrow-key row navigation (Up/Down = click prev/next row) ---
 function currentIndex() {
-  return openRow == null ? -1 : view.findIndex(d => d === openRow);
+  return openRow == null ? -1 : flat.findIndex(d => d === openRow);
 }
 function firstVisibleRowIdx(fromBottom) {
   // [data-i] only: the tbody also holds chrome rows (the "new since your last
@@ -4067,17 +4283,17 @@ function firstVisibleRowIdx(fromBottom) {
   return -1;
 }
 function navigate(dir) {  // dir: +1 down, -1 up
-  if (!view.length) return;
+  if (!flat.length) return;
   const cur = currentIndex();
   let target;
   if (cur < 0) {                                   // nothing selected → top (or bottom) visible row
     target = firstVisibleRowIdx(dir < 0);
-    if (target < 0) target = dir > 0 ? 0 : view.length - 1;
+    if (target < 0) target = dir > 0 ? 0 : flat.length - 1;
   } else {
     target = cur + dir;
-    if (target < 0 || target >= view.length) return;  // clamp at the ends
+    if (target < 0 || target >= flat.length) return;  // clamp at the ends
   }
-  openPanel(view[target]);
+  openPanel(flat[target]);
   const tr = document.querySelector('#rows tr[data-i="' + target + '"]');
   if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });  // keep the selected row centered as you arrow through
 }
@@ -4105,6 +4321,14 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
     e.preventDefault();
     navigate(e.key === 'ArrowDown' ? 1 : -1);
+    return;
+  }
+  // Right/Left on a selected umbrella opens/closes its members (caret keys
+  // inside a field keep their meaning)
+  if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && openRow && openRow.grp
+      && !e.target.closest('input, textarea, select')) {
+    e.preventDefault();
+    toggleGroup(openRow, e.key === 'ArrowRight');
     return;
   }
   // type anywhere to filter: printable keys and Backspace route to the search box.
@@ -4653,6 +4877,10 @@ function ingest(d) {
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
   for (const k in KEY2ROW) delete KEY2ROW[k];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
+  // same-game groups by g, every member (apply() folds whatever survives the filters)
+  for (const g in ALLG) delete ALLG[g];
+  for (const r of DATA) if (r.g) (ALLG[r.g] = ALLG[r.g] || []).push(r);
+  for (const g in ALLG) if (ALLG[g].length < 2) delete ALLG[g];  // Mature -> Hide can orphan a member
   // batch-clustering: count rows sharing a core's Last Updated stamp (see
   // updCluster / clusterN). Rebuilt, not merged, for the same reason as above.
   for (const k in updCluster) delete updCluster[k];
@@ -4788,14 +5016,14 @@ function captureAnchor() {
   const wrap = document.querySelector('.tablewrap');
   if (wrap.scrollTop <= 0) return null;
   const i = firstVisibleRowIdx();
-  const d = i >= 0 ? view[i] : null;
+  const d = i >= 0 ? flat[i] : null;
   const tr = i >= 0 ? document.querySelector('#rows tr[data-i="' + i + '"]') : null;
-  if (!d || !d.k || !tr) return null;
-  return { wrap, k: d.k, top: tr.getBoundingClientRect().top };
+  if (!d || !rowHash(d) || !tr) return null;
+  return { wrap, h: rowHash(d), top: tr.getBoundingClientRect().top };
 }
 function restoreAnchor(a) {
   if (!a) return;
-  const i = view.findIndex(x => x.k === a.k);
+  const i = flat.findIndex(x => rowHash(x) === a.h);
   if (i < 0) return;  // the anchor row itself is gone; leave the scroll alone
   const tr = document.querySelector('#rows tr[data-i="' + i + '"]');
   if (tr) a.wrap.scrollTop += tr.getBoundingClientRect().top - a.top;
@@ -4883,7 +5111,7 @@ function boot() {
     // the entry we arrived on already IS the panel state (in overlay mode Back
     // correctly leaves the site, i.e. returns where the visitor came from).
     // Unknown/stale keys are ignored silently.
-    const hit = KEY2ROW[hashKey()];
+    const hit = hashRow();
     if (hit) { openPanel(hit, true); recenterOpen(); }
     armNextCheck();
   }).catch(() => {

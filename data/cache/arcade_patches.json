@@ -1273,6 +1273,7 @@
       "hbmame": {
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
+        "sfx.09": "sfx.09",
         "sfx.13m": "sfx.13m",
         "sfx.14m": "sfx.14m",
         "sfx.15m": "sfx.15m",
@@ -1308,6 +1309,7 @@
       "hbmame": {
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
+        "sfx.09": "sfx.09",
         "sfx.13m": "sfx.13m",
         "sfx.14m": "sfx.14m",
         "sfx.15m": "sfx.15m",
@@ -1349,8 +1351,8 @@
     "Shin Akuma in eleven colors from Ultra Street Fighter II: pick Shin on Akuma's cell, let go of every button, then press one of the same buttons before the select screen moves on",
     "Akuma's own defeated face on the Continue screen, in the color you picked",
     "The three bonus stages from Super Street Fighter II, back in one-player games: the car after three fights, the barrels after six, the oil drums after nine. They run at the selected Turbo speed; BONUS STAGE in EX CONFIGURATION turns them on or off",
-    "EX CONFIGURATION in the operator menu: Japanese or international names; ORIGINAL, 30TH ANNIVERSARY or ULTRA SF2 artwork; and BONUS STAGE on or off. 30TH ANNIVERSARY, the default, uses the 30th Anniversary Collection's Hong Kong flag, Chun-Li's storefront signs and Guile's stage, with the red-winged runway emblem. Settings are saved between sessions",
-    "ULTRA SF2 artwork follows Ultra Street Fighter II's stages: its runway emblem and a gold can on Guile's stage, Chun-Li's storefront without its signs, a red sun on E. Honda's bathhouse mural and a plain floor on Zangief's stage, with the 30th Anniversary Hong Kong flag",
+    "EX CONFIGURATION in the operator menu: Japanese or international names; ORIGINAL, 30TH ANNIVERSARY or ULTRA SF2 artwork; and BONUS STAGE on or off. 30TH ANNIVERSARY, the default, uses the 30th Anniversary Collection's Hong Kong flag, Chun-Li's storefront signs and Guile's stage, with the red-winged runway emblem. Settings are saved between sessions. On EXIT, press 1P Start to save and return",
+    "ULTRA SF2 artwork follows Ultra Street Fighter II's stages: its runway emblem and a gold can on Guile's stage, Chun-Li's storefront without its signs, a red sun on E. Honda's bathhouse mural and a plain floor on Zangief's stage, with the 30th Anniversary Hong Kong flag and RUSSIA for Zangief's country",
     "Tournament Battle: with the link adapter, eight players and three matches across linked cabinets, with the Akuma and random-select cells on its select screen; without it, the game plays normally",
     "A new title screen with an EX mark",
     "Two more colors for every fighter: pick with two punches or two kicks, or hold Start as well for the Old version in those colors. The VS screen and the fight portrait show the color you picked",
@@ -1433,7 +1435,7 @@
      ]
     ]
    },
-   "date": "2026-10-09",
+   "date": "2026-10-15",
    "description": [
     "Super Turbo is the version competitive players swear by, but it left things behind. The bonus stages from Super Street Fighter II were gone. Shin Akuma was a hidden boss you had to earn, and Ten Akuma only turned up years later at home. Tournament Battle, the eight-player linked-cabinet mode, stayed with the earlier Super Street Fighter II.",
     "EX puts it together on the arcade game. Akuma has his own select-screen cell, with Shin and Ten available through codes there; the original Ryu codes still work. A random-select cell sits opposite him. The car, the falling barrels and the oil drums are back between fights. Link cabinets with the adapter and it runs Tournament Battle; without it, it plays as normal. Every fighter gets two more colors, Akuma and Shin Akuma get their colors from Ultra Street Fighter II, the move names are the modern ones, and the title screen carries an EX mark.",
@@ -1484,6 +1486,17 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-10-15",
+     "items": [
+      "Cammy's stage no longer flashes gaps at the aurora boundary or beside the right-hand pillar, while retaining the floor's perspective and the game's timing.",
+      "JAMAICA's final A now has a complete outline.",
+      "ULTRA SF2 artwork shows RUSSIA for Zangief's country. ORIGINAL and 30TH ANNIVERSARY keep U.S.S.R.",
+      "EX CONFIGURATION's EXIT shows the 1P Start prompt and uses 1P Start to save and return, like SYSTEM CONFIGURATION.",
+      "Both regional builds have new checksums; rebuild them with the rc7 kit."
+     ],
+     "version": "rc7"
+    },
     {
      "date": "2026-10-09",
      "items": [
@@ -1598,7 +1611,7 @@
    "subtitle": "Enhanced version",
    "summary": "Japan's Super Turbo with the extras it never had together: Shin Akuma and Ten Akuma on the select screen, the bonus stages back, Tournament Battle, two more colors and Free Play. In English or Japanese.",
    "title": "Super Street Fighter II EX",
-   "version": "rc6"
+   "version": "rc7"
   },
   {
    "artifact": {

@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 14 Oct 2026 19:42:53 +0000</lastBuildDate>
+<lastBuildDate>Thu, 15 Oct 2026 06:07:41 +0000</lastBuildDate>
+<item>
+<title>[New] Heavy Unit (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hvyunit</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Heavy Unit.mra:2026-10-15T06:07:41+00:00</guid>
+<pubDate>Thu, 15 Oct 2026 06:07:41 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hvyunit.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1988 / Kaneko / Taito&lt;/p&gt;&lt;p&gt;Core: Arcade-HeavyUnit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-15 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] The Lost Castle In Darkmist (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#the-lost-castle-in-darkmist</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/The Lost Castle In Darkmist.mra:2026-10-15T06:07:41+00:00</guid>
+<pubDate>Thu, 15 Oct 2026 06:07:41 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/darkmist.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platform / 1986 / Seibu Kaihatsu (Taito license)&lt;/p&gt;&lt;p&gt;Core: Arcade-Darkmist&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-15 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Super Don Quix-ote (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#superdq</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Super Don Quix-ote.mra:2026-10-15T05:35:57+00:00</guid>
+<pubDate>Thu, 15 Oct 2026 05:35:57 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;Platform / 1984 / Universal&lt;/p&gt;&lt;p&gt;Core: LaserdiscGames&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] LaserdiscGames (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261014.rbf:2026-10-15T05:35:57+00:00</guid>
+<pubDate>Thu, 15 Oct 2026 05:35:57 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Space Ace, Super Don Quix-ote.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Apple II (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Apple-II</link>
@@ -80,13 +116,13 @@
 <description>&lt;p&gt;Serves: Funky Fish, Kangaroo.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kangaroo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] LaserdiscGames (Arcade core, 3 games)</title>
+<title>[Updated] LaserdiscGames (Arcade core, 4 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261013.rbf:2026-10-14T00:37:37+00:00</guid>
 <pubDate>Wed, 14 Oct 2026 00:37:37 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Space Ace.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Space Ace, Super Don Quix-ote.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Qix (Arcade core, 8 games)</title>
@@ -870,42 +906,6 @@
 <category>new</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1980 / Apple&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-III_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Macintosh Quadra 800 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacQuadra800</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacQuadra800_20261002.rbf:2026-10-10T18:44:03+00:00</guid>
-<pubDate>Sat, 10 Oct 2026 18:44:03 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1993 / Apple&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacQuadra800_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] NeXTstation Turbo Color (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#NeXT-Color</link>
-<guid isPermaLink="false">distribution_mister:_Computer/NeXT-Color_20261010.rbf:2026-10-10T18:44:03+00:00</guid>
-<pubDate>Sat, 10 Oct 2026 18:44:03 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1992 / NeXT&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/NeXT-Color_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Sun-2 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Sun-2</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Sun-2_20261004.rbf:2026-10-10T18:44:03+00:00</guid>
-<pubDate>Sat, 10 Oct 2026 18:44:03 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1983 / Sun Microsystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Sun-2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Sun-3 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Sun-3</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Sun-3_20261005.rbf:2026-10-10T18:44:03+00:00</guid>
-<pubDate>Sat, 10 Oct 2026 18:44:03 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1985 / Sun Microsystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Sun-3_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

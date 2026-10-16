@@ -1489,6 +1489,15 @@
     {
      "date": "2026-10-15",
      "items": [
+      "Akuma, Shin Akuma and Ten Akuma keep their portraits after a win and when another player joins, including their extra colors.",
+      "Fighter names are centered beside the VS emblem without running beneath it.",
+      "Both regional builds have new checksums; rebuild them with the rc8 kit."
+     ],
+     "version": "rc8"
+    },
+    {
+     "date": "2026-10-15",
+     "items": [
       "Cammy's stage no longer flashes gaps at the aurora boundary or beside the right-hand pillar, while retaining the floor's perspective and the game's timing.",
       "JAMAICA's final A now has a complete outline.",
       "ULTRA SF2 artwork shows RUSSIA for Zangief's country. ORIGINAL and 30TH ANNIVERSARY keep U.S.S.R.",
@@ -1611,7 +1620,7 @@
    "subtitle": "Enhanced version",
    "summary": "Japan's Super Turbo with the extras it never had together: Shin Akuma and Ten Akuma on the select screen, the bonus stages back, Tournament Battle, two more colors and Free Play. In English or Japanese.",
    "title": "Super Street Fighter II EX",
-   "version": "rc7"
+   "version": "rc8"
   },
   {
    "artifact": {

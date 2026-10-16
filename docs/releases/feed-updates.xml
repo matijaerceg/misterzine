@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 15 Oct 2026 19:15:49 +0000</lastBuildDate>
+<lastBuildDate>Fri, 16 Oct 2026 05:20:02 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arcade-SSV (Arcade core, 10 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cairblad</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-SSV_20261016.rbf:2026-10-16T05:20:02+00:00</guid>
+<pubDate>Fri, 16 Oct 2026 05:20:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Change Air Blade, Drift Out '94 - The Hard Order, Dyna Gear, Monster Slider, Storm Blade, Survival Arts, Twin Eagle II - The Rescue Mission, Ultra X Weapons, Vasara, Vasara 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-16 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/SVV/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Sharp MZ (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#SharpMZ</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Power Instinct, Super Spacefortress Macross II, Thunder Dragon 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-06 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Rapid Hero (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#raphero</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Raphero_20261006.rbf:2026-10-06T23:24:50+00:00</guid>
-<pubDate>Tue, 06 Oct 2026 23:24:50 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raphero.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shooter / 1994 / NMK&lt;/p&gt;&lt;p&gt;Core: Arcade-NMK16_Raphero&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-06 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

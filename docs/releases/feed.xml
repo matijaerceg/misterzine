@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 16 Oct 2026 16:26:15 +0000</lastBuildDate>
+<lastBuildDate>Fri, 16 Oct 2026 21:43:49 +0000</lastBuildDate>
+<item>
+<title>[Updated] Bad Lands (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#badlands</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Badlands_20261016.rbf:2026-10-16T21:43:49+00:00</guid>
+<pubDate>Fri, 16 Oct 2026 21:43:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/badlands.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Badlands&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Badlands_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Batman (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#batman</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Batman_20261016.rbf:2026-10-16T21:43:49+00:00</guid>
+<pubDate>Fri, 16 Oct 2026 21:43:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/batman.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Batman&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Batman_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Off the Wall (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#offtwall</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/OffTheWall_20261016.rbf:2026-10-16T21:43:49+00:00</guid>
+<pubDate>Fri, 16 Oct 2026 21:43:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/offtwall.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Atari Games&lt;/p&gt;&lt;p&gt;Core: OffTheWall&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-OffTheWall_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rampart (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rampart</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Rampart_20261016.rbf:2026-10-16T21:43:49+00:00</guid>
+<pubDate>Fri, 16 Oct 2026 21:43:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/rampart.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1990 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Rampart&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Rampart_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] B-Wings (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bwings</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Trojan (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#trojan</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Trojan/Trojan (Romstar, set 1).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/trojan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Capcom&lt;/p&gt;&lt;p&gt;Core: jttrojan&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/trojan"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] The Simpsons (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#the-simpsons</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/The Simpsons.mra:2026-10-12T09:59:08+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 09:59:08 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/simpsons.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-Simpsons&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-12 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sharp MZ (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SharpMZ</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SharpMZ_20261012.rbf:2026-10-12T09:23:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 09:23:53 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ChampionBaseball (Arcade core, 5 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#champbas</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/ChampionBaseball_20261011.rbf:2026-10-11T22:47:52+00:00</guid>
-<pubDate>Sun, 11 Oct 2026 22:47:52 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Champion Base Ball, Champion Base Ball Part-2, Exciting Soccer, Exciting Soccer II, Talbot.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ChampionBaseball_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

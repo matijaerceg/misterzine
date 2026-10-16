@@ -2600,16 +2600,18 @@
    "changes": [
     "In CONSOLE game mode, free play and a title-screen mode menu: Arcade, Versus, Survival, Dramatic Battle, Akuma, Training and Options",
     "Training, as on the Saturn: recording and replay, computer settings, and action, speed and gauge options",
-    "Hold START during a CONSOLE fight for Continue and Quit; a short tap still taunts",
+    "Coin opens Pause/Back in CONSOLE mode, including character selection; Quit asks for confirmation",
     "Cammy and Random cells on the select screen, and Cammy as a CPU opponent in Arcade",
-    "EX Akuma (EX Gouki in Japan) and EX Cammy, under Capcom's EX rules with no Super Combos",
+    "EX Akuma (EX Gouki in Japan) and EX Cammy, under Capcom's EX rules with no Super Combos and distinct name colors on the select screen",
     "Alternate forms with one or two START presses, and every secret unlocked from the start",
-    "Versus matches return straight to the select screen; holding START for three seconds on a select screen returns to the menu",
+    "Versus matches return straight to the select screen",
     "An OPTION MODE page, and GAME MODE (CONSOLE or ARCADE), eight GAME SPEED levels and a TIME LIMIT with infinity in the operator menu",
     "A new title screen with an EX mark",
     "The USA build includes the Japanese story and endings in English, held-button win-quote selection and the next-stage place names",
     "REGULATION on the operator menu switches red or white blood, with red as the default",
-    "USA (Alpha 2 EX, English) and Japan (Zero 2 EX, Japanese) builds, each in 4 MB and 8 MB sizes"
+    "USA (Alpha 2 EX, English) and Japan (Zero 2 EX, Japanese) builds, each in 4 MB and 8 MB sizes",
+    "EX CONFIGURATION offers JAPAN or INTERNATIONAL backgrounds, with JAPAN as the default, and ORIGINAL or 30TH ANNIVERSARY artwork",
+    "START on Gen switches between his two starting stances"
    ],
    "comparison": {
     "columns": [
@@ -2691,12 +2693,12 @@
      ]
     ]
    },
-   "date": "2026-10-13",
+   "date": "2026-10-15",
    "description": [
     "Street Fighter Alpha 2 EX builds on our Street Fighter Alpha 2 Gold backport. Every Gold fighter plays exactly as in Gold. EX adds the menus, modes and forms the arcade game kept behind codes or never had, and every secret starts unlocked.",
-    "In CONSOLE game mode the game plays free, and START at the title opens a mode menu: Arcade, Versus, Survival, Dramatic Battle, Akuma, Training and Options. Versus matches go straight back to the select screen, and holding START for three seconds on any select screen returns to the menu. Holding START during a fight opens Continue and Quit. Training offers recording and replay, computer behavior and guard settings, input history and attack data. Cammy and a Random cell sit on the select screen, Cammy turns up as a CPU opponent in the other fighters' Arcade runs, and alternate forms take a START press or two instead of five.",
+    "In CONSOLE game mode the game plays free, and START at the title opens a mode menu: Arcade, Versus, Survival, Dramatic Battle, Akuma, Training and Options. Versus matches go straight back to the select screen, and Coin opens Pause/Back on selection screens and during fights, with a confirmed Quit to the title menu. Training offers recording and replay, computer behavior and guard settings, input history and attack data. Cammy and a Random cell sit on the select screen, Cammy turns up as a CPU opponent in the other fighters' Arcade runs, and alternate forms take a START press or two instead of five.",
     "Two EX forms join the roster, each one START press away on its fighter's cell: EX Akuma and EX Cammy. Both follow Capcom's own EX rules, with classic moves and no Super Combos.",
-    "OPTIONS opens an OPTION MODE page with difficulty, time limit, rounds, damage, turbo and sound. The operator menu adds GAME MODE, REGULATION for red or white blood, eight GAME SPEED levels and a TIME LIMIT of 25, 50, 75, 99 or infinity, and the title has a new EX mark. The USA build is in English; the Japan build, Street Fighter Zero 2 EX, keeps the Japanese.",
+    "OPTIONS opens an OPTION MODE page with difficulty, time limit, rounds, damage, turbo and sound. The operator menu adds GAME MODE, REGULATION for red or white blood, eight GAME SPEED levels and a TIME LIMIT of 25, 50, 75, 99 or infinity, and the title has a new EX mark. The USA build is in English; the Japan build, Street Fighter Zero 2 EX, keeps the Japanese. EX CONFIGURATION selects JAPAN or INTERNATIONAL backgrounds and ORIGINAL or 30TH ANNIVERSARY artwork.",
     "The MiSTer MRAs start in CONSOLE mode. MAME and HBMAME start in ARCADE mode, which keeps Gold's arcade title; set GAME MODE to CONSOLE on the operator menu's SYSTEM page for the mode menu. It runs in MAME and HBMAME and on MiSTer.",
     "This is a release candidate."
    ],
@@ -2706,9 +2708,9 @@
     "pr_url": "https://github.com/Robbbert/hbmame/pull/56"
    },
    "notes": [
-    "The 8 MB builds hold more QSound audio than the original CPS-2 hardware supports, so they run only on HBMAME and MiSTer.",
+    "The 8 MB builds run in HBMAME and on MiSTer; stock MAME uses the 4 MB builds.",
     "The 4 MB builds use the same arcade set names as Street Fighter Alpha 2 Gold's 4 MB builds (sfz2al, sfz2alj), so keep one or the other in your MAME ROM path.",
-    "This is a fan edition, unaffiliated with Capcom. The sets are built from discs and roms you already own, and the kit ships no code or data from the anthology or the arcade game beyond EX's mirrored and recolored versions of some of the game's own art. It also carries a few small pieces of other Capcom games: about 4 KB of Cammy's theme score from X-Men vs. Street Fighter (1996), for her stage music; the infinity and star symbols from Street Fighter Zero 2 Dash for the Sega Saturn; and a few bytes of projectile data from Super Street Fighter II Turbo."
+    "This is a fan edition, unaffiliated with Capcom. The sets are built from discs and roms you already own, and the kit ships no code or data from the anthology or the arcade game beyond EX's mirrored and recolored versions of some of the game's own art. It also carries a few small pieces of other Capcom games: about 4 KB of Cammy's theme score from X-Men vs. Street Fighter (1996), for her stage music; the infinity and star symbols from Street Fighter Zero 2 Dash for the Sega Saturn; a few bytes of projectile data from Super Street Fighter II Turbo; and the altered billboard artwork from Street Fighter 30th Anniversary Collection."
    ],
    "reconstruction": {
     "how": "A small tool reads Alpha 2 Gold from your PlayStation 2 disc image, combines it with your arcade Zero 2 Alpha romset, adds EX, and writes out the finished CPS-2 build.",
@@ -2727,6 +2729,19 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-10-15",
+     "items": [
+      "Coin opens Pause/Back in CONSOLE mode, including character selection, and Quit asks for confirmation. Arcade coin handling is unchanged.",
+      "Removed the character-select START-hold exit so stage selection can finish normally.",
+      "START on Gen alternates his two starting stances.",
+      "New EX CONFIGURATION settings: JAPAN or INTERNATIONAL backgrounds, defaulting to JAPAN, and ORIGINAL or 30TH ANNIVERSARY artwork.",
+      "Restored Cammy’s portrait and name on the next-opponent preview strip.",
+      "Fixed the QSound RAM NG startup failure in FBNeo.",
+      "EX Akuma and EX Cammy use the same name color as the other EX forms on the select screen."
+     ],
+     "version": "rc3"
+    },
     {
      "date": "2026-10-13",
      "items": [
@@ -2773,7 +2788,7 @@
    "summary": "Our Alpha 2 Gold backport with a console-style mode menu, Training with recording and replay, Cammy and Random on the select screen, EX Akuma and EX Cammy, and more speed and time settings. In USA and Japan builds.",
    "thumbnail_build": "us",
    "title": "Street Fighter Alpha 2 EX",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "builds": [

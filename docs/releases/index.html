@@ -4264,6 +4264,14 @@ document.getElementById('rows').addEventListener('click', e => {
   const tr = e.target.closest('tr[data-i]');
   if (!tr) return;
   const d = flat[+tr.dataset.i];
+  // on phones the overlay panel would cover the expansion a first tap just
+  // revealed, so a tap on a closed umbrella only expands it; a tap on an open
+  // one opens the game's panel. There is no collapse on phones, on purpose.
+  if (d && d.grp && matchMedia('(max-aspect-ratio: 3/5)').matches) {
+    if (!expanded.has(d.g)) { expanded.add(d.g); render(); }
+    else openPanel(d);
+    return;
+  }
   // an umbrella click is a selection first: closed -> open + select; open but
   // not selected -> select only; open and already selected -> close
   if (d && d.grp) toggleGroup(d, !expanded.has(d.g) || openRow !== d ? true : false);

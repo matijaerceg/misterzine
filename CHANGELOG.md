@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-16
+
+- Release tracker: on phones, tapping a grouped game first expands it to show its cores, and a second tap opens its panel.
+
 ## 2026-10-15
 
 - Site: on phones the Cores / Frontend / Plex / Patreon links move into the Menu, so every page's header is one row shorter.

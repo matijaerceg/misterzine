@@ -2886,6 +2886,7 @@
    ],
    "section": "restorations",
    "slug": "vsav-arrange",
+   "sort_title": "Vampire Savior 1 Arrange",
    "status": "release-candidate",
    "subtitle": "Arcade backport",
    "summary": "The Arrange edition of Vampire Savior from Capcom’s PlayStation 2 collection, as a CPS-2 game: Donovan, Huitzil and Pyron return, and Dee joins the roster. USA and Japan builds.",
@@ -3148,6 +3149,131 @@
    "thumbnail_build": "us",
    "title": "Night Warriors 2 Arrange",
    "version": "rc3"
+  },
+  {
+   "builds": [
+    {
+     "hbmame_set": "usf2t8",
+     "key": "us",
+     "mame_set": "usf2t4",
+     "region": "USA",
+     "title": "Ultra Street Fighter II",
+     "title_screen": "data/screenshots/usf2-backport/title_us.png"
+    },
+    {
+     "hbmame_set": "usf2j8",
+     "key": "jp",
+     "mame_set": "usf2j4",
+     "region": "Japan",
+     "title": "Ultra Street Fighter II",
+     "title_screen": "data/screenshots/usf2-backport/title_jp.png"
+    }
+   ],
+   "changes": [
+    "Akuma on his own select cell, with Evil Ryu and Violent Ken: twenty fighters with the hidden Shin Akuma",
+    "Ultra's classic colors for the new fighters, chosen on a color select screen",
+    "Sixteen stages and Random to choose from after you pick a fighter",
+    "The Ultra title and intro, and ULTRA on the VS, Continue and Game Over screens",
+    "The Switch edition's sound effects, and its arranged music on MiSTer; MODERN or CLASSIC for each in ULTRA CONFIGURATION",
+    "USA (English) and Japan builds"
+   ],
+   "date": "2026-10-16",
+   "description": [
+    "Ultra Street Fighter II: The Final Challengers is the 2017 Nintendo Switch edition of Super Street Fighter II Turbo, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
+    "Akuma has his own select cell, and Evil Ryu and Violent Ken join the original sixteen fighters with their Ultra moves, colors and endings. Shin Akuma stays hidden, for twenty fighters in all.",
+    "Ultra's presentation comes with them: the Ultra title and intro, \"The Final Challengers\" lettering, a color select for the new fighters, and a choice of sixteen stages or Random once you have picked a fighter.",
+    "The Switch edition's sound effects play in every build, and on MiSTer its arranged music plays too. The ULTRA CONFIGURATION page in Test Mode switches the sound effects and, on MiSTer, the music between MODERN and CLASSIC.",
+    "The USA build is in English; the Japan build keeps the Japanese.",
+    "This is a release candidate."
+   ],
+   "game": "Ultra Street Fighter II: The Final Challengers (Nintendo Switch)",
+   "hardware": "Capcom CPS-2 with the CPS+ core",
+   "notes": [
+    "The 4 MB builds run in MAME and the 8 MB builds run in HBMAME and on MiSTer. MAME and HBMAME need the kit's set definitions compiled in; the kit includes an installer for them.",
+    "Credits: Akuma's imported artwork is Tyrone's, from Super Street Fighter II Turbo: New Legacy.",
+    "This is a fan backport, unaffiliated with Capcom. The sets are built from game files you already own; the kit ships only our own code and patches, plus the CPS+ core with its source and licenses."
+   ],
+   "reconstruction": {
+    "columns": [
+     [
+      "MAME",
+      "mame_set"
+     ],
+     [
+      "HBMAME / MiSTer",
+      "hbmame_set"
+     ]
+    ],
+    "how": "A small tool opens your Switch game files with your own keys, combines them with your arcade romsets, and writes out the finished MAME and HBMAME sets, the MiSTer files, and the music pack.",
+    "kit_command": "python3 apply.py --rompath roms --nsp-us usa.nsp --nsp-jp japan.nsp \\\n                 --keys prod.keys --out-dir out",
+    "kit_dir": "backports/usf2/kit",
+    "requires": [
+     "your own Nintendo Switch game files: the USA base game of Ultra Street Fighter II for the USA set, the Japanese base game for the Japan set",
+     "your own Switch prod.keys",
+     "your own arcade romset ssf2xj (with its parent ssf2t if yours is a split set) and the QSound firmware (qsound)"
+    ],
+    "sizes_note": ""
+   },
+   "related": [
+    {
+     "label": "Super Street Fighter II Turbo: Grand Master Challenge",
+     "note": "the English restoration of the game Ultra is built on",
+     "url": "../ssf2t-gmc/"
+    },
+    {
+     "label": "Super Street Fighter II EX",
+     "note": "another enhanced Super Turbo",
+     "url": "../ssf2-ex/"
+    },
+    {
+     "label": "CPS-2+ hardware",
+     "note": "how the extended system these sets need works",
+     "url": "../cps2-plus/"
+    },
+    {
+     "label": "Super Street Fighter II Turbo: New Legacy",
+     "note": "Tyrone's Akuma artwork comes from this project",
+     "url": "https://newlegacy.fr/credits.html"
+    }
+   ],
+   "release_history": [
+    {
+     "date": "2026-10-16",
+     "items": [
+      "First release candidate."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "requirements": {
+    "link": {
+     "label": "About CPS-2+ hardware",
+     "url": "../cps2-plus/"
+    },
+    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. In MAME or HBMAME they need the set definitions the kit writes compiled in, since the stock emulators don't know these sets."
+   },
+   "screenshots": [
+    {
+     "caption": "Evil Ryu in the intro.",
+     "single": "data/screenshots/usf2-backport/attract_evil_ryu.png"
+    },
+    {
+     "caption": "Evil Ryu on the select screen.",
+     "single": "data/screenshots/usf2-backport/select_evil_ryu.png"
+    },
+    {
+     "caption": "Evil Ryu's ending.",
+     "single": "data/screenshots/usf2-backport/ending_evil_ryu.png"
+    }
+   ],
+   "section": "restorations",
+   "slug": "usf2-backport",
+   "status": "release-candidate",
+   "subtitle": "Arcade backport",
+   "summary": "Ultra Street Fighter II: The Final Challengers as a CPS-2 game: Akuma gets his own select cell, Evil Ryu and Violent Ken join the roster, and the Switch edition's title, color select and sound come along. USA and Japan builds.",
+   "thumbnail_build": "us",
+   "title": "Ultra Street Fighter II",
+   "version": "rc1"
   },
   {
    "artifact": {
@@ -3807,6 +3933,10 @@
        "soundtrack": "X68000 MIDI soundtrack"
       },
       {
+       "disc": "Super Street Fighter II",
+       "soundtrack": "X68000 FM soundtrack"
+      },
+      {
        "disc": "Super Street Fighter II Turbo (MS-DOS)",
        "soundtrack": "MS-DOS FM soundtrack"
       },
@@ -3919,6 +4049,10 @@
       {
        "disc": "Hyper Street Fighter II: The Anniversary Edition",
        "soundtrack": "Anniversary Edition arrange"
+      },
+      {
+       "disc": "Street Fighter II' Champion Edition",
+       "soundtrack": "X68000 MIDI soundtrack"
       }
      ],
      "sets": "sf2hfu, sf2hfj"
@@ -3929,6 +4063,10 @@
       {
        "disc": "Hyper Street Fighter II: The Anniversary Edition",
        "soundtrack": "Anniversary Edition arrange"
+      },
+      {
+       "disc": "Street Fighter II' Champion Edition",
+       "soundtrack": "X68000 MIDI soundtrack"
       }
      ],
      "sets": "sf2uk, sf2jl"
@@ -3975,6 +4113,10 @@
        "soundtrack": "X68000 MIDI soundtrack"
       },
       {
+       "disc": "Super Street Fighter II",
+       "soundtrack": "X68000 FM soundtrack"
+      },
+      {
        "disc": "Super Street Fighter II Turbo (MS-DOS)",
        "soundtrack": "MS-DOS FM soundtrack"
       },
@@ -4018,6 +4160,10 @@
        "soundtrack": "X68000 MIDI soundtrack"
       },
       {
+       "disc": "Super Street Fighter II",
+       "soundtrack": "X68000 FM soundtrack"
+      },
+      {
        "disc": "Super Street Fighter II Turbo (MS-DOS)",
        "soundtrack": "MS-DOS FM soundtrack"
       },
@@ -4053,11 +4199,11 @@
     }
    ],
    "coverage_intro": "Every soundtrack is built from one disc, one set of disks, or one album you own. Where a disc came out in several regions, the ones listed below all produce the same pack.",
-   "date": "2026-09-28",
+   "date": "2026-10-15",
    "description": [
     "From Final Fight CD onward, Capcom kept sending its arcade soundtracks back to the studio. Every CD-based home port got a full re-recording of the music, the 'arrange' versions, produced by the original composers' teams. For thirty years those recordings stayed locked to the home versions. CPS+ puts them where they always belonged, under the arcade games themselves.",
     "On a MiSTer, the real CPS-1 or CPS-2 hardware logic runs the game while the CD-era soundtrack plays the music, started, looped and faded by the game itself, exactly the way Capcom's own console releases timed it. Hit sounds, voices and the announcer stay pure arcade. It sounds like the arcade machine grew a CD drive.",
-    "Version 1.5 gives Super Street Fighter II, Super Street Fighter II Turbo and Hyper Street Fighter II a ninth soundtrack: the complete remixed score of Ultra Street Fighter II: The Final Challengers on Nintendo Switch. It also puts the MS-DOS soundtracks' versus screen and boss music right."
+    "Super Street Fighter II, Super Street Fighter II Turbo and Hyper Street Fighter II each have ten soundtracks, from the Anniversary Edition arrange to the remixed score of Ultra Street Fighter II and, new in version 1.6, the music the X68000's own FM chip played."
    ],
    "download_notes": [
     "The download is tools: the MRAs, the three CPS+ cores with their GPL-3.0 source, and the pack builder. It makes the packs on your machine from discs, disks and albums you own, naming anything it skips for want of a disc. It also assembles out/mister/ for you, holding the cores, your packs, and only the MRAs those packs can load, so nothing on the card fails to start.",
@@ -4067,7 +4213,7 @@
    "faq": [
     {
      "a": [
-      "Python 3.11 or newer, numpy, and ffmpeg on your PATH. On a Mac: brew install python ffmpeg, then pip3 install numpy. On Linux, use your package manager. 7-Zip is only needed if your rips are .7z archives. The three X68000 packs, the rendered MS-DOS packs (FM, Sound Canvas and MT-32) and the USF2 Remix pack additionally need git, cmake and a C/C++ compiler (see the X68000 and USF2 questions below, and the kit's MSDOS.md). The Strider pack needs MAME as well (see the Strider question below).",
+      "Python 3.11 or newer, numpy, and ffmpeg on your PATH. On a Mac: brew install python ffmpeg, then pip3 install numpy. On Linux, use your package manager. 7-Zip is only needed if your rips are .7z archives. The X68000 packs, the rendered MS-DOS packs (FM, Sound Canvas and MT-32) and the USF2 Remix pack additionally need git, cmake and a C/C++ compiler (see the X68000 and USF2 questions below, and the kit's MSDOS.md). The Strider pack and the X68000 FM pack need MAME as well (see the Strider and X68000 questions).",
       "Nothing is installed on the MiSTer itself. The kit is plain files copied to the SD card, and a stock MiSTer runs them as-is."
      ],
      "q": "What do I need installed to build the packs?"
@@ -4090,7 +4236,8 @@
      "a": [
       "The X68000 ports of Ghouls'n Ghosts, Street Fighter II' Champion Edition and Super Street Fighter II shipped their music as MIDI, meant for a Roland SC-55 on the desk next to the computer. There is no recording to copy, so the kit renders one on your machine, the same way the published packs were made: your disk images, your SC-55 ROM set, and a cycle-accurate SC-55 emulator built from source at a pinned revision.",
       "That means git, cmake and a C/C++ compiler (Xcode's command-line tools on a Mac, build-essential and cmake on Debian or Ubuntu), a one-time build of a few minutes, and then ten minutes to an hour of rendering per game. The result is hash-checked like every other pack. The kit's X68000.md walks through it.",
-      "The published packs were rendered and rebuilt byte-for-byte on a Mac. Whether the emulator's output is bit-identical on every CPU has not been proven; if it isn't on yours, the builder stops at the hash check rather than staging different audio."
+      "The published packs were rendered and rebuilt byte-for-byte on a Mac. Whether the emulator's output is bit-identical on every CPU has not been proven; if it isn't on yours, the builder stops at the hash check rather than staging different audio.",
+      "The Super Street Fighter II FM soundtrack is the other half of that port's music: what the X68000's own FM chip played. The kit records it by booting your disk images in MAME, opening the game's music test and playing each of its songs. It needs the same disk images, MAME, and MAME's x68000 BIOS set (x68000.zip), but no SC-55 ROMs. A few GB of disk and under an hour; the result is hash-checked like the rest. The kit's X68000.md has the details."
      ],
      "q": "What do the X68000 soundtracks need, and why are they different?"
     },
@@ -4130,6 +4277,14 @@
     },
     {
      "a": [
+      "Five packs changed. The four MS-DOS packs (ssf2_dos_cd, ssf2_dos_fm, ssf2_dos_sc55 and ssf2_dos_mt32) keep their names and get corrected music cues, and the Final Fight 30th Anniversary CPS2 Edition pack now stops its music when you insert a coin in the attract mode. Drop the 1.6 kit over your old one and run make_packs.py again. It rebuilds those five, adds the Super Street Fighter II FM pack if discs.toml names the disk images, MAME and the BIOS folder, and every other pack comes out identical, hash for hash.",
+      "On the card, replace the four ssf2_dos_*.zip files and ffightae_cps2_arrange.zip in games/CPS+/, copy the new MRAs, and replace the CPS-2 core with the one in the kit; the CPS-1 and CPS-1.5 cores are unchanged.",
+      "If you use the Super Street Fighter II EX, Alpha 2 Gold or Final Fight EX MRAs, rebuild those sets with their projects' latest kits (EX rc8, Gold rc7, Final Fight EX rc3): the MRAs now expect the new sets."
+     ],
+     "q": "I built the 1.5 packs. Do I need to rebuild them for 1.6?"
+    },
+    {
+     "a": [
       "Only the four MS-DOS packs: ssf2_dos_cd, ssf2_dos_fm, ssf2_dos_sc55 and ssf2_dos_mt32 keep their names and get corrected music cues. Drop the 1.5 kit over your old one and run make_packs.py again. It rebuilds those four, adds the USF2 Remix pack if discs.toml names the Switch game, and every other pack comes out identical, hash for hash. The three cores are unchanged.",
       "On the card, replace the four ssf2_dos_*.zip files in games/CPS+/ and copy the new MRAs.",
       "If you use the Super Street Fighter II EX or Alpha 2 Gold MRAs, rebuild those sets with their projects' latest kits (EX rc3, Gold rc5): the MRAs now expect the new sets."
@@ -4159,11 +4314,11 @@
      "q": "I built the 1.1 packs. Do I need to rebuild them for 1.2?"
     }
    ],
-   "featured_stats": "31 audio packs · 163 MRAs · 3 cores · every pack built from sources you own",
+   "featured_stats": "32 audio packs · 179 MRAs · 3 cores · every pack built from sources you own",
    "hardware": "MiSTer FPGA (CPS-1.0, CPS-1.5 and CPS-2 cores)",
    "highlights": [
-    "31 audio packs covering 19 arcade games: every arranged soundtrack Capcom recorded for the CPS line, the SNES, X68000 MIDI and MS-DOS scores, the Double Impact and HD Remix arrangements, and the PlayStation soundtracks of Strider and Captain Commando, and the Nintendo Switch remix of Ultra Street Fighter II",
-    "163 ready-to-play MRAs, so you pick the game from the CPS+ folder and the music is just there",
+    "32 audio packs covering 19 arcade games: every arranged soundtrack Capcom recorded for the CPS line, the SNES, X68000 and MS-DOS scores, the Double Impact and HD Remix arrangements, and the PlayStation soundtracks of Strider and Captain Commando, and the Nintendo Switch remix of Ultra Street Fighter II",
+    "179 ready-to-play MRAs, so you pick the game from the CPS+ folder and the music is just there",
     "Runs on a stock MiSTer, with no firmware changes and nothing to configure",
     "Only tools in the download. Packs build from the discs, disks and albums you already own, in one command"
    ],
@@ -4250,10 +4405,21 @@
    "quickstart": [
     "Download and unzip the kit.",
     "Edit builder/discs.toml and point it at the disc rips you own (each entry is optional), or pass them on the command line with --disc mtwins_pce_disc=/discs/chiki.7z. make_packs.py --list shows every pack and the disc it wants.",
-    "Run python3 builder/make_packs.py (Python 3.11+, numpy, ffmpeg). It builds out/mister/, laid out like your SD card. The three X68000 packs also need git, cmake and a C/C++ compiler, and take up to an hour each to render; the USF2 Remix pack needs the same three tools. The Strider pack needs MAME and your PlayStation BIOS set, and takes about five minutes to record.",
+    "Run python3 builder/make_packs.py (Python 3.11+, numpy, ffmpeg). It builds out/mister/, laid out like your SD card. The X68000 packs also need git, cmake and a C/C++ compiler, and take up to an hour each to render (the FM pack records in MAME instead); the USF2 Remix pack needs the same three tools. The Strider pack needs MAME and your PlayStation BIOS set, and takes about five minutes to record.",
     "Copy the contents of out/mister/ to your MiSTer SD card, merging with what's there. Arcade ROM zips go where they always do."
    ],
    "release_history": [
+    {
+     "date": "2026-10-15",
+     "items": [
+      "New: the X68000 FM soundtrack of Super Street Fighter II, the music the port's own FM chip played, for Super Street Fighter II, Super Street Fighter II Turbo (with Super Street Fighter II X, Grand Master Challenge and EX) and Hyper Street Fighter II, in twelve new MRAs. It builds from your disk images and MAME; the kit's X68000.md explains what it reads.",
+      "New: the X68000 MIDI soundtrack also plays in Street Fighter II: The World Warrior and Street Fighter II': Hyper Fighting, in four new MRAs.",
+      "Fix: The MS-DOS CD soundtrack plays the CD's own versus-screen music, and all four MS-DOS soundtracks have Boxer's and Claw's critical-health music the right way round, their own loss-screen and game-over music, and the CD adds Chun-Li's first ending and the high-score ranking.",
+      "Fix: Final Fight 30th Anniversary CPS2 Edition stops its music when you insert a coin in the attract mode instead of playing on over the credit screen.",
+      "The CPS-2 core is the October 2026 build. The Street Fighter Alpha 2 Gold MRAs load the rc7 sets, the Super Street Fighter II EX MRAs the rc8 sets and the Final Fight EX MRAs the rc3 sets."
+     ],
+     "version": "1.6"
+    },
     {
      "date": "2026-09-28",
      "items": [
@@ -4404,7 +4570,7 @@
     {
      "disc": "Super Street Fighter II",
      "platform": "X68000",
-     "variants": "a zip of the game's disk images, plus your own Roland SC-55 ROM set; the soundtrack is rendered on your machine"
+     "variants": "a zip of the game's disk images. The MIDI soundtrack also needs your own Roland SC-55 ROM set and is rendered on your machine; the FM soundtrack needs MAME and its x68000 BIOS set and is recorded on your machine"
     },
     {
      "disc": "Final Fight: Double Impact remixed soundtrack",
@@ -4445,7 +4611,7 @@
     "Any QSound CPS-2 title is a potential target, and CPS-1 and CPS-1.5 games work too. PACK_FORMAT.md in the kit covers the trigger contract, the pack layout, and how to author one."
    ],
    "title": "CPS+",
-   "version": "1.5"
+   "version": "1.6"
   },
   {
    "coverage": [

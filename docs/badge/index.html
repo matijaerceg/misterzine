@@ -37,7 +37,10 @@
   .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
   @media (max-width: 36rem) {
     .top { flex-wrap: wrap; }
-    .top nav { order: -1; flex-basis: 100%; justify-content: flex-end; flex-wrap: nowrap; gap: .4rem; }
+    /* the site links fold into the Menu here (nav.css .nv), so the lone Menu
+       sits beside the title instead of taking a row of its own */
+    .top { flex-wrap: nowrap; align-items: flex-start; }
+    .top nav { flex: 0 0 auto; flex-wrap: nowrap; gap: .4rem; margin-top: .15rem; }
   }
 
   h2 { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: 1.25rem; margin: 1.6rem 0 .4rem; }
@@ -71,6 +74,12 @@
     <details class="sitemenu" id="menudd">
       <summary id="menusum">Menu</summary>
       <div class="mlist">
+      <!-- the site links, shown only where the nav row is folded away (nav.css .nv) -->
+      <a class="nv" href="../releases/">Core Tracker</a>
+      <a class="nv" href="../frontend/">Arcade Frontend</a>
+      <a class="nv" href="../plex/">Plex</a>
+      <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
+      <hr class="msep nv">
         <div class="theme" id="theme">
           <details id="themedd">
             <summary id="themesum">Theme</summary>

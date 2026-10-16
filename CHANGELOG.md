@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-15
 
+- Site: on phones the Cores / Frontend / Plex / Patreon links move into the Menu, so every page's header is one row shorter.
+- Release tracker: on phones the Type, Source, Genre, Patches and Year menus fold behind one Filters button that counts how many are narrowing the list, with Clear filters inside; the controls fit one row with the search box, the star and Columns. The title is one line and the status line runs the full width under it, so the since-your-last-visit tally no longer gets cut off. The filter row now sizes itself to the room beside the open game panel instead of the whole window, so a docked panel on a laptop folds the filters the same way a narrow window does. The empty panel no longer opens by itself below 1200px wide. Clear filters appears only when there is something to clear, and the share icon has left the row (Share this view stays in the Menu).
 - Release tracker: an arcade game that ships on more than one core (Bubble Bobble on Jotego and Coin-Op, Galivan on the Distribution and rmCores, 37 games today) is now one row that expands into its per-core builds. The row sorts by its newest build and earliest debut; its panel shows the game once with a section per core. Favorites, links and the update_all export stay on the individual builds.
 
 ## 2026-10-14

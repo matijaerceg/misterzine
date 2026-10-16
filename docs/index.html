@@ -167,15 +167,15 @@
   /* site nav (.segnav + .pill) AND the whole theme control (closed summary +
      open menu, .theme .menu*) live in the shared nav.css; theme.js builds the
      menu buttons and mask.js wires the shadow-mask row. */
-  /* MOBILE (below ~34rem): logo on its own line; the nav pills + theme wrap onto
-     the line below it. The logo still shrinks on scroll (via --sh) but the nav
+  /* MOBILE (below ~34rem): logo left, the site Menu right (the nav links live
+     inside it). The logo still shrinks on scroll (via --sh) and the Menu
      stays put, so it's always reachable. min-height (driven by --sh) keeps the
      wavy bottom edge tracking the shrink; content stays decoupled (fixed header). */
   @media (max-width: 34rem) {
-    .top { display: block; min-height: calc(7rem - 2.5rem * var(--sh)); }
-    /* nowrap so the segnav shrinks to keep the pills + theme on ONE row; the
-       pill/theme mobile SIZING is shared (nav.css @media max-width:36rem) */
-    .top nav { margin-top: .55rem; justify-content: flex-start; flex-wrap: nowrap; gap: .4rem; }
+    .top { align-items: flex-start; min-height: calc(7rem - 2.5rem * var(--sh)); }
+    /* the site links fold into the Menu (nav.css .nv); the Menu alone sits
+       top-right, centred on the wordmark's height as it shrinks with --sh */
+    .top nav { flex-wrap: nowrap; gap: .4rem; margin-top: calc((71px - 34px * var(--sh)) / 2 - .95rem); }
   }
 
   /* two cards, one per sub-page: condensed title (same face as the sub-page
@@ -246,6 +246,12 @@
     <details class="sitemenu" id="menudd">
       <summary id="menusum">Menu</summary>
       <div class="mlist">
+      <!-- the site links, shown only where the nav row is folded away (nav.css .nv) -->
+      <a class="nv" href="releases/">Core Tracker</a>
+      <a class="nv" href="frontend/">Arcade Frontend</a>
+      <a class="nv" href="plex/">Plex</a>
+      <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
+      <hr class="msep nv">
         <div class="theme" id="theme">
           <details id="themedd">
             <summary id="themesum">Theme</summary>

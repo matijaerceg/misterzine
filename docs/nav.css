@@ -1,6 +1,6 @@
 /* Shared chrome for the site header: the site-nav (Cores | Arcade Frontend |
    Plex | Patreon; the wordmark is the home link, Hardware Landscape is a Menu
-   row), the site Menu (one "Menu" control
+   row; on phones the four fold into the Menu as .nv rows, see below), the site Menu (one "Menu" control
    per page holding the low-frequency links, the tracker's My MiSTer(s) button
    and the theme picker as a nested fold) and the theme picker itself. Linked
    render-blocking by every page so the header look is a single source and
@@ -131,6 +131,22 @@
   #menusum, #acct { padding: .36rem 0; letter-spacing: .02em; font-size: .82rem; }
   /* the row's gap is .4rem here: the rule's margin evens out the space around it */
   .segnav::after { margin-right: calc(min(.8rem, 2.6vw) - .4rem); }
+}
+
+/* site links folded into the Menu. Below the phone breakpoint the nav row is
+   dropped altogether and the same four destinations lead the Menu list as .nv
+   rows (hidden while the .segnav shows): one Menu instead of a row of links
+   plus a Menu. The current page is a plain span, shaded like a pressed theme.
+   The release tracker repeats this flip in its own @container block, since its
+   header also narrows when the detail panel docks on a laptop. */
+.sitemenu .mlist > .nv { display: none; }
+.sitemenu .mlist > span.nv { font: inherit; font-size: .85rem; padding: .35rem .6rem; border-radius: 4px;
+                             background: var(--rule); font-weight: 600; white-space: nowrap;
+                             align-items: center; cursor: default; }
+@media (max-width: 36rem) {
+  .segnav { display: none; }
+  .sitemenu .mlist > .nv { display: flex; }
+  .sitemenu .mlist > hr.nv { display: block; }
 }
 
 /* Patreon note (theme.js): what a header Patreon link opens instead of leaving

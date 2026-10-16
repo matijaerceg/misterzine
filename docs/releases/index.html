@@ -63,8 +63,17 @@
      re-adds it inside), so the surface band runs to the viewport edges —
      otherwise themes where --surface differs from --bg show the page ground
      as odd gutters beside the topbar */
+  /* .topbar is a size container: the layout rules below key off ITS inline
+     width (@container topbar), not the viewport, so a docked detail panel
+     (a third of a wide screen) costs the controls row the same room a narrow
+     window does. The container measures the content box, i.e. the viewport
+     minus main's 2rem of side padding, so every threshold sits 2rem below the
+     old viewport one: 899px -> 867px, 36rem -> 34rem, 900-1500 -> 868-1468.
+     The 867px literal is mirrored by NARROW_W in the script; keep them equal.
+     Fixed-position descendants would resolve against this box, but there are
+     none (popovers are body-appended, #favexp is a top-layer dialog). */
   .topbar { flex: none; position: relative; z-index: 20; background: var(--surface);
-            margin: 0 -1rem; padding: 0 1rem; }
+            margin: 0 -1rem; padding: 0 1rem; container: topbar / inline-size; }
   header { margin: 0; padding: 1rem 0 0; }
   /* page title: matches the hardware page's style -- Roboto Condensed 700 in the
      accent colour, sized down on narrow screens. The whole title is still the
@@ -73,6 +82,7 @@
        font-size: clamp(1.4rem, 4.2vw, 1.75rem); font-weight: 700;
        line-height: 1.15; letter-spacing: .01em; margin: 0 0 .25rem; }
   h1 a.titlelink { color: var(--accent); text-decoration: none; }
+  h1 .short { display: none; }   /* the phone wording; swapped in by the 34rem container block */
   /* status line under the title: the data clock ("Updated 12 minutes ago.")
      then the visitor clock ("2 added, 1 updated since your last visit,
      yesterday."), one line, never wrapping: phones swap in the short
@@ -83,7 +93,7 @@
   .updated { color: var(--muted); font-size: .8rem; line-height: 1.2rem; margin: .15rem 0 0; min-height: 1.2rem;
              white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .updated .n { display: none; }
-  @media (max-width: 36rem) {
+  @container topbar (max-width: 34rem) {
     .updated .w { display: none; }
     .updated .n { display: inline; }
   }
@@ -97,9 +107,9 @@
   /* thin divider; flex:none keeps it (and the Columns pref after it) from ever
      wrapping, so Columns stays pinned to the far right no matter how filters wrap */
   /* the Patches menu made the one-line filter bar ~110px wider; between the
-     phone layout and ~1500px tighten the gaps and summary padding so it still
-     fits one line down to 1366px (search keeps its 12rem floor) */
-  @media (min-width: 900px) and (max-width: 1500px) {
+     phone layout and ~1500px of topbar tighten the gaps and summary padding so
+     it still fits one line down to 1366px (search keeps its 12rem floor) */
+  @container topbar (min-width: 868px) and (max-width: 1468px) {
     .controls, .filters { gap: .3rem; }
     .controls details.cols > summary { padding-left: .5rem; padding-right: .5rem; }
   }
@@ -110,9 +120,9 @@
   #cols { flex: none; align-self: flex-start; }
   /* the search box carries its own inline clear-x, so it lives in a relative wrapper
      that takes the grow-to-fill role the bare input used to have. Its floor was
-     16rem until the Share button joined the row (2026-10-07). 12rem still clears
-     the "Find anything" placeholder beside the tally; the floor only binds right
-     at the wrap edge. */
+     16rem until a Share button joined the row (2026-10-07; it left again on
+     2026-10-15, the Menu row stays). 12rem still clears the "Find anything"
+     placeholder beside the tally; the floor only binds right at the wrap edge. */
   .searchwrap { position: relative; display: flex; flex: 1; min-width: 12rem; }
   input[type=search] { padding: .4rem .6rem; flex: 1; min-width: 0;
                        /* right padding = the clear-x slot + the tally's measured width
@@ -151,45 +161,47 @@
            color: var(--muted); font-size: .8rem; white-space: nowrap;
            font-variant-numeric: tabular-nums; pointer-events: none; }
   #q:not(:placeholder-shown) ~ .count { right: 1.45rem; }
-  /* "Clear filters" has two states, and is clickable in both. Idle (nothing to
-     clear: no search, no narrowing filter, the default sort) it is the dropdown
-     summaries' neutral chrome, a notch faded. Armed (JS toggles .active) it is
-     an ACTION, not a status: the solid accent fill with --accent-on text (the
-     pair with a contrast floor, as on the panel's Launch button) and a small x
-     in front, so "press me to undo" stands apart from the filters' accent tint.
-     The x's slot (--clx) is held in both states, idle padding it out evenly on
-     both sides, so arming never nudges the rest of the row. */
+  /* "Clear filters" is an ACTION, not a status, so it only exists while there
+     is something to undo: JS toggles .active when a search, a narrowing filter
+     or toggle, or a non-default sort is set, and idle it leaves the row (it
+     used to hold its slot as a faded ghost). Armed it is the solid accent fill
+     with --accent-on text (the pair with a contrast floor, as on the panel's
+     Launch button) and a small x in front, so "press me to undo" stands apart
+     from the filters' accent tint. */
   button.clear { --clx: .75rem; --clpad: .7rem;
                  font: inherit; font-size: .9rem; padding: .4rem var(--clpad); cursor: pointer;
                  border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit;
                  opacity: .75; }
-  button.clear:not(.active) { padding-inline: calc(var(--clpad) + var(--clx) / 2); }
-  button.clear:not(.active) .clx { display: none; }
+  button.clear:not(.active) { display: none; }
   button.clear:hover { background: var(--hover-bg); }
   button.clear .clx { display: inline-block; width: var(--clx); font-size: .85em; font-weight: 700; }
   button.clear.active { opacity: 1; border-color: var(--accent); background: var(--accent); color: var(--accent-on); }
   button.clear.active:hover { background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
-  /* the filter row's Share button: the Menu's "Share this view" as an icon, in
-     the dropdown summaries' neutral chrome. Kept an inline box (no flex) so the
-     line's strut sets its height, the same as every text button in the row; the
-     glyph rides on the text line like the seal does. */
-  .viewlinkbtn { font: inherit; font-size: .9rem; padding: .4rem .55rem; cursor: pointer;
-              border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit; }
-  .viewlinkbtn:hover { background: var(--hover-bg); }
-  .viewlinkbtn svg { display: inline-block; width: 1.1em; height: 1.1em; vertical-align: -.2em; }
-  /* "Columns" dropdown: opt-in arcade metadata columns (default all off) */
+  /* the phone "Filters" fold (.fsheet): on wide layouts the wrapper and its
+     body dissolve (display: contents), so the five dropdowns + Clear stay direct
+     flex items of .filters exactly as before, and the Filters button is not
+     rendered. The narrow container block further down turns it into a single
+     button with a drop-down sheet. The button's own reset sits BEFORE the
+     summary chrome below so the shared font-size/padding win over it. */
+  .fsheet, .fsheet .fbody { display: contents; }
+  #filterssum { display: none; font: inherit; background: transparent; color: inherit; }
+  /* "Columns" dropdown: opt-in arcade metadata columns (default all off); the
+     Filters button borrows the summaries' chrome, caret and glow */
   details.cols { position: relative; }
-  details.cols summary { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
+  details.cols summary, #filterssum { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
                          padding: .4rem .7rem; border: 1px solid var(--hair); border-radius: 4px; }
   details.cols summary::-webkit-details-marker { display: none; }
-  details.cols summary::after { content: " ▾"; color: var(--muted); }
-  details.cols summary:hover, details.cols[open] summary { background: var(--hover-bg); }
+  details.cols summary::after, #filterssum::after { content: " ▾"; color: var(--muted); }
+  details.cols summary:hover, details.cols[open] summary,
+  #filterssum:hover, .fsheet.open #filterssum { background: var(--hover-bg); }
   /* a Types/Year filter that's narrowing results tints its summary with the same
      accent as a non-empty search box, so an active filter stays obvious with the
-     menu closed (Columns is a display pref, not a filter, so it never glows) */
-  details.cols summary.active { border-color: var(--accent2, var(--accent));
+     menu closed (Columns is a display pref, not a filter, so it never glows).
+     Filters glows the same way while anything inside it narrows. */
+  details.cols summary.active, #filterssum.active { border-color: var(--accent2, var(--accent));
                                 background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
-  details.cols summary.active:hover, details.cols[open] summary.active {
+  details.cols summary.active:hover, details.cols[open] summary.active,
+  #filterssum.active:hover, .fsheet.open #filterssum.active {
                                 background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
   details.cols .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30;
                        background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
@@ -947,60 +959,91 @@
   }
   /* narrow: the desktop controls row assumes it can wrap the filter cluster
      against a divider + Columns pinned on the right. That only fits on one
-     line at ~900px+; below it the cluster squeezes into a sliver (one dropdown
-     per line) and eats three rows of height. So the breakpoint sits where the
-     desktop row genuinely stops fitting, not at a phone width — landscape
-     phones, tablets and narrow windows all land in that zone. Reflow into a
-     single wrapping cluster: the search box (tally riding inside it) on line
-     one, then the dropdowns / Clear / Columns flowing together beneath it. */
-  @media (max-width: 899px) {
-    /* column-gap is tighter than the .5rem default, and the summary padding below
-       is trimmed with it: together they keep the five filters (3 dropdowns, Clear,
-       favorites) on one line at 358px of usable width on a 390px phone — 338px
-       against 358px. Columns no longer joins them: six controls want ~429px, and
-       nothing short of dropping one closes a 70px gap, so it takes the next row
-       (still right-anchored, which reads as the display-pref corner it is). */
-    .controls { flex-wrap: wrap; row-gap: .5rem; column-gap: .3rem; }
+     line at ~900px of viewport (867px of topbar); below it the cluster squeezes
+     into a sliver (one dropdown per line) and eats three rows of height. So the
+     breakpoint sits where the desktop row genuinely stops fitting, not at a
+     phone width: landscape phones, tablets, narrow windows and a wide screen
+     with the detail panel docked all land in that zone. Reflow into ONE row,
+     [search][Filters][star][Col.]: the five dropdowns + Clear fold behind the
+     Filters button (the .fsheet sheet below), so the row wants ~328px of the
+     358px a 390px phone offers, the search box taking the slack. */
+  @container topbar (max-width: 867px) {   /* = NARROW_W in the script */
+    .controls { flex-wrap: nowrap; gap: .3rem; }
     /* dissolve the filters wrapper so its children become flex items of .controls
-       itself and join one shared wrap flow with Columns — the desktop "grows and
-       wraps against a pinned right column" split is exactly what has no room
-       here. Order is then set explicitly below. */
+       itself; order is then set explicitly below */
     .filters { display: contents; }
-    .searchwrap { order: 1; flex: 1 1 8rem; min-width: 0; }
-    /* the vertical divider has no room here, but the element is still useful: a
-       zero-height 100%-wide flex item forces the wrap after the search line, so
-       the dropdowns always start a fresh row instead of trailing the search box */
-    .ctrlsep.tall { order: 3; flex-basis: 100%; width: auto; height: 0; background: none; align-self: auto; }
-    #typedd { order: 4; }
-    #srcdd { order: 5; }
-    #genredd { order: 6; }
-    #patchdd { order: 6; }
-    #yeardd { order: 7; }
-    button.clear, #viewlinkbtn { order: 9; }
-    .favctl { order: 10; }
-    /* Columns keeps its far-right anchoring, now against whatever row it lands on */
-    #cols { order: 11; margin-left: auto; align-self: center; }
-    /* a notch tighter so the filter cluster fits one line on a ~390px phone. Only
-       the HORIZONTAL padding is trimmed (.55 -> .45): the vertical stays .35rem, so
-       the tap targets keep their height. */
-    details.cols summary, button.clear, .favctl > button, .viewlinkbtn { font-size: .85rem; padding: .35rem .45rem; }
+    .searchwrap { order: 1; flex: 1 1 7rem; min-width: 0; }
+    .ctrlsep.tall { display: none; }   /* no room for the divider on one row */
+    #filterssum { display: inline-block; order: 2; flex: none; }
+    .favctl { order: 3; }
+    #cols { order: 4; align-self: center; }
+    /* a notch tighter so the row fits a ~390px phone. Only the HORIZONTAL padding
+       is trimmed (.7 -> .45): the vertical stays .35rem, so the tap targets keep
+       their height. */
+    details.cols summary, #filterssum, button.clear, .favctl > button { font-size: .85rem; padding: .35rem .45rem; }
     button.clear { --clpad: .45rem; }
     .favctl > button { min-width: 3em; }
-    /* the sort arrow is dropped here: at this width it's the thing that wraps the
-       header onto a second sticky line, and the accent color already says which
-       column is sorted. Direction is the only loss (tap again to flip); aria-sort
-       still carries it to screen readers, and desktop keeps the arrow. */
-    th[aria-sort]::after { content: none; }
+    /* the fold: closed, the body is gone; open, it drops under the controls row
+       as a full-width sheet and scrolls inside itself (the page never scrolls).
+       top and max-height are set per open by placeSheet(), since the row above
+       varies in height. position:absolute resolves against .topbar, which is
+       both position:relative and (container-type) a containing block. */
+    .fsheet .fbody { display: none; }
+    .fsheet.open .fbody { display: grid; gap: .3rem; position: absolute; left: 0; right: 0; z-index: 30;
+                          padding: .6rem 1rem .8rem; background: var(--surface);
+                          border-bottom: 1px solid var(--hair); box-shadow: 0 8px 20px #0004;
+                          overflow-y: auto; overscroll-behavior: contain; }
+    /* inside the sheet the dropdowns read as accordion rows: full-width summaries
+       with the caret pushed right, and each menu flows in place under its own
+       summary (static, so positionMenu() leaves it alone) with a hairline on the
+       left marking the indent instead of a floating box */
+    .fbody details.cols { width: 100%; }
+    .fbody details.cols summary { display: flex; justify-content: space-between; align-items: center;
+                                  width: 100%; box-sizing: border-box; padding: .5rem .7rem; }
+    .fbody details.cols .menu { position: static; box-shadow: none; border: 0; border-left: 2px solid var(--hair);
+                                border-radius: 0; margin: .25rem 0 .35rem .5rem; max-height: none !important; min-width: 0;
+                                /* not a scroll container here: the desktop rule's overflow-y:auto +
+                                   overscroll-behavior:contain would swallow wheel/touch scrolling over
+                                   the list (an element with nothing to scroll still 'contains'), so the
+                                   sheet above never received it */
+                                overflow: visible; overscroll-behavior: auto; }
+    .fbody button.clear { justify-self: start; margin-top: .3rem; }
   }
-  /* phones: put the domain nav + theme on the TOPMOST row (matching the hardware
-     page), with the title/meta block below it. order:-1 lifts the nav above the
-     masthead and flex-basis:100% gives it its own full-width row (both without
-     markup changes); flex-end right-aligns the pill group; nowrap lets the shared
-     .segnav grid squeeze to fit so the pills and theme stay on ONE row down to the
-     narrowest phones. The pill/menu mobile SIZING is shared (nav.css @media
-     max-width:36rem), matching the home and hardware pages. */
-  @media (max-width: 36rem) {
-    .hctl { order: -1; flex-basis: 100%; flex-wrap: nowrap; justify-content: flex-end; gap: .4rem; }
+  /* the sort arrow is dropped on narrow layouts: there it's the thing that wraps
+     the header onto a second sticky line, and the accent color already says which
+     column is sorted. Direction is the only loss (tap again to flip); aria-sort
+     still carries it to screen readers, and desktop keeps the arrow. The table is
+     not inside .topbar, so this keys off html.narrow, which the narrowMQ shim in
+     the script toggles from the same measurement as the container block above. */
+  html.narrow th[aria-sort]::after { content: none; }
+  /* phones (and the header beside a docked panel on a laptop): the site links
+     fold into the Menu (nav.css .nv rows; the flip is repeated here because
+     nav.css can only key it off the viewport) and the controls that are left
+     (Sign in, Menu) sit on the wordmark's row, right-aligned, instead of
+     taking a row of their own above the masthead. The pill/menu mobile SIZING
+     is shared (nav.css @media max-width:36rem). */
+  @container topbar (max-width: 34rem) {
+    .segnav { display: none; }
+    .sitemenu .mlist > .nv { display: flex; }
+    .sitemenu .mlist > hr.nv { display: block; }
+    .hrow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: .55rem; align-items: center; }
+    .hctl { grid-area: 1 / 3; flex-wrap: nowrap; gap: .4rem; }
+    /* masthead on phones: the title keeps to one line (the short wording, then
+       an ellipsis as a last resort) and the status line drops below BOTH the
+       logo and the title, full width, so the since-visit tally no longer
+       truncates beside the logo or the controls. The masthead and the title
+       block both dissolve (display: contents) so the .hrow grid places logo,
+       title and controls on row one and the status line alone on row two;
+       that leaves theme.js's
+       --titleh observer measuring a 0-height block, hence the literal logo
+       height here (this block comes later in the sheet than the --titleh
+       rule, so it wins). */
+    h1 .long { display: none; }
+    h1 .short { display: inline; }
+    h1 { font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .masthead, .masthead .titleblock { display: contents; }
+    .masthead .updated { grid-column: 1 / -1; margin-top: .2rem; }
+    .masthead .brand svg { height: calc(1.2rem * 1.15); }
   }
   /* printing: undo the fixed-height app shell so the full row list paginates
      instead of clipping to one screen of the scroller */
@@ -1030,7 +1073,7 @@
     <div class="masthead">
       <a class="brand" href="../" aria-label="MisterZine home"><svg class="logo" viewBox="38.5 111.3 532.4 354.2" aria-hidden="true" fill="currentColor"><g transform="translate(0,600) scale(0.1,-0.1)"><path d="M2400 4880 c-25 -6 -73 -24 -108 -41 -57 -28 -66 -29 -95 -19 -47 18 -314 25 -390 10 -68 -13 -149 -49 -185 -83 l-22 -21 -28 26 c-77 72 -173 92 -425 86 -209 -5 -261 -19 -341 -89 -86 -76 -95 -106 -192 -654 -52 -293 -86 -516 -86 -555 0 -92 31 -168 92 -227 42 -41 47 -49 39 -72 -23 -69 -61 -320 -57 -381 8 -145 113 -259 271 -295 l50 -11 -185 -166 c-102 -92 -199 -184 -215 -205 -63 -80 -86 -147 -123 -357 -17 -100 -18 -130 -9 -180 22 -124 96 -221 209 -275 l55 -26 730 0 730 0 50 24 c49 23 56 24 275 22 205 -3 231 -1 286 18 l61 20 59 -20 c53 -19 77 -20 264 -17 l205 3 65 35 65 35 69 -35 69 -35 216 0 216 0 65 32 c36 17 80 46 99 64 33 32 34 32 60 15 62 -41 195 -97 277 -118 118 -29 391 -32 527 -5 246 49 408 149 473 290 15 35 34 108 47 183 18 107 19 136 10 201 l-11 75 38 62 c58 93 82 174 88 297 13 301 -145 543 -430 656 -35 14 -69 31 -77 38 -22 21 -6 59 34 78 56 27 121 93 145 148 12 28 30 104 41 168 24 146 29 156 76 172 44 14 101 48 125 75 32 36 68 131 90 236 19 92 21 111 10 160 -33 147 -156 230 -316 213 -85 -9 -84 -9 -211 0 -110 8 -196 -3 -258 -34 -38 -19 -40 -19 -81 -1 -23 10 -67 23 -97 30 l-55 12 0 87 c1 75 -3 93 -27 143 -33 66 -90 119 -156 145 -40 15 -92 18 -422 21 -322 3 -385 1 -440 -13 -83 -21 -77 -22 -199 5 -197 42 -436 28 -597 -36 -66 -27 -68 -26 -123 18 -73 57 -220 89 -320 68z m163 -214 c58 -24 81 -59 85 -130 9 -147 -93 -239 -241 -216 -100 15 -147 87 -126 193 13 70 51 124 102 148 50 22 134 25 180 5z m842 -56 c90 -23 128 -46 134 -81 1 -13 -5 -62 -15 -109 -13 -65 -24 -92 -45 -112 -33 -33 -43 -34 -144 -8 -130 33 -240 22 -259 -26 -12 -31 21 -61 101 -94 177 -72 235 -111 281 -188 25 -43 27 -56 27 -147 -1 -124 -24 -191 -95 -268 -94 -103 -222 -147 -426 -147 -168 0 -320 34 -371 82 -29 27 -29 61 -2 158 35 127 65 141 200 95 135 -46 276 -42 295 10 16 40 -4 62 -83 95 -206 84 -257 118 -298 201 -79 155 -7 383 152 482 136 85 351 107 548 57z m-2005 -5 c16 -8 34 -25 41 -36 6 -12 15 -125 21 -267 5 -136 13 -255 16 -264 5 -12 43 62 121 235 63 139 122 266 133 283 33 57 68 66 254 62 l166 -3 24 -28 c15 -17 24 -41 24 -60 0 -18 -23 -162 -51 -322 -27 -159 -65 -379 -84 -487 -19 -108 -39 -206 -45 -217 -23 -43 -48 -51 -172 -51 -171 0 -175 7 -138 200 38 197 81 443 77 446 -2 2 -63 -134 -137 -302 -90 -204 -142 -312 -159 -325 -19 -15 -40 -19 -112 -19 -134 0 -126 -18 -154 330 -22 283 -28 341 -31 337 -2 -2 -28 -142 -58 -312 -67 -379 -52 -355 -220 -355 -99 0 -115 2 -134 20 -12 11 -24 31 -28 44 -3 13 15 135 40 272 25 137 66 366 91 509 49 271 56 293 110 315 11 5 100 9 198 9 140 1 184 -2 207 -14z m3045 -10 c30 -29 30 -41 6 -163 -26 -132 -40 -145 -166 -150 -54 -3 -98 -9 -103 -16 -5 -6 -18 -65 -31 -131 -12 -66 -42 -230 -66 -365 -25 -135 -48 -253 -51 -263 -3 -10 -20 -27 -37 -38 -27 -16 -51 -19 -160 -19 -122 0 -129 1 -152 25 -16 15 -25 36 -25 55 0 17 29 182 65 367 36 185 65 346 65 359 0 23 -3 24 -72 24 -75 0 -113 12 -132 42 -13 21 18 222 40 252 31 44 41 45 427 46 l368 0 24 -25z m-1884 -364 c16 -16 29 -38 29 -48 0 -44 -112 -651 -125 -681 -8 -18 -26 -37 -41 -42 -35 -14 -227 -13 -258 1 -53 24 -52 40 9 396 38 220 63 336 75 353 28 41 57 50 173 50 107 0 109 0 138 -29z m2171 -16 c104 -36 169 -145 154 -258 -9 -65 -28 -100 -71 -132 -57 -44 -142 -65 -266 -65 -121 0 -129 -5 -85 -57 21 -24 32 -28 93 -31 51 -3 91 2 148 18 l79 22 18 -22 c15 -18 17 -32 12 -74 -11 -83 -19 -100 -54 -123 -66 -45 -215 -70 -319 -54 -132 21 -196 62 -243 159 -30 61 -33 74 -32 162 1 297 181 490 444 475 41 -2 96 -11 122 -20z m484 4 c34 -12 44 -25 44 -59 l1 -25 22 26 c34 41 87 69 133 69 51 0 77 -19 77 -56 0 -42 -32 -178 -46 -198 -8 -11 -36 -20 -75 -26 -72 -10 -113 -35 -136 -85 -9 -19 -30 -107 -46 -195 -31 -169 -39 -193 -70 -210 -25 -13 -196 -13 -221 1 -43 22 -42 45 17 372 30 172 61 326 69 344 10 23 24 35 47 41 48 13 152 14 184 1z m-2365 -901 c90 -30 133 -95 132 -198 -2 -120 -49 -202 -141 -247 -49 -24 -68 -28 -142 -27 -125 1 -191 40 -221 131 -16 49 -5 150 22 207 25 53 93 118 141 133 45 15 168 15 209 1z m-531 -53 c36 -18 60 -62 60 -107 0 -59 -50 -300 -68 -332 -10 -17 -205 -200 -433 -406 l-416 -375 337 -5 c314 -5 339 -6 359 -24 27 -25 27 -63 0 -214 -26 -148 -41 -179 -93 -203 -39 -17 -79 -19 -671 -19 -419 0 -643 4 -669 11 -45 12 -81 48 -89 87 -7 35 36 259 57 301 21 39 -2 18 490 454 l420 372 -350 5 c-192 3 -357 9 -367 14 -23 11 -37 38 -37 73 0 54 49 285 67 316 40 69 16 67 731 67 555 0 647 -2 672 -15z m2837 -353 c124 -39 211 -113 261 -220 24 -50 27 -69 27 -162 0 -95 -3 -111 -28 -162 -46 -94 -128 -150 -275 -190 -60 -16 -121 -22 -272 -27 l-195 -6 3 -25 c3 -29 28 -66 63 -92 68 -51 234 -46 422 11 153 48 180 25 158 -132 -16 -114 -30 -147 -73 -180 -46 -36 -195 -83 -303 -98 -112 -15 -310 -6 -385 16 -242 74 -361 261 -347 545 12 229 99 442 234 572 76 74 204 136 333 164 92 19 296 12 377 -14z m-1145 -8 c65 -22 130 -82 158 -145 31 -74 29 -174 -9 -394 -81 -463 -114 -631 -127 -657 -29 -55 -54 -63 -219 -66 -177 -3 -211 7 -232 70 -11 33 -6 74 47 365 33 180 60 340 60 354 0 45 -31 73 -79 71 -56 -2 -96 -25 -126 -70 -20 -30 -35 -97 -85 -372 -41 -227 -67 -343 -79 -360 -35 -50 -73 -60 -226 -60 -164 0 -201 12 -223 71 -12 33 -6 75 82 563 53 291 102 540 108 554 7 14 26 35 41 46 25 19 45 21 182 24 124 3 159 0 184 -12 33 -18 54 -69 43 -108 -5 -19 3 -15 45 22 129 116 303 156 455 104z m-1190 -144 c20 -6 47 -23 59 -38 18 -23 20 -36 16 -92 -7 -95 -145 -847 -165 -899 -30 -77 -51 -85 -220 -89 -163 -4 -210 5 -241 45 -26 32 -26 65 -2 195 11 57 45 245 76 418 30 173 60 334 66 357 13 49 51 88 99 101 47 14 266 14 312 2z"/><path d="M4516 4009 c-14 -11 -33 -34 -41 -50 l-16 -29 65 0 c78 0 95 6 107 37 22 59 -57 88 -115 42z"/><path d="M4842 2590 c-61 -28 -105 -80 -127 -149 l-7 -24 113 5 c157 6 199 30 199 112 0 68 -90 96 -178 56z"/></g></svg></a>
       <div class="titleblock">
-        <h1><a href="./" id="brandlink" class="titlelink" data-tip="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)">MiSTer Core Tracker &amp; Launcher</a></h1>
+        <h1><a href="./" id="brandlink" class="titlelink" data-tip="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)"><span class="long">MiSTer Core Tracker &amp; Launcher</span><span class="short">Core Tracker &amp; Launcher</span></a></h1>
         <!-- status line: data clock + since-visit tallies, filled by stampMeta / syncStatus -->
         <p class="updated" id="updated"></p>
       </div>
@@ -1051,6 +1094,12 @@
       <details class="sitemenu" id="menudd">
         <summary id="menusum">Menu</summary>
         <div class="mlist">
+      <!-- the site links, shown only where the nav row is folded away (nav.css .nv) -->
+      <span class="nv" aria-current="page">Core Tracker</span>
+      <a class="nv" href="../frontend/">Arcade Frontend</a>
+      <a class="nv" href="../plex/">Plex</a>
+      <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
+      <hr class="msep nv">
       <button type="button" id="mymisters" data-tip="Your saved MiSTers">My MiSTer(s)</button>
       <button type="button" id="shareview" data-tip="Copy a link to exactly this view: the search, filters, sort and open game">Share this view</button>
           <div class="theme" id="theme">
@@ -1093,29 +1142,39 @@
       <button type="button" id="qx" class="qx" data-tip="Clear search" tabindex="-1">x</button>
       <span class="count" id="count"></span>
     </div>
-    <details class="cols" id="typedd">
-      <summary id="typesummary">Type</summary>
-      <div class="menu" id="typemenu"></div>
-    </details>
-    <details class="cols" id="srcdd">
-      <summary id="srcsummary">Source</summary>
-      <div class="menu" id="srcmenu"></div>
-    </details>
-    <details class="cols" id="genredd">
-      <summary id="genresummary">Genre</summary>
-      <div class="menu" id="genremenu"></div>
-    </details>
-    <details class="cols" id="patchdd">
-      <summary id="patchsummary">Patches</summary>
-      <div class="menu" id="patchmenu"></div>
-    </details>
-    <details class="cols" id="yeardd">
-      <summary id="yearsummary">Year</summary>
-      <div class="menu" id="yearmenu"></div>
-    </details>
-    <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
-    <!-- the Menu's "Share this view", one tap away (same handler) -->
-    <button type="button" id="viewlinkbtn" class="viewlinkbtn" data-tip="Share this view" aria-label="Share this view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg></button>
+    <!-- the five filter dropdowns + Clear. On wide layouts the .fsheet wrapper
+         and its body dissolve (display: contents) and the Filters button is not
+         rendered; on narrow ones (see the 867px container block) the button is
+         the only thing in the row and the body drops down as a sheet. A div +
+         button rather than <details>: a closed details hides its children
+         whatever their display, and this wrapper is NOT details.cols, so the
+         dropdown light-dismiss logic never sees it. -->
+    <div class="fsheet" id="filtersdd">
+      <button type="button" id="filterssum" aria-expanded="false" aria-controls="fbody">Filters</button>
+      <div class="fbody" id="fbody">
+        <details class="cols" id="typedd">
+          <summary id="typesummary">Type</summary>
+          <div class="menu" id="typemenu"></div>
+        </details>
+        <details class="cols" id="srcdd">
+          <summary id="srcsummary">Source</summary>
+          <div class="menu" id="srcmenu"></div>
+        </details>
+        <details class="cols" id="genredd">
+          <summary id="genresummary">Genre</summary>
+          <div class="menu" id="genremenu"></div>
+        </details>
+        <details class="cols" id="patchdd">
+          <summary id="patchsummary">Patches</summary>
+          <div class="menu" id="patchmenu"></div>
+        </details>
+        <details class="cols" id="yeardd">
+          <summary id="yearsummary">Year</summary>
+          <div class="menu" id="yearmenu"></div>
+        </details>
+        <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
+      </div>
+    </div>
     <!-- favorites: the left segment filters the list down to starred rows, the
          caret opens the housekeeping (backup link, clear). Same split shape as
          the theme toggle in the header. -->
@@ -2078,10 +2137,42 @@ const activeColumns = () => COLUMNS.filter(c => c.lock || enabledCols.has(c.k));
 // Narrow screens trade wording for vertical space: one-word headers (COLUMNS.sl)
 // and terser filter summaries, so neither the sticky header row nor the filter
 // row costs a second line on a phone. Same breakpoint as the controls reflow
-// above — the header only wraps once the table is at its min-width floor, which
-// is roughly the same zone. The change listener re-runs every piece of text that
-// depends on it; each sync fn below reads narrowMQ.matches itself.
-const narrowMQ = matchMedia('(max-width: 899px)');
+// above. The change listener re-runs every piece of text that depends on it;
+// each sync fn below reads narrowMQ.matches itself.
+//
+// narrowMQ used to be matchMedia('(max-width: 899px)'). Since the controls row
+// now reflows per the .topbar container's width (the @container rules in the
+// CSS), it is a MediaQueryList-shaped shim ({matches, addEventListener}) fed by
+// a ResizeObserver on .topbar, so the script and the stylesheet flip on the
+// same measurement: a docked detail panel narrows the topbar just like a small
+// window does. NARROW_W mirrors the 867px CSS literal (content-box width, the
+// viewport minus main's 2rem of padding); keep them equal. html.narrow carries
+// the state to rules outside the topbar (the sort arrow on <th>). The initial
+// value is computed synchronously so the first buildHeader() below already
+// picks the right labels.
+const NARROW_W = 867;
+const narrowMQ = (() => {
+  const bar = document.querySelector('.topbar');
+  const contentW = () => {
+    const cs = getComputedStyle(bar);
+    return bar.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  };
+  const listeners = [];
+  const mq = {
+    matches: contentW() <= NARROW_W,
+    addEventListener(type, fn) { if (type === 'change') listeners.push(fn); },
+  };
+  const sync = w => {
+    const m = w <= NARROW_W;
+    document.documentElement.classList.toggle('narrow', m);
+    if (m === mq.matches) return;
+    mq.matches = m;
+    for (const fn of listeners) fn({ matches: m });
+  };
+  document.documentElement.classList.toggle('narrow', mq.matches);
+  new ResizeObserver(entries => sync(entries[0].contentRect.width)).observe(bar);
+  return mq;
+})();
 
 function buildHeader() {
   const cols = activeColumns();
@@ -2354,7 +2445,11 @@ function render() {
 // input's right padding reserves so typed text never runs under the tally.
 function setCount(shown) {
   const el = document.getElementById('count');
-  el.textContent = shown === DATA.length ? String(DATA.length) : shown + ' of ' + DATA.length;
+  // narrow: the search box shares one row with three buttons, so the filtered
+  // tally drops " of " for a slash and the placeholder shortens to match
+  el.textContent = shown === DATA.length ? String(DATA.length)
+    : narrowMQ.matches ? shown + '/' + DATA.length : shown + ' of ' + DATA.length;
+  document.getElementById('q').placeholder = narrowMQ.matches ? 'Search' : 'Find anything';
   el.parentElement.style.setProperty('--countw', el.offsetWidth + 'px');
 }
 
@@ -2370,13 +2465,14 @@ function apply() {
   // matching both, in any field, in any order); each term is an independent
   // substring so multi-word values still match ("street fighter" hits the title)
   const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
-  // the global "Clear filters" button is always present and clickable; it's
-  // armed (accent fill + x) while anything differs from a fresh load: a search,
-  // a narrowing filter or toggle, or a sort other than the default
+  // the global "Clear filters" button only renders while armed (accent fill +
+  // x; idle it is display:none), i.e. while anything differs from a fresh load:
+  // a search, a narrowing filter or toggle, or a sort other than the default
   const [dk, dd] = defaultSort();
   document.getElementById('clear').classList.toggle('active',
     !!(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
       || favOnly || favView || sortKey !== dk || sortDir !== dd));
+  syncFilterCount();  // the phone Filters button shows how many of its menus narrow
   // Type / Source / Genre: every box checked is the default (no filter); any
   // unchecked box narrows to the checked ones, and an all-unchecked menu shows
   // nothing (see pickNarrows and the menus below).
@@ -2555,16 +2651,9 @@ function clearAllFilters() {
   recenterOpen();
 }
 document.getElementById('clear').addEventListener('click', clearAllFilters);
-// "Clear filters" is the longest control in the row; narrow keeps just the verb.
-// The tooltip only exists while the label is abbreviated — on desktop it would
-// just echo the full label back. Unlike the dropdowns, no existing sync fn owns
-// this button's text, hence the helper.
-function syncClearLabel() {
-  const b = document.getElementById('clear');
-  b.querySelector('.cll').textContent = narrowMQ.matches ? 'Clear' : 'Clear filters';
-  if (narrowMQ.matches) b.dataset.tip = 'Clear filters'; else b.removeAttribute('data-tip');
-}
-syncClearLabel();
+// the button reads "Clear filters" at every width: on phones it sits inside the
+// Filters sheet with a full row to itself, so the old narrow "Clear" abbreviation
+// (and its tooltip) went with the 2026-10-15 rework.
 // the brand/URL in the title is a plain link to "./": clicking it does a real
 // navigation to a bare /releases/, exactly like typing that URL and hitting
 // Enter. That's a full fresh load (panel/hash, filters, sort and scroll all
@@ -3194,8 +3283,8 @@ function adoptViewParams() {
   if (p.has('f') && p.get('f') !== '0') { favOnly = true; syncFavSummary(); }
   apply();
 }
-// one handler for the Menu row and the filter row's icon button; the toast
-// anchors to whichever was pressed
+// the Menu's "Share this view" row (an icon button in the filter row shared this
+// handler from 2026-10-07 to 2026-10-15); the toast anchors to the pressed button
 function shareView(e) {
   const b = e.currentTarget;
   const url = shareURL();
@@ -3210,7 +3299,6 @@ function shareView(e) {
   else showChip(b, 'Copy failed');
 }
 document.getElementById('shareview').addEventListener('click', shareView);
-document.getElementById('viewlinkbtn').addEventListener('click', shareView);
 
 // --- favorites -> update_all export dialog -----------------------------------
 // Terms come from each row's `ft` (stamped by export-web from the live
@@ -3339,7 +3427,12 @@ function closeDropdowns(except) {
 // The dismissing click passes through to whatever it landed on (rows, sibling
 // filters, Clear, sort headers, search), so one click both closes the open
 // menu AND acts on the target underneath.
+const filtersDD = document.getElementById('filtersdd');
+const filtersSum = document.getElementById('filterssum');
 document.addEventListener('click', e => {
+  // the phone Filters sheet dismisses the same way: a click outside it closes it
+  // and still lands on its target (a row, Columns, the search box)
+  if (filtersDD.classList.contains('open') && !filtersDD.contains(e.target)) setSheet(false);
   const inside = e.target.closest('details.cols');
   if (!document.querySelector('details.cols[open]')) return;
   closeDropdowns(inside);
@@ -3356,6 +3449,10 @@ function positionMenu(dd) {
   if (!menu) return;
   menu.style.left = '';  // back to the CSS defaults before measuring
   menu.style.maxHeight = '';
+  // inside the phone Filters sheet the menus flow in place (position: static,
+  // see .fbody details.cols .menu); there is nothing to clamp, and the sheet
+  // itself does the scrolling
+  if (getComputedStyle(menu).position === 'static') return;
   const margin = 8, dRect = dd.getBoundingClientRect(), mW = menu.offsetWidth;
   const vw = document.documentElement.clientWidth;
   let mLeft = dRect.left;                                   // default: aligned under the summary
@@ -3367,6 +3464,49 @@ function positionMenu(dd) {
 }
 for (const dd of document.querySelectorAll('details.cols'))
   dd.addEventListener('toggle', () => { if (dd.open) positionMenu(dd); });
+
+// --- phone "Filters" fold (.fsheet) ---
+// On narrow layouts the five dropdowns + Clear live in a sheet under the
+// controls row (CSS: the 867px container block). The sheet is placed from JS
+// because the row above it varies in height: top = the controls row's bottom
+// edge in .topbar's coordinates (its containing block), and the height is
+// capped to the room left below so it scrolls inside itself (the page never
+// scrolls). Re-placed on resize while open (orientation flip, soft keyboard).
+function placeSheet() {
+  const body = document.getElementById('fbody');
+  const bar = document.querySelector('.topbar').getBoundingClientRect();
+  const ctl = document.querySelector('.controls').getBoundingClientRect();
+  body.style.top = (ctl.bottom - bar.top) + 'px';
+  body.style.maxHeight = (document.documentElement.clientHeight - ctl.bottom - 8) + 'px';
+}
+// opening places the sheet; closing also shuts whichever accordion row was open
+// inside it, so the next open starts folded. No-op when already in that state
+// (the widen listener calls setSheet(false) blind, and must not disturb a
+// desktop dropdown).
+function setSheet(open) {
+  if (filtersDD.classList.contains('open') === open) return;
+  filtersDD.classList.toggle('open', open);
+  filtersSum.setAttribute('aria-expanded', String(open));
+  if (open) placeSheet(); else closeDropdowns();
+}
+filtersSum.addEventListener('click', () => setSheet(!filtersDD.classList.contains('open')));
+addEventListener('resize', () => { if (filtersDD.classList.contains('open')) placeSheet(); });
+// the button's label counts the menus that narrow the list (Type, Source,
+// Genre, Patches, a Year bound), "Filters (2)", and glows like an active
+// summary, so a folded-away filter still shows with the sheet closed. Search
+// and favorites are not counted: both have their own visible control in the
+// row. Called from apply(), next to the Clear button's arming.
+function syncFilterCount() {
+  const n = [
+    enabledTypes.size < TYPES.length,
+    SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length,
+    GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length,
+    PATCH_KEYS.length > 0 && enabledPatches.size < PATCH_KEYS.length,
+    yearFrom != null || yearTo != null,
+  ].filter(Boolean).length;
+  filtersSum.textContent = n ? 'Filters (' + n + ')' : 'Filters';
+  filtersSum.classList.toggle('active', n > 0);
+}
 
 buildHeader();  // header renders immediately; rows follow once data.json loads
 
@@ -4310,6 +4450,8 @@ document.addEventListener('keydown', e => {
     // an open Types/Columns dropdown is the next topmost thing — close it
     const dd = document.querySelector('details.cols[open]');
     if (dd) { dd.open = false; return; }
+    // then the phone Filters sheet, handing focus back to its button
+    if (filtersDD.classList.contains('open')) { setSheet(false); filtersSum.focus(); return; }
     // an active search filter absorbs the first Esc (clear it, keep the panel);
     // a second Esc — filter now empty — closes the panel as before
     if (document.getElementById('q').value) {
@@ -4445,8 +4587,12 @@ resizer.addEventListener('pointercancel', endResize);
 // positionMenu height cap it used to borrow. Both files are linked at the end of
 // the body; the pre-paint theme guard stays inline in <head>.
 
-// wide screens: dock the panel with the empty state by default (no slide-in on first paint)
-if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
+// wide screens: dock the panel with the empty state by default (no slide-in on
+// first paint). Only from 1200px up: below that the docked panel takes a third
+// of a laptop window and leaves the controls row ~650px, folding the filters
+// away before anyone has picked a title. Narrower screens get the panel when a
+// row is clicked and never auto-open it later.
+if (matchMedia('(min-aspect-ratio: 3/5)').matches && matchMedia('(min-width: 1200px)').matches) {
   document.body.classList.add('no-anim');
   openPlaceholder();
   requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('no-anim')));
@@ -4455,13 +4601,15 @@ if (matchMedia('(min-aspect-ratio: 3/5)').matches) {
 // header must go through buildHeader(): it ends in syncScrollHints(), which
 // re-measures --theadh off the first <th> — and the header's height is exactly
 // what changes here (the "Scroll to top" pill anchors to it).
-narrowMQ.addEventListener('change', () => {
+narrowMQ.addEventListener('change', e => {
   buildHeader();
   syncTypeSummary();
   syncGenreSummary();
   syncPatchSummary();
   syncYear();
-  syncClearLabel();
+  syncFilterCount();
+  setCount(view.length);  // short tally + placeholder while narrow
+  if (!e.matches) setSheet(false);  // widening unfolds the filters into the row
 });
 
 // turning portrait while only the empty state shows → hide it so it doesn't cover the list

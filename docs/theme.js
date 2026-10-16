@@ -197,6 +197,7 @@
     var fitNav = function () {
       var root = document.documentElement;
       root.classList.remove('navshort', 'navwrap');
+      if (getComputedStyle(seg).display === 'none') return;  // folded into the Menu (nav.css .nv): nothing to fit
       var first = navrow.firstElementChild, last = navrow.lastElementChild;
       var below = function () { return last.getBoundingClientRect().top >= first.getBoundingClientRect().bottom - 2; };
       if (below()) root.classList.add('navshort');

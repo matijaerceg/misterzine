@@ -52,8 +52,12 @@
   .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
   @media (max-width: 36rem) {
     .top { flex-wrap: wrap; row-gap: .5rem; }
-    .top nav { order: -1; flex-basis: 100%; justify-content: flex-end; flex-wrap: nowrap; gap: .4rem; }
-    .masthead { flex-basis: 100%; }
+    /* the site links fold into the Menu here (nav.css .nv), so the lone Menu
+       sits beside the title instead of taking a row of its own */
+    .top { flex-wrap: nowrap; align-items: flex-start; }
+    .top nav { flex: 0 0 auto; flex-wrap: nowrap; gap: .4rem; margin-top: .15rem; }
+    .masthead { min-width: 0; --titleh: calc(1.4rem * 1.15 + .15rem + 1.2rem); }
+    .top h1 { font-size: 1.4rem; }  /* keeps the title on one line beside the Menu, so the logo stays small */
   }
 
   /* ---- hero: the horizontal list beside the tate details, equal height.
@@ -132,6 +136,12 @@
     <details class="sitemenu" id="menudd">
       <summary id="menusum">Menu</summary>
       <div class="mlist">
+      <!-- the site links, shown only where the nav row is folded away (nav.css .nv) -->
+      <a class="nv" href="../releases/">Core Tracker</a>
+      <span class="nv" aria-current="page">Arcade Frontend</span>
+      <a class="nv" href="../plex/">Plex</a>
+      <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
+      <hr class="msep nv">
         <div class="theme" id="theme">
           <details id="themedd">
             <summary id="themesum">Theme</summary>

@@ -16,7 +16,7 @@ srmvs=Tabletop / Mahjong
 class MatureTests(unittest.TestCase):
     def test_parse_reads_only_the_marker(self):
         self.assertEqual(mz.parse_catver_mature(CATVER), {"galpanic"})
-        # the genre parser still collapses the category as before
+        # the genre parser still maps the category without the marker
         self.assertEqual(mz.parse_catver(CATVER)["galpanic"], "Puzzle")
 
     def test_rules(self):

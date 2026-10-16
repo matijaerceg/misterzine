@@ -2328,12 +2328,100 @@ def fetch_catver(refresh=False):
     return text
 
 
-def parse_catver(text):
-    """Parse the [Category] section into {setname_lower: top_level_genre}.
+# The site's genre vocabulary: fifteen player-facing labels derived from
+# catver's "Genre / Subgenre" pairs. catver's top level alone was too coarse
+# (every shooter under "Shooter", belt scrollers under "Platform" or
+# "Fighter"), so the second level decides where it tells the styles apart.
+# GENRE_BY_SUBGENRE pins the exact pairs that leave their top level's default;
+# GENRE_BY_TOP maps everything else by top level; anything unlisted is Other.
+GENRES = (
+    "Shoot 'em up", "Run 'n gun", "Beat 'em up", "Fighting", "Platformer",
+    "Arena shooter", "Fixed shooter", "Rail shooter", "Light gun", "Racing",
+    "Maze", "Puzzle", "Sports", "Tabletop & quiz", "Other",
+)
+GENRE_BY_SUBGENRE = {
+    "Fighter / Versus": "Fighting",
+    "Fighter / Versus Co-op": "Fighting",
+    "Maze / Fighter": "Beat 'em up",
+    "Platform / Fighter": "Beat 'em up",
+    "Platform / Shooter": "Run 'n gun",
+    "Platform / Shooter Scrolling": "Run 'n gun",
+    "Shooter / Walking": "Run 'n gun",
+    "Shooter / 3rd Person": "Run 'n gun",
+    "Shooter / Driving": "Run 'n gun",
+    "Shooter / Driving Vertical": "Run 'n gun",
+    "Shooter / Driving Horizontal": "Run 'n gun",
+    "Shooter / Driving Diagonal": "Run 'n gun",
+    "Shooter / Gallery": "Fixed shooter",
+    "Shooter / Command": "Fixed shooter",
+    "Shooter / Balloon Popping": "Fixed shooter",
+    "Shooter / Versus": "Fixed shooter",
+    "Shooter / Gun": "Light gun",
+    "Shooter / Light Gun": "Light gun",
+    "Shooter / Rifle": "Light gun",
+    "Shooter / Field": "Arena shooter",
+    "Shooter / Tank Driving": "Arena shooter",
+    "Maze / Shooter Large": "Arena shooter",
+    "Maze / Shooter Small": "Arena shooter",
+    "Shooter / Flying (chase view)": "Rail shooter",
+    "Shooter / Flying 1st Person": "Rail shooter",
+    "Shooter / 1st Person": "Rail shooter",
+    "Shooter / Driving (chase view)": "Rail shooter",
+}
+GENRE_BY_TOP = {
+    # every other Shooter / * (Flying *, Misc. *) and Fighter / * (2D, 2.5D,
+    # 3D, Vertical, Field) subgenre, including ones catver adds later
+    "Shooter": "Shoot 'em up",
+    "Fighter": "Beat 'em up",
+    "Platform": "Platformer",
+    "Climbing": "Platformer",
+    "Maze": "Maze",
+    "Driving": "Racing",
+    "Puzzle": "Puzzle",
+    "Ball & Paddle": "Puzzle",
+    "Sports": "Sports",
+    "Tabletop": "Tabletop & quiz",
+    "Quiz": "Tabletop & quiz",
+}
+# catver's old top-level names, as stored in catalog.genre by builds before
+# the vocabulary above: translated on the way out so a stale row still shows
+# a current label until the next `genre` pass rewrites it.
+LEGACY_GENRE = dict(GENRE_BY_TOP, **{
+    "Gambling": "Other", "Slot Machine": "Other", "Multiplay": "Other",
+    "MultiGame": "Other", "Misc.": "Other", "Game Console": "Other",
+    "Utilities": "Other", "Pinball": "Other", "Handheld": "Other", "System": "Other",
+})
 
-    catver values look like 'Shooter / Flying Vertical' or 'Platform - Climb';
-    collapse to the leading token so e.g. all shooters land under 'Shooter'.
-    """
+
+def catver_category(value):
+    """A catver [Category] value stripped to its bare 'Genre / Subgenre':
+    without the 'TTL * ' prefix current catver puts on discrete-logic games,
+    the meaningless 'Arcade / ' parent it files pinball-style games under,
+    and the '* Mature *' suffix (parse_catver_mature reads that one)."""
+    v = value.strip()
+    if v.endswith("* Mature *"):
+        v = v[:-len("* Mature *")].strip()
+    if v.startswith("TTL * "):
+        v = v[len("TTL * "):]
+    if v.startswith("Arcade / "):
+        v = v[len("Arcade / "):]
+    return v.strip()
+
+
+def genre_label(value):
+    """The site genre for a catver [Category] value ('' for an empty one)."""
+    v = catver_category(value)
+    if not v:
+        return ""
+    if v in GENRE_BY_SUBGENRE:
+        return GENRE_BY_SUBGENRE[v]
+    top = re.split(r"[/-]", v)[0].strip()
+    return GENRE_BY_TOP.get(top, "Other")
+
+
+def parse_catver(text):
+    """Parse the [Category] section into {setname_lower: site_genre}, with
+    each 'Genre / Subgenre' value mapped through genre_label."""
     cats = {}
     section = None
     for line in text.splitlines():
@@ -2342,17 +2430,9 @@ def parse_catver(text):
             continue
         if section == "Category" and "=" in line:
             k, v = line.split("=", 1)
-            # current catver prefixes discrete-logic games with 'TTL * ' and
-            # files pinball-style games under a meaningless 'Arcade / ' parent;
-            # drop both so the real category leads before collapsing.
-            v = v.strip()
-            if v.startswith("TTL * "):
-                v = v[len("TTL * "):]
-            if v.startswith("Arcade / "):
-                v = v[len("Arcade / "):]
-            v = re.split(r"[/-]", v)[0].strip()
-            if v:
-                cats[k.strip().lower()] = v
+            g = genre_label(v)
+            if g:
+                cats[k.strip().lower()] = g
     return cats
 
 
@@ -2456,14 +2536,19 @@ def local_catver():
 
 
 def genre_for(setname, cats, dat):
-    """catver genre for a setname, falling back to its DAT parent's genre."""
+    """Site genre for a setname: a GENRE_OVERRIDES pin on the set or its DAT
+    parent first, else catver's category for the set, else its parent's."""
     if not setname:
         return ""
     sl = setname.lower()
+    parent = (dat.get(sl) or {}).get("parent")
+    if sl in GENRE_OVERRIDES:
+        return GENRE_OVERRIDES[sl]
+    if parent in GENRE_OVERRIDES:
+        return GENRE_OVERRIDES[parent]
     g = cats.get(sl)
     if g:
         return g
-    parent = (dat.get(sl) or {}).get("parent")
     return cats.get(parent, "") if parent else ""
 
 
@@ -2474,17 +2559,18 @@ def cmd_genre(args):
     log(f"genre: {len(cats)} setname->genre entries from catver.ini"
         + (f"; {len(dat)} DAT machines for parent fallback" if dat else ""))
     rows = con.execute(
-        "SELECT source_id, path, setname FROM catalog WHERE system='arcade' AND setname IS NOT NULL"
+        "SELECT source_id, path, setname, title FROM catalog WHERE system='arcade' AND setname IS NOT NULL"
     ).fetchall()
     n = 0
     for row in rows:
-        g = genre_for(row["setname"], cats, dat)
-        if g:
-            con.execute(
-                "UPDATE catalog SET genre=? WHERE source_id=? AND path=?",
-                (g, row["source_id"], row["path"]),
-            )
-            n += 1
+        # rewrite every row, so a label from an earlier vocabulary or a set
+        # catver has since dropped never lingers in the committed DB
+        g = genre_for(row["setname"], cats, dat) or arcade_genre(row["setname"], row["title"])
+        con.execute(
+            "UPDATE catalog SET genre=? WHERE source_id=? AND path=?",
+            (g or None, row["source_id"], row["path"]),
+        )
+        n += bool(g)
     con.commit()
     con.close()
     log(f"  joined {n}/{len(rows)} arcade titles (with a setname) to a genre")
@@ -3402,16 +3488,44 @@ def arcade_year(setname, title):
 # homebrew, and TTL games with no MAME setname). Same shape as the year tables:
 # by setname where one exists, by normalized title otherwise.
 ARCADE_GENRE_BY_SETNAME = {
+    "aquario": "Platformer",         # Clockwork Aquario prototype; catver lists no set
     "cleansweept": "Maze",           # Macro's homebrew port of the 1982 Vectrex maze game
+    "devilfsg": "Maze",              # Devil Fish on Galaxian hardware; catver lists no set
     "mrdonight": "Maze",             # Mr. Do! hack
-    "popflamn": "Maze",              # bootleg; parent popflame is 'Maze / Shooter Small'
-    "spacerace": "Driving",          # Atari 1973: two rockets racing upward
-    "sf2cre": "Fighter",             # SF2' Champion Re-Edit hack, not in MAME/catver
-    "sf2hfsce": "Fighter",           # SF2' Special Champion Edition (Sr Street hack)
+    "popflamn": "Arena shooter",     # bootleg; parent popflame is 'Maze / Shooter Small'
+    "spacerace": "Racing",           # Atari 1973: two rockets racing upward
+    "sf2cre": "Fighting",            # SF2' Champion Re-Edit hack, not in MAME/catver
+    "sf2hfsce": "Fighting",          # SF2' Special Champion Edition (Sr Street hack)
+    "spacedemon": "Fixed shooter",   # the MRA's setname; MAME's spacedem is 'Shooter / Gallery'
+    "twinbeeb": "Shoot 'em up",      # Bubble System TwinBee; catver lists only twinbee
 }
 ARCADE_GENRE_BY_NAME = {
-    "Computer Space": "Shooter",
-    "Pac-Manic Miner": "Platform",   # Manic Miner port on Pac-Man hardware
+    "Computer Space": "Shoot 'em up",
+    "Pac-Manic Miner": "Platformer", # Manic Miner port on Pac-Man hardware
+}
+
+# Sets whose catver subgenre lands them in the wrong site genre: catver files
+# most belt scrollers under 'Platform / Fighter Scrolling' together with the
+# true platformers, and several platformers under 'Platform / Shooter
+# Scrolling'. By lowercase MAME setname (parent sets; genre_for applies a pin
+# to the set's clones through the DAT parent too), checked against the
+# catalogue 2026-10-16. Wins over catver.
+GENRE_OVERRIDES = {
+    "baddudes": "Beat 'em up",       # Bad Dudes vs. Dragonninja (drgninja is its clone)
+    "vigilant": "Beat 'em up",       # Vigilante
+    "spidman": "Beat 'em up",        # Spider-Man: The Videogame
+    "altbeast": "Beat 'em up",       # Altered Beast
+    "cbuster": "Beat 'em up",        # Crude Buster
+    "triothep": "Beat 'em up",       # Trio The Punch
+    "wboy": "Platformer",            # Wonder Boy
+    "toki": "Platformer",            # Toki
+    "willow": "Platformer",          # Willow
+    "karnov": "Platformer",          # Karnov
+    "sonson": "Platformer",          # Son Son
+    "bionicc": "Platformer",         # Bionic Commando
+    "bonzeadv": "Platformer",        # Bonze Adventure
+    "pooyan": "Fixed shooter",       # Pooyan
+    "mpang": "Fixed shooter",        # Mighty! Pang
 }
 _ARCADE_GENRE_BY_NAME_NORM = {norm_key(k): v for k, v in ARCADE_GENRE_BY_NAME.items()}
 
@@ -4045,11 +4159,14 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         sn = r["setname"] or (arcade_setnames or {}).get(title) or ""
         if not sn and dat_desc_index:
             sn = dat_desc_index.get(_norm_arcade_title(title), "")
-        # genre from catver (DB) → catver-by-parent; manufacturer from the MRA
-        # (DB) → MAME DAT by setname → by parent. Fills the clone-setname genre
-        # gaps and the Toaplan/Nichibutsu/UPL manufacturer gaps.
-        genre = (r["genre"] or genre_for(sn, arcade_cats or {}, arcade_meta or {})
-                 or arcade_genre(sn, title))
+        # genre from catver (pins, set, DAT parent) → the frozen tables → the
+        # DB's own column (a `genre` pass stored it; translated when it still
+        # carries catver's old top-level name); manufacturer from the MRA (DB)
+        # → MAME DAT by setname → by parent. Fills the clone-setname genre gaps
+        # and the Toaplan/Nichibutsu/UPL manufacturer gaps.
+        genre = (genre_for(sn, arcade_cats or {}, arcade_meta or {})
+                 or arcade_genre(sn, title)
+                 or LEGACY_GENRE.get(r["genre"] or "", r["genre"] or ""))
         if not manufacturer:
             manufacturer = _dat_field(sn, arcade_meta, "manufacturer")
         # the FPGA core (rbf) the game runs on. Multi-game cores (jtcps2, ST-V,

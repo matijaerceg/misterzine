@@ -33,7 +33,10 @@ dashboard is public, linked as "Traffic Stats" in the header).
   Distribution shows exactly what a stock update_all does not deliver.
 - Default sort is **Build Date**, newest first; the Title column stays pinned while
   scrolling horizontally; every column header explains itself on hover.
-- **Type** reads `Arcade, <genre>` for arcade titles (genre from MAME's catver.ini) and
+- **Type** reads `Arcade, <genre>` for arcade titles, one of fifteen genres (Shoot 'em up,
+  Run 'n gun, Beat 'em up, Fighting, Platformer, Arena shooter, Fixed shooter, Rail shooter,
+  Light gun, Racing, Maze, Puzzle, Sports, Tabletop & quiz, Other) derived from MAME
+  catver.ini's genre and subgenre with hand pins for the sets catver files oddly) and
   `Console core` / `Computer core` / `Other core` for cores.
 - **Core** links every row to its GitHub repository.
 - Console/computer rows carry their hardware maker (Nintendo/Sega/Commodore/...) and the
@@ -361,7 +364,7 @@ python misterzine.py repos        # MiSTer-devel arcade repo dates (incremental)
 python misterzine.py core-repos   # console/computer/other core debut dates (incremental)
 python misterzine.py jtcores      # Jotego dates from the jtcores monorepo (incremental)
 python misterzine.py coinop       # Coin-Op dates from develop commit messages
-python misterzine.py genre        # arcade genre from MAME catver.ini (joined on setname)
+python misterzine.py genre        # arcade genre from MAME catver.ini's genre/subgenre (joined on setname)
 python misterzine.py patches      # fan patches from Arcade Patches (strygo), per-row `pt`
 python misterzine.py mad          # arcade rotation/resolution/players/controls from MAD
 python misterzine.py specs        # provisional specs from legacy/current MAME
@@ -403,7 +406,7 @@ Example record (`arcade.json`):
 {
   "title": "Eeek! (Pac-Man Conversion)",
   "year": "1984", "manufacturer": "Epos Corporation",
-  "rbf": "pacman", "setname": "eeekkp", "genre": "Platform",
+  "rbf": "pacman", "setname": "eeekkp", "genre": "Platformer",
   "release_date": "2017-11-09T05:49:26Z",
   "last_update": "2026-06-26T06:12:21Z",
   "repo": "MiSTer-devel/Arcade-Pacman_MiSTer"

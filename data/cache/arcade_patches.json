@@ -3170,7 +3170,7 @@
     {
      "hbmame_set": "usf2t8",
      "key": "us",
-     "mame_set": "usf2t4",
+     "mame_set": "hsf2",
      "region": "USA",
      "title": "Ultra Street Fighter II",
      "title_screen": "data/screenshots/usf2-backport/title_us.png"
@@ -3178,7 +3178,7 @@
     {
      "hbmame_set": "usf2j8",
      "key": "jp",
-     "mame_set": "usf2j4",
+     "mame_set": "hsf2j",
      "region": "Japan",
      "title": "Ultra Street Fighter II",
      "title_screen": "data/screenshots/usf2-backport/title_jp.png"
@@ -3192,7 +3192,7 @@
     "The Switch edition's sound effects, and its arranged music on MiSTer; MODERN or CLASSIC for each in ULTRA CONFIGURATION",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-10-16",
+   "date": "2026-10-17",
    "description": [
     "Ultra Street Fighter II: The Final Challengers is the 2017 Nintendo Switch edition of Super Street Fighter II Turbo, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "Akuma has his own select cell, and Evil Ryu and Violent Ken join the original sixteen fighters with their Ultra moves, colors and endings. Shin Akuma stays hidden, for twenty fighters in all.",
@@ -3204,7 +3204,7 @@
    "game": "Ultra Street Fighter II: The Final Challengers (Nintendo Switch)",
    "hardware": "Capcom CPS-2 with the CPS+ core",
    "notes": [
-    "The 4 MB builds run in MAME and the 8 MB builds run in HBMAME and on MiSTer. MAME and HBMAME need the kit's set definitions compiled in; the kit includes an installer for them.",
+    "The 4 MB audio builds run in stock MAME as hsf2 (USA) and hsf2j (Japan), with expected checksum warnings. Keep them separate from original Hyper Street Fighter II ROMs. The 8 MB audio builds run in HBMAME and on MiSTer; HBMAME needs the included set definitions compiled in.",
     "Credits: Akuma's imported artwork is Tyrone's, from Super Street Fighter II Turbo: New Legacy.",
     "This is a fan backport, unaffiliated with Capcom. The sets are built from game files you already own; the kit ships only our own code and patches, plus the CPS+ core with its source and licenses."
    ],
@@ -3253,6 +3253,15 @@
    ],
    "release_history": [
     {
+     "date": "2026-10-17",
+     "items": [
+      "MAME output now runs in unmodified MAME; launch instructions are included.",
+      "Improved Windows setup and extraction of your Switch game files.",
+      "Accepts matching arcade ROMs packaged with different ZIP compression."
+     ],
+     "version": "rc2"
+    },
+    {
      "date": "2026-10-16",
      "items": [
       "First release candidate."
@@ -3265,7 +3274,7 @@
      "label": "About CPS-2+ hardware",
      "url": "../cps2-plus/"
     },
-    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. In MAME or HBMAME they need the set definitions the kit writes compiled in, since the stock emulators don't know these sets."
+    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. The MAME sets run in unmodified MAME using its Hyper Street Fighter II loader. HBMAME needs the set definitions the kit writes compiled in."
    },
    "screenshots": [
     {
@@ -3288,7 +3297,7 @@
    "summary": "Ultra Street Fighter II: The Final Challengers as a CPS-2 game: Akuma gets his own select cell, Evil Ryu and Violent Ken join the roster, and the Switch edition's title, color select and sound come along. USA and Japan builds.",
    "thumbnail_build": "us",
    "title": "Ultra Street Fighter II",
-   "version": "rc1"
+   "version": "rc2"
   },
   {
    "artifact": {

@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 18 Oct 2026 01:09:39 +0000</lastBuildDate>
+<lastBuildDate>Sun, 18 Oct 2026 09:44:02 +0000</lastBuildDate>
+<item>
+<title>[New] Ninjakun Majou no Bouken (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ninjakun-majou-no-bouken</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Ninjakun Majou no Bouken.mra:2026-10-18T09:44:02+00:00</guid>
+<pubDate>Sun, 18 Oct 2026 09:44:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ninjakun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1984 / UPL (Taito license)&lt;/p&gt;&lt;p&gt;Core: UPLFramebuffer&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] UPLFramebuffer (Arcade core, 9 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arkarea</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/UPLFramebuffer_20261017.rbf:2026-10-18T09:44:02+00:00</guid>
+<pubDate>Sun, 18 Oct 2026 09:44:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Ninjakun Majou no Bouken, Nova 2001, Omega Fighter, Penguin-Kun Wars, Raiders5.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Battletoads (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#btoads</link>
@@ -512,13 +530,13 @@
 <description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] UPLFramebuffer (Arcade core, 5 games)</title>
+<title>[Updated] UPLFramebuffer (Arcade core, 9 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arkarea</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/cores/UPLFramebuffer_20261013.rbf:2026-10-14T00:37:37+00:00</guid>
 <pubDate>Wed, 14 Oct 2026 00:37:37 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Omega Fighter.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Ninjakun Majou no Bouken, Nova 2001, Omega Fighter, Penguin-Kun Wars, Raiders5.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Argus (Arcade)</title>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shinobi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sukeban Jansi Ryuko (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sjryuko</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Sukeban Jansi Ryuko (set 2, System 16B, FD1089B 317-5021).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sjryuko.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1988 / White Board&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sunset Riders (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ssriders</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Sunset Riders (4 Players ver EAC).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ssriders.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtriders&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/riders"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

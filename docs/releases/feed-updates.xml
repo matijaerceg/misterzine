@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 17 Oct 2026 20:58:27 +0000</lastBuildDate>
+<lastBuildDate>Sun, 18 Oct 2026 09:44:02 +0000</lastBuildDate>
+<item>
+<title>[Updated] UPLFramebuffer (Arcade core, 9 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arkarea</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/UPLFramebuffer_20261017.rbf:2026-10-18T09:44:02+00:00</guid>
+<pubDate>Sun, 18 Oct 2026 09:44:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Ninjakun Majou no Bouken, Nova 2001, Omega Fighter, Penguin-Kun Wars, Raiders5.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Klax (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#klax</link>
@@ -323,13 +332,13 @@
 <description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] UPLFramebuffer (Arcade core, 5 games)</title>
+<title>[Updated] UPLFramebuffer (Arcade core, 9 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arkarea</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/cores/UPLFramebuffer_20261013.rbf:2026-10-14T00:37:37+00:00</guid>
 <pubDate>Wed, 14 Oct 2026 00:37:37 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Omega Fighter.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Ninjakun Majou no Bouken, Nova 2001, Omega Fighter, Penguin-Kun Wars, Raiders5.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Arcade-Simple156 (Arcade core, 3 games)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Bubble 2000, Guardian Storm, Mang-Chi, Pop's Pop's, Spectrum 2000, Stagger I.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-07 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-NMK16_Gunnail (Arcade core, 21 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#acrobatm</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20261007.rbf:2026-10-07T08:21:37+00:00</guid>
-<pubDate>Wed, 07 Oct 2026 08:21:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Acrobat Mission, Air Attack, Bio-ship Paladin, Black Heart, Bombjack Twin, Dolmen, GunNail, Hacha Mecha Fighter, Koutetsu Yousai Strahl, Many Block, Nouryoku Koujou Iinkai, Puzzle World, S.S. Mission, Saboten Bombers, Super Spacefortress Macross, Task Force Harrier, Thunder Dragon, Tom Tom Magic, Twin Action, US AAF Mustang, Vandyke.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-07 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

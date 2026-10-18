@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-18
+
+- Release tracker: added Ongo as an arcade source, including Kyle Lester's Namco, Deniam and other cores. Games also carried by existing sources remain labelled by source. The catalogue includes games whose cores Ongo supplies, with regional variants folded as usual; practice files and Ongo's non-arcade content are excluded.
+
 ## 2026-10-16
 
 - Release tracker: arcade genres are now fifteen player-facing labels instead of MAME catver's top-level names: Shoot 'em up, Run 'n gun, Beat 'em up, Fighting, Platformer, Arena shooter, Fixed shooter, Rail shooter, Light gun, Racing, Maze, Puzzle, Sports, Tabletop & quiz and Other. They come from catver's subgenre, so Galaga is a Fixed shooter, Contra a Run 'n gun, Street Fighter II a Fighting game and Final Fight a Beat 'em up; a few sets catver files oddly (Bad Dudes, Altered Beast, Wonder Boy, Toki, Pooyan and others) are pinned by hand. The Genre filter, column and the feeds use the new names.

@@ -171,6 +171,15 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/rossops/Arcade-SegaYBoard_MiSTer/main/db.json.zip",
     },
     {
+        # Ongo's community database. It aggregates arcade MRAs and core builds
+        # alongside other system databases, ROM payloads, scripts and extras;
+        # only arcade MRA files and the shipped _Arcade/cores bitstreams are
+        # part of this catalogue. It is an opt-in downloader section.
+        "id": "ongo",
+        "name": "Ongo",
+        "db_url": "https://raw.githubusercontent.com/OngoGablogian/MiSTer_Ongo/db/db.json.zip",
+    },
+    {
         "id": "theypsilon_unofficial_distribution",
         "name": "theypsilon Unofficial Distribution",
         "db_url": "https://raw.githubusercontent.com/theypsilon/Unofficial_Distribution_MiSTer/main/unofficialdb.json.zip",
@@ -191,6 +200,19 @@ SOURCE_SYSTEMS = {
     "meathax": {"arcade"},
 }
 
+# Ongo's large aggregate db needs a path-level allowlist: its arcade folder
+# also contains playlists and other support files. Cave practice-ROM MRAs are
+# tools for games, not standalone release entries.
+SOURCE_PATH_FILTERS = {
+    "ongo": lambda path: (
+        path.replace("\\", "/").lower().startswith("_arcade/")
+        and (path.lower().endswith(".mra") or
+             (path.replace("\\", "/").lower().startswith("_arcade/cores/")
+              and path.lower().endswith(".rbf")))
+        and "practice roms/" not in path.replace("\\", "/").lower()
+    ),
+}
+
 # Dbs that ship a game's regional/revision sets as sibling MRAs instead of
 # filing the extras under _Arcade/_alternatives/. The site lists each game
 # once, so export-web folds them the way it drops alternatives
@@ -198,7 +220,7 @@ SOURCE_SYSTEMS = {
 # Over Sea sets side by side; his 2026-09-25 rebuild moved Japan and Korea
 # into _alternatives, which leaves the fold idle, but it stays in case a
 # later rebuild puts them back.
-SIBLING_VARIANT_SOURCES = {"blahm1d"}
+SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo"}
 
 # Opt-in dbs whose games may move into the MiSTer Distribution later
 # (MiSTer-devel forked rossops' X Board core; Y Board may follow). Once the
@@ -456,6 +478,9 @@ def classify(path):
 
 def tracked_path(source_id, path):
     """False for db entries a partly-tracked source ships that we don't list."""
+    path_filter = SOURCE_PATH_FILTERS.get(source_id)
+    if path_filter is not None and not path_filter(path):
+        return False
     allowed = SOURCE_SYSTEMS.get(source_id)
     return allowed is None or classify(path)[0] in allowed
 
@@ -464,7 +489,7 @@ def tracked_files(source_id, files):
     """Filter a snapshot's path->meta map down to what this source is tracked
     for. Applied to BOTH sides of the snapshot diff so an untracked path is
     simply invisible: it never seeds a row, and it never looks 'removed'."""
-    if source_id not in SOURCE_SYSTEMS:
+    if source_id not in SOURCE_SYSTEMS and source_id not in SOURCE_PATH_FILTERS:
         return files
     return {p: m for p, m in files.items() if tracked_path(source_id, p)}
 
@@ -650,7 +675,10 @@ def write_snapshot(source_id, timestamp, files):
 def cmd_snapshot(args):
     con = connect()
     total_events = 0
+    selected_source = getattr(args, "source", None)
     for source in SOURCES:
+        if selected_source and source["id"] != selected_source:
+            continue
         ts, files, gated, gates = fetch_db(source)
         # an archived orphan whose summary failed to load: last crawl's values
         for path in [p for p, meta in files.items() if meta is None]:
@@ -1430,6 +1458,8 @@ MRA_REPOS = [
     ("bazset", "bazset/MiSTer_BAZSET", "main", "_Arcade/_BAZSET"),
     # the db installs them to _Arcade/, but the repo keeps them in releases/
     ("rossops", "rossops/Arcade-SegaYBoard_MiSTer", "main", "releases"),
+    # Ongo's main branch carries MRAs at the root and in nested system folders.
+    ("ongo", "OngoGablogian/MiSTer_Ongo", "main", "_Arcade"),
 ]
 
 
@@ -1473,7 +1503,7 @@ def _db_hosted_mras(source_id, mradir):
     return DATA / "repos" / source_id, urls
 
 
-def _sparse_arcade_clone(full_name, branch, mradir="_Arcade"):
+def _sparse_arcade_clone(full_name, branch, mradir="_Arcade", sparse_paths=None):
     """Blobless sparse clone of a repo's MRA folder; returns the local dir."""
     name = full_name.split("/")[-1]
     repodir = DATA / "repos" / name
@@ -1487,7 +1517,12 @@ def _sparse_arcade_clone(full_name, branch, mradir="_Arcade"):
         ])
         # Non-cone pattern: only top-level MRAs. Skips nested dirs like
         # _Arcade/_alternatives/_M.I.A./ whose trailing-dot names are illegal on NTFS.
-        subprocess.check_call(["git", "-C", str(repodir), "sparse-checkout", "set", "--no-cone", f"/{mradir}/*.mra"])
+        if sparse_paths is None:
+            patterns = [f"/{mradir}/*.mra"]
+        else:
+            patterns = _sparse_checkout_patterns(sparse_paths)
+        subprocess.run(["git", "-C", str(repodir), "sparse-checkout", "set", "--no-cone", "--stdin"],
+                       input="\n".join(patterns) + "\n", text=True, check=True)
         # protectNTFS=false lets checkout proceed past NTFS-illegal paths in
         # excluded subdirs (e.g. _alternatives/_M.I.A./); sparse skips writing them.
         subprocess.check_call(["git", "-C", str(repodir), "-c", "core.protectNTFS=false", "checkout"])
@@ -1501,8 +1536,42 @@ def _sparse_arcade_clone(full_name, branch, mradir="_Arcade"):
         if pull.returncode != 0:
             log(f"  {full_name}: ff-only pull failed (force-push?); re-cloning fresh")
             _rmtree_force(repodir)
-            return _sparse_arcade_clone(full_name, branch, mradir)
+            return _sparse_arcade_clone(full_name, branch, mradir, sparse_paths)
+        if sparse_paths is not None:
+            patterns = _sparse_checkout_patterns(sparse_paths)
+            subprocess.run(["git", "-C", str(repodir), "sparse-checkout", "set", "--no-cone", "--stdin"],
+                           input="\n".join(patterns) + "\n", text=True, check=True)
     return repodir
+
+
+def _sparse_checkout_patterns(paths):
+    """Make exact sparse-checkout patterns, quoting glob characters in names."""
+    return ["/" + re.sub(r"([\\*?\[\]])", r"\\\1", p.replace("\\", "/").lstrip("/"))
+            for p in paths]
+
+
+def _mra_metadata_key(source_id, repo_path):
+    path = repo_path.replace("\\", "/")
+    return path if source_id == "ongo" else Path(path).name
+
+
+def _mra_catalog_key(source_id, catalog_path):
+    path = catalog_path.replace("\\", "/")
+    return path if source_id == "ongo" else Path(path).name
+
+
+def _mra_specs_key(source_id, repo_path, mradir):
+    path = repo_path.replace("\\", "/")
+    return path if source_id == "ongo" else f"{mradir}/{Path(path).name}"
+
+
+def _ongo_mra_paths():
+    """Current Ongo MRA paths included by its source-specific scope."""
+    source = next(s for s in SOURCES if s["id"] == "ongo")
+    z = zipfile.ZipFile(BytesIO(http_get(source["db_url"])))
+    d = json.loads(z.read(z.namelist()[0]))
+    return sorted(p for p in d.get("files", {})
+                  if p.lower().endswith(".mra") and tracked_path("ongo", p))
 
 
 def _rmtree_force(path):
@@ -1526,7 +1595,10 @@ def cmd_enrich_mra(args):
     con = connect()
     grand = 0
     mra_specs = local_mra_specs()
+    selected_source = getattr(args, "source", None)
     for source_id, full_name, branch, mradir in MRA_REPOS:
+        if selected_source and source_id != selected_source:
+            continue
         if full_name is None:
             # a one-person host: an outage skips this source for the run
             # (its rows keep the last enrichment) instead of failing CI
@@ -1536,22 +1608,29 @@ def cmd_enrich_mra(args):
                 log(f"  {source_id}: MRA download failed ({e}); rows keep their last enrichment")
                 continue
         else:
-            repodir, mra_urls = _sparse_arcade_clone(full_name, branch, mradir), {}
+            sparse_paths = _ongo_mra_paths() if source_id == "ongo" else None
+            repodir, mra_urls = _sparse_arcade_clone(
+                full_name, branch, mradir, sparse_paths=sparse_paths), {}
         meta = {}
         source_specs = {}
-        for mra in (repodir / mradir).glob("*.mra"):
+        mra_folder = repodir / mradir
+        mras = mra_folder.rglob("*.mra") if source_id == "ongo" else mra_folder.glob("*.mra")
+        for mra in mras:
+            relpath = mra.relative_to(repodir).as_posix()
+            key = _mra_metadata_key(source_id, relpath)
+            spec_key = _mra_specs_key(source_id, relpath, mradir)
             spec = parse_mra_specs(mra.read_text(encoding="utf-8", errors="ignore"),
                 mra_urls.get(mra.name) or
                 f"https://github.com/{full_name}/blob/{branch}/" +
-                urllib.parse.quote(f"{mradir}/{mra.name}"))
+                urllib.parse.quote(relpath, safe="/"))
             if spec:
-                source_specs[f"{mradir}/{mra.name}"] = spec
+                source_specs[spec_key] = spec
             try:
                 root = ET.parse(mra).getroot()
                 def gx(tag):
                     el = root.find(tag)
                     return el.text.strip() if el is not None and el.text else None
-                meta[mra.name] = {"year": gx("year"), "manufacturer": gx("manufacturer"),
+                meta[key] = {"year": gx("year"), "manufacturer": gx("manufacturer"),
                                   "rbf": gx("rbf"), "setname": gx("setname")}
             except Exception:
                 # Some upstream MRAs are not well-formed XML (e.g. "--" inside a
@@ -1564,13 +1643,13 @@ def cmd_enrich_mra(args):
                 def gr(tag):
                     m = re.search(r"<%s>\s*([^<]+?)\s*</%s>" % (tag, tag), txt)
                     return m.group(1) if m else None
-                meta[mra.name] = {"year": gr("year"), "manufacturer": gr("manufacturer"),
+                meta[key] = {"year": gr("year"), "manufacturer": gr("manufacturer"),
                                   "rbf": gr("rbf"), "setname": gr("setname")}
         n = 0
         for row in con.execute(
             "SELECT path FROM catalog WHERE system='arcade' AND source_id=?", (source_id,)
         ).fetchall():
-            m = meta.get(Path(row["path"]).name)
+            m = meta.get(_mra_catalog_key(source_id, row["path"]))
             if m:
                 con.execute(
                     "UPDATE catalog SET year=?, manufacturer=?, rbf=?, setname=? WHERE source_id=? AND path=?",
@@ -2264,6 +2343,19 @@ ROSSOPS_FROZEN_DATES = {
     "Strike Fighter.mra": "2026-08-29",
 }
 
+ONGO_CORE_REPOS = {
+    "namco_na1_na2": "kyledlester/Namco_NA1_NA2_MiSTer",
+    "namco_nb1": "kyledlester/Namco_NB1_MiSTer",
+    "namco_nb2": "kyledlester/Namco_NB2_MiSTer",
+    "crystal": "kyledlester/BrezzaSoft_Crystal_System_MiSTer",
+    "deniam": "kyledlester/Deniam_MiSTer_FPGA",
+    "djmain": "kyledlester/Konami_Bemani_DJ-Main_MiSTer_FPGA",
+    "djmainsd": "kyledlester/Konami_Bemani_DJ-Main_MiSTer_FPGA",
+    "nerattechu": "kyledlester/MiSTer_Neratte_Chu",
+    "nostradamus": "kyledlester/Nostradamus_Magical_Cat_Adventure_MiSTer",
+    "rshark": "kyledlester/R_Shark_Super_X_MiSTer",
+}
+
 # First public version: GX400-Friends/gx400-bin CHANGELOG.md, 2022-03-14.
 # The distribution import in 2026 is not the core's debut.
 OPTIN_DB_SOURCES = {
@@ -2280,6 +2372,9 @@ OPTIN_DB_SOURCES = {
     "bazset": (BAZSET_REPO, BAZSET_CORE_REPOS, BAZSET_FROZEN_DATES),
     # db and core share one repo, so the fallback link is already the core
     "rossops": (ROSSOPS_REPO, {}, ROSSOPS_FROZEN_DATES),
+    # Ongo's source repo contains the aggregate MRA/core files; no invented
+    # debut dates are attached to its initial catalogue seed.
+    "ongo": (None, ONGO_CORE_REPOS, {}),
 }
 
 
@@ -3091,6 +3186,8 @@ def cmd_export(args):
 
     # full catalog (deduped by normalized title, preferring rows with a release date)
     rows = [dict(r) for r in con.execute("SELECT * FROM catalog").fetchall()]
+    shipped_rbfs = _shipped_rbf_index(con)
+    rows = [r for r in rows if _source_row_visible(r, shipped_rbfs)]
     (EXPORTDIR / "catalog.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
 
     arcade = [r for r in rows if r["system"] == "arcade"]
@@ -3109,6 +3206,9 @@ def cmd_export(args):
     # timeline of dated events, newest first
     events = [dict(r) for r in con.execute(
         "SELECT * FROM events ORDER BY ts DESC, source_id").fetchall()]
+    visible_ongo = {(r["source_id"], r["path"]) for r in rows if r["source_id"] == "ongo"}
+    events = [e for e in events if e["source_id"] != "ongo" or
+              (e["source_id"], e["path"]) in visible_ongo]
     with (EXPORTDIR / "timeline.jsonl").open("w", encoding="utf-8") as f:
         for e in events:
             f.write(json.dumps(e) + "\n")
@@ -3827,6 +3927,8 @@ def _core_label(r, fork_info, repo_maps):
         return "bazset"
     if r["source_id"] == "rossops":
         return "rossops"
+    if r["source_id"] == "ongo":
+        return "Ongo"
     repo =(r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -4093,6 +4195,12 @@ def _resolve_shipped_rbf(source_id, tag, shipped):
         return None
     key, disp = stems[best]
     return disp, key
+
+
+def _source_row_visible(row, shipped):
+    """Ongo lists community MRAs whose core it does not ship; keep those out."""
+    return (row["source_id"] != "ongo" or
+            _resolve_shipped_rbf("ongo", row.get("rbf"), shipped) is not None)
 
 
 def arcade_family(sn, meta):
@@ -4450,6 +4558,8 @@ def _repo_for(r, core, repo_maps):
             return repo
         if lc in FROZEN_REPOS:
             return FROZEN_REPOS[lc]
+    if r["source_id"] == "ongo":
+        return "OngoGablogian/MiSTer_Ongo"
     return FROZEN_TITLE_REPOS.get((r["title"] or "").strip(), "")
 
 
@@ -4689,6 +4799,7 @@ def cmd_export_web(args):
     fork_info = {r["repo"].lower(): r for r in con.execute(
         "SELECT repo, is_fork, parent_owner FROM arcade_repos")}
     con.close()
+    rows = [r for r in rows if _source_row_visible(r, shipped_rbfs)]
     # Drop arcade region/revision/bootleg variants (MiSTer files them under
     # _Arcade/_alternatives/); the site shows only the mainline title per game.
     # The exception is a game that ships with no mainline set at all
@@ -5479,7 +5590,27 @@ def _backfill_arcade_images(data):
             return False
         return age.days <= BACKFILL_RETRY_DAYS
 
+    def inherit_set_art(entry, sn):
+        sn = (sn or "").lower()
+        matches = [e for e in manifest if e is not entry
+                   and sn and (e.get("setname") or "").lower() == sn
+                   and e.get("source") in ("psnaps", "adb")
+                   and any(e.get(k) for k in ("title_img", "snap_img", "third_img"))]
+        if not matches:
+            return False
+        art = max(matches, key=lambda e: sum(bool(e.get(k)) for k in
+            ("title_img", "snap_img", "third_img")))
+        current_score = sum(bool(entry.get(k)) for k in
+                            ("title_img", "snap_img", "third_img"))
+        if sum(bool(art.get(k)) for k in ("title_img", "snap_img", "third_img")) <= current_score:
+            return False
+        for key in ("source", "title_img", "snap_img", "third_img", "third_pack"):
+            entry[key] = art.get(key)
+        entry["setname"] = sn
+        return True
+
     todo = []  # (row, manifest entry — freshly appended for unseen titles)
+    manifest_changed = False
     for r in data:
         if r.get("base") != "Arcade" or r.get("deprecated"):
             continue
@@ -5488,12 +5619,27 @@ def _backfill_arcade_images(data):
             entry = {"title": r.get("mt") or r["title"], "setname": None,
                      "source": None, "title_img": None, "snap_img": None,
                      "third_img": None, "third_pack": None}
+            # A renamed/newly mirrored MRA can introduce a second title for an
+            # existing set (e.g. Star Wars Rev 2). Reuse that set's richest
+            # existing image entry instead of replacing its screenshot slots
+            # with a less complete ADB lookup.
+            sn = (r.get("sn") or "").lower()
+            inherited = inherit_set_art(entry, sn)
+            entry["setname"] = sn or None
             manifest.append(entry)
             by_title[entry["title"]] = entry
-            todo.append((r, entry))
-        elif bare(entry) and young(r):
-            todo.append((r, entry))  # recorded miss, row still young: retry
+            manifest_changed = True
+            if not inherited and not any(entry.get(k) for k in ("title_img", "snap_img", "third_img")):
+                todo.append((r, entry))
+        else:
+            inherited = inherit_set_art(entry, r.get("sn"))
+            manifest_changed |= inherited
+            if bare(entry) and not inherited and young(r):
+                todo.append((r, entry))  # recorded miss: retry only if no same-set art exists
     if not todo:
+        if manifest_changed:
+            manifest_path.write_text(json.dumps(manifest, indent=1, ensure_ascii=False),
+                                     encoding="utf-8")
         return  # steady state: no new titles, no young misses
 
     hits = 0
@@ -5647,6 +5793,8 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     sp = sub.add_parser("snapshot", help="fetch DBs, diff vs last snapshot, log dated events")
+    sp.add_argument("--source", choices=[s["id"] for s in SOURCES],
+                    help="refresh one source only")
     sp.set_defaults(func=cmd_snapshot)
 
     rp = sub.add_parser("repos", help="crawl per-core arcade repos for real release dates")
@@ -5660,6 +5808,8 @@ def main():
     crp.set_defaults(func=cmd_core_repos)
 
     mp = sub.add_parser("enrich-mra", help="add year/manufacturer/rbf from MRA XML")
+    mp.add_argument("--source", choices=sorted({source_id for source_id, *_ in MRA_REPOS}),
+                    help="enrich one source only")
     mp.set_defaults(func=cmd_enrich_mra)
 
     jp = sub.add_parser("jtcores", help="backfill Jotego release dates from jtcores monorepo")

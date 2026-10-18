@@ -1,6 +1,11 @@
 """bd/bh: the shipped rbf's own build date and md5, untouched by the
 `updated` adjustments (MRA-only fix bump, debut floor)."""
 import unittest
+from unittest import mock
+import json
+import subprocess
+import tempfile
+from pathlib import Path
 
 import misterzine as mz
 
@@ -177,6 +182,148 @@ class SiblingVariantFoldTests(unittest.TestCase):
         rows = [arcade(title="Asteroids Deluxe (v3 green)", setname="astdelux", path="a"),
                 arcade(title="Asteroids Deluxe (v3 orange)", setname="astdelux", path="b")]
         self.assertEqual(len(mz.fold_sibling_variants(rows, {"astdelux": {}})), 2)
+
+    def test_ongo_regional_sets_fold_only_on_the_same_core(self):
+        rows = [
+            arcade(source_id="ongo", title="RayForce (Ver 2.3A)", setname="rayforce",
+                   rbf="TaitoF3", path="_Arcade/_Taito F3 (WIP)/RayForce (Ver 2.3A).mra"),
+            arcade(source_id="ongo", title="RayForce (Ver 2.3J)", setname="rayforcej",
+                   rbf="TaitoF3", path="_Arcade/_Taito F3 (WIP)/RayForce (Ver 2.3J).mra"),
+            arcade(source_id="ongo", title="RayForce (other core)", setname="rayforcej",
+                   rbf="TaitoF3Experimental", path="_Arcade/_alternatives/RayForce (other core).mra"),
+        ]
+        meta = {"rayforce": {"parent": ""}, "rayforcej": {"parent": "rayforce"}}
+        kept = mz.fold_sibling_variants(rows, meta)
+        self.assertEqual([r["title"] for r in kept],
+                         ["RayForce (Ver 2.3A)", "RayForce (other core)"])
+
+
+class OngoSourceTests(unittest.TestCase):
+    def test_image_backfill_inherits_richer_art_for_same_setname(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache = root / "cache"
+            cache.mkdir()
+            manifest_path = cache / "image_manifest.json"
+            manifest_path.write_text(json.dumps([
+                {"title": "Star Wars", "setname": "starwars", "source": "psnaps",
+                 "title_img": "titles/starwars.png", "snap_img": "snap/starwars.png",
+                 "third_img": "gameover/starwars.png", "third_pack": "gameover"},
+                {"title": "Empire Strikes Back", "setname": "starwars", "source": "adb",
+                 "title_img": "titles/starwars.png", "snap_img": "ingames/starwars.png",
+                 "third_img": None, "third_pack": None},
+                {"title": "Star Wars (Rev 2)", "setname": "starwars", "source": None,
+                 "title_img": None, "snap_img": None, "third_img": None, "third_pack": None},
+            ]), encoding="utf-8")
+            with mock.patch.object(mz, "CACHEDIR", cache), \
+                 mock.patch.object(mz, "DOCSDIR", root / "docs"), \
+                 mock.patch.object(mz, "_fetch_png", side_effect=AssertionError("unexpected download")):
+                mz._backfill_arcade_images([{"base": "Arcade", "title": "Star Wars (Rev 2)",
+                                             "sn": "starwars", "date": "2026-10-18"}])
+            saved = json.loads(manifest_path.read_text(encoding="utf-8"))
+            rev2 = next(e for e in saved if e["title"] == "Star Wars (Rev 2)")
+            self.assertEqual(rev2["source"], "psnaps")
+            self.assertEqual(rev2["third_img"], "gameover/starwars.png")
+            self.assertEqual(rev2["third_pack"], "gameover")
+
+    def test_scope_keeps_only_arcade_mras_and_shipped_core_files(self):
+        allowed = ["_Arcade/Game.mra", "_Arcade/_Nintendo VS. System/Game.mra",
+                   "_Arcade/cores/Core_20261018.rbf"]
+        rejected = ["_Console/Game.mra", "_Arcade/cores/readme.txt",
+                    "_Arcade/playlist.mgl", "_Arcade/games/rom.zip",
+                    "_Arcade/_Cave CV1000/_Cave CV1000 Practice ROMs/Game.mra",
+                    "Scripts/install.sh"]
+        self.assertTrue(all(mz.tracked_path("ongo", p) for p in allowed))
+        self.assertFalse(any(mz.tracked_path("ongo", p) for p in rejected))
+
+    def test_enrichment_uses_full_paths_for_same_basename_and_filters_unshipped(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            repo = root / "repo"
+            paths = ["_Arcade/Clone A/Game.mra", "_Arcade/Clone B/Game.mra"]
+            xml = [
+                '<mister><rbf>CoreA</rbf><setname>set_a</setname><year>1981</year>'
+                '<manufacturer>Maker A</manufacturer><rotation>horizontal</rotation></mister>',
+                '<mister><rbf>CoreB</rbf><setname>set_b</setname><year>1982</year>'
+                '<manufacturer>Maker B</manufacturer><rotation>vertical</rotation></mister>',
+            ]
+            for rel, contents in zip(paths, xml):
+                file = repo / rel
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_text(contents, encoding="utf-8")
+
+            dbpath = root / "catalog.sqlite"
+            specpath = root / "mra_specs.json"
+            with mock.patch.object(mz, "DBPATH", dbpath), \
+                 mock.patch.object(mz, "MRA_SPECS_JSON", specpath), \
+                 mock.patch.object(mz, "_ongo_mra_paths", return_value=paths), \
+                 mock.patch.object(mz, "_sparse_arcade_clone", return_value=repo):
+                con = mz.connect()
+                for i, rel in enumerate(paths):
+                    con.execute("INSERT INTO catalog(source_id,path,system,kind,title) "
+                                "VALUES('ongo',?,'arcade','mra',?)",
+                                (rel, f"Game {i}"))
+                con.commit()
+                con.close()
+                mz.cmd_enrich_mra(type("Args", (), {"source": "ongo"})())
+
+                con = mz.connect()
+                rows = con.execute("SELECT path,year,manufacturer,rbf,setname FROM catalog "
+                                   "WHERE source_id='ongo' ORDER BY path").fetchall()
+                con.close()
+                self.assertEqual([(r["year"], r["manufacturer"], r["rbf"], r["setname"])
+                                  for r in rows],
+                                 [("1981", "Maker A", "CoreA", "set_a"),
+                                  ("1982", "Maker B", "CoreB", "set_b")])
+                specs = json.loads(specpath.read_text(encoding="utf-8"))
+                self.assertEqual(set(specs["ongo"]), set(paths))
+                self.assertEqual(specs["ongo"][paths[0]]["rot"], "Horizontal")
+                self.assertEqual(specs["ongo"][paths[1]]["rot"], "Vertical")
+
+        # Existing sources deliberately retain their established basename join.
+        self.assertEqual(mz._mra_metadata_key("rossops", "releases/Game.mra"), "Game.mra")
+        shipped = {"ongo": {"core_20261018": ("core_20261018.rbf", "core")}}
+        self.assertTrue(mz._source_row_visible(arcade(source_id="ongo", rbf="core"), shipped))
+        self.assertFalse(mz._source_row_visible(arcade(source_id="ongo", rbf="other"), shipped))
+
+    def test_ongo_core_identifier_keeps_install_key_and_original_repo(self):
+        row = mz._web_row(
+            arcade(source_id="ongo", rbf="Namco_NB1",
+                   repo="kyledlester/Namco_NB1_MiSTer"),
+            core_files={"namco_nb1": {"ongo": "2026-10-18"}},
+            core_hashes={"namco_nb1": {"ongo": "ab" * 16}},
+            shipped_rbfs={"ongo": {"namco_nb1_20261018":
+                                   ("namco_nb1", "Namco_NB1")}})
+        self.assertEqual(row["core"], "Namco_NB1")
+        self.assertEqual(row["repo"], "kyledlester/Namco_NB1_MiSTer")
+        self.assertEqual(row["bd"], "2026-10-18")
+        self.assertEqual(row["bh"], "ab" * 16)
+
+    def test_sparse_checkout_escapes_bracketed_mra_names(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            selected = ["_Arcade/Alcon [v1.0].mra",
+                        "_Arcade/_Nintendo VS. System/Game (Japan).mra"]
+            extra = "_Arcade/scripts/install.sh"
+            for rel in selected + [extra]:
+                path = root / rel
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("sample", encoding="utf-8")
+
+            def git(*args, input_text=None):
+                return subprocess.run(["git", "-C", str(root), *args], input=input_text,
+                                      text=True, check=True, capture_output=True)
+
+            git("init", "-q")
+            git("config", "user.email", "test@example.invalid")
+            git("config", "user.name", "Test")
+            git("add", "--all")
+            git("commit", "-qm", "seed")
+            git("sparse-checkout", "init", "--no-cone")
+            git("sparse-checkout", "set", "--no-cone", "--stdin",
+                input_text="\n".join(mz._sparse_checkout_patterns(selected)) + "\n")
+            self.assertTrue(all((root / rel).exists() for rel in selected))
+            self.assertFalse((root / extra).exists())
 
 
 class RetitleKeyTests(unittest.TestCase):

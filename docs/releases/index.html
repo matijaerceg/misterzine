@@ -1581,6 +1581,13 @@ function syncStatus() {
 // are listed here — single-game cores fall back to the game's own title (see
 // coreLabel), and anything unrecognised is shown cosmetically de-camelCased.
 const CORE_NAMES = {
+  'TaitoF3': 'Taito F3 (WIP)',
+  'Namco_NA1_NA2': 'Namco NA-1 / NA-2',
+  'Namco_NB1': 'Namco NB-1', 'Namco_NB2': 'Namco NB-2',
+  'Crystal': 'BrezzaSoft Crystal System', 'Deniam': 'Deniam-16',
+  'DJMain': 'Konami Bemani DJ-Main', 'DJMainSD': 'Konami Bemani DJ-Main (SD)',
+  'NeratteChu': 'Seta ST-0016 (Neratte Chu)',
+  'Nostradamus': 'Nostradamus / Magical Cat Adventure', 'RShark': 'Dooyong (R-Shark / Super-X)',
   // Capcom
   'jtcps1': 'Capcom CPS-1', 'jtcps15': 'Capcom CPS-1.5', 'jtcps2': 'Capcom CPS-2', 'jtcps3': 'Capcom CPS-3',
   'jt1942': 'Capcom (1942)', 'jt1943': 'Capcom (1943)', 'jttora': 'Capcom (Tiger Road)',
@@ -1658,6 +1665,7 @@ const CORE_NAMES = {
 // tokens — NOT the display name itself, so typing "mist"/"mister" while
 // hunting a title doesn't light up all ~830 MiSTer Distribution rows.
 const SRC_NAMES = {
+  ongo: 'Ongo',
   distribution_mister: 'MiSTer Distribution',
   jtbindb: 'Jotego (JTcores)',
   coinop: 'Coin-Op Collection',
@@ -1671,6 +1679,7 @@ const SRC_NAMES = {
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
+  ongo: 'ongo ongogablogian',
   distribution_mister: 'distribution',
   jtbindb: 'jotego jtcores',
   coinop: 'coin-op collection',
@@ -1688,6 +1697,13 @@ const SRC_SEARCH = {
 // export dialog spell that out, plus a one-line "what is this" for dbs whose
 // rows double a game the Distribution already lists.
 const OPTIN_DBS = {
+  ongo: {
+    section: 'OngoGablogian/MiSTer_Ongo',
+    url: 'https://raw.githubusercontent.com/OngoGablogian/MiSTer_Ongo/db/db.json.zip',
+    what: 'Ongo distributes arcade cores from several developers, including Kyle Lester. ' +
+      'MisterZine tracks the arcade cores in this collection; some also appear under other sources. ' +
+      'The database itself also includes other systems, scripts and extras.',
+  },
   meathax: {
     section: 'meathax/meatcores',
     url: 'https://raw.githubusercontent.com/meathax/meatcores/db/db.json.zip',
@@ -1704,14 +1720,13 @@ const OPTIN_DBS = {
     section: 'TheJesusFish/Slop-Core',
     url: 'https://raw.githubusercontent.com/TheJesusFish/Slop-Core/db/db.json.zip',
     what: 'TheJesusFish\'s MAME-based cores, written with AI assistance (his repo calls them slop). ' +
-      'New games, not in any other database.',
+      'A separate source for these arcade implementations.',
   },
   kuzecores: {
     section: 'kuzearcade/kuzecores',
     url: 'https://raw.githubusercontent.com/kuzearcade/kuzecores/db/db.json.zip',
-    what: 'kuzearcade\'s cores, written with AI assistance (his repo says so). So far the NMK16 ' +
-      'board family as four cores; apart from Black Heart and Thunder Dragon, which Coin-Op ' +
-      'Collection also ships, these games are in no other database.',
+    what: 'kuzearcade\'s cores, written with AI assistance (his repo says so), including the NMK16 ' +
+      'board family. Black Heart and Thunder Dragon also appear in Coin-Op Collection.',
   },
   blahm1d: {
     section: 'blahm1d',
@@ -1719,7 +1734,7 @@ const OPTIN_DBS = {
     what: 'blahm1d\'s cores: Midway\'s Y, T, X and Wolf Unit boards, Cruis\'n USA, NARC, Exidy 440, ' +
       'Gladiator, The Legend of Kage (bootleg) and Night Slashers, each first posted as a free ' +
       'download on his Patreon. NARC and Night Slashers also ship in other databases as other ' +
-      'builds; the rest are in no other database.',
+      'builds. Some of his cores are also distributed through Ongo.',
   },
   bazset: {
     section: 'bazset/MiSTer_BAZSET',
@@ -1733,7 +1748,7 @@ const OPTIN_DBS = {
     section: 'rossops/Arcade-SegaYBoard_MiSTer',
     url: 'https://raw.githubusercontent.com/rossops/Arcade-SegaYBoard_MiSTer/main/db.json.zip',
     what: 'rossops\' Sega Y Board core: Galaxy Force II, Power Drift, G-LOC Air Battle, G-LOC R360, ' +
-      'Rail Chase and Strike Fighter, in no other database yet. If the MiSTer Distribution adopts a ' +
+      'Rail Chase and Strike Fighter. If the MiSTer Distribution adopts a ' +
       'game, as it did with the same author\'s X Board core, its row here gives way to the Distribution\'s.',
   },
 };
@@ -3307,6 +3322,7 @@ document.getElementById('shareview').addEventListener('click', shareView);
 // users already have -- so the dialog hands out bare terms plus the sentence
 // saying where they go.
 const FT_SECTIONS = {   // ini section name = each db's db_id
+  ongo: 'OngoGablogian/MiSTer_Ongo',
   distribution_mister: 'distribution_mister',
   jtbindb: 'jtcores',
   coinop: 'Coin-OpCollection/Distribution-MiSTerFPGA',
@@ -4703,7 +4719,7 @@ const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
   "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's and bazset's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
-  "Distribution. Jotego and Coin-Op announce their Patreon early-access cores " +
+  "Distribution, plus the arcade cores distributed through Ongo. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +
   "release. Cores that never touch a public database cannot be listed.</p>" +

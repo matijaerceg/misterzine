@@ -14,9 +14,11 @@ ROOT = Path(__file__).resolve().parent
 # that date. Rows added later are left out so catalogue growth keeps the pin
 # valid; a change here means catver moved a set, a pin changed, or a row was
 # dropped or retitled. Re-pin only after checking which rows moved and why.
+# The historical count is 115 after the Meathax Simpsons row was withdrawn
+# upstream (2026-10-12); the older Jotego Simpsons row remains in the data.
 PINNED_THROUGH = "2026-10-16"
 PINNED_COUNTS = {
-    "Shoot 'em up": 261, "Platformer": 161, "Sports": 131, "Beat 'em up": 116,
+    "Shoot 'em up": 261, "Platformer": 161, "Sports": 131, "Beat 'em up": 115,
     "Run 'n gun": 108, "Maze": 92, "Fighting": 88, "Puzzle": 87,
     "Arena shooter": 80, "Fixed shooter": 75, "Racing": 64, "Tabletop & quiz": 41,
     "Other": 27, "Light gun": 25, "Rail shooter": 24,
@@ -89,6 +91,10 @@ class CatalogueTests(unittest.TestCase):
         rows = json.loads((ROOT / "docs/releases/data.json").read_text(encoding="utf-8"))
         counts = collections.Counter()
         for r in rows:
+            # Ongo was added after this frozen cohort; keep its undated seed
+            # rows out without changing the original treatment of legacy rows.
+            if r.get("src") == "ongo":
+                continue
             if r.get("base") != "Arcade" or (r.get("date") or "")[:10] > PINNED_THROUGH:
                 continue
             counts[mz.genre_for(r.get("sn"), cats, dat) or mz.arcade_genre(r.get("sn"), r["title"])

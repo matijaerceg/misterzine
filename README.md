@@ -244,7 +244,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The ten sources (all public)
+## The twelve sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -301,8 +301,17 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    this source is in `DISTRIBUTION_TAKES_OVER`: once the Distribution ships one of its
    games (same MAME setname, or same family and base title), export-web lists only the
    Distribution row, which keeps the earlier debut and inherits the row's deep-link key.
+11. **Ongo**: `OngoGablogian/MiSTer_Ongo` `db` branch (opt-in; add
+   `[OngoGablogian/MiSTer_Ongo]` to downloader.ini). The source combines community arcade
+   and non-arcade files. The catalogue keeps arcade MRAs and shipped arcade core bitstreams;
+   it skips other systems, scripts, ROM payloads, support files and Cave practice-ROM MRAs.
+   Nested VS System, Cave CV1000 and Taito F3 releases remain eligible when their MRA names a
+   core included in the same database.
+12. **theypsilon Unofficial Distribution**: `theypsilon/Unofficial_Distribution_MiSTer` `main`
+   branch. Its arcade MRAs are tracked alongside the main Distribution; the other systems
+   remain represented by their primary source.
 
-All ten publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All twelve publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

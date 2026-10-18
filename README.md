@@ -306,7 +306,9 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    and non-arcade files. The catalogue keeps arcade MRAs and shipped arcade core bitstreams;
    it skips other systems, scripts, ROM payloads, support files and Cave practice-ROM MRAs.
    Nested VS System, Cave CV1000 and Taito F3 releases remain eligible when their MRA names a
-   core included in the same database.
+   core included in the same database. The website hides Ongo listings already covered by
+   another source (same ROM set, or same game and family). The shared catalogue feed
+   retains them so on-device app behavior is unchanged.
 12. **theypsilon Unofficial Distribution**: `theypsilon/Unofficial_Distribution_MiSTer` `main`
    branch. Its arcade MRAs are tracked alongside the main Distribution; the other systems
    remain represented by their primary source.

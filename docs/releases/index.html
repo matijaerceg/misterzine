@@ -1245,6 +1245,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
+<script src="./source-visibility.js?v=1"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=5"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
@@ -1701,7 +1702,7 @@ const OPTIN_DBS = {
     section: 'OngoGablogian/MiSTer_Ongo',
     url: 'https://raw.githubusercontent.com/OngoGablogian/MiSTer_Ongo/db/db.json.zip',
     what: 'Ongo distributes arcade cores from several developers, including Kyle Lester. ' +
-      'MisterZine tracks the arcade cores in this collection; some also appear under other sources. ' +
+      'The website uses this collection as a fallback, showing games not already covered by another source. ' +
       'The database itself also includes other systems, scripts and extras.',
   },
   meathax: {
@@ -5035,7 +5036,8 @@ function ingest(d) {
   // the tally, the menus' counts, the since-visit line and deep links all agree
   // with the list. RAW keeps the full set for switching the mode back.
   RAW = d;
-  DATA = matMode === 'hide' ? d.filter(r => !r.mat) : d;
+  const siteRows = siteSourceRows(d);
+  DATA = matMode === 'hide' ? siteRows.filter(r => !r.mat) : siteRows;
   // index cores that map to exactly one title, so single-game cores read as
   // the game name without hard-coding each (see coreLabel / CORE_NAMES).
   const seen = {};

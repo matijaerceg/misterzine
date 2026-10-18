@@ -1245,7 +1245,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
-<script src="./source-visibility.js?v=1"></script>
+<script src="./source-visibility.js?v=2"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=5"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
@@ -5053,6 +5053,7 @@ function ingest(d) {
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
   for (const k in KEY2ROW) delete KEY2ROW[k];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
+  for (const r of DATA) for (const k of r.siteAliases || []) KEY2ROW[k] = r;
   // same-game groups by g, every member (apply() folds whatever survives the filters)
   for (const g in ALLG) delete ALLG[g];
   for (const r of DATA) if (r.g) (ALLG[r.g] = ALLG[r.g] || []).push(r);

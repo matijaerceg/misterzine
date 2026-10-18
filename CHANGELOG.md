@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-18
 
+- Website: combined BAZSET's two identical Meikyu Jima launchers into one “Meikyu Jima / Kickle Cubicle” listing, searchable under either name. Existing links still open the combined listing.
+
 - Website: Ongo now fills gaps in other sources. Overlapping Ongo game listings are hidden from the tracker; the shared app catalogue is unchanged.
 
 - Release tracker: added Ongo as an arcade source, including Kyle Lester's Namco, Deniam and other cores. Games also carried by existing sources remain labelled by source. The catalogue includes games whose cores Ongo supplies, with regional variants folded as usual; practice files and Ongo's non-arcade content are excluded.

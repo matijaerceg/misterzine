@@ -4,6 +4,23 @@ const { siteSourceRows } = require('../docs/releases/source-visibility');
 const row = (src, sn, title = 'Game', family = sn, extra = {}) =>
   ({ src, sn, title, family, base: 'Arcade', ...extra });
 
+test('Meikyu Jima name aliases share one stable launcher without changing app data', () => {
+  const japan = row('bazset', 'kikcubic', 'Meikyu Jima (bazset)', 'kikcubic',
+    { k: 'meikyu-jima', mra: '_Arcade/_BAZSET/Meikyu Jima (Japan).mra' });
+  const english = { ...japan, k: 'kickle-cubicle', title: 'Meikyu Jima',
+    mra: '_Arcade/_BAZSET/Kickle Cubicle (English title).mra' };
+  const before = JSON.stringify([english, japan]);
+  const result = siteSourceRows([english, japan]);
+  assert.equal(result.length, 1);
+  assert.equal(result[0].title, 'Meikyu Jima / Kickle Cubicle');
+  assert.equal(result[0].mra, japan.mra);
+  assert.equal(result[0].k, japan.k);
+  assert.deepEqual(result[0].siteAliases, ['kickle-cubicle']);
+  assert.deepEqual(siteSourceRows([japan, english]), result);
+  assert.equal(JSON.stringify([english, japan]), before);
+  assert.equal(siteSourceRows([english])[0].mra, english.mra);
+});
+
 test('other sources win regardless of order without mutating the feed', () => {
   const direct = row('meathax', 'game');
   const backup = row('ongo', 'game');

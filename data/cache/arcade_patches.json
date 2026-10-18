@@ -3356,10 +3356,10 @@
     "Japanese Regulation OFF by default, with its operator switch and uncensored effects",
     "Japanese 980904 gameplay, difficulty, Turbo 1 defaults and secret-character access",
     "Alpha branding in the intro, selection, player introductions and win screens; English A/X/V-ISM descriptions and score rankings, Western names, title and entry announcements, and operator menus",
-    "Corrected ending backgrounds, framing and colors for Adon, Akuma, Dhalsim, Gen, R. Mika, Sakura and Vega",
+    "Corrected ending backgrounds, framing and colors, including cleaner picture edges and character placement in E. Honda’s ending",
     "An optional Japanese edition with original Japanese text and names, Zero branding and Z-ISM, and the same ending corrections"
    ],
-   "date": "2026-10-13",
+   "date": "2026-10-17",
    "description": [
     "Street Fighter Alpha 3's US arcade version cut each character's win quotes down to eight generic lines. The Japanese game also has a quote for each opponent. This restoration brings back all 625 opponent-specific quotes, with all 825 of the Japanese game's win quotes in English.",
     "Detailed stage locations return in English, in the original stage panels. Biographies, rival dialogue and endings follow the Japanese script in natural English that fits each character. Capcom's English stays where it was accurate, and Alpha 3 MAX's official wording is used where it fits.",
@@ -3399,6 +3399,15 @@
    ],
    "release_history": [
     {
+     "date": "2026-10-17",
+     "items": [
+      "Corrected ending background edges, framing and colors for Blanka, Cammy, Karin and Sodom, with cleaner picture edges in the other endings.",
+      "Raised E. Honda and his trainees to their correct positions in his ending.",
+      "Fixed the picture corruption where Dhalsim's ending cuts to Chun-Li."
+     ],
+     "version": "rc3"
+    },
+    {
      "date": "2026-10-13",
      "items": [
       "Corrected A-ISM labels and the names of Akuma, Charlie, Vega, Balrog and M. Bison on stage, versus, winner and score-ranking screens.",
@@ -3432,7 +3441,7 @@
    "subtitle": "English restoration",
    "summary": "The Japanese arcade game in English, with all 625 opponent-specific win quotes restored, detailed stage locations and the original Regulation setting.",
    "title": "Street Fighter Alpha 3",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "artifact": {

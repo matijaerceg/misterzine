@@ -1,6 +1,6 @@
-"""Arcade genre: the catver subgenre mapping, the set pins and the per-genre
-counts of the published catalogue, pinned so a catver drift shows up."""
-import collections
+"""Arcade genre: the catver subgenre mapping, the set pins and the genre of
+every game in the published catalogue's 2026-10-16 cohort, pinned so a catver
+drift or a mapping change shows up."""
 import json
 import unittest
 from pathlib import Path
@@ -9,21 +9,16 @@ import misterzine as mz
 
 ROOT = Path(__file__).resolve().parent
 
-# Per-genre row counts of docs/releases/data.json's arcade rows that debuted
-# on or before PINNED_THROUGH, from data/cache/catver.ini as committed on
-# that date. Rows added later are left out so catalogue growth keeps the pin
-# valid; a change here means catver moved a set, a pin changed, or a row was
-# dropped or retitled. Re-pin only after checking which rows moved and why.
-# Beat 'em up dipped to 115 while Meathax's Simpsons MRA was out of his db
-# (2026-10-18) and is 116 again since it came back as the two-player set
-# simpsons2p (2026-10-19 refresh).
-PINNED_THROUGH = "2026-10-16"
-PINNED_COUNTS = {
-    "Shoot 'em up": 261, "Platformer": 161, "Sports": 131, "Beat 'em up": 116,
-    "Run 'n gun": 108, "Maze": 92, "Fighting": 88, "Puzzle": 87,
-    "Arena shooter": 80, "Fixed shooter": 75, "Racing": 64, "Tabletop & quiz": 41,
-    "Other": 27, "Light gun": 25, "Rail shooter": 24,
-}
+# test_genre_pins.json: the genre of every arcade row in docs/releases/data.json
+# that debuted on or before 2026-10-16, per MAME setname (per title for the few
+# rows without one), from data/cache/catver.ini as committed on that date.
+# Pinned per game rather than as per-genre totals: the upstream dbs drop,
+# rename and re-set games on their own schedule (Meathax's Simpsons left and
+# came back as simpsons2p, 2026-10-18/19), and a total that moves with them
+# failed the scheduled refresh. A game that has left the catalogue is skipped;
+# a game still listed under another genre fails, naming the set: catver moved
+# it, or a mapping/pin change did. Re-pin only after checking why.
+PINS = json.loads((ROOT / "test_genre_pins.json").read_text(encoding="utf-8"))
 
 
 class MappingTests(unittest.TestCase):
@@ -85,22 +80,28 @@ class MappingTests(unittest.TestCase):
 
 
 class CatalogueTests(unittest.TestCase):
-    def test_pinned_counts(self):
+    def test_pinned_genres(self):
         cats = mz.local_catver()
         dat = mz.load_arcade_dat_meta()
         self.assertTrue(cats and dat, "data/cache/catver.ini and mame_meta.json.gz must be present")
         rows = json.loads((ROOT / "docs/releases/data.json").read_text(encoding="utf-8"))
-        counts = collections.Counter()
+        moved, seen = [], set()
         for r in rows:
-            # Ongo was added after this frozen cohort; keep its undated seed
-            # rows out without changing the original treatment of legacy rows.
-            if r.get("src") == "ongo":
+            if r.get("base") != "Arcade":
                 continue
-            if r.get("base") != "Arcade" or (r.get("date") or "")[:10] > PINNED_THROUGH:
-                continue
-            counts[mz.genre_for(r.get("sn"), cats, dat) or mz.arcade_genre(r.get("sn"), r["title"])
-                   or "(none)"] += 1
-        self.assertEqual(dict(counts), PINNED_COUNTS)
+            sn = (r.get("sn") or "").lower()
+            want = PINS["sets"].get(sn) if sn else PINS["titles"].get(r["title"])
+            if want is None:
+                continue  # not in the cohort: a later debut, or another db's copy
+            seen.add(sn or r["title"])
+            got = mz.genre_for(r.get("sn"), cats, dat) or mz.arcade_genre(r.get("sn"), r["title"]) or "(none)"
+            if got != want:
+                moved.append(f"{sn or r['title']}: pinned {want!r}, now {got!r}")
+        self.assertEqual(sorted(set(moved)), [])
+        # games leaving the catalogue is fine, but most of the cohort vanishing
+        # means data.json or the setname join broke, not upstream churn
+        pinned = len(PINS["sets"]) + len(PINS["titles"])
+        self.assertGreater(len(seen), pinned * 0.9, f"only {len(seen)} of {pinned} pinned games found")
 
     def test_pinned_sets_exist_in_the_catalogue(self):
         rows = json.loads((ROOT / "docs/releases/data.json").read_text(encoding="utf-8"))

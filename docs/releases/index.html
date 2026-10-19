@@ -225,6 +225,14 @@
   details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
   /* the All / None pair closing each multi-select menu (Type, Source, Genre) */
   details.cols .menu .resets { display: flex; gap: 1rem; }
+  /* Type: Arcade's sub-filters (Patches, then Mature / Non-mature), indented
+     under its row; a small dim heading or a hairline opens each section, and
+     the block dims while Arcade itself is unchecked (its boxes keep their
+     state but filter nothing then) */
+  #typemenu .tsub { display: grid; gap: .35rem; padding-left: 1.55rem; }
+  #typemenu .tsub .tsubh { font-size: .75rem; opacity: .6; margin-top: .1rem; }
+  #typemenu .tsub hr { border: 0; border-top: 1px solid var(--hair); margin: .15rem 0; }
+  #typemenu .tsub.off { opacity: .45; }
   #srcmenu .resets { flex-wrap: wrap; gap: .35rem 1rem; }
   /* "Year" dropdown: From/To numeric range inputs + one-tap decade chips. Inputs
      (not selects) so any boundary year is enterable, including decade edges like
@@ -1164,10 +1172,6 @@
           <summary id="genresummary">Genre</summary>
           <div class="menu" id="genremenu"></div>
         </details>
-        <details class="cols" id="patchdd">
-          <summary id="patchsummary">Patches</summary>
-          <div class="menu" id="patchmenu"></div>
-        </details>
         <details class="cols" id="yeardd">
           <summary id="yearsummary">Year</summary>
           <div class="menu" id="yearmenu"></div>
@@ -1245,7 +1249,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
-<script src="./source-visibility.js?v=5"></script>
+<script src="./source-visibility.js?v=6"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=5"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
@@ -1624,6 +1628,16 @@ const CORE_NAMES = {
   'blahm1d_gladiator': 'Gladiator',
   // bazset's EXPRO-02 core (Comad's strip-puzzle games); his other cores are single-game
   'EXPRO02_bazset': 'Kaneko EXPRO-02',
+  // TomSVR's cores, one per board family (his README's core table)
+  'TomSVR_comad': 'Comad (EXPRO-02 clone)', 'TomSVR_esd': 'ESD 16-bit',
+  'TomSVR_funybubl': 'In Chang (Funny Bubble HW)', 'TomSVR_galpin': 'Comad (Gals Pinball HW)',
+  'TomSVR_gumbo': 'Min Corp. (Gumbo HW)', 'TomSVR_hdoll': 'Barko (Honey Doll HW)',
+  'TomSVR_hotblk': 'Hot Blocks HW', 'TomSVR_jpop': 'Nics (Jumping Pop HW)',
+  'TomSVR_madd': 'Promat (One Shot One Kill HW)', 'TomSVR_missb': 'Miss Bubble II HW',
+  'TomSVR_nmg5': 'Yun Sung (NMG5 HW)', 'TomSVR_para': 'Yun Sung (Paradise HW)',
+  'TomSVR_playmark': 'Playmark (Big Twin HW)', 'TomSVR_splash': 'Gaelco (Splash! HW)',
+  'TomSVR_sqix': 'Promat (Super Qix HW)', 'TomSVR_ys16': 'Yun Sung 16-bit',
+  'TomSVR_ys8': 'Yun Sung 8-bit', 'TomSVR_zero': 'Comad (Zero Zone HW)',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -1677,6 +1691,7 @@ const SRC_NAMES = {
   blahm1d: 'blahm1d',
   bazset: 'bazset',
   rossops: 'rossops (Sega Y Board)',
+  tomsvr: 'TomSVR',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1691,6 +1706,7 @@ const SRC_SEARCH = {
   blahm1d: 'blahm1d blahmid',
   bazset: 'bazset',
   rossops: 'rossops y board yboard',
+  tomsvr: 'tomsvr',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1751,6 +1767,14 @@ const OPTIN_DBS = {
     what: 'rossops\' Sega Y Board core: Galaxy Force II, Power Drift, G-LOC Air Battle, G-LOC R360, ' +
       'Rail Chase and Strike Fighter. If the MiSTer Distribution adopts a ' +
       'game, as it did with the same author\'s X Board core, its row here gives way to the Distribution\'s.',
+  },
+  tomsvr: {
+    section: 'TomSVR-Mister/TomSVR-Arcade-Cores',
+    url: 'https://raw.githubusercontent.com/TomSVR-Mister/TomSVR-Arcade-Cores/db/db.json.zip',
+    what: 'TomSVR\'s unofficial cores for small 1990s boards (ESD, Yun Sung, Playmark, Gaelco\'s ' +
+      'Splash!, Comad and others), built on Jotego\'s JTFRAME from the MAME drivers and written ' +
+      'with AI assistance (his repo says so). They are not Jotego cores. A few Comad games also ' +
+      'ship in bazset\'s database.',
   },
 };
 
@@ -2435,6 +2459,7 @@ function render() {
       pickMsg(SRC_KEYS, enabledSrcs, s => SRC_NAMES[s] || s, 'source') +
       pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
       pickMsg(PATCH_KEYS, enabledPatches, k => PATCH_LABELS[k], 'patch type') +
+      pickMsg(MAT_KEYS, enabledMat, k => MAT_LABELS[k], 'mature option') +
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -2515,10 +2540,14 @@ function apply() {
     // Genre: rows without one (everything non-arcade) sit under the menu's own
     // "No genre" box, so unchecking a real genre never hides a console core
     if (GENRE_KEYS.length && !enabledGenres.has(d.genre || NO_GENRE)) return false;
-    // Patches: a row passes while any of its patch types (or, with none, the
-    // "No patches" box) is checked
-    if (PATCH_KEYS.length && enabledPatches.size < PATCH_KEYS.length &&
-        !patchKeysOf(d).some(k => enabledPatches.has(k))) return false;
+    // Arcade's sub-filters (Type menu): Patches passes a game while any of its
+    // patch types (or, with none, the "No patches" box) is checked; Mature /
+    // Non-mature by the mat marker. Non-arcade rows are never judged by them.
+    if (d.base === 'Arcade') {
+      if (PATCH_KEYS.length && enabledPatches.size < PATCH_KEYS.length &&
+          !patchKeysOf(d).some(k => enabledPatches.has(k))) return false;
+      if (MAT_KEYS.length && !enabledMat.has(matKeyOf(d))) return false;
+    }
     // Year range: rows with no numeric Original Year drop out while a bound is set
     if (yearFrom != null || yearTo != null) {
       const y = +d.year;
@@ -2664,7 +2693,7 @@ document.getElementById('qx').addEventListener('click', clearSearch);
 function clearAllFilters() {
   const q = document.getElementById('q');
   q.value = '';
-  resetTypes(); resetSrcs(); resetGenres(); resetPatches(); resetYear();
+  resetTypes(); resetSrcs(); resetGenres(); resetYear();
   // both favorites narrowers go too (the saved list itself is untouched) — a
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
@@ -2722,6 +2751,7 @@ let enabledTypes = new Set(TYPES);
 let enabledSrcs = new Set();
 let enabledGenres = new Set();
 let enabledPatches = new Set();
+let enabledMat = new Set();
 let yearFrom = null, yearTo = null, YEAR_MIN = null, YEAR_MAX = null;
 // true while any multi-select is narrowing (some box unchecked). A menu that has no
 // keys yet (data not landed) cannot narrow.
@@ -2729,7 +2759,7 @@ function pickNarrows() {
   return enabledTypes.size < TYPES.length
     || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length)
     || (GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length)
-    || (PATCH_KEYS.length > 0 && enabledPatches.size < PATCH_KEYS.length);
+    || arcadeSubNarrows();
 }
 // shared chrome for the three multi-select menus: the All / None pair closing each
 // menu, the summary text + glow + button states after any change, and the All/None
@@ -2758,34 +2788,105 @@ function pickAllNone(menu, set, keys, e) {
 
 const typeMenu = document.getElementById('typemenu');
 const typeSummary = document.getElementById('typesummary');
-// each row is prefixed with its colour-coded type icon (decorative here, the
-// text label carries the name) so the menu doubles as the icons' legend
-typeMenu.innerHTML = TYPES.map(t =>
-  '<label><input type="checkbox" data-t="' + t + '"' +
+// Arcade carries two sub-filters, indented under its row, both on the same
+// all-checked model and both judging arcade rows only (no console core has a
+// fan patch or MAME's mature marker):
+//  - Patches: one box per patch type present plus a closing "No patches" box,
+//    so unchecking a type never hides unpatched games; a game with several
+//    patch types shows while any of them is checked.
+//  - Mature / Non-mature: data.json's mat marker and its opposite. Absent
+//    while the Menu's Mature games switch is on Hide (DATA has no mature rows).
+// Both are data-seeded by buildTypeMenu (ingest); a section with nothing to
+// tell apart is left out. Unchecking Arcade keeps their picks but dims them.
+const NO_PATCH = '__none__';
+const PATCH_LABELS = { translation: 'Translation', restoration: 'Restoration',
+  enhanced: 'Enhanced', arrange: 'Arranged soundtrack', [NO_PATCH]: 'No patches' };
+const PATCH_ORDER = ['translation', 'restoration', 'enhanced', 'arrange'];
+let PATCH_KEYS = [];  // menu order, filled by buildTypeMenu; empty until data lands
+const patchKeysOf = d => d.pt && d.pt.length ? [...new Set(d.pt.map(p => p.t))] : [NO_PATCH];
+const MAT_LABELS = { mature: 'Mature', clean: 'Non-mature' };
+let MAT_KEYS = [];
+const matKeyOf = d => d.mat ? 'mature' : 'clean';
+function arcadeSubNarrows() {
+  return (PATCH_KEYS.length > 0 && enabledPatches.size < PATCH_KEYS.length)
+    || (MAT_KEYS.length > 0 && enabledMat.size < MAT_KEYS.length);
+}
+function typeNarrows() { return enabledTypes.size < TYPES.length || arcadeSubNarrows(); }
+// each type row is prefixed with its colour-coded type icon (decorative here,
+// the text label carries the name) so the menu doubles as the icons' legend
+const typeRow = t => '<label><input type="checkbox" data-t="' + t + '"' +
   (enabledTypes.has(t) ? ' checked' : '') + '>' +
   '<span class="tico t-' + t.toLowerCase() + '" aria-hidden="true">' + (TYPE_ICONS[t] || '') + '</span>' +
-  t + '</label>').join('') + pickButtons('type');
-function syncTypeSummary() { syncPick(typeSummary, typeMenu, 'Type', enabledTypes, TYPES.length); }
+  t + '</label>';
+function buildTypeMenu() {
+  const pc = {}, mc = {};
+  for (const d of DATA) {
+    if (d.base !== 'Arcade') continue;
+    for (const k of patchKeysOf(d)) pc[k] = (pc[k] || 0) + 1;
+    mc[matKeyOf(d)] = (mc[matKeyOf(d)] || 0) + 1;
+  }
+  const pkeys = PATCH_ORDER.filter(k => pc[k]);
+  if (pkeys.length && pc[NO_PATCH]) pkeys.push(NO_PATCH);
+  const mkeys = mc.mature && mc.clean ? ['mature', 'clean'] : [];
+  // live data swap keeps picks, exactly like buildGenreMenu
+  const keep = (keys, set, old) => new Set(!old.length || old.every(k => set.has(k))
+    ? keys : keys.filter(k => set.has(k)));
+  enabledPatches = keep(pkeys, enabledPatches, PATCH_KEYS); PATCH_KEYS = pkeys;
+  enabledMat = keep(mkeys, enabledMat, MAT_KEYS); MAT_KEYS = mkeys;
+  const box = (attr, k, set, label, n) => '<label><input type="checkbox" ' + attr + '="' + k + '"' +
+    (set.has(k) ? ' checked' : '') + '> ' + label + '<span class="gcount">' + n + '</span></label>';
+  const sub = (PATCH_KEYS.length ? '<span class="tsubh">Patches</span>' +
+      PATCH_KEYS.map(k => box('data-p', k, enabledPatches, PATCH_LABELS[k], pc[k])).join('') : '') +
+    (PATCH_KEYS.length && MAT_KEYS.length ? '<hr>' : '') +
+    MAT_KEYS.map(k => box('data-m', k, enabledMat, MAT_LABELS[k], mc[k])).join('');
+  typeMenu.innerHTML = TYPES.map(t => typeRow(t) +
+    (t === 'Arcade' && sub ? '<div class="tsub">' + sub + '</div>' : '')).join('') + pickButtons('type');
+  syncTypeSummary();
+}
+function syncTypeSummary() {
+  syncPick(typeSummary, typeMenu, 'Type', enabledTypes, TYPES.length);
+  // Arcade's sections narrow too: the summary glows and All re-arms
+  if (arcadeSubNarrows()) {
+    typeSummary.textContent = 'Type (' + enabledTypes.size + ')';
+    typeSummary.classList.add('active');
+    const all = typeMenu.querySelector('[data-pick=all]');
+    if (all) all.disabled = false;
+  }
+  const sub = typeMenu.querySelector('.tsub');
+  if (sub) sub.classList.toggle('off', !enabledTypes.has('Arcade'));
+}
 typeMenu.addEventListener('change', e => {
-  const t = e.target.dataset.t;
-  if (!t) return;
-  if (e.target.checked) enabledTypes.add(t); else enabledTypes.delete(t);
+  const { t, p, m } = e.target.dataset;
+  const set = t ? enabledTypes : p ? enabledPatches : m ? enabledMat : null;
+  if (!set) return;
+  if (e.target.checked) set.add(t || p || m); else set.delete(t || p || m);
   syncTypeSummary();
   apply();
   recenterOpen();  // adding/removing whole types moves the selected row — follow it
 });
 // state-only reset (no apply/recenter) so the in-menu All button and the global
-// "Clear filters" can both reuse it
+// "Clear filters" can both reuse it; Arcade's sections reset with the types
 function resetTypes() {
   for (const t of TYPES) enabledTypes.add(t);
+  for (const k of PATCH_KEYS) enabledPatches.add(k);
+  for (const k of MAT_KEYS) enabledMat.add(k);
   for (const cb of typeMenu.querySelectorAll('input')) cb.checked = true;
   syncTypeSummary();
 }
+// None unchecks the four types only: Arcade's section picks stay (dimmed), so
+// re-ticking Arcade brings back the arcade list as it was narrowed
 typeMenu.addEventListener('click', e => {
-  if (!pickAllNone(typeMenu, enabledTypes, TYPES, e)) return;
-  syncTypeSummary(); apply(); recenterOpen();
+  const b = e.target.closest('[data-pick]');
+  if (!b) return;
+  if (b.dataset.pick === 'all') resetTypes();
+  else {
+    enabledTypes.clear();
+    for (const cb of typeMenu.querySelectorAll('input[data-t]')) cb.checked = false;
+    syncTypeSummary();
+  }
+  apply(); recenterOpen();
 });
-syncTypeSummary();
+buildTypeMenu();
 
 // --- "Columns" dropdown: toggle any column (Title stays locked on) ---
 const colsMenu = document.getElementById('colsmenu');
@@ -3064,56 +3165,6 @@ genreMenu.addEventListener('click', e => {
 });
 syncGenreSummary();  // initial state before data loads (reads "Genre" / no glow)
 
-// --- "Patches" dropdown: fan patches from Arcade Patches (strygo), row field pt ---
-// Same all-checked model as Genre: one box per patch type present in the data plus
-// a closing "No patches" box for every row without one, so unchecking a type never
-// hides unrelated rows. A row with several patch types shows while any is checked.
-const patchMenu = document.getElementById('patchmenu');
-const patchSummary = document.getElementById('patchsummary');
-const NO_PATCH = '__none__';
-const PATCH_LABELS = { translation: 'Translation', restoration: 'Restoration',
-  enhanced: 'Enhanced', arrange: 'Arranged soundtrack', [NO_PATCH]: 'No patches' };
-const PATCH_ORDER = ['translation', 'restoration', 'enhanced', 'arrange'];
-let PATCH_KEYS = [];  // menu order, filled by buildPatchMenu; empty until data lands
-const patchKeysOf = d => d.pt && d.pt.length ? [...new Set(d.pt.map(p => p.t))] : [NO_PATCH];
-function syncPatchSummary() { syncPick(patchSummary, patchMenu, 'Patches', enabledPatches, PATCH_KEYS.length); }
-function buildPatchMenu() {
-  const counts = {};
-  for (const d of DATA) for (const k of patchKeysOf(d)) counts[k] = (counts[k] || 0) + 1;
-  const keys = PATCH_ORDER.filter(k => counts[k]);
-  if (!keys.length) { document.getElementById('patchdd').hidden = true; PATCH_KEYS = []; return; }
-  document.getElementById('patchdd').hidden = false;
-  if (counts[NO_PATCH]) keys.push(NO_PATCH);
-  // live data swap keeps picks, exactly like buildGenreMenu
-  const untouched = !PATCH_KEYS.length || PATCH_KEYS.every(k => enabledPatches.has(k));
-  PATCH_KEYS = keys;
-  enabledPatches = new Set(untouched ? keys : keys.filter(k => enabledPatches.has(k)));
-  patchMenu.innerHTML = keys.map(k =>
-    '<label><input type="checkbox" data-p="' + k + '"' +
-    (enabledPatches.has(k) ? ' checked' : '') + '> ' + PATCH_LABELS[k] +
-    '<span class="gcount">' + counts[k] + '</span></label>').join('') + pickButtons('patch');
-  syncPatchSummary();
-}
-patchMenu.addEventListener('change', e => {
-  const k = e.target.dataset.p;
-  if (!k) return;
-  if (e.target.checked) enabledPatches.add(k); else enabledPatches.delete(k);
-  syncPatchSummary();
-  apply();
-  recenterOpen();
-});
-// state-only reset (no apply/recenter) shared by the in-menu All and "Clear filters"
-function resetPatches() {
-  for (const k of PATCH_KEYS) enabledPatches.add(k);
-  for (const cb of patchMenu.querySelectorAll('input')) cb.checked = true;
-  syncPatchSummary();
-}
-patchMenu.addEventListener('click', e => {
-  if (!pickAllNone(patchMenu, enabledPatches, PATCH_KEYS, e)) return;
-  syncPatchSummary(); apply(); recenterOpen();
-});
-syncPatchSummary();
-
 // --- favorites control: filter toggle + housekeeping menu ---------------------
 const favctl = document.getElementById('favctl');
 const favToggle = document.getElementById('favtoggle');
@@ -3200,6 +3251,8 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 //   t    Type menu                             t=arcade,console   t=-other
 //   src  Source menu (database ids)            src=-distribution_mister
 //   g    Genre menu (slugs; none = No genre)   g=shooter,maze
+//   p    Type > Arcade > Patches (none = No patches)   p=translation,enhanced
+//   m    Type > Arcade > Mature / Non-mature   m=clean
 //   y    Original Year range                   y=1980-1989  y=1990-  y=-1985  y=1987
 //   s    sort column, leading - = descending   s=title  s=-date  (-updated, the default, is left out)
 //   f    favorites only (the VISITOR'S own)    f=1
@@ -3208,7 +3261,7 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 // a ?fav= list being viewed stays in. On arrival the link wins wherever it says
 // something; the columns fall back to their remembered state. hv (the retired
 // Hardware Verified filter, 2026-10-14) is still stripped so old links come out clean.
-const VIEW_KEYS = ['q', 't', 'src', 'g', 'p', 'y', 's', 'hv', 'f'];
+const VIEW_KEYS = ['q', 't', 'src', 'g', 'p', 'm', 'y', 's', 'hv', 'f'];
 const patchSlug = k => k === NO_PATCH ? 'none' : k;
 const typeSlug = t => t.toLowerCase();
 const srcSlug = s => s;
@@ -3231,7 +3284,8 @@ function viewParams() {
   for (const [k, v] of [['t', pickParam(enabledTypes, TYPES, typeSlug)],
                         ['src', pickParam(enabledSrcs, SRC_KEYS, srcSlug)],
                         ['g', pickParam(enabledGenres, GENRE_KEYS, genreSlug)],
-                        ['p', pickParam(enabledPatches, PATCH_KEYS, patchSlug)]])
+                        ['p', pickParam(enabledPatches, PATCH_KEYS, patchSlug)],
+                        ['m', pickParam(enabledMat, MAT_KEYS, k => k)]])
     if (v != null) out.push([k, v]);
   if (yearFrom != null || yearTo != null)
     out.push(['y', yearFrom != null && yearFrom === yearTo ? '' + yearFrom
@@ -3276,10 +3330,11 @@ function adoptViewParams() {
   const p = new URLSearchParams(location.search);
   const q = p.get('q');
   if (q) document.getElementById('q').value = q;
-  adoptPick(p.get('t'), enabledTypes, TYPES, typeSlug, typeMenu, 'data-t'); syncTypeSummary();
+  adoptPick(p.get('t'), enabledTypes, TYPES, typeSlug, typeMenu, 'data-t');
+  adoptPick(p.get('p'), enabledPatches, PATCH_KEYS, patchSlug, typeMenu, 'data-p');
+  adoptPick(p.get('m'), enabledMat, MAT_KEYS, k => k, typeMenu, 'data-m'); syncTypeSummary();
   adoptPick(p.get('src'), enabledSrcs, SRC_KEYS, srcSlug, srcMenu, 'data-s'); syncSrcSummary();
   adoptPick(p.get('g'), enabledGenres, GENRE_KEYS, genreSlug, genreMenu, 'data-g'); syncGenreSummary();
-  adoptPick(p.get('p'), enabledPatches, PATCH_KEYS, patchSlug, patchMenu, 'data-p'); syncPatchSummary();
   const y = /^(\d{1,4})?(-)?(\d{1,4})?$/.exec((p.get('y') || '').trim());
   if (y && (y[1] || y[3]) && YEAR_MIN != null) {
     const clamp = v => Math.min(Math.max(Math.round(+v), YEAR_MIN), YEAR_MAX);
@@ -3344,6 +3399,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   blahm1d: 'blahm1d',
   bazset: 'bazset/MiSTer_BAZSET',
   rossops: 'rossops/Arcade-SegaYBoard_MiSTer',
+  tomsvr: 'TomSVR-Mister/TomSVR-Arcade-Cores',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -3518,17 +3574,16 @@ function setSheet(open) {
 }
 filtersSum.addEventListener('click', () => setSheet(!filtersDD.classList.contains('open')));
 addEventListener('resize', () => { if (filtersDD.classList.contains('open')) placeSheet(); });
-// the button's label counts the menus that narrow the list (Type, Source,
-// Genre, Patches, a Year bound), "Filters (2)", and glows like an active
+// the button's label counts the menus that narrow the list (Type with its
+// Arcade sections, Source, Genre, a Year bound), "Filters (2)", and glows like an active
 // summary, so a folded-away filter still shows with the sheet closed. Search
 // and favorites are not counted: both have their own visible control in the
 // row. Called from apply(), next to the Clear button's arming.
 function syncFilterCount() {
   const n = [
-    enabledTypes.size < TYPES.length,
+    typeNarrows(),
     SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length,
     GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length,
-    PATCH_KEYS.length > 0 && enabledPatches.size < PATCH_KEYS.length,
     yearFrom != null || yearTo != null,
   ].filter(Boolean).length;
   filtersSum.textContent = n ? 'Filters (' + n + ')' : 'Filters';
@@ -4632,7 +4687,6 @@ narrowMQ.addEventListener('change', e => {
   buildHeader();
   syncTypeSummary();
   syncGenreSummary();
-  syncPatchSummary();
   syncYear();
   syncFilterCount();
   setCount(view.length);  // short tally + placeholder while narrow
@@ -4721,7 +4775,7 @@ const FEED_LIST = [
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
-  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's and bazset's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's, bazset's and TomSVR's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
   "Distribution, plus the arcade cores distributed through Ongo. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +
@@ -5075,7 +5129,7 @@ function ingest(d) {
   buildYearMenu();
   buildSrcMenu();
   buildGenreMenu();
-  buildPatchMenu();
+  buildTypeMenu();
   buildHeader();
   apply();
 }

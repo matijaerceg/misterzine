@@ -26,7 +26,8 @@ function siteSingletonTitles(rows) {
   // parentheses (player count, hardware, region, bootleg, etc.).
   const labels = { coinop: 'Coin-Op Collection', jtbindb: 'Jotego', meathax: 'Meathax',
     rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
-    blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo' };
+    blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
+    tomsvr: 'TomSVR' };
   const norm = title => (title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
   const identity = row => row.g || row.family || row.sn;
   const counts = new Map(), names = new Map();

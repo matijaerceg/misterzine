@@ -171,6 +171,23 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/rossops/Arcade-SegaYBoard_MiSTer/main/db.json.zip",
     },
     {
+        # TomSVR's unofficial cores, released 2026-10-19 (his GitHub issue
+        # #14 asked for them): small 1990s boards (ESD, Yun Sung, Playmark,
+        # Gaelco's Splash!, Comad, Paradise, NMG5, ...), 18 cores and 114
+        # MRAs. Built on JTFRAME with jotego's chip modules, board logic from
+        # the MAME drivers, developed with AI assistance (his README says
+        # so); not jotego cores, hence the TomSVR_ rbf names. Undated rbfs
+        # (TomSVR_esd.rbf), like Jotego's. Every regional/revision set sits
+        # beside the mainline MRA in _Arcade/_TomSVR/ (no _alternatives), so
+        # export-web folds them (SIBLING_VARIANT_SOURCES). The MRAs and the
+        # db live on the repo's `db` branch. Several Comad games double
+        # bazset's EXPRO-02 core. Same opt-in model as MeatCores: users
+        # hand-add [TomSVR-Mister/TomSVR-Arcade-Cores].
+        "id": "tomsvr",
+        "name": "TomSVR",
+        "db_url": "https://raw.githubusercontent.com/TomSVR-Mister/TomSVR-Arcade-Cores/db/db.json.zip",
+    },
+    {
         # Ongo's community database. It aggregates arcade MRAs and core builds
         # alongside other system databases, ROM payloads, scripts and extras;
         # only arcade MRA files and the shipped _Arcade/cores bitstreams are
@@ -219,8 +236,8 @@ SOURCE_PATH_FILTERS = {
 # (fold_sibling_variants). blahm1d seeded Night Slashers' Japan, Korea and
 # Over Sea sets side by side; his 2026-09-25 rebuild moved Japan and Korea
 # into _alternatives, which leaves the fold idle, but it stays in case a
-# later rebuild puts them back.
-SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo"}
+# later rebuild puts them back. TomSVR ships every set side by side.
+SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr"}
 
 # Opt-in dbs whose games may move into the MiSTer Distribution later
 # (MiSTer-devel forked rossops' X Board core; Y Board may follow). Once the
@@ -1460,6 +1477,8 @@ MRA_REPOS = [
     ("rossops", "rossops/Arcade-SegaYBoard_MiSTer", "main", "releases"),
     # Ongo's main branch carries MRAs at the root and in nested system folders.
     ("ongo", "OngoGablogian/MiSTer_Ongo", "main", "_Arcade"),
+    # main holds the core sources; the released MRAs are only on `db`
+    ("tomsvr", "TomSVR-Mister/TomSVR-Arcade-Cores", "db", "_Arcade/_TomSVR"),
 ]
 
 
@@ -2343,6 +2362,128 @@ ROSSOPS_FROZEN_DATES = {
     "Strike Fighter.mra": "2026-08-29",
 }
 
+TOMSVR_REPO = "TomSVR-Mister/TomSVR-Arcade-Cores"
+# Debut dates for the TomSVR initial import (2026-10-19 seed): every MRA
+# went public at once with the db and the v2026.10.1 release (both
+# 2026-10-19, UTC). Nothing was playable earlier: the builds-* branches
+# held bare jt-named rbfs with no MRAs. Post-import titles need no entry.
+TOMSVR_FROZEN_DATES = dict.fromkeys((
+    "7 Ordi (Korea) [TomSVR].mra",
+    "Big Twin [TomSVR].mra",
+    "Bomb Kick (set 1) [TomSVR].mra",
+    "Bomb Kick (set 2) [TomSVR].mra",
+    "Bubble Pong Pong [TomSVR].mra",
+    "Cannon Ball (Yun Sung, horizontal) [TomSVR].mra",
+    "Cannon Ball (Yun Sung, vertical) [TomSVR].mra",
+    "Deluxe 4 U (ver. 0107, 07-01-2000) [TomSVR].mra",
+    "Deluxe 5 (ver. 0107, 07-01-2000, set 1) [TomSVR].mra",
+    "Deluxe 5 (ver. 0107, 07-01-2000, set 2) [TomSVR].mra",
+    "Deluxe 5 (ver. 0107, 07-01-2000, set 3) [TomSVR].mra",
+    "Double Point (Dong Bang Electron, bootleg_) [TomSVR].mra",
+    "Double Point [TomSVR].mra",
+    "Excelsior (set 1) [TomSVR].mra",
+    "Excelsior (set 2) [TomSVR].mra",
+    "Fantasia II (1998) [TomSVR].mra",
+    "Fantasia II (Explicit) [TomSVR].mra",
+    "Fantasia II (Less Explicit) [TomSVR].mra",
+    "Fantasy '95 [TomSVR].mra",
+    "Funny Bubble (Comad version) [TomSVR].mra",
+    "Funny Bubble [TomSVR].mra",
+    "Gals Hustler (set 1) [TomSVR].mra",
+    "Gals Hustler (set 2) [TomSVR].mra",
+    "Gals Pinball [TomSVR].mra",
+    "Garogun Seroyang (Korea) [TomSVR].mra",
+    "Gumbo [TomSVR].mra",
+    "Head Panic (ver. 0117, 17-01-2000) [TomSVR].mra",
+    "Head Panic (ver. 0315, 15-03-2000) [TomSVR].mra",
+    "Head Panic (ver. 0615, 15-06-1999) [TomSVR].mra",
+    "Head Panic (ver. 0702, 02-07-1999) [TomSVR].mra",
+    "Head Panic (ver. 8.30) [TomSVR].mra",
+    "Honey Doll [TomSVR].mra",
+    "Hot Blocks - Tetrix II (set 1) [TomSVR].mra",
+    "Hot Blocks - Tetrix II (set 2) [TomSVR].mra",
+    "Hot Blocks - Tetrix II (set 3) [TomSVR].mra",
+    "Hot Mind (Hard Times hardware, set 1) [TomSVR].mra",
+    "Hot Mind (Hard Times hardware, set 2) [TomSVR].mra",
+    "Hot Night [TomSVR].mra",
+    "Hot Pinball [TomSVR].mra",
+    "Jumping Pop (Nics) [TomSVR].mra",
+    "Jumping Pop (set 1) [TomSVR].mra",
+    "Jumping Pop (set 2) [TomSVR].mra",
+    "Komo Como (Topmar, bootleg) [TomSVR].mra",
+    "Las Vegas Girl (Girl '94) [TomSVR].mra",
+    "Mad Ball V2.0 (With Nudity) [TomSVR].mra",
+    "Mad Ball V2.0 [TomSVR].mra",
+    "Mad Donna (Tuning, set 1) [TomSVR].mra",
+    "Magic Bubble (Adult, YS-0211) [TomSVR].mra",
+    "Magic Bubble (Adult, YS1302 set 1) [TomSVR].mra",
+    "Magic Bubble (Adult, YS1302 set 2) [TomSVR].mra",
+    "Magic Bubble [TomSVR].mra",
+    "Magix - Rock (no copyright message) [TomSVR].mra",
+    "Magix - Rock [TomSVR].mra",
+    "Miss Bingo [TomSVR].mra",
+    "Miss Bubble II [TomSVR].mra",
+    "Miss Puzzle (Clone of Gumbo) [TomSVR].mra",
+    "Miss Puzzle (Nudes, less explicit) [TomSVR].mra",
+    "Miss Puzzle (Nudes, more explicit) [TomSVR].mra",
+    "Miss Puzzle [TomSVR].mra",
+    "Miss World '96 (Nude) (C-3000A PCB, set 1) [TomSVR].mra",
+    "Miss World 2002 (Daigom license) [TomSVR].mra",
+    "Miss World 2002 [TomSVR].mra",
+    "Multi 5 - New Multi Game 5 (set 1) [TomSVR].mra",
+    "Multi 5 - New Multi Game 5 (set 2, censored) [TomSVR].mra",
+    "Multi 5 - New Multi Game 5 (set 3, earlier) [TomSVR].mra",
+    "Multi Champ (Korea, older) [TomSVR].mra",
+    "Multi Champ (World, older) [TomSVR].mra",
+    "Multi Champ (World, ver. 2.5) [TomSVR].mra",
+    "Multi Champ (World, ver. 9.6) [TomSVR].mra",
+    "Multi Champ Deluxe (ver. 0106, 06-01-2000) [TomSVR].mra",
+    "Multi Champ Deluxe (ver. 1114, 14-11-1999) [TomSVR].mra",
+    "Multi Champ Deluxe (ver. 1126, 26-11-1999) [TomSVR].mra",
+    "New Splash (ver. 1.4, Korea, set 1) [TomSVR].mra",
+    "New Splash (ver. 1.4, Korea, set 2) [TomSVR].mra",
+    "Painted Lady (ver. 1.3, North America) [TomSVR].mra",
+    "Paparazzi [TomSVR].mra",
+    "Paradise (Escape) [TomSVR].mra",
+    "Paradise (set 1) [TomSVR].mra",
+    "Paradise (set 2) [TomSVR].mra",
+    "Paradise 2 Deluxe [TomSVR].mra",
+    "Paradise Deluxe [TomSVR].mra",
+    "Penky (Italian) [TomSVR].mra",
+    "Penky [TomSVR].mra",
+    "Perestroika Girls (Fuuki license) [TomSVR].mra",
+    "Perestroika Girls [TomSVR].mra",
+    "Pocket Gals V.I.P. (set 2) [TomSVR].mra",
+    "Puzzle Club (Yun Sung, set 1) [TomSVR].mra",
+    "Puzzle Club (Yun Sung, set 2) [TomSVR].mra",
+    "Rock Tris [TomSVR].mra",
+    "Search Eye (English, Korean) [TomSVR].mra",
+    "Search Eye (English, Korean, Japanese, Italian) [TomSVR].mra",
+    "Search Eye Plus V2.0 [TomSVR].mra",
+    "Shocking (Korea, set 1) [TomSVR].mra",
+    "Shocking (Korea, set 2) [TomSVR].mra",
+    "Shocking [TomSVR].mra",
+    "Splash! (ver. 1.0, World) [TomSVR].mra",
+    "Splash! (ver. 1.1, World) [TomSVR].mra",
+    "Splash! (ver. 1.2, World) [TomSVR].mra",
+    "Splash! (ver. 1.3, Korea) [TomSVR].mra",
+    "Splash! (ver. 1.3, North America) [TomSVR].mra",
+    "Splash! (ver. 1.3, World) [TomSVR].mra",
+    "Tang Tang (ver. 0526, 26-05-2000, set 1) [TomSVR].mra",
+    "Tang Tang (ver. 0526, 26-05-2000, set 2) [TomSVR].mra",
+    "Target Ball '96 [TomSVR].mra",
+    "Target Ball (With Nudity) [TomSVR].mra",
+    "Target Ball [TomSVR].mra",
+    "The Return of Lady Frog (set 1) [TomSVR].mra",
+    "The Return of Lady Frog (set 2) [TomSVR].mra",
+    "Torus [TomSVR].mra",
+    "WOW New Fantasia (Explicit) [TomSVR].mra",
+    "Wonder Stick (set 1) [TomSVR].mra",
+    "Wonder Stick (set 2, censored) [TomSVR].mra",
+    "Zero Zone [TomSVR].mra",
+    "Zip & Zap (Less Explicit) [TomSVR].mra",
+), "2026-10-19")
+
 ONGO_CORE_REPOS = {
     "namco_na1_na2": "kyledlester/Namco_NA1_NA2_MiSTer",
     "namco_nb1": "kyledlester/Namco_NB1_MiSTer",
@@ -2375,6 +2516,8 @@ OPTIN_DB_SOURCES = {
     # Ongo's source repo contains the aggregate MRA/core files; no invented
     # debut dates are attached to its initial catalogue seed.
     "ongo": (None, ONGO_CORE_REPOS, {}),
+    # cores and db share one repo, so the fallback link is already the core
+    "tomsvr": (TOMSVR_REPO, {}, TOMSVR_FROZEN_DATES),
 }
 
 
@@ -2963,7 +3106,7 @@ def attach_same_game_groups(data, meta):
     seen = {}
     for i, d in enumerate(rows):
         sn = d["sn"].lower()
-        for key in (("sn", sn), ("fam", root(sn), _arcade_base(d.get("mt") or d["title"]).casefold())):
+        for key in (("sn", sn), ("fam", root(sn), _same_game_key(d.get("mt") or d["title"]))):
             j = seen.setdefault(key, i)
             if j != i:
                 parent[find(i)] = find(j)
@@ -3760,6 +3903,13 @@ def _arcade_base(title):
     return re.sub(r"\s*[\(\[].*$", "", title).strip()
 
 
+def _same_game_key(title):
+    """_arcade_base for same-game matching: case-blind, and blind to a trailing
+    period MRA names disagree on (TomSVR's "Pocket Gals V.I.P." vs bazset's
+    "Pocket Gals V.I.P"). The setname/parent check still decides the game."""
+    return _arcade_base(title).rstrip(".").casefold()
+
+
 def fold_sibling_variants(rows, arcade_meta):
     """Drop the extra region/revision sets a SIBLING_VARIANT_SOURCES db ships
     beside the mainline one, as if they sat in _alternatives: per source and
@@ -3883,6 +4033,13 @@ ARCADE_TITLES = {
     "edfp": "E.D.F.: Earth Defense Force (Coin-Op Collection)",  # the prototype on Coin-Op's
                                            # Mega System 1 core; kuzecores' edf keeps the bare
                                            # name (the Black Heart convention)
+    # TomSVR: two unrelated games MAME both calls "Jumping Pop" (ESD 2001,
+    # Nics 1992), and Miss Puzzle on its own board and on Gumbo's. Left to
+    # the collision rule they kept raw MRA names with a " [TomSVR]" suffix.
+    "jumppop": "Jumping Pop (ESD)",
+    "jpopnics": "Jumping Pop (Nics)",
+    "mspuzzle": "Miss Puzzle",
+    "mspuzzleg": "Miss Puzzle (Clone of Gumbo)",
 }
 
 # Escape hatch for the same-game qualifier labels below, keyed by lowercase
@@ -3929,6 +4086,8 @@ def _core_label(r, fork_info, repo_maps):
         return "rossops"
     if r["source_id"] == "ongo":
         return "Ongo"
+    if r["source_id"] == "tomsvr":
+        return "TomSVR"
     repo =(r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -4870,7 +5029,7 @@ def cmd_export_web(args):
             # case-blind: MRA names disagree on acronyms (Meathax's "NARC",
             # blahm1d's "Narc (rev 7.00)"); the setname check below still
             # decides whether it is one game
-            groups.setdefault(_arcade_base(r["title"]).casefold(), []).append(r)
+            groups.setdefault(_same_game_key(r["title"]), []).append(r)
     for b, grp in groups.items():
         if len(grp) < 2:
             continue

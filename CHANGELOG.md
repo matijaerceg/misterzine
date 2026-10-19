@@ -2,6 +2,11 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-19
+
+- Release tracker: now also tracks TomSVR's database: 63 games on 18 unofficial cores for small 1990s boards from ESD, Yun Sung, Playmark, Gaelco (Splash!), Comad and others, such as Multi Champ, Head Panic, Paradise, Magic Bubble, Big Twin and The Return of Lady Frog. It is opt-in: add the [TomSVR-Mister/TomSVR-Arcade-Cores] section to downloader.ini. Pocket Gals V.I.P, WOW New Fantasia and Zip & Zap also ship in bazset's database, so each is one row with both builds.
+- Release tracker: the Patches filter moved into the Type menu, under Arcade, and a second section there filters Mature and Non-mature games. Both judge arcade games only, so consoles and computers are unaffected. The Mature games switch in the Menu still shows, blurs or hides those games.
+
 ## 2026-10-18
 
 - Website: combined BAZSET's two identical Meikyu Jima launchers into one “Meikyu Jima / Kickle Cubicle” listing, searchable under either name. Existing links still open the combined listing.

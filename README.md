@@ -244,7 +244,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The twelve sources (all public)
+## The thirteen sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -312,8 +312,16 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 12. **theypsilon Unofficial Distribution**: `theypsilon/Unofficial_Distribution_MiSTer` `main`
    branch. Its arcade MRAs are tracked alongside the main Distribution; the other systems
    remain represented by their primary source.
+13. **TomSVR**: `TomSVR-Mister/TomSVR-Arcade-Cores` `db` branch (opt-in, section
+   `[TomSVR-Mister/TomSVR-Arcade-Cores]`), since 2026-10-19. Unofficial cores for small
+   1990s boards (ESD, Yun Sung, Playmark, Gaelco's Splash!, Comad and others), built on
+   JTFRAME from the MAME drivers with AI assistance; not Jotego cores. 18 undated
+   `TomSVR_<core>.rbf` files and 114 MRAs in `_Arcade/_TomSVR/`, every regional and
+   revision set side by side, which export-web folds to one row per game. The db carries
+   no tags, so its rows have no favorites-export filter term. A few Comad games double
+   bazset's EXPRO-02 core (same-game labels apply).
 
-All twelve publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All thirteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

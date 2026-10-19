@@ -19,6 +19,45 @@ test('Meathax Simpsons launchers show their player counts without changing launc
   assert.deepEqual(siteSourceRows([jotego]), [jotego]);
 });
 
+test('source suffix cleanup follows mirror removal, preserves identity, and is repeatable', () => {
+  const original = row('bazset', 'aquajack', 'Aqua Jack (bazset)', 'aquajack',
+    { g: 'aquajack', mt: 'Aqua Jack (World)', k: 'aquajack', mra: 'Aqua Jack.mra' });
+  const mirror = { ...original, src: 'ongo', title: 'Aqua Jack (Ongo)', k: 'mirror' };
+  const input = [mirror, original], before = JSON.stringify(input);
+  const result = siteSourceRows(input);
+  assert.deepEqual(result, [{ ...original, title: 'Aqua Jack' }]);
+  assert.deepEqual(siteSourceRows([...input].reverse()), result);
+  assert.deepEqual(siteSourceRows(result), result);
+  assert.equal(JSON.stringify(input), before);
+});
+
+test('cleanup retains multiple implementations, unknown labels and meaningful qualifiers', () => {
+  const a = row('meathax', 'game', 'Game (Meathax)');
+  const b = row('bazset', 'game', 'Game (bazset)');
+  assert.deepEqual(siteSourceRows([a, b]), [a, b]);
+  for (const title of ['Game (2-player)', 'Game (4-player)', 'Game (Bootleg)',
+    'Game (Japan)', 'Game (T-Unit)', 'Game (Unrecognized)']) {
+    const variant = { ...a, title };
+    assert.deepEqual(siteSourceRows([variant]), [variant]);
+  }
+  const bootleg = { ...a, title: 'Game (Bootleg) (Meathax)' };
+  assert.equal(siteSourceRows([bootleg])[0].title, 'Game (Bootleg)');
+  const collision = row('other', 'different', 'Game');
+  assert.deepEqual(siteSourceRows([a, collision]), [a, collision]);
+  const unknown = { ...a, sn: '', family: '' };
+  assert.deepEqual(siteSourceRows([unknown]), [unknown]);
+});
+
+test('published Aqua Jack and Meta Fox become unambiguous plain titles', () => {
+  const rows = require('../docs/releases/data.json');
+  const visible = siteSourceRows(rows);
+  for (const [src, sn, title] of [['bazset', 'aquajack', 'Aqua Jack'], ['meathax', 'metafox', 'Meta Fox']]) {
+    const original = rows.find(r => r.src === src && r.sn === sn);
+    const result = visible.find(r => r.k === original.k);
+    assert.deepEqual(result, { ...original, title });
+  }
+});
+
 test('renamed mirrors need game identity plus core evidence', () => {
   const direct = row('meathax', 'btoads', 'Battletoads', '', { core: 'Arcade-Battletoads', bh: 'abc' });
   const copy = row('ongo', 'btoads_meathax', 'Battletoads (Meathax)', '', { core: 'Meathax_Battletoads', bh: 'abc' });

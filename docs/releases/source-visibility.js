@@ -21,6 +21,33 @@ function siteRenamedMirror(row, original) {
   return !!core(row.core) && core(row.core) === core(original.core);
 }
 
+function siteSingletonTitles(rows) {
+  // Only known source-brand suffixes are disposable. Never strip arbitrary
+  // parentheses (player count, hardware, region, bootleg, etc.).
+  const labels = { coinop: 'Coin-Op Collection', jtbindb: 'Jotego', meathax: 'Meathax',
+    rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
+    blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo' };
+  const norm = title => (title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+  const identity = row => row.g || row.family || row.sn;
+  const counts = new Map(), names = new Map();
+  const proposed = rows.map(row => {
+    const suffix = labels[row.src] && ` (${labels[row.src]})`;
+    return row.base === 'Arcade' && suffix && row.title.endsWith(suffix)
+      ? row.title.slice(0, -suffix.length) : row.title;
+  });
+  rows.forEach((row, i) => {
+    if (row.base === 'Arcade' && identity(row)) {
+      const key = identity(row);
+      counts.set(key, (counts.get(key) || 0) + 1);
+    }
+    const name = norm(proposed[i]);
+    names.set(name, (names.get(name) || 0) + 1);
+  });
+  return rows.map((row, i) => proposed[i] !== row.title && norm(proposed[i]) &&
+    identity(row) && counts.get(identity(row)) === 1 && names.get(norm(proposed[i])) === 1
+    ? { ...row, title: proposed[i], mt: row.mt || row.title } : row);
+}
+
 function siteSourceRows(rows) {
   const sets = new Set(), games = new Set();
   const titles = new Map();
@@ -59,11 +86,11 @@ function siteSourceRows(rows) {
     '_Arcade/_BAZSET/Kickle Cubicle (English title).mra',
   ]);
   const aliases = visible.filter(row => row.src === 'bazset' && row.sn === 'kikcubic' && paths.has(row.mra));
-  if (!aliases.length) return visible;
+  if (!aliases.length) return siteSingletonTitles(visible);
   const lead = aliases.find(row => row.mra.endsWith('/Meikyu Jima (Japan).mra')) || aliases[0];
-  return visible.filter(row => !aliases.includes(row) || row === lead).map(row => row === lead
+  return siteSingletonTitles(visible.filter(row => !aliases.includes(row) || row === lead).map(row => row === lead
     ? { ...row, title: 'Meikyu Jima / Kickle Cubicle', siteAliases: aliases.filter(r => r !== lead).map(r => r.k).filter(Boolean) }
-    : row);
+    : row));
 }
 
 if (typeof module !== 'undefined') module.exports = { siteSourceRows, siteGameTitle, siteRenamedMirror };

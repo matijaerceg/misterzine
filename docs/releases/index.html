@@ -161,19 +161,23 @@
            color: var(--muted); font-size: .8rem; white-space: nowrap;
            font-variant-numeric: tabular-nums; pointer-events: none; }
   #q:not(:placeholder-shown) ~ .count { right: 1.45rem; }
-  /* "Clear filters" is an ACTION, not a status, so it only exists while there
-     is something to undo: JS toggles .active when a search, a narrowing filter
-     or toggle, or a non-default sort is set, and idle it leaves the row (it
-     used to hold its slot as a faded ghost). Armed it is the solid accent fill
-     with --accent-on text (the pair with a contrast floor, as on the panel's
-     Launch button) and a small x in front, so "press me to undo" stands apart
-     from the filters' accent tint. */
+  /* "Clear filters": JS toggles .active (and drops `disabled`) when a search, a
+     narrowing filter or toggle, or a non-default sort is set. On desktop it
+     always holds its slot, a faded disabled ghost while idle, so arming it
+     never shifts the filter buttons (an open dropdown used to jump sideways
+     when it appeared; 2026-10-19, reversing the 10-16 hide-when-idle). In the
+     phone Filters sheet idle it is gone (the 867px block). Armed it is the
+     solid accent fill with --accent-on text (the pair with a contrast floor,
+     as on the panel's Launch button) and a small x in front, so "press me to
+     undo" stands apart from the filters' accent tint. */
   button.clear { --clx: .75rem; --clpad: .7rem;
                  font: inherit; font-size: .9rem; padding: .4rem var(--clpad); cursor: pointer;
                  border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit;
                  opacity: .75; }
-  button.clear:not(.active) { display: none; }
-  button.clear:hover { background: var(--hover-bg); }
+  /* pointer-events: none so a click on the ghost still reaches the document
+     and light-dismisses an open dropdown (a disabled button swallows clicks) */
+  button.clear:disabled { opacity: .4; cursor: default; pointer-events: none; }
+  button.clear:not(:disabled):hover { background: var(--hover-bg); }
   button.clear .clx { display: inline-block; width: var(--clx); font-size: .85em; font-weight: 700; }
   button.clear.active { opacity: 1; border-color: var(--accent); background: var(--accent); color: var(--accent-on); }
   button.clear.active:hover { background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
@@ -1016,6 +1020,7 @@
                                    sheet above never received it */
                                 overflow: visible; overscroll-behavior: auto; }
     .fbody button.clear { justify-self: start; margin-top: .3rem; }
+    button.clear:not(.active) { display: none; }   /* the sheet shows it only when armed */
   }
   /* the sort arrow is dropped on narrow layouts: there it's the thing that wraps
      the header onto a second sticky line, and the accent color already says which
@@ -2572,13 +2577,16 @@ function apply() {
   // matching both, in any field, in any order); each term is an independent
   // substring so multi-word values still match ("street fighter" hits the title)
   const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
-  // the global "Clear filters" button only renders while armed (accent fill +
-  // x; idle it is display:none), i.e. while anything differs from a fresh load:
-  // a search, a narrowing filter or toggle, or a sort other than the default
+  // the global "Clear filters" button is armed (accent fill + x) while anything
+  // differs from a fresh load: a search, a narrowing filter or toggle, or a
+  // sort other than the default. Idle it is disabled: a ghost holding its slot
+  // on desktop, gone in the phone Filters sheet (CSS)
   const [dk, dd] = defaultSort();
-  document.getElementById('clear').classList.toggle('active',
-    !!(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
-      || favOnly || favView || sortKey !== dk || sortDir !== dd));
+  const armed = !!(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
+    || favOnly || favView || sortKey !== dk || sortDir !== dd);
+  const clearBtn = document.getElementById('clear');
+  clearBtn.classList.toggle('active', armed);
+  clearBtn.disabled = !armed;
   syncFilterCount();  // the phone Filters button shows how many of its menus narrow
   // Type / Source / Genre: every box checked is the default (no filter); any
   // unchecked box narrows to the checked ones, and an all-unchecked menu shows
@@ -3601,11 +3609,24 @@ function positionMenu(dd) {
   if (mLeft + mW > vw - margin) mLeft = vw - margin - mW;   // don't spill past the right edge
   if (mLeft < margin) mLeft = margin;                       // ...nor past the left edge
   menu.style.left = (mLeft - dRect.left) + 'px';
+  dd._pinLeft = mLeft;
   const room = document.documentElement.clientHeight - menu.getBoundingClientRect().top - margin;
   if (menu.offsetHeight > room) menu.style.maxHeight = room + 'px';
 }
-for (const dd of document.querySelectorAll('details.cols'))
+// An open menu stays where it opened. The filter buttons are right-aligned, so
+// when a pick changes a summary's label ("Type" -> "Type (3)") the button grows
+// leftward; re-pin the menu to its opening spot instead of letting it slide.
+const menuPin = new ResizeObserver(entries => {
+  for (const { target: dd } of entries) {
+    const menu = dd.querySelector('.menu');
+    if (!dd.open || dd._pinLeft == null || !menu || getComputedStyle(menu).position === 'static') continue;
+    menu.style.left = (dd._pinLeft - dd.getBoundingClientRect().left) + 'px';
+  }
+});
+for (const dd of document.querySelectorAll('details.cols')) {
   dd.addEventListener('toggle', () => { if (dd.open) positionMenu(dd); });
+  menuPin.observe(dd);
+}
 
 // --- phone "Filters" fold (.fsheet) ---
 // On narrow layouts the five dropdowns + Clear live in a sheet under the

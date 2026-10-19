@@ -188,6 +188,46 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/TomSVR-Mister/TomSVR-Arcade-Cores/db/db.json.zip",
     },
     {
+        # decoryah's own cores (first builds 2026-10-03): Metro, Taito L
+        # System, IGS PGM2, Konami's Violent Storm / Metamorphic Force /
+        # Monster Maulers / Gaiapolis, Kaneko's Heavy Unit and others, 12 core
+        # repos. A GitHub DB-Template db (build_db.py + config.json on main,
+        # db.json.zip on the `db` branch): every file entry carries its own
+        # url pinned to a commit of the core repo, MRAs install to
+        # _Arcade/_Decoryah/_<Core>/ with every regional/revision set side by
+        # side (SIBLING_VARIANT_SOURCES), plus MAME ROM zips (games/mame,
+        # support files). No tags. Ongo mirrors his PGM2 build. Opt-in:
+        # users hand-add [decoryah/MiSTer_decoryah].
+        "id": "decoryah",
+        "name": "decoryah",
+        "db_url": "https://raw.githubusercontent.com/decoryah/MiSTer_decoryah/db/db.json.zip",
+    },
+    {
+        # ppriest's own cores (first builds 2026-09-10): Seta, PlayChoice-10,
+        # Konami GX, Bally/Sente SAC-1, Vamphalf/Limenko, Eolith, Jaleco
+        # MegaSystem 32, Hyper Neo Geo 64 and others, 11 core repos. Same
+        # DB-Template layout as decoryah's (per-file urls into the core
+        # repos' releases/), MRAs flat in _Arcade/ with _alternatives, MAME
+        # ROM zips, no tags. MiSTer-devel adopted his Fuuki and Psikyo cores
+        # (they left this db), so DISTRIBUTION_TAKES_OVER watches it. Ongo
+        # mirrors nearly all of it. Opt-in: [ppriest/MiSTer_ppriest].
+        "id": "ppriest",
+        "name": "ppriest",
+        "db_url": "https://raw.githubusercontent.com/ppriest/MiSTer_ppriest/db/db.json.zip",
+    },
+    {
+        # Gm0rk's cores (first builds 2026-09-26): Atari GT/G1 (Hydra, Pit
+        # Fighter), Atari G42 (Road Riot 4WD, Guardians of the 'Hood) and
+        # Incredible Technologies 8-bit (Golden Tee Golf, Capcom Bowling,
+        # Hot Shots Tennis, ...). Classic downloader db: base_files_url into
+        # Gm0rk/Gm0rkCores, MRAs in _Arcade/_Gm0rkCores/ with _alternatives,
+        # real tags. Each core repo published GitHub releases before the db
+        # existed (2026-10-11). Opt-in: [Gm0rk/Gm0rkCores].
+        "id": "gm0rk",
+        "name": "Gm0rk",
+        "db_url": "https://raw.githubusercontent.com/Gm0rk/Gm0rkCores/db/db.json.zip",
+    },
+    {
         # Ongo's community database. It aggregates arcade MRAs and core builds
         # alongside other system databases, ROM payloads, scripts and extras;
         # only arcade MRA files and the shipped _Arcade/cores bitstreams are
@@ -236,14 +276,15 @@ SOURCE_PATH_FILTERS = {
 # (fold_sibling_variants). blahm1d seeded Night Slashers' Japan, Korea and
 # Over Sea sets side by side; his 2026-09-25 rebuild moved Japan and Korea
 # into _alternatives, which leaves the fold idle, but it stays in case a
-# later rebuild puts them back. TomSVR ships every set side by side.
-SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr"}
+# later rebuild puts them back. TomSVR and decoryah ship every set side by
+# side.
+SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr", "decoryah"}
 
 # Opt-in dbs whose games may move into the MiSTer Distribution later
-# (MiSTer-devel forked rossops' X Board core; Y Board may follow). Once the
-# Distribution ships one of their games, export-web lists only the
-# Distribution's row (distribution_takeovers); nothing to do by hand.
-DISTRIBUTION_TAKES_OVER = {"rossops"}
+# (MiSTer-devel forked rossops' X Board core and ppriest's Fuuki and Psikyo
+# cores). Once the Distribution ships one of their games, export-web lists
+# only the Distribution's row (distribution_takeovers); nothing to do by hand.
+DISTRIBUTION_TAKES_OVER = {"rossops", "decoryah", "ppriest", "gm0rk"}
 
 # Games MiSTer ships ONLY as an _Arcade/_alternatives MRA (the core authors
 # carry a regional set and no mainline one). export-web drops alternatives, so
@@ -1479,12 +1520,18 @@ MRA_REPOS = [
     ("ongo", "OngoGablogian/MiSTer_Ongo", "main", "_Arcade"),
     # main holds the core sources; the released MRAs are only on `db`
     ("tomsvr", "TomSVR-Mister/TomSVR-Arcade-Cores", "db", "_Arcade/_TomSVR"),
+    # decoryah's and ppriest's MRAs live in a dozen core repos each; their
+    # dbs pin every file's url, so the MRAs come from the db like blahm1d's
+    # (decoryah's per-core subfolders flatten; ppriest's _alternatives too).
+    ("decoryah", None, None, "_Arcade/_Decoryah"),
+    ("ppriest", None, None, "_Arcade"),
+    ("gm0rk", "Gm0rk/Gm0rkCores", "main", "_Arcade/_Gm0rkCores"),
 ]
 
 
 def _db_hosted_mras(source_id, mradir):
     """Download the MRAs a db serves under mradir by its own per-file urls,
-    for a source with no git repo behind it; returns the local dir holding
+    for a source with no single git repo behind it; returns the local dir holding
     them flat under mradir (the enrich loop globs one level, and keys MRAs
     by file name). Files are kept by hash, so a warm cache refetches only
     what changed and a dropped MRA leaves the folder."""
@@ -1593,6 +1640,27 @@ def _ongo_mra_paths():
                   if p.lower().endswith(".mra") and tracked_path("ongo", p))
 
 
+# MAME BIOS sets an MRA may name as its <setname> while the game's own set
+# rides in the ROM zip list instead: ppriest's PlayChoice-10 MRAs switched to
+# <setname>playch10</setname> with zip="pc_bfght.zip|playch10.zip" (Ongo still
+# carries the older per-game setnames). Every such row would share one
+# setname, so screenshots, genres and same-game matching would all collapse.
+BIOS_SETNAMES = {"playch10"}
+
+
+def _game_setname(setname, zips):
+    """The game's MAME set for an MRA: its <setname>, unless that is a BIOS
+    (BIOS_SETNAMES) and its ROM zips name exactly one other set, then that
+    set. Several (ppriest's "PlayChoice-10 (three channels)" loads three
+    games) means the MRA really is the BIOS, so it keeps the BIOS set."""
+    if not setname or setname.lower() not in BIOS_SETNAMES:
+        return setname
+    games = {stem for z in zips for stem in
+             (re.sub(r"\.zip$", "", n.strip(), flags=re.I) for n in z.split("|"))
+             if stem and stem.lower() not in BIOS_SETNAMES}
+    return games.pop() if len(games) == 1 else setname
+
+
 def _rmtree_force(path):
     """rmtree that survives Windows' read-only .git pack files: on a permission
     error, clear the read-only bit and retry so the delete actually completes
@@ -1649,8 +1717,9 @@ def cmd_enrich_mra(args):
                 def gx(tag):
                     el = root.find(tag)
                     return el.text.strip() if el is not None and el.text else None
+                zips = [el.get("zip") for el in root.iter("rom") if el.get("zip")]
                 meta[key] = {"year": gx("year"), "manufacturer": gx("manufacturer"),
-                                  "rbf": gx("rbf"), "setname": gx("setname")}
+                                  "rbf": gx("rbf"), "setname": _game_setname(gx("setname"), zips)}
             except Exception:
                 # Some upstream MRAs are not well-formed XML (e.g. "--" inside a
                 # comment, which is illegal). Skipping left setname NULL forever
@@ -1662,8 +1731,9 @@ def cmd_enrich_mra(args):
                 def gr(tag):
                     m = re.search(r"<%s>\s*([^<]+?)\s*</%s>" % (tag, tag), txt)
                     return m.group(1) if m else None
+                zips = re.findall(r'<rom\b[^>]*\bzip="([^"]+)"', txt)
                 meta[key] = {"year": gr("year"), "manufacturer": gr("manufacturer"),
-                                  "rbf": gr("rbf"), "setname": gr("setname")}
+                                  "rbf": gr("rbf"), "setname": _game_setname(gr("setname"), zips)}
         n = 0
         for row in con.execute(
             "SELECT path FROM catalog WHERE system='arcade' AND source_id=?", (source_id,)
@@ -2484,6 +2554,561 @@ TOMSVR_FROZEN_DATES = dict.fromkeys((
     "Zip & Zap (Less Explicit) [TomSVR].mra",
 ), "2026-10-19")
 
+DECORYAH_REPO = "decoryah/MiSTer_decoryah"
+# Debut dates for the decoryah initial import (2026-10-19 seed): the day
+# each MRA was first committed to its core repo (where the db's url
+# points; renames followed), or the core's first build if that came
+# later, UTC. Post-import titles need no entry.
+DECORYAH_FROZEN_DATES = {
+    "Gaiapolis (Japan ver JAF).mra": "2026-10-03",
+    "Gaiapolis (USA ver UAF).mra": "2026-10-03",
+    "Gaiapolis (World ver EAF).mra": "2026-10-03",
+    "American Horseshoes (US).mra": "2026-10-05",
+    "Cachat (Japan).mra": "2026-10-05",
+    "Catt (Japan).mra": "2026-10-05",
+    "Champion Wrestler (World).mra": "2026-10-05",
+    "Cuby Bop (Japan, location test).mra": "2026-10-05",
+    "Evil Stone.mra": "2026-10-05",
+    "Fighting Hawk (World).mra": "2026-10-05",
+    "Flipull (Japan).mra": "2026-10-05",
+    "Kuri Kinton (World).mra": "2026-10-05",
+    "LA Girl.mra": "2026-10-05",
+    "Magical Cat Adventure (Japan).mra": "2026-10-05",
+    "Magical Cat Adventure.mra": "2026-10-05",
+    "Nostradamus (Japan).mra": "2026-10-05",
+    "Nostradamus Yeeon (Korea).mra": "2026-10-05",
+    "Nostradamus.mra": "2026-10-05",
+    "Palamedes (Japan).mra": "2026-10-05",
+    "Palamedes (US).mra": "2026-10-05",
+    "Play Girls 2 (Europe).mra": "2026-10-05",
+    "Play Girls 2 (Japan).mra": "2026-10-05",
+    "Play Girls.mra": "2026-10-05",
+    "Plotting (US).mra": "2026-10-05",
+    "Plotting (World set 1).mra": "2026-10-05",
+    "Plotting (World set 2, protected).mra": "2026-10-05",
+    "Plotting (World set 3, earliest version).mra": "2026-10-05",
+    "Puzznic (bootleg, set 1).mra": "2026-10-05",
+    "Puzznic (bootleg, set 2).mra": "2026-10-05",
+    "Puzznic (Italian bootleg).mra": "2026-10-05",
+    "Puzznic (Japan).mra": "2026-10-05",
+    "Puzznic (US).mra": "2026-10-05",
+    "Puzznic (World).mra": "2026-10-05",
+    "Tube-It.mra": "2026-10-05",
+    "Champion Wrestler (Japan).mra": "2026-10-06",
+    "Champion Wrestler (US).mra": "2026-10-06",
+    "Fighting Hawk (Japan).mra": "2026-10-06",
+    "Kuri Kinton (Japan).mra": "2026-10-06",
+    "Kuri Kinton (US).mra": "2026-10-06",
+    "Kuri Kinton (US, World Games license).mra": "2026-10-06",
+    "Kuri Kinton (World, prototype).mra": "2026-10-06",
+    "Raimais (Japan).mra": "2026-10-06",
+    "Raimais (Japan, rev 1).mra": "2026-10-06",
+    "Raimais (World, rev 1).mra": "2026-10-06",
+    "Sokoban LE.mra": "2026-10-08",
+    "SQIJ 2018.mra": "2026-10-08",
+    "The Speccies 2.mra": "2026-10-08",
+    "Kyukyoku Sentai Dadandarn (Japan ver JAA).mra": "2026-10-10",
+    "Monster Maulers (USA ver UAA).mra": "2026-10-10",
+    "Monster Maulers (World ver EAA).mra": "2026-10-10",
+    "Naname de Magic! (Japan).mra": "2026-10-10",
+    "Oh My God! (Japan).mra": "2026-10-10",
+    "Metamorphic Force (Asia ver AAA).mra": "2026-10-11",
+    "Metamorphic Force (Japan ver JAA).mra": "2026-10-11",
+    "Metamorphic Force (USA ver UAA).mra": "2026-10-11",
+    "Metamorphic Force (World ver EAA).mra": "2026-10-11",
+    "Metamorphic Force (World ver EAA, alternate).mra": "2026-10-11",
+    "Violent Storm (Asia ver AAB).mra": "2026-10-12",
+    "Violent Storm (Asia ver AAC).mra": "2026-10-12",
+    "Violent Storm (Japan ver JAC).mra": "2026-10-12",
+    "Violent Storm (USA ver UAB).mra": "2026-10-12",
+    "Violent Storm (USA ver UAC).mra": "2026-10-12",
+    "Violent Storm (World ver EAB).mra": "2026-10-12",
+    "Violent Storm (World ver EAC).mra": "2026-10-12",
+    "Bal Cube (Japan).mra": "2026-10-13",
+    "Bang Bang Ball (v1.05).mra": "2026-10-13",
+    "Battle Bubble (v2.00).mra": "2026-10-13",
+    "Blazing Tornado.mra": "2026-10-13",
+    "Chatan Yara Kuushanku - The Karate Tournament (Japan).mra": "2026-10-13",
+    "Daitoride (Japan).mra": "2026-10-13",
+    "Daitoride (Japan, YMF278B version).mra": "2026-10-13",
+    "Dharma Dojang - Mangchi Man (Korea).mra": "2026-10-13",
+    "Dharma Doujou (Germany).mra": "2026-10-13",
+    "Dharma Doujou (Japan).mra": "2026-10-13",
+    "Dharma Doujou.mra": "2026-10-13",
+    "Grand Striker 2 (Europe and Oceania).mra": "2026-10-13",
+    "Grand Striker 2 (Japan).mra": "2026-10-13",
+    "Gun Master.mra": "2026-10-13",
+    "Lady Killer.mra": "2026-10-13",
+    "Last Fortress - Toride (China, Rev A).mra": "2026-10-13",
+    "Last Fortress - Toride (China, Rev C).mra": "2026-10-13",
+    "Last Fortress - Toride (Japan, VG420 PCB).mra": "2026-10-13",
+    "Last Fortress - Toride (Japan, VG460 PCB).mra": "2026-10-13",
+    "Last Fortress - Toride (Korea).mra": "2026-10-13",
+    "Last Fortress - Toride - Mah-jong (Germany).mra": "2026-10-13",
+    "Mahjong Doukyuusei (Japan).mra": "2026-10-13",
+    "Mahjong Doukyuusei Special (Japan).mra": "2026-10-13",
+    "Mahjong Gakuensai (Japan, set 1).mra": "2026-10-13",
+    "Mahjong Gakuensai (Japan, set 2).mra": "2026-10-13",
+    "Mahjong Gakuensai 2 (Japan).mra": "2026-10-13",
+    "Moeyo Gonta!! (Japan).mra": "2026-10-13",
+    "Mouja (Japan).mra": "2026-10-13",
+    "Mouse Shooter GoGo.mra": "2026-10-13",
+    "Pang Pom's (Mitchell).mra": "2026-10-13",
+    "Pang Pom's (Nova).mra": "2026-10-13",
+    "Pang Pom's.mra": "2026-10-13",
+    "Poitto! (Japan revision D).mra": "2026-10-13",
+    "Pururun (Japan set 1).mra": "2026-10-13",
+    "Pururun (Japan set 2).mra": "2026-10-13",
+    "Puzzli (Japan revision A).mra": "2026-10-13",
+    "Puzzli (Japan revision B).mra": "2026-10-13",
+    "Sankokushi (Japan).mra": "2026-10-13",
+    "Sky Alert.mra": "2026-10-13",
+    "The Karate Tournament.mra": "2026-10-13",
+    "Toride II (German).mra": "2026-10-13",
+    "Toride II (Japan, revision I).mra": "2026-10-13",
+    "Toride II (Japan, revision K).mra": "2026-10-13",
+    "Toride II Adauchi Gaiden (Japan).mra": "2026-10-13",
+    "Toride II Bok Su Oi Jeon Adauchi Gaiden (Korea).mra": "2026-10-13",
+    "Varia Metal (New Ways Trading Co.).mra": "2026-10-13",
+    "Varia Metal.mra": "2026-10-13",
+    "Jackie Chan - The Kung-Fu Master (rev 3).mra": "2026-10-14",
+    "Jackie Chan - The Kung-Fu Master (rev 4).mra": "2026-10-14",
+    "Jackie Chan in Fists of Fire.mra": "2026-10-14",
+    "Heavy Unit (Japan, alternate ROM format).mra": "2026-10-15",
+    "Heavy Unit (Japan, newer).mra": "2026-10-15",
+    "Heavy Unit (Japan, older).mra": "2026-10-15",
+    "Heavy Unit (World).mra": "2026-10-15",
+    "Heavy Unit -U.S.A. Version- (US).mra": "2026-10-15",
+    "DoDonPachi Dai-Ou-Jou Tamashii (V201, China).mra": "2026-10-18",
+    "Knights of Valour 2 New Legend (V300, Oversea).mra": "2026-10-18",
+    "Knights of Valour 2 New Legend (V301, Oversea).mra": "2026-10-18",
+    "Knights of Valour 2 New Legend (V302, Oversea).mra": "2026-10-18",
+    "Knights of Valour 3 (V100, China, Hong Kong, Taiwan).mra": "2026-10-18",
+    "Knights of Valour 3 (V101, China, Hong Kong, Taiwan).mra": "2026-10-18",
+    "Knights of Valour 3 (V102, China, Hong Kong, Taiwan).mra": "2026-10-18",
+    "Knights of Valour 3 (V104, China, Hong Kong, Taiwan).mra": "2026-10-18",
+    "Oriental Legend 2 (V101, Oversea).mra": "2026-10-18",
+    "Oriental Legend 2 (V103, Oversea).mra": "2026-10-18",
+    "Oriental Legend 2 (V104, Oversea).mra": "2026-10-18",
+    "Saiyuu Shakuyakuden 2 (V101, Japan).mra": "2026-10-18",
+    "Saiyuu Shakuyakuden 2 (V103, Japan).mra": "2026-10-18",
+    "Saiyuu Shakuyakuden 2 (V104, Japan).mra": "2026-10-18",
+    "Sanguo Zhan Ji 2 Gaishi Yingxiong (V300, China).mra": "2026-10-18",
+    "Sanguo Zhan Ji 2 Gaishi Yingxiong (V301, China).mra": "2026-10-18",
+    "Sanguo Zhan Ji 2 Gaishi Yingxiong (V302, China).mra": "2026-10-18",
+    "The King of Fighters '98 - Ultimate Match HERO (China, V100, 09-08-23).mra": "2026-10-18",
+    "Xiyou Shi E Zhuan 2 (V101, China).mra": "2026-10-18",
+    "Xiyou Shi E Zhuan 2 (V103, China).mra": "2026-10-18",
+    "Xiyou Shi E Zhuan 2 (V104, China).mra": "2026-10-18",
+    "Bestri (Korea, set 1).mra": "2026-10-19",
+    "Bestri (Korea, set 2).mra": "2026-10-19",
+    "Cross Pang.mra": "2026-10-19",
+    "Heuk Sun Baek Sa (Korea).mra": "2026-10-19",
+    "Pitapat Puzzle (set 1).mra": "2026-10-19",
+    "Pitapat Puzzle (set 2).mra": "2026-10-19",
+}
+
+# MRA <rbf> tag (lowercased) -> core repo; Metro's three rbfs share one
+DECORYAH_CORE_REPOS = {
+    "crospang": "decoryah/Arcade-CrossPang_MiSTer",
+    "gaiapolis": "decoryah/Arcade-Gaiapolis_MiSTer",
+    "heavyunit": "decoryah/Arcade-HeavyUnit_MiSTer",
+    "jchan": "decoryah/Arcade-JackieChan_MiSTer",
+    "mcatadv": "decoryah/Arcade-MagicalCatAdventure_Nostradamus_MiSTer",
+    "metamorphicforce": "decoryah/Arcade-MetamorphicForce_MiSTer",
+    "metro": "decoryah/Arcade-Metro_MiSTer",
+    "metrod64": "decoryah/Arcade-Metro_MiSTer",
+    "metrof64": "decoryah/Arcade-Metro_MiSTer",
+    "monstermaulers": "decoryah/Arcade-MonsterMaulers_MiSTer",
+    "ohmygod": "decoryah/Arcade-OhMyGod_MiSTer",
+    "pgm2": "decoryah/Arcade-IGSPGM2_MiSTer",
+    "taitol": "decoryah/Arcade-TaitoLSystem_MiSTer",
+    "violentstorm": "decoryah/Arcade-ViolentStorm_MiSTer",
+}
+
+PPRIEST_REPO = "ppriest/MiSTer_ppriest"
+# Debut dates for the ppriest initial import (2026-10-19 seed), worked out
+# as for decoryah: first commit of each MRA in its core repo's releases/
+# (renames followed), or the core's first build if later, UTC. Ongo's
+# copies of these games were seeded 2026-10-18; these dates are the
+# originals'. Post-import titles need no entry.
+PPRIEST_FROZEN_DATES = {
+    "Athena no Hatena.mra": "2026-09-10",
+    "Block Carnival - Thunder & Lightning 2.mra": "2026-09-10",
+    "Daioh.mra": "2026-09-10",
+    "Dragon Unit - Castle of Dragon.mra": "2026-09-10",
+    "Eight Forces.mra": "2026-09-10",
+    "Magical Speed.mra": "2026-09-10",
+    "Masked Riders Club Battle Race - Kamen Rider Club Battle Racer.mra": "2026-09-10",
+    "Mobile Suit Gundam.mra": "2026-09-10",
+    "Oishii Puzzle Ha Irimasenka.mra": "2026-09-10",
+    "Pairs Love.mra": "2026-09-10",
+    "Quiz Kokology 2.mra": "2026-09-10",
+    "Quiz Kokology.mra": "2026-09-10",
+    "Rezon.mra": "2026-09-10",
+    "SD Gundam Neo Battling (Japan).mra": "2026-09-10",
+    "Strike Gunner S.T.G.mra": "2026-09-10",
+    "Thunder & Lightning (set 1).mra": "2026-09-10",
+    "Thunder & Lightning (set 2).mra": "2026-09-10",
+    "Ultraman Club - Tatakae! Ultraman Kyoudai!!.mra": "2026-09-10",
+    "War of Aero - Project MEIOU.mra": "2026-09-10",
+    "Wit's (Japan).mra": "2026-09-10",
+    "Blandia (prototype).mra": "2026-09-11",
+    "Blandia.mra": "2026-09-11",
+    "Daioh (earlier).mra": "2026-09-11",
+    "Extreme Downhill (v1.5).mra": "2026-09-11",
+    "Gundhara (Chinese, bootleg).mra": "2026-09-11",
+    "Gundhara.mra": "2026-09-11",
+    "J. J. Squawkers (older).mra": "2026-09-11",
+    "J. J. Squawkers.mra": "2026-09-11",
+    "Mad Shark.mra": "2026-09-11",
+    "Mobile Suit Gundam (Japan).mra": "2026-09-11",
+    "Rezon (earlier).mra": "2026-09-11",
+    "Sokonuke Taisen Game (Japan).mra": "2026-09-11",
+    "Zing Zing Zip (World) - Zhen Zhen Ji Pao (China).mra": "2026-09-11",
+    "Zombie Raid (9-28-95, US).mra": "2026-09-12",
+    "Best Bout Boxing (ver 1.3).mra": "2026-09-13",
+    "Desert War - Wangan Sensou (ver 1.0).mra": "2026-09-13",
+    "Gratia - Second Earth (ver 1.0, 91022-10 version).mra": "2026-09-13",
+    "Gratia - Second Earth (ver 1.0, 92047-01 version).mra": "2026-09-13",
+    "Hayaoshi Quiz Grand Champion Taikai.mra": "2026-09-13",
+    "Hayaoshi Quiz Nettou Namahousou (ver 1.2).mra": "2026-09-13",
+    "Hayaoshi Quiz Nettou Namahousou (ver 1.5).mra": "2026-09-13",
+    "Idol Janshi Suchie-Pai II (ver 1.0).mra": "2026-09-13",
+    "Idol Janshi Suchie-Pai II (ver 1.1).mra": "2026-09-13",
+    "Mahjong Angel Kiss (ver 1.0, 92047-01 version).mra": "2026-09-13",
+    "Mahjong Angel Kiss (ver 1.0, 92048-01 version).mra": "2026-09-13",
+    "P-47 Aces (ver 1.0).mra": "2026-09-13",
+    "P-47 Aces (ver 1.1).mra": "2026-09-13",
+    "Ryuusei Janshi Kirara Star (ver 1.0, 91022-10 version).mra": "2026-09-13",
+    "Ryuusei Janshi Kirara Star (ver 1.0, 92047-01 version).mra": "2026-09-13",
+    "Tetris Plus (ver 1.0).mra": "2026-09-13",
+    "Tetris Plus 2 (ver 1.0, MegaSystem 32 Version).mra": "2026-09-13",
+    "The Game Paradise - Master of Shooting! (ver 1.0).mra": "2026-09-13",
+    "Vs. Janshi Brandnew Stars (Ver 1.1, MegaSystem 32 Version).mra": "2026-09-13",
+    "Arbalester.mra": "2026-09-18",
+    "DownTown - Mokugeki (joystick hack).mra": "2026-09-18",
+    "DownTown - Mokugeki (prototype).mra": "2026-09-18",
+    "DownTown - Mokugeki (set 1).mra": "2026-09-18",
+    "DownTown - Mokugeki (set 2).mra": "2026-09-18",
+    "Meta Fox.mra": "2026-09-18",
+    "Twin Eagle - Revenge Joe's Brother.mra": "2026-09-18",
+    "Thundercade - Twin Formation.mra": "2026-09-19",
+    "Tokusyu Butai U.A.G. (Japan).mra": "2026-09-19",
+    "Chicken Shift (11-23-84).mra": "2026-09-26",
+    "F-1 Super Battle.mra": "2026-09-26",
+    "Gimme A Break (7-7-85).mra": "2026-09-26",
+    "Goalie Ghost.mra": "2026-09-26",
+    "Grudge Match (v00.80, prototype).mra": "2026-09-26",
+    "Grudge Match (v00.90, Italy, location test-).mra": "2026-09-26",
+    "Grudge Match (v00.90, prototype).mra": "2026-09-26",
+    "Hat Trick (11-12-84).mra": "2026-09-26",
+    "Mini Golf (10-8-85).mra": "2026-09-26",
+    "Mini Golf (11-25-85).mra": "2026-09-26",
+    "Mini Golf (cocktail, 10-18-85).mra": "2026-09-26",
+    "Mini Golf (set 1).mra": "2026-09-26",
+    "Name That Tune (Bally, 3-23-86).mra": "2026-09-26",
+    "Name That Tune (Bally, 3-31-86).mra": "2026-09-26",
+    "Night Stocker (10-6-86).mra": "2026-09-26",
+    "Night Stocker (8-27-86).mra": "2026-09-26",
+    "Off the Wall (Sente) (10-16-84).mra": "2026-09-26",
+    "Rescue Raider (5-11-87) (non-cartridge).mra": "2026-09-26",
+    "Rescue Raider (stand-alone).mra": "2026-09-26",
+    "Sente Diagnostic Cartridge.mra": "2026-09-26",
+    "Snacks'n Jaxson.mra": "2026-09-26",
+    "Snake Pit (9-14-84).mra": "2026-09-26",
+    "Snake Pit.mra": "2026-09-26",
+    "Spiker (5-5-86).mra": "2026-09-26",
+    "Spiker (6-9-86).mra": "2026-09-26",
+    "Spiker (earliest-).mra": "2026-09-26",
+    "Stocker (3-19-85).mra": "2026-09-26",
+    "Stompin' (4-4-86).mra": "2026-09-26",
+    "Stompin' (prototype-).mra": "2026-09-26",
+    "Street Football (11-12-86).mra": "2026-09-26",
+    "Team Hat Trick (11-16-84).mra": "2026-09-26",
+    "Toggle (prototype).mra": "2026-09-26",
+    "Trivial Pursuit (All Star Sports Edition).mra": "2026-09-26",
+    "Trivial Pursuit (Baby Boomer Edition) (3-20-85).mra": "2026-09-26",
+    "Trivial Pursuit (Genus II Edition) (3-22-85).mra": "2026-09-26",
+    "Trivial Pursuit (Think Tank - Genus Edition) (12-14-84).mra": "2026-09-26",
+    "Trivial Pursuit (Think Tank - Genus Edition) (2-12-85).mra": "2026-09-26",
+    "Trivial Pursuit (Volumen II, Spanish, Maibesa license).mra": "2026-09-26",
+    "Trivial Pursuit (Volumen III, Spanish, Maibesa license).mra": "2026-09-26",
+    "Trivial Pursuit (Young Players Edition) (3-29-85).mra": "2026-09-26",
+    "Crazy Cross (ver EAA).mra": "2026-09-27",
+    "Daisu-Kiss (ver JAA).mra": "2026-09-27",
+    "Dragoon Might (ver AAB).mra": "2026-09-27",
+    "Dragoon Might (ver JAA).mra": "2026-09-27",
+    "Fantastic Journey (ver AAA).mra": "2026-09-27",
+    "Fantastic Journey (ver EAA).mra": "2026-09-27",
+    "Gokujou Parodius Kako no Eikou o Motomete (ver JAD).mra": "2026-09-27",
+    "Lethal Enforcers II Gun Fighters (ver EAA).mra": "2026-09-27",
+    "Lethal Enforcers II Gun Fighters (ver UAA).mra": "2026-09-27",
+    "Lethal Enforcers II The Western (ver JAA).mra": "2026-09-27",
+    "Magical Twin Bee (ver EAA).mra": "2026-09-27",
+    "Salamander 2 (ver AAB).mra": "2026-09-27",
+    "Salamander 2 (ver JAA).mra": "2026-09-27",
+    "Sexy Parodius (ver AAA).mra": "2026-09-27",
+    "Sexy Parodius (ver JAA).mra": "2026-09-27",
+    "Taisen Puzzle-dama (ver JAA).mra": "2026-09-27",
+    "Taisen Tokkae-dama (ver JAA).mra": "2026-09-27",
+    "Tokimeki Memorial Taisen Puzzle-dama (ver JAB).mra": "2026-09-27",
+    "Twin Bee Yahhoo! (ver JAA).mra": "2026-09-27",
+    "Winning Spike (ver AAA).mra": "2026-09-27",
+    "Winning Spike (ver EAA).mra": "2026-09-27",
+    "Winning Spike (ver JAA).mra": "2026-09-27",
+    "Buriki One - World Grapple Tournament '99 in Tokyo (rev.B).mra": "2026-10-04",
+    "Fatal Fury - Wild Ambition - Garou Densetsu - Wild Ambition (rev.A).mra": "2026-10-04",
+    "Samurai Shodown 64 - Samurai Spirits - Paewang Jeonseol 64.mra": "2026-10-04",
+    "Samurai Shodown 64 - Warriors Rage - Samurai Spirits 2 - Asura Zanmaden.mra": "2026-10-04",
+    "Shrike Avenger (prototype).mra": "2026-10-04",
+    "Beast Busters - Second Nightmare.mra": "2026-10-06",
+    "Roads Edge - Round Trip RV (rev.B).mra": "2026-10-06",
+    "Xtreme Rally - Off Beat Racer!.mra": "2026-10-06",
+    "Cool Minigame Collection (Italy).mra": "2026-10-08",
+    "Cool Minigame Collection.mra": "2026-10-08",
+    "Date Quiz Go Go Episode 2.mra": "2026-10-08",
+    "Diet Family.mra": "2026-10-08",
+    "Jumping Break (set 1).mra": "2026-10-08",
+    "Jumping Break (set 2).mra": "2026-10-08",
+    "Lup Lup Puzzle - Zhuan Zhuan Puzzle (version 1.05 - 981214).mra": "2026-10-08",
+    "Lup Lup Puzzle - Zhuan Zhuan Puzzle (version 2.9 - 990108).mra": "2026-10-08",
+    "Lup Lup Puzzle - Zhuan Zhuan Puzzle (version 3.0 - 990128).mra": "2026-10-08",
+    "Mission Craft (version 2.4).mra": "2026-10-08",
+    "Mission Craft (version 2.7).mra": "2026-10-08",
+    "Mr. Dig.mra": "2026-10-08",
+    "Mr. Kicker (F-E1-16-010 PCB).mra": "2026-10-08",
+    "New Cross Pang (set 1).mra": "2026-10-08",
+    "New Cross Pang (set 2).mra": "2026-10-08",
+    "Poosho Poosho.mra": "2026-10-08",
+    "Puzzle Bang Bang (Korea, version 2.8 - 990106).mra": "2026-10-08",
+    "Puzzle Bang Bang (Korea, version 2.9 - 990108).mra": "2026-10-08",
+    "Soccer Superstars (ver AAA).mra": "2026-10-08",
+    "Soccer Superstars (ver EAC).mra": "2026-10-08",
+    "Soccer Superstars (ver JAA).mra": "2026-10-08",
+    "Soccer Superstars (ver JAC).mra": "2026-10-08",
+    "Soccer Superstars (ver UAC).mra": "2026-10-08",
+    "Super Lup Lup Puzzle - Zhuan Zhuan Puzzle (version 4.0 - 990518).mra": "2026-10-08",
+    "Toy Land Adventure.mra": "2026-10-08",
+    "Vamf x1-2 (Europe, version 1.0.0903).mra": "2026-10-08",
+    "Vamf x1-2 (Europe, version 1.1.0908).mra": "2026-10-08",
+    "Vamp x1-2 (Korea, version 1.1.0908).mra": "2026-10-08",
+    "Wivern Wings.mra": "2026-10-08",
+    "World Adventure.mra": "2026-10-08",
+    "Wyvern Wings (set 1).mra": "2026-10-08",
+    "Wyvern Wings (set 2).mra": "2026-10-08",
+    "Boong-Ga Boong-Ga (Spank'em!).mra": "2026-10-09",
+    "Final Godori (Korea, version 2.20.5915).mra": "2026-10-09",
+    "Mr. Kicker (SEMICOM-003b PCB).mra": "2026-10-09",
+    "Solitaire (version 2.5).mra": "2026-10-09",
+    "Yori Jori Kuk Kuk.mra": "2026-10-09",
+    "Age Of Heroes - Silkroad 2 (v0.63 - 2001-02-07).mra": "2026-10-10",
+    "Candy Candy.mra": "2026-10-10",
+    "Crazy War.mra": "2026-10-10",
+    "Fortress 2 Blue Arcade (Korea) (ver 1.00 - pcb ver 3.05).mra": "2026-10-10",
+    "Fortress 2 Blue Arcade (World) (ver 1.01 - pcb ver 3.05).mra": "2026-10-10",
+    "Genix Family.mra": "2026-10-10",
+    "Gongtit Jiucoi Iron Fortress (Hong Kong).mra": "2026-10-10",
+    "Hidden Catch (World) - Tul Lin Gu Lim Chat Ki '98 (Korea) (pcb ver 3.02).mra": "2026-10-10",
+    "Hidden Catch (World) - Tul Lin Gu Lim Chat Ki '98 (Korea) (pcb ver 3.03).mra": "2026-10-10",
+    "Hidden Catch 2 (pcb ver 1.00) (Kor-Eng-Jpn-Chi).mra": "2026-10-10",
+    "Hidden Catch 2 (pcb ver 3.03) (Kor-Eng) (AT89c52 protected).mra": "2026-10-10",
+    "Hidden Catch 2000 (AT89c52 protected).mra": "2026-10-10",
+    "Hidden Catch 3 (ver 1.00 - pcb ver 3.05).mra": "2026-10-10",
+    "Iron Fortress.mra": "2026-10-10",
+    "KlonDike+.mra": "2026-10-10",
+    "Land Breaker (World) - Miss Tang Ja Ru Gi (Korea) (pcb ver 1.0) (AT89c52 protected).mra": "2026-10-10",
+    "Land Breaker (World) - Miss Tang Ja Ru Gi (Korea) (pcb ver 3.02).mra": "2026-10-10",
+    "Land Breaker (World) - Miss Tang Ja Ru Gi (Korea) (pcb ver 3.03) (AT89c52 protected).mra": "2026-10-10",
+    "Linky Pipe.mra": "2026-10-10",
+    "New Hidden Catch (World) - New Tul Lin Gu Lim Chat Ki '98 (Korea) (pcb ver 3.02).mra": "2026-10-10",
+    "Penfan Girls - Step1. Mild Mind (set 1).mra": "2026-10-10",
+    "Penfan Girls - Step1. Mild Mind (set 2).mra": "2026-10-10",
+    "Pirates (set 1).mra": "2026-10-10",
+    "Pirates (set 2).mra": "2026-10-10",
+    "Puzzle King (Dance & Puzzle).mra": "2026-10-10",
+    "Racin' Force (ver EAC).mra": "2026-10-10",
+    "Racin' Force (ver UAB).mra": "2026-10-10",
+    "Run and Gun 2 (ver UAA).mra": "2026-10-10",
+    "Rushing Heroes (ver UAB).mra": "2026-10-10",
+    "Slam Dunk 2 (ver JAA).mra": "2026-10-10",
+    "Steal See.mra": "2026-10-10",
+    "Versus Net Soccer (ver AAA).mra": "2026-10-10",
+    "Versus Net Soccer (ver EAB).mra": "2026-10-10",
+    "Versus Net Soccer (ver EAD).mra": "2026-10-10",
+    "Versus Net Soccer (ver JAB).mra": "2026-10-10",
+    "Versus Net Soccer (ver UAB).mra": "2026-10-10",
+    "Golfing Greats 2 (ver JAC).mra": "2026-10-11",
+    "Konami's Open Golf Championship (ver EAD).mra": "2026-10-11",
+    "Konami's Open Golf Championship (ver EAE).mra": "2026-10-11",
+    "Raccoon World.mra": "2026-10-11",
+    "Dynamite Bomber (Korea, Rev 1.5).mra": "2026-10-13",
+    "Legend of Heroes.mra": "2026-10-13",
+    "Spotty (Ver. 2.0.2).mra": "2026-10-13",
+    "Super Bubble 2003 (Asia, Ver 1.0).mra": "2026-10-13",
+    "Super Bubble 2003 (World, Ver 1.0).mra": "2026-10-13",
+    "To Heart House.mra": "2026-10-13",
+    "G-Stream G2020.mra": "2026-10-14",
+    "Baryon - Future Assault (set 1).mra": "2026-10-17",
+    "Baryon - Future Assault (set 2).mra": "2026-10-17",
+    "Cute Fighter.mra": "2026-10-17",
+    "Dream World.mra": "2026-10-17",
+    "Gaia - The Last Choice of Earth.mra": "2026-10-17",
+    "Rolling Crush (version 1.03.E - 1999-01-29).mra": "2026-10-17",
+    "Rolling Crush (version 1.07.E - 1999-02-11, Trust license).mra": "2026-10-17",
+    "1942 (PlayChoice-10).mra": "2026-10-18",
+    "Balloon Fight (PlayChoice-10).mra": "2026-10-18",
+    "Baseball (PlayChoice-10).mra": "2026-10-18",
+    "Baseball Stars- Be a Champ! (PlayChoice-10).mra": "2026-10-18",
+    "Bases Loaded (Prototype, PlayChoice-10).mra": "2026-10-18",
+    "Captain Sky Hawk (PlayChoice-10).mra": "2026-10-18",
+    "Castlevania (PlayChoice-10).mra": "2026-10-18",
+    "Chip'n Dale- Rescue Rangers (PlayChoice-10).mra": "2026-10-18",
+    "Contra (PlayChoice-10).mra": "2026-10-18",
+    "Double Dragon (PlayChoice-10).mra": "2026-10-18",
+    "Double Dribble (PlayChoice-10).mra": "2026-10-18",
+    "Dr. Mario (PlayChoice-10).mra": "2026-10-18",
+    "Duck Hunt (PlayChoice-10).mra": "2026-10-18",
+    "Excitebike (PlayChoice-10).mra": "2026-10-18",
+    "Gauntlet (PlayChoice-10).mra": "2026-10-18",
+    "Golf (PlayChoice-10).mra": "2026-10-18",
+    "Gradius (PlayChoice-10).mra": "2026-10-18",
+    "Gradius (PlayChoice-10, older).mra": "2026-10-18",
+    "Hogan's Alley (PlayChoice-10).mra": "2026-10-18",
+    "Kung Fu (PlayChoice-10).mra": "2026-10-18",
+    "Mario Bros. (PlayChoice-10).mra": "2026-10-18",
+    "Mario's Open Golf (PlayChoice-10).mra": "2026-10-18",
+    "Mega Man III (PlayChoice-10).mra": "2026-10-18",
+    "Metroid (PlayChoice-10).mra": "2026-10-18",
+    "Mike Tyson's Punch-Out!! (PlayChoice-10).mra": "2026-10-18",
+    "Ninja Gaiden (PlayChoice-10).mra": "2026-10-18",
+    "Ninja Gaiden Episode II- The Dark Sword of Chaos (PlayChoice-10).mra": "2026-10-18",
+    "Ninja Gaiden Episode III- The Ancient Ship of Doom (PlayChoice-10).mra": "2026-10-18",
+    "Nintendo World Cup (PlayChoice-10).mra": "2026-10-18",
+    "PinBot (PlayChoice-10).mra": "2026-10-18",
+    "PlayChoice-10 (three channels).mra": "2026-10-18",
+    "Power Blade (PlayChoice-10).mra": "2026-10-18",
+    "Pro Wrestling (PlayChoice-10).mra": "2026-10-18",
+    "R.C. Pro-Am (PlayChoice-10).mra": "2026-10-18",
+    "Rad Racer (PlayChoice-10).mra": "2026-10-18",
+    "Rad Racer II (PlayChoice-10).mra": "2026-10-18",
+    "Rockin' Kats (PlayChoice-10).mra": "2026-10-18",
+    "Rush'n Attack (PlayChoice-10).mra": "2026-10-18",
+    "Rygar (PlayChoice-10).mra": "2026-10-18",
+    "Solar Jetman (PlayChoice-10).mra": "2026-10-18",
+    "Super C (PlayChoice-10).mra": "2026-10-18",
+    "Super Mario Bros. (PlayChoice-10).mra": "2026-10-18",
+    "Super Mario Bros. 2 (PlayChoice-10).mra": "2026-10-18",
+    "Super Mario Bros. 3 (PlayChoice-10).mra": "2026-10-18",
+    "Tecmo Bowl (PlayChoice-10).mra": "2026-10-18",
+    "Teenage Mutant Ninja Turtles (PlayChoice-10).mra": "2026-10-18",
+    "Teenage Mutant Ninja Turtles II- The Arcade Game (PlayChoice-10).mra": "2026-10-18",
+    "Tennis (PlayChoice-10).mra": "2026-10-18",
+    "The Goonies (PlayChoice-10).mra": "2026-10-18",
+    "Tiny Toon Adventures (prototype) (PlayChoice-10).mra": "2026-10-18",
+    "Track & Field (PlayChoice-10).mra": "2026-10-18",
+    "Trojan (PlayChoice-10).mra": "2026-10-18",
+    "Uncle Fester's Quest- The Addams Family (PlayChoice-10).mra": "2026-10-18",
+    "Virus (Dr. Mario prototype, PlayChoice-10).mra": "2026-10-18",
+    "Volley Ball (PlayChoice-10).mra": "2026-10-18",
+    "Wild Gunman (PlayChoice-10).mra": "2026-10-18",
+    "Yo! Noid (PlayChoice-10).mra": "2026-10-18",
+}
+
+# MRA <rbf> tag (lowercased) -> core repo; Konami GX, Seta, Jaleco MS32
+# and Vamphalf/Limenko each ship several rbfs from one repo
+PPRIEST_CORE_REPOS = {
+    "ballysente": "ppriest/Arcade-BallySente_MiSTer",
+    "dreamworld": "ppriest/Arcade-DreamWorld_MiSTer",
+    "eolith": "ppriest/Arcade-Eolith_MiSTer",
+    "gstream": "ppriest/Arcade-GStream_MiSTer",
+    "hyperng64": "ppriest/Arcade-HyperNG64_MiSTer",
+    "jalecoms32": "ppriest/Arcade-JalecoMS32_MiSTer",
+    "jalecoms32f1": "ppriest/Arcade-JalecoMS32_MiSTer",
+    "konamigx": "ppriest/Arcade-KonamiGX_MiSTer",
+    "konamigxt1": "ppriest/Arcade-KonamiGX_MiSTer",
+    "konamigxt34": "ppriest/Arcade-KonamiGX_MiSTer",
+    "limenko": "ppriest/Arcade-Vamphalf_MiSTer",
+    "nixpirates": "ppriest/Arcade-NixPirates_MiSTer",
+    "playchoice10": "ppriest/Arcade-PlayChoice10_MiSTer",
+    "seta": "ppriest/Arcade-Seta_MiSTer",
+    "setadowntown": "ppriest/Arcade-Seta_MiSTer",
+    "vamphalf": "ppriest/Arcade-Vamphalf_MiSTer",
+}
+
+GM0RK_REPO = "Gm0rk/Gm0rkCores"
+# Debut dates for the Gm0rk initial import (2026-10-19 seed). His db repo
+# copies the MRAs from the core repos, which published GitHub releases
+# from 2026-09-26 on, before the db existed (2026-10-11). So each date is
+# the earliest of: the MRA's first commit in a core repo's mra/ or in
+# Gm0rkCores, but never before that repo's first build (a release or a
+# committed rbf), UTC. Post-import titles need no entry.
+GM0RK_FROZEN_DATES = {
+    "Hydra (prototype 5-14-90).mra": "2026-09-26",
+    "Hydra (prototype 5-25-90).mra": "2026-09-26",
+    "Hydra.mra": "2026-09-26",
+    "Pit Fighter (bootleg).mra": "2026-09-26",
+    "Pit Fighter (Japan rev 3, 2 players).mra": "2026-09-26",
+    "Pit Fighter (rev 1, 2 players).mra": "2026-09-26",
+    "Pit Fighter (rev 2).mra": "2026-09-26",
+    "Pit Fighter (rev 3).mra": "2026-09-26",
+    "Pit Fighter (rev 4).mra": "2026-09-26",
+    "Pit Fighter (rev 5).mra": "2026-09-26",
+    "Pit Fighter (rev 6).mra": "2026-09-26",
+    "Pit Fighter (rev 7).mra": "2026-09-26",
+    "Pit Fighter (rev 9).mra": "2026-09-26",
+    "Ninja Clowns (27 oct 91).mra": "2026-09-28",
+    "Bowl-O-Rama (Rev 1.0).mra": "2026-09-29",
+    "Capcom Bowling (set 1).mra": "2026-09-29",
+    "Capcom Bowling (set 2).mra": "2026-09-29",
+    "Capcom Bowling (set 3).mra": "2026-09-29",
+    "Capcom Bowling (set 4).mra": "2026-09-29",
+    "Coors Light Bowling.mra": "2026-09-29",
+    "Danger Express (prototype).mra": "2026-09-29",
+    "Guardians of the 'Hood.mra": "2026-09-29",
+    "Road Riot 4WD (04 Dec 1991, conversion kit).mra": "2026-09-29",
+    "Road Riot 4WD (04 Jun 1991, dedicated twin).mra": "2026-09-29",
+    "Road Riot 4WD (13 Nov 1991, conversion kit).mra": "2026-09-29",
+    "Strata Bowling (V1).mra": "2026-09-29",
+    "Strata Bowling (V3).mra": "2026-09-29",
+    "Golden Par Golf (Joystick, v1.0).mra": "2026-10-04",
+    "Golden Par Golf (Joystick, v1.1).mra": "2026-10-04",
+    "Golden Tee Golf (Joystick, v3.1).mra": "2026-10-04",
+    "Golden Tee Golf (Joystick, v3.3).mra": "2026-10-04",
+    "Golden Tee Golf (Trackball, v1.0).mra": "2026-10-04",
+    "Golden Tee Golf (Trackball, v2.0).mra": "2026-10-04",
+    "Golden Tee Golf (Trackball, v2.1).mra": "2026-10-04",
+    "Golden Tee Golf II (Joystick, v1.0).mra": "2026-10-04",
+    "Golden Tee Golf II (Trackball, v1.1).mra": "2026-10-04",
+    "Golden Tee Golf II (Trackball, v2.2).mra": "2026-10-04",
+    "Arlington Horse Racing (v1.21-D).mra": "2026-10-06",
+    "Arlington Horse Racing (v1.21-I).mra": "2026-10-06",
+    "Arlington Horse Racing (v1.40-D).mra": "2026-10-06",
+    "Hot Shots Tennis (v1.0).mra": "2026-10-06",
+    "Hot Shots Tennis (v1.1).mra": "2026-10-06",
+    "Neck-N-Neck (v1.2).mra": "2026-10-06",
+    "Peggle (Joystick, v1.0).mra": "2026-10-06",
+    "Peggle (Trackball, v1.0).mra": "2026-10-06",
+    "Poker Dice (v1.7).mra": "2026-10-06",
+    "Wheel Of Fortune (set 1).mra": "2026-10-06",
+    "Wheel Of Fortune (set 2).mra": "2026-10-06",
+    "Rim Rockin' Basketball (v1.2).mra": "2026-10-10",
+    "Rim Rockin' Basketball (v1.2, bootleg).mra": "2026-10-10",
+    "Rim Rockin' Basketball (v1.5).mra": "2026-10-10",
+    "Rim Rockin' Basketball (v1.6).mra": "2026-10-10",
+    "Rim Rockin' Basketball (v2.0).mra": "2026-10-10",
+    "Rim Rockin' Basketball (v2.2).mra": "2026-10-10",
+    "Grudge Match (Yankee Game Technology).mra": "2026-10-11",
+}
+
+# MRA <rbf> tag (lowercased) -> core repo; the tags disagree on the
+# Arcade- prefix the shipped rbfs all carry
+GM0RK_CORE_REPOS = {
+    "atari-g1": "Gm0rk/Arcade-Atari-G1_MiSTer",
+    "arcade-atari-g42": "Gm0rk/Arcade-Atari-G42_MiSTer",
+    "arcade-itech8": "Gm0rk/ITech8_MiSTer",
+}
+
 ONGO_CORE_REPOS = {
     "namco_na1_na2": "kyledlester/Namco_NA1_NA2_MiSTer",
     "namco_nb1": "kyledlester/Namco_NB1_MiSTer",
@@ -2518,6 +3143,9 @@ OPTIN_DB_SOURCES = {
     "ongo": (None, ONGO_CORE_REPOS, {}),
     # cores and db share one repo, so the fallback link is already the core
     "tomsvr": (TOMSVR_REPO, {}, TOMSVR_FROZEN_DATES),
+    "decoryah": (DECORYAH_REPO, DECORYAH_CORE_REPOS, DECORYAH_FROZEN_DATES),
+    "ppriest": (PPRIEST_REPO, PPRIEST_CORE_REPOS, PPRIEST_FROZEN_DATES),
+    "gm0rk": (GM0RK_REPO, GM0RK_CORE_REPOS, GM0RK_FROZEN_DATES),
 }
 
 
@@ -3380,7 +4008,10 @@ def cmd_export(args):
 # screen). Drop the arcade duplicate; the console .rbf row is the canonical one.
 ARCADE_EXCLUDE_SETNAMES = {"pgm", "ngp"}
 
-_CORE_DATE_RE = re.compile(r"_(20\d{6})\b")
+# an optional letter marks a same-day rebuild (decoryah's metro_20261018c,
+# PGM2_20261017e); without it the core name kept the date, so every rebuild
+# read as a brand-new core instead of a new build of the same one
+_CORE_DATE_RE = re.compile(r"_(20\d{6})[a-z]?\b")
 
 # Pretty base label per catalog `system` value.
 _BASE_LABEL = {"arcade": "Arcade", "console": "Console", "computer": "Computer", "other": "Other"}
@@ -4088,6 +4719,12 @@ def _core_label(r, fork_info, repo_maps):
         return "Ongo"
     if r["source_id"] == "tomsvr":
         return "TomSVR"
+    if r["source_id"] == "decoryah":
+        return "decoryah"
+    if r["source_id"] == "ppriest":
+        return "ppriest"
+    if r["source_id"] == "gm0rk":
+        return "Gm0rk"
     repo =(r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")

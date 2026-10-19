@@ -25,7 +25,7 @@ test('source suffix cleanup follows mirror removal, preserves identity, and is r
   const mirror = { ...original, src: 'ongo', title: 'Aqua Jack (Ongo)', k: 'mirror' };
   const input = [mirror, original], before = JSON.stringify(input);
   const result = siteSourceRows(input);
-  assert.deepEqual(result, [{ ...original, title: 'Aqua Jack' }]);
+  assert.deepEqual(result, [{ ...original, title: 'Aqua Jack', siteAliases: ['mirror'] }]);
   assert.deepEqual(siteSourceRows([...input].reverse()), result);
   assert.deepEqual(siteSourceRows(result), result);
   assert.equal(JSON.stringify(input), before);
@@ -48,14 +48,21 @@ test('cleanup retains multiple implementations, unknown labels and meaningful qu
   assert.deepEqual(siteSourceRows([unknown]), [unknown]);
 });
 
-test('published Aqua Jack and Meta Fox become unambiguous plain titles', () => {
+test('published Aqua Jack and Meta Fox: one build drops its label, two builds keep theirs', () => {
   const rows = require('../docs/releases/data.json');
   const visible = siteSourceRows(rows);
-  for (const [src, sn, title] of [['bazset', 'aquajack', 'Aqua Jack'], ['meathax', 'metafox', 'Meta Fox']]) {
-    const original = rows.find(r => r.src === src && r.sn === sn);
-    const result = visible.find(r => r.k === original.k);
-    assert.deepEqual(result, { ...original, title });
-  }
+  const shown = (src, sn) => visible.find(r => r.k === rows.find(o => o.src === src && o.sn === sn).k);
+  // bazset's Aqua Jack is the only build listed; Ongo's copy of it folds in
+  const aqua = shown('bazset', 'aquajack');
+  assert.equal(aqua.title, 'Aqua Jack');
+  assert.ok(aqua.alsoOngo);
+  assert.ok(aqua.siteAliases.includes(rows.find(r => r.src === 'ongo' && r.sn === 'aquajack').k));
+  // Meta Fox runs on Meathax's core and on ppriest's Seta core (Ongo's copy
+  // is ppriest's build): both stay, each named by its source
+  assert.equal(shown('meathax', 'metafox').title, 'Meta Fox (Meathax)');
+  assert.equal(shown('ppriest', 'metafox').title, 'Meta Fox (ppriest)');
+  assert.ok(shown('ppriest', 'metafox').alsoOngo);
+  assert.ok(!shown('meathax', 'metafox').alsoOngo);
 });
 
 test('renamed mirrors need game identity plus core evidence', () => {
@@ -66,8 +73,8 @@ test('renamed mirrors need game identity plus core evidence', () => {
   const otherCore = { ...newer, core: 'DifferentCore' };
   const unknown = { ...newer, sn: 'btoads_unknown' };
   const before = JSON.stringify([copy, direct]);
-  assert.deepEqual(siteSourceRows([copy, direct]), [direct]);
-  assert.deepEqual(siteSourceRows([direct, newer]), [direct]);
+  assert.deepEqual(siteSourceRows([copy, direct]), [{ ...direct, alsoOngo: true }]);
+  assert.deepEqual(siteSourceRows([direct, newer]), [{ ...direct, alsoOngo: true }]);
   assert.deepEqual(siteSourceRows([direct, otherGame, otherCore, unknown]), [direct, otherGame, otherCore, unknown]);
   assert.deepEqual(siteSourceRows([{ ...direct, deprecated: true }, copy]), [{ ...direct, deprecated: true }, copy]);
   assert.equal(JSON.stringify([copy, direct]), before);
@@ -76,8 +83,9 @@ test('renamed mirrors need game identity plus core evidence', () => {
 test('catalogue audit hides renamed copies but retains distinct implementations and games', () => {
   const rows = require('../docs/releases/data.json');
   const visible = new Set(siteSourceRows(rows).map(r => r.k));
-  for (const key of ['btoads_meathax', 'narc_blahm1d', 'narc_meathax']) assert.ok(!visible.has(key), key);
-  for (const key of ['btoads', 'narc', 'narc-blahm1d', 'mk_wolf', 'mk2_wolf', 'otwalls', 'swa', 'hotrod', 'sparkman', 'nbajamtese']) assert.ok(visible.has(key), key);
+  // otwalls: Ongo's Off the Wall (Sente) gives way to ppriest's own build
+  for (const key of ['btoads_meathax', 'narc_blahm1d', 'narc_meathax', 'otwalls']) assert.ok(!visible.has(key), key);
+  for (const key of ['btoads', 'narc', 'narc-blahm1d', 'mk_wolf', 'mk2_wolf', 'off-the-wall-sente-10-16-84', 'swa', 'hotrod', 'sparkman', 'nbajamtese']) assert.ok(visible.has(key), key);
 });
 
 test('Meikyu Jima name aliases share one stable launcher without changing app data', () => {
@@ -126,4 +134,40 @@ test('missing metadata and retired sources do not hide a backup', () => {
   const available = row('ongo', 'old', 'Old');
   assert.deepEqual(siteSourceRows([row('other', '', 'Unknown', ''), backup, retired, available]),
     [row('other', '', 'Unknown', ''), backup, retired, available]);
+});
+
+test('a hidden Ongo copy hands its key to the original, and notes Ongo only for the same build', () => {
+  const ppriest = row('ppriest', 'metafox', 'Meta Fox', 'metafox', { k: 'meta-fox-ppriest', core: 'SetaDowntown' });
+  const meathax = row('meathax', 'metafox', 'Meta Fox', 'metafox', { k: 'meta-fox', core: 'Arcade-Arbalester' });
+  const copy = row('ongo', 'metafox', 'Meta Fox (Ongo)', 'metafox', { k: 'meta-fox-ongo', core: 'SetaDowntown' });
+  const input = [meathax, copy, ppriest], before = JSON.stringify(input);
+  const result = siteSourceRows(input);
+  assert.deepEqual(result.map(r => r.k), ['meta-fox', 'meta-fox-ppriest']);
+  assert.deepEqual(result[1].siteAliases, ['meta-fox-ongo']);
+  assert.equal(result[1].alsoOngo, true);
+  assert.equal(result[0].siteAliases, undefined);
+  assert.equal(result[0].alsoOngo, undefined);
+  assert.equal(JSON.stringify(input), before);
+  // only another core lists it: the copy still gives way, without the Ongo note
+  assert.deepEqual(siteSourceRows([meathax, copy]), [{ ...meathax, siteAliases: ['meta-fox-ongo'] }]);
+});
+
+test("Kyle Lester's cores stay listed: Ongo is their home, not a copy", () => {
+  const decoryah = row('decoryah', 'nost', 'Nostradamus', 'nost', { k: 'nostradamus-decoryah', core: 'mcatadv' });
+  const kyle = row('ongo', 'nost', 'Nostradamus', 'nost',
+    { k: 'nost', core: 'Nostradamus', repo: 'kyledlester/Nostradamus_Magical_Cat_Adventure_MiSTer' });
+  const mirror = row('ongo', 'nost', 'Nostradamus', 'nost', { k: 'nost-2', core: 'mcatadv' });
+  assert.deepEqual(siteSourceRows([kyle, decoryah]), [kyle, decoryah]);
+  assert.deepEqual(siteSourceRows([kyle, mirror, decoryah]).map(r => r.k), ['nost', 'nostradamus-decoryah']);
+});
+
+test('Meikyu Jima keeps an Ongo key folded into its English launcher', () => {
+  const japan = row('bazset', 'kikcubic', 'Meikyu Jima', 'kikcubic',
+    { k: 'meikyu-jima', mra: '_Arcade/_BAZSET/Meikyu Jima (Japan).mra' });
+  const english = { ...japan, k: 'kickle-cubicle', mra: '_Arcade/_BAZSET/Kickle Cubicle (English title).mra' };
+  const copy = row('ongo', 'kikcubicb', 'Kickle Cubele', 'kikcubic', { k: 'kickle-ongo', core: 'bazset_kickle' });
+  const [lead] = siteSourceRows([english, copy, japan]);
+  assert.equal(lead.k, 'meikyu-jima');
+  assert.deepEqual([...lead.siteAliases].sort(), ['kickle-cubicle', 'kickle-ongo']);
+  assert.equal(lead.alsoOngo, true);
 });

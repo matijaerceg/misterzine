@@ -244,7 +244,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The thirteen sources (all public)
+## The sixteen sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -307,8 +307,11 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    it skips other systems, scripts, ROM payloads, support files and Cave practice-ROM MRAs.
    Nested VS System, Cave CV1000 and Taito F3 releases remain eligible when their MRA names a
    core included in the same database. The website hides Ongo listings already covered by
-   another source (same ROM set, or same game and family). The shared catalogue feed
-   retains them so on-device app behavior is unchanged.
+   another source (same ROM set, or same game and family); the original row takes over the
+   hidden row's key (deep links and stars) and, when Ongo's copy is the same build, its panel
+   says Ongo ships it too. Kyle Lester's cores are the exception: Ongo is their only
+   distribution, so their rows always show. The shared catalogue feed retains every Ongo row
+   so on-device app behavior is unchanged.
 12. **theypsilon Unofficial Distribution**: `theypsilon/Unofficial_Distribution_MiSTer` `main`
    branch. Its arcade MRAs are tracked alongside the main Distribution; the other systems
    remain represented by their primary source.
@@ -320,8 +323,27 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    revision set side by side, which export-web folds to one row per game. The db carries
    no tags, so its rows have no favorites-export filter term. A few Comad games double
    bazset's EXPRO-02 core (same-game labels apply).
+14. **decoryah**: `decoryah/MiSTer_decoryah` `db` branch (opt-in, section
+   `[decoryah/MiSTer_decoryah]`), since 2026-10-19. His own cores from 12 repos: Metro, Taito L
+   System, IGS PGM2, Konami's Violent Storm, Metamorphic Force, Monster Maulers and Gaiapolis,
+   Kaneko's Heavy Unit and others. Every file entry carries its own url into a core repo, so
+   the MRAs are fetched from the db (like blahm1d's). MRAs sit in `_Arcade/_Decoryah/_<Core>/`
+   with every regional set side by side (folded to one row per game). No tags.
+15. **ppriest**: `ppriest/MiSTer_ppriest` `db` branch (opt-in, section
+   `[ppriest/MiSTer_ppriest]`), since 2026-10-19. His own cores from 11 repos: Seta,
+   PlayChoice-10, Konami GX, Bally/Sente, Jaleco Mega System 32, Eolith, Vamphalf/Limenko,
+   Hyper Neo Geo 64 and others; same db layout as decoryah's, MRAs flat in `_Arcade/` with
+   `_alternatives`. No tags. MiSTer-devel adopted his Fuuki and Psikyo cores, so it is in
+   `DISTRIBUTION_TAKES_OVER` (as are decoryah and Gm0rk).
+16. **Gm0rk**: `Gm0rk/Gm0rkCores` `db` branch (opt-in, section `[Gm0rk/Gm0rkCores]`), since
+   2026-10-19. Atari G1, Atari G42 and Incredible Technologies 8-bit cores; MRAs in
+   `_Arcade/_Gm0rkCores/` with `_alternatives`, real tags.
 
-All thirteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+Debuts for all three are frozen per MRA (`*_FROZEN_DATES`): the day the MRA was first
+committed where it is served from, but not before the core's first public build (Gm0rk's
+core repos published GitHub releases two weeks before his db existed).
+
+All sixteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

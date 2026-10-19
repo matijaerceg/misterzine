@@ -1249,7 +1249,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
-<script src="./source-visibility.js?v=6"></script>
+<script src="./source-visibility.js?v=7"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=5"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
@@ -1423,10 +1423,19 @@ window.addEventListener('storage', e => {
   if (TOKEN) syncServerFavs();
 });
 
+// starred under its own key, or under a key the site folded into it
+// (siteAliases: a hidden Ongo copy, Kickle Cubicle), so a star made there
+// still shows here
+const isFav = d => !!d.k && (FAVS.has(d.k) || (d.siteAliases || []).some(k => FAVS.has(k)));
 function toggleFav(d, anchor) {
   if (!d || !d.k) return;
-  const on = !FAVS.has(d.k);
+  const on = !isFav(d);
   if (on) FAVS.add(d.k); else FAVS.delete(d.k);
+  // unstarring clears the folded keys too, or the star would stay lit
+  if (!on) for (const k of d.siteAliases || []) {
+    if (!FAVS.delete(k)) continue;
+    if (TOKEN) apiFetch('/favorites/' + encodeURIComponent(k), { method: 'DELETE' });
+  }
   const saved = favSave();
   syncFavStars(d);
   syncFavSummary();
@@ -1449,7 +1458,7 @@ function toggleFav(d, anchor) {
 // tbody under the pointer (a full render() would drop the hover the star is
 // riding on). Touch has no hover star to update in place, so it re-renders.
 function syncFavStars(d) {
-  const on = FAVS.has(d.k);
+  const on = isFav(d);
   const rb = document.querySelector('#rows .fav[data-k="' + CSS.escape(d.k) + '"]');
   if (rb) setFavBtn(rb, on);
   else if (!CAN_HOVER) render();  // passive marker appears/disappears
@@ -1464,10 +1473,10 @@ function setFavBtn(b, on) {
   b.setAttribute('aria-pressed', on);
   b.setAttribute('aria-label', on ? 'Remove from favorites' : 'Add to favorites');
 }
-const favBtnHTML = d => '<button type="button" class="fav' + (FAVS.has(d.k) ? ' on' : '') +
-  '" data-k="' + escA(d.k) + '" aria-pressed="' + FAVS.has(d.k) + '" aria-label="' +
-  (FAVS.has(d.k) ? 'Remove from favorites' : 'Add to favorites') + '">' +
-  (FAVS.has(d.k) ? '★' : '☆') + '</button>';
+const favBtnHTML = d => '<button type="button" class="fav' + (isFav(d) ? ' on' : '') +
+  '" data-k="' + escA(d.k) + '" aria-pressed="' + isFav(d) + '" aria-label="' +
+  (isFav(d) ? 'Remove from favorites' : 'Add to favorites') + '">' +
+  (isFav(d) ? '★' : '☆') + '</button>';
 
 // --- "new since your last visit" baseline -------------------------------
 // What this browser had already seen when it last looked: every row's k mapped
@@ -1638,6 +1647,22 @@ const CORE_NAMES = {
   'TomSVR_playmark': 'Playmark (Big Twin HW)', 'TomSVR_splash': 'Gaelco (Splash! HW)',
   'TomSVR_sqix': 'Promat (Super Qix HW)', 'TomSVR_ys16': 'Yun Sung 16-bit',
   'TomSVR_ys8': 'Yun Sung 8-bit', 'TomSVR_zero': 'Comad (Zero Zone HW)',
+  // decoryah's cores (Ongo ships the same PGM2); single-game ones read as the game
+  'PGM2': 'IGS PGM2', 'taitol': 'Taito L System', 'metro': 'Metro (Imagetek I4x00)',
+  'metrod64': 'Metro (64 MB SDRAM)', 'metrof64': 'Metro (Blazing Tornado HW)',
+  'crospang': 'F2 System (Cross Pang HW)', 'mcatadv': 'Face LINDA (Magical Cat HW)',
+  'jchan': 'Kaneko (Jackie Chan HW)', 'ohmygod': 'Atlus (Oh My God! HW)',
+  // ppriest's cores (Ongo ships most of them too)
+  'PlayChoice10': 'Nintendo PlayChoice-10', 'BallySente': 'Bally/Sente SAC-1',
+  'Seta': 'Seta 1st gen', 'SetaDowntown': 'Seta (DownTown HW)', 'KonamiGX': 'Konami GX',
+  'KonamiGXT1': 'Konami GX (Type 1)', 'KonamiGXT34': 'Konami GX (Type 3/4, twin monitor)',
+  'JalecoMS32': 'Jaleco Mega System 32', 'Eolith': 'Eolith 32-bit',
+  'Vamphalf': 'Hyperstone E1 (Vamphalf HW)', 'Limenko': 'Limenko Power System 2',
+  'HyperNG64': 'SNK Hyper Neo Geo 64', 'DreamWorld': 'SemiCom (Dream World HW)',
+  'NixPirates': 'NIX (Pirates HW)',
+  // Gm0rk's cores
+  'Arcade-Atari-G1': 'Atari G1', 'Arcade-Atari-G42': 'Atari G42',
+  'Arcade-ITech8': 'Incredible Technologies 8-bit',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -1692,6 +1717,9 @@ const SRC_NAMES = {
   bazset: 'bazset',
   rossops: 'rossops (Sega Y Board)',
   tomsvr: 'TomSVR',
+  decoryah: 'decoryah',
+  ppriest: 'ppriest',
+  gm0rk: 'Gm0rk',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1707,6 +1735,9 @@ const SRC_SEARCH = {
   bazset: 'bazset',
   rossops: 'rossops y board yboard',
   tomsvr: 'tomsvr',
+  decoryah: 'decoryah',
+  ppriest: 'ppriest',
+  gm0rk: 'gm0rk gmork',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1717,9 +1748,10 @@ const OPTIN_DBS = {
   ongo: {
     section: 'OngoGablogian/MiSTer_Ongo',
     url: 'https://raw.githubusercontent.com/OngoGablogian/MiSTer_Ongo/db/db.json.zip',
-    what: 'Ongo distributes arcade cores from several developers, including Kyle Lester. ' +
-      'The website uses this collection as a fallback, showing games not already covered by another source. ' +
-      'The database itself also includes other systems, scripts and extras.',
+    what: 'Ongo distributes arcade cores from several developers, including Kyle Lester, whose cores ' +
+      'are only distributed there. The website lists another developer\'s game from Ongo only when ' +
+      'no other database it tracks has that game. The database itself also includes other systems, ' +
+      'scripts and extras.',
   },
   meathax: {
     section: 'meathax/meatcores',
@@ -1775,6 +1807,26 @@ const OPTIN_DBS = {
       'Splash!, Comad and others), built on Jotego\'s JTFRAME from the MAME drivers and written ' +
       'with AI assistance (his repo says so). They are not Jotego cores. A few Comad games also ' +
       'ship in bazset\'s database.',
+  },
+  decoryah: {
+    section: 'decoryah/MiSTer_decoryah',
+    url: 'https://raw.githubusercontent.com/decoryah/MiSTer_decoryah/db/db.json.zip',
+    what: 'decoryah\'s cores: Metro, Taito L System, IGS PGM2, Konami\'s Violent Storm, Metamorphic ' +
+      'Force, Monster Maulers and Gaiapolis, Kaneko\'s Heavy Unit and others. Some of these games ' +
+      'also ship in other databases as other cores.',
+  },
+  ppriest: {
+    section: 'ppriest/MiSTer_ppriest',
+    url: 'https://raw.githubusercontent.com/ppriest/MiSTer_ppriest/db/db.json.zip',
+    what: 'ppriest\'s cores: Seta, PlayChoice-10, Konami GX, Bally/Sente, Jaleco Mega System 32, ' +
+      'Eolith, Vamphalf, Hyper Neo Geo 64 and others. The MiSTer Distribution already adopted his ' +
+      'Fuuki and Psikyo cores; if it adopts a game from here, its row here gives way to the Distribution\'s.',
+  },
+  gm0rk: {
+    section: 'Gm0rk/Gm0rkCores',
+    url: 'https://raw.githubusercontent.com/Gm0rk/Gm0rkCores/db/db.json.zip',
+    what: 'Gm0rk\'s cores: Atari G1 (Hydra, Pit Fighter), Atari G42 (Road Riot 4WD, Guardians of ' +
+      'the \'Hood) and Incredible Technologies\' 8-bit boards (Golden Tee Golf, Capcom Bowling and others).',
   },
 };
 
@@ -2036,11 +2088,15 @@ function titleCell(d) {
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
-    : FAVS.has(d.k) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
+    : isFav(d) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
   return fav + dotHTML(d) + esc(d.title) + newBadge(d) + betaBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
+// Ongo's copy of this build is folded into this row (siteSourceRows): its
+// [section] installs the game too, so a visitor who has only that one is set
+const ongoNote = d => d.alsoOngo ? ' Ongo\'s database also carries this build, so its [' +
+  esc(OPTIN_DBS.ongo.section) + '] section installs it too.' : '';
 
 // Rotation stays MAME-honest (the original cabinet, via MAD). d.brot is a
 // hardware-verified note that the MiSTer core boots the other way with no
@@ -2531,8 +2587,8 @@ function apply() {
     // favorites: someone else's shared link (favView) and your own toggle are
     // separate narrowers — a shared link is a view of THEIR list, and starring
     // things while reading it mustn't change what the link shows
-    if (favView && !(d.k && favView.has(d.k))) return false;
-    if (favOnly && !(d.k && FAVS.has(d.k))) return false;
+    if (favView && !(d.k && [d.k, ...(d.siteAliases || [])].some(k => favView.has(k)))) return false;
+    if (favOnly && !isFav(d)) return false;
     if (!enabledTypes.has(d.base)) return false;
     // Source: a row with no source (a retired, hand-listed core) passes only while
     // the menu is untouched; any narrowing means "just these databases"
@@ -3400,6 +3456,9 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   bazset: 'bazset/MiSTer_BAZSET',
   rossops: 'rossops/Arcade-SegaYBoard_MiSTer',
   tomsvr: 'TomSVR-Mister/TomSVR-Arcade-Cores',
+  decoryah: 'decoryah/MiSTer_decoryah',
+  ppriest: 'ppriest/MiSTer_ppriest',
+  gm0rk: 'Gm0rk/Gm0rkCores',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -4127,9 +4186,10 @@ function detailHTML(d) {
     const opt = OPTIN_DBS[d.src];
     rows.push(['Source', esc(SRC_NAMES[d.src]) + '<br><span class="optin">' +
       (opt.what ? esc(opt.what) + ' ' : '') + 'Opt-in database: add a [' + esc(opt.section) +
-      '] section to downloader.ini to receive it via update_all.</span>', true]);
+      '] section to downloader.ini to receive it via update_all.' + ongoNote(d) + '</span>', true]);
   } else if (d.src) {
-    rows.push(['Source', SRC_NAMES[d.src] || d.src]);
+    rows.push(['Source', esc(SRC_NAMES[d.src] || d.src) +
+      (d.alsoOngo ? '<br><span class="optin">' + ongoNote(d).trim() + '</span>' : ''), true]);
   }
   // show the repo slug (jtcores deep links keep the full path in the href only)
   if (d.repo) rows.push(['Repository', '<a href="' + escA(repoURL(d)) + '" target="_blank" rel="noopener">' +
@@ -4775,7 +4835,7 @@ const FEED_LIST = [
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
-  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's, bazset's and TomSVR's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's, bazset's, TomSVR's, decoryah's, ppriest's and Gm0rk's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
   "Distribution, plus the arcade cores distributed through Ongo. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +

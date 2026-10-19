@@ -4,6 +4,28 @@ const { siteSourceRows } = require('../docs/releases/source-visibility');
 const row = (src, sn, title = 'Game', family = sn, extra = {}) =>
   ({ src, sn, title, family, base: 'Arcade', ...extra });
 
+test('renamed mirrors need game identity plus core evidence', () => {
+  const direct = row('meathax', 'btoads', 'Battletoads', '', { core: 'Arcade-Battletoads', bh: 'abc' });
+  const copy = row('ongo', 'btoads_meathax', 'Battletoads (Meathax)', '', { core: 'Meathax_Battletoads', bh: 'abc' });
+  const newer = { ...copy, bh: 'def' };
+  const otherGame = { ...copy, title: 'Another Game', sn: 'another' };
+  const otherCore = { ...newer, core: 'DifferentCore' };
+  const unknown = { ...newer, sn: 'btoads_unknown' };
+  const before = JSON.stringify([copy, direct]);
+  assert.deepEqual(siteSourceRows([copy, direct]), [direct]);
+  assert.deepEqual(siteSourceRows([direct, newer]), [direct]);
+  assert.deepEqual(siteSourceRows([direct, otherGame, otherCore, unknown]), [direct, otherGame, otherCore, unknown]);
+  assert.deepEqual(siteSourceRows([{ ...direct, deprecated: true }, copy]), [{ ...direct, deprecated: true }, copy]);
+  assert.equal(JSON.stringify([copy, direct]), before);
+});
+
+test('catalogue audit hides renamed copies but retains distinct implementations and games', () => {
+  const rows = require('../docs/releases/data.json');
+  const visible = new Set(siteSourceRows(rows).map(r => r.k));
+  for (const key of ['btoads_meathax', 'narc_blahm1d', 'narc_meathax']) assert.ok(!visible.has(key), key);
+  for (const key of ['btoads', 'narc', 'narc-blahm1d', 'mk_wolf', 'mk2_wolf', 'otwalls', 'swa', 'hotrod', 'sparkman', 'nbajamtese']) assert.ok(visible.has(key), key);
+});
+
 test('Meikyu Jima name aliases share one stable launcher without changing app data', () => {
   const japan = row('bazset', 'kikcubic', 'Meikyu Jima (bazset)', 'kikcubic',
     { k: 'meikyu-jima', mra: '_Arcade/_BAZSET/Meikyu Jima (Japan).mra' });

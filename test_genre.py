@@ -14,11 +14,12 @@ ROOT = Path(__file__).resolve().parent
 # that date. Rows added later are left out so catalogue growth keeps the pin
 # valid; a change here means catver moved a set, a pin changed, or a row was
 # dropped or retitled. Re-pin only after checking which rows moved and why.
-# The historical count is 115 after the Meathax Simpsons row was withdrawn
-# upstream (2026-10-12); the older Jotego Simpsons row remains in the data.
+# Beat 'em up dipped to 115 while Meathax's Simpsons MRA was out of his db
+# (2026-10-18) and is 116 again since it came back as the two-player set
+# simpsons2p (2026-10-19 refresh).
 PINNED_THROUGH = "2026-10-16"
 PINNED_COUNTS = {
-    "Shoot 'em up": 261, "Platformer": 161, "Sports": 131, "Beat 'em up": 115,
+    "Shoot 'em up": 261, "Platformer": 161, "Sports": 131, "Beat 'em up": 116,
     "Run 'n gun": 108, "Maze": 92, "Fighting": 88, "Puzzle": 87,
     "Arena shooter": 80, "Fixed shooter": 75, "Racing": 64, "Tabletop & quiz": 41,
     "Other": 27, "Light gun": 25, "Rail shooter": 24,

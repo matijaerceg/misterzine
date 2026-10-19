@@ -3,6 +3,7 @@
 import unittest
 from unittest import mock
 import json
+import sqlite3
 import subprocess
 import tempfile
 from pathlib import Path
@@ -199,6 +200,23 @@ class SiblingVariantFoldTests(unittest.TestCase):
 
 
 class OngoSourceTests(unittest.TestCase):
+    def test_visibility_accepts_database_rows_and_export_dicts(self):
+        shipped = {"ongo": {"core_20261018": ("core", "core")}}
+        con = sqlite3.connect(":memory:")
+        con.row_factory = sqlite3.Row
+        self.addCleanup(con.close)
+        for source, rbf, visible in [
+            ("ongo", "core", True),
+            ("ongo", "other", False),
+            ("ongo", None, False),
+            ("ongo", "", False),
+            ("distribution_mister", None, True),
+        ]:
+            row = con.execute("SELECT ? AS source_id, ? AS rbf", (source, rbf)).fetchone()
+            for record in (row, dict(row)):
+                with self.subTest(source=source, rbf=rbf, record_type=type(record)):
+                    self.assertEqual(mz._source_row_visible(record, shipped), visible)
+
     def test_image_backfill_inherits_richer_art_for_same_setname(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

@@ -4200,7 +4200,7 @@ def _resolve_shipped_rbf(source_id, tag, shipped):
 def _source_row_visible(row, shipped):
     """Ongo lists community MRAs whose core it does not ship; keep those out."""
     return (row["source_id"] != "ongo" or
-            _resolve_shipped_rbf("ongo", row.get("rbf"), shipped) is not None)
+            _resolve_shipped_rbf("ongo", row["rbf"], shipped) is not None)
 
 
 def arcade_family(sn, meta):

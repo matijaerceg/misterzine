@@ -1245,7 +1245,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
-<script src="./source-visibility.js?v=3"></script>
+<script src="./source-visibility.js?v=4"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=5"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
@@ -1766,6 +1766,16 @@ const ASPECT_OVERRIDE = {
   shienryu: '3 / 4',  // vertical shmup; MAD wrongly tags it Horizontal (file MAD PR)
   wrestwar: '3 / 4',  // vertical wrestling game; MAD wrongly tags it Horizontal (file MAD PR)
 };
+
+function screenshotRatio(d) {
+  // PlayChoice captures stack two horizontal monitors. A landscape capture
+  // contains only one monitor and must keep the ordinary 4:3 treatment.
+  if (d.core === 'PlayChoice10' && d.img_h > d.img_w) return '2 / 3';
+  return ASPECT_OVERRIDE[d.img] || (d.scr === 3 ? '12 / 3' : d.scr === 2 ? '8 / 3'
+    : (d.img_h && d.img_w / d.img_h >= 2.4) ? '8 / 3'
+    : d.rot ? (d.rot.startsWith('Vertical') ? '3 / 4' : '4 / 3')
+    : (d.img_w > d.img_h ? '4 / 3' : '3 / 4'));
+}
 
 // Console/computer cores with a hardware photo in docs/images/systems/<core>.png
 // (~240px transparent PNGs from Wikimedia Commons, quantized to DawnBringer-16
@@ -3963,10 +3973,7 @@ function groupHTML(u) {
   const hint = overlay
     ? '<p class="hint"><em>Swipe or Back to close</em></p>'
     : '<p class="hint"><kbd>↑</kbd> <kbd>↓</kbd> browse rows · <kbd>→</kbd> <kbd>←</kbd> open or close the group · <kbd>Esc</kbd> to close</p>';
-  const ratio = ASPECT_OVERRIDE[u.img] || (u.scr === 3 ? '12 / 3' : u.scr === 2 ? '8 / 3'
-    : (u.img_h && u.img_w / u.img_h >= 2.4) ? '8 / 3'
-    : u.rot ? (u.rot.startsWith('Vertical') ? '3 / 4' : '4 / 3')
-    : (u.img_w > u.img_h ? '4 / 3' : '3 / 4'));
+  const ratio = screenshotRatio(u);
   const shots = (u.img_slots || []).map(s =>
     '<div class="frame' + (ratio === '3 / 4' ? ' vert' : '') + (u.mat ? ' mat' : '') +
     '" style="aspect-ratio:' + ratio + '">' +
@@ -4103,6 +4110,7 @@ function detailHTML(d) {
     '" target="_blank" rel="noopener"><span class="lbl">Report a problem</span><span class="ext">↗</span></a></p>';
   // multi-monitor cabinets: N screens = N 4:3 CRTs side by side, so dual → 8:3
   // and triple → 12:3, driven by the pipeline's `scr` field (MAME desc + pins).
+  // PlayChoice stacks use two horizontal monitors vertically; otherwise:
   // Precedence: (1) ASPECT_OVERRIDE escape hatch; (2) d.scr (dual/triple);
   // (3) the >= 2.4 dimension heuristic, kept as a net for a superwide shot on a
   // row missing `scr` (2.4 sits below the dual-screen cluster at 2.67+ but above
@@ -4111,13 +4119,7 @@ function detailHTML(d) {
   // raster's raw w/h misleads (square DECO Cassette games, TATE games in a
   // landscape raster, non-square pixels); (5) dimension fallback for the few
   // rows with no rotation. Keyed by setname (d.img) for the override.
-  const aspect = d.img_h ? d.img_w / d.img_h : 1;
-  const ratio = ASPECT_OVERRIDE[d.img] ||
-    (d.scr === 3 ? '12 / 3'
-      : d.scr === 2 ? '8 / 3'
-      : aspect >= 2.4 ? '8 / 3'
-      : d.rot ? (d.rot.startsWith('Vertical') ? '3 / 4' : '4 / 3')
-      : (d.img_w > d.img_h ? '4 / 3' : '3 / 4'));
+  const ratio = screenshotRatio(d);
   // tate rows (however the ratio decision got there — MAD, override, or
   // dimension fallback) carry .vert so the CRT mask + tube blur rotate with
   // the monitor

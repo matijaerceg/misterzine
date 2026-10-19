@@ -44,7 +44,14 @@ function siteSourceRows(rows) {
   }
   const visible = rows.filter(row => row.src !== 'ongo' || row.base !== 'Arcade' ||
     !(row.sn && sets.has(norm(row.sn))) && !(game(row) && games.has(game(row))) &&
-    !(titles.get(siteGameTitle(row)) || []).some(original => siteRenamedMirror(row, original)));
+    !(titles.get(siteGameTitle(row)) || []).some(original => siteRenamedMirror(row, original)))
+    .map(row => {
+      // MeatCores ships separate two- and four-player launchers on one core.
+      const players = { simpsons2p: 2, simpsons: 4 }[row.sn];
+      return row.src === 'meathax' && row.core === 'Arcade-Simpsons' && players
+        ? { ...row, title: `Simpsons (${players}-player)`, mt: row.mt || row.title }
+        : row;
+    });
   // BAZSET's English-name launcher differs from the Japan launcher only in
   // its name. Keep one launch target and expose both names on the website.
   const paths = new Set([

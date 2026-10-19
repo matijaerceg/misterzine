@@ -4,6 +4,21 @@ const { siteSourceRows } = require('../docs/releases/source-visibility');
 const row = (src, sn, title = 'Game', family = sn, extra = {}) =>
   ({ src, sn, title, family, base: 'Arcade', ...extra });
 
+test('Meathax Simpsons launchers show their player counts without changing launch identity', () => {
+  const variants = [row('meathax', 'simpsons2p', 'The Simpsons', 'simpsons',
+    { core: 'Arcade-Simpsons', k: 'the-simpsons', mra: '_Arcade/_MeatCores/The Simpsons.mra' }),
+  row('meathax', 'simpsons', 'Simpsons', 'simpsons',
+    { core: 'Arcade-Simpsons', k: 'simpsons-2', mra: '_Arcade/_MeatCores/Simpsons.mra' })];
+  const before = JSON.stringify(variants);
+  const result = siteSourceRows(variants);
+  assert.deepEqual(result.map(r => r.title), ['Simpsons (2-player)', 'Simpsons (4-player)']);
+  result.forEach((r, i) => assert.deepEqual(r, { ...variants[i], title: r.title, mt: variants[i].title }));
+  assert.equal(JSON.stringify(variants), before);
+  assert.deepEqual(siteSourceRows(result), result);
+  const jotego = { ...variants[1], src: 'jtbindb', core: 'jtsimson' };
+  assert.deepEqual(siteSourceRows([jotego]), [jotego]);
+});
+
 test('renamed mirrors need game identity plus core evidence', () => {
   const direct = row('meathax', 'btoads', 'Battletoads', '', { core: 'Arcade-Battletoads', bh: 'abc' });
   const copy = row('ongo', 'btoads_meathax', 'Battletoads (Meathax)', '', { core: 'Meathax_Battletoads', bh: 'abc' });

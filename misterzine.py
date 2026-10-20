@@ -6431,9 +6431,21 @@ def _backfill_arcade_images(data):
             if not inherited and not any(entry.get(k) for k in ("title_img", "snap_img", "third_img")):
                 todo.append((r, entry))
         else:
+            # An entry recorded while the row's setname was still a BIOS set
+            # (before _game_setname looked past it) shows the BIOS screen for
+            # every game on that board. Drop that art so the game's own set
+            # is inherited or fetched below.
+            sn = (r.get("sn") or "").lower()
+            rebased = bool(sn and sn not in BIOS_SETNAMES
+                           and (entry.get("setname") or "").lower() in BIOS_SETNAMES)
+            if rebased:
+                for key in ("source", "title_img", "snap_img", "third_img", "third_pack"):
+                    entry[key] = None
+                entry["setname"] = sn
+                manifest_changed = True
             inherited = inherit_set_art(entry, r.get("sn"))
             manifest_changed |= inherited
-            if bare(entry) and not inherited and young(r):
+            if bare(entry) and not inherited and (young(r) or rebased):
                 todo.append((r, entry))  # recorded miss: retry only if no same-set art exists
     if not todo:
         if manifest_changed:

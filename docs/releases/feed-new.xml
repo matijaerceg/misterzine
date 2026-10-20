@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Tue, 20 Oct 2026 00:27:35 +0000</lastBuildDate>
+<lastBuildDate>Tue, 20 Oct 2026 03:01:47 +0000</lastBuildDate>
+<item>
+<title>[New] Narc [15kHz CRT] (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#narc-15khz-crt</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Narc [15kHz CRT].mra:2026-10-20T03:01:47+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 03:01:47 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/narc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1988 / Williams&lt;/p&gt;&lt;p&gt;Core: Arcade-NARC&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/narc/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Ninjakun Majou No Bouken (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ninjakun-majou-no-bouken</link>
@@ -26,13 +35,13 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/xxmissio.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1986 / UPL&lt;/p&gt;&lt;p&gt;Core: UPLFramebuffer&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Cray-XMP (Computer core)</title>
+<title>[New] Cray X-MP (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Cray-XMP</link>
 <guid isPermaLink="false">distribution_mister:_Computer/Cray-XMP_20261010.rbf:2026-10-20T00:27:35+00:00</guid>
 <pubDate>Tue, 20 Oct 2026 00:27:35 +0000</pubDate>
 <category>new</category>
 <category>Computer core</category>
-<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Cray-XMP_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;1982 / Cray Research&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Cray-XMP_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Lethal Enforcers (Arcade)</title>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/zaviga.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1984 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: Arcade-DataEastLiberation&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-16 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Dragon's Lair 2: Time Warp (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dlair2</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Dragon's Lair II - Time Warp.mra:2026-10-16T14:57:53+00:00</guid>
-<pubDate>Fri, 16 Oct 2026 14:57:53 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;Platformer / 1991 / Leland&lt;/p&gt;&lt;p&gt;Core: LaserdiscGames&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

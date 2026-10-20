@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Tue, 20 Oct 2026 00:27:35 +0000</lastBuildDate>
+<lastBuildDate>Tue, 20 Oct 2026 03:01:47 +0000</lastBuildDate>
+<item>
+<title>[New] Narc [15kHz CRT] (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#narc-15khz-crt</link>
+<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Narc [15kHz CRT].mra:2026-10-20T03:01:47+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 03:01:47 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/narc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1988 / Williams&lt;/p&gt;&lt;p&gt;Core: Arcade-NARC&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/narc/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-NARC (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#narc</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-NARC_20261020.rbf:2026-10-20T03:01:47+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 03:01:47 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: NARC, Narc [15kHz CRT].&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/narc/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Ninjakun Majou No Bouken (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ninjakun-majou-no-bouken</link>
@@ -35,13 +53,13 @@
 <description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Ninjakun Majou No Bouken, Nova 2001, Omega Fighter, Penguin-Kun Wars, Raiders5, XX Mission.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Cray-XMP (Computer core)</title>
+<title>[New] Cray X-MP (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Cray-XMP</link>
 <guid isPermaLink="false">distribution_mister:_Computer/Cray-XMP_20261010.rbf:2026-10-20T00:27:35+00:00</guid>
 <pubDate>Tue, 20 Oct 2026 00:27:35 +0000</pubDate>
 <category>new</category>
 <category>Computer core</category>
-<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Cray-XMP_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;1982 / Cray Research&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Cray-XMP_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Vectrex (Console core)</title>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Dragon's Lair 2: Time Warp, Space Ace, Super Don Quix-ote, Thayer's Quest.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-19 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Studio II (Console core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Studio-II</link>
-<guid isPermaLink="false">distribution_mister:_Console/Studio-II_20261016.rbf:2026-10-19T03:20:10+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:20:10 +0000</pubDate>
-<category>updated</category>
-<category>Console core</category>
-<description>&lt;p&gt;1977 / RCA&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-19 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/StudioII_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Aqua Jack (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#aqua-jack-bazset</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Aqua Jack (World).mra:2026-10-19T00:10:52+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 00:10:52 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aquajack.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1990 / Taito&lt;/p&gt;&lt;p&gt;Core: Aqua_Jack&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

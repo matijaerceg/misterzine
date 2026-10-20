@@ -458,6 +458,13 @@
   tr.nomatch .msg { text-align: center; padding: 2.5rem .5rem; }
   tr.nomatch .msg b { font-weight: 600; color: var(--fg); }
   tr.nomatch .msg .esc { font-size: .85em; margin-top: .35rem; display: block; }
+  /* The virtualized list's spacer rows (see vWindow): empty stand-ins for the
+     rows above and below the rendered window, so they shed all cell chrome
+     (padding, rule, sticky first cell, hover tint). The script holds the rows
+     still as the window shifts, so the browser's own scroll anchoring stays
+     off: it would correct a second time on top. */
+  #rows tr.vpad td { padding: 0; border: 0; position: static; background: none; }
+  .tablewrap { overflow-anchor: none; }
   table { min-width: 49rem; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top;
            overflow-wrap: break-word; }
@@ -1302,10 +1309,21 @@ const rowURL = d => location.origin + location.pathname + rowHash(d);
 // time; live collections are kept current by the browser and cost nothing
 // while the rows don't change.
 const ROWS = document.getElementById('rows');
+const WRAP = document.querySelector('.tablewrap');
 const OPEN_TRS = ROWS.getElementsByClassName('open');  // the selected row (at most one)
-const DOT_SPANS = ROWS.getElementsByClassName('sv');   // since-visit dots, in list order
-const openTr = () => OPEN_TRS[0] || null;
-const rowEl = i => { const tr = ROWS.rows[i]; return tr && +tr.dataset.i === i ? tr : null; };  // the <tr> of flat[i]
+// Virtualized rows (see vWindow): only flat[vwA..vwB) is in the DOM, between
+// two spacer rows (vTop, vBot) that stand in for the rest.
+let flatCls = [];        // group role class per flat index: 'grp', 'grp x', 'member' or ''
+let vwA = 0, vwB = 0;    // the rendered window of flat
+let vTop = null, vBot = null;  // the spacer rows; null while the no-matches message shows
+let vTopH = 0;           // the top spacer's height, px (may drift from vPos[vwA] until vSettle)
+let vPos = null;         // vPos[i] = top of flat[i] in the tbody, px (vPos[n] = total); null = stale
+const ROW_H = new Map(); // row object -> its measured height, px
+let vEst = 32, vEstFresh = true;  // height assumed for unmeasured rows; re-taken after a clear
+let vAll = false;        // printing: render every row
+let vDot = -1;           // flat index of the deepest row with a since-visit dot, or -1
+// the <tr> of flat[i], or null while it is outside the rendered window
+const rowEl = i => { const tr = i >= vwA && i < vwB ? ROWS.rows[i - vwA + 1] : null; return tr && +tr.dataset.i === i ? tr : null; };
 // the sort's string order: case- and accent-blind, numbers natural. One shared
 // Collator, since localeCompare with options sets one up per comparison.
 const COLL = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
@@ -2316,6 +2334,7 @@ const narrowMQ = (() => {
 })();
 
 function buildHeader() {
+  ROW_H.clear(); vEstFresh = true; vPos = null;  // other columns, other wrapping: row heights are stale
   const cols = activeColumns();
   // fixed columns get their own width; the percentages of the rest add up to
   // 100%, which table-layout:fixed scales into the width the fixed ones leave
@@ -2443,7 +2462,8 @@ function syncScrollHints() {
 // once per frame: a fling or a wheel spin fires several scroll events per paint
 let hintsRaf = 0;
 document.querySelector('.tablewrap').addEventListener('scroll', () => {
-  if (!hintsRaf) hintsRaf = requestAnimationFrame(() => { hintsRaf = 0; syncScrollHints(); });
+  if (!hintsRaf) hintsRaf = requestAnimationFrame(() => { hintsRaf = 0; vWindow(); syncScrollHints(); });
+  if (!('onscrollend' in window)) vSettleSoon();
 }, { passive: true });
 new ResizeObserver(syncScrollHints).observe(document.querySelector('.tablewrap'));
 new ResizeObserver(syncScrollHints).observe(document.querySelector('table'));
@@ -2471,44 +2491,31 @@ document.querySelector('.tablewrap').addEventListener('scroll', () => {
 function syncJumps(w, z) {
   const tt = document.getElementById('totop');
   if (tt.disabled !== !(w.scrollTop > 30)) tt.disabled = !(w.scrollTop > 30);
-  const v = w.getBoundingClientRect();
-  const top = v.top + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
-  const sync = (id, find, label) => {
-    const btn = document.getElementById(id), row = find();
+  // rows outside the rendered window have no <tr>, so judge from the height
+  // model, in tbody px: the sticky header covers the top of the scrollport
+  const p = vTop ? vPositions() : null, body = vTop ? vBodyTop() : 0;
+  const top = w.scrollTop - body + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
+  const bottom = w.scrollTop - body + w.clientHeight;
+  const sync = (id, i, label) => {
+    const btn = document.getElementById(id);
     let off = false, above = false;
-    if (row) {
-      const r = row.getBoundingClientRect();
-      above = r.bottom <= top;
-      off = above || r.top >= v.bottom;
+    if (p && i >= 0) {
+      above = p[i + 1] <= top;
+      off = above || p[i] >= bottom;
     }
     // only touch what changed: this runs every scroll frame
     const txt = off ? (above ? '↑ ' : '↓ ') + label : label;
     if (btn.disabled !== !off) btn.disabled = !off;
     if (btn.textContent !== txt) btn.textContent = txt;
   };
-  sync('tovisit', lastDotRow, 'Since visit');
-  sync('torow', openTr, 'Selected');
+  sync('tovisit', vDot, 'Since visit');
+  sync('torow', openRow ? flat.indexOf(openRow) : -1, 'Selected');
 }
 document.getElementById('torow').addEventListener('click', () => {
-  const tr = openTr();
-  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
+  revealIndex(openRow ? flat.indexOf(openRow) : -1, 'center', true);
 });
-// park a row about 40% down the scrollport, so what sits above and below it are
-// both on screen
-function parkRow(row) {
-  const w = document.querySelector('.tablewrap');
-  const thead = parseFloat(getComputedStyle(document.querySelector('.tablezone')).getPropertyValue('--theadh')) || 0;
-  const y = row.getBoundingClientRect().top - w.getBoundingClientRect().top + w.scrollTop - thead - w.clientHeight * .4;
-  w.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-}
-// the deepest dotted row in the rendered (filtered, sorted) list, or null
-function lastDotRow() {
-  return DOT_SPANS.length ? DOT_SPANS[DOT_SPANS.length - 1].closest('tr') : null;
-}
-document.getElementById('tovisit').addEventListener('click', () => {
-  const row = lastDotRow();
-  if (row) parkRow(row);  // the deepest change and the rows around it both on screen
-});
+// the deepest change, parked so the rows around it are on screen too
+document.getElementById('tovisit').addEventListener('click', () => revealIndex(vDot, 'park', true));
 
 // The notice pill's action. It used to scroll to the top of the table on the
 // assumption that its news was up there; Last Updated is day-granular, so a row
@@ -2523,11 +2530,9 @@ function jumpToNews(keys) {
   let opened = false;
   for (const u of view) if (u.grp && !expanded.has(u.g) && u.members.some(m => want.has(m.k))) { expanded.add(u.g); opened = true; }
   if (opened) render();
-  for (const tr of document.querySelectorAll('#rows tr[data-i]')) {
-    const d = flat[+tr.dataset.i];
-    if (d && want.has(d.k)) return parkRow(tr);
-  }
-  scrollTableTop();
+  const i = flat.findIndex(d => want.has(d.k));
+  if (i >= 0) revealIndex(i, 'park', true);
+  else scrollTableTop();
 }
 
 // the Scroll-to-top button, and where jumpToNews lands when its rows are filtered out
@@ -2547,6 +2552,8 @@ function render() {
   // zero results is never left as a silent blank table: name the query AND any
   // active type/source/genre filter (an invisible narrower is the sneaky way to get here)
   if (!view.length && DATA.length) {
+    vTop = vBot = null; vwA = vwB = 0; flat = []; flatCls = []; vDot = -1;
+    ROWS.parentElement.removeAttribute('aria-rowcount');
     const q = document.getElementById('q').value.trim();
     // a multi-select reads as a narrower only while boxes are unchecked: a partial
     // pick lists what is still checked (in menu order), an empty pick says so outright
@@ -2575,13 +2582,18 @@ function render() {
   // flat = what the tbody shows: each top-level entry, then its members while
   // the umbrella is expanded. Member rows get .member only here (a promoted
   // lone survivor keeps its g but sits at the top level as a plain row).
+  vSettle();  // square the old window first, so a redraw in place lands rows where they were
   flat = [];
-  const cls = [];
+  flatCls = [];
   for (const d of view) {
-    flat.push(d); cls.push(d.grp ? 'grp' + (expanded.has(d.g) ? ' x' : '') : '');
-    if (d.grp && expanded.has(d.g)) for (const m of d.members) { flat.push(m); cls.push('member'); }
+    flat.push(d); flatCls.push(d.grp ? 'grp' + (expanded.has(d.g) ? ' x' : '') : '');
+    if (d.grp && expanded.has(d.g)) for (const m of d.members) { flat.push(m); flatCls.push('member'); }
   }
-  tb.innerHTML = flat.map((d, i) => rowHTML(d, i, cls[i], cols)).join('');
+  vPos = null;
+  vDot = -1;
+  for (let i = flat.length - 1; i >= 0; i--) if (hasDot(flat[i])) { vDot = i; break; }
+  ROWS.parentElement.setAttribute('aria-rowcount', flat.length + 1);  // + the header row
+  vWindow(true);
   // the tally counts releases, not umbrellas, so "N of M" keeps meaning rows
   setCount(view.reduce((n, d) => n + (d.grp ? d.members.length : 1), 0));
   syncScrollHints();  // the jump stack re-reads its targets; a same-height re-render escapes the ResizeObserver
@@ -2590,32 +2602,201 @@ function render() {
 // its index into flat
 function rowHTML(d, i, cls, cols) {
   const c = (cls + (d === openRow ? ' open' : '')).trim();
-  return '<tr' + (c ? ' class="' + c + '"' : '') + ' data-i="' + i + '">' +
+  return '<tr' + (c ? ' class="' + c + '"' : '') + ' data-i="' + i + '" aria-rowindex="' + (i + 2) + '">' +
     cols.map(x => x.cell(d)).join('') + '</tr>';
 }
-// Open or close one umbrella in place: redraw its own row (the chevron) and
-// add or drop its member rows, then renumber the data-i of every row below,
-// since each indexes flat. A full render() redraws the whole list, a few
-// hundred ms; this touches a handful of rows. Falls back to render() if the
-// umbrella isn't where flat says it is.
+// open or close one umbrella (render() only redraws the rows in view)
 function setExpanded(u, on) {
   if (on === expanded.has(u.g)) return;
   if (on) expanded.add(u.g); else expanded.delete(u.g);
-  const i = flat.indexOf(u), tr = i >= 0 ? rowEl(i) : null;
-  if (!tr) { render(); return; }
-  if (hoverPopFor && hoverPopFor.closest('#rows')) closeHoverPop();  // as render(): its anchor may go
-  const cols = activeColumns();
-  if (on) {
-    flat.splice(i + 1, 0, ...u.members);
-    tr.insertAdjacentHTML('afterend', u.members.map((m, k) => rowHTML(m, i + 1 + k, 'member', cols)).join(''));
-  } else {
-    const n = u.members.length;
-    flat.splice(i + 1, n);
-    for (let k = 0; k < n; k++) tr.nextElementSibling.remove();
+  render();
+}
+// does this row show the since-visit dot? (mirrors titleCell / dotHTML)
+const hasDot = d => d.grp ? d.members.some(isUnseen) : isUnseen(d);
+
+// ---- Virtualized rows ----
+// Only the rows near the scrollport are in the DOM: flat[vwA..vwB) between two
+// spacer rows whose heights stand in for everything above and below. The full
+// list was ~2,000 rows and 30,000+ elements, rebuilt on every filter, sort or
+// search (200-300 ms on a fast PC, far more on a phone); a window is ~100 rows.
+// Row heights vary (long titles and core names wrap), so each row's measured
+// height is kept in ROW_H (cleared when the table width, columns or fonts
+// change) and rows never rendered are assumed vEst tall. A row entering the
+// window above the scrollport rarely matches that guess, so the top spacer
+// shrinks by the rows' real height rather than the guessed one: nothing on
+// screen moves, and the spacer drifts from the model (vPos) instead. The drift
+// is settled once scrolling stops (vSettle: spacer and scroll position move
+// together, so still nothing visibly moves), or at once if the spacer would
+// go negative. Browser scroll anchoring can't do this: Firefox doesn't anchor
+// on table rows at all, so it's off for the scroller (CSS) and this does it.
+// Code that used to find a <tr> goes through the index: rowEl(i) is null
+// outside the window, revealIndex(i) scrolls a row in.
+// Printing renders every row; Ctrl+F only sees the window (the search box
+// covers the whole list).
+const V_OVER = 40;   // rows rendered beyond each edge of the scrollport
+const V_SLACK = 15;  // re-window once the scrollport comes this close to an edge
+const vPad = h => '<tr class="vpad" aria-hidden="true"><td colspan="' + activeColumns().length +
+  '" style="height:' + h + 'px"></td></tr>';
+function vPositions() {
+  if (!vPos) {
+    vPos = new Float64Array(flat.length + 1);
+    for (let i = 0; i < flat.length; i++) {
+      const h = ROW_H.get(flat[i]);
+      vPos[i + 1] = vPos[i] + (h === undefined ? vEst : h);
+    }
   }
-  tr.outerHTML = rowHTML(u, i, 'grp' + (on ? ' x' : ''), cols);
-  for (let j = i + 1 + (on ? u.members.length : 0); j < ROWS.rows.length; j++) ROWS.rows[j].dataset.i = j;
-  syncScrollHints();  // the jump stack's targets may have moved
+  return vPos;
+}
+// the first row whose bottom edge lies below y (px from the tbody's top)
+function vIndexAt(y) {
+  const p = vPositions();
+  let lo = 0, hi = flat.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (p[m + 1] <= y) lo = m + 1; else hi = m; }
+  return lo;
+}
+// the tbody's top edge in the scroller's content (the header's height, in practice)
+const vBodyTop = () => ROWS.getBoundingClientRect().top - WRAP.getBoundingClientRect().top + WRAP.scrollTop;
+// Render the rows the scrollport needs. rebuild: the list itself changed
+// (render), so the whole tbody is redrawn; otherwise rows are only added and
+// dropped at the window's edges, so the rows in view (hover, focus, an open
+// popover's anchor) stay the same elements.
+function vWindow(rebuild) {
+  if (!rebuild && !vTop) return;  // the no-matches message is showing
+  const n = flat.length;
+  let a = 0, b = n;
+  if (!vAll) {
+    const y = WRAP.scrollTop - vBodyTop();
+    const s = vIndexAt(y), e = Math.min(n, vIndexAt(y + WRAP.clientHeight) + 1);
+    if (!rebuild && Math.max(0, s - V_SLACK) >= vwA && Math.min(n, e + V_SLACK) <= vwB) return;
+    a = Math.max(0, s - V_OVER); b = Math.min(n, e + V_OVER);
+  }
+  const cols = activeColumns();
+  const rows = (i, j) => { let h = ''; for (let k = i; k < j; k++) h += rowHTML(flat[k], k, flatCls[k], cols); return h; };
+  // keep: the top spacer's height that leaves the kept rows exactly where they
+  // are (incremental path only); null = place it from the model
+  let keep = null;
+  const h = k => { const v = ROW_H.get(flat[k]); return v === undefined ? vEst : v; };
+  if (rebuild) {
+    const p = vPositions();
+    ROWS.innerHTML = vPad(p[a]) + rows(a, b) + vPad(p[n] - p[b]);
+    vTop = ROWS.firstElementChild; vBot = ROWS.lastElementChild;
+  } else if (b <= vwA || a >= vwB) {  // no overlap (a long jump): swap the lot
+    const r = document.createRange();
+    r.setStartAfter(vTop); r.setEndBefore(vBot); r.deleteContents();
+    vTop.insertAdjacentHTML('afterend', rows(a, b));
+  } else {
+    keep = vTopH;
+    for (let k = vwA; k < a; k++) { keep += h(k); vTop.nextElementSibling.remove(); }
+    for (let k = b; k < vwB; k++) vBot.previousElementSibling.remove();
+    if (a < vwA) vTop.insertAdjacentHTML('afterend', rows(a, vwA));
+    if (b > vwB) vBot.insertAdjacentHTML('beforebegin', rows(vwB, b));
+  }
+  const oldA = vwA;
+  vwA = a; vwB = b;
+  // a removed row never fires the mouseout that would close its hover popover
+  if (hoverPopFor && !hoverPopFor.isConnected) closeHoverPop();
+  vMeasure();
+  if (keep !== null) for (let k = a; k < oldA; k++) keep -= h(k);  // rows that came in on top, at their real height
+  vSetTop(keep === null ? vPositions()[a] : keep);
+}
+// Size the top spacer. A height that can't stand (negative, or a gap left
+// above the first row) snaps to the model, with the scroll position moved by
+// the same amount so the rows on screen stay put.
+function vSetTop(hgt) {
+  const want = vPositions()[vwA];
+  const snap = hgt < 0 || (vwA === 0 && Math.abs(hgt) > .5);
+  vTopH = snap ? want : hgt;
+  vTop.firstElementChild.style.height = vTopH + 'px';
+  if (snap && Math.abs(want - hgt) > .5 && WRAP.scrollTop > 0) WRAP.scrollTop += want - hgt;
+}
+// Scrolling has stopped: settle the top spacer's drift (see above) while
+// nothing is moving.
+function vSettle() {
+  if (!vTop || vAll) return;
+  const want = vPositions()[vwA], d = want - vTopH;
+  if (Math.abs(d) <= .5) return;
+  vTopH = want;
+  vTop.firstElementChild.style.height = want + 'px';
+  WRAP.scrollTop += d;
+}
+// Record the rendered rows' heights and size the spacers to the rest.
+function vMeasure() {
+  if (!vTop) return;
+  const hs = [];
+  for (let tr = vTop.nextElementSibling, k = vwA; tr && tr !== vBot; tr = tr.nextElementSibling, k++) {
+    const h = tr.getBoundingClientRect().height;
+    hs.push(h);
+    if (ROW_H.get(flat[k]) !== h) { ROW_H.set(flat[k], h); vPos = null; }
+  }
+  if (vEstFresh && hs.length) {  // the typical row: the median of what's on screen
+    hs.sort((x, y) => x - y);
+    vEst = hs[hs.length >> 1]; vEstFresh = false; vPos = null;
+  }
+  const p = vPositions();
+  vBot.firstElementChild.style.height = (p[flat.length] - p[vwB]) + 'px';
+}
+// Heights went stale (the table's width, its columns or the fonts changed):
+// forget them all, re-measure what's rendered, re-window.
+function vRemeasure() {
+  ROW_H.clear(); vEstFresh = true; vPos = null;
+  if (!vTop) return;
+  vMeasure();  // the top spacer stays as it is, so the rendered rows stay put
+  vWindow();
+  vSettleSoon();
+}
+// settle once scrolling stops: scrollend where the browser has it, else a pause
+let vSettleT = 0;
+function vScrollEnd() {
+  clearTimeout(vSettleT);
+  vWindow();  // scrollend can beat the last scroll frame's re-window
+  vSettle();
+  if (vReveal) { const r = vReveal; vReveal = null; revealIndex(r.i, r.block, true, false); }
+}
+const vSettleSoon = () => { clearTimeout(vSettleT); vSettleT = setTimeout(vScrollEnd, 'onscrollend' in window ? 1000 : 200); };
+WRAP.addEventListener('scrollend', vScrollEnd);
+// Bring flat[i] into view, rendered or not. block: 'center' | 'nearest' |
+// 'park' (about 40% down, clear of the sticky header, so what sits above and
+// below the row are both on screen). The model places it first; an instant
+// scroll then lets the rendered <tr> settle it exactly.
+// A smooth scroll's destination is fixed when it starts, but rows rendered on
+// the way can prove taller or shorter than the model guessed, so it lands a
+// little off: re-aim once when it stops (vScrollEnd), unless the visitor took
+// over the scrolling meanwhile.
+let vReveal = null;
+['wheel', 'touchstart', 'pointerdown'].forEach(t => WRAP.addEventListener(t, () => { vReveal = null; }, { passive: true }));
+function revealIndex(i, block, smooth, again = true) {
+  if (i < 0 || i >= flat.length || !vTop) return;
+  vSettle();  // the model is exact once the top spacer is squared
+  const p = vPositions(), top = vBodyTop() + p[i], h = p[i + 1] - p[i];
+  const thead = parseFloat(getComputedStyle(document.querySelector('.tablezone')).getPropertyValue('--theadh')) || 0;
+  let y;
+  if (block === 'park') y = top - thead - WRAP.clientHeight * .4;
+  else if (block === 'center') y = top + h / 2 - WRAP.clientHeight / 2;
+  else if (top < WRAP.scrollTop + thead) y = top - thead;
+  else if (top + h > WRAP.scrollTop + WRAP.clientHeight) y = top + h - WRAP.clientHeight;
+  else return;
+  y = Math.max(0, Math.min(y, WRAP.scrollHeight - WRAP.clientHeight));
+  if (smooth) {
+    if (Math.abs(y - WRAP.scrollTop) < 2) return;
+    vReveal = again ? { i, block } : null;
+    WRAP.scrollTo({ top: y, behavior: 'smooth' });
+    return;
+  }
+  WRAP.scrollTop = y;
+  vWindow();
+  const tr = rowEl(i);
+  if (tr && block !== 'park') tr.scrollIntoView({ block, inline: 'nearest' });
+}
+addEventListener('beforeprint', () => { if (vTop) { vAll = true; vWindow(true); } });
+addEventListener('afterprint', () => { if (vAll) { vAll = false; vWindow(true); } });
+if (document.fonts) document.fonts.ready.then(vRemeasure);  // a late webfont re-wraps the rows
+{
+  // the scroller's width re-wraps rows (heights stale); its height only moves the window
+  let lastW = 0;
+  new ResizeObserver(() => {
+    const wd = WRAP.clientWidth;
+    if (wd !== lastW) { lastW = wd; vRemeasure(); } else vWindow();
+  }).observe(WRAP);
 }
 // tally: rendered inside the search box (see .count CSS). "142 of 1025" while
 // the list is narrowed; just the bare total when everything shows, since
@@ -2801,19 +2982,19 @@ function toggleGroup(u, force) {
 // sort, type filter, column toggle). No-op when nothing is open or the open row
 // was filtered out of the current results — its <tr> simply isn't in the DOM.
 function recenterOpen() {
-  const tr = openTr();
-  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
+  if (openRow) revealIndex(flat.indexOf(openRow), 'center');
 }
 
 // Re-center on every keystroke: if the open row survives the filter it stays put
 // (and this covers backspacing back to the full list); if it's filtered out the
 // helper no-ops until it reappears. Filtering preserves the sort order rather
 // than ranking by match, so anchoring to the open row doesn't hide better hits.
-// Each pass redraws the list, so it waits for a pause in typing (apply() drops a
-// pending one, so the x, Esc or a filter click never get a stale second pass).
+// Each pass re-filters and re-sorts the whole list, so a burst of keys waits
+// for a short pause (apply() drops a pending one, so the x, Esc or a filter
+// click never get a stale second pass).
 document.getElementById('q').addEventListener('input', () => {
   clearTimeout(qTimer);
-  qTimer = setTimeout(() => { apply(); recenterOpen(); }, 150);
+  qTimer = setTimeout(() => { apply(); recenterOpen(); }, 60);
 });
 // clears the text search only — wired to the inline x and to Esc; leaves the dropdown filters alone
 function clearSearch() {
@@ -2863,7 +3044,7 @@ document.getElementById('hrow').addEventListener('click', e => {
   apply();
   // With a row selected, follow it to its new position; with nothing selected,
   // jump to the top — "show me the new #1" is what a bare re-sort means.
-  if (openTr()) recenterOpen();
+  if (openRow && flat.includes(openRow)) recenterOpen();
   else document.querySelector('.tablewrap').scrollTop = 0;
 });
 
@@ -4669,8 +4850,7 @@ function navigate(dir) {  // dir: +1 down, -1 up
     if (target < 0 || target >= flat.length) return;  // clamp at the ends
   }
   openPanel(flat[target]);
-  const tr = rowEl(target);
-  if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });  // keep the selected row centered as you arrow through
+  revealIndex(target, 'center');  // keep the selected row centered as you arrow through
 }
 
 document.addEventListener('keydown', e => {
@@ -5409,6 +5589,7 @@ function restoreAnchor(a) {
   if (!a) return;
   const i = flat.findIndex(x => rowHash(x) === a.h);
   if (i < 0) return;  // the anchor row itself is gone; leave the scroll alone
+  if (!rowEl(i)) revealIndex(i, 'nearest');  // outside the window: bring it in first
   const tr = rowEl(i);
   if (tr) a.wrap.scrollTop += tr.getBoundingClientRect().top - a.top;
 }

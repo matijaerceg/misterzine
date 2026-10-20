@@ -238,6 +238,14 @@
   #typemenu .tsub hr { border: 0; border-top: 1px solid var(--hair); margin: .15rem 0; }
   #typemenu .tsub.off { opacity: .45; }
   #srcmenu .resets { flex-wrap: wrap; gap: .35rem 1rem; }
+  /* Source: the downloader.ini lines opener under the picks. A real button, not
+     a link-style pick like the ones above it: it opens a popup, it filters nothing */
+  #srcmenu .menubtn { display: flex; align-items: center; justify-content: center; gap: .45rem;
+                      margin: .35rem 0 0; padding: .4rem .75rem; font: inherit; font-size: .9rem;
+                      white-space: nowrap; cursor: pointer; color: var(--fg);
+                      background: var(--bg); border: 1px solid var(--hair); border-radius: 4px; }
+  #srcmenu .menubtn:hover { background: var(--hover-bg); border-color: var(--accent); }
+  #srcmenu .menubtn svg { flex: none; width: .95rem; height: .95rem; }
   /* "Year" dropdown: From/To numeric range inputs + one-tap decade chips. Inputs
      (not selects) so any boundary year is enterable, including decade edges like
      2010/2019 that no game in the data happens to carry; the per-field x shows
@@ -3423,8 +3431,12 @@ function buildSrcMenu() {
     (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
     '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src',
       '<button type="button" class="reset" data-src-preset="inside" data-tip="Select only sources included in update_all\'s curated built-in selection. You may need to enable a source in update_all settings to receive its cores.">Inside update_all</button>' +
-      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s curated built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>' +
-      '<button type="button" class="reset" id="iniexpbtn" data-tip="Ready-made downloader.ini lines for every source outside update_all, with notes to read first.">downloader.ini lines...</button>');
+      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s curated built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>') +
+    // a window glyph: this one opens a popup
+    '<button type="button" class="menubtn" id="iniexpbtn" aria-haspopup="dialog" data-tip="Ready-made downloader.ini lines for every source outside update_all, with notes to read first.">' +
+      '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">' +
+      '<rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M1.5 5.5h13M4 8.5h5M4 11h7"/></svg>' +
+      'downloader.ini lines...</button>';
   syncSrcSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML

@@ -4079,6 +4079,7 @@ COMPUTER_MANUFACTURER = {
     "SGIIndy": "Silicon Graphics",
     "Sun-2": "Sun Microsystems",
     "Sun-3": "Sun Microsystems",
+    "Cray-XMP": "Cray Research",
     "JR100": "Panasonic",  # sold as the National JR-100 in Japan (Matsushita)
     "Ti994a": "Texas Instruments",
     "ColecoAdam": "Coleco", "Aquarius": "Mattel", "TomyTutor": "Tomy",
@@ -4129,6 +4130,7 @@ CORE_YEAR = {
     "SGIIndy": "1993",  # SGI Indy announced 1993-07-12
     "Sun-2": "1983",
     "Sun-3": "1985",
+    "Cray-XMP": "1982",
     "JR100": "1981",
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
     "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
@@ -4244,6 +4246,7 @@ SYSTEM_TITLES = {
     "MacSE30": "Macintosh SE/30",
     "MacQuadra800": "Macintosh Quadra 800",
     "MacIIcx": "Macintosh IIcx",
+    "Cray-XMP": "Cray X-MP",
     "Minimig": "Amiga (Minimig)",
     "MSX": "MSX2",  # this core is the MSX2/2+/3 machine; the separate MSX1 core is first-gen
     "Ondra_SPO186": "Ondra SPO 186",

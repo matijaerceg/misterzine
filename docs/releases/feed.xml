@@ -6,7 +6,61 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Tue, 20 Oct 2026 03:01:47 +0000</lastBuildDate>
+<lastBuildDate>Tue, 20 Oct 2026 04:11:24 +0000</lastBuildDate>
+<item>
+<title>[New] Super Qix (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sqix</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Qix (US) [TomSVR].mra:2026-10-20T04:11:24+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:11:24 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sqix.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1987 / Kaneko / Taito&lt;/p&gt;&lt;p&gt;Core: TomSVR_sqix&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TomSVR_sqix (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#perestro</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_sqix_20261020.rbf:2026-10-20T04:11:24+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:11:24 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Perestroika Girls, Super Qix.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Battletoads (Meathax) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btoads_meathax</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Meathax_Battletoads_20261020.rbf:2026-10-20T04:03:21+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:03:21 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/battletoads-meathax.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;1994 / Rare / Electronic Arts&lt;/p&gt;&lt;p&gt;Core: Meathax_Battletoads&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Narc (rev 7.00) [Meathax] (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#narc_meathax</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Meathax_NARC_20261020.rbf:2026-10-20T04:03:21+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:03:21 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;1988 / Williams&lt;/p&gt;&lt;p&gt;Core: Meathax_NARC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Juezhan Tianhuang (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#juezhan-tianhuang-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/bazset_JuezhanTianhuang_20261019.rbf:2026-10-20T04:03:21+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:03:21 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jzth.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 2000 / &amp;lt;unknown&amp;gt;&lt;/p&gt;&lt;p&gt;Core: bazset_JuezhanTianhuang&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Battletoads (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btoads</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-Battletoads_20261020.rbf:2026-10-20T03:42:30+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 03:42:30 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/btoads.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1994 / Rare / Electronic Arts&lt;/p&gt;&lt;p&gt;Core: Arcade-Battletoads&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Narc [15kHz CRT] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#narc-15khz-crt</link>
@@ -410,7 +464,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_bfght.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Baseball (Ongo) (Arcade)</title>
@@ -419,7 +473,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Nintendo of America&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_bball.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Nintendo of America&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Baseball Stars - Be a Champ! (Arcade)</title>
@@ -437,7 +491,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Jaleco (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_bload.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Jaleco (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Captain Sky Hawk (Ongo) (Arcade)</title>
@@ -446,7 +500,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Rare (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_cshwk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Rare (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Castlevania (Ongo) (Arcade)</title>
@@ -455,7 +509,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_cvnia.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Chip'n Dale - Rescue Rangers (Arcade)</title>
@@ -500,7 +554,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_drmro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Duck Hunt (Ongo) (Arcade)</title>
@@ -509,7 +563,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_duckh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Excitebike (Ongo) (Arcade)</title>
@@ -518,7 +572,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ebike.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Gauntlet (PlayChoice-10) (Arcade)</title>
@@ -536,7 +590,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_golf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Gradius (PlayChoice-10) (Arcade)</title>
@@ -554,7 +608,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_hgaly.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Kung Fu (Ongo) (Arcade)</title>
@@ -563,7 +617,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1985 / Irem (Nintendo license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_kngfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1985 / Irem (Nintendo license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Mario Bros. (PlayChoice-10) (Arcade)</title>
@@ -581,7 +635,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_moglf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Mega Man III (Ongo) (Arcade)</title>
@@ -590,7 +644,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_mman3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Metroid (Ongo) (Arcade)</title>
@@ -599,7 +653,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_mtoid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Mike Tyson's Punch-Out!! (Ongo) (Arcade)</title>
@@ -608,7 +662,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_miket.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Ninja Gaiden (Ongo) (Arcade)</title>
@@ -617,7 +671,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ngaid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Ninja Gaiden Episode II - The Dark Sword of Chaos (Arcade)</title>
@@ -644,7 +698,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Technos Japan (Nintendo license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_wcup.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Technos Japan (Nintendo license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] PinBot (Ongo) (Arcade)</title>
@@ -653,7 +707,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1988 / Rare (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pinbt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1988 / Rare (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] PlayChoice-10 BIOS (Arcade)</title>
@@ -671,7 +725,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Taito (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwbld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Taito (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Pro Wrestling (Ongo) (Arcade)</title>
@@ -680,7 +734,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwrst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] R.C. Pro-Am (Ongo) (Arcade)</title>
@@ -689,7 +743,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Rare&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rcpam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Rare&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Rad Racer (Ongo) (Arcade)</title>
@@ -698,7 +752,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Square&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_radrc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Square&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Rad Racer II (Ongo) (Arcade)</title>
@@ -707,7 +761,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1990 / Square (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_radr2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1990 / Square (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Rockin' Kats (Ongo) (Arcade)</title>
@@ -716,7 +770,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Atlus (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rkats.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Atlus (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Rush'n Attack (Ongo) (Arcade)</title>
@@ -725,7 +779,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rnatk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Rygar (PlayChoice-10) (Arcade)</title>
@@ -743,7 +797,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1990 / Rare&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_sjetm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1990 / Rare&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Super C (Ongo) (Arcade)</title>
@@ -752,7 +806,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_suprc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Super Mario Bros. (Ongo) (Arcade)</title>
@@ -761,7 +815,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1985 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1985 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Super Mario Bros. 2 (Ongo) (Arcade)</title>
@@ -770,7 +824,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Super Mario Bros. 3 (Ongo) (Arcade)</title>
@@ -779,7 +833,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Tecmo Bowl (Ongo) (Arcade)</title>
@@ -788,7 +842,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tbowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Teenage Mutant Ninja Turtles (PlayChoice-10) (Arcade)</title>
@@ -815,7 +869,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tenis.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] The Goonies (Ongo) (Arcade)</title>
@@ -824,7 +878,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Konami&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_goons.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Konami&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Tiny Toon Adventures (Ongo) (Arcade)</title>
@@ -833,7 +887,7 @@
 <pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ttoon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Track &amp; Field (PlayChoice-10) (Arcade)</title>
@@ -852,60 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_trjan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1986 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Uncle Fester's Quest - The Addams Family (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_ftqst</link>
-<guid isPermaLink="false">ongo:_Arcade/_Nintendo PlayChoice-10/Uncle Fester's Quest - The Addams Family (PlayChoice-10).mra:2026-10-19T03:33:43+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ftqst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1989 / Sunsoft (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Volley Ball (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_vball</link>
-<guid isPermaLink="false">ongo:_Arcade/_Nintendo PlayChoice-10/Volley Ball (PlayChoice-10).mra:2026-10-19T03:33:43+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Wild Gunman (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_wgnmn</link>
-<guid isPermaLink="false">ongo:_Arcade/_Nintendo PlayChoice-10/Wild Gunman (PlayChoice-10).mra:2026-10-19T03:33:43+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Yo! Noid (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_ynoid</link>
-<guid isPermaLink="false">ongo:_Arcade/_Nintendo PlayChoice-10/Yo! Noid (PlayChoice-10).mra:2026-10-19T03:33:43+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Thayer's Quest (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#thayers</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Thayer's Quest.mra:2026-10-19T03:20:10+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:20:10 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thayers.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1984 / RDI Video Systems&lt;/p&gt;&lt;p&gt;Core: LaserdiscGames&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] LaserdiscGames (Arcade core, 6 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261018.rbf:2026-10-19T03:20:10+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:20:10 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Dragon's Lair 2: Time Warp, Space Ace, Super Don Quix-ote, Thayer's Quest.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-19 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

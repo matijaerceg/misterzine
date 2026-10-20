@@ -6,7 +6,52 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 20 Oct 2026 03:01:47 +0000</lastBuildDate>
+<lastBuildDate>Tue, 20 Oct 2026 04:11:24 +0000</lastBuildDate>
+<item>
+<title>[Updated] TomSVR_sqix (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#perestro</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_sqix_20261020.rbf:2026-10-20T04:11:24+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:11:24 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Perestroika Girls, Super Qix.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Battletoads (Meathax) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btoads_meathax</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Meathax_Battletoads_20261020.rbf:2026-10-20T04:03:21+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:03:21 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/battletoads-meathax.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;1994 / Rare / Electronic Arts&lt;/p&gt;&lt;p&gt;Core: Meathax_Battletoads&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Narc (rev 7.00) [Meathax] (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#narc_meathax</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Meathax_NARC_20261020.rbf:2026-10-20T04:03:21+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:03:21 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;1988 / Williams&lt;/p&gt;&lt;p&gt;Core: Meathax_NARC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Juezhan Tianhuang (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#juezhan-tianhuang-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/bazset_JuezhanTianhuang_20261019.rbf:2026-10-20T04:03:21+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 04:03:21 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jzth.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 2000 / &amp;lt;unknown&amp;gt;&lt;/p&gt;&lt;p&gt;Core: bazset_JuezhanTianhuang&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Battletoads (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btoads</link>
+<guid isPermaLink="false">meathax:_Arcade/cores/Arcade-Battletoads_20261020.rbf:2026-10-20T03:42:30+00:00</guid>
+<pubDate>Tue, 20 Oct 2026 03:42:30 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/btoads.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1994 / Rare / Electronic Arts&lt;/p&gt;&lt;p&gt;Core: Arcade-Battletoads&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arcade-NARC (Arcade core, 2 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#narc</link>
@@ -861,51 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/midres.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtmidres&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/midres"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Robocop (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#robocop</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Robocop/Robocop (Japan).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/robocop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtcop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cop"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Secret Agent (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#secretag</link>
-<guid isPermaLink="false">jtbindb:_Arcade/_alternatives/_Secret Agent/Secret Agent (Japan, revision 2).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/secretag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1989 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sharp MZ (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SharpMZ</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SharpMZ_20261012.rbf:2026-10-12T09:23:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 09:23:53 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ChampionBaseball (Arcade core, 5 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#champbas</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/ChampionBaseball_20261011.rbf:2026-10-11T22:47:52+00:00</guid>
-<pubDate>Sun, 11 Oct 2026 22:47:52 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Champion Base Ball, Champion Base Ball Part-2, Exciting Soccer, Exciting Soccer II, Talbot.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ChampionBaseball_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] PolePosition (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#polepos</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/PolePosition_20261011.rbf:2026-10-11T22:47:52+00:00</guid>
-<pubDate>Sun, 11 Oct 2026 22:47:52 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Pole Position, Pole Position II.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PolePosition_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

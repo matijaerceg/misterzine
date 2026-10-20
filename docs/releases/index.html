@@ -278,34 +278,45 @@
                       background: var(--surface); color: inherit; }
   .favbanner button:hover { background: var(--hover-bg); }
   #favdismiss { margin-left: auto; }
-  /* favorites -> update_all export dialog. Native <dialog> (top layer, inert
+  /* favorites -> update_all export dialog, and the Source menu's downloader.ini
+     lines (#iniexp) built the same way. Native <dialog> (top layer, inert
      page behind); padding lives on .fx-in so a backdrop click is detectable
      as e.target === dialog (the light-dismiss check). */
-  #favexp { padding: 0; border: 1px solid var(--hair); border-radius: 8px;
+  :is(#favexp, #iniexp) { padding: 0; border: 1px solid var(--hair); border-radius: 8px;
             background: var(--surface); color: var(--fg);
             width: min(36rem, calc(100vw - 2rem)); }
-  #favexp::backdrop { background: rgb(0 0 0 / .45); }  /* shadows stay black on every theme */
-  #favexp .fx-in { padding: 1rem 1.15rem 1.05rem; max-height: min(80vh, 42rem);
+  :is(#favexp, #iniexp)::backdrop { background: rgb(0 0 0 / .45); }  /* shadows stay black on every theme */
+  :is(#favexp, #iniexp) .fx-in { padding: 1rem 1.15rem 1.05rem; max-height: min(80vh, 42rem);
                    overflow: auto; box-sizing: border-box; }
-  #favexp h2 { margin: 0 0 .45rem; font-size: 1.05rem; }
-  #favexp h3 { margin: .9rem 0 .2rem; font-size: .95rem; }
-  #favexp p { margin: .35rem 0; font-size: .88rem; line-height: 1.45; }
-  #favexp p code { background: var(--bg); border: 1px solid var(--hair);
+  :is(#favexp, #iniexp) h2 { margin: 0 0 .45rem; font-size: 1.05rem; }
+  :is(#favexp, #iniexp) h3 { margin: .9rem 0 .2rem; font-size: .95rem; }
+  :is(#favexp, #iniexp) p { margin: .35rem 0; font-size: .88rem; line-height: 1.45; }
+  :is(#favexp, #iniexp) p code { background: var(--bg); border: 1px solid var(--hair);
                    border-radius: 3px; padding: 0 .25rem; font-size: .95em; }
-  #favexp .fx-row { display: flex; gap: .5rem; align-items: flex-start; margin: .4rem 0 .1rem; }
-  #favexp .fx-row code { flex: 1 1 auto; display: block; background: var(--bg);
+  :is(#favexp, #iniexp) .fx-row { display: flex; gap: .5rem; align-items: flex-start; margin: .4rem 0 .1rem; }
+  :is(#favexp, #iniexp) .fx-row code { flex: 1 1 auto; display: block; background: var(--bg);
                          border: 1px solid var(--hair); border-radius: 4px;
                          padding: .45rem .55rem; font-size: .82rem; line-height: 1.5;
                          overflow-wrap: anywhere; user-select: all; }
-  #favexp button { font: inherit; font-size: .85rem; padding: .35rem .6rem; cursor: pointer;
+  :is(#favexp, #iniexp) button { font: inherit; font-size: .85rem; padding: .35rem .6rem; cursor: pointer;
                    border: 1px solid var(--hair); border-radius: 4px;
                    background: var(--surface); color: inherit; }
-  #favexp button:hover { background: var(--hover-bg); }
-  #favexp .fx-note, #favexp .fx-warn { color: var(--muted); font-size: .8rem; }
-  #favexp .fx-warn { margin-top: .8rem; padding-top: .5rem; border-top: 1px solid var(--rule); }
-  #favexp .fx-close { margin-top: .8rem; text-align: right; }
-  #favexp a { color: var(--accent); text-decoration: none; }
-  #favexp a .lbl { text-decoration: underline; text-underline-offset: 2px; }
+  :is(#favexp, #iniexp) button:hover { background: var(--hover-bg); }
+  :is(#favexp, #iniexp) .fx-note, :is(#favexp, #iniexp) .fx-warn { color: var(--muted); font-size: .8rem; }
+  :is(#favexp, #iniexp) .fx-warn { margin-top: .8rem; padding-top: .5rem; border-top: 1px solid var(--rule); }
+  :is(#favexp, #iniexp) .fx-close { margin-top: .8rem; text-align: right; }
+  :is(#favexp, #iniexp) a { color: var(--accent); text-decoration: none; }
+  :is(#favexp, #iniexp) a .lbl { text-decoration: underline; text-underline-offset: 2px; }
+  /* the ini text is wider than the export's prose: comment lines run to 76 columns */
+  #iniexp { width: min(46rem, calc(100vw - 2rem)); }
+  #iniexp textarea { display: block; box-sizing: border-box; width: 100%; height: min(52vh, 26rem);
+                     margin: .5rem 0 0; padding: .5rem .6rem; resize: vertical;
+                     background: var(--bg); color: var(--fg); border: 1px solid var(--hair);
+                     border-radius: 4px; font: .78rem/1.45 ui-monospace, SFMono-Regular, Consolas, monospace;
+                     white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
+  /* comment lines are 76 columns and fit a desktop box; the soft wrap only
+     keeps a long db_url line from hiding past the edge (a copy keeps it whole) */
+  #iniexp .fx-close { display: flex; gap: .5rem; justify-content: flex-end; flex-wrap: wrap; }
   .yearrow { display: flex; align-items: center; gap: .4rem; }
   .yearrow .ylbl { width: 2.6rem; color: var(--muted); font-size: .9rem; }
   .yearrow input[type=number] { flex: 1; min-width: 0; font-family: inherit; font-size: .9rem;
@@ -1253,6 +1264,21 @@
       update_all will download only those cores (plus MiSTer system files) from
       that database and skip everything else in it.</p>
     <div class="fx-close"><button type="button" id="favexpclose">Close</button></div>
+  </div>
+</dialog>
+<!-- Source menu -> downloader.ini lines for every database update_all does not
+     bundle, notes first. Text built on open and editable; no copy button, the
+     visitor picks what to copy. -->
+<dialog id="iniexp" aria-labelledby="iniexph">
+  <div class="fx-in">
+    <h2 id="iniexph">Sources outside update_all</h2>
+    <p>Ready-made downloader.ini lines for every database the tracker lists that
+      update_all does not include. Read the notes at the top, delete what you do
+      not want, then select the rest and copy it.</p>
+    <textarea id="initext" spellcheck="false" autocomplete="off" aria-label="downloader.ini lines"></textarea>
+    <div class="fx-close">
+      <button type="button" id="iniclose" autofocus>Close</button>
+    </div>
   </div>
 </dialog>
 </div>
@@ -3397,7 +3423,8 @@ function buildSrcMenu() {
     (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
     '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src',
       '<button type="button" class="reset" data-src-preset="inside" data-tip="Select only sources included in update_all\'s curated built-in selection. You may need to enable a source in update_all settings to receive its cores.">Inside update_all</button>' +
-      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s curated built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>');
+      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s curated built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>' +
+      '<button type="button" class="reset" id="iniexpbtn" data-tip="Ready-made downloader.ini lines for every source outside update_all, with notes to read first.">downloader.ini lines...</button>');
   syncSrcSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
@@ -3416,6 +3443,7 @@ function resetSrcs() {
   syncSrcSummary();
 }
 srcMenu.addEventListener('click', e => {
+  if (e.target.closest('#iniexpbtn')) { openIniExp(); return; }
   const preset = e.target.closest('[data-src-preset]');
   if (preset) {
     const inside = preset.dataset.srcPreset === 'inside';
@@ -3772,6 +3800,82 @@ favExpDlg.addEventListener('click', e => {
   if (e.target === favExpDlg) favExpDlg.close();  // backdrop click = light dismiss
 });
 document.getElementById('favexpclose').addEventListener('click', () => favExpDlg.close());
+
+// --- Source menu -> downloader.ini lines for the opt-in databases ------------
+// One block for every database update_all does not bundle (OPTIN_DBS), with the
+// warnings first as ini comments so they travel with the paste. Downloader 2.4+
+// (2026-03) also reads drop-in files named downloader_*.ini next to
+// downloader.ini, where a section downloader.ini already has wins, so the notes
+// offer pasting into a new file of that name too. No download and no copy
+// button (the owner's call: the visitor reads, prunes and copies by hand).
+// Comments start at column 0 and never with "[": the
+// downloader's duplicate-section scan treats any other line as ini.
+const INI_FILE = 'downloader_misterzine.ini';
+const iniDlg = document.getElementById('iniexp');
+const iniText = document.getElementById('initext');
+// word-wrap one note into "# " comment lines: `first` opens it, `rest` indents
+// the lines after it
+function iniWrap(text, first = '# ', rest = first, w = 76) {
+  const out = [];
+  let line = '';
+  for (const word of text.split(/\s+/)) {
+    const pre = out.length ? rest : first;
+    if (line && (pre + line + ' ' + word).length > w) { out.push(pre + line); line = word; }
+    else line = line ? line + ' ' + word : word;
+  }
+  out.push((out.length ? rest : first) + line);
+  return out;
+}
+function buildIni() {
+  const srcs = (SRC_KEYS.length ? SRC_KEYS : Object.keys(OPTIN_DBS)).filter(s => OPTIN_DBS[s]);
+  const bundled = [...UPDATE_ALL_INCLUDED].map(s => SRC_NAMES[s] || s);
+  const day = new Date().toISOString().slice(0, 10);
+  const L = [
+    ...iniWrap('Databases listed on the misterzine release tracker that update_all does not include. Generated ' +
+      day + ' from https://misterzine.fyi/releases/'),
+    '#',
+    ...iniWrap('READ THIS FIRST. You decide what goes on your MiSTer, and you are responsible for it.'),
+    '#',
+    ...iniWrap('These are third-party databases. misterzine only lists what they publish; it does not run, ' +
+      'test or vouch for any of them.', '# - ', '#   '),
+    ...iniWrap('Delete every section you do not want before you paste this.', '# - ', '#   '),
+    ...iniWrap('Paste it one of two ways:', '# - ', '#   '),
+    ...iniWrap('Into a new file, /media/fat/' + INI_FILE + ' (Downloader 2.4 or newer, March 2026). ' +
+      'A section your downloader.ini already has wins over the one here, and deleting the file ' +
+      'stops these updates.', '#   1. ', '#      '),
+    ...iniWrap('At the end of /media/fat/downloader.ini. If a section appears twice, ' +
+      'only its first appearance counts.', '#   2. ', '#      '),
+    '#   Then run update_all.',
+    ...iniWrap('Some databases deliver more than the tracker lists. Ongo also brings other systems, ' +
+      'scripts, extras and ROM files; bazset, decoryah and ppriest also ship MAME ROM zips. Make sure ' +
+      'you are allowed to have those files where you live.', '# - ', '#   '),
+    ...iniWrap('Ongo also carries cores by some of the developers below, and several databases ship the ' +
+      'same games as other cores, so expect duplicates in your arcade menu.', '# - ', '#   '),
+    ...iniWrap('Some of these cores are early, experimental, or written with AI assistance.', '# - ', '#   '),
+    ...iniWrap('Not listed here: ' + bundled.join(', ') + '. Those come with update_all; ' +
+      'turn them on in its settings menu.', '# - ', '#   '),
+  ];
+  for (const s of srcs) {
+    const o = OPTIN_DBS[s];
+    L.push('', '# ' + (SRC_NAMES[s] || s));
+    if (o.what) L.push(...iniWrap(o.what));
+    L.push('[' + o.section + ']', 'db_url = ' + o.url);
+  }
+  return L.join('\n') + '\n';
+}
+function openIniExp() {
+  document.getElementById('srcdd').open = false;  // the modal replaces the menu
+  setSheet(false);                                // and the phone Filters sheet
+  iniDlg.showModal();
+  // filled once shown: a value set while the dialog is hidden keeps the old
+  // scroll position, so a reopen would land mid-text instead of on the notes
+  iniText.value = buildIni();
+  iniText.setSelectionRange(0, 0);
+  iniText.scrollTop = 0;
+}
+iniDlg.addEventListener('click', e => {
+  if (e.target.closest('#iniclose') || e.target === iniDlg) iniDlg.close();  // backdrop click = light dismiss
+});
 
 // --- arriving on a ?fav= link ------------------------------------------------
 // The param is read once, on load (see the data.json handler — it needs KEY2ROW
@@ -4857,7 +4961,7 @@ document.addEventListener('keydown', e => {
   // the export dialog is modal: native Esc closes it, and no key may leak to
   // the Esc ladder, arrow-nav, or type-anywhere while it's up (q.focus() on an
   // inert page would misfire anyway)
-  if (favExpDlg.open || document.querySelector('dialog.fbdlg[open]')) return;  // same for the feedback form
+  if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open]')) return;  // same for the ini lines and the feedback form
   if (e.key === 'Escape') {
     if (closePop() || closeHoverPop()) return;  // an open popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it

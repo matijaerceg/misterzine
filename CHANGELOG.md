@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-20
+
+- Release tracker: the Source menu has a new "downloader.ini lines..." link. It shows ready-made downloader.ini lines for all twelve sources update_all does not include, with notes at the top to read first. Delete the ones you do not want, then copy and paste the rest into downloader.ini or a new downloader_misterzine.ini file.
+
 ## 2026-10-19
 
 - Release tracker: PlayChoice-10 games from ppriest's and Ongo's databases now show their own title and gameplay screenshots instead of the PlayChoice-10 boot screen.

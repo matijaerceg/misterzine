@@ -41,7 +41,7 @@ jobs:
         run: python misterzine.py snapshot
 
       - name: Check feed field exports
-        run: python -m unittest test_controls test_card_status test_arcade_specs test_family test_seed_r2 test_supporters test_mature test_genre
+        run: python -m unittest test_controls test_card_status test_arcade_specs test_family test_seed_r2 test_supporters test_mature test_genre test_optin_dbs
 
       - name: Check website source visibility
         run: node --test tools/source_visibility.test.js

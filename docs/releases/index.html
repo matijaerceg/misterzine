@@ -391,6 +391,13 @@
     width: var(--hint-l-w, 12px); pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 15;
     background: linear-gradient(to right, var(--hint-shadow), transparent); }
   .tablezone.more-l::before { opacity: 1; }
+  /* syncScrollHints sets its variables (the two above, --titlew, --theadh,
+     --sbw, --sbh) on .tablezone for the overlays and pills that sit beside the
+     scroller. Custom properties inherit, so without this fence every new value
+     restyled every cell of the table: ~50-125 ms per scroll step or panel
+     resize. Nothing inside the scroller reads them. */
+  .tablewrap { --hint-r-w: initial; --hint-l-w: initial; --titlew: initial;
+               --theadh: initial; --sbw: initial; --sbh: initial; }
   /* Floating pills over the table: the jump stack (top right: Scroll to top /
      Since visit / Selected, always present, each one disabled while it has
      nowhere to go - see syncJumps)
@@ -487,7 +494,12 @@
      vivid yet legible on both the light and dark table grounds. */
   .tico { display: inline-flex; align-items: center; vertical-align: middle;
           color: color-mix(in srgb, var(--h) 80%, var(--fg)); }
-  .tico svg { width: 1rem; height: 1rem; }
+  /* the glyph: a currentColor square masked by the type's SVG (--ico, set per
+     ti-<type> class by the script next to TYPE_ICONS). Exact colours so the
+     icons survive printing, which drops backgrounds by default. */
+  .tico::before { content: ""; display: block; width: 1rem; height: 1rem; background: currentColor;
+                  -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat;
+                  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   td .dep { color: var(--muted); font-size: .82em; margin-left: .35rem; }
   /* DEBUT badge (was NEW until 2026-09-17): our own pill, where the NEW emoji
      it replaced was a fixed blue that ignored every theme. Outlined in
@@ -1285,6 +1297,19 @@ const ALLG = {};   // g -> every member row in DATA (ingest), for deep links to 
 const G2ROW = {};  // g -> the umbrella object of the current apply()
 const rowHash = d => d.grp ? '#g:' + d.g : d.k ? '#' + d.k : '';
 const rowURL = d => location.origin + location.pathname + rowHash(d);
+// Lookups into the rendered rows. The table runs to ~45,000 elements, so a
+// selector query per scroll event or keypress was a whole-table walk each
+// time; live collections are kept current by the browser and cost nothing
+// while the rows don't change.
+const ROWS = document.getElementById('rows');
+const OPEN_TRS = ROWS.getElementsByClassName('open');  // the selected row (at most one)
+const DOT_SPANS = ROWS.getElementsByClassName('sv');   // since-visit dots, in list order
+const openTr = () => OPEN_TRS[0] || null;
+const rowEl = i => { const tr = ROWS.rows[i]; return tr && +tr.dataset.i === i ? tr : null; };  // the <tr> of flat[i]
+// the sort's string order: case- and accent-blind, numbers natural. One shared
+// Collator, since localeCompare with options sets one up per comparison.
+const COLL = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+let qTimer = 0;  // the search box's typing pause (see its input listener)
 // the site feedback form (feedback.js) offers to attach the game whose panel is open
 window.mzFeedbackGame = () => document.body.classList.contains('panel-open') && openRow && openRow.k
   ? { key: openRow.k, title: openRow.title } : null;
@@ -1929,21 +1954,26 @@ function typeLabel(d) {
 // Search and sort read typeLabel(d) from the data, not this markup, so the
 // text -> icon swap leaves both untouched; the type name still rides along as
 // title/aria-label for hover, screen readers and the sort tooltip.
-const _tsvg = p => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-  'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + p + '</svg>';
+// The icons are painted by CSS (a mask over the .tico hue, class ti-<type>), not
+// inlined: an <svg> in each of ~2,000 rows was a third of the table's DOM and
+// about a third of every re-render.
+const _tsvg = p => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000" ' +
+  'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + p + '</svg>';
 const TYPE_ICONS = {
   Arcade:   _tsvg('<path d="M21 17a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2Z"/><path d="M6 15v-2"/><path d="M12 15V9"/><circle cx="12" cy="6" r="3"/>'),
   Console:  _tsvg('<line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/>'),
   Computer: _tsvg('<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>'),
   Other:    _tsvg('<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>')
 };
+document.head.insertAdjacentHTML('beforeend', '<style>' + Object.keys(TYPE_ICONS).map(t =>
+  '.tico.ti-' + t.toLowerCase() + '{--ico:url("data:image/svg+xml,' + encodeURIComponent(TYPE_ICONS[t]) + '")}').join('') + '</style>');
+const icoClass = t => 'ti-' + (TYPE_ICONS[t] ? t : 'Other').toLowerCase();
 
 function typeBadge(d) {
   const base = d.base || 'Other';
   const cls  = 't-' + base.toLowerCase();
-  const ico  = TYPE_ICONS[base] || TYPE_ICONS.Other;
-  return '<span class="tico ' + cls + '" role="img" data-tip="' + escA(base) +
-         '" aria-label="' + escA(base) + '">' + ico + '</span>';
+  return '<span class="tico ' + cls + ' ' + icoClass(base) + '" role="img" data-tip="' + escA(base) +
+         '" aria-label="' + escA(base) + '"></span>';
 }
 
 // Whole days since a genuinely known MiSTer debut, else -1. Gating on
@@ -2364,6 +2394,9 @@ function dragifyThumb(t, horiz) {
 // content resizes (rows/columns change the table's size without touching the
 // scroller's box, so the wrap's own observer misses them), and after column
 // toggles (buildHeader above).
+// write a style variable only when its value changes: a repeat write still
+// dirties the element's style, and this runs on every scroll frame
+function setVar(el, k, v) { if (el.style.getPropertyValue(k) !== v) el.style.setProperty(k, v); }
 function syncScrollHints() {
   const w = document.querySelector('.tablewrap'), z = document.querySelector('.tablezone');
   z.classList.toggle('more-l', w.scrollLeft > 0);
@@ -2376,19 +2409,19 @@ function syncScrollHints() {
   const maxScroll = w.scrollWidth - w.clientWidth;
   const remain = Math.max(0, maxScroll - w.scrollLeft);
   const taper = Math.max(48, maxScroll * .06);
-  z.style.setProperty('--hint-r-w', Math.min(28, 28 * remain / taper).toFixed(1) + 'px');
-  z.style.setProperty('--hint-l-w', Math.min(12, 12 * w.scrollLeft / taper).toFixed(1) + 'px');
+  setVar(z, '--hint-r-w', Math.min(28, 28 * remain / taper).toFixed(1) + 'px');
+  setVar(z, '--hint-l-w', Math.min(12, 12 * w.scrollLeft / taper).toFixed(1) + 'px');
   // scrollbar thickness (0 with overlay scrollbars), so the shadows can stop
   // short of the scrollbars instead of shading them
-  z.style.setProperty('--sbw', (w.offsetWidth - w.clientWidth) + 'px');
-  z.style.setProperty('--sbh', (w.offsetHeight - w.clientHeight) + 'px');
+  setVar(z, '--sbw', (w.offsetWidth - w.clientWidth) + 'px');
+  setVar(z, '--sbh', (w.offsetHeight - w.clientHeight) + 'px');
   // pin the left shadow to the sticky Title column's right edge (the column is
   // percentage-sized, so the edge moves with every panel/window/column change)
   const th = document.querySelector('#hrow th');
-  if (th) z.style.setProperty('--titlew',
+  if (th) setVar(z, '--titlew',
     (th.getBoundingClientRect().right - z.getBoundingClientRect().left) + 'px');
   // sticky header height anchors the "Scroll to top" button just below it
-  if (th) z.style.setProperty('--theadh', th.getBoundingClientRect().height + 'px');
+  if (th) setVar(z, '--theadh', th.getBoundingClientRect().height + 'px');
   // floating thumbs: length ∝ visible fraction, position ∝ scroll progress
   if (vThumb) {
     const canV = w.scrollHeight > w.clientHeight + 1;
@@ -2407,7 +2440,11 @@ function syncScrollHints() {
     }
   }
 }
-document.querySelector('.tablewrap').addEventListener('scroll', syncScrollHints, { passive: true });
+// once per frame: a fling or a wheel spin fires several scroll events per paint
+let hintsRaf = 0;
+document.querySelector('.tablewrap').addEventListener('scroll', () => {
+  if (!hintsRaf) hintsRaf = requestAnimationFrame(() => { hintsRaf = 0; syncScrollHints(); });
+}, { passive: true });
 new ResizeObserver(syncScrollHints).observe(document.querySelector('.tablewrap'));
 new ResizeObserver(syncScrollHints).observe(document.querySelector('table'));
 // reveal the floating thumbs while scrolling, drop them again after a beat
@@ -2432,7 +2469,8 @@ document.querySelector('.tablewrap').addEventListener('scroll', () => {
 // scrolling, resizing and every re-render (the table ResizeObserver) keep it
 // honest; markOpenRow/closePanel call it too since a highlight moves no pixels.
 function syncJumps(w, z) {
-  document.getElementById('totop').disabled = !(w.scrollTop > 30);
+  const tt = document.getElementById('totop');
+  if (tt.disabled !== !(w.scrollTop > 30)) tt.disabled = !(w.scrollTop > 30);
   const v = w.getBoundingClientRect();
   const top = v.top + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
   const sync = (id, find, label) => {
@@ -2443,14 +2481,16 @@ function syncJumps(w, z) {
       above = r.bottom <= top;
       off = above || r.top >= v.bottom;
     }
-    btn.disabled = !off;
-    btn.textContent = off ? (above ? '↑ ' : '↓ ') + label : label;
+    // only touch what changed: this runs every scroll frame
+    const txt = off ? (above ? '↑ ' : '↓ ') + label : label;
+    if (btn.disabled !== !off) btn.disabled = !off;
+    if (btn.textContent !== txt) btn.textContent = txt;
   };
   sync('tovisit', lastDotRow, 'Since visit');
-  sync('torow', () => document.querySelector('#rows tr.open'), 'Selected');
+  sync('torow', openTr, 'Selected');
 }
 document.getElementById('torow').addEventListener('click', () => {
-  const tr = document.querySelector('#rows tr.open');
+  const tr = openTr();
   if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
 });
 // park a row about 40% down the scrollport, so what sits above and below it are
@@ -2463,8 +2503,7 @@ function parkRow(row) {
 }
 // the deepest dotted row in the rendered (filtered, sorted) list, or null
 function lastDotRow() {
-  const dots = document.querySelectorAll('#rows tr[data-i] .sv');
-  return dots.length ? dots[dots.length - 1].closest('tr') : null;
+  return DOT_SPANS.length ? DOT_SPANS[DOT_SPANS.length - 1].closest('tr') : null;
 }
 document.getElementById('tovisit').addEventListener('click', () => {
   const row = lastDotRow();
@@ -2542,14 +2581,41 @@ function render() {
     flat.push(d); cls.push(d.grp ? 'grp' + (expanded.has(d.g) ? ' x' : '') : '');
     if (d.grp && expanded.has(d.g)) for (const m of d.members) { flat.push(m); cls.push('member'); }
   }
-  tb.innerHTML = flat.map((d, i) => {
-    const c = cls[i] + (d === openRow ? ' open' : '');
-    return '<tr' + (c.trim() ? ' class="' + c.trim() + '"' : '') + ' data-i="' + i + '">' +
-      cols.map(x => x.cell(d)).join('') + '</tr>';
-  }).join('');
+  tb.innerHTML = flat.map((d, i) => rowHTML(d, i, cls[i], cols)).join('');
   // the tally counts releases, not umbrellas, so "N of M" keeps meaning rows
   setCount(view.reduce((n, d) => n + (d.grp ? d.members.length : 1), 0));
   syncScrollHints();  // the jump stack re-reads its targets; a same-height re-render escapes the ResizeObserver
+}
+// one <tr>: cls is its group role ('grp', 'grp x', 'member' or ''), and data-i
+// its index into flat
+function rowHTML(d, i, cls, cols) {
+  const c = (cls + (d === openRow ? ' open' : '')).trim();
+  return '<tr' + (c ? ' class="' + c + '"' : '') + ' data-i="' + i + '">' +
+    cols.map(x => x.cell(d)).join('') + '</tr>';
+}
+// Open or close one umbrella in place: redraw its own row (the chevron) and
+// add or drop its member rows, then renumber the data-i of every row below,
+// since each indexes flat. A full render() redraws the whole list, a few
+// hundred ms; this touches a handful of rows. Falls back to render() if the
+// umbrella isn't where flat says it is.
+function setExpanded(u, on) {
+  if (on === expanded.has(u.g)) return;
+  if (on) expanded.add(u.g); else expanded.delete(u.g);
+  const i = flat.indexOf(u), tr = i >= 0 ? rowEl(i) : null;
+  if (!tr) { render(); return; }
+  if (hoverPopFor && hoverPopFor.closest('#rows')) closeHoverPop();  // as render(): its anchor may go
+  const cols = activeColumns();
+  if (on) {
+    flat.splice(i + 1, 0, ...u.members);
+    tr.insertAdjacentHTML('afterend', u.members.map((m, k) => rowHTML(m, i + 1 + k, 'member', cols)).join(''));
+  } else {
+    const n = u.members.length;
+    flat.splice(i + 1, n);
+    for (let k = 0; k < n; k++) tr.nextElementSibling.remove();
+  }
+  tr.outerHTML = rowHTML(u, i, 'grp' + (on ? ' x' : ''), cols);
+  for (let j = i + 1 + (on ? u.members.length : 0); j < ROWS.rows.length; j++) ROWS.rows[j].dataset.i = j;
+  syncScrollHints();  // the jump stack's targets may have moved
 }
 // tally: rendered inside the search box (see .count CSS). "142 of 1025" while
 // the list is narrowed; just the bare total when everything shows, since
@@ -2572,6 +2638,7 @@ function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
 const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 function apply() {
+  clearTimeout(qTimer);
   const qEl = document.getElementById('q');
   // whitespace splits the query into AND terms ("horizontal 4-way" = rows
   // matching both, in any field, in any order); each term is an independent
@@ -2658,7 +2725,7 @@ function apply() {
       if (ae !== be) return ae ? 1 : -1;
       // Case- and accent-insensitive so "ASO" sorts next to "Ace", not ahead of
       // it; numeric:true gives natural ordering for any number runs in titles.
-      const cmp = sortDir * av.localeCompare(bv, undefined, { numeric: true, sensitivity: 'base' });
+      const cmp = sortDir * COLL.compare(av, bv);
       if (cmp) return cmp;
       // Inside one date, newest arrival first. `b` is the refresh run that first
       // shipped this row's Last Updated value (see _assign_update_batches): the
@@ -2681,12 +2748,12 @@ function apply() {
       // flipping asc/desc reorders the dates only, leaving each date's block in a
       // stable arrival-then-core-then-title order.
       if (sortKey === 'updated' || sortKey === 'mz') {
-        const cc = coreLabel(a.core).localeCompare(coreLabel(b.core), undefined, { numeric: true, sensitivity: 'base' });
+        const cc = COLL.compare(coreLabel(a.core), coreLabel(b.core));
         if (cc) return cc;
       }
       // Final tiebreak: title A–Z, so an equal date/core block isn't left in
       // arbitrary data order.
-      return a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' });
+      return COLL.compare(a.title, b.title);
     };
     view.sort(cmp);
     for (const u of view) if (u.grp) u.members.sort(cmp);  // members follow the table's order
@@ -2726,16 +2793,15 @@ function makeUmbrella(ms) {
 // open or close an umbrella; selecting it also shows the group panel
 function toggleGroup(u, force) {
   const on = force === undefined ? !expanded.has(u.g) : force;
-  if (on) expanded.add(u.g); else expanded.delete(u.g);
   if (openRow !== u) openPanel(u);
-  render();
+  setExpanded(u, on);  // no-op when it's already that way (selecting an open umbrella)
 }
 
 // Keep the still-selected row in view after any reshuffle of the list (search,
 // sort, type filter, column toggle). No-op when nothing is open or the open row
 // was filtered out of the current results — its <tr> simply isn't in the DOM.
 function recenterOpen() {
-  const tr = document.querySelector('#rows tr.open');
+  const tr = openTr();
   if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });
 }
 
@@ -2743,7 +2809,12 @@ function recenterOpen() {
 // (and this covers backspacing back to the full list); if it's filtered out the
 // helper no-ops until it reappears. Filtering preserves the sort order rather
 // than ranking by match, so anchoring to the open row doesn't hide better hits.
-document.getElementById('q').addEventListener('input', () => { apply(); recenterOpen(); });
+// Each pass redraws the list, so it waits for a pause in typing (apply() drops a
+// pending one, so the x, Esc or a filter click never get a stale second pass).
+document.getElementById('q').addEventListener('input', () => {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => { apply(); recenterOpen(); }, 150);
+});
 // clears the text search only — wired to the inline x and to Esc; leaves the dropdown filters alone
 function clearSearch() {
   const q = document.getElementById('q');
@@ -2792,7 +2863,7 @@ document.getElementById('hrow').addEventListener('click', e => {
   apply();
   // With a row selected, follow it to its new position; with nothing selected,
   // jump to the top — "show me the new #1" is what a bare re-sort means.
-  if (document.querySelector('#rows tr.open')) recenterOpen();
+  if (openTr()) recenterOpen();
   else document.querySelector('.tablewrap').scrollTop = 0;
 });
 
@@ -2880,7 +2951,7 @@ function typeNarrows() { return enabledTypes.size < TYPES.length || arcadeSubNar
 // the text label carries the name) so the menu doubles as the icons' legend
 const typeRow = t => '<label><input type="checkbox" data-t="' + t + '"' +
   (enabledTypes.has(t) ? ' checked' : '') + '>' +
-  '<span class="tico t-' + t.toLowerCase() + '" aria-hidden="true">' + (TYPE_ICONS[t] || '') + '</span>' +
+  '<span class="tico t-' + t.toLowerCase() + ' ' + icoClass(t) + '" aria-hidden="true"></span>' +
   t + '</label>';
 function buildTypeMenu() {
   const pc = {}, mc = {};
@@ -4381,18 +4452,17 @@ window.addEventListener('popstate', e => {
 });
 
 function markOpenRow() {
-  document.querySelectorAll('#rows tr.open').forEach(tr => tr.classList.remove('open'));
-  syncScrollHints();  // retire the "Selected" jump button with the highlight
-  if (openRow == null) return;
-  // a selected member implies its group is open: expand a collapsed umbrella
-  // so the highlight has a row to land on (deep links, arrow keys, panel cards)
-  if (openRow.g && !openRow.grp && !expanded.has(openRow.g) && view.includes(G2ROW[openRow.g])) {
-    expanded.add(openRow.g);
-    render();  // stamps .open itself
-    return;
+  for (const tr of [...OPEN_TRS]) tr.classList.remove('open');
+  if (openRow != null) {
+    // a selected member implies its group is open: expand a collapsed umbrella
+    // so the highlight has a row to land on (deep links, arrow keys, panel cards)
+    if (openRow.g && !openRow.grp && !expanded.has(openRow.g) && view.includes(G2ROW[openRow.g])) {
+      setExpanded(G2ROW[openRow.g], true);  // stamps .open itself
+      return;
+    }
+    const tr = rowEl(flat.indexOf(openRow));
+    if (tr) tr.classList.add('open');
   }
-  const i = flat.findIndex(d => d === openRow);
-  if (i >= 0) { const tr = document.querySelector('#rows tr[data-i="' + i + '"]'); if (tr) tr.classList.add('open'); }
   syncScrollHints();  // the "Selected" jump button follows the highlight, not the scroll
 }
 
@@ -4423,7 +4493,7 @@ document.getElementById('rows').addEventListener('click', e => {
   // revealed, so a tap on a closed umbrella only expands it; a tap on an open
   // one opens the game's panel. There is no collapse on phones, on purpose.
   if (d && d.grp && matchMedia('(max-aspect-ratio: 3/5)').matches) {
-    if (!expanded.has(d.g)) { expanded.add(d.g); render(); }
+    if (!expanded.has(d.g)) setExpanded(d, true);
     else openPanel(d);
     return;
   }
@@ -4599,7 +4669,7 @@ function navigate(dir) {  // dir: +1 down, -1 up
     if (target < 0 || target >= flat.length) return;  // clamp at the ends
   }
   openPanel(flat[target]);
-  const tr = document.querySelector('#rows tr[data-i="' + target + '"]');
+  const tr = rowEl(target);
   if (tr) tr.scrollIntoView({ block: 'center', inline: 'nearest' });  // keep the selected row centered as you arrow through
 }
 
@@ -5331,7 +5401,7 @@ function captureAnchor() {
   if (wrap.scrollTop <= 0) return null;
   const i = firstVisibleRowIdx();
   const d = i >= 0 ? flat[i] : null;
-  const tr = i >= 0 ? document.querySelector('#rows tr[data-i="' + i + '"]') : null;
+  const tr = i >= 0 ? rowEl(i) : null;
   if (!d || !rowHash(d) || !tr) return null;
   return { wrap, h: rowHash(d), top: tr.getBoundingClientRect().top };
 }
@@ -5339,7 +5409,7 @@ function restoreAnchor(a) {
   if (!a) return;
   const i = flat.findIndex(x => rowHash(x) === a.h);
   if (i < 0) return;  // the anchor row itself is gone; leave the scroll alone
-  const tr = document.querySelector('#rows tr[data-i="' + i + '"]');
+  const tr = rowEl(i);
   if (tr) a.wrap.scrollTop += tr.getBoundingClientRect().top - a.top;
 }
 

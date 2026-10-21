@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-21
 
+- Release tracker: when a core ships an update to several games at once, those games now fold into one row named after the core, with a "N games" count. Select the row to list them, open any game from the list, or expand the row in place. A batch of brand-new games reads "debut" instead of "update". A Batches button in the filter row (in the Filters menu on phones) turns the folding off; the setting is remembered. Applies to the Build Date and Changed on MZ sorts.
 - Release tracker: now also tracks two more developers' own databases, both opt-in. jlrh's (43 games on his "FF" cores: Mystic Warriors, Xexex, Asterix, Sunset Riders, WEC Le Mans, Operation Wolf, the Gaelco set, Tecfri, SNK, Seibu and more; section [jlrh/jlrh-misterfpga-db]) and shmupfan's (41 games: 1945k III, Dooyong's Gulf Storm, Pollux and R-Shark, Data East's Gondomania and Last Mission, Tecmo's Final Star Force, and 22 Taito G-NET games such as Ray Crisis, Psyvariar and Shikigami no Shiro on an alpha core; section [shmupfan]). Each game is dated from when its developer first published it. Games that another database already carries, such as Squash, Xexex and Mystic Warriors, are one row with every build.
 - Release tracker: a short notice card can now appear in the bottom corner for a few days when there is news. Close it once and it stays closed, on every device when you are signed in. The first one is about the faster tracker.
 

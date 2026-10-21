@@ -5985,6 +5985,7 @@ def cmd_export_web(args):
     warn_provisional_rotation(outdir)  # needs the dims the re-tag just restored
     _write_feeds(outdir)  # RSS feeds from the events table (needs final data.json)
     _write_site_meta(outdir)  # last-updated stamp, bumped only when data.json changes
+    _write_app_tables(outdir)  # the device app's source and core tables, from index.html
     log(f"web export written to {outdir}")
     log(f"  data.json: {len(data)} rows")
     log(f"  update_all filter terms (ft): {sum(1 for d in data if d.get('ft'))}")
@@ -6487,6 +6488,110 @@ def _write_site_meta(outdir):
     log(f"  meta.json: updated={updated} ({'unchanged' if prev.get('hash') == digest else 'bumped'})")
 
 
+# The on-device app (misterzine-on-device) names sources and multi-game cores
+# the way this page does. It used to bake SRC_NAMES, FT_SECTIONS, OPTIN_DBS and
+# CORE_NAMES in at build time, so every new source needed an app release; it
+# now also fetches releases/app.json, which export-web writes from those same
+# literals. index.html stays the one place to edit. The parsing mirrors the
+# app's cmd/mzgen (which reads app.json for its built-in fallback).
+APP_TABLES_VERSION = 1
+
+
+def _js_unescape(s):
+    return s.replace("\\'", "'").replace('\\"', '"').replace("\\\\", "\\")
+
+
+def _js_body(page, name):
+    """The text of `const NAME = {` ... the first `\\n};`."""
+    marker = "const " + name + " = {"
+    i = page.find(marker)
+    if i < 0:
+        raise ValueError(f"{name} not found in index.html")
+    rest = page[i + len(marker):]
+    j = rest.find("\n};")
+    if j < 0:
+        raise ValueError(f"end of {name} not found in index.html")
+    return rest[:j]
+
+
+def _js_flat(page, name):
+    """A flat object literal of string values: quoted or bare keys, single- or
+    double-quoted values, line comments dropped."""
+    body = "\n".join(ln.split("//", 1)[0] for ln in _js_body(page, name).split("\n"))
+    pat = re.compile(r"""(?:'((?:[^'\\]|\\.)*)'|([A-Za-z_][A-Za-z0-9_]*))\s*:\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")""")
+    out = {}
+    for m in pat.finditer(body):
+        key = m.group(1) if m.group(1) is not None else m.group(2)
+        val = m.group(3) if m.group(3) is not None else (m.group(4) or "")
+        out[_js_unescape(key)] = _js_unescape(val)
+    return out
+
+
+def _js_nested(page, name):
+    """An object of objects (OPTIN_DBS: id -> {section, url, what}); each entry
+    opens with `id: {` on its own line and closes at the next `  }` line."""
+    body = _js_body(page, name)
+    head = re.compile(r"^\s*(?:'([^']+)'|([A-Za-z_][A-Za-z0-9_]*))\s*:\s*\{\s*$", re.M)
+    field = re.compile(r"([A-Za-z_][A-Za-z0-9_]*)\s*:\s*'((?:[^'\\]|\\.)*)'")
+    out = {}
+    while True:
+        m = head.search(body)
+        if not m:
+            break
+        key = m.group(1) or m.group(2)
+        after = body[m.end():]
+        end = after.find("\n  }")
+        if end < 0:
+            raise ValueError(f"{name}: end of entry {key!r} not found")
+        entry = re.sub(r"'\s*\+\s*\n\s*'", "", after[:end])
+        out[_js_unescape(key)] = {f: _js_unescape(v) for f, v in field.findall(entry)}
+        body = after[end:]
+    if not out:
+        raise ValueError(f"{name}: no entries found")
+    return out
+
+
+def app_tables(page):
+    """The app's source and core tables from index.html's text, checked the way
+    mzgen checks them: every named source has an ini section, every opt-in db
+    a https url and the same section."""
+    core_names = _js_flat(page, "CORE_NAMES")
+    names = _js_flat(page, "SRC_NAMES")
+    sections = _js_flat(page, "FT_SECTIONS")
+    optin = _js_nested(page, "OPTIN_DBS")
+    if len(core_names) < 50 or len(names) < 4:
+        raise ValueError(f"extraction looks wrong: {len(core_names)} core names, {len(names)} source names")
+    for src in sections:
+        if src not in names:
+            raise ValueError(f"FT_SECTIONS names {src!r}, SRC_NAMES does not")
+    sources = {}
+    for src, name in names.items():
+        if not sections.get(src):
+            raise ValueError(f"source {src!r} has a name but no FT_SECTIONS entry")
+        sources[src] = {"name": name, "section": sections[src], "db_url": ""}
+    for src, o in optin.items():
+        if src not in names:
+            raise ValueError(f"OPTIN_DBS names {src!r}, SRC_NAMES does not")
+        if not o.get("url", "").startswith("https://") or o.get("section") != sections[src]:
+            raise ValueError(f"OPTIN_DBS {src!r}: url {o.get('url')!r}, section {o.get('section')!r} "
+                             f"vs FT_SECTIONS {sections[src]!r}")
+        sources[src]["db_url"] = o["url"]
+    return {"version": APP_TABLES_VERSION, "sources": sources, "core_names": core_names}
+
+
+def _write_app_tables(outdir):
+    """Write releases/app.json from releases/index.html. Sorted keys, so an
+    export with no table change leaves the file byte-identical."""
+    tables = app_tables((outdir / "index.html").read_text(encoding="utf-8"))
+    text = json.dumps(tables, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
+    path = outdir / "app.json"
+    old = path.read_text(encoding="utf-8") if path.exists() else ""
+    if old != text:
+        path.write_text(text, encoding="utf-8")
+    log(f"  app.json: {len(tables['sources'])} sources, {len(tables['core_names'])} core names "
+        f"({'unchanged' if old == text else 'written'})")
+
+
 LIBRETRO_RAW = "https://raw.githubusercontent.com/libretro-thumbnails/MAME/master/{}"
 LIBRETRO_TREE_API = "/repos/libretro-thumbnails/MAME/git/trees/master?recursive=1"
 # Arcade Database serves per-setname native-res PNGs (the same progettoSNAPS
@@ -6854,6 +6959,8 @@ def main():
 
     wp = sub.add_parser("export-web", help="write the static site (docs/) for GitHub Pages")
     wp.set_defaults(func=cmd_export_web)
+    atp = sub.add_parser("app-tables", help="write docs/releases/app.json from index.html (export-web also does)")
+    atp.set_defaults(func=lambda args: _write_app_tables(DOCSDIR / "releases"))
 
     stp = sub.add_parser("stats", help="print database summary")
     stp.set_defaults(func=cmd_stats)

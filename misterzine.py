@@ -4278,6 +4278,7 @@ COMPUTER_MANUFACTURER = {
     "SGIIndy": "Silicon Graphics",
     "Sun-2": "Sun Microsystems",
     "Sun-3": "Sun Microsystems",
+    "SunSparcStation20": "Sun Microsystems",
     "Cray-XMP": "Cray Research",
     "JR100": "Panasonic",  # sold as the National JR-100 in Japan (Matsushita)
     "Ti994a": "Texas Instruments",
@@ -4329,6 +4330,7 @@ CORE_YEAR = {
     "SGIIndy": "1993",  # SGI Indy announced 1993-07-12
     "Sun-2": "1983",
     "Sun-3": "1985",
+    "SunSparcStation20": "1994",  # SPARCstation 20 announced May 1994
     "Cray-XMP": "1982",
     "JR100": "1981",
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
@@ -4461,6 +4463,7 @@ SYSTEM_TITLES = {
     "RX78": "RX-78 Gundam",
     "SAMCoupe": "SAM Coupé",
     "SGIIndy": "SGI Indy",
+    "SunSparcStation20": "SPARCstation 20",
     "SharpMZ": "Sharp MZ",
     "SordM5": "Sord M5",
     "Svi328": "SV-328",

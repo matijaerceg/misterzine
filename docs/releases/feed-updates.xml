@@ -6,7 +6,52 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 20 Oct 2026 08:42:45 +0000</lastBuildDate>
+<lastBuildDate>Wed, 21 Oct 2026 06:38:45 +0000</lastBuildDate>
+<item>
+<title>[Updated] TomSVR_playmark (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bigtwin</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_playmark_20261021.rbf:2026-10-21T06:38:45+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 06:38:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Big Twin, Excelsior, Hard Times, Hot Mind, Lucky Boom.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TomSVR_sqix (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#perestro</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_sqix_20261021.rbf:2026-10-21T06:38:45+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 06:38:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Perestroika Girls, Super Qix.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] LaserdiscGames (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261020.rbf:2026-10-21T05:45:42+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 05:45:42 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Dragon's Lair 2: Time Warp, Space Ace, Super Don Quix-ote, Thayer's Quest.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Meathax_PWB351024A (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#devastators-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Meathax_PWB351024A_20261020.rbf:2026-10-21T05:05:58+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 05:05:58 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Devastators (Ongo), The Main Event (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Meathax_Simple156 (Arcade core, 7 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#chainrec</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Meathax_Simple156_20261021.rbf:2026-10-21T05:05:58+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 05:05:58 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Chain Reaction, Charlie Ninja (Ongo), Heavy Smash, Joe &amp;amp; Mac Returns (Ongo), Magical Drop, Magical Drop Plus 1, Osman (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] TomSVR_comad (Arcade core, 9 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#fantsia2</link>
@@ -116,13 +161,13 @@
 <description>&lt;p&gt;Serves: Mad Ball, Paradise, Paradise 2 Deluxe, Paradise Deluxe, Penky, Target Ball, Target Ball '96, Torus.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] TomSVR_playmark (Arcade core, 3 games)</title>
+<title>[Updated] TomSVR_playmark (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bigtwin</link>
 <guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_playmark_20261020.rbf:2026-10-20T08:42:45+00:00</guid>
 <pubDate>Tue, 20 Oct 2026 08:42:45 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Big Twin, Excelsior, Hot Mind.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Big Twin, Excelsior, Hard Times, Hot Mind, Lucky Boom.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] TomSVR_splash (Arcade core, 4 games)</title>
@@ -861,51 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kicker.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1985 / Konami&lt;/p&gt;&lt;p&gt;Core: jtkicker&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kicker"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] MVP (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mvp</link>
-<guid isPermaLink="false">jtbindb:_Arcade/MVP (set 2, US) (FD1094 317-0143).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mvp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Major League (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mjleague</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Major League (World, S16A) [No Protection].mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mjleague.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Passing Shot (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#passsht</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Passing Shot (World, 2 Players) (FD1094 317-0080).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/passsht.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Quartet 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#quartet2a</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Quartet 2 (World, S16A) [No Protection].mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/quartet2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Riot City (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#riotcity</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Riot City (Japan).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/riotcity.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega / Westone&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

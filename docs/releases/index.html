@@ -269,6 +269,9 @@
   .favctl.active { border-color: var(--accent2, var(--accent)); }
   .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
+  /* Batches borrows the group look but has no dropdown segment, so its button
+     rounds both ends (the left-only radius showed square corners when lit) */
+  #batchctl > button { border-radius: 3px; }
   /* sized and ruled off like the Columns menu's footnote (.colnote) */
   .favctl .menu .favnote { margin: 0 0 .35rem; padding: .3rem .5rem .4rem; border-bottom: 1px solid var(--rule);
                            font-size: .78rem; line-height: 1.35; color: var(--muted);

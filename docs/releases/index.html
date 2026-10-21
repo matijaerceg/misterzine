@@ -1354,6 +1354,22 @@ const KEY2ROW = {};  // filled when data.json loads
 // release: no favorite star, no k; its permalink is #g:<g>.
 let flat = [];
 const expanded = new Set();  // g of every open umbrella; survives re-renders and live swaps
+// A search opens every core batch, since a batch titled with the core's name
+// would otherwise hide the very games that matched. That opening is temporary
+// and never touches `expanded`: while the search box holds a query, a batch is
+// open unless the visitor closed it during this query (searchShut), and
+// clearing the search hands every batch back to its hand state. A new query
+// (the folded terms, joined) empties searchShut, so every batch opens again.
+// Only the search box does this; the filter menus leave batches as they are.
+// Same-game umbrellas never auto-open. isOpen() is the one test of "is this
+// umbrella open"; markExpanded() the one way to change it (setExpanded()
+// also redraws).
+let searchOn = false;          // the search box holds a query (set by apply)
+const searchShut = new Set();  // g of every batch closed by hand during this query
+let lastQueryKey = '';
+function isOpen(u) {
+  return u.bat && searchOn ? !searchShut.has(u.g) : expanded.has(u.g);
+}
 const ALLG = {};   // g -> every member row in DATA (ingest), for deep links to a filtered-away group
 const G2ROW = {};  // g -> the umbrella object of the current apply()
 const PARENT = new Map();  // member row -> the umbrella (same-game or batch) holding it in the current apply()
@@ -2243,7 +2259,7 @@ function titleCell(d) {
     const dot = d.members.some(isUnseen)
       ? '<span class="sv" data-tip="A game in this batch was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
     const debut = d.members.every(m => newBadge(m));
-    return '<span class="tw" aria-hidden="true">' + (expanded.has(d.g) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
+    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
       '<span class="bu">' + (debut ? 'debut' : 'update') + '</span>' +
       '<span class="gc" data-tip="' + escA(n + ' games on this core shipped ' + (debut ? 'together' : 'an update together') +
         ' (' + d.updated + '). Select the row to list them.') + '">' + n + ' games</span>' +
@@ -2252,7 +2268,7 @@ function titleCell(d) {
   if (d.grp) {
     const dot = d.members.some(isUnseen)
       ? '<span class="sv" data-tip="A build of this game was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
-    return '<span class="tw" aria-hidden="true">' + (expanded.has(d.g) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
+    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
       '<span class="gc" data-tip="' + escA('This game ships on ' + d.members.length + ' cores. Select the row to list them.') + '">' +
       d.members.length + ' cores</span>' + newBadge(d);
   }
@@ -2646,7 +2662,7 @@ function jumpToNews(keys) {
   // a changed build folded under a collapsed umbrella has no row to park on:
   // open its group first
   let opened = false;
-  for (const u of view) if (u.grp && !expanded.has(u.g) && u.members.some(m => want.has(m.k))) { expanded.add(u.g); opened = true; }
+  for (const u of view) if (u.grp && !isOpen(u) && u.members.some(m => want.has(m.k))) { markExpanded(u, true); opened = true; }
   if (opened) render();
   const i = flat.findIndex(d => want.has(d.k));
   if (i >= 0) revealIndex(i, 'park', true);
@@ -2704,8 +2720,8 @@ function render() {
   flat = [];
   flatCls = [];
   for (const d of view) {
-    flat.push(d); flatCls.push(d.grp ? 'grp' + (expanded.has(d.g) ? ' x' : '') + (d.bat ? ' bat' : '') : '');
-    if (d.grp && expanded.has(d.g)) for (const m of d.members) { flat.push(m); flatCls.push('member'); }
+    flat.push(d); flatCls.push(d.grp ? 'grp' + (isOpen(d) ? ' x' : '') + (d.bat ? ' bat' : '') : '');
+    if (d.grp && isOpen(d)) for (const m of d.members) { flat.push(m); flatCls.push('member'); }
   }
   vPos = null;
   vDot = -1;
@@ -2725,9 +2741,15 @@ function rowHTML(d, i, cls, cols) {
 }
 // open or close one umbrella (render() only redraws the rows in view)
 function setExpanded(u, on) {
-  if (on === expanded.has(u.g)) return;
-  if (on) expanded.add(u.g); else expanded.delete(u.g);
+  if (on === isOpen(u)) return;
+  markExpanded(u, on);
   render();
+}
+// the state change alone, no render: during a search a batch's open or closed
+// lives in searchShut, so the hand state in `expanded` waits untouched
+function markExpanded(u, on) {
+  if (u.bat && searchOn) { if (on) searchShut.delete(u.g); else searchShut.add(u.g); }
+  else if (on) expanded.add(u.g); else expanded.delete(u.g);
 }
 // does this row show the since-visit dot? (mirrors titleCell / dotHTML)
 const hasDot = d => d.grp ? d.members.some(isUnseen) : isUnseen(d);
@@ -2943,6 +2965,11 @@ function apply() {
   // matching both, in any field, in any order); each term is an independent
   // substring so multi-word values still match ("street fighter" hits the title)
   const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
+  // a search opens every batch until the visitor closes one; a new query
+  // forgets those closes (see searchShut)
+  searchOn = terms.length > 0;
+  const qKey = terms.join(' ');
+  if (qKey !== lastQueryKey) { searchShut.clear(); lastQueryKey = qKey; }
   // the global "Clear filters" button is armed (accent fill + x) while anything
   // differs from a fresh load: a search, a narrowing filter or toggle, or a
   // sort other than the default. Idle it is disabled: a ghost holding its slot
@@ -3140,7 +3167,7 @@ function syncBatchToggle() {
 syncBatchToggle();
 // open or close an umbrella; selecting it also shows the group panel
 function toggleGroup(u, force) {
-  const on = force === undefined ? !expanded.has(u.g) : force;
+  const on = force === undefined ? !isOpen(u) : force;
   if (openRow !== u) openPanel(u);
   setExpanded(u, on);  // no-op when it's already that way (selecting an open umbrella)
 }
@@ -4925,7 +4952,7 @@ function markOpenRow() {
     // a selected member implies its group is open: expand a collapsed umbrella
     // so the highlight has a row to land on (deep links, arrow keys, panel cards)
     const u = PARENT.get(openRow);  // its same-game or batch umbrella in this view, if any
-    if (u && !expanded.has(u.g)) {
+    if (u && !isOpen(u)) {
       setExpanded(u, true);  // stamps .open itself
       return;
     }
@@ -4962,13 +4989,13 @@ document.getElementById('rows').addEventListener('click', e => {
   // revealed, so a tap on a closed umbrella only expands it; a tap on an open
   // one opens the game's panel. There is no collapse on phones, on purpose.
   if (d && d.grp && matchMedia('(max-aspect-ratio: 3/5)').matches) {
-    if (!expanded.has(d.g)) setExpanded(d, true);
+    if (!isOpen(d)) setExpanded(d, true);
     else openPanel(d);
     return;
   }
   // an umbrella click is a selection first: closed -> open + select; open but
   // not selected -> select only; open and already selected -> close
-  if (d && d.grp) toggleGroup(d, !expanded.has(d.g) || openRow !== d ? true : false);
+  if (d && d.grp) toggleGroup(d, !isOpen(d) || openRow !== d ? true : false);
   else openPanel(d);
 });
 // EASTER EGG: the ZapScript token takes a jolt of current when you touch it, and

@@ -276,6 +276,73 @@
     }
   }, true);
 
+  // ---- site notice: a dated card in the corner, shown once per visitor ----
+  // To post a new notice: give it a NEW id (letters, digits, dashes), set the
+  // first and last day it shows (inclusive, the visitor's local date) and the
+  // text. Closing it is remembered in this browser (mz-notice = id) and, when
+  // signed in, on the account (PUT /me/notice), so one person sees each notice
+  // once across their browsers. Outside the window nothing shows. To look at it
+  // regardless of the window or a past close, open any page with ?notice=preview.
+  // `page` limits it to one section of the site by path ('/releases/' = the
+  // tracker); leave it out to show on every page. Set NOTICE to null when
+  // there is nothing to say.
+  var NOTICE = {
+    id: 'faster-tracker-2026-10',
+    page: '/releases/',
+    from: '2026-10-20',
+    to: '2026-10-24',
+    title: 'A faster tracker',
+    html: '<p>As of October 20 this page should feel a lot more responsive: scrolling, filtering, sorting, and selection ' +
+          'no longer stall. Thanks for continuing to report issues!</p>' +
+          '<p>If you find the site useful, consider supporting me on ' +
+          '<a href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener">Patreon</a>.</p>' +
+          '<p class="snsig">-Matija</p>'
+  };
+  (function () {
+    if (!NOTICE || !/^[a-z0-9-]{1,40}$/.test(NOTICE.id)) return;
+    if (NOTICE.page && location.pathname.indexOf(NOTICE.page) !== 0) return;
+    var preview = /[?&]notice=preview(&|$)/.test(location.search);
+    var d = new Date(), today = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+    if (!preview && (today < NOTICE.from || today > NOTICE.to)) return;
+    var seen = null, token = null;
+    try { seen = localStorage.getItem('mz-notice'); token = localStorage.getItem('mz-token'); } catch (e) {}
+    if (!preview && seen === NOTICE.id) return;
+    // same session + API rules as the tracker: the bearer from /auth/, the live
+    // service, overridable only on localhost for testing (mz-api)
+    var api = 'https://api.misterzine.fyi';
+    var local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    try { if (local && localStorage.getItem('mz-api')) api = localStorage.getItem('mz-api'); } catch (e) {}
+    if (!token || !/^[A-Za-z0-9_-]{40,}$/.test(token)) token = null;
+    function remember() {
+      try { localStorage.setItem('mz-notice', NOTICE.id); } catch (e) {}
+      if (token) fetch(api + '/me/notice', {
+        method: 'PUT', headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: NOTICE.id })
+      }).catch(function () {});
+    }
+    function show() {
+      if (document.getElementById('sitenote')) return;
+      var box = document.createElement('aside');
+      box.id = 'sitenote';
+      box.className = 'sitenote';
+      box.setAttribute('aria-label', 'Site notice');
+      box.innerHTML = '<p class="snh"></p><button type="button" class="snx" aria-label="Close">×</button><div class="snb"></div>';
+      box.querySelector('.snh').textContent = NOTICE.title;
+      box.querySelector('.snb').innerHTML = NOTICE.html;
+      box.querySelector('.snx').addEventListener('click', function () { box.remove(); remember(); });
+      document.body.appendChild(box);
+    }
+    if (!token || preview) { show(); return; }
+    // signed in: skip it when this account closed it in another browser; a
+    // failed or stale check (offline, signed out elsewhere) just shows the card
+    fetch(api + '/me', { headers: { Authorization: 'Bearer ' + token } }).then(function (r) {
+      return r.ok ? r.json() : null;
+    }).then(function (me) {
+      if (me && me.notice === NOTICE.id) { try { localStorage.setItem('mz-notice', NOTICE.id); } catch (e) {} return; }
+      show();
+    }, show);
+  })();
+
   var saved = 'eva';
   try { saved = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {}
   applyTheme(saved);

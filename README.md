@@ -1,4 +1,4 @@
-# misterzine
+# MisterZine: MiSTer FPGA catalogue and release tracker
 
 An automated release database for **MiSTer FPGA** cores, and the public site it powers:
 
@@ -200,8 +200,9 @@ GitHub, no password) makes the same favorites follow you across browsers and dev
 
 The account service is a small Cloudflare Worker with a D1 database, source in
 [`api/`](api/). It stores the provider's user id, the email the provider passes along,
-and the list of starred entry keys. Nothing else: no names, no saved MiSTers, no Zaparoo
-keys. The [privacy page](https://misterzine.fyi/privacy/) is the user-facing version.
+the list of starred entry keys, and which site notice the account last closed (so a
+closed notice stays closed on every device). Nothing else: no names, no saved MiSTers,
+no Zaparoo keys. The [privacy page](https://misterzine.fyi/privacy/) is the user-facing version.
 
 **RSS feeds** (last 30 days / 100 items, autodiscoverable from the page or via the
 header's "RSS" link; items deep-link to the entry on the site):

@@ -165,6 +165,20 @@ npx wrangler secret put DISCORD_FEEDBACK_WEBHOOK                # prompts; paste
 npx wrangler deploy
 ```
 
+## Site notices
+
+The site shows a dated notice card (`docs/theme.js`, the `NOTICE` block at the
+top: id, first and last day, text). Closing it is remembered in the browser,
+and for a signed-in visitor on the account too (`PUT /me/notice {id}`, read
+back as `notice` in `GET /me`), so a new notice shows once per person, not once
+per browser. A database created before 2026-10-20 needs the column once, before
+the code is deployed:
+
+```bash
+npx wrangler d1 execute misterzine --remote --file=migrations/2026-10-20-notice-seen.sql
+npx wrangler deploy
+```
+
 The webhook URL comes from Discord: the channel's Edit Channel ->
 Integrations -> Webhooks -> New Webhook -> Copy Webhook URL. Treat it as a
 password (anyone holding it can post to the channel); it lives only in the

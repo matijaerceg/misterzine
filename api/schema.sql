@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS users (
   provider_user_id TEXT    NOT NULL,            -- the provider's stable user id (Google sub / GitHub id)
   email            TEXT,                        -- support lookups only; never displayed or mailed
   created_at       TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+  notice_seen      TEXT,                        -- id of the last site notice this account closed (added 2026-10-20;
+                                                --   existing databases: see migrations/2026-10-20-notice-seen.sql)
   UNIQUE (provider, provider_user_id)
 );
 

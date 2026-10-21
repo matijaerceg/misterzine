@@ -242,3 +242,29 @@ body:has(#menudd[open]) .fbtab, body:has(dialog.fbdlg[open]) .fbtab { visibility
 .fbdlg .fb-thanks { padding: 1.6rem 1.15rem 1.7rem; text-align: center; }
 .fbdlg .fb-thanks h2 { outline: none; margin-bottom: .35rem; }
 .fbdlg .fb-thanks p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+/* ---- site notice (theme.js NOTICE): a card in the bottom corner, Menu chrome,
+   one Close button, not modal. z 102 clears the tracker's docked panel (100)
+   and its resizer (101); the feedback tab (20) stays under it. The tracker's
+   --fb-right keeps it off the floating scrollbar lane like the tab. Phones:
+   full width along the bottom edge. */
+.sitenote { position: fixed; z-index: 102; right: calc(var(--fb-right, 0px) + 12px); bottom: 12px;
+            box-sizing: border-box; width: min(22rem, calc(100vw - 24px));
+            background: var(--surface); color: var(--fg); border: 1px solid var(--hair); border-radius: 6px;
+            padding: .75rem 2.8rem .35rem .95rem; box-shadow: 0 4px 16px #0004;
+            font-size: .85rem; line-height: 1.45; text-align: left; }
+.sitenote .snh { margin: 0 0 .4rem; font-weight: 700; font-size: .95rem; }
+.sitenote .snb p { margin: 0 0 .6rem; }
+.sitenote .snb a { color: var(--accent); }
+.sitenote .snb .snsig { margin-top: -.25rem; color: var(--muted); }
+.sitenote .snx { position: absolute; top: .3rem; right: .3rem; width: 2.3rem; height: 2.3rem;
+                 display: grid; place-items: center; padding: 0;
+                 border: 0; border-radius: 6px; background: transparent; color: var(--muted);
+                 font: inherit; font-size: 1.7rem; line-height: 1; cursor: pointer; }
+.sitenote .snx:hover { background: var(--hover-bg); color: var(--fg); }
+.sitenote .snx:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+@media (max-width: 36rem) {
+  .sitenote { right: 0; bottom: 0; left: 0; width: auto; border-radius: 6px 6px 0 0; border-bottom: 0;
+              padding-right: 3.2rem; padding-bottom: calc(.35rem + env(safe-area-inset-bottom, 0px)); }
+  .sitenote .snx { width: 2.75rem; height: 2.75rem; font-size: 1.9rem; }  /* a full fingertip target */
+}

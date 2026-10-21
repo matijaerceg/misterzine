@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-21
+
+- Release tracker: a short notice card can now appear in the bottom corner for a few days when there is news. Close it once and it stays closed, on every device when you are signed in. The first one is about the faster tracker.
+
 ## 2026-10-20
 
 - Release tracker: the Source menu has a new "downloader.ini lines..." link. It shows ready-made downloader.ini lines for all twelve sources update_all does not include, with notes at the top to read first. Delete the ones you do not want, then copy and paste the rest into downloader.ini or a new downloader_misterzine.ini file.

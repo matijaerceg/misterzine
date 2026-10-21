@@ -113,7 +113,8 @@ storage and never leave it:</p>
 <ul>
   <li>favorites (the starred entries in the release tracker),</li>
   <li>saved MiSTers: network addresses, and Zaparoo Online API keys if you connect that way,</li>
-  <li>preferences such as theme, visible columns and the "new since your last visit" marker.</li>
+  <li>preferences such as theme, visible columns and the "new since your last visit" marker,</li>
+  <li>which site notice you last closed, so it does not show again.</li>
 </ul>
 <p>Launching a game from the tracker sends a request from your browser straight to your own MiSTer on
 your network, or straight to Zaparoo Online if you connected through Zaparoo (their
@@ -129,6 +130,7 @@ in, the account service stores:</p>
   <tr><td>The email address your sign-in provider passes along</td><td>Only so a support request can be matched to an account. It is never displayed, never used to send mail, never shared.</td></tr>
   <tr><td>When the account was created</td><td>Housekeeping.</td></tr>
   <tr><td>Your favorites</td><td>The point of the account: the list of starred entries, as the tracker's own entry keys.</td></tr>
+  <tr><td>The last site notice you closed</td><td>So a notice you closed on one device does not show again on your others.</td></tr>
   <tr><td>Sign-in sessions</td><td>A random token in your browser's storage identifies your session. Signing out deletes it.</td></tr>
 </table>
 <p>Not stored: your name, profile picture, password, saved MiSTers, Zaparoo keys, or anything else from
@@ -220,7 +222,7 @@ The site's code and this page are public there, so any change to this policy sho
 </footer>
 
 </div>
-<script src="../theme.js?v=5"></script>
+<script src="../theme.js?v=6"></script>
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 </body>
 </html>

@@ -15,7 +15,8 @@
 //   GET    /auth/github?r=/releases/  start sign-in (browser navigation)
 //   GET    /auth/{provider}/callback  provider returns here; we redirect to
 //                                     SITE_ORIGIN/auth/#t=<token>&new=1|0&r=<path>
-//   GET    /me                        {provider, created_at, favorites}
+//   GET    /me                        {provider, created_at, favorites, notice}
+//   PUT    /me/notice                 {id} remember the site notice this account closed
 //   DELETE /me                        delete the account (header X-Confirm: delete)
 //   POST   /logout                    revoke this session
 //   GET    /favorites                 {keys: [...]}
@@ -39,6 +40,7 @@ import { feedback } from './feedback.js';
 
 const KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;      // release tracker row keys (data.json `k`)
 const MAX_FAVORITES = 5000;
+const NOTICE_RE = /^[a-z0-9-]{1,40}$/;        // site notice ids (docs/theme.js NOTICE.id)
 const SESSION_DAYS = 90;
 const COOKIE = 'mz_oauth';
 const enc = new TextEncoder();
@@ -84,7 +86,14 @@ async function route(request, env, url) {
 
   if (p === '/me' && m === 'GET') {
     const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM favorites WHERE user_id = ?').bind(user.id).first('n');
-    return json({ provider: user.provider, created_at: user.created_at, favorites: n });
+    return json({ provider: user.provider, created_at: user.created_at, favorites: n, notice: user.notice_seen || null });
+  }
+  if (p === '/me/notice' && m === 'PUT') {
+    const body = await readJSON(request);
+    const id = body && body.id;
+    if (typeof id !== 'string' || !NOTICE_RE.test(id)) return json({ error: 'bad_id' }, 400);
+    await env.DB.prepare('UPDATE users SET notice_seen = ? WHERE id = ?').bind(id, user.id).run();
+    return new Response(null, { status: 204 });
   }
   if (p === '/me' && m === 'DELETE') {
     if (request.headers.get('X-Confirm') !== 'delete') return json({ error: 'confirm_required' }, 400);
@@ -145,7 +154,7 @@ async function authenticate(request, env) {
   if (!/^[A-Za-z0-9_-]{40,}$/.test(token)) return null;
   const hash = await sha256hex(token);
   const row = await env.DB.prepare(
-    'SELECT s.token_hash, s.last_seen_at, u.id, u.provider, u.created_at FROM sessions s ' +
+    'SELECT s.token_hash, s.last_seen_at, u.id, u.provider, u.created_at, u.notice_seen FROM sessions s ' +
     'JOIN users u ON u.id = s.user_id WHERE s.token_hash = ?').bind(hash).first();
   if (!row) return null;
   const last = Date.parse(row.last_seen_at), now = Date.now();

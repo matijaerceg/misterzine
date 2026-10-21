@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-21
 
+- Release tracker: the dot marking rows that changed since your last visit is smaller, so it sits more quietly beside the title. It is just as easy to hover for its explanation.
 - Release tracker: while you search, games from one core update stay under that update's row, which opens on its own, so the games that matched are visible right away. This holds even when only one game matches; the row then reads "1 of 12 games", and its panel still lists the whole update. Clearing the search puts every row back the way you left it. Rows that group one game's builds on several cores still stay folded.
 - Release tracker: a core update row made of brand-new games no longer repeats a DEBUT badge, since it already says "debut". The games inside keep theirs. Games listed under a grouped row now hang from a quiet line in the theme's color instead of the bright accent, which stays reserved for the since-visit dot.
 - Release tracker: when a core ships an update to several games at once, those games now fold into one row named after the core, with a "N games" count. Select the row to list them, open any game from the list, or expand the row in place. A batch of brand-new games reads "debut" instead of "update". A Batches button in the filter row (in the Filters menu on phones) turns the folding off; the setting is remembered. Applies to the Build Date and Changed on MZ sorts.

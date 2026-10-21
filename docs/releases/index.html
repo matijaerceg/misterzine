@@ -543,9 +543,13 @@
      the previous visit (see isUnseen). One accent-colored dot before the title
      under ANY sort, where the old divider line only worked under the default
      order and fenced in unchanged rows that merely sorted above the last
-     changed one. Hover explains which kind via the shared popover. */
-  td .sv { display: inline-block; width: .5em; height: .5em; border-radius: 50%;
-           background: var(--accent); margin-right: .4rem; vertical-align: middle;
+     changed one. Hover explains which kind via the shared popover. The dot
+     is drawn small (.36em) inside a transparent padding ring, so the hover
+     target stays as big as the old .5em dot. content-box sizing is explicit:
+     under the page's border-box the padding would eat the dot instead. */
+  td .sv { display: inline-block; box-sizing: content-box; width: .36em; height: .36em; padding: .07em; border-radius: 50%;
+           background: var(--accent); background-clip: content-box;
+           margin-right: .35rem; vertical-align: middle;
            position: relative; top: -.05em; }
   /* Patreon-beta chip: the NEW badge's pill, but dashed and muted — "not fully
      here yet" rather than "look at me". Hover explains via the shared popover. */

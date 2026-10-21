@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 21 Oct 2026 13:59:25 +0000</lastBuildDate>
+<lastBuildDate>Wed, 21 Oct 2026 17:26:20 +0000</lastBuildDate>
+<item>
+<title>[Updated] seta2 (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#myangel</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/seta2_20261021.rbf:2026-10-21T17:26:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Kosodate Quiz My Angel, Kosodate Quiz My Angel 2, Mobile Suit Gundam EX Revue, Puzzle De Bowling, Wakakusamonogatari Mahjong Yonshimai.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] seta2pen (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#deerhunt</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/seta2pen_20261021.rbf:2026-10-21T17:26:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Deer Hunting USA V4.3, Penguin Brothers (decoryah), Trophy Hunting - Bear &amp;amp; Moose V1.00, Turkey Hunting USA V1.00, Wing Shooting Championship V2.00.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] HeliFire (Meathax) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#helifire</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] 1943: The Battle of Midway Mark II (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#1943mii</link>
-<guid isPermaLink="false">jtbindb:_Arcade/1943 The Battle of Midway Mark II (US).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/1943mii.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: jt1943&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/1943"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Ace Attacker (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#aceattaca</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Ace Attacker (Japan, S16A) [FD1094 317-0060].mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aceattaca.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

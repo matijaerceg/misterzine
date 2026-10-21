@@ -1307,7 +1307,7 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
-<script src="./source-visibility.js?v=7"></script>
+<script src="./source-visibility.js?v=8"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=6"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
@@ -1745,6 +1745,12 @@ const CORE_NAMES = {
   // Gm0rk's cores
   'Arcade-Atari-G1': 'Atari G1', 'Arcade-Atari-G42': 'Atari G42',
   'Arcade-ITech8': 'Incredible Technologies 8-bit',
+  // jlrh's multi-game cores (the single-game ones read as the game)
+  'ffaltair': 'Cidelsa (Altair HW)', 'ffmegaphx': 'Inder/Dinamic (Mega Phoenix HW)',
+  'ffspeedbal': 'Tecfri (Speed Ball HW)',
+  // shmupfan's cores
+  '1945kiii': 'Oriental Soft (1945k III HW)', 'dec8': 'Data East DEC-8', 'dooyong': 'Dooyong',
+  'TaitoGNET': 'Taito G-NET', 'tecmo16': 'Tecmo 16-bit (Final Star Force HW)',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -1802,6 +1808,8 @@ const SRC_NAMES = {
   decoryah: 'decoryah',
   ppriest: 'ppriest',
   gm0rk: 'Gm0rk',
+  jlrh: 'jlrh',
+  shmupfan: 'shmupfan',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -1820,6 +1828,8 @@ const SRC_SEARCH = {
   decoryah: 'decoryah',
   ppriest: 'ppriest',
   gm0rk: 'gm0rk gmork',
+  jlrh: 'jlrh jose_82 jose82 ff',
+  shmupfan: 'shmupfan shmup fan',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -1909,6 +1919,20 @@ const OPTIN_DBS = {
     url: 'https://raw.githubusercontent.com/Gm0rk/Gm0rkCores/db/db.json.zip',
     what: 'Gm0rk\'s cores: Atari G1 (Hydra, Pit Fighter), Atari G42 (Road Riot 4WD, Guardians of ' +
       'the \'Hood) and Incredible Technologies\' 8-bit boards (Golden Tee Golf, Capcom Bowling and others).',
+  },
+  jlrh: {
+    section: 'jlrh/jlrh-misterfpga-db',
+    url: 'https://raw.githubusercontent.com/jlrh/jlrh-misterfpga-db/db/db.json.zip',
+    what: 'jlrh\'s "FF" cores: Konami (Mystic Warriors, Xexex, Asterix, Sunset Riders, WEC Le Mans and ' +
+      'others), Gaelco, Seibu, SNK, Tecfri, Technos, Cidelsa, Video System, Inder/Dinamic and Taito\'s ' +
+      'Operation Wolf. Some of these games also ship in other databases as other cores.',
+  },
+  shmupfan: {
+    section: 'shmupfan',
+    url: 'https://raw.githubusercontent.com/shmupfan/Distribution/main/db.json',
+    what: 'shmupfan\'s cores: 1945k III, Dooyong (Gulf Storm, Pollux, R-Shark and others), Data East ' +
+      'DEC-8, Tecmo 16-bit and Taito G-NET. The G-NET core is an alpha, and its games\' CHDs need a ' +
+      'one-time conversion on a computer first (see the core\'s install guide).',
   },
 };
 
@@ -3759,6 +3783,8 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   decoryah: 'decoryah/MiSTer_decoryah',
   ppriest: 'ppriest/MiSTer_ppriest',
   gm0rk: 'Gm0rk/Gm0rkCores',
+  jlrh: 'jlrh/jlrh-misterfpga-db',
+  shmupfan: 'shmupfan',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {
@@ -5222,7 +5248,7 @@ const FEED_LIST = [
 const PUB_NOTE_HTML =
   "<p>Every core and game that update_all can install from these public " +
   "databases: the main MiSTer distribution, Jotego's, Coin-Op Collection's, " +
-  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's, bazset's, TomSVR's, decoryah's, ppriest's and Gm0rk's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
+  "MeatCores, rmCores, TheJesusFish's Slop Cores, kuzearcade's kuzecores, blahm1d's, bazset's, TomSVR's, decoryah's, ppriest's, Gm0rk's, jlrh's and shmupfan's cores, rossops' Sega Y Board and theypsilon's Unofficial " +
   "Distribution, plus the arcade cores distributed through Ongo. Jotego and Coin-Op announce their Patreon early-access cores " +
   "in those same public databases (hidden by a default download filter); such " +
   "rows are marked alpha or beta and need the author's key until the public " +

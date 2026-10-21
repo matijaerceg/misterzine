@@ -45,7 +45,8 @@ function siteSingletonTitles(rows) {
   const labels = { coinop: 'Coin-Op Collection', jtbindb: 'Jotego', meathax: 'Meathax',
     rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
     blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
-    tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk' };
+    tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk',
+    jlrh: 'jlrh', shmupfan: 'shmupfan' };
   const norm = title => (title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
   const identity = row => row.g || row.family || row.sn;
   const counts = new Map(), names = new Map();

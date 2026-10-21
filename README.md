@@ -245,7 +245,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The sixteen sources (all public)
+## The eighteen sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -339,12 +339,27 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 16. **Gm0rk**: `Gm0rk/Gm0rkCores` `db` branch (opt-in, section `[Gm0rk/Gm0rkCores]`), since
    2026-10-19. Atari G1, Atari G42 and Incredible Technologies 8-bit cores; MRAs in
    `_Arcade/_Gm0rkCores/` with `_alternatives`, real tags.
+17. **jlrh**: `jlrh/jlrh-misterfpga-db` `db` branch (opt-in, section
+   `[jlrh/jlrh-misterfpga-db]`), since 2026-10-21. His "FF" cores from 11 family repos:
+   Konami, Gaelco, Seibu, SNK, Tecfri, Technos, Cidelsa, Video System, Inder/Dinamic and
+   Taito's Operation Wolf. Classic db: the MRAs and rbfs are committed on `main`, MRAs flat
+   in `_Arcade/` with `_alternatives`, real per-core tags. Sunset Riders and World Rally ship
+   two mainline sets each (`SIBLING_VARIANT_SOURCES` folds them).
+18. **shmupfan**: `shmupfan/Distribution` `main` branch (opt-in, section `[shmupfan]`), since
+   2026-10-21. 1945k III, Dooyong, DEC-8, Tecmo 16-bit and Taito G-NET (alpha) cores, one
+   repo each. The db is a plain `db.json`, not zipped (`_db_json` reads both); every file
+   entry carries its own url into a core repo, so the MRAs are fetched from the db. MRAs
+   flat in `_Arcade/` with `_alternatives`, no tags.
 
-Debuts for all three are frozen per MRA (`*_FROZEN_DATES`): the day the MRA was first
+Debuts for these five are frozen per MRA (`*_FROZEN_DATES`): the day the MRA was first
 committed where it is served from, but not before the core's first public build (Gm0rk's
-core repos published GitHub releases two weeks before his db existed).
+core repos published GitHub releases two weeks before his db existed; jlrh's Gaelco games
+were public from 2026-06-20, a month before his current db). Neither jlrh nor shmupfan is
+in `DISTRIBUTION_TAKES_OVER`: that rule hides a row whenever the Distribution ships the
+same game, even on another core (the Distribution's own Detana!! Twin Bee would hide
+jlrh's).
 
-All sixteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All eighteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

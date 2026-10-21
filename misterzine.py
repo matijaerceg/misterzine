@@ -228,6 +228,33 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/Gm0rk/Gm0rkCores/db/db.json.zip",
     },
     {
+        # jlrh's (José Luis Rodríguez, forum name jose_82) "FF" cores, first
+        # builds 2026-06-20: Konami (Mystic Warriors, Xexex, Asterix, Sunset
+        # Riders, WEC Le Mans, ...), Gaelco, Cidelsa, Seibu, SNK, Tecfri,
+        # Technos, Taito (Operation Wolf), Video System and Inder/Dinamic,
+        # 11 family repos. Classic downloader db: base_files_url into
+        # jlrh/jlrh-misterfpga-db, which commits the rbfs as well as the MRAs
+        # (external_files.csv is empty). MRAs flat in _Arcade/ with
+        # _alternatives, an "(FF ...)" qualifier in every file name, real
+        # per-core tags (arcadeffxexex). Not in DISTRIBUTION_TAKES_OVER: the
+        # Distribution's own Detana!! Twin Bee is another core of the same
+        # game, and that rule would hide his. Opt-in: [jlrh/jlrh-misterfpga-db].
+        "id": "jlrh",
+        "name": "jlrh",
+        "db_url": "https://raw.githubusercontent.com/jlrh/jlrh-misterfpga-db/db/db.json.zip",
+    },
+    {
+        # shmupfan's cores, first builds 2026-09-30: 1945k III, Dooyong,
+        # DEC8, Tecmo16 and Taito G-NET (alpha), one repo each. The db is a
+        # PLAIN db.json on main (not zipped, so _db_json), every file entry
+        # carrying its own url pinned to a core repo commit (releases/), so
+        # the MRAs come from the db like decoryah's. MRAs flat in _Arcade/
+        # with _alternatives, no tags, db_id "shmupfan". Opt-in: [shmupfan].
+        "id": "shmupfan",
+        "name": "shmupfan",
+        "db_url": "https://raw.githubusercontent.com/shmupfan/Distribution/main/db.json",
+    },
+    {
         # Ongo's community database. It aggregates arcade MRAs and core builds
         # alongside other system databases, ROM payloads, scripts and extras;
         # only arcade MRA files and the shipped _Arcade/cores bitstreams are
@@ -277,8 +304,9 @@ SOURCE_PATH_FILTERS = {
 # Over Sea sets side by side; his 2026-09-25 rebuild moved Japan and Korea
 # into _alternatives, which leaves the fold idle, but it stays in case a
 # later rebuild puts them back. TomSVR and decoryah ship every set side by
-# side.
-SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr", "decoryah"}
+# side; jlrh ships Sunset Riders' 2- and 4-player sets and two World Rally
+# checksum sets in _Arcade/.
+SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr", "decoryah", "jlrh"}
 
 # Opt-in dbs whose games may move into the MiSTer Distribution later
 # (MiSTer-devel forked rossops' X Board core and ppriest's Fuuki and Psikyo
@@ -657,6 +685,15 @@ def _archived_orphans(source_id, d):
     return out
 
 
+def _db_json(raw):
+    """A downloader db's JSON from its download: most dbs ship db.json.zip,
+    but shmupfan's db_url is a plain db.json (the downloader takes both)."""
+    if raw[:2] == b"PK":
+        z = zipfile.ZipFile(BytesIO(raw))
+        raw = z.read(z.namelist()[0])
+    return json.loads(raw)
+
+
 def fetch_db(source):
     """Download a db.json.zip, return (ts, {path: {hash,size}}, {path: gate}, gates).
 
@@ -675,10 +712,7 @@ def fetch_db(source):
     (no recency inflation), and the graduation logs a 'new' event so the
     feeds announce it going public."""
     log(f"  fetching {source['name']} ...")
-    raw = http_get(source["db_url"])
-    z = zipfile.ZipFile(BytesIO(raw))
-    inner = z.read(z.namelist()[0])
-    d = json.loads(inner)
+    d = _db_json(http_get(source["db_url"]))
     gates = _gate_terms(d)
     by_id = {tid: term for term, tid in gates.items()}
     files = {}
@@ -1526,6 +1560,10 @@ MRA_REPOS = [
     ("decoryah", None, None, "_Arcade/_Decoryah"),
     ("ppriest", None, None, "_Arcade"),
     ("gm0rk", "Gm0rk/Gm0rkCores", "main", "_Arcade/_Gm0rkCores"),
+    # the db is built from main, where the MRAs (and the rbfs) are committed
+    ("jlrh", "jlrh/jlrh-misterfpga-db", "main", "_Arcade"),
+    # per-file urls into five core repos' releases/, like ppriest's
+    ("shmupfan", None, None, "_Arcade"),
 ]
 
 
@@ -1536,9 +1574,7 @@ def _db_hosted_mras(source_id, mradir):
     by file name). Files are kept by hash, so a warm cache refetches only
     what changed and a dropped MRA leaves the folder."""
     source = next(s for s in SOURCES if s["id"] == source_id)
-    raw = http_get(source["db_url"])
-    z = zipfile.ZipFile(BytesIO(raw))
-    d = json.loads(z.read(z.namelist()[0]))
+    d = _db_json(http_get(source["db_url"]))
     outdir = DATA / "repos" / source_id / mradir
     outdir.mkdir(parents=True, exist_ok=True)
     want, urls = {}, {}
@@ -3109,6 +3145,167 @@ GM0RK_CORE_REPOS = {
     "arcade-itech8": "Gm0rk/ITech8_MiSTer",
 }
 
+JLRH_REPO = "jlrh/jlrh-misterfpga-db"
+# Debut dates for the jlrh initial import (2026-10-21 seed). His games were
+# public before this db existed (2026-07-19): the Gaelco set in
+# jlrh/gaelco-fpga's releases/ from 2026-06-20 and his first Gaelco db
+# (jlrh/gaelco-fpga-db, 2026-07-01), Destroyer in cidelsa-fpga, Operation
+# Wolf in taito-fpga. So each date is the earliest, over all his repos, of
+# an MRA of the same game being committed (the "FF" qualifier he added
+# later ignored), but never before a build of that game's core in the same
+# repo, UTC. Moo Mesa's first build was cowboys_20260719.rbf, before the
+# core took the moomesa name. Post-import titles need no entry.
+JLRH_FROZEN_DATES = {
+    "Aero Fighters (FF, Video System, 1992).mra": "2026-09-15",
+    "Alligator Hunt (FF, Gaelco, 1994).mra": "2026-06-30",
+    "Altair (FF, Cidelsa, 1981).mra": "2026-09-10",
+    "Altair II (FF, Cidelsa, 198x).mra": "2026-09-10",
+    "Ambush (FF, Tecfri, 1983).mra": "2026-10-14",
+    "Asterix (FF ver EAD).mra": "2026-07-28",
+    "Beast Busters (FF, SNK, 1989).mra": "2026-10-07",
+    "Big Karnak (FF, Gaelco, 1991).mra": "2026-07-01",
+    "Biomechanical Toy (FF, Gaelco, 1995).mra": "2026-06-22",
+    "Chequered Flag (FF, Konami, 1988).mra": "2026-10-04",
+    "Crazy Rally (FF, Tecfri, 1985).mra": "2026-10-14",
+    "Dead Angle (FF, Seibu, 1988).mra": "2026-10-06",
+    "Destroyer (FF, Cidelsa, 1980).mra": "2026-07-02",
+    "Detana!! Twin Bee (FF, Japan ver J, Konami, 1991).mra": "2026-09-04",
+    "Draco (FF, Cidelsa, 1981).mra": "2026-09-10",
+    "Empire City 1931 (FF, Seibu, 1986).mra": "2026-07-19",
+    "Glass (FF, Gaelco, 1993).mra": "2026-07-14",
+    "Guerrilla War (FF, SNK, 1987).mra": "2026-10-06",
+    "Hammer Boy (FF, Dinamic-Inder, 1990).mra": "2026-09-25",
+    "Hole Land (FF, Tecfri, 1984).mra": "2026-10-14",
+    "Hot Chase (FF, Konami, 1988).mra": "2026-10-01",
+    "Konami GT (FF, Konami, 1985).mra": "2026-10-04",
+    "Martial Champion (FF ver EAB).mra": "2026-08-25",
+    "Mechanized Attack (FF, SNK, 1989).mra": "2026-10-07",
+    "Mega Phoenix (FF, Dinamic-Inder, 1991).mra": "2026-09-25",
+    "Music Ball (FF, Tecfri, 1988).mra": "2026-10-14",
+    "Mystic Warriors (FF ver EAA).mra": "2026-08-22",
+    "Operation Wolf (FF, World, rev 2, set 1).mra": "2026-07-18",
+    "Over Drive (FF, Konami, 1990).mra": "2026-10-04",
+    "Sauro (FF, Tecfri, 1987).mra": "2026-10-14",
+    "Shadow Force (FF, Technos, 1993).mra": "2026-10-05",
+    "Speed Ball (FF, Tecfri, 1987).mra": "2026-10-14",
+    "Squash (FF, Gaelco, 1992).mra": "2026-06-22",
+    "Sunset Riders (FF 2 Players ver EBD).mra": "2026-08-15",
+    "Sunset Riders (FF 4 Players ver EAC).mra": "2026-08-15",
+    "TH Strikes Back (FF, Gaelco, 1994).mra": "2026-06-25",
+    "Thunder Hoop (FF, Gaelco, 1992).mra": "2026-06-22",
+    "Tricky Doc (FF, Tecfri, 1987).mra": "2026-10-14",
+    "WEC Le Mans 24 (FF, Konami, 1986).mra": "2026-10-01",
+    "Wild West C.O.W.-Boys of Moo Mesa (FF, Konami, 1992).mra": "2026-07-19",
+    "World Rally 2 (FF, Gaelco, 1995).mra": "2026-07-01",
+    "World Rally Championship (FF, Gaelco, 1993, checksum 3873).mra": "2026-07-19",
+    "World Rally Championship (FF, Gaelco, 1993, checksum DE0D).mra": "2026-06-20",
+    "Xexex (FF ver EAA).mra": "2026-09-29",
+    "YoYo Spell (prototype) (FF, Inder, 1992).mra": "2026-09-25",
+}
+
+# MRA <rbf> tag (lowercased) -> the family repo holding that core's sources
+JLRH_CORE_REPOS = {
+    "ffaerofgt": "jlrh/videosystem-fpga",
+    "ffaligator": "jlrh/gaelco-fpga",
+    "ffaltair": "jlrh/cidelsa-fpga",
+    "ffambush": "jlrh/tecfri-fpga",
+    "ffasterix": "jlrh/konami-fpga",
+    "ffbbusters": "jlrh/snk-fpga",
+    "ffbigkarnk": "jlrh/gaelco-fpga",
+    "ffbiomtoy": "jlrh/gaelco-fpga",
+    "ffblswhstl": "jlrh/konami-fpga",
+    "ffcheqflag": "jlrh/konami-fpga",
+    "ffcrzrally": "jlrh/tecfri-fpga",
+    "ffdeadang": "jlrh/seibu-fpga",
+    "ffdestroyer": "jlrh/cidelsa-fpga",
+    "ffdraco": "jlrh/cidelsa-fpga",
+    "ffempirecity": "jlrh/seibu-fpga",
+    "ffglass": "jlrh/gaelco-fpga",
+    "ffgwar": "jlrh/snk-fpga",
+    "ffholeland": "jlrh/tecfri-fpga",
+    "ffhotchase": "jlrh/konami-fpga",
+    "ffkonamigt": "jlrh/konami-fpga",
+    "ffmechatt": "jlrh/snk-fpga",
+    "ffmegaphx": "jlrh/inder-dinamic-fpga",
+    "ffmoomesa": "jlrh/konami-fpga",
+    "ffmtlchamp": "jlrh/konami-fpga",
+    "ffmystwarr": "jlrh/konami-fpga",
+    "ffopwolf": "jlrh/taito-fpga",
+    "ffoverdriv": "jlrh/konami-fpga",
+    "ffsauro": "jlrh/tecfri-fpga",
+    "ffshadfrce": "jlrh/technos-fpga",
+    "ffspeedbal": "jlrh/tecfri-fpga",
+    "ffsquash": "jlrh/gaelco-fpga",
+    "ffssriders": "jlrh/konami-fpga",
+    "ffthoop": "jlrh/gaelco-fpga",
+    "ffthoop2": "jlrh/gaelco-fpga",
+    "fftrckydoc": "jlrh/tecfri-fpga",
+    "ffwecleman": "jlrh/konami-fpga",
+    "ffwrally": "jlrh/gaelco-fpga",
+    "ffwrally2": "jlrh/gaelco-fpga",
+    "ffxexex": "jlrh/konami-fpga",
+}
+
+SHMUPFAN_REPO = "shmupfan/Distribution"
+# Debut dates for the shmupfan initial import (2026-10-21 seed): the day
+# each MRA was first committed to its core repo's releases/ (where the db's
+# url points), or the core's first committed build if that came later, UTC.
+# The core repos predate the db (2026-10-02). The G-NET repo carries the PSX
+# core's history back to 2022; only Arcade-TaitoGNET builds count for it.
+# Post-import titles need no entry.
+SHMUPFAN_FROZEN_DATES = {
+    "'96 Flag Rally.mra": "2026-10-03",
+    "1945k III (newer, OPCX2 PCB).mra": "2026-10-03",
+    "Blue Hawk.mra": "2026-09-30",
+    "Chaos Heat (V2.09O).mra": "2026-10-06",
+    "Final Star Force (US).mra": "2026-10-04",
+    "Flip Maze (V2.04J).mra": "2026-10-06",
+    "Flying Tiger (set 1).mra": "2026-09-30",
+    "Ganbare Ginkun.mra": "2026-10-04",
+    "Go By RC (V2.03O).mra": "2026-10-06",
+    "Gondomania (World).mra": "2026-10-04",
+    "Gulf Storm (set 1).mra": "2026-09-30",
+    "Gun Dealer '94.mra": "2026-09-30",
+    "Kollon (V2.04JA).mra": "2026-10-06",
+    "Last Mission (World revision 8).mra": "2026-10-04",
+    "Mahjong Oh (V2.06J).mra": "2026-10-06",
+    "Night Raid (V2.03J).mra": "2026-10-06",
+    "Otenami Haiken (V2.04J).mra": "2026-10-06",
+    "Otenami Haiken Final (V2.07JC).mra": "2026-10-06",
+    "Otenki Kororin (V2.01J).mra": "2026-10-06",
+    "Pollux (set 1).mra": "2026-09-30",
+    "Pop Bingo.mra": "2026-09-30",
+    "Psyvariar -Medium Unit- (V2.02O).mra": "2026-10-06",
+    "Psyvariar -Revision- (V2.04J).mra": "2026-10-06",
+    "R-Shark (set 1).mra": "2026-09-30",
+    "Ray Crisis (V2.03O).mra": "2026-10-06",
+    "Riot (NMK).mra": "2026-10-04",
+    "Sadari (Japan, NTC license).mra": "2026-09-30",
+    "Shanghai Sangokuhai Tougi (Ver 2.01J).mra": "2026-10-06",
+    "Shanghai Shoryu Sairin (V2.03J).mra": "2026-10-06",
+    "Shikigami no Shiro (V2.03J).mra": "2026-10-06",
+    "Solite Spirits.mra": "2026-10-03",
+    "Soutenryu (V2.07J).mra": "2026-10-06",
+    "Space Invaders Anniversary (V2.02J).mra": "2026-10-06",
+    "SRD - Super Real Darwin (World).mra": "2026-10-04",
+    "Super Puzzle Bobble (V2.05O).mra": "2026-10-06",
+    "Super-X (NTC).mra": "2026-09-30",
+    "The Last Day (set 1).mra": "2026-09-30",
+    "Usagi (V2.02J).mra": "2026-10-06",
+    "XII Stag (V2.01J).mra": "2026-10-06",
+    "Zoku Otenamihaiken (V2.03J).mra": "2026-10-06",
+    "Zooo (V2.01JA).mra": "2026-10-06",
+}
+
+# MRA <rbf> tag (lowercased) -> core repo
+SHMUPFAN_CORE_REPOS = {
+    "1945kiii": "shmupfan/Arcade-1945kIII_MiSTer",
+    "dec8": "shmupfan/Arcade-DEC8_MiSTer",
+    "dooyong": "shmupfan/Arcade-Dooyong_MiSTer",
+    "taitognet": "shmupfan/Arcade-TaitoGNET_MiSTer",
+    "tecmo16": "shmupfan/Arcade-Tecmo16_MiSTer",
+}
+
 ONGO_CORE_REPOS = {
     "namco_na1_na2": "kyledlester/Namco_NA1_NA2_MiSTer",
     "namco_nb1": "kyledlester/Namco_NB1_MiSTer",
@@ -3146,6 +3343,8 @@ OPTIN_DB_SOURCES = {
     "decoryah": (DECORYAH_REPO, DECORYAH_CORE_REPOS, DECORYAH_FROZEN_DATES),
     "ppriest": (PPRIEST_REPO, PPRIEST_CORE_REPOS, PPRIEST_FROZEN_DATES),
     "gm0rk": (GM0RK_REPO, GM0RK_CORE_REPOS, GM0RK_FROZEN_DATES),
+    "jlrh": (JLRH_REPO, JLRH_CORE_REPOS, JLRH_FROZEN_DATES),
+    "shmupfan": (SHMUPFAN_REPO, SHMUPFAN_CORE_REPOS, SHMUPFAN_FROZEN_DATES),
 }
 
 
@@ -4728,6 +4927,10 @@ def _core_label(r, fork_info, repo_maps):
         return "ppriest"
     if r["source_id"] == "gm0rk":
         return "Gm0rk"
+    if r["source_id"] == "jlrh":
+        return "jlrh"
+    if r["source_id"] == "shmupfan":
+        return "shmupfan"
     repo =(r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -4888,9 +5091,7 @@ def _filter_tag_map():
     rbf_core = re.compile(r"_(?:Console|Computer|Other|Utility)/([^/]+?)(?:_\d{6,8})?\.rbf$")
     for source in SOURCES:
         try:
-            raw = http_get(source["db_url"])
-            z = zipfile.ZipFile(BytesIO(raw))
-            d = json.loads(z.read(z.namelist()[0]))
+            d = _db_json(http_get(source["db_url"]))
         except Exception as e:
             log(f"  filter-tag join: {source['id']} fetch failed ({e}); its rows ship without ft")
             continue
@@ -5668,8 +5869,11 @@ def cmd_export_web(args):
         if r["system"] == "arcade" and not r["beta"]:
             # case-blind: MRA names disagree on acronyms (Meathax's "NARC",
             # blahm1d's "Narc (rev 7.00)"); the setname check below still
-            # decides whether it is one game
-            groups.setdefault(_same_game_key(r["title"]), []).append(r)
+            # decides whether it is one game. A pinned ARCADE_TITLES name
+            # keeps its qualifier, which is there to part it from another
+            # game: "Squash (Gaelco 1992)" (Jotego, jlrh) is not Itisa's Squash
+            pin = ARCADE_TITLES.get((r["setname"] or "").lower())
+            groups.setdefault(pin.casefold() if pin else _same_game_key(r["title"]), []).append(r)
     for b, grp in groups.items():
         if len(grp) < 2:
             continue

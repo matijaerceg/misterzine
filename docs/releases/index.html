@@ -1840,10 +1840,9 @@ const OPTIN_DBS = {
   ongo: {
     section: 'OngoGablogian/MiSTer_Ongo',
     url: 'https://raw.githubusercontent.com/OngoGablogian/MiSTer_Ongo/db/db.json.zip',
-    what: 'Ongo distributes arcade cores from several developers, including Kyle Lester, whose cores ' +
-      'are only distributed there. The website lists another developer\'s game from Ongo only when ' +
-      'no other database it tracks has that game. The database itself also includes other systems, ' +
-      'scripts and extras.',
+    what: 'Ongo distributes arcade cores from several developers. The website lists another ' +
+      'developer\'s game from Ongo only when no other database it tracks has that game. The ' +
+      'database itself also includes other systems, scripts and extras.',
   },
   meathax: {
     section: 'meathax/meatcores',
@@ -3865,7 +3864,9 @@ function iniWrap(text, first = '# ', rest = first, w = 76) {
   return out;
 }
 function buildIni() {
-  const srcs = (SRC_KEYS.length ? SRC_KEYS : Object.keys(OPTIN_DBS)).filter(s => OPTIN_DBS[s]);
+  // Source-menu order, but Ongo last: it is the catch-all that doubles the others
+  const srcs = (SRC_KEYS.length ? SRC_KEYS : Object.keys(OPTIN_DBS)).filter(s => OPTIN_DBS[s])
+    .sort((a, b) => (a === 'ongo') - (b === 'ongo'));
   const bundled = [...UPDATE_ALL_INCLUDED].map(s => SRC_NAMES[s] || s);
   const day = new Date().toISOString().slice(0, 10);
   const L = [

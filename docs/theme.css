@@ -551,6 +551,308 @@
   --stamp-sheen: rgb(255 255 255 / .06);
 }
 
+/* ---- lagoon: dark teal water, sea-glass ink, a gold accent and a bright
+   lagoon teal for the second highlight. One of the low-contrast set (added
+   2026-10-21): the luma spread is kept small on purpose, with --fg held just
+   over the 8:1 floor; the colour lives in the hues, not in the brightness. */
+:root[data-theme="lagoon"] {
+  color-scheme: dark;
+  --bg: #012b33;
+  --surface: #043d48;
+  --fg: #99c6c4;
+  --muted: #65a0a2;
+  --line: #2a6670;
+  --accent: #eeb100;
+  --accent2: #00d7c9;
+  --accent-on: #012b33;
+  --brand-hover: #00d7c9;
+  --type-arcade: #ff9614;
+  --type-console: #2ebcfc;
+  --type-computer: #5dcf4b;
+  --type-other: #d897f6;
+  --reset: #ff9614;
+  --ok: #5dcf4b;
+  --danger: #ff6d6d;
+  --warn: #eeb100;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- moss: forest floor: dark olive ground, lichen ink, a gold accent.
+   Low-contrast set (2026-10-21). */
+:root[data-theme="moss"] {
+  color-scheme: dark;
+  --bg: #1c2710;
+  --surface: #293a18;
+  --fg: #b8c48f;
+  --muted: #8a9d61;
+  --line: #465a30;
+  --accent: #e6af00;
+  --accent2: #5bbdf0;
+  --accent-on: #1c2710;
+  --brand-hover: #afd452;
+  --type-arcade: #f88f00;
+  --type-console: #5bbdf0;
+  --type-computer: #99d135;
+  --type-other: #f395da;
+  --reset: #f88f00;
+  --ok: #99d135;
+  --danger: #ff715a;
+  --warn: #e6af00;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- woodgrain: the walnut veneer of a 2600 "woodie": dark brown ground,
+   cream ink, Atari orange accent, teal second highlight. */
+:root[data-theme="woodgrain"] {
+  color-scheme: dark;
+  --bg: #2d1b0d;
+  --surface: #422915;
+  --fg: #fbdcaa;
+  --muted: #c6904a;
+  --line: #754c27;
+  --accent: #ff7f2a;
+  --accent2: #39cfc3;
+  --accent-on: #1e1209;
+  --brand-hover: #ffa060;
+  --type-arcade: #ff9a4a;
+  --type-console: #39cfc3;
+  --type-computer: #b1cd50;
+  --type-other: #ff9d7e;
+  --reset: #ff9a4a;
+  --ok: #89d73e;
+  --danger: #ff6a5a;
+  --warn: #f9bd00;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- merlot: deep wine-red ground, rose ink, gold accent. Low-contrast
+   set (2026-10-21) in feel, though its ink clears 12:1. */
+:root[data-theme="merlot"] {
+  color-scheme: dark;
+  --bg: #300d19;
+  --surface: #491629;
+  --fg: #f9d0db;
+  --muted: #cc7e94;
+  --line: #732e44;
+  --accent: #febc00;
+  --accent2: #9ebcff;
+  --accent-on: #300d19;
+  --brand-hover: #ff90b4;
+  --type-arcade: #ff9c47;
+  --type-console: #9ebcff;
+  --type-computer: #89e054;
+  --type-other: #ff8ec8;
+  --reset: #ff9c47;
+  --ok: #89e054;
+  --danger: #ff7f8c;
+  --warn: #febc00;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- next: the NeXT cube's graphite: mid-dark grey ground and soft
+   grey ink (--fg held just over the 8:1 floor), a gold accent and sky-blue
+   second highlight. Low-contrast set (2026-10-21). */
+:root[data-theme="next"] {
+  color-scheme: dark;
+  --bg: #38383b;
+  --surface: #4a4a4e;
+  --fg: #d7d7d7;
+  --muted: #a2a2a5;
+  --line: #6e6e72;
+  --accent: #f9bc00;
+  --accent2: #50c7ff;
+  --accent-on: #2a2a2c;
+  --brand-hover: #ffcd55;
+  --type-arcade: #ff9e27;
+  --type-console: #50c7ff;
+  --type-computer: #8ddb4e;
+  --type-other: #fd86d4;
+  --reset: #ff9e27;
+  --ok: #8ddb4e;
+  --danger: #ff837e;
+  --warn: #f9bc00;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- clay: terracotta: a MID-dark warm ground (the lightest of the dark
+   themes), cream ink, sand-gold accent. Low-contrast set (2026-10-21). */
+:root[data-theme="clay"] {
+  color-scheme: dark;
+  --bg: #732d1a;
+  --surface: #883925;
+  --fg: #ffe3ca;
+  --muted: #f9b588;
+  --line: #b36442;
+  --accent: #ffd27a;
+  --accent2: #a0daff;
+  --accent-on: #4a2016;
+  --brand-hover: #ffc8a0;
+  --type-arcade: #ffc490;
+  --type-console: #a0daff;
+  --type-computer: #c2eb5c;
+  --type-other: #ffbbe0;
+  --reset: #ffc490;
+  --ok: #c2eb5c;
+  --danger: #ffb0b0;
+  --warn: #ffd27a;
+  --hint-shadow: rgb(0 0 0 / .75);
+  --watermark: color-mix(in srgb, #000 22%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .45);
+  --stamp-sheen: rgb(255 255 255 / .06);
+}
+
+/* ---- vic: menu label "VIC-20" (slug letters only, see the pre-paint
+   guard): the VIC-20 boot screen's pale cyan and blue ink, a deep teal
+   accent. LIGHT. */
+:root[data-theme="vic"] {
+  color-scheme: light;
+  --bg: #ddf6fa;
+  --surface: #b4e8f2;
+  --fg: #2b2a8c;
+  --muted: #5e68a0;
+  --line: #82b8cd;
+  --accent: #00737e;
+  --accent2: #0078b6;
+  --accent-on: #ffffff;
+  --brand-hover: #5c44ff;
+  --type-arcade: #c35800;
+  --type-console: #0078b6;
+  --type-computer: #008c34;
+  --type-other: #a000ba;
+  --reset: #c35800;
+  --ok: #008c34;
+  --danger: #d0002d;
+  --warn: #9a7400;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- pocket: the Game Boy Pocket's grey-green LCD: lower contrast than
+   dmg (--fg held just over the 8:1 floor), dark green accent. LIGHT. */
+:root[data-theme="pocket"] {
+  color-scheme: light;
+  --bg: #bac49a;
+  --surface: #a6b184;
+  --fg: #222a1b;
+  --muted: #525d3d;
+  --line: #858f69;
+  --accent: #254815;
+  --accent2: #124a7e;
+  --accent-on: #bac49a;
+  --brand-hover: #254815;
+  --type-arcade: #6f4800;
+  --type-console: #124a7e;
+  --type-computer: #035e10;
+  --type-other: #6b1e6c;
+  --reset: #6f4800;
+  --ok: #035e10;
+  --danger: #971700;
+  --warn: #685000;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- super: the US Super Nintendo: lavender ground, deep-purple accent,
+   and the four face-button colours as the type hues. LIGHT. */
+:root[data-theme="super"] {
+  color-scheme: light;
+  --bg: #dacef3;
+  --surface: #c4b3ec;
+  --fg: #3c2e60;
+  --muted: #6a599a;
+  --line: #a593d6;
+  --accent: #671dd0;
+  --accent2: #1347e5;
+  --accent-on: #ffffff;
+  --brand-hover: #8740f2;
+  --type-arcade: #d00011;
+  --type-console: #1347e5;
+  --type-computer: #00873f;
+  --type-other: #8a6800;
+  --reset: #d00011;
+  --ok: #00873f;
+  --danger: #b90048;
+  --warn: #8a6800;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- platinum: the cool light grey of late-90s desktop chrome, with an
+   indigo accent. Low-contrast set (2026-10-21): --fg held just over the 8:1
+   floor. LIGHT. */
+:root[data-theme="platinum"] {
+  color-scheme: light;
+  --bg: #d6dae3;
+  --surface: #c1c6d3;
+  --fg: #353a47;
+  --muted: #666b79;
+  --line: #9ba0ae;
+  --accent: #523aea;
+  --accent2: #0067bf;
+  --accent-on: #ffffff;
+  --brand-hover: #6a5cff;
+  --type-arcade: #af5600;
+  --type-console: #0067bf;
+  --type-computer: #007e35;
+  --type-other: #a01dd9;
+  --reset: #af5600;
+  --ok: #007e35;
+  --danger: #c5002e;
+  --warn: #866600;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
+/* ---- beige: the beige-box PC case, with a keyboard-blue accent.
+   Low-contrast set (2026-10-21). LIGHT. */
+:root[data-theme="beige"] {
+  color-scheme: light;
+  --bg: #d8cba6;
+  --surface: #c6b68d;
+  --fg: #353025;
+  --muted: #716449;
+  --line: #a89771;
+  --accent: #1648b4;
+  --accent2: #005cb0;
+  --accent-on: #ffffff;
+  --brand-hover: #225dd3;
+  --type-arcade: #a54e00;
+  --type-console: #005cb0;
+  --type-computer: #1b7400;
+  --type-other: #8f1991;
+  --reset: #a54e00;
+  --ok: #1b7400;
+  --danger: #b70019;
+  --warn: #7a5e00;
+  --hint-shadow: rgb(0 0 0 / .20);
+  --watermark: color-mix(in srgb, var(--fg) 8%, var(--surface));
+  --stamp-shade: rgb(0 0 0 / .42);
+  --stamp-sheen: rgb(255 255 255 / .55);
+}
+
 /* ---- theme PREVIEW COLOURS: the pair of little dots beside each name in the
    theme dropdown.
 
@@ -615,12 +917,23 @@
 .menu button[data-set="amber"]      { --sw1: #100b04; --sw2: #ffb000; } /* black + amber */
 .menu button[data-set="phosphor"]   { --sw1: #0a0e0a; --sw2: #35e86b; } /* dark + bright green */
 .menu button[data-set="eva"]        { --sw1: #6b5a94; --sw2: #a6ff00; } /* medium purple + green */
+.menu button[data-set="merlot"]     { --sw1: #300d19; --sw2: #ff90b4; } /* wine + rose */
 .menu button[data-set="vaporwave"]  { --sw1: #b967ff; --sw2: #ff71ce; } /* medium purple + pink */
+.menu button[data-set="woodgrain"]  { --sw1: #2d1b0d; --sw2: #ff7f2a; } /* walnut + Atari orange */
 .menu button[data-set="punchy"]     { --sw1: #1e1e2e; --sw2: #cba6f7; } /* deep indigo + mauve */
+.menu button[data-set="moss"]       { --sw1: #1c2710; --sw2: #afd452; } /* dark olive + moss green */
+.menu button[data-set="lagoon"]     { --sw1: #012b33; --sw2: #00d7c9; } /* deep teal + lagoon teal */
 .menu button[data-set="commodore"]  { --sw1: #352879; --sw2: #7869c4; } /* the two VIC-II blues */
+.menu button[data-set="next"]       { --sw1: #38383b; --sw2: #f9bc00; } /* graphite + gold */
 .menu button[data-set="workbench"]  { --sw1: #003a75; --sw2: #ff9422; } /* Amiga blue + orange */
+.menu button[data-set="clay"]       { --sw1: #732d1a; --sw2: #ffd27a; } /* terracotta + sand gold */
 .menu button[data-set="dmg"]        { --sw1: #9bbc0f; --sw2: #0f380f; } /* screen + ink */
+.menu button[data-set="pocket"]     { --sw1: #bac49a; --sw2: #254815; } /* LCD grey-green + ink green */
+.menu button[data-set="beige"]      { --sw1: #d8cba6; --sw2: #1648b4; } /* beige + keyboard blue */
+.menu button[data-set="super"]      { --sw1: #dacef3; --sw2: #671dd0; } /* lavender + purple */
+.menu button[data-set="platinum"]   { --sw1: #d6dae3; --sw2: #523aea; } /* cool grey + indigo */
 .menu button[data-set="pink"]       { --sw1: #ffd9e7; --sw2: #c4136c; } /* soft pink + deep pink */
+.menu button[data-set="vic"]        { --sw1: #ddf6fa; --sw2: #2b2a8c; } /* pale cyan + VIC blue */
 .menu button[data-set="icecream"]   { --sw1: #fdf5c9; --sw2: #d6467a; } /* vanilla + strawberry */
 .menu button[data-set="riso"]       { --sw1: #f2efe6; --sw2: #00827f; } /* newsprint + teal ink */
 .menu button[data-set="famicom"]    { --sw1: #f5f0e4; --sw2: #a71d31; } /* cream + crimson */

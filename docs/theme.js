@@ -13,10 +13,14 @@
   var THEMES = [
     ['light', 'Light'], ['dark', 'Dark'], ['virtualboy', 'Virtual'],
     ['spectrum', 'ZX'], ['amber', 'Amber'], ['phosphor', 'Phosphor'],
-    ['eva', 'Unit-01'], ['vaporwave', 'Synth'], ['punchy', 'MiSTer-y'],
-    ['commodore', 'C64'], ['workbench', 'Bench'], ['dmg', 'Game Boy'],
-    ['pink', 'Pink'], ['icecream', 'Gelato'], ['riso', 'Riso'],
-    ['famicom', 'Famicom'], ['pastel', 'Pastel']
+    ['eva', 'Unit-01'], ['merlot', 'Merlot'], ['vaporwave', 'Synth'],
+    ['woodgrain', 'Woodgrain'], ['punchy', 'MiSTer-y'], ['moss', 'Moss'],
+    ['lagoon', 'Lagoon'], ['commodore', 'C64'], ['next', 'NeXT'],
+    ['workbench', 'Bench'], ['clay', 'Clay'], ['dmg', 'Game Boy'],
+    ['pocket', 'Pocket'], ['beige', 'Beige'], ['super', 'Super'],
+    ['platinum', 'Platinum'], ['pink', 'Pink'], ['vic', 'VIC-20'],
+    ['icecream', 'Gelato'], ['riso', 'Riso'], ['famicom', 'Famicom'],
+    ['pastel', 'Pastel']
   ];
   // the site Menu (every page, since 2026-09-17): outside click and Escape
   // close it; on open its list is capped to the room below so it stays

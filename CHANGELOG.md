@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-21
 
+- Eleven new themes in Menu → Theme: Merlot, Woodgrain, Moss, Lagoon, NeXT, Clay, Pocket, Beige, Super, Platinum and VIC-20. Several are deliberately gentler, with less difference between text and background.
 - Release tracker: the Batches button now has rounded corners on both sides when it is switched on, matching the other buttons in the filter row.
 - Release tracker: the new Sun SPARCstation 20 core is now listed as "SPARCstation 20", with its year (1994), maker (Sun Microsystems) and a photo of the machine.
 - Release tracker: the dot marking rows that changed since your last visit is smaller, so it sits more quietly beside the title. It is just as easy to hover for its explanation.

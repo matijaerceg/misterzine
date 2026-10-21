@@ -683,9 +683,9 @@
      short accent rule so the tree reads at a glance. Chip chrome copies .bb
      (muted pill): a count, not a novelty. */
   tr.grp td:first-child { font-weight: 600; }
-  tr.grp .tw { position: absolute; left: .45rem; top: 0; bottom: 0; width: 1rem;
+  tr.grp .tw { position: absolute; left: .45rem; top: .35rem; height: 1lh; width: 1rem;
                display: flex; align-items: center; justify-content: center;
-               color: var(--muted); font-size: .8em; }
+               color: var(--muted); font-size: 1em; }
   td .gc { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
            border: 1px solid var(--muted); border-radius: .2rem;
            color: var(--muted); font-size: .6em; font-weight: 700;
@@ -695,9 +695,6 @@
   /* a core batch umbrella (tr.bat, also .grp): the core's name in the Title
      cell with a muted "update" tail, so it reads as an event, not a game */
   tr.bat td:first-child .bu { color: var(--muted); font-weight: 400; margin-left: .3rem; }
-  /* the batch chevron: a notch bigger, and on the first text line (the cell's
-     top padding + one line box) rather than centred on a two-line row */
-  tr.bat .tw { top: .35rem; bottom: auto; height: 1lh; font-size: 1em; }
   /* the batch panel's game list: one line per game, star at the end */
   #panel ul.blist { list-style: none; margin: .4rem 0 0; padding: 0; }
   #panel ul.blist li { display: flex; align-items: baseline; gap: .35rem; padding: .25rem 0;

@@ -1366,9 +1366,12 @@ const PARENT = new Map();  // member row -> the umbrella (same-game or batch) ho
 // rows sharing a core and Build Date fold under one umbrella (makeBatch; grp
 // AND bat: true) that reuses the whole same-game umbrella machinery: expand in
 // place, #g: permalink, group panel. Same-game umbrellas and their members stay
-// outside (never two deep); debut-floored rows are not batch members (clusterN).
+// outside (never two deep). Debut-floored rows count as members too: a game
+// that debuts on the day its core ships is part of the same wave, so three or
+// more rows on one core and Build Date fold, floored or not. The "batch" badge
+// still skips floored rows (clusterN).
 // A display pref (mz-batches), not a filter: Clear filters leaves it alone.
-const BATCH_MIN = 4;
+const BATCH_MIN = 3;
 let foldBatches = true;
 try { foldBatches = localStorage.getItem('mz-batches') !== '0'; } catch (e) {}
 const batchG = (core, updated) => core + '@' + updated;  // the umbrella's g; setnames never carry '@'
@@ -1417,7 +1420,7 @@ function hashRow() {
   // a batch link while batches are off, or filtered away: build it from DATA
   const at = g.lastIndexOf('@');
   if (at > 0) {
-    const ms = DATA.filter(d => d.core === g.slice(0, at) && d.updated === g.slice(at + 1) && clusterN(d) >= 2);
+    const ms = DATA.filter(d => d.core === g.slice(0, at) && d.updated === g.slice(at + 1));
     if (ms.length >= 2) return makeBatch(ms);
   }
   return undefined;
@@ -3008,13 +3011,14 @@ function apply() {
   view = top.map(x => Array.isArray(x) ? (x.length > 1 ? makeUmbrella(x) : x[0]) : x);
   // then fold core batches (see makeBatch): plain survivors sharing a core and
   // Build Date, BATCH_MIN or more of them, under the date sorts only (any other
-  // sort would scatter the games out of their order). Same-game umbrellas are
-  // never batch members, so nothing nests two deep. Fewer survivors than
-  // BATCH_MIN stay plain rows (with the "batch" badge), like a promoted member.
+  // sort would scatter the games out of their order). Debut-floored rows count,
+  // since a same-day debut is part of the wave. Same-game umbrellas are never
+  // batch members, so nothing nests two deep. Fewer survivors than BATCH_MIN
+  // stay plain rows (with the "batch" badge where clusterN gives one).
   if (foldBatches && (sortKey === 'updated' || sortKey === 'mz')) {
     const bk = {}, out = [];
     for (const d of view) {
-      if (d.grp || clusterN(d) < 2) { out.push(d); continue; }
+      if (d.grp || !d.core || !d.updated) { out.push(d); continue; }
       const key = batchG(d.core, d.updated);
       let b = bk[key];
       if (!b) { b = bk[key] = []; out.push(b); }

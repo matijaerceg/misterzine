@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 21 Oct 2026 06:38:45 +0000</lastBuildDate>
+<lastBuildDate>Wed, 21 Oct 2026 08:31:20 +0000</lastBuildDate>
+<item>
+<title>[New] Fantasia (TomSVR) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasian</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Fantasia (940803 PCB) [TomSVR].mra:2026-10-21T08:31:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:31:20 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantasian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Comad &amp;amp; New Japan System&lt;/p&gt;&lt;p&gt;Core: TomSVR_comad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Final Tetris (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#finalttr</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Final Tetris [TomSVR].mra:2026-10-21T08:31:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:31:20 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/finalttr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1993 / Jeil Computer System&lt;/p&gt;&lt;p&gt;Core: TomSVR_semicom&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TomSVR_semicom (Arcade core, 12 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cookbib2</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_semicom_20261023.rbf:2026-10-21T08:31:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:31:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cookie &amp;amp; Bibi 2, Cookie &amp;amp; Bibi 3, Final Tetris, Hyper Pacman, Macheonlu, New HyperMan, Puzzle Break, Puzzle Express More More, Puzzle Express More More Plus, Suhoseong, Toppy &amp;amp; Rappy, Twinkle.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261021.rbf:2026-10-21T08:15:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:15:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Big Twin (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bigtwin</link>
@@ -386,13 +422,13 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mj4simai.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1996 / Maboroshi Ware&lt;/p&gt;&lt;p&gt;Core: seta2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-20 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] TomSVR_comad (Arcade core, 9 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantsia2</link>
+<title>[Updated] TomSVR_comad (Arcade core, 10 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasian</link>
 <guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_comad_20261020.rbf:2026-10-20T08:42:45+00:00</guid>
 <pubDate>Tue, 20 Oct 2026 08:42:45 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Fantasia II, Fantasy '95, Gals Hustler, Hot Night, Miss World '96, Miss World 2002, Pocket Gals V.I.P (TomSVR), WOW New Fantasia (TomSVR), Zip &amp;amp; Zap (TomSVR).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Fantasia (TomSVR), Fantasia II, Fantasy '95, Gals Hustler, Hot Night, Miss World '96, Miss World 2002, Pocket Gals V.I.P (TomSVR), WOW New Fantasia (TomSVR), Zip &amp;amp; Zap (TomSVR).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] TomSVR_esd (Arcade core, 7 games)</title>
@@ -870,42 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/exterm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1989 / Premier Technology / Gottlieb&lt;/p&gt;&lt;p&gt;Core: Arcade-Exterminator&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Jack Rabbit (Meathax) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#jackrabt</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Jack Rabbit.mra:2026-10-19T11:17:37+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 11:17:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jackrabt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1984 / Zaccaria&lt;/p&gt;&lt;p&gt;Core: Arcade-Zaccaria&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Meta Fox (Meathax) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#meta-fox-meathax</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Meta Fox.mra:2026-10-19T11:17:37+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 11:17:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metafox.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Jordan I.S. / Seta&lt;/p&gt;&lt;p&gt;Core: Arcade-Arbalester&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Money Money (Meathax) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#monymony</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Money Money.mra:2026-10-19T11:17:37+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 11:17:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/monymony.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1983 / Zaccaria&lt;/p&gt;&lt;p&gt;Core: Arcade-Zaccaria&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Simpsons (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#simpsons-2</link>
-<guid isPermaLink="false">meathax:_Arcade/_MeatCores/Simpsons.mra:2026-10-19T11:17:37+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 11:17:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/simpsons.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-Simpsons&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

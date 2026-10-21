@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Wed, 21 Oct 2026 06:38:45 +0000</lastBuildDate>
+<lastBuildDate>Wed, 21 Oct 2026 08:31:20 +0000</lastBuildDate>
+<item>
+<title>[New] Fantasia (TomSVR) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasian</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Fantasia (940803 PCB) [TomSVR].mra:2026-10-21T08:31:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:31:20 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantasian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Comad &amp;amp; New Japan System&lt;/p&gt;&lt;p&gt;Core: TomSVR_comad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Final Tetris (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#finalttr</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Final Tetris [TomSVR].mra:2026-10-21T08:31:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:31:20 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/finalttr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1993 / Jeil Computer System&lt;/p&gt;&lt;p&gt;Core: TomSVR_semicom&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Big Twin (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bigtwin</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/playch10.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1986 / Nintendo of America&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Power Blade (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_pwbld</link>
-<guid isPermaLink="false">ongo:_Arcade/_Nintendo PlayChoice-10/Power Blade (PlayChoice-10).mra:2026-10-19T03:33:43+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwbld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Taito (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Pro Wrestling (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_pwrst</link>
-<guid isPermaLink="false">ongo:_Arcade/_Nintendo PlayChoice-10/Pro Wrestling (PlayChoice-10).mra:2026-10-19T03:33:43+00:00</guid>
-<pubDate>Mon, 19 Oct 2026 03:33:43 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwrst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-19 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

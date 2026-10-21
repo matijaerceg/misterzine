@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 21 Oct 2026 06:38:45 +0000</lastBuildDate>
+<lastBuildDate>Wed, 21 Oct 2026 08:31:20 +0000</lastBuildDate>
+<item>
+<title>[Updated] TomSVR_semicom (Arcade core, 12 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cookbib2</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_semicom_20261023.rbf:2026-10-21T08:31:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:31:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cookie &amp;amp; Bibi 2, Cookie &amp;amp; Bibi 3, Final Tetris, Hyper Pacman, Macheonlu, New HyperMan, Puzzle Break, Puzzle Express More More, Puzzle Express More More Plus, Suhoseong, Toppy &amp;amp; Rappy, Twinkle.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261021.rbf:2026-10-21T08:15:20+00:00</guid>
+<pubDate>Wed, 21 Oct 2026 08:15:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] TomSVR_playmark (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bigtwin</link>
@@ -53,13 +71,13 @@
 <description>&lt;p&gt;Serves: Chain Reaction, Charlie Ninja (Ongo), Heavy Smash, Joe &amp;amp; Mac Returns (Ongo), Magical Drop, Magical Drop Plus 1, Osman (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] TomSVR_comad (Arcade core, 9 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantsia2</link>
+<title>[Updated] TomSVR_comad (Arcade core, 10 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasian</link>
 <guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_comad_20261020.rbf:2026-10-20T08:42:45+00:00</guid>
 <pubDate>Tue, 20 Oct 2026 08:42:45 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Fantasia II, Fantasy '95, Gals Hustler, Hot Night, Miss World '96, Miss World 2002, Pocket Gals V.I.P (TomSVR), WOW New Fantasia (TomSVR), Zip &amp;amp; Zap (TomSVR).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Fantasia (TomSVR), Fantasia II, Fantasy '95, Gals Hustler, Hot Night, Miss World '96, Miss World 2002, Pocket Gals V.I.P (TomSVR), WOW New Fantasia (TomSVR), Zip &amp;amp; Zap (TomSVR).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] TomSVR_esd (Arcade core, 7 games)</title>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fantzn2x.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 2008 / Sega / M2&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Flash Point (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fpoint</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Flash Point (set 2, Japan) (FD1094 317-0127A).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/fpoint.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kicker (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kicker</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Kicker.mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kicker.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1985 / Konami&lt;/p&gt;&lt;p&gt;Core: jtkicker&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kicker"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

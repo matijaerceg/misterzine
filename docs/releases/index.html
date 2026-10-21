@@ -561,6 +561,18 @@
            color: var(--muted); font-size: .6em; font-weight: 700;
            letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; }
+  /* mature sign (data.json mat, see matBadge): a crossed-out 18 drawn in two
+     theme shades, the 18 brighter than the circle and slash. Masks, not the
+     emoji, which is a fixed red that ignores every theme. 1.25em: at the
+     .nb/.bb pill size the 18 smears. Class stays neutral (blockers hide
+     nsfw/adult names). */
+  td .ms { display: inline-block; width: 1.25em; height: 1.25em; margin-left: .35rem;
+           vertical-align: middle; position: relative; top: -.05em; }
+  td .ms::before, td .ms::after { content: ""; position: absolute; inset: 0;
+           -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat;
+           -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  td .ms::before { --ico: var(--ms-18); background: color-mix(in srgb, var(--fg) 65%, var(--muted)); }
+  td .ms::after  { --ico: var(--ms-x);  background: var(--muted); }
   /* batch marker: this row's Last Updated date is shared by other games on the
      same core (one build shipped them together). Deliberately quieter than the
      .nb/.bb/.br pills — no border, just muted small text: it's a grouping hint,
@@ -2238,6 +2250,25 @@ function betaBadge(d) {
   return d.beta ? '<span class="bb" data-tip="' + escA(gateInfo(d).tip) + '">' + gateStage(d) + '</span>' : '';
 }
 
+// Mature sign: rows data.json marks mat, under Show and Blur alike (Hide keeps
+// them out of the list). Same per-row popover path as the beta chip. Two masks
+// like the Type icons: the 18 (--ms-18) and the circle + slash (--ms-x), whose
+// slash is cut away around the 18 (the 18's strokes widened by 1.2 in the mask)
+// so the line passes behind the number instead of smearing into it. The owner
+// picked this cut (2026-10-21) over cutting the 18 and over no gap at all.
+const MAT_TIP = 'Mature (adult content). Menu > Mature games can show, blur or hide these.';
+function matBadge(d) {
+  return d.mat ? '<span class="ms" data-tip="' + MAT_TIP + '" role="img" aria-label="Mature"></span>' : '';
+}
+{
+  const url = s => 'url("data:image/svg+xml,' + encodeURIComponent(s) + '")';
+  const digits = '<path d="M5.4 8.3 7.9 6.4v11.2"/><circle cx="15" cy="9.2" r="2.6"/><circle cx="15" cy="14.75" r="2.9"/>';
+  document.head.insertAdjacentHTML('beforeend', '<style>td .ms{' +
+    '--ms-18:' + url(_tsvg('<g stroke-width="2.1">' + digits + '</g>')) + ';' +
+    '--ms-x:' + url(_tsvg('<mask id="k"><rect width="24" height="24" fill="#fff" stroke="none"/><g stroke-width="3.3">' + digits + '</g></mask>' +
+      '<circle cx="12" cy="12" r="10.9" stroke-width="1.5"/><path d="M4.3 4.3 19.7 19.7" stroke-width="1.5" mask="url(#k)"/>')) + '}</style>');
+}
+
 // "batch" marker in the Last Updated cell: this row's date is shared by other
 // games on the same core, i.e. one core build shipped them all at once. Shown on
 // every clustered row (not recency-gated — the batching is as true for an old
@@ -2288,13 +2319,13 @@ function titleCell(d) {
       ? '<span class="sv" data-tip="A build of this game was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
     return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
       '<span class="gc" data-tip="' + escA('This game ships on ' + d.members.length + ' cores. Select the row to list them.') + '">' +
-      d.members.length + ' cores</span>' + newBadge(d);
+      d.members.length + ' cores</span>' + newBadge(d) + matBadge(d);
   }
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
     : isFav(d) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
-  return fav + dotHTML(d) + esc(d.title) + newBadge(d) + betaBadge(d) + dep;
+  return fav + dotHTML(d) + esc(d.title) + newBadge(d) + betaBadge(d) + matBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -5478,7 +5509,7 @@ const META_SEL = '#rss-link, #pub-note';
 // META_POP. They stay out of the focus and tap paths below — focusing them
 // would add a dozen tab stops for a date the Debut column already spells out,
 // and on touch a tap in that cell belongs to the row's detail panel.
-const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .br, td .xb, td .sv, td[data-tip], td [data-tip]';  // td-level tips are ours too (theme.js skips td)
+const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .ms, td .br, td .xb, td .sv, td[data-tip], td [data-tip]';  // td-level tips are ours too (theme.js skips td)
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
 let hoverPop = null, hoverPopFor = null;   // hoverPopFor: the trigger element
 function closeHoverPop() {

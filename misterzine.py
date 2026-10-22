@@ -6226,10 +6226,19 @@ def _assign_update_batches(data):
         if prev and prev[0] == upd:
             d["b"] = prev[1]
             d["mz"] = _mz_date(prev[1], prev[2])
-            continue
-        d["b"] = nxt
-        d["mz"] = _mz_date(nxt, ts)
-        pending.append((k, upd, nxt))
+            stamped = prev[2]
+        else:
+            d["b"] = nxt
+            d["mz"] = _mz_date(nxt, ts)
+            stamped = ts
+            pending.append((k, upd, nxt))
+        # the raw (filename) date is what row_batches stores and compares, so
+        # a capped row is not re-stamped every run; only the export is capped
+        capped = _cap_future_build(upd, stamped)
+        if capped != upd:
+            log(f"  FUTURE BUILD DATE: {d.get('title')!r} ({d.get('core')}) build {upd} "
+                f"first seen {str(stamped)[:10]}, shown as {capped}")
+            d["updated"] = capped
     if not pending:
         con.close()
         return
@@ -6244,6 +6253,25 @@ def _assign_update_batches(data):
     con.commit()
     con.close()
     log(f"  update batches: {done} rows entered batch {nxt}")
+
+
+FUTURE_BUILD_GRACE_DAYS = 1  # a dev east of UTC legitimately stamps "tomorrow"
+
+
+def _cap_future_build(updated, stamped_at):
+    """A build cannot have shipped later than the day the tracker first picked
+    it up. Build dates come from the rbf filename, which devs type by hand:
+    TomSVR_semicom_20261023.rbf was published on 2026-10-21 and sat at the top
+    of the Build Date sort for two days as the newest thing on MiSTer. The cap
+    is the row_batches stamp (the one per-(row, build) first-seen the pipeline
+    keeps, never revised) plus one day of grace: a filename dated one day ahead
+    of the db is routine for devs east of UTC and is kept as typed, so the
+    column agrees with the file visitors download. Deterministic: the stamp
+    never moves, so a capped date never jumps on a later run."""
+    if not updated or not stamped_at:
+        return updated
+    cap = dt.date.fromisoformat(str(stamped_at)[:10]) + dt.timedelta(days=FUTURE_BUILD_GRACE_DAYS)
+    return min(updated, cap.isoformat())
 
 
 def _mz_date(batch, stamped_at):

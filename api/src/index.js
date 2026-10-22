@@ -3,7 +3,7 @@
 // What it does: signs people in with Google or GitHub (OAuth, no passwords),
 // and stores their release-tracker favorites and custom game lists. It holds
 // no device addresses, no Zaparoo keys, no OAuth names, no avatars. Lists may
-// have an optional public byline typed by their owner. It also takes the
+// show an account's chosen public curator name. It also takes the
 // diagnostic reports a player sends from the MisterZine Frontend's
 // Troubleshooting screen (src/reports.js): kept 30 days in a private R2
 // bucket, readable only by the developer, and never tied to an account. And
@@ -16,7 +16,8 @@
 //   GET    /auth/github?r=/releases/  start sign-in (browser navigation)
 //   GET    /auth/{provider}/callback  provider returns here; we redirect to
 //                                     SITE_ORIGIN/auth/#t=<token>&new=1|0&r=<path>
-//   GET    /me                        {provider, created_at, favorites, notice}
+//   GET    /me                        {provider, created_at, favorites, notice, profile}
+//   PUT    /me/profile                {display_name} choose/change public curator name
 //   PUT    /me/notice                 {id} remember the site notice this account closed
 //   DELETE /me                        delete the account (header X-Confirm: delete)
 //   POST   /logout                    revoke this session
@@ -26,7 +27,11 @@
 //   POST   /favorites/import          {keys: [...]} union into the account (first sign-in)
 //   GET/POST /lists                   own list summaries / create an unpublished list
 //   GET/PUT/DELETE /lists/{id}         own list / replace / delete (writes need version)
-//   GET    /public/lists/{id}          anonymous read of a published list
+//   GET    /collections               owned + followed list summaries
+//   PUT/DELETE /following/{id}        follow / unfollow an accessible list
+//   GET    /public/lists/{id}          anonymous read of a public or unlisted list
+//   GET    /public/lists              paged public directory (q, sort, offset, limit)
+//   GET    /public/curators/{id}       chosen profile + public lists only
 //   POST   /reports                   device report upload; the rest of /reports is
 //                                     developer-only (see src/reports.js)
 //   POST   /feedback                  site feedback form, anonymous or signed in;
@@ -41,7 +46,7 @@
 
 import { reports } from './reports.js';
 import { feedback } from './feedback.js';
-import { lists, publicList } from './lists.js';
+import { lists, publicLists, collections, following, getProfile, updateProfile } from './lists.js';
 
 const KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;      // release tracker row keys (data.json `k`)
 const MAX_FAVORITES = 5000;
@@ -85,17 +90,21 @@ async function route(request, env, url) {
   if (p === '/feedback' || p.startsWith('/feedback/'))
     return feedback(request, env, m, p, { authenticate: () => authenticate(request, env) });
 
-  if (p === '/public/lists' || p.startsWith('/public/lists/')) return publicList(env, p, m);
+  if (p === '/public/lists' || p.startsWith('/public/lists/') || p.startsWith('/public/curators/')) return publicLists(env, p, m, url);
 
   // --- everything below needs a session -------------------------------------
   const user = await authenticate(request, env);
   if (!user) return json({ error: 'unauthorized' }, 401);
 
   if (p === '/lists' || p.startsWith('/lists/')) return lists(request, env, m, p, user);
+  if (p === '/collections' && m === 'GET') return collections(env, user);
+  if (p.startsWith('/following/')) return following(env, m, p, user);
+  if (p === '/me/profile' && m === 'PUT') return updateProfile(request, env, user);
 
   if (p === '/me' && m === 'GET') {
     const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM favorites WHERE user_id = ?').bind(user.id).first('n');
-    return json({ provider: user.provider, created_at: user.created_at, favorites: n, notice: user.notice_seen || null });
+    return json({ provider: user.provider, created_at: user.created_at, favorites: n, notice: user.notice_seen || null,
+      profile: await getProfile(env, user.id) });
   }
   if (p === '/me/notice' && m === 'PUT') {
     const body = await readJSON(request);
@@ -106,9 +115,12 @@ async function route(request, env, url) {
   }
   if (p === '/me' && m === 'DELETE') {
     if (request.headers.get('X-Confirm') !== 'delete') return json({ error: 'confirm_required' }, 400);
-    // ON DELETE CASCADE covers favorites + sessions + lists, but delete explicitly too
-    // so the result never depends on the foreign_keys pragma being on
+    // Delete explicitly so cleanup does not depend on foreign_keys being on.
+    // Other accounts' follows remain as unavailable IDs, never list content.
     await env.DB.batch([
+      env.DB.prepare('DELETE FROM list_follows WHERE user_id = ?').bind(user.id),
+      env.DB.prepare('DELETE FROM public_profiles WHERE user_id = ?').bind(user.id),
+      env.DB.prepare('DELETE FROM curated_lists WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM custom_lists WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM favorites WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM sessions WHERE user_id = ?').bind(user.id),

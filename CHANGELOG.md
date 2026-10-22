@@ -4,7 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
-- Custom lists: signed-in visitors can create private lists, select exact entries in the Tracker, and publish a share page with a stable list ID. Saved edits update the same public list. Lists can be made private again or deleted, and remain separate from favorites. Arcade app subscriptions will follow in a separate update.
+- Collections now have a permanent home above the Tracker: switch between all entries, favorites, and your own or followed lists. The Tracker remembers your last collection, while shared links open the collection they specify.
+- Signed-in visitors can select exact entries into private lists, share an unlisted link, or publish to Browse lists under a chosen public display name. Browse lists supports search and sorts by last content update, newest, or follower count. Following a list adds it to your collections and uses its owner's latest saved contents. Account integration with MZ Arcade will follow separately.
 
 ## 2026-10-26
 

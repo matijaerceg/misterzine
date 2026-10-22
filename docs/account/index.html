@@ -68,6 +68,10 @@
   .msg { min-height: 1.4em; }
   .msg.err { color: var(--danger); }
   .msg.ok { color: var(--ok, var(--accent)); }
+  .name-form { margin: .8rem 0; }
+  .name-form label { display: block; font-weight: 600; margin-bottom: .3rem; }
+  .name-form input { display: block; width: min(100%, 28rem); font: inherit; padding: .55rem .65rem; color: var(--fg); background: var(--surface); border: 1px solid var(--btn-border, var(--hair)); border-radius: 5px; }
+  .account-links { display: flex; flex-wrap: wrap; gap: .4rem; }
   [hidden] { display: none !important; }
 </style>
 </head>
@@ -131,7 +135,7 @@
   <p class="msg" id="outmsg"></p>
   <p>When you sign in to an account that has no favorites yet, the favorites already saved in this browser
   are added to it. After that, starring an entry anywhere you are signed in saves it to the account.</p>
-  <p>Favorites and custom lists follow your account. Saved MiSTers and Zaparoo keys stay in each browser and are
+  <p>Favorites, custom lists and lists you follow stay with your account. Saved MiSTers and Zaparoo keys stay in each browser and are
   never sent to the service.</p>
   <p class="muted">Google and GitHub accounts are separate: signing in with the other one creates a second account,
   which then starts from whatever this browser has starred. What is stored and why is on the
@@ -140,6 +144,26 @@
 
 <section id="in" hidden>
   <p class="lead" id="who"></p>
+  <p id="continue-row" hidden><a id="continue-link" class="btn" href="../releases/">Continue to the Tracker</a></p>
+
+  <h2>Your collections</h2>
+  <p id="collection-counts">Loading your lists...</p>
+  <div class="account-links"><a class="btn" href="../lists/?view=mine">My lists &amp; following</a><a class="btn" href="../lists/">Discover lists</a></div>
+  <p class="muted">Your account and the lists you follow are private. Creating a list does not make it public.</p>
+
+  <section id="public-name" aria-labelledby="public-name-heading">
+    <h2 id="public-name-heading">Your name on shared lists</h2>
+    <p>Choose a name or handle when you want to share a list. It appears on all your shared lists; your sign-in name and email are never shown.</p>
+    <p class="muted">A name is not needed to keep private lists or follow other people. Choosing one does not publish your account. A curator page appears only when you have a public list, and shows only your public lists.</p>
+    <form id="name-form" class="name-form">
+      <label for="display-name">Public display name</label>
+      <input id="display-name" name="display_name" maxlength="80" required autocomplete="off" aria-describedby="name-help">
+      <p id="name-help" class="muted">Up to 80 characters. This is a name you choose, not a verified identity.</p>
+      <button id="name-save" class="btn" type="submit">Save display name</button>
+      <a id="curator-link" class="btn" href="../lists/" hidden>View my public lists</a>
+    </form>
+    <p id="name-message" class="msg" role="status"></p>
+  </section>
 
   <h2>Favorites</h2>
   <p id="favs"></p>
@@ -150,16 +174,12 @@
   <p class="muted">Favorites and custom lists follow your account. Saved MiSTers and Zaparoo keys stay in each browser and are
   never sent to the service.</p>
 
-  <h2>Custom lists</h2>
-  <p>Create private collections of Tracker entries and publish them when you are ready to share.</p>
-  <p><a class="btn" href="../lists/">Manage my lists</a></p>
-
   <h2>Sign out</h2>
   <p>Signing out on this device keeps a copy of the favorites in this browser; they stop following the account until you sign in again.</p>
   <p><button class="btn" id="logout" type="button">Sign out</button></p>
 
   <h2>Delete account</h2>
-  <p>Removes the account, its sign-in sessions, favorites and all custom lists from the service immediately, and clears the favorites saved in this browser. Published list links and IDs stop working. The favorites backup link above does not include custom lists.</p>
+  <p>Removes the account, its display name, sign-in sessions, favorites, followed lists and all your custom lists from the service immediately, and clears the favorites saved in this browser. Your shared list links stop working. Other curators' lists are unaffected. The favorites backup link above does not include custom lists.</p>
   <p><button class="btn danger" id="del" type="button">Delete account</button></p>
   <p class="msg" id="inmsg"></p>
 </section>
@@ -186,6 +206,7 @@
   var TOKEN = null;
   try { TOKEN = localStorage.getItem('mz-token'); } catch (e) {}
   var KEYS = [];   // the account's favorites, for the backup link
+  var PROFILE = null, HAS_PUBLIC_LIST = false, loadNumber = 0, sessionVersion = 0;
   var PROVIDER = { google: 'Google', github: 'GitHub' };
 
   // Preserve the list flow through sign-in; only allow a path on this site.
@@ -193,12 +214,22 @@
   if (!/^\/[A-Za-z0-9_\-./?=&%#]*$/.test(returnPath) || returnPath.indexOf('//') === 0) returnPath = '/releases/';
   $('in-google').href = API + '/auth/google?r=' + encodeURIComponent(returnPath);
   $('in-github').href = API + '/auth/github?r=' + encodeURIComponent(returnPath);
+  $('continue-link').href = returnPath;
+  $('continue-link').textContent = returnPath.indexOf('/lists/') === 0 ? 'Continue to My lists' : 'Continue to the Tracker';
+  $('continue-row').hidden = !new URLSearchParams(location.search).has('r');
 
   function show(id) {
     ['loading', 'out', 'in', 'offline'].forEach(function (s) { $(s).hidden = s !== id; });
   }
   function msg(id, text, cls) { var m = $(id); m.textContent = text; m.className = 'msg' + (cls ? ' ' + cls : ''); }
-  function dropToken() { TOKEN = null; try { localStorage.removeItem('mz-token'); } catch (e) {} }
+  function resetSessionControls() {
+    disarm(); $('del').disabled = false; $('logout').disabled = false; $('name-save').disabled = false;
+    msg('name-message', ''); msg('inmsg', ''); PROFILE = null;
+  }
+  function dropToken() {
+    sessionVersion++; loadNumber++; TOKEN = null; resetSessionControls();
+    try { localStorage.removeItem('mz-token'); } catch (e) {}
+  }
   function api(path, opts) {
     opts = opts || {};
     opts.headers = Object.assign({ Authorization: 'Bearer ' + TOKEN }, opts.headers || {});
@@ -206,17 +237,27 @@
   }
 
   function load() {
+    var attempt = ++loadNumber;
     if (!TOKEN) return show('out');
     show('loading');
-    Promise.all([api('/me'), api('/favorites')]).then(function (rs) {
-      if (rs[0].status === 401 || rs[1].status === 401) {
+    Promise.all([api('/me'), api('/favorites'), api('/collections').catch(function () { return null; })]).then(function (rs) {
+      if (attempt !== loadNumber) return;
+      if (rs[0].status === 401 || rs[1].status === 401 || (rs[2] && rs[2].status === 401)) {
         dropToken(); show('out');
         msg('outmsg', 'Your sign-in has expired. Sign in again to continue.');
         return;
       }
       if (!rs[0].ok || !rs[1].ok) throw new Error('bad');
-      return Promise.all([rs[0].json(), rs[1].json()]).then(function (js) {
+      return Promise.all([rs[0].json(), rs[1].json(), rs[2] && rs[2].ok ? rs[2].json() : null]).then(function (js) {
+        if (attempt !== loadNumber) return;
         var me = js[0]; KEYS = js[1].keys || [];
+        PROFILE = me.profile || null;
+        $('display-name').value = PROFILE ? PROFILE.display_name : '';
+        var collections = js[2];
+        HAS_PUBLIC_LIST = !!collections && collections.owned.some(function (list) { return list.visibility === 'public'; });
+        $('collection-counts').textContent = collections ? collections.owned.length + (collections.owned.length === 1 ? ' list of your own' : ' lists of your own') + ' · Following ' + collections.following.length + (collections.following.length === 1 ? ' list.' : ' lists.') : 'Could not load your list counts. Open My lists to try again.';
+        $('curator-link').hidden = !PROFILE || !HAS_PUBLIC_LIST;
+        if (PROFILE) $('curator-link').href = '../lists/?curator=' + encodeURIComponent(PROFILE.id);
         var since = (me.created_at || '').slice(0, 10);
         $('who').textContent = 'Signed in with ' + (PROVIDER[me.provider] || me.provider) +
           (since ? ', account created ' + since + '.' : '.');
@@ -226,9 +267,39 @@
         $('copy').disabled = n === 0;
         show('in');
       });
-    }).catch(function () { show('offline'); });
+    }).catch(function () { if (attempt === loadNumber) show('offline'); });
   }
   $('retry').addEventListener('click', load);
+
+  $('name-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    var name = $('display-name').value.trim(), b = $('name-save');
+    if (!name) { msg('name-message', 'Enter the name you want on your shared lists.', 'err'); $('display-name').focus(); return; }
+    if (b.disabled) return;
+    b.disabled = true; msg('name-message', 'Saving...');
+    var session = sessionVersion;
+    try {
+      var res = await api('/me/profile', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ display_name: name }) });
+      if (session !== sessionVersion) return;
+      if (res.status === 401) { dropToken(); show('out'); msg('outmsg', 'Your sign-in has expired. Sign in again to save your name.', 'err'); return; }
+      if (!res.ok) { msg('name-message', res.status === 400 ? 'Use a display name of 1 to 80 characters.' : 'Could not save your name. Please try again.', 'err'); return; }
+      var profile = await res.json();
+      if (session !== sessionVersion) return;
+      PROFILE = profile;
+      $('display-name').value = PROFILE.display_name;
+      $('curator-link').href = '../lists/?curator=' + encodeURIComponent(PROFILE.id);
+      $('curator-link').hidden = !HAS_PUBLIC_LIST;
+      msg('name-message', 'Display name saved. Your shared lists use this name.', 'ok');
+    } catch (e) { if (session === sessionVersion) msg('name-message', 'Could not confirm that your name was saved. Check your connection and try again.', 'err'); }
+    finally { if (session === sessionVersion) b.disabled = false; }
+  });
+  window.addEventListener('storage', function (event) {
+    if (event.key === 'mz-token' || event.key === null) {
+      sessionVersion++; resetSessionControls();
+      try { TOKEN = localStorage.getItem('mz-token'); } catch (e) { TOKEN = null; }
+      load();
+    }
+  });
 
   $('copy').addEventListener('click', function () {
     var url = location.origin + '/releases/?fav=' + KEYS.map(encodeURIComponent).join(',');
@@ -238,8 +309,9 @@
   });
 
   $('logout').addEventListener('click', function () {
-    var b = $('logout'); b.disabled = true;
+    var b = $('logout'), session = sessionVersion; b.disabled = true;
     api('/logout', { method: 'POST' }).catch(function () {}).then(function () {
+      if (session !== sessionVersion) return;
       dropToken(); b.disabled = false; show('out');
       msg('outmsg', 'Signed out. The favorites stay in this browser.', 'ok');
     });
@@ -252,8 +324,9 @@
   $('del').addEventListener('click', function (e) {
     e.stopPropagation();
     if (!armed) { armed = true; $('del').textContent = 'Really delete? Click again'; return; }
-    var b = $('del'); b.disabled = true;
+    var b = $('del'), session = sessionVersion; b.disabled = true;
     api('/me', { method: 'DELETE', headers: { 'X-Confirm': 'delete' } }).then(function (res) {
+      if (session !== sessionVersion) return;
       if (res.status === 401) {
         dropToken(); show('out');
         msg('outmsg', 'Your sign-in has expired. Sign in again to delete the account.', 'err');
@@ -263,10 +336,10 @@
       dropToken();
       try { localStorage.removeItem('mz-favs'); localStorage.removeItem('mz-fav-import'); } catch (e) {}
       show('out');
-      msg('outmsg', 'Account, favorites and custom lists deleted. Published list links no longer work.', 'ok');
+      msg('outmsg', 'Account, display name, favorites, follows and custom lists deleted. Your shared list links no longer work.', 'ok');
     }).catch(function () {
-      msg('inmsg', 'Could not delete the account (offline?). Nothing was changed.', 'err');
-    }).then(function () { b.disabled = false; disarm(); });
+      if (session === sessionVersion) msg('inmsg', 'Could not confirm the account deletion. Check your connection and try again.', 'err');
+    }).then(function () { if (session === sessionVersion) { b.disabled = false; disarm(); } });
   });
   document.addEventListener('click', function () { if (armed) disarm(); });
 

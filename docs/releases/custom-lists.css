@@ -1,28 +1,64 @@
 /* Custom-list editing stays inside the Tracker's existing app shell. */
-.clbar { padding: .65rem 0; border-top: 1px solid var(--border, #8884); }
+.clbar { padding: .65rem 0; border-top: 1px solid var(--hair); }
 .clbar[hidden], .clbar [hidden] { display: none !important; }
 .clrow { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
 .clrow + .clrow { margin-top: .4rem; }
 .clname { font-size: 1rem; overflow-wrap: anywhere; }
-.clstate, .clnote { color: var(--muted, #888); font-size: .85rem; }
+.clstate, .clnote { color: var(--muted); font-size: .85rem; }
 .clnote { margin: .35rem 0 0; }
 .clstatus { margin: .35rem 0 0; font-size: .85rem; overflow-wrap: anywhere; }
-.clstatus.error { color: var(--error, #c64c4c); }
-.clbar button, .clbar .cllink, .cldialog button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--border, #8885); border-radius: .35rem; padding: .3rem .6rem; cursor: pointer; text-decoration: none; }
+.clstatus.error { color: var(--danger); }
+.clbar button, .clbar .cllink, .cldialog button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; padding: .3rem .6rem; cursor: pointer; text-decoration: none; }
 .clbar button:hover, .clbar .cllink:hover, .cldialog button:hover { border-color: var(--accent); }
 .clbar button:disabled, .cldialog button:disabled { opacity: .5; cursor: default; }
-.clbar .clprimary, .cldialog .clprimary { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+.clbar .clprimary, .cldialog .clprimary { color: var(--accent-on); background: var(--accent); border-color: var(--accent); }
 .clbar button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
 .clbar .clspacer { flex: 1; }
 .clpick { margin: 0 .5rem 0 0; width: 1rem; height: 1rem; vertical-align: middle; }
-.cldialog { color: var(--fg); background: var(--bg); border: 1px solid var(--border, #8886); border-radius: .65rem; width: min(32rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 1.25rem; }
+.cldialog { color: var(--fg); background: var(--bg); border: 1px solid var(--hair); border-radius: .65rem; width: min(32rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 1.25rem; }
 .cldialog::backdrop { background: #0008; }
 .cldialog h2 { margin: 0 0 .7rem; font-size: 1.25rem; }
 .cldialog label { display: block; margin: .75rem 0; }
-.cldialog input, .cldialog textarea { display: block; width: 100%; box-sizing: border-box; padding: .5rem; margin-top: .25rem; color: var(--fg); background: var(--surface); border: 1px solid var(--border, #8886); border-radius: .3rem; font: inherit; }
+.cldialog input, .cldialog textarea { display: block; width: 100%; box-sizing: border-box; padding: .5rem; margin-top: .25rem; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .3rem; font: inherit; }
 .cldialog textarea { resize: vertical; min-height: 5rem; }
 .cldialog .clactions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; justify-content: flex-end; }
 .clmissing { max-height: 10rem; overflow: auto; margin: .4rem 0; padding-left: 1.5rem; }
 .clmissing button { margin-left: .5rem; }
 @media (max-width: 36rem) { .clbar { padding: .45rem 0; } .clrow { gap: .35rem; } .clnote { font-size: .8rem; } .clbar button, .clbar .cllink { padding: .35rem .5rem; } }
 @media print { .clbar button, .clpick, .clbar .cllink { display: none; } }
+/* Always-visible collection navigation sits above the game filters. */
+.collections { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .45rem .8rem; padding: .6rem 0; border-top: 1px solid var(--hair); }
+.collection-tabs, .collection-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; min-width: 0; }
+.collections a, .collections button, .collections select { font: inherit; color: var(--fg); background: transparent; border: 1px solid transparent; border-radius: .35rem; padding: .32rem .55rem; text-decoration: none; cursor: pointer; }
+.collections a:hover, .collections button:hover { background: var(--surface); border-color: var(--hair); }
+.collections a[aria-current=page], .collections select.active { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.collections select { background: var(--surface); border-color: var(--hair); max-width: min(20rem, 48vw); min-width: 7.5rem; }
+.collections select option, .collections select optgroup { color: var(--fg); background: var(--surface); }
+.collection-actions a { color: var(--accent); }
+.collection-actions button { border-color: var(--hair); }
+.collection-picker .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.collection-intro { display: flex; align-items: center; gap: .5rem; padding: 0 0 .4rem; color: var(--muted); font-size: .85rem; }
+.collection-intro button { margin-left: auto; flex-shrink: 0; border: 0; background: transparent; color: var(--fg); font-size: 1.2rem; cursor: pointer; }
+.collection-intro[hidden], #collection-notice[hidden] { display: none; }
+#collection-notice { padding: .2rem 0 .5rem; }
+.cldescriptionfold { margin: .3rem 0; font-size: .88rem; }
+.cldescriptionfold summary { cursor: pointer; color: var(--muted); }
+.cldescriptionfold p { white-space: pre-wrap; overflow-wrap: anywhere; margin: .3rem 0; max-height: 7rem; overflow: auto; }
+.clvisibility { border: 0; margin: .6rem 0; padding: 0; }
+.clvisibility legend { font-weight: 600; }
+.cldialog .clvisibility label { display: flex; align-items: flex-start; gap: .6rem; padding: .55rem; margin: .35rem 0; border: 1px solid var(--hair); border-radius: .4rem; cursor: pointer; }
+.cldialog .clvisibility input { display: inline-block; width: auto; margin: .3rem 0 0; accent-color: var(--accent); }
+.clvisibility small { display: block; color: var(--muted); }
+.cldialog [hidden] { display: none !important; }
+.cldialog button:focus-visible, .collections a:focus-visible, .collections button:focus-visible, .collections select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@container topbar (max-width: 34rem) {
+  .collections { padding: .45rem 0; gap: .35rem; }
+  .collections a, .collections button, .collections select { padding: .3rem .4rem; font-size: .85rem; }
+  .collection-tabs { flex: 1 1 100%; }
+  .collection-picker { flex: 1; min-width: 0; }
+  .collections select { width: 100%; max-width: 100%; min-width: 0; }
+  .collection-actions { flex: 1; justify-content: space-between; }
+  .collection-intro { font-size: .8rem; }
+  .clnote { font-size: .8rem; }
+}
+@media print { .collections, .collection-intro { display: none; } }

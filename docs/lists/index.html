@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Custom Lists - MisterZine</title>
-<meta name="description" content="Make your own collections of MiSTer games and share them with a public link or list ID.">
+<meta name="description" content="Make your own collections of MiSTer games and discover collections from the MiSTer community.">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="canonical" href="https://misterzine.fyi/lists/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MisterZine">
 <meta property="og:title" content="Custom Lists - MisterZine">
-<meta property="og:description" content="Make your own collections of MiSTer games and share them with a public link or list ID.">
+<meta property="og:description" content="Make your own collections of MiSTer games and discover collections from the MiSTer community.">
 <meta property="og:url" content="https://misterzine.fyi/lists/">
 <script>var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css">
 <link rel="stylesheet" href="../nav.css?v=6">
-<link rel="stylesheet" href="lists.css?v=1">
+<link rel="stylesheet" href="lists.css?v=2">
 </head>
 <body>
 <div class="wrap">
@@ -55,76 +55,73 @@
 </header>
 <main>
 <nav class="subnav" aria-label="Lists">
-  <a href="./">My lists</a>
+  <a id="nav-directory" href="./">Discover lists</a>
+  <a id="nav-mine" href="?view=mine">My lists</a>
   <a href="../releases/">Core Tracker</a>
   <a href="../account/">Account</a>
 </nav>
-<div id="library-intro">
-  <p class="lead">Collect your favorite games, your weekend picks, or the cores you recommend. Start a private draft, choose entries in the Tracker, then publish a list to share.</p>
-  <p class="muted">Lists keep the exact Tracker entries you choose, including your choice of core when a game has alternatives. Your favorites stay separate.</p>
-</div>
+<section id="directory" hidden aria-labelledby="directory-heading">
+  <h2 id="directory-heading">Discover lists</h2>
+  <p class="lead">Collections made by the MiSTer community. Open a list in the Tracker to explore its games, and follow it to keep it in your account.</p>
+  <form id="search-form" class="search-form" role="search">
+    <label class="field"><span>Search public lists</span><input id="search" type="search" maxlength="200" placeholder="List name, topic or curator" autocomplete="off"></label>
+    <label class="field"><span>Sort by</span><select id="sort"><option value="updated">Recently updated</option><option value="created">Newest lists</option><option value="followers">Most followed</option></select></label>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <p id="results-count" class="muted" role="status"></p>
+  <p id="directory-empty" class="muted" hidden></p>
+  <ul id="directory-cards" class="list-cards directory-cards"></ul>
+  <button id="load-more" class="btn" type="button" hidden>Load more lists</button>
+</section>
+<section id="mine-intro" hidden>
+  <h2>My lists</h2>
+  <p class="lead">Your own collections and the lists you follow, all in one place. Your favorites stay separate.</p>
+</section>
 <p id="message" class="msg" role="status" aria-live="polite"></p>
 <section id="loading"><p class="lead">Loading lists...</p></section>
+<button id="retry" class="btn" type="button" hidden>Try again</button>
 <section id="out" class="panel" hidden>
-  <h2>Your collections, saved to your account</h2>
-  <p>Sign in to create and manage your lists. Anyone with a published link or ID can read a list without signing in.</p>
-  <p><a class="btn primary" href="../account/?r=%2Flists%2F">Sign in to make a list</a></p>
+  <h2>Keep your collections together</h2>
+  <p>Sign in to make lists and follow other curators. You can browse public lists without an account.</p>
+  <p><a class="btn primary" href="../account/?r=%2Flists%2F%3Fview%3Dmine">Sign in for My lists</a> <a class="btn" href="./">Discover lists</a></p>
 </section>
-<button id="retry-library" class="btn" type="button" hidden>Reload My lists</button>
-<button id="retry-public" class="btn" type="button" hidden>Try again</button>
 <section id="library" hidden>
   <section class="panel" aria-labelledby="create-heading">
     <h2 id="create-heading">Make a new list</h2>
-    <p class="muted">Only you can see a new list. Publish it from the Tracker when it is ready.</p>
+    <p class="muted">Start privately, then choose whether to keep it private, share it by link, or put it in the public directory. No public name is needed until you share.</p>
     <form id="create">
-      <div class="create-grid">
-        <label class="field"><span>List name</span><input id="new-title" name="title" required maxlength="100" autocomplete="off" placeholder="My weekend arcade picks"></label>
-        <label class="field"><span>Public name <small>(optional)</small></span><input id="new-byline" name="byline" maxlength="80" autocomplete="off" aria-describedby="byline-help"><small id="byline-help">A name or handle to credit you. Your sign-in name and email are never shown.</small></label>
-        <label class="field wide"><span>Description <small>(optional)</small></span><textarea id="new-description" name="description" maxlength="2000" rows="2" placeholder="What makes this collection worth playing?"></textarea></label>
-      </div>
-      <button id="create-submit" class="btn primary" type="submit">Create draft &amp; choose games</button>
+      <label class="field"><span>List name</span><input id="new-title" name="title" required maxlength="100" autocomplete="off" placeholder="My weekend arcade picks"></label>
+      <label class="field"><span>Description <small>(optional)</small></span><textarea id="new-description" name="description" maxlength="2000" rows="2" placeholder="What makes this collection worth playing?"></textarea></label>
+      <button id="create-submit" class="btn primary" type="submit">Create list &amp; choose games</button>
     </form>
   </section>
-  <div class="section-heading"><h2>My lists <span id="library-count" class="muted"></span></h2><button id="refresh" class="btn" type="button">Refresh</button></div>
-  <p id="empty" class="muted" hidden>No lists yet. Make your first private draft above.</p>
-  <ul id="cards" class="list-cards"></ul>
+  <div class="section-heading"><h2>Your lists <span id="owned-count" class="muted"></span></h2><button id="refresh" class="btn" type="button">Refresh</button></div>
+  <p id="owned-empty" class="muted" hidden>No lists yet. Make your first private list above.</p>
+  <ul id="owned-cards" class="list-cards"></ul>
+  <div class="section-heading"><h2>Following <span id="following-count" class="muted"></span></h2></div>
+  <p class="muted">Only you can see which lists you follow. Open a list in the Tracker to follow or unfollow it.</p>
+  <p id="following-empty" class="muted" hidden>No followed lists yet. <a href="./">Discover a collection</a> and choose Follow in the Tracker.</p>
+  <ul id="following-cards" class="list-cards"></ul>
 </section>
-<section id="public" hidden aria-labelledby="public-title">
-  <h2 id="public-title" class="public-title"></h2>
-  <p id="public-byline"></p>
-  <p id="public-description" class="description"></p>
-  <p id="public-meta" class="muted public-meta"></p>
-  <div class="panel list-access">
-    <div class="actions">
-      <span>List ID: <span id="public-id" class="list-id"></span></span>
-      <button id="copy-id" class="btn" type="button">Copy ID</button>
-      <button id="copy-link" class="btn" type="button">Copy share link</button>
-      <a id="view-tracker" class="btn primary" href="../releases/">View in Tracker</a>
-    </div>
-    <p class="muted">This link and ID stay the same when the owner updates the list. Reload to see their latest changes.</p>
-  </div>
-  <h3>In this list</h3>
-  <p id="catalogue-message" class="muted" role="status"></p>
-  <button id="retry-catalogue" class="btn" type="button" hidden>Retry loading entries</button>
-  <ol id="entries" class="entries"></ol>
+<section id="curator-view" hidden aria-labelledby="curator-name">
+  <h2 id="curator-name" class="public-title"></h2>
+  <p id="curator-count" class="muted"></p>
+  <p>Public collections by this curator.</p>
+  <ul id="curator-cards" class="list-cards directory-cards"></ul>
 </section>
-<form id="open-list" class="open-form">
-  <label class="field"><span>Have a list ID?</span><input id="open-id" name="id" type="text" required maxlength="12" minlength="12" pattern="[0-9A-HJ-KM-NP-Ta-hj-km-np-tV-Zv-z]{12}" spellcheck="false" autocomplete="off" autocapitalize="characters" placeholder="12-character ID"></label>
-  <button class="btn" type="submit">Open list</button>
-</form>
-<p class="muted">Following lists in the MZ Arcade app is planned for a future update. These lists work on the website now.</p>
-<noscript><p>Custom Lists needs JavaScript to load your lists and game entries.</p></noscript>
+<p class="muted">Lists work on the website now. MZ Arcade app support is planned for a future update.</p>
+<noscript><p>Custom Lists needs JavaScript to load collections.</p></noscript>
 </main>
 <dialog id="delete-dialog" aria-labelledby="delete-heading" aria-describedby="delete-detail">
   <h2 id="delete-heading">Delete this list?</h2>
-  <p id="delete-detail"><strong id="delete-name"></strong> will be permanently deleted. Its public link and ID will stop working. Your favorites and other lists are unaffected.</p>
+  <p id="delete-detail"><strong id="delete-name"></strong> will be permanently deleted. Its link will stop working for you and anyone following it. Your favorites and other lists are unaffected.</p>
   <p id="delete-message" class="msg" role="status"></p>
   <div class="actions"><button id="delete-cancel" class="btn" type="button" autofocus>Cancel</button><button id="delete-confirm" class="btn danger" type="button">Delete list</button></div>
 </dialog>
-<footer><p>Lists are saved with your account. Published names, descriptions and entries are public. Read the <a href="../privacy/">privacy page</a> for details.</p></footer>
+<footer><p>Your account and the lists you follow are private. You choose whether to share your own collections. Read the <a href="../privacy/">privacy page</a> for details.</p></footer>
 </div>
 <script src="../theme.js?v=6"></script>
 <script src="../feedback.js?v=1"></script>
-<script src="lists.js?v=1"></script>
+<script src="lists.js?v=2"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy - MisterZine</title>
-<meta name="description" content="What MisterZine stores, where, and how to delete it. Accounts hold favorites and custom lists. Published lists are public; drafts are private.">
+<meta name="description" content="What MisterZine stores, where, and how to delete it. Your account and follows are private. Custom lists can be private, unlisted or public.">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="canonical" href="https://misterzine.fyi/privacy/">
@@ -132,7 +132,9 @@ in, the account service stores:</p>
   <tr><td>The email address your sign-in provider passes along</td><td>Only so a support request can be matched to an account. It is never displayed, never used to send mail, never shared.</td></tr>
   <tr><td>When the account was created</td><td>Housekeeping.</td></tr>
   <tr><td>Your favorites</td><td>The list of starred entries, as the tracker's own entry keys.</td></tr>
-  <tr><td>Your custom lists</td><td>The names, descriptions, optional public names you enter, selected Tracker entry keys, publication status, list IDs and creation/update times. Drafts are private to your account; published lists can be read by anyone with their link or ID.</td></tr>
+  <tr><td>Your custom lists</td><td>The titles, descriptions, selected Tracker entry keys, visibility settings, list IDs and creation/update times. You choose Private, Unlisted or Public for each list.</td></tr>
+  <tr><td>Your chosen display name</td><td>Only when you choose one to credit you on shared lists. It is not taken from your sign-in provider. A separate public curator ID connects your public lists without exposing your account ID.</td></tr>
+  <tr><td>The lists you follow</td><td>To keep those collections in your account across devices. Which lists you follow, and the identities of a list's followers, are private. Only a total follower count is public on shared lists.</td></tr>
   <tr><td>The last site notice you closed</td><td>So a notice you closed on one device does not show again on your others.</td></tr>
   <tr><td>Sign-in sessions</td><td>A random token in your browser's storage identifies your session. Signing out deletes it.</td></tr>
 </table>
@@ -141,12 +143,24 @@ and Zaparoo keys stay in your browser. Signing in with Google one day and GitHub
 <p>The account service runs on Cloudflare (Workers and a D1 database). Traffic to it is encrypted.</p>
 
 <h2>Sharing custom lists</h2>
-<p>Publishing a list makes its name, description, the public name you chose (if any), selected Tracker entry keys,
-list ID and update times publicly readable on the site and through the list service. Your email, sign-in
-provider identity and account ID are never included. A public name is optional and is only what you type;
-it is not verified. Lists are shared by link or ID and are not a private way to send information.</p>
-<p>You can make a published list private again or delete it. This stops further public access through
-MisterZine, but cannot remove copies someone already saved. Renaming or updating a list keeps its ID.</p>
+<p>Your account is private. Making or following a list does not create a public profile. You choose how each
+of your own lists is shared:</p>
+<ul>
+  <li><strong>Private:</strong> only your signed-in account can read it.</li>
+  <li><strong>Unlisted:</strong> anyone with the link can read and follow it. It is excluded from the public
+    directory and your curator page. Its link can be passed on, so it is not private.</li>
+  <li><strong>Public:</strong> anyone can read and follow it, and it can appear in the searchable list
+    directory and on your curator page.</li>
+</ul>
+<p>Sharing a list as Unlisted or Public requires a display name of your choice. Its title, description,
+selected Tracker entry keys, display name, total follower count, list ID and creation/update times are then
+readable through the site and list service. A Public list also links to your public curator page, which shows
+only your Public lists. Unlisted lists do not expose that curator link. Display names are not verified identities.
+Your email, sign-in provider identity, account ID, favorites and the lists you follow are never included.</p>
+<p>Changing your display name changes the credit on all your shared lists. You can make a shared list private
+again or delete it to stop further public access through MisterZine, but cannot remove copies someone already
+saved. Renaming or updating a list keeps its link. A followed list that becomes private or is deleted appears
+as unavailable to its followers, without its former title or content.</p>
 
 <h2>Feedback</h2>
 <p>The Feedback form (in the Menu, and the tab at the edge of the screen) sends your message to the developer
@@ -159,8 +173,9 @@ until you press Send.</p>
 <h2>Deleting your data</h2>
 <ul>
   <li><strong>Account:</strong> open your <a href="../account/">account page</a> and choose "Delete account".
-    Favorites, custom lists (including published ones), sessions and the account record are removed immediately. Published list links and IDs stop working.</li>
-  <li><strong>A custom list:</strong> open <a href="../lists/">My lists</a> and choose "Delete". To stop sharing while keeping the list, edit it in the Tracker and make it private.</li>
+    Favorites, your custom lists (including shared ones), display name, follows, sessions and the account record are removed immediately. Your shared list links stop working. Other curators' lists are unaffected.</li>
+  <li><strong>A custom list:</strong> open <a href="../lists/?view=mine">My lists</a> and choose "Delete". To stop sharing while keeping the list, edit it in the Tracker and choose Private.</li>
+  <li><strong>A followed list:</strong> open it in the Tracker and choose "Unfollow". If it is unavailable, choose "Stop following" in My lists.</li>
   <li><strong>Browser data:</strong> clear this site's data in your browser, or use "Clear all favorites"
     and the device manager in the tracker.</li>
 </ul>

@@ -84,16 +84,21 @@ def prepare(directory, state):
         'database_id = "11111111-1111-4111-8111-111111111111"\n',
         encoding="utf-8",
     )
-    token_hash = hashlib.sha256(state["token"].encode()).hexdigest()
     seed = directory / "seed.sql"
-    seed.write_text(
-        "INSERT OR IGNORE INTO users (provider, provider_user_id) VALUES ('github', 'local-custom-lists-preview');\n"
-        "INSERT OR REPLACE INTO sessions (token_hash, user_id) SELECT "
-        f"'{token_hash}', id FROM users WHERE provider='github' AND provider_user_id='local-custom-lists-preview';\n"
-        f"UPDATE users SET notice_seen='{current_notice()}' WHERE provider='github' AND provider_user_id='local-custom-lists-preview';\n",
-        encoding="utf-8",
-    )
-    for sql in [ROOT / "api/schema.sql", ROOT / "api/migrations/2026-10-22-custom-lists.sql", seed]:
+    statements = []
+    for account, token in [("local-custom-lists-preview", state["token"]),
+                           ("local-custom-lists-follower", state["follower_token"]),
+                           ("local-custom-lists-tester", state["tester_token"])]:
+        token_hash = hashlib.sha256(token.encode()).hexdigest()
+        statements.extend([
+            f"INSERT OR IGNORE INTO users (provider, provider_user_id) VALUES ('github', '{account}');",
+            "INSERT OR REPLACE INTO sessions (token_hash, user_id) SELECT "
+            f"'{token_hash}', id FROM users WHERE provider='github' AND provider_user_id='{account}';",
+            f"UPDATE users SET notice_seen='{current_notice()}' WHERE provider='github' AND provider_user_id='{account}';",
+        ])
+    seed.write_text("\n".join(statements), encoding="utf-8")
+    for sql in [ROOT / "api/schema.sql", ROOT / "api/migrations/2026-10-22-custom-lists.sql",
+                ROOT / "api/migrations/2026-10-22-list-community.sql", seed]:
         if sql.is_file():
             result = subprocess.run(
                 wrangler() + ["d1", "execute", "misterzine-preview", "--local", "--config", str(config),
@@ -149,6 +154,7 @@ def ready(state):
 
 def print_status(directory, state):
     print("Local preview account: " + state["site"] + "/__preview__/owner")
+    print("Second local account: " + state["site"] + "/__preview__/follower")
     print("Signed-out preview (use another browser or private window): " + state["site"] + "/__preview__/anonymous")
     print("Local API: " + state["api"])
     print("State and logs: " + str(directory))
@@ -177,15 +183,17 @@ def serve(directory, state):
                 self.end_headers()
                 self.wfile.write(body)
                 return
-            if path in ["/__preview__/owner", "/__preview__/anonymous"]:
-                account = f"localStorage.setItem('mz-token', {json.dumps(state['token'])});" if path.endswith("/owner") else "localStorage.removeItem('mz-token');"
+            if path in ["/__preview__/owner", "/__preview__/follower", "/__preview__/tester", "/__preview__/anonymous"]:
+                token_key = {"owner": "token", "follower": "follower_token", "tester": "tester_token"}.get(path.rsplit("/", 1)[-1])
+                account = f"localStorage.setItem('mz-token', {json.dumps(state[token_key])});" if token_key else "localStorage.removeItem('mz-token');"
+                target = "/releases/" if token_key else "/releases/?collection=all"
                 body = (
                     "<!doctype html><meta charset=utf-8><title>MisterZine local preview</title>"
                     "<p>Opening the local Custom Lists preview...</p><script>"
                     f"localStorage.setItem('mz-api', {json.dumps(state['api'])});"
                     f"localStorage.setItem('mz-notice', {json.dumps(current_notice())});"
                     "localStorage.removeItem('mz-fav-import');" + account +
-                    "location.replace('/lists/');</script>"
+                    f"location.replace({json.dumps(target)});</script>"
                 ).encode()
                 self.send_response(200)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -223,6 +231,9 @@ def main():
         "token": secrets.token_urlsafe(32), "secret": secrets.token_urlsafe(32),
         "preview_id": secrets.token_hex(12),
     }
+    # Add test accounts without replacing the owner's session or saved lists.
+    state.setdefault("follower_token", secrets.token_urlsafe(32))
+    state.setdefault("tester_token", secrets.token_urlsafe(32))
     save_state(directory, state)
     if args.command == "serve":
         serve(directory, state)

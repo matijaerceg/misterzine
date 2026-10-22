@@ -1,12 +1,12 @@
 import { env, SELF } from 'cloudflare:test';
 import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import schema from '../schema.sql?raw';
-import migration from '../migrations/2026-10-22-custom-lists.sql?raw';
+import migration from '../migrations/2026-10-22-list-community.sql?raw';
 
 const API = 'https://api.misterzine.fyi';
 const SITE = 'https://misterzine.fyi';
 const TOKENS = ['A'.repeat(43), 'B'.repeat(43)];
-const FIELD_NAMES = ['id', 'title', 'description', 'byline', 'keys', 'published', 'version', 'created_at', 'updated_at'].sort();
+const FIELD_NAMES = ['id', 'title', 'description', 'byline', 'keys', 'published', 'version', 'created_at', 'updated_at', 'visibility', 'curator', 'follower_count'].sort();
 const sha256hex = async text => [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))]
   .map(byte => byte.toString(16).padStart(2, '0')).join('');
 const apply = async sql => env.DB.batch(sql.replace(/--.*$/gm, '').split(';').map(s => s.trim()).filter(Boolean).map(s => env.DB.prepare(s)));
@@ -21,7 +21,14 @@ const create = async (value = {}, account = 0) => {
 };
 const read = async (id, account = 0) => (await call('/lists/' + id, 'GET', undefined, account)).json();
 const publicRead = id => call('/public/lists/' + id, 'GET', undefined, null);
-const savedCount = async () => env.DB.prepare('SELECT COUNT(*) AS n FROM custom_lists').first('n');
+const savedCount = async () => env.DB.prepare('SELECT COUNT(*) AS n FROM curated_lists').first('n');
+const save = async (list, changes = {}, account = 0) => {
+  const response = await call('/lists/' + list.id, 'PUT', { ...list, ...changes }, account);
+  expect(response.status).toBe(200);
+  return response.json();
+};
+const directory = async (query = '') => (await call('/public/lists' + query, 'GET', undefined, null)).json();
+const collection = async (account = 0) => (await call('/collections', 'GET', undefined, account)).json();
 
 beforeAll(async () => {
   await apply(schema);
@@ -29,16 +36,18 @@ beforeAll(async () => {
   await apply(migration); // both schema and the upgrade must be safe to re-run
 });
 beforeEach(async () => {
-  await env.DB.batch(['custom_lists', 'feedback', 'sessions', 'favorites', 'users'].map(table => env.DB.prepare('DELETE FROM ' + table)));
+  await env.DB.batch(['list_follows', 'public_profiles', 'curated_lists', 'custom_lists', 'feedback', 'sessions', 'favorites', 'users'].map(table => env.DB.prepare('DELETE FROM ' + table)));
   for (let index = 0; index < TOKENS.length; index++) {
     await env.DB.prepare('INSERT INTO users (id, provider, provider_user_id, email) VALUES (?, ?, ?, ?)')
       .bind(index + 1, 'github', 'private-provider-id-' + index, 'private-' + index + '@example.com').run();
     await env.DB.prepare('INSERT INTO sessions (token_hash, user_id) VALUES (?, ?)').bind(await sha256hex(TOKENS[index]), index + 1).run();
   }
+  await call('/me/profile', 'PUT', { display_name: 'Matija' });
+  await call('/me/profile', 'PUT', { display_name: 'Other curator' }, 1);
 });
 
 describe('own lists', () => {
-  it('creates a draft with a stable id, exact ordered row keys and explicit public byline', async () => {
+  it('creates a draft with a stable id, exact ordered row keys and chosen account name', async () => {
     const list = await create({ title: '  Curated choices  ', keys: ['Core_A', 'game-b', 'Core_A', 'core_a'], byline: '  Matija  ' });
     expect(list).toMatchObject({ title: 'Curated choices', keys: ['Core_A', 'game-b', 'core_a'], byline: 'Matija',
       description: '', published: false, version: 1 });
@@ -54,7 +63,7 @@ describe('own lists', () => {
 
   it('always starts private, even if the client supplies publish or account fields', async () => {
     const list = await create({ published: true, user_id: 2, version: 400, email: 'unwanted@example.com' });
-    expect(list).toMatchObject({ published: false, version: 1, byline: '' });
+    expect(list).toMatchObject({ published: false, version: 1, byline: 'Matija' });
     expect((await publicRead(list.id)).status).toBe(404);
     expect((await (await call('/lists', 'GET', undefined, 1)).json()).lists).toEqual([]);
   });
@@ -85,7 +94,7 @@ describe('own lists', () => {
 describe('publication and revisions', () => {
   it('publishes only the chosen display fields, updates the same public id and immediately unpublishes', async () => {
     const draft = await create({ byline: 'Chosen public name' });
-    const publish = await call('/lists/' + draft.id.toLowerCase(), 'PUT', { ...draft, published: true });
+    const publish = await call('/lists/' + draft.id.toLowerCase(), 'PUT', { ...draft, visibility: 'unlisted' });
     expect(publish.status).toBe(200);
     const list = await publish.json();
     expect(list).toMatchObject({ id: draft.id, published: true, version: 2, created_at: draft.created_at });
@@ -100,7 +109,7 @@ describe('publication and revisions', () => {
     expect((await call('/lists/' + list.id, 'GET', undefined, 1)).status).toBe(404);
     const changed = await (await call('/lists/' + list.id, 'PUT', { ...list, title: 'New name', keys: ['new-core'] })).json();
     expect(await (await publicRead(list.id)).json()).toMatchObject({ id: list.id, title: 'New name', keys: ['new-core'], version: 3 });
-    expect((await call('/lists/' + list.id, 'PUT', { ...changed, published: false })).status).toBe(200);
+    expect((await call('/lists/' + list.id, 'PUT', { ...changed, visibility: 'private' })).status).toBe(200);
     expect((await publicRead(list.id)).status).toBe(404);
     expect((await publicRead('000000000000')).status).toBe(404);
   });
@@ -135,7 +144,6 @@ describe('validation', () => {
     for (const [fields, error] of [
       [{ title: '' }, 'bad_title'], [{ title: '   ' }, 'bad_title'], [{ title: 'x'.repeat(101) }, 'bad_title'],
       [{ title: 7 }, 'bad_title'], [{ description: null }, 'bad_description'], [{ description: 'x'.repeat(2001) }, 'bad_description'],
-      [{ byline: {} }, 'bad_byline'], [{ byline: 'x'.repeat(81) }, 'bad_byline'],
       [{ keys: 'one' }, 'bad_keys'], [{ keys: [null] }, 'bad_keys'], [{ keys: ['spaces forbidden'] }, 'bad_keys'],
       [{ keys: ['x'.repeat(65)] }, 'bad_keys'], [{ keys: Array(5001).fill('x') }, 'bad_keys'],
     ]) {
@@ -153,12 +161,12 @@ describe('validation', () => {
     expect((await (await call('/lists')).json()).lists[0].count).toBe(5000);
   });
 
-  it('requires full replacement keys, a boolean publication flag and a positive integer version', async () => {
+  it('requires full replacement keys, a valid visibility and a positive integer version', async () => {
     const list = await create();
     for (const [fields, error] of [
       [{ version: undefined }, 'bad_version'], [{ version: '1' }, 'bad_version'], [{ version: 0 }, 'bad_version'],
       [{ version: 1.5 }, 'bad_version'], [{ version: Number.MAX_SAFE_INTEGER + 1 }, 'bad_version'],
-      [{ keys: undefined }, 'bad_keys'], [{ published: undefined }, 'bad_published'], [{ published: 1 }, 'bad_published'],
+      [{ keys: undefined }, 'bad_keys'], [{ visibility: 'unknown' }, 'bad_visibility'], [{ visibility: 1 }, 'bad_visibility'],
     ]) {
       const response = await call('/lists/' + list.id, 'PUT', { ...list, ...fields });
       expect(response.status).toBe(400);
@@ -185,7 +193,7 @@ describe('account cleanup and browser access', () => {
   it('deleting an account removes its drafts and public lists without changing other owners', async () => {
     const draft = await create();
     const published = await create();
-    await call('/lists/' + published.id, 'PUT', { ...published, published: true });
+    await call('/lists/' + published.id, 'PUT', { ...published, visibility: 'public' });
     const other = await create({ title: 'Keep this list' }, 1);
     expect((await call('/me', 'DELETE')).status).toBe(400);
     expect(await savedCount()).toBe(3);
@@ -210,5 +218,221 @@ describe('account cleanup and browser access', () => {
       const foreign = await call(path, 'GET', undefined, 0, { Origin: 'https://unrelated.example' });
       expect(foreign.headers.get('Access-Control-Allow-Origin')).toBeNull();
     }
+  });
+});
+
+describe('chosen account names', () => {
+  it('requires a chosen name before sharing and never substitutes OAuth identity or per-list input', async () => {
+    await env.DB.prepare('DELETE FROM public_profiles WHERE user_id = 1').run();
+    expect((await (await call('/me')).json()).profile).toBeNull();
+    const draft = await create({ byline: 'Ignored per-list name' });
+    expect(draft).toMatchObject({ byline: '', curator: { name: '', id: null } });
+    for (const visibility of ['unlisted', 'public']) {
+      const response = await call('/lists/' + draft.id, 'PUT', { ...draft, visibility });
+      expect(response.status).toBe(409);
+      expect(await response.json()).toEqual({ error: 'profile_required' });
+    }
+    expect(await read(draft.id)).toEqual(draft);
+    const profile = await (await call('/me/profile', 'PUT', { display_name: '  Chosen name  ' })).json();
+    expect(profile).toEqual({ id: expect.stringMatching(/^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{12}$/), display_name: 'Chosen name' });
+    const shared = await save(draft, { visibility: 'unlisted' });
+    expect(shared.curator).toEqual({ name: 'Chosen name', id: null });
+    expect(shared.byline).toBe('Chosen name');
+    expect((await (await call('/me')).json()).profile).toEqual(profile);
+  });
+
+  it('keeps a stable profile id across renames, allows duplicate names and does not change list dates or versions', async () => {
+    const draft = await create();
+    const shared = await save(await create(), { visibility: 'public' });
+    const before = (await (await call('/me')).json()).profile;
+    const response = await call('/me/profile', 'PUT', { display_name: 'Other curator' });
+    expect(response.status).toBe(200);
+    const profile = await response.json();
+    expect(profile).toEqual({ id: before.id, display_name: 'Other curator' });
+    const other = (await (await call('/me', 'GET', undefined, 1)).json()).profile;
+    expect(other.display_name).toBe(profile.display_name);
+    expect(other.id).not.toBe(profile.id);
+    for (const original of [draft, shared]) {
+      const current = await read(original.id);
+      expect(current).toMatchObject({ byline: profile.display_name, version: original.version, updated_at: original.updated_at });
+      expect(current.curator.id).toBe(original.visibility === 'public' ? profile.id : null);
+    }
+    expect((await directory('?q=Other%20curator')).lists.map(row => row.id)).toEqual([shared.id]);
+  });
+
+  it('validates names, caps profile bodies and refuses anonymous changes', async () => {
+    const before = (await (await call('/me')).json()).profile;
+    for (const display_name of ['', ' ', null, 5, 'x'.repeat(81)]) {
+      const response = await call('/me/profile', 'PUT', { display_name });
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({ error: 'bad_display_name' });
+    }
+    expect((await call('/me/profile', 'PUT', { display_name: 'x' }, null)).status).toBe(401);
+    expect((await call('/me/profile', 'PUT', { display_name: 'x', ignored: 'x'.repeat(4096) })).status).toBe(413);
+    expect((await (await call('/me')).json()).profile).toEqual(before);
+    expect((await call('/me/profile', 'PUT', { display_name: 'x'.repeat(80) })).status).toBe(200);
+  });
+});
+
+describe('public discovery and curator privacy', () => {
+  it('exposes public lists only in directory/profile and never leaks private or unlisted ids through their curator', async () => {
+    const privateList = await create({ title: 'Secret game list' });
+    const unlisted = await save(await create({ title: 'Secret link list' }), { visibility: 'unlisted' });
+    const publicList = await save(await create({ title: 'Visible list' }), { visibility: 'public' });
+    const profile = (await (await call('/me')).json()).profile;
+    expect((await directory()).lists.map(row => row.id)).toEqual([publicList.id]);
+    expect((await directory('?q=Secret')).total).toBe(0);
+    const curator = await (await call('/public/curators/' + profile.id.toLowerCase(), 'GET', undefined, null)).json();
+    expect(curator.profile).toEqual(profile);
+    expect(curator.lists.map(row => row.id)).toEqual([publicList.id]);
+    expect(JSON.stringify(curator)).not.toContain(privateList.id);
+    expect(JSON.stringify(curator)).not.toContain(unlisted.id);
+    expect((await (await publicRead(unlisted.id)).json()).curator).toEqual({ name: profile.display_name, id: null });
+    expect((await publicRead(privateList.id)).status).toBe(404);
+    await save(publicList, { visibility: 'unlisted' });
+    expect(await directory()).toEqual({ lists: [], total: 0, has_more: false });
+    expect((await call('/public/curators/' + profile.id, 'GET', undefined, null)).status).toBe(404);
+  });
+
+  it('uses literal search and deterministic bounded pagination for all directory sorts', async () => {
+    const a = await save(await create({ title: 'Alpha', description: 'Mahjong favourites' }), { visibility: 'public' });
+    const b = await save(await create({ title: 'Beta 100%' }), { visibility: 'public' });
+    const c = await save(await create({ title: 'Gamma' }), { visibility: 'public' });
+    // Equal timestamps must still produce deterministic pages.
+    await env.DB.prepare("UPDATE curated_lists SET created_at = '2020-01-01T00:00:00Z', updated_at = '2020-01-02T00:00:00Z'").run();
+    const ids = [a.id, b.id, c.id].sort();
+    for (const sort of ['updated', 'created', 'followers']) {
+      const first = await directory('?sort=' + sort + '&limit=2');
+      const second = await directory('?sort=' + sort + '&offset=2&limit=2');
+      expect(first).toMatchObject({ total: 3, has_more: true });
+      expect(second).toMatchObject({ total: 3, has_more: false });
+      expect([...first.lists, ...second.lists].map(row => row.id)).toEqual(ids);
+      expect(first.lists[0]).not.toHaveProperty('keys');
+      expect(first.lists[0]).toHaveProperty('count', 2);
+    }
+    expect((await directory('?q=mahjong')).lists.map(row => row.id)).toEqual([a.id]);
+    expect((await directory('?q=matija')).total).toBe(3);
+    expect((await directory('?q=%25')).lists.map(row => row.id)).toEqual([b.id]);
+    expect((await directory('?q=_')).total).toBe(0);
+    expect((await call('/following/' + c.id, 'PUT', undefined, 1)).status).toBe(204);
+    expect((await directory('?sort=followers')).lists[0]).toMatchObject({ id: c.id, follower_count: 1 });
+    for (const query of ['?sort=bogus', '?offset=-1', '?offset=10001', '?offset=x', '?limit=0', '?limit=101', '?limit=1.5', '?q=' + 'x'.repeat(201)])
+      expect((await call('/public/lists' + query, 'GET', undefined, null)).status).toBe(400);
+    expect(await directory('?offset=10000')).toEqual({ lists: [], total: 3, has_more: false });
+  });
+});
+
+describe('following lists', () => {
+  it('counts concurrent follows once, hides follower identity and supports idempotent unfollow', async () => {
+    const list = await save(await create(), { visibility: 'unlisted' });
+    const responses = await Promise.all(Array.from({ length: 4 }, () => call('/following/' + list.id.toLowerCase(), 'PUT', undefined, 1)));
+    expect(responses.map(response => response.status)).toEqual([204, 204, 204, 204]);
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM list_follows').first('n')).toBe(1);
+    const publicValue = await (await publicRead(list.id)).json();
+    expect(publicValue.follower_count).toBe(1);
+    expect(Object.keys(publicValue).sort()).toEqual(FIELD_NAMES);
+    expect(JSON.stringify(publicValue)).not.toContain('private-');
+    const followed = (await collection(1)).following;
+    expect(followed).toHaveLength(1);
+    expect(followed[0]).toMatchObject({ id: list.id, follower_count: 1, count: 2 });
+    expect((await collection()).following).toEqual([]);
+    expect((await call('/following/' + list.id, 'PUT')).status).toBe(400);
+    expect((await call('/following/' + list.id, 'PUT', undefined, null)).status).toBe(401);
+    expect((await call('/collections', 'GET', undefined, null)).status).toBe(401);
+    for (let i = 0; i < 2; i++) expect((await call('/following/' + list.id, 'DELETE', undefined, 1)).status).toBe(204);
+    expect((await read(list.id)).follower_count).toBe(0);
+    expect((await collection(1)).following).toEqual([]);
+  });
+
+  it('retains only an unavailable id after withdrawal or deletion and resumes after sharing again', async () => {
+    let list = await save(await create({ title: 'A private title later', description: 'Secret after withdrawal' }), { visibility: 'public' });
+    await call('/following/' + list.id, 'PUT', undefined, 1);
+    list = await save(list, { visibility: 'private' });
+    expect((await collection(1)).following).toEqual([{ id: list.id, unavailable: true }]);
+    expect((await call('/following/' + list.id, 'PUT', undefined, 1)).status).toBe(404);
+    expect((await publicRead(list.id)).status).toBe(404);
+    list = await save(list, { visibility: 'unlisted' });
+    expect((await collection(1)).following[0]).toMatchObject({ id: list.id, title: list.title, follower_count: 1 });
+    expect((await call('/lists/' + list.id, 'DELETE', { version: list.version })).status).toBe(204);
+    expect((await collection(1)).following).toEqual([{ id: list.id, unavailable: true }]);
+    expect((await call('/following/' + list.id, 'DELETE', undefined, 1)).status).toBe(204);
+    expect((await collection(1)).following).toEqual([]);
+    expect((await call('/following/000000000000', 'PUT', undefined, 1)).status).toBe(404);
+  });
+
+  it('never exposes private content when a follow races withdrawal', async () => {
+    const list = await save(await create(), { visibility: 'public' });
+    const [follow, withdraw] = await Promise.all([
+      call('/following/' + list.id, 'PUT', undefined, 1),
+      call('/lists/' + list.id, 'PUT', { ...list, visibility: 'private' }),
+    ]);
+    expect([204, 404]).toContain(follow.status);
+    expect(withdraw.status).toBe(200);
+    const following = (await collection(1)).following;
+    expect(following.length).toBeLessThanOrEqual(1);
+    if (following.length) expect(following).toEqual([{ id: list.id, unavailable: true }]);
+  });
+
+  it('account deletion removes its name and own follows while preserving other followers as unavailable', async () => {
+    const mine = await save(await create(), { visibility: 'public' });
+    const other = await save(await create({ title: 'Other list' }, 1), { visibility: 'public' }, 1);
+    await call('/following/' + other.id, 'PUT');
+    await call('/following/' + mine.id, 'PUT', undefined, 1);
+    expect((await call('/me', 'DELETE', undefined, 0, { 'X-Confirm': 'delete' })).status).toBe(204);
+    expect((await collection(1)).following).toEqual([{ id: mine.id, unavailable: true }]);
+    expect((await read(other.id, 1)).follower_count).toBe(0);
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM public_profiles WHERE user_id = 1').first('n')).toBe(0);
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM list_follows WHERE user_id = 1').first('n')).toBe(0);
+    expect((await call('/public/curators/' + mine.curator.id, 'GET', undefined, null)).status).toBe(404);
+  });
+});
+
+describe('revision and migration semantics', () => {
+  it('no-op saves preserve date/version while visibility only changes version and content changes both', async () => {
+    let list = await create();
+    const oldDate = '2020-01-01T00:00:00.000Z';
+    await env.DB.prepare('UPDATE curated_lists SET updated_at = ? WHERE id = ?').bind(oldDate, list.id).run();
+    list = await read(list.id);
+    expect(await save(list, { byline: 'Ignored', title: ' ' + list.title + ' ' })).toEqual(list);
+    const publicList = await save(list, { visibility: 'public' });
+    expect(publicList).toMatchObject({ updated_at: oldDate, version: 2 });
+    expect(await save(publicList)).toEqual(publicList);
+    // A stale no-op must still reject; it cannot reset the visibility/date.
+    const stale = await call('/lists/' + list.id, 'PUT', { ...publicList, version: 1 });
+    expect(stale.status).toBe(409);
+    const reordered = await save(publicList, { keys: [...publicList.keys].reverse() });
+    expect(reordered.version).toBe(3);
+    expect(reordered.updated_at).not.toBe(oldDate);
+    expect(reordered.keys).toEqual([...publicList.keys].reverse());
+  });
+
+  it('maps legacy published=true to unlisted only when visibility is absent', async () => {
+    const draft = await create();
+    const { visibility, ...legacy } = draft;
+    const shared = await save(legacy, { published: true });
+    expect(shared.visibility).toBe('unlisted');
+    expect(shared.published).toBe(true);
+    expect((await directory()).total).toBe(0);
+    expect((await save(shared, { published: true, visibility: 'private' })).published).toBe(false);
+  });
+
+  it('moves old shared links to unlisted without guessing profiles, and reruns never overwrite or resurrect', async () => {
+    await env.DB.prepare('DELETE FROM public_profiles WHERE user_id = 1').run();
+    await env.DB.prepare('INSERT INTO custom_lists (id, user_id, title, byline, published, keys_json) VALUES (?, 1, ?, ?, 1, ?)')
+      .bind('AAAAAAAAAAAA', 'Legacy list', 'Legacy chosen byline', '["galaga"]').run();
+    await apply(migration);
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM custom_lists').first('n')).toBe(0);
+    const list = await read('AAAAAAAAAAAA');
+    expect(list).toMatchObject({ title: 'Legacy list', byline: 'Legacy chosen byline', visibility: 'unlisted', curator: { name: 'Legacy chosen byline', id: null } });
+    expect((await publicRead(list.id)).status).toBe(200);
+    expect((await (await call('/me')).json()).profile).toBeNull();
+    expect((await directory()).total).toBe(0);
+    await call('/me/profile', 'PUT', { display_name: 'Account name now' });
+    const changed = await save(list, { title: 'Edited after migration' });
+    await apply(migration);
+    expect(await read(list.id)).toEqual(changed);
+    await call('/lists/' + list.id, 'DELETE', { version: changed.version });
+    await apply(migration);
+    expect((await call('/lists/' + list.id)).status).toBe(404);
   });
 });

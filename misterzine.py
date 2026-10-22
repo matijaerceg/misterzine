@@ -297,6 +297,24 @@ SOURCE_PATH_FILTERS = {
     ),
 }
 
+# Sources taken off the site (meathax since 2026-10-21). Snapshots keep
+# tracking them, so catalog, events and row_keys stay intact and only
+# export-web skips their rows. Reinstating is deleting the entry: keys, debut
+# dates and visitors' stars come back unchanged, and no feed item replays
+# (feeds only list exported rows). The value is the rbf prefix aggregator dbs
+# give this source's cores (Ongo ships Meathax_SegaSystem32 and friends):
+# those copies leave too, or the site would show them in place of the
+# hidden originals (source-visibility.js only hid them as duplicates).
+DELISTED_SOURCES = {"meathax": "meathax_"}
+
+
+def delisted_row(row):
+    """True for a row of a delisted source, or another db's copy of its cores."""
+    if row["source_id"] in DELISTED_SOURCES:
+        return True
+    rbf = (row["rbf"] or "").lower()
+    return any(rbf.startswith(prefix) for prefix in DELISTED_SOURCES.values())
+
 # Dbs that ship a game's regional/revision sets as sibling MRAs instead of
 # filing the extras under _Arcade/_alternatives/. The site lists each game
 # once, so export-web folds them the way it drops alternatives
@@ -5201,7 +5219,11 @@ def _resolve_shipped_rbf(source_id, tag, shipped):
 
 
 def _source_row_visible(row, shipped):
-    """Ongo lists community MRAs whose core it does not ship; keep those out."""
+    """Ongo lists community MRAs whose core it does not ship; keep those out.
+    Delisted sources (DELISTED_SOURCES) and other dbs' copies of their cores
+    stay out too."""
+    if delisted_row(row):
+        return False
     return (row["source_id"] != "ongo" or
             _resolve_shipped_rbf("ongo", row["rbf"], shipped) is not None)
 

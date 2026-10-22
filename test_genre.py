@@ -2,6 +2,7 @@
 every game in the published catalogue's 2026-10-16 cohort, pinned so a catver
 drift or a mapping change shows up."""
 import json
+import sqlite3
 import unittest
 from pathlib import Path
 
@@ -112,6 +113,16 @@ class CatalogueTests(unittest.TestCase):
             if sn:
                 sets.add(sn)
                 sets.add((dat.get(sn) or {}).get("parent") or sn)
+        # a delisted source's games are still tracked, only left out of the
+        # export, so their pins must survive for the day the source returns
+        con = sqlite3.connect(f"file:{mz.DBPATH.as_posix()}?mode=ro", uri=True)
+        con.row_factory = sqlite3.Row
+        for r in con.execute("SELECT * FROM catalog"):
+            sn = (r["setname"] or "").lower()
+            if sn and mz.delisted_row(r):
+                sets.add(sn)
+                sets.add((dat.get(sn) or {}).get("parent") or sn)
+        con.close()
         missing = sorted(set(mz.GENRE_OVERRIDES) - sets)
         self.assertEqual(missing, [], "GENRE_OVERRIDES pins sets the catalogue no longer lists")
 

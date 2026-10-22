@@ -252,7 +252,9 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    are listed but labeled, see below)
 3. **Coin-Op Collection**: `Distribution-MiSTerFPGA` `db` branch (public arcade cores)
 4. **MeatCores (Meathax)**: `meathax/meatcores` `db` branch, arcade rows only (opt-in: no
-   update_all toggle, users add the `[meathax/meatcores]` section to downloader.ini by hand)
+   update_all toggle, users add the `[meathax/meatcores]` section to downloader.ini by hand).
+   Not listed on the site since 2026-10-21: still snapshotted, but `DELISTED_SOURCES` keeps
+   its rows, and other databases' copies of its cores, out of the export.
 5. **rmCores (rmonic79)**: `rmonic79/rmcores` `db` branch (opt-in like MeatCores, section
    `[rmonic79/rmcores]`). Not new games: rmonic79's cores ship upstream through
    MiSTer-devel, and this db carries the same cores rebuilt with CRT Adjust / V-Size on the

@@ -57,12 +57,13 @@ test('published Aqua Jack and Meta Fox: one build drops its label, two builds ke
   assert.equal(aqua.title, 'Aqua Jack');
   assert.ok(aqua.alsoOngo);
   assert.ok(aqua.siteAliases.includes(rows.find(r => r.src === 'ongo' && r.sn === 'aquajack').k));
-  // Meta Fox runs on Meathax's core and on ppriest's Seta core (Ongo's copy
-  // is ppriest's build): both stay, each named by its source
-  assert.equal(shown('meathax', 'metafox').title, 'Meta Fox (Meathax)');
-  assert.equal(shown('ppriest', 'metafox').title, 'Meta Fox (ppriest)');
+  // Meta Fox: with MeatCores delisted, ppriest's Seta core is the only build
+  // listed and Ongo's copy is that build
+  assert.equal(shown('ppriest', 'metafox').title, 'Meta Fox');
   assert.ok(shown('ppriest', 'metafox').alsoOngo);
-  assert.ok(!shown('meathax', 'metafox').alsoOngo);
+  // Night Slashers ships on two different cores: both stay, each named
+  assert.equal(shown('blahm1d', 'nslashers').title, 'Night Slashers (blahm1d)');
+  assert.equal(shown('distribution_mister', 'nslasher').title, 'Night Slashers (rmonic79)');
 });
 
 test('renamed mirrors need game identity plus core evidence', () => {
@@ -84,8 +85,11 @@ test('catalogue audit hides renamed copies but retains distinct implementations 
   const rows = require('../docs/releases/data.json');
   const visible = new Set(siteSourceRows(rows).map(r => r.k));
   // otwalls: Ongo's Off the Wall (Sente) gives way to ppriest's own build
-  for (const key of ['btoads_meathax', 'narc_blahm1d', 'narc_meathax', 'otwalls']) assert.ok(!visible.has(key), key);
-  for (const key of ['btoads', 'narc', 'narc-blahm1d', 'mk_wolf', 'mk2_wolf', 'off-the-wall-sente-10-16-84', 'swa', 'hotrod', 'sparkman', 'nbajamtese']) assert.ok(visible.has(key), key);
+  for (const key of ['narc_blahm1d', 'otwalls']) assert.ok(!visible.has(key), key);
+  for (const key of ['narc-blahm1d', 'mk_wolf', 'mk2_wolf', 'off-the-wall-sente-10-16-84', 'swa', 'nbajamtese']) assert.ok(visible.has(key), key);
+  // MeatCores is delisted (misterzine.py DELISTED_SOURCES): neither its rows
+  // nor Ongo's copies of its cores reach the site
+  assert.ok(!rows.some(r => r.src === 'meathax' || /^meathax_/i.test(r.core || '')));
 });
 
 test('Meikyu Jima name aliases share one stable launcher without changing app data', () => {

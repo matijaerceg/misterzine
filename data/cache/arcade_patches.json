@@ -1146,7 +1146,7 @@
      ]
     ]
    },
-   "date": "2026-09-17",
+   "date": "2026-10-21",
    "description": [
     "Super Turbo came in two versions. Japan got Super Street Fighter II X, the one competitive players swear by. The rest of the world got a slightly different game: it plays differently, the continue screen is bare, most of the win quotes are gone, the endings are shorter, and Akuma's story is missing. Japan's version, of course, was in Japanese.",
     "Grand Master Challenge is Japan's game in English. The fighting is untouched. Everything you read is new: all 136 win quotes, the strategy tips on the continue screen, the full endings, and Akuma's dialogue, translated fresh from the Japanese with Capcom's own English as the style guide.",
@@ -1158,10 +1158,19 @@
    "hbmame": {
     "pr_url": "https://github.com/Robbbert/hbmame/pull/54",
     "renames": {
+     "sfx.09": "sfx.09",
      "sfx.13m": "sfx.13m",
+     "sfx.14m": "sfx.14m",
      "sfx.15m": "sfx.15m",
+     "sfx.16m": "sfx.16m",
      "sfx.17m": "sfx.17m",
+     "sfx.18m": "sfx.18m",
      "sfx.19m": "sfx.19m",
+     "sfx.20m": "sfx.20m",
+     "sfx.21m": "sfx.21m",
+     "sfx.23m": "sfx.23m",
+     "sfx.25m": "sfx.25m",
+     "sfx.27m": "sfx.27m",
      "sfxj.03d": "sfxj.03d",
      "sfxj.04a": "sfxj.04a",
      "sfxj.08": "sfxj.08"
@@ -1182,7 +1191,7 @@
     "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
    },
    "notes": [
-    "MAME shows checksum warnings for the seven patched files. That's expected; the game plays normally. HBMAME with the ssf2tgmc set definition loads it without them.",
+    "MAME shows checksum warnings for the patched files. That's expected; the game plays normally. HBMAME with the ssf2tgmc set definition loads it without them.",
     "Fan work, unaffiliated with Capcom. The patch contains no ROM data; you need your own dump of the Japanese set."
    ],
    "patch_intro": "An unofficial fan restoration of Super Street Fighter II X: Grand Master Challenge (Japan 940311): the Japanese game, in English, under a US identity.",
@@ -1201,6 +1210,15 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-10-21",
+     "items": [
+      "Stage edges are filled in on Vega's, Dee Jay's and Cammy's stages, and Fei Long's background stays covered during airborne hits.",
+      "Zangief's large portraits keep consistent skin and beard colors.",
+      "Moving between fighters on the select screen no longer briefly shows the next portrait in the previous fighter's colors."
+     ],
+     "version": "rc3"
+    },
     {
      "date": "2026-09-17",
      "items": [
@@ -1263,7 +1281,7 @@
    "subtitle": "English restoration",
    "summary": "Japan's Super Turbo is the one the pros play, and it never came west. Now it does: the same game, with every quote, tip and ending in English.",
    "title": "Super Street Fighter II Turbo: Grand Master Challenge",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "artifact": {
@@ -1435,7 +1453,7 @@
      ]
     ]
    },
-   "date": "2026-10-15",
+   "date": "2026-10-21",
    "description": [
     "Super Turbo is the version competitive players swear by, but it left things behind. The bonus stages from Super Street Fighter II were gone. Shin Akuma was a hidden boss you had to earn, and Ten Akuma only turned up years later at home. Tournament Battle, the eight-player linked-cabinet mode, stayed with the earlier Super Street Fighter II.",
     "EX puts it together on the arcade game. Akuma has his own select-screen cell, with Shin and Ten available through codes there; the original Ryu codes still work. A random-select cell sits opposite him. The car, the falling barrels and the oil drums are back between fights. Link cabinets with the adapter and it runs Tournament Battle; without it, it plays as normal. Every fighter gets two more colors, Akuma and Shin Akuma get their colors from Ultra Street Fighter II, the move names are the modern ones, and the title screen carries an EX mark.",
@@ -1486,6 +1504,15 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-10-21",
+     "items": [
+      "Fight HUD portraits better match the selected fighter colors, and Zangief's large portraits keep consistent skin and beard colors.",
+      "Stage edges are filled in on Vega's, Dee Jay's and Cammy's stages, and Fei Long's background stays covered during airborne hits.",
+      "Moving between fighters on the select screen no longer briefly shows the next portrait in the previous fighter's colors."
+     ],
+     "version": "rc9"
+    },
     {
      "date": "2026-10-15",
      "items": [
@@ -1620,7 +1647,7 @@
    "subtitle": "Enhanced version",
    "summary": "Japan's Super Turbo with the extras it never had together: Shin Akuma and Ten Akuma on the select screen, the bonus stages back, Tournament Battle, two more colors and Free Play. In English or Japanese.",
    "title": "Super Street Fighter II EX",
-   "version": "rc8"
+   "version": "rc9"
   },
   {
    "artifact": {
@@ -2816,7 +2843,7 @@
     "The Collection’s music for the restored scenes and Dee’s boss fight, on MiSTer",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-10-14",
+   "date": "2026-10-21",
    "description": [
     "Vampire Savior Arrange is one of the arranged editions in Capcom’s 2005 PlayStation 2 Vampire: Darkstalkers Collection, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "It keeps Vampire Savior’s game system, with recoverable health and Dark Force, and brings back Donovan, Huitzil and Pyron (Donovan, Phobos and Pyron in Japan). Dee, the fighter Capcom made for the Arrange, joins them on his own cell at the bottom of the select screen.",
@@ -2867,6 +2894,17 @@
    ],
    "release_history": [
     {
+     "date": "2026-10-21",
+     "items": [
+      "Restored Huitzil’s air dashes and floating, and corrected mine contact and missing animations.",
+      "Fixed Dee’s jumping light-kick special cancels, repeated teleports and Dark Force sword behavior.",
+      "Corrected Donovan’s artwork, animations, sword effects and special-move colors.",
+      "Corrected Pyron’s special-move commands, animation timing and jumping shadows.",
+      "Fixed Dee’s sword colors when returning from a special move."
+     ],
+     "version": "rc3"
+    },
+    {
      "date": "2026-10-14",
      "items": [
       "Fixed resets before character endings.",
@@ -2907,7 +2945,7 @@
    "summary": "The Arrange edition of Vampire Savior from Capcom’s PlayStation 2 collection, as a CPS-2 game: Donovan, Huitzil and Pyron return, and Dee joins the roster. USA and Japan builds.",
    "thumbnail_build": "us",
    "title": "Vampire Savior Arrange",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "builds": [
@@ -3189,15 +3227,15 @@
     "Ultra's classic colors for the new fighters, chosen on a color select screen",
     "Sixteen stages and Random to choose from after you pick a fighter",
     "The Ultra title and intro, and ULTRA on the VS, Continue and Game Over screens",
-    "The Switch edition's sound effects, and its arranged music on MiSTer; MODERN or CLASSIC for each in ULTRA CONFIGURATION",
+    "The Switch edition's sound effects, and its arranged music on MiSTer; MODERN or CLASSIC options in the 8 MB audio builds",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-10-17",
+   "date": "2026-10-21",
    "description": [
     "Ultra Street Fighter II: The Final Challengers is the 2017 Nintendo Switch edition of Super Street Fighter II Turbo, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "Akuma has his own select cell, and Evil Ryu and Violent Ken join the original sixteen fighters with their Ultra moves, colors and endings. Shin Akuma stays hidden, for twenty fighters in all.",
     "Ultra's presentation comes with them: the Ultra title and intro, \"The Final Challengers\" lettering, a color select for the new fighters, and a choice of sixteen stages or Random once you have picked a fighter.",
-    "The Switch edition's sound effects play in every build, and on MiSTer its arranged music plays too. The ULTRA CONFIGURATION page in Test Mode switches the sound effects and, on MiSTer, the music between MODERN and CLASSIC.",
+    "The Switch edition's sound effects play in every build, and on MiSTer its arranged music plays too. The 8 MB audio builds retain more sound detail and let you choose MODERN or CLASSIC sound effects in ULTRA CONFIGURATION; on MiSTer you can choose the music there too. The 4 MB audio builds use MODERN sound effects, prioritizing common attacks and defeat voices; some less frequent speech has reduced detail.",
     "The USA build is in English; the Japan build keeps the Japanese.",
     "This is a release candidate."
    ],
@@ -3206,6 +3244,7 @@
    "notes": [
     "The 4 MB audio builds run in stock MAME as hsf2 (USA) and hsf2j (Japan), with expected checksum warnings. Keep them separate from original Hyper Street Fighter II ROMs. The 8 MB audio builds run in HBMAME and on MiSTer; HBMAME needs the included set definitions compiled in.",
     "Credits: Akuma's imported artwork is Tyrone's, from Super Street Fighter II Turbo: New Legacy.",
+    "Special thanks to Gachichan! for extensive testing, bug reports, and improvements to the Evil Ryu and Violent Ken profile pictures.",
     "This is a fan backport, unaffiliated with Capcom. The sets are built from game files you already own; the kit ships only our own code and patches, plus the CPS+ core with its source and licenses."
    ],
    "reconstruction": {
@@ -3223,7 +3262,7 @@
     "kit_command": "python3 apply.py --rompath roms --nsp-us usa.nsp --nsp-jp japan.nsp \\\n                 --keys prod.keys --out-dir out",
     "kit_dir": "backports/usf2/kit",
     "requires": [
-     "your own Nintendo Switch game files: the USA base game of Ultra Street Fighter II for the USA set, the Japanese base game for the Japan set",
+     "your own Nintendo Switch base game files: a USA NSP or XCI for the USA set, or a Japanese NSP for the Japan set",
      "your own Switch prod.keys",
      "your own arcade romset ssf2xj (with its parent ssf2t if yours is a split set) and the QSound firmware (qsound)"
     ],
@@ -3252,6 +3291,33 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-10-21",
+     "items": [
+      "Restored CPU opponents and portraits after a challenger, and the return to attract mode after endings.",
+      "Restored the normal Insert Coin and Free Play positions outside the title screen.",
+      "Corrected Violent Ken’s super meter checks and close-range six-hit sequence.",
+      "Restored Violent Ken’s dash trails and victory animations, with purple fist flames and orange burn reactions.",
+      "Corrected Continue portraits and revival animations for Evil Ryu and Violent Ken, and Evil Ryu’s pose orientation.",
+      "Restored Demon super-finish effects and bonus.",
+      "Added dedicated Evil Ryu and Violent Ken ending music on MiSTer and their full winner captions.",
+      "Restored later ending-music changes for Ken and Chun-Li, including Ken’s fades.",
+      "Corrected intro sprite display and the Japanese title copyright.",
+      "Restored Ryu’s intro fireball startup, poses and travel, and animated backgrounds between rounds.",
+      "Removed stray player markers during travel, smoothed the stage-selection airplane and corrected the mirrored Spain flag.",
+      "Improved Modern attack sounds and defeat voices in the 4 MB build.",
+      "Updated Evil Ryu and Violent Ken portraits, including their selected faces and animated defeated portraits.",
+      "Corrected portrait colors after selection and Continue, missing portrait blocks, HUD lettering and Guile/Cammy HUD colors.",
+      "Added Evil Ryu and Violent Ken to Random character selection.",
+      "Restored Evil Ryu’s white background during the Demon combo and the correct variant winner announcements.",
+      "Corrected background gaps in Cammy, Claw, Dee Jay and Fei Long stages, and Zangief’s portrait shading.",
+      "Fixed INPUT and OUTPUT service-menu navigation.",
+      "Sped up the STREET FIGHTER title entrance.",
+      "Accepts repackaged Switch files with matching game content and adds USA XCI input support.",
+      "Expanded setup instructions with FFmpeg prerequisites and MAME, HBMAME and MiSTer command examples."
+     ],
+     "version": "rc3"
+    },
     {
      "date": "2026-10-17",
      "items": [
@@ -3297,7 +3363,7 @@
    "summary": "Ultra Street Fighter II: The Final Challengers as a CPS-2 game: Akuma gets his own select cell, Evil Ryu and Violent Ken join the roster, and the Switch edition's title, color select and sound come along. USA and Japan builds.",
    "thumbnail_build": "us",
    "title": "Ultra Street Fighter II",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "artifact": {
@@ -3351,21 +3417,22 @@
    },
    "changes": [
     "All 825 Japanese win quotes in English, including 625 opponent-specific quotes the US arcade version left out",
-    "All 24 detailed stage locations in English, centered in the original panels",
+    "All 24 detailed stage locations in English, centered in the original panels with Capcom’s per-panel text colors",
     "Biographies, rival and boss dialogue, and endings that follow the Japanese script, keeping Capcom's wording where it was accurate",
     "Japanese Regulation OFF by default, with its operator switch and uncensored effects",
     "Japanese 980904 gameplay, difficulty, Turbo 1 defaults and secret-character access",
     "Alpha branding in the intro, selection, player introductions and win screens; English A/X/V-ISM descriptions and score rankings, Western names, title and entry announcements, and operator menus",
     "Corrected ending backgrounds, framing and colors, including cleaner picture edges and character placement in E. Honda’s ending",
+    "Corrected Sodom portrait colors, including a blue X-ISM mask and the original gray V-ISM mask in the rankings",
     "An optional Japanese edition with original Japanese text and names, Zero branding and Z-ISM, and the same ending corrections"
    ],
-   "date": "2026-10-17",
+   "date": "2026-10-21",
    "description": [
     "Street Fighter Alpha 3's US arcade version cut each character's win quotes down to eight generic lines. The Japanese game also has a quote for each opponent. This restoration brings back all 625 opponent-specific quotes, with all 825 of the Japanese game's win quotes in English.",
     "Detailed stage locations return in English, in the original stage panels. Biographies, rival dialogue and endings follow the Japanese script in natural English that fits each character. Capcom's English stays where it was accurate, and Alpha 3 MAX's official wording is used where it fits.",
     "The game uses the Japanese 980904 revision's gameplay and secret-character access, with its original difficulty and Turbo 1 defaults. Regulation starts OFF, restoring red hit blood and the full defeat and ending effects; the operator can still switch it ON. The arcade ending sequences are retained, with corrected backgrounds and colors.",
     "Alpha branding in the animated intro, character selection, player introductions and win screens, English A/X/V-ISM labels, descriptions and score rankings, Western names in the intro and fights, title and entry announcements, and English operator menus retain the USA presentation. It runs in MAME and on MiSTer with the jtcps2 core. Supply your own original Japanese sfz3j romset; split sets also need their sfa3 parent and QSound firmware.",
-    "The optional Japanese edition keeps the original Japanese text and names, Zero branding and Z-ISM, with the same ending background and color corrections.",
+    "The optional Japanese edition keeps the original Japanese text and names, Zero branding and Z-ISM, with the same ending and portrait color corrections.",
     "This is a release candidate."
    ],
    "feedback": true,
@@ -3398,6 +3465,14 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-10-21",
+     "items": [
+      "Restored Capcom’s per-panel text colors for the English stage locations.",
+      "Corrected Sodom’s mask, eye and mouth colors in portraits and rankings, including his X-ISM ranking portrait."
+     ],
+     "version": "rc4"
+    },
     {
      "date": "2026-10-17",
      "items": [
@@ -3441,7 +3516,7 @@
    "subtitle": "English restoration",
    "summary": "The Japanese arcade game in English, with all 625 opponent-specific win quotes restored, detailed stage locations and the original Regulation setting.",
    "title": "Street Fighter Alpha 3",
-   "version": "rc3"
+   "version": "rc4"
   },
   {
    "artifact": {

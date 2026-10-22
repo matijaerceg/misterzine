@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 21 Oct 2026 23:12:25 +0000</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 05:05:53 +0000</lastBuildDate>
+<item>
+<title>[Updated] monstermaulers (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dadandrn</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/monstermaulers_20261021.rbf:2026-10-22T05:05:53+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 05:05:53 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Kyukyoku Sentai Dadandarn, Monster Maulers.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-22 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-MonsterMaulers_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] DoDonPachi Dai-Ou-Jou Tamashii (Ongo) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ddpdojt</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1988 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: jtdd2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd2"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Dunk Shot (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dunkshot</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Dunk Shot (Rev C, FD1089A 317-0022).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dunkshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

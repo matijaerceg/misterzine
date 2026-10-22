@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 22 Oct 2026 00:46:39 +0000</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 05:05:53 +0000</lastBuildDate>
+<item>
+<title>[Updated] monstermaulers (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dadandrn</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/monstermaulers_20261021.rbf:2026-10-22T05:05:53+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 05:05:53 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Kyukyoku Sentai Dadandarn, Monster Maulers.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-22 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-MonsterMaulers_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Pushman (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pushman-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/Pushman (American Sammy license).mra:2026-10-22T02:15:12+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 02:15:12 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pushmans.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Comad (American Sammy license)&lt;/p&gt;&lt;p&gt;Core: bazset_Pushman&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] 1000 Miglia: Great 1000 Miles Rally (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1000-miglia-great-1000-miles-rally-bazset</link>
@@ -17,7 +35,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gtmr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1994 / Kaneko&lt;/p&gt;&lt;p&gt;Core: KanekoFamily&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-22 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Pushman (Arcade)</title>
+<title>[New] Pushman (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#pushmans</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/Pushman (American Sammy license).mra:2026-10-22T00:46:39+00:00</guid>
 <pubDate>Thu, 22 Oct 2026 00:46:39 +0000</pubDate>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/deerhunt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 2000 / Sammy USA Corporation&lt;/p&gt;&lt;p&gt;Core: seta2pen&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Trophy Hunting - Bear &amp; Moose V1.00 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#trophyh</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_Seta2/Trophy Hunting - Bear &amp; Moose.mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/trophyh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 2002 / Sammy USA Corporation&lt;/p&gt;&lt;p&gt;Core: seta2pen&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Turkey Hunting USA V1.00 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#turkhunt</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_Seta2/Turkey Hunting USA.mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/turkhunt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 2001 / Sammy USA Corporation&lt;/p&gt;&lt;p&gt;Core: seta2pen&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

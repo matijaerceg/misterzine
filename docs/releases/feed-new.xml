@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Thu, 22 Oct 2026 00:46:39 +0000</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 02:15:12 +0000</lastBuildDate>
+<item>
+<title>[New] Pushman (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pushman-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/Pushman (American Sammy license).mra:2026-10-22T02:15:12+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 02:15:12 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pushmans.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Comad (American Sammy license)&lt;/p&gt;&lt;p&gt;Core: bazset_Pushman&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] 1000 Miglia: Great 1000 Miles Rally (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1000-miglia-great-1000-miles-rally-bazset</link>
@@ -17,7 +26,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gtmr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1994 / Kaneko&lt;/p&gt;&lt;p&gt;Core: KanekoFamily&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-22 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Pushman (Arcade)</title>
+<title>[New] Pushman (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#pushmans</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/Pushman (American Sammy license).mra:2026-10-22T00:46:39+00:00</guid>
 <pubDate>Thu, 22 Oct 2026 00:46:39 +0000</pubDate>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/suhosong.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1997 / SemiCom&lt;/p&gt;&lt;p&gt;Core: TomSVR_semicom&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super Qix (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sqix</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Qix (bootleg of V1.0, 8031 MCU) [TomSVR].mra:2026-10-21T06:38:45+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 06:38:45 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sqix.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1987 / Kaneko / Taito&lt;/p&gt;&lt;p&gt;Core: TomSVR_sqix&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

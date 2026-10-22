@@ -1430,6 +1430,13 @@ const batchG = (core, updated) => core + '@' + updated;  // the umbrella's g; se
 // batch, since a header over a partial match keeps the context the search
 // would otherwise drop; the chip and the panel then speak for the whole build.
 const BATCHES = {};
+// "Updates win" (owner's pick, 2026-10-22): under the date sorts with batches
+// on and outside a search, a core batch claims EVERY survivor of its core and
+// Build Date first, same-game members included; only the rows left over fold
+// into same-game umbrellas. Still never two deep: each row has one parent. A
+// search keeps the old precedence (same-game groups win): search is about games.
+const BATCHES_ALL = {};  // like BATCHES, same-game members included (the whole build)
+const GREDIR = {};       // g of a same-game group dissolved into batches -> the row #g:<g> selects
 const rowHash = d => d.grp ? '#g:' + d.g : d.k ? '#' + d.k : '';
 const rowURL = d => location.origin + location.pathname + rowHash(d);
 // Lookups into the rendered rows. The table runs to ~45,000 elements, so a
@@ -1471,11 +1478,12 @@ function hashRow() {
   const h = hashKey();
   if (!h.startsWith('g:')) return KEY2ROW[h];
   const g = h.slice(2);
+  if (GREDIR[g]) return GREDIR[g];  // a same-game group the batches took apart
   if (G2ROW[g]) return G2ROW[g];
   // a batch link while batches are off, or filtered away: build it from DATA
   const at = g.lastIndexOf('@');
   if (at > 0) {
-    const ms = BATCHES[g] || DATA.filter(d => d.core === g.slice(0, at) && d.updated === g.slice(at + 1));
+    const ms = BATCHES_ALL[g] || DATA.filter(d => d.core === g.slice(0, at) && d.updated === g.slice(at + 1));
     if (ms.length >= 2) return makeBatch(ms);
   }
   return undefined;
@@ -2354,9 +2362,13 @@ function titleCell(d) {
   if (d.grp) {
     const dot = d.members.some(isUnseen)
       ? '<span class="sv" data-tip="A build of this game was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
+    // d.split = every build of the game when some of them sit
+    // under their core's batch row instead ("N of M cores")
+    const n = d.members.length, t = d.split || n;
     return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
-      '<span class="gc" data-tip="' + escA('This game ships on ' + d.members.length + ' cores. Select the row to list them.') + '">' +
-      d.members.length + ' cores</span>' + newBadge(d) + matBadge(d);
+      '<span class="gc" data-tip="' + escA(n === t ? 'This game ships on ' + n + ' cores. Select the row to list them.'
+        : 'This game ships on ' + t + ' cores. ' + n + ' are listed here; the other builds sit under their core update rows. Select the row to list these ' + n + '.') + '">' +
+      (n === t ? n : n + ' of ' + t) + ' cores</span>' + newBadge(d) + matBadge(d);
   }
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
   const fav = !d.k ? ''
@@ -3111,6 +3123,30 @@ function apply() {
   // fold same-game survivors under one umbrella (see makeUmbrella); a group the
   // filters cut to one member is promoted to a plain row. Umbrellas are minted
   // per apply, so the open one and the deep-link map are re-pointed here.
+  // "Updates win" (see BATCHES_ALL): outside a search the batches go
+  // first. Pass 1 buckets every survivor with a core and Build Date (plain or
+  // same-game member) and keeps buckets of BATCH_MIN or more as batches (the
+  // survivor count, as today: favorites-only must not make "1 of 12" headers);
+  // pass 2 folds what is left by g as below. A same-game umbrella that lost
+  // builds to a batch carries `split` (all its builds in DATA) for its chip.
+  const uw = !searchOn && foldBatches && (sortKey === 'updated' || sortKey === 'mz');
+  for (const g in GREDIR) delete GREDIR[g];
+  let bats = [], split = {};
+  if (uw) {
+    const bk = {}, left = [];
+    for (const d of view) {
+      if (!d.core || !d.updated) { left.push(d); continue; }
+      const key = batchG(d.core, d.updated);
+      (bk[key] = bk[key] || []).push(d);
+    }
+    for (const key in bk) {
+      const ms = bk[key];
+      if (ms.length < BATCH_MIN) { left.push(...ms); continue; }
+      bats.push(makeBatch(ms));
+      for (const m of ms) if (m.g && ALLG[m.g]) split[m.g] = true;
+    }
+    view = left;
+  }
   const buckets = {}, top = [];
   for (const d of view) {
     if (!d.g) { top.push(d); continue; }
@@ -3119,16 +3155,18 @@ function apply() {
     b.push(d);
   }
   view = top.map(x => Array.isArray(x) ? (x.length > 1 ? makeUmbrella(x) : x[0]) : x);
-  // then fold core batches (see makeBatch): plain survivors sharing a core and
-  // Build Date, BATCH_MIN or more of them, under the date sorts only (any other
-  // sort would scatter the games out of their order). Debut-floored rows count,
-  // since a same-day debut is part of the wave. Same-game umbrellas are never
-  // batch members, so nothing nests two deep. Fewer survivors than BATCH_MIN
-  // stay plain rows (with the "batch" badge where clusterN gives one).
-  // During a search the count is of the whole batch instead (see BATCHES): any
-  // survivor of a batch that exists folds under its header, even alone, so a
-  // partial match keeps the context the search would otherwise drop.
-  if (foldBatches && (sortKey === 'updated' || sortKey === 'mz')) {
+  if (uw) {  // the leftover umbrellas name their missing builds, then the batches join
+    for (const u of view) if (u.grp && split[u.g]) u.split = ALLG[u.g].length;
+    view = view.concat(bats);
+  }
+  // during a search, fold core batches AFTER the same-game fold (see
+  // makeBatch): plain survivors sharing a core and Build Date, under the date
+  // sorts only (any other sort would scatter the games out of their order).
+  // Same-game umbrellas are never batch members, so nothing nests two deep.
+  // The count is of the whole batch (see BATCHES): any survivor of a batch
+  // that exists folds under its header, even alone, so a partial match keeps
+  // the context the search would otherwise drop.
+  if (!uw && foldBatches && (sortKey === 'updated' || sortKey === 'mz')) {
     const bk = {}, out = [];
     for (const d of view) {
       if (d.grp || !d.core || !d.updated) { out.push(d); continue; }
@@ -3143,6 +3181,20 @@ function apply() {
   for (const g in G2ROW) delete G2ROW[g];
   PARENT.clear();
   for (const d of view) if (d.grp) { G2ROW[d.g] = d; for (const m of d.members) PARENT.set(m, d); }
+  // a same-game group whose builds the batches took apart (no
+  // umbrella of its own in this view): #g:<g> selects the batch holding its
+  // newest shown build (or that build itself, when it was left a plain row)
+  if (uw) {
+    const shown = new Set(view);
+    for (const g in ALLG) {
+      if (G2ROW[g] || !split[g]) continue;
+      const ms = ALLG[g].filter(m => PARENT.has(m) || shown.has(m));
+      if (!ms.length) continue;  // filtered away: the fallback below
+      const m = ms.reduce((a, b) => (b.updated || '') > (a.updated || '') ||
+        ((b.updated || '') === (a.updated || '') && (b.b || 0) > (a.b || 0)) ? b : a);
+      GREDIR[g] = PARENT.get(m) || m;
+    }
+  }
   for (const g in ALLG) if (!G2ROW[g]) G2ROW[g] = makeUmbrella(ALLG[g]);  // filtered away: still linkable
   if (openRow && openRow.grp) openRow = G2ROW[openRow.g] || openRow;
   if (sortKey) {
@@ -3244,9 +3296,8 @@ function makeBatch(ms) {
   const repo = same('repo'); if (repo) u.repo = repo;
   u.cores = u.title;
   u.srcs = [...new Set(ms.map(m => SRC_NAMES[m.src] || m.src))].join(' · ');
-  // a lone survivor of a same-game group can join a batch outside a search
-  // (it is a plain row then) though BATCHES leaves it out: add it back
-  const all = new Set(BATCHES[u.g] || []);
+  // the whole build, same-game members included, for the chip and the panel
+  const all = new Set(BATCHES_ALL[u.g] || []);
   for (const m of ms) all.add(m);
   u.all = [...all];
   u.total = u.all.length;
@@ -4746,7 +4797,10 @@ function groupHTML(u) {
     (u.year ? ' <span style="color:var(--muted);font-weight:normal">(' + esc(u.year) + ')</span>' : '');
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + cfield(rowURL(u), titleHTML, 'Copy link to this game') + '</h2>' +
-    '<p class="grpnote">One game, ' + u.members.length + ' cores. Each build below has its own entry, star and launch button.</p>' +
+    '<p class="grpnote">One game, ' + (u.split || u.members.length) + ' cores. ' +
+    // the builds a core batch took sit under their update rows
+    (u.split && u.split > u.members.length ? u.members.length + ' are listed here; the others sit under their core update rows. ' : '') +
+    'Each build below has its own entry, star and launch button.</p>' +
     shots + dl(rows) + cards + '</div>' + hint;
 }
 
@@ -5861,12 +5915,20 @@ function ingest(d) {
   for (const r of DATA) if (r.g) (ALLG[r.g] = ALLG[r.g] || []).push(r);
   for (const g in ALLG) if (ALLG[g].length < 2) delete ALLG[g];  // Mature -> Hide can orphan a member
   // core batches by g, every row, same-game group members left out as the
-  // fold in apply() leaves them out (see BATCHES). Rebuilt, not merged, too.
+  // fold in apply() leaves them out during a search (see BATCHES). Rebuilt,
+  // not merged, too.
   for (const g in BATCHES) delete BATCHES[g];
   for (const r of DATA) {
     if (!r.core || !r.updated || (r.g && ALLG[r.g])) continue;
     const g = batchG(r.core, r.updated);
     (BATCHES[g] = BATCHES[g] || []).push(r);
+  }
+  // the same, same-game members included (see BATCHES_ALL)
+  for (const g in BATCHES_ALL) delete BATCHES_ALL[g];
+  for (const r of DATA) {
+    if (!r.core || !r.updated) continue;
+    const g = batchG(r.core, r.updated);
+    (BATCHES_ALL[g] = BATCHES_ALL[g] || []).push(r);
   }
   // batch-clustering: count rows sharing a core's Last Updated stamp (see
   // updCluster / clusterN). Rebuilt, not merged, for the same reason as above.

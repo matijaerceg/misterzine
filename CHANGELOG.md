@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-21
 
+- Release tracker: sorted by Build Date, a core update now holds every game it shipped, including games that also run on another core. Those games used to stay in their own rows, so one update could show as a dozen. Sorting by title or searching still groups each game's versions together.
 - Release tracker: a build date can no longer be later than the day the tracker first saw the build, plus one day for time zones. A core file named with a date two days ahead used to sit at the top of the Build Date sort until the calendar caught up.
 - Release tracker: a row that folds one core's update now reads as a label on a light stripe, such as "UPDATE: XNSUPER22 CORE" or "DEBUT: PANDORA CORE", so it can't be mistaken for a game. Its panel heading matches, and a debut keeps saying debut after its games' DEBUT tags fade.
 - Release tracker: MeatCores (Meathax) is no longer listed, and neither are the games Ongo's database carries on Meathax's cores.

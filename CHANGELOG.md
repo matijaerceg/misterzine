@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-22
+
+- Release tracker: the "what gets listed" note now states the listing rule: a source stays listed while its cores' source code is public under its license, and comes off while its code is withdrawn or its builds are in dispute.
+
 ## 2026-10-21
 
 - Release tracker: sorted by Build Date, a core update now holds every game it shipped, including games that also run on another core. Those games used to stay in their own rows, so one update could show as a dozen. Sorting by title or searching still groups each game's versions together.

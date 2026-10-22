@@ -1493,6 +1493,36 @@
   <ul id="clmissingrows" class="clmissing"></ul>
   <div class="clactions"><button type="button" data-clclose>Done</button></div>
 </dialog>
+<dialog id="clentrydialog" class="cldialog" aria-labelledby="clentryheading" aria-describedby="clentryname clentrycore">
+  <h2 id="clentryheading">Add to a list</h2>
+  <p id="clentryname" class="clentryname"></p>
+  <p id="clentrycore" class="clnote"></p>
+  <p class="clnote">Adds this exact entry, including its core and source.</p>
+  <p id="clentrystatus" class="clstatus" role="status" aria-live="polite"></p>
+  <p><a id="clentrysignin" href="../account/" target="_blank" rel="noopener" hidden>Sign in in a new tab</a></p>
+  <div id="clentryforms" hidden>
+    <p id="clentryempty" class="clnote" hidden>You have no lists yet. Make a private list with this entry below.</p>
+    <form id="clentryform">
+      <div id="clentryexisting">
+        <label for="clentrytarget">Your lists</label>
+        <select id="clentrytarget" required><option value="">Choose a list</option></select>
+        <div class="clactions"><button id="clentryaddyes" class="clprimary" type="submit">Add to selected list</button></div>
+      </div>
+    </form>
+    <details id="clentrynew" class="clentrynew">
+      <summary>Make a new private list</summary>
+      <form id="clentrynewform">
+        <label>List name<input id="clentrynewtitle" maxlength="100" required autocomplete="off" placeholder="My weekend arcade picks"></label>
+        <label>Description <small>(optional)</small><textarea id="clentrynewdescription" maxlength="2000" rows="2"></textarea></label>
+        <p class="clnote">The new list starts privately with this entry. You can add more games and decide whether to share it later.</p>
+        <div class="clactions"><button id="clentrycreateyes" class="clprimary" type="submit">Create list with this entry</button></div>
+      </form>
+    </details>
+  </div>
+  <p><a id="clentrycreated" href="#" target="_blank" rel="noopener" hidden>Edit the new list in a new tab</a></p>
+  <div class="clactions"><button id="clentryreload" type="button" hidden>Reload your lists</button><button type="button" data-clclose>Done</button></div>
+  <p class="clnote"><a href="../lists/?view=mine" target="_blank" rel="noopener">Manage your lists</a> · <a href="../account/#public-name" target="_blank" rel="noopener">Account</a></p>
+</dialog>
 <script src="custom-lists.js"></script>
 <script src="./source-visibility.js?v=9"></script>
 <script src="../mask.js?v=4"></script>
@@ -4964,7 +4994,7 @@ function groupHTML(u) {
     // the card's heading is the member's own entry: a link into its panel
     return '<section class="corecard"><h3>' +
       '<a class="openm" href="' + escA(rowHash(m)) + '" data-k="' + escA(m.k) + '">' + esc(m.title) + '</a>' +
-      betaBadge(m) + newBadge(m) + favBtnHTML(m) + '</h3>' + launcher + dl(r) + '</section>';
+      betaBadge(m) + newBadge(m) + favBtnHTML(m) + '</h3>' + launcher + '<div class="clentryactions">' + MZLists.panelButton(m) + '</div>' + dl(r) + '</section>';
   }).join('');
   const overlay = window.matchMedia('(max-aspect-ratio: 3/5)').matches;
   const hint = overlay
@@ -4982,7 +5012,7 @@ function groupHTML(u) {
     '<p class="grpnote">One game, ' + (u.split || u.members.length) + ' cores. ' +
     // the builds a core batch took sit under their update rows
     (u.split && u.split > u.members.length ? u.members.length + ' are listed here; the others sit under their core update rows. ' : '') +
-    'Each build below has its own entry, star and launch button.</p>' +
+    'Each build below has its own entry, star, Add to list and launch button.</p>' +
     flyerHTML(u) + shots + dl(rows) + cards + '</div>' + hint;
 }
 
@@ -5097,7 +5127,7 @@ function batchHTML(u) {
     '<dt>' + esc(k) + '</dt><dd>' + (html ? v : esc(v)) + '</dd>').join('') + '</dl>';
   const list = '<ul class="blist">' + all.map(m =>
     '<li><a class="openm" href="' + escA(rowHash(m)) + '" data-k="' + escA(m.k) + '">' + esc(m.title) + '</a>' +
-    betaBadge(m) + newBadge(m) + favBtnHTML(m) + '</li>').join('') + '</ul>';
+    betaBadge(m) + newBadge(m) + favBtnHTML(m) + MZLists.panelButton(m) + '</li>').join('') + '</ul>';
   const overlay = window.matchMedia('(max-aspect-ratio: 3/5)').matches;
   const hint = overlay
     ? '<p class="hint"><em>Swipe or Back to close</em></p>'
@@ -5109,7 +5139,7 @@ function batchHTML(u) {
     '<h2>' + cfield(rowURL(u), titleHTML, 'Copy link to this batch') + '</h2>' +
     '<p class="grpnote">These ' + all.length + (u.by === 'date' ? ' games debuted on MiSTer together on ' + esc(u.date)
       : (debut ? ' new games shipped together on ' : ' games shipped an update together on ') + esc(u.updated)) +
-    '. Each has its own entry and star.</p>' +
+    '. Each has its own entry, star and Add to list button.</p>' +
     dl + list + '</div>' + hint;
 }
 
@@ -5306,7 +5336,7 @@ function detailHTML(d) {
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2' + (d.k ? ' class="starred"' : '') + '>' +
     (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
-    launcher + sysphoto + flyerHTML(d) + shots + dl + prose + report + '</div>' + hint;
+    launcher + (d.k ? '<div class="clentryactions">' + MZLists.panelButton(d) + '</div>' : '') + sysphoto + flyerHTML(d) + shots + dl + prose + report + '</div>' + hint;
 }
 
 function openPanel(d, fromHistory) {
@@ -5537,6 +5567,8 @@ document.addEventListener('click', e => {
   if (f) { doCopy(f); zapJolt(f.querySelector('.rom.zap')); }
 });
 panel.addEventListener('click', e => {
+  const add = e.target.closest('button.clentryadd');
+  if (add) { MZLists.showEntry(add.dataset.listEntry); return; }
   // on touch this is the only way to star anything (rows have no hover to reveal one)
   const fb = e.target.closest('button.fav');
   if (fb) { toggleFav(KEY2ROW[fb.dataset.k] || openRow, fb); return; }  // a group card stars its own member
@@ -6448,6 +6480,13 @@ function boot() {
       visible: () => view.flatMap(d => d.grp ? d.members : [d]),
       source: s => SRC_NAMES[s] || s, isFavorite: isFav,
       original: key => RAW.find(d => d.k === key),
+      entryReturn: key => {
+        const url = new URL(shareURL()), current = new URL(location.href);
+        if (current.searchParams.has('editList')) url.searchParams.set('editList', current.searchParams.get('editList'));
+        url.searchParams.set('addToList', key); url.hash = key;
+        // URLSearchParams leaves + and * literal, but sign-in return paths require escapes.
+        return url.pathname + url.search.replace(/\+/g, '%20').replace(/\*/g, '%2A').replace(/,/g, '%2C') + url.hash;
+      },
       closePanel,
       repaint: () => { apply(); recenterOpen(); }
     });

@@ -18,6 +18,7 @@ window.MZLists = (() => {
   let dirty = false, busy = false, started = false, owner = false, following = false;
   let collections = { owned: [], following: [] }, profile = null, profileLoaded = false;
   let loadVersion = 0, collectionsVersion = 0, sessionVersion = 0, followBusy = false, createBusy = false;
+  let entryRow = null, entryVersion = 0, entryBusy = false, entryCreateBlocked = false;
   const $ = id => document.getElementById(id);
   const safe = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
   const visibility = () => list.visibility || (list.published ? 'unlisted' : 'private');
@@ -195,6 +196,7 @@ window.MZLists = (() => {
       if (hooks.token() && !owner) await setFollowing(true);
       else if (!owner) status('Sign in to follow this collection.');
     }
+    if (generation === loadVersion) resumeEntry();
   }
   async function save(value) {
     if (busy || !list || !owner) return false;
@@ -321,11 +323,139 @@ window.MZLists = (() => {
       createBusy = false; $('clcreateyes').disabled = false;
     }
   }
+  function panelButton(row) {
+    if (!row || row.grp || !row.k) return '';
+    const label = 'Add ' + row.title + (row.src ? ' (' + hooks.source(row.src) + ')' : '') + ' to a list';
+    return '<button type="button" class="clentryadd" data-list-entry="' + safe(row.k) + '" aria-label="' + safe(label) + '">Add to list</button>';
+  }
+  function entryStatus(text, error = false) {
+    $('clentrystatus').textContent = text; $('clentrystatus').classList.toggle('error', error);
+  }
+  function entryControls() {
+    for (const control of $('clentryforms').querySelectorAll('input,textarea,select,button')) control.disabled = entryBusy;
+    $('clentryaddyes').disabled = entryBusy || !validID($('clentrytarget').value);
+    $('clentrycreateyes').disabled = entryBusy || entryCreateBlocked;
+    $('clentryreload').disabled = entryBusy;
+  }
+  async function entryLists() {
+    const attempt = ++entryVersion, session = sessionVersion;
+    entryBusy = true; entryControls(); entryStatus('Loading your lists...');
+    $('clentrysignin').hidden = true; $('clentryreload').hidden = true; $('clentryforms').hidden = true;
+    try {
+      const data = await request('/lists', null, true);
+      if (attempt !== entryVersion || session !== sessionVersion) return;
+      const picker = $('clentrytarget'); picker.replaceChildren(new Option('Choose a list', ''));
+      for (const row of data.lists) {
+        const current = editing && owner && list && row.id === id;
+        picker.append(new Option((current ? list.title : row.title) + (current ? ' (current editor; save required)' : ''), row.id));
+      }
+      if (editing && owner && list && data.lists.some(row => row.id === id)) picker.value = id;
+      $('clentryexisting').hidden = !data.lists.length;
+      $('clentryempty').hidden = !!data.lists.length;
+      $('clentrynew').open = !data.lists.length;
+      $('clentryforms').hidden = false; entryCreateBlocked = false;
+      entryStatus('Choose one of your lists, or make a new private list.');
+    } catch (err) {
+      if (attempt !== entryVersion || session !== sessionVersion) return;
+      $('clentrysignin').hidden = err.status !== 401;
+      entryStatus(err.status === 401 ? 'Sign in to add this entry to your own lists. Your current view stays open here.' : 'Could not load your lists. Check your connection and try again.', true);
+    } finally {
+      if (attempt === entryVersion && session === sessionVersion) { entryBusy = false; $('clentryreload').hidden = false; entryControls(); }
+    }
+  }
+  function showEntry(key) {
+    const row = hooks.original(key);
+    if (!row || row.grp || !row.k) return;
+    if (editing && busy) { notice('Wait for the current list to finish saving, then try Add to list again.'); return; }
+    entryVersion++; entryRow = row; entryBusy = false; entryCreateBlocked = false;
+    $('clentryname').textContent = row.title;
+    $('clentrycore').textContent = [row.core ? 'Core: ' + row.core : '', row.src ? 'Source: ' + hooks.source(row.src) : ''].filter(Boolean).join(' · ');
+    $('clentrysignin').href = signIn(hooks.entryReturn(row.k));
+    $('clentrycreated').hidden = true; $('clentryforms').hidden = true; $('clentryreload').hidden = true;
+    $('clentrynewtitle').value = ''; $('clentrynewdescription').value = '';
+    $('clentrydialog').showModal();
+    if (!hooks.token()) {
+      $('clentrysignin').hidden = false;
+      entryStatus('Sign in to add this entry to your own lists. Your current view stays open here.');
+    } else entryLists();
+  }
+  function resumeEntry() {
+    if (!params.has('addToList') || (editing && (busy || !list || !owner))) return;
+    const key = params.get('addToList'), url = new URL(location.href);
+    params.delete('addToList'); url.searchParams.delete('addToList'); history.replaceState(history.state, '', url);
+    if (hooks.original(key)) showEntry(key); else notice('That entry is no longer in the catalogue. Choose another entry to add to a list.');
+  }
+  async function addEntry(event) {
+    event.preventDefault();
+    const target = $('clentrytarget').value, row = entryRow;
+    if (entryBusy || !row || !validID(target)) return;
+    // The open editor owns its pending state. Never write around its unsaved changes.
+    if (editing && target === id) {
+      if (!owner || !list || busy) { entryStatus('Retry the current editor with the list owner signed in before adding here.', true); return; }
+      if (selected.has(row.k)) { entryStatus('This entry is already in the current selection. Save the list when your edits are ready.'); return; }
+      if (selected.size >= 5000) { entryStatus('A list can hold up to 5,000 entries. Remove an entry first.', true); return; }
+      selected.add(row.k); changed(); entryStatus('Added to the current selection. Use Save in the editor to save your changes.'); return;
+    }
+    const attempt = entryVersion, session = sessionVersion;
+    entryBusy = true; entryControls(); entryStatus('Adding entry...');
+    try {
+      const current = await request('/lists/' + target, null, true);
+      if (attempt !== entryVersion || session !== sessionVersion) return;
+      if (current.keys.includes(row.k)) { entryStatus('This entry is already saved in "' + current.title + '".'); return; }
+      if (current.keys.length >= 5000) { entryStatus('This list already has 5,000 entries. Remove an entry before adding another.', true); return; }
+      const updated = await request('/lists/' + target, {method: 'PUT', body: JSON.stringify({
+        title: current.title, description: current.description, keys: [...current.keys, row.k],
+        visibility: current.visibility || (current.published ? 'unlisted' : 'private'), version: current.version
+      })}, true);
+      if (session !== sessionVersion) return;
+      if (!editing && mode === 'list' && target === id) {
+        loadVersion++; busy = false; owner = true; list = updated; selected = new Set(updated.keys); original = snapshot(); redraw();
+      }
+      refreshCollections();
+      if (attempt !== entryVersion) return;
+      entryStatus('Added to "' + updated.title + '". Saved with its existing visibility.');
+    } catch (err) {
+      if (attempt !== entryVersion || session !== sessionVersion) return;
+      $('clentrysignin').hidden = err.status !== 401;
+      const text = err.code === 'profile_required' ? 'Choose a display name on your account page before updating this shared list.'
+        : err.status === 409 ? 'This list changed elsewhere. Nothing was overwritten. Choose Add again to use its latest saved version.'
+        : err.status === 404 ? 'This list is no longer available to your account. Reload your lists to choose another.'
+        : err.status === 401 ? 'Your sign-in expired. Sign in again, then reopen Add to list.'
+        : 'Could not confirm the addition. Try Add again to check the saved list; existing entries will not be duplicated.';
+      entryStatus(text, true);
+    } finally { if (attempt === entryVersion && session === sessionVersion) { entryBusy = false; entryControls(); } }
+  }
+  async function createEntryList(event) {
+    event.preventDefault();
+    if (entryBusy || entryCreateBlocked || !entryRow) return;
+    const title = $('clentrynewtitle').value.trim();
+    if (!title) { entryStatus('Enter a name for your new list.', true); $('clentrynewtitle').focus(); return; }
+    const attempt = entryVersion, session = sessionVersion, key = entryRow.k;
+    entryBusy = true; entryControls(); entryStatus('Creating your private list...');
+    try {
+      const created = await request('/lists', {method: 'POST', body: JSON.stringify({title, description: $('clentrynewdescription').value.trim(), keys: [key], visibility: 'private'})}, true);
+      if (session !== sessionVersion) return;
+      refreshCollections();
+      if (attempt !== entryVersion) return;
+      $('clentrytarget').append(new Option(created.title, created.id)); $('clentrytarget').value = created.id;
+      $('clentryexisting').hidden = false; $('clentryempty').hidden = true; $('clentrynew').open = false;
+      $('clentrynewtitle').value = ''; $('clentrynewdescription').value = '';
+      $('clentrycreated').href = '/releases/?editList=' + encodeURIComponent(created.id); $('clentrycreated').hidden = false;
+      entryStatus('Created "' + created.title + '" privately with this entry. Your current view is unchanged.');
+    } catch (err) {
+      if (attempt !== entryVersion || session !== sessionVersion) return;
+      $('clentrysignin').hidden = err.status !== 401;
+      entryCreateBlocked = ![400,401,413].includes(err.status);
+      entryStatus(err.status === 401 ? 'Your sign-in expired. Sign in again, then reopen Add to list.'
+        : [400,413].includes(err.status) ? 'Use a name up to 100 characters and a description up to 2,000.'
+        : 'Could not confirm creation. Reload your lists and check for the new list before creating another.', true);
+    } finally { if (attempt === entryVersion && session === sessionVersion) { entryBusy = false; entryControls(); } }
+  }
   function sessionChanged() {
     if (!started) return;
     sessionVersion++; collectionsVersion++; loadVersion++; profile = null; profileLoaded = false;
     collections = {owned: [], following: []}; following = false; owner = false;
-    followBusy = false; createBusy = false;
+    followBusy = false; createBusy = false; entryVersion++; entryRow = null; entryBusy = false;
     for (const dialog of document.querySelectorAll('dialog.cldialog[open]')) dialog.close();
     for (const control of $('clvisibilityform').querySelectorAll('button,input')) control.disabled = false;
     $('clcreateyes').disabled = false;
@@ -353,6 +483,11 @@ window.MZLists = (() => {
     $('collection-create').disabled = false;
     $('collection-select').disabled = false;
     $('clcreateform').onsubmit = create;
+    $('clentryform').onsubmit = addEntry;
+    $('clentrynewform').onsubmit = createEntryList;
+    $('clentrytarget').onchange = entryControls;
+    $('clentryreload').onclick = entryLists;
+    $('clentrydialog').addEventListener('close', () => { entryVersion++; entryBusy = false; });
     $('collection-dismiss').onclick = () => { $('collection-intro').hidden = true; try { localStorage.setItem(INTRO, '1'); } catch (_) {} };
     try { $('collection-intro').hidden = localStorage.getItem(INTRO) === '1' || editing || mode === 'list'; } catch (_) {}
     $('clbar').hidden = mode !== 'list';
@@ -398,6 +533,7 @@ window.MZLists = (() => {
       const url = new URL(location.href); url.searchParams.delete('createList'); url.searchParams.set('collection', 'all'); history.replaceState(history.state, '', url);
       if (hooks.token()) showCreate(); else notice('Sign in, then choose Create a list to start your collection.');
     }
+    resumeEntry();
     let lastRefresh = Date.now();
     document.addEventListener('visibilitychange', () => {
       if (document.hidden || editing || Date.now() - lastRefresh < 30000) return;
@@ -405,7 +541,7 @@ window.MZLists = (() => {
       if (mode === 'list' && !busy) load();
     });
   }
-  return {start, sync, checkbox, matches, toggle, sessionChanged, isFavorites: () => mode === 'favorites', favoritesClick: () => {
+  return {start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry, isFavorites: () => mode === 'favorites', favoritesClick: () => {
     if (mode === 'list') return false;
     location.assign('?collection=' + (mode === 'favorites' ? 'all' : 'favorites')); return true;
   }};

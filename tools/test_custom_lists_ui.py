@@ -18,11 +18,216 @@ from playwright.sync_api import expect, sync_playwright
 import custom_lists_preview as preview
 
 
+def quick_add_tests(owner, anonymous, base, api, token, title, screenshots=None):
+    """Add real panel entries without changing the browsing view or stale data."""
+    page = owner.new_page()
+    errors, fixtures = [], []
+    page.on("pageerror", lambda error: errors.append(str(error)))
+    headers = {"Authorization": "Bearer " + token}
+    catalogue = owner.request.get(base + "/releases/data.json").json()
+    games = [next(row for row in catalogue if row.get("k") and row["title"].startswith(query)) for query in ["1944", "1942", "1943"]]
+    first, second, remote = [row["k"] for row in games]
+
+    def read(list_id):
+        response = owner.request.get(api + "/lists/" + list_id, headers=headers)
+        assert response.status == 200
+        return response.json()
+
+    def panel(key):
+        page.goto(base + "/releases/?collection=all#" + key)
+        expect(page.locator(f'#panel .clentryadd[data-list-entry="{key}"]')).to_be_visible()
+
+    def chooser(key):
+        page.locator(f'#panel .clentryadd[data-list-entry="{key}"]').click()
+        expect(page.locator("#clentrydialog")).to_be_visible()
+        expect(page.locator("#clentryforms")).to_be_visible()
+
+    def close():
+        page.locator("#clentrydialog").get_by_role("button", name="Done", exact=True).click()
+        expect(page.locator("#clentrydialog")).to_be_hidden()
+
+    def capture(name):
+        if screenshots:
+            page.evaluate("document.fonts.ready")
+            page.screenshot(path=str(screenshots / name))
+
+    try:
+        existing = owner.request.post(api + "/lists", headers=headers, data={"title": title + " existing", "description": "Quick-add fixture", "keys": []})
+        assert existing.status == 201
+        existing_id = existing.json()["id"]
+        fixtures.append(existing_id)
+        page.goto(base + "/__preview__/tester")
+        page.wait_for_function("typeof booted !== 'undefined' && booted")
+        panel(first)
+        page.locator("#q").fill("1944")
+        expect(page.locator("#rows")).to_contain_text("1944")
+        browsing_url = page.url
+        chooser(first)
+        expect(page.locator("#clentryname")).to_have_text(games[0]["title"])
+        page.locator("#clentrytarget").select_option(existing_id)
+        page.locator("#clentryaddyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text('Added to "')
+        saved = read(existing_id)
+        assert saved["keys"] == [first] and saved["visibility"] == "private"
+        assert page.url == browsing_url
+        expect(page.locator("#q")).to_have_value("1944")
+        page.locator("#clentryaddyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text("already saved")
+        unchanged = read(existing_id)
+        assert (unchanged["keys"], unchanged["version"], unchanged["updated_at"]) == ([first], saved["version"], saved["updated_at"])
+        page.locator("#clentrynew summary").click()
+        page.locator("#clentrynewtitle").fill(title + " new")
+        page.locator("#clentrynewdescription").fill("Created from the game panel")
+        page.locator("#clentrycreateyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text('Created "')
+        new_id = parse_qs(urlparse(page.locator("#clentrycreated").get_attribute("href")).query)["editList"][0]
+        fixtures.append(new_id)
+        created = read(new_id)
+        assert created["keys"] == [first] and created["visibility"] == "private"
+        assert anonymous.request.get(api + "/public/lists/" + new_id).status == 404
+        assert page.url == browsing_url
+        # A response can be lost after creation succeeded. The form must stop
+        # repeat submission until the owner reloads the saved list inventory.
+        page.locator("#clentrynew summary").click()
+        uncertain_title = title + " uncertain"
+        page.locator("#clentrynewtitle").fill(uncertain_title)
+        lost_responses = []
+
+        def lose_create_response(route):
+            if route.request.method == "POST":
+                result = route.fetch()
+                assert result.status == 201
+                lost_id = result.json()["id"]
+                fixtures.append(lost_id)
+                lost_responses.append(lost_id)
+                route.abort()
+            else:
+                route.continue_()
+
+        page.route(api + "/lists", lose_create_response)
+        page.locator("#clentrycreateyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text("Could not confirm creation")
+        expect(page.locator("#clentrycreateyes")).to_be_disabled()
+        assert len(lost_responses) == 1
+        page.unroute(api + "/lists", lose_create_response)
+        page.locator("#clentryreload").click()
+        expect(page.locator("#clentrytarget option", has_text=uncertain_title)).to_have_count(1)
+        assert read(lost_responses[0])["keys"] == [first]
+        close()
+        page.locator("#q").fill("1942")
+        expect(page.locator("#rows")).to_contain_text("1942")
+        print("PASS panel exact add/new private, duplicate no-op, lost-create recovery, browsing/filter continuity")
+
+        panel(second)
+        chooser(second)
+        page.locator("#clentrytarget").select_option(existing_id)
+
+        def offline(route):
+            if route.request.method == "PUT":
+                route.abort()
+            else:
+                route.continue_()
+
+        page.route(api + "/lists/" + existing_id, offline)
+        page.locator("#clentryaddyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text("Could not confirm the addition")
+        expect(page.locator("#clentryaddyes")).to_be_enabled()
+        assert read(existing_id)["keys"] == [first]
+        page.unroute(api + "/lists/" + existing_id, offline)
+        injected = []
+
+        def concurrent_update(route):
+            if route.request.method == "PUT" and not injected:
+                latest = read(existing_id)
+                latest["keys"].append(remote)
+                change = owner.request.put(api + "/lists/" + existing_id, headers=headers, data={
+                    key: latest[key] for key in ["title", "description", "keys", "visibility", "version"]
+                })
+                assert change.status == 200
+                injected.append(True)
+            route.continue_()
+
+        page.route(api + "/lists/" + existing_id, concurrent_update)
+        page.locator("#clentryaddyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text("Nothing was overwritten")
+        assert read(existing_id)["keys"] == [first, remote]
+        page.unroute(api + "/lists/" + existing_id, concurrent_update)
+        page.locator("#clentryaddyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text('Added to "')
+        assert read(existing_id)["keys"] == [first, remote, second]
+        close()
+        print("PASS interrupted quick-add retry and real version conflict preserve newer entries")
+
+        # Adding to the currently edited list must remain part of its unsaved
+        # selection, without writing around other pending editor changes.
+        page.goto(base + "/releases/?editList=" + new_id + "#" + second)
+        expect(page.locator("#clname")).to_have_text(title + " new")
+        chooser(second)
+        expect(page.locator("#clentrytarget")).to_have_value(new_id)
+        page.locator("#clentryaddyes").click()
+        expect(page.locator("#clentrystatus")).to_contain_text("current selection")
+        assert read(new_id)["keys"] == [first]
+        close()
+        expect(page.locator("#clstate")).to_contain_text("Unsaved")
+        page.locator("#clsave").click()
+        expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
+        assert read(new_id)["keys"] == [first, second]
+        chooser(second)
+        editor_return = parse_qs(urlparse(page.locator("#clentrysignin").get_attribute("href")).query)["r"][0]
+        assert parse_qs(urlparse(editor_return).query)["editList"] == [new_id]
+        close()
+        page.goto(base + editor_return)
+        expect(page.locator("#clname")).to_have_text(title + " new")
+        expect(page.locator("#clentrydialog")).to_be_visible()
+        expect(page.locator("#clentrytarget")).to_have_value(new_id)
+        assert read(new_id)["keys"] == [first, second]
+        close()
+        page.set_viewport_size({"width": 390, "height": 844})
+        panel(first)
+        chooser(first)
+        page.locator("#clentrynew summary").click()
+        page.evaluate("document.fonts.ready")
+        assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), "Quick-add mobile overflow"
+        bounds = page.locator("#clentrydialog").bounding_box()
+        assert bounds["x"] >= 0 and bounds["x"] + bounds["width"] <= 390
+        capture("quick-add-mobile.png")
+        close()
+        signed_out = anonymous.new_page()
+        signed_out.on("pageerror", lambda error: errors.append(str(error)))
+        signed_out.goto(base + "/__preview__/anonymous")
+        signed_out.wait_for_function("typeof booted !== 'undefined' && booted")
+        signed_out.goto(base + "/releases/?collection=all#" + first)
+        expect(signed_out.locator(f'#panel .clentryadd[data-list-entry="{first}"]')).to_be_visible()
+        signed_out.locator("#q").fill("Q*bert")
+        expect(signed_out.locator("#rows")).to_contain_text("Q*bert")
+        signed_out.locator(f'#panel .clentryadd[data-list-entry="{first}"]').click()
+        expect(signed_out.locator("#clentrysignin")).to_be_visible()
+        expect(signed_out.locator("#clentryforms")).to_be_hidden()
+        return_path = parse_qs(urlparse(signed_out.locator("#clentrysignin").get_attribute("href")).query)["r"][0]
+        assert parse_qs(urlparse(return_path).query)["addToList"] == [first]
+        before_resume = read(existing_id)
+        page.goto(base + return_path)
+        expect(page.locator("#clentrydialog")).to_be_visible()
+        expect(page.locator("#clentryname")).to_have_text(games[0]["title"])
+        expect(page.locator("#q")).to_have_value("Q*bert")
+        assert read(existing_id) == before_resume
+        signed_out.close()
+        assert not errors, "Quick-add JavaScript errors: " + json.dumps(errors)
+        print("PASS pending editor save, mobile chooser, signed-out return/resume without auto-add; no JavaScript errors")
+    finally:
+        page.close()
+        for list_id in fixtures:
+            response = owner.request.get(api + "/lists/" + list_id, headers=headers)
+            if response.status == 200 and response.json()["title"].startswith(title):
+                owner.request.delete(api + "/lists/" + list_id, headers=headers, data={"version": response.json()["version"]})
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--base-url", default="http://localhost:8633")
     parser.add_argument("--state-dir", type=Path, default=preview.DEFAULT_STATE)
     parser.add_argument("--screenshots", type=Path)
+    parser.add_argument("--quick-add-only", action="store_true", help="Run only game-panel Add to list coverage.")
     args = parser.parse_args()
     base = args.base_url.rstrip("/")
     assert urlparse(base).hostname in {"localhost", "127.0.0.1"}, "Only local previews may be tested."
@@ -37,8 +242,8 @@ def main():
         "d1", "execute", "misterzine-preview", "--local", "--config", str(directory / "wrangler.toml"),
         "--persist-to", str(directory / "wrangler"), "--command",
         "DELETE FROM public_profiles WHERE user_id IN (SELECT id FROM users WHERE provider='github' AND provider_user_id='local-custom-lists-tester')",
-    ], cwd=directory, env=preview.isolated_env(), capture_output=True, text=True, encoding="utf-8", errors="replace")
-    assert reset.returncode == 0, "Could not initialize the dedicated test profile."
+    ], cwd=directory, env=preview.isolated_env(), capture_output=True, text=True, encoding="utf-8", errors="replace") if not args.quick_add_only else None
+    assert reset is None or reset.returncode == 0, "Could not initialize the dedicated test profile."
     title = "Preview test " + datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S-%f")
     display_name = "Collection test curator"
     if args.screenshots:
@@ -99,6 +304,9 @@ def main():
                 tab.screenshot(path=str(args.screenshots / name), full_page=True)
 
         try:
+            if args.quick_add_only:
+                quick_add_tests(owner, anonymous, base, api, token, title, args.screenshots)
+                return
             page.goto(base + "/__preview__/tester")
             page.wait_for_function("typeof booted !== 'undefined' && booted")
             expect(page.locator("#collection-create")).to_be_visible()
@@ -216,6 +424,7 @@ def main():
             expect(following.locator("#collection-notice")).to_be_visible()
             assert not errors, "Browser errors: " + json.dumps(errors)
             print("PASS confirmed delete, deleted-view fallback; no JavaScript errors")
+            quick_add_tests(owner, anonymous, base, api, token, title, args.screenshots)
         finally:
             if list_id:
                 follower.request.delete(api + "/following/" + list_id, headers=auth(follower_token))

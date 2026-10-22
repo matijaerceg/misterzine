@@ -46,3 +46,19 @@ CREATE TABLE IF NOT EXISTS feedback (
 );
 
 CREATE INDEX IF NOT EXISTS feedback_ip_time ON feedback(ip_hash, created_at);
+
+-- Custom game lists. Existing databases can apply the identical, idempotent
+-- migrations/2026-10-22-custom-lists.sql before deploying the Worker.
+CREATE TABLE IF NOT EXISTS custom_lists (
+  id          TEXT PRIMARY KEY,
+  user_id     INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title       TEXT NOT NULL,
+  description TEXT NOT NULL DEFAULT '',
+  byline      TEXT NOT NULL DEFAULT '',
+  keys_json   TEXT NOT NULL DEFAULT '[]',
+  published   INTEGER NOT NULL DEFAULT 0 CHECK (published IN (0, 1)),
+  version     INTEGER NOT NULL DEFAULT 1 CHECK (version > 0),
+  created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+  updated_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+CREATE INDEX IF NOT EXISTS custom_lists_user_updated ON custom_lists(user_id, updated_at DESC, id);

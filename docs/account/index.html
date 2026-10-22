@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Account - MisterZine</title>
-<meta name="description" content="Sign in to MisterZine with Google or GitHub to keep your release-tracker favorites across devices; sign out or delete the account here.">
+<meta name="description" content="Sign in to MisterZine with Google or GitHub to keep your favorites and custom lists across devices; sign out or delete the account here.">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="canonical" href="https://misterzine.fyi/account/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MisterZine">
 <meta property="og:title" content="Account - MisterZine">
-<meta property="og:description" content="Sign in to MisterZine with Google or GitHub to keep your release-tracker favorites across devices; sign out or delete the account here.">
+<meta property="og:description" content="Sign in to MisterZine with Google or GitHub to keep your favorites and custom lists across devices; sign out or delete the account here.">
 <meta property="og:url" content="https://misterzine.fyi/account/">
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
@@ -122,7 +122,7 @@
 <section id="loading"><p class="lead">Checking your account...</p></section>
 
 <section id="out" hidden>
-  <p class="lead">Sign in to keep your favorites across browsers and devices. No password: MisterZine
+  <p class="lead">Sign in to keep your favorites and custom lists across browsers and devices. No password: MisterZine
   only asks Google or GitHub who you are.</p>
   <p>
     <a class="btn" id="in-google" href="#">Sign in with Google</a>
@@ -131,7 +131,7 @@
   <p class="msg" id="outmsg"></p>
   <p>When you sign in to an account that has no favorites yet, the favorites already saved in this browser
   are added to it. After that, starring an entry anywhere you are signed in saves it to the account.</p>
-  <p>Only favorites follow the account for now. Saved MiSTers and Zaparoo keys stay in each browser and are
+  <p>Favorites and custom lists follow your account. Saved MiSTers and Zaparoo keys stay in each browser and are
   never sent to the service.</p>
   <p class="muted">Google and GitHub accounts are separate: signing in with the other one creates a second account,
   which then starts from whatever this browser has starred. What is stored and why is on the
@@ -147,15 +147,19 @@
     <button class="btn" id="copy" type="button">Copy backup link</button>
   </p>
   <p class="muted">The backup link lists your favorites in the address itself, so it restores them anywhere, signed in or not.</p>
-  <p class="muted">Only favorites follow the account for now. Saved MiSTers and Zaparoo keys stay in each browser and are
+  <p class="muted">Favorites and custom lists follow your account. Saved MiSTers and Zaparoo keys stay in each browser and are
   never sent to the service.</p>
+
+  <h2>Custom lists</h2>
+  <p>Create private collections of Tracker entries and publish them when you are ready to share.</p>
+  <p><a class="btn" href="../lists/">Manage my lists</a></p>
 
   <h2>Sign out</h2>
   <p>Signing out on this device keeps a copy of the favorites in this browser; they stop following the account until you sign in again.</p>
   <p><button class="btn" id="logout" type="button">Sign out</button></p>
 
   <h2>Delete account</h2>
-  <p>Removes the account, its sign-in sessions and its favorites from the service immediately, and clears the favorites saved in this browser. Copy the backup link first if you want to keep them.</p>
+  <p>Removes the account, its sign-in sessions, favorites and all custom lists from the service immediately, and clears the favorites saved in this browser. Published list links and IDs stop working. The favorites backup link above does not include custom lists.</p>
   <p><button class="btn danger" id="del" type="button">Delete account</button></p>
   <p class="msg" id="inmsg"></p>
 </section>
@@ -184,10 +188,11 @@
   var KEYS = [];   // the account's favorites, for the backup link
   var PROVIDER = { google: 'Google', github: 'GitHub' };
 
-  // sign-in starts at the service and comes back through /auth/, which then
-  // returns to the tracker (the thing accounts exist for)
-  $('in-google').href = API + '/auth/google?r=/releases/';
-  $('in-github').href = API + '/auth/github?r=/releases/';
+  // Preserve the list flow through sign-in; only allow a path on this site.
+  var returnPath = new URLSearchParams(location.search).get('r') || '/releases/';
+  if (!/^\/[A-Za-z0-9_\-./?=&%#]*$/.test(returnPath) || returnPath.indexOf('//') === 0) returnPath = '/releases/';
+  $('in-google').href = API + '/auth/google?r=' + encodeURIComponent(returnPath);
+  $('in-github').href = API + '/auth/github?r=' + encodeURIComponent(returnPath);
 
   function show(id) {
     ['loading', 'out', 'in', 'offline'].forEach(function (s) { $(s).hidden = s !== id; });
@@ -249,11 +254,16 @@
     if (!armed) { armed = true; $('del').textContent = 'Really delete? Click again'; return; }
     var b = $('del'); b.disabled = true;
     api('/me', { method: 'DELETE', headers: { 'X-Confirm': 'delete' } }).then(function (res) {
-      if (res.status !== 204 && res.status !== 401) throw new Error('bad');
+      if (res.status === 401) {
+        dropToken(); show('out');
+        msg('outmsg', 'Your sign-in has expired. Sign in again to delete the account.', 'err');
+        return;
+      }
+      if (res.status !== 204) throw new Error('bad');
       dropToken();
       try { localStorage.removeItem('mz-favs'); localStorage.removeItem('mz-fav-import'); } catch (e) {}
       show('out');
-      msg('outmsg', 'Account deleted. Nothing about you is stored any more.', 'ok');
+      msg('outmsg', 'Account, favorites and custom lists deleted. Published list links no longer work.', 'ok');
     }).catch(function () {
       msg('inmsg', 'Could not delete the account (offline?). Nothing was changed.', 'err');
     }).then(function () { b.disabled = false; disarm(); });

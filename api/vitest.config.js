@@ -1,8 +1,8 @@
 import { defineWorkersConfig } from '@cloudflare/vitest-pool-workers/config';
 
-// The report routes run against Miniflare's local R2 and the feedback routes
-// against its local D1 (the tests apply schema.sql); the other account routes
-// are not covered here. A synced folder (Dropbox) can lock Vite's dependency
+// Reports run against Miniflare's local R2; feedback, notice and custom-list
+// tests use its local D1 (the tests apply schema.sql). A synced folder
+// (Dropbox) can lock Vite's dependency
 // cache mid-rename; point VITEST_CACHE_DIR somewhere local when that happens.
 const cacheDir = process.env.VITEST_CACHE_DIR || 'node_modules/.vite';
 

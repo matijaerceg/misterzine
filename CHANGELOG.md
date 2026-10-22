@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## Unreleased
+
+- Custom lists: signed-in visitors can create private lists, select exact entries in the Tracker, and publish a share page with a stable list ID. Saved edits update the same public list. Lists can be made private again or deleted, and remain separate from favorites. Arcade app subscriptions will follow in a separate update.
+
 ## 2026-10-26
 
 - Release tracker: screenshots in the detail panel enlarge on click, like flyers, to a capped size that keeps the shadow mask and tube blur. Click anywhere or press Escape to close.

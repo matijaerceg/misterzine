@@ -2,7 +2,8 @@
 
 A single Cloudflare Worker (`src/index.js`) with a D1 database (`schema.sql`).
 It signs visitors in with Google or GitHub and stores their release-tracker
-favorites: no passwords, no names, no device addresses, no keys.
+favorites and custom game lists: no passwords, no OAuth names, no device
+addresses, no Zaparoo keys. Lists can have a public byline the owner types.
 The site talks to it from the browser at `https://api.misterzine.fyi`.
 
 It also takes the diagnostic reports players send from the MisterZine
@@ -78,6 +79,110 @@ The API listens on `http://localhost:8787`. To let a locally served copy of the
 site call it, add that site's origin to `DEV_ORIGINS` in `wrangler.toml` for the
 session (do not commit it). A session for testing without OAuth: insert a row
 into `sessions` with the sha256 of any token and use that token as the bearer.
+
+## Custom lists
+
+For a complete isolated site preview, run these from the repository root:
+
+```bash
+npm --prefix api ci
+python tools/custom_lists_preview.py start
+```
+
+Open the printed owner URL. It signs that browser into a disposable local account;
+the anonymous URL is for a separate browser context. The helper runs the real
+Worker and D1 locally, serves `docs/`, and keeps its database and test session
+outside the site directory. It does not deploy or use production credentials.
+Google/GitHub OAuth is not exercised by this preview. Local lists survive restarts.
+Stop both servers with `python tools/custom_lists_preview.py stop`.
+
+With Python Playwright and Chromium installed, run
+`python tools/test_custom_lists_ui.py` against that preview for the browser flow.
+
+An account can keep any number of named, ordered lists of Tracker row keys.
+Each starts unpublished. Publishing makes that list readable by anyone with
+its ID; it does not put it in a public directory. Owners can change, unpublish
+or delete it. The ID survives renames and edits, so a future Arcade subscriber
+can refresh the same URL. There is no Arcade app integration in this site release.
+
+`byline` is an optional public curator name, explicitly supplied by the owner.
+The service never fills it from OAuth identity, email or account details.
+Both owner and public list responses contain only these fields:
+
+```json
+{
+  "id": "3PK4H7X2RC9N",
+  "title": "Favourite games",
+  "description": "A few arcade favourites.",
+  "byline": "Matija",
+  "keys": ["galaga", "pacman"],
+  "published": true,
+  "version": 2,
+  "created_at": "2026-10-22T15:00:00.000Z",
+  "updated_at": "2026-10-22T15:10:00.000Z"
+}
+```
+
+IDs are twelve cryptographically random uppercase Crockford base32
+characters (`0123456789ABCDEFGHJKMNPQRSTVWXYZ`); route lookup accepts lowercase
+too. `keys` are exact, case-sensitive Tracker `k` values, kept in curator order.
+They are not game titles or core names. Repeated keys are collapsed, retaining
+the first occurrence. A list stores at most 5000 submitted keys, each matching
+`[A-Za-z0-9_-]{1,64}`. The Worker does not validate against the live catalogue:
+a row which disappears from the catalogue stays in the saved list, so clients
+can show it as unavailable instead of silently losing the curator's selection.
+
+All owner routes use the existing `Authorization: Bearer <session>`:
+
+| Route | Request | Result |
+|---|---|---|
+| `GET /lists` | — | `200 {"lists":[...]}`: own summaries, most recently updated first; each has the fields above except `keys`, plus `count` |
+| `POST /lists` | `{title, description?, byline?, keys?}` | `201` full list, unpublished at version 1; omitted optional fields default to `""`, `""`, `[]` |
+| `GET /lists/:id` | — | `200` own full list; `404` for missing lists or another owner's list |
+| `PUT /lists/:id` | `{title, description?, byline?, keys, published, version}` | `200` updated full list; replaces the saved content and increments version |
+| `DELETE /lists/:id` | `{version}` | `204`; permanently removes the list |
+| `GET /public/lists/:id` | no sign-in needed | `200` full published list; `404` for unpublished, deleted, invalid or unknown IDs |
+
+Title must be 1–100 UTF-16 units after trimming; description at most 2000;
+byline at most 80. Display fields are stored trimmed, with no HTML processing:
+clients must render them as text. Publication must be a boolean and version a
+positive safe integer. Each JSON request is capped at 384 KiB, including
+streamed bodies. No account list-count limit is imposed.
+
+`PUT` and `DELETE` must send the version last read. The version comparison and
+write happen in one database statement. If someone saves in another tab first,
+the stale request returns `409 {"error":"conflict","current_version":2}`
+without changing anything. Reload the complete list before deciding how to
+merge changes; do not retry blindly using `current_version`. Another account
+always receives `404` on owner routes, including for published lists.
+
+Validation errors return `400 {"error":...}` using `bad_json`, `bad_title`,
+`bad_description`, `bad_byline`, `bad_keys`, `bad_published` or `bad_version`.
+Other errors are `401 unauthorized`, `404 not_found`, `413 too_large`, and
+the conflict response above. Creation can return `503 unavailable` if repeated
+ID collisions prevent allocation. Lists use the existing site/DEV_ORIGINS
+CORS allowlist. Every list response is `Cache-Control: no-store`, so
+unpublishing takes effect on the next read. Deleting an account deletes all
+its lists in the same transaction as its favorites and sessions.
+
+Before deploying this Worker, apply the idempotent migration **from `api/`**:
+
+```bash
+# Local testing uses only the local D1 database:
+npx wrangler d1 execute misterzine --local --file=migrations/2026-10-22-custom-lists.sql
+
+# When deployment is approved, production order is migration, Worker, then site:
+npx wrangler d1 execute misterzine --remote --file=migrations/2026-10-22-custom-lists.sql
+npx wrangler deploy
+```
+
+New local databases can instead apply `schema.sql`, which includes the same
+table and index. Apply the migration before the new Worker even if the Lists
+page is not yet visible: account deletion also uses this table. For staging,
+use Wrangler's local D1 with disposable test accounts; a local page connected
+to the production API still writes production data. The migration only adds
+a table and index, and the prior Worker can safely run with them in place.
+Do not remove the table as a rollback once anyone has saved lists.
 
 ## Device reports
 
@@ -213,5 +318,8 @@ served site's origin must be in `DEV_ORIGINS`.
 
 ## Tests
 
-The report and feedback routes are tested with `npm test` (vitest with the
-Workers pool, local R2 and D1; the feedback tests apply `schema.sql` themselves).
+The report, feedback, notice and custom-list routes are tested with `npm test`
+(Vitest with the Workers pool, local R2 and D1; database tests apply `schema.sql`
+themselves). List coverage includes account isolation, explicit public fields,
+publication and withdrawal, simultaneous saves, stale-delete protection,
+validation/body limits, account deletion and existing CORS behavior.

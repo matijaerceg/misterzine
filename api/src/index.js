@@ -1,8 +1,9 @@
 // misterzine account service: a Cloudflare Worker in front of a D1 database.
 //
 // What it does: signs people in with Google or GitHub (OAuth, no passwords),
-// and stores their release-tracker favorites. It holds no device addresses,
-// no Zaparoo keys, no names, no avatars. Its one other job is taking the
+// and stores their release-tracker favorites and custom game lists. It holds
+// no device addresses, no Zaparoo keys, no OAuth names, no avatars. Lists may
+// have an optional public byline typed by their owner. It also takes the
 // diagnostic reports a player sends from the MisterZine Frontend's
 // Troubleshooting screen (src/reports.js): kept 30 days in a private R2
 // bucket, readable only by the developer, and never tied to an account. And
@@ -23,6 +24,9 @@
 //   PUT    /favorites/{key}           add one
 //   DELETE /favorites/{key}           remove one
 //   POST   /favorites/import          {keys: [...]} union into the account (first sign-in)
+//   GET/POST /lists                   own list summaries / create an unpublished list
+//   GET/PUT/DELETE /lists/{id}         own list / replace / delete (writes need version)
+//   GET    /public/lists/{id}          anonymous read of a published list
 //   POST   /reports                   device report upload; the rest of /reports is
 //                                     developer-only (see src/reports.js)
 //   POST   /feedback                  site feedback form, anonymous or signed in;
@@ -37,6 +41,7 @@
 
 import { reports } from './reports.js';
 import { feedback } from './feedback.js';
+import { lists, publicList } from './lists.js';
 
 const KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;      // release tracker row keys (data.json `k`)
 const MAX_FAVORITES = 5000;
@@ -80,9 +85,13 @@ async function route(request, env, url) {
   if (p === '/feedback' || p.startsWith('/feedback/'))
     return feedback(request, env, m, p, { authenticate: () => authenticate(request, env) });
 
+  if (p === '/public/lists' || p.startsWith('/public/lists/')) return publicList(env, p, m);
+
   // --- everything below needs a session -------------------------------------
   const user = await authenticate(request, env);
   if (!user) return json({ error: 'unauthorized' }, 401);
+
+  if (p === '/lists' || p.startsWith('/lists/')) return lists(request, env, m, p, user);
 
   if (p === '/me' && m === 'GET') {
     const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM favorites WHERE user_id = ?').bind(user.id).first('n');
@@ -97,9 +106,10 @@ async function route(request, env, url) {
   }
   if (p === '/me' && m === 'DELETE') {
     if (request.headers.get('X-Confirm') !== 'delete') return json({ error: 'confirm_required' }, 400);
-    // ON DELETE CASCADE covers favorites + sessions, but delete explicitly too
+    // ON DELETE CASCADE covers favorites + sessions + lists, but delete explicitly too
     // so the result never depends on the foreign_keys pragma being on
     await env.DB.batch([
+      env.DB.prepare('DELETE FROM custom_lists WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM favorites WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM sessions WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM users WHERE id = ?').bind(user.id),

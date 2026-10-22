@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy - MisterZine</title>
-<meta name="description" content="What MisterZine stores, where, and how to delete it. Short version: nothing about you unless you sign in, and then only your favorites.">
+<meta name="description" content="What MisterZine stores, where, and how to delete it. Accounts hold favorites and custom lists. Published lists are public; drafts are private.">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="canonical" href="https://misterzine.fyi/privacy/">
@@ -105,9 +105,9 @@
 </header>
 
 <main>
-<p class="lead">MisterZine is a static website. It has no visitor database and no server of its own, with one
-exception: an optional account service that stores your favorites so they follow you between
-browsers. This page says exactly what that stores and how to delete it.</p>
+<p class="lead">MisterZine is a static website with a few supporting services. An optional account keeps your
+favorites and custom lists across browsers. This page explains what the site and apps store, what becomes
+public when you share a list, and how to delete your data.</p>
 
 <h2>Without an account</h2>
 <p>Nothing about you is stored anywhere but your own browser. These live in your browser's local
@@ -131,13 +131,22 @@ in, the account service stores:</p>
   <tr><td>Your user ID at Google or GitHub</td><td>To recognise you next time. It is a number, not your name.</td></tr>
   <tr><td>The email address your sign-in provider passes along</td><td>Only so a support request can be matched to an account. It is never displayed, never used to send mail, never shared.</td></tr>
   <tr><td>When the account was created</td><td>Housekeeping.</td></tr>
-  <tr><td>Your favorites</td><td>The point of the account: the list of starred entries, as the tracker's own entry keys.</td></tr>
+  <tr><td>Your favorites</td><td>The list of starred entries, as the tracker's own entry keys.</td></tr>
+  <tr><td>Your custom lists</td><td>The names, descriptions, optional public names you enter, selected Tracker entry keys, publication status, list IDs and creation/update times. Drafts are private to your account; published lists can be read by anyone with their link or ID.</td></tr>
   <tr><td>The last site notice you closed</td><td>So a notice you closed on one device does not show again on your others.</td></tr>
   <tr><td>Sign-in sessions</td><td>A random token in your browser's storage identifies your session. Signing out deletes it.</td></tr>
 </table>
-<p>Not stored: your name, profile picture, password, saved MiSTers, Zaparoo keys, or anything else from
-your browser. Signing in with Google one day and GitHub another creates two separate accounts.</p>
+<p>Not collected from your sign-in provider: your name, profile picture or password. Your saved MiSTers
+and Zaparoo keys stay in your browser. Signing in with Google one day and GitHub another creates two separate accounts.</p>
 <p>The account service runs on Cloudflare (Workers and a D1 database). Traffic to it is encrypted.</p>
+
+<h2>Sharing custom lists</h2>
+<p>Publishing a list makes its name, description, the public name you chose (if any), selected Tracker entry keys,
+list ID and update times publicly readable on the site and through the list service. Your email, sign-in
+provider identity and account ID are never included. A public name is optional and is only what you type;
+it is not verified. Lists are shared by link or ID and are not a private way to send information.</p>
+<p>You can make a published list private again or delete it. This stops further public access through
+MisterZine, but cannot remove copies someone already saved. Renaming or updating a list keeps its ID.</p>
 
 <h2>Feedback</h2>
 <p>The Feedback form (in the Menu, and the tab at the edge of the screen) sends your message to the developer
@@ -150,7 +159,8 @@ until you press Send.</p>
 <h2>Deleting your data</h2>
 <ul>
   <li><strong>Account:</strong> open your <a href="../account/">account page</a> and choose "Delete account".
-    Deletion is immediate and complete: favorites, sessions and the account record are removed.</li>
+    Favorites, custom lists (including published ones), sessions and the account record are removed immediately. Published list links and IDs stop working.</li>
+  <li><strong>A custom list:</strong> open <a href="../lists/">My lists</a> and choose "Delete". To stop sharing while keeping the list, edit it in the Tracker and make it private.</li>
   <li><strong>Browser data:</strong> clear this site's data in your browser, or use "Clear all favorites"
     and the device manager in the tracker.</li>
 </ul>
@@ -240,7 +250,7 @@ The site's code and this page are public there, so any change to this policy sho
 </main>
 
 <footer>
-  <p>Effective 2026-09-01. Also on MisterZine: the <a href="../releases/">release tracker</a>, the <a href="../hardware-landscape/">hardware landscape</a> and the <a href="../frontend/">Frontend</a>.</p>
+  <p>Updated 2026-10-22. Also on MisterZine: the <a href="../releases/">release tracker</a>, the <a href="../hardware-landscape/">hardware landscape</a> and the <a href="../frontend/">Frontend</a>.</p>
 </footer>
 
 </div>

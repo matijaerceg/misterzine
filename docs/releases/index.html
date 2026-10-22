@@ -32,6 +32,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
+<link rel="stylesheet" href="custom-lists.css">
 <link rel="stylesheet" href="../nav.css?v=6"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
@@ -1238,6 +1239,7 @@
       <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
       <hr class="msep nv">
       <button type="button" id="mymisters" data-tip="Your saved MiSTers">My MiSTer(s)</button>
+      <a href="../lists/">Custom lists</a>
       <button type="button" id="shareview" data-tip="Copy a link to exactly this view: the search, filters, sort and open game">Share this view</button>
           <div class="theme" id="theme">
             <details id="themedd">
@@ -1269,6 +1271,32 @@
     </div>
   </div>
 </header>
+<section id="clbar" class="clbar" aria-label="Custom list" hidden>
+  <div class="clrow">
+    <a id="clback" class="cllink" href="../lists/">My lists</a>
+    <strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span>
+    <span class="clspacer"></span>
+    <a id="clshare" class="cllink" href="../lists/" hidden>Public page</a>
+    <button id="clcopy" type="button" hidden>Copy ID</button>
+  </div>
+  <div id="cledit" class="clrow" hidden>
+    <button id="clselected" type="button" aria-pressed="false">Selected (0)</button>
+    <button id="cladd" type="button">Add matching</button>
+    <button id="clremove" type="button">Remove matching</button>
+    <button id="cldetailsbtn" type="button">List details</button>
+    <span class="clspacer"></span>
+    <button id="clprivate" type="button" hidden>Make private</button>
+    <button id="clsave" type="button">Save draft</button>
+    <button id="clpublish" class="clprimary" type="button">Publish</button>
+  </div>
+  <p id="clnote" class="clnote"></p>
+  <p id="clstatus" class="clstatus" role="status" aria-live="polite"></p>
+  <div class="clrow">
+    <button id="clmissing" type="button" hidden></button>
+    <button id="clretry" type="button" hidden>Try again</button>
+    <a id="clsignin" class="cllink" href="../account/" target="_blank" rel="noopener" hidden>Sign in in a new tab</a>
+  </div>
+</section>
 <div class="controls">
   <!-- the filters live in their own wrapping section; it grows to fill the row
        and right-aligns its contents, so the cluster hugs the separator and wraps
@@ -1404,6 +1432,27 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
+<dialog id="cldetails" class="cldialog">
+  <form id="cldetailsform">
+    <h2>List details</h2>
+    <label>Title<input id="cltitle" maxlength="100" required></label>
+    <label>Curator name <small>(optional, public when published)</small><input id="clbyline" maxlength="80" autocomplete="off"></label>
+    <label>Description <small>(optional)</small><textarea id="cldescription" maxlength="2000"></textarea></label>
+    <p class="clnote">Changes are kept in the editor until you save the list.</p>
+    <div class="clactions"><button type="button" data-clclose>Cancel</button><button class="clprimary" type="submit">Use these details</button></div>
+  </form>
+</dialog>
+<dialog id="clconfirm" class="cldialog">
+  <h2 id="clconfirmtitle"></h2><p id="clconfirmtext"></p>
+  <div class="clactions"><button type="button" data-clclose>Cancel</button><button id="clconfirmyes" class="clprimary" type="button"></button></div>
+</dialog>
+<dialog id="clmissingdialog" class="cldialog">
+  <h2>Entries not shown in the Tracker</h2>
+  <p>These exact entries were removed or folded into another Tracker listing. They are still saved in your list; no other core has been substituted. Keep them or remove them before saving.</p>
+  <ul id="clmissingrows" class="clmissing"></ul>
+  <div class="clactions"><button type="button" data-clclose>Done</button></div>
+</dialog>
+<script src="custom-lists.js"></script>
 <script src="./source-visibility.js?v=9"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=6"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
@@ -2507,7 +2556,7 @@ function coreCell(d) {
 // line is spent at every scroll position. Only multi-word labels need one; the
 // Columns menu always shows the full label.
 const COLUMNS = [
-  { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + titleCell(d) + '</td>' },
+  { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + MZLists.checkbox(d) + titleCell(d) + '</td>' },
   { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
@@ -2852,6 +2901,7 @@ function scrollTableTop() {
 document.getElementById('totop').addEventListener('click', scrollTableTop);
 
 function render() {
+  MZLists.sync();
   syncStatus();  // counts run over DATA, not the view, so no early return below can skip this
   const tb = document.getElementById('rows');
   const cols = activeColumns();
@@ -3161,6 +3211,7 @@ function apply() {
   // unchecked box narrows to the checked ones, and an all-unchecked menu shows
   // nothing (see pickNarrows and the menus below).
   view = DATA.filter(d => {
+    if (!MZLists.matches(d)) return false;
     // favorites: someone else's shared link (favView) and your own toggle are
     // separate narrowers — a shared link is a view of THEIR list, and starring
     // things while reading it mustn't change what the link shows
@@ -4049,7 +4100,7 @@ function viewParams() {
 // the open row's #key. Nothing else in the address bar (the ?v= cache-buster,
 // the RSS ref tag) describes the view, so it stays behind.
 function shareURL() {
-  const fav = location.search.slice(1).split('&').filter(pr => paramName(pr) === 'fav');
+  const fav = location.search.slice(1).split('&').filter(pr => ['fav', 'list'].includes(paramName(pr)));
   const parts = viewParams().map(([k, v]) => k + '=' + v).concat(fav);
   return location.origin + location.pathname + (parts.length ? '?' + parts.join('&') : '') + location.hash;
 }
@@ -5310,7 +5361,11 @@ function openPlaceholder() {
   markOpenRow();
 }
 
+document.getElementById('rows').addEventListener('change', e => {
+  if (e.target.matches('.clpick')) MZLists.toggle(e.target.dataset.listKey, e.target.checked);
+});
 document.getElementById('rows').addEventListener('click', e => {
+  if (e.target.closest('.clpick')) return;  // list membership is separate from opening a row
   if (e.target.closest('a')) return;  // repo links navigate; don't also open the panel
   const fb = e.target.closest('button.fav');  // starring is not a row selection
   if (fb) { toggleFav(KEY2ROW[fb.dataset.k], fb); return; }
@@ -5504,7 +5559,7 @@ document.addEventListener('keydown', e => {
   // the export dialog is modal: native Esc closes it, and no key may leak to
   // the Esc ladder, arrow-nav, or type-anywhere while it's up (q.focus() on an
   // inert page would misfire anyway)
-  if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open]')) return;  // same for the ini lines and the feedback form
+  if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open], dialog.cldialog[open]')) return;  // modal fields own their keyboard input
   if (e.key === 'Escape') {
     if (closePop() || closeHoverPop()) return;  // an open popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it
@@ -6344,6 +6399,12 @@ function boot() {
     adoptViewParams();  // a shared view: search, menus, year, sort, favorites-only
     adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
     stripViewParams();  // one-shot: the view is applied, the address bar goes back to plain
+    MZLists.start({
+      api: () => API, token: () => TOKEN, rows: () => siteSourceRows(RAW),
+      visible: () => view.flatMap(d => d.grp ? d.members : [d]),
+      source: s => SRC_NAMES[s] || s,
+      repaint: () => { apply(); recenterOpen(); }
+    });
     // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
     // the entry we arrived on already IS the panel state (in overlay mode Back
     // correctly leaves the site, i.e. returns where the visitor came from).

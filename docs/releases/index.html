@@ -713,9 +713,25 @@
            font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;
            letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; cursor: help; }
-  /* a core batch umbrella (tr.bat, also .grp): the core's name in the Title
-     cell with a muted "update" tail, so it reads as an event, not a game */
-  tr.bat td:first-child .bu { color: var(--muted); font-weight: 400; margin-left: .3rem; }
+  /* a core batch umbrella (tr.bat, also .grp) reads as a label, not a game:
+     "DEBUT: PANDORA CORE" in condensed caps (kind and "core" muted, the core's
+     name in the text colour) on a light stripe across the whole row, with the
+     game columns left empty (makeBatch). Same-game umbrellas keep the bold
+     game title (user picked this "stripe" look over a words-only row and a
+     divider line, 2026-10-21). The stripe is opaque over --bg like the
+     sticky-cell tints above, and stronger than the 6.67% row hover so it
+     still shows in the low-contrast themes (Pocket, Beige, Moss). */
+  #rows tr.bat td { background: color-mix(in srgb, var(--line) 15%, var(--bg)); }
+  #rows tr.bat:hover td { background: color-mix(in srgb, var(--line) 21%, var(--bg)); }
+  #rows tr.bat.open td { background: color-mix(in srgb, var(--accent) 20%, var(--bg)); }
+  #rows tr.bat td:first-child { font-weight: 400; font-size: .85em; letter-spacing: .06em;
+    text-transform: uppercase; font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
+  tr.bat .bk, tr.bat .bc, #panel h2 .bk, #panel h2 .bc { color: var(--muted); font-weight: normal; }
+  tr.bat .bn { color: var(--fg); font-weight: 600; }
+  /* undo the .85em for the arrow (every group row has the identical arrow)
+     and the chip (as legible as on a game group) */
+  #rows tr.bat .tw { font-size: calc(1em / .85); }
+  #rows tr.bat .gc { font-size: calc(.6em / .85); text-transform: none; letter-spacing: .04em; }
   /* the batch panel's game list: one line per game, star at the end */
   #panel ul.blist { list-style: none; margin: .4rem 0 0; padding: 0; }
   #panel ul.blist li { display: flex; align-items: baseline; gap: .35rem; padding: .25rem 0;
@@ -2286,6 +2302,27 @@ function batchBadge(d) {
   return ' <span class="xb" data-tip="' + escA(tip) + '">batch</span>';
 }
 
+// A core batch is a debut when every game in the build was still inside its
+// DEBUT window (NEW_DAYS) on the BUILD date: a new core's first wave, even if
+// it was rebuilt a few days later. Judged against the build date, never today,
+// so the row does not turn into an "update" once the DEBUT pills fade (it
+// did until 2026-10-21). The whole build counts (u.all), not just the games a
+// search or filter shows.
+function batchIsDebut(u) {
+  const up = Date.parse(u.updated);
+  return (u.all || u.members).every(m => {
+    const gap = (up - Date.parse(m.date)) / 864e5;
+    return m.date && gap >= 0 && gap < NEW_DAYS;
+  });
+}
+// The batch's name, for its row and its panel heading: "Debut: Pandora core",
+// "Update: XNSUPER22 core" (the row's CSS sets it in caps). "core" rides a
+// no-break space so a narrow column never strands it on a line of its own.
+function batchLabel(u, debut) {
+  return '<span class="bk">' + (debut ? 'Debut:' : 'Update:') + '</span> <span class="bn">' +
+    esc(u.title) + '</span><span class="bc">&nbsp;core</span>';
+}
+
 // The star sits out of flow in the sticky cell's left padding (see the .fav CSS),
 // so it costs the Title column no width and shifts no text when it appears on
 // hover. Without hover there's nothing to reveal it, so touch gets a plain
@@ -2295,19 +2332,19 @@ function titleCell(d) {
   // umbrella: disclosure chevron, the game's base title, a "N cores" chip, and
   // the dot/DEBUT pill speaking for the group (any member unseen; the game's
   // own debut). No star: favorites live on the member builds.
-  // batch umbrella: chevron, the core's name + "update", a "N games" chip ("N of
-  // T games" when a search shows only part of the batch); the dot speaks for the
-  // batch. A batch whose every shown game is still in its DEBUT window (a new
-  // core's first wave rebuilt within days) reads "debut" instead of "update".
-  // No DEBUT pill on the header: the word says it, and each member keeps its own.
+  // batch umbrella: chevron, its label ("Update: XNSUPER22 core", batchLabel),
+  // a "N games" chip ("N of T games" when a search shows only part of the
+  // batch); the dot speaks for the batch. A debut batch (batchIsDebut) says
+  // "Debut:". No DEBUT pill on the header: the word says it, and each member
+  // keeps its own.
   if (d.bat) {
     const n = d.members.length, t = d.total || n;
     const dot = d.members.some(isUnseen)
       ? '<span class="sv" data-tip="A game in this batch was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
-    const debut = d.members.every(m => newBadge(m));
-    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
-      '<span class="bu">' + (debut ? 'debut' : 'update') + '</span>' +
-      '<span class="gc" data-tip="' + escA(n === t
+    const debut = batchIsDebut(d);
+    // <wbr> lets the chip wrap to the next line instead of splitting a word
+    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + batchLabel(d, debut) +
+      '<wbr><span class="gc" data-tip="' + escA(n === t
         ? n + ' games on this core shipped ' + (debut ? 'together' : 'an update together') +
           ' (' + d.updated + '). Select the row to list them.'
         : n + ' of the ' + t + ' games this core shipped ' + (debut ? 'together' : 'in one update') +
@@ -3202,9 +3239,9 @@ function makeBatch(ms) {
     title: coreLabel(core) || core, base: ms[0].base, core, src: same('src') || '',
     date: min('date'), updated: ms[0].updated, mz: max('mz'), act: max('act'),
     b: Math.max(...ms.map(m => m.b || 0)), date_kind: 'build', mat: ms.some(m => m.mat) };
-  for (const k of ['genre', 'year', 'manufacturer', 'reg', 'rot', 'res', 'plr', 'ctl', 'spc', 'flip', 'repo']) {
-    const v = same(k); if (v !== undefined && v !== '') u[k] = v;
-  }
+  // game columns (year, maker, genre, specs) stay empty, even when every
+  // member agrees: the row is a label for a build, not one more game
+  const repo = same('repo'); if (repo) u.repo = repo;
   u.cores = u.title;
   u.srcs = [...new Set(ms.map(m => SRC_NAMES[m.src] || m.src))].join(' · ');
   // a lone survivor of a same-game group can join a batch outside a search
@@ -4738,11 +4775,13 @@ function batchHTML(u) {
   const hint = overlay
     ? '<p class="hint"><em>Swipe or Back to close</em></p>'
     : '<p class="hint"><kbd>↑</kbd> <kbd>↓</kbd> browse rows · <kbd>→</kbd> <kbd>←</kbd> open or close the batch · <kbd>Esc</kbd> to close</p>';
-  const titleHTML = '<span class="gametitle">' + esc(u.title) + '</span>' +
-    ' <span style="color:var(--muted);font-weight:normal">update</span>';
+  // the heading matches the row (batchLabel); the note says what kind of build
+  const debut = batchIsDebut(u);
+  const titleHTML = '<span class="gametitle">' + batchLabel(u, debut) + '</span>';
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + cfield(rowURL(u), titleHTML, 'Copy link to this batch') + '</h2>' +
-    '<p class="grpnote">These ' + all.length + ' games shipped an update together on ' + esc(u.updated) +
+    '<p class="grpnote">These ' + all.length + (debut ? ' new games shipped together on '
+      : ' games shipped an update together on ') + esc(u.updated) +
     '. Each has its own entry and star.</p>' +
     dl + list + '</div>' + hint;
 }

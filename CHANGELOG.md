@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-21
 
+- Release tracker: a row that folds one core's update now reads as a label on a light stripe, such as "UPDATE: XNSUPER22 CORE" or "DEBUT: PANDORA CORE", so it can't be mistaken for a game. Its panel heading matches, and a debut keeps saying debut after its games' DEBUT tags fade.
 - Release tracker: MeatCores (Meathax) is no longer listed, and neither are the games Ongo's database carries on Meathax's cores.
 - Eleven new themes in Menu → Theme: Merlot, Woodgrain, Moss, Lagoon, NeXT, Clay, Pocket, Beige, Super, Platinum and VIC-20. Several are deliberately gentler, with less difference between text and background.
 - Release tracker: the Batches button now has rounded corners on both sides when it is switched on, matching the other buttons in the filter row.

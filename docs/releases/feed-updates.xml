@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 22 Oct 2026 05:05:53 +0000</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 09:55:31 +0000</lastBuildDate>
+<item>
+<title>[Updated] TaitoGNET (Arcade core, 22 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#chaoshea</link>
+<guid isPermaLink="false">shmupfan:_Arcade/cores/TaitoGNET_20261022.rbf:2026-10-22T09:55:31+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 09:55:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Chaos Heat, Flip Maze, Go By RC, Kollon, Mahjong Oh, Night Raid, Otenami Haiken, Otenami Haiken Final, Otenki Kororin, Psyvariar -Medium Unit-, Psyvariar -Revision-, Ray Crisis, Shanghai Sangokuhai Tougi, Shanghai Shoryu Sairin, Shikigami no Shiro, Soutenryu, Space Invaders Anniversary, Super Puzzle Bobble, Usagi, XII Stag, Zoku Otenamihaiken, Zooo.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-22 (source: shmupfan).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/shmupfan/Arcade-TaitoGNET_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] monstermaulers (Arcade core, 2 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#dadandrn</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1987 / Technos Japan (Taito license)&lt;/p&gt;&lt;p&gt;Core: jtdd&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Double Dragon II: The Revenge (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ddragon2</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Double Dragon II The Revenge (World).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddragon2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1988 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: jtdd2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/dd2"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -19,15 +19,27 @@ window.MZLists = (() => {
   let collections = { owned: [], following: [] }, profile = null, profileLoaded = false;
   let loadVersion = 0, collectionsVersion = 0, sessionVersion = 0, followBusy = false, createBusy = false;
   let entryRow = null, entryVersion = 0, entryBusy = false, entryCreateBlocked = false;
-  let draftRecord = null, draftAvailable = true, undoSelection = null;
+  let draftRecord = null, draftAvailable = true;
+  let undo = [], redo = [], present = '', memberLimit = 200, memberSignature = '', catalogue = null, catalogueByKey = new Map();
+  function resetHistory() { undo = []; redo = []; present = snapshot(); }
+  function travelHistory(back) {
+    if (busy || !owner || !editing) return;
+    const from = back ? undo : redo, to = back ? redo : undo;
+    if (!from.length) return;
+    to.push(snapshot());
+    const value = from.pop(), [title, description, keys] = JSON.parse(value);
+    list = {...list, title, description}; selected = new Set(keys); present = value;
+    changed(false);
+  }
   const draftKey = () => 'mz-list-draft:' + id;
   function draftNote() {
     if (!$('cldraftnote')) return;
     $('cldraftnote').hidden = !editing || !owner || !dirty;
     $('cldraftnote').textContent = draftAvailable
-      ? 'Unsaved changes are kept on this device for recovery. Use Save to update your list.'
+      ? 'Recovery copy kept on this device.'
       : 'This browser could not keep a recovery copy. Keep this tab open and save your changes before leaving.';
-    $('cldiscard').hidden = !editing || !owner || !dirty;
+    $('cldiscard').hidden = !editing || !owner;
+    $('cldiscard').disabled = busy || !dirty;
   }
   function clearDraft() {
     try { if (draftRecord && localStorage.getItem(draftKey()) === draftRecord) localStorage.removeItem(draftKey()); }
@@ -67,7 +79,7 @@ window.MZLists = (() => {
     try {
       const latest = await request('/lists/' + id, null, true);
       if (session !== sessionVersion) return;
-      clearDraft(); list = latest; selected = new Set(latest.keys); original = snapshot(); dirty = false; undoSelection = null;
+      clearDraft(); list = latest; selected = new Set(latest.keys); original = snapshot(); dirty = false; resetHistory();
       $('cllatest').hidden = true; status('Unsaved changes discarded. Showing the latest saved list.');
     } catch (err) { if (session === sessionVersion) { status(errorText(err), true); $('clsignin').hidden = err.status !== 401; } }
     finally { if (session === sessionVersion) { busy = false; redraw(); } }
@@ -87,7 +99,70 @@ window.MZLists = (() => {
   function notice(text) { $('collection-notice').textContent = text; $('collection-notice').hidden = !text; }
   function status(text, error = false) { $('clstatus').textContent = text; $('clstatus').classList.toggle('error', error); }
   function redraw() { hooks.repaint(); sync(); }
-  function changed(keepUndo = false) { if (!keepUndo) undoSelection = null; dirty = snapshot() !== original; keepDraft(); status(dirty ? draftAvailable ? 'Changes are not saved yet.' : 'Unsaved changes. Save before leaving; local recovery is unavailable.' : 'No unsaved changes.'); redraw(); }
+  function changed(record = true) {
+    const next = snapshot();
+    if (record && next !== present) {
+      if (present) undo.push(present);
+      if (undo.length > 100) undo.shift();
+      redo = []; present = next;
+    }
+    dirty = next !== original; keepDraft();
+    // The state beside the title already says Saved / Unsaved changes.
+    status(dirty && !draftAvailable ? 'Unsaved changes. Save before leaving; local recovery is unavailable.' : '');
+    redraw();
+  }
+  function syncMembers() {
+    if (!$('clworkspace')) return;
+    const editor = editing && mode === 'list';
+    const active = editing && owner && !!list;
+    document.body.classList.toggle('cl-editor', editor);
+    $('clworkspace').hidden = !editor;
+    $('clmobiletabs').hidden = !editor;
+    $('clbulkbar').hidden = !active;
+    $('clmembers').hidden = !active;
+    $('clmembersearch').disabled = !active;
+    $('clmembersmore').hidden = true;
+    if (!active) {
+      memberSignature = ''; $('clmembercount').textContent = 'Your list'; $('clshowlist').textContent = 'Your list';
+      $('clmembers').replaceChildren(); $('clmemberempty').hidden = true; return;
+    }
+    $('clmembercount').textContent = 'In this list (' + selected.size + ')';
+    $('clshowlist').textContent = 'Your list (' + selected.size + ')';
+    const rows = hooks.catalogue();
+    if (catalogue !== rows) { catalogue = rows; catalogueByKey = new Map(rows.map(row => [row.k, row])); memberSignature = ''; }
+    const query = $('clmembersearch').value.trim().toLocaleLowerCase();
+    const signature = JSON.stringify([[...selected], query, memberLimit, busy]);
+    if (signature === memberSignature) {
+      $('clmembersmore').hidden = Number($('clmembersmore').dataset.remaining || 0) === 0;
+      return;
+    }
+    memberSignature = signature;
+    const entries = [...selected].map(key => ({key, row: catalogueByKey.get(key)}))
+      .filter(({key, row}) => !query || [row?.title || key, row?.core, row?.src && hooks.source(row.src)].join(' ').toLocaleLowerCase().includes(query))
+      .sort((a, b) => (a.row?.title || a.key).localeCompare(b.row?.title || b.key, undefined, {numeric: true, sensitivity: 'base'}) || a.key.localeCompare(b.key));
+    const focus = document.activeElement, focusedKey = focus?.dataset.clremove;
+    const oldIndex = focusedKey ? [...$('clmembers').querySelectorAll('button')].indexOf(focus) : -1;
+    const fragment = document.createDocumentFragment();
+    for (const {key, row} of entries.slice(0, memberLimit)) {
+      const li = document.createElement('li'), text = document.createElement('div'), title = document.createElement('strong'), detail = document.createElement('small'), remove = document.createElement('button');
+      li.className = 'clmember'; title.textContent = row?.title || 'Unavailable entry';
+      detail.textContent = row ? [row.core, row.src && hooks.source(row.src)].filter(Boolean).join(' · ') : key + ' · No longer in the catalogue';
+      text.append(title, detail); remove.type = 'button'; remove.textContent = 'Remove'; remove.dataset.clremove = key;
+      remove.setAttribute('aria-label', 'Remove ' + (row?.title || key) + (row && detail.textContent ? ' (' + detail.textContent + ')' : '') + ' from this list'); remove.disabled = busy;
+      li.append(text, remove); fragment.append(li);
+    }
+    $('clmembers').replaceChildren(fragment);
+    $('clmemberempty').hidden = entries.length > 0;
+    $('clmemberempty').textContent = selected.size ? 'No list entries match this search.' : 'Your list is empty. Tick games in the catalogue to add them here.';
+    const remaining = Math.max(0, entries.length - memberLimit);
+    $('clmembersmore').dataset.remaining = remaining;
+    $('clmembersmore').hidden = !remaining;
+    $('clmembersmore').textContent = 'Show more (' + remaining + ' remaining)';
+    if (oldIndex >= 0) {
+      const buttons = [...$('clmembers').querySelectorAll('button')];
+      (buttons.find(button => button.dataset.clremove === focusedKey) || buttons[Math.min(oldIndex, buttons.length - 1)] || $('clmembers').parentElement).focus({preventScroll: true});
+    }
+  }
   function fail(message, status, code) { const error = new Error(message); error.status = status; error.code = code; throw error; }
   async function request(path, options, auth = false) {
     const token = hooks.token();
@@ -143,6 +218,7 @@ window.MZLists = (() => {
   }
   function sync() {
     if (!started) return;
+    syncMembers();
     $('collection-all').setAttribute('aria-current', mode === 'all' ? 'page' : 'false');
     $('collection-favorites').setAttribute('aria-current', mode === 'favorites' ? 'page' : 'false');
     if (!list || editing && !owner) {
@@ -160,13 +236,15 @@ window.MZLists = (() => {
     $('clmoresummary').textContent = editing ? 'More' : 'About this list';
     draftNote();
     $('cldone').href = listPath();
+    $('cldone').textContent = dirty ? 'Save & done' : 'Done editing';
+    $('cldone').setAttribute('aria-disabled', String(busy));
     $('cleditlink').hidden = editing || !owner; $('cleditlink').href = editPath();
     $('cllinkcopy').hidden = visibility() === 'private';
     $('clfollow').hidden = editing || owner || visibility() === 'private';
     $('clfollow').disabled = followBusy;
     $('clfollow').textContent = following ? 'Unfollow' : 'Follow list';
     $('clfollow').setAttribute('aria-pressed', String(following));
-    $('clselected').textContent = 'Selected (' + selected.size + ')';
+    $('clselected').textContent = selectedOnly ? 'Show all games' : 'Show only list entries';
     $('clselected').setAttribute('aria-pressed', selectedOnly);
     $('clsave').textContent = visibility() === 'private' ? 'Save draft' : 'Save changes';
     $('clsave').disabled = busy || !dirty;
@@ -185,7 +263,7 @@ window.MZLists = (() => {
     $('cldescriptionfold').hidden = !list.description;
     $('cldescriptionview').textContent = list.description;
     $('clnote').textContent = editing
-      ? 'Tick exact entries, or add everything matching your filters. Expand a grouped row to choose a specific core. ' + (visibility() === 'private' ? 'Your draft stays private until you share it.' : 'Saving changes updates the same shared list.')
+      ? 'Tick games in the catalogue to add them. Your list stays visible here as you search and filter. ' + (visibility() === 'private' ? 'Your draft stays private until you share it.' : 'Saving updates the same shared list.')
       : !selected.size ? (owner ? 'This list is empty. Choose Edit list to start adding entries.' : 'This list has no entries yet. Its owner can add them later.')
       : !hooks.visible().length ? 'No saved entries are visible with your current filters and visibility settings. Try clearing filters or review entries not shown below.'
       : 'Search and filters apply within this collection.';
@@ -198,11 +276,14 @@ window.MZLists = (() => {
     $('clempty').textContent = !selected.size
       ? (owner ? 'This list is empty. Choose Edit list to start adding entries.' : 'This list has no entries yet. Its owner can add them later.')
       : 'No saved entries are visible with your current filters and visibility settings. Try clearing filters or review entries not shown.';
-    $('clundo').hidden = !undoSelection;
-    $('cladd').textContent = 'Add matching (' + matching.length + ')';
-    $('cladd').disabled = busy || !matching.length;
+    $('clundo').hidden = !editing || !owner; $('clredo').hidden = !editing || !owner;
+    $('clundo').disabled = busy || !undo.length; $('clredo').disabled = busy || !redo.length;
+    $('cldiscard').disabled = busy || !dirty;
+    const additions = matching.filter(d => !selected.has(d.k)).length;
+    $('cladd').textContent = 'Add ' + additions + ' matching…';
+    $('cladd').disabled = busy || !additions;
     $('clremove').disabled = busy || !matching.some(d => selected.has(d.k));
-    $('clremove').textContent = 'Remove matching (' + matching.filter(d => selected.has(d.k)).length + ')';
+    $('clremove').textContent = 'Remove ' + matching.filter(d => selected.has(d.k)).length + ' matching…';
   }
   function checkbox(d) {
     if (!editing || !list || !owner || d.grp || !d.k) return '';
@@ -241,10 +322,11 @@ window.MZLists = (() => {
       if (generation !== loadVersion) return;
       const retained = editing && list && dirty;
       owner = isOwner;
-      if (!retained) { list = value; selected = new Set(value.keys); dirty = false; original = snapshot(); undoSelection = null; }
+      if (!retained) { list = value; selected = new Set(value.keys); dirty = false; original = snapshot(); resetHistory(); }
       const recovered = !retained && restoreDraft();
+      if (recovered) { undo.push(present); present = snapshot(); }
       $('clretry').hidden = true; $('clsignin').hidden = true;
-      status(recovered ? 'Recovered your unsaved changes from this device. Review them, then save when ready.' : retained ? 'Your unsaved edits are still here.' : editing ? 'Select entries, then save your list.' : '');
+      status(recovered ? 'Recovered your unsaved changes from this device. Review them, then save when ready.' : retained ? 'Your unsaved edits are still here.' : '');
       if ((retained || recovered) && list.version !== value.version) {
         status('This list changed elsewhere. Your edits are still here; review the latest saved version before saving.', true);
         $('cllatest').hidden = false;
@@ -276,7 +358,7 @@ window.MZLists = (() => {
       })}, true);
       if (session !== sessionVersion) return false;
       list = updated; selected = new Set(updated.keys); dirty = false; original = snapshot();
-      clearDraft(); undoSelection = null;
+      clearDraft(); resetHistory();
       status(value === 'private' ? 'Saved privately.' : value === 'unlisted' ? 'Saved. Anyone with your link can view and follow this list.' : 'Saved. Your list now appears in Browse lists and on your curator page.');
       $('clsignin').hidden = true; $('cllatest').hidden = true;
       refreshCollections(); return true;
@@ -546,6 +628,31 @@ window.MZLists = (() => {
     hooks = bridge;
     if (started) return;
     started = true;
+    if (editing) $('clworkspace').prepend($('clbar'));
+    $('clmembers').onclick = event => {
+      const button = event.target.closest('button[data-clremove]');
+      if (button) toggle(button.dataset.clremove, false);
+    };
+    $('clmembersearch').oninput = () => { memberLimit = 200; syncMembers(); };
+    $('clmembersmore').onclick = () => { memberLimit += 200; syncMembers(); };
+    const showPane = showList => {
+      document.body.classList.toggle('cl-mobile-list', showList);
+      $('clshowcatalogue').setAttribute('aria-pressed', String(!showList));
+      $('clshowlist').setAttribute('aria-pressed', String(showList));
+    };
+    $('clshowcatalogue').onclick = () => showPane(false);
+    $('clshowlist').onclick = () => showPane(true);
+    showPane(false);
+    document.addEventListener('pointerdown', event => {
+      if (!event.target.closest('#clbulktools')) $('clbulktools').open = false;
+    });
+    document.addEventListener('keydown', event => {
+      if (!editing || !owner || !(event.ctrlKey || event.metaKey) || event.altKey || event.isComposing ||
+        event.target.closest('input:not([type=checkbox]):not([type=radio]):not([type=button]):not([type=submit]),textarea,select,[contenteditable="true"]') || document.querySelector('dialog[open]')) return;
+      const key = event.key.toLowerCase();
+      if (key !== 'z' && key !== 'y') return;
+      event.preventDefault(); event.stopImmediatePropagation(); travelHistory(key === 'z' && !event.shiftKey);
+    }, true);
     $('collection-select').onchange = event => {
       const value = event.target.value;
       if (value === 'manage') location.assign(hooks.token() ? '../lists/?view=mine' : signIn('/lists/?view=mine'));
@@ -570,15 +677,31 @@ window.MZLists = (() => {
     }
     $('clretry').onclick = load;
     $('cldiscard').onclick = discardDraft;
-    $('clundo').onclick = () => { if (!undoSelection || busy || !owner) return; selected = new Set(undoSelection); changed(); };
+    $('clundo').onclick = () => travelHistory(true);
+    $('clredo').onclick = () => travelHistory(false);
+    $('clundo').title = 'Undo the last edit (Ctrl/Cmd+Z). History resets after saving.';
+    $('clredo').title = 'Redo (Ctrl/Cmd+Shift+Z or Ctrl/Cmd+Y).';
+    $('cldone').onclick = async event => {
+      event.preventDefault();
+      if (busy || !owner || !list) return;
+      if (!dirty || await save(visibility())) location.assign(listPath());
+    };
     $('clselected').onclick = () => { selectedOnly = !selectedOnly; redraw(); };
     $('cladd').onclick = () => {
-      const keys = hooks.visible().map(d => d.k).filter(Boolean);
+      if (busy || !owner) return;
+      const keys = [...new Set(hooks.visible().map(d => d.k).filter(key => key && !selected.has(key)))];
       if (new Set([...selected, ...keys]).size > 5000) { status('A list can hold up to 5,000 entries. Narrow the filters before adding.', true); return; }
-      if (!keys.some(key => !selected.has(key))) return;
-      undoSelection = [...selected]; keys.forEach(key => selected.add(key)); changed(true);
+      if (!keys.length || !confirm('Add ' + keys.length + ' matching entries to “' + list.title + '”?\n\nThis changes your draft only. You can Undo before saving.')) return;
+      $('clbulktools').open = false;
+      keys.forEach(key => selected.add(key)); changed();
     };
-    $('clremove').onclick = () => { undoSelection = [...selected]; hooks.visible().forEach(d => selected.delete(d.k)); changed(true); };
+    $('clremove').onclick = () => {
+      if (busy || !owner) return;
+      const keys = [...new Set(hooks.visible().map(d => d.k).filter(key => selected.has(key)))];
+      if (!keys.length || !confirm('Remove ' + keys.length + ' matching entries from “' + list.title + '”?\n\nThis changes your draft only. You can Undo before saving.')) return;
+      $('clbulktools').open = false;
+      keys.forEach(key => selected.delete(key)); changed();
+    };
     $('clsave').onclick = () => save(visibility());
     $('clpublish').onclick = showSharing;
     $('clvisibilityform').onsubmit = submitSharing;
@@ -616,7 +739,10 @@ window.MZLists = (() => {
       if (mode === 'list' && !busy) load();
     });
   }
-  return {start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry, isFavorites: () => mode === 'favorites', favoritesClick: () => {
+  return {start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry,
+    isListView: () => mode === 'list' && !editing,
+    isEditing: () => mode === 'list' && editing,
+    isFavorites: () => mode === 'favorites', favoritesClick: () => {
     if (mode === 'list') return false;
     location.assign('?collection=' + (mode === 'favorites' ? 'all' : 'favorites')); return true;
   }};

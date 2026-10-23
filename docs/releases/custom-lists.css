@@ -45,7 +45,7 @@
 @media (max-width: 36rem) { .clbar { padding: .45rem 0; } .clrow { gap: .35rem; } .clnote { font-size: .8rem; } .clbar button, .clbar .cllink { padding: .35rem .5rem; } }
 @media print { .clbar button, .clpick, .clbar .cllink { display: none; } }
 /* Always-visible collection navigation sits above the game filters. */
-.collections { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .45rem .8rem; padding: .6rem 0; border-top: 1px solid var(--hair); }
+.collections { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: .45rem .8rem; padding: .6rem 0; border-top: 1px solid var(--hair); }
 .collection-tabs, .collection-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .35rem; min-width: 0; }
 .collections a, .collections button, .collections select { font: inherit; color: var(--fg); background: transparent; border: 1px solid transparent; border-radius: .35rem; padding: .32rem .55rem; text-decoration: none; cursor: pointer; }
 .collections a:hover, .collections button:hover { background: var(--surface); border-color: var(--hair); }
@@ -75,7 +75,7 @@
   .collection-tabs { flex: 1 1 100%; }
   .collection-picker { flex: 1; min-width: 0; }
   .collections select { width: 100%; max-width: 100%; min-width: 0; }
-  .collection-actions { flex: 1; justify-content: space-between; }
+  .collection-actions { flex: 0 1 auto; justify-content: flex-start; }
   .collection-intro { font-size: .8rem; }
   .clnote { font-size: .8rem; }
 }
@@ -116,4 +116,120 @@
   #clselected, #clsave, .clmore > summary { white-space: nowrap; font-size: .85rem; }
   .clmorebody { width: min(26rem, calc(100vw - 2rem)); }
   .clstatus { font-size: .8rem; }
+}
+
+/* The catalogue and selected list have separate scroll areas. The wrapper is
+   also present outside editing, preserving the table's full-bleed scroll box. */
+.cllayout { display: flex; flex: 1 1 auto; min-width: 0; min-height: 0; margin: 0 -1rem; }
+.clcatalogue { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; min-height: 0; }
+.cllayout .tablezone { min-width: 0; margin: 0; }
+#clworkspace[hidden], #clbulkbar[hidden], #clmobiletabs[hidden], .clmemberarea [hidden] { display: none !important; }
+.clworkspace, .clmobiletabs { display: none; }
+.cl-editor main { container: clmain / inline-size; }
+.cl-editor .cllayout { display: grid; grid-template-columns: minmax(0, 57fr) minmax(20rem, 43fr); }
+.cl-editor .clworkspace { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-left: 1px solid var(--hair); background: var(--bg); }
+/* Game details overlay the catalogue while editing, leaving the working list
+   stable. Feedback remains available from the Menu without covering actions. */
+body.cl-editor.panel-open main { margin-left: 0; }
+body.cl-editor #panel { width: min(32rem, 100vw); }
+body.cl-editor #resizer, body.cl-editor .fbtab { display: none; }
+.clbulkbar { position: relative; display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; padding: .55rem .75rem; flex: none; border-bottom: 1px solid var(--hair); background: var(--surface); }
+.clbulkbar button, .clbulktools > summary, .clmobiletabs button, .clmemberscroll button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; padding: .35rem .6rem; cursor: pointer; }
+.clbulkbar button:hover, .clbulktools > summary:hover, .clmobiletabs button:hover, .clmemberscroll button:hover { border-color: var(--accent); }
+.clbulkbar button:disabled, .clmemberscroll button:disabled { opacity: .5; cursor: default; }
+.clbulkbar button[aria-pressed=true], .clmobiletabs button[aria-pressed=true] { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.clbulkbar button:focus-visible, .clbulktools > summary:focus-visible, .clmobiletabs button:focus-visible, .clmemberscroll button:focus-visible, #clmembersearch:focus-visible, .clmemberscroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.clbulktools { position: relative; }
+.clbulktools[open] > summary { border-color: var(--accent); }
+.clbulkbody { position: absolute; z-index: 25; top: calc(100% + .4rem); left: 0; width: min(21rem, calc(100vw - 2rem)); padding: .75rem; border: 1px solid var(--hair); border-radius: .4rem; background: var(--surface); box-shadow: 0 .35rem 1rem #0003; }
+.clbulkbody button { display: block; width: 100%; text-align: left; }
+.clbulkbody button + button { margin-top: .4rem; }
+.clbulkbody p { margin: .55rem 0 0; color: var(--muted); font-size: .8rem; }
+
+/* A shared editor toolbar remains above the member list on desktop and above
+   either tab on phones. Metadata controls remain visible below the main actions. */
+.cl-editor #clbar { position: relative; flex: none; padding: .65rem .75rem; border-top: 0; border-bottom: 1px solid var(--hair); background: var(--surface); }
+.cl-editor .clheading { min-width: 0; padding-right: 4.5rem; gap: .15rem .5rem; }
+.cl-editor .clname { flex: 1 1 100%; font-size: 1rem; line-height: 1.25; }
+.cl-editor .clstate { font-size: .8rem; }
+.cl-editor .clworkrow { display: block; margin-top: .55rem; }
+.cl-editor #cledit { display: flex; flex-wrap: wrap; gap: .35rem; }
+.cl-editor #clsave { margin-left: 0; }
+.cl-editor #clsave, .cl-editor #cldone { font-weight: 600; }
+.cl-editor #cldone { border-color: var(--accent); }
+.cl-editor #cldiscard, .cl-editor #clundo, .cl-editor #clredo { margin: 0; }
+.cl-editor #cldiscard { margin-left: auto; }
+.cl-editor #clsecondary { gap: .4rem; padding: 0; margin: .5rem 0 0; border: 0; }
+.cl-editor #clsecondary button { font-size: .85rem; }
+.cl-editor #cldraftnote { margin: .45rem 0 0; font-size: .78rem; }
+.cl-editor .clmore { position: absolute; top: .65rem; right: .75rem; margin: 0; }
+.cl-editor .clmore > summary { font-size: .8rem; }
+.cl-editor .clmorebody { max-width: calc(100vw - 2rem); width: min(28rem, calc(100vw - 2rem)); }
+.cl-editor .clviewactions { margin-top: .35rem; }
+.clrecovery:not(:has(> :not([hidden]))) { display: none; }
+
+.clmemberarea { flex: 1 1 auto; min-height: 0; min-width: 0; display: flex; flex-direction: column; }
+.clmembershead { flex: none; padding: .65rem .75rem; border-bottom: 1px solid var(--hair); }
+.clmembershead h2 { margin: 0 0 .4rem; font-size: 1rem; font-weight: 600; }
+.clmemberlabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#clmembersearch { display: block; width: 100%; padding: .4rem .55rem; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; }
+.clmemberscroll { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; scroll-padding: .5rem; }
+.clmembers { margin: 0; padding: 0; list-style: none; }
+.clmember { display: flex; align-items: center; gap: .7rem; padding: .65rem .75rem; border-bottom: 1px solid var(--hair); }
+.clmember > div { flex: 1 1 auto; min-width: 0; }
+.clmember strong { display: block; font-weight: 500; overflow-wrap: anywhere; }
+.clmember small { display: block; margin-top: .15rem; color: var(--muted); overflow-wrap: anywhere; }
+.clmember button { flex: none; font-size: .85rem; }
+.clmemberempty { margin: 0; padding: 1rem .75rem; color: var(--muted); overflow-wrap: anywhere; }
+#clmembersmore { display: block; margin: .75rem auto; }
+
+/* Viewing a list uses only the rows with content. Its controls sit beside the
+   title instead of reserving the editor's action rows above the catalogue. */
+body:not(.cl-editor) #clbar { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .65rem; padding: .45rem 0; }
+body:not(.cl-editor) #clbar .clheading { flex: 1 1 auto; gap: .3rem .5rem; }
+body:not(.cl-editor) #clbar .clname { flex: initial; }
+body:not(.cl-editor) #clbar .clviewactions, body:not(.cl-editor) #clbar .clworkrow { margin: 0; }
+body:not(.cl-editor) #clbar .clmore { margin: 0; }
+body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, body:not(.cl-editor) #clbar > .clrecovery { flex: 1 1 100%; margin-top: 0; }
+
+@container clmain (max-width: 54rem) {
+  /* Done returns to the normal collection navigation. While editing, devote
+     the phone header to the current task and its catalogue search. */
+  .cl-editor .collections, .cl-editor .collection-intro, .cl-editor .masthead .updated { display: none; }
+  .cl-editor.cl-mobile-list .controls { display: none; }
+  .cl-editor .cllayout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
+  .cl-editor .clworkspace { display: contents; }
+  .cl-editor #clbar { grid-column: 1; grid-row: 1; padding: .45rem .65rem; }
+  .cl-editor .clcatalogue, .cl-editor .clmemberarea { grid-column: 1; grid-row: 3; }
+  .cl-editor .clmemberarea { display: none; }
+  .cl-editor .clmobiletabs { grid-column: 1; grid-row: 2; display: flex; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); background: var(--surface); }
+  .cl-editor .clmobiletabs button { flex: 1; }
+  .cl-editor.cl-mobile-list .clcatalogue { display: none; }
+  .cl-editor.cl-mobile-list .clmemberarea { display: flex; }
+  .cl-editor .clheading { padding-right: 4.2rem; }
+  .cl-editor .clname { font-size: .95rem; }
+  .cl-editor #cledit { gap: .3rem; }
+  .cl-editor #cledit button, .cl-editor #cledit .cllink { padding: .3rem .45rem; font-size: .85rem; }
+  .cl-editor #cldiscard { margin-left: 0; }
+  .cl-editor .clmore { top: .45rem; right: .65rem; }
+  .cl-editor .clmore > summary { padding: .3rem .45rem; }
+  .cl-editor .clbulkbar { gap: .35rem; padding: .4rem .65rem; }
+  .cl-editor .clbulkbar button, .cl-editor .clbulktools > summary { padding: .3rem .45rem; font-size: .8rem; }
+  .cl-editor .clbulktools { position: static; }
+  .cl-editor .clbulkbody { left: .65rem; right: .65rem; width: auto; }
+  .cl-editor .clmembershead { padding: .5rem .65rem; }
+  .cl-editor .clmembershead h2 { font-size: .9rem; }
+  @media (max-height: 40rem) {
+    .cl-editor .clbulkbody { top: auto; bottom: calc(100% + .4rem); max-height: calc(100dvh - 2rem); overflow: auto; }
+  }
+}
+@media (pointer: coarse), (max-width: 36rem) {
+  .clbulkbar button, .clbulktools > summary, .clmobiletabs button, .clmemberscroll button { min-height: 44px; }
+  .clbulktools > summary { align-content: center; }
+  #clmembersearch { min-height: 44px; font-size: 16px; }
+  .clmember { padding: .5rem .65rem; }
+}
+@media print {
+  .cllayout, .clcatalogue { display: block; }
+  #clworkspace, #clmobiletabs, #clbulkbar { display: none !important; }
 }

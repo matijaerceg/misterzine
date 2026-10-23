@@ -1298,35 +1298,29 @@
   </div>
   <div class="clworkrow">
     <div id="cledit" class="clrow" hidden>
-      <button id="clselected" type="button" aria-pressed="false">Selected (0)</button>
       <button id="clsave" class="clprimary" type="button">Save draft</button>
+      <a id="cldone" class="cllink" href="#" hidden>Done editing</a>
+      <button id="clundo" type="button" disabled>Undo</button>
+      <button id="clredo" type="button" disabled>Redo</button>
+      <button id="cldiscard" type="button" disabled>Discard</button>
     </div>
     <details id="clmore" class="clmore">
       <summary id="clmoresummary">About this list</summary>
       <div class="clmorebody">
-        <div id="clsecondary" hidden>
-          <div class="clrow">
-            <button id="cldetailsbtn" type="button">List details</button>
-            <button id="clpublish" type="button">Sharing...</button>
-            <a id="cldone" class="cllink" href="#" hidden>Done editing</a>
-          </div>
-          <div class="clrow">
-            <button id="cladd" type="button">Add matching</button>
-            <button id="clremove" type="button">Remove matching</button>
-          </div>
-          <p id="cldraftnote" class="clnote" role="status" hidden></p>
-          <button id="clundo" type="button" hidden>Undo selection change</button>
-          <button id="cldiscard" type="button" hidden>Discard unsaved changes</button>
-        </div>
         <div id="clattribution" class="clnote"></div>
         <details id="cldescriptionfold" class="cldescriptionfold" hidden><summary>Description</summary><p id="cldescriptionview"></p></details>
         <p id="clnote" class="clnote"></p>
       </div>
     </details>
   </div>
+  <div id="clsecondary" class="clrow" hidden>
+    <button id="cldetailsbtn" type="button">List details</button>
+    <button id="clpublish" type="button">Sharing...</button>
+  </div>
+  <p id="cldraftnote" class="clnote" role="status" hidden></p>
   <p id="clstatus" class="clstatus" role="status" aria-live="polite"></p>
   <p id="clempty" class="clnote" hidden></p>
-  <div class="clrow">
+  <div class="clrow clrecovery">
     <button id="clmissing" type="button" hidden></button>
     <button id="clretry" type="button" hidden>Try again</button>
     <a id="clsignin" class="cllink" href="../account/" target="_blank" rel="noopener" hidden>Sign in in a new tab</a>
@@ -1451,6 +1445,23 @@
   </div>
 </dialog>
 </div>
+<div id="cllayout" class="cllayout">
+<div id="clmobiletabs" class="clmobiletabs" role="group" aria-label="List editor panes" hidden>
+  <button id="clshowcatalogue" type="button" aria-pressed="true" aria-controls="clcatalogue">Find games</button>
+  <button id="clshowlist" type="button" aria-pressed="false" aria-controls="clworkspace">List entries</button>
+</div>
+<section id="clcatalogue" class="clcatalogue" aria-label="Game catalogue">
+<div id="clbulkbar" class="clbulkbar" aria-label="Catalogue selection tools" hidden>
+  <button id="clselected" type="button" aria-pressed="false">Show only selected</button>
+  <details id="clbulktools" class="clbulktools">
+    <summary>Bulk actions</summary>
+    <div class="clbulkbody">
+      <button id="cladd" type="button">Add matching</button>
+      <button id="clremove" type="button">Remove matching</button>
+      <p>Changes stay in your draft until you save.</p>
+    </div>
+  </details>
+</div>
 <div class="tablezone">
 <div class="jumps" data-fb-clear><!-- data-fb-clear: the feedback tab (feedback.js) stays below this stack -->
 <button id="totop" type="button" disabled>↑ Scroll to top</button>
@@ -1465,6 +1476,22 @@
   <tbody id="rows"></tbody>
 </table>
 </div>
+</div>
+</section>
+<aside id="clworkspace" class="clworkspace" aria-label="List editor" hidden>
+  <div class="clmemberarea">
+    <div class="clmembershead">
+      <h2 id="clmembercount">List entries</h2>
+      <label for="clmembersearch" class="clmemberlabel">Find in this list</label>
+      <input id="clmembersearch" type="search" placeholder="Find in this list" autocomplete="off">
+    </div>
+    <div class="clmemberscroll" tabindex="0" role="region" aria-label="Selected list entries">
+      <ul id="clmembers" class="clmembers" aria-label="List entries"></ul>
+      <p id="clmemberempty" class="clmemberempty" hidden>No entries selected yet. Add games from the catalogue.</p>
+      <button id="clmembersmore" type="button" hidden>Show more entries</button>
+    </div>
+  </div>
+</aside>
 </div>
 </main>
 <aside id="panel" hidden></aside>
@@ -3794,6 +3821,7 @@ function syncColsReset() {
 // site default) if shown, then debut date, else the always-on title column.
 // Also the fallback when the sorted column is hidden (sortFallback).
 function defaultSort() {
+  if (MZLists.isListView()) return ['title', 1];
   const on = k => activeColumns().some(c => c.k === k);
   return on('updated') ? ['updated', -1] : on('date') ? ['date', -1] : ['title', 1];
 }
@@ -4185,7 +4213,9 @@ function viewParams() {
   if (yearFrom != null || yearTo != null)
     out.push(['y', yearFrom != null && yearFrom === yearTo ? '' + yearFrom
       : (yearFrom != null ? yearFrom : '') + '-' + (yearTo != null ? yearTo : '')]);
-  if (sortKey && !(sortKey === 'updated' && sortDir === -1))
+  // URLs use a canonical default, independent of this browser's column choices.
+  const [defaultKey, defaultDirection] = MZLists.isListView() ? ['title', 1] : ['updated', -1];
+  if (sortKey && !(sortKey === defaultKey && sortDir === defaultDirection))
     out.push(['s', (sortDir < 0 ? '-' : '') + sortKey]);
   if (favOnly) out.push(['f', '1']);
   return out;
@@ -4223,6 +4253,7 @@ function adoptPick(raw, set, keys, slug, menu, attr) {
 // from the data). A ?fav= list has its own reader (adoptFavParam).
 function adoptViewParams() {
   const p = new URLSearchParams(location.search);
+  if (MZLists.isListView()) { sortKey = 'title'; sortDir = 1; buildHeader(); }
   const q = p.get('q');
   if (q) document.getElementById('q').value = q;
   adoptPick(p.get('t'), enabledTypes, TYPES, typeSlug, typeMenu, 'data-t');
@@ -5683,6 +5714,8 @@ document.addEventListener('keydown', e => {
   // inert page would misfire anyway)
   if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open], dialog.cldialog[open]')) return;  // modal fields own their keyboard input
   if (e.key === 'Escape') {
+    const bulkTools = document.getElementById('clbulktools');
+    if (bulkTools.open) { e.preventDefault(); bulkTools.open = false; bulkTools.querySelector('summary').focus(); return; }
     if (collectionMore.open) { e.preventDefault(); collectionMore.open = false; document.getElementById('clmoresummary').focus(); return; }
     if (closePop() || closeHoverPop()) return;  // an open popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it
@@ -5830,7 +5863,7 @@ resizer.addEventListener('pointercancel', endResize);
 // of a laptop window and leaves the controls row ~650px, folding the filters
 // away before anyone has picked a title. Narrower screens get the panel when a
 // row is clicked and never auto-open it later.
-if (matchMedia('(min-aspect-ratio: 3/5)').matches && matchMedia('(min-width: 1200px)').matches) {
+if (!MZLists.isEditing() && matchMedia('(min-aspect-ratio: 3/5)').matches && matchMedia('(min-width: 1200px)').matches) {
   document.body.classList.add('no-anim');
   openPlaceholder();
   requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('no-anim')));
@@ -6524,6 +6557,7 @@ function boot() {
     stripViewParams();  // one-shot: the view is applied, the address bar goes back to plain
     MZLists.start({
       api: () => API, token: () => TOKEN, rows: () => siteSourceRows(RAW),
+      catalogue: () => RAW,
       visible: () => view.flatMap(d => d.grp ? d.members : [d]),
       source: s => SRC_NAMES[s] || s, isFavorite: isFav,
       original: key => RAW.find(d => d.k === key),

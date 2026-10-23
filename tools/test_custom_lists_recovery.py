@@ -17,8 +17,13 @@ import custom_lists_preview as preview
 
 
 def more(page):
-    if not page.locator("#clmore").evaluate("element => element.open"):
+    if not page.locator("#cldetailsbtn").is_visible() and not page.locator("#clmore").evaluate("element => element.open"):
         page.locator("#clmoresummary").click()
+
+
+def bulk(page):
+    if not page.locator("#clbulktools").evaluate("element => element.open"):
+        page.locator("#clbulktools > summary").click()
 
 
 def change_title(page, value):
@@ -67,7 +72,7 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         page.reload()
         expect(page.locator("#clname")).to_have_text(pending)
         expect(page.locator("#clstate")).to_contain_text("Unsaved")
-        expect(page.locator("#clselected")).to_have_text("Selected (1)")
+        expect(page.locator("#clmembercount")).to_have_text("In this list (1)")
         assert read() == saved, "Reload must not auto-save recovered content."
         page.locator("#clsave").click()
         expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
@@ -187,11 +192,12 @@ def mobile_tests(browser, base, api, token, prefix, screenshots):
         page.goto(base + "/releases/?editList=" + list_id)
         expect(page.locator("#clname")).to_have_text(fixture["title"])
         page.evaluate("document.fonts.ready")
-        expect(page.locator("#cldetailsbtn")).to_be_hidden()
+        expect(page.locator("#cldetailsbtn")).to_be_visible()
         expect(page.locator("#clsave")).to_be_visible()
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         header = page.locator("#hrow").bounding_box()
-        assert header["y"] + header["height"] <= 524, "Phone editing must leave at least 320px for game rows."
+        capture("touch-editor-mobile-initial.png")
+        assert header["y"] + header["height"] <= 524, "Phone editing must leave at least 320px for game rows: " + json.dumps(header)
         page.locator("#q").fill("1944")
         expect(page.locator(".clpick").first).to_have_attribute("aria-label", re.compile("1944"))
         chosen = page.locator(".clpick").first.get_attribute("data-list-key")
@@ -203,12 +209,12 @@ def mobile_tests(browser, base, api, token, prefix, screenshots):
         # exactly the entry and never open the independent game panel.
         target.tap(position={"x": 3, "y": 3})
         expect(checkbox).to_be_checked()
-        expect(page.locator("#clselected")).to_have_text("Selected (1)")
+        expect(page.locator("#clmembercount")).to_have_text("In this list (1)")
         expect(page.locator("#panel")).to_be_hidden()
         assert page.evaluate("document.activeElement.classList.contains('clpick')")
         checkbox.locator("xpath=ancestor::td").tap(position={"x": 100, "y": 15})
         expect(page.locator("#panel")).to_be_visible()
-        expect(page.locator("#clselected")).to_have_text("Selected (1)")
+        expect(page.locator("#clmembercount")).to_have_text("In this list (1)")
         page.locator("#panel .close").tap()
         expect(page.locator("#panel")).to_be_hidden()
         capture("touch-editor-mobile.png")
@@ -217,23 +223,26 @@ def mobile_tests(browser, base, api, token, prefix, screenshots):
         page.locator("#q").fill("194")
         expect(page.locator(".clpick").first).to_have_attribute("aria-label", re.compile("1942"))
         more(page)
-        expect(page.locator("#cladd")).to_have_text(re.compile(r"Add matching \(\d+\)"))
-        count = int(re.search(r"\((\d+)\)", page.locator("#cladd").inner_text()).group(1))
-        assert count > 1
+        bulk(page)
+        expect(page.locator("#cladd")).to_have_text(re.compile(r"Add \d+ matching"))
+        count = int(re.search(r"\d+", page.locator("#cladd").inner_text()).group(0))
+        assert count > 0
         page.locator("#cladd").tap()
-        expect(page.locator("#clselected")).to_have_text("Selected (" + str(count) + ")")
+        expect(page.locator("#clmembercount")).to_have_text("In this list (" + str(count + 1) + ")")
         page.locator("#clundo").tap()
-        expect(page.locator("#clselected")).to_have_text("Selected (1)")
+        expect(page.locator("#clmembercount")).to_have_text("In this list (1)")
         expect(checkbox).to_be_checked()
+        bulk(page)
         page.locator("#clremove").tap()
-        expect(page.locator("#clselected")).to_have_text("Selected (0)")
+        expect(page.locator("#clmembercount")).to_have_text("In this list (0)")
         page.locator("#clundo").tap()
-        expect(page.locator("#clselected")).to_have_text("Selected (1)")
+        expect(page.locator("#clmembercount")).to_have_text("In this list (1)")
         expect(checkbox).to_be_checked()
         assert context.request.get(api + "/lists/" + list_id, headers=auth).json()["keys"] == []
         print("PASS filter-aware bulk counts and one-step add/remove undo restore the exact prior selection without saving")
 
-        page.locator("#clmoresummary").tap()
+        if page.locator("#clmore").evaluate("element => element.open"):
+            page.locator("#clmoresummary").tap()
         page.locator("#clsave").tap()
         expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
         page.set_viewport_size({"width": 390, "height": 460})
@@ -248,6 +257,9 @@ def mobile_tests(browser, base, api, token, prefix, screenshots):
         reachable("#clconfirm", "#clconfirmyes")
         capture("visibility-short-viewport.png")
         page.locator("#clconfirm [data-clclose]").tap()
+        # Mobile editing dedicates the header to this list. Global collection
+        # creation is available back in the catalogue view.
+        page.goto(base + "/releases/?collection=all")
         page.locator("#collection-create").tap()
         page.locator("#clnewtitle").fill("Keyboard viewport example")
         reachable("#clcreate", "#clcreateyes")

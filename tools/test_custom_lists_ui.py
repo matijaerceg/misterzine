@@ -287,7 +287,7 @@ def main():
             expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
 
         def set_visibility(visibility, name=None):
-            if not page.locator("#clmore").evaluate("element => element.open"):
+            if not page.locator("#clpublish").is_visible() and not page.locator("#clmore").evaluate("element => element.open"):
                 page.locator("#clmoresummary").click()
             page.locator("#clpublish").click()
             expect(page.locator("#clconfirm")).to_be_visible()
@@ -325,7 +325,7 @@ def main():
             expect(page.locator("#clname")).to_have_text(title)
             assert anonymous.request.get(api + "/public/lists/" + list_id).status == 404
             keys = [select_game("1942"), select_game("1943")]
-            expect(page.locator("#clselected")).to_have_text("Selected (2)")
+            expect(page.locator("#clmembercount")).to_have_text("In this list (2)")
             page.locator("#clsave").click()
             saved()
             assert get_list()["keys"] == keys

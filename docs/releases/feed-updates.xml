@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 22 Oct 2026 16:49:57 +0000</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 22:55:46 +0000</lastBuildDate>
+<item>
+<title>[Updated] Model2A (Arcade core, 11 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#doaab</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2A_20261022.rbf:2026-10-22T22:55:46+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 22:55:46 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261022.rbf:2026-10-22T22:55:46+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 22:55:46 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Maniac Square (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#maniacsq</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/baddudes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1988 / Data East USA&lt;/p&gt;&lt;p&gt;Core: jtninja&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/ninja"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Boulder Dash - Boulder Dash Part 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#bouldash</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Boulder Dash - Boulder Dash Part 2 (World).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bouldash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1990 / Data East Corporation (licensed from First Star)&lt;/p&gt;&lt;p&gt;Core: jtslyspy&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/slyspy"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Cyber Police ESWAT (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#eswat</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Cyber Police ESWAT (set 4, World) (FD1094 317-0130).mra:2026-10-12T16:36:53+00:00</guid>
-<pubDate>Mon, 12 Oct 2026 16:36:53 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eswat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-12 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

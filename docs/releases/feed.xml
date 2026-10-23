@@ -6,7 +6,52 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 22 Oct 2026 16:49:57 +0000</lastBuildDate>
+<lastBuildDate>Thu, 22 Oct 2026 22:55:46 +0000</lastBuildDate>
+<item>
+<title>[New] Fire Trap (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#firetrap</link>
+<guid isPermaLink="false">ongo:_Arcade/Fire Trap (US, rev A).mra:2026-10-22T22:55:46+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 22:55:46 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/firetrap.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Wood Place (Data East USA license)&lt;/p&gt;&lt;p&gt;Core: FireTrap&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Hunchback (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hunchbak</link>
+<guid isPermaLink="false">ongo:_Arcade/Hunchback (set 1).mra:2026-10-22T22:55:46+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 22:55:46 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hunchbak.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: Hunchback&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Millipede (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#milliped</link>
+<guid isPermaLink="false">ongo:_Arcade/Millipede.mra:2026-10-22T22:55:46+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 22:55:46 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/milliped.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1982 / Atari&lt;/p&gt;&lt;p&gt;Core: Millipede&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2A (Arcade core, 11 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#doaab</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2A_20261022.rbf:2026-10-22T22:55:46+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 22:55:46 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261022.rbf:2026-10-22T22:55:46+00:00</guid>
+<pubDate>Thu, 22 Oct 2026 22:55:46 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Maniac Square (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#maniacsq</link>
@@ -861,51 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_pm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] RoadWars (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ar_rdwr</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_ArcadiaSystems/RoadWars (Arcadia, V 2.3).mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_rdwr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1988 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Sidewinder (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ar_sdwr</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_ArcadiaSystems/Sidewinder (Arcadia, set 1, V 2.1).mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_sdwr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1988 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Space Ranger (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ar_sprg</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_ArcadiaSystems/Space Ranger (Arcadia, V 2.0).mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_sprg.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] SportTime Bowling (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ar_bowl</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_ArcadiaSystems/SportTime Bowling (Arcadia, V 2.1).mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_bowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] SportTime Table Hockey (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ar_airh</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_ArcadiaSystems/SportTime Table Hockey (Arcadia, set 1, V 2.1).mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_airh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

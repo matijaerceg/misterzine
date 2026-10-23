@@ -56,10 +56,18 @@ def main():
     items = []
     for key, source in sources.items():
         dest = stage / (key + '.png')
-        w, h = normalize(source, dest)
+        if dest.exists() and dest.stat().st_mtime >= source.stat().st_mtime:
+            with Image.open(dest) as image:
+                image.load()
+                w, h = image.size
+            if max(w, h) > 640 or dest.stat().st_size > 4 << 20:
+                raise ValueError(f'Invalid cached flyer: {dest.name}')
+        else:
+            w, h = normalize(source, dest)
         assets[key] = {'width': w, 'height': h, 'bytes': dest.stat().st_size,
                        'sha256': hashlib.sha256(dest.read_bytes()).hexdigest(),
-                       'source_file': source.relative_to(args.directory).as_posix()}
+                       'source_file': source.relative_to(args.directory).as_posix(),
+                       'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest()}
         items.append((f'flyer/{key}.png', str(dest)))
     existing = seed_r2.list_keys(s3, 'flyer/')
     print(seed_r2.upload_many(s3, items, args.source_url, 6, False, existing), flush=True)

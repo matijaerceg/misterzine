@@ -22,5 +22,10 @@ added branding. The machine-readable `data/flyers.json` in the source repository
 records original filenames, source and hosted SHA256 hashes, hosted dimensions,
 and source URL. An exact setname takes precedence over family artwork.
 
+The initial import covers 1,374 of 2,424 arcade catalogue rows: 1,314 exact
+setname matches and 60 family fallbacks. Rows include regional versions and
+different core implementations, so this is not a count of distinct games.
+The remaining 1,050 rows have no matching flyer in this collection.
+
 Flyers appear in website detail galleries and on supported device builds;
 website list cards retain screenshots. Games without a matching flyer omit it.

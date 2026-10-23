@@ -1,0 +1,6314 @@
+{
+  "collection_images": 5123,
+  "selected_images": 1195,
+  "outside_catalogue": 3928,
+  "coverage": {
+    "exact": 1314,
+    "family": 60,
+    "missing": 1050
+  },
+  "missing_rows": [
+    {
+      "title": "Jin",
+      "sn": "jin",
+      "family": "jin",
+      "key": "jin"
+    },
+    {
+      "title": "Phoenix",
+      "sn": "phoenix",
+      "family": "phoenix",
+      "key": "phoenix"
+    },
+    {
+      "title": "Super Xevious",
+      "sn": "sxevious",
+      "family": "sxevious",
+      "key": "sxevious"
+    },
+    {
+      "title": "Bagman",
+      "sn": "bagman",
+      "family": "bagman",
+      "key": "bagman"
+    },
+    {
+      "title": "Botanic",
+      "sn": "botanic",
+      "family": "botanic",
+      "key": "botanic"
+    },
+    {
+      "title": "Crazy Kong",
+      "sn": "ckong",
+      "family": "ckong",
+      "key": "ckong"
+    },
+    {
+      "title": "Crazy Kong Part II",
+      "sn": "ckongpt2",
+      "family": "ckongpt2",
+      "key": "ckongpt2"
+    },
+    {
+      "title": "Pickin'",
+      "sn": "pickin",
+      "family": "pickin",
+      "key": "pickin"
+    },
+    {
+      "title": "Squash",
+      "sn": "squaitsa",
+      "family": "squaitsa",
+      "key": "squaitsa"
+    },
+    {
+      "title": "Computer Space",
+      "sn": null,
+      "family": null,
+      "key": "computer-space"
+    },
+    {
+      "title": "Ali Baba and 40 Thieves",
+      "sn": "alibaba",
+      "family": "alibaba",
+      "key": "alibaba"
+    },
+    {
+      "title": "Birdiy",
+      "sn": "birdiy",
+      "family": "birdiy",
+      "key": "birdiy"
+    },
+    {
+      "title": "Cavelon",
+      "sn": "cavelon",
+      "family": "cavelon",
+      "key": "cavelon"
+    },
+    {
+      "title": "Dream Shopper",
+      "sn": "dremshpr",
+      "family": "dremshpr",
+      "key": "dremshpr"
+    },
+    {
+      "title": "Eeekk!",
+      "sn": "eeekkp",
+      "family": "eeekk",
+      "key": "eeekkp"
+    },
+    {
+      "title": "Eggor",
+      "sn": "eggor",
+      "family": "eggor",
+      "key": "eggor"
+    },
+    {
+      "title": "Lizard Wizard",
+      "sn": "lizwiz",
+      "family": "lizwiz",
+      "key": "lizwiz"
+    },
+    {
+      "title": "Mr. TNT",
+      "sn": "mrtnt",
+      "family": "mrtnt",
+      "key": "mrtnt"
+    },
+    {
+      "title": "Number Crash",
+      "sn": "numcrash",
+      "family": "numcrash",
+      "key": "numcrash"
+    },
+    {
+      "title": "Pac-Man Club",
+      "sn": "clubpacm",
+      "family": "clubpacm",
+      "key": "clubpacm"
+    },
+    {
+      "title": "Pac-Manic Miner",
+      "sn": null,
+      "family": null,
+      "key": "pac-manic-miner"
+    },
+    {
+      "title": "Speed Coin",
+      "sn": "spdcoin",
+      "family": "spdcoin",
+      "key": "spdcoin"
+    },
+    {
+      "title": "Super Cobra",
+      "sn": "scobra",
+      "family": "scobra",
+      "key": "scobra"
+    },
+    {
+      "title": "Super Glob",
+      "sn": "sprglbpg",
+      "family": "suprglob",
+      "key": "sprglbpg"
+    },
+    {
+      "title": "The End",
+      "sn": "theend",
+      "family": "theend",
+      "key": "theend"
+    },
+    {
+      "title": "Woodpecker",
+      "sn": "woodpeck",
+      "family": "woodpeck",
+      "key": "woodpeck"
+    },
+    {
+      "title": "Dorodon",
+      "sn": "dorodon",
+      "family": "dorodon",
+      "key": "dorodon"
+    },
+    {
+      "title": "Snap Jack",
+      "sn": "snapjack",
+      "family": "snapjack",
+      "key": "snapjack"
+    },
+    {
+      "title": "Azurian Attack",
+      "sn": "azurian",
+      "family": "azurian",
+      "key": "azurian"
+    },
+    {
+      "title": "Catacomb",
+      "sn": "catacomb",
+      "family": "catacomb",
+      "key": "catacomb"
+    },
+    {
+      "title": "Clean Sweep",
+      "sn": "cleansweept",
+      "family": null,
+      "key": "cleansweept"
+    },
+    {
+      "title": "Devil Fish",
+      "sn": "devilfsg",
+      "family": null,
+      "key": "devilfsg"
+    },
+    {
+      "title": "Mr. Do Nightmare",
+      "sn": "mrdonight",
+      "family": null,
+      "key": "mrdonight"
+    },
+    {
+      "title": "Orbitron",
+      "sn": "orbitron",
+      "family": "orbitron",
+      "key": "orbitron"
+    },
+    {
+      "title": "Pisces",
+      "sn": "pisces",
+      "family": "pisces",
+      "key": "pisces"
+    },
+    {
+      "title": "Victory",
+      "sn": "victorycb",
+      "family": "victoryc",
+      "key": "victorycb"
+    },
+    {
+      "title": "War of the Bugs",
+      "sn": "warofbug",
+      "family": "warofbug",
+      "key": "warofbug"
+    },
+    {
+      "title": "Burnin' Rubber",
+      "sn": "brubber",
+      "family": "brubber",
+      "key": "brubber"
+    },
+    {
+      "title": "Radar Scope",
+      "sn": "radarscp",
+      "family": "radarscp",
+      "key": "radarscp"
+    },
+    {
+      "title": "Alien Arena",
+      "sn": "alienaru",
+      "family": "alienar",
+      "key": "alienaru"
+    },
+    {
+      "title": "Zig Zag",
+      "sn": "zigzagb",
+      "family": "zigzagb",
+      "key": "zigzagb"
+    },
+    {
+      "title": "Shot Rider",
+      "sn": "shtrider",
+      "family": "shtrider",
+      "key": "shtrider"
+    },
+    {
+      "title": "Back Fire",
+      "sn": "backfirt",
+      "family": "backfirt",
+      "key": "backfirt"
+    },
+    {
+      "title": "Gemini Wing",
+      "sn": "gemini",
+      "family": "gemini",
+      "key": "gemini"
+    },
+    {
+      "title": "River Patrol",
+      "sn": "rpatroln",
+      "family": "rpatrol",
+      "key": "rpatroln"
+    },
+    {
+      "title": "Silver Land",
+      "sn": "silvland",
+      "family": "rpatrol",
+      "key": "silvland"
+    },
+    {
+      "title": "1943 Kai: Midway Kaisen",
+      "sn": "1943kai",
+      "family": "1943kai",
+      "key": "1943kai"
+    },
+    {
+      "title": "1943: The Battle of Midway Mark II",
+      "sn": "1943mii",
+      "family": "1943mii",
+      "key": "1943mii"
+    },
+    {
+      "title": "Mr. Goemon",
+      "sn": "mrgoemon",
+      "family": "mrgoemon",
+      "key": "mrgoemon"
+    },
+    {
+      "title": "4-D Warriors",
+      "sn": "4dwarrio",
+      "family": "4dwarrio",
+      "key": "4dwarrio"
+    },
+    {
+      "title": "Block Gal",
+      "sn": "blockgal",
+      "family": "blockgal",
+      "key": "blockgal"
+    },
+    {
+      "title": "I'm Sorry",
+      "sn": "imsorry",
+      "family": "imsorry",
+      "key": "imsorry"
+    },
+    {
+      "title": "Pitfall II",
+      "sn": "pitfall2",
+      "family": "pitfall2",
+      "key": "pitfall2"
+    },
+    {
+      "title": "Rafflesia",
+      "sn": "raflesia",
+      "family": "raflesia",
+      "key": "raflesia"
+    },
+    {
+      "title": "Gulun.Pa!",
+      "sn": "gulunpa",
+      "family": "gulunpa",
+      "key": "gulunpa"
+    },
+    {
+      "title": "Magical Pumpkin: Puroland de Daibouken",
+      "sn": "mpumpkin",
+      "family": "mpumpkin",
+      "key": "mpumpkin"
+    },
+    {
+      "title": "Mega Man: The Power Battle",
+      "sn": "megaman",
+      "family": "megaman",
+      "key": "megaman"
+    },
+    {
+      "title": "Mega Twins",
+      "sn": "mtwins",
+      "family": "mtwins",
+      "key": "mtwins"
+    },
+    {
+      "title": "Pang! 3",
+      "sn": "pang3",
+      "family": "pang3",
+      "key": "pang3"
+    },
+    {
+      "title": "Pnickies",
+      "sn": "pnickj",
+      "family": "pnickj",
+      "key": "pnickj"
+    },
+    {
+      "title": "Pokonyan! Balloon",
+      "sn": "pokonyan",
+      "family": "pokonyan",
+      "key": "pokonyan"
+    },
+    {
+      "title": "Quiz & Dragons: Capcom Quiz Game",
+      "sn": "qad",
+      "family": "qad",
+      "key": "qad"
+    },
+    {
+      "title": "Quiz Tonosama no Yabou 2: Zenkoku-ban",
+      "sn": "qtono2j",
+      "family": "qtono2j",
+      "key": "qtono2j"
+    },
+    {
+      "title": "Street Fighter II': Hyper Fighting",
+      "sn": "sf2hf",
+      "family": "sf2hf",
+      "key": "sf2hf"
+    },
+    {
+      "title": "Street Fighter Zero",
+      "sn": "sfzch",
+      "family": null,
+      "key": "sfzch"
+    },
+    {
+      "title": "Tenchi wo Kurau II Sekiheki no Tatakai",
+      "sn": "wofch",
+      "family": null,
+      "key": "wofch"
+    },
+    {
+      "title": "Willow",
+      "sn": "willow",
+      "family": "willow",
+      "key": "willow"
+    },
+    {
+      "title": "Star Guards",
+      "sn": "stargrds",
+      "family": "stargrds",
+      "key": "stargrds"
+    },
+    {
+      "title": "Discs of Tron",
+      "sn": "dotron",
+      "family": "dotron",
+      "key": "dotron"
+    },
+    {
+      "title": "Crater Raider",
+      "sn": "crater",
+      "family": "crater",
+      "key": "crater"
+    },
+    {
+      "title": "Turbo Tag",
+      "sn": "turbotag",
+      "family": "turbotag",
+      "key": "turbotag"
+    },
+    {
+      "title": "Black Widow",
+      "sn": "bwidow",
+      "family": "bwidow",
+      "key": "bwidow"
+    },
+    {
+      "title": "Horizon",
+      "sn": "horizon",
+      "family": "horizon",
+      "key": "horizon"
+    },
+    {
+      "title": "Youjyuden",
+      "sn": "youjyudn",
+      "family": "youjyudn",
+      "key": "youjyudn"
+    },
+    {
+      "title": "DonPachi",
+      "sn": "donpachi",
+      "family": "donpachi",
+      "key": "donpachi"
+    },
+    {
+      "title": "Fever SOS",
+      "sn": "feversos",
+      "family": "feversos",
+      "key": "feversos"
+    },
+    {
+      "title": "Gaia Crusaders",
+      "sn": "gaia",
+      "family": "gaia",
+      "key": "gaia"
+    },
+    {
+      "title": "Gogetsuji Legends",
+      "sn": "plegends",
+      "family": "plegends",
+      "key": "plegends"
+    },
+    {
+      "title": "Mario Bros. (US, Rev G)",
+      "sn": "mario",
+      "family": "mario",
+      "key": "mario"
+    },
+    {
+      "title": "Power Instinct 2",
+      "sn": "pwrinst2",
+      "family": "pwrinst2",
+      "key": "pwrinst2"
+    },
+    {
+      "title": "Thunder Heroes",
+      "sn": "theroes",
+      "family": "theroes",
+      "key": "theroes"
+    },
+    {
+      "title": "Avengers",
+      "sn": "avengers",
+      "family": "avengers",
+      "key": "avengers"
+    },
+    {
+      "title": "Attack Force",
+      "sn": "attackfc",
+      "family": "attackfc",
+      "key": "attackfc"
+    },
+    {
+      "title": "Cosmo",
+      "sn": "cosmo",
+      "family": "cosmo",
+      "key": "cosmo"
+    },
+    {
+      "title": "Polaris",
+      "sn": "polaris",
+      "family": "polaris",
+      "key": "polaris"
+    },
+    {
+      "title": "Vortex",
+      "sn": "vortex",
+      "family": "vortex",
+      "key": "vortex"
+    },
+    {
+      "title": "1944: The Loop Master",
+      "sn": "1944",
+      "family": "1944",
+      "key": "1944"
+    },
+    {
+      "title": "19XX: The War Against Destiny",
+      "sn": "19xx",
+      "family": "19xx",
+      "key": "19xx"
+    },
+    {
+      "title": "Hyper Street Fighter II: The Anniversary Edition",
+      "sn": "hsf2",
+      "family": "hsf2",
+      "key": "hsf2"
+    },
+    {
+      "title": "Janpai Puzzle Choukou",
+      "sn": "choko",
+      "family": "choko",
+      "key": "choko"
+    },
+    {
+      "title": "Jyangokushi: Haoh no Saihai",
+      "sn": "jyangoku",
+      "family": "jyangoku",
+      "key": "jyangoku"
+    },
+    {
+      "title": "Mega Man 2: The Power Fighters",
+      "sn": "megaman2",
+      "family": "megaman2",
+      "key": "megaman2"
+    },
+    {
+      "title": "Progear",
+      "sn": "progear",
+      "family": "progear",
+      "key": "progear"
+    },
+    {
+      "title": "Ring of Destruction: Slammasters II",
+      "sn": "ringdest",
+      "family": "ringdest",
+      "key": "ringdest"
+    },
+    {
+      "title": "Super Puzzle Fighter II Turbo",
+      "sn": "spf2t",
+      "family": "spf2t",
+      "key": "spf2t"
+    },
+    {
+      "title": "Super Street Fighter II: The New Challengers",
+      "sn": "ssf2",
+      "family": "ssf2",
+      "key": "ssf2"
+    },
+    {
+      "title": "X-Men: Children of the Atom",
+      "sn": "xmcota",
+      "family": "xmcota",
+      "key": "xmcota"
+    },
+    {
+      "title": "Space Race",
+      "sn": "spacerace",
+      "family": null,
+      "key": "spacerace"
+    },
+    {
+      "title": "Poly-Play",
+      "sn": "polyplay",
+      "family": "polyplay",
+      "key": "polyplay"
+    },
+    {
+      "title": "Poly-Play 2",
+      "sn": "polyplay2",
+      "family": "polyplay2",
+      "key": "polyplay2"
+    },
+    {
+      "title": "U.S. Championship V'ball",
+      "sn": "vball",
+      "family": "vball",
+      "key": "vball"
+    },
+    {
+      "title": "Billiard",
+      "sn": "bilyard",
+      "family": "bilyard",
+      "key": "bilyard"
+    },
+    {
+      "title": "Gorodki",
+      "sn": "gorodki",
+      "family": "gorodki",
+      "key": "gorodki"
+    },
+    {
+      "title": "Konek-Gorbunok",
+      "sn": "konek",
+      "family": "konek",
+      "key": "konek"
+    },
+    {
+      "title": "Kot-Rybolov",
+      "sn": "kot",
+      "family": "kot",
+      "key": "kot"
+    },
+    {
+      "title": "S.O.S.",
+      "sn": "sosterm",
+      "family": "sosterm",
+      "key": "sosterm"
+    },
+    {
+      "title": "Snezhnaja Koroleva",
+      "sn": "koroleva",
+      "family": "koroleva",
+      "key": "koroleva"
+    },
+    {
+      "title": "Air Duel",
+      "sn": "airduelm72",
+      "family": "airduel",
+      "key": "airduelm72"
+    },
+    {
+      "title": "Bomber Man World",
+      "sn": "bbmanw",
+      "family": "bbmanw",
+      "key": "bbmanw"
+    },
+    {
+      "title": "Gun Force II",
+      "sn": "gunforc2",
+      "family": "gunforc2",
+      "key": "gunforc2"
+    },
+    {
+      "title": "Image Fight",
+      "sn": "imgfight",
+      "family": "imgfight",
+      "key": "imgfight"
+    },
+    {
+      "title": "Legend of Hero Tonma",
+      "sn": "lohtj",
+      "family": "loht",
+      "key": "lohtj"
+    },
+    {
+      "title": "Major Title 2",
+      "sn": "majtitl2",
+      "family": "majtitl2",
+      "key": "majtitl2"
+    },
+    {
+      "title": "Mystic Riders",
+      "sn": "mysticri",
+      "family": "mysticri",
+      "key": "mysticri"
+    },
+    {
+      "title": "Ninja Baseball Bat Man",
+      "sn": "nbbatman",
+      "family": "nbbatman",
+      "key": "nbbatman"
+    },
+    {
+      "title": "Ninja Spirit",
+      "sn": "nspiritj",
+      "family": "nspirit",
+      "key": "nspiritj"
+    },
+    {
+      "title": "R-Type Leo",
+      "sn": "rtypeleo",
+      "family": "rtypeleo",
+      "key": "rtypeleo"
+    },
+    {
+      "title": "Dottori Kun",
+      "sn": "dotrikun",
+      "family": "dotrikun",
+      "key": "dotrikun"
+    },
+    {
+      "title": "Devil Zone",
+      "sn": "devzone",
+      "family": "devzone",
+      "key": "devzone"
+    },
+    {
+      "title": "Jackal",
+      "sn": "jackal",
+      "family": "jackal",
+      "key": "jackal"
+    },
+    {
+      "title": "Megumi Rescue",
+      "sn": "megrescu",
+      "family": "megrescu",
+      "key": "megrescu"
+    },
+    {
+      "title": "Riddle of Pythagoras",
+      "sn": "ridleofp",
+      "family": "ridleofp",
+      "key": "ridleofp"
+    },
+    {
+      "title": "Tetris (Sega System E)",
+      "sn": "tetrisse",
+      "family": "tetrisse",
+      "key": "tetrisse"
+    },
+    {
+      "title": "Transformer",
+      "sn": "transfrm",
+      "family": "transfrm",
+      "key": "transfrm"
+    },
+    {
+      "title": "Scooter Shooter",
+      "sn": "scotrsht",
+      "family": "scotrsht",
+      "key": "scotrsht"
+    },
+    {
+      "title": "Fast Lane",
+      "sn": "fastlane",
+      "family": "fastlane",
+      "key": "fastlane"
+    },
+    {
+      "title": "MX5000",
+      "sn": "mx5000",
+      "family": "mx5000",
+      "key": "mx5000"
+    },
+    {
+      "title": "Super Basketball",
+      "sn": "sbasketb",
+      "family": "sbasketb",
+      "key": "sbasketb"
+    },
+    {
+      "title": "Trick Trap",
+      "sn": "tricktrp",
+      "family": "tricktrp",
+      "key": "tricktrp"
+    },
+    {
+      "title": "Ace Attacker",
+      "sn": "aceattaca",
+      "family": "aceattac",
+      "key": "aceattaca"
+    },
+    {
+      "title": "Aurail",
+      "sn": "aurail",
+      "family": "aurail",
+      "key": "aurail"
+    },
+    {
+      "title": "Cotton",
+      "sn": "cotton",
+      "family": "cotton",
+      "key": "cotton"
+    },
+    {
+      "title": "Dunk Shot",
+      "sn": "dunkshot",
+      "family": "dunkshot",
+      "key": "dunkshot"
+    },
+    {
+      "title": "Dynamite Dux",
+      "sn": "ddux",
+      "family": "ddux",
+      "key": "ddux"
+    },
+    {
+      "title": "Fantasy Zone II - The Tears of Opa-Opa (System 16C version)",
+      "sn": "fantzn2x",
+      "family": "fantzn2x",
+      "key": "fantzn2x"
+    },
+    {
+      "title": "Major League",
+      "sn": "mjleague",
+      "family": "mjleague",
+      "key": "mjleague"
+    },
+    {
+      "title": "Riot City",
+      "sn": "riotcity",
+      "family": "riotcity",
+      "key": "riotcity"
+    },
+    {
+      "title": "RyuKyu",
+      "sn": "ryukyu",
+      "family": "ryukyu",
+      "key": "ryukyu"
+    },
+    {
+      "title": "SDI - Strategic Defense Initiative",
+      "sn": "sdi",
+      "family": "sdi",
+      "key": "sdi"
+    },
+    {
+      "title": "Toryumon",
+      "sn": "toryumon",
+      "family": "toryumon",
+      "key": "toryumon"
+    },
+    {
+      "title": "Tough Turf",
+      "sn": "tturfu",
+      "family": "tturf",
+      "key": "tturfu"
+    },
+    {
+      "title": "Bosconian - Star Destroyer",
+      "sn": "bosco",
+      "family": "bosco",
+      "key": "bosco"
+    },
+    {
+      "title": "Rastan",
+      "sn": "rastan",
+      "family": "rastan",
+      "key": "rastan"
+    },
+    {
+      "title": "Robocop",
+      "sn": "robocop",
+      "family": "robocop",
+      "key": "robocop"
+    },
+    {
+      "title": "Vigilante",
+      "sn": "vigilant",
+      "family": "vigilant",
+      "key": "vigilant"
+    },
+    {
+      "title": "Psychic 5",
+      "sn": "psychic5",
+      "family": "psychic5",
+      "key": "psychic5"
+    },
+    {
+      "title": "Dokaben 2",
+      "sn": "dokaben2",
+      "family": "dokaben2",
+      "key": "dokaben2"
+    },
+    {
+      "title": "Super Pang",
+      "sn": "spang",
+      "family": "spang",
+      "key": "spang"
+    },
+    {
+      "title": "SAR - Search And Rescue",
+      "sn": "searchar",
+      "family": "searchar",
+      "key": "searchar"
+    },
+    {
+      "title": "Combat Hawk",
+      "sn": "combh",
+      "family": "combh",
+      "key": "combh"
+    },
+    {
+      "title": "Express Raider",
+      "sn": "exprraid",
+      "family": "exprraid",
+      "key": "exprraid"
+    },
+    {
+      "title": "Extermination",
+      "sn": "extrmatn",
+      "family": "extrmatn",
+      "key": "extrmatn"
+    },
+    {
+      "title": "Kageki",
+      "sn": "kageki",
+      "family": "kageki",
+      "key": "kageki"
+    },
+    {
+      "title": "Xain'd Sleena",
+      "sn": "xsleenaba",
+      "family": "xsleena",
+      "key": "xsleenaba"
+    },
+    {
+      "title": "Pipi & Bibis",
+      "sn": "pipibibs",
+      "family": "pipibibs",
+      "key": "pipibibs"
+    },
+    {
+      "title": "Tiger-Heli (Bootleg)",
+      "sn": "tigerhb1",
+      "family": "tigerh",
+      "key": "tigerhb1"
+    },
+    {
+      "title": "Performan",
+      "sn": "perfrman",
+      "family": "perfrman",
+      "key": "perfrman"
+    },
+    {
+      "title": "Clockwork Aquario",
+      "sn": "aquario",
+      "family": null,
+      "key": "aquario"
+    },
+    {
+      "title": "Desert Breaker",
+      "sn": "desertbr",
+      "family": "desertbr",
+      "key": "desertbr"
+    },
+    {
+      "title": "Hammer Away",
+      "sn": "hamaway",
+      "family": "hamaway",
+      "key": "hamaway"
+    },
+    {
+      "title": "Wally wo Sagase!",
+      "sn": "wwallyj",
+      "family": "wwallyj",
+      "key": "wwallyj"
+    },
+    {
+      "title": "Bradley Trainer",
+      "sn": "bradley",
+      "family": "bradley",
+      "key": "bradley"
+    },
+    {
+      "title": "Super Casino",
+      "sn": "sucasino",
+      "family": "sucasino",
+      "key": "sucasino"
+    },
+    {
+      "title": "Crime Fighters",
+      "sn": "crimfght",
+      "family": "crimfght",
+      "key": "crimfght"
+    },
+    {
+      "title": "Rod-Land",
+      "sn": "rodland",
+      "family": "rodland",
+      "key": "rodland"
+    },
+    {
+      "title": "Parodius Da!: Shinwa kara Owarai e",
+      "sn": "parodius",
+      "family": "parodius",
+      "key": "parodius"
+    },
+    {
+      "title": "Soldam",
+      "sn": "soldam",
+      "family": "soldam",
+      "key": "soldam"
+    },
+    {
+      "title": "Adventure Canoe",
+      "sn": "adcanoe",
+      "family": null,
+      "key": "adcanoe"
+    },
+    {
+      "title": "Bio Attack",
+      "sn": "bioatack",
+      "family": "bioatack",
+      "key": "bioatack"
+    },
+    {
+      "title": "Elevator Action",
+      "sn": "elevator",
+      "family": "elevator",
+      "key": "elevator"
+    },
+    {
+      "title": "Front Line",
+      "sn": "frontlin",
+      "family": "frontlin",
+      "key": "frontlin"
+    },
+    {
+      "title": "High Way Race",
+      "sn": "hwrace",
+      "family": "hwrace",
+      "key": "hwrace"
+    },
+    {
+      "title": "The Tin Star",
+      "sn": "tinstar",
+      "family": "tinstar",
+      "key": "tinstar"
+    },
+    {
+      "title": "Water Ski",
+      "sn": "waterski",
+      "family": "waterski",
+      "key": "waterski"
+    },
+    {
+      "title": "TwinBee (Bubble System)",
+      "sn": "twinbeeb",
+      "family": "twinbeeb",
+      "key": "twinbeeb"
+    },
+    {
+      "title": "Boxy Boy",
+      "sn": "boxyboy",
+      "family": "boxyboy",
+      "key": "boxyboy"
+    },
+    {
+      "title": "Pistol Daimyo no Bouken",
+      "sn": "pistoldm",
+      "family": "pistoldm",
+      "key": "pistoldm"
+    },
+    {
+      "title": "Pro Tennis World Court",
+      "sn": "wldcourt",
+      "family": "wldcourt",
+      "key": "wldcourt"
+    },
+    {
+      "title": "Pro Yakyuu World Stadium",
+      "sn": "ws",
+      "family": "ws",
+      "key": "ws"
+    },
+    {
+      "title": "Splatter House",
+      "sn": "splatter",
+      "family": "splatter",
+      "key": "splatter"
+    },
+    {
+      "title": "Tank Force",
+      "sn": "tankfrce",
+      "family": "tankfrce",
+      "key": "tankfrce"
+    },
+    {
+      "title": "Iga Ninjyutsuden",
+      "sn": "iganinju",
+      "family": "kazan",
+      "key": "iganinju"
+    },
+    {
+      "title": "In Your Face",
+      "sn": "inyourfa",
+      "family": "inyourfa",
+      "key": "inyourfa"
+    },
+    {
+      "title": "Jitsuryoku!! Pro Yakyuu",
+      "sn": "jitsupro",
+      "family": "jitsupro",
+      "key": "jitsupro"
+    },
+    {
+      "title": "Pepper II",
+      "sn": "pepper2",
+      "family": "pepper2",
+      "key": "pepper2"
+    },
+    {
+      "title": "Teki Paki",
+      "sn": "tekipaki",
+      "family": "tekipaki",
+      "key": "tekipaki"
+    },
+    {
+      "title": "WWF Superstars",
+      "sn": "wwfsstar",
+      "family": "wwfsstar",
+      "key": "wwfsstar"
+    },
+    {
+      "title": "X-Men",
+      "sn": "xmen",
+      "family": "xmen",
+      "key": "xmen"
+    },
+    {
+      "title": "Rumba Lumber",
+      "sn": "rumba",
+      "family": "rumba",
+      "key": "rumba"
+    },
+    {
+      "title": "The FairyLand Story",
+      "sn": "flstory",
+      "family": "flstory",
+      "key": "flstory"
+    },
+    {
+      "title": "Raiga - Strato Fighter",
+      "sn": "stratof",
+      "family": "stratof",
+      "key": "stratof"
+    },
+    {
+      "title": "Shadow Warriors",
+      "sn": "shadoww",
+      "family": "shadoww",
+      "key": "shadoww"
+    },
+    {
+      "title": "Columns '97",
+      "sn": "colmns97",
+      "family": "colmns97",
+      "key": "colmns97"
+    },
+    {
+      "title": "Danchi de Hanafuda",
+      "sn": "danchih",
+      "family": "danchih",
+      "key": "danchih"
+    },
+    {
+      "title": "Danchi de Quiz: Okusan Yontaku Desuyo!",
+      "sn": "danchiq",
+      "family": "danchiq",
+      "key": "danchiq"
+    },
+    {
+      "title": "Ejihon Tantei Jimusho",
+      "sn": "ejihon",
+      "family": "ejihon",
+      "key": "ejihon"
+    },
+    {
+      "title": "Final Fight Revenge",
+      "sn": "ffreveng",
+      "family": "ffreveng",
+      "key": "ffreveng"
+    },
+    {
+      "title": "Maru-Chan de Goo!",
+      "sn": "maruchan",
+      "family": "maruchan",
+      "key": "maruchan"
+    },
+    {
+      "title": "Othello Shiyouyo",
+      "sn": "othellos",
+      "family": "othellos",
+      "key": "othellos"
+    },
+    {
+      "title": "Princess Clara Daisakusen",
+      "sn": "prikura",
+      "family": "prikura",
+      "key": "prikura"
+    },
+    {
+      "title": "Pro Mahjong Kiwame S",
+      "sn": "kiwames",
+      "family": "kiwames",
+      "key": "kiwames"
+    },
+    {
+      "title": "Puzzle & Action: Sando-R",
+      "sn": "sandor",
+      "family": "sandor",
+      "key": "sandor"
+    },
+    {
+      "title": "Sakura Taisen - Hanagumi Taisen Columns",
+      "sn": "hanagumi",
+      "family": "hanagumi",
+      "key": "hanagumi"
+    },
+    {
+      "title": "Steep Slope Sliders",
+      "sn": "sss",
+      "family": "sss",
+      "key": "sss"
+    },
+    {
+      "title": "Touryuu Densetsu Elan-Doree",
+      "sn": "elandore",
+      "family": "elandore",
+      "key": "elandore"
+    },
+    {
+      "title": "Virtual Mahjong 2 - My Fair Lady",
+      "sn": "myfairld",
+      "family": "myfairld",
+      "key": "myfairld"
+    },
+    {
+      "title": "Winter Heat",
+      "sn": "winterht",
+      "family": "winterht",
+      "key": "winterht"
+    },
+    {
+      "title": "Cameltry",
+      "sn": "cameltry",
+      "family": "cameltry",
+      "key": "cameltry"
+    },
+    {
+      "title": "Dead Connection",
+      "sn": "deadconx",
+      "family": "deadconx",
+      "key": "deadconx"
+    },
+    {
+      "title": "Don Doko Don",
+      "sn": "dondokod",
+      "family": "dondokod",
+      "key": "dondokod"
+    },
+    {
+      "title": "Drift Out",
+      "sn": "driftout",
+      "family": "driftout",
+      "key": "driftout"
+    },
+    {
+      "title": "Growl",
+      "sn": "growl",
+      "family": "growl",
+      "key": "growl"
+    },
+    {
+      "title": "Gun & Frontier",
+      "sn": "gunfront",
+      "family": "gunfront",
+      "key": "gunfront"
+    },
+    {
+      "title": "Liquid Kids",
+      "sn": "liquidk",
+      "family": "liquidk",
+      "key": "liquidk"
+    },
+    {
+      "title": "PuLiRuLa",
+      "sn": "pulirula",
+      "family": "pulirula",
+      "key": "pulirula"
+    },
+    {
+      "title": "Quiz Chikyu Bouei Gun",
+      "sn": "qzchikyu",
+      "family": "qzchikyu",
+      "key": "qzchikyu"
+    },
+    {
+      "title": "Solitary Fighter",
+      "sn": "solfigtr",
+      "family": "solfigtr",
+      "key": "solfigtr"
+    },
+    {
+      "title": "Pop Flamer",
+      "sn": "popflamn",
+      "family": null,
+      "key": "popflamn"
+    },
+    {
+      "title": "Sky Kid Deluxe",
+      "sn": "skykiddx",
+      "family": "skykiddx",
+      "key": "skykiddx"
+    },
+    {
+      "title": "Golfing Greats",
+      "sn": "glfgreat",
+      "family": "glfgreat",
+      "key": "glfgreat"
+    },
+    {
+      "title": "Run and Gun",
+      "sn": "rungun",
+      "family": "rungun",
+      "key": "rungun"
+    },
+    {
+      "title": "Snow Bros. 2 - With New Elves",
+      "sn": "snowbro2",
+      "family": "snowbro2",
+      "key": "snowbro2"
+    },
+    {
+      "title": "Premier Soccer",
+      "sn": "prmrsocr",
+      "family": "prmrsocr",
+      "key": "prmrsocr"
+    },
+    {
+      "title": "Grasspin",
+      "sn": "grasspin",
+      "family": "grasspin",
+      "key": "grasspin"
+    },
+    {
+      "title": "Saturn (Zilec)",
+      "sn": "saturnzi",
+      "family": "saturnzi",
+      "key": "saturnzi"
+    },
+    {
+      "title": "Planet Probe",
+      "sn": "pprobe",
+      "family": "pprobe",
+      "key": "pprobe"
+    },
+    {
+      "title": "Vastar",
+      "sn": "vastar",
+      "family": "vastar",
+      "key": "vastar"
+    },
+    {
+      "title": "Complex X",
+      "sn": "complexx",
+      "family": "complexx",
+      "key": "complexx"
+    },
+    {
+      "title": "Kram",
+      "sn": "kram",
+      "family": "kram",
+      "key": "kram"
+    },
+    {
+      "title": "Slither",
+      "sn": "slither",
+      "family": "slither",
+      "key": "slither"
+    },
+    {
+      "title": "The Electric Yo-Yo",
+      "sn": "elecyoyo",
+      "family": "elecyoyo",
+      "key": "elecyoyo"
+    },
+    {
+      "title": "DoDonPachi III",
+      "sn": "ddp3",
+      "family": "ddp3",
+      "key": "ddp3"
+    },
+    {
+      "title": "Dragon World 2001",
+      "sn": "dw2001",
+      "family": "dw2001",
+      "key": "dw2001"
+    },
+    {
+      "title": "Dragon World 3",
+      "sn": "drgw3",
+      "family": "drgw3",
+      "key": "drgw3"
+    },
+    {
+      "title": "Dragon World 3 EX",
+      "sn": "dwex",
+      "family": "dwex",
+      "key": "dwex"
+    },
+    {
+      "title": "Knights of Valour Super Heroes",
+      "sn": "kovsh",
+      "family": "kovsh",
+      "key": "kovsh"
+    },
+    {
+      "title": "Oriental Legend",
+      "sn": "orlegend",
+      "family": "orlegend",
+      "key": "orlegend"
+    },
+    {
+      "title": "Photo Y2K",
+      "sn": "photoy2k",
+      "family": "photoy2k",
+      "key": "photoy2k"
+    },
+    {
+      "title": "Puzzle Star",
+      "sn": "puzlstar",
+      "family": "puzlstar",
+      "key": "puzlstar"
+    },
+    {
+      "title": "Puzzli 2",
+      "sn": "puzzli2",
+      "family": "puzzli2",
+      "key": "puzzli2"
+    },
+    {
+      "title": "S.V.G. - Spectral vs Generation",
+      "sn": "svg",
+      "family": "svg",
+      "key": "svg"
+    },
+    {
+      "title": "The Gladiator",
+      "sn": "theglad",
+      "family": "theglad",
+      "key": "theglad"
+    },
+    {
+      "title": "The Killing Blade",
+      "sn": "killbld",
+      "family": "killbld",
+      "key": "killbld"
+    },
+    {
+      "title": "The Killing Blade Plus",
+      "sn": "killbldp",
+      "family": "killbldp",
+      "key": "killbldp"
+    },
+    {
+      "title": "Xiyou Shi E Zhuan Super",
+      "sn": "olds103t",
+      "family": "olds",
+      "key": "olds103t"
+    },
+    {
+      "title": "Mania Challenge",
+      "sn": "maniach",
+      "family": "maniach",
+      "key": "maniach"
+    },
+    {
+      "title": "Psycho-Nics Oscar",
+      "sn": "oscar",
+      "family": "oscar",
+      "key": "oscar"
+    },
+    {
+      "title": "City Connection",
+      "sn": "citycon",
+      "family": "citycon",
+      "key": "citycon"
+    },
+    {
+      "title": "Space Demon",
+      "sn": "SpaceDemon",
+      "family": null,
+      "key": "spacedem"
+    },
+    {
+      "title": "DECO Darksoft Multigame",
+      "sn": "decodark",
+      "family": "decodark",
+      "key": "decodark"
+    },
+    {
+      "title": "Flash Boy",
+      "sn": "cfboy0a1",
+      "family": "cfboy0a1",
+      "key": "cfboy0a1"
+    },
+    {
+      "title": "Flying Ball",
+      "sn": "cflyball",
+      "family": "cflyball",
+      "key": "cflyball"
+    },
+    {
+      "title": "Nebula",
+      "sn": "cnebula",
+      "family": "cnebula",
+      "key": "cnebula"
+    },
+    {
+      "title": "Ocean to Ocean",
+      "sn": "cocean6b",
+      "family": "cocean1a",
+      "key": "cocean1a"
+    },
+    {
+      "title": "Skater",
+      "sn": "cskater",
+      "family": "cskater",
+      "key": "cskater"
+    },
+    {
+      "title": "The Tower",
+      "sn": "ctower",
+      "family": "ctower",
+      "key": "ctower"
+    },
+    {
+      "title": "Tornado",
+      "sn": "ctornado",
+      "family": "ctornado",
+      "key": "ctornado"
+    },
+    {
+      "title": "Blood Bros.",
+      "sn": "bloodbro",
+      "family": "bloodbro",
+      "key": "bloodbro"
+    },
+    {
+      "title": "D-Con",
+      "sn": "dcon",
+      "family": "dcon",
+      "key": "dcon"
+    },
+    {
+      "title": "Air Gallet",
+      "sn": "agallet",
+      "family": "agallet",
+      "key": "agallet"
+    },
+    {
+      "title": "Hotdog Storm",
+      "sn": "hotdogst",
+      "family": "hotdogst",
+      "key": "hotdogst"
+    },
+    {
+      "title": "Metamoqester",
+      "sn": "metmqstr",
+      "family": "metmqstr",
+      "key": "metmqstr"
+    },
+    {
+      "title": "Boogie Wings (rmonic79)",
+      "sn": "boogwing",
+      "family": "boogwing",
+      "key": "boogwing"
+    },
+    {
+      "title": "Act-Fancer Cybernetick Hyper Weapon",
+      "sn": "actfancr",
+      "family": "actfancr",
+      "key": "actfancr"
+    },
+    {
+      "title": "Biomechanical Toy (jlrh)",
+      "sn": "biomtoy",
+      "family": "biomtoy",
+      "key": "biomechanical-toy-jlrh"
+    },
+    {
+      "title": "Squash (Gaelco 1992) (jlrh)",
+      "sn": "squash",
+      "family": "squash",
+      "key": "squash-ff-gaelco-1992"
+    },
+    {
+      "title": "Street Fighter III 2nd Impact: Giant Attack",
+      "sn": "sfiii2n",
+      "family": "sfiii2",
+      "key": "sfiii2n"
+    },
+    {
+      "title": "Alligator Hunt",
+      "sn": "aligator",
+      "family": "aligator",
+      "key": "aligator"
+    },
+    {
+      "title": "World Rally 2: Twin Racing",
+      "sn": "wrally2",
+      "family": "wrally2",
+      "key": "wrally2"
+    },
+    {
+      "title": "Destroyer",
+      "sn": "destryer",
+      "family": "destryer",
+      "key": "destryer"
+    },
+    {
+      "title": "Night Slashers (blahm1d)",
+      "sn": "nslashers",
+      "family": "nslasher",
+      "key": "night-slashers-blahm1d"
+    },
+    {
+      "title": "Biomechanical Toy (Jotego)",
+      "sn": "biomtoy",
+      "family": "biomtoy",
+      "key": "biomtoy"
+    },
+    {
+      "title": "Squash (Gaelco 1992) (Jotego)",
+      "sn": "squash",
+      "family": "squash",
+      "key": "squash"
+    },
+    {
+      "title": "Night Slashers (rmonic79)",
+      "sn": "nslasher",
+      "family": "nslasher",
+      "key": "nslasher"
+    },
+    {
+      "title": "Glass",
+      "sn": "glassa",
+      "family": "glass",
+      "key": "glassa"
+    },
+    {
+      "title": "Gals Panic",
+      "sn": "galpanic",
+      "family": "galpanic",
+      "key": "galpanic"
+    },
+    {
+      "title": "Operation Wolf (jlrh)",
+      "sn": "opwolf",
+      "family": "opwolf",
+      "key": "operation-wolf-jlrh"
+    },
+    {
+      "title": "Eleven Beat",
+      "sn": "11beat",
+      "family": "11beat",
+      "key": "11beat"
+    },
+    {
+      "title": "Hanabi de Doon! - Don-chan Puzzle",
+      "sn": "doncdoon",
+      "family": "doncdoon",
+      "key": "doncdoon"
+    },
+    {
+      "title": "Hi Pai Paradise",
+      "sn": "hipai",
+      "family": "hipai",
+      "key": "hipai"
+    },
+    {
+      "title": "Hi Pai Paradise 2",
+      "sn": "hipai2",
+      "family": "hipai2",
+      "key": "hipai2"
+    },
+    {
+      "title": "Kurukuru Fever",
+      "sn": "kurufev",
+      "family": "kurufev",
+      "key": "kurufev"
+    },
+    {
+      "title": "Mayjinsen 3",
+      "sn": "mayjin3",
+      "family": "mayjin3",
+      "key": "mayjin3"
+    },
+    {
+      "title": "NBA Hangtime (blahm1d)",
+      "sn": "nbahangt",
+      "family": "nbahangt",
+      "key": "nbahangt"
+    },
+    {
+      "title": "Star Soldier: Vanishing Earth",
+      "sn": "starsldr",
+      "family": "starsldr",
+      "key": "starsldr"
+    },
+    {
+      "title": "Super Real Mahjong VS",
+      "sn": "srmvs",
+      "family": "srmvs",
+      "key": "srmvs"
+    },
+    {
+      "title": "Tower & Shaft",
+      "sn": "twrshaft",
+      "family": "twrshaft",
+      "key": "twrshaft"
+    },
+    {
+      "title": "Vivid Dolls",
+      "sn": "vivdolls",
+      "family": "vivdolls",
+      "key": "vivdolls"
+    },
+    {
+      "title": "Ultimate Mortal Kombat 3 (blahm1d)",
+      "sn": "umk3",
+      "family": "umk3",
+      "key": "umk3"
+    },
+    {
+      "title": "Operation Wolf (Jotego)",
+      "sn": "opwolf",
+      "family": "opwolf",
+      "key": "opwolf"
+    },
+    {
+      "title": "Asterix",
+      "sn": "asterix",
+      "family": "asterix",
+      "key": "asterix"
+    },
+    {
+      "title": "NBA Maximum Hangtime (blahm1d)",
+      "sn": "nbamht",
+      "family": "nbahangt",
+      "key": "nbamht"
+    },
+    {
+      "title": "Airwolf",
+      "sn": "airwolf",
+      "family": "airwolf",
+      "key": "airwolf"
+    },
+    {
+      "title": "Boogie Wings (Coin-Op Collection)",
+      "sn": "boogwingu",
+      "family": "boogwing",
+      "key": "boogwingu"
+    },
+    {
+      "title": "Gyrodine",
+      "sn": "gyrodine",
+      "family": "gyrodine",
+      "key": "gyrodine"
+    },
+    {
+      "title": "Legend",
+      "sn": "legend",
+      "family": "legend",
+      "key": "legend"
+    },
+    {
+      "title": "Repulse",
+      "sn": "repulse",
+      "family": "repulse",
+      "key": "repulse"
+    },
+    {
+      "title": "S.R.D. Mission",
+      "sn": "srdmissn",
+      "family": "srdmissn",
+      "key": "srdmissn"
+    },
+    {
+      "title": "Double Wings",
+      "sn": "dblewingb",
+      "family": "dblewing",
+      "key": "dblewingb"
+    },
+    {
+      "title": "Mutant Fighter",
+      "sn": "mutantf",
+      "family": "mutantf",
+      "key": "mutantf"
+    },
+    {
+      "title": "Nitro Ball",
+      "sn": "nitrobal",
+      "family": "nitrobal",
+      "key": "nitrobal"
+    },
+    {
+      "title": "Diet Go Go",
+      "sn": "dietgo",
+      "family": "dietgo",
+      "key": "dietgo"
+    },
+    {
+      "title": "Super Burger Time",
+      "sn": "supbtime",
+      "family": "supbtime",
+      "key": "supbtime"
+    },
+    {
+      "title": "Wizard Fire",
+      "sn": "wizdfire",
+      "family": "wizdfire",
+      "key": "wizdfire"
+    },
+    {
+      "title": "Pretty Soldier Sailor Moon",
+      "sn": "sailormn",
+      "family": "sailormn",
+      "key": "sailormn"
+    },
+    {
+      "title": "Rainbow Islands - Extra Version (bazset)",
+      "sn": "rbislande",
+      "family": "rbislande",
+      "key": "rainbow-islands-extra-version-bazset"
+    },
+    {
+      "title": "Volfied (bazset)",
+      "sn": "volfied",
+      "family": "volfied",
+      "key": "volfied-bazset"
+    },
+    {
+      "title": "Judge Dredd (blahm1d)",
+      "sn": "jdreddp",
+      "family": "jdreddp",
+      "key": "jdreddp"
+    },
+    {
+      "title": "Rainbow Islands - Extra Version (Jotego)",
+      "sn": "rbislande",
+      "family": "rbislande",
+      "key": "rbislande"
+    },
+    {
+      "title": "SD Gundam Sangokushi Rainbow Tairiku Senki",
+      "sn": "grainbow",
+      "family": "grainbow",
+      "key": "grainbow"
+    },
+    {
+      "title": "Street Fighter II' Champion Re-Edit",
+      "sn": "sf2cre",
+      "family": null,
+      "key": "sf2cre"
+    },
+    {
+      "title": "Street Fighter II' Special Champion Edition",
+      "sn": "sf2hfsce",
+      "family": null,
+      "key": "sf2hfsce"
+    },
+    {
+      "title": "Thunder Cross II",
+      "sn": "thndrx2",
+      "family": "thndrx2",
+      "key": "thndrx2"
+    },
+    {
+      "title": "Thunder Zone",
+      "sn": "thndzone",
+      "family": "thndzone",
+      "key": "thndzone"
+    },
+    {
+      "title": "Volfied (Jotego)",
+      "sn": "volfied",
+      "family": "volfied",
+      "key": "volfied"
+    },
+    {
+      "title": "Gunbarich",
+      "sn": "gnbarich",
+      "family": "gnbarich",
+      "key": "gnbarich"
+    },
+    {
+      "title": "Mahjong G-Taste",
+      "sn": "mjgtaste",
+      "family": "mjgtaste",
+      "key": "mjgtaste"
+    },
+    {
+      "title": "Mahjong Hot Gimmick Integral",
+      "sn": "hotgmcki",
+      "family": "hotgmcki",
+      "key": "hotgmcki"
+    },
+    {
+      "title": "Quiz de Idol! Hot Debut",
+      "sn": "hotdebut",
+      "family": "hotdebut",
+      "key": "hotdebut"
+    },
+    {
+      "title": "Space Bomber",
+      "sn": "sbomber",
+      "family": "sbomber",
+      "key": "sbomber"
+    },
+    {
+      "title": "Taisen Hot Gimmick 3 Digital Surfing",
+      "sn": "hotgmck3",
+      "family": "hotgmck3",
+      "key": "hotgmck3"
+    },
+    {
+      "title": "Taisen Hot Gimmick 4 Ever",
+      "sn": "hotgm4ev",
+      "family": "hotgm4ev",
+      "key": "hotgm4ev"
+    },
+    {
+      "title": "The Fallen Angels",
+      "sn": "daraku",
+      "family": "daraku",
+      "key": "daraku"
+    },
+    {
+      "title": "Denjin Makai",
+      "sn": "denjinmk",
+      "family": "denjinmk",
+      "key": "denjinmk"
+    },
+    {
+      "title": "DECO Widel Multigame",
+      "sn": "decomult",
+      "family": "decomult",
+      "key": "decomult"
+    },
+    {
+      "title": "Exciting Soccer II",
+      "sn": "exctscc2",
+      "family": "exctscc2",
+      "key": "exctscc2"
+    },
+    {
+      "title": "Talbot",
+      "sn": "talbot",
+      "family": "talbot",
+      "key": "talbot"
+    },
+    {
+      "title": "Zeroize",
+      "sn": "czeroize",
+      "family": "czeroize",
+      "key": "czeroize"
+    },
+    {
+      "title": "Raiden DX",
+      "sn": "raidendx",
+      "family": "raidendx",
+      "key": "raidendx"
+    },
+    {
+      "title": "A.B. Cop",
+      "sn": "abcop",
+      "family": "abcop",
+      "key": "abcop"
+    },
+    {
+      "title": "After Burner II",
+      "sn": "aburner2",
+      "family": "aburner2",
+      "key": "aburner2"
+    },
+    {
+      "title": "Last Survivor",
+      "sn": "lastsurv",
+      "family": "lastsurv",
+      "key": "lastsurv"
+    },
+    {
+      "title": "Line of Fire",
+      "sn": "loffire",
+      "family": "loffire",
+      "key": "loffire"
+    },
+    {
+      "title": "Marble Madness II",
+      "sn": "marblmd2",
+      "family": "marblmd2",
+      "key": "marblmd2"
+    },
+    {
+      "title": "G-LOC Air Battle (rossops)",
+      "sn": "gloc",
+      "family": "gloc",
+      "key": "gloc"
+    },
+    {
+      "title": "Grind Stormer",
+      "sn": "grindstm",
+      "family": "grindstm",
+      "key": "grindstm"
+    },
+    {
+      "title": "Penguin-Kun Wars",
+      "sn": "pkunwar",
+      "family": "pkunwar",
+      "key": "pkunwar"
+    },
+    {
+      "title": "Raiders5",
+      "sn": "raiders5",
+      "family": "raiders5",
+      "key": "raiders5"
+    },
+    {
+      "title": "Rail Chase (rossops)",
+      "sn": "rchase",
+      "family": "rchase",
+      "key": "rchase"
+    },
+    {
+      "title": "Salamander",
+      "sn": "salamand",
+      "family": "salamand",
+      "key": "salamand"
+    },
+    {
+      "title": "Night Slashers (rmCores)",
+      "sn": "nslasher",
+      "family": "nslasher",
+      "key": "rm-night-slashers"
+    },
+    {
+      "title": "Ark Area",
+      "sn": "arkarea",
+      "family": "arkarea",
+      "key": "arkarea"
+    },
+    {
+      "title": "Mutant Night",
+      "sn": "mnight",
+      "family": "mnight",
+      "key": "mnight"
+    },
+    {
+      "title": "Ninja-Kid II",
+      "sn": "ninjakd2",
+      "family": "ninjakd2",
+      "key": "ninjakd2"
+    },
+    {
+      "title": "Ring King",
+      "sn": "ringking",
+      "family": "kingofb",
+      "key": "ringking"
+    },
+    {
+      "title": "Balloon Brothers",
+      "sn": "ballbros",
+      "family": "ballbros",
+      "key": "ballbros"
+    },
+    {
+      "title": "JoJo no Kimyou na Bouken: Mirai e no Isan",
+      "sn": "jojoban",
+      "family": "jojoba",
+      "key": "jojoban"
+    },
+    {
+      "title": "Last Striker",
+      "sn": "kyustrkr",
+      "family": "kyustrkr",
+      "key": "kyustrkr"
+    },
+    {
+      "title": "Street Fighter III 3rd Strike: Fight for the Future",
+      "sn": "sfiii3n",
+      "family": "sfiii3",
+      "key": "sfiii3n"
+    },
+    {
+      "title": "Saurian Front",
+      "sn": "saurnfrnt",
+      "family": "strkforc",
+      "key": "saurnfrnt"
+    },
+    {
+      "title": "Strike Force (blahm1d)",
+      "sn": "strkforc",
+      "family": "strkforc",
+      "key": "strkforc"
+    },
+    {
+      "title": "Super High Impact (blahm1d)",
+      "sn": "shimpact",
+      "family": "shimpact",
+      "key": "shimpact"
+    },
+    {
+      "title": "Tengai",
+      "sn": "tengai",
+      "family": "tengai",
+      "key": "tengai"
+    },
+    {
+      "title": "Clay Pigeon (blahm1d)",
+      "sn": "claypign",
+      "family": "claypign",
+      "key": "claypign"
+    },
+    {
+      "title": "Who Dunit (blahm1d)",
+      "sn": "whodunit",
+      "family": "whodunit",
+      "key": "whodunit"
+    },
+    {
+      "title": "Rapid Hero",
+      "sn": "raphero",
+      "family": "arcadian",
+      "key": "raphero"
+    },
+    {
+      "title": "Super Spacefortress Macross II",
+      "sn": "macross2",
+      "family": "macross2",
+      "key": "macross2"
+    },
+    {
+      "title": "Thunder Dragon 2",
+      "sn": "tdragon2",
+      "family": "tdragon2",
+      "key": "tdragon2"
+    },
+    {
+      "title": "Altair II",
+      "sn": "altair2",
+      "family": "altair2",
+      "key": "altair2"
+    },
+    {
+      "title": "Athena no Hatena? (ppriest)",
+      "sn": "atehate",
+      "family": "atehate",
+      "key": "athena-no-hatena-ppriest"
+    },
+    {
+      "title": "Block Carnival (ppriest)",
+      "sn": "blockcar",
+      "family": "blockcar",
+      "key": "block-carnival-ppriest"
+    },
+    {
+      "title": "Daioh (ppriest)",
+      "sn": "daioh",
+      "family": "daioh",
+      "key": "daioh-ppriest"
+    },
+    {
+      "title": "Eight Forces (ppriest)",
+      "sn": "eightfrc",
+      "family": "eightfrc",
+      "key": "eight-forces-ppriest"
+    },
+    {
+      "title": "Magical Speed (ppriest)",
+      "sn": "magspeed",
+      "family": "magspeed",
+      "key": "magical-speed-ppriest"
+    },
+    {
+      "title": "Pairs Love (ppriest)",
+      "sn": "pairlove",
+      "family": "pairlove",
+      "key": "pairs-love-ppriest"
+    },
+    {
+      "title": "Quiz Kokology (ppriest)",
+      "sn": "qzkklogy",
+      "family": "qzkklogy",
+      "key": "quiz-kokology-ppriest"
+    },
+    {
+      "title": "SD Gundam Neo Battling (ppriest)",
+      "sn": "neobattl",
+      "family": "neobattl",
+      "key": "sd-gundam-neo-battling-ppriest"
+    },
+    {
+      "title": "Ultraman Club - Tatakae! Ultraman Kyoudai!! (ppriest)",
+      "sn": "umanclub",
+      "family": "umanclub",
+      "key": "ultraman-club-tatakae-ultraman-kyoudai-ppriest"
+    },
+    {
+      "title": "War of Aero - Project MEIOU (ppriest)",
+      "sn": "wrofaero",
+      "family": "wrofaero",
+      "key": "war-of-aero-project-meiou-ppriest"
+    },
+    {
+      "title": "Wit's (ppriest)",
+      "sn": "wits",
+      "family": "wits",
+      "key": "wit-s-ppriest"
+    },
+    {
+      "title": "Acrobat Mission",
+      "sn": "acrobatm",
+      "family": "acrobatm",
+      "key": "acrobatm"
+    },
+    {
+      "title": "Bombjack Twin",
+      "sn": "bjtwin",
+      "family": "bjtwin",
+      "key": "bjtwin"
+    },
+    {
+      "title": "J. J. Squawkers (ppriest)",
+      "sn": "jjsquawk",
+      "family": "jjsquawk",
+      "key": "j-j-squawkers-ppriest"
+    },
+    {
+      "title": "Koutetsu Yousai Strahl",
+      "sn": "strahl",
+      "family": "strahl",
+      "key": "strahl"
+    },
+    {
+      "title": "Mad Shark (ppriest)",
+      "sn": "madshark",
+      "family": "madshark",
+      "key": "mad-shark-ppriest"
+    },
+    {
+      "title": "Sokonuke Taisen Game (ppriest)",
+      "sn": "sokonuke",
+      "family": "sokonuke",
+      "key": "sokonuke-taisen-game-ppriest"
+    },
+    {
+      "title": "Vandyke",
+      "sn": "vandyke",
+      "family": "vandyke",
+      "key": "vandyke"
+    },
+    {
+      "title": "Bubble 2000",
+      "sn": "bubl2000",
+      "family": "bubl2000",
+      "key": "bubl2000"
+    },
+    {
+      "title": "Guardian Storm",
+      "sn": "grdnstrm",
+      "family": "grdnstrm",
+      "key": "grdnstrm"
+    },
+    {
+      "title": "Mang-Chi",
+      "sn": "mangchi",
+      "family": "mangchi",
+      "key": "mangchi"
+    },
+    {
+      "title": "Pop's Pop's",
+      "sn": "popspops",
+      "family": "popspops",
+      "key": "popspops"
+    },
+    {
+      "title": "Spectrum 2000",
+      "sn": "spec2k",
+      "family": "spec2k",
+      "key": "spec2k"
+    },
+    {
+      "title": "Stagger I",
+      "sn": "stagger1",
+      "family": "stagger1",
+      "key": "stagger1"
+    },
+    {
+      "title": "Tom Tom Magic",
+      "sn": "tomagic",
+      "family": "tomagic",
+      "key": "tomagic"
+    },
+    {
+      "title": "Hayaoshi Quiz Grand Champion Taikai (ppriest)",
+      "sn": "hayaosi2",
+      "family": "hayaosi2",
+      "key": "hayaoshi-quiz-grand-champion-taikai-ppriest"
+    },
+    {
+      "title": "Hayaoshi Quiz Nettou Namahousou (ppriest)",
+      "sn": "hayaosi3",
+      "family": "hayaosi3",
+      "key": "hayaoshi-quiz-nettou-namahousou-ppriest"
+    },
+    {
+      "title": "Idol Janshi Suchie-Pai II (ppriest)",
+      "sn": "suchie2",
+      "family": "suchie2",
+      "key": "idol-janshi-suchie-pai-ii-ppriest"
+    },
+    {
+      "title": "P-47 Aces (ppriest)",
+      "sn": "p47aces",
+      "family": "p47aces",
+      "key": "p-47-aces-ppriest"
+    },
+    {
+      "title": "Vs. Janshi Brandnew Stars (ppriest)",
+      "sn": "bnstars",
+      "family": "bnstars1",
+      "key": "vs-janshi-brandnew-stars-ppriest"
+    },
+    {
+      "title": "Dolmen",
+      "sn": "dolmen",
+      "family": "dolmen",
+      "key": "dolmen"
+    },
+    {
+      "title": "Many Block",
+      "sn": "manybloc",
+      "family": "manybloc",
+      "key": "manybloc"
+    },
+    {
+      "title": "Puzzle World",
+      "sn": "puzlwrld",
+      "family": null,
+      "key": "puzlwrld"
+    },
+    {
+      "title": "Twin Action",
+      "sn": "twinactn",
+      "family": "twinactn",
+      "key": "twinactn"
+    },
+    {
+      "title": "Arbalester (ppriest)",
+      "sn": "arbalest",
+      "family": "arbalest",
+      "key": "arbalester-ppriest"
+    },
+    {
+      "title": "Bonze Adventure (bazset)",
+      "sn": "bonzeadv",
+      "family": "bonzeadv",
+      "key": "bonze-adventure-bazset"
+    },
+    {
+      "title": "Wardner",
+      "sn": "wardner",
+      "family": "wardner",
+      "key": "wardner"
+    },
+    {
+      "title": "Galmedes (bazset)",
+      "sn": "galmedes",
+      "family": "galmedes",
+      "key": "galmedes-bazset"
+    },
+    {
+      "title": "Maze of Flott (bazset)",
+      "sn": "mofflott",
+      "family": "mofflott",
+      "key": "maze-of-flott-bazset"
+    },
+    {
+      "title": "Sand Scorpion",
+      "sn": "sandscrp",
+      "family": "sandscrp",
+      "key": "sandscrp"
+    },
+    {
+      "title": "64th. Street: A Detective Story",
+      "sn": "64street",
+      "family": "64street",
+      "key": "64street"
+    },
+    {
+      "title": "Chimera Beast",
+      "sn": "chimerab",
+      "family": "chimerab",
+      "key": "chimerab"
+    },
+    {
+      "title": "Hayaoshi Quiz Ouza Ketteisen: The King Of Quiz",
+      "sn": "hayaosi1",
+      "family": "hayaosi1",
+      "key": "hayaosi1"
+    },
+    {
+      "title": "Asura Buster - Eternal Warriors",
+      "sn": "asurabus",
+      "family": "asurabus",
+      "key": "asurabus"
+    },
+    {
+      "title": "Bonze Adventure (rmCores)",
+      "sn": "bonzeadv",
+      "family": "bonzeadv",
+      "key": "bonze-adventure-rmcores"
+    },
+    {
+      "title": "Bonze Adventure (rmonic79)",
+      "sn": "bonzeadv",
+      "family": "bonzeadv",
+      "key": "bonze-adventure"
+    },
+    {
+      "title": "Cruis'n USA (blahm1d)",
+      "sn": "crusnusa44",
+      "family": "crusnusa",
+      "key": "crusnusa44"
+    },
+    {
+      "title": "Galmedes (rmCores)",
+      "sn": "galmedes",
+      "family": "galmedes",
+      "key": "galmedes-rmcores"
+    },
+    {
+      "title": "Galmedes (rmonic79)",
+      "sn": "galmedes",
+      "family": "galmedes",
+      "key": "galmedes"
+    },
+    {
+      "title": "Kokontouzai Eto Monogatari",
+      "sn": "eto",
+      "family": "eto",
+      "key": "kokontouzai-eto-monogatari"
+    },
+    {
+      "title": "Kokontouzai Eto Monogatari (rmCores)",
+      "sn": "eto",
+      "family": "eto",
+      "key": "kokontouzai-eto-monogatari-rmcores"
+    },
+    {
+      "title": "Legend of Makai",
+      "sn": "lomakai",
+      "family": "lomakai",
+      "key": "lomakai"
+    },
+    {
+      "title": "Macross Plus",
+      "sn": "macrossp",
+      "family": "macrossp",
+      "key": "macrossp"
+    },
+    {
+      "title": "Maze of Flott (rmCores)",
+      "sn": "mofflott",
+      "family": "mofflott",
+      "key": "maze-of-flott-rmcores"
+    },
+    {
+      "title": "Maze of Flott (rmonic79)",
+      "sn": "mofflott",
+      "family": "mofflott",
+      "key": "maze-of-flott"
+    },
+    {
+      "title": "New Fantasia",
+      "sn": "newfant",
+      "family": "newfant",
+      "key": "newfant"
+    },
+    {
+      "title": "Pocket Gals V.I.P (bazset)",
+      "sn": "pgalvip",
+      "family": "pgalvip",
+      "key": "pgalvip"
+    },
+    {
+      "title": "Quiz Bishoujo Senshi Sailor Moon - Chiryoku Tairyoku Toki no Un",
+      "sn": "quizmoon",
+      "family": "quizmoon",
+      "key": "quizmoon"
+    },
+    {
+      "title": "Super Miss World",
+      "sn": "smissw",
+      "family": "smissw",
+      "key": "smissw"
+    },
+    {
+      "title": "Super Model",
+      "sn": "supmodel",
+      "family": "supmodel",
+      "key": "supmodel"
+    },
+    {
+      "title": "Super Model II",
+      "sn": "supmodl2",
+      "family": "supmodl2",
+      "key": "supmodl2"
+    },
+    {
+      "title": "WOW New Fantasia (bazset)",
+      "sn": "wownfant",
+      "family": "wownfant",
+      "key": "wownfant"
+    },
+    {
+      "title": "Zip & Zap (bazset)",
+      "sn": "zipzap",
+      "family": "zipzap",
+      "key": "zipzap"
+    },
+    {
+      "title": "Boogie Wings (rmCores)",
+      "sn": "boogwing",
+      "family": "boogwing",
+      "key": "boogie-wings-rmcores"
+    },
+    {
+      "title": "Guardians",
+      "sn": "grdians",
+      "family": "grdians",
+      "key": "grdians"
+    },
+    {
+      "title": "Hammer Boy",
+      "sn": "hamboy",
+      "family": "hamboy",
+      "key": "hamboy"
+    },
+    {
+      "title": "Mega Phoenix",
+      "sn": "megaphx",
+      "family": "megaphx",
+      "key": "megaphx"
+    },
+    {
+      "title": "YoYo Spell",
+      "sn": "yoyospel",
+      "family": "littlerb",
+      "key": "yoyospel"
+    },
+    {
+      "title": "Grudge Match (v00.90, prototype)",
+      "sn": "grudge",
+      "family": "grudge",
+      "key": "grudge-match-v00-90-prototype"
+    },
+    {
+      "title": "Spiker (ppriest)",
+      "sn": "spiker",
+      "family": "spiker",
+      "key": "spiker-ppriest"
+    },
+    {
+      "title": "Toggle (ppriest)",
+      "sn": "toggle",
+      "family": "toggle",
+      "key": "toggle-ppriest"
+    },
+    {
+      "title": "Trivial Pursuit (Genus II Edition) (3-22-85)",
+      "sn": "triviag2",
+      "family": "triviag2",
+      "key": "trivial-pursuit-genus-ii-edition-3-22-85"
+    },
+    {
+      "title": "Trivial Pursuit (Young Players Edition) (3-29-85)",
+      "sn": "triviayp",
+      "family": "triviayp",
+      "key": "trivial-pursuit-young-players-edition-3-29-85"
+    },
+    {
+      "title": "Alien Sector",
+      "sn": "aliensec",
+      "family": "aliensec",
+      "key": "aliensec"
+    },
+    {
+      "title": "Bubble Trouble - Golly! Ghost! 2",
+      "sn": "bubbletr",
+      "family": "bubbletr",
+      "key": "bubbletr"
+    },
+    {
+      "title": "Cosmo Gang the Video",
+      "sn": "cosmogng",
+      "family": "cosmogng",
+      "key": "cosmogng"
+    },
+    {
+      "title": "Crazy Cross (ppriest)",
+      "sn": "crzcross",
+      "family": "crzcross",
+      "key": "crazy-cross-ppriest"
+    },
+    {
+      "title": "Daisu-Kiss (ppriest)",
+      "sn": "daiskiss",
+      "family": "daiskiss",
+      "key": "daisu-kiss-ppriest"
+    },
+    {
+      "title": "Fantastic Journey (ppriest)",
+      "sn": "fantjour",
+      "family": "fantjour",
+      "key": "fantastic-journey-ppriest"
+    },
+    {
+      "title": "Finest Hour",
+      "sn": "finehour",
+      "family": "finehour",
+      "key": "finehour"
+    },
+    {
+      "title": "Hyper Duel",
+      "sn": "hyprduel",
+      "family": "hyprduel",
+      "key": "hyprduel"
+    },
+    {
+      "title": "Magical Error wo Sagase",
+      "sn": "magerror",
+      "family": "magerror",
+      "key": "magerror"
+    },
+    {
+      "title": "Ordyne (kuzearcade)",
+      "sn": "ordyne",
+      "family": "ordyne",
+      "key": "ordyne"
+    },
+    {
+      "title": "Sexy Parodius (ppriest)",
+      "sn": "sexyparo",
+      "family": "sexyparo",
+      "key": "sexy-parodius-ppriest"
+    },
+    {
+      "title": "Super World Stadium '92",
+      "sn": "sws92",
+      "family": "sws92",
+      "key": "sws92"
+    },
+    {
+      "title": "Super World Stadium '93",
+      "sn": "sws93",
+      "family": "sws93",
+      "key": "sws93"
+    },
+    {
+      "title": "Suzuka 8 Hours 2",
+      "sn": "suzuk8h2",
+      "family": "suzuk8h2",
+      "key": "suzuk8h2"
+    },
+    {
+      "title": "Tokimeki Memorial Taisen Puzzle-dama (ppriest)",
+      "sn": "tkmmpzdm",
+      "family": "tkmmpzdm",
+      "key": "tokimeki-memorial-taisen-puzzle-dama-ppriest"
+    },
+    {
+      "title": "Wardner (World)",
+      "sn": "wardner",
+      "family": "wardner",
+      "key": "wardner-world"
+    },
+    {
+      "title": "Winning Spike (ppriest)",
+      "sn": "winspike",
+      "family": "winspike",
+      "key": "winning-spike-ppriest"
+    },
+    {
+      "title": "Bowl-O-Rama (Gm0rk)",
+      "sn": "bowlrama",
+      "family": "bowlrama",
+      "key": "bowlrama"
+    },
+    {
+      "title": "Danger Express (Gm0rk)",
+      "sn": "dangerex",
+      "family": "dangerex",
+      "key": "dangerex"
+    },
+    {
+      "title": "Road Riot 4WD (Gm0rk)",
+      "sn": "roadriot",
+      "family": "roadriot",
+      "key": "roadriot"
+    },
+    {
+      "title": "Blue Hawk",
+      "sn": "bluehawk",
+      "family": "bluehawk",
+      "key": "bluehawk"
+    },
+    {
+      "title": "Flying Tiger",
+      "sn": "flytiger",
+      "family": "flytiger",
+      "key": "flytiger"
+    },
+    {
+      "title": "Gun Dealer '94",
+      "sn": "gundl94",
+      "family": "gundl94",
+      "key": "gundl94"
+    },
+    {
+      "title": "Ordyne (bazset)",
+      "sn": "ordyneje",
+      "family": "ordyne",
+      "key": "ordyneje"
+    },
+    {
+      "title": "Pop Bingo",
+      "sn": "popbingo",
+      "family": "popbingo",
+      "key": "popbingo"
+    },
+    {
+      "title": "R-Shark",
+      "sn": "rshark",
+      "family": "rshark",
+      "key": "rshark"
+    },
+    {
+      "title": "Sadari",
+      "sn": "sadari",
+      "family": "sadari",
+      "key": "sadari"
+    },
+    {
+      "title": "Super-X",
+      "sn": "superx",
+      "family": "superx",
+      "key": "superx"
+    },
+    {
+      "title": "The Last Day",
+      "sn": "lastday",
+      "family": "lastday",
+      "key": "lastday"
+    },
+    {
+      "title": "Pig Out: Dine Like a Swine!",
+      "sn": "pigout",
+      "family": "pigout",
+      "key": "pigout"
+    },
+    {
+      "title": "Primal Rage",
+      "sn": "primrage",
+      "family": "primrage",
+      "key": "primrage"
+    },
+    {
+      "title": "WEC Le Mans 24",
+      "sn": "wecleman",
+      "family": "wecleman",
+      "key": "wecleman"
+    },
+    {
+      "title": "Escape Kids",
+      "sn": "esckids",
+      "family": "esckids",
+      "key": "escape-kids-asia-4-players"
+    },
+    {
+      "title": "'96 Flag Rally",
+      "sn": "flagrall",
+      "family": "flagrall",
+      "key": "flagrall"
+    },
+    {
+      "title": "1945k III",
+      "sn": "1945kiii",
+      "family": "1945kiii",
+      "key": "1945kiii"
+    },
+    {
+      "title": "Gaiapolis",
+      "sn": "gaiapols",
+      "family": "gaiapols",
+      "key": "gaiapols"
+    },
+    {
+      "title": "Solite Spirits",
+      "sn": "slspirit",
+      "family": "slspirit",
+      "key": "slspirit"
+    },
+    {
+      "title": "Golden Par Golf (Gm0rk)",
+      "sn": "gpgolf",
+      "family": "gpgolf",
+      "key": "gpgolf"
+    },
+    {
+      "title": "Golden Tee Golf (Gm0rk)",
+      "sn": "gtg",
+      "family": "gtg",
+      "key": "gtg"
+    },
+    {
+      "title": "Golden Tee Golf II (Gm0rk)",
+      "sn": "gtg2",
+      "family": "gtg2",
+      "key": "gtg2"
+    },
+    {
+      "title": "Gondomania",
+      "sn": "gondo",
+      "family": "gondo",
+      "key": "gondo"
+    },
+    {
+      "title": "Riot",
+      "sn": "riot",
+      "family": "riot",
+      "key": "riot"
+    },
+    {
+      "title": "Samurai Shodown 64: Warriors Rage",
+      "sn": "sams64_2",
+      "family": "sams64_2",
+      "key": "sams64_2"
+    },
+    {
+      "title": "Cuby Bop",
+      "sn": "cubybop",
+      "family": "cubybop",
+      "key": "cubybop"
+    },
+    {
+      "title": "Evil Stone",
+      "sn": "evilston",
+      "family": "evilston",
+      "key": "evilston"
+    },
+    {
+      "title": "Nostradamus (decoryah)",
+      "sn": "nost",
+      "family": "nost",
+      "key": "nostradamus-decoryah"
+    },
+    {
+      "title": "Palamedes",
+      "sn": "palamed",
+      "family": "palamed",
+      "key": "palamed"
+    },
+    {
+      "title": "Play Girls",
+      "sn": "plgirls",
+      "family": "plgirls",
+      "key": "plgirls"
+    },
+    {
+      "title": "Play Girls 2",
+      "sn": "plgirls2",
+      "family": "plgirls2",
+      "key": "plgirls2"
+    },
+    {
+      "title": "Plotting",
+      "sn": "plotting",
+      "family": "plotting",
+      "key": "plotting"
+    },
+    {
+      "title": "Tube-It",
+      "sn": "tubeit",
+      "family": "cachat",
+      "key": "tubeit"
+    },
+    {
+      "title": "Go By RC",
+      "sn": "gobyrc",
+      "family": "gobyrc",
+      "key": "gobyrc"
+    },
+    {
+      "title": "Kollon",
+      "sn": "kollon",
+      "family": "kollon",
+      "key": "kollon"
+    },
+    {
+      "title": "Mahjong Oh",
+      "sn": "mahjngoh",
+      "family": "mahjngoh",
+      "key": "mahjngoh"
+    },
+    {
+      "title": "Neck-N-Neck (Gm0rk)",
+      "sn": "neckneck",
+      "family": "neckneck",
+      "key": "neckneck"
+    },
+    {
+      "title": "Night Raid",
+      "sn": "nightrai",
+      "family": "nightrai",
+      "key": "nightrai"
+    },
+    {
+      "title": "Otenami Haiken Final",
+      "sn": "otenamhf",
+      "family": "otenamhf",
+      "key": "otenamhf"
+    },
+    {
+      "title": "Otenki Kororin",
+      "sn": "otenki",
+      "family": "otenki",
+      "key": "otenki"
+    },
+    {
+      "title": "Psyvariar -Medium Unit-",
+      "sn": "psyvaria",
+      "family": "psyvaria",
+      "key": "psyvaria"
+    },
+    {
+      "title": "Psyvariar -Revision-",
+      "sn": "psyvarrv",
+      "family": "psyvarrv",
+      "key": "psyvarrv"
+    },
+    {
+      "title": "Ray Crisis",
+      "sn": "raycris",
+      "family": "raycris",
+      "key": "raycris"
+    },
+    {
+      "title": "Shanghai Sangokuhai Tougi",
+      "sn": "shangtou",
+      "family": "shangtou",
+      "key": "shangtou"
+    },
+    {
+      "title": "Shanghai Shoryu Sairin",
+      "sn": "shanghss",
+      "family": "shanghss",
+      "key": "shanghss"
+    },
+    {
+      "title": "Shikigami no Shiro",
+      "sn": "shikigam",
+      "family": "shikigam",
+      "key": "shikigam"
+    },
+    {
+      "title": "Soutenryu",
+      "sn": "soutenry",
+      "family": "soutenry",
+      "key": "soutenry"
+    },
+    {
+      "title": "Super Puzzle Bobble",
+      "sn": "spuzbobl",
+      "family": "spuzbobl",
+      "key": "spuzbobl"
+    },
+    {
+      "title": "Usagi",
+      "sn": "usagi",
+      "family": "usagi",
+      "key": "usagi"
+    },
+    {
+      "title": "Zoku Otenamihaiken",
+      "sn": "zokuotena",
+      "family": "zokuoten",
+      "key": "zokuotena"
+    },
+    {
+      "title": "Zooo",
+      "sn": "zooo",
+      "family": "zooo",
+      "key": "zooo"
+    },
+    {
+      "title": "Cool Minigame Collection (ppriest)",
+      "sn": "coolmini",
+      "family": "coolmini",
+      "key": "cool-minigame-collection-ppriest"
+    },
+    {
+      "title": "Date Quiz Go Go Episode 2 (ppriest)",
+      "sn": "dquizgo2",
+      "family": "dquizgo2",
+      "key": "date-quiz-go-go-episode-2-ppriest"
+    },
+    {
+      "title": "Jumping Break (ppriest)",
+      "sn": "jmpbreak",
+      "family": "jmpbreak",
+      "key": "jumping-break-ppriest"
+    },
+    {
+      "title": "Mission Craft (ppriest)",
+      "sn": "misncrft",
+      "family": "misncrft",
+      "key": "mission-craft-ppriest"
+    },
+    {
+      "title": "Mr. Dig (ppriest)",
+      "sn": "mrdig",
+      "family": "mrdig",
+      "key": "mr-dig-ppriest"
+    },
+    {
+      "title": "Mr. Kicker (ppriest)",
+      "sn": "mrkicker",
+      "family": "mrkicker",
+      "key": "mr-kicker-ppriest"
+    },
+    {
+      "title": "New Cross Pang (ppriest)",
+      "sn": "newxpang",
+      "family": "newxpang",
+      "key": "new-cross-pang-ppriest"
+    },
+    {
+      "title": "Poosho Poosho (ppriest)",
+      "sn": "poosho",
+      "family": "poosho",
+      "key": "poosho-poosho-ppriest"
+    },
+    {
+      "title": "Sokoban LE",
+      "sn": "sokobanle",
+      "family": null,
+      "key": "sokobanle"
+    },
+    {
+      "title": "SQIJ 2018",
+      "sn": "sqij",
+      "family": null,
+      "key": "sqij"
+    },
+    {
+      "title": "Super Lup Lup Puzzle (ppriest)",
+      "sn": "suplup",
+      "family": "suplup",
+      "key": "super-lup-lup-puzzle-ppriest"
+    },
+    {
+      "title": "The Speccies 2",
+      "sn": "speccies2",
+      "family": null,
+      "key": "speccies2"
+    },
+    {
+      "title": "Toy Land Adventure (ppriest)",
+      "sn": "toyland",
+      "family": "toyland",
+      "key": "toy-land-adventure-ppriest"
+    },
+    {
+      "title": "Vamf x1/2 (ppriest)",
+      "sn": "vamphalf",
+      "family": "vamphalf",
+      "key": "vamf-x1-2-ppriest"
+    },
+    {
+      "title": "World Adventure (ppriest)",
+      "sn": "worldadv",
+      "family": "worldadv",
+      "key": "world-adventure-ppriest"
+    },
+    {
+      "title": "Final Godori (ppriest)",
+      "sn": "finalgdr",
+      "family": "finalgdr",
+      "key": "final-godori-ppriest"
+    },
+    {
+      "title": "Solitaire (ppriest)",
+      "sn": "solitaire",
+      "family": "solitaire",
+      "key": "solitaire-ppriest"
+    },
+    {
+      "title": "Yori Jori Kuk Kuk (ppriest)",
+      "sn": "yorijori",
+      "family": "yorijori",
+      "key": "yori-jori-kuk-kuk-ppriest"
+    },
+    {
+      "title": "Age Of Heroes - Silkroad 2 (ppriest)",
+      "sn": "aoh",
+      "family": "aoh",
+      "key": "age-of-heroes-silkroad-2-ppriest"
+    },
+    {
+      "title": "Fortress 2 Blue Arcade (ppriest)",
+      "sn": "fort2b",
+      "family": "fort2b",
+      "key": "fortress-2-blue-arcade-ppriest"
+    },
+    {
+      "title": "Genix Family (ppriest)",
+      "sn": "genix",
+      "family": "genix",
+      "key": "genix-family-ppriest"
+    },
+    {
+      "title": "Hidden Catch 2000 (ppriest)",
+      "sn": "hidnc2k",
+      "family": "hidnc2k",
+      "key": "hidden-catch-2000-ppriest"
+    },
+    {
+      "title": "Hidden Catch 3 (ppriest)",
+      "sn": "hidctch3",
+      "family": "hidctch3",
+      "key": "hidden-catch-3-ppriest"
+    },
+    {
+      "title": "KlonDike+ (ppriest)",
+      "sn": "klondkp",
+      "family": "klondkp",
+      "key": "klondike-ppriest"
+    },
+    {
+      "title": "Monster Maulers",
+      "sn": "mmaulers",
+      "family": "mmaulers",
+      "key": "mmaulers"
+    },
+    {
+      "title": "Naname de Magic!",
+      "sn": "naname",
+      "family": "naname",
+      "key": "naname"
+    },
+    {
+      "title": "New Hidden Catch (ppriest)",
+      "sn": "nhidctch",
+      "family": "nhidctch",
+      "key": "new-hidden-catch-ppriest"
+    },
+    {
+      "title": "Oh My God!",
+      "sn": "ohmygod",
+      "family": "ohmygod",
+      "key": "ohmygod"
+    },
+    {
+      "title": "Penfan Girls - Step1. Mild Mind (ppriest)",
+      "sn": "penfan",
+      "family": "penfan",
+      "key": "penfan-girls-step1-mild-mind-ppriest"
+    },
+    {
+      "title": "Pirates (ppriest)",
+      "sn": "pirates",
+      "family": "pirates",
+      "key": "pirates-ppriest"
+    },
+    {
+      "title": "Puzzle King (Dance & Puzzle)",
+      "sn": "puzzlekg",
+      "family": "puzzlekg",
+      "key": "puzzle-king-ppriest"
+    },
+    {
+      "title": "Racin' Force (ppriest)",
+      "sn": "racinfrc",
+      "family": "racinfrc",
+      "key": "racin-force-ppriest"
+    },
+    {
+      "title": "Run and Gun 2 (ppriest)",
+      "sn": "rungun2",
+      "family": "rungun2",
+      "key": "run-and-gun-2-ppriest"
+    },
+    {
+      "title": "Rushing Heroes (ppriest)",
+      "sn": "rushhero",
+      "family": "rushhero",
+      "key": "rushing-heroes-ppriest"
+    },
+    {
+      "title": "Shogun Warriors (bazset)",
+      "sn": "shogwarr",
+      "family": "shogwarr",
+      "key": "shogwarr"
+    },
+    {
+      "title": "Steal See (ppriest)",
+      "sn": "stealsee",
+      "family": "stealsee",
+      "key": "steal-see-ppriest"
+    },
+    {
+      "title": "Tank II",
+      "sn": "tankii",
+      "family": "tankii",
+      "key": "tankii"
+    },
+    {
+      "title": "Dog Fight",
+      "sn": "dogfight",
+      "family": "dogfight",
+      "key": "dogfight"
+    },
+    {
+      "title": "Konami's Open Golf Championship (ppriest)",
+      "sn": "opengolf",
+      "family": "opengolf",
+      "key": "konami-s-open-golf-championship-ppriest"
+    },
+    {
+      "title": "Raccoon World (ppriest)",
+      "sn": "raccoon",
+      "family": "raccoon",
+      "key": "raccoon-world-ppriest"
+    },
+    {
+      "title": "The Bounty",
+      "sn": "bounty",
+      "family": "bounty",
+      "key": "bounty"
+    },
+    {
+      "title": "The Percussor",
+      "sn": "percuss",
+      "family": "percuss",
+      "key": "percuss"
+    },
+    {
+      "title": "Bal Cube",
+      "sn": "balcube",
+      "family": "balcube",
+      "key": "balcube"
+    },
+    {
+      "title": "Bang Bang Ball",
+      "sn": "bangball",
+      "family": "bangball",
+      "key": "bangball"
+    },
+    {
+      "title": "Blazing Tornado",
+      "sn": "blzntrnd",
+      "family": "blzntrnd",
+      "key": "blzntrnd"
+    },
+    {
+      "title": "Daitoride",
+      "sn": "daitorid",
+      "family": "daitorid",
+      "key": "daitorid"
+    },
+    {
+      "title": "Dharma Doujou",
+      "sn": "dharma",
+      "family": "dharma",
+      "key": "dharma"
+    },
+    {
+      "title": "Grand Striker 2",
+      "sn": "gstrik2",
+      "family": "gstrik2",
+      "key": "gstrik2"
+    },
+    {
+      "title": "Gun Master",
+      "sn": "gunmast",
+      "family": "gunmast",
+      "key": "gunmast"
+    },
+    {
+      "title": "Lady Killer",
+      "sn": "ladykill",
+      "family": "ladykill",
+      "key": "ladykill"
+    },
+    {
+      "title": "Last Fortress - Toride",
+      "sn": "lastfort",
+      "family": "lastfort",
+      "key": "lastfort"
+    },
+    {
+      "title": "Mahjong Doukyuusei Special",
+      "sn": "dokyusp",
+      "family": "dokyusp",
+      "key": "dokyusp"
+    },
+    {
+      "title": "Mahjong Gakuensai 2",
+      "sn": "gakusai2",
+      "family": "gakusai2",
+      "key": "gakusai2"
+    },
+    {
+      "title": "Meikyu Jima",
+      "sn": "kikcubic",
+      "family": "kikcubic",
+      "key": "kickle-cubicle"
+    },
+    {
+      "title": "Meikyu Jima (bazset)",
+      "sn": "kikcubic",
+      "family": "kikcubic",
+      "key": "meikyu-jima"
+    },
+    {
+      "title": "Mouja",
+      "sn": "mouja",
+      "family": "mouja",
+      "key": "mouja"
+    },
+    {
+      "title": "Mouse Shooter GoGo",
+      "sn": "msgogo",
+      "family": "msgogo",
+      "key": "msgogo"
+    },
+    {
+      "title": "Pang Pom's",
+      "sn": "pangpoms",
+      "family": "pangpoms",
+      "key": "pangpoms"
+    },
+    {
+      "title": "Poitto!",
+      "sn": "poitto",
+      "family": "poitto",
+      "key": "poitto"
+    },
+    {
+      "title": "Pururun",
+      "sn": "pururun",
+      "family": "pururun",
+      "key": "pururun"
+    },
+    {
+      "title": "Puzzli",
+      "sn": "puzzli",
+      "family": "puzzli",
+      "key": "puzzli"
+    },
+    {
+      "title": "Sankokushi",
+      "sn": "3kokushi",
+      "family": "3kokushi",
+      "key": "3kokushi"
+    },
+    {
+      "title": "Sky Alert",
+      "sn": "skyalert",
+      "family": "skyalert",
+      "key": "skyalert"
+    },
+    {
+      "title": "Spotty (ppriest)",
+      "sn": "spotty",
+      "family": "spotty",
+      "key": "spotty-ppriest"
+    },
+    {
+      "title": "Super Bubble 2003 (ppriest)",
+      "sn": "sb2003",
+      "family": "sb2003",
+      "key": "super-bubble-2003-ppriest"
+    },
+    {
+      "title": "The Karate Tournament",
+      "sn": "karatour",
+      "family": "karatour",
+      "key": "karatour"
+    },
+    {
+      "title": "To Heart House (ppriest)",
+      "sn": "hrthouse",
+      "family": "hrthouse",
+      "key": "to-heart-house-ppriest"
+    },
+    {
+      "title": "Toride II Adauchi Gaiden",
+      "sn": "toride2g",
+      "family": "toride2g",
+      "key": "toride2g"
+    },
+    {
+      "title": "Varia Metal",
+      "sn": "vmetal",
+      "family": "vmetal",
+      "key": "vmetal"
+    },
+    {
+      "title": "Ambush",
+      "sn": "ambush",
+      "family": "ambush",
+      "key": "ambush"
+    },
+    {
+      "title": "G-Stream G2020",
+      "sn": "gstream",
+      "family": "gstream",
+      "key": "gstream"
+    },
+    {
+      "title": "Jackie Chan - The Kung-Fu Master",
+      "sn": "jchan",
+      "family": "jchan",
+      "key": "jchan"
+    },
+    {
+      "title": "Jackie Chan in Fists of Fire",
+      "sn": "jchan2",
+      "family": "jchan2",
+      "key": "jchan2"
+    },
+    {
+      "title": "Juezhan Tianhuang (bazset)",
+      "sn": "jzth",
+      "family": "jzth",
+      "key": "jzth"
+    },
+    {
+      "title": "Music Ball",
+      "sn": "musicbal",
+      "family": "musicbal",
+      "key": "musicbal"
+    },
+    {
+      "title": "Sauro",
+      "sn": "sauro",
+      "family": "sauro",
+      "key": "sauro"
+    },
+    {
+      "title": "Speed Ball",
+      "sn": "speedbal",
+      "family": "speedbal",
+      "key": "speedbal"
+    },
+    {
+      "title": "Tricky Doc",
+      "sn": "trckydoc",
+      "family": "trckydoc",
+      "key": "trckydoc"
+    },
+    {
+      "title": "Baryon - Future Assault",
+      "sn": "baryon",
+      "family": "baryon",
+      "key": "baryon"
+    },
+    {
+      "title": "Cute Fighter",
+      "sn": "cutefght",
+      "family": "cutefght",
+      "key": "cutefght"
+    },
+    {
+      "title": "Dream World",
+      "sn": "dreamwld",
+      "family": "dreamwld",
+      "key": "dreamwld"
+    },
+    {
+      "title": "Gaia - The Last Choice of Earth",
+      "sn": "gaialast",
+      "family": "gaialast",
+      "key": "gaialast"
+    },
+    {
+      "title": "Rolling Crush",
+      "sn": "rolcrush",
+      "family": "rolcrush",
+      "key": "rolcrush"
+    },
+    {
+      "title": "Ufo Senshi Yohko Chan",
+      "sn": "ufosensi",
+      "family": "ufosensi",
+      "key": "ufosensi"
+    },
+    {
+      "title": "Wonder Boy: Monster Land",
+      "sn": "wbmlvcd",
+      "family": "wbml",
+      "key": "wbmlvcd"
+    },
+    {
+      "title": "1942 (PlayChoice-10)",
+      "sn": "pc_1942",
+      "family": "pc_1942",
+      "key": "1942-playchoice-10"
+    },
+    {
+      "title": "Baseball (ppriest)",
+      "sn": "pc_bball",
+      "family": "pc_bball",
+      "key": "baseball-playchoice-10"
+    },
+    {
+      "title": "Baseball Stars- Be a Champ!",
+      "sn": "pc_bstar",
+      "family": "pc_bstar",
+      "key": "baseball-stars-be-a-champ"
+    },
+    {
+      "title": "Bases Loaded (ppriest)",
+      "sn": "pc_bload",
+      "family": "pc_bload",
+      "key": "playchoice-10-bios-prototype-playchoice-10-2"
+    },
+    {
+      "title": "Captain Sky Hawk (ppriest)",
+      "sn": "pc_cshwk",
+      "family": "pc_cshwk",
+      "key": "captain-sky-hawk-playchoice-10"
+    },
+    {
+      "title": "Castlevania (ppriest)",
+      "sn": "pc_cvnia",
+      "family": "pc_cvnia",
+      "key": "castlevania-playchoice-10"
+    },
+    {
+      "title": "Chip'n Dale- Rescue Rangers",
+      "sn": "pc_rrngr",
+      "family": "pc_rrngr",
+      "key": "chip-n-dale-rescue-rangers"
+    },
+    {
+      "title": "Contra (PlayChoice-10)",
+      "sn": "pc_cntra",
+      "family": "pc_cntra",
+      "key": "contra-playchoice-10"
+    },
+    {
+      "title": "DoDonPachi Dai-Ou-Jou Tamashii (decoryah)",
+      "sn": "ddpdojt",
+      "family": "ddpdojt",
+      "key": "dodonpachi-dai-ou-jou-tamashii-decoryah"
+    },
+    {
+      "title": "Double Dragon (PlayChoice-10)",
+      "sn": "pc_ddrgn",
+      "family": "pc_ddrgn",
+      "key": "double-dragon-playchoice-10"
+    },
+    {
+      "title": "Double Dribble (PlayChoice-10)",
+      "sn": "pc_dbldr",
+      "family": "pc_dbldr",
+      "key": "double-dribble-playchoice-10"
+    },
+    {
+      "title": "Duck Hunt (ppriest)",
+      "sn": "pc_duckh",
+      "family": "pc_duckh",
+      "key": "duck-hunt-playchoice-10"
+    },
+    {
+      "title": "Excitebike (ppriest)",
+      "sn": "pc_ebike",
+      "family": "pc_ebike",
+      "key": "excitebike-playchoice-10"
+    },
+    {
+      "title": "Gauntlet (PlayChoice-10)",
+      "sn": "pc_gntlt",
+      "family": "pc_gntlt",
+      "key": "gauntlet-playchoice-10"
+    },
+    {
+      "title": "Golf (ppriest)",
+      "sn": "pc_golf",
+      "family": "pc_golf",
+      "key": "golf-playchoice-10"
+    },
+    {
+      "title": "Gradius (PlayChoice-10)",
+      "sn": "pc_grdus",
+      "family": "pc_grdus",
+      "key": "gradius-playchoice-10"
+    },
+    {
+      "title": "Hogan's Alley (ppriest)",
+      "sn": "pc_hgaly",
+      "family": "pc_hgaly",
+      "key": "hogan-s-alley-playchoice-10"
+    },
+    {
+      "title": "Knights of Valour 2 New Legend",
+      "sn": "kov2nl",
+      "family": "kov2nl",
+      "key": "knights-of-valour-2-new-legend"
+    },
+    {
+      "title": "Knights of Valour 3",
+      "sn": "kov3",
+      "family": "kov3",
+      "key": "knights-of-valour-3"
+    },
+    {
+      "title": "Kung Fu (ppriest)",
+      "sn": "pc_kngfu",
+      "family": "pc_kngfu",
+      "key": "kung-fu-playchoice-10"
+    },
+    {
+      "title": "Mario Bros. (PlayChoice-10)",
+      "sn": "pc_mario",
+      "family": "pc_mario",
+      "key": "mario-bros-playchoice-10"
+    },
+    {
+      "title": "Mario's Open Golf (ppriest)",
+      "sn": "pc_moglf",
+      "family": "pc_moglf",
+      "key": "mario-s-open-golf-playchoice-10"
+    },
+    {
+      "title": "Metroid (ppriest)",
+      "sn": "pc_mtoid",
+      "family": "pc_mtoid",
+      "key": "metroid-playchoice-10"
+    },
+    {
+      "title": "Mike Tyson's Punch-Out!! (ppriest)",
+      "sn": "pc_miket",
+      "family": "pc_miket",
+      "key": "mike-tyson-s-punch-out-playchoice-10"
+    },
+    {
+      "title": "Ninja Gaiden (ppriest)",
+      "sn": "pc_ngaid",
+      "family": "pc_ngaid",
+      "key": "ninja-gaiden-playchoice-10"
+    },
+    {
+      "title": "Ninja Gaiden Episode II- The Dark Sword of Chaos",
+      "sn": "pc_ngai2",
+      "family": "pc_ngai2",
+      "key": "ninja-gaiden-episode-ii-the-dark-sword-of-chaos"
+    },
+    {
+      "title": "Ninja Gaiden Episode III- The Ancient Ship of Doom",
+      "sn": "pc_ngai3",
+      "family": "pc_ngai3",
+      "key": "ninja-gaiden-episode-iii-the-ancient-ship-of-doom"
+    },
+    {
+      "title": "Oriental Legend 2 (decoryah)",
+      "sn": "orleg2",
+      "family": "orleg2",
+      "key": "oriental-legend-2-decoryah"
+    },
+    {
+      "title": "PinBot (ppriest)",
+      "sn": "pc_pinbt",
+      "family": "pc_pinbt",
+      "key": "pinbot-playchoice-10"
+    },
+    {
+      "title": "Power Blade (ppriest)",
+      "sn": "pc_pwbld",
+      "family": "pc_pwbld",
+      "key": "power-blade-playchoice-10"
+    },
+    {
+      "title": "Pro Wrestling (ppriest)",
+      "sn": "pc_pwrst",
+      "family": "pc_pwrst",
+      "key": "pro-wrestling-playchoice-10"
+    },
+    {
+      "title": "R.C. Pro-Am (ppriest)",
+      "sn": "pc_rcpam",
+      "family": "pc_rcpam",
+      "key": "r-c-pro-am-playchoice-10"
+    },
+    {
+      "title": "Rad Racer (ppriest)",
+      "sn": "pc_radrc",
+      "family": "pc_radrc",
+      "key": "rad-racer-playchoice-10"
+    },
+    {
+      "title": "Rad Racer II (ppriest)",
+      "sn": "pc_radr2",
+      "family": "pc_radr2",
+      "key": "rad-racer-ii-playchoice-10"
+    },
+    {
+      "title": "Rockin' Kats (ppriest)",
+      "sn": "pc_rkats",
+      "family": "pc_rkats",
+      "key": "rockin-kats-playchoice-10"
+    },
+    {
+      "title": "Rush'n Attack (ppriest)",
+      "sn": "pc_rnatk",
+      "family": "pc_rnatk",
+      "key": "rush-n-attack-playchoice-10"
+    },
+    {
+      "title": "Rygar (PlayChoice-10)",
+      "sn": "pc_rygar",
+      "family": "pc_rygar",
+      "key": "rygar-playchoice-10"
+    },
+    {
+      "title": "Super C (ppriest)",
+      "sn": "pc_suprc",
+      "family": "pc_suprc",
+      "key": "super-c-playchoice-10"
+    },
+    {
+      "title": "Super Mario Bros. (ppriest)",
+      "sn": "pc_smb",
+      "family": "pc_smb",
+      "key": "super-mario-bros-playchoice-10"
+    },
+    {
+      "title": "Super Mario Bros. 2 (ppriest)",
+      "sn": "pc_smb2",
+      "family": "pc_smb2",
+      "key": "super-mario-bros-2-playchoice-10"
+    },
+    {
+      "title": "Super Mario Bros. 3 (ppriest)",
+      "sn": "pc_smb3",
+      "family": "pc_smb3",
+      "key": "super-mario-bros-3-playchoice-10"
+    },
+    {
+      "title": "Tecmo Bowl (ppriest)",
+      "sn": "pc_tbowl",
+      "family": "pc_tbowl",
+      "key": "tecmo-bowl-playchoice-10"
+    },
+    {
+      "title": "Teenage Mutant Ninja Turtles (PlayChoice-10)",
+      "sn": "pc_tmnt",
+      "family": "pc_tmnt",
+      "key": "teenage-mutant-ninja-turtles-playchoice-10"
+    },
+    {
+      "title": "Tennis (ppriest)",
+      "sn": "pc_tenis",
+      "family": "pc_tenis",
+      "key": "tennis-playchoice-10"
+    },
+    {
+      "title": "The Goonies (ppriest)",
+      "sn": "pc_goons",
+      "family": "pc_goons",
+      "key": "the-goonies-playchoice-10"
+    },
+    {
+      "title": "The King of Fighters '98: Ultimate Match HERO (decoryah)",
+      "sn": "kof98umh",
+      "family": "kof98umh",
+      "key": "the-king-of-fighters-98-ultimate-match-hero-decoryah"
+    },
+    {
+      "title": "Tiny Toon Adventures (ppriest)",
+      "sn": "pc_ttoon",
+      "family": "pc_ttoon",
+      "key": "playchoice-10-bios-prototype-playchoice-10"
+    },
+    {
+      "title": "Track & Field (PlayChoice-10)",
+      "sn": "pc_tkfld",
+      "family": "pc_tkfld",
+      "key": "track-field-playchoice-10"
+    },
+    {
+      "title": "Trojan (PlayChoice-10)",
+      "sn": "pc_trjan",
+      "family": "pc_trjan",
+      "key": "trojan-playchoice-10"
+    },
+    {
+      "title": "Uncle Fester's Quest- The Addams Family",
+      "sn": "pc_ftqst",
+      "family": "pc_ftqst",
+      "key": "uncle-fester-s-quest-the-addams-family"
+    },
+    {
+      "title": "Volley Ball (ppriest)",
+      "sn": "pc_vball",
+      "family": "pc_vball",
+      "key": "volley-ball-playchoice-10"
+    },
+    {
+      "title": "Wild Gunman (ppriest)",
+      "sn": "pc_wgnmn",
+      "family": "pc_wgnmn",
+      "key": "wild-gunman-playchoice-10"
+    },
+    {
+      "title": "1942 (PlayChoice-10)",
+      "sn": "pc_1942",
+      "family": "pc_1942",
+      "key": "pc_1942"
+    },
+    {
+      "title": "7 Ordi",
+      "sn": "7ordi",
+      "family": "7ordi",
+      "key": "7ordi"
+    },
+    {
+      "title": "Aqua Jack (bazset)",
+      "sn": "aquajack",
+      "family": "aquajack",
+      "key": "aqua-jack-bazset"
+    },
+    {
+      "title": "Aqua Jack (Ongo)",
+      "sn": "aquajack",
+      "family": "aquajack",
+      "key": "aqua-jack-ongo"
+    },
+    {
+      "title": "Baseball (Ongo)",
+      "sn": "pc_bball",
+      "family": "pc_bball",
+      "key": "pc_bball"
+    },
+    {
+      "title": "Baseball Stars - Be a Champ!",
+      "sn": "pc_bstar",
+      "family": "pc_bstar",
+      "key": "pc_bstar"
+    },
+    {
+      "title": "Bases Loaded (Ongo)",
+      "sn": "pc_bload",
+      "family": "pc_bload",
+      "key": "pc_bload"
+    },
+    {
+      "title": "Bestri",
+      "sn": "bestri",
+      "family": "bestri",
+      "key": "bestri"
+    },
+    {
+      "title": "Big Twin",
+      "sn": "bigtwin",
+      "family": "bigtwin",
+      "key": "bigtwin"
+    },
+    {
+      "title": "Bomb Kick",
+      "sn": "bombkick",
+      "family": "bombkick",
+      "key": "bombkick"
+    },
+    {
+      "title": "Bubble Pong Pong",
+      "sn": "bublpong",
+      "family": "missb2",
+      "key": "bublpong"
+    },
+    {
+      "title": "Cannon Ball",
+      "sn": "cannball",
+      "family": "cannball",
+      "key": "cannball"
+    },
+    {
+      "title": "Captain Sky Hawk (Ongo)",
+      "sn": "pc_cshwk",
+      "family": "pc_cshwk",
+      "key": "pc_cshwk"
+    },
+    {
+      "title": "Castlevania (Ongo)",
+      "sn": "pc_cvnia",
+      "family": "pc_cvnia",
+      "key": "pc_cvnia"
+    },
+    {
+      "title": "Chip'n Dale - Rescue Rangers",
+      "sn": "pc_rrngr",
+      "family": "pc_rrngr",
+      "key": "pc_rrngr"
+    },
+    {
+      "title": "Contra (PlayChoice-10)",
+      "sn": "pc_cntra",
+      "family": "pc_cntra",
+      "key": "pc_cntra"
+    },
+    {
+      "title": "Cross Pang",
+      "sn": "crospang",
+      "family": "crospang",
+      "key": "crospang"
+    },
+    {
+      "title": "Deluxe 4 U",
+      "sn": "deluxe4u",
+      "family": "deluxe5",
+      "key": "deluxe4u"
+    },
+    {
+      "title": "Deluxe 5",
+      "sn": "deluxe5",
+      "family": "deluxe5",
+      "key": "deluxe5"
+    },
+    {
+      "title": "Donggul Donggul Haerong",
+      "sn": "donghaer",
+      "family": "donghaer",
+      "key": "donghaer"
+    },
+    {
+      "title": "Double Dragon (PlayChoice-10)",
+      "sn": "pc_ddrgn",
+      "family": "pc_ddrgn",
+      "key": "pc_ddrgn"
+    },
+    {
+      "title": "Double Dribble (PlayChoice-10)",
+      "sn": "pc_dbldr",
+      "family": "pc_dbldr",
+      "key": "pc_dbldr"
+    },
+    {
+      "title": "Double Point",
+      "sn": "dblpoint",
+      "family": "dblpoint",
+      "key": "dblpoint"
+    },
+    {
+      "title": "Duck Hunt (Ongo)",
+      "sn": "pc_duckh",
+      "family": "pc_duckh",
+      "key": "pc_duckh"
+    },
+    {
+      "title": "Excitebike (Ongo)",
+      "sn": "pc_ebike",
+      "family": "pc_ebike",
+      "key": "pc_ebike"
+    },
+    {
+      "title": "Fantasia II",
+      "sn": "fantsia2",
+      "family": "fantsia2",
+      "key": "fantsia2"
+    },
+    {
+      "title": "Gals Hustler",
+      "sn": "galhustl",
+      "family": "pgalvip",
+      "key": "galhustl"
+    },
+    {
+      "title": "Garogun Seroyang",
+      "sn": "garogun",
+      "family": "garogun",
+      "key": "garogun"
+    },
+    {
+      "title": "Gauntlet (PlayChoice-10)",
+      "sn": "pc_gntlt",
+      "family": "pc_gntlt",
+      "key": "pc_gntlt"
+    },
+    {
+      "title": "Golf (Ongo)",
+      "sn": "pc_golf",
+      "family": "pc_golf",
+      "key": "pc_golf"
+    },
+    {
+      "title": "Gradius (PlayChoice-10)",
+      "sn": "pc_grdus",
+      "family": "pc_grdus",
+      "key": "pc_grdus"
+    },
+    {
+      "title": "Gumbo",
+      "sn": "gumbo",
+      "family": "gumbo",
+      "key": "gumbo"
+    },
+    {
+      "title": "Heuk Sun Baek Sa",
+      "sn": "heuksun",
+      "family": "heuksun",
+      "key": "heuksun"
+    },
+    {
+      "title": "Hogan's Alley (Ongo)",
+      "sn": "pc_hgaly",
+      "family": "pc_hgaly",
+      "key": "pc_hgaly"
+    },
+    {
+      "title": "Honey Doll",
+      "sn": "honeydol",
+      "family": "honeydol",
+      "key": "honeydol"
+    },
+    {
+      "title": "Hot Blocks - Tetrix II",
+      "sn": "hotblock",
+      "family": "hotblock",
+      "key": "hotblock"
+    },
+    {
+      "title": "Hot Mind",
+      "sn": "hotmind",
+      "family": "hotmind",
+      "key": "hotmind"
+    },
+    {
+      "title": "Hot Night",
+      "sn": "hotnight",
+      "family": "newfant",
+      "key": "hotnight"
+    },
+    {
+      "title": "Jumping Pop (Nics)",
+      "sn": "jpopnics",
+      "family": "jpopnics",
+      "key": "jpopnics"
+    },
+    {
+      "title": "Komo Como",
+      "sn": "komocomo",
+      "family": "maddonna",
+      "key": "komocomo"
+    },
+    {
+      "title": "Kung Fu (Ongo)",
+      "sn": "pc_kngfu",
+      "family": "pc_kngfu",
+      "key": "pc_kngfu"
+    },
+    {
+      "title": "Las Vegas Girl",
+      "sn": "lvgirl94",
+      "family": "lvgirl94",
+      "key": "lvgirl94"
+    },
+    {
+      "title": "Mad Ball",
+      "sn": "madball",
+      "family": "madball",
+      "key": "madball"
+    },
+    {
+      "title": "Mad Donna",
+      "sn": "maddonna",
+      "family": "maddonna",
+      "key": "maddonna"
+    },
+    {
+      "title": "Magic Bubble",
+      "sn": "magicbub",
+      "family": "magicbub",
+      "key": "magicbub"
+    },
+    {
+      "title": "Magix",
+      "sn": "magix",
+      "family": "magix",
+      "key": "magix"
+    },
+    {
+      "title": "Mario Bros. (PlayChoice-10)",
+      "sn": "pc_mario",
+      "family": "pc_mario",
+      "key": "pc_mario"
+    },
+    {
+      "title": "Mario's Open Golf (Ongo)",
+      "sn": "pc_moglf",
+      "family": "pc_moglf",
+      "key": "pc_moglf"
+    },
+    {
+      "title": "Metroid (Ongo)",
+      "sn": "pc_mtoid",
+      "family": "pc_mtoid",
+      "key": "pc_mtoid"
+    },
+    {
+      "title": "Mike Tyson's Punch-Out!! (Ongo)",
+      "sn": "pc_miket",
+      "family": "pc_miket",
+      "key": "pc_miket"
+    },
+    {
+      "title": "Miss Bingo",
+      "sn": "msbingo",
+      "family": "msbingo",
+      "key": "msbingo"
+    },
+    {
+      "title": "Miss Bubble II",
+      "sn": "missb2",
+      "family": "missb2",
+      "key": "missb2"
+    },
+    {
+      "title": "Miss Puzzle (Clone of Gumbo)",
+      "sn": "mspuzzleg",
+      "family": "gumbo",
+      "key": "mspuzzleg"
+    },
+    {
+      "title": "Miss World 2002",
+      "sn": "missw02",
+      "family": "missw02",
+      "key": "missw02"
+    },
+    {
+      "title": "Multi 5",
+      "sn": "nmg5",
+      "family": "nmg5",
+      "key": "nmg5"
+    },
+    {
+      "title": "Ninja Gaiden (Ongo)",
+      "sn": "pc_ngaid",
+      "family": "pc_ngaid",
+      "key": "pc_ngaid"
+    },
+    {
+      "title": "Ninja Gaiden Episode II - The Dark Sword of Chaos",
+      "sn": "pc_ngai2",
+      "family": "pc_ngai2",
+      "key": "pc_ngai2"
+    },
+    {
+      "title": "Ninja Gaiden Episode III - The Ancient Ship of Doom",
+      "sn": "pc_ngai3",
+      "family": "pc_ngai3",
+      "key": "pc_ngai3"
+    },
+    {
+      "title": "Paparazzi",
+      "sn": "paprazzi",
+      "family": "paprazzi",
+      "key": "paprazzi"
+    },
+    {
+      "title": "Paradise",
+      "sn": "paradise",
+      "family": "paradise",
+      "key": "paradise"
+    },
+    {
+      "title": "Paradise 2 Deluxe",
+      "sn": "para2dx",
+      "family": "para2dx",
+      "key": "para2dx"
+    },
+    {
+      "title": "Paradise Deluxe",
+      "sn": "paradlx",
+      "family": "paradlx",
+      "key": "paradlx"
+    },
+    {
+      "title": "Penky",
+      "sn": "penky",
+      "family": "penky",
+      "key": "penky"
+    },
+    {
+      "title": "Perestroika Girls",
+      "sn": "perestro",
+      "family": "perestro",
+      "key": "perestro"
+    },
+    {
+      "title": "PinBot (Ongo)",
+      "sn": "pc_pinbt",
+      "family": "pc_pinbt",
+      "key": "pc_pinbt"
+    },
+    {
+      "title": "Pitapat Puzzle",
+      "sn": "pitapat",
+      "family": "pitapat",
+      "key": "pitapat"
+    },
+    {
+      "title": "Pocket Gals V.I.P (TomSVR)",
+      "sn": "pgalvipa",
+      "family": "pgalvip",
+      "key": "pgalvipa"
+    },
+    {
+      "title": "Power Blade (Ongo)",
+      "sn": "pc_pwbld",
+      "family": "pc_pwbld",
+      "key": "pc_pwbld"
+    },
+    {
+      "title": "Pro Wrestling (Ongo)",
+      "sn": "pc_pwrst",
+      "family": "pc_pwrst",
+      "key": "pc_pwrst"
+    },
+    {
+      "title": "Puzzle Club",
+      "sn": "pclubys",
+      "family": "pclubys",
+      "key": "pclubys"
+    },
+    {
+      "title": "R.C. Pro-Am (Ongo)",
+      "sn": "pc_rcpam",
+      "family": "pc_rcpam",
+      "key": "pc_rcpam"
+    },
+    {
+      "title": "Rad Racer (Ongo)",
+      "sn": "pc_radrc",
+      "family": "pc_radrc",
+      "key": "pc_radrc"
+    },
+    {
+      "title": "Rad Racer II (Ongo)",
+      "sn": "pc_radr2",
+      "family": "pc_radr2",
+      "key": "pc_radr2"
+    },
+    {
+      "title": "Rock Tris",
+      "sn": "rocktris",
+      "family": "rocktris",
+      "key": "rocktris"
+    },
+    {
+      "title": "Rockin' Kats (Ongo)",
+      "sn": "pc_rkats",
+      "family": "pc_rkats",
+      "key": "pc_rkats"
+    },
+    {
+      "title": "Rush'n Attack (Ongo)",
+      "sn": "pc_rnatk",
+      "family": "pc_rnatk",
+      "key": "pc_rnatk"
+    },
+    {
+      "title": "Rygar (PlayChoice-10)",
+      "sn": "pc_rygar",
+      "family": "pc_rygar",
+      "key": "pc_rygar"
+    },
+    {
+      "title": "Search Eye",
+      "sn": "searchey",
+      "family": "searchey",
+      "key": "searchey"
+    },
+    {
+      "title": "Search Eye Plus V2.0",
+      "sn": "searchp2",
+      "family": "searchp2",
+      "key": "searchp2"
+    },
+    {
+      "title": "Shocking",
+      "sn": "shocking",
+      "family": "shocking",
+      "key": "shocking"
+    },
+    {
+      "title": "Starblade",
+      "sn": "starblad",
+      "family": "starblad",
+      "key": "starblad"
+    },
+    {
+      "title": "Super C (Ongo)",
+      "sn": "pc_suprc",
+      "family": "pc_suprc",
+      "key": "pc_suprc"
+    },
+    {
+      "title": "Super Mario Bros. (Ongo)",
+      "sn": "pc_smb",
+      "family": "pc_smb",
+      "key": "pc_smb"
+    },
+    {
+      "title": "Super Mario Bros. 2 (Ongo)",
+      "sn": "pc_smb2",
+      "family": "pc_smb2",
+      "key": "pc_smb2"
+    },
+    {
+      "title": "Super Mario Bros. 3 (Ongo)",
+      "sn": "pc_smb3",
+      "family": "pc_smb3",
+      "key": "pc_smb3"
+    },
+    {
+      "title": "Target Ball",
+      "sn": "tgtballn",
+      "family": "tgtbal96",
+      "key": "tgtballn"
+    },
+    {
+      "title": "Target Ball '96",
+      "sn": "tgtbal96",
+      "family": "tgtbal96",
+      "key": "tgtbal96"
+    },
+    {
+      "title": "Tecmo Bowl (Ongo)",
+      "sn": "pc_tbowl",
+      "family": "pc_tbowl",
+      "key": "pc_tbowl"
+    },
+    {
+      "title": "Teenage Mutant Ninja Turtles (PlayChoice-10)",
+      "sn": "pc_tmnt",
+      "family": "pc_tmnt",
+      "key": "pc_tmnt"
+    },
+    {
+      "title": "Tennis (Ongo)",
+      "sn": "pc_tenis",
+      "family": "pc_tenis",
+      "key": "pc_tenis"
+    },
+    {
+      "title": "The Goonies (Ongo)",
+      "sn": "pc_goons",
+      "family": "pc_goons",
+      "key": "pc_goons"
+    },
+    {
+      "title": "The Return of Lady Frog",
+      "sn": "roldfrog",
+      "family": "roldfrog",
+      "key": "roldfrog"
+    },
+    {
+      "title": "Tiny Toon Adventures (Ongo)",
+      "sn": "pc_ttoon",
+      "family": "pc_ttoon",
+      "key": "pc_ttoon"
+    },
+    {
+      "title": "Torus",
+      "sn": "torus",
+      "family": "torus",
+      "key": "torus"
+    },
+    {
+      "title": "Track & Field (PlayChoice-10)",
+      "sn": "pc_tkfld",
+      "family": "pc_tkfld",
+      "key": "pc_tkfld"
+    },
+    {
+      "title": "Trojan (PlayChoice-10)",
+      "sn": "pc_trjan",
+      "family": "pc_trjan",
+      "key": "pc_trjan"
+    },
+    {
+      "title": "Uncle Fester's Quest - The Addams Family",
+      "sn": "pc_ftqst",
+      "family": "pc_ftqst",
+      "key": "pc_ftqst"
+    },
+    {
+      "title": "Volley Ball (Ongo)",
+      "sn": "pc_vball",
+      "family": "pc_vball",
+      "key": "pc_vball"
+    },
+    {
+      "title": "Wild Gunman (Ongo)",
+      "sn": "pc_wgnmn",
+      "family": "pc_wgnmn",
+      "key": "pc_wgnmn"
+    },
+    {
+      "title": "Winning Run",
+      "sn": "winrun",
+      "family": "winrun",
+      "key": "winrun"
+    },
+    {
+      "title": "Wonder Stick",
+      "sn": "wondstck",
+      "family": "wondstck",
+      "key": "wondstck"
+    },
+    {
+      "title": "WOW New Fantasia (TomSVR)",
+      "sn": "wownfanta",
+      "family": "wownfant",
+      "key": "wownfanta"
+    },
+    {
+      "title": "Zero Zone",
+      "sn": "zerozone",
+      "family": "zerozone",
+      "key": "zerozone"
+    },
+    {
+      "title": "Zip & Zap (TomSVR)",
+      "sn": "zipzapa",
+      "family": "zipzap",
+      "key": "zipzapa"
+    },
+    {
+      "title": "Kosodate Quiz My Angel",
+      "sn": "myangel",
+      "family": "myangel",
+      "key": "myangel"
+    },
+    {
+      "title": "Mobile Suit Gundam EX Revue",
+      "sn": "gundamex",
+      "family": "gundamex",
+      "key": "gundamex"
+    },
+    {
+      "title": "Penguin Brothers",
+      "sn": "penbros",
+      "family": "penbros",
+      "key": "penbros"
+    },
+    {
+      "title": "Wakakusamonogatari Mahjong Yonshimai",
+      "sn": "mj4simai",
+      "family": "mj4simai",
+      "key": "mj4simai"
+    },
+    {
+      "title": "Ace Driver: Victory Lap",
+      "sn": "victlap",
+      "family": "victlap",
+      "key": "victlap"
+    },
+    {
+      "title": "Armadillo Racing",
+      "sn": "adillor",
+      "family": "adillor",
+      "key": "adillor"
+    },
+    {
+      "title": "Blastaball",
+      "sn": "ar_blast",
+      "family": "ar_blast",
+      "key": "ar_blast"
+    },
+    {
+      "title": "Come Back Toto",
+      "sn": "toto",
+      "family": "toto",
+      "key": "toto"
+    },
+    {
+      "title": "Cookie & Bibi 2 (ppriest)",
+      "sn": "cookbib2",
+      "family": "cookbib2",
+      "key": "cookie-bibi-2-ppriest"
+    },
+    {
+      "title": "Cookie & Bibi 2 (TomSVR)",
+      "sn": "cookbib2",
+      "family": "cookbib2",
+      "key": "cookbib2"
+    },
+    {
+      "title": "Cookie & Bibi 3 (ppriest)",
+      "sn": "cookbib3",
+      "family": "cookbib3",
+      "key": "cookie-bibi-3-ppriest"
+    },
+    {
+      "title": "Cookie & Bibi 3 (TomSVR)",
+      "sn": "cookbib3",
+      "family": "cookbib3",
+      "key": "cookbib3"
+    },
+    {
+      "title": "Cyber Commando",
+      "sn": "cybrcomm",
+      "family": "cybrcomm",
+      "key": "cybrcomm"
+    },
+    {
+      "title": "Dead or Alive",
+      "sn": "doaab",
+      "family": "doa",
+      "key": "doaab"
+    },
+    {
+      "title": "Delta Command",
+      "sn": "ar_dlta",
+      "family": "ar_dlta",
+      "key": "ar_dlta"
+    },
+    {
+      "title": "Dirt Dash",
+      "sn": "dirtdash",
+      "family": "dirtdash",
+      "key": "dirtdash"
+    },
+    {
+      "title": "Dynamite Cop",
+      "sn": "dynamcop",
+      "family": "dynamcop",
+      "key": "dynamcop"
+    },
+    {
+      "title": "Dynamite Duke",
+      "sn": "dynduke",
+      "family": "dynduke",
+      "key": "dynduke"
+    },
+    {
+      "title": "Final Tetris (ppriest)",
+      "sn": "finalttr",
+      "family": "finalttr",
+      "key": "final-tetris-ppriest"
+    },
+    {
+      "title": "Final Tetris (TomSVR)",
+      "sn": "finalttr",
+      "family": "finalttr",
+      "key": "finalttr"
+    },
+    {
+      "title": "Gwasuwon",
+      "sn": "gwasu",
+      "family": "gwasu",
+      "key": "gwasu"
+    },
+    {
+      "title": "Hanguk Pro Yagu 98",
+      "sn": "hpyagu98",
+      "family": "hpyagu98",
+      "key": "hpyagu98"
+    },
+    {
+      "title": "Hard Times",
+      "sn": "hrdtimes",
+      "family": "hrdtimes",
+      "key": "hrdtimes"
+    },
+    {
+      "title": "Hyper Pacman (ppriest)",
+      "sn": "hyperpac",
+      "family": "hyperpac",
+      "key": "hyper-pacman-ppriest"
+    },
+    {
+      "title": "Hyper Pacman (TomSVR)",
+      "sn": "hyperpac",
+      "family": "hyperpac",
+      "key": "hyperpac"
+    },
+    {
+      "title": "Lucky Boom",
+      "sn": "luckboomh",
+      "family": "luckboom",
+      "key": "luckboomh"
+    },
+    {
+      "title": "Ma Cheon Ru",
+      "sn": "mcheonru",
+      "family": "mcheonru",
+      "key": "mcheonru"
+    },
+    {
+      "title": "Macheonlu",
+      "sn": "mcheonru",
+      "family": "mcheonru",
+      "key": "macheonlu"
+    },
+    {
+      "title": "Manx TT Superbike - DX/Twin",
+      "sn": "manxtt",
+      "family": "manxtt",
+      "key": "manxtt"
+    },
+    {
+      "title": "More More",
+      "sn": "moremore",
+      "family": "moremore",
+      "key": "moremore"
+    },
+    {
+      "title": "New HyperMan (ppriest)",
+      "sn": "3in1semi",
+      "family": "3in1semi",
+      "key": "new-hyperman-ppriest"
+    },
+    {
+      "title": "New HyperMan (TomSVR)",
+      "sn": "3in1semi",
+      "family": "3in1semi",
+      "key": "3in1semi"
+    },
+    {
+      "title": "Operation Thunderbolt",
+      "sn": "othunder",
+      "family": "othunder",
+      "key": "othunder"
+    },
+    {
+      "title": "Pharaohs Match",
+      "sn": "ar_pm",
+      "family": "ar_pm",
+      "key": "ar_pm"
+    },
+    {
+      "title": "Pilot Kids",
+      "sn": "pltkidsa",
+      "family": "pltkids",
+      "key": "pltkidsa"
+    },
+    {
+      "title": "Puzzle Break (ppriest)",
+      "sn": "pzlbreak",
+      "family": "pzlbreak",
+      "key": "puzzle-break-ppriest"
+    },
+    {
+      "title": "Puzzle Break (TomSVR)",
+      "sn": "pzlbreak",
+      "family": "pzlbreak",
+      "key": "pzlbreak"
+    },
+    {
+      "title": "Puzzle Express More More",
+      "sn": "moremore",
+      "family": "moremore",
+      "key": "puzzle-express-more-more"
+    },
+    {
+      "title": "Puzzle King (PacMan 2, Tetris, HyperMan 2, Snow Bros.)",
+      "sn": "4in1boot",
+      "family": "4in1boot",
+      "key": "4in1boot"
+    },
+    {
+      "title": "Puzzle Yutnori",
+      "sn": "yutnori",
+      "family": "yutnori",
+      "key": "yutnori"
+    },
+    {
+      "title": "Reaktor (bazset)",
+      "sn": "reaktor",
+      "family": "reaktor",
+      "key": "reaktor-bazset"
+    },
+    {
+      "title": "Reaktor (Ongo)",
+      "sn": "reaktor",
+      "family": "reaktor",
+      "key": "reaktor-ongo"
+    },
+    {
+      "title": "Ridge Racer",
+      "sn": "ridgerac",
+      "family": "ridgerac",
+      "key": "ridgerac"
+    },
+    {
+      "title": "Strike Force (Gm0rk)",
+      "sn": "strkforc",
+      "family": "strkforc",
+      "key": "strike-force-gm0rk"
+    },
+    {
+      "title": "Su Ho Seong",
+      "sn": "suhosong",
+      "family": "suhosong",
+      "key": "suhosong"
+    },
+    {
+      "title": "Suhoseong",
+      "sn": "suhosong",
+      "family": "suhosong",
+      "key": "suhoseong"
+    },
+    {
+      "title": "Super High Impact (Gm0rk)",
+      "sn": "shimpact",
+      "family": "shimpact",
+      "key": "super-high-impact-gm0rk"
+    },
+    {
+      "title": "Sutjaro Haeyo Deluxe",
+      "sn": "sutjarod",
+      "family": "sutjarod",
+      "key": "sutjarod"
+    },
+    {
+      "title": "The Double Dynamites",
+      "sn": "dbldynj",
+      "family": "dbldynj",
+      "key": "dbldynj"
+    },
+    {
+      "title": "Toppy & Rappy (ppriest)",
+      "sn": "toppyrap",
+      "family": "toppyrap",
+      "key": "toppy-rappy-ppriest"
+    },
+    {
+      "title": "Toppy & Rappy (TomSVR)",
+      "sn": "toppyrap",
+      "family": "toppyrap",
+      "key": "toppyrap"
+    },
+    {
+      "title": "Twinkle (ppriest)",
+      "sn": "twinkle",
+      "family": "twinkle",
+      "key": "twinkle-ppriest"
+    },
+    {
+      "title": "Twinkle (TomSVR)",
+      "sn": "twinkle",
+      "family": "twinkle",
+      "key": "twinkle"
+    },
+    {
+      "title": "War of the Worlds",
+      "sn": "wotw",
+      "family": "wotw",
+      "key": "wotw"
+    },
+    {
+      "title": "Zero Gunner",
+      "sn": "zeroguna",
+      "family": "zerogun",
+      "key": "zeroguna"
+    },
+    {
+      "title": "Maniac Square",
+      "sn": "maniacsq",
+      "family": "maniacsq",
+      "key": "maniacsq"
+    },
+    {
+      "title": "Rabbit",
+      "sn": "rabbit",
+      "family": "rabbit",
+      "key": "rabbit"
+    },
+    {
+      "title": "Snow Board Championship",
+      "sn": "snowboar",
+      "family": "snowboar",
+      "key": "snowboar"
+    },
+    {
+      "title": "Bouncing Balls",
+      "sn": "bballs",
+      "family": "bballs",
+      "key": "bballs"
+    },
+    {
+      "title": "Bowl-O-Rama (Ongo)",
+      "sn": "bowlrama",
+      "family": "bowlrama",
+      "key": "bowl-o-rama-ongo"
+    },
+    {
+      "title": "Danger Express (Ongo)",
+      "sn": "dangerex",
+      "family": "dangerex",
+      "key": "danger-express-ongo"
+    },
+    {
+      "title": "Golden Par Golf (Ongo)",
+      "sn": "gpgolf",
+      "family": "gpgolf",
+      "key": "golden-par-golf-ongo"
+    },
+    {
+      "title": "Golden Tee Golf (Ongo)",
+      "sn": "gtg",
+      "family": "gtg",
+      "key": "golden-tee-golf-ongo"
+    },
+    {
+      "title": "Golden Tee Golf II (Ongo)",
+      "sn": "gtg2",
+      "family": "gtg2",
+      "key": "golden-tee-golf-ii-ongo"
+    },
+    {
+      "title": "Neck-N-Neck (Ongo)",
+      "sn": "neckneck",
+      "family": "neckneck",
+      "key": "neck-n-neck-ongo"
+    },
+    {
+      "title": "Road Riot 4WD (Ongo)",
+      "sn": "roadriot",
+      "family": "roadriot",
+      "key": "road-riot-4wd-ongo"
+    },
+    {
+      "title": "Touch and Go",
+      "sn": "touchgo",
+      "family": "touchgo",
+      "key": "touchgo"
+    },
+    {
+      "title": "Aero Fighters Special",
+      "sn": "aerofgts",
+      "family": "aerofgts",
+      "key": "aerofgts"
+    },
+    {
+      "title": "Age Of Heroes - Silkroad 2 (Ongo)",
+      "sn": "aoh",
+      "family": "aoh",
+      "key": "aoh"
+    },
+    {
+      "title": "Aqua Rush",
+      "sn": "aquarush",
+      "family": "aquarush",
+      "key": "aquarush"
+    },
+    {
+      "title": "Arbalester (Ongo)",
+      "sn": "arbalest",
+      "family": "arbalest",
+      "key": "arbalest"
+    },
+    {
+      "title": "Arkanoid Returns",
+      "sn": "arkretrn",
+      "family": "arkretrn",
+      "key": "arkretrn"
+    },
+    {
+      "title": "Athena no Hatena? (Ongo)",
+      "sn": "atehate",
+      "family": "atehate",
+      "key": "atehate"
+    },
+    {
+      "title": "Attack Pla Rail",
+      "sn": "aplarail",
+      "family": "aplarail",
+      "key": "aplarail"
+    },
+    {
+      "title": "Bakuretsu Quiz Ma-Q Dai Bouken",
+      "sn": "bkrtmaq",
+      "family": "bkrtmaq",
+      "key": "bkrtmaq"
+    },
+    {
+      "title": "Battle Arena Toshinden 2",
+      "sn": "ts2u",
+      "family": "ts2",
+      "key": "ts2u"
+    },
+    {
+      "title": "beatmania 2nd MIX",
+      "sn": "bm2ndmix",
+      "family": "bm2ndmix",
+      "key": "bm2ndmix"
+    },
+    {
+      "title": "beatmania 3rd MIX",
+      "sn": "bm3rdmix",
+      "family": "bm3rdmix",
+      "key": "bm3rdmix"
+    },
+    {
+      "title": "beatmania 4th MIX",
+      "sn": "bm4thmix",
+      "family": "bm4thmix",
+      "key": "bm4thmix"
+    },
+    {
+      "title": "beatmania 6th MIX",
+      "sn": "bm6thmix",
+      "family": "bm6thmix",
+      "key": "bm6thmix"
+    },
+    {
+      "title": "beatmania 7th MIX",
+      "sn": "bm7thmix",
+      "family": "bm7thmix",
+      "key": "bm7thmix"
+    },
+    {
+      "title": "beatmania complete MIX",
+      "sn": "bmcompmx",
+      "family": "bmcompmx",
+      "key": "bmcompmx"
+    },
+    {
+      "title": "beatmania complete MIX 2",
+      "sn": "bmcompm2",
+      "family": "bmcompm2",
+      "key": "bmcompm2"
+    },
+    {
+      "title": "beatmania CORE REMIX",
+      "sn": "bmcorerm",
+      "family": "bmcorerm",
+      "key": "bmcorerm"
+    },
+    {
+      "title": "beatmania featuring Dreams Come True",
+      "sn": "bmdct",
+      "family": "bmdct",
+      "key": "bmdct"
+    },
+    {
+      "title": "beatmania THE FINAL",
+      "sn": "bmfinal",
+      "family": "bmfinal",
+      "key": "bmfinal"
+    },
+    {
+      "title": "Block Carnival (Ongo)",
+      "sn": "blockcar",
+      "family": "blockcar",
+      "key": "blockcar"
+    },
+    {
+      "title": "Bubble Bobble II",
+      "sn": "bublbob2",
+      "family": "bublbob2",
+      "key": "bublbob2"
+    },
+    {
+      "title": "Bubble Memories",
+      "sn": "bubblembe",
+      "family": null,
+      "key": "bubblembe"
+    },
+    {
+      "title": "Clay Pigeon (Ongo)",
+      "sn": "claypign",
+      "family": "claypign",
+      "key": "clay-pigeon-ongo"
+    },
+    {
+      "title": "Command War - Super Special Battle & War Game",
+      "sn": "commandw",
+      "family": "commandw",
+      "key": "commandw"
+    },
+    {
+      "title": "Cool Minigame Collection (Ongo)",
+      "sn": "coolmini",
+      "family": "coolmini",
+      "key": "coolmini"
+    },
+    {
+      "title": "Cosmo Gang the Puzzle",
+      "sn": "cgangpzlj",
+      "family": "cgangpzl",
+      "key": "cgangpzlj"
+    },
+    {
+      "title": "Crazy Cross (Ongo)",
+      "sn": "crzcross",
+      "family": "crzcross",
+      "key": "crzcross"
+    },
+    {
+      "title": "Cruis'n USA (Ongo)",
+      "sn": "crusnusa44",
+      "family": "crusnusa",
+      "key": "cruis-n-usa-ongo"
+    },
+    {
+      "title": "Daioh (Ongo)",
+      "sn": "daioh",
+      "family": "daioh",
+      "key": "daioh"
+    },
+    {
+      "title": "Daisu-Kiss (Ongo)",
+      "sn": "daiskiss",
+      "family": "daiskiss",
+      "key": "daiskiss"
+    },
+    {
+      "title": "Dan-Ku-Ga",
+      "sn": "dankuga",
+      "family": "dankuga",
+      "key": "dankuga"
+    },
+    {
+      "title": "Dancing Eyes",
+      "sn": "danceyes",
+      "family": "danceyes",
+      "key": "danceyes"
+    },
+    {
+      "title": "Date Quiz Go Go Episode 2 (Ongo)",
+      "sn": "dquizgo2",
+      "family": "dquizgo2",
+      "key": "dquizgo2"
+    },
+    {
+      "title": "Dead Or Alive ++",
+      "sn": "doapp",
+      "family": "doapp",
+      "key": "doapp"
+    },
+    {
+      "title": "Derby Quiz My Dream Horse",
+      "sn": "mdhorse",
+      "family": "mdhorse",
+      "key": "mdhorse"
+    },
+    {
+      "title": "DoDonPachi Dai-Ou-Jou Tamashii (Ongo)",
+      "sn": "ddpdojt",
+      "family": "ddpdojt",
+      "key": "ddpdojt"
+    },
+    {
+      "title": "Dunk Mania",
+      "sn": "dunkmnia",
+      "family": "dunkmnia",
+      "key": "dunkmnia"
+    },
+    {
+      "title": "Ehrgeiz",
+      "sn": "ehrgeiz",
+      "family": "ehrgeiz",
+      "key": "ehrgeiz"
+    },
+    {
+      "title": "Eight Forces (Ongo)",
+      "sn": "eightfrc",
+      "family": "eightfrc",
+      "key": "eightfrc"
+    },
+    {
+      "title": "Emeraldia",
+      "sn": "emeraldajb",
+      "family": "emeralda",
+      "key": "emeraldajb"
+    },
+    {
+      "title": "Evolution Soccer",
+      "sn": "evosocc",
+      "family": "evosocc",
+      "key": "evosocc"
+    },
+    {
+      "title": "Exvania",
+      "sn": "exvaniaj",
+      "family": "exvania",
+      "key": "exvaniaj"
+    },
+    {
+      "title": "F-1 Grand Prix",
+      "sn": "f1gp",
+      "family": "f1gp",
+      "key": "f1gp"
+    },
+    {
+      "title": "Fantastic Journey (Ongo)",
+      "sn": "fantjour",
+      "family": "fantjour",
+      "key": "fantjour"
+    },
+    {
+      "title": "Fighting Layer",
+      "sn": "fgtlayer",
+      "family": "fgtlayer",
+      "key": "fgtlayer"
+    },
+    {
+      "title": "Final Godori (Ongo)",
+      "sn": "finalgdr",
+      "family": "finalgdr",
+      "key": "finalgdr"
+    },
+    {
+      "title": "Flame Gunner",
+      "sn": "flamegun",
+      "family": "flamegun",
+      "key": "flamegun"
+    },
+    {
+      "title": "Fortress 2 Blue Arcade (Ongo)",
+      "sn": "fort2b",
+      "family": "fort2b",
+      "key": "fort2b"
+    },
+    {
+      "title": "G-LOC Air Battle (Ongo)",
+      "sn": "gloc",
+      "family": "gloc",
+      "key": "g-loc-air-battle-ongo"
+    },
+    {
+      "title": "Gallop Racer",
+      "sn": "glpracr",
+      "family": "glpracr",
+      "key": "glpracr"
+    },
+    {
+      "title": "Gallop Racer 3",
+      "sn": "glpracr3",
+      "family": "glpracr3",
+      "key": "glpracr3"
+    },
+    {
+      "title": "Gals Panic 4",
+      "sn": "galpani4",
+      "family": "galpani4",
+      "key": "galpani4"
+    },
+    {
+      "title": "Gals Panic S - Extra Edition",
+      "sn": "galpanis",
+      "family": "galpanis",
+      "key": "galpanis"
+    },
+    {
+      "title": "Gals Panic S2",
+      "sn": "galpans2",
+      "family": "galpans2",
+      "key": "galpans2"
+    },
+    {
+      "title": "Gals Panic S3",
+      "sn": "galpans3",
+      "family": "galpans3",
+      "key": "galpans3"
+    },
+    {
+      "title": "Gekirindan",
+      "sn": "gekiridn",
+      "family": "gekiridn",
+      "key": "gekiridn"
+    },
+    {
+      "title": "Genix Family (Ongo)",
+      "sn": "genix",
+      "family": "genix",
+      "key": "genix"
+    },
+    {
+      "title": "Ghoul Panic",
+      "sn": "ghlpanic",
+      "family": "ghlpanic",
+      "key": "ghlpanic"
+    },
+    {
+      "title": "Golgo 13 Kiseki no Dandou",
+      "sn": "g13knd",
+      "family": "g13knd",
+      "key": "g13knd"
+    },
+    {
+      "title": "Great Sluggers",
+      "sn": "gslugrsj",
+      "family": "gslugrsj",
+      "key": "gslugrsj"
+    },
+    {
+      "title": "Grudge Match (v00.90, prototype)",
+      "sn": "grudge",
+      "family": "grudge",
+      "key": "grudge"
+    },
+    {
+      "title": "Guts'n",
+      "sn": "gutsn",
+      "family": "gutsn",
+      "key": "gutsn"
+    },
+    {
+      "title": "Hayaoshi Quiz Grand Champion Taikai (Ongo)",
+      "sn": "hayaosi2",
+      "family": "hayaosi2",
+      "key": "hayaosi2"
+    },
+    {
+      "title": "Hayaoshi Quiz Nettou Namahousou (Ongo)",
+      "sn": "hayaosi3",
+      "family": "hayaosi3",
+      "key": "hayaosi3"
+    },
+    {
+      "title": "Hidden Catch 2000 (Ongo)",
+      "sn": "hidnc2k",
+      "family": "hidnc2k",
+      "key": "hidnc2k"
+    },
+    {
+      "title": "Hidden Catch 3 (Ongo)",
+      "sn": "hidctch3",
+      "family": "hidctch3",
+      "key": "hidctch3"
+    },
+    {
+      "title": "Idol Janshi Suchie-Pai II (Ongo)",
+      "sn": "suchie2",
+      "family": "suchie2",
+      "key": "suchie2"
+    },
+    {
+      "title": "International Cup '94",
+      "sn": "intcup94",
+      "family": "intcup94",
+      "key": "intcup94"
+    },
+    {
+      "title": "J-League Soccer V-Shoot",
+      "sn": "vshoot",
+      "family": "vshoot",
+      "key": "vshoot"
+    },
+    {
+      "title": "J. J. Squawkers (Ongo)",
+      "sn": "jjsquawk",
+      "family": "jjsquawk",
+      "key": "jjsquawk"
+    },
+    {
+      "title": "Jan Jan Paradise",
+      "sn": "jjparads",
+      "family": "jjparads",
+      "key": "jjparads"
+    },
+    {
+      "title": "Judge Dredd (Ongo)",
+      "sn": "jdreddp",
+      "family": "jdreddp",
+      "key": "judge-dredd-ongo"
+    },
+    {
+      "title": "Juezhan Tianhuang (Ongo)",
+      "sn": "jzth",
+      "family": "jzth",
+      "key": "juezhan-tianhuang-ongo"
+    },
+    {
+      "title": "Jumping Break (Ongo)",
+      "sn": "jmpbreak",
+      "family": "jmpbreak",
+      "key": "jmpbreak"
+    },
+    {
+      "title": "Kickle Cubele",
+      "sn": "kikcubicb",
+      "family": "kikcubic",
+      "key": "kikcubicb"
+    },
+    {
+      "title": "KlonDike+ (Ongo)",
+      "sn": "klondkp",
+      "family": "klondkp",
+      "key": "klondkp"
+    },
+    {
+      "title": "Knights of Valour 2 New Legend - Sanguo Zhan Ji 2 Guang Sao Yu Jun",
+      "sn": "kov2nl",
+      "family": "kov2nl",
+      "key": "kov2nl"
+    },
+    {
+      "title": "Knights of Valour 3 - Sanguo Zhan Ji 3",
+      "sn": "kov3",
+      "family": "kov3",
+      "key": "kov3"
+    },
+    {
+      "title": "Konami's Open Golf Championship (Ongo)",
+      "sn": "opengolf",
+      "family": "opengolf",
+      "key": "opengolf"
+    },
+    {
+      "title": "Land Maker",
+      "sn": "landmakr",
+      "family": "landmakr",
+      "key": "landmakr"
+    },
+    {
+      "title": "Logic Pro",
+      "sn": "logicpro",
+      "family": "croquis",
+      "key": "logicpro"
+    },
+    {
+      "title": "Logic Pro 2",
+      "sn": "logicpr2",
+      "family": "logicpr2",
+      "key": "logicpr2"
+    },
+    {
+      "title": "Mach Breakers",
+      "sn": "machbrkr",
+      "family": "machbrkr",
+      "key": "machbrkr"
+    },
+    {
+      "title": "Mad Gear",
+      "sn": "madgear",
+      "family": "madgear",
+      "key": "madgear"
+    },
+    {
+      "title": "Mad Shark (Ongo)",
+      "sn": "madshark",
+      "family": "madshark",
+      "key": "madshark"
+    },
+    {
+      "title": "Magical Speed (Ongo)",
+      "sn": "magspeed",
+      "family": "magspeed",
+      "key": "magspeed"
+    },
+    {
+      "title": "Master of Weapon",
+      "sn": "masterw",
+      "family": "masterw",
+      "key": "masterw"
+    },
+    {
+      "title": "Meikyu Jima (Ongo)",
+      "sn": "kikcubic",
+      "family": "kikcubic",
+      "key": "meikyu-jima-ongo"
+    },
+    {
+      "title": "Mission Craft (Ongo)",
+      "sn": "misncrft",
+      "family": "misncrft",
+      "key": "misncrft"
+    },
+    {
+      "title": "Monita to Rimoko no Head On Channel",
+      "sn": "headonch",
+      "family": "headonch",
+      "key": "headonch"
+    },
+    {
+      "title": "Monster Farm Jump",
+      "sn": "mfjump",
+      "family": "mfjump",
+      "key": "mfjump"
+    },
+    {
+      "title": "Mortal Kombat (rev 5.5) (Wolf Unit)",
+      "sn": "mk_wolf",
+      "family": null,
+      "key": "mk_wolf"
+    },
+    {
+      "title": "Mortal Kombat II (rev L3.2W) (Wolf Unit)",
+      "sn": "mk2_wolf",
+      "family": null,
+      "key": "mk2_wolf"
+    },
+    {
+      "title": "Mr. Dig (Ongo)",
+      "sn": "mrdig",
+      "family": "mrdig",
+      "key": "mrdig"
+    },
+    {
+      "title": "Mr. Driller",
+      "sn": "mrdrillrja2",
+      "family": "mrdrillr",
+      "key": "mrdrillrja2"
+    },
+    {
+      "title": "Mr. Kicker (Ongo)",
+      "sn": "mrkicker",
+      "family": "mrkicker",
+      "key": "mrkicker"
+    },
+    {
+      "title": "Narc (rev 7.00) [blahm1d]",
+      "sn": "narc_blahm1d",
+      "family": null,
+      "key": "narc_blahm1d"
+    },
+    {
+      "title": "NBA Hangtime (Ongo)",
+      "sn": "nbahangt",
+      "family": "nbahangt",
+      "key": "nba-hangtime-ongo"
+    },
+    {
+      "title": "NBA Jam Tournament Edition SE",
+      "sn": "nbajamtese",
+      "family": null,
+      "key": "nbajamtese"
+    },
+    {
+      "title": "NBA Maximum Hangtime (Ongo)",
+      "sn": "nbamht",
+      "family": "nbahangt",
+      "key": "nba-maximum-hangtime-ongo"
+    },
+    {
+      "title": "Neratte Chu",
+      "sn": "nratechu",
+      "family": "nratechu",
+      "key": "nratechu"
+    },
+    {
+      "title": "Nettou! Gekitou! Quiztou!!",
+      "sn": "quiztou",
+      "family": "quiztou",
+      "key": "quiztou"
+    },
+    {
+      "title": "New Cross Pang (Ongo)",
+      "sn": "newxpang",
+      "family": "newxpang",
+      "key": "newxpang"
+    },
+    {
+      "title": "New Hidden Catch (Ongo)",
+      "sn": "nhidctch",
+      "family": "nhidctch",
+      "key": "nhidctch"
+    },
+    {
+      "title": "Nintendo Super System BIOS",
+      "sn": "nss",
+      "family": "nss",
+      "key": "nss"
+    },
+    {
+      "title": "Nostradamus (Ongo)",
+      "sn": "nost",
+      "family": "nost",
+      "key": "nost"
+    },
+    {
+      "title": "Office Yeoin Cheonha",
+      "sn": "officeye",
+      "family": "officeye",
+      "key": "officeye"
+    },
+    {
+      "title": "Oh! Bakyuuun",
+      "sn": "ohbakyuun",
+      "family": "ghlpanic",
+      "key": "ohbakyuun"
+    },
+    {
+      "title": "OOPArts",
+      "sn": "ooparts",
+      "family": "ooparts",
+      "key": "ooparts"
+    },
+    {
+      "title": "Oriental Legend 2 (Ongo)",
+      "sn": "orleg2",
+      "family": "orleg2",
+      "key": "orleg2"
+    },
+    {
+      "title": "P-47 Aces (Ongo)",
+      "sn": "p47aces",
+      "family": "p47aces",
+      "key": "p47aces"
+    },
+    {
+      "title": "Paca Paca Passion",
+      "sn": "pacapp",
+      "family": "pacapp",
+      "key": "pacapp"
+    },
+    {
+      "title": "Paca Paca Passion 2",
+      "sn": "pacapp2",
+      "family": "pacapp2",
+      "key": "pacapp2"
+    },
+    {
+      "title": "Paca Paca Passion Special",
+      "sn": "pacappsp",
+      "family": "pacappsp",
+      "key": "pacappsp"
+    },
+    {
+      "title": "Pairs Love (Ongo)",
+      "sn": "pairlove",
+      "family": "pairlove",
+      "key": "pairlove"
+    },
+    {
+      "title": "Panic Street",
+      "sn": "panicstr",
+      "family": "panicstr",
+      "key": "panicstr"
+    },
+    {
+      "title": "Penfan Girls - Step1. Mild Mind (Ongo)",
+      "sn": "penfan",
+      "family": "penfan",
+      "key": "penfan"
+    },
+    {
+      "title": "Pirates (Ongo)",
+      "sn": "pirates",
+      "family": "pirates",
+      "key": "pirates"
+    },
+    {
+      "title": "Plasma Sword: Nightmare of Bilstein",
+      "sn": "plsmaswd",
+      "family": "plsmaswd",
+      "key": "plsmaswd"
+    },
+    {
+      "title": "Pocket Racer",
+      "sn": "pocketrc",
+      "family": "pocketrc",
+      "key": "pocketrc"
+    },
+    {
+      "title": "Point Blank",
+      "sn": "ptblank",
+      "family": "ptblank",
+      "key": "ptblank"
+    },
+    {
+      "title": "Poosho Poosho (Ongo)",
+      "sn": "poosho",
+      "family": "poosho",
+      "key": "poosho"
+    },
+    {
+      "title": "Pop'n Music",
+      "sn": "popn1",
+      "family": "popn1",
+      "key": "popn1"
+    },
+    {
+      "title": "Pop'n Music 2",
+      "sn": "popn2",
+      "family": "popn2",
+      "key": "popn2"
+    },
+    {
+      "title": "Pop'n Music 3",
+      "sn": "popn3",
+      "family": "popn3",
+      "key": "popn3"
+    },
+    {
+      "title": "Pop'n Stage EX",
+      "sn": "popnstex",
+      "family": "popnstex",
+      "key": "popnstex"
+    },
+    {
+      "title": "Poto Poto",
+      "sn": "potopoto",
+      "family": "potopoto",
+      "key": "potopoto"
+    },
+    {
+      "title": "Prime Goal EX",
+      "sn": "primglex",
+      "family": "primglex",
+      "key": "primglex"
+    },
+    {
+      "title": "Print Club (Japan Vol.1)",
+      "sn": "pclubj",
+      "family": "pclubj",
+      "key": "pclubj"
+    },
+    {
+      "title": "Print Club (Japan Vol.2)",
+      "sn": "pclubjv2",
+      "family": "pclubjv2",
+      "key": "pclubjv2"
+    },
+    {
+      "title": "Print Club (Japan Vol.3)",
+      "sn": "pclubjv3",
+      "family": "pclubjv3",
+      "key": "pclubjv3"
+    },
+    {
+      "title": "Print Club (Japan Vol.4)",
+      "sn": "pclubjv4",
+      "family": "pclubjv4",
+      "key": "pclubjv4"
+    },
+    {
+      "title": "Print Club (Japan Vol.5)",
+      "sn": "pclubjv5",
+      "family": "pclubjv5",
+      "key": "pclubjv5"
+    },
+    {
+      "title": "Prop Cycle",
+      "sn": "propcycl",
+      "family": "propcycl",
+      "key": "propcycl"
+    },
+    {
+      "title": "Punch-Out!!",
+      "sn": "punchout",
+      "family": "punchout",
+      "key": "punchout"
+    },
+    {
+      "title": "Puyo Puyo 2",
+      "sn": "puyopuy2",
+      "family": "puyopuy2",
+      "key": "puyopuy2"
+    },
+    {
+      "title": "Puzz Loop",
+      "sn": "puzzloop",
+      "family": "puzzloop",
+      "key": "puzzloop"
+    },
+    {
+      "title": "Puzzle & Action: Ichidant-R",
+      "sn": "ichir",
+      "family": "ichir",
+      "key": "ichir"
+    },
+    {
+      "title": "Puzzle & Action: Tant-R",
+      "sn": "tantr",
+      "family": "tantr",
+      "key": "tantr"
+    },
+    {
+      "title": "Puzzle King (Dance & Puzzle)",
+      "sn": "puzzlekg",
+      "family": "puzzlekg",
+      "key": "puzzlekg"
+    },
+    {
+      "title": "Quiz Kokology (Ongo)",
+      "sn": "qzkklogy",
+      "family": "qzkklogy",
+      "key": "qzkklogy"
+    },
+    {
+      "title": "Raccoon World (Ongo)",
+      "sn": "raccoon",
+      "family": "raccoon",
+      "key": "raccoon"
+    },
+    {
+      "title": "Racin' Force (Ongo)",
+      "sn": "racinfrc",
+      "family": "racinfrc",
+      "key": "racinfrc"
+    },
+    {
+      "title": "Raiden Fighters",
+      "sn": "rdft",
+      "family": "rdft",
+      "key": "rdft"
+    },
+    {
+      "title": "Raiden Fighters Jet",
+      "sn": "rfjet",
+      "family": "rfjet",
+      "key": "rfjet"
+    },
+    {
+      "title": "Rail Chase (Ongo)",
+      "sn": "rchase",
+      "family": "rchase",
+      "key": "rail-chase-ongo"
+    },
+    {
+      "title": "Rave Racer",
+      "sn": "raverace",
+      "family": "raverace",
+      "key": "raverace"
+    },
+    {
+      "title": "Ray Storm",
+      "sn": "raystorm",
+      "family": "raystorm",
+      "key": "raystorm"
+    },
+    {
+      "title": "Real Puncher",
+      "sn": "realpunc",
+      "family": "realpunc",
+      "key": "realpunc"
+    },
+    {
+      "title": "Recalhorn",
+      "sn": "recalh",
+      "family": "recalh",
+      "key": "recalh"
+    },
+    {
+      "title": "Run and Gun 2 (Ongo)",
+      "sn": "rungun2",
+      "family": "rungun2",
+      "key": "rungun2"
+    },
+    {
+      "title": "Rushing Heroes (Ongo)",
+      "sn": "rushhero",
+      "family": "rushhero",
+      "key": "rushhero"
+    },
+    {
+      "title": "Ryu Jin",
+      "sn": "ryujin",
+      "family": "ryujin",
+      "key": "ryujin"
+    },
+    {
+      "title": "SD Gundam Neo Battling (Ongo)",
+      "sn": "neobattl",
+      "family": "neobattl",
+      "key": "neobattl"
+    },
+    {
+      "title": "SegaSonic Bros.",
+      "sn": "ssonicbr",
+      "family": "ssonicbr",
+      "key": "ssonicbr"
+    },
+    {
+      "title": "SegaSonic Cosmo Fighter",
+      "sn": "sonicfgt",
+      "family": "sonicfgt",
+      "key": "sonicfgt"
+    },
+    {
+      "title": "SegaSonic Popcorn Shop",
+      "sn": "sonicpop",
+      "family": "sonicpop",
+      "key": "sonicpop"
+    },
+    {
+      "title": "Sen-Know",
+      "sn": "senknow",
+      "family": "senknow",
+      "key": "senknow"
+    },
+    {
+      "title": "Sengeki Striker",
+      "sn": "sengekis",
+      "family": "sengekis",
+      "key": "sengekis"
+    },
+    {
+      "title": "Sexy Parodius (Ongo)",
+      "sn": "sexyparo",
+      "family": "sexyparo",
+      "key": "sexyparo"
+    },
+    {
+      "title": "Shin Nihon Pro Wrestling Toukon Retsuden 3 Arcade Edition",
+      "sn": "toukon3",
+      "family": "toukon3",
+      "key": "toukon3"
+    },
+    {
+      "title": "Shogun Warriors (Ongo)",
+      "sn": "shogwarr",
+      "family": "shogwarr",
+      "key": "shogun-warriors-ongo"
+    },
+    {
+      "title": "Sokonuke Taisen Game (Ongo)",
+      "sn": "sokonuke",
+      "family": "sokonuke",
+      "key": "sokonuke"
+    },
+    {
+      "title": "Solitaire (Ongo)",
+      "sn": "solitaire",
+      "family": "solitaire",
+      "key": "solitaire"
+    },
+    {
+      "title": "Sonic Wings Limited",
+      "sn": "sncwgltd",
+      "family": "aerofgts",
+      "key": "sncwgltd"
+    },
+    {
+      "title": "Soreike! Anpanman Popcorn Koujou",
+      "sn": "anpanman",
+      "family": "anpanman",
+      "key": "anpanman"
+    },
+    {
+      "title": "Spiker (Ongo)",
+      "sn": "spiker",
+      "family": "spiker",
+      "key": "spiker"
+    },
+    {
+      "title": "Spotty (Ongo)",
+      "sn": "spotty",
+      "family": "spotty",
+      "key": "spotty"
+    },
+    {
+      "title": "Stack Columns",
+      "sn": "stkclmns",
+      "family": "stkclmns",
+      "key": "stkclmns"
+    },
+    {
+      "title": "Star Sweep",
+      "sn": "starswep",
+      "family": "starswep",
+      "key": "starswep"
+    },
+    {
+      "title": "Star Wars Arcade (Sega, US)",
+      "sn": "swa",
+      "family": "swa",
+      "key": "swa"
+    },
+    {
+      "title": "Steal See (Ongo)",
+      "sn": "stealsee",
+      "family": "stealsee",
+      "key": "stealsee"
+    },
+    {
+      "title": "Strike Force (Ongo)",
+      "sn": "strkforc",
+      "family": "strkforc",
+      "key": "strike-force-ongo"
+    },
+    {
+      "title": "Super Bubble 2003 (Ongo)",
+      "sn": "sb2003",
+      "family": "sb2003",
+      "key": "sb2003"
+    },
+    {
+      "title": "Super Cup Finals",
+      "sn": "scfinals",
+      "family": "scfinals",
+      "key": "scfinals"
+    },
+    {
+      "title": "Super High Impact (Ongo)",
+      "sn": "shimpact",
+      "family": "shimpact",
+      "key": "super-high-impact-ongo"
+    },
+    {
+      "title": "Super Lup Lup Puzzle (Ongo)",
+      "sn": "suplup",
+      "family": "suplup",
+      "key": "suplup"
+    },
+    {
+      "title": "Super World Stadium '95",
+      "sn": "sws95",
+      "family": "sws95",
+      "key": "sws95"
+    },
+    {
+      "title": "Super World Stadium '96",
+      "sn": "sws96",
+      "family": "sws96",
+      "key": "sws96"
+    },
+    {
+      "title": "Super World Stadium '97",
+      "sn": "sws97",
+      "family": "sws97",
+      "key": "sws97"
+    },
+    {
+      "title": "Super World Stadium '98",
+      "sn": "sws98",
+      "family": "sws98",
+      "key": "sws98"
+    },
+    {
+      "title": "Super World Stadium '99",
+      "sn": "sws99",
+      "family": "sws99",
+      "key": "sws99"
+    },
+    {
+      "title": "Techno Drive",
+      "sn": "technodr",
+      "family": "technodr",
+      "key": "technodr"
+    },
+    {
+      "title": "Tekken",
+      "sn": "tekken",
+      "family": "tekken",
+      "key": "tekken"
+    },
+    {
+      "title": "Tekken 3",
+      "sn": "tekken3",
+      "family": "tekken3",
+      "key": "tekken3"
+    },
+    {
+      "title": "Tekken Tag Tournament",
+      "sn": "tektagt",
+      "family": "tektagt",
+      "key": "tektagt"
+    },
+    {
+      "title": "Tel Jan",
+      "sn": "teljan",
+      "family": "teljan",
+      "key": "teljan"
+    },
+    {
+      "title": "Tenkomori Shooting",
+      "sn": "tenkomor",
+      "family": "tenkomor",
+      "key": "tenkomor"
+    },
+    {
+      "title": "Tetris: The Grand Master",
+      "sn": "tgmj",
+      "family": "tgmj",
+      "key": "tgmj"
+    },
+    {
+      "title": "The Block Kuzushi",
+      "sn": "tblkkuzu",
+      "family": "tblkkuzu",
+      "key": "tblkkuzu"
+    },
+    {
+      "title": "The Crystal of Kings",
+      "sn": "crysking",
+      "family": "crysking",
+      "key": "the-crystal-of-kings-ongo"
+    },
+    {
+      "title": "The King of Fighters '98: Ultimate Match HERO (Ongo)",
+      "sn": "kof98umh",
+      "family": "kof98umh",
+      "key": "kof98umh"
+    },
+    {
+      "title": "The Pit",
+      "sn": "thepitu1",
+      "family": "thepit",
+      "key": "thepitu1"
+    },
+    {
+      "title": "Thunder Force AC",
+      "sn": "tfrceac",
+      "family": "tfrceac",
+      "key": "tfrceac"
+    },
+    {
+      "title": "Tinkle Pit",
+      "sn": "tinklpit",
+      "family": "tinklpit",
+      "key": "tinklpit"
+    },
+    {
+      "title": "To Heart House (Ongo)",
+      "sn": "hrthouse",
+      "family": "hrthouse",
+      "key": "hrthouse"
+    },
+    {
+      "title": "Toggle (Ongo)",
+      "sn": "toggle",
+      "family": "toggle",
+      "key": "toggle"
+    },
+    {
+      "title": "Tokimeki Memorial Taisen Puzzle-dama (Ongo)",
+      "sn": "tkmmpzdm",
+      "family": "tkmmpzdm",
+      "key": "tkmmpzdm"
+    },
+    {
+      "title": "Tondemo Crisis",
+      "sn": "tondemo",
+      "family": "tondemo",
+      "key": "tondemo"
+    },
+    {
+      "title": "Top Blade V",
+      "sn": "topbladv",
+      "family": "topbladv",
+      "key": "topbladv"
+    },
+    {
+      "title": "Toy Land Adventure (Ongo)",
+      "sn": "toyland",
+      "family": "toyland",
+      "key": "toyland"
+    },
+    {
+      "title": "Trivial Pursuit (Genus II Edition) (3-22-85)",
+      "sn": "triviag2",
+      "family": "triviag2",
+      "key": "triviag2"
+    },
+    {
+      "title": "Trivial Pursuit (Young Players Edition) (3-29-85)",
+      "sn": "triviayp",
+      "family": "triviayp",
+      "key": "triviayp"
+    },
+    {
+      "title": "Truck Kyosokyoku",
+      "sn": "truckk",
+      "family": "truckk",
+      "key": "truckk"
+    },
+    {
+      "title": "Twin Cobra II",
+      "sn": "tcobra2",
+      "family": "tcobra2",
+      "key": "tcobra2"
+    },
+    {
+      "title": "Twin Qix",
+      "sn": "twinqix",
+      "family": "twinqix",
+      "key": "twinqix"
+    },
+    {
+      "title": "Ultimate Mortal Kombat 3 (Ongo)",
+      "sn": "umk3",
+      "family": "umk3",
+      "key": "ultimate-mortal-kombat-3-ongo"
+    },
+    {
+      "title": "Ultraman Club - Tatakae! Ultraman Kyoudai!! (Ongo)",
+      "sn": "umanclub",
+      "family": "umanclub",
+      "key": "umanclub"
+    },
+    {
+      "title": "Um Jammer Lammy NOW!",
+      "sn": "ujlnow",
+      "family": "ujlnow",
+      "key": "ujlnow"
+    },
+    {
+      "title": "Vamf x1/2 (Ongo)",
+      "sn": "vamphalf",
+      "family": "vamphalf",
+      "key": "vamphalf"
+    },
+    {
+      "title": "VS Block Breaker",
+      "sn": "vblokbrk",
+      "family": "vblokbrk",
+      "key": "vblokbrk"
+    },
+    {
+      "title": "VS Mahjong Otome Ryouran",
+      "sn": "ryouran",
+      "family": "ryouran",
+      "key": "ryouran"
+    },
+    {
+      "title": "Vs. Battle City",
+      "sn": "btlecity",
+      "family": "btlecity",
+      "key": "btlecity"
+    },
+    {
+      "title": "Vs. Clu Clu Land",
+      "sn": "cluclu",
+      "family": "cluclu",
+      "key": "cluclu"
+    },
+    {
+      "title": "Vs. Excitebike",
+      "sn": "excitebk",
+      "family": "excitebk",
+      "key": "excitebk"
+    },
+    {
+      "title": "Vs. Freedom Force",
+      "sn": "vsfdf",
+      "family": "vsfdf",
+      "key": "vsfdf"
+    },
+    {
+      "title": "Vs. From Below - HBMame",
+      "sn": "frombelow",
+      "family": null,
+      "key": "frombelow"
+    },
+    {
+      "title": "Vs. Ice Climber Dual",
+      "sn": "iceclmrd",
+      "family": "iceclmrd",
+      "key": "iceclmrd"
+    },
+    {
+      "title": "Vs. Janshi Brandnew Stars (Ongo)",
+      "sn": "bnstars",
+      "family": "bnstars1",
+      "key": "bnstars"
+    },
+    {
+      "title": "Vs. Mach Rider",
+      "sn": "nvs_machrider",
+      "family": "nvs_machrider",
+      "key": "nvs_machrider"
+    },
+    {
+      "title": "Vs. Mahjong",
+      "sn": "vsmahjng",
+      "family": "vsmahjng",
+      "key": "vsmahjng"
+    },
+    {
+      "title": "Vs. Platoon",
+      "sn": "nvs_platoon",
+      "family": "nvs_platoon",
+      "key": "nvs_platoon"
+    },
+    {
+      "title": "Vs. Soccer",
+      "sn": "vssoccer",
+      "family": "vssoccer",
+      "key": "vssoccer"
+    },
+    {
+      "title": "Vs. Tennis",
+      "sn": "vstennis",
+      "family": "vstennis",
+      "key": "vstennis"
+    },
+    {
+      "title": "Vs. Tetris",
+      "sn": "vstetris",
+      "family": "vstetris",
+      "key": "vstetris"
+    },
+    {
+      "title": "Vs. Urban Champion - HBMame",
+      "sn": "vs_urban",
+      "family": null,
+      "key": "vs_urban"
+    },
+    {
+      "title": "Waku Waku Anpanman",
+      "sn": "wwanpanm",
+      "family": "wwanpanm",
+      "key": "wwanpanm"
+    },
+    {
+      "title": "Waku Waku Jumbo",
+      "sn": "wwjumbo",
+      "family": "wwjumbo",
+      "key": "wwjumbo"
+    },
+    {
+      "title": "Waku Waku Marine",
+      "sn": "wwmarine",
+      "family": "wwmarine",
+      "key": "wwmarine"
+    },
+    {
+      "title": "Waku Waku Pajero",
+      "sn": "wwpajero",
+      "family": "wwpajero",
+      "key": "wwpajero"
+    },
+    {
+      "title": "War of Aero - Project MEIOU (Ongo)",
+      "sn": "wrofaero",
+      "family": "wrofaero",
+      "key": "wrofaero"
+    },
+    {
+      "title": "Who Dunit (Ongo)",
+      "sn": "whodunit",
+      "family": "whodunit",
+      "key": "who-dunit-ongo"
+    },
+    {
+      "title": "Wing Force",
+      "sn": "wingforc",
+      "family": "wingforc",
+      "key": "wingforc"
+    },
+    {
+      "title": "Winning Spike (Ongo)",
+      "sn": "winspike",
+      "family": "winspike",
+      "key": "winspike"
+    },
+    {
+      "title": "Wit's (Ongo)",
+      "sn": "wits",
+      "family": "wits",
+      "key": "wits"
+    },
+    {
+      "title": "World Adventure (Ongo)",
+      "sn": "worldadv",
+      "family": "worldadv",
+      "key": "worldadv"
+    },
+    {
+      "title": "WWF WrestleFest",
+      "sn": "wwfwfest",
+      "family": "wwfwfest",
+      "key": "wwfwfest"
+    },
+    {
+      "title": "Xevious 3D/G",
+      "sn": "xevi3dg",
+      "family": "xevi3dg",
+      "key": "xevi3dg"
+    },
+    {
+      "title": "Y-Unit Test ROM",
+      "sn": "yunittst",
+      "family": "yunittst",
+      "key": "yunittst"
+    },
+    {
+      "title": "Yori Jori Kuk Kuk (Ongo)",
+      "sn": "yorijori",
+      "family": "yorijori",
+      "key": "yorijori"
+    },
+    {
+      "title": "Zunzunkyou no Yabou",
+      "sn": "zunkyou",
+      "family": "zunkyou",
+      "key": "zunkyou"
+    }
+  ],
+  "import_date": "2026-10-23",
+  "catalogue_revision": "06327b0b"
+}

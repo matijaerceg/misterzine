@@ -80,3 +80,22 @@ The tests run as two projects, one per `UPSTREAM_ENABLED` value, with the
 edge cache bypassed (`EDGE_CACHE=0`; the Cache API write does not settle in
 the test runtime). In a synced folder, Vite's dependency cache can hit a file
 lock; set `VITEST_CACHE_DIR` to a local path when that happens.
+
+
+## Flyers
+
+`GET /flyer/<setname>.png` serves uploaded flyer images only. Missing flyers
+return 404 without contacting upstream or guessing clone artwork. Catalogue
+rows explicitly choose an exact setname or their declared MAME family.
+
+`python tools/seed_flyers.py <extracted-pack> --source-url <archive-url>`
+converts originals to PNG at no more than 640 pixels on either side, uploads
+changed objects, verifies every object, and writes `data/flyers.json` with
+source filenames, dimensions and SHA256 hashes. Install Pillow and boto3
+locally; credentials are the same as the screenshot seeder. `--credentials-root`
+may point to the main checkout when running from an isolated worktree.
+
+`python tools/flyer_catalog.py` applies that hosted index to the website/device
+catalogue. The regular export also runs it before generating catalogue hashes,
+so scheduled updates retain flyer availability. Flyer rights remain with their
+original owners; the index records the source collection, not a new license.

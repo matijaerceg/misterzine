@@ -6006,6 +6006,8 @@ def cmd_export_web(args):
     # 2026-07-28), not a redirect — export-web must never write it.
     _backfill_arcade_images(data)  # give brand-new arcade titles an ADB/libretro shot
     _retag_image_dims()  # re-apply img/img_w/img_h that regenerating data.json drops
+    from tools.flyer_catalog import retag as retag_flyers
+    retag_flyers()
     warn_duplicate_titles(data)
     warn_provisional_rotation(outdir)  # needs the dims the re-tag just restored
     _write_feeds(outdir)  # RSS feeds from the events table (needs final data.json)

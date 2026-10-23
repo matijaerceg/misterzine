@@ -1485,6 +1485,15 @@
       <label for="clmembersearch" class="clmemberlabel">Find in this list</label>
       <input id="clmembersearch" type="search" placeholder="Find in this list" autocomplete="off">
     </div>
+    <div id="clmembertools" class="clmembertools">
+      <span id="clmarkcount" aria-live="polite">0 selected</span>
+      <button id="clmarkall" type="button" title="Select every entry matching this list search, including entries below Show more">Select all shown</button>
+      <button id="clmarkremove" type="button" disabled>Remove selected</button>
+      <button id="clmarkclear" type="button" disabled>Clear selection</button>
+      <button id="clclearsearch" type="button" hidden>Clear search</button>
+      <button id="clshowadded" type="button" hidden>Show added</button>
+      <small>Tick to select for removal. Shift-click selects a range. Remove can be undone.</small>
+    </div>
     <div class="clmemberscroll" tabindex="0" role="region" aria-label="Selected list entries">
       <ul id="clmembers" class="clmembers" aria-label="List entries"></ul>
       <p id="clmemberempty" class="clmemberempty" hidden>No entries selected yet. Add games from the catalogue.</p>
@@ -1495,6 +1504,15 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
+<dialog id="clleave" class="cldialog" aria-labelledby="clleavetitle">
+  <h2 id="clleavetitle">Save your list before leaving?</h2>
+  <p>You have unsaved changes.</p>
+  <div class="clactions">
+    <button id="clleavesave" type="button">Save &amp; leave</button>
+    <button id="clleavediscard" type="button">Discard &amp; leave</button>
+    <button id="clleavekeep" type="button">Keep editing</button>
+  </div>
+</dialog>
 <dialog id="cldetails" class="cldialog">
   <form id="cldetailsform">
     <h2>List details</h2>

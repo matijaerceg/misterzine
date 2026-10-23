@@ -233,3 +233,12 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
   .cllayout, .clcatalogue { display: block; }
   #clworkspace, #clmobiletabs, #clbulkbar { display: none !important; }
 }
+
+.clmembertools { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); }
+.clmembertools small { flex-basis: 100%; color: var(--muted); }
+.clmembertools button { font: inherit; font-size: .8rem; padding: .35rem .5rem; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; cursor: pointer; }
+.clmembertools button:disabled { opacity: .5; cursor: default; }
+.clmarkhit { display: flex; align-items: center; justify-content: center; min-width: 32px; min-height: 44px; cursor: pointer; }
+.clmarkhit input { width: 18px; height: 18px; accent-color: var(--accent); }
+.clnewmember { box-shadow: inset 3px 0 var(--accent); }
+@container (max-width: 54rem) { .clmembertools button { min-height: 44px; } .clmembertools small { font-size: .75rem; } }

@@ -21,6 +21,7 @@ window.MZLists = (() => {
   let entryRow = null, entryVersion = 0, entryBusy = false, entryCreateBlocked = false;
   let draftRecord = null, draftAvailable = true;
   let undo = [], redo = [], present = '', memberLimit = 200, memberSignature = '', catalogue = null, catalogueByKey = new Map();
+  let marked = new Set(), memberAnchor = null, shownMembers = [], addedKeys = new Set(), pendingNavigation = null;
   function resetHistory() { undo = []; redo = []; present = snapshot(); }
   function travelHistory(back) {
     if (busy || !owner || !editing) return;
@@ -100,6 +101,8 @@ window.MZLists = (() => {
   function status(text, error = false) { $('clstatus').textContent = text; $('clstatus').classList.toggle('error', error); }
   function redraw() { hooks.repaint(); sync(); }
   function changed(record = true) {
+    const previousKeys = new Set(present ? JSON.parse(present)[2] : []);
+    addedKeys = new Set([...selected].filter(key => !previousKeys.has(key)));
     const next = snapshot();
     if (record && next !== present) {
       if (present) undo.push(present);
@@ -120,6 +123,7 @@ window.MZLists = (() => {
     $('clmobiletabs').hidden = !editor;
     $('clbulkbar').hidden = !active;
     $('clmembers').hidden = !active;
+    $('clmembertools').hidden = !active;
     $('clmembersearch').disabled = !active;
     $('clmembersmore').hidden = true;
     if (!active) {
@@ -131,7 +135,16 @@ window.MZLists = (() => {
     const rows = hooks.catalogue();
     if (catalogue !== rows) { catalogue = rows; catalogueByKey = new Map(rows.map(row => [row.k, row])); memberSignature = ''; }
     const query = $('clmembersearch').value.trim().toLocaleLowerCase();
-    const signature = JSON.stringify([[...selected], query, memberLimit, busy]);
+    marked = new Set([...marked].filter(key => selected.has(key)));
+    $('clmembertools').hidden = !active;
+    $('clmarkcount').textContent = marked.size + ' selected';
+    for (const name of ['clmarkcount', 'clmarkremove', 'clmarkclear']) $(name).hidden = !marked.size;
+    $('clmarkremove').disabled = busy || !marked.size;
+    $('clmarkclear').disabled = busy || !marked.size;
+    $('clmarkall').disabled = busy;
+    $('clclearsearch').hidden = !query;
+    $('clshowadded').hidden = !addedKeys.size;
+    const signature = JSON.stringify([[...selected], [...marked], [...addedKeys], query, memberLimit, busy]);
     if (signature === memberSignature) {
       $('clmembersmore').hidden = Number($('clmembersmore').dataset.remaining || 0) === 0;
       return;
@@ -140,18 +153,28 @@ window.MZLists = (() => {
     const entries = [...selected].map(key => ({key, row: catalogueByKey.get(key)}))
       .filter(({key, row}) => !query || [row?.title || key, row?.core, row?.src && hooks.source(row.src)].join(' ').toLocaleLowerCase().includes(query))
       .sort((a, b) => (a.row?.title || a.key).localeCompare(b.row?.title || b.key, undefined, {numeric: true, sensitivity: 'base'}) || a.key.localeCompare(b.key));
-    const focus = document.activeElement, focusedKey = focus?.dataset.clremove;
+    shownMembers = entries.map(entry => entry.key);
+    $('clmarkall').disabled = busy || !entries.length;
+    const scroll = $('clmembers').parentElement, scrollTop = scroll.scrollTop;
+    const focus = document.activeElement, focusedMark = focus?.dataset.clmark, focusedKey = focus?.dataset.clremove;
     const oldIndex = focusedKey ? [...$('clmembers').querySelectorAll('button')].indexOf(focus) : -1;
     const fragment = document.createDocumentFragment();
     for (const {key, row} of entries.slice(0, memberLimit)) {
       const li = document.createElement('li'), text = document.createElement('div'), title = document.createElement('strong'), detail = document.createElement('small'), remove = document.createElement('button');
-      li.className = 'clmember'; title.textContent = row?.title || 'Unavailable entry';
+      const hit = document.createElement('label'), check = document.createElement('input');
+      hit.className = 'clmarkhit'; check.type = 'checkbox'; check.dataset.clmark = key;
+      check.checked = marked.has(key); check.disabled = busy;
+      check.setAttribute('aria-label', 'Select ' + (row?.title || key) + ' for removal' + (row?.core ? ' (' + row.core + ')' : ''));
+      hit.append(check);
+      li.className = 'clmember'; li.classList.toggle('clnewmember', addedKeys.has(key)); title.textContent = row?.title || 'Unavailable entry';
       detail.textContent = row ? [row.core, row.src && hooks.source(row.src)].filter(Boolean).join(' · ') : key + ' · No longer in the catalogue';
       text.append(title, detail); remove.type = 'button'; remove.textContent = 'Remove'; remove.dataset.clremove = key;
       remove.setAttribute('aria-label', 'Remove ' + (row?.title || key) + (row && detail.textContent ? ' (' + detail.textContent + ')' : '') + ' from this list'); remove.disabled = busy;
-      li.append(text, remove); fragment.append(li);
+      li.append(hit, text, remove); fragment.append(li);
     }
     $('clmembers').replaceChildren(fragment);
+    scroll.scrollTop = scrollTop;
+    if (focusedMark) [...$('clmembers').querySelectorAll('[data-clmark]')].find(el => el.dataset.clmark === focusedMark)?.focus({preventScroll: true});
     $('clmemberempty').hidden = entries.length > 0;
     $('clmemberempty').textContent = selected.size ? 'No list entries match this search.' : 'Your list is empty. Tick games in the catalogue to add them here.';
     const remaining = Math.max(0, entries.length - memberLimit);
@@ -624,16 +647,41 @@ window.MZLists = (() => {
     }
     refreshCollections();
   }
+  function navigate(url) {
+    if (!editing || !dirty) { location.assign(url); return; }
+    pendingNavigation = url;
+    $('clleavesave').disabled = $('clleavediscard').disabled = busy || !owner;
+    $('clleave').showModal(); $('clleavekeep').focus(); updatePicker();
+  }
   function start(bridge) {
     hooks = bridge;
     if (started) return;
     started = true;
     if (editing) $('clworkspace').prepend($('clbar'));
     $('clmembers').onclick = event => {
+      const check = event.target.closest('input[data-clmark]');
+      if (check && !busy && owner) {
+        const key = check.dataset.clmark, end = shownMembers.indexOf(key), start = shownMembers.indexOf(memberAnchor);
+        const keys = event.shiftKey && start >= 0 ? shownMembers.slice(Math.min(start, end), Math.max(start, end) + 1) : [key];
+        keys.forEach(k => check.checked ? marked.add(k) : marked.delete(k));
+        memberAnchor = key; syncMembers(); return;
+      }
       const button = event.target.closest('button[data-clremove]');
       if (button) toggle(button.dataset.clremove, false);
     };
-    $('clmembersearch').oninput = () => { memberLimit = 200; syncMembers(); };
+    $('clmembersearch').oninput = () => { memberAnchor = null; memberLimit = 200; syncMembers(); };
+    $('clmarkall').onclick = () => { if (busy || !owner) return; shownMembers.forEach(key => marked.add(key)); syncMembers(); };
+    $('clmarkclear').onclick = () => { marked.clear(); memberAnchor = null; syncMembers(); };
+    $('clmarkremove').onclick = () => {
+      if (busy || !owner || !marked.size) return;
+      marked.forEach(key => selected.delete(key)); marked.clear(); memberAnchor = null; changed();
+      $('clmembers').parentElement.focus({preventScroll: true});
+    };
+    $('clclearsearch').onclick = () => { $('clmembersearch').value = ''; memberAnchor = null; syncMembers(); $('clmembersearch').focus(); };
+    $('clshowadded').onclick = () => {
+      $('clmembersearch').value = ''; memberLimit = 5000; syncMembers(); showPane(true);
+      $('clmembers').querySelector('.clnewmember')?.scrollIntoView({block: 'nearest'});
+    };
     $('clmembersmore').onclick = () => { memberLimit += 200; syncMembers(); };
     const showPane = showList => {
       document.body.classList.toggle('cl-mobile-list', showList);
@@ -653,10 +701,28 @@ window.MZLists = (() => {
       if (key !== 'z' && key !== 'y') return;
       event.preventDefault(); event.stopImmediatePropagation(); travelHistory(key === 'z' && !event.shiftKey);
     }, true);
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a[href]');
+      if (!editing || !dirty || event.defaultPrevented || !link || link.id === 'cldone' || link.target === '_blank' || link.hasAttribute('download') || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      const url = new URL(link.href, location.href);
+      if (!['http:', 'https:'].includes(url.protocol) || (url.pathname === location.pathname && url.search === location.search && url.hash)) return;
+      event.preventDefault(); navigate(url.href);
+    });
+    $('clleave').addEventListener('cancel', () => { pendingNavigation = null; });
+    $('clleavekeep').onclick = () => { pendingNavigation = null; $('clleave').close(); };
+    $('clleavediscard').onclick = () => { if (busy) return; clearDraft(); dirty = false; location.assign(pendingNavigation); };
+    $('clleavesave').onclick = async () => {
+      if (busy) return;
+      const destination = pendingNavigation;
+      $('clleavesave').disabled = $('clleavediscard').disabled = true;
+      if (await save(visibility())) { if (pendingNavigation === destination) location.assign(destination); return; }
+      $('clleave').close(); pendingNavigation = null;
+      $('clleavesave').disabled = $('clleavediscard').disabled = false;
+    };
     $('collection-select').onchange = event => {
       const value = event.target.value;
-      if (value === 'manage') location.assign(hooks.token() ? '../lists/?view=mine' : signIn('/lists/?view=mine'));
-      else if (validID(value)) location.assign('/releases/?list=' + encodeURIComponent(value));
+      if (value === 'manage') navigate(hooks.token() ? '../lists/?view=mine' : signIn('/lists/?view=mine'));
+      else if (validID(value)) navigate('/releases/?list=' + encodeURIComponent(value));
     };
     $('collection-create').onclick = showCreate;
     $('collection-create').disabled = false;

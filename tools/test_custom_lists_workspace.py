@@ -108,6 +108,44 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             expect(page.locator(control)).to_be_visible()
         expect(page.locator("#clundo")).to_be_disabled()
         expect(page.locator("#clredo")).to_be_disabled()
+        if mobile:
+            page.locator("#clshowlist").click()
+        checks = page.locator("#clmembers [data-clmark]")
+        checks.nth(0).click()
+        checks.nth(2).click(modifiers=["Shift"])
+        expect(page.locator("#clmarkcount")).to_have_text("3 selected")
+        expect(page.locator("#clsave")).to_be_disabled()
+        page.locator("#clmarkclear").click()
+        page.locator("#clmembersearch").fill("1943")
+        page.locator("#clmarkall").click()
+        expect(page.locator("#clmarkcount")).to_have_text("1 selected")
+        page.locator("#clmarkremove").click()
+        expect_members([])
+        page.locator("#clclearsearch").click()
+        expect_members([first, missing])
+        page.locator("#clundo").click()
+        expect_members([first, second, missing])
+        page.locator("#clredo").click()
+        expect_members([first, missing])
+        page.locator("#clundo").click()
+        expect_members([first, second, missing])
+        assert read() == baseline and not puts
+        if mobile:
+            page.locator("#clshowcatalogue").click()
+        else:
+            details(page, title + " navigation")
+            page.locator("#collection-browse").click()
+            expect(page.locator("#clleave")).to_be_visible()
+            page.locator("#clleavekeep").click()
+            assert page.url == editor
+            page.locator("#collection-browse").click()
+            page.locator("#clleavediscard").click()
+            page.wait_for_url("**/lists/")
+            assert read() == baseline
+            page.goto(editor)
+            expect(page.locator("#clname")).to_have_text(title)
+            expect(page.locator("#clsave")).to_be_disabled()
+        print("PASS range selection, filtered selection, bulk remove/undo/redo and navigation protection")
         search("1944")
 
         if mobile:

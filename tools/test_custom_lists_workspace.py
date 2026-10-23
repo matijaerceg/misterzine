@@ -146,6 +146,85 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             expect(page.locator("#clname")).to_have_text(title)
             expect(page.locator("#clsave")).to_be_disabled()
         print("PASS range selection, filtered selection, bulk remove/undo/redo and navigation protection")
+        # Inspecting a game must not trap the catalogue behind an overlay.
+        sizes = [(390, 844), (390, 667), (844, 500)] if mobile else [(1440, 1000), (1280, 720), (1024, 768)]
+        for width, height in sizes:
+            print("Checking details layout", width, height, flush=True)
+            page.set_viewport_size({"width": width, "height": height})
+            search("1944")
+            box = page.locator(f'.clpick[data-list-key="{third}"]')
+            box.locator("xpath=ancestor::td").click(position={"x": 100, "y": 15})
+            expect(page.locator("#panel")).to_be_visible()
+            expect(page.locator("#clshowdetails")).to_have_attribute("aria-pressed", "true")
+            expect(page.locator("#clshowlist")).to_have_attribute("aria-pressed", "false")
+            expect(page.locator("#clmembers")).to_be_hidden()
+            for control in ["#cldone", "#clshowlist", "#panel .close"]:
+                page.locator(control).click(trial=True)
+            body_box = page.locator("#panel .body").bounding_box()
+            assert body_box["height"] >= 100, (width, height, body_box)
+            assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+            if mobile:
+                expect(page.locator("#clcatalogue")).to_be_hidden()
+                page.locator("#clshowcatalogue").click()
+                expect(page.locator("#panel")).to_be_hidden()
+                page.wait_for_function("!location.hash")
+                expect(page.locator("#q")).to_have_value("1944")
+                page.locator("#clshowdetails").click()
+                expect(page.locator("#panel")).to_be_visible()
+            else:
+                table_box = page.locator("#clcatalogue").bounding_box()
+                panel_box = page.locator("#panel").bounding_box()
+                assert panel_box["x"] >= table_box["x"] + table_box["width"] - 1
+                box.check()
+                expect(page.locator("#panel")).to_be_visible()
+                page.locator("#clundo").click()
+                expect(box).not_to_be_checked()
+                # Browse another row while details remain docked.
+                search("1943")
+                page.locator(f'.clpick[data-list-key="{second}"]').locator("xpath=ancestor::td").click(position={"x": 100, "y": 15})
+                expect(page.locator("#panel h2")).to_contain_text("1943")
+            if width in [1280, 390] and height in [720, 844]:
+                capture("details-mobile.png" if mobile else "details-desktop.png")
+            page.locator("#clshowlist").click()
+            expect(page.locator("#clmembers")).to_be_visible()
+            expect(page.locator("#panel")).to_be_hidden()
+            page.wait_for_function("!location.hash")
+            expect_members([first, second, missing])
+            page.locator("#clmembersearch").fill("1943")
+            page.locator("#clmembersearch").press("ArrowDown")
+            expect(page.locator("#panel")).to_be_hidden()
+            page.locator("#clmembersearch").press("Escape")
+            expect(page.locator("#clmembersearch")).to_have_value("")
+            page.locator("#clshowdetails").click()
+            # Esc closes details before clearing an unrelated catalogue search.
+            page.locator("#panel .close").focus()
+            page.keyboard.press("Escape")
+            expect(page.locator("#panel")).to_be_hidden()
+            page.wait_for_function("!location.hash")
+            expect(page.locator("#q")).not_to_have_value("")
+            if mobile:
+                page.locator("#clshowcatalogue").click()
+        if not mobile:
+            page.locator("#q").fill("")
+            page.wait_for_function("document.querySelectorAll('.clpick').length > 10")
+            table_scroll = page.locator(".tablewrap")
+            table_scroll.evaluate("element => { element.scrollTop = 500; }")
+            page.wait_for_function("document.querySelector('.tablewrap').scrollTop >= 490")
+            top = table_scroll.evaluate("element => element.scrollTop")
+            details(page, description="Checking catalogue scroll position")
+            assert abs(table_scroll.evaluate("element => element.scrollTop") - top) < 2
+            page.locator("#clundo").click()
+            assert abs(table_scroll.evaluate("element => element.scrollTop") - top) < 2
+            page.locator("#cljumptools > summary").click()
+            page.locator("#totop").click()
+            expect(page.locator("#cljumptools")).not_to_have_attribute("open", "")
+            page.wait_for_function("document.querySelector('.tablewrap').scrollTop < 2")
+        assert read() == baseline and not puts
+        print("PASS docked details, unobscured catalogue, pane switching, reachable controls and keyboard isolation at three screen sizes")
+        page.set_viewport_size({"width": 390 if mobile else 1440, "height": 844 if mobile else 1000})
+        # A fresh editor also checks the initial layout without a details tab.
+        page.goto(editor)
+        expect(page.locator("#clname")).to_have_text(title)
         search("1944")
 
         if mobile:
@@ -368,6 +447,7 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             recipient.close()
         print("PASS shared view preserves Date sort across different sender/recipient column preferences")
     finally:
+        capture("last-workspace-mobile.png" if mobile else "last-workspace-desktop.png")
         current = context.request.get(endpoint, headers=auth)
         if current.status == 200 and current.json()["title"].startswith(prefix):
             context.request.delete(endpoint, headers=auth, data={"version": current.json()["version"]})

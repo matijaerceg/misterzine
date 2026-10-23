@@ -128,10 +128,18 @@
 .cl-editor main { container: clmain / inline-size; }
 .cl-editor .cllayout { display: grid; grid-template-columns: minmax(0, 57fr) minmax(20rem, 43fr); }
 .cl-editor .clworkspace { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-left: 1px solid var(--hair); background: var(--bg); }
-/* Game details overlay the catalogue while editing, leaving the working list
-   stable. Feedback remains available from the Menu without covering actions. */
+/* Details share the right-hand workspace with list entries. The catalogue and
+   editor toolbar remain reachable while inspecting a game. */
 body.cl-editor.panel-open main { margin-left: 0; }
-body.cl-editor #panel { width: min(32rem, 100vw); }
+body.cl-editor #panel { position: relative; inset: auto; width: 100%; height: auto; min-height: 0; min-width: 0; flex: 1 1 auto; transform: none; transition: none; z-index: auto; border: 0; }
+body.cl-editor #panel .body { scrollbar-width: thin; }
+body.cl-editor #panel .body::-webkit-scrollbar { display: initial; width: 8px; }
+body.cl-editor #panel .close { min-width: 44px; min-height: 44px; background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; z-index: 1; }
+.cl-editor.cl-has-details .clmobiletabs { display: flex; flex: none; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); background: var(--surface); }
+.cl-editor .clmobiletabs button { flex: 1; }
+.cl-editor #clshowcatalogue { display: none; }
+.cl-editor.cl-detail-view .clmemberarea { display: none; }
+.clmobiletabs button[hidden] { display: none !important; }
 body.cl-editor #resizer, body.cl-editor .fbtab { display: none; }
 .clbulkbar { position: relative; display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; padding: .55rem .75rem; flex: none; border-bottom: 1px solid var(--hair); background: var(--surface); }
 .clbulkbar button, .clbulktools > summary, .clmobiletabs button, .clmemberscroll button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; padding: .35rem .6rem; cursor: pointer; }
@@ -145,6 +153,8 @@ body.cl-editor #resizer, body.cl-editor .fbtab { display: none; }
 .clbulkbody button { display: block; width: 100%; text-align: left; }
 .clbulkbody button + button { margin-top: .4rem; }
 .clbulkbody p { margin: .55rem 0 0; color: var(--muted); font-size: .8rem; }
+.cl-editor .jumps { position: static; display: flex; gap: .4rem; }
+.cl-editor .jumps button { margin: 0; border-radius: .35rem; box-shadow: none; }
 
 /* A shared editor toolbar remains above the member list on desktop and above
    either tab on phones. Metadata controls remain visible below the main actions. */
@@ -196,7 +206,7 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
   /* Done returns to the normal collection navigation. While editing, devote
      the phone header to the current task and its catalogue search. */
   .cl-editor .collections, .cl-editor .collection-intro, .cl-editor .masthead .updated { display: none; }
-  .cl-editor.cl-mobile-list .controls { display: none; }
+  .cl-editor.cl-mobile-list .controls, .cl-editor.cl-detail-view .controls { display: none; }
   .cl-editor .cllayout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
   .cl-editor .clworkspace { display: contents; }
   .cl-editor #clbar { grid-column: 1; grid-row: 1; padding: .45rem .65rem; }
@@ -204,8 +214,10 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
   .cl-editor .clmemberarea { display: none; }
   .cl-editor .clmobiletabs { grid-column: 1; grid-row: 2; display: flex; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); background: var(--surface); }
   .cl-editor .clmobiletabs button { flex: 1; }
-  .cl-editor.cl-mobile-list .clcatalogue { display: none; }
+  .cl-editor #clshowcatalogue { display: block; }
+  .cl-editor.cl-mobile-list .clcatalogue, .cl-editor.cl-detail-view .clcatalogue { display: none; }
   .cl-editor.cl-mobile-list .clmemberarea { display: flex; }
+  body.cl-editor #panel { grid-column: 1; grid-row: 3; }
   .cl-editor .clheading { padding-right: 4.2rem; }
   .cl-editor .clname { font-size: .95rem; }
   .cl-editor #cledit { gap: .3rem; }
@@ -232,6 +244,13 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
 @media print {
   .cllayout, .clcatalogue { display: block; }
   #clworkspace, #clmobiletabs, #clbulkbar { display: none !important; }
+}
+/* Landscape phones and short windows must be able to scroll past the editor
+   toolbar instead of reducing the catalogue to a header with no reachable rows. */
+@media (max-width: 56rem) and (max-height: 44rem) {
+  html:has(body.cl-editor) { overflow-y: auto; }
+  body.cl-editor { height: auto; overflow: visible; }
+  body.cl-editor main { height: 44rem; }
 }
 
 .clmembertools { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); }

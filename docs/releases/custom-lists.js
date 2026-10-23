@@ -22,6 +22,35 @@ window.MZLists = (() => {
   let draftRecord = null, draftAvailable = true;
   let undo = [], redo = [], present = '', memberLimit = 200, memberSignature = '', catalogue = null, catalogueByKey = new Map();
   let marked = new Set(), memberAnchor = null, shownMembers = [], addedKeys = new Set(), pendingNavigation = null;
+  let editorPane = 'catalogue', returnPane = 'catalogue', detailFocus = null;
+  function setEditorPane(pane) {
+    editorPane = pane;
+    document.body.classList.toggle('cl-mobile-list', pane === 'list');
+    document.body.classList.toggle('cl-detail-view', pane === 'details');
+    $('clshowcatalogue').setAttribute('aria-pressed', String(pane === 'catalogue'));
+    $('clshowlist').setAttribute('aria-pressed', String(pane === 'list' || pane === 'catalogue' && !$('clshowcatalogue').getClientRects().length));
+    $('clshowdetails').setAttribute('aria-pressed', String(pane === 'details'));
+  }
+  function detailsOpened() {
+    if (!editing || mode !== 'list' || !started) return;
+    if (editorPane !== 'details') { returnPane = editorPane; detailFocus = document.activeElement; }
+    document.body.classList.add('cl-has-details');
+    $('clshowdetails').hidden = false;
+    setEditorPane('details');
+    const hint = $('panel').querySelector('.hint');
+    if (hint) hint.textContent = 'Switch to Your list to continue editing. Esc closes game details.';
+    // On phones the catalogue disappears; move focus out of that hidden pane.
+    if (!$('clcatalogue').getClientRects().length) $('clshowdetails').focus({preventScroll: true});
+  }
+  function detailsClosed() {
+    if (!editing || mode !== 'list' || !started) return;
+    const restore = $('panel').contains(document.activeElement);
+    setEditorPane(returnPane);
+    if (restore) {
+      const target = detailFocus?.isConnected && detailFocus.matches('button,input,a[href],[tabindex]') && detailFocus.getClientRects().length ? detailFocus : $('clshowcatalogue').getClientRects().length ? $('clshowcatalogue') : $('clshowlist');
+      target.focus({preventScroll: true});
+    }
+  }
   function resetHistory() { undo = []; redo = []; present = snapshot(); }
   function travelHistory(back) {
     if (busy || !owner || !editing) return;
@@ -119,6 +148,11 @@ window.MZLists = (() => {
     const editor = editing && mode === 'list';
     const active = editing && owner && !!list;
     document.body.classList.toggle('cl-editor', editor);
+    if (!editor && $('panel').parentElement === $('clworkspace')) {
+      document.body.append($('panel'));
+      document.body.classList.remove('cl-detail-view', 'cl-mobile-list', 'cl-has-details');
+      document.querySelector('.tablezone').prepend(document.querySelector('.jumps'));
+    }
     $('clworkspace').hidden = !editor;
     $('clmobiletabs').hidden = !editor;
     $('clbulkbar').hidden = !active;
@@ -657,7 +691,11 @@ window.MZLists = (() => {
     hooks = bridge;
     if (started) return;
     started = true;
-    if (editing) $('clworkspace').prepend($('clbar'));
+    if (editing) {
+      $('clworkspace').prepend($('clbar'), $('clmobiletabs'));
+      $('clworkspace').append($('panel'));
+      $('cljumps').append(document.querySelector('.jumps'));
+    }
     $('clmembers').onclick = event => {
       const check = event.target.closest('input[data-clmark]');
       if (check && !busy && owner) {
@@ -684,15 +722,20 @@ window.MZLists = (() => {
     };
     $('clmembersmore').onclick = () => { memberLimit += 200; syncMembers(); };
     const showPane = showList => {
-      document.body.classList.toggle('cl-mobile-list', showList);
-      $('clshowcatalogue').setAttribute('aria-pressed', String(!showList));
-      $('clshowlist').setAttribute('aria-pressed', String(showList));
+      if (editorPane === 'details') hooks.closePanel();
+      setEditorPane(showList ? 'list' : 'catalogue');
     };
     $('clshowcatalogue').onclick = () => showPane(false);
     $('clshowlist').onclick = () => showPane(true);
+    $('clshowdetails').onclick = () => hooks.openDetails();
     showPane(false);
+    if (editing) window.addEventListener('resize', () => { if (mode === 'list') setEditorPane(editorPane); });
     document.addEventListener('pointerdown', event => {
       if (!event.target.closest('#clbulktools')) $('clbulktools').open = false;
+      if (!event.target.closest('#cljumptools')) $('cljumptools').open = false;
+    });
+    $('cljumps').addEventListener('click', event => {
+      if (event.target.closest('button:not(:disabled)')) $('cljumptools').open = false;
     });
     document.addEventListener('keydown', event => {
       if (!editing || !owner || !(event.ctrlKey || event.metaKey) || event.altKey || event.isComposing ||
@@ -805,7 +848,7 @@ window.MZLists = (() => {
       if (mode === 'list' && !busy) load();
     });
   }
-  return {start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry,
+  return {start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry, detailsOpened, detailsClosed,
     isListView: () => mode === 'list' && !editing,
     isEditing: () => mode === 'list' && editing,
     isFavorites: () => mode === 'favorites', favoritesClick: () => {

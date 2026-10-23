@@ -1449,10 +1449,15 @@
 <div id="clmobiletabs" class="clmobiletabs" role="group" aria-label="List editor panes" hidden>
   <button id="clshowcatalogue" type="button" aria-pressed="true" aria-controls="clcatalogue">Find games</button>
   <button id="clshowlist" type="button" aria-pressed="false" aria-controls="clworkspace">List entries</button>
+  <button id="clshowdetails" type="button" aria-pressed="false" aria-controls="panel" hidden>Game details</button>
 </div>
 <section id="clcatalogue" class="clcatalogue" aria-label="Game catalogue">
 <div id="clbulkbar" class="clbulkbar" aria-label="Catalogue selection tools" hidden>
   <button id="clselected" type="button" aria-pressed="false">Show only selected</button>
+  <details id="cljumptools" class="clbulktools">
+    <summary>Jump to</summary>
+    <div class="clbulkbody" id="cljumps"></div>
+  </details>
   <details id="clbulktools" class="clbulktools">
     <summary>Bulk actions</summary>
     <div class="clbulkbody">
@@ -5424,6 +5429,7 @@ function openPanel(d, fromHistory) {
   // transition; otherwise the display:none→block toggle swallows the slide-in
   void panel.offsetWidth;
   document.body.classList.add('panel-open');
+  MZLists.detailsOpened();
   markOpenRow();
   // history/Back navigations (and the initial #hash open) must not write
   // history themselves — the entry they came from already carries the hash
@@ -5437,8 +5443,11 @@ function closePanel() {
   // openRow is deliberately kept: the row stays highlighted after the panel
   // closes as a "you were here" marker (re-orientation aid, esp. after the
   // fullscreen overlay on mobile). Cleared only by opening another row.
-  const onEnd = () => { panel.hidden = true; panel.removeEventListener('transitionend', onEnd); };
-  panel.addEventListener('transitionend', onEnd);
+  if (MZLists.isEditing()) { MZLists.detailsClosed(); panel.hidden = true; }
+  else {
+    const onEnd = () => { panel.hidden = true; panel.removeEventListener('transitionend', onEnd); };
+    panel.addEventListener('transitionend', onEnd);
+  }
   // consume the history entry that backed this panel (see pushPanelState), so a
   // close via ×/Esc/swipe doesn't leave a dead Back press behind — the URL's
   // hash reverts with it. Docked panels never pushed, so just strip the hash.
@@ -5732,6 +5741,8 @@ document.addEventListener('keydown', e => {
   // inert page would misfire anyway)
   if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open], dialog.cldialog[open]')) return;  // modal fields own their keyboard input
   if (e.key === 'Escape') {
+    const jumpTools = document.getElementById('cljumptools');
+    if (jumpTools.open) { e.preventDefault(); jumpTools.open = false; jumpTools.querySelector('summary').focus(); return; }
     const bulkTools = document.getElementById('clbulktools');
     if (bulkTools.open) { e.preventDefault(); bulkTools.open = false; bulkTools.querySelector('summary').focus(); return; }
     if (collectionMore.open) { e.preventDefault(); collectionMore.open = false; document.getElementById('clmoresummary').focus(); return; }
@@ -5743,6 +5754,10 @@ document.addEventListener('keydown', e => {
     if (filtersDD.classList.contains('open')) { setSheet(false); filtersSum.focus(); return; }
     // an active search filter absorbs the first Esc (clear it, keep the panel);
     // a second Esc — filter now empty — closes the panel as before
+    if (MZLists.isEditing() && document.body.classList.contains('cl-detail-view')) { e.preventDefault(); closePanel(); return; }
+    if (MZLists.isEditing() && e.target.id === 'clmembersearch') {
+      e.preventDefault(); e.target.value = ''; e.target.dispatchEvent(new Event('input')); return;
+    }
     if (document.getElementById('q').value) {
       e.preventDefault();
       clearSearch();  // Esc clears the search only, never the dropdown filters
@@ -5751,6 +5766,9 @@ document.addEventListener('keydown', e => {
     if (document.body.classList.contains('panel-open')) closePanel();
     return;
   }
+  // List controls own their keyboard input; arrows must not open an unrelated
+  // catalogue game or move focus to a search field hidden behind another tab.
+  if (MZLists.isEditing() && e.target.closest('.clmemberarea, #clbar, #clmobiletabs, input, textarea, select')) return;
   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
     e.preventDefault();
     navigate(e.key === 'ArrowDown' ? 1 : -1);
@@ -5788,6 +5806,7 @@ document.addEventListener('keydown', e => {
 // and desktop has ×/Esc/resizer-flick)
 let sx = 0, sy = 0, axis = null, dx = 0;
 panel.addEventListener('pointerdown', e => {
+  if (MZLists.isEditing()) return;  // docked details use explicit pane controls
   if (e.pointerType !== 'touch') return;
   if (e.target.closest('.close')) return;
   sx = e.clientX; sy = e.clientY; axis = null; dx = 0;
@@ -6587,12 +6606,16 @@ function boot() {
         return url.pathname + url.search.replace(/\+/g, '%20').replace(/\*/g, '%2A').replace(/,/g, '%2C') + url.hash;
       },
       closePanel,
+      openDetails: () => openPanel(openRow),
       repaint: () => {
         // Rebuilding the table must not strand keyboard users after ticking a row.
         const active = document.activeElement, focused = active && active.matches('.clpick');
         const key = focused && active.dataset.listKey;
         const previous = focused ? [...document.querySelectorAll('#rows .clpick')].indexOf(active) : -1;
-        apply(); recenterOpen();
+        const scroll = document.querySelector('.tablewrap'), top = scroll.scrollTop, left = scroll.scrollLeft;
+        apply();
+        if (MZLists.isEditing()) { scroll.scrollTop = top; scroll.scrollLeft = left; }
+        else recenterOpen();
         if (focused) {
           const boxes = [...document.querySelectorAll('#rows .clpick')];
           const next = boxes.find(box => box.dataset.listKey === key) || boxes[Math.min(previous, boxes.length - 1)] || document.getElementById('clselected');

@@ -942,6 +942,12 @@
   .sitemenu .matseg button + button { border-left: 1px solid var(--hair); }
   .sitemenu .matseg button:hover { background: var(--hover-bg); }
   .sitemenu .matseg button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  #panel .flyer { margin: 0 0 1.75rem; text-align: center; }
+  #panel .flyer a { display: block; }
+  #panel .flyer img { display: block; width: 100%; height: auto; }
+  #panel .flyer figcaption { color: var(--muted); font-size: .8rem; margin-top: .4rem; }
+  html[data-mature="blur"] #panel .flyer.mat:not(.reveal) img { filter: blur(24px) saturate(.5); }
+  #panel .flyer.mat { overflow: hidden; }
   #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: var(--muted); opacity: .55;
                       font-size: .62rem; }
   #panel .syscredit a { color: inherit; }
@@ -3269,6 +3275,8 @@ function makeUmbrella(ms) {
   }
   const pic = ms.find(m => m.img);
   if (pic) for (const k of ['img', 'img_slots', 'img_w', 'img_h']) u[k] = pic[k];
+  const media = ms.find(m => m.media_key && (m.media_slots || []).includes('flyer'));
+  if (media) { u.media_key = media.media_key; u.media_slots = media.media_slots; }
   // a single-game core reads as its game's name (coreSoleTitle), which in an
   // umbrella cell just repeats the title: name the source instead
   u.cores = [...new Set(ms.map(m => { const l = coreLabel(m.core) || m.core;
@@ -4801,12 +4809,33 @@ function groupHTML(u) {
     // the builds a core batch took sit under their update rows
     (u.split && u.split > u.members.length ? u.members.length + ' are listed here; the others sit under their core update rows. ' : '') +
     'Each build below has its own entry, star and launch button.</p>' +
-    shots + dl(rows) + cards + '</div>' + hint;
+    shots + flyerHTML(u) + dl(rows) + cards + '</div>' + hint;
 }
 
 // The batch panel: the core, the build, then every game in it as a line with
 // its own link and star. Neutral wording ("shipped an update together"): a core
 // rebuild and a batched MRA change look the same from here (see batchBadge).
+// Printed artwork stays unfiltered and opens the hosted original for reading.
+function flyerHTML(d) {
+  if (!d.media_key || !(d.media_slots || []).includes('flyer')) return '';
+  const url = 'https://images.misterzine.fyi/flyer/' + encodeURIComponent(d.media_key) + '.png';
+  return '<figure class="flyer' + (d.mat ? ' mat' : '') + '"><a href="' + escA(url) +
+    '" target="_blank" rel="noopener" aria-label="Enlarge flyer for ' + escA(d.title) + '">' +
+    '<img loading="lazy" src="' + escA(url) + '" alt="Flyer for ' + escA(d.title) +
+    '"></a><figcaption>Flyer · click to enlarge</figcaption></figure>';
+}
+panel.addEventListener('error', e => {
+  const flyer = e.target.closest && e.target.closest('.flyer');
+  if (flyer) flyer.remove();
+}, true);
+panel.addEventListener('click', e => {
+  const flyer = e.target.closest('.flyer.mat');
+  if (flyer && matMode === 'blur' && !flyer.classList.contains('reveal')) {
+    e.preventDefault();
+    flyer.classList.add('reveal');
+  }
+});
+
 function batchHTML(u) {
   const rows = [];
   rows.push(['FPGA core', cfield(u.core, esc(coreLabel(u.core)) +
@@ -5033,7 +5062,7 @@ function detailHTML(d) {
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2' + (d.k ? ' class="starred"' : '') + '>' +
     (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
-    launcher + sysphoto + shots + dl + prose + report + '</div>' + hint;
+    launcher + sysphoto + shots + flyerHTML(d) + dl + prose + report + '</div>' + hint;
 }
 
 function openPanel(d, fromHistory) {

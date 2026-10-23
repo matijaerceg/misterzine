@@ -942,6 +942,10 @@
   .sitemenu .matseg button + button { border-left: 1px solid var(--hair); }
   .sitemenu .matseg button:hover { background: var(--hover-bg); }
   .sitemenu .matseg button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
+  #flyer-lightbox { border: 0; padding: 16px; margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; box-sizing: border-box; background: transparent; cursor: zoom-out; overflow: hidden; }
+  #flyer-lightbox[open] { display: flex; align-items: center; justify-content: center; }
+  #flyer-lightbox::backdrop { background: rgba(0, 0, 0, .78); }
+  #flyer-lightbox img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
   #panel .flyer { margin: 0 0 1.75rem; text-align: center; }
   #panel .flyer a { display: block; }
   #panel .flyer img { display: block; width: 100%; height: auto; }
@@ -4815,12 +4819,12 @@ function groupHTML(u) {
 // The batch panel: the core, the build, then every game in it as a line with
 // its own link and star. Neutral wording ("shipped an update together"): a core
 // rebuild and a batched MRA change look the same from here (see batchBadge).
-// Printed artwork stays unfiltered and opens the hosted original for reading.
+// Printed artwork stays unfiltered and opens in a simple modal for reading.
 function flyerHTML(d) {
   if (!d.media_key || !(d.media_slots || []).includes('flyer')) return '';
   const url = 'https://images.misterzine.fyi/flyer/' + encodeURIComponent(d.media_key) + '.png';
   return '<figure class="flyer' + (d.mat ? ' mat' : '') + '"><a href="' + escA(url) +
-    '" target="_blank" rel="noopener" aria-label="Enlarge flyer for ' + escA(d.title) + '">' +
+    '" aria-label="Enlarge flyer for ' + escA(d.title) + '">' +
     '<img loading="lazy" src="' + escA(url) + '" alt="Flyer for ' + escA(d.title) +
     '"></a><figcaption>Flyer · click to enlarge</figcaption></figure>';
 }
@@ -4828,12 +4832,30 @@ panel.addEventListener('error', e => {
   const flyer = e.target.closest && e.target.closest('.flyer');
   if (flyer) flyer.remove();
 }, true);
+const flyerLightbox = document.createElement('dialog');
+flyerLightbox.id = 'flyer-lightbox';
+flyerLightbox.setAttribute('aria-label', 'Enlarged flyer. Click anywhere or press Escape to close.');
+flyerLightbox.innerHTML = '<img alt="">';
+document.body.appendChild(flyerLightbox);
+flyerLightbox.addEventListener('click', () => flyerLightbox.close());
+flyerLightbox.addEventListener('keydown', e => {
+  e.stopPropagation();
+  if (e.key === 'Escape') { e.preventDefault(); flyerLightbox.close(); }
+});
+flyerLightbox.addEventListener('close', () => flyerLightbox.querySelector('img').removeAttribute('src'));
 panel.addEventListener('click', e => {
-  const flyer = e.target.closest('.flyer.mat');
-  if (flyer && matMode === 'blur' && !flyer.classList.contains('reveal')) {
-    e.preventDefault();
+  const link = e.target.closest('.flyer a');
+  if (!link) return;
+  e.preventDefault();
+  const flyer = link.closest('.flyer');
+  if (flyer.classList.contains('mat') && matMode === 'blur' && !flyer.classList.contains('reveal')) {
     flyer.classList.add('reveal');
+    return;
   }
+  const image = flyerLightbox.querySelector('img');
+  image.src = link.href;
+  image.alt = link.querySelector('img').alt;
+  flyerLightbox.showModal();
 });
 
 function batchHTML(u) {

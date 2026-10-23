@@ -29,3 +29,7 @@ The remaining 1,050 rows have no matching flyer in this collection.
 
 Flyers appear in website detail galleries and on supported device builds;
 website list cards retain screenshots. Games without a matching flyer omit it.
+
+Website lightboxes use separate progressive JPEGs, quality 88, up to 1600 pixels on the longest edge. Smaller originals are not enlarged during conversion. These are generated from the original scans, not the device PNGs. Their dimensions and hashes are recorded in `data/flyers-web.json`; `tools/seed_flyers_web.py` prepares and verifies uploads. Device PNGs remain unchanged.
+
+Sidebar images use separate 640px JPEGs at `/flyer-thumb/<setname>.jpg`, prepared with the same tool using `--thumbnail`. The 1600px image is loaded only on opening the lightbox.

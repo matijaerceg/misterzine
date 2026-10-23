@@ -4822,10 +4822,11 @@ function groupHTML(u) {
 // Printed artwork stays unfiltered and opens in a simple modal for reading.
 function flyerHTML(d) {
   if (!d.media_key || !(d.media_slots || []).includes('flyer')) return '';
-  const url = 'https://images.misterzine.fyi/flyer/' + encodeURIComponent(d.media_key) + '.png';
+  const url = 'https://images.misterzine.fyi/flyer-web/' + encodeURIComponent(d.media_key) + '.jpg';
+  const thumbnail = 'https://images.misterzine.fyi/flyer-thumb/' + encodeURIComponent(d.media_key) + '.jpg';
   return '<figure class="flyer' + (d.mat ? ' mat' : '') + '"><a href="' + escA(url) +
     '" aria-label="Enlarge flyer for ' + escA(d.title) + '">' +
-    '<img loading="lazy" src="' + escA(url) + '" alt="Flyer for ' + escA(d.title) +
+    '<img loading="lazy" src="' + escA(thumbnail) + '" alt="Flyer for ' + escA(d.title) +
     '"></a></figure>';
 }
 panel.addEventListener('error', e => {

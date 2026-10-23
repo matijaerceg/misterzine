@@ -10,6 +10,8 @@
 // Routes:
 //   GET/HEAD /snap/<setname>.png    in-game screenshot
 //   GET/HEAD /title/<setname>.png   title screen
+//   GET/HEAD /flyer/<setname>.png   device flyer
+//   GET/HEAD /flyer-web/<setname>.jpg website flyer
 //   GET      /healthz               {"ok":true, ...seed summary}
 //   GET      /                      service info
 //
@@ -56,6 +58,10 @@ export default {
 async function route(request, env, ctx, url) {
   const m = request.method, p = url.pathname.replace(/\/+$/, '') || '/';
   let mm;
+  if ((mm = p.match(/^\/(flyer-web|flyer-thumb)\/([^/]+)\.jpg$/))) {
+    if (m !== 'GET' && m !== 'HEAD') return json({ error: 'method' }, 405);
+    return serveImage(mm[1], mm[2], request, env, ctx, url);
+  }
   if ((mm = p.match(/^\/(snap|title|flyer)\/([^/]+)\.png$/))) {
     if (m !== 'GET' && m !== 'HEAD') return json({ error: 'method' }, 405);
     return serveImage(mm[1], mm[2], request, env, ctx, url);
@@ -80,10 +86,10 @@ async function serveImage(kind, sn, request, env, ctx, url) {
   const cached = cache && await cache.match(cacheKey);
   if (cached) return finish(cached, request);
 
-  const key = `${kind}/${sn}.png`;
+  const key = `${kind}/${sn}.${kind.startsWith('flyer-') ? 'jpg' : 'png'}`;
   let obj = await env.IMAGES.get(key);
   let source = obj && obj.customMetadata && obj.customMetadata.src || 'seed';
-  if (!obj && kind === 'flyer') return finish(miss('negative', 300), request);
+  if (!obj && (kind === 'flyer' || kind.startsWith('flyer-'))) return finish(miss('negative', 300), request);
   if (!obj) {
     const found = await onMiss(kind, sn, env);
     if (found.response) {
@@ -95,7 +101,7 @@ async function serveImage(kind, sn, request, env, ctx, url) {
   }
   // Buffer the picture: screenshots are small, and a buffered body clones
   // freely into the edge cache while the original streams to the client.
-  const res = hit(obj, source, await obj.arrayBuffer());
+  const res = hit(obj, source, await obj.arrayBuffer(), kind.startsWith('flyer-') ? 'image/jpeg' : 'image/png');
   if (cache) ctx.waitUntil(cache.put(cacheKey, res.clone()));
   return finish(res, request);
 }
@@ -279,10 +285,10 @@ async function rememberMiss(kind, sn, env, prev, reason) {
 
 // --- responses ----------------------------------------------------------------------
 
-function hit(obj, source, body) {
+function hit(obj, source, body, contentType = 'image/png') {
   const meta = obj.customMetadata || {};
   const headers = {
-    'Content-Type': 'image/png',
+    'Content-Type': contentType,
     'Content-Length': String(body.byteLength),
     'Cache-Control': 'public, max-age=31536000, immutable',
     ETag: obj.httpEtag,

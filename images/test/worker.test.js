@@ -103,3 +103,17 @@ describe('flyers', () => {
     expect((await get('/flyer/dkong.png', { method: 'POST' })).status).toBe(405);
   });
 });
+
+it.each(['flyer-web', 'flyer-thumb'])('serves %s JPEGs separately with conditional and HEAD responses', async (kind) => {
+ const bytes = new Uint8Array([255,216,255,217]);
+ await env.IMAGES.put(`${kind}/dkong.jpg`, bytes, {httpMetadata:{contentType:'image/jpeg'}});
+ const r=await get(`/${kind}/dkong.jpg`);
+ expect(r.status).toBe(200); expect(r.headers.get('Content-Type')).toBe('image/jpeg');
+ expect(new Uint8Array(await r.arrayBuffer())).toEqual(bytes);
+ expect((await get(`/${kind}/dkong.jpg`,{headers:{'If-None-Match':r.headers.get('ETag')}})).status).toBe(304);
+ const head=await get(`/${kind}/dkong.jpg`,{method:'HEAD'});
+ expect(head.status).toBe(200);expect((await head.arrayBuffer()).byteLength).toBe(0);
+ expect((await get(`/${kind}/missing.jpg`)).status).toBe(404);
+ expect((await get(`/${kind}/dkong.png`)).status).toBe(404);
+ expect((await get(`/${kind}/dkong.jpg`,{method:'POST'})).status).toBe(405);
+});

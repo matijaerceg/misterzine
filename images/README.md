@@ -105,3 +105,6 @@ so scheduled updates retain flyer availability. Flyer rights remain with their
 original owners; the index records the source collection, not a new license.
 
 Source details and collection scope: [flyer credits](../docs/flyer-sources.md).
+
+Website flyers are served read-only at `/flyer-web/<setname>.jpg` as `image/jpeg`, separately from the device `/flyer/<setname>.png` files. `python tools/seed_flyers_web.py ORIGINALS --credentials-root REPO` verifies the original hashes against `data/flyers.json`, prepares progressive quality-88 JPEGs bounded to 1600 pixels, uploads them, and records verified hashes in `data/flyers-web.json`. Missing website flyers return 404 without upstream fetching.
+Sidebar thumbnails use `/flyer-thumb/<setname>.jpg` (640px); generate them with the same command plus `--thumbnail`. Publish both verified indexes before switching gallery URLs.

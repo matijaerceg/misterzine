@@ -92,3 +92,14 @@ describe('helpers', () => {
     expect(await pngIsBlank(new Uint8Array([1, 2, 3]))).toBe(false);
   });
 });
+
+
+describe('flyers', () => {
+  it('serves hosted flyers and does not infer family or fetch upstream', async () => {
+    await seed('flyer/dkong.png', COLOR);
+    expect((await get('/flyer/dkong.png')).status).toBe(200);
+    expect((await get('/flyer/dkong.png', { method: 'HEAD' })).status).toBe(200);
+    expect((await get('/flyer/missing.png')).status).toBe(404);
+    expect((await get('/flyer/dkong.png', { method: 'POST' })).status).toBe(405);
+  });
+});

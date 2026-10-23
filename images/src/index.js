@@ -56,7 +56,7 @@ export default {
 async function route(request, env, ctx, url) {
   const m = request.method, p = url.pathname.replace(/\/+$/, '') || '/';
   let mm;
-  if ((mm = p.match(/^\/(snap|title)\/([^/]+)\.png$/))) {
+  if ((mm = p.match(/^\/(snap|title|flyer)\/([^/]+)\.png$/))) {
     if (m !== 'GET' && m !== 'HEAD') return json({ error: 'method' }, 405);
     return serveImage(mm[1], mm[2], request, env, ctx, url);
   }
@@ -83,6 +83,7 @@ async function serveImage(kind, sn, request, env, ctx, url) {
   const key = `${kind}/${sn}.png`;
   let obj = await env.IMAGES.get(key);
   let source = obj && obj.customMetadata && obj.customMetadata.src || 'seed';
+  if (!obj && kind === 'flyer') return finish(miss('negative', 300), request);
   if (!obj) {
     const found = await onMiss(kind, sn, env);
     if (found.response) {

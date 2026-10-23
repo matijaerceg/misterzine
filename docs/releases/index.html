@@ -906,7 +906,8 @@
   #panel .hint { flex: none; margin: 0; padding: .55rem 1rem; border-top: 1px solid var(--rule);
                  background: var(--surface); color: var(--muted); font-size: .78rem; }
   #panel .hint kbd { font: inherit; padding: 0 .25rem; border: 1px solid var(--kbd-border); border-radius: 3px; }
-  #panel .frame { width: 100%; background: #000; margin: .5rem 0; position: relative; }
+  #panel .frame, #panel .flyer { margin: .5rem 0; }
+  #panel .frame { width: 100%; background: #000; position: relative; }
   #panel .frame img { width: 100%; height: 100%; object-fit: fill; display: block; }
   /* CRT slot mask (mask.js) drawn over each screenshot in device pixels;
      decorative only — must never swallow clicks/touches */
@@ -946,10 +947,9 @@
   #flyer-lightbox[open] { display: flex; align-items: center; justify-content: center; }
   #flyer-lightbox::backdrop { background: rgba(0, 0, 0, .78); }
   #flyer-lightbox img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
-  #panel .flyer { margin: 0 0 1.75rem; text-align: center; }
-  #panel .flyer a { display: block; }
+  #panel .flyer { text-align: center; }
+  #panel .flyer a { display: block; cursor: zoom-in; }
   #panel .flyer img { display: block; width: 100%; height: auto; }
-  #panel .flyer figcaption { color: var(--muted); font-size: .8rem; margin-top: .4rem; }
   html[data-mature="blur"] #panel .flyer.mat:not(.reveal) img { filter: blur(24px) saturate(.5); }
   #panel .flyer.mat { overflow: hidden; }
   #panel .syscredit { margin: 0 0 1.75rem; text-align: center; color: var(--muted); opacity: .55;
@@ -4813,7 +4813,7 @@ function groupHTML(u) {
     // the builds a core batch took sit under their update rows
     (u.split && u.split > u.members.length ? u.members.length + ' are listed here; the others sit under their core update rows. ' : '') +
     'Each build below has its own entry, star and launch button.</p>' +
-    shots + flyerHTML(u) + dl(rows) + cards + '</div>' + hint;
+    flyerHTML(u) + shots + dl(rows) + cards + '</div>' + hint;
 }
 
 // The batch panel: the core, the build, then every game in it as a line with
@@ -4826,7 +4826,7 @@ function flyerHTML(d) {
   return '<figure class="flyer' + (d.mat ? ' mat' : '') + '"><a href="' + escA(url) +
     '" aria-label="Enlarge flyer for ' + escA(d.title) + '">' +
     '<img loading="lazy" src="' + escA(url) + '" alt="Flyer for ' + escA(d.title) +
-    '"></a><figcaption>Flyer · click to enlarge</figcaption></figure>';
+    '"></a></figure>';
 }
 panel.addEventListener('error', e => {
   const flyer = e.target.closest && e.target.closest('.flyer');
@@ -5084,7 +5084,7 @@ function detailHTML(d) {
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2' + (d.k ? ' class="starred"' : '') + '>' +
     (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
-    launcher + sysphoto + shots + flyerHTML(d) + dl + prose + report + '</div>' + hint;
+    launcher + sysphoto + flyerHTML(d) + shots + dl + prose + report + '</div>' + hint;
 }
 
 function openPanel(d, fromHistory) {

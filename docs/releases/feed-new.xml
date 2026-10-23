@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Fri, 23 Oct 2026 06:07:08 +0000</lastBuildDate>
+<lastBuildDate>Fri, 23 Oct 2026 06:43:56 +0000</lastBuildDate>
+<item>
+<title>[New] Touch and Go (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#touchgo</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Touch and Go (North America, checksum 05737572) [TomSVR].mra:2026-10-23T06:43:56+00:00</guid>
+<pubDate>Fri, 23 Oct 2026 06:43:56 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/touchgo.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1996 / Gaelco&lt;/p&gt;&lt;p&gt;Core: TomSVR_gaelco2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-23 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Bang! (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bang</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_argh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1988 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Blastaball (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ar_blast</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_ArcadiaSystems/Blastaball (Arcadia, V 2.1).mra:2026-10-21T17:26:20+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 17:26:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ar_blast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Arcadia Systems&lt;/p&gt;&lt;p&gt;Core: arcadiasystems&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

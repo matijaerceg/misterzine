@@ -287,6 +287,8 @@ def main():
             expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
 
         def set_visibility(visibility, name=None):
+            if not page.locator("#clmore").evaluate("element => element.open"):
+                page.locator("#clmoresummary").click()
             page.locator("#clpublish").click()
             expect(page.locator("#clconfirm")).to_be_visible()
             page.locator(f'#clvisibility input[value="{visibility}"]').check()
@@ -357,6 +359,15 @@ def main():
             following.locator("#clfollow").click()
             expect(following.locator("#clfollow")).to_have_text(re.compile("Following|Unfollow|Stop following"))
             assert public_list()["follower_count"] == 1
+            following.goto(base + "/lists/?view=mine")
+            followed_card = following.locator("#following-cards .list-card").filter(has=following.get_by_role("heading", name=title, exact=True))
+            followed_card.get_by_role("button", name="Stop following " + title, exact=True).click()
+            expect(followed_card).to_have_count(0)
+            assert public_list()["follower_count"] == 0
+            following.goto(base + "/releases/?list=" + list_id)
+            following.locator("#clfollow").click()
+            expect(following.locator("#clfollow")).to_have_text(re.compile("Following|Unfollow|Stop following"))
+            assert public_list()["follower_count"] == 1
             following.goto(base + "/releases/")
             expect(following.locator("#clname")).to_have_text(title)
             following.locator("#collection-favorites").click()
@@ -369,7 +380,7 @@ def main():
             expect(page.locator("#clname")).to_have_text(title)
             page.goto(base + "/releases/")
             expect(page.locator("#clname")).to_have_text(title)
-            print("PASS follow/count, own/followed views remembered, explicit link overrides favorites")
+            print("PASS follow/count, My lists unfollow, own/followed views remembered, explicit link overrides favorites")
 
             page.goto(base + "/releases/?editList=" + list_id)
             expect(page.locator("#clname")).to_have_text(title)

@@ -141,6 +141,10 @@ in, the account service stores:</p>
 <p>Not collected from your sign-in provider: your name, profile picture or password. Your saved MiSTers
 and Zaparoo keys stay in your browser. Signing in with Google one day and GitHub another creates two separate accounts.</p>
 <p>The account service runs on Cloudflare (Workers and a D1 database). Traffic to it is encrypted.</p>
+<p>While you edit a custom list, the Tracker keeps a recovery copy of unsaved changes in this browser.
+It restores that copy only after confirming that your signed-in account owns the list. The copy stays on
+this device; editing a draft does not upload those changes until you save the list. Saving or discarding
+the changes removes the recovery copy. Clearing this site's browser data also removes it.</p>
 
 <h2>Sharing custom lists</h2>
 <p>Your account is private. Making or following a list does not create a public profile. You choose how each
@@ -175,7 +179,7 @@ until you press Send.</p>
   <li><strong>Account:</strong> open your <a href="../account/">account page</a> and choose "Delete account".
     Favorites, your custom lists (including shared ones), display name, follows, sessions and the account record are removed immediately. Your shared list links stop working. Other curators' lists are unaffected.</li>
   <li><strong>A custom list:</strong> open <a href="../lists/?view=mine">My lists</a> and choose "Delete". To stop sharing while keeping the list, edit it in the Tracker and choose Private.</li>
-  <li><strong>A followed list:</strong> open it in the Tracker and choose "Unfollow". If it is unavailable, choose "Stop following" in My lists.</li>
+  <li><strong>A followed list:</strong> choose "Stop following" in <a href="../lists/?view=mine">My lists</a>, or open the list in the Tracker and choose "Unfollow".</li>
   <li><strong>Browser data:</strong> clear this site's data in your browser, or use "Clear all favorites"
     and the device manager in the tracker.</li>
 </ul>

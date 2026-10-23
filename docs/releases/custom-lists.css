@@ -14,14 +14,32 @@
 .clbar .clprimary, .cldialog .clprimary { color: var(--accent-on); background: var(--accent); border-color: var(--accent); }
 .clbar button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
 .clbar .clspacer { flex: 1; }
-.clpick { margin: 0 .5rem 0 0; width: 1rem; height: 1rem; vertical-align: middle; }
-.cldialog { color: var(--fg); background: var(--bg); border: 1px solid var(--hair); border-radius: .65rem; width: min(32rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 1.25rem; }
+.clworkrow { display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
+#cledit { flex: 1; }
+#clsave { margin-left: auto; }
+.clviewactions:not(:has(> :not([hidden]))) { display: none; }
+.clstatus:empty { display: none; }
+.clmore { position: relative; flex: none; margin-left: auto; }
+.clmore > summary { cursor: pointer; color: var(--fg); border: 1px solid var(--hair); border-radius: .35rem; padding: .3rem .6rem; background: var(--surface); }
+.clmore[open] > summary { border-color: var(--accent); }
+.clmore > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.clmorebody { position: absolute; z-index: 25; top: calc(100% + .4rem); right: 0; width: min(32rem, calc(100vw - 2rem)); max-height: min(28rem, calc(var(--clviewport-height, 100dvh) - 8rem)); overflow: auto; overscroll-behavior: contain; padding: .85rem; border: 1px solid var(--hair); border-radius: .4rem; background: var(--surface); box-shadow: 0 .35rem 1rem #0003; }
+#clsecondary { padding-bottom: .65rem; margin-bottom: .65rem; border-bottom: 1px solid var(--hair); }
+#cldraftnote { margin: .65rem 0; }
+#cldiscard, #clundo { margin-top: .4rem; }
+.clcell { display: flex; align-items: center; }
+.cltitletext { min-width: 0; }
+.clpickhit { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.5rem; min-height: 1.5rem; margin-right: .3rem; vertical-align: middle; border-radius: .3rem; cursor: pointer; }
+.clpickhit:focus-within { outline: 2px solid var(--accent); outline-offset: -2px; }
+.clpick { margin: 0; width: 1rem; height: 1rem; }
+.cldialog { position: fixed; inset: auto 0; top: calc(var(--clviewport-top, 0px) + var(--clviewport-height, 100dvh) * .5); transform: translateY(-50%); margin: 0 auto; color: var(--fg); background: var(--bg); border: 1px solid var(--hair); border-radius: .65rem; width: min(32rem, calc(100vw - 2rem)); max-height: calc(var(--clviewport-height, 100dvh) - 1rem); padding: 1.25rem; overflow: auto; overscroll-behavior: contain; scroll-padding: 1rem 0 5rem; }
 .cldialog::backdrop { background: #0008; }
 .cldialog h2 { margin: 0 0 .7rem; font-size: 1.25rem; }
 .cldialog label { display: block; margin: .75rem 0; }
 .cldialog input, .cldialog textarea { display: block; width: 100%; box-sizing: border-box; padding: .5rem; margin-top: .25rem; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .3rem; font: inherit; }
 .cldialog textarea { resize: vertical; min-height: 5rem; }
 .cldialog .clactions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; justify-content: flex-end; }
+.cldialog > form > .clactions, .cldialog > .clactions { position: sticky; bottom: -1.25rem; z-index: 1; padding: .75rem 0; background: var(--bg); }
 .clmissing { max-height: 10rem; overflow: auto; margin: .4rem 0; padding-left: 1.5rem; }
 .clmissing button { margin-left: .5rem; }
 @media (max-width: 36rem) { .clbar { padding: .45rem 0; } .clrow { gap: .35rem; } .clnote { font-size: .8rem; } .clbar button, .clbar .cllink { padding: .35rem .5rem; } }
@@ -74,3 +92,28 @@
 .clentrynew summary { color: var(--accent); cursor: pointer; }
 #clentrycore { overflow-wrap: anywhere; }
 @media print { #panel .clentryadd { display: none; } }
+/* Touch controls keep a separate, generous target without turning title taps
+   into selection changes. Form text stays large enough to avoid mobile zoom. */
+@media (pointer: coarse), (max-width: 36rem) {
+  .clbar button, .clbar .cllink, .clmore > summary, .cldialog button, #panel .clentryadd { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .clbar .cllink { box-sizing: border-box; }
+  .clmore > summary { display: list-item; align-content: center; }
+  .clpickhit { width: 44px; min-height: 44px; margin-right: .2rem; }
+  .clpick { width: 1.15rem; height: 1.15rem; }
+  .cldialog { width: calc(100vw - 1rem); padding: 1rem; }
+  .cldialog input, .cldialog textarea, .cldialog select { font-size: 16px; min-height: 44px; }
+  .cldialog input[type=radio] { min-height: 0; }
+  .cldialog .clvisibility label { min-height: 48px; }
+  .cldialog > form > .clactions, .cldialog > .clactions { bottom: -1rem; }
+  .clentrynew summary { min-height: 44px; align-content: center; }
+}
+@container topbar (max-width: 34rem) {
+  .clheading { gap: .15rem .5rem; }
+  .clname { flex: 1 1 100%; line-height: 1.2; }
+  .clstate { font-size: .78rem; }
+  .clworkrow, #cledit { gap: .35rem; }
+  #cledit { flex-wrap: nowrap; }
+  #clselected, #clsave, .clmore > summary { white-space: nowrap; font-size: .85rem; }
+  .clmorebody { width: min(26rem, calc(100vw - 2rem)); }
+  .clstatus { font-size: .8rem; }
+}

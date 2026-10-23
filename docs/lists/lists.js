@@ -55,23 +55,28 @@
       message('Your sign-in has expired. Sign in again to manage your lists.', true);
     }
   }
-  function card(list, own) {
+  function unfollowButton(list) {
+    var control = button('Stop following', async function (event) {
+      var b = event.currentTarget, session = sessionVersion; b.disabled = true;
+      try {
+        await request('/following/' + encodeURIComponent(list.id), { method: 'DELETE' }, true);
+        if (session !== sessionVersion) return;
+        message('Removed from your followed lists.');
+        await loadLibrary(true);
+      } catch (err) {
+        if (session !== sessionVersion) return;
+        if (err.status === 401) signedOut(true);
+        else { b.disabled = false; message('Could not stop following this list. Try again.', true); }
+      }
+    });
+    if (list.title) control.setAttribute('aria-label', 'Stop following ' + list.title);
+    return control;
+  }
+  function card(list, own, followed) {
     var item = el('li', undefined, 'list-card');
     if (list.unavailable) {
       item.append(el('h3', 'Unavailable list'), el('p', 'The owner made this list private or removed it. It stays in your followed lists in case access returns.', 'muted'));
-      item.append(button('Stop following', async function (event) {
-        var b = event.currentTarget, session = sessionVersion; b.disabled = true;
-        try {
-          await request('/following/' + encodeURIComponent(list.id), { method: 'DELETE' }, true);
-          if (session !== sessionVersion) return;
-          await loadLibrary(); if (session !== sessionVersion) return;
-          message('Removed from your followed lists.');
-        } catch (err) {
-          if (session !== sessionVersion) return;
-          if (err.status === 401) signedOut(true);
-          else { b.disabled = false; message('Could not stop following this list. Try again.', true); }
-        }
-      }));
+      item.append(unfollowButton(list));
       return item;
     }
     var href = '../releases/?list=' + encodeURIComponent(list.id);
@@ -95,6 +100,7 @@
       if (list.visibility !== 'private') actions.append(button('Copy link', function () { copy(location.origin + '/releases/?list=' + encodeURIComponent(list.id)); }));
       actions.append(button('Delete', function () { confirmDelete(list); }, 'btn danger'));
     }
+    if (followed) actions.append(unfollowButton(list));
     item.append(actions); return item;
   }
   async function loadLibrary(keepMessage) {
@@ -108,7 +114,7 @@
       if (attempt !== generation) return;
       $('owned-cards').replaceChildren(); $('following-cards').replaceChildren();
       data.owned.forEach(function (list) { $('owned-cards').append(card(list, true)); });
-      data.following.forEach(function (list) { $('following-cards').append(card(list, false)); });
+      data.following.forEach(function (list) { $('following-cards').append(card(list, false, true)); });
       $('owned-empty').hidden = data.owned.length > 0; $('following-empty').hidden = data.following.length > 0;
       $('owned-count').textContent = countLabel(data.owned.length, 'list'); $('following-count').textContent = countLabel(data.following.length, 'list');
       $('loading').hidden = true; $('library').hidden = false;

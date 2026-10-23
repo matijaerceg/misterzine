@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- List editing on phones leaves more room for games, with larger selection targets and secondary tools under More. Unsaved list edits can be recovered on the same device after reloading, bulk selection changes can be undone, and followed lists can be removed directly from My Lists.
 - Game detail panels now have Add to list: choose one of your lists or create a private list with that exact game and core. Adding to the list currently being edited stays in its pending selection until you save.
 - Collections now have a permanent home above the Tracker: switch between all entries, favorites, and your own or followed lists. The Tracker remembers your last collection, while shared links open the collection they specify.
 - Signed-in visitors can select exact entries into private lists, share an unlisted link, or publish to Browse lists under a chosen public display name. Browse lists supports search and sorts by last content update, newest, or follower count. Following a list adds it to your collections and uses its owner's latest saved contents. Account integration with MZ Arcade will follow separately.

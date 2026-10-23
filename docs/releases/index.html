@@ -1288,27 +1288,44 @@
 </div>
 <p id="collection-notice" class="clstatus" role="status" hidden></p>
 <section id="clbar" class="clbar" aria-label="Current collection" hidden>
-  <div class="clrow">
+  <div class="clrow clheading">
     <strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span>
-    <span class="clspacer"></span>
+  </div>
+  <div class="clrow clviewactions">
     <button id="clfollow" type="button" hidden>Follow list</button>
     <a id="cleditlink" class="cllink" href="#" hidden>Edit list</a>
     <button id="cllinkcopy" type="button" hidden>Copy share link</button>
-    <a id="cldone" class="cllink" href="#" hidden>Done editing</a>
   </div>
-  <div id="clattribution" class="clnote"></div>
-  <details id="cldescriptionfold" class="cldescriptionfold" hidden><summary>About this list</summary><p id="cldescriptionview"></p></details>
-  <div id="cledit" class="clrow" hidden>
-    <button id="clselected" type="button" aria-pressed="false">Selected (0)</button>
-    <button id="cladd" type="button">Add matching</button>
-    <button id="clremove" type="button">Remove matching</button>
-    <button id="cldetailsbtn" type="button">List details</button>
-    <span class="clspacer"></span>
-    <button id="clsave" type="button">Save draft</button>
-    <button id="clpublish" class="clprimary" type="button">Sharing…</button>
+  <div class="clworkrow">
+    <div id="cledit" class="clrow" hidden>
+      <button id="clselected" type="button" aria-pressed="false">Selected (0)</button>
+      <button id="clsave" class="clprimary" type="button">Save draft</button>
+    </div>
+    <details id="clmore" class="clmore">
+      <summary id="clmoresummary">About this list</summary>
+      <div class="clmorebody">
+        <div id="clsecondary" hidden>
+          <div class="clrow">
+            <button id="cldetailsbtn" type="button">List details</button>
+            <button id="clpublish" type="button">Sharing...</button>
+            <a id="cldone" class="cllink" href="#" hidden>Done editing</a>
+          </div>
+          <div class="clrow">
+            <button id="cladd" type="button">Add matching</button>
+            <button id="clremove" type="button">Remove matching</button>
+          </div>
+          <p id="cldraftnote" class="clnote" role="status" hidden></p>
+          <button id="clundo" type="button" hidden>Undo selection change</button>
+          <button id="cldiscard" type="button" hidden>Discard unsaved changes</button>
+        </div>
+        <div id="clattribution" class="clnote"></div>
+        <details id="cldescriptionfold" class="cldescriptionfold" hidden><summary>Description</summary><p id="cldescriptionview"></p></details>
+        <p id="clnote" class="clnote"></p>
+      </div>
+    </details>
   </div>
-  <p id="clnote" class="clnote"></p>
   <p id="clstatus" class="clstatus" role="status" aria-live="polite"></p>
+  <p id="clempty" class="clnote" hidden></p>
   <div class="clrow">
     <button id="clmissing" type="button" hidden></button>
     <button id="clretry" type="button" hidden>Try again</button>
@@ -2629,7 +2646,10 @@ function coreCell(d) {
 // line is spent at every scroll position. Only multi-word labels need one; the
 // Columns menu always shows the full label.
 const COLUMNS = [
-  { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => '<td>' + MZLists.checkbox(d) + titleCell(d) + '</td>' },
+  { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => {
+    const pick = MZLists.checkbox(d);
+    return '<td>' + (pick ? '<span class="clcell">' + pick + '<span class="cltitletext">' + titleCell(d) + '</span></span>' : titleCell(d)) + '</td>';
+  } },
   { k: 'sn', label: 'ROM Name', sl: 'ROM', w: 9, mw: 6.5, opt: true,
     cell: d => '<td class="rom">' + esc(d.sn || '') + '</td>' },
   { k: 'typesort', label: 'Core Type', sl: 'Type', w: 5, mw: 3.5, cell: d => '<td class="type">' + typeBadge(d) + '</td>' },
@@ -5438,8 +5458,34 @@ function openPlaceholder() {
 document.getElementById('rows').addEventListener('change', e => {
   if (e.target.matches('.clpick')) MZLists.toggle(e.target.dataset.listKey, e.target.checked);
 });
+// Collection tools stay out of the game table until needed. Native details keeps
+// its keyboard semantics; outside click and Escape return to the compact row.
+const collectionMore = document.getElementById('clmore');
+const fitCollectionMore = () => {
+  if (!collectionMore.open) return;
+  const body = collectionMore.querySelector('.clmorebody'), viewport = window.visualViewport;
+  const bottom = viewport ? viewport.offsetTop + viewport.height : innerHeight;
+  body.style.maxHeight = Math.max(80, bottom - body.getBoundingClientRect().top - 8) + 'px';
+};
+collectionMore.addEventListener('toggle', fitCollectionMore);
+window.addEventListener('resize', fitCollectionMore);
+document.addEventListener('click', e => {
+  if (collectionMore.open && (!collectionMore.contains(e.target) || e.target.closest('#cldetailsbtn, #clpublish'))) collectionMore.open = false;
+});
+// Mobile keyboards shrink the visual viewport without always resizing the page.
+// Keep dialogs inside that visible area, with their contents independently scrollable.
+if (window.visualViewport) {
+  const fitListDialogs = () => {
+    document.documentElement.style.setProperty('--clviewport-height', window.visualViewport.height + 'px');
+    document.documentElement.style.setProperty('--clviewport-top', window.visualViewport.offsetTop + 'px');
+    fitCollectionMore();
+  };
+  window.visualViewport.addEventListener('resize', fitListDialogs);
+  window.visualViewport.addEventListener('scroll', fitListDialogs);
+  fitListDialogs();
+}
 document.getElementById('rows').addEventListener('click', e => {
-  if (e.target.closest('.clpick')) return;  // list membership is separate from opening a row
+  if (e.target.closest('.clpickhit')) return;  // the whole checkbox label is separate from opening a row
   if (e.target.closest('a')) return;  // repo links navigate; don't also open the panel
   const fb = e.target.closest('button.fav');  // starring is not a row selection
   if (fb) { toggleFav(KEY2ROW[fb.dataset.k], fb); return; }
@@ -5637,6 +5683,7 @@ document.addEventListener('keydown', e => {
   // inert page would misfire anyway)
   if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open], dialog.cldialog[open]')) return;  // modal fields own their keyboard input
   if (e.key === 'Escape') {
+    if (collectionMore.open) { e.preventDefault(); collectionMore.open = false; document.getElementById('clmoresummary').focus(); return; }
     if (closePop() || closeHoverPop()) return;  // an open popover absorbs the Esc first
     // an open Types/Columns dropdown is the next topmost thing — close it
     const dd = document.querySelector('details.cols[open]');
@@ -6488,7 +6535,18 @@ function boot() {
         return url.pathname + url.search.replace(/\+/g, '%20').replace(/\*/g, '%2A').replace(/,/g, '%2C') + url.hash;
       },
       closePanel,
-      repaint: () => { apply(); recenterOpen(); }
+      repaint: () => {
+        // Rebuilding the table must not strand keyboard users after ticking a row.
+        const active = document.activeElement, focused = active && active.matches('.clpick');
+        const key = focused && active.dataset.listKey;
+        const previous = focused ? [...document.querySelectorAll('#rows .clpick')].indexOf(active) : -1;
+        apply(); recenterOpen();
+        if (focused) {
+          const boxes = [...document.querySelectorAll('#rows .clpick')];
+          const next = boxes.find(box => box.dataset.listKey === key) || boxes[Math.min(previous, boxes.length - 1)] || document.getElementById('clselected');
+          next.focus({preventScroll: true});
+        }
+      }
     });
     // deep link: a #key in the arrival URL opens that row's panel. fromHistory —
     // the entry we arrived on already IS the panel state (in overlay mode Back

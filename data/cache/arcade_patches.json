@@ -3265,7 +3265,7 @@
    "hardware": "Capcom CPS-2 with the CPS+ core",
    "notes": [
     "MAME: RC4 replaces the previous default 4 MB, Modern-only audio build with an 8 MB audio build containing both Modern and Classic sound effects. It still runs in unmodified MAME as hsf2 (USA) or hsf2j (Japan); no custom MAME build is needed. Choose MODERN or CLASSIC in ULTRA CONFIGURATION. Use the newly generated ZIPs and keep them separate from original Hyper Street Fighter II ROMs. Checksum warnings are expected. HBMAME still needs the included set definitions compiled in.",
-    "Installation: install Python 3.10 or newer, extract the kit and run apply.py with your arcade ROMs, Switch game files and prod.keys. Git, CMake, a C/C++ compiler, NumPy and a separate FFmpeg installation are no longer needed. The kit downloads the extraction and audio tools it needs on first use and reuses them on later runs. For offline setup, keep cpsplus-tools-v2-offline.zip zipped and add --tools-bundle cpsplus-tools-v2-offline.zip --offline to your command. Optional 7z inputs still need 7-Zip.",
+    "Installation: install Python 3.10 or newer, extract the kit and run apply.py with your arcade ROMs, Switch game files and prod.keys. The region follows the game files you supply. Scratch and output folders are selected automatically unless you specify them. The installer checks paths before downloading tools, reports setup errors without a traceback, and groups the finished files and instructions by target. No compiler, Git, CMake, NumPy or separate FFmpeg installation is needed. For offline setup, keep cpsplus-tools-v2-offline.zip zipped and add --tools-bundle cpsplus-tools-v2-offline.zip --offline. Optional 7z inputs still need 7-Zip.",
     "Credits: Akuma's imported artwork is Tyrone's, from Super Street Fighter II Turbo: New Legacy.",
     "Special thanks to Gachichan! for bug reports and improvements to the Evil Ryu and Violent Ken profile pictures.",
     "This is a fan backport, unaffiliated with Capcom. The sets are built from game files you already own; the kit ships only our own code and patches, plus the CPS+ core with its source and licenses."
@@ -3282,7 +3282,7 @@
      ]
     ],
     "how": "A small tool opens your Switch game files with your own keys, combines them with your arcade romsets, and writes out the finished MAME and HBMAME sets, the MiSTer files, and the music pack.",
-    "kit_command": "python3 apply.py --rompath roms --nsp-us usa.nsp --nsp-jp japan.nsp --keys prod.keys --work scratch --out-dir out",
+    "kit_command": "python3 apply.py --rompath roms --source-us usa.nsp --keys prod.keys --platform mame",
     "kit_dir": "backports/usf2/kit",
     "requires": [
      "your own Nintendo Switch base game files: a USA NSP or XCI for the USA set, or a Japanese NSP for the Japan set",

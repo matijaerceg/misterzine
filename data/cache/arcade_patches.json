@@ -3380,6 +3380,24 @@
     "stock_zip": "../capcom/roms/mame0260/sfz3j.zip",
     "variants": [
      {
+      "hbmame": {
+       "renames": {
+        "sz3.08c": "sz3.08c",
+        "sz3.09c": "sz3.09c",
+        "sz3.10b": "sz3.10b",
+        "sz3.13m": "sz3.13m",
+        "sz3.14m": "sz3.14m",
+        "sz3.15m": "sz3.15m",
+        "sz3.16m": "sz3.16m",
+        "sz3.17m": "sz3.17m",
+        "sz3.18m": "sz3.18m",
+        "sz3.19m": "sz3.19m",
+        "sz3.20m": "sz3.20m",
+        "sz3j.03c": "sz3j.03c",
+        "sz3j.04c": "sz3j.04c"
+       },
+       "setname": "sfa3ru"
+      },
       "key": "english",
       "label": "English restoration",
       "mra": {
@@ -3397,6 +3415,19 @@
       "patched_zip": "../capcom/backports/sfa3/out/release/roms/sfz3j.zip"
      },
      {
+      "hbmame": {
+       "renames": {
+        "sz3.09c": "sz3.09c",
+        "sz3.10b": "sz3.10b",
+        "sz3.13m": "sz3.13m",
+        "sz3.15m": "sz3.15m",
+        "sz3.17m": "sz3.17m",
+        "sz3.19m": "sz3.19m",
+        "sz3j.03c": "sz3j.03c",
+        "sz3j.04c": "sz3j.04c"
+       },
+       "setname": "sfz3rj"
+      },
       "key": "japanese",
       "label": "Japanese restoration",
       "mra": {
@@ -3431,7 +3462,7 @@
     "Street Fighter Alpha 3's US arcade version cut each character's win quotes down to eight generic lines. The Japanese game also has a quote for each opponent. This restoration brings back all 625 opponent-specific quotes, with all 825 of the Japanese game's win quotes in English.",
     "Detailed stage locations return in English, in the original stage panels. Biographies, rival dialogue and endings follow the Japanese script in natural English that fits each character. Capcom's English stays where it was accurate, and Alpha 3 MAX's official wording is used where it fits.",
     "The game uses the Japanese 980904 revision's gameplay and secret-character access, with its original difficulty and Turbo 1 defaults. Regulation starts OFF, restoring red hit blood and the full defeat and ending effects; the operator can still switch it ON. The arcade ending sequences are retained, with corrected backgrounds and colors.",
-    "Alpha branding in the animated intro, character selection, player introductions and win screens, English A/X/V-ISM labels, descriptions and score rankings, Western names in the intro and fights, title and entry announcements, and English operator menus retain the USA presentation. It runs in MAME and on MiSTer with the jtcps2 core. Supply your own original Japanese sfz3j romset; split sets also need their sfa3 parent and QSound firmware.",
+    "Alpha branding in the animated intro, character selection, player introductions and win screens, English A/X/V-ISM labels, descriptions and score rankings, Western names in the intro and fights, title and entry announcements, and English operator menus retain the USA presentation. It runs in MAME and HBMAME and on MiSTer with the jtcps2 core. Supply your own original Japanese sfz3j romset; split sets also need their sfa3 parent and QSound firmware.",
     "The optional Japanese edition keeps the original Japanese text and names, Zero branding and Z-ISM, with the same ending and portrait color corrections.",
     "This is a release candidate."
    ],
@@ -3946,6 +3977,138 @@
    "subtitle": "English restoration",
    "summary": "The Japanese win quotes, rival dialogue, endings and continue advice in English, with red blood, Auto guard and the original Dramatic Battle music.",
    "title": "Street Fighter Alpha: Warriors' Dreams",
+   "version": "rc1"
+  },
+  {
+   "builds": [
+    {
+     "hbmame_set": "ffex2r",
+     "key": "en",
+     "region": "English restoration",
+     "title": "Final Fight EX",
+     "title_screen": "data/screenshots/final-fight-ex-cps2/title_en.png"
+    },
+    {
+     "hbmame_set": "ffex2u",
+     "key": "us",
+     "region": "USA",
+     "title": "Final Fight EX",
+     "title_screen": "data/screenshots/final-fight-ex-cps2/title_en.png"
+    },
+    {
+     "hbmame_set": "ffex2j",
+     "key": "jp",
+     "region": "Japan",
+     "title": "Final Fight EX",
+     "title_screen": "data/screenshots/final-fight-ex-cps2/title_en.png"
+    }
+   ],
+   "builds_heading": "Title screen",
+   "changes": [
+    "The Sega CD opening cutscene as native CPS-2 graphics: the Metro City map, the Mad Gear line-up, Damnd's sketch and the knife, Haggar's phone call, and Cody and Guy",
+    "The Sega CD ending scenes: Haggar and Jessica's reunion and Cody's farewell, and Cody and Guy in the mansion hall in the Japan and English restoration builds",
+    "The Final Fight EX title screen",
+    "The arcade's music and sound effects on the CPS-2's QSound",
+    "On MiSTer, the Sega CD arranged soundtrack and voiced cutscenes, with MUSIC to switch back to the arcade music",
+    "The English restoration: the Japanese version in English, with a new English voice track on MiSTer",
+    "EX settings in the test menu: BONUS STAGE on or off, CUT SCENES SEGA CD or ARCADE, ARTWORK ORIGINAL or ARCADE STADIUM",
+    "REGULATION: Jessica on Haggar's TV in the US disc's red dress or the Japanese disc's lingerie; in the Japan and English restoration builds it also turns blood white",
+    "A hidden stage select with an ENDING option: hold attack and jump and press Start on the title screen",
+    "A CPS-2 test menu in place of the DIP switches: coins, continues, difficulty, lives and extends",
+    "GRENADE spelled right on the HUD, and the USA story's typos fixed",
+    "USA (ffex2u), Japan (ffex2j) and English restoration (ffex2r) builds"
+   ],
+   "date": "2026-10-23",
+   "description": [
+    "This kit brings Final Fight EX to Capcom's CPS-2 with every enhancement from the CPS-1 version. It includes a restored English version with added scenes, an improved translation and uncensored content. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
+    "The 1993 Sega CD port of Final Fight opened with a fully animated cutscene and closed with new ending scenes, over a soundtrack with spoken dialogue. Final Fight EX brings them to the arcade game. On the CPS-2 the arcade's music and sound effects play through QSound.",
+    "The opening shows the Metro City map, the Mad Gear line-up, Damnd's sketch and the knife, Haggar's phone call and Cody and Guy. The ending adds Haggar and Jessica's reunion and Cody's farewell, and the builds made from the Japanese disc add Cody and Guy's talk in the mansion hall. CUT SCENES in the test menu switches back to the arcade's own story and ending.",
+    "On MiSTer the Sega CD's arranged soundtrack plays and the cutscenes are voiced: the USA build with the US disc's voices, the Japan build with the Japanese disc's, and the English restoration with a new English voice track. MUSIC switches back to the arcade music. In HBMAME the game plays the arcade music, and the cutscenes keep their captions.",
+    "The English restoration is the Japanese version in English: the Japanese disc's cutscenes, translated from the Japanese, with captions that follow the English voices and mouths that move with the lines.",
+    "The test menu's EX page can also turn the bonus stages off and switch the artwork to Capcom Arcade Stadium's revised soda can and Uptown sign. REGULATION chooses Jessica's outfit on Haggar's TV in the opening. A hidden stage select on the title screen can jump to any round or straight to the ending.",
+    "This is a release candidate."
+   ],
+   "game": "Final Fight (arcade, Capcom CPS-1)",
+   "hardware": "Capcom CPS-2",
+   "notes": [
+    "The MiSTer builds start with the arranged soundtrack; MUSIC in the test menu's EX page switches to the arcade music. HBMAME plays the arcade music, with the cutscenes captioned.",
+    "The cutscene art and audio derive from Capcom's Final Fight CD. This is an unofficial fan project, unaffiliated with Capcom or Sega. The sets are built from discs and romsets you already own; the kit ships only our own code and patches, the English voice track, and the CPS+ core with its source and licenses."
+   ],
+   "reconstruction": {
+    "columns": [
+     [
+      "HBMAME / MiSTer",
+      "hbmame_set"
+     ]
+    ],
+    "how": "A small tool reads the cutscenes and soundtrack from your Final Fight CD discs, combines them with your arcade romsets, and writes out the finished HBMAME sets, the MiSTer files and the music packs. Give it either disc on its own to build just that disc's builds.",
+    "kit_command": "python3 apply.py --disc-jp \"Final Fight CD (JP).cue\" \\\n                 --disc-us \"Final Fight CD (USA).cue\" \\\n                 --romset /path/to/roms --out-dir out",
+    "kit_dir": "tools/ffightcps2_builder",
+    "requires": [
+     "your own Final Fight CD disc for each build you make, as its .cue sheet, a CD .chd, or a .zip or .7z holding one: the USA disc for ffex2u, the Japan disc for ffex2j and ffex2r",
+     "your own arcade Final Fight romset: ffight, ffightu and ffightj (MAME 0.260-era, .zip or .7z)",
+     "your own arcade Street Fighter Alpha 3 romset, sfa3u, for the CPS-2 sound (and qsound, if your sfa3u leaves out the QSound firmware)"
+    ],
+    "sizes_note": ""
+   },
+   "related": [
+    {
+     "label": "Final Fight EX",
+     "note": "the CPS-1 version, for HBMAME and MiSTer's jtcps1",
+     "url": "../final-fight-ex/"
+    },
+    {
+     "label": "CPS-2+ hardware",
+     "note": "how the extended system the MiSTer builds use works",
+     "url": "../cps2-plus/"
+    },
+    {
+     "label": "CPS+",
+     "note": "arranged soundtracks for other Capcom arcade games on MiSTer",
+     "url": "../cps-plus/"
+    }
+   ],
+   "release_history": [
+    {
+     "date": "2026-10-23",
+     "items": [
+      "First release candidate."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "requirements": {
+    "link": {
+     "label": "About CPS-2+ hardware",
+     "url": "../cps2-plus/"
+    },
+    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. HBMAME needs the set definitions the kit writes compiled in."
+   },
+   "screenshots": [
+    {
+     "caption": "The opening's Metro City map.",
+     "single": "data/screenshots/final-fight-ex-cps2/scene_map.png"
+    },
+    {
+     "caption": "Haggar takes Damnd's call.",
+     "single": "data/screenshots/final-fight-ex-cps2/scene_phone.png"
+    },
+    {
+     "caption": "Haggar and Jessica's reunion in the ending.",
+     "single": "data/screenshots/final-fight-ex-cps2/scene_reunion.png"
+    },
+    {
+     "caption": "Cody and Guy in the mansion hall, in English.",
+     "single": "data/screenshots/final-fight-ex-cps2/scene_hall_en.png"
+    }
+   ],
+   "section": "enhanced",
+   "slug": "final-fight-ex-cps2",
+   "status": "release-candidate",
+   "subtitle": "Enhanced version",
+   "summary": "Final Fight EX on Capcom's CPS-2, with every enhancement from the CPS-1 version and a restored English version with added scenes, an improved translation and uncensored content. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
+   "thumbnail_build": "en",
+   "title": "Final Fight EX (CPS-2)",
    "version": "rc1"
   }
  ],

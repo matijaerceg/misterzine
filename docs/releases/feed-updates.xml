@@ -6,7 +6,34 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 23 Oct 2026 06:07:08 +0000</lastBuildDate>
+<lastBuildDate>Fri, 23 Oct 2026 21:33:07 +0000</lastBuildDate>
+<item>
+<title>[Updated] Gaiapolis (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gaiapols</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/gaiapolis_20261023.rbf:2026-10-23T21:33:07+00:00</guid>
+<pubDate>Fri, 23 Oct 2026 21:33:07 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gaiapols.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: gaiapolis&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-23 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-Gaiapolis_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] mcatadv (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#magical-cat-adventure-decoryah</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/mcatadv_20261023.rbf:2026-10-23T21:33:07+00:00</guid>
+<pubDate>Fri, 23 Oct 2026 21:33:07 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Magical Cat Adventure (decoryah), Nostradamus (decoryah).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-23 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-MagicalCatAdventure_Nostradamus_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ohmygod (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#naname</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/ohmygod_20261023b.rbf:2026-10-23T21:33:07+00:00</guid>
+<pubDate>Fri, 23 Oct 2026 21:33:07 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Naname de Magic!, Oh My God!.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-23 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-OhMyGod_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] TomSVR_gaelco2 (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bang</link>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Champion Base Ball, Champion Base Ball Part-2, Exciting Soccer, Exciting Soccer II, Talbot.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ChampionBaseball_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kangaroo (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fnkyfish</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Kangaroo_20261013.rbf:2026-10-14T00:37:37+00:00</guid>
-<pubDate>Wed, 14 Oct 2026 00:37:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Funky Fish, Kangaroo.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Kangaroo_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] LaserdiscGames (Arcade core, 6 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261013.rbf:2026-10-14T00:37:37+00:00</guid>
-<pubDate>Wed, 14 Oct 2026 00:37:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Dragon's Lair 2: Time Warp, Space Ace, Super Don Quix-ote, Thayer's Quest.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Qix (Arcade core, 8 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#complexx</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Qix_20261013.rbf:2026-10-14T00:37:37+00:00</guid>
-<pubDate>Wed, 14 Oct 2026 00:37:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 24 Oct 2026 06:01:15 +0000</lastBuildDate>
+<lastBuildDate>Sat, 24 Oct 2026 10:47:49 +0000</lastBuildDate>
+<item>
+<title>[New] Neon (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Neon</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Neon_20261024.rbf:2026-10-24T10:47:49+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 10:47:49 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Neon_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Super Dodge Ball (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#spdodgeb</link>
+<guid isPermaLink="false">ongo:_Arcade/Super Dodge Ball (US).mra:2026-10-24T07:20:08+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 07:20:08 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/spdodgeb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: SuperDodgeBall&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Guts n' Glory (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#guts</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kof98umh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 2009 / IGS / SNK Playmore / New Channel&lt;/p&gt;&lt;p&gt;Core: PGM2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Tokyo Wars (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tokyowar</link>
-<guid isPermaLink="false">ongo:_Arcade/Tokyo Wars (World, TW2 Ver.A).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tokyowar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1996 / Namco&lt;/p&gt;&lt;p&gt;Core: XNSUPER22&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Virtua Cop 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vcop2</link>
-<guid isPermaLink="false">ongo:_Arcade/Virtua Cop 2.mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vcop2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1995 / Sega&lt;/p&gt;&lt;p&gt;Core: Model2A&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

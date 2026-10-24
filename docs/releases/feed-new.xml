@@ -6,7 +6,34 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Fri, 23 Oct 2026 21:33:07 +0000</lastBuildDate>
+<lastBuildDate>Sat, 24 Oct 2026 06:01:15 +0000</lastBuildDate>
+<item>
+<title>[New] Guts n' Glory (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#guts</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Guts n' Glory (prototype).mra:2026-10-24T06:01:15+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 06:01:15 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/guts.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Escape&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Escape_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] UKNC (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#UKNC</link>
+<guid isPermaLink="false">distribution_mister:_Computer/UKNC_20261023.rbf:2026-10-24T06:01:15+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 06:01:15 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/UKNC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Bouncing Balls (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bouncing-balls-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/Bouncing Balls.mra:2026-10-24T00:34:45+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 00:34:45 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bballs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Comad&lt;/p&gt;&lt;p&gt;Core: bazset_BouncingBalls&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Gunpey (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gunpey</link>
@@ -251,7 +278,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/yunittst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 199? / Midway&lt;/p&gt;&lt;p&gt;Core: Gm0rk_Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-23 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Bouncing Balls (Arcade)</title>
+<title>[New] Bouncing Balls (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bballs</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/Bouncing Balls (Comad, 1991).mra:2026-10-23T02:01:08+00:00</guid>
 <pubDate>Fri, 23 Oct 2026 02:01:08 +0000</pubDate>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shimpact.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Gm0rkCores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Terminator 2 - Judgment Day (Gm0rk) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#terminator-2-judgment-day-gm0rk</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/Terminator 2 - Judgment Day (rev LA4 08-03-92).mra:2026-10-21T18:38:58+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 18:38:58 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/term2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1991 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Gm0rkCores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Total Carnage (Gm0rk) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#total-carnage-gm0rk</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/Total Carnage (rev LA1 03-10-92).mra:2026-10-21T18:38:58+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 18:38:58 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/totcarn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1992 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Gm0rkCores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Trog (Gm0rk) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#trog-gm0rk</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/Trog (rev LA5 3-29-91).mra:2026-10-21T18:38:58+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 18:38:58 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/trog.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1990 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Gm0rkCores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

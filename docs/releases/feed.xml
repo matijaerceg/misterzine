@@ -6,7 +6,79 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 23 Oct 2026 21:33:07 +0000</lastBuildDate>
+<lastBuildDate>Sat, 24 Oct 2026 06:01:15 +0000</lastBuildDate>
+<item>
+<title>[New] Guts n' Glory (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#guts</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Guts n' Glory (prototype).mra:2026-10-24T06:01:15+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 06:01:15 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/guts.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Escape&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Escape_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Escape (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#eprom</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Escape_20261019.rbf:2026-10-24T06:01:15+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 06:01:15 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Escape from the Planet of the Robot Monsters, Guts n' Glory.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Escape_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Sun-2 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Sun-2</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Sun-2_20261022.rbf:2026-10-24T06:01:15+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 06:01:15 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Sun Microsystems&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Sun-2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] UKNC (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#UKNC</link>
+<guid isPermaLink="false">distribution_mister:_Computer/UKNC_20261023.rbf:2026-10-24T06:01:15+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 06:01:15 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/UKNC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Violent Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#violent-storm-decoryah</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/violentstorm_20261022.rbf:2026-10-24T04:50:17+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 04:50:17 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: violentstorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-ViolentStorm_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Birdie Try (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#birdie-try-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/Birdie Try (Japan, revision 2, revision 1 MCU).mra:2026-10-24T00:34:45+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 00:34:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/birdtry.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: bazset_BirdieTry&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Bouncing Balls (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bouncing-balls-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/Bouncing Balls.mra:2026-10-24T00:34:45+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 00:34:45 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bballs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Comad&lt;/p&gt;&lt;p&gt;Core: bazset_BouncingBalls&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261023b.rbf:2026-10-24T00:34:45+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 00:34:45 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Gunpey (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gunpey</link>
@@ -377,7 +449,7 @@
 <description>&lt;p&gt;Serves: Killer Instinct, Killer Instinct 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-23 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-KillerInstinct_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Bouncing Balls (Arcade)</title>
+<title>[New] Bouncing Balls (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bballs</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/Bouncing Balls (Comad, 1991).mra:2026-10-23T02:01:08+00:00</guid>
 <pubDate>Fri, 23 Oct 2026 02:01:08 +0000</pubDate>
@@ -834,78 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vcop2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1995 / Sega&lt;/p&gt;&lt;p&gt;Core: Model2A&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Virtua Fighter 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vf2</link>
-<guid isPermaLink="false">ongo:_Arcade/Virtua Fighter 2 (Version 2.1).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vf2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: Model2A&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Zero Gunner (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#zeroguna</link>
-<guid isPermaLink="false">ongo:_Arcade/Zero Gunner (Export, Model 2A).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/zeroguna.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1997 / Psikyo&lt;/p&gt;&lt;p&gt;Core: Model2A&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Prop Cycle (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#propcycl</link>
-<guid isPermaLink="false">ongo:_Arcade/_alternatives/_Prop Cycle/Prop Cycle (Japan, PR1 Ver.A).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/propcycl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1996 / Namco&lt;/p&gt;&lt;p&gt;Core: XNSUPER22&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Rave Racer (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#raverace</link>
-<guid isPermaLink="false">ongo:_Arcade/_alternatives/_Rave Racer/Rave Racer (Japan, RV1 Ver.B).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raverace.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Namco&lt;/p&gt;&lt;p&gt;Core: XNSYSTEM22&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Ridge Racer 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ridgera2</link>
-<guid isPermaLink="false">ongo:_Arcade/_alternatives/_Ridge Racer 2/Ridge Racer 2 (Japan, RRS1 Ver.B).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ridgera2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1994 / Namco&lt;/p&gt;&lt;p&gt;Core: XNSYSTEM22&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Time Crisis (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#timecris</link>
-<guid isPermaLink="false">ongo:_Arcade/_alternatives/_Time Crisis/Time Crisis (Japan, TS1 Ver.B).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/timecris.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1996 / Namco&lt;/p&gt;&lt;p&gt;Core: XNSUPER22&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] XNSUPER22 (Arcade core, 11 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#airco22b</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/XNSUPER22_20261021.rbf:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Combat 22, Alpine Racer, Alpine Racer 2, Alpine Surfer, Aqua Jet, Armadillo Racing, Cyber Cycles, Dirt Dash, Prop Cycle, Time Crisis, Tokyo Wars.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] XNSYSTEM22 (Arcade core, 6 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#acedrive</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/XNSYSTEM22_20261021.rbf:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Ace Driver: Racing Evolution, Ace Driver: Victory Lap, Cyber Commando, Rave Racer, Ridge Racer, Ridge Racer 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

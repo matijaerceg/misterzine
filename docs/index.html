@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MisterZine - MiSTer FPGA release tracker, apps for the MiSTer and hardware guide</title>
-<meta name="description" content="Track every public MiSTer FPGA core and arcade release, browse the tracker and your Plex library on the MiSTer itself, and find the MiSTer hardware that fits you.">
+<meta name="description" content="Track every public MiSTer FPGA core and arcade release, browse the tracker and your Plex or Jellyfin library on the MiSTer itself, and find the MiSTer hardware that fits you.">
 <link rel="icon" href="./favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <!-- installable web app (manifest shared with /releases/; no service worker
@@ -17,14 +17,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MisterZine">
 <meta property="og:title" content="MisterZine - MiSTer FPGA release tracker, apps for the MiSTer and hardware guide">
-<meta property="og:description" content="Every public MiSTer core and arcade release in one tracker, two apps for the MiSTer itself (an arcade frontend and Plex), and a hardware buyer's guide.">
+<meta property="og:description" content="Every public MiSTer core and arcade release in one tracker, three apps for the MiSTer itself (an arcade frontend, Plex and Jellyfin), and a hardware buyer's guide.">
 <meta property="og:url" content="https://misterzine.fyi/">
 <meta property="og:image" content="https://misterzine.fyi/images/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="MisterZine logo beside a grid of arcade title screens">
 <meta name="twitter:card" content="summary_large_image">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"MisterZine","url":"https://misterzine.fyi/","description":"Track every public MiSTer FPGA core and arcade release, browse the tracker and your Plex library on the MiSTer itself, and find the MiSTer hardware that fits you."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"MisterZine","url":"https://misterzine.fyi/","description":"Track every public MiSTer FPGA core and arcade release, browse the tracker and your Plex or Jellyfin library on the MiSTer itself, and find the MiSTer hardware that fits you."}</script>
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: All changes" href="releases/feed.xml">
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: New cores &amp; games" href="releases/feed-new.xml">
 <link rel="alternate" type="application/rss+xml" title="MiSTer Tracker: Updates only" href="releases/feed-updates.xml">
@@ -241,6 +241,7 @@
       <a class="pill" href="releases/"><span class="long">Core Tracker</span><span class="short">Cores</span></a>
       <a class="pill" href="frontend/"><span class="long">Arcade </span>Frontend</a>
       <a class="pill" href="plex/">Plex</a>
+      <a class="pill" href="jellyfin/">Jellyfin</a>
       <a class="pill" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="nav" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
     </span>
     <details class="sitemenu" id="menudd">
@@ -250,6 +251,7 @@
       <a class="nv" href="releases/">Core Tracker</a>
       <a class="nv" href="frontend/">Arcade Frontend</a>
       <a class="nv" href="plex/">Plex</a>
+      <a class="nv" href="jellyfin/">Jellyfin</a>
       <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
       <hr class="msep nv">
         <div class="theme" id="theme">
@@ -274,8 +276,8 @@
 <main>
 
 <p class="intro">MisterZine makes things for MiSTer FPGA: a release tracker and a hardware guide on the web,
-   and two apps for the MiSTer itself, the <a href="frontend/">Arcade Frontend</a> and
-   <a href="plex/">Plex Core</a>. One person's project, kept going by
+   and three apps for the MiSTer itself, the <a href="frontend/">Arcade Frontend</a>,
+   <a href="plex/">Plex Core</a> and <a href="jellyfin/">Jellyfin Core</a>. One person's project, kept going by
    <a href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-goatcounter-click="patreon-home">Patreon supporters</a>.</p>
 
 <article>
@@ -306,9 +308,20 @@
   <h2><a href="plex/">Plex Core</a> <span class="why">your Plex library on a CRT</span></h2>
   <a class="shot ui" href="plex/" tabindex="-1" aria-hidden="true"><img src="plex/img/crt.jpg" alt="" loading="lazy"></a>
   <p>Plex on the MiSTer itself, from the main menu: Continue Watching and Recently Added, shows and
-     seasons, search, and playback with skip intro, subtitles and the next episode lined up. A real 4:3
-     picture at 480i for CRTs, and 480p on HDMI. Early access is open to Patreon members now, and the
-     public release will be free.</p>
+     seasons, search, and playback with skip intro, subtitles and the next episode lined up. The video is
+     decoded on the FPGA itself. A real 4:3 picture at 480i or 576i for CRTs, and 480p, 576p or native
+     output on HDMI. Early access is open to Patreon members now, and the public release will be free.</p>
+</article>
+
+<hr class="sq">
+
+<article>
+  <h2><a href="jellyfin/">Jellyfin Core</a> <span class="why">your Jellyfin library on a CRT</span></h2>
+  <a class="shot ui" href="jellyfin/" tabindex="-1" aria-hidden="true"><img src="jellyfin/img/crt.jpg" alt="" loading="lazy"></a>
+  <p>The same app for Jellyfin servers, with the video decoded on the FPGA itself: H.264 files up to 720p
+     play as stored, with no transcode. A real 4:3 picture at 480i or 576i for CRTs, and 480p, 576p or
+     native output on HDMI. Early access is open to Patreon members now, and the public release will be
+     free.</p>
 </article>
 
 <hr class="sq">

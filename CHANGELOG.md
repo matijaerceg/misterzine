@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-25
 
+- Site: MisterZine Jellyfin Core has a page at [/jellyfin/](https://misterzine.fyi/jellyfin/), with what it does, what is free versus Patreon early access, and the current version from GitHub. Jellyfin joins the header links on every page, the home page gains a Jellyfin card, and the privacy page a Jellyfin section. The Plex page now describes the releases with the H.264 decoder core: files played as stored, 576i for PAL sets, and the HDMI modes.
 - Release tracker: now also tracks asturur's own database (opt-in, section [asturur/Mister-cores]): his JTFRAME cores for Power Spikes, Turbo Force, Karate Blazers, Aero Fighters, F-1 Grand Prix, Final Lap R, Speed Racer and Round Up 5. Ongo's copies of these games fold into his rows, dated from when Ongo first shipped them.
 
 ## 2026-10-22

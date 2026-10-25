@@ -73,6 +73,7 @@
       <a class="pill" href="../releases/"><span class="long">Core Tracker</span><span class="short">Cores</span></a>
       <a class="pill" href="../frontend/"><span class="long">Arcade </span>Frontend</a>
       <a class="pill" href="../plex/">Plex</a>
+      <a class="pill" href="../jellyfin/">Jellyfin</a>
       <a class="pill" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="nav" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
     </span>
     <details class="sitemenu" id="menudd">
@@ -82,6 +83,7 @@
       <a class="nv" href="../releases/">Core Tracker</a>
       <a class="nv" href="../frontend/">Arcade Frontend</a>
       <a class="nv" href="../plex/">Plex</a>
+      <a class="nv" href="../jellyfin/">Jellyfin</a>
       <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
       <hr class="msep nv">
         <div class="theme" id="theme">
@@ -185,7 +187,7 @@ until you press Send.</p>
    there. MisterZine is not in that path and never sees your sign-in, your server or what you watch.</p>
 <p>Besides Plex, the app only fetches things that carry nothing about you: the list of releases from GitHub
    when it checks for updates, the supporter list for its Patreon page from misterzine.fyi, and, when you
-   install or update, the release files from GitHub and a video decoder from johnvansickle.com. A Patreon
+   install or update, the release files from GitHub. A Patreon
    early-access code is checked on the MiSTer itself and never sent anywhere. The app has no analytics.
    MisterZine-Plex-Uninstall removes it and keeps your settings unless you choose to remove all Plex data.</p>
 <p>Reports work like the Frontend's. Options &rarr; Send a report (or the MisterZine-Plex-Diagnostics script)
@@ -194,6 +196,24 @@ until you press Send.</p>
    address and account files are never included. It goes to api.misterzine.fyi under a short code, with
    nothing kept about who sent it, is deleted after 30 days, and a copy stays on your SD card. Nothing is
    sent until you choose to send it.</p>
+
+<h2>MisterZine Jellyfin Core (the Jellyfin app on your MiSTer)</h2>
+<p>The <a href="../jellyfin/">Jellyfin app</a> runs on your own MiSTer and talks to your Jellyfin server
+   directly. To find servers it sends Jellyfin's discovery broadcast on your local network. You sign in on
+   the server, with Quick Connect or a password, and the app keeps the token the server gives it, the
+   server's address, your settings and its caches on your SD card. It browses and plays from your server
+   and tells it what you watched (resume points and watched marks), as any Jellyfin app does. MisterZine is
+   not in that path and never sees your sign-in, your server or what you watch.</p>
+<p>Besides your server, the app only fetches things that carry nothing about you: the list of releases from
+   GitHub when it checks for updates, the release files from GitHub when you install or update, and the
+   supporter list for its Patreon page from misterzine.fyi. The Patreon early-access code is checked on the
+   MiSTer itself and never sent anywhere. The app has no analytics. MisterZine-Jellyfin-Uninstall removes
+   it and keeps your settings unless you choose to remove all its data.</p>
+<p>Options &rarr; Send a report (or the MisterZine-Jellyfin-Diagnostics script) writes a report file to the
+   SD card and sends nothing: the app and launcher logs, the reasons for connection and update failures,
+   the video settings from your MiSTer INI, which MiSTer main is running and the state of the display. It
+   can name media titles and playback details; sign-in tokens, the server address and account files are
+   never included. You choose whether to attach it to a bug report.</p>
 
 <h2>Analytics</h2>
 <p>Page views are counted with <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a>,
@@ -208,6 +228,7 @@ There are no ads and no other trackers.</p>
   <li>Cloudflare hosts the account service, the image service used by the Frontend, and the reports you
     choose to send from either app.</li>
   <li>Plex (plex.tv and your own Plex server) is contacted by the Plex app, under Plex's own policy.</li>
+  <li>Your own Jellyfin server is contacted by the Jellyfin app; no Jellyfin service is involved.</li>
   <li>Zaparoo Online is contacted only when you choose to launch through it.</li>
 </ul>
 

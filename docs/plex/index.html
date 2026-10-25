@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Plex Core: Plex on MiSTer FPGA - MisterZine</title>
-<meta name="description" content="MisterZine Plex Core plays your Plex library on a MiSTer FPGA: a real 4:3 480i picture for CRTs, 480p on HDMI, and controller navigation from the main menu.">
+<meta name="description" content="MisterZine Plex Core plays your Plex library on a MiSTer FPGA: video decoded on the FPGA itself, a real 4:3 480i or 576i picture for CRTs, 480p, 576p and native output on HDMI, and controller navigation from the main menu.">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="canonical" href="https://misterzine.fyi/plex/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MisterZine">
 <meta property="og:title" content="Plex Core">
-<meta property="og:description" content="Your Plex library on a MiSTer FPGA, made for CRTs: a real 4:3 480i picture, 480p on HDMI, and the pad you already use.">
+<meta property="og:description" content="Your Plex library on a MiSTer FPGA, made for CRTs: video decoded on the FPGA, a real 4:3 480i or 576i picture, HDMI too, and the pad you already use.">
 <meta property="og:url" content="https://misterzine.fyi/plex/">
 <meta property="og:image" content="https://misterzine.fyi/images/og-plex.jpg">
 <meta property="og:image:width" content="1200">
@@ -132,6 +132,7 @@
       <a class="pill" href="../releases/"><span class="long">Core Tracker</span><span class="short">Cores</span></a>
       <a class="pill" href="../frontend/"><span class="long">Arcade </span>Frontend</a>
       <span class="pill" aria-current="page">Plex</span>
+      <a class="pill" href="../jellyfin/">Jellyfin</a>
       <a class="pill" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="nav" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
     </span>
     <details class="sitemenu" id="menudd">
@@ -141,6 +142,7 @@
       <a class="nv" href="../releases/">Core Tracker</a>
       <a class="nv" href="../frontend/">Arcade Frontend</a>
       <span class="nv" aria-current="page">Plex</span>
+      <a class="nv" href="../jellyfin/">Jellyfin</a>
       <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
       <hr class="msep nv">
         <div class="theme" id="theme">
@@ -152,7 +154,7 @@
         <hr class="msep">
       <a href="https://github.com/matijaerceg/misterzine-plex-core/releases" target="_blank" rel="noopener">Releases<span class="ext">↗</span></a>
       <a href="https://github.com/matijaerceg/misterzine-plex-core/issues" target="_blank" rel="noopener">GitHub issues<span class="ext">↗</span></a>
-      <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" data-tip="The MisterZine thread on the official MiSTer Discord: the tracker, the site and both apps.">Discord<span class="ext">↗</span></a>
+      <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" data-tip="The MisterZine thread on the official MiSTer Discord: the tracker, the site and the apps.">Discord<span class="ext">↗</span></a>
       <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic<span class="ext">↗</span></a>
       <a href="../hardware-landscape/">Hardware Landscape</a>
       <a href="../credits/">Credits</a>
@@ -168,7 +170,8 @@
 
 <p class="lead">MisterZine Plex Core plays your Plex library on a MiSTer. Open it from the main menu, sign in
    once at plex.tv/link, and browse with the pad you already use for the MiSTer menu. It is made for CRTs
-   first: a real 4:3 picture at 480i on the analog output, and 480p on HDMI.</p>
+   first: a real 4:3 picture at 480i, or 576i on a PAL set, on the analog output, and 480p, 576p or the
+   video's own size on HDMI. Since beta 28 the video is decoded on the FPGA itself.</p>
 
 <div class="getit">
   <div class="getrow">
@@ -208,25 +211,35 @@
   <li><b>Your library, laid out like Plex.</b> Continue Watching and Recently Added rows for each library,
       with the selected title's artwork behind them.</li>
   <li><b>Shows, seasons, episodes.</b> From a show to its seasons to an episode in a press or two, long-running
-      shows included. A library view and search, typed on a keyboard if one is plugged in.</li>
-  <li><b>Playback controls.</b> Skip intro and credits, 10-second skips both ways, the next episode
-      plays on its own, subtitles and audio tracks.</li>
+      shows included. Libraries by name, date added, release date, folders and collections, and search, typed
+      on a keyboard if one is plugged in. Plex Home profiles, with their PINs.</li>
+  <li><b>Playback controls.</b> Skip intro and credits, 10-second skips both ways, scrubbing with a frame of
+      the film under the dot (when the server has video preview thumbnails), subtitles and audio tracks,
+      shuffle, and the next episode plays on its own.</li>
   <li><b>Keeps your place.</b> Resume points and watched marks go back to your server like any Plex app,
       and anything can be removed from Continue Watching.</li>
   <li><b>4:3 only, if you like.</b> One switch hides widescreen media across the app.</li>
-  <li><b>Updates in the app.</b> Options &gt; Updates installs a new version and restarts.</li>
+  <li><b>Updates in the app.</b> Options &gt; Updates installs a new version and restarts; the previous one
+      stays for rollback.</li>
 </ul>
 </div>
 <div>
 <h2>Built for the screen it runs on</h2>
 <ul>
-  <li><b>Real 480i.</b> A 4:3 interlaced picture on the MiSTer's analog output, for RGB, component,
-      S-Video or composite. NTSC for now; PAL is not supported yet.</li>
-  <li><b>HDMI too.</b> Switch to 480p in Options.</li>
+  <li><b>Decoded on the FPGA.</b> H.264 files up to 720p play as stored, with no transcode: the server sends
+      the file as it is, so a NAS or a Pi can serve it. The server converts the rest to H.264. The decoder is
+      Ben Owen's H.264 core for MiSTer, shipped with the app.</li>
+  <li><b>Real 480i, or 576i.</b> A 4:3 interlaced picture on the MiSTer's analog output, for RGB, component,
+      S-Video or composite. NTSC and PAL sets alike.</li>
+  <li><b>HDMI too.</b> 480p, 576p or the video's own size, chosen in the core's menu, with a 16:9 shape for
+      widescreen displays.</li>
   <li><b>60 fps menus.</b> Scrolling, fades and slides with no input lag.</li>
-  <li><b>Widescreen on a 4:3 tube.</b> Letterboxed, or cropped to 14:9, or filling the screen.</li>
-  <li><b>Fits your tube.</b> Set the picture edges once so nothing is cut off.</li>
-  <li><b>Easy on the tube.</b> The screen dims after a few idle minutes. Theme music plays on show pages.</li>
+  <li><b>Widescreen on a 4:3 tube.</b> Letterboxed, or cropped to 14:9, or filling the screen. Set the picture
+      edges once so nothing is cut off, and the screen dims after a few idle minutes.</li>
+  <li><b>Subtitles without a transcode.</b> Text subtitles are drawn by the app, so turning them on or off
+      never restarts the video.</li>
+  <li><b>For the curious.</b> 240p playback, 50/60 Hz refresh matching, the PAL film speed-up and de-flicker,
+      all in the core's menu.</li>
 </ul>
 </div>
 </div>
@@ -237,7 +250,7 @@
    from the main menu. The <a href="https://github.com/matijaerceg/misterzine-plex-core#readme" target="_blank" rel="noopener">README on GitHub</a>
    has the steps and a short help page for when something goes wrong.</p>
 <p>You need a networked MiSTer on current MiSTer Linux, 250 MB free on the SD card, and a Plex account with a
-   server that can transcode.</p>
+   server that can transcode, reachable over IPv4.</p>
 <p class="muted">It is beta software and it talks to your real Plex account: playback, watched marks and resume
    points change your library.</p>
 
@@ -251,7 +264,7 @@
 <footer>
   <p>The app's source is public on GitHub under its own <a href="https://github.com/matijaerceg/misterzine-plex-core/blob/main/release/TERMS.md" target="_blank" rel="noopener">terms</a>,
      not an open-source licence. Not affiliated with Plex or the MiSTer project. Movie artwork belongs to its
-     owners. Also on MisterZine: the <a href="../releases/">release tracker</a>, the
+     owners. Also on MisterZine: the <a href="../jellyfin/">Jellyfin</a> app, the <a href="../releases/">release tracker</a>, the
      <a href="../frontend/">Arcade Frontend</a>, the <a href="../hardware-landscape/">hardware landscape</a>
      and the <a href="../privacy/">privacy page</a>.</p>
 </footer>

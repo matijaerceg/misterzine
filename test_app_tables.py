@@ -30,9 +30,13 @@ class AppTablesTests(unittest.TestCase):
 
     def test_known_values(self):
         s = self.t["sources"]
-        self.assertEqual(s["shmupfan"], {"name": "shmupfan", "section": "shmupfan",
+        self.assertEqual(s["shmupfan"], {"name": "shmupfan", "section": "shmupfan", "in_update_all": False,
                                          "db_url": "https://raw.githubusercontent.com/shmupfan/Distribution/main/db.json"})
-        self.assertEqual(s["jtbindb"], {"name": "Jotego (JTcores)", "section": "jtcores", "db_url": ""})
+        self.assertEqual(s["jtbindb"], {"name": "Jotego (JTcores)", "section": "jtcores", "db_url": "", "in_update_all": True})
+        # update_all's built-in selection: the four it ships toggles for, as
+        # the page's Inside/Outside update_all presets read it
+        self.assertEqual({k for k, v in s.items() if v["in_update_all"]},
+                         {"distribution_mister", "jtbindb", "coinop", "theypsilon_unofficial_distribution"})
         self.assertEqual(self.t["core_names"]["TaitoGNET"], "Taito G-NET")
         self.assertEqual(self.t["core_names"]["Nostradamus"], "Nostradamus / Magical Cat Adventure")
         self.assertEqual(self.t["version"], mz.APP_TABLES_VERSION)
@@ -44,15 +48,21 @@ class AppTablesTests(unittest.TestCase):
             "const SRC_NAMES = {\n  a: 'A', b: 'B', c: 'C', d: 'D (d)',\n};\n"
             "const FT_SECTIONS = {\n  a: 'a/a', b: 'b', c: 'c', d: 'd/d',\n};\n"
             "const OPTIN_DBS = {\n  d: {\n    section: 'd/d',\n    url: 'https://x/d.zip',\n"
-            "    what: 'one ' +\n      'two',\n  },\n};\n")
+            "    what: 'one ' +\n      'two',\n  },\n};\n"
+            "const UPDATE_ALL_INCLUDED = new Set([\n  'a', 'c', // 'b' is hand-added\n]);\n")
         t = mz.app_tables(page)
         self.assertEqual(t["core_names"]["It's"], "Quote's")
         self.assertNotIn("x", t["core_names"])
-        self.assertEqual(t["sources"]["d"], {"name": "D (d)", "section": "d/d", "db_url": "https://x/d.zip"})
+        self.assertEqual(t["sources"]["d"], {"name": "D (d)", "section": "d/d", "db_url": "https://x/d.zip", "in_update_all": False})
         self.assertEqual(t["sources"]["a"]["db_url"], "")
+        self.assertEqual({k for k, v in t["sources"].items() if v["in_update_all"]}, {"a", "c"})
         bad = page.replace("  a: 'a/a', ", "  ")
         with self.assertRaises(ValueError):
             mz.app_tables(bad)
+        with self.assertRaises(ValueError):
+            mz.app_tables(page.replace("'a', 'c',", "'a', 'zz',"))
+        with self.assertRaises(ValueError):
+            mz.app_tables(page.replace("const UPDATE_ALL_INCLUDED", "const RENAMED"))
 
     def test_written_file_is_sorted_json(self):
         path = Path(__file__).parent / "docs" / "releases" / "app.json"

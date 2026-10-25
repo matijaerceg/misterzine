@@ -205,96 +205,115 @@
  "sources": {
   "asturur": {
    "db_url": "https://raw.githubusercontent.com/asturur/Mister-cores/db/db.json.zip",
+   "in_update_all": false,
    "name": "asturur",
    "section": "asturur/Mister-cores"
   },
   "bazset": {
    "db_url": "https://raw.githubusercontent.com/bazset/MiSTer_BAZSET/db/db.json.zip",
+   "in_update_all": false,
    "name": "bazset",
    "section": "bazset/MiSTer_BAZSET"
   },
   "blahm1d": {
    "db_url": "https://mister.blahm1d.com/db.json.zip",
+   "in_update_all": false,
    "name": "blahm1d",
    "section": "blahm1d"
   },
   "coinop": {
    "db_url": "",
+   "in_update_all": true,
    "name": "Coin-Op Collection",
    "section": "Coin-OpCollection/Distribution-MiSTerFPGA"
   },
   "decoryah": {
    "db_url": "https://raw.githubusercontent.com/decoryah/MiSTer_decoryah/db/db.json.zip",
+   "in_update_all": false,
    "name": "decoryah",
    "section": "decoryah/MiSTer_decoryah"
   },
   "distribution_mister": {
    "db_url": "",
+   "in_update_all": true,
    "name": "MiSTer Distribution",
    "section": "distribution_mister"
   },
   "gm0rk": {
    "db_url": "https://raw.githubusercontent.com/Gm0rk/Gm0rkCores/db/db.json.zip",
+   "in_update_all": false,
    "name": "Gm0rk",
    "section": "Gm0rk/Gm0rkCores"
   },
   "jlrh": {
    "db_url": "https://raw.githubusercontent.com/jlrh/jlrh-misterfpga-db/db/db.json.zip",
+   "in_update_all": false,
    "name": "jlrh",
    "section": "jlrh/jlrh-misterfpga-db"
   },
   "jtbindb": {
    "db_url": "",
+   "in_update_all": true,
    "name": "Jotego (JTcores)",
    "section": "jtcores"
   },
   "kuzecores": {
    "db_url": "https://raw.githubusercontent.com/kuzearcade/kuzecores/db/db.json.zip",
+   "in_update_all": false,
    "name": "kuzecores (kuzearcade)",
    "section": "kuzearcade/kuzecores"
   },
   "meathax": {
    "db_url": "https://raw.githubusercontent.com/meathax/meatcores/db/db.json.zip",
+   "in_update_all": false,
    "name": "Meathax (MeatCores)",
    "section": "meathax/meatcores"
   },
   "ongo": {
    "db_url": "https://raw.githubusercontent.com/OngoGablogian/MiSTer_Ongo/db/db.json.zip",
+   "in_update_all": false,
    "name": "Ongo",
    "section": "OngoGablogian/MiSTer_Ongo"
   },
   "ppriest": {
    "db_url": "https://raw.githubusercontent.com/ppriest/MiSTer_ppriest/db/db.json.zip",
+   "in_update_all": false,
    "name": "ppriest",
    "section": "ppriest/MiSTer_ppriest"
   },
   "rmcores": {
    "db_url": "https://raw.githubusercontent.com/rmonic79/rmcores/db/db.json.zip",
+   "in_update_all": false,
    "name": "rmCores (rmonic79)",
    "section": "rmonic79/rmcores"
   },
   "rossops": {
    "db_url": "https://raw.githubusercontent.com/rossops/Arcade-SegaYBoard_MiSTer/main/db.json.zip",
+   "in_update_all": false,
    "name": "rossops (Sega Y Board)",
    "section": "rossops/Arcade-SegaYBoard_MiSTer"
   },
   "shmupfan": {
    "db_url": "https://raw.githubusercontent.com/shmupfan/Distribution/main/db.json",
+   "in_update_all": false,
    "name": "shmupfan",
    "section": "shmupfan"
   },
   "slopcore": {
    "db_url": "https://raw.githubusercontent.com/TheJesusFish/Slop-Core/db/db.json.zip",
+   "in_update_all": false,
    "name": "Slop Cores (TheJesusFish)",
    "section": "TheJesusFish/Slop-Core"
   },
   "theypsilon_unofficial_distribution": {
    "db_url": "",
+   "in_update_all": true,
    "name": "theypsilon Unofficial Distribution",
    "section": "theypsilon_unofficial_distribution"
   },
   "tomsvr": {
    "db_url": "https://raw.githubusercontent.com/TomSVR-Mister/TomSVR-Arcade-Cores/db/db.json.zip",
+   "in_update_all": false,
    "name": "TomSVR",
    "section": "TomSVR-Mister/TomSVR-Arcade-Cores"
   }

@@ -6659,6 +6659,20 @@ def _js_nested(page, name):
     return out
 
 
+def _js_set(page, name):
+    """The string members of `const NAME = new Set([` ... `]);`."""
+    marker = "const " + name + " = new Set(["
+    i = page.find(marker)
+    if i < 0:
+        raise ValueError(f"{name} not found in index.html")
+    rest = page[i + len(marker):]
+    j = rest.find("]);")
+    if j < 0:
+        raise ValueError(f"end of {name} not found in index.html")
+    body = "\n".join(ln.split("//", 1)[0] for ln in rest[:j].split("\n"))
+    return {_js_unescape(m) for m in re.findall(r"'((?:[^'\\]|\\.)*)'", body)}
+
+
 def app_tables(page):
     """The app's source and core tables from index.html's text, checked the way
     mzgen checks them: every named source has an ini section, every opt-in db
@@ -6667,16 +6681,23 @@ def app_tables(page):
     names = _js_flat(page, "SRC_NAMES")
     sections = _js_flat(page, "FT_SECTIONS")
     optin = _js_nested(page, "OPTIN_DBS")
+    bundled = _js_set(page, "UPDATE_ALL_INCLUDED")
     if len(core_names) < 50 or len(names) < 4:
         raise ValueError(f"extraction looks wrong: {len(core_names)} core names, {len(names)} source names")
     for src in sections:
         if src not in names:
             raise ValueError(f"FT_SECTIONS names {src!r}, SRC_NAMES does not")
+    for src in bundled:
+        if src not in names:
+            raise ValueError(f"UPDATE_ALL_INCLUDED names {src!r}, SRC_NAMES does not")
     sources = {}
     for src, name in names.items():
         if not sections.get(src):
             raise ValueError(f"source {src!r} has a name but no FT_SECTIONS entry")
-        sources[src] = {"name": name, "section": sections[src], "db_url": ""}
+        # in_update_all: update_all's built-in selection carries the database
+        # (on by default or a settings toggle); the app's Details line tells a
+        # player whether to flip a toggle or write a downloader.ini section
+        sources[src] = {"name": name, "section": sections[src], "db_url": "", "in_update_all": src in bundled}
     for src, o in optin.items():
         if src not in names:
             raise ValueError(f"OPTIN_DBS names {src!r}, SRC_NAMES does not")

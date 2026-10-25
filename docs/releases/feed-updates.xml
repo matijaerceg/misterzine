@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 25 Oct 2026 00:24:34 +0000</lastBuildDate>
+<lastBuildDate>Sun, 25 Oct 2026 05:11:20 +0000</lastBuildDate>
+<item>
+<title>[Updated] WOW New Fantasia (TomSVR) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#wownfanta</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/WOW New Fantasia (Explicit) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wownfanta.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2002 / Comad&lt;/p&gt;&lt;p&gt;Core: TomSVR_comad&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Violent Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#violent-storm-decoryah</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/violentstorm_20261024.rbf:2026-10-25T04:59:49+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 04:59:49 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: violentstorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-ViolentStorm_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Macintosh IIcx (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
@@ -494,13 +512,13 @@
 <description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Dragon's Lair 2: Time Warp, Space Ace, Super Don Quix-ote, Thayer's Quest.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] TomSVR_comad (Arcade core, 10 games)</title>
+<title>[Updated] TomSVR_comad (Arcade core, 13 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#fantasian</link>
 <guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_comad_20261020.rbf:2026-10-20T08:42:45+00:00</guid>
 <pubDate>Tue, 20 Oct 2026 08:42:45 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Fantasia (TomSVR), Fantasia II, Fantasy '95, Gals Hustler, Hot Night, Miss World '96, Miss World 2002, Pocket Gals V.I.P (TomSVR), WOW New Fantasia (TomSVR), Zip &amp;amp; Zap (TomSVR).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Fantasia (TomSVR), Fantasia II, Fantasy '95, Gals Hustler, Hot Night, Miss World '96, Miss World 2002, Pocket Gals V.I.P (TomSVR), Super Miss World (TomSVR), Super Model (TomSVR), Super Model II (TomSVR), WOW New Fantasia (TomSVR), Zip &amp;amp; Zap (TomSVR).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-20 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] TomSVR_esd (Arcade core, 7 games)</title>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-NMK16_Gunnail (Arcade core, 21 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#acrobatm</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Gunnail_20261015.rbf:2026-10-15T16:47:37+00:00</guid>
-<pubDate>Thu, 15 Oct 2026 16:47:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Acrobat Mission, Air Attack, Bio-ship Paladin, Black Heart, Bombjack Twin, Dolmen, GunNail, Hacha Mecha Fighter, Koutetsu Yousai Strahl, Many Block, Nouryoku Koujou Iinkai, Puzzle World, S.S. Mission, Saboten Bombers, Super Spacefortress Macross, Task Force Harrier, Thunder Dragon, Tom Tom Magic, Twin Action, US AAF Mustang, Vandyke.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] LaserdiscGames (Arcade core, 6 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cliffhgr</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/LaserdiscGames_20261015.rbf:2026-10-15T15:09:19+00:00</guid>
-<pubDate>Thu, 15 Oct 2026 15:09:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Cliff Hanger, Dragon's Lair, Dragon's Lair 2: Time Warp, Space Ace, Super Don Quix-ote, Thayer's Quest.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-LaserdiscGames_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

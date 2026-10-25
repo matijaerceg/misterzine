@@ -146,6 +146,7 @@
   "jtoutrun": "Sega (Out Run)",
   "jtpang": "Mitchell (Pang)",
   "jtparoda": "Konami (Parodius)",
+  "jtpspike": "Video System (Power Spikes HW)",
   "jtriders": "Konami (Sunset Riders HW)",
   "jtroadf": "Konami (Road Fighter)",
   "jts16": "Sega System 16A",
@@ -156,6 +157,7 @@
   "jtshouse": "Namco System 1",
   "jtsimson": "Konami (Simpsons HW)",
   "jtslyspy": "Data East (Sly Spy HW)",
+  "jtsysfl": "Namco System FL",
   "jtthundr": "Namco System 86",
   "jttmnt": "Konami (TMNT HW)",
   "jttora": "Capcom (Tiger Road)",
@@ -201,6 +203,11 @@
   "zerowing_mister": "Toaplan (Zero Wing HW)"
  },
  "sources": {
+  "asturur": {
+   "db_url": "https://raw.githubusercontent.com/asturur/Mister-cores/db/db.json.zip",
+   "name": "asturur",
+   "section": "asturur/Mister-cores"
+  },
   "bazset": {
    "db_url": "https://raw.githubusercontent.com/bazset/MiSTer_BAZSET/db/db.json.zip",
    "name": "bazset",

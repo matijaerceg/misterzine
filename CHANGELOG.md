@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-25
+
+- Release tracker: now also tracks asturur's own database (opt-in, section [asturur/Mister-cores]): his JTFRAME cores for Power Spikes, Turbo Force, Karate Blazers, Aero Fighters, F-1 Grand Prix, Final Lap R, Speed Racer and Round Up 5. Ongo's copies of these games fold into his rows, dated from when Ongo first shipped them.
+
 ## 2026-10-22
 
 - Release tracker: the "what gets listed" note now states the listing rule: a source stays listed while its cores' source code is public under its license, and comes off while its code is withdrawn or its builds are in dispute.

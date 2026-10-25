@@ -57,10 +57,15 @@ test('published Aqua Jack and Meta Fox: one build drops its label, two builds ke
   assert.equal(aqua.title, 'Aqua Jack');
   assert.ok(aqua.alsoOngo);
   assert.ok(aqua.siteAliases.includes(rows.find(r => r.src === 'ongo' && r.sn === 'aquajack').k));
-  // Meta Fox: with MeatCores delisted, ppriest's Seta core is the only build
-  // listed and Ongo's copy is that build
-  assert.equal(shown('ppriest', 'metafox').title, 'Meta Fox');
-  assert.ok(shown('ppriest', 'metafox').alsoOngo);
+  // (Meta Fox used to be the second example; ppriest dropped it from his db
+  // on 2026-10-25, leaving Ongo's copy alone.)
+  // Power Spikes: asturur's own db folds Ongo's earlier build of his core,
+  // a different file under another core name, so no alsoOngo note
+  const spikes = shown('asturur', 'pspikes');
+  assert.equal(spikes.title, 'Power Spikes');
+  assert.ok(!spikes.alsoOngo);
+  assert.ok(spikes.siteAliases.includes(rows.find(r => r.src === 'ongo' && r.sn === 'pspikes').k));
+  assert.ok(!visible.some(r => r.src === 'ongo' && r.sn === 'pspikes'));
   // Night Slashers ships on two different cores: both stay, each named
   assert.equal(shown('blahm1d', 'nslashers').title, 'Night Slashers (blahm1d)');
   assert.equal(shown('distribution_mister', 'nslasher').title, 'Night Slashers (rmonic79)');

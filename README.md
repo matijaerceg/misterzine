@@ -245,7 +245,7 @@ New arcade titles even get screenshots auto-backfilled from libretro-thumbnails 
 daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 [Images](#the-image-pipeline-tools)).
 
-## The eighteen sources (all public)
+## The nineteen sources (all public)
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -352,16 +352,24 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    repo each. The db is a plain `db.json`, not zipped (`_db_json` reads both); every file
    entry carries its own url into a core repo, so the MRAs are fetched from the db. MRAs
    flat in `_Arcade/` with `_alternatives`, no tags.
+19. **asturur**: `asturur/Mister-cores` `db` branch (opt-in, section `[asturur/Mister-cores]`),
+   since 2026-10-25. Four JTFRAME cores built from the jotego/jtcores `andrea-cores` branch,
+   not yet hardware verified so not in jtbindb: jtpspike (Power Spikes, Turbo Force, Karate
+   Blazers, Aero Fighters as alternatives only, pinned in `ORPHAN_ALTERNATIVES`), jtf1grpr,
+   jtsysfl (Final Lap R, Speed Racer) and jtroundu. MRAs and rbfs committed on `main`, MRAs
+   flat in `_Arcade/` with `_alternatives`, no tags. Ongo shipped the same games from
+   2026-09-16 and 2026-09-23 under other core names, which is where their debuts come from;
+   the site folds Ongo's copies into these rows.
 
-Debuts for these five are frozen per MRA (`*_FROZEN_DATES`): the day the MRA was first
+Debuts for these six are frozen per MRA (`*_FROZEN_DATES`): the day the MRA was first
 committed where it is served from, but not before the core's first public build (Gm0rk's
 core repos published GitHub releases two weeks before his db existed; jlrh's Gaelco games
-were public from 2026-06-20, a month before his current db). Neither jlrh nor shmupfan is
+were public from 2026-06-20, a month before his current db). None of jlrh, shmupfan or asturur is
 in `DISTRIBUTION_TAKES_OVER`: that rule hides a row whenever the Distribution ships the
 same game, even on another core (the Distribution's own Detana!! Twin Bee would hide
 jlrh's).
 
-All eighteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All nineteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but

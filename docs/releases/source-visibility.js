@@ -46,7 +46,7 @@ function siteSingletonTitles(rows) {
     rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
     blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
     tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk',
-    jlrh: 'jlrh', shmupfan: 'shmupfan' };
+    jlrh: 'jlrh', shmupfan: 'shmupfan', asturur: 'asturur' };
   const norm = title => (title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
   const identity = row => row.g || row.family || row.sn;
   const counts = new Map(), names = new Map();

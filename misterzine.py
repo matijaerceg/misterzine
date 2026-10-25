@@ -255,6 +255,25 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/shmupfan/Distribution/main/db.json",
     },
     {
+        # asturur's (Andrea's) JTFRAME cores, a repo of his own since
+        # 2026-10-23: Video System's Power Spikes board (Power Spikes, Turbo
+        # Force, Karate Blazers, Aero Fighters), F-1 Grand Prix, Namco
+        # System FL (Final Lap R, Speed Racer) and Round Up 5. Built from
+        # the jotego/jtcores `andrea-cores` branch, not yet hardware
+        # verified, so they are not in jtbindb; his README says they move
+        # into jtcores once they are. Ongo carried every game but Round Up
+        # 5 from 2026-09-16 (pspike, f1grpr) and 2026-09-23 (XNSYSTEMFL)
+        # under other core names; this db is the author's own, so the site
+        # shows these rows and folds Ongo's copies. Standard DB-Template
+        # db (db.json.zip on `db`), MRAs and rbfs committed on main, MRAs
+        # flat in _Arcade/ with _alternatives, no tags. Aero Fighters ships
+        # only as alternatives (ORPHAN_ALTERNATIVES lists it). Opt-in:
+        # [asturur/Mister-cores].
+        "id": "asturur",
+        "name": "asturur",
+        "db_url": "https://raw.githubusercontent.com/asturur/Mister-cores/db/db.json.zip",
+    },
+    {
         # Ongo's community database. It aggregates arcade MRAs and core builds
         # alongside other system databases, ROM payloads, scripts and extras;
         # only arcade MRA files and the shipped _Arcade/cores bitstreams are
@@ -379,6 +398,12 @@ ORPHAN_ALTERNATIVES = {
         {"setname": "phantasm", "rbf": "megasys1_a", "debut": "2023-07-08", "listed": "2026-10-14"},
     ("coinop", "_Arcade/_alternatives/_E.D.F. - Earth Defense Force/E.D.F. -  Earth Defense Force (Japan, Prototype).mra"):
         {"setname": "edfp", "rbf": "megasys1_a", "debut": "2024-01-01", "listed": "2026-10-14"},
+    # asturur ships Aero Fighters only as alternatives (his README lists it
+    # as a jtpspike game); jlrh's row is the other core. Debut is Ongo's
+    # first commit of the same alternatives folder (2026-09-16), the day
+    # the pspike build went public.
+    ("asturur", "_Arcade/_alternatives/_Aero Fighters/Aero Fighters (Taiwan - Japan, set 1).mra"):
+        {"setname": "aerofgtb", "rbf": "jtpspike", "debut": "2026-09-16", "listed": "2026-10-25"},
 }
 
 # GitHub org + name prefix where the retrospective arcade release dates live.
@@ -1582,6 +1607,7 @@ MRA_REPOS = [
     ("jlrh", "jlrh/jlrh-misterfpga-db", "main", "_Arcade"),
     # per-file urls into five core repos' releases/, like ppriest's
     ("shmupfan", None, None, "_Arcade"),
+    ("asturur", "asturur/Mister-cores", "main", "_Arcade"),
 ]
 
 
@@ -3324,6 +3350,25 @@ SHMUPFAN_CORE_REPOS = {
     "tecmo16": "shmupfan/Arcade-Tecmo16_MiSTer",
 }
 
+ASTURUR_REPO = "asturur/Mister-cores"
+# Debut dates for the asturur initial import (2026-10-25 seed). His repo
+# dates from 2026-10-23, but every game except Round Up 5 was a public
+# download before that: Ongo's db shipped the same MRAs (on cores it named
+# pspike, f1grpr and XNSYSTEMFL) from the day of OngoGablogian/MiSTer_Ongo's
+# first commit of each file, UTC. The jtcores `andrea-cores` branch only
+# starts 2026-10-02 ("moved all in one"), so it is no earlier. Round Up 5
+# first appeared in his own repo (commit c89f75b7). Post-import titles need
+# no entry.
+ASTURUR_FROZEN_DATES = {
+    "F-1 Grand Prix (set 1).mra": "2026-09-16",
+    "Karate Blazers (World, set 1).mra": "2026-09-16",
+    "Power Spikes (World).mra": "2026-09-16",
+    "Turbo Force (World, set 1).mra": "2026-09-16",
+    "Final Lap R (Rev. B).mra": "2026-09-23",
+    "Speed Racer.mra": "2026-09-23",
+    "Round Up 5 - Super Delta Force.mra": "2026-10-23",
+}
+
 ONGO_CORE_REPOS = {
     "namco_na1_na2": "kyledlester/Namco_NA1_NA2_MiSTer",
     "namco_nb1": "kyledlester/Namco_NB1_MiSTer",
@@ -3363,6 +3408,8 @@ OPTIN_DB_SOURCES = {
     "gm0rk": (GM0RK_REPO, GM0RK_CORE_REPOS, GM0RK_FROZEN_DATES),
     "jlrh": (JLRH_REPO, JLRH_CORE_REPOS, JLRH_FROZEN_DATES),
     "shmupfan": (SHMUPFAN_REPO, SHMUPFAN_CORE_REPOS, SHMUPFAN_FROZEN_DATES),
+    # all four cores ship from the db repo; the source is a jtcores branch
+    "asturur": (ASTURUR_REPO, {}, ASTURUR_FROZEN_DATES),
 }
 
 
@@ -4952,6 +4999,8 @@ def _core_label(r, fork_info, repo_maps):
         return "jlrh"
     if r["source_id"] == "shmupfan":
         return "shmupfan"
+    if r["source_id"] == "asturur":
+        return "asturur"
     repo =(r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")

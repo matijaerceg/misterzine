@@ -4361,6 +4361,8 @@ COMPUTER_MANUFACTURER = {
     "Ondra_SPO186": "Tesla", "PMD85": "Tesla", "IQ151": "ZPA",
     "BK0011M": "Elektronika", "Vector-06C": "Schetmash", "Apogee": "Soviet",
     "ORAO": "PEL Varaždin",
+    "UKNC": "Elektronika",  # Elektronika MS 0511
+    "Neon": "Kvant",  # Soyuz-Neon PK-11/16, small series at the Kvant plant, Zelenograd
 }
 
 # Original-hardware release year per core (keyed by core_name). The year the real
@@ -4411,6 +4413,7 @@ CORE_YEAR = {
     "MSX": "1985", "MSX1": "1983", "TK2000": "1984", "Galaksija": "1983", "Homelab": "1983",
     "Specialist": "1985", "Ondra_SPO186": "1985", "PMD85": "1985", "IQ151": "1985",
     "BK0011M": "1990", "Vector-06C": "1987", "Apogee": "1988", "ORAO": "1984",
+    "UKNC": "1987", "Neon": "1991",  # Neon year per the core README + ru.wikipedia
     # best-effort years for cores with no single vintage machine: ao486 = i486 era,
     # MultiComp/TSConf = modern FPGA/clone designs (their actual creation year).
     "ao486": "1989", "MultiComp": "2013", "TSConf": "2014",
@@ -4515,6 +4518,7 @@ SYSTEM_TITLES = {
     "Cray-XMP": "Cray X-MP",
     "Minimig": "Amiga (Minimig)",
     "MSX": "MSX2",  # this core is the MSX2/2+/3 machine; the separate MSX1 core is first-gen
+    "Neon": "Soyuz-Neon PK-11/16",
     "Ondra_SPO186": "Ondra SPO 186",
     "ORAO": "Orao",
     "JR100": "JR-100",

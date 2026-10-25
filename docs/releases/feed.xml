@@ -6,906 +6,906 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 25 Oct 2026 11:50:29 +0000</lastBuildDate>
+<lastBuildDate>Sun, 25 Oct 2026 18:18:52 +0000</lastBuildDate>
 <item>
-<title>[Updated] Violent Storm (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#violent-storm-decoryah</link>
-<guid isPermaLink="false">decoryah:_Arcade/cores/violentstorm_20261025.rbf:2026-10-25T11:50:29+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 11:50:29 +0000</pubDate>
+<title>[Updated] 1942 (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#1942-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/1942 (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/viostorm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: violentstorm&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-ViolentStorm_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_1942.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Capcom&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Agent Super Bond (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#superbona</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Agent Super Bond (Super Cobra conversion, not encrypted).mra:2026-10-25T09:56:08+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:56:08 +0000</pubDate>
+<title>[Updated] Balloon Fight (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#balloon-fight-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Balloon Fight (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_bfght.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Baseball (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#baseball-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Baseball (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_bball.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Nintendo of America&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Baseball Stars- Be a Champ! (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#baseball-stars-be-a-champ</link>
+<guid isPermaLink="false">ppriest:_Arcade/Baseball Stars- Be a Champ! (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_bstar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / SNK (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Bases Loaded (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#playchoice-10-bios-prototype-playchoice-10-2</link>
+<guid isPermaLink="false">ppriest:_Arcade/Bases Loaded (Prototype, PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_bload.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Jaleco (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Captain Sky Hawk (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#captain-sky-hawk-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Captain Sky Hawk (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_cshwk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Rare (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Castlevania (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#castlevania-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Castlevania (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_cvnia.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Chip'n Dale- Rescue Rangers (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#chip-n-dale-rescue-rangers</link>
+<guid isPermaLink="false">ppriest:_Arcade/Chip'n Dale- Rescue Rangers (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rrngr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Contra (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#contra-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Contra (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_cntra.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1988 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Double Dragon (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#double-dragon-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Double Dragon (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ddrgn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1988 / Technos Japan&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Double Dribble (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#double-dribble-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Double Dribble (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_dbldr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Dr. Mario (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dr-mario-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Dr. Mario (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_drmro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Duck Hunt (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#duck-hunt-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Duck Hunt (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_duckh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Excitebike (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#excitebike-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Excitebike (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ebike.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Gauntlet (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gauntlet-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Gauntlet (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_gntlt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1985 / Atari / Tengen (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Golf (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#golf-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Golf (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_golf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Gradius (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gradius-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Gradius (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_grdus.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1986 / Konami&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Hogan's Alley (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hogan-s-alley-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Hogan's Alley (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_hgaly.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Kung Fu (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#kung-fu-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Kung Fu (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_kngfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1985 / Irem (Nintendo license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Mario Bros. (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mario-bros-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Mario Bros. (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_mario.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Mario's Open Golf (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mario-s-open-golf-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Mario's Open Golf (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_moglf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Mega Man III (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mega-man-iii-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Mega Man III (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_mman3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Metroid (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#metroid-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Metroid (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_mtoid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Mike Tyson's Punch-Out!! (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mike-tyson-s-punch-out-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Mike Tyson's Punch-Out!! (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_miket.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Ninja Gaiden (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ninja-gaiden-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Ninja Gaiden (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ngaid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Ninja Gaiden Episode II- The Dark Sword of Chaos (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ninja-gaiden-episode-ii-the-dark-sword-of-chaos</link>
+<guid isPermaLink="false">ppriest:_Arcade/Ninja Gaiden Episode II- The Dark Sword of Chaos (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ngai2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Ninja Gaiden Episode III- The Ancient Ship of Doom (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ninja-gaiden-episode-iii-the-ancient-ship-of-doom</link>
+<guid isPermaLink="false">ppriest:_Arcade/Ninja Gaiden Episode III- The Ancient Ship of Doom (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ngai3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Nintendo World Cup (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#nintendo-world-cup-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Nintendo World Cup (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_wcup.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Technos Japan (Nintendo license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] PinBot (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pinbot-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/PinBot (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pinbt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1988 / Rare (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Power Blade (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#power-blade-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Power Blade (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwbld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Taito (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Pro Wrestling (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pro-wrestling-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Pro Wrestling (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwrst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] R.C. Pro-Am (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#r-c-pro-am-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/R.C. Pro-Am (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rcpam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Rare&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rad Racer (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rad-racer-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Rad Racer (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_radrc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Square&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rad Racer II (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rad-racer-ii-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Rad Racer II (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_radr2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1990 / Square (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rockin' Kats (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rockin-kats-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Rockin' Kats (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rkats.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Atlus (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rush'n Attack (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rush-n-attack-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Rush'n Attack (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rnatk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rygar (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rygar-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Rygar (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_rygar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Solar Jetman (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#solar-jetman-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Solar Jetman (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_sjetm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1990 / Rare&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Super C (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#super-c-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Super C (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_suprc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Super Mario Bros. (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#super-mario-bros-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Super Mario Bros. (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1985 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Super Mario Bros. 2 (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#super-mario-bros-2-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Super Mario Bros. 2 (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Super Mario Bros. 3 (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#super-mario-bros-3-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Super Mario Bros. 3 (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Tecmo Bowl (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tecmo-bowl-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Tecmo Bowl (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tbowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Teenage Mutant Ninja Turtles (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#teenage-mutant-ninja-turtles-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Teenage Mutant Ninja Turtles (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tmnt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Teenage Mutant Ninja Turtles II- The Arcade Game (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#teenage-mutant-ninja-turtles-ii-the-arcade-game</link>
+<guid isPermaLink="false">ppriest:_Arcade/Teenage Mutant Ninja Turtles II- The Arcade Game (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tmnt2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1990 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Tennis (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tennis-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Tennis (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tenis.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] The Goonies (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#the-goonies-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/The Goonies (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_goons.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Konami&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Tiny Toon Adventures (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#playchoice-10-bios-prototype-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Tiny Toon Adventures (prototype) (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ttoon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Track &amp; Field (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#track-field-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Track &amp; Field (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tkfld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Trojan (PlayChoice-10) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#trojan-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Trojan (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_trjan.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1986 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Uncle Fester's Quest- The Addams Family (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#uncle-fester-s-quest-the-addams-family</link>
+<guid isPermaLink="false">ppriest:_Arcade/Uncle Fester's Quest- The Addams Family (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ftqst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1989 / Sunsoft (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Volley Ball (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#volley-ball-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Volley Ball (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_vball.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Wild Gunman (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#wild-gunman-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Wild Gunman (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_wgnmn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1984 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Yo! Noid (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#yo-noid-playchoice-10</link>
+<guid isPermaLink="false">ppriest:_Arcade/Yo! Noid (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_ynoid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] BallySente (Arcade core, 52 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cshift</link>
+<guid isPermaLink="false">ppriest:_Arcade/cores/BallySente_20261025.rbf:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Chicken Shift (Ongo), Chicken Shift (ppriest), Gimme A Break (Ongo), Gimme A Break (ppriest), Goalie Ghost (Ongo), Goalie Ghost (ppriest), Grudge Match (v00.90, prototype), Grudge Match (v00.90, prototype), Hat Trick (Ongo), Hat Trick (ppriest), Mini Golf (Ongo), Mini Golf (ppriest), Name That Tune (Ongo), Name That Tune (ppriest), Night Stocker (Ongo), Night Stocker (ppriest), Off the Wall (Sente) (10-16-84), Off the Wall (Sente) (10-16-84), Rescue Raider (Ongo), Rescue Raider (ppriest), Sente Diagnostic Cartridge (Ongo), Sente Diagnostic Cartridge (ppriest), Shrike Avenger (Ongo), Shrike Avenger (ppriest), Snacks'n Jaxson (Ongo), Snacks'n Jaxson (ppriest), Snake Pit (Ongo), Snake Pit (ppriest), Spiker (Ongo), Spiker (ppriest), Stocker (Ongo), Stocker (ppriest), Stompin' (Ongo), Stompin' (ppriest), Street Football (Ongo), Street Football (ppriest), Team Hat Trick (Ongo), Team Hat Trick (ppriest), Toggle (Ongo), Toggle (ppriest), Trivial Pursuit (All Star Sports Edition), Trivial Pursuit (All Star Sports Edition), Trivial Pursuit (Baby Boomer Edition) (3-20-85), Trivial Pursuit (Baby Boomer Edition) (3-20-85), Trivial Pursuit (Genus II Edition) (3-22-85), Trivial Pursuit (Genus II Edition) (3-22-85), Trivial Pursuit (Think Tank - Genus Edition) (2-12-85), Trivial Pursuit (Think Tank - Genus Edition) (2-12-85), Trivial Pursuit (Volumen III, Spanish, Maibesa license), Trivial Pursuit (Volumen III, Spanish, Maibesa license), Trivial Pursuit (Young Players Edition) (3-29-85), Trivial Pursuit (Young Players Edition) (3-29-85).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Pandora (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#toto</link>
+<guid isPermaLink="false">ppriest:_Arcade/cores/Pandora_20261025.rbf:2026-10-25T18:18:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Come Back Toto, Cookie &amp;amp; Bibi 2 (ppriest), Cookie &amp;amp; Bibi 3 (ppriest), Final Tetris (ppriest), Gwasuwon, Hyper Pacman (ppriest), Macheonlu, New HyperMan (ppriest), Puzzle Break (ppriest), Puzzle Express More More, Puzzle Express More More Plus, Puzzle King (PacMan 2, Tetris, HyperMan 2, Snow Bros.), Puzzle Yutnori, Snow Bros. - Nick &amp;amp; Tom (ppriest), Suhoseong, Sutjaro Haeyo Deluxe, Toppy &amp;amp; Rappy (ppriest), Twinkle (ppriest).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-Midway-Y-Unit (Arcade core, 8 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#high-impact-football-gm0rk</link>
+<guid isPermaLink="false">gm0rk:_Arcade/cores/Arcade-Midway-Y-Unit_20261025.rbf:2026-10-25T16:55:20+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:55:20 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: High Impact Football (Gm0rk), Mortal Kombat (rev 4.0 09-28-92), Smash T.V. (Gm0rk), Strike Force (Gm0rk), Super High Impact (Gm0rk), Terminator 2 - Judgment Day (Gm0rk), Total Carnage (Gm0rk), Trog (Gm0rk).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Gm0rkCores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Aquarium (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#aquarium</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_Aquarium/Aquarium (US).mra:2026-10-25T16:38:10+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:38:10 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/superbona.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1984 / Video Village&lt;/p&gt;&lt;p&gt;Core: scramble&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Scramble_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aquarium.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1996 / Excellent System&lt;/p&gt;&lt;p&gt;Core: aquarium&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Scramble (Arcade core, 22 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#superbona</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Scramble_20261024.rbf:2026-10-25T09:56:08+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:56:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Agent Super Bond, Amidar, Anteater, Armored Car, Battle of Atlantis, Calipso, Cavelon, Dark Planet, Frogger, Lost Tomb, Mars, Mighty Monkey, Minefield, Moonwar, Rescue, Scramble, Speed Coin, Strategy X, Super Cobra, Tazz-Mania, The End, Turtles.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Scramble_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] PC-8801 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#PC88</link>
-<guid isPermaLink="false">distribution_mister:_Computer/PC88_20261020.rbf:2026-10-25T09:56:08+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:56:08 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1981 / NEC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PC88_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] UKNC (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#UKNC</link>
-<guid isPermaLink="false">distribution_mister:_Computer/UKNC_20261025.rbf:2026-10-25T09:56:08+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:56:08 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/UKNC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Athena no Hatena? (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#athena-no-hatena-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Athena no Hatena.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/atehate.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1993 / Athena&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Blandia (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#blandia-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Blandia.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blandia.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1992 / Allumer&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Block Carnival (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#block-carnival-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Block Carnival - Thunder &amp; Lightning 2.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blockcar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1992 / Visco&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Daioh (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#daioh-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Daioh.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/daioh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Athena&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] DownTown (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#downtown-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/DownTown - Mokugeki (set 1).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/downtown.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Seta&lt;/p&gt;&lt;p&gt;Core: SetaDowntown&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Dragon Unit (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dragon-unit-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Dragon Unit - Castle of Dragon.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/drgnunit.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Athena / Seta&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Eight Forces (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#eight-forces-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Eight Forces.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/eightfrc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1994 / Tecmo&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Extreme Downhill (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#extreme-downhill-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Extreme Downhill (v1.5).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/extdwnhl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1995 / Sammy Industries Japan&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Gundhara (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gundhara-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Gundhara.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gundhara.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1995 / Banpresto&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] J. J. Squawkers (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#j-j-squawkers-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/J. J. Squawkers.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jjsquawk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1993 / Athena / Able&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Mad Shark (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mad-shark-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Mad Shark.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/madshark.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Allumer&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Magical Speed (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#magical-speed-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Magical Speed.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/magspeed.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1994 / Allumer&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Masked Riders Club Battle Race (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#masked-riders-club-battle-race-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Masked Riders Club Battle Race - Kamen Rider Club Battle Racer.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kamenrid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1993 / Banpresto&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Mobile Suit Gundam (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mobile-suit-gundam-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Mobile Suit Gundam.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/msgundam.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1993 / Banpresto / Allumer&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Oishii Puzzle Ha Irimasenka (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#oishii-puzzle-ha-irimasenka-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Oishii Puzzle Ha Irimasenka.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/oisipuzl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1993 / Sunsoft / Atlus&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Pairs Love (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pairs-love-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Pairs Love.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pairlove.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Athena / Nihon System&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Quiz Kokology 2 (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#quiz-kokology-2-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Quiz Kokology 2.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/qzkklgy2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1993 / Tecmo&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Quiz Kokology (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#quiz-kokology-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Quiz Kokology.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/qzkklogy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1992 / Tecmo&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Rezon (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#rezon-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Rezon.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/rezon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1992 / Allumer&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SD Gundam Neo Battling (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sd-gundam-neo-battling-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/SD Gundam Neo Battling (Japan).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/neobattl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1992 / Banpresto&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sokonuke Taisen Game (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sokonuke-taisen-game-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Sokonuke Taisen Game (Japan).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sokonuke.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1995 / Sammy Industries&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Strike Gunner S.T.G (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#strike-gunner-s-t-g-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Strike Gunner S.T.G.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/stg.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1991 / Athena / Tecmo&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Thunder &amp; Lightning (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#thunder-lightning-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Thunder &amp; Lightning (set 1).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thunderl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Seta&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Thundercade (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#thundercade-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Thundercade - Twin Formation.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tndrcade.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1987 / Seta (Taito license)&lt;/p&gt;&lt;p&gt;Core: SetaDowntown&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Twin Eagle - Revenge Joe's Brother (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#twin-eagle-revenge-joe-s-brother-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Twin Eagle - Revenge Joe's Brother.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/twineagl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1988 / Seta (Taito license)&lt;/p&gt;&lt;p&gt;Core: SetaDowntown&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Ultraman Club - Tatakae! Ultraman Kyoudai!! (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ultraman-club-tatakae-ultraman-kyoudai-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Ultraman Club - Tatakae! Ultraman Kyoudai!!.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/umanclub.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1992 / Banpresto&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] War of Aero - Project MEIOU (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#war-of-aero-project-meiou-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/War of Aero - Project MEIOU.mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wrofaero.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Yang Cheng&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Wit's (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wit-s-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Wit's (Japan).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wits.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / Athena (Visco license)&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Zing Zing Zip (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#zing-zing-zip-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Zing Zing Zip (World) - Zhen Zhen Ji Pao (China).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/zingzip.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1992 / Allumer / Tecmo&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Zombie Raid (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#zombie-raid-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Zombie Raid (9-28-95, US).mra:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/zombraid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1995 / American Sammy&lt;/p&gt;&lt;p&gt;Core: Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Seta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] KonamiHornet (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gradius4</link>
-<guid isPermaLink="false">ppriest:_Arcade/cores/KonamiHornet_20261025.rbf:2026-10-25T09:53:28+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 09:53:28 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Gradius IV: Fukkatsu, NBA Play By Play.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] After Burner (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
+<title>[Updated] After Burner (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_aftrb</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/After Burner (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/After Burner (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_aftrb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_aftrb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Alien Storm (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Alien Storm (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_astrm</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Alien Storm (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Alien Storm (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_astrm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_astrm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Alien Syndrome (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
+<title>[Updated] Alien Syndrome (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_asyn</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Alien Syndrome (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Alien Syndrome (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_asyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_asyn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Altered Beast (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Altered Beast (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_beast</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Altered Beast (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Altered Beast (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_beast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_beast.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Arnold Palmer Tournament Golf (Arcade)</title>
+<title>[Updated] Arnold Palmer Tournament Golf (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_tgolf</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Arnold Palmer Tournament Golf (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Arnold Palmer Tournament Golf (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_tgolf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_tgolf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Arrow Flash (Arcade)</title>
+<title>[Updated] Arrow Flash (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_arrow</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Arrow Flash (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Arrow Flash (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_arrow.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_arrow.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Astro Warrior (Arcade)</title>
+<title>[Updated] Astro Warrior (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_astro</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Astro Warrior (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Astro Warrior (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_astro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_astro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1986 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Bonanza Bros. (Arcade)</title>
+<title>[Updated] Bonanza Bros. (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_bbros</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Bonanza Bros. (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Bonanza Bros. (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_bbros.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_bbros.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] California Games (Arcade)</title>
+<title>[Updated] California Games (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_calga</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/California Games (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/California Games (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_calga.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_calga.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Columns (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Columns (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_cols</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Columns (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Columns (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_cols.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_cols.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Crack Down (Arcade)</title>
+<title>[Updated] Crack Down (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_crack</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Crack Down (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Crack Down (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crkdown.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crkdown.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Cyber Police ESWAT: Enhanced Special Weapons and Tactics (Arcade)</title>
+<title>[Updated] Cyber Police ESWAT: Enhanced Special Weapons and Tactics (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_eswat</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Cyber Police ESWAT - Enhanced Special Weapons and Tactics (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Cyber Police ESWAT - Enhanced Special Weapons and Tactics (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_eswat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_eswat.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Fantasy Zone (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
+<title>[Updated] Fantasy Zone (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_fz</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Fantasy Zone (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Fantasy Zone (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_fz.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_fz.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Fire Shark (Arcade)</title>
+<title>[Updated] Fire Shark (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_fshrk</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Fire Shark (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Fire Shark (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_fshrk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1990 / Toaplan / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_fshrk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1990 / Toaplan / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Forgotten Worlds (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Forgotten Worlds (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_fwrld</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Forgotten Worlds (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Forgotten Worlds (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_fwrld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_fwrld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Ghouls'n Ghosts (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Ghouls'n Ghosts (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_gng</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Ghouls'n Ghosts (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Ghouls'n Ghosts (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gng.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Capcom / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gng.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Capcom / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Golden Axe (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Golden Axe (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_gaxe</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Golden Axe (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Golden Axe (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gaxe.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gaxe.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Golden Axe II (Arcade)</title>
+<title>[Updated] Golden Axe II (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_gaxe2</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Golden Axe II (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Golden Axe II (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gaxe2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gaxe2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Great Football (Arcade)</title>
+<title>[Updated] Great Football (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_gfoot</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Great Football (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Great Football (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gfoot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gfoot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Great Golf (Arcade)</title>
+<title>[Updated] Great Golf (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_ggolf</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Great Golf (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Great Golf (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_ggolf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_ggolf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Great Soccer (Arcade)</title>
+<title>[Updated] Great Soccer (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_gsocr</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Great Soccer (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Great Soccer (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gsocr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 198? / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_gsocr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 198? / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Joe Montana II: Sports Talk Football (Arcade)</title>
+<title>[Updated] Joe Montana II: Sports Talk Football (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_stf</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Joe Montana II - Sports Talk Football (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Joe Montana II - Sports Talk Football (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_stf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_stf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Kid Chameleon (Arcade)</title>
+<title>[Updated] Kid Chameleon (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_kcham</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Kid Chameleon (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Kid Chameleon (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_kcham.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_kcham.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Last Battle (Arcade)</title>
+<title>[Updated] Last Battle (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_lastb</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Last Battle (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Last Battle (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_lastb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_lastb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Mario Lemieux Hockey (Arcade)</title>
+<title>[Updated] Mario Lemieux Hockey (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_mlh</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Mario Lemieux Hockey (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Mario Lemieux Hockey (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_mlh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_mlh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Michael Jackson's Moonwalker (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Michael Jackson's Moonwalker (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_mwalk</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Michael Jackson's Moonwalker (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Michael Jackson's Moonwalker (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_mwalk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_mwalk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Mystic Defender (Arcade)</title>
+<title>[Updated] Mystic Defender (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_mystd</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Mystic Defender (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Mystic Defender (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_mystd.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_mystd.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Out Run (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
+<title>[Updated] Out Run (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_orun</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Out Run (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Out Run (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_orun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_orun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Parlour Games (Arcade)</title>
+<title>[Updated] Parlour Games (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_parlg</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Parlour Games (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Parlour Games (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_parlg.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_parlg.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Shadow Dancer (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Shadow Dancer (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_shado</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Shadow Dancer (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Shadow Dancer (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shado.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shado.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Shinobi (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
+<title>[Updated] Shinobi (Mega-Tech, SMS based) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_shnbi</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Shinobi (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Shinobi (Mega-Tech, SMS based) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shnbi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shnbi.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Sonic The Hedgehog (Arcade)</title>
+<title>[Updated] Sonic The Hedgehog (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_sonic</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Sonic The Hedgehog (Mega-Tech, set 1) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Sonic The Hedgehog (Mega-Tech, set 1) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_sonic.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_sonic.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Sonic The Hedgehog 2 (Arcade)</title>
+<title>[Updated] Sonic The Hedgehog 2 (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_soni2</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Sonic The Hedgehog 2 (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Sonic The Hedgehog 2 (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_soni2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_soni2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Space Harrier II (Arcade)</title>
+<title>[Updated] Space Harrier II (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_shar2</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Space Harrier II (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Space Harrier II (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shar2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shar2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Spider-Man vs The Kingpin (Arcade)</title>
+<title>[Updated] Spider-Man vs The Kingpin (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_spman</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Spider-Man vs The Kingpin (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Spider-Man vs The Kingpin (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_spman.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega / Marvel&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_spman.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega / Marvel&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Streets of Rage (Arcade)</title>
+<title>[Updated] Streets of Rage (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_srage</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Streets of Rage (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Streets of Rage (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_srage.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_srage.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Super Hang-On (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Super Hang-On (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_shang</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Hang-On (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Hang-On (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shang.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_shang.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Super Miss World (TomSVR) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#super-miss-world-tomsvr</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Miss World [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/smissw.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1996 / Comad&lt;/p&gt;&lt;p&gt;Core: TomSVR_comad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super Model II (TomSVR) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#super-model-ii-tomsvr</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Model II [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/supmodl2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1997 / Comad&lt;/p&gt;&lt;p&gt;Core: TomSVR_comad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super Model (TomSVR) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#super-model-tomsvr</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Model [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/supmodel.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Comad &amp;amp; New Japan System&lt;/p&gt;&lt;p&gt;Core: TomSVR_comad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super Monaco GP (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Super Monaco GP (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_smgp</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Monaco GP (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Monaco GP (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_smgp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_smgp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Super Real Basketball (Arcade)</title>
+<title>[Updated] Super Real Basketball (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_srbb</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Real Basketball (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Real Basketball (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_srbb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_srbb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Super Thunder Blade (Arcade)</title>
+<title>[Updated] Super Thunder Blade (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_stbld</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Thunder Blade (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Super Thunder Blade (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_stbld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_stbld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Tetris (Mega-Tech) [TomSVR] (Arcade)</title>
+<title>[Updated] Tetris (Mega-Tech) [TomSVR] (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_tetri</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Tetris (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Tetris (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
+<category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_tetri.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_tetri.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] The Revenge of Shinobi (Arcade)</title>
+<title>[Updated] The Revenge of Shinobi (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mt_revsh</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/The Revenge of Shinobi (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_revsh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Thunder Force II MD (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mt_tfor2</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Thunder Force II MD (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_tfor2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Techno Soft / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Tommy Lasorda Baseball (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mt_tlbba</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Tommy Lasorda Baseball (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_tlbba.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Turbo Outrun (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mt_tout</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Turbo Outrun (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_tout.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] WOW New Fantasia (TomSVR) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wownfanta</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/WOW New Fantasia (Explicit) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/The Revenge of Shinobi (Mega-Tech) [TomSVR].mra:2026-10-25T16:03:52+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 16:03:52 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wownfanta.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2002 / Comad&lt;/p&gt;&lt;p&gt;Core: TomSVR_comad&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] World Championship Soccer (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mt_wcsoc</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/World Championship Soccer (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_wcsoc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Wrestle War (Mega-Tech) [TomSVR] (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mt_wwar</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Wrestle War (Mega-Tech) [TomSVR].mra:2026-10-25T05:11:20+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 05:11:20 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_wwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Macintosh IIcx (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacIIcx_20261024.rbf:2026-10-25T00:24:34+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 00:24:34 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Macintosh SE/30 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261024.rbf:2026-10-25T00:24:34+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 00:24:34 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Metamorphic Force (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#metamorphic-force-decoryah</link>
-<guid isPermaLink="false">decoryah:_Arcade/cores/metamorphicforce_20261024.rbf:2026-10-24T21:00:51+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 21:00:51 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metamrph.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: metamorphicforce&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-MetamorphicForce_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Diamond Run (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#diamrun</link>
-<guid isPermaLink="false">ongo:_Arcade/Diamond Run.mra:2026-10-24T20:27:30+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 20:27:30 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/diamrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / KH Video&lt;/p&gt;&lt;p&gt;Core: bazset_DiamondRun&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Mille Miglia 2 - Great 1000 Miles Rally (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mille-miglia-2-great-1000-miles-rally</link>
-<guid isPermaLink="false">ongo:_Arcade/Mille Miglia 2 - Great 1000 Miles Rally (95-04-04).mra:2026-10-24T20:27:30+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 20:27:30 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gtmr2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Kaneko&lt;/p&gt;&lt;p&gt;Core: bazset_MilleMiglia2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Neon (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Neon</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Neon_20261025.rbf:2026-10-24T17:32:07+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 17:32:07 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Neon_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sharp MZ (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SharpMZ</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SharpMZ_20261024.rbf:2026-10-24T17:32:07+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 17:32:07 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] UKNC (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#UKNC</link>
-<guid isPermaLink="false">distribution_mister:_Computer/UKNC_20261024.rbf:2026-10-24T17:32:07+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 17:32:07 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/UKNC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Gaiapolis (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gaiapols</link>
-<guid isPermaLink="false">decoryah:_Arcade/cores/gaiapolis_20261024.rbf:2026-10-24T16:07:11+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 16:07:11 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gaiapols.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: gaiapolis&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-Gaiapolis_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Gradius IV: Fukkatsu (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gradius4</link>
-<guid isPermaLink="false">ppriest:_Arcade/Gradius IV Fukkatsu (ver JAC).mra:2026-10-24T15:24:10+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 15:24:10 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gradius4.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiHornet&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] NBA Play By Play (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#nbapbp</link>
-<guid isPermaLink="false">ppriest:_Arcade/NBA Play By Play (ver UAB).mra:2026-10-24T15:24:10+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 15:24:10 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/nbapbp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiHornet&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] The Legend of Silkroad (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#silkroad</link>
-<guid isPermaLink="false">ppriest:_Arcade/The Legend of Silkroad.mra:2026-10-24T15:24:10+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 15:24:10 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/silkroad.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1999 / Unico&lt;/p&gt;&lt;p&gt;Core: Silkroad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Mille Miglia 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gtmr2a</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Mille Miglia 2.mra:2026-10-24T13:41:17+00:00</guid>
-<pubDate>Sat, 24 Oct 2026 13:41:17 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gtmr2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Kaneko&lt;/p&gt;&lt;p&gt;Core: MilleMiglia2_bazset&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mt_revsh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Sega&lt;/p&gt;&lt;p&gt;Core: TomSVR_megatech&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

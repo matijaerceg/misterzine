@@ -6,7 +6,52 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 24 Oct 2026 17:32:07 +0000</lastBuildDate>
+<lastBuildDate>Sun, 25 Oct 2026 00:24:34 +0000</lastBuildDate>
+<item>
+<title>[Updated] Macintosh IIcx (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacIIcx_20261024.rbf:2026-10-25T00:24:34+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 00:24:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Macintosh SE/30 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261024.rbf:2026-10-25T00:24:34+00:00</guid>
+<pubDate>Sun, 25 Oct 2026 00:24:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Metamorphic Force (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#metamorphic-force-decoryah</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/metamorphicforce_20261024.rbf:2026-10-24T21:00:51+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 21:00:51 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metamrph.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: metamorphicforce&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-24 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-MetamorphicForce_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Diamond Run (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#diamrun</link>
+<guid isPermaLink="false">ongo:_Arcade/Diamond Run.mra:2026-10-24T20:27:30+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 20:27:30 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/diamrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / KH Video&lt;/p&gt;&lt;p&gt;Core: bazset_DiamondRun&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Mille Miglia 2 - Great 1000 Miles Rally (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mille-miglia-2-great-1000-miles-rally</link>
+<guid isPermaLink="false">ongo:_Arcade/Mille Miglia 2 - Great 1000 Miles Rally (95-04-04).mra:2026-10-24T20:27:30+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 20:27:30 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gtmr2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Kaneko&lt;/p&gt;&lt;p&gt;Core: bazset_MilleMiglia2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Neon (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Neon</link>
@@ -71,7 +116,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/silkroad.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1999 / Unico&lt;/p&gt;&lt;p&gt;Core: Silkroad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Mille Miglia 2: Great 1000 Miles Rally (Arcade)</title>
+<title>[New] Mille Miglia 2 (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gtmr2a</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/Mille Miglia 2.mra:2026-10-24T13:41:17+00:00</guid>
 <pubDate>Sat, 24 Oct 2026 13:41:17 +0000</pubDate>
@@ -861,51 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dirtdash.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Namco&lt;/p&gt;&lt;p&gt;Core: XNSUPER22&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] DoDonPachi Dai-Ou-Jou Tamashii (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ddpdojt</link>
-<guid isPermaLink="false">ongo:_Arcade/DoDonPachi Dai-Ou-Jou Tamashii (V201, China).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ddpdojt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 2010 / IGS / Cave (Tong Li Animation license)&lt;/p&gt;&lt;p&gt;Core: PGM2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Dynamite Cop (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dynamcop</link>
-<guid isPermaLink="false">ongo:_Arcade/Dynamite Cop (Export, Model 2A).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dynamcop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1998 / Sega&lt;/p&gt;&lt;p&gt;Core: Model2A&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Hanguk Pro Yagu 98 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hpyagu98</link>
-<guid isPermaLink="false">ongo:_Arcade/Hanguk Pro Yagu 98.mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hpyagu98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Deniam&lt;/p&gt;&lt;p&gt;Core: Model2A&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Knights of Valour 2 New Legend - Sanguo Zhan Ji 2 Guang Sao Yu Jun (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kov2nl</link>
-<guid isPermaLink="false">ongo:_Arcade/Knights of Valour 2 New Legend - Sanguo Zhan Ji 2 Guang Sao Yu Jun (V302, Oversea).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kov2nl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 2008 / IGS&lt;/p&gt;&lt;p&gt;Core: PGM2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Knights of Valour 3 - Sanguo Zhan Ji 3 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kov3</link>
-<guid isPermaLink="false">ongo:_Arcade/Knights of Valour 3 - Sanguo Zhan Ji 3 (V104, China, Hong Kong, Taiwan).mra:2026-10-21T23:12:25+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 23:12:25 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kov3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 2011 / IGS (Huatong license)&lt;/p&gt;&lt;p&gt;Core: PGM2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-21 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

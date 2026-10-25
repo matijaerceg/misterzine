@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sat, 24 Oct 2026 15:24:10 +0000</lastBuildDate>
+<lastBuildDate>Sat, 24 Oct 2026 20:27:30 +0000</lastBuildDate>
+<item>
+<title>[New] Diamond Run (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#diamrun</link>
+<guid isPermaLink="false">ongo:_Arcade/Diamond Run.mra:2026-10-24T20:27:30+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 20:27:30 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/diamrun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1989 / KH Video&lt;/p&gt;&lt;p&gt;Core: bazset_DiamondRun&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Mille Miglia 2 - Great 1000 Miles Rally (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mille-miglia-2-great-1000-miles-rally</link>
+<guid isPermaLink="false">ongo:_Arcade/Mille Miglia 2 - Great 1000 Miles Rally (95-04-04).mra:2026-10-24T20:27:30+00:00</guid>
+<pubDate>Sat, 24 Oct 2026 20:27:30 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gtmr2a.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Kaneko&lt;/p&gt;&lt;p&gt;Core: bazset_MilleMiglia2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Gradius IV: Fukkatsu (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gradius4</link>
@@ -35,7 +53,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/silkroad.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1999 / Unico&lt;/p&gt;&lt;p&gt;Core: Silkroad&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-24 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Mille Miglia 2: Great 1000 Miles Rally (Arcade)</title>
+<title>[New] Mille Miglia 2 (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gtmr2a</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/Mille Miglia 2.mra:2026-10-24T13:41:17+00:00</guid>
 <pubDate>Sat, 24 Oct 2026 13:41:17 +0000</pubDate>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/suhosong.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1997 / SemiCom&lt;/p&gt;&lt;p&gt;Core: Pandora&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Sutjaro Haeyo Deluxe (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sutjarod</link>
-<guid isPermaLink="false">ppriest:_Arcade/Sutjaro Haeyo Deluxe (Korea).mra:2026-10-21T20:09:05+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 20:09:05 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sutjarod.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1996 / SemiCom&lt;/p&gt;&lt;p&gt;Core: Pandora&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Toppy &amp; Rappy (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#toppy-rappy-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Toppy &amp; Rappy.mra:2026-10-21T20:09:05+00:00</guid>
-<pubDate>Wed, 21 Oct 2026 20:09:05 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toppyrap.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1996 / SemiCom&lt;/p&gt;&lt;p&gt;Core: Pandora&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-21 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

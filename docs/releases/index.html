@@ -1225,7 +1225,7 @@
           <!-- mature content (data.json mat): show, blur the screenshots, or hide
                the rows. Remembered per browser (mz-mature); wired by syncMature. -->
           <div class="matrow" role="group" aria-labelledby="matlbl"
-               data-tip="Games MAME marks as mature, mostly strip puzzle and mahjong games. Blur (the default) covers their screenshots (click one to reveal it); Hide removes them from the list.">
+               data-tip="Games MAME marks as mature, mostly strip puzzle and mahjong games. Hide (the default) removes them from the list; Blur covers their screenshots (click one to reveal it).">
             <span id="matlbl">Mature games</span>
             <span class="matseg" id="matseg"><button type="button" data-mat="show">Show</button><button type="button" data-mat="blur">Blur</button><button type="button" data-mat="hide">Hide</button></span>
           </div>
@@ -1386,7 +1386,7 @@ let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most r
 // is set to Hide (see ingest and syncMature)
 let RAW = [];
 const MAT_KEY = 'mz-mature', MAT_MODES = ['show', 'blur', 'hide'];
-let matMode = 'blur';  // the default until a visitor picks another mode
+let matMode = 'hide';  // the default until a visitor picks another mode
 try { const m = localStorage.getItem(MAT_KEY); if (MAT_MODES.includes(m)) matMode = m; } catch (e) {}
 document.documentElement.setAttribute('data-mature', matMode);
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)

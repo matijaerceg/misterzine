@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-25
 
+- Release tracker: mature games are now hidden by default. Menu > Mature games can still show them or blur their screenshots, and a choice made there is remembered as before.
 - Release tracker: the UKNC and the new Neon core have photos of their machines, years and makers. Neon is now listed as "Soyuz-Neon PK-11/16".
 - Release tracker: Mega-Tech games and Punch-Out!! / Super Punch-Out!! show their screenshots at the right shape. Both cabinets have two monitors, one above the other, and the pair was squashed into a single screen's shape.
 - Site: MisterZine Jellyfin Core has a page at [/jellyfin/](https://misterzine.fyi/jellyfin/), with what it does, what is free versus Patreon early access, and the current version from GitHub. Jellyfin joins the header links on every page, the home page gains a Jellyfin card, and the privacy page a Jellyfin section. The Plex page now describes the releases with the H.264 decoder core: files played as stored, 576i for PAL sets, and the HDMI modes.

@@ -1306,14 +1306,15 @@
           <div class="menu" id="yearmenu"></div>
         </details>
         <!-- "Group by core" (core batches): games that shipped an update together
-             fold into one row per core under the date sorts (see foldBatches). A
+             fold into one row per core under the date sorts, games that debuted
+             together under the MiSTer Debut sort (see foldBatches, batchField). A
              display pref like Columns, not a filter: it persists and Clear filters
              leaves it alone, hence the checkbox look (CSS at #batchctl).
              Lives in the filter cluster so it rides the phone Filters sheet too
              (as its own button in the row, it crushed the search box at 390px). -->
         <div class="favctl" id="batchctl">
           <button type="button" id="batchtoggle" aria-pressed="true"
-                  data-tip="Fold games that shipped an update together into one row per core. Applies to the Build Date and Changed on MZ sorts. Remembered between visits.">Group by core</button>
+                  data-tip="Fold games that shipped an update together into one row per core. Under the MiSTer Debut sort, games that debuted together instead. Applies to the Build Date, Changed on MZ and MiSTer Debut sorts. Remembered between visits.">Group by core</button>
         </div>
         <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
       </div>
@@ -1459,11 +1460,25 @@ const PARENT = new Map();  // member row -> the umbrella (same-game or batch) ho
 // that debuts on the day its core ships is part of the same wave, so three or
 // more rows on one core and Build Date fold, floored or not. The "batch" badge
 // still skips floored rows (clusterN).
+// Under the MiSTer Debut sort the pile is keyed on the debut date instead
+// (2026-10-26): games of one core that debuted on the same day fold the same
+// way ("Debut: ST-V core, 43 games"). The pile always shares the SORTED
+// column's value with its members, so it sits where they would (a build pile
+// under the debut sort would scatter games years out of their order, which is
+// why that sort had no folding at all before). batchField() names the column.
 // A display pref (mz-batches), not a filter: Clear filters leaves it alone.
 const BATCH_MIN = 3;
 let foldBatches = true;
 try { foldBatches = localStorage.getItem('mz-batches') !== '0'; } catch (e) {}
-const batchG = (core, updated) => core + '@' + updated;  // the umbrella's g; setnames never carry '@'
+const batchField = () => sortKey === 'date' ? 'date' : 'updated';
+const batchSortOn = () => foldBatches && (sortKey === 'updated' || sortKey === 'mz' || sortKey === 'date');
+// the umbrella's g: core@<build date>, or core@d:<debut date> for a debut
+// pile; setnames never carry '@'
+const batchG = (core, v, field) => core + '@' + (field === 'date' ? 'd:' : '') + v;
+// the value a row piles on, or '' when it has none for this column: a debut
+// pile wants a real debut (date_kind 'build' is a console row that fell back
+// to its build date)
+const batchVal = (d, field) => field === 'date' ? (d.date_kind === 'debut' && d.date || '') : (d.updated || '');
 // g -> every row of that core batch in DATA (ingest), filters ignored. A batch
 // exists at BATCH_MIN rows. A search folds even one matching game under its
 // batch, since a header over a partial match keeps the context the search
@@ -1522,8 +1537,10 @@ function hashRow() {
   // a batch link while batches are off, or filtered away: build it from DATA
   const at = g.lastIndexOf('@');
   if (at > 0) {
-    const ms = BATCHES_ALL[g] || DATA.filter(d => d.core === g.slice(0, at) && d.updated === g.slice(at + 1));
-    if (ms.length >= 2) return makeBatch(ms);
+    const deb = g.startsWith('d:', at + 1), field = deb ? 'date' : 'updated';
+    const v = g.slice(at + (deb ? 3 : 1)), core = g.slice(0, at);
+    const ms = BATCHES_ALL[g] || DATA.filter(d => d.core === core && batchVal(d, field) === v);
+    if (ms.length >= 2) return makeBatch(ms, field);
   }
   return undefined;
 }
@@ -2376,6 +2393,7 @@ function batchBadge(d) {
 // did until 2026-10-21). The whole build counts (u.all), not just the games a
 // search or filter shows.
 function batchIsDebut(u) {
+  if (u.by === 'date') return true;  // a debut pile is debuts by construction
   const up = Date.parse(u.updated);
   return (u.all || u.members).every(m => {
     const gap = (up - Date.parse(m.date)) / 864e5;
@@ -2409,13 +2427,14 @@ function titleCell(d) {
     const dot = d.members.some(isUnseen)
       ? '<span class="sv" data-tip="A game in this batch was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
     const debut = batchIsDebut(d);
+    const when = d.by === 'date' ? d.date : d.updated;  // the date the pile shares
     // <wbr> lets the chip wrap to the next line instead of splitting a word
     return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + batchLabel(d, debut) +
       '<wbr><span class="gc" data-tip="' + escA(n === t
-        ? n + ' games on this core shipped ' + (debut ? 'together' : 'an update together') +
-          ' (' + d.updated + '). Select the row to list them.'
-        : n + ' of the ' + t + ' games this core shipped ' + (debut ? 'together' : 'in one update') +
-          ' (' + d.updated + ') ' + (n === 1 ? 'matches' : 'match') + ' your search. Select the row to list all ' + t + '.') + '">' +
+        ? n + ' games on this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped an update together') +
+          ' (' + when + '). Select the row to list them.'
+        : n + ' of the ' + t + ' games this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped in one update') +
+          ' (' + when + ') ' + (n === 1 ? 'matches' : 'match') + ' your search. Select the row to list all ' + t + '.') + '">' +
       (n === t ? n : n + ' of ' + t) + ' games</span>';
   }
   if (d.grp) {
@@ -3188,20 +3207,22 @@ function apply() {
   // survivor count, as today: favorites-only must not make "1 of 12" headers);
   // pass 2 folds what is left by g as below. A same-game umbrella that lost
   // builds to a batch carries `split` (all its builds in DATA) for its chip.
-  const uw = !searchOn && foldBatches && (sortKey === 'updated' || sortKey === 'mz');
+  const bf = batchField();
+  const uw = !searchOn && batchSortOn();
   for (const g in GREDIR) delete GREDIR[g];
   let bats = [], split = {};
   if (uw) {
     const bk = {}, left = [];
     for (const d of view) {
-      if (!d.core || !d.updated) { left.push(d); continue; }
-      const key = batchG(d.core, d.updated);
+      const v = d.core && batchVal(d, bf);
+      if (!v) { left.push(d); continue; }
+      const key = batchG(d.core, v, bf);
       (bk[key] = bk[key] || []).push(d);
     }
     for (const key in bk) {
       const ms = bk[key];
       if (ms.length < BATCH_MIN) { left.push(...ms); continue; }
-      bats.push(makeBatch(ms));
+      bats.push(makeBatch(ms, bf));
       for (const m of ms) if (m.g && ALLG[m.g]) split[m.g] = true;
     }
     view = left;
@@ -3219,23 +3240,25 @@ function apply() {
     view = view.concat(bats);
   }
   // during a search, fold core batches AFTER the same-game fold (see
-  // makeBatch): plain survivors sharing a core and Build Date, under the date
-  // sorts only (any other sort would scatter the games out of their order).
+  // makeBatch): plain survivors sharing a core and the sorted date (build,
+  // or debut under the MiSTer Debut sort), under the date sorts only (any
+  // other sort would scatter the games out of their order).
   // Same-game umbrellas are never batch members, so nothing nests two deep.
   // The count is of the whole batch (see BATCHES): any survivor of a batch
   // that exists folds under its header, even alone, so a partial match keeps
   // the context the search would otherwise drop.
-  if (!uw && foldBatches && (sortKey === 'updated' || sortKey === 'mz')) {
+  if (!uw && batchSortOn()) {
     const bk = {}, out = [];
     for (const d of view) {
-      if (d.grp || !d.core || !d.updated) { out.push(d); continue; }
-      const key = batchG(d.core, d.updated);
+      const v = !d.grp && d.core && batchVal(d, bf);
+      if (!v) { out.push(d); continue; }
+      const key = batchG(d.core, v, bf);
       if (searchOn && ((d.g && ALLG[d.g]) || !BATCHES[key] || BATCHES[key].length < BATCH_MIN)) { out.push(d); continue; }
       let b = bk[key];
       if (!b) { b = bk[key] = []; out.push(b); }
       b.push(d);
     }
-    view = out.flatMap(x => Array.isArray(x) ? (searchOn || x.length >= BATCH_MIN ? [makeBatch(x)] : x) : [x]);
+    view = out.flatMap(x => Array.isArray(x) ? (searchOn || x.length >= BATCH_MIN ? [makeBatch(x, bf)] : x) : [x]);
   }
   for (const g in G2ROW) delete G2ROW[g];
   PARENT.clear();
@@ -3343,15 +3366,19 @@ function makeUmbrella(ms) {
 // the core itself (core cell link, core tiebreak) and the facts the games agree
 // on. No screenshot: it is a build, not a game. `members` are the survivors
 // (what expands in the table); `all` is the whole batch (chip, panel).
-function makeBatch(ms) {
+// `field` is the column the pile shares (batchField): 'updated' for a build
+// pile, 'date' for a debut pile (u.by keeps it; the shared date sits in that
+// column and the other one takes the newest member's value)
+function makeBatch(ms, field) {
+  field = field || 'updated';
   const same = k => ms.every(m => (m[k] || '') === (ms[0][k] || '')) ? ms[0][k] : undefined;
   const max = k => ms.reduce((v, m) => (m[k] || '') > v ? m[k] : v, '');
   const min = k => ms.reduce((v, m) => m[k] && (!v || m[k] < v) ? m[k] : v, '');
-  const core = ms[0].core;
-  const u = { grp: true, bat: true, g: batchG(core, ms[0].updated), members: ms,
+  const core = ms[0].core, deb = field === 'date';
+  const u = { grp: true, bat: true, by: field, g: batchG(core, batchVal(ms[0], field), field), members: ms,
     title: coreLabel(core) || core, base: ms[0].base, core, src: same('src') || '',
-    date: min('date'), updated: ms[0].updated, mz: max('mz'), act: max('act'),
-    b: Math.max(...ms.map(m => m.b || 0)), date_kind: 'build', mat: ms.some(m => m.mat) };
+    date: deb ? ms[0].date : min('date'), updated: deb ? max('updated') : ms[0].updated, mz: max('mz'), act: max('act'),
+    b: Math.max(...ms.map(m => m.b || 0)), date_kind: deb ? 'debut' : 'build', mat: ms.some(m => m.mat) };
   // game columns (year, maker, genre, specs) stay empty, even when every
   // member agrees: the row is a label for a build, not one more game
   const repo = same('repo'); if (repo) u.repo = repo;
@@ -4963,7 +4990,8 @@ function batchHTML(u) {
     (coreLabel(u.core) !== u.core ? ' (' + esc(u.core) + ')' : ''), 'Copy core name'), true]);
   rows.push(['Type', typeLabel(u)]);
   rows.push(['Source', u.srcs]);
-  rows.push(['Build date', esc(u.updated) + agoSpan(relAge(u.updated)), true]);
+  if (u.by === 'date') rows.push(['MiSTer debut', esc(u.date) + agoSpan(relAge(u.date)), true]);
+  rows.push([u.by === 'date' ? 'Latest build' : 'Build date', esc(u.updated) + agoSpan(relAge(u.updated)), true]);
   if (u.mz) rows.push(['Changed on MisterZine', esc(u.mz) + agoSpan(relAge(u.mz)), true]);
   if (u.act && u.act !== u.updated) rows.push(['Latest commit', esc(u.act) + agoSpan(relAge(u.act)), true]);
   if (u.repo) rows.push(['Repository', '<a href="' + escA(repoURL(u)) + '" target="_blank" rel="noopener">' +
@@ -4984,8 +5012,8 @@ function batchHTML(u) {
   const titleHTML = '<span class="gametitle">' + batchLabel(u, debut) + '</span>';
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2>' + cfield(rowURL(u), titleHTML, 'Copy link to this batch') + '</h2>' +
-    '<p class="grpnote">These ' + all.length + (debut ? ' new games shipped together on '
-      : ' games shipped an update together on ') + esc(u.updated) +
+    '<p class="grpnote">These ' + all.length + (u.by === 'date' ? ' games debuted on MiSTer together on ' + esc(u.date)
+      : (debut ? ' new games shipped together on ' : ' games shipped an update together on ') + esc(u.updated)) +
     '. Each has its own entry and star.</p>' +
     dl + list + '</div>' + hint;
 }
@@ -6067,18 +6095,27 @@ function ingest(d) {
   // core batches by g, every row, same-game group members left out as the
   // fold in apply() leaves them out during a search (see BATCHES). Rebuilt,
   // not merged, too.
+  // Both pile kinds live in the one map, told apart by their g (batchG).
   for (const g in BATCHES) delete BATCHES[g];
   for (const r of DATA) {
-    if (!r.core || !r.updated || (r.g && ALLG[r.g])) continue;
-    const g = batchG(r.core, r.updated);
-    (BATCHES[g] = BATCHES[g] || []).push(r);
+    if (!r.core || (r.g && ALLG[r.g])) continue;
+    for (const f of ['updated', 'date']) {
+      const v = batchVal(r, f);
+      if (!v) continue;
+      const g = batchG(r.core, v, f);
+      (BATCHES[g] = BATCHES[g] || []).push(r);
+    }
   }
   // the same, same-game members included (see BATCHES_ALL)
   for (const g in BATCHES_ALL) delete BATCHES_ALL[g];
   for (const r of DATA) {
-    if (!r.core || !r.updated) continue;
-    const g = batchG(r.core, r.updated);
-    (BATCHES_ALL[g] = BATCHES_ALL[g] || []).push(r);
+    if (!r.core) continue;
+    for (const f of ['updated', 'date']) {
+      const v = batchVal(r, f);
+      if (!v) continue;
+      const g = batchG(r.core, v, f);
+      (BATCHES_ALL[g] = BATCHES_ALL[g] || []).push(r);
+    }
   }
   // batch-clustering: count rows sharing a core's Last Updated stamp (see
   // updCluster / clusterN). Rebuilt, not merged, for the same reason as above.

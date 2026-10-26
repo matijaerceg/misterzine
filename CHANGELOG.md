@@ -6,6 +6,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - Release tracker: screenshots in the detail panel enlarge on click, like flyers, to a capped size that keeps the shadow mask and tube blur. Click anywhere or press Escape to close.
 
+- Release tracker: Group by core now works under the MiSTer Debut sort too: games of one core that debuted on the same day fold into one "Debut: <core> core" row, with the pile's debut date in that column and the newest build in Build Date.
 - Release tracker: the Batches button is now "Group by core" and looks like a checkbox, since it is a remembered on/off setting rather than a filter.
 - Release tracker: sorting the table no longer lights up the Clear filters button, and Clear filters no longer changes the sort. The button only clears what hides rows: the search, the dropdown filters and the favorites views. The site title link still resets everything.
 

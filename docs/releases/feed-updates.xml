@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 26 Oct 2026 09:16:37 +0000</lastBuildDate>
+<lastBuildDate>Mon, 26 Oct 2026 16:13:53 +0000</lastBuildDate>
+<item>
+<title>[Updated] Plump Pop (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#plumppop</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Plump Pop (Japan).mra:2026-10-26T16:13:53+00:00</guid>
+<pubDate>Mon, 26 Oct 2026 16:13:53 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/plumppop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1987 / Taito&lt;/p&gt;&lt;p&gt;Core: PlumpPop_BAZSET_B01&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] 1943 Kai: Midway Kaisen (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1943kai</link>
@@ -374,7 +383,7 @@
 <pubDate>Mon, 26 Oct 2026 05:54:29 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: After Burner (Mega-Tech, SMS based) [TomSVR], Alien Storm (Mega-Tech) [TomSVR], Alien Syndrome (Mega-Tech, SMS based) [TomSVR], Altered Beast (Mega-Tech) [TomSVR], Arnold Palmer Tournament Golf, Arrow Flash, Astro Warrior, Bonanza Bros., California Games, Columns (Mega-Tech) [TomSVR], Crack Down, Cyber Police ESWAT: Enhanced Special Weapons and Tactics, Fantasy Zone (Mega-Tech, SMS based) [TomSVR], Fire Shark, Forgotten Worlds (Mega-Tech) [TomSVR], Ghouls'n Ghosts (Mega-Tech) [TomSVR], Golden Axe (Mega-Tech) [TomSVR], Golden Axe II, Great Football, Great Golf, Great Soccer, Joe Montana II: Sports Talk Football, Kid Chameleon, Last Battle, Mario Lemieux Hockey, Michael Jackson's Moonwalker (Mega-Tech) [TomSVR], Mystic Defender, Out Run (Mega-Tech, SMS based) [TomSVR], Parlour Games, Shadow Dancer (Mega-Tech) [TomSVR], Shinobi (Mega-Tech, SMS based) [TomSVR], Sonic The Hedgehog, Sonic The Hedgehog 2, Space Harrier II, Spider-Man vs The Kingpin, Streets of Rage, Super Hang-On (Mega-Tech) [TomSVR], Super Monaco GP (Mega-Tech) [TomSVR], Super Real Basketball, Super Thunder Blade, Tetris (Mega-Tech) [TomSVR], The Revenge of Shinobi, Thunder Force II MD, Tommy Lasorda Baseball, Turbo Outrun, World Championship Soccer, Wrestle War (Mega-Tech) [TomSVR].&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: After Burner (Mega-Tech, SMS based) [TomSVR], Alien Storm (Mega-Tech) [TomSVR], Alien Syndrome (Mega-Tech, SMS based) [TomSVR], Altered Beast (Mega-Tech) [TomSVR], Arnold Palmer Tournament Golf, Arrow Flash, Astro Warrior, Bonanza Bros., California Games, Columns (Mega-Tech) [TomSVR], Crack Down, Cyber Police ESWAT: Enhanced Special Weapons and Tactics, Fantasy Zone (Mega-Tech, SMS based) [TomSVR], Fire Shark, Forgotten Worlds (Mega-Tech) [TomSVR], Ghouls'n Ghosts (Mega-Tech) [TomSVR], Golden Axe (Mega-Tech) [TomSVR], Golden Axe II (Mega-Tech) [TomSVR], Great Football, Great Golf, Great Soccer, Joe Montana II: Sports Talk Football, Kid Chameleon, Last Battle, Mario Lemieux Hockey, Michael Jackson's Moonwalker (Mega-Tech) [TomSVR], Mystic Defender, Out Run (Mega-Tech, SMS based) [TomSVR], Parlour Games, Shadow Dancer (Mega-Tech) [TomSVR], Shinobi (Mega-Tech, SMS based) [TomSVR], Sonic The Hedgehog (Mega-Tech, set 1) [TomSVR], Sonic The Hedgehog 2 (Mega-Tech) [TomSVR], Space Harrier II, Spider-Man vs The Kingpin, Streets of Rage, Super Hang-On (Mega-Tech) [TomSVR], Super Monaco GP (Mega-Tech) [TomSVR], Super Real Basketball, Super Thunder Blade, Tetris (Mega-Tech) [TomSVR], The Revenge of Shinobi, Thunder Force II MD, Tommy Lasorda Baseball, Turbo Outrun, World Championship Soccer, Wrestle War (Mega-Tech) [TomSVR].&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Gm0rk_Atari-G1 (Arcade core, 2 games)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_dbldr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Dr. Mario (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dr-mario-playchoice-10</link>
-<guid isPermaLink="false">ppriest:_Arcade/Dr. Mario (PlayChoice-10).mra:2026-10-25T18:18:52+00:00</guid>
-<pubDate>Sun, 25 Oct 2026 18:18:52 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_drmro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Nintendo&lt;/p&gt;&lt;p&gt;Core: PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-25 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-PlayChoice10_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -3893,6 +3893,242 @@
         "sfzj.03c": "sfzj.03c",
         "sfzj.key": "sfzj.key"
        },
+       "setname": "sfaexu"
+      },
+      "key": "usa",
+      "label": "USA (English)",
+      "mra": {
+       "base": "data/mra/sfa-ex-usa.mra",
+       "filename": "Street Fighter Alpha EX (USA).mra",
+       "name": "Street Fighter Alpha EX (USA)",
+       "region": "USA",
+       "setname": "sfaexu"
+      },
+      "patched_zip": "../capcom/backports/sfa/out/ex_release/usa/sfzj.zip"
+     },
+     {
+      "hbmame": {
+       "complete": true,
+       "renames": {
+        "sfz.01": "sfz.01",
+        "sfz.02": "sfz.02",
+        "sfz.04b": "sfz.04b",
+        "sfz.05a": "sfz.05a",
+        "sfz.06": "sfz.06",
+        "sfz.11m": "sfz.11m",
+        "sfz.12m": "sfz.12m",
+        "sfz.14m": "sfz.14m",
+        "sfz.16m": "sfz.16m",
+        "sfz.18m": "sfz.18m",
+        "sfz.20m": "sfz.20m",
+        "sfzj.03c": "sfzj.03c",
+        "sfzj.key": "sfzj.key"
+       },
+       "setname": "sfzexj"
+      },
+      "key": "japan",
+      "label": "Japan (Japanese)",
+      "mra": {
+       "base": "data/mra/sfa-ex-japan.mra",
+       "filename": "Street Fighter Zero EX (Japan).mra",
+       "name": "Street Fighter Zero EX (Japan)",
+       "region": "Japan",
+       "setname": "sfzexj",
+       "subdir": "_Japan"
+      },
+      "patched_zip": "../capcom/backports/sfa/out/ex_release/japan/sfzj.zip"
+     },
+     {
+      "hbmame": {
+       "complete": true,
+       "renames": {
+        "sfz.01": "sfz.01",
+        "sfz.02": "sfz.02",
+        "sfz.04b": "sfz.04b",
+        "sfz.05a": "sfz.05a",
+        "sfz.06": "sfz.06",
+        "sfz.11m": "sfz.11m",
+        "sfz.12m": "sfz.12m",
+        "sfz.14m": "sfz.14m",
+        "sfz.16m": "sfz.16m",
+        "sfz.18m": "sfz.18m",
+        "sfz.20m": "sfz.20m",
+        "sfzj.03c": "sfzj.03c",
+        "sfzj.key": "sfzj.key"
+       },
+       "setname": "sfzexa"
+      },
+      "key": "asia",
+      "label": "Asia (English)",
+      "mra": {
+       "base": "data/mra/sfa-ex-asia.mra",
+       "filename": "Street Fighter Zero EX (Asia).mra",
+       "name": "Street Fighter Zero EX (Asia)",
+       "region": "Asia",
+       "setname": "sfzexa",
+       "subdir": "_Asia"
+      },
+      "patched_zip": "../capcom/backports/sfa/out/ex_release/asia/sfzj.zip"
+     }
+    ]
+   },
+   "builds": [
+    {
+     "hbmame_set": "sfaexu",
+     "key": "usa",
+     "mame_set": "sfzj",
+     "region": "USA",
+     "title": "Street Fighter Alpha EX",
+     "title_screen": "data/screenshots/sfa-ex/title_usa.png"
+    },
+    {
+     "hbmame_set": "sfzexj",
+     "key": "japan",
+     "mame_set": "sfzj",
+     "region": "Japan",
+     "title": "Street Fighter Zero EX",
+     "title_screen": "data/screenshots/sfa-ex/title_japan.png"
+    }
+   ],
+   "builds_heading": "Title screens",
+   "changes": [
+    "Akuma, Dan, M. Bison and Random on the expanded character-select screen",
+    "Six colors per fighter, selected with the six attack buttons; the four extra colors come from Alpha 2",
+    "CONSOLE mode with a green title and Arcade, Versus, Training, Dramatic Battle, Survival, Akuma and Options",
+    "Training with recording and replay, computer behavior, stage and gauge controls, delayed health refill and a 1 HP minimum",
+    "Classic Dramatic Battle and a four-opponent EX route, with a computer teammate or two human players",
+    "Survival with Alpha Anthology's opponent order and health recovery, animated during FIGHT",
+    "Direct access to the original Akuma challenge, named Gouki in Japan",
+    "Versus rematches return to character selection, with shared win counters in Versus and Survival",
+    "Coin or a START hold opens pause in Console fights; Quit returns directly to the title",
+    "OPTIONS for difficulty, timer, rounds, damage, speed and sound; extended Turbo and slow speeds in operator configuration",
+    "Optional CPS Changer route choices after character and speed selection in Arcade",
+    "USA, Japan and Asia builds, with the regional restoration underneath"
+   ],
+   "date": "2026-10-26",
+   "description": [
+    "Street Fighter Alpha EX aims to be the definitive version of the first Alpha, bringing together features from its console releases and the CPS-1 Changer version. It builds on the regional restoration, with Akuma, Dan and M. Bison on the visible select screen and six colors per fighter: the original two plus four from Alpha 2.",
+    "CONSOLE mode adds a green title and a cycling mode menu: Arcade, Versus, Training, Dramatic Battle, Survival, Akuma and Options. Versus returns to fighter selection after each match. Training has recording and replay, computer behavior, stage and gauge controls, and health that refills after a combo while stopping at 1 HP.",
+    "Dramatic Battle offers the original Ryu and Ken encounter and an EX route against Adon, Sagat, M. Bison and Akuma. Play with a computer teammate or a second player, and choose your team in EX. Survival follows Alpha Anthology's opponent order and health recovery. Akuma mode goes straight to the original boss challenge.",
+    "OPTIONS covers difficulty, timer, rounds, damage, speed and sound. The operator menu adds CONSOLE or ARCADE game mode, six or original colors, extended Turbo and slow speeds, and optional CPS Changer route choices in Arcade. ARCADE mode retains the arcade title and coin handling.",
+    "The USA build is Street Fighter Alpha EX, with the regional restoration's English story, quotes and endings. Japan is Street Fighter Zero EX, in Japanese; Asia retains the Zero title with English text. The MiSTer MRAs start in CONSOLE mode; MAME and HBMAME start in ARCADE mode. It runs in MAME and HBMAME and on MiSTer.",
+    "This is a release candidate."
+   ],
+   "game": "Street Fighter Zero (Japan 950727)",
+   "hardware": "Capcom CPS-2",
+   "hidden": false,
+   "mra": {
+    "auxiliary_zips": [
+     "../capcom/roms/mame0260/qsound.zip"
+    ],
+    "base": "data/mra/sfa-ex-usa.mra",
+    "category": "Fighting",
+    "catver": "Fighter / Versus",
+    "mraauthor": "jotego,strygo",
+    "platform": "CPS-2",
+    "zip_dir": "_Arcade/_Arcade Patches/_Enhanced Versions"
+   },
+   "notes": [
+    "To open the mode menu in MAME or HBMAME, set GAME MODE to CONSOLE in SYSTEM CONFIGURATION, then save and exit.",
+    "You need your own Japanese sfzj arcade set and QSound device ROMs. The downloads contain patches and portable application tools, not complete game ROMs.",
+    "Fan work, unaffiliated with Capcom."
+   ],
+   "patch_intro": "An unofficial enhanced edition of Street Fighter Zero, with USA, Japan and Asia builds.",
+   "patch_kind": "EX edition patch",
+   "patch_noun": "edition",
+   "reconstruction": {
+    "columns": [
+     [
+      "HBMAME",
+      "hbmame_set"
+     ],
+     [
+      "MAME",
+      "mame_set"
+     ]
+    ],
+    "how": "The patch tool verifies your original ROMs, applies the selected EX edition, and writes the MAME and HBMAME archives and MiSTer MRAs. No console disc is needed.",
+    "requires": [
+     "Your own original Street Fighter Zero (Japan 950727) arcade romset: sfzj."
+    ],
+    "sizes_note": ""
+   },
+   "related": [
+    {
+     "label": "Street Fighter Alpha regional restoration",
+     "note": "the regional foundation EX builds on",
+     "url": "../sfa-restoration/"
+    }
+   ],
+   "release_history": [
+    {
+     "date": "2026-10-26",
+     "items": [
+      "First public release candidate."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "screenshots": [
+    {
+     "caption": "All thirteen fighters and Random on character select.",
+     "single": "data/screenshots/sfa-ex/select.png"
+    },
+    {
+     "caption": "Ryu and Ken team up against Adon in EX Dramatic Battle.",
+     "single": "data/screenshots/sfa-ex/dramatic.png"
+    },
+    {
+     "caption": "Difficulty, timer, rounds, damage, speed and sound in OPTIONS.",
+     "single": "data/screenshots/sfa-ex/options.png"
+    },
+    {
+     "caption": "Training with computer controls and recording.",
+     "single": "data/screenshots/sfa-ex/training.png"
+    }
+   ],
+   "section": "enhanced",
+   "set": "sfzj",
+   "slug": "sfa-ex",
+   "sort_title": "Street Fighter Alpha 1 EX",
+   "status": "release-candidate",
+   "subtitle": "Enhanced version",
+   "summary": "Alpha with all thirteen fighters on the select screen, six colors each, a console mode menu, Training with recording, Survival and cooperative Dramatic Battle.",
+   "title": "Street Fighter Alpha EX",
+   "version": "rc1"
+  },
+  {
+   "artifact": {
+    "auxiliary_stock_members": [
+     {
+      "name": "dl-1425.bin",
+      "sha256": "524a25bcd153be24594d37c0dbd334fe4f384f77da73c2058dc60fc1f581cf18",
+      "size": 24576
+     }
+    ],
+    "parents": [
+     "sfa"
+    ],
+    "stock_zip": "../capcom/roms/mame0260/sfzj.zip",
+    "variants": [
+     {
+      "hbmame": {
+       "complete": true,
+       "renames": {
+        "sfz.01": "sfz.01",
+        "sfz.02": "sfz.02",
+        "sfz.04b": "sfz.04b",
+        "sfz.05a": "sfz.05a",
+        "sfz.06": "sfz.06",
+        "sfz.11m": "sfz.11m",
+        "sfz.12m": "sfz.12m",
+        "sfz.14m": "sfz.14m",
+        "sfz.16m": "sfz.16m",
+        "sfz.18m": "sfz.18m",
+        "sfz.20m": "sfz.20m",
+        "sfzj.03c": "sfzj.03c",
+        "sfzj.key": "sfzj.key"
+       },
        "setname": "sfaru"
       },
       "key": "usa",

@@ -2,6 +2,13 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-10-26
+
+- Release tracker: screenshots in the detail panel enlarge on click, like flyers, to a capped size that keeps the shadow mask and tube blur. Click anywhere or press Escape to close.
+
+- Release tracker: the Batches button is now "Group by core" and looks like a checkbox, since it is a remembered on/off setting rather than a filter.
+- Release tracker: sorting the table no longer lights up the Clear filters button, and Clear filters no longer changes the sort. The button only clears what hides rows: the search, the dropdown filters and the favorites views. The site title link still resets everything.
+
 ## 2026-10-25
 
 - Release tracker: mature games are now hidden by default. Menu > Mature games can still show them or blur their screenshots, and a choice made there is remembered as before.

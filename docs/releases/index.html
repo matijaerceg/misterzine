@@ -161,8 +161,8 @@
            color: var(--muted); font-size: .8rem; white-space: nowrap;
            font-variant-numeric: tabular-nums; pointer-events: none; }
   #q:not(:placeholder-shown) ~ .count { right: 1.45rem; }
-  /* "Clear filters": JS toggles .active (and drops `disabled`) when a search, a
-     narrowing filter or toggle, or a non-default sort is set. On desktop it
+  /* "Clear filters": JS toggles .active (and drops `disabled`) when a search or
+     a narrowing filter or toggle is set (never the sort: it hides nothing). On desktop it
      always holds its slot, a faded disabled ghost while idle, so arming it
      never shifts the filter buttons (an open dropdown used to jump sideways
      when it appeared; 2026-10-19, reversing the 10-16 hide-when-idle). In the
@@ -269,9 +269,20 @@
   .favctl.active { border-color: var(--accent2, var(--accent)); }
   .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
-  /* Batches borrows the group look but has no dropdown segment, so its button
-     rounds both ends (the left-only radius showed square corners when lit) */
-  #batchctl > button { border-radius: 3px; }
+  /* "Group by core" borrows the group look but has no dropdown segment, so its
+     button rounds both ends (the left-only radius showed square corners when
+     lit). It is a remembered on/off setting, not a command, so it reads as a
+     checkbox: a drawn box in front (::before) that fills with the accent and
+     shows a check while on (aria-pressed), mirroring the Columns menu's boxes. */
+  #batchctl > button { border-radius: 3px; display: inline-flex; align-items: center; gap: .45rem; }
+  #batchctl > button::before { content: ""; flex: none; width: .85em; height: .85em; box-sizing: border-box;
+                               border: 1.5px solid var(--muted); border-radius: 2px; background: transparent; }
+  #batchctl > button[aria-pressed="true"]::before {
+    border-color: var(--accent2, var(--accent)); background: var(--accent2, var(--accent));
+    /* the check: a mask so it takes --accent-on, the text color with a floor against the accent */
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.5l2.5 2.5 4.5-5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat, linear-gradient(#000 0 0);
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.5l2.5 2.5 4.5-5' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; }
   /* sized and ruled off like the Columns menu's footnote (.colnote) */
   .favctl .menu .favnote { margin: 0 0 .35rem; padding: .3rem .5rem .4rem; border-bottom: 1px solid var(--rule);
                            font-size: .78rem; line-height: 1.35; color: var(--muted);
@@ -947,6 +958,21 @@
   #flyer-lightbox[open] { display: flex; align-items: center; justify-content: center; }
   #flyer-lightbox::backdrop { background: rgba(0, 0, 0, .78); }
   #flyer-lightbox img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  /* Screenshots enlarge too (click), into #shot-lightbox: a frame + mask canvas
+     like the panel's, so the enlarged shot wears the same CRT mask and tube blur.
+     Capped, not full-screen: --r is the numeric aspect ratio, so the width is
+     the smallest of 92vw, 1100px and what 85dvh of height allows (the canvas
+     fills the img's box, so the box must never squash the picture). */
+  #panel .frame:not(.mat), #panel .frame.mat.reveal, html:not([data-mature="blur"]) #panel .frame.mat { cursor: zoom-in; }
+  #shot-lightbox { border: 0; padding: 16px; margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none;
+                   box-sizing: border-box; background: transparent; cursor: zoom-out; overflow: hidden; }
+  #shot-lightbox[open] { display: flex; align-items: center; justify-content: center; }
+  #shot-lightbox::backdrop { background: rgba(0, 0, 0, .78); }
+  #shot-lightbox .frame { position: relative; background: #000;
+                          width: min(92vw, 1100px, calc(85dvh * var(--r, 1.3333))); }
+  #shot-lightbox .frame img { display: block; width: 100%; height: 100%; object-fit: fill; }
+  #shot-lightbox .frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  html[data-mask="off"] #shot-lightbox .frame canvas { display: none; }
   #panel .flyer { text-align: center; }
   #panel .flyer a { display: block; cursor: zoom-in; }
   #panel .flyer img { display: block; width: 100%; height: auto; }
@@ -1279,14 +1305,15 @@
           <summary id="yearsummary">Year</summary>
           <div class="menu" id="yearmenu"></div>
         </details>
-        <!-- core batches: games that shipped an update together fold into one row
-             per core under the date sorts (see foldBatches). A display pref like
-             Columns, not a filter: it persists and Clear filters leaves it alone.
+        <!-- "Group by core" (core batches): games that shipped an update together
+             fold into one row per core under the date sorts (see foldBatches). A
+             display pref like Columns, not a filter: it persists and Clear filters
+             leaves it alone, hence the checkbox look (CSS at #batchctl).
              Lives in the filter cluster so it rides the phone Filters sheet too
              (as its own button in the row, it crushed the search box at 390px). -->
         <div class="favctl" id="batchctl">
           <button type="button" id="batchtoggle" aria-pressed="true"
-                  data-tip="Fold games that shipped an update together into one row per core. Applies to the Build Date and Changed on MZ sorts.">Batches</button>
+                  data-tip="Fold games that shipped an update together into one row per core. Applies to the Build Date and Changed on MZ sorts. Remembered between visits.">Group by core</button>
         </div>
         <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
       </div>
@@ -3101,12 +3128,12 @@ function apply() {
   const qKey = terms.join(' ');
   if (qKey !== lastQueryKey) { searchShut.clear(); lastQueryKey = qKey; }
   // the global "Clear filters" button is armed (accent fill + x) while anything
-  // differs from a fresh load: a search, a narrowing filter or toggle, or a
-  // sort other than the default. Idle it is disabled: a ghost holding its slot
-  // on desktop, gone in the phone Filters sheet (CSS)
-  const [dk, dd] = defaultSort();
+  // hides rows: a search, a narrowing filter or toggle. The sort is view state,
+  // not a filter: it neither arms nor is reset by the button (2026-10-26; the
+  // title link is the full "fresh load" reset). Idle it is disabled: a ghost
+  // holding its slot on desktop, gone in the phone Filters sheet (CSS)
   const armed = !!(qEl.value || pickNarrows() || yearFrom != null || yearTo != null
-    || favOnly || favView || sortKey !== dk || sortDir !== dd);
+    || favOnly || favView);
   const clearBtn = document.getElementById('clear');
   clearBtn.classList.toggle('active', armed);
   clearBtn.disabled = !armed;
@@ -3380,7 +3407,7 @@ function clearSearch() {
 }
 document.getElementById('qx').addEventListener('click', clearSearch);
 // the far-right "Clear filters" button resets every filter at once (text + every
-// dropdown + the toggles) and the sort; resetTypes/resetSrcs/resetGenres/resetYear
+// dropdown + the toggles), never the sort; resetTypes/resetSrcs/resetGenres/resetYear
 // are state-only helpers defined with each dropdown below
 function clearAllFilters() {
   const q = document.getElementById('q');
@@ -3390,10 +3417,8 @@ function clearAllFilters() {
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
   if (favView) dismissFavView();
-  // the sort goes back to the default too, so the button means "the list as a
-  // fresh load shows it" (columns, theme and the favorites list are prefs, not view)
-  const [k, d] = defaultSort();
-  if (sortKey !== k || sortDir !== d) { sortKey = k; sortDir = d; buildHeader(); }
+  // the sort stays: it hides nothing, so "Clear filters" has no business with
+  // it (columns, theme, grouping and the favorites list are prefs, not filters)
   apply();
   recenterOpen();
 }
@@ -3596,7 +3621,7 @@ function syncColsReset() {
 }
 // the sort a fresh load lands on, given the visible columns: last-updated (the
 // site default) if shown, then debut date, else the always-on title column.
-// "Clear filters" resets to it and arms itself whenever the sort differs.
+// Also the fallback when the sorted column is hidden (sortFallback).
 function defaultSort() {
   const on = k => activeColumns().some(c => c.k === k);
   return on('updated') ? ['updated', -1] : on('date') ? ['date', -1] : ['title', 1];
@@ -4880,6 +4905,56 @@ panel.addEventListener('click', e => {
   image.src = link.href;
   image.alt = link.querySelector('img').alt;
   flyerLightbox.showModal();
+});
+// Screenshots: click a panel frame to enlarge it in #shot-lightbox, masked and
+// blurred like the small one (maskShot reads the frame's .vert for tate). A
+// blurred mature frame's first click reveals it instead (the handler below);
+// the enlarge waits for the next click. The panel's drag-to-scroll captures
+// the pointer, so a mouse click can arrive targeted at #panel: the frame comes
+// from the press, as the mature handler does it.
+const shotLightbox = document.createElement('dialog');
+shotLightbox.id = 'shot-lightbox';
+shotLightbox.setAttribute('aria-label', 'Enlarged screenshot. Click anywhere or press Escape to close.');
+shotLightbox.innerHTML = '<div class="frame"><img alt=""></div>';
+document.body.appendChild(shotLightbox);
+const shotLbFrame = shotLightbox.querySelector('.frame');
+const shotLbImg = shotLbFrame.querySelector('img');
+function maskLightboxShot() {
+  if (!shotLightbox.open || !window.mzMask || !shotLbImg.complete || !shotLbImg.naturalWidth) return;
+  let cv = shotLbFrame.querySelector('canvas');
+  if (!cv) { cv = document.createElement('canvas'); shotLbFrame.appendChild(cv); }
+  if (!window.mzMask(shotLbImg, cv, { fit: 'fill', blur: TUBE_BLUR,
+                                      rot: shotLbFrame.classList.contains('vert') })) cv.remove();
+}
+shotLbImg.addEventListener('load', maskLightboxShot);
+let shotLbT;
+new ResizeObserver(() => { clearTimeout(shotLbT); shotLbT = setTimeout(maskLightboxShot, 100); }).observe(shotLbFrame);
+shotLightbox.addEventListener('click', () => shotLightbox.close());
+shotLightbox.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { e.preventDefault(); shotLightbox.close(); }
+});
+shotLightbox.addEventListener('close', () => {
+  shotLbImg.removeAttribute('src');
+  const cv = shotLbFrame.querySelector('canvas'); if (cv) cv.remove();
+});
+let shotPressed = null;
+panel.addEventListener('pointerdown', e => { shotPressed = e.target.closest('.frame'); });
+panel.addEventListener('click', e => {
+  const f = e.target.closest('.frame') || (e.target === panel ? shotPressed : null);
+  shotPressed = null;
+  if (!f || !f.isConnected) return;
+  if (f.classList.contains('mat') && matMode === 'blur' && !f.classList.contains('reveal')) return;
+  const img = f.querySelector('img');
+  if (!img || !img.naturalWidth) return;
+  const ratio = f.style.aspectRatio || '4 / 3';
+  const [rw, rh] = ratio.split('/').map(Number);
+  shotLbFrame.style.aspectRatio = ratio;
+  shotLbFrame.style.setProperty('--r', rh ? (rw / rh) : 4 / 3);
+  shotLbFrame.classList.toggle('vert', f.classList.contains('vert'));
+  shotLbImg.alt = img.alt;
+  shotLbImg.src = img.currentSrc || img.src;
+  shotLightbox.showModal();
+  maskLightboxShot();  // cached image: load may not fire again
 });
 
 function batchHTML(u) {

@@ -353,3 +353,6 @@ body:not(.cl-editor) #clbar { border-top: 0; }
 .collection-tabs { scrollbar-width: none; }
 .collection-tabs::-webkit-scrollbar { display: none; }
 .collection-tabs > a:not([aria-current=page]), #collection-pins > a:not([aria-current=page]) { border-bottom-color: var(--accent); }
+
+/* Unavailable shortcuts should not obscure short lists or empty states. */
+body:not(.cl-editor) .jumps button:disabled { display: none; }

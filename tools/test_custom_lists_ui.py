@@ -71,8 +71,8 @@ def quick_add_tests(owner, anonymous, base, api, token, title, screenshots=None)
         assert saved["keys"] == [first] and saved["visibility"] == "private"
         assert page.url == browsing_url
         expect(page.locator("#q")).to_have_value("1944")
-        page.locator("#clentryaddyes").click()
-        expect(page.locator("#clentrystatus")).to_contain_text("already saved")
+        expect(page.locator("#clentryaddyes")).to_be_disabled()
+        expect(page.locator("#clentryaddyes")).to_have_text("Already in this list")
         unchanged = read(existing_id)
         assert (unchanged["keys"], unchanged["version"], unchanged["updated_at"]) == ([first], saved["version"], saved["updated_at"])
         page.locator("#clentrynew summary").click()
@@ -312,7 +312,7 @@ def main():
             page.goto(base + "/__preview__/tester")
             page.wait_for_function("typeof booted !== 'undefined' && booted")
             expect(page.locator("#collection-create")).to_be_visible()
-            for control in ["#collection-all", "#collection-favorites", "#collection-select", "#collection-browse"]:
+            for control in ["#collection-all", "#collection-favorites", "#collection-summary", "#collection-browse"]:
                 expect(page.locator(control)).to_be_visible()
             assert page.evaluate("localStorage.getItem('mz-token')") == token
             page.locator("#collection-create").click()

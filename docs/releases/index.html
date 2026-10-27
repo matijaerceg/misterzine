@@ -3076,8 +3076,9 @@ function render() {
     const pickMsg = (keys, set, label, name) => set.size >= keys.length ? ''
       : set.size ? ' in ' + esc(keys.filter(k => set.has(k)).map(label).join(', '))
       : ' (no ' + name + ' selected)';
+    const collectionEmpty = MZLists.emptyMessage();
     tb.innerHTML = '<tr class="nomatch"><td colspan="' + cols.length + '"><div class="msg">' +
-      'No matches' + (q ? ' for <b>"' + esc(q) + '"</b>' : '') +
+      (collectionEmpty ? esc(collectionEmpty) : 'No matches' + (q ? ' for <b>"' + esc(q) + '"</b>' : '') +
       pickMsg(TYPES, enabledTypes, t => t, 'type') +
       pickMsg(SRC_KEYS, enabledSrcs, s => SRC_NAMES[s] || s, 'source') +
       pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
@@ -3086,7 +3087,7 @@ function render() {
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
-        ? '<span class="esc">press Esc to clear the search</span>' : '') + '</div></td></tr>';
+        ? '<span class="esc">press Esc to clear the search</span>' : '')) + '</div></td></tr>';
     setCount(0);
     return;
   }
@@ -3328,8 +3329,10 @@ function setCount(shown) {
   const el = document.getElementById('count');
   // narrow: the search box shares one row with three buttons, so the filtered
   // tally drops " of " for a slash and the placeholder shortens to match
-  el.textContent = shown === DATA.length ? String(DATA.length)
-    : narrowMQ.matches ? shown + '/' + DATA.length : shown + ' of ' + DATA.length;
+  const total = MZLists.isListView() || MZLists.isFavorites() ? DATA.filter(MZLists.matches).length : DATA.length;
+  el.textContent = shown === total ? String(total)
+    : narrowMQ.matches ? shown + '/' + total : shown + ' of ' + total;
+  el.title = shown + ' matching entries out of ' + total + (MZLists.isListView() ? ' available in this list' : MZLists.isFavorites() ? ' available favorites' : ' catalogue entries');
   document.getElementById('q').placeholder = narrowMQ.matches ? 'Search' : 'Find anything';
   el.parentElement.style.setProperty('--countw', el.offsetWidth + 'px');
 }

@@ -23,6 +23,7 @@ window.MZLists = (() => {
   let undo = [], redo = [], present = '', memberLimit = 200, memberSignature = '', catalogue = null, catalogueByKey = new Map();
   let marked = new Set(), memberAnchor = null, shownMembers = [], addedKeys = new Set(), pendingNavigation = null;
   let copySource = null;
+  let entryCheckVersion = 0, entryChecking = false, entryAlready = false;
   let editorPane = 'catalogue', returnPane = 'catalogue', detailFocus = null;
   function setEditorPane(pane) {
     editorPane = pane;
@@ -258,6 +259,7 @@ window.MZLists = (() => {
     picker.append(new Option(hooks.token() ? 'Manage your lists...' : 'Sign in for your lists...', 'manage'));
     const pinned = (collections.pins || []).some(p => p.id === id);
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
+    $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
     $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? list.title : 'Your lists';
     const menu = $('collection-menu'); menu.replaceChildren();
     for (const child of picker.children) {
@@ -569,12 +571,33 @@ window.MZLists = (() => {
   }
   function entryControls() {
     for (const control of $('clentryforms').querySelectorAll('input,textarea,select,button')) control.disabled = entryBusy;
-    $('clentryaddyes').disabled = entryBusy || !validID($('clentrytarget').value);
+    $('clentryaddyes').disabled = entryBusy || entryChecking || entryAlready || !validID($('clentrytarget').value);
+    $('clentryaddyes').textContent = entryChecking ? 'Checking list…' : entryAlready ? 'Already in this list' : 'Add to selected list';
     $('clentrycreateyes').disabled = entryBusy || entryCreateBlocked;
     $('clentryreload').disabled = entryBusy;
   }
+  async function checkEntryTarget() {
+    const check = ++entryCheckVersion, attempt = entryVersion, session = sessionVersion;
+    const target = $('clentrytarget').value, row = entryRow;
+    entryAlready = false; entryChecking = false;
+    if (!row || !validID(target)) { entryControls(); entryStatus('Choose one of your lists, or make a new private list.'); return; }
+    entryChecking = true; entryControls();
+    try {
+      const current = editing && owner && target === id ? {keys:[...selected]} : await request('/lists/' + target, null, true);
+      if (check !== entryCheckVersion || attempt !== entryVersion || session !== sessionVersion) return;
+      entryAlready = current.keys.includes(row.k);
+      entryStatus(entryAlready ? 'This entry is already in this list.' : 'Ready to add this entry to the selected list.');
+    } catch (err) {
+      if (check === entryCheckVersion && attempt === entryVersion && session === sessionVersion)
+        entryStatus('Could not check this list. Add will check its latest contents before saving.');
+    } finally {
+      if (check === entryCheckVersion && attempt === entryVersion && session === sessionVersion) { entryChecking = false; entryControls(); }
+    }
+  }
   async function entryLists() {
+    let loaded = false;
     const attempt = ++entryVersion, session = sessionVersion;
+    entryCheckVersion++; entryChecking = false; entryAlready = false;
     entryBusy = true; entryControls(); entryStatus('Loading your lists...');
     $('clentrysignin').hidden = true; $('clentryreload').hidden = true; $('clentryforms').hidden = true;
     try {
@@ -589,20 +612,21 @@ window.MZLists = (() => {
       $('clentryexisting').hidden = !data.lists.length;
       $('clentryempty').hidden = !!data.lists.length;
       $('clentrynew').open = !data.lists.length;
-      $('clentryforms').hidden = false; entryCreateBlocked = false;
+      $('clentryforms').hidden = false; entryCreateBlocked = false; loaded = true;
       entryStatus('Choose one of your lists, or make a new private list.');
     } catch (err) {
       if (attempt !== entryVersion || session !== sessionVersion) return;
       $('clentrysignin').hidden = err.status !== 401;
       entryStatus(err.status === 401 ? 'Sign in to add this entry to your own lists. Your current view stays open here.' : 'Could not load your lists. Check your connection and try again.', true);
     } finally {
-      if (attempt === entryVersion && session === sessionVersion) { entryBusy = false; $('clentryreload').hidden = false; entryControls(); }
+      if (attempt === entryVersion && session === sessionVersion) { entryBusy = false; $('clentryreload').hidden = false; entryControls(); if (loaded) checkEntryTarget(); }
     }
   }
   function showEntry(key) {
     const row = hooks.original(key);
     if (!row || row.grp || !row.k) return;
     if (editing && busy) { notice('Wait for the current list to finish saving, then try Add to list again.'); return; }
+    entryCheckVersion++; entryChecking = false; entryAlready = false;
     entryVersion++; entryRow = row; entryBusy = false; entryCreateBlocked = false;
     $('clentryname').textContent = row.title;
     $('clentrycore').textContent = [row.core ? 'Core: ' + row.core : '', row.src ? 'Source: ' + hooks.source(row.src) : ''].filter(Boolean).join(' · ');
@@ -624,20 +648,20 @@ window.MZLists = (() => {
   async function addEntry(event) {
     event.preventDefault();
     const target = $('clentrytarget').value, row = entryRow;
-    if (entryBusy || !row || !validID(target)) return;
+    if (entryBusy || entryChecking || entryAlready || !row || !validID(target)) return;
     // The open editor owns its pending state. Never write around its unsaved changes.
     if (editing && target === id) {
       if (!owner || !list || busy) { entryStatus('Retry the current editor with the list owner signed in before adding here.', true); return; }
       if (selected.has(row.k)) { entryStatus('This entry is already in the current selection. Save the list when your edits are ready.'); return; }
       if (selected.size >= 5000) { entryStatus('A list can hold up to 5,000 entries. Remove an entry first.', true); return; }
-      selected.add(row.k); changed(); entryStatus('Added to the current selection. Use Save in the editor to save your changes.'); return;
+      selected.add(row.k); changed(); entryAlready = true; entryControls(); entryStatus('Added to the current selection. Use Save in the editor to save your changes.'); return;
     }
     const attempt = entryVersion, session = sessionVersion;
     entryBusy = true; entryControls(); entryStatus('Adding entry...');
     try {
       const current = await request('/lists/' + target, null, true);
       if (attempt !== entryVersion || session !== sessionVersion) return;
-      if (current.keys.includes(row.k)) { entryStatus('This entry is already saved in "' + current.title + '".'); return; }
+      if (current.keys.includes(row.k)) { entryAlready = true; entryStatus('This entry is already saved in "' + current.title + '".'); return; }
       if (current.keys.length >= 5000) { entryStatus('This list already has 5,000 entries. Remove an entry before adding another.', true); return; }
       const updated = await request('/lists/' + target, {method: 'PUT', body: JSON.stringify({
         title: current.title, description: current.description, keys: [...current.keys, row.k],
@@ -649,6 +673,7 @@ window.MZLists = (() => {
       }
       refreshCollections();
       if (attempt !== entryVersion) return;
+      entryAlready = true;
       entryStatus('Added to "' + updated.title + '". Saved with its existing visibility.');
     } catch (err) {
       if (attempt !== entryVersion || session !== sessionVersion) return;
@@ -868,7 +893,7 @@ window.MZLists = (() => {
     $('clcreateform').onsubmit = create;
     $('clentryform').onsubmit = addEntry;
     $('clentrynewform').onsubmit = createEntryList;
-    $('clentrytarget').onchange = entryControls;
+    $('clentrytarget').onchange = checkEntryTarget;
     $('clentryreload').onclick = entryLists;
     $('clentrydialog').addEventListener('close', () => { entryVersion++; entryBusy = false; });
     $('clbar').hidden = mode !== 'list';
@@ -948,6 +973,9 @@ window.MZLists = (() => {
     });
   }
   return {start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry, detailsOpened, detailsClosed,
+    emptyMessage: () => mode === 'favorites' && hooks && !hooks.catalogue().some(hooks.isFavorite)
+      ? hooks.token() ? 'No favorites yet. Open a game and choose its star to save it here.' : 'No favorites yet. Sign in to save favorites, then open a game and choose its star.'
+      : mode === 'list' && !editing ? !list ? 'Loading your list…' : !selected.size ? 'This list is empty. Its owner can add games using Edit list.' : '' : '',
     isListView: () => mode === 'list' && !editing,
     isEditing: () => mode === 'list' && editing,
     isFavorites: () => mode === 'favorites', favoritesClick: () => {

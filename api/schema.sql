@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS list_follows (
   PRIMARY KEY (user_id, list_id)
 );
 -- list_id has no foreign key: followers retain an unavailable entry after
--- withdrawal or deletion, without retaining the title or other list content.
+-- withdrawal or deletion. Only a remembered title is kept separately, never games.
 CREATE INDEX IF NOT EXISTS list_follows_target ON list_follows(list_id);
 
 -- Existing shared links stay unlisted. Never opt old lists into discovery.
@@ -103,3 +103,15 @@ INSERT INTO curated_lists (id, user_id, title, description, byline, keys_json, v
     CASE WHEN published = 1 THEN 'unlisted' ELSE 'private' END, version, created_at, updated_at
   FROM custom_lists WHERE true ON CONFLICT(id) DO NOTHING;
 DELETE FROM custom_lists;
+
+-- Remember only a followed list's title, never its games or description.
+CREATE TABLE IF NOT EXISTS list_follow_titles (
+  user_id INTEGER NOT NULL,
+  list_id TEXT NOT NULL,
+  title TEXT NOT NULL,
+  PRIMARY KEY (user_id, list_id),
+  FOREIGN KEY (user_id, list_id) REFERENCES list_follows(user_id, list_id) ON DELETE CASCADE
+);
+INSERT OR IGNORE INTO list_follow_titles (user_id, list_id, title)
+SELECT f.user_id, f.list_id, l.title FROM list_follows f JOIN curated_lists l ON l.id = f.list_id
+WHERE l.visibility IN ('public', 'unlisted');

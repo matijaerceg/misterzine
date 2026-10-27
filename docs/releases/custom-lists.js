@@ -22,6 +22,7 @@ window.MZLists = (() => {
   let draftRecord = null, draftAvailable = true;
   let undo = [], redo = [], present = '', memberLimit = 200, memberSignature = '', catalogue = null, catalogueByKey = new Map();
   let marked = new Set(), memberAnchor = null, shownMembers = [], addedKeys = new Set(), pendingNavigation = null;
+  let copySource = null;
   let editorPane = 'catalogue', returnPane = 'catalogue', detailFocus = null;
   function setEditorPane(pane) {
     editorPane = pane;
@@ -117,7 +118,7 @@ window.MZLists = (() => {
   const $ = id => document.getElementById(id);
   const safe = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
   const visibility = () => list.visibility || (list.published ? 'unlisted' : 'private');
-  const visibilityLabel = value => ({private: 'Private draft', unlisted: 'Unlisted', public: 'Public'})[value];
+  const visibilityLabel = value => ({private: 'Private', unlisted: 'Unlisted', public: 'Public'})[value];
   const listPath = () => '/releases/?list=' + encodeURIComponent(id);
   const editPath = () => '/releases/?editList=' + encodeURIComponent(id);
   const signIn = path => '/account/?r=' + encodeURIComponent(path);
@@ -247,7 +248,7 @@ window.MZLists = (() => {
       if (!rows.length) continue;
       const group = document.createElement('optgroup'); group.label = label;
       for (const row of rows) {
-        const option = new Option(row.unavailable ? 'Unavailable list' : row.title, row.id);
+        const option = new Option(row.unavailable ? (row.title || 'Unavailable list') + ' (unavailable)' : row.title, row.id);
         option.disabled = !!row.unavailable; group.append(option);
       }
       picker.append(group);
@@ -283,7 +284,7 @@ window.MZLists = (() => {
       $('clstate').textContent = ''; $('clattribution').replaceChildren();
       $('cldescriptionview').textContent = '';
       $('clnote').textContent = '';
-      for (const element of ['cldescriptionfold', 'cledit', 'clsecondary', 'cldone', 'cleditlink', 'cllinkcopy', 'clfollow', 'clmissing', 'cllatest', 'cldraftnote', 'cldiscard', 'clempty']) $(element).hidden = true;
+      for (const element of ['cldescriptionfold', 'cledit', 'clsecondary', 'cldone', 'cleditlink', 'cllinkcopy', 'clcopylist', 'clfollow', 'clmissing', 'cllatest', 'cldraftnote', 'cldiscard', 'clempty']) $(element).hidden = true;
       return;
     }
     $('clname').textContent = list.title;
@@ -297,15 +298,16 @@ window.MZLists = (() => {
     $('cldone').setAttribute('aria-disabled', String(busy));
     $('cleditlink').hidden = editing || !owner; $('cleditlink').href = editPath();
     $('cllinkcopy').hidden = visibility() === 'private';
+    $('clcopylist').hidden = editing;
     $('clfollow').hidden = editing || owner || visibility() === 'private';
     $('clfollow').disabled = followBusy;
     $('clfollow').textContent = following ? 'Unfollow' : 'Follow list';
     $('clfollow').setAttribute('aria-pressed', String(following));
     $('clselected').textContent = selectedOnly ? 'Show all games' : 'Show only list entries';
     $('clselected').setAttribute('aria-pressed', selectedOnly);
-    $('clsave').textContent = visibility() === 'private' ? 'Save draft' : 'Save changes';
+    $('clsave').textContent = 'Save changes';
     $('clsave').disabled = busy || !dirty;
-    $('clpublish').textContent = visibility() === 'private' ? 'Share / publish...' : 'Sharing...';
+    $('clpublish').textContent = 'Visibility…';
     const attribution = $('clattribution'); attribution.replaceChildren();
     const name = list.curator && list.curator.name || list.byline;
     if (name) {
@@ -320,7 +322,7 @@ window.MZLists = (() => {
     $('cldescriptionfold').hidden = !list.description;
     $('cldescriptionview').textContent = list.description;
     $('clnote').textContent = editing
-      ? 'Tick games in the catalogue to add them. Your list stays visible here as you search and filter. ' + (visibility() === 'private' ? 'Your draft stays private until you share it.' : 'Saving updates the same shared list.')
+      ? 'Tick games in the catalogue to add them. Your list stays visible here as you search and filter. ' + (visibility() === 'private' ? 'Your list is private unless you change its visibility.' : 'Saving updates the same shared list.')
       : !selected.size ? (owner ? 'This list is empty. Choose Edit list to start adding entries.' : 'This list has no entries yet. Its owner can add them later.')
       : !hooks.visible().length ? 'No saved entries are visible with your current filters and visibility settings. Try clearing filters or review entries not shown below.'
       : 'Search and filters apply within this collection.';
@@ -435,7 +437,7 @@ window.MZLists = (() => {
     $('clprofilesaved').hidden = !needsName || !profile;
     $('clprofilesaved').textContent = profile ? 'Credited as ' + profile.display_name + '. You can change this on your account page.' : '';
     $('clconfirmyes').disabled = needsName && !profileLoaded;
-    $('clconfirmyes').textContent = value === 'public' ? 'Publish to Browse lists' : value === 'unlisted' ? 'Save as unlisted' : 'Save privately';
+    $('clconfirmyes').textContent = value === 'public' ? 'Save as public' : value === 'unlisted' ? 'Save as unlisted' : 'Save privately';
   }
   async function showSharing() {
     if (busy || !owner || !list) return;
@@ -514,6 +516,9 @@ window.MZLists = (() => {
     $('clmissingdialog').showModal();
   }
   function showCreate() {
+    if (editing && dirty) { status('Save or discard your current changes before creating another list.', true); return; }
+    copySource = null;
+    $('clcreatehint').textContent = 'Your list starts private. Choose entries, then decide who can see it.';
     if (!hooks.token()) { location.assign(signIn('/releases/?createList=1')); return; }
     $('clcreate').showModal(); $('clnewtitle').focus();
   }
@@ -522,14 +527,16 @@ window.MZLists = (() => {
     const session = sessionVersion;
     const title = $('clnewtitle').value.trim();
     if (!title) { $('clcreatestatus').textContent = 'Enter a list name.'; return; }
-    createBusy = true; $('clcreateyes').disabled = true; $('clcreatestatus').textContent = 'Creating your private draft...';
+    createBusy = true; $('clcreateyes').disabled = true; $('clcreatestatus').textContent = 'Creating your private list...';
     try {
-      const created = await request('/lists', {method: 'POST', body: JSON.stringify({title, description: $('clnewdescription').value.trim(), keys: []})}, true);
+      const source = copySource ? await request((owner ? '/lists/' : '/public/lists/') + copySource, null, owner) : null;
+      if (session !== sessionVersion) return;
+      const created = await request('/lists', {method: 'POST', body: JSON.stringify({title, description: $('clnewdescription').value.trim(), keys: source ? source.keys : []})}, true);
       if (session !== sessionVersion) return;
       location.assign('/releases/?editList=' + encodeURIComponent(created.id));
     } catch (err) {
       if (session !== sessionVersion) return;
-      $('clcreatestatus').textContent = err.status === 401 ? errorText(err) : 'Could not confirm creation. Check My lists before trying again.';
+      $('clcreatestatus').textContent = err.status === 404 && copySource ? 'The original list is no longer available. No copy was created.' : err.status === 401 ? errorText(err) : 'Could not confirm creation. Check My lists before trying again.';
       createBusy = false; $('clcreateyes').disabled = false;
     }
   }
@@ -768,6 +775,15 @@ window.MZLists = (() => {
       else if (validID(value)) navigate('/releases/?list=' + encodeURIComponent(value));
     };
     $('collection-create').onclick = showCreate;
+    $('clcopylist').onclick = () => {
+      if (!list || editing) return;
+      if (!hooks.token()) { location.assign(signIn(listPath())); return; }
+      copySource = id;
+      $('clnewtitle').value = (list.title + ' (copy)').slice(0, 100);
+      $('clnewdescription').value = list.description || '';
+      $('clcreatehint').textContent = 'Save an independent private copy. It will not receive updates from the original list.';
+      $('clcreate').showModal(); $('clnewtitle').focus();
+    };
     $('collection-create').disabled = false;
     $('collection-select').disabled = false;
     $('clcreateform').onsubmit = create;
@@ -800,14 +816,14 @@ window.MZLists = (() => {
       if (busy || !owner) return;
       const keys = [...new Set(hooks.visible().map(d => d.k).filter(key => key && !selected.has(key)))];
       if (new Set([...selected, ...keys]).size > 5000) { status('A list can hold up to 5,000 entries. Narrow the filters before adding.', true); return; }
-      if (!keys.length || !confirm('Add ' + keys.length + ' matching entries to “' + list.title + '”?\n\nThis changes your draft only. You can Undo before saving.')) return;
+      if (!keys.length || !confirm('Add ' + keys.length + ' matching entries to “' + list.title + '”?\n\nThese changes are not saved yet. You can Undo before saving.')) return;
       $('clbulktools').open = false;
       keys.forEach(key => selected.add(key)); changed();
     };
     $('clremove').onclick = () => {
       if (busy || !owner) return;
       const keys = [...new Set(hooks.visible().map(d => d.k).filter(key => selected.has(key)))];
-      if (!keys.length || !confirm('Remove ' + keys.length + ' matching entries from “' + list.title + '”?\n\nThis changes your draft only. You can Undo before saving.')) return;
+      if (!keys.length || !confirm('Remove ' + keys.length + ' matching entries from “' + list.title + '”?\n\nThese changes are not saved yet. You can Undo before saving.')) return;
       $('clbulktools').open = false;
       keys.forEach(key => selected.delete(key)); changed();
     };
@@ -830,6 +846,12 @@ window.MZLists = (() => {
     };
     for (const button of document.querySelectorAll('[data-clclose]')) button.onclick = () => button.closest('dialog').close();
     window.addEventListener('beforeunload', event => { if (editing && dirty) { event.preventDefault(); event.returnValue = ''; } });
+    // A confirmed browser departure discards edits. A crash does not emit
+    // pagehide, so its recovery copy can still be offered to the owner.
+    window.addEventListener('pagehide', () => { if (editing && dirty) clearDraft(); });
+    window.addEventListener('pageshow', event => {
+      if (event.persisted && editing && dirty) { dirty = false; load(); }
+    });
     // Make restored state explicit, so Back and links don't re-interpret a bare URL.
     if (!location.search && !location.hash) history.replaceState(history.state, '', mode === 'list' ? listPath() : '?collection=' + mode);
     if (mode === 'list') {

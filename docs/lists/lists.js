@@ -75,8 +75,8 @@
   function card(list, own, followed) {
     var item = el('li', undefined, 'list-card');
     if (list.unavailable) {
-      item.append(el('h3', 'Unavailable list'), el('p', 'The owner made this list private or removed it. It stays in your followed lists in case access returns.', 'muted'));
-      item.append(unfollowButton(list));
+      item.append(el('h3', list.title || 'Unavailable list'), el('p', 'This list is no longer available. Its games cannot be viewed or copied. You can remove it from your followed lists.', 'muted'));
+      var remove = unfollowButton(list); remove.textContent = 'Remove'; item.append(remove);
       return item;
     }
     var href = '../releases/?list=' + encodeURIComponent(list.id);

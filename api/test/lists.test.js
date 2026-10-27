@@ -2,6 +2,7 @@ import { env, SELF } from 'cloudflare:test';
 import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import schema from '../schema.sql?raw';
 import migration from '../migrations/2026-10-22-list-community.sql?raw';
+import titlesMigration from '../migrations/2026-10-27-followed-list-titles.sql?raw';
 
 const API = 'https://api.misterzine.fyi';
 const SITE = 'https://misterzine.fyi';
@@ -33,6 +34,8 @@ const collection = async (account = 0) => (await call('/collections', 'GET', und
 beforeAll(async () => {
   await apply(schema);
   await apply(migration);
+  await apply(titlesMigration);
+  await apply(titlesMigration);
   await apply(migration); // both schema and the upgrade must be safe to re-run
 });
 beforeEach(async () => {
@@ -344,20 +347,32 @@ describe('following lists', () => {
     expect((await collection(1)).following).toEqual([]);
   });
 
-  it('retains only an unavailable id after withdrawal or deletion and resumes after sharing again', async () => {
+  it('retains only a remembered title and unavailable id after withdrawal or deletion and resumes after sharing again', async () => {
     let list = await save(await create({ title: 'A private title later', description: 'Secret after withdrawal' }), { visibility: 'public' });
     await call('/following/' + list.id, 'PUT', undefined, 1);
     list = await save(list, { visibility: 'private' });
-    expect((await collection(1)).following).toEqual([{ id: list.id, unavailable: true }]);
+    expect((await collection(1)).following).toEqual([{ id: list.id, title: list.title, unavailable: true }]);
     expect((await call('/following/' + list.id, 'PUT', undefined, 1)).status).toBe(404);
     expect((await publicRead(list.id)).status).toBe(404);
     list = await save(list, { visibility: 'unlisted' });
     expect((await collection(1)).following[0]).toMatchObject({ id: list.id, title: list.title, follower_count: 1 });
     expect((await call('/lists/' + list.id, 'DELETE', { version: list.version })).status).toBe(204);
-    expect((await collection(1)).following).toEqual([{ id: list.id, unavailable: true }]);
+    expect((await collection(1)).following).toEqual([{ id: list.id, title: list.title, unavailable: true }]);
     expect((await call('/following/' + list.id, 'DELETE', undefined, 1)).status).toBe(204);
     expect((await collection(1)).following).toEqual([]);
     expect((await call('/following/000000000000', 'PUT', undefined, 1)).status).toBe(404);
+  });
+
+  it('remembers the last accessible title without revealing later private edits', async () => {
+    let list = await save(await create({ title: 'Remember this title' }), { visibility: 'public' });
+    await call('/following/' + list.id, 'PUT', undefined, 1);
+    await collection(1);
+    list = await save(list, { visibility: 'private', title: 'Secret renamed title', keys: ['private_game'], description: 'Private notes' });
+    expect((await collection(1)).following).toEqual([{ id: list.id, title: 'Remember this title', unavailable: true }]);
+    await call('/lists/' + list.id, 'DELETE', { version: list.version });
+    expect((await collection(1)).following).toEqual([{ id: list.id, title: 'Remember this title', unavailable: true }]);
+    await call('/following/' + list.id, 'DELETE', undefined, 1);
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM list_follow_titles').first('n')).toBe(0);
   });
 
   it('never exposes private content when a follow races withdrawal', async () => {
@@ -370,7 +385,7 @@ describe('following lists', () => {
     expect(withdraw.status).toBe(200);
     const following = (await collection(1)).following;
     expect(following.length).toBeLessThanOrEqual(1);
-    if (following.length) expect(following).toEqual([{ id: list.id, unavailable: true }]);
+    if (following.length) expect(following).toEqual([{ id: list.id, title: list.title, unavailable: true }]);
   });
 
   it('account deletion removes its name and own follows while preserving other followers as unavailable', async () => {
@@ -379,7 +394,7 @@ describe('following lists', () => {
     await call('/following/' + other.id, 'PUT');
     await call('/following/' + mine.id, 'PUT', undefined, 1);
     expect((await call('/me', 'DELETE', undefined, 0, { 'X-Confirm': 'delete' })).status).toBe(204);
-    expect((await collection(1)).following).toEqual([{ id: mine.id, unavailable: true }]);
+    expect((await collection(1)).following).toEqual([{ id: mine.id, title: mine.title, unavailable: true }]);
     expect((await read(other.id, 1)).follower_count).toBe(0);
     expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM public_profiles WHERE user_id = 1').first('n')).toBe(0);
     expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM list_follows WHERE user_id = 1').first('n')).toBe(0);

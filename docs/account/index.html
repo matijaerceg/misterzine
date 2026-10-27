@@ -167,19 +167,19 @@
 
   <h2>Favorites</h2>
   <p id="favs"></p>
-  <p>
+  <p hidden>
     <button class="btn" id="copy" type="button">Copy backup link</button>
   </p>
-  <p class="muted">The backup link lists your favorites in the address itself, so it restores them anywhere, signed in or not.</p>
+  <p class="muted">Favorite changes are saved to your account. Browser-only favorites are being retired.</p>
   <p class="muted">Favorites and custom lists follow your account. Saved MiSTers and Zaparoo keys stay in each browser and are
   never sent to the service.</p>
 
   <h2>Sign out</h2>
-  <p>Signing out on this device keeps a copy of the favorites in this browser; they stop following the account until you sign in again.</p>
+  <p>Signing out on this device keeps a copy of the favorites in this browser; they remain viewable, but changes require signing in again.</p>
   <p><button class="btn" id="logout" type="button">Sign out</button></p>
 
   <h2>Delete account</h2>
-  <p>Removes the account, its display name, sign-in sessions, favorites, followed lists and all your custom lists from the service immediately, and clears the favorites saved in this browser. Your shared list links stop working. Other curators' lists are unaffected. The favorites backup link above does not include custom lists.</p>
+  <p>Removes the account, its display name, sign-in sessions, favorites, followed lists and all your custom lists from the service immediately, and clears the favorites saved in this browser. Your shared list links stop working. Other curators' lists are unaffected.</p>
   <p><button class="btn danger" id="del" type="button">Delete account</button></p>
   <p class="msg" id="inmsg"></p>
 </section>
@@ -334,7 +334,7 @@
       }
       if (res.status !== 204) throw new Error('bad');
       dropToken();
-      try { localStorage.removeItem('mz-favs'); localStorage.removeItem('mz-fav-import'); } catch (e) {}
+      try { localStorage.removeItem('mz-favs'); localStorage.removeItem('mz-fav-import'); localStorage.removeItem('mz-legacy-favs'); } catch (e) {}
       show('out');
       msg('outmsg', 'Account, display name, favorites, follows and custom lists deleted. Your shared list links no longer work.', 'ok');
     }).catch(function () {

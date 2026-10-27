@@ -1277,6 +1277,17 @@
     <a id="collection-favorites" href="?collection=favorites">Favorites</a>
     <label class="collection-picker"><span class="sr-only">Your lists</span><select id="collection-select" aria-label="Your lists" disabled><option value="">Your lists</option></select></label>
   </div>
+  <div class="favctl" id="favmanagement">      <details class="cols" id="favdd">
+        <summary id="favsum">Favorites options</summary>
+        <div class="menu">
+          <!-- where the list lives + the account action; filled by syncAcct() -->
+          <p class="favnote"></p><button type="button" class="reset" id="favlegacy" hidden>Add browser favorites to account</button>
+          <button type="button" class="reset" id="favexpbtn" disabled>Export for update_all...</button>
+          <button type="button" class="reset" id="favcopy" disabled hidden
+                  data-tip="Copies a link that restores your favorites anywhere">Copy backup link</button>
+          <button type="button" class="reset" id="favclearall" disabled>Clear all favorites</button>
+        </div>
+      </details></div>
   <div class="collection-actions">
     <a href="../lists/" id="collection-browse">Browse lists</a>
     <button type="button" id="collection-create" disabled>Create a list</button>
@@ -1286,19 +1297,21 @@
   <span>Create your own game collections or follow someone else's picks. Your lists live here.</span>
   <button type="button" id="collection-dismiss" aria-label="Dismiss introduction to lists">×</button>
 </div>
+<p id="favlegacyinfo" class="clnote" hidden>Browser-only favorites are being retired. Existing favorites remain viewable. Sign in to save changes and keep them in your account.</p>
 <p id="collection-notice" class="clstatus" role="status" hidden></p>
 <section id="clbar" class="clbar" aria-label="Current collection" hidden>
   <div class="clrow clheading">
-    <strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span>
+    <span class="cleditorlabel">Editing list</span><strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span>
   </div>
   <div class="clrow clviewactions">
     <button id="clfollow" type="button" hidden>Follow list</button>
     <a id="cleditlink" class="cllink" href="#" hidden>Edit list</a>
+    <button id="clcopylist" type="button" hidden>Copy to my lists</button>
     <button id="cllinkcopy" type="button" hidden>Copy share link</button>
   </div>
   <div class="clworkrow">
     <div id="cledit" class="clrow" hidden>
-      <button id="clsave" class="clprimary" type="button">Save draft</button>
+      <button id="clsave" class="clprimary" type="button">Save changes</button>
       <a id="cldone" class="cllink" href="#" hidden>Done editing</a>
       <button id="clundo" type="button" disabled>Undo</button>
       <button id="clredo" type="button" disabled>Redo</button>
@@ -1383,17 +1396,7 @@
     <div class="favctl" id="favctl">
       <button type="button" id="favtoggle" aria-pressed="false" disabled
               data-tip="Star an entry to save it here">&#9733; 0</button>
-      <details class="cols" id="favdd">
-        <summary id="favsum" aria-label="Favorites menu"></summary>
-        <div class="menu">
-          <!-- where the list lives + the account action; filled by syncAcct() -->
-          <p class="favnote"></p>
-          <button type="button" class="reset" id="favexpbtn" disabled>Export for update_all...</button>
-          <button type="button" class="reset" id="favcopy" disabled
-                  data-tip="Copies a link that restores your favorites anywhere">Copy backup link</button>
-          <button type="button" class="reset" id="favclearall" disabled>Clear all favorites</button>
-        </div>
-      </details>
+
     </div>
   </div>
   <!-- The full-height divider and the Columns display-pref stay pinned to the
@@ -1463,7 +1466,7 @@
     <div class="clbulkbody">
       <button id="cladd" type="button">Add matching</button>
       <button id="clremove" type="button">Remove matching</button>
-      <p>Changes stay in your draft until you save.</p>
+      <p>Changes are not saved until you choose Save changes.</p>
     </div>
   </details>
 </div>
@@ -1509,6 +1512,12 @@
 </div>
 </main>
 <aside id="panel" hidden></aside>
+<dialog id="favsignin" class="cldialog" aria-labelledby="favsignintitle">
+  <h2 id="favsignintitle">Sign in to save favorites</h2>
+  <p>Browser-only favorites are being retired. Your existing favorites remain viewable; adding or removing favorites now requires an account.</p>
+  <p><a id="favsigninlink" href="../account/" target="_blank" rel="noopener">Sign in in a new tab</a></p>
+  <button type="button" data-clclose>Keep browsing</button>
+</dialog>
 <dialog id="clleave" class="cldialog" aria-labelledby="clleavetitle">
   <h2 id="clleavetitle">Save your list before leaving?</h2>
   <p>You have unsaved changes.</p>
@@ -1531,7 +1540,7 @@
   <form id="clvisibilityform">
     <h2 id="clconfirmtitle">Sharing and visibility</h2>
     <fieldset id="clvisibility" class="clvisibility"><legend>Who can see this list?</legend>
-      <label><input type="radio" name="visibility" value="private"> <span><strong>Private draft</strong><small>Only you. Followers cannot access it.</small></span></label>
+      <label><input type="radio" name="visibility" value="private"> <span><strong>Private</strong><small>Only you. Followers cannot access it.</small></span></label>
       <label><input type="radio" name="visibility" value="unlisted"> <span><strong>Unlisted</strong><small>Anyone with the link. Hidden from Browse lists and your curator page.</small></span></label>
       <label><input type="radio" name="visibility" value="public"> <span><strong>Public</strong><small>Anyone. Appears in Browse lists and on your curator page.</small></span></label>
     </fieldset>
@@ -1549,9 +1558,9 @@
   <form id="clcreateform"><h2 id="clcreatetitle">Create a list</h2>
     <label>List name<input id="clnewtitle" maxlength="100" required placeholder="My weekend arcade picks"></label>
     <label>Description <small>(optional)</small><textarea id="clnewdescription" maxlength="2000" rows="2"></textarea></label>
-    <p class="clnote">Your list starts as a private draft. Choose entries in the Tracker, then decide whether to share it.</p>
+    <p class="clnote" id="clcreatehint">Your list starts private. Choose entries, then decide who can see it.</p>
     <p id="clcreatestatus" class="clstatus" role="status"></p>
-    <div class="clactions"><button type="button" data-clclose>Cancel</button><button id="clcreateyes" class="clprimary" type="submit">Create draft &amp; choose entries</button></div>
+    <div class="clactions"><button type="button" data-clclose>Cancel</button><button id="clcreateyes" class="clprimary" type="submit">Create list &amp; choose entries</button></div>
   </form>
 </dialog>
 <dialog id="clmissingdialog" class="cldialog">
@@ -1787,7 +1796,13 @@ function syncAcct() {
   // user data goes through innerHTML)
   favNote.innerHTML = TOKEN
     ? 'Saved to your account. <a href="../account/">Manage account</a>'
-    : 'Saved in this browser only. <a href="../account/">Sign in</a> to keep favorites across devices.';
+    : 'Browser-only favorites are being retired. <a href="../account/">Sign in</a> to keep these favorites and save changes.';
+  let legacy = false; try { legacy = !!localStorage.getItem('mz-legacy-favs'); } catch (_) {}
+  document.getElementById('favlegacy').hidden = !TOKEN || !legacy;
+  const legacyInfo = document.getElementById('favlegacyinfo');
+  legacyInfo.hidden = TOKEN ? !legacy : !FAVS.size;
+  legacyInfo.textContent = TOKEN ? 'Browser favorites are available to add to your account. Open Favorites options to keep them.' : 'Browser-only favorites are being retired. Existing favorites remain viewable. Sign in to save changes and keep them in your account.';
+  if (TOKEN) document.getElementById('favsignin').close();
 }
 // resolves to the Response, or null when signed out / offline. A 401 means the
 // session is gone (signed out elsewhere, deleted, expired): forget the token
@@ -1865,8 +1880,14 @@ window.addEventListener('storage', e => {
 // (siteAliases: a hidden Ongo copy, Kickle Cubicle), so a star made there
 // still shows here
 const isFav = d => !!d.k && (FAVS.has(d.k) || (d.siteAliases || []).some(k => FAVS.has(k)));
+function requireFavAccount() {
+  if (TOKEN) return true;
+  try { if (FAVS.size) localStorage.setItem('mz-legacy-favs', JSON.stringify([...FAVS])); } catch (_) {}
+  document.getElementById('favsigninlink').href = '../account/?r=' + encodeURIComponent(location.pathname + location.search);
+  document.getElementById('favsignin').showModal(); return false;
+}
 function toggleFav(d, anchor) {
-  if (!d || !d.k) return;
+  if (!d || !d.k || !requireFavAccount()) return;
   const on = !isFav(d);
   if (on) FAVS.add(d.k); else FAVS.delete(d.k);
   // unstarring clears the folded keys too, or the star would stay lit
@@ -1874,23 +1895,13 @@ function toggleFav(d, anchor) {
     if (!FAVS.delete(k)) continue;
     if (TOKEN) apiFetch('/favorites/' + encodeURIComponent(k), { method: 'DELETE' });
   }
-  const saved = favSave();
+  favSave();
   syncFavStars(d);
   syncFavSummary();
   // unstarring while the list is narrowed to favorites drops the row out from
   // under the click, which is the honest result — re-run the filter to show it
   if (favOnly || favView || MZLists.isFavorites()) { apply(); recenterOpen(); }
-  if (TOKEN) { favWrite(d, on, anchor); return; }   // the account is the truth; the cache write is best effort
-  if (!saved) { showChip(anchor, 'Could not save (private window?)'); return; }
-  // where the list lives is worth saying once, the first time it matters; the
-  // star menu carries the rest (the backup link) from then on. On iOS Safari
-  // that once is spent on the thing that actually protects the list: installing
-  // (Safari deletes a non-installed site's storage after 7 days away)
-  if (on && !localStorage.getItem('mz-fav-hint')) {
-    try { localStorage.setItem('mz-fav-hint', '1'); } catch (e) {}
-    showChip(anchor, IOS_BROWSER ? 'Saved. Add to Home Screen to keep favorites safe'
-                                 : 'Saved in this browser. Sign in to keep favorites across devices');
-  }
+  favWrite(d, on, anchor);
 }
 // repaint the two stars that can show one row's state, without rebuilding the
 // tbody under the pointer (a full render() would drop the hover the star is
@@ -4122,21 +4133,24 @@ function syncFavSummary() {
   // the count is the whole list, not what survives the current filters: it says
   // "this is what you've saved", which is a fact about you, not about the table
   const n = FAVS.size;
-  favToggle.textContent = '★ ' + n;
+  favToggle.innerHTML = '<span class="favfilterfull">★ Favorites only</span><span class="favfiltershort" aria-hidden="true">★ only</span>';
+  favToggle.setAttribute('aria-label', 'Favorites only');
+  favctl.hidden = MZLists.isFavorites();
+  document.getElementById('collection-favorites').textContent = 'Favorites (' + n + ')';
   // never disable while it's the thing doing the narrowing (clearing the last
   // favorite switches the toggle off first, so the two can't deadlock)
-  favToggle.disabled = n === 0 && !favOnly && !MZLists.isFavorites();
-  favToggle.dataset.tip = n === 0 ? 'Star an entry to save it here' : 'Show only favorites';
+  favToggle.disabled = MZLists.isFavorites() || n === 0 && !favOnly;
+  favToggle.dataset.tip = 'Show only starred games within the current view';
   favToggle.setAttribute('aria-pressed', favOnly || MZLists.isFavorites());
   favctl.classList.toggle('active', favOnly || MZLists.isFavorites());
   favCopyBtn.disabled = n === 0;
   favExpBtn.disabled = n === 0;
-  favClearBtn.disabled = n === 0;
+  favClearBtn.disabled = n === 0 || !TOKEN;
   // a wider count nudges the caret this menu is anchored under
   if (favdd.open) positionMenu(favdd);
 }
 favToggle.addEventListener('click', () => {
-  if (MZLists.favoritesClick()) return;
+  if (MZLists.isFavorites()) return;
   favOnly = !favOnly;
   syncFavSummary(); apply(); recenterOpen();
 });
@@ -4147,6 +4161,17 @@ function resetFavOnly() { favOnly = false; syncFavSummary(); }
 // menus' resets only drop session filters; this one throws away saved data, and
 // it sits one slip away from "Copy backup link".
 let favClearArmed = false;
+document.getElementById('favlegacy').addEventListener('click', async () => {
+  if (!requireFavAccount()) return;
+  const button = document.getElementById('favlegacy'); button.disabled = true;
+  try {
+    const keys = JSON.parse(localStorage.getItem('mz-legacy-favs') || '[]');
+    const res = await apiFetch('/favorites/import', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({keys})});
+    if (!res || !res.ok) { showChip(button, 'Could not import favorites. Please try again.'); return; }
+    localStorage.removeItem('mz-legacy-favs'); button.hidden = true; syncAcct(); await syncServerFavs();
+  } catch (_) { showChip(button, 'Could not read browser favorites. Your account favorites are unchanged.'); }
+  finally { button.disabled = false; }
+});
 function disarmFavClear() { favClearArmed = false; favClearBtn.textContent = 'Clear all favorites'; }
 favdd.addEventListener('toggle', () => { if (!favdd.open) disarmFavClear(); });
 favdd.querySelector('.menu').addEventListener('click', e => {
@@ -4163,6 +4188,7 @@ favdd.querySelector('.menu').addEventListener('click', e => {
     return;
   }
   if (e.target.closest('#favclearall')) {
+    if (!requireFavAccount()) return;
     if (!favClearArmed) { favClearArmed = true; favClearBtn.textContent = 'Really clear all?'; return; }
     const cleared = [...FAVS];
     FAVS.clear(); favSave(); disarmFavClear();
@@ -4508,6 +4534,7 @@ function dismissFavView() {
   stripFavParam();
 }
 document.getElementById('favadd').addEventListener('click', () => {
+  if (!requireFavAccount()) return;
   const added = [...favView].filter(k => !FAVS.has(k));
   for (const k of favView) FAVS.add(k);
   const saved = favSave();

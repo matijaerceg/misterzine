@@ -164,6 +164,7 @@
   try { keys = JSON.parse(localStorage.getItem('mz-favs') || '[]') || []; } catch (e) {}
   keys = keys.filter(function (k) { return typeof k === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(k); });
   if (!keys.length) return location.replace(r);
+  try { if (!localStorage.getItem('mz-legacy-favs')) localStorage.setItem('mz-legacy-favs', JSON.stringify(keys)); } catch (e) {}
   var headers = { Authorization: 'Bearer ' + t, 'Content-Type': 'application/json' };
   var need = isNew ? Promise.resolve(true)
     : fetch(API + '/favorites', { headers: headers }).then(function (res) { return res.ok ? res.json() : null; })
@@ -176,7 +177,7 @@
     // dropped request here is retried there instead of silently forgotten
     try { localStorage.setItem('mz-fav-import', '1'); } catch (e) {}
     return fetch(API + '/favorites/import', { method: 'POST', headers: headers, body: JSON.stringify({ keys: keys }) })
-      .then(function (res) { if (res.ok) { try { localStorage.removeItem('mz-fav-import'); } catch (e) {} } })
+      .then(function (res) { if (res.ok) { try { localStorage.removeItem('mz-fav-import'); localStorage.removeItem('mz-legacy-favs'); } catch (e) {} } })
       .catch(function () {}).then(function () { location.replace(r); });
   });
 })();

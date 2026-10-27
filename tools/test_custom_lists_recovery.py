@@ -53,6 +53,18 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         assert response.status == 200
         return response.json()
 
+    def crash_reload():
+        # Simulate storage surviving a crash (no pagehide), rather than an
+        # intentional browser departure, which now discards unsaved edits.
+        recovery = page.evaluate("key => localStorage.getItem(key)", storage_key)
+        page.evaluate("key => localStorage.removeItem(key)", storage_key)
+        page.reload()
+        page.wait_for_function("typeof booted !== 'undefined' && booted")
+        expect(page.locator("#clretry")).to_be_enabled()
+        if recovery:
+            page.evaluate("([key, value]) => localStorage.setItem(key, value)", [storage_key, recovery])
+            page.reload()
+
     try:
         page.goto(base + "/__preview__/tester")
         page.wait_for_function("typeof booted !== 'undefined' && booted")
@@ -69,7 +81,7 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         page.wait_for_function("key => JSON.parse(localStorage.getItem(key)).keys.length === 1", arg=storage_key)
         saved = read()
         assert saved["title"] == prefix and saved["keys"] == []
-        page.reload()
+        crash_reload()
         expect(page.locator("#clname")).to_have_text(pending)
         expect(page.locator("#clstate")).to_contain_text("Unsaved")
         expect(page.locator("#clmembercount")).to_have_text("In this list (1)")
@@ -78,7 +90,7 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
         assert read()["title"] == pending and read()["keys"] == [chosen]
         assert page.evaluate("key => localStorage.getItem(key)", storage_key) is None
-        print("PASS pending title/selection recover after reload; explicit Save writes and clears recovery")
+        print("PASS pending title/selection recover after simulated crash; explicit Save writes and clears recovery")
 
         private_pending = prefix + " private pending"
         change_title(page, private_pending)
@@ -87,7 +99,7 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
             route.abort()
 
         page.route(api + "/lists/" + list_id, unavailable_owner)
-        page.reload()
+        crash_reload()
         expect(page.locator("#clretry")).to_be_visible()
         assert private_pending not in page.locator("body").inner_text()
         expect(page.locator(".clpick")).to_have_count(0)
@@ -105,7 +117,7 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         })
         assert changed.status == 200
         remote = changed.json()
-        page.reload()
+        crash_reload()
         expect(page.locator("#clname")).to_have_text(private_pending)
         page.locator("#clsave").click()
         expect(page.locator("#cllatest")).to_be_visible()
@@ -116,12 +128,13 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         expect(page.locator("#clname")).to_have_text(remote["title"])
         expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
         assert page.evaluate("key => localStorage.getItem(key)", storage_key) is None
-        page.reload()
+        crash_reload()
         expect(page.locator("#clname")).to_have_text(remote["title"])
         print("PASS recovered base version rejects conflicts; discard loads latest and clears recovery")
 
         isolated = prefix + " owner only"
         change_title(page, isolated)
+        isolated_recovery = page.evaluate("key => localStorage.getItem(key)", storage_key)
         page.goto(editor_url + "#" + chosen)
         expect(page.locator("#clname")).to_have_text(isolated)
         expect(page.locator("#panel")).to_be_visible()
@@ -134,7 +147,7 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         expect(page.locator("#panel")).to_be_hidden()
         # Reload is a new ownership decision, not permission inherited from the
         # previous account's in-memory editor state.
-        page.reload()
+        crash_reload()
         expect(page.locator("#clretry")).to_be_visible()
         assert isolated not in page.locator("body").inner_text()
         expect(page.locator(".clpick")).to_have_count(0)
@@ -142,7 +155,8 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         assert read() == remote
         switcher.goto(base + "/__preview__/tester")
         switcher.wait_for_function("typeof booted !== 'undefined' && booted")
-        page.reload()
+        page.evaluate("([key, value]) => localStorage.setItem(key, value)", [storage_key, isolated_recovery])
+        crash_reload()
         expect(page.locator("#clname")).to_have_text(isolated)
         expect(page.locator("#clstate")).to_contain_text("Unsaved")
         more(page)
@@ -150,7 +164,7 @@ def recovery_tests(browser, base, api, token, follower_token, prefix, screenshot
         expect(page.locator("#clname")).to_have_text(remote["title"])
         switcher.close()
         assert not errors, "Recovery JavaScript errors: " + json.dumps(errors)
-        print("PASS other-account reload cannot expose/recover pending draft; original owner can recover")
+        print("PASS other-account recovery cannot expose/recover pending draft; original owner can recover")
     finally:
         current = context.request.get(api + "/lists/" + list_id, headers=auth)
         if current.status == 200 and current.json()["title"].startswith(prefix):

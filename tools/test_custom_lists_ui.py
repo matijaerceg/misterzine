@@ -418,7 +418,7 @@ def main():
             expect(following.locator("#collection-notice")).to_be_visible()
             expect(following.locator("#clbar")).to_be_hidden()
             following.goto(base + "/lists/?view=mine")
-            expect(following.locator("#following-cards")).to_contain_text("Unavailable list")
+            expect(following.locator("#following-cards")).to_contain_text("no longer available")
             print("PASS mobile fit, private withdrawal, remembered fallback and followed tombstone")
 
             set_visibility("public")

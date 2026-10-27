@@ -1239,7 +1239,7 @@
       <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
       <hr class="msep nv">
       <button type="button" id="mymisters" data-tip="Your saved MiSTers">My MiSTer(s)</button>
-      <a href="../lists/">Custom lists</a>
+      <a href="?collection=browse" id="collection-menubrowse">Custom lists</a>
       <button type="button" id="shareview" data-tip="Copy a link to exactly this view: the search, filters, sort and open game">Share this view</button>
           <div class="theme" id="theme">
             <details id="themedd">
@@ -1276,12 +1276,13 @@
     <a id="collection-all" href="?collection=all">All entries</a>
     <a id="collection-favorites" href="?collection=favorites">Favorites</a>
     <span id="collection-pins"></span>
+    <details class="cols" id="collection-picker"><summary id="collection-summary">Your lists</summary><div class="menu" id="collection-menu"></div></details>
+    <a id="collection-browse" href="?collection=browse">Browse lists</a>
+    <a id="collection-manage" href="?collection=manage">Manage lists</a>
 
   </div>
-  <details class="cols" id="collection-picker"><summary id="collection-summary">Your lists</summary><div class="menu" id="collection-menu"></div></details>
   <select id="collection-select" aria-label="Your lists" hidden></select>
   <div class="collection-actions">
-    <a href="../lists/" id="collection-browse">Browse lists</a>
     <button type="button" id="collection-create" disabled>Create a list</button>
   </div>
 </nav>
@@ -1450,6 +1451,61 @@
   </div>
 </dialog>
 </div>
+<section id="collection-library" aria-label="List library" hidden><section id="lib-directory" hidden aria-labelledby="lib-directory-heading">
+  <h2 id="lib-directory-heading">Browse lists</h2>
+  <p class="lead">Collections made by the MiSTer community. Choose a list to explore its games, and follow it to keep it in your account.</p>
+  <form id="lib-search-form" class="search-form" role="search">
+    <label class="field"><span>Search public lists</span><input id="lib-search" type="search" maxlength="200" placeholder="List name, topic or curator" autocomplete="off"></label>
+    <label class="field"><span>Sort by</span><select id="lib-sort"><option value="updated">Recently updated</option><option value="created">Newest lists</option><option value="followers">Most followed</option></select></label>
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <p id="lib-results-count" class="muted" role="status"></p>
+  <p id="lib-directory-empty" class="muted" hidden></p>
+  <ul id="lib-directory-cards" class="list-cards directory-cards"></ul>
+  <button id="lib-load-more" class="btn" type="button" hidden>Load more lists</button>
+</section>
+<section id="lib-mine-intro" hidden>
+  <h2>Manage lists</h2>
+  <p class="lead">Your own collections and the lists you follow, all in one place. Your favorites stay separate.</p>
+</section>
+<p id="lib-message" class="msg" role="status" aria-live="polite"></p>
+<section id="lib-loading"><p class="lead">Loading lists...</p></section>
+<button id="lib-retry" class="btn" type="button" hidden>Try again</button>
+<section id="lib-out" class="panel" hidden>
+  <h2>Keep your collections together</h2>
+  <p>Sign in to make lists and follow other curators. You can browse public lists without an account.</p>
+  <p><a class="btn primary" href="../account/?r=%2Freleases%2F%3Fcollection%3Dmanage">Sign in for My lists</a> <a class="btn" href="?collection=browse">Discover lists</a></p>
+</section>
+<section id="lib-library" hidden>
+  <details class="panel library-create" hidden><summary id="lib-create-heading">Create a list</summary>
+
+    <p class="muted">Start privately, then choose whether to keep it private, share it by link, or put it in the public directory. No public name is needed until you share.</p>
+    <form id="lib-create">
+      <label class="field"><span>List name</span><input id="lib-new-title" name="title" required maxlength="100" autocomplete="off" placeholder="My weekend arcade picks"></label>
+      <label class="field"><span>Description <small>(optional)</small></span><textarea id="lib-new-description" name="description" maxlength="2000" rows="2" placeholder="What makes this collection worth playing?"></textarea></label>
+      <button id="lib-create-submit" class="btn primary" type="submit">Create list &amp; choose games</button>
+    </form>
+  </details>
+  <div class="section-heading"><h2>Your lists <span id="lib-owned-count" class="muted"></span></h2><button id="lib-refresh" class="btn" type="button">Refresh</button></div>
+  <p id="lib-owned-empty" class="muted" hidden>No lists yet. Choose Create a list to make your first private collection.</p>
+  <ul id="lib-owned-cards" class="list-cards"></ul>
+  <div class="section-heading"><h2>Following <span id="lib-following-count" class="muted"></span></h2></div>
+  <p class="muted">Only you can see which lists you follow. Open a list in the Tracker to follow or unfollow it.</p>
+  <p id="lib-following-empty" class="muted" hidden>No followed lists yet. <a href="?collection=browse">Discover a collection</a> and choose Follow in the Tracker.</p>
+  <ul id="lib-following-cards" class="list-cards"></ul>
+</section>
+<section id="lib-curator-view" hidden aria-labelledby="lib-curator-name">
+  <h2 id="lib-curator-name" class="public-title"></h2>
+  <p id="lib-curator-count" class="muted"></p>
+  <p>Public collections by this curator.</p>
+  <ul id="lib-curator-cards" class="list-cards directory-cards"></ul>
+</section>
+<dialog id="lib-delete-dialog" aria-labelledby="lib-delete-heading" aria-describedby="lib-delete-detail">
+  <h2 id="lib-delete-heading">Delete this list?</h2>
+  <p id="lib-delete-detail"><strong id="lib-delete-name"></strong> will be permanently deleted. Its link will stop working for you and anyone following it. Your favorites and other lists are unaffected.</p>
+  <p id="lib-delete-message" class="msg" role="status"></p>
+  <div class="actions"><button id="lib-delete-cancel" class="btn" type="button" autofocus>Cancel</button><button id="lib-delete-confirm" class="btn danger" type="button">Delete list</button></div>
+</dialog></section>
 <div id="cllayout" class="cllayout">
 <div id="clmobiletabs" class="clmobiletabs" role="group" aria-label="List editor panes" hidden>
   <button id="clshowcatalogue" type="button" aria-pressed="true" aria-controls="clcatalogue">Find games</button>
@@ -1599,8 +1655,9 @@
   </div>
   <p><a id="clentrycreated" href="#" target="_blank" rel="noopener" hidden>Edit the new list in a new tab</a></p>
   <div class="clactions"><button id="clentryreload" type="button" hidden>Reload your lists</button><button type="button" data-clclose>Done</button></div>
-  <p class="clnote"><a href="../lists/?view=mine" target="_blank" rel="noopener">Manage your lists</a> · <a href="../account/#public-name" target="_blank" rel="noopener">Account</a></p>
+  <p class="clnote"><a href="?collection=manage" target="_blank" rel="noopener">Manage your lists</a> · <a href="../account/#public-name" target="_blank" rel="noopener">Account</a></p>
 </dialog>
+<script src="../lists/lists.js"></script>
 <script src="custom-lists.js"></script>
 <script src="./source-visibility.js?v=9"></script>
 <script src="../mask.js?v=4"></script>
@@ -4613,7 +4670,8 @@ function positionMenu(dd) {
   let mLeft = dRect.left;                                   // default: aligned under the summary
   if (mLeft + mW > vw - margin) mLeft = vw - margin - mW;   // don't spill past the right edge
   if (mLeft < margin) mLeft = margin;                       // ...nor past the left edge
-  menu.style.left = (mLeft - dRect.left) + 'px';
+  menu.style.left = (getComputedStyle(menu).position === 'fixed' ? mLeft : mLeft - dRect.left) + 'px';
+  if (getComputedStyle(menu).position === 'fixed') menu.style.top = (dRect.bottom + 4) + 'px';
   dd._pinLeft = mLeft;
   const room = document.documentElement.clientHeight - menu.getBoundingClientRect().top - margin;
   if (menu.offsetHeight > room) menu.style.maxHeight = room + 'px';
@@ -4625,7 +4683,7 @@ const menuPin = new ResizeObserver(entries => {
   for (const { target: dd } of entries) {
     const menu = dd.querySelector('.menu');
     if (!dd.open || dd._pinLeft == null || !menu || getComputedStyle(menu).position === 'static') continue;
-    menu.style.left = (dd._pinLeft - dd.getBoundingClientRect().left) + 'px';
+    menu.style.left = (getComputedStyle(menu).position === 'fixed' ? dd._pinLeft : dd._pinLeft - dd.getBoundingClientRect().left) + 'px';
   }
 });
 for (const dd of document.querySelectorAll('details.cols')) {
@@ -6646,7 +6704,7 @@ function boot() {
       },
       captureView: () => ({query: document.getElementById('q').value,
         types: [...enabledTypes], patches: [...enabledPatches], maturity: [...enabledMat], sources: [...enabledSrcs], genres: [...enabledGenres],
-        yearFrom, yearTo, sortKey, sortDir, favOnly, expanded: [...expanded], searchShut: [...searchShut], top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
+        yearFrom, yearTo, sortKey, sortDir, favOnly, expanded: [...expanded], searchShut: [...searchShut], libraryTop: document.getElementById('collection-library').scrollTop, top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
       restoreView: saved => {
         favView = null; document.getElementById('favbanner').hidden = true;
         expanded.clear(); (saved?.expanded || []).forEach(k => expanded.add(k));
@@ -6668,7 +6726,7 @@ function boot() {
         favOnly = saved?.favOnly || false;
         syncTypeSummary(); syncSrcSummary(); syncGenreSummary(); syncYear(); syncFavSummary(); buildHeader(); apply();
       },
-      restoreScroll: saved => { const scroller = document.querySelector('.tablewrap'); scroller.scrollTop = saved?.top || 0; scroller.scrollLeft = saved?.left || 0; },
+      restoreScroll: saved => { document.getElementById('collection-library').scrollTop = saved?.libraryTop || 0; const scroller = document.querySelector('.tablewrap'); scroller.scrollTop = saved?.top || 0; scroller.scrollLeft = saved?.left || 0; },
       closeViewDetails: () => {
         closeDropdowns(); panelHist = false; openRow = null;
         if (document.body.classList.contains('panel-open') && !matchMedia('(max-aspect-ratio: 3/5)').matches) openPlaceholder();

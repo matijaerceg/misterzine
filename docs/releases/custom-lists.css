@@ -356,3 +356,46 @@ body:not(.cl-editor) #clbar { border-top: 0; }
 
 /* Unavailable shortcuts should not obscure short lists or empty states. */
 body:not(.cl-editor) .jumps button:disabled { display: none; }
+
+/* Every collection destination stays in the tracker shell. */
+#collection-picker { order: 0; align-self: stretch; margin: 0; }
+#collection-picker > summary { border-radius: .5rem .5rem 0 0; border-bottom-color: var(--accent); padding: .32rem .65rem; font-size: inherit; background: var(--surface); }
+#collection-picker > summary.active { border-color: var(--accent); border-bottom-color: var(--surface); background: var(--surface); color: var(--accent); font-weight: 600; }
+#collection-menu { position: fixed; z-index: 50; }
+.collection-tabs { flex: 0 1 auto; max-width: 100%; }
+body.cl-library #cllayout, body.cl-library .filters, body.cl-library #favlegacyinfo, body.cl-library .favbanner, body.cl-library #panel { display: none !important; }
+body.cl-library main { margin-left: 0 !important; transition: none; }
+#collection-library { flex: 1; min-height: 0; overflow: auto; padding: 1rem 0 2rem; overscroll-behavior: contain; }
+#collection-library[hidden], #collection-library [hidden] { display: none !important; }
+#collection-library h2 { font-size: 1.2rem; margin: 0 0 .5rem; }
+#collection-library h3 { font-size: 1rem; margin: 0; }
+#collection-library p { margin: .4rem 0; }
+#collection-library a { color: var(--accent); }
+#collection-library .muted { color: var(--muted); font-size: .85rem; }
+#collection-library .lead { max-width: 50rem; }
+#collection-library .search-form, #collection-library .actions, #collection-library .section-heading { display: flex; flex-wrap: wrap; gap: .5rem; align-items: end; }
+#collection-library .search-form { margin: 1rem 0; }
+#collection-library .search-form .field:first-child { flex: 1; min-width: 12rem; }
+#collection-library .field { display: block; margin: .5rem 0; }
+#collection-library .field > span { display: block; margin-bottom: .25rem; }
+#collection-library input, #collection-library textarea, #collection-library select { box-sizing: border-box; width: 100%; padding: .4rem .65rem; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: 4px; }
+#collection-library .btn, #collection-library summary { display: inline-block; padding: .4rem .65rem; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: 4px; cursor: pointer; text-decoration: none; }
+#collection-library .btn:hover { border-color: var(--accent); }
+#collection-library .btn:disabled { opacity: .5; cursor: default; }
+#collection-library .danger { color: var(--danger); }
+#collection-library .list-cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(min(100%,22rem),1fr)); gap: .8rem; list-style: none; padding: 0; margin: .8rem 0; }
+#collection-library .list-card { border: 1px solid var(--hair); border-radius: .4rem; padding: .8rem; background: var(--surface); overflow-wrap: anywhere; }
+#collection-library .description { white-space: pre-wrap; max-height: 8rem; overflow: auto; }
+#collection-library .card-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
+#collection-library .state { color: var(--muted); font-size: .8rem; }
+#collection-library .section-heading { align-items: center; margin-top: 1rem; }
+#collection-library .section-heading h2 { margin: 0; }
+#collection-library .library-create { margin: .8rem 0; }
+#collection-library .library-create[open] { padding-bottom: 1rem; border-bottom: 1px solid var(--hair); }
+#collection-library .msg:empty { display: none; }
+#collection-library .err { color: var(--danger); }
+#collection-library dialog { max-width: min(32rem,calc(100vw - 2rem)); box-sizing: border-box; padding: 1rem; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .5rem; }
+#collection-library dialog::backdrop { background: #0008; }
+@media(max-width:650px) { .collection-tabs { flex: 1 1 100%; } #collection-library .btn { min-height: 44px; } }
+
+body.cl-library .controls, body.cl-library #resizer { display: none !important; }

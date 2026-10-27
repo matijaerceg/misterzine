@@ -6,7 +6,7 @@ window.MZLists = (() => {
   const validID = id => /^[0-9A-HJKMNP-TV-Z]{12}$/.test(id || '');
   const editing = params.has('editList');
   let id = (params.get(editing ? 'editList' : 'list') || '').trim().toUpperCase();
-  let mode = editing || params.has('list') ? 'list' : params.get('collection') === 'favorites' ? 'favorites' : 'all';
+  let mode = editing || params.has('list') ? 'list' : ['favorites','browse','manage'].includes(params.get('collection')) ? params.get('collection') : 'all';
   if (!location.search && !location.hash) {
     try {
       const last = JSON.parse(localStorage.getItem(KEY));
@@ -14,6 +14,8 @@ window.MZLists = (() => {
       else if (last && last.kind === 'list' && validID(last.id)) { mode = 'list'; id = last.id; }
     } catch (_) {}
   }
+  let libraryUI, libraryMode = null;
+  const isLibrary = () => mode === "browse" || mode === "manage";
   let hooks, list = null, selected = new Set(), selectedOnly = false, original = '';
   let dirty = false, busy = false, started = false, owner = false, following = false;
   let collections = { owned: [], following: [] }, profile = null, profileLoaded = false;
@@ -256,7 +258,7 @@ window.MZLists = (() => {
     }
     const showCurrent = list && (owner || !editing && visibility() !== 'private');
     if (mode === 'list' && showCurrent && ![...picker.options].some(o => o.value === id)) picker.append(new Option(list.title, id));
-    picker.append(new Option(hooks.token() ? 'Manage your lists...' : 'Sign in for your lists...', 'manage'));
+    if (!picker.options.length) picker.append(new Option('No saved lists yet', 'empty'));
     const pinned = (collections.pins || []).some(p => p.id === id);
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
     $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
@@ -268,7 +270,7 @@ window.MZLists = (() => {
       }
       for (const option of child.tagName === 'OPTGROUP' ? child.children : [child]) {
         const button = document.createElement('button'); button.type = 'button'; button.className = 'reset';
-        button.textContent = option.textContent; button.disabled = option.disabled;
+        button.textContent = option.textContent; button.disabled = option.disabled || option.value === 'empty';
         button.setAttribute('aria-current', option.value === picker.value ? 'page' : 'false');
         button.onclick = () => { $('collection-picker').open = false; picker.value = option.value; picker.dispatchEvent(new Event('change')); };
         menu.append(button);
@@ -300,6 +302,15 @@ window.MZLists = (() => {
     $('clpin').textContent = (collections.pins || []).some(p => p.id === id) ? 'Unpin tab' : 'Pin as tab';
     $('collection-all').setAttribute('aria-current', mode === 'all' ? 'page' : 'false');
     $('collection-favorites').setAttribute('aria-current', mode === 'favorites' ? 'page' : 'false');
+    $('collection-browse').setAttribute('aria-current', mode === 'browse' ? 'page' : 'false');
+    $('collection-manage').setAttribute('aria-current', mode === 'manage' ? 'page' : 'false');
+    document.body.classList.toggle('cl-library', isLibrary());
+    $('collection-library').hidden = !isLibrary();
+    const nextLibrary = isLibrary() ? mode + ':' + (new URLSearchParams(location.search).get('curator') || '') : null;
+    if (libraryUI && libraryMode !== nextLibrary) {
+      libraryMode = nextLibrary;
+      if (isLibrary()) libraryUI.show(mode, new URLSearchParams(location.search).get('curator')).then(() => { if (libraryMode === nextLibrary) hooks.restoreScroll(viewMemory.get(viewKey())); }); else libraryUI.hide();
+    }
     if (!list || editing && !owner) {
       $('clname').textContent = editing ? 'Edit list' : 'Loading collection...';
       $('clstate').textContent = ''; $('clattribution').replaceChildren();
@@ -334,7 +345,7 @@ window.MZLists = (() => {
     if (name) {
       attribution.append(document.createTextNode('By '));
       if (list.curator && list.curator.id) {
-        const link = document.createElement('a'); link.textContent = name; link.href = '../lists/?curator=' + encodeURIComponent(list.curator.id); attribution.append(link);
+        const link = document.createElement('a'); link.textContent = name; link.href = '?collection=browse&curator=' + encodeURIComponent(list.curator.id); link.onclick = event => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && !event.button) { event.preventDefault(); navigate(link.href); } }; attribution.append(link);
       } else attribution.append(document.createTextNode(name));
       attribution.append(document.createTextNode(' · '));
     }
@@ -714,6 +725,7 @@ window.MZLists = (() => {
   }
   function sessionChanged() {
     if (!started) return;
+    libraryMode = null;
     sessionVersion++; collectionsVersion++; loadVersion++; profile = null; profileLoaded = false;
     collections = {owned: [], following: []}; following = false; owner = false;
     followBusy = false; createBusy = false; entryVersion++; entryRow = null; entryBusy = false;
@@ -751,7 +763,7 @@ window.MZLists = (() => {
       }
     }
     requestAnimationFrame(() => {
-      const strip = document.querySelector('.collection-tabs'), active = strip.querySelector('a[aria-current=page]');
+      const strip = document.querySelector('.collection-tabs'), active = strip.querySelector('a[aria-current=page], #collection-summary.active');
       if (!active) return;
       const tabRect = active.getBoundingClientRect(), stripRect = strip.getBoundingClientRect();
       if (tabRect.right > stripRect.right) strip.scrollLeft += tabRect.right - stripRect.right;
@@ -762,7 +774,7 @@ window.MZLists = (() => {
     const target = new URL(url, location.href);
     if (editing || target.origin !== location.origin || target.pathname !== location.pathname || target.searchParams.has('editList')) return false;
     const nextID = target.searchParams.get('list') || '';
-    const nextMode = nextID ? 'list' : target.searchParams.get('collection') === 'favorites' ? 'favorites' : 'all';
+    const nextMode = nextID ? 'list' : ['favorites','browse','manage'].includes(target.searchParams.get('collection')) ? target.searchParams.get('collection') : 'all';
     if (!nextID && !target.searchParams.has('collection')) return false;
     if (nextMode === mode && nextID === id && target.search === location.search) return true;
     viewMemory.set(viewKey(), hooks.captureView());
@@ -786,6 +798,7 @@ window.MZLists = (() => {
   }
   function start(bridge) {
     hooks = bridge;
+    libraryUI = window.MZListLibrary($('collection-library'), {navigate, changed: refreshCollections});
     if (started) return;
     started = true;
     if (editing) {
@@ -875,9 +888,9 @@ window.MZLists = (() => {
     };
     $('collection-select').onchange = event => {
       const value = event.target.value;
-      if (value === 'manage') navigate(hooks.token() ? '../lists/?view=mine' : signIn('/lists/?view=mine'));
-      else if (validID(value)) navigate('/releases/?list=' + encodeURIComponent(value));
+      if (validID(value)) navigate('/releases/?list=' + encodeURIComponent(value));
     };
+    $('collection-menubrowse').onclick = event => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) { event.preventDefault(); navigate(event.currentTarget.href); } };
     $('collection-create').onclick = showCreate;
     $('clcopylist').onclick = () => {
       if (!list || editing) return;
@@ -972,7 +985,7 @@ window.MZLists = (() => {
       if (mode === 'list' && !busy) load();
     });
   }
-  return {start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry, detailsOpened, detailsClosed,
+  return {isLibrary, start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry, detailsOpened, detailsClosed,
     emptyMessage: () => mode === 'favorites' && hooks && !hooks.catalogue().some(hooks.isFavorite)
       ? hooks.token() ? 'No favorites yet. Open a game and choose its star to save it here.' : 'No favorites yet. Sign in to save favorites, then open a game and choose its star.'
       : mode === 'list' && !editing ? !list ? 'Loading your list…' : !selected.size ? 'This list is empty. Its owner can add games using Edit list.' : '' : '',

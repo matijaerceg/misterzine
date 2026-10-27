@@ -1,18 +1,19 @@
-(function () {
+window.MZListLibrary = function (root, bridge) {
   'use strict';
-  var $ = function (id) { return document.getElementById(id); };
+  var $ = function (id) { return document.getElementById((root ? "lib-" : "") + id); };
   var LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   var API = 'https://api.misterzine.fyi';
   try { if (LOCAL && localStorage.getItem('mz-api')) API = localStorage.getItem('mz-api'); } catch (e) {}
   var params = new URLSearchParams(location.search);
   // The Tracker is the one list viewer; keep previously shared links working.
-  if (params.has('id')) {
+  if (!root && params.has('id')) {
     location.replace('../releases/?list=' + encodeURIComponent((params.get('id') || '').trim().toUpperCase()) + location.hash);
     return;
   }
   var curatorID = params.get('curator');
   var mode = curatorID !== null ? 'curator' : params.get('view') === 'mine' ? 'mine' : 'directory';
   var token = null, generation = 0, deleting = null, timer = null, sessionVersion = 0;
+  var directoryReady = false;
   var offset = 0, busy = false, retryMore = false, seen = new Set();
   function readToken() { try { token = localStorage.getItem('mz-token'); } catch (e) { token = null; } }
   readToken();
@@ -94,7 +95,7 @@
     item.append(el('p', [countLabel(list.count || 0, 'entry'), countLabel(list.follower_count || 0, 'follower')].join(' · '), 'muted'));
     item.append(el('p', [dateLabel(list.updated_at, 'Updated'), dateLabel(list.created_at, 'Created')].filter(Boolean).join(' · '), 'muted'));
     var actions = el('div', undefined, 'actions');
-    actions.append(link('View in Tracker', href, 'btn'));
+    actions.append(link(root ? 'View games' : 'View in Tracker', href, 'btn'));
     if (own) {
       actions.append(link('Edit', '../releases/?editList=' + encodeURIComponent(list.id), 'btn'));
       if (list.visibility !== 'private') actions.append(button('Copy link', function () { copy(location.origin + '/releases/?list=' + encodeURIComponent(list.id)); }));
@@ -117,7 +118,7 @@
       data.following.forEach(function (list) { $('following-cards').append(card(list, false, true)); });
       $('owned-empty').hidden = data.owned.length > 0; $('following-empty').hidden = data.following.length > 0;
       $('owned-count').textContent = countLabel(data.owned.length, 'list'); $('following-count').textContent = countLabel(data.following.length, 'list');
-      $('loading').hidden = true; $('library').hidden = false;
+      $('loading').hidden = true; $('library').hidden = false; if (bridge) bridge.changed();
     } catch (err) {
       if (attempt !== generation) return;
       if (err.status === 401) return signedOut(true);
@@ -126,6 +127,7 @@
     }
   }
   function setDirectoryURL() {
+    if (root) return;
     var p = new URLSearchParams(), q = $('search').value.trim(), sort = $('sort').value;
     if (q) p.set('q', q);
     if (sort !== 'updated') p.set('sort', sort);
@@ -136,6 +138,7 @@
     var attempt = ++generation; busy = true; retryMore = !!more;
     $('retry').hidden = true; $('load-more').disabled = true; message('');
     if (!more) {
+      directoryReady = false;
       offset = 0; seen.clear(); $('directory-cards').replaceChildren();
       $('directory-empty').hidden = true; $('results-count').textContent = '';
       $('loading').hidden = false; $('load-more').hidden = true;
@@ -149,10 +152,10 @@
       $('results-count').textContent = countLabel(data.total, 'public list');
       $('directory-empty').textContent = $('search').value.trim() ? 'No public lists match your search. Try a different name or topic.' : 'No public lists yet. Make a list and choose Public to help others find it.';
       $('directory-empty').hidden = data.total > 0;
-      $('load-more').hidden = !data.has_more; $('load-more').disabled = false; $('loading').hidden = true; busy = false;
+      $('load-more').hidden = !data.has_more; $('load-more').disabled = false; $('loading').hidden = true; busy = false; directoryReady = true;
     } catch (err) {
       if (attempt !== generation) return;
-      busy = false; $('loading').hidden = true; $('retry').hidden = false; $('load-more').hidden = true;
+      directoryReady = false; busy = false; $('loading').hidden = true; $('retry').hidden = false; $('load-more').hidden = true;
       message(more ? 'Could not load more lists. The lists already loaded are still here.' : 'Could not load public lists. Check your connection and try again.', true);
     }
   }
@@ -162,7 +165,7 @@
     try {
       var data = await request('/public/curators/' + encodeURIComponent(curatorID));
       if (attempt !== generation) return;
-      $('curator-name').textContent = data.profile.display_name; document.title = data.profile.display_name + ' - Custom Lists - MisterZine';
+      $('curator-name').textContent = data.profile.display_name; if (!root) document.title = data.profile.display_name + ' - Custom Lists - MisterZine';
       $('curator-cards').replaceChildren(); data.lists.forEach(function (list) { $('curator-cards').append(card(list, false)); });
       $('curator-count').textContent = countLabel(data.lists.length, 'public list'); $('loading').hidden = true; $('curator-view').hidden = false;
     } catch (err) {
@@ -228,6 +231,28 @@
       if (mode === 'mine') { $('delete-dialog').close(); loadLibrary(); }
     }
   });
+  function show(next, curator) {
+    clearTimeout(timer); generation++; busy = false; retryMore = false;
+    mode = curator ? 'curator' : next === 'manage' ? 'mine' : 'directory'; curatorID = curator;
+    readToken(); message(''); $('retry').hidden = true;
+    ['directory','mine-intro','library','out','curator-view','loading'].forEach(function(name) { $(name).hidden = true; });
+    $('directory').hidden = mode !== 'directory'; $('mine-intro').hidden = mode !== 'mine';
+    if (mode === 'mine') return loadLibrary();
+    if (mode === 'curator') return loadCurator();
+    if (directoryReady) return Promise.resolve();
+    return loadDirectory(false);
+  }
+  if (root) {
+    root.addEventListener('click', function(event) {
+      var a = event.target.closest('a[href]');
+      if (!a || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button || a.target === '_blank') return;
+      var url = new URL(a.href, location.href);
+      if (url.origin !== location.origin) return;
+      if (url.searchParams.has('curator')) { event.preventDefault(); bridge.navigate('/releases/?collection=browse&curator=' + encodeURIComponent(url.searchParams.get('curator'))); }
+      else if (url.pathname === '/releases/') { event.preventDefault(); bridge.navigate(url.href); }
+    });
+    return {show, hide: function() { clearTimeout(timer); generation++; if (busy) directoryReady = false; busy = false; }};
+  }
   $('directory').hidden = mode !== 'directory'; $('mine-intro').hidden = mode !== 'mine';
   if (mode !== 'curator') $(mode === 'mine' ? 'nav-mine' : 'nav-directory').setAttribute('aria-current', 'page');
   if (mode === 'mine') { document.title = 'My Lists - MisterZine'; loadLibrary(); }
@@ -237,4 +262,5 @@
     $('sort').value = ['updated', 'created', 'followers'].includes(params.get('sort')) ? params.get('sort') : 'updated';
     loadDirectory(false);
   }
-})();
+};
+if (!document.getElementById('collection-library')) window.MZListLibrary();

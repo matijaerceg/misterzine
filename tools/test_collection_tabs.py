@@ -37,7 +37,7 @@ def main():
    page.locator('#collection-all').click(); page.locator('#collection-pins a').click()
    expect(page.locator('#collection-notice')).to_contain_text('not available')
    page.get_by_role('button',name='Unpin '+fixture['title'],exact=True).click(); expect(page.locator('#collection-pins a')).to_have_count(0)
-   page.locator('#collection-summary').click(); page.locator('#collection-menu').get_by_role('button', name='Manage your lists...', exact=True).click(); page.wait_for_url('**/lists/?view=mine')
+   page.locator('#collection-manage').click(); page.wait_for_url('**/releases/?collection=manage'); expect(page.locator('#lib-library')).to_be_visible()
    assert not errors,errors
    print('PASS in-place tabs, Back/Forward, per-view search/sort/scroll, visit-only memory, account pins, Source filter, mobile overflow')
   finally:

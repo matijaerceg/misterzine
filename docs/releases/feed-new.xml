@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Tue, 27 Oct 2026 06:23:41 +0000</lastBuildDate>
+<lastBuildDate>Tue, 27 Oct 2026 15:26:30 +0000</lastBuildDate>
+<item>
+<title>[New] Chack'n Pop (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#chaknpop</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Chack'n Pop.mra:2026-10-27T15:26:30+00:00</guid>
+<pubDate>Tue, 27 Oct 2026 15:26:30 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/chaknpop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Taito&lt;/p&gt;&lt;p&gt;Core: Arcade-ChacknPop&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Knuckle Joe (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#kncljoe</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Knuckle Joe (set 1).mra:2026-10-27T15:26:30+00:00</guid>
+<pubDate>Tue, 27 Oct 2026 15:26:30 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kncljoe.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1985 / Seibu Kaihatsu&lt;/p&gt;&lt;p&gt;Core: Arcade-KnuckleJoe&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Avengers In Galactic Storm (Ongo) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#avengers-in-galactic-storm-ongo</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metafox.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Jordan I.S. / Seta&lt;/p&gt;&lt;p&gt;Core: jtarblst&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-26 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/arblst"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] NARC (Jotego) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#narc-jotego</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Narc (rev 7.00).mra:2026-10-26T09:16:37+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 09:16:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/narc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1988 / Williams&lt;/p&gt;&lt;p&gt;Core: jtnarc&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-26 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/narc"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] The Simpsons (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#simpsons</link>
-<guid isPermaLink="false">jtbindb:_Arcade/The Simpsons (4 Players World, set 1).mra:2026-10-26T09:16:37+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 09:16:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/simpsons.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtsimson&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-26 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/simson"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

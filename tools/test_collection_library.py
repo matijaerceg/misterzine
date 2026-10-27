@@ -16,7 +16,7 @@ def main():
    res=context.request.put(api+'/lists/'+row['id'],headers=auth,data={**row,'visibility':'public'});assert res.status==200
    page.goto(base+'/__preview__/tester');page.goto(base+'/releases/?collection=all');page.wait_for_function('booted');page.evaluate('window.noReload = 123');page.locator('#q').fill('1942')
    page.locator('#collection-browse').click();expect(page.locator('#lib-directory')).to_be_visible();expect(page.locator('#cllayout')).to_be_hidden();expect(page.locator('#cols')).to_be_hidden();expect(page.locator('#resizer')).to_be_hidden()
-   page.locator('#lib-search').fill('Library tab workflow');expect(page.locator('#lib-directory-cards')).to_contain_text(row['title']);page.locator('#lib-directory-cards').get_by_role('link',name='View games',exact=True).click();expect(page.locator('#clname')).to_have_text(row['title']);assert page.evaluate('window.noReload')==123
+   page.locator('#lib-search').fill('Library tab workflow');expect(page.locator('#lib-directory-cards')).to_contain_text(row['title']);page.locator('#lib-directory-cards .list-card').filter(has=page.get_by_role('heading',name=row['title'],exact=True)).get_by_role('link',name='View games',exact=True).click();expect(page.locator('#clname')).to_have_text(row['title']);assert page.evaluate('window.noReload')==123
    expect(page.locator('#collection-summary')).to_have_text(row['title']);assert page.locator('#collection-summary').evaluate("e=>getComputedStyle(e).borderBottomColor == getComputedStyle(e).backgroundColor")
    page.locator('#clpin').click();expect(page.locator('#collection-summary')).to_have_text('Your lists')
    page.locator('#collection-browse').click();expect(page.locator('#lib-search')).to_have_value('Library tab workflow');expect(page.locator('#lib-directory-cards')).to_contain_text(row['title'])
@@ -26,7 +26,7 @@ def main():
    page.go_back();expect(page.locator('#lib-directory')).to_be_visible();page.go_forward();expect(page.locator('#lib-library')).to_be_visible()
    for width,height in [(1440,900),(1024,768),(390,844),(320,700)]:
     page.set_viewport_size({'width':width,'height':height});page.locator('#collection-manage').click();expect(page.locator('#collection-library')).to_be_visible();assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
-    page.locator('#collection-summary').click();expect(page.locator('#collection-menu')).to_be_visible();box=page.locator('#collection-menu').bounding_box();assert box['x']>=0 and box['x']+box['width']<=width+1
+    page.locator('#collection-summary').click();expect(page.locator('#collection-menu')).to_be_visible();page.wait_for_function("(()=>{const b=document.getElementById('collection-menu').getBoundingClientRect();return b.left>=0 && b.right<=innerWidth+1})()")
     assert page.locator('#collection-menu').get_by_text('Manage your lists...',exact=True).count()==0
     page.locator('#collection-summary').click();page.screenshot(path=str(shots/f'library-manage-{width}.png'))
     page.locator('#collection-browse').click();page.screenshot(path=str(shots/f'library-browse-{width}.png'))

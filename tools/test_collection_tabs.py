@@ -31,12 +31,20 @@ def main():
    for width in [1280,390]:
     page.set_viewport_size({'width':width,'height':800}); page.screenshot(path=str(shots/f'folder-tabs-{width}.png')); assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
    page.set_viewport_size({'width':1280,'height':800}); page.locator('#collection-pins a').click(); expect(page.locator('#clpin')).to_have_text('Unpin tab'); page.locator('#clpin').click(); expect(page.locator('#collection-pins a')).to_have_count(0)
-   # A deleted pin remains identifiable and can be removed without opening its list.
+   # Failed loads keep the pin and offer a retry, never a deletion warning.
+   page.route('**/lists/'+fixture['id'],lambda route:route.abort())
+   page.locator('#collection-all').click(); page.locator('#clpin').wait_for(state='hidden'); page.locator('#collection-pins a').count()
+   page.goto(base+'/releases/?list='+fixture['id']); expect(page.locator('#clstatus')).to_contain_text('Could not load this list'); expect(page.locator('#clretry')).to_be_visible(); page.screenshot(path=str(shots/'list-load-error.png'))
+   page.unroute('**/lists/'+fixture['id']); page.locator('#clretry').click(); expect(page.locator('#clpin')).to_be_visible()
+   page.locator('#q').fill('zzzz-no-such-game'); expect(page.locator('#clclearfilters')).to_be_visible(); page.screenshot(path=str(shots/'list-filter-empty.png')); page.locator('#clclearfilters').click(); expect(page.locator('#clclearfilters')).to_be_hidden()
+   # A deleted pin keeps its title and opens an explanatory removal state.
    page.locator('#clpin').click(); expect(page.locator('#collection-pins a')).to_have_count(1)
    request.delete(api+'/lists/'+fixture['id'],headers=auth,data={'version':fixture['version']})
    page.locator('#collection-all').click(); page.locator('#collection-pins a').click()
-   expect(page.locator('#collection-notice')).to_contain_text('not available')
-   page.get_by_role('button',name='Unpin '+fixture['title'],exact=True).click(); expect(page.locator('#collection-pins a')).to_have_count(0)
+   expect(page.locator('#clstatus')).to_contain_text('deleted or is no longer shared'); expect(page.locator('#collection-pins a')).to_contain_text('Unavailable')
+   for width in [1280,390]:
+    page.set_viewport_size({'width':width,'height':800}); page.screenshot(path=str(shots/f'list-unavailable-{width}.png'))
+   page.locator('#clremoveunavailable').click(); expect(page.locator('#collection-pins a')).to_have_count(0); expect(page.locator('#collection-all')).to_have_attribute('aria-current','page'); expect(page.locator('#collection-notice')).to_contain_text('removed from your lists')
    page.locator('#collection-manage').click(); page.wait_for_url('**/releases/?collection=manage'); expect(page.locator('#lib-library')).to_be_visible()
    assert not errors,errors
    print('PASS in-place tabs, Back/Forward, per-view search/sort/scroll, visit-only memory, account pins, Source filter, mobile overflow')

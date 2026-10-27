@@ -14,7 +14,8 @@ window.MZLists = (() => {
       else if (last && last.kind === 'list' && validID(last.id)) { mode = 'list'; id = last.id; }
     } catch (_) {}
   }
-  let libraryUI, libraryMode = null;
+  let libraryUI, libraryMode = null, loadState = null;
+  const rememberedList = () => [...collections.owned, ...collections.following, ...(collections.pins || [])].find(row => row.id === id);
   const isLibrary = () => mode === "browse" || mode === "manage";
   let hooks, list = null, selected = new Set(), selectedOnly = false, original = '';
   let dirty = false, busy = false, started = false, owner = false, following = false;
@@ -256,17 +257,17 @@ window.MZLists = (() => {
       const group = document.createElement('optgroup'); group.label = label;
       for (const row of rows) {
         const option = new Option(row.unavailable ? (row.title || 'Unavailable list') + ' (unavailable)' : row.title, row.id);
-        option.disabled = !!row.unavailable; group.append(option);
+        option.disabled = false; group.append(option);
       }
       picker.append(group);
     }
-    const showCurrent = list && (owner || !editing && visibility() !== 'private');
-    if (mode === 'list' && showCurrent && ![...picker.options].some(o => o.value === id)) picker.append(new Option(list.title, id));
+    const showCurrent = list && (owner || !editing && visibility() !== 'private') || loadState === 'unavailable' && rememberedList();
+    if (mode === 'list' && showCurrent && ![...picker.options].some(o => o.value === id)) picker.append(new Option(list?.title || rememberedList()?.title || 'Unavailable list', id));
     if (!picker.options.length) picker.append(new Option('No saved lists yet', 'empty'));
     const pinned = !mobile && (collections.pins || []).some(p => p.id === id);
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
     $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
-    $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? list.title : 'Your lists';
+    $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? (list?.title || rememberedList()?.title || 'Unavailable list') : 'Your lists';
     $('collection-summary').title = $('collection-summary').textContent;
     const menu = $('collection-menu'); menu.replaceChildren();
     for (const child of picker.children) {
@@ -296,15 +297,18 @@ window.MZLists = (() => {
       updatePicker(); sync();
     } catch (err) {
       if (generation !== collectionsVersion || token !== hooks.token()) return;
-      collections = {owned: [], following: []}; updatePicker();
+      if (err.status === 401) collections = {owned: [], following: []}; updatePicker();
       notice(err.status === 401 ? 'Sign in again to see your saved lists. You can still browse public collections.' : 'Your saved lists could not be loaded. Browse lists is still available.');
     }
   }
   function sync() {
     if (!started) return;
     syncMembers();
+    $('clremoveunavailable').hidden = mode !== 'list' || loadState !== 'unavailable' || !rememberedList();
+    $('clclearfilters').hidden = true;
     $('favmanagement').hidden = mode !== 'favorites';
     $('clpin').hidden = editing || !list;
+    $('clmore').hidden = !list;
     $('clpin').textContent = (collections.pins || []).some(p => p.id === id) ? 'Unpin tab' : 'Pin as tab';
     $('collection-all').setAttribute('aria-current', mode === 'all' ? 'page' : 'false');
     $('collection-favorites').setAttribute('aria-current', mode === 'favorites' ? 'page' : 'false');
@@ -318,7 +322,7 @@ window.MZLists = (() => {
       if (isLibrary()) libraryUI.show(mode, new URLSearchParams(location.search).get('curator')).then(() => { if (libraryMode === nextLibrary) hooks.restoreScroll(viewMemory.get(viewKey())); }); else libraryUI.hide();
     }
     if (!list || editing && !owner) {
-      $('clname').textContent = editing ? 'Edit list' : 'Loading collection...';
+      $('clname').textContent = editing ? 'Edit list' : rememberedList()?.title || (loadState === 'unavailable' ? 'Unavailable list' : loadState === 'error' ? 'Could not load list' : 'Loading collection...');
       $('clstate').textContent = ''; $('clattribution').replaceChildren();
       $('cldescriptionview').textContent = '';
       $('clnote').textContent = '';
@@ -339,7 +343,7 @@ window.MZLists = (() => {
     $('clcopylist').hidden = editing;
     $('clfollow').hidden = editing || owner || visibility() === 'private';
     $('clfollow').disabled = followBusy;
-    $('clfollow').textContent = following ? 'Unfollow' : 'Follow list';
+    $('clfollow').textContent = following ? (collections.pins || []).some(p => p.id === id) ? 'Unfollow & unpin' : 'Unfollow' : 'Follow list';
     $('clfollow').setAttribute('aria-pressed', String(following));
     $('clselected').textContent = selectedOnly ? 'Show all games' : 'Show only list entries';
     $('clselected').setAttribute('aria-pressed', selectedOnly);
@@ -370,9 +374,10 @@ window.MZLists = (() => {
     for (const button of document.querySelectorAll('#cledit button, #clsecondary button')) if (button.id !== 'clsave') button.disabled = busy;
     const matching = hooks.visible();
     $('clempty').hidden = editing || matching.length > 0;
+    $('clclearfilters').hidden = editing || !selected.size || matching.length > 0 || $('clear').disabled;
     $('clempty').textContent = !selected.size
       ? (owner ? 'This list is empty. Choose Edit list to start adding entries.' : 'This list has no entries yet. Its owner can add them later.')
-      : 'No saved entries are visible with your current filters and visibility settings. Try clearing filters or review entries not shown.';
+      : $('clear').disabled ? 'These saved games are not available in the current catalogue. Review entries not shown.' : 'No games match your filters. Clear filters to see the list.';
     $('clundo').hidden = !editing || !owner; $('clredo').hidden = !editing || !owner;
     $('clundo').disabled = busy || !undo.length; $('clredo').disabled = busy || !redo.length;
     $('cldiscard').disabled = busy || !dirty;
@@ -408,7 +413,7 @@ window.MZLists = (() => {
   async function load() {
     if (busy) return;
     const generation = ++loadVersion, requestedID = id;
-    busy = true; $('clretry').disabled = true; status('Loading collection...');
+    loadState = null; busy = true; $('clretry').disabled = true; status('Loading collection...');
     try {
       let value, isOwner = false;
       if (hooks.token()) {
@@ -431,9 +436,14 @@ window.MZLists = (() => {
       remember(); updatePicker();
     } catch (err) {
       if (generation !== loadVersion) return;
-      if (err.status === 404 && !editing) unavailable('That collection was deleted, made private, or is not available to this account.');
+      if (!editing) hooks.closePanel();
+      if (err.status === 404 && !editing) {
+        loadState = 'unavailable'; list = null; selected.clear(); owner = false;
+        status('This list was deleted or is no longer shared with you.');
+        $('clretry').hidden = true; updatePicker(); refreshCollections();
+      }
       else {
-        status(errorText(err), true); $('clretry').hidden = false; $('clsignin').hidden = err.status !== 401;
+        loadState = 'error'; status('Could not load this list. ' + errorText(err), true); $('clretry').hidden = false; $('clsignin').hidden = err.status !== 401;
       }
     } finally {
       if (generation === loadVersion) { busy = false; $('clretry').disabled = false; redraw(); }
@@ -519,6 +529,7 @@ window.MZLists = (() => {
     const session = sessionVersion;
     followBusy = true; sync();
     try {
+      if (!on) await request('/pins/' + id, {method:'DELETE'}, true);
       await request('/following/' + id, {method: on ? 'PUT' : 'DELETE'}, true);
       if (session !== sessionVersion) return;
       following = on; status(on ? "Following. This collection is now in Your lists and will use the owner's latest saved entries." : 'Unfollowed. This collection has been removed from Your lists.');
@@ -762,10 +773,8 @@ window.MZLists = (() => {
       tab.title = row && !row.unavailable ? tab.textContent : tab.textContent + ' (unavailable)';
       host.append(tab);
       if (!row || row.unavailable) {
-        const remove = document.createElement('button'); remove.textContent = '×';
-        remove.setAttribute('aria-label', 'Unpin ' + tab.textContent);
-        remove.onclick = async () => { try { await request('/pins/' + pin.id, {method:'DELETE'}, true); await refreshCollections(); } catch (err) { notice(errorText(err)); } };
-        host.append(remove);
+        tab.textContent = (row?.title || pin.title || 'List') + ' · Unavailable';
+        tab.classList.add('collection-unavailable');
       }
     }
     requestAnimationFrame(() => {
@@ -785,7 +794,7 @@ window.MZLists = (() => {
     if (nextMode === mode && nextID === id && target.search === location.search) return true;
     viewMemory.set(viewKey(), hooks.captureView());
     hooks.closeViewDetails();
-    mode = nextMode; id = nextID; following = collections.following.some(r => r.id === id && !r.unavailable); list = null; selected.clear(); owner = false; busy = false; loadVersion++;
+    mode = nextMode; id = nextID; following = collections.following.some(r => r.id === id && !r.unavailable); list = null; loadState = null; selected.clear(); owner = false; busy = false; loadVersion++;
     notice(''); status(''); $('clbar').hidden = mode !== 'list';
     $('clretry').hidden = true; $('clsignin').hidden = true;
     if (!fromHistory) history.pushState({}, '', target);
@@ -888,7 +897,7 @@ window.MZLists = (() => {
       if (!hooks.token()) { location.assign(signIn(listPath())); return; }
       const target = id, pinned = (collections.pins || []).some(p => p.id === target);
       $('clpin').disabled = true;
-      try { await request('/pins/' + target, {method: pinned ? 'DELETE' : 'PUT'}, true); await refreshCollections(); }
+      try { await request('/pins/' + target, {method: pinned ? 'DELETE' : 'PUT'}, true); await refreshCollections(); status(pinned ? 'Unpinned. The list is still in Your lists.' : 'Pinned.'); }
       catch (err) { status(errorText(err), true); }
       finally { $('clpin').disabled = false; }
     };
@@ -922,6 +931,20 @@ window.MZLists = (() => {
       $('cllatest').href = listPath();
     }
     $('clretry').onclick = load;
+    $('clclearfilters').onclick = () => $('clear').click();
+    $('clremoveunavailable').onclick = async () => {
+      const target = id, session = sessionVersion, name = rememberedList()?.title || 'List';
+      $('clremoveunavailable').disabled = true;
+      try {
+        await request('/pins/' + target, {method:'DELETE'}, true);
+        await request('/following/' + target, {method:'DELETE'}, true);
+        if (session !== sessionVersion) return;
+        await refreshCollections();
+        if (id === target) await switchView('/releases/?collection=all');
+        notice(name + ' removed from your lists.');
+      } catch (err) { status(errorText(err), true); }
+      finally { $('clremoveunavailable').disabled = false; }
+    };
     $('cldiscard').onclick = discardDraft;
     $('clundo').onclick = () => travelHistory(true);
     $('clredo').onclick = () => travelHistory(false);
@@ -994,7 +1017,7 @@ window.MZLists = (() => {
   return {isLibrary, start, sync, checkbox, matches, toggle, sessionChanged, panelButton, showEntry, detailsOpened, detailsClosed,
     emptyMessage: () => mode === 'favorites' && hooks && !hooks.catalogue().some(hooks.isFavorite)
       ? hooks.token() ? 'No favorites yet. Open a game and choose its star to save it here.' : 'No favorites yet. Sign in to save favorites, then open a game and choose its star.'
-      : mode === 'list' && !editing ? !list ? 'Loading your list…' : !selected.size ? 'This list is empty. Its owner can add games using Edit list.' : '' : '',
+      : mode === 'list' && !editing ? !list ? loadState === 'unavailable' ? 'This list is unavailable. Its games cannot be viewed.' : loadState === 'error' ? 'Could not load this list. Use Retry above.' : 'Loading your list…' : !selected.size ? 'This list is empty. Its owner can add games using Edit list.' : '' : '',
     isListView: () => mode === 'list' && !editing,
     isEditing: () => mode === 'list' && editing,
     isFavorites: () => mode === 'favorites', favoritesClick: () => {

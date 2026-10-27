@@ -13,7 +13,7 @@ window.MZListLibrary = function (root, bridge) {
   var curatorID = params.get('curator');
   var mode = curatorID !== null ? 'curator' : params.get('view') === 'mine' ? 'mine' : 'directory';
   var token = null, generation = 0, deleting = null, timer = null, sessionVersion = 0;
-  var directoryReady = false;
+  var directoryReady = false, pinnedIDs = new Set();
   var offset = 0, busy = false, retryMore = false, seen = new Set();
   function readToken() { try { token = localStorage.getItem('mz-token'); } catch (e) { token = null; } }
   readToken();
@@ -57,9 +57,10 @@ window.MZListLibrary = function (root, bridge) {
     }
   }
   function unfollowButton(list) {
-    var control = button('Stop following', async function (event) {
+    var control = button(pinnedIDs.has(list.id) ? 'Unfollow & unpin' : 'Stop following', async function (event) {
       var b = event.currentTarget, session = sessionVersion; b.disabled = true;
       try {
+        await request('/pins/' + encodeURIComponent(list.id), { method: 'DELETE' }, true);
         await request('/following/' + encodeURIComponent(list.id), { method: 'DELETE' }, true);
         if (session !== sessionVersion) return;
         message('Removed from your followed lists.');
@@ -70,14 +71,14 @@ window.MZListLibrary = function (root, bridge) {
         else { b.disabled = false; message('Could not stop following this list. Try again.', true); }
       }
     });
-    if (list.title) control.setAttribute('aria-label', 'Stop following ' + list.title);
+    if (list.title) control.setAttribute('aria-label', (pinnedIDs.has(list.id) ? 'Unfollow and unpin ' : 'Stop following ') + list.title);
     return control;
   }
   function card(list, own, followed) {
     var item = el('li', undefined, 'list-card');
     if (list.unavailable) {
       item.append(el('h3', list.title || 'Unavailable list'), el('p', 'This list is no longer available. Its games cannot be viewed or copied. You can remove it from your followed lists.', 'muted'));
-      var remove = unfollowButton(list); remove.textContent = 'Remove'; item.append(remove);
+      var remove = unfollowButton(list); remove.textContent = 'Remove from your lists'; remove.setAttribute('aria-label', 'Remove ' + (list.title || 'unavailable list') + ' from your lists'); item.append(remove);
       return item;
     }
     var href = '../releases/?list=' + encodeURIComponent(list.id);
@@ -113,6 +114,7 @@ window.MZListLibrary = function (root, bridge) {
     try {
       var data = await request('/collections', {}, true);
       if (attempt !== generation) return;
+      pinnedIDs = new Set((data.pins || []).map(function(p) { return p.id; }));
       $('owned-cards').replaceChildren(); $('following-cards').replaceChildren();
       data.owned.forEach(function (list) { $('owned-cards').append(card(list, true)); });
       data.following.forEach(function (list) { $('following-cards').append(card(list, false, true)); });

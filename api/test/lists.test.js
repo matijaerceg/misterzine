@@ -451,3 +451,24 @@ describe('revision and migration semantics', () => {
     expect((await call('/lists/' + list.id)).status).toBe(404);
   });
 });
+
+ describe('pinned collection tabs', () => {
+  it('pins own private lists and automatically follows accessible lists; unpin preserves follow', async () => {
+    const mine = await create();
+    expect((await call('/pins/' + mine.id, 'PUT')).status).toBe(204);
+    expect((await collection()).pins).toEqual([{id:mine.id,title:mine.title}]);
+    expect((await call('/pins/' + mine.id, 'PUT', undefined, 1)).status).toBe(404);
+    const shared = await save(mine, {visibility:'unlisted'});
+    expect((await call('/pins/' + mine.id, 'PUT', undefined, 1)).status).toBe(204);
+    expect((await collection(1)).following[0].id).toBe(mine.id);
+    await call('/pins/' + mine.id, 'DELETE', undefined, 1);
+    expect((await collection(1)).pins).toEqual([]);
+    expect((await collection(1)).following[0].id).toBe(mine.id);
+    await call('/pins/' + mine.id, 'PUT', undefined, 1);
+    await save(shared, {title:'Secret new title',visibility:'private'});
+    const hidden = await collection(1);
+    expect(hidden.pins).toEqual([{id:mine.id,title:mine.title}]);
+    expect(hidden.following[0].unavailable).toBe(true);
+    expect((await call('/pins/' + mine.id, 'DELETE', undefined, 1)).status).toBe(204);
+  });
+ });

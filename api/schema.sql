@@ -115,3 +115,11 @@ CREATE TABLE IF NOT EXISTS list_follow_titles (
 INSERT OR IGNORE INTO list_follow_titles (user_id, list_id, title)
 SELECT f.user_id, f.list_id, l.title FROM list_follows f JOIN curated_lists l ON l.id = f.list_id
 WHERE l.visibility IN ('public', 'unlisted');
+
+CREATE TABLE IF NOT EXISTS list_pins (
+ user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ list_id TEXT NOT NULL,
+ title TEXT NOT NULL,
+ created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY(user_id, list_id)
+);

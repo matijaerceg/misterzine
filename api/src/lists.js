@@ -80,7 +80,9 @@ export async function collections(env, user) {
   const { results } = await env.DB.prepare('SELECT ' + META + ', json_array_length(l.keys_json) AS count, f.list_id AS followed_id, t.title AS remembered_title ' +
     "FROM list_follows f LEFT JOIN curated_lists l ON l.id = f.list_id AND l.visibility IN ('unlisted', 'public') " +
     'LEFT JOIN list_follow_titles t ON t.user_id = f.user_id AND t.list_id = f.list_id LEFT JOIN public_profiles p ON p.user_id = l.user_id WHERE f.user_id = ? ORDER BY f.created_at DESC, f.list_id').bind(user.id).all();
-  return json({ owned: mine, following: results.map(row => row.id ? present(row) : { id: row.followed_id, title: row.remembered_title || 'Unavailable list', unavailable: true }) });
+  await env.DB.prepare("UPDATE list_pins SET title=(SELECT title FROM curated_lists WHERE id=list_pins.list_id) WHERE user_id=? AND list_id IN (SELECT id FROM curated_lists WHERE user_id=? OR visibility IN ('public','unlisted'))").bind(user.id,user.id).run();
+  const pins = (await env.DB.prepare('SELECT list_id AS id, title FROM list_pins WHERE user_id = ? ORDER BY created_at, list_id').bind(user.id).all()).results;
+  return json({ pins, owned: mine, following: results.map(row => row.id ? present(row) : { id: row.followed_id, title: row.remembered_title || 'Unavailable list', unavailable: true }) });
 }
 export async function following(env, method, path, user) {
   const match = path.match(/^\/following\/([^/]+)$/), id = match && normalizeId(match[1]);
@@ -99,6 +101,21 @@ export async function following(env, method, path, user) {
   const row = check.results[0];
   if (row && row.user_id === user.id) return json({ error: 'own_list' }, 400);
   return row && row.visibility !== 'private' ? empty() : json({ error: 'not_found' }, 404);
+}
+export async function pinning(env, method, path, user) {
+  const id = normalizeId(path.split('/')[2] || '');
+  if (!id || !['PUT', 'DELETE'].includes(method)) return json({error: 'not_found'}, 404);
+  if (method === 'DELETE') {
+    await env.DB.prepare('DELETE FROM list_pins WHERE user_id=? AND list_id=?').bind(user.id, id).run();
+    return empty();
+  }
+  // Capture only accessible content; the same transaction follows another curator.
+  const results = await env.DB.batch([
+    env.DB.prepare("INSERT INTO list_pins(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND (user_id=? OR visibility IN ('public','unlisted')) ON CONFLICT(user_id,list_id) DO UPDATE SET title=excluded.title RETURNING list_id").bind(user.id,id,user.id),
+    env.DB.prepare("INSERT OR IGNORE INTO list_follows(user_id,list_id) SELECT ?,id FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted')").bind(user.id,id,user.id),
+    env.DB.prepare("INSERT OR IGNORE INTO list_follow_titles(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted')").bind(user.id,id,user.id),
+  ]);
+  return results[0].results.length ? empty() : json({error:'not_found'},404);
 }
 export async function lists(request, env, method, path, user) {
   if (path === '/lists' && method === 'GET') return json({ lists: await owned(env, user.id) });

@@ -1275,11 +1275,17 @@
   <div class="collection-tabs">
     <a id="collection-all" href="?collection=all">All entries</a>
     <a id="collection-favorites" href="?collection=favorites">Favorites</a>
-    <label class="collection-picker"><span class="sr-only">Your lists</span><select id="collection-select" aria-label="Your lists" disabled><option value="">Your lists</option></select></label>
+    <span id="collection-pins"></span>
+    <label class="collection-picker"><span class="sr-only">Your lists</span><select id="collection-select" aria-label="Your lists" disabled><option value="manage">Manage your lists...</option></select></label>
   </div>
-  <div class="favctl" id="favmanagement">      <details class="cols" id="favdd">
-        <summary id="favsum">Favorites options</summary>
-        <div class="menu">
+  <div class="collection-actions">
+    <a href="../lists/" id="collection-browse">Browse lists</a>
+    <button type="button" id="collection-create" disabled>Create a list</button>
+  </div>
+</nav>
+  <div class="favctl" id="favmanagement" hidden>      <div id="favdd">
+
+        <div class="fav-actions menu">
           <!-- where the list lives + the account action; filled by syncAcct() -->
           <p class="favnote"></p><button type="button" class="reset" id="favlegacy" hidden>Add browser favorites to account</button>
           <button type="button" class="reset" id="favexpbtn" disabled>Export for update_all...</button>
@@ -1287,16 +1293,7 @@
                   data-tip="Copies a link that restores your favorites anywhere">Copy backup link</button>
           <button type="button" class="reset" id="favclearall" disabled>Clear all favorites</button>
         </div>
-      </details></div>
-  <div class="collection-actions">
-    <a href="../lists/" id="collection-browse">Browse lists</a>
-    <button type="button" id="collection-create" disabled>Create a list</button>
-  </div>
-</nav>
-<div class="collection-intro" id="collection-intro" hidden>
-  <span>Create your own game collections or follow someone else's picks. Your lists live here.</span>
-  <button type="button" id="collection-dismiss" aria-label="Dismiss introduction to lists">×</button>
-</div>
+      </div></div>
 <p id="favlegacyinfo" class="clnote" hidden>Browser-only favorites are being retired. Existing favorites remain viewable. Sign in to save changes and keep them in your account.</p>
 <p id="collection-notice" class="clstatus" role="status" hidden></p>
 <section id="clbar" class="clbar" aria-label="Current collection" hidden>
@@ -1304,6 +1301,7 @@
     <span class="cleditorlabel">Editing list</span><strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span>
   </div>
   <div class="clrow clviewactions">
+    <button id="clpin" type="button" hidden>Pin as tab</button>
     <button id="clfollow" type="button" hidden>Follow list</button>
     <a id="cleditlink" class="cllink" href="#" hidden>Edit list</a>
     <button id="clcopylist" type="button" hidden>Copy to my lists</button>
@@ -1350,6 +1348,7 @@
       <button type="button" id="qx" class="qx" data-tip="Clear search" tabindex="-1">x</button>
       <span class="count" id="count"></span>
     </div>
+    <button id="favchip" type="button" hidden>Favorites only ×</button>
     <!-- the five filter dropdowns + Clear. On wide layouts the .fsheet wrapper
          and its body dissolve (display: contents) and the Filters button is not
          rendered; on narrow ones (see the 867px container block) the button is
@@ -4010,7 +4009,7 @@ const UPDATE_ALL_INCLUDED = new Set([
 const srcMenu = document.getElementById('srcmenu');
 const srcSummary = document.getElementById('srcsummary');
 let SRC_KEYS = [];  // menu order, filled by buildSrcMenu; empty until data lands
-function syncSrcSummary() { syncPick(srcSummary, srcMenu, 'Source', enabledSrcs, SRC_KEYS.length); }
+function syncSrcSummary() { syncPick(srcSummary, srcMenu, 'Source', enabledSrcs, SRC_KEYS.length); if (favOnly && !MZLists.isFavorites()) srcSummary.textContent += ' · Favorites'; }
 function buildSrcMenu() {
   const counts = {};
   for (const d of DATA) if (d.src) counts[d.src] = (counts[d.src] || 0) + 1;
@@ -4019,14 +4018,14 @@ function buildSrcMenu() {
     .sort((a, b) => counts[b] - counts[a] || known.indexOf(a) - known.indexOf(b))
     .concat(Object.keys(counts).filter(s => !SRC_NAMES[s]).sort());
   // one database (or none) leaves nothing to choose between
-  if (srcs.length < 2) { document.getElementById('srcdd').hidden = true; SRC_KEYS = []; return; }
+  document.getElementById('srcdd').hidden = false; // Favorites only remains useful with a single source.
   // a live data swap keeps the visitor's picks: an untouched menu (everything
   // checked, or never built) checks any newcomer too; a narrowed one leaves new
   // databases unchecked and drops retired ones
   const untouched = !SRC_KEYS.length || SRC_KEYS.every(s => enabledSrcs.has(s));
   SRC_KEYS = srcs;
   enabledSrcs = new Set(untouched ? srcs : srcs.filter(s => enabledSrcs.has(s)));
-  srcMenu.innerHTML = srcs.map(s =>
+  srcMenu.innerHTML = '<label class="source-favorites"><input type="checkbox" id="srcfavorites"> Favorites only</label>' + srcs.map(s =>
     '<label><input type="checkbox" data-s="' + escA(s) + '"' +
     (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
     '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src',
@@ -4037,10 +4036,11 @@ function buildSrcMenu() {
       '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">' +
       '<rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M1.5 5.5h13M4 8.5h5M4 11h7"/></svg>' +
       'downloader.ini lines...</button>';
-  syncSrcSummary();
+  syncSrcSummary(); syncFavSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
 srcMenu.addEventListener('change', e => {
+  if (e.target.id === 'srcfavorites') { favOnly = e.target.checked; syncFavSummary(); apply(); recenterOpen(); return; }
   const s = e.target.dataset.s;
   if (!s) return;
   if (e.target.checked) enabledSrcs.add(s); else enabledSrcs.delete(s);
@@ -4051,7 +4051,7 @@ srcMenu.addEventListener('change', e => {
 // state-only reset (no apply/recenter) shared by the in-menu All and "Clear filters"
 function resetSrcs() {
   for (const s of SRC_KEYS) enabledSrcs.add(s);
-  for (const cb of srcMenu.querySelectorAll('input')) cb.checked = true;
+  for (const cb of srcMenu.querySelectorAll('input[data-s]')) cb.checked = true;
   syncSrcSummary();
 }
 srcMenu.addEventListener('click', e => {
@@ -4061,7 +4061,7 @@ srcMenu.addEventListener('click', e => {
     const inside = preset.dataset.srcPreset === 'inside';
     enabledSrcs.clear();
     for (const s of SRC_KEYS) if (UPDATE_ALL_INCLUDED.has(s) === inside) enabledSrcs.add(s);
-    for (const cb of srcMenu.querySelectorAll('input')) cb.checked = enabledSrcs.has(cb.dataset.s);
+    for (const cb of srcMenu.querySelectorAll('input[data-s]')) cb.checked = enabledSrcs.has(cb.dataset.s);
   } else if (!pickAllNone(srcMenu, enabledSrcs, SRC_KEYS, e)) return;
   syncSrcSummary(); apply(); recenterOpen();
 });
@@ -4135,7 +4135,12 @@ function syncFavSummary() {
   const n = FAVS.size;
   favToggle.innerHTML = '<span class="favfilterfull">★ Favorites only</span><span class="favfiltershort" aria-hidden="true">★ only</span>';
   favToggle.setAttribute('aria-label', 'Favorites only');
-  favctl.hidden = MZLists.isFavorites();
+  favctl.hidden = true;
+  const checkbox = document.getElementById('srcfavorites');
+  if (checkbox) { checkbox.checked = favOnly || MZLists.isFavorites(); checkbox.disabled = MZLists.isFavorites(); }
+  document.getElementById('favchip').hidden = !favOnly || MZLists.isFavorites();
+  document.getElementById('favmanagement').hidden = !MZLists.isFavorites();
+  syncSrcSummary();
   document.getElementById('collection-favorites').textContent = 'Favorites (' + n + ')';
   // never disable while it's the thing doing the narrowing (clearing the last
   // favorite switches the toggle off first, so the two can't deadlock)
@@ -4149,6 +4154,7 @@ function syncFavSummary() {
   // a wider count nudges the caret this menu is anchored under
   if (favdd.open) positionMenu(favdd);
 }
+document.getElementById('favchip').onclick = () => { resetFavOnly(); apply(); };
 favToggle.addEventListener('click', () => {
   if (MZLists.isFavorites()) return;
   favOnly = !favOnly;
@@ -6631,6 +6637,36 @@ function boot() {
         url.searchParams.set('addToList', key); url.hash = key;
         // URLSearchParams leaves + and * literal, but sign-in return paths require escapes.
         return url.pathname + url.search.replace(/\+/g, '%20').replace(/\*/g, '%2A').replace(/,/g, '%2C') + url.hash;
+      },
+      captureView: () => ({query: document.getElementById('q').value,
+        types: [...enabledTypes], patches: [...enabledPatches], maturity: [...enabledMat], sources: [...enabledSrcs], genres: [...enabledGenres],
+        yearFrom, yearTo, sortKey, sortDir, favOnly, expanded: [...expanded], searchShut: [...searchShut], top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
+      restoreView: saved => {
+        favView = null; document.getElementById('favbanner').hidden = true;
+        expanded.clear(); (saved?.expanded || []).forEach(k => expanded.add(k));
+        searchShut.clear(); (saved?.searchShut || []).forEach(k => searchShut.add(k));
+        document.getElementById('q').value = saved?.query || '';
+        for (const [set, values, menu, attr] of [
+          [enabledTypes, saved?.types || TYPES, typeMenu, 'data-t'],
+          [enabledPatches, saved?.patches || PATCH_KEYS, typeMenu, 'data-p'],
+          [enabledMat, saved?.maturity || MAT_KEYS, typeMenu, 'data-m'],
+          [enabledSrcs, saved?.sources || SRC_KEYS, srcMenu, 'data-s'],
+          [enabledGenres, saved?.genres || GENRE_KEYS, genreMenu, 'data-g']]) {
+          set.clear(); values.forEach(v => set.add(v));
+          for (const cb of menu.querySelectorAll('input[' + attr + ']')) cb.checked = set.has(cb.getAttribute(attr));
+        }
+        yearFrom = saved?.yearFrom ?? null; yearTo = saved?.yearTo ?? null;
+        const from = yearMenu.querySelector('.yfrom'), to = yearMenu.querySelector('.yto');
+        if (from) from.value = yearFrom ?? ''; if (to) to.value = yearTo ?? '';
+        sortKey = saved?.sortKey || (MZLists.isListView() ? 'title' : 'updated'); sortDir = saved?.sortDir || (MZLists.isListView() ? 1 : -1);
+        favOnly = saved?.favOnly || false;
+        syncTypeSummary(); syncSrcSummary(); syncGenreSummary(); syncYear(); syncFavSummary(); buildHeader(); apply();
+      },
+      restoreScroll: saved => { const scroller = document.querySelector('.tablewrap'); scroller.scrollTop = saved?.top || 0; scroller.scrollLeft = saved?.left || 0; },
+      closeViewDetails: () => {
+        closeDropdowns(); panelHist = false; openRow = null;
+        if (document.body.classList.contains('panel-open') && !matchMedia('(max-aspect-ratio: 3/5)').matches) openPlaceholder();
+        else { document.body.classList.remove('panel-open'); panel.hidden = true; }
       },
       closePanel,
       openDetails: () => openPanel(openRow),

@@ -46,7 +46,7 @@
 
 import { reports } from './reports.js';
 import { feedback } from './feedback.js';
-import { lists, publicLists, collections, following, getProfile, updateProfile } from './lists.js';
+import { lists, publicLists, collections, following, pinning, getProfile, updateProfile } from './lists.js';
 
 const KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;      // release tracker row keys (data.json `k`)
 const MAX_FAVORITES = 5000;
@@ -98,6 +98,7 @@ async function route(request, env, url) {
 
   if (p === '/lists' || p.startsWith('/lists/')) return lists(request, env, m, p, user);
   if (p === '/collections' && m === 'GET') return collections(env, user);
+  if (p.startsWith('/pins/')) return pinning(env, m, p, user);
   if (p.startsWith('/following/')) return following(env, m, p, user);
   if (p === '/me/profile' && m === 'PUT') return updateProfile(request, env, user);
 

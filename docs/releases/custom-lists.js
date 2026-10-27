@@ -2,7 +2,7 @@
 // Local recovery copies are read only after the service confirms list ownership.
 window.MZLists = (() => {
   const params = new URLSearchParams(location.search);
-  const KEY = 'mz-last-collection', INTRO = 'mz-lists-intro';
+  const KEY = 'mz-last-collection';
   const validID = id => /^[0-9A-HJKMNP-TV-Z]{12}$/.test(id || '');
   const editing = params.has('editList');
   let id = (params.get(editing ? 'editList' : 'list') || '').trim().toUpperCase();
@@ -243,7 +243,7 @@ window.MZLists = (() => {
   function errorText(err) { return err instanceof TypeError ? 'Could not reach the list service. ' + (editing && dirty ? 'Your unsaved changes are still here; please try again.' : 'Check your connection and try again.') : err.message; }
   function updatePicker() {
     if (!started) return;
-    const picker = $('collection-select'); picker.replaceChildren(new Option('Your lists', ''));
+    const picker = $('collection-select'); picker.replaceChildren();
     for (const [label, rows] of [['Your lists', collections.owned], ['Following', collections.following]]) {
       if (!rows.length) continue;
       const group = document.createElement('optgroup'); group.label = label;
@@ -257,7 +257,9 @@ window.MZLists = (() => {
     if (mode === 'list' && showCurrent && ![...picker.options].some(o => o.value === id)) picker.append(new Option(list.title, id));
     picker.append(new Option(hooks.token() ? 'Manage your lists...' : 'Sign in for your lists...', 'manage'));
     picker.value = mode === 'list' && showCurrent ? id : '';
-    picker.classList.toggle('active', mode === 'list');
+    picker.parentElement.classList.toggle('placeholder', picker.selectedIndex < 0);
+    picker.classList.toggle('active', mode === 'list' && !(collections.pins || []).some(p => p.id === id));
+    renderPins();
   }
   async function refreshCollections() {
     const generation = ++collectionsVersion, token = hooks.token();
@@ -277,6 +279,9 @@ window.MZLists = (() => {
   function sync() {
     if (!started) return;
     syncMembers();
+    $('favmanagement').hidden = mode !== 'favorites';
+    $('clpin').hidden = editing || !list;
+    $('clpin').textContent = (collections.pins || []).some(p => p.id === id) ? 'Unpin tab' : 'Pin as tab';
     $('collection-all').setAttribute('aria-current', mode === 'all' ? 'page' : 'false');
     $('collection-favorites').setAttribute('aria-current', mode === 'favorites' ? 'page' : 'false');
     if (!list || editing && !owner) {
@@ -365,19 +370,19 @@ window.MZLists = (() => {
     list = null; selected.clear(); mode = 'all'; id = ''; owner = false; dirty = false;
     $('clbar').hidden = true; remember(); updatePicker();
     history.replaceState(history.state, '', '/releases/?collection=all');
-    hooks.closePanel(); notice(message + ' Showing all entries.'); redraw();
+    hooks.closePanel(); notice(message + ' Showing all entries.'); redraw(); refreshCollections();
   }
   async function load() {
     if (busy) return;
-    const generation = ++loadVersion;
+    const generation = ++loadVersion, requestedID = id;
     busy = true; $('clretry').disabled = true; status('Loading collection...');
     try {
       let value, isOwner = false;
       if (hooks.token()) {
-        try { value = await request('/lists/' + id, null, true); isOwner = true; }
+        try { value = await request('/lists/' + requestedID, null, true); isOwner = true; }
         catch (err) { if (editing || ![401,404].includes(err.status)) throw err; }
       } else if (editing) fail('Sign in to edit your list.', 401);
-      if (!value) value = await request('/public/lists/' + id);
+      if (!value) value = await request('/public/lists/' + requestedID);
       if (generation !== loadVersion) return;
       const retained = editing && list && dirty;
       owner = isOwner;
@@ -688,8 +693,47 @@ window.MZLists = (() => {
     }
     refreshCollections();
   }
+  const viewMemory = new Map();
+  const viewKey = () => mode === 'list' ? id : mode;
+  function renderPins() {
+    const host = $('collection-pins'); host.replaceChildren();
+    for (const pin of collections.pins || []) {
+      const row = [...collections.owned, ...collections.following].find(r => r.id === pin.id);
+      const tab = document.createElement('a'); tab.href = '/releases/?list=' + pin.id;
+      tab.textContent = row?.title || pin.title;
+      tab.setAttribute('aria-current', mode === 'list' && id === pin.id ? 'page' : 'false');
+      tab.title = row && !row.unavailable ? tab.textContent : tab.textContent + ' (unavailable)';
+      host.append(tab);
+      if (!row || row.unavailable) {
+        const remove = document.createElement('button'); remove.textContent = '×';
+        remove.setAttribute('aria-label', 'Unpin ' + tab.textContent);
+        remove.onclick = async () => { try { await request('/pins/' + pin.id, {method:'DELETE'}, true); await refreshCollections(); } catch (err) { notice(errorText(err)); } };
+        host.append(remove);
+      }
+    }
+  }
+  async function switchView(url, fromHistory = false) {
+    const target = new URL(url, location.href);
+    if (editing || target.origin !== location.origin || target.pathname !== location.pathname || target.searchParams.has('editList')) return false;
+    const nextID = target.searchParams.get('list') || '';
+    const nextMode = nextID ? 'list' : target.searchParams.get('collection') === 'favorites' ? 'favorites' : 'all';
+    if (!nextID && !target.searchParams.has('collection')) return false;
+    if (nextMode === mode && nextID === id && target.search === location.search) return true;
+    viewMemory.set(viewKey(), hooks.captureView());
+    hooks.closeViewDetails();
+    mode = nextMode; id = nextID; following = collections.following.some(r => r.id === id && !r.unavailable); list = null; selected.clear(); owner = false; busy = false; loadVersion++;
+    notice(''); status(''); $('clbar').hidden = mode !== 'list';
+    $('clretry').hidden = true; $('clsignin').hidden = true;
+    if (!fromHistory) history.pushState({}, '', target);
+    const remembered = viewMemory.get(viewKey());
+    hooks.restoreView(remembered);
+    updatePicker(); sync(); remember();
+    if (mode === 'list') await load(); else redraw();
+    if (viewKey() === (nextID || nextMode)) hooks.restoreScroll(remembered);
+    return true;
+  }
   function navigate(url) {
-    if (!editing || !dirty) { location.assign(url); return; }
+    if (!editing || !dirty) { switchView(url).then(handled => { if (!handled) location.assign(url); }); return; }
     pendingNavigation = url;
     $('clleavesave').disabled = $('clleavediscard').disabled = busy || !owner;
     $('clleave').showModal(); $('clleavekeep').focus(); updatePicker();
@@ -769,6 +813,20 @@ window.MZLists = (() => {
       $('clleave').close(); pendingNavigation = null;
       $('clleavesave').disabled = $('clleavediscard').disabled = false;
     };
+    document.querySelector('.collection-tabs').addEventListener('click', event => {
+      const link = event.target.closest('a');
+      if (!link || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault(); navigate(link.href);
+    });
+    window.addEventListener('popstate', () => { if (!editing) switchView(location.href, true); });
+    $('clpin').onclick = async () => {
+      if (!hooks.token()) { location.assign(signIn(listPath())); return; }
+      const target = id, pinned = (collections.pins || []).some(p => p.id === target);
+      $('clpin').disabled = true;
+      try { await request('/pins/' + target, {method: pinned ? 'DELETE' : 'PUT'}, true); await refreshCollections(); }
+      catch (err) { status(errorText(err), true); }
+      finally { $('clpin').disabled = false; }
+    };
     $('collection-select').onchange = event => {
       const value = event.target.value;
       if (value === 'manage') navigate(hooks.token() ? '../lists/?view=mine' : signIn('/lists/?view=mine'));
@@ -792,8 +850,6 @@ window.MZLists = (() => {
     $('clentrytarget').onchange = entryControls;
     $('clentryreload').onclick = entryLists;
     $('clentrydialog').addEventListener('close', () => { entryVersion++; entryBusy = false; });
-    $('collection-dismiss').onclick = () => { $('collection-intro').hidden = true; try { localStorage.setItem(INTRO, '1'); } catch (_) {} };
-    try { $('collection-intro').hidden = localStorage.getItem(INTRO) === '1' || editing || mode === 'list'; } catch (_) {}
     $('clbar').hidden = mode !== 'list';
     if (mode === 'list') {
       $('clname').textContent = editing ? 'Edit list' : 'Loading collection...';

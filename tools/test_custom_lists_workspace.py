@@ -147,7 +147,7 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             expect(page.locator("#clsave")).to_be_disabled()
         print("PASS range selection, filtered selection, bulk remove/undo/redo and navigation protection")
         # Inspecting a game must not trap the catalogue behind an overlay.
-        sizes = [(390, 844), (390, 667), (844, 500)] if mobile else [(1440, 1000), (1280, 720), (1024, 768)]
+        sizes = [(390, 844), (390, 667), (844, 500)] if mobile else [(1440, 1000), (1280, 720), (1200, 720), (1024, 768)]
         for width, height in sizes:
             print("Checking details layout", width, height, flush=True)
             page.set_viewport_size({"width": width, "height": height})
@@ -157,24 +157,33 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             expect(page.locator("#panel")).to_be_visible()
             expect(page.locator("#clshowdetails")).to_have_attribute("aria-pressed", "true")
             expect(page.locator("#clshowlist")).to_have_attribute("aria-pressed", "false")
-            expect(page.locator("#clmembers")).to_be_hidden()
-            for control in ["#cldone", "#clshowlist", "#panel .close"]:
+            docked = width >= 1200
+            if docked:
+                expect(page.locator("#clmembers")).to_be_visible()
+            else:
+                expect(page.locator("#clmembers")).to_be_hidden()
+            for control in (["#cldone", "#panel .close"] if docked else ["#cldone", "#clshowlist", "#panel .close"]):
                 page.locator(control).click(trial=True)
             body_box = page.locator("#panel .body").bounding_box()
             assert body_box["height"] >= 100, (width, height, body_box)
             assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-            if mobile:
+            if not docked:
                 expect(page.locator("#clcatalogue")).to_be_hidden()
                 page.locator("#clshowcatalogue").click()
                 expect(page.locator("#panel")).to_be_hidden()
                 page.wait_for_function("!location.hash")
                 expect(page.locator("#q")).to_have_value("1944")
-                page.locator("#clshowdetails").click()
+                box.locator("xpath=ancestor::td").click(position={"x": 100, "y": 15})
                 expect(page.locator("#panel")).to_be_visible()
             else:
                 table_box = page.locator("#clcatalogue").bounding_box()
                 panel_box = page.locator("#panel").bounding_box()
-                assert panel_box["x"] >= table_box["x"] + table_box["width"] - 1
+                list_box = page.locator("#clworkspace").bounding_box()
+                assert 280 <= panel_box["width"] <= 320
+                assert panel_box["x"] + panel_box["width"] <= table_box["x"] + 1
+                assert table_box["x"] + table_box["width"] <= list_box["x"] + 1
+                assert table_box["width"] >= 400
+                page.locator(f'#clmembers [data-clremove="{first}"]').click(trial=True)
                 box.check()
                 expect(page.locator("#panel")).to_be_visible()
                 page.locator("#clundo").click()
@@ -185,7 +194,7 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
                 expect(page.locator("#panel h2")).to_contain_text("1943")
             if width in [1280, 390] and height in [720, 844]:
                 capture("details-mobile.png" if mobile else "details-desktop.png")
-            page.locator("#clshowlist").click()
+            page.locator("#panel .close" if docked else "#clshowlist").click()
             expect(page.locator("#clmembers")).to_be_visible()
             expect(page.locator("#panel")).to_be_hidden()
             page.wait_for_function("!location.hash")
@@ -195,7 +204,9 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             expect(page.locator("#panel")).to_be_hidden()
             page.locator("#clmembersearch").press("Escape")
             expect(page.locator("#clmembersearch")).to_have_value("")
-            page.locator("#clshowdetails").click()
+            if not docked and mobile:
+                page.locator("#clshowcatalogue").click()
+            page.locator('.clpick').first.locator("xpath=ancestor::td").click(position={"x": 100, "y": 15})
             # Esc closes details before clearing an unrelated catalogue search.
             page.locator("#panel .close").focus()
             page.keyboard.press("Escape")
@@ -220,7 +231,7 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             expect(page.locator("#cljumptools")).not_to_have_attribute("open", "")
             page.wait_for_function("document.querySelector('.tablewrap').scrollTop < 2")
         assert read() == baseline and not puts
-        print("PASS docked details, unobscured catalogue, pane switching, reachable controls and keyboard isolation at three screen sizes")
+        print("PASS docked details, unobscured catalogue, pane switching, reachable controls and keyboard isolation across desktop and narrow screen sizes")
         page.set_viewport_size({"width": 390 if mobile else 1440, "height": 844 if mobile else 1000})
         # A fresh editor also checks the initial layout without a details tab.
         page.goto(editor)

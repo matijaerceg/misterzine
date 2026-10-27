@@ -38,7 +38,7 @@ window.MZLists = (() => {
     $('clshowdetails').hidden = false;
     setEditorPane('details');
     const hint = $('panel').querySelector('.hint');
-    if (hint) hint.textContent = 'Switch to Your list to continue editing. Esc closes game details.';
+    if (hint) hint.textContent = 'Close game details with × or Esc. Your list edits are kept.';
     // On phones the catalogue disappears; move focus out of that hidden pane.
     if (!$('clcatalogue').getClientRects().length) $('clshowdetails').focus({preventScroll: true});
   }
@@ -47,7 +47,7 @@ window.MZLists = (() => {
     const restore = $('panel').contains(document.activeElement);
     setEditorPane(returnPane);
     if (restore) {
-      const target = detailFocus?.isConnected && detailFocus.matches('button,input,a[href],[tabindex]') && detailFocus.getClientRects().length ? detailFocus : $('clshowcatalogue').getClientRects().length ? $('clshowcatalogue') : $('clshowlist');
+      const target = detailFocus?.isConnected && detailFocus.matches('button,input,a[href],[tabindex]') && detailFocus.getClientRects().length ? detailFocus : $('clshowcatalogue').getClientRects().length ? $('clshowcatalogue') : $('q');
       target.focus({preventScroll: true});
     }
   }

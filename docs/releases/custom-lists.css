@@ -128,18 +128,38 @@
 .cl-editor main { container: clmain / inline-size; }
 .cl-editor .cllayout { display: grid; grid-template-columns: minmax(0, 57fr) minmax(20rem, 43fr); }
 .cl-editor .clworkspace { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-left: 1px solid var(--hair); background: var(--bg); }
-/* Details share the right-hand workspace with list entries. The catalogue and
-   editor toolbar remain reachable while inspecting a game. */
+/* Compact left dock on roomy screens; a separate details view when three
+   usable columns cannot fit. Never cover the catalogue or replace the list. */
 body.cl-editor.panel-open main { margin-left: 0; }
 body.cl-editor #panel { position: relative; inset: auto; width: 100%; height: auto; min-height: 0; min-width: 0; flex: 1 1 auto; transform: none; transition: none; z-index: auto; border: 0; }
 body.cl-editor #panel .body { scrollbar-width: thin; }
 body.cl-editor #panel .body::-webkit-scrollbar { display: initial; width: 8px; }
 body.cl-editor #panel .close { min-width: 44px; min-height: 44px; background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; z-index: 1; }
-.cl-editor.cl-has-details .clmobiletabs { display: flex; flex: none; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); background: var(--surface); }
 .cl-editor .clmobiletabs button { flex: 1; }
 .cl-editor #clshowcatalogue { display: none; }
 .cl-editor.cl-detail-view .clmemberarea { display: none; }
 .clmobiletabs button[hidden] { display: none !important; }
+@media (min-width: 1200px) {
+  body.cl-editor.panel-open main { margin-left: clamp(280px, 22vw, 320px); transition: none; }
+  body.cl-editor #panel { position: fixed; inset: 0 auto 0 0; width: clamp(280px, 22vw, 320px); height: 100dvh; z-index: 100; border-right: 1px solid var(--hair); }
+  body.cl-editor #panel .body { padding: .75rem; }
+  body.cl-editor #panel dl { grid-template-columns: minmax(0, 1fr); gap: .1rem; }
+  body.cl-editor #panel dd { margin: 0 0 .45rem; overflow-wrap: anywhere; }
+  body.cl-editor #panel h2 .gametitle { font-size: 1.15rem; }
+  body.cl-editor #panel .hint { padding: .5rem .75rem; }
+  .cl-editor.cl-detail-view .clmemberarea { display: flex; }
+}
+/* Mid-sized laptops keep the normal two-column editor until details are
+   requested, then show an explicit full-width details view with return tabs. */
+@media (min-width: 897px) and (max-width: 1199px) {
+  .cl-editor.cl-detail-view .cllayout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
+  .cl-editor.cl-detail-view .clworkspace { display: contents; }
+  .cl-editor.cl-detail-view #clbar { grid-column: 1; grid-row: 1; }
+  .cl-editor.cl-detail-view .clmobiletabs { display: flex; grid-column: 1; grid-row: 2; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); }
+  .cl-editor.cl-detail-view #clshowcatalogue { display: block; }
+  .cl-editor.cl-detail-view .clcatalogue, .cl-editor.cl-detail-view .controls { display: none; }
+  body.cl-editor #panel { grid-column: 1; grid-row: 3; }
+}
 body.cl-editor #resizer, body.cl-editor .fbtab { display: none; }
 .clbulkbar { position: relative; display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; padding: .55rem .75rem; flex: none; border-bottom: 1px solid var(--hair); background: var(--surface); }
 .clbulkbar button, .clbulktools > summary, .clmobiletabs button, .clmemberscroll button { font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; padding: .35rem .6rem; cursor: pointer; }

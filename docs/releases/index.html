@@ -1273,17 +1273,17 @@
 </header>
 <nav class="collections" aria-label="Browse collections">
   <div class="collection-tabs">
-    <a id="collection-all" href="?collection=all">All entries</a>
-    <a id="collection-favorites" href="?collection=favorites">Favorites</a>
+    <a id="collection-all" href="?collection=all"><span class="collection-full">All entries</span><span class="collection-short">All</span></a>
+    <a id="collection-favorites" href="?collection=favorites"><span class="collection-full">Favorites</span><span class="collection-short">Favs</span></a>
     <span id="collection-pins"></span>
     <details class="cols" id="collection-picker"><summary id="collection-summary">Your lists</summary><div class="menu" id="collection-menu"></div></details>
-    <a id="collection-browse" href="?collection=browse">Browse lists</a>
-    <a id="collection-manage" href="?collection=manage">Manage lists</a>
+    <a id="collection-browse" href="?collection=browse"><span class="collection-full">Browse lists</span><span class="collection-short">Browse</span></a>
+    <a id="collection-manage" href="?collection=manage"><span class="collection-full">Manage lists</span><span class="collection-short">Manage</span></a>
 
   </div>
   <select id="collection-select" aria-label="Your lists" hidden></select>
   <div class="collection-actions">
-    <button type="button" id="collection-create" disabled>Create a list</button>
+    <button type="button" id="collection-create" disabled>+ <span class="collection-full">Create a list</span><span class="collection-short">Create</span></button>
   </div>
 </nav>
   <div class="favctl" id="favmanagement" hidden>      <div id="favdd">
@@ -4204,7 +4204,7 @@ function syncFavSummary() {
   document.getElementById('favchip').hidden = !favOnly || MZLists.isFavorites();
   document.getElementById('favmanagement').hidden = !MZLists.isFavorites();
   syncSrcSummary();
-  document.getElementById('collection-favorites').textContent = 'Favorites (' + n + ')';
+  document.querySelector('#collection-favorites .collection-full').textContent = 'Favorites (' + n + ')';
   // never disable while it's the thing doing the narrowing (clearing the last
   // favorite switches the toggle off first, so the two can't deadlock)
   favToggle.disabled = MZLists.isFavorites() || n === 0 && !favOnly;

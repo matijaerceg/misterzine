@@ -247,7 +247,11 @@ window.MZLists = (() => {
   function updatePicker() {
     if (!started) return;
     const picker = $('collection-select'); picker.replaceChildren();
-    for (const [label, rows] of [['Your lists', collections.owned], ['Following', collections.following]]) {
+    const mobile = matchMedia('(max-width: 650px)').matches;
+    const pinIDs = new Set((collections.pins || []).map(p => p.id));
+    const pinnedRows = (collections.pins || []).map(p => [...collections.owned, ...collections.following].find(r => r.id === p.id) || {...p, unavailable: true});
+    const groups = mobile ? [['Pinned', pinnedRows], ['Your lists', collections.owned.filter(r => !pinIDs.has(r.id))], ['Following', collections.following.filter(r => !pinIDs.has(r.id))]] : [['Your lists', collections.owned], ['Following', collections.following]];
+    for (const [label, rows] of groups) {
       if (!rows.length) continue;
       const group = document.createElement('optgroup'); group.label = label;
       for (const row of rows) {
@@ -259,10 +263,11 @@ window.MZLists = (() => {
     const showCurrent = list && (owner || !editing && visibility() !== 'private');
     if (mode === 'list' && showCurrent && ![...picker.options].some(o => o.value === id)) picker.append(new Option(list.title, id));
     if (!picker.options.length) picker.append(new Option('No saved lists yet', 'empty'));
-    const pinned = (collections.pins || []).some(p => p.id === id);
+    const pinned = !mobile && (collections.pins || []).some(p => p.id === id);
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
     $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
     $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? list.title : 'Your lists';
+    $('collection-summary').title = $('collection-summary').textContent;
     const menu = $('collection-menu'); menu.replaceChildren();
     for (const child of picker.children) {
       if (child.tagName === 'OPTGROUP') {
@@ -279,6 +284,7 @@ window.MZLists = (() => {
     picker.classList.toggle('active', mode === 'list' && !(collections.pins || []).some(p => p.id === id));
     renderPins();
   }
+  matchMedia('(max-width: 650px)').addEventListener('change', () => updatePicker());
   async function refreshCollections() {
     const generation = ++collectionsVersion, token = hooks.token();
     if (!token) { collections = {owned: [], following: []}; following = false; updatePicker(); sync(); return; }

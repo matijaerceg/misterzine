@@ -17,7 +17,7 @@ def main():
    page.locator('#collection-favorites').click(); expect(page.locator('#favmanagement')).to_be_visible(); expect(page.locator('#q')).to_have_value('')
    page.locator('#collection-all').click(); expect(page.locator('#q')).to_have_value('194'); assert page.evaluate('window.sameDocument')==123
    page.go_back(); expect(page.locator('#favmanagement')).to_be_visible(); page.go_forward(); expect(page.locator('#q')).to_have_value('194')
-   page.locator('#collection-select').select_option(fixture['id']); expect(page.locator('#clname')).to_have_text(fixture['title']); expect(page.locator('#q')).to_have_value(''); assert page.evaluate('sortKey')=='title'
+   page.locator('#collection-summary').click(); page.locator('#collection-menu').get_by_role('button', name=fixture['title'], exact=True).click(); expect(page.locator('#clname')).to_have_text(fixture['title']); expect(page.locator('#q')).to_have_value(''); assert page.evaluate('sortKey')=='title'
    page.locator('#clpin').click(); expect(page.locator('#collection-pins a')).to_have_text(fixture['title'])
    page.locator('#collection-all').click(); expect(page.locator('#q')).to_have_value('194'); page.locator('#collection-pins a').click(); expect(page.locator('#clname')).to_have_text(fixture['title'])
    page.locator('#srcsummary').click(); page.locator('#srcfavorites').check(); page.locator('#srcsummary').click(); expect(page.locator('#favchip')).to_be_visible(); page.locator('#favchip').click(); expect(page.locator('#favchip')).to_be_hidden()
@@ -37,7 +37,7 @@ def main():
    page.locator('#collection-all').click(); page.locator('#collection-pins a').click()
    expect(page.locator('#collection-notice')).to_contain_text('not available')
    page.get_by_role('button',name='Unpin '+fixture['title'],exact=True).click(); expect(page.locator('#collection-pins a')).to_have_count(0)
-   page.locator('#collection-select').select_option('manage'); page.wait_for_url('**/lists/?view=mine')
+   page.locator('#collection-summary').click(); page.locator('#collection-menu').get_by_role('button', name='Manage your lists...', exact=True).click(); page.wait_for_url('**/lists/?view=mine')
    assert not errors,errors
    print('PASS in-place tabs, Back/Forward, per-view search/sort/scroll, visit-only memory, account pins, Source filter, mobile overflow')
   finally:

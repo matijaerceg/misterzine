@@ -256,8 +256,22 @@ window.MZLists = (() => {
     const showCurrent = list && (owner || !editing && visibility() !== 'private');
     if (mode === 'list' && showCurrent && ![...picker.options].some(o => o.value === id)) picker.append(new Option(list.title, id));
     picker.append(new Option(hooks.token() ? 'Manage your lists...' : 'Sign in for your lists...', 'manage'));
-    picker.value = mode === 'list' && showCurrent ? id : '';
-    picker.parentElement.classList.toggle('placeholder', picker.selectedIndex < 0);
+    const pinned = (collections.pins || []).some(p => p.id === id);
+    picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
+    $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? list.title : 'Your lists';
+    const menu = $('collection-menu'); menu.replaceChildren();
+    for (const child of picker.children) {
+      if (child.tagName === 'OPTGROUP') {
+        const heading = document.createElement('strong'); heading.className = 'collection-group'; heading.textContent = child.label; menu.append(heading);
+      }
+      for (const option of child.tagName === 'OPTGROUP' ? child.children : [child]) {
+        const button = document.createElement('button'); button.type = 'button'; button.className = 'reset';
+        button.textContent = option.textContent; button.disabled = option.disabled;
+        button.setAttribute('aria-current', option.value === picker.value ? 'page' : 'false');
+        button.onclick = () => { $('collection-picker').open = false; picker.value = option.value; picker.dispatchEvent(new Event('change')); };
+        menu.append(button);
+      }
+    }
     picker.classList.toggle('active', mode === 'list' && !(collections.pins || []).some(p => p.id === id));
     renderPins();
   }
@@ -711,6 +725,13 @@ window.MZLists = (() => {
         host.append(remove);
       }
     }
+    requestAnimationFrame(() => {
+      const strip = document.querySelector('.collection-tabs'), active = strip.querySelector('a[aria-current=page]');
+      if (!active) return;
+      const tabRect = active.getBoundingClientRect(), stripRect = strip.getBoundingClientRect();
+      if (tabRect.right > stripRect.right) strip.scrollLeft += tabRect.right - stripRect.right;
+      else if (tabRect.left < stripRect.left) strip.scrollLeft -= stripRect.left - tabRect.left;
+    });
   }
   async function switchView(url, fromHistory = false) {
     const target = new URL(url, location.href);

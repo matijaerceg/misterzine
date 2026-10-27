@@ -1276,8 +1276,10 @@
     <a id="collection-all" href="?collection=all">All entries</a>
     <a id="collection-favorites" href="?collection=favorites">Favorites</a>
     <span id="collection-pins"></span>
-    <label class="collection-picker"><span class="sr-only">Your lists</span><select id="collection-select" aria-label="Your lists" disabled><option value="manage">Manage your lists...</option></select></label>
+
   </div>
+  <details class="cols" id="collection-picker"><summary id="collection-summary">Your lists</summary><div class="menu" id="collection-menu"></div></details>
+  <select id="collection-select" aria-label="Your lists" hidden></select>
   <div class="collection-actions">
     <a href="../lists/" id="collection-browse">Browse lists</a>
     <button type="button" id="collection-create" disabled>Create a list</button>
@@ -1287,11 +1289,12 @@
 
         <div class="fav-actions menu">
           <!-- where the list lives + the account action; filled by syncAcct() -->
-          <p class="favnote"></p><button type="button" class="reset" id="favlegacy" hidden>Add browser favorites to account</button>
+          <button type="button" class="reset" id="favlegacy" hidden>Add browser favorites to account</button>
           <button type="button" class="reset" id="favexpbtn" disabled>Export for update_all...</button>
           <button type="button" class="reset" id="favcopy" disabled hidden
                   data-tip="Copies a link that restores your favorites anywhere">Copy backup link</button>
           <button type="button" class="reset" id="favclearall" disabled>Clear all favorites</button>
+          <p class="favnote"></p>
         </div>
       </div></div>
 <p id="favlegacyinfo" class="clnote" hidden>Browser-only favorites are being retired. Existing favorites remain viewable. Sign in to save changes and keep them in your account.</p>

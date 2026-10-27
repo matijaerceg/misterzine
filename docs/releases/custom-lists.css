@@ -337,3 +337,19 @@ body:not(.cl-editor) #clbar { border-top: 0; }
 .collection-picker.placeholder select option, .collection-picker.placeholder select optgroup { color: var(--fg); }
 
 .collection-picker.placeholder::after { content: '▾'; position: absolute; right: .65rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--fg); }
+
+/* Match the existing filter dropdowns; reserve folder styling for actual tabs. */
+.collections { border-bottom-color: var(--accent); }
+#collection-pins > a[aria-current=page], .collection-tabs > a[aria-current=page] { color: var(--accent); border-color: var(--accent); border-bottom-color: var(--surface); background: var(--surface); font-weight: 600; }
+#collection-picker { align-self: center; order: 1; margin-bottom: .3rem; flex: none; }
+#collection-picker summary { max-width: min(20rem, 65vw); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#collection-menu { min-width: 15rem; max-width: min(25rem, calc(100vw - 2rem)); }
+#collection-menu button { display: block; width: 100%; text-align: left; white-space: normal; }
+#collection-menu button[aria-current=page] { color: var(--accent); font-weight: 600; }
+.collection-group { display: block; color: var(--muted); font-size: .8rem; padding: .4rem .5rem; }
+#favmanagement .favnote { flex-basis: auto; margin: 0 0 0 .35rem; }
+#collection-select[hidden] { display: none !important; }
+
+.collection-tabs { scrollbar-width: none; }
+.collection-tabs::-webkit-scrollbar { display: none; }
+.collection-tabs > a:not([aria-current=page]), #collection-pins > a:not([aria-current=page]) { border-bottom-color: var(--accent); }

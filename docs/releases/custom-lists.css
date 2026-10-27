@@ -421,3 +421,7 @@ body.cl-library .controls, body.cl-library #resizer { display: none !important; 
  body:not(.cl-editor) #clbar .clviewactions > *, #favmanagement .fav-actions > * { flex-shrink: 0; white-space: nowrap; }
 }
 body.cl-library .collection-tabs > a[aria-current=page] { background: var(--bg); border-bottom-color: var(--bg); }
+/* Draw the shared baseline above inactive tab corners, not behind them. */
+.collections { position: relative; background: none; }
+.collections::after { content: ''; position: absolute; inset: auto 0 0; height: 1px; background: var(--accent); z-index: 1; pointer-events: none; }
+.collection-tabs > a[aria-current=page], #collection-pins > a[aria-current=page], #collection-picker > summary.active { position: relative; z-index: 2; }

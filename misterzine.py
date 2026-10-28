@@ -4363,6 +4363,7 @@ COMPUTER_MANUFACTURER = {
     "ORAO": "PEL Varaždin",
     "UKNC": "Elektronika",  # Elektronika MS 0511
     "Neon": "Kvant",  # Soyuz-Neon PK-11/16, small series at the Kvant plant, Zelenograd
+    "VideoBrain": "Umtech",  # Umtech Inc., later renamed VideoBrain Computer Company
 }
 
 # Original-hardware release year per core (keyed by core_name). The year the real
@@ -4414,6 +4415,7 @@ CORE_YEAR = {
     "Specialist": "1985", "Ondra_SPO186": "1985", "PMD85": "1985", "IQ151": "1985",
     "BK0011M": "1990", "Vector-06C": "1987", "Apogee": "1988", "ORAO": "1984",
     "UKNC": "1987", "Neon": "1991",  # Neon year per the core README + ru.wikipedia
+    "VideoBrain": "1978",  # shown at CES 1977, shipped 1978
     # best-effort years for cores with no single vintage machine: ao486 = i486 era,
     # MultiComp/TSConf = modern FPGA/clone designs (their actual creation year).
     "ao486": "1989", "MultiComp": "2013", "TSConf": "2014",

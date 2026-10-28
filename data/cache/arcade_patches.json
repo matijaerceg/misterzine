@@ -4900,7 +4900,7 @@
     }
    ],
    "coverage_intro": "Every soundtrack is built from one disc, one set of disks, or one album you own. Where a disc came out in several regions, the ones listed below all produce the same pack.",
-   "date": "2026-10-15",
+   "date": "2026-10-28",
    "description": [
     "From Final Fight CD onward, Capcom kept sending its arcade soundtracks back to the studio. Every CD-based home port got a full re-recording of the music, the 'arrange' versions, produced by the original composers' teams. For thirty years those recordings stayed locked to the home versions. CPS+ puts them where they always belonged, under the arcade games themselves.",
     "On a MiSTer, the real CPS-1 or CPS-2 hardware logic runs the game while the CD-era soundtrack plays the music, started, looped and faded by the game itself, exactly the way Capcom's own console releases timed it. Hit sounds, voices and the announcer stay pure arcade. It sounds like the arcade machine grew a CD drive.",
@@ -5111,6 +5111,13 @@
    ],
    "release_history": [
     {
+     "date": "2026-10-28",
+     "items": [
+      "The shared CPS1+ core now also supports Strider EX. The kit includes its dated core alongside the existing CPS-1.5 and CPS-2 cores. Existing soundtracks and launchers are unchanged."
+     ],
+     "version": "1.7"
+    },
+    {
      "date": "2026-10-15",
      "items": [
       "New: the X68000 FM soundtrack of Super Street Fighter II, the music the port's own FM chip played, for Super Street Fighter II, Super Street Fighter II Turbo (with Super Street Fighter II X, Grand Master Challenge and EX) and Hyper Street Fighter II, in twelve new MRAs. It builds from your disk images and MAME; the kit's X68000.md explains what it reads.",
@@ -5312,7 +5319,7 @@
     "Any QSound CPS-2 title is a potential target, and CPS-1 and CPS-1.5 games work too. PACK_FORMAT.md in the kit covers the trigger contract, the pack layout, and how to author one."
    ],
    "title": "CPS+",
-   "version": "1.6"
+   "version": "1.7"
   },
   {
    "coverage": [

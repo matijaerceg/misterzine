@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 28 Oct 2026 09:00:39 +0000</lastBuildDate>
+<lastBuildDate>Wed, 28 Oct 2026 17:51:59 +0000</lastBuildDate>
+<item>
+<title>[Updated] Sauro (bazset) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sauro-bazset</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Sauro (Tecfri 1987).mra:2026-10-28T17:51:59+00:00</guid>
+<pubDate>Wed, 28 Oct 2026 17:51:59 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sauro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Tecfri&lt;/p&gt;&lt;p&gt;Core: Arcade-Sauro&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Spy Hunter (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#spyhunt</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Spy Hunter.mra:2026-10-28T15:51:57+00:00</guid>
+<pubDate>Wed, 28 Oct 2026 15:51:57 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/spyhunt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1983 / Bally&lt;/p&gt;&lt;p&gt;Core: mcr3scroll&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MCR3Scroll_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Turbo Tag (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#turbotag</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Turbo Tag (Prototype).mra:2026-10-28T15:51:57+00:00</guid>
+<pubDate>Wed, 28 Oct 2026 15:51:57 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/turbotag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1985 / Bally&lt;/p&gt;&lt;p&gt;Core: mcr3scroll&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MCR3Scroll_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] SGI Indy (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SGIIndy</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SGIIndy_20261023.rbf:2026-10-28T15:51:57+00:00</guid>
+<pubDate>Wed, 28 Oct 2026 15:51:57 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1993 / Silicon Graphics&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SGIIndy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arabian (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hattrick.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Bally/Sente&lt;/p&gt;&lt;p&gt;Core: ppriest_BallySente&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hayaoshi Quiz Grand Champion Taikai (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hayaosi2</link>
-<guid isPermaLink="false">ongo:_Arcade/Hayaoshi Quiz Grand Champion Taikai.mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hayaosi2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1994 / Jaleco&lt;/p&gt;&lt;p&gt;Core: ppriest_JalecoMS32&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hayaoshi Quiz Nettou Namahousou (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hayaosi3</link>
-<guid isPermaLink="false">ongo:_Arcade/Hayaoshi Quiz Nettou Namahousou (ver 1.5).mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hayaosi3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1994 / Jaleco&lt;/p&gt;&lt;p&gt;Core: ppriest_JalecoMS32&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hidden Catch (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hidnctch</link>
-<guid isPermaLink="false">ongo:_Arcade/Hidden Catch (World) - Tul Lin Gu Lim Chat Ki '98 (Korea) (pcb ver 3.03).mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hidnctch.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1998 / Eolith&lt;/p&gt;&lt;p&gt;Core: ppriest_Eolith&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Hidden Catch 2 (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hidctch2</link>
-<guid isPermaLink="false">ongo:_Arcade/Hidden Catch 2 (pcb ver 3.03) (Kor-Eng) (AT89c52 protected).mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hidctch2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1999 / Eolith&lt;/p&gt;&lt;p&gt;Core: ppriest_Eolith&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

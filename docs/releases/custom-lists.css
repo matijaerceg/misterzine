@@ -462,7 +462,7 @@ body.cl-library .controls, body.cl-library #resizer { display: none !important; 
 #collection-create { color: var(--accent); border: 0; background: transparent; white-space: nowrap; font-weight: 600; }
 #collection-create:hover { border: 0; background: color-mix(in srgb,var(--accent) 10%,transparent); }
 /* The strip is set in the condensed face: room there is scarce. */
-.collection-tabs > a, #collection-pins > a, #collection-picker > summary, #collection-create { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: 1rem; letter-spacing: .01em; }
+.collection-tabs > a, #collection-pins > a, #collection-picker > summary, #collection-create { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: .9rem; line-height: 1.4rem; letter-spacing: .01em; }
 /* Label length, the Create button and which pins stay in the strip are decided by measurement (fitStrip), not by viewport. */
 .collection-short { display: none; }
 .collections[data-labels=short] .collection-full { display: none; }
@@ -473,7 +473,7 @@ body.cl-library .controls, body.cl-library #resizer { display: none !important; 
 .collections[data-fit=overflow] .collection-tabs { overflow-x: auto; }
 @media(max-width:650px) {
  .collections .collection-tabs { flex: 1 1 auto; }
- .collection-tabs > a, #collection-picker > summary { padding: .55rem .5rem; font-size: .85rem; }
+ .collection-tabs > a, #collection-picker > summary { padding: .55rem .5rem; font-size: .8rem; line-height: 1.19rem; }
  #collection-picker > summary { max-width: 9rem; }
  #collection-create { min-height: 44px; padding-inline: .3rem; }
  #favmanagement .fav-actions { flex-wrap: nowrap; overflow-x: auto; padding-bottom: .25rem; }

@@ -33,7 +33,7 @@
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);
 </script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="custom-lists.css?v=c8b04df9de">
+<link rel="stylesheet" href="custom-lists.css?v=8e087d0373">
 <link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
@@ -1200,6 +1200,17 @@
     .tablezone { display: block; }
     .tablezone::after { display: none; }
     .tablewrap { overflow: visible; }
+  }
+  /* Slightly quieter toolbar text; retain the controls' original line-box height. */
+  .controls input[type=search], .controls details.cols > summary,
+  .controls #filterssum, .controls button.clear, .controls .favctl > button {
+    font-size: .85rem; line-height: 1.26rem;
+  }
+  @container topbar (max-width: 867px) {
+    .controls details.cols > summary, .controls #filterssum,
+    .controls button.clear, .controls .favctl > button {
+      font-size: .8rem; line-height: 1.19rem;
+    }
   }
 </style>
 <!-- GoatCounter analytics (privacy-friendly, no cookies). Views from the

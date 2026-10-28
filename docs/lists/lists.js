@@ -440,7 +440,7 @@ window.MZListLibrary = function (root, bridge) {
   else if (mode === 'curator') loadCurator();
   else {
     $('search').value = (params.get('q') || '').slice(0, 200);
-    $('sort').value = ['updated', 'created', 'followers'].includes(params.get('sort')) ? params.get('sort') : 'updated';
+    $('sort').value = ['updated', 'created', 'trending'].includes(params.get('sort')) ? params.get('sort') : 'updated';
     loadDirectory(false);
   }
 };

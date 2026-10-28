@@ -551,3 +551,15 @@ body.cl-library .collection-tabs > a[aria-current=page] { background: var(--bg);
 .controls input[type=search], #collection-library input[type=search], #collection-library select, #clmembersearch {
  border-color: color-mix(in srgb, var(--hair) 78%, var(--fg));
 }
+
+/* Use one explicit control height: native select sizing varies by browser. */
+#collection-library .search-form :is(input[type=search], select, button[type=submit]) {
+  box-sizing: border-box; height: calc(1.4em + .8rem + 2px); min-height: 0; line-height: 1.4;
+}
+@media (max-width: 650px), (pointer: coarse) {
+  #collection-library .search-form :is(input[type=search], select, button[type=submit]) { min-height: 44px; }
+}
+@media (max-width: 650px) {
+  #collection-library .search-form .field:first-child { flex: 1 0 100%; min-width: 0; }
+  #collection-library .search-form .field:nth-child(2) { flex: 1; }
+}

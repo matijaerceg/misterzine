@@ -128,3 +128,11 @@ dialog strong { overflow-wrap: anywhere; }
 
 .icon-share { --icon: url(icons/share.svg); }
 input[type=search], .search-form select, .manage-tools select { border-color: color-mix(in srgb, var(--hair) 78%, var(--fg)); }
+
+/* Use one explicit control height: native select sizing varies by browser. */
+.search-form :is(input[type=search], select, button[type=submit]) {
+  box-sizing: border-box; height: calc(1.55em + 1.1rem + 2px); min-height: 0; line-height: 1.4;
+}
+@media (max-width: 650px), (pointer: coarse) {
+  .search-form :is(input[type=search], select, button[type=submit]) { min-height: 44px; }
+}

@@ -167,12 +167,18 @@ again, its live summary returns automatically. Followed summaries are ordered
 by follow time (newest first), with ID breaking ties.
 
 The directory accepts `q` (trimmed, at most 200 units; literal substring of
-title, description or curator name), `sort=updated|created|followers`
+title, description or curator name), `sort=updated|created|trending|followers`
 (default `updated`), `offset=0..10000` (default 0), and `limit=1..100` (default
 24). Invalid values return `400 {"error":"bad_query"}`. Searches are
 case-insensitive for ASCII. Every sort is descending and has deterministic
 ID tie-breaking; follower sorting also uses update date before ID. Only
 public lists participate in search, totals, pagination and curator pages.
+Trending sums active follows weighted by `0.5 ** (days since first follow / 7)`,
+then breaks ties by list creation date and ID. It never uses the list edit date.
+The original follow date survives unfollow/refollow, including pinning. History
+is private and cascades on account or list deletion. Apply
+`migrations/2026-10-28-list-trending.sql` before deploying the Worker.
+The old `followers` API sort remains compatible but is no longer offered in Browse.
 
 `PUT` and `DELETE` require the last-read positive integer version. Comparison
 and mutation happen in one database statement. A stale request, including a

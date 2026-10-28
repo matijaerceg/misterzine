@@ -13,6 +13,23 @@ const META = '(SELECT hidden FROM list_moderation m WHERE m.list_id=l.id) AS mod
 const FROM = ' FROM curated_lists l LEFT JOIN public_profiles p ON p.user_id = l.user_id';
 const SUMMARY = 'SELECT ' + META + ', json_array_length(l.keys_json) AS count' + FROM;
 const FULL = 'SELECT ' + META + ', l.keys_json' + FROM;
+// Only active follows contribute. Each loses half its weight every seven days;
+// edits, publication changes and refollows do not renew that weight.
+const TRENDING = `(SELECT COALESCE(SUM(pow(0.5, MAX(0, julianday('now') -
+  julianday(COALESCE(h.first_followed_at, f.created_at))) / 7.0)), 0)
+  FROM list_follows f LEFT JOIN list_follow_history h
+  ON h.user_id=f.user_id AND h.list_id=f.list_id WHERE f.list_id=l.id)`;
+const DIRECTORY_ORDER = {
+  updated: 'l.updated_at DESC, l.id', created: 'l.created_at DESC, l.id',
+  followers: 'follower_count DESC, l.updated_at DESC, l.id',
+  trending: TRENDING + ' DESC, l.created_at DESC, l.id',
+};
+function rememberFirstFollow(env, userId, listId) {
+  return env.DB.prepare('INSERT OR IGNORE INTO list_follow_history (user_id, list_id, first_followed_at) ' +
+    'SELECT f.user_id, f.list_id, f.created_at FROM list_follows f JOIN curated_lists l ON l.id=f.list_id WHERE f.user_id=? AND f.list_id=?')
+    .bind(userId, listId);
+}
+
 
 export async function getProfile(env, userId) {
   return env.DB.prepare('SELECT id, display_name FROM public_profiles WHERE user_id = ?').bind(userId).first();
@@ -56,13 +73,13 @@ async function directory(env, params) {
   const query = (params.get('q') || '').trim(), sort = params.get('sort') || 'updated';
   const number = (key, fallback) => params.has(key) && /^\d+$/.test(params.get(key)) ? Number(params.get(key)) : params.has(key) ? NaN : fallback;
   const offset = number('offset', 0), limit = number('limit', 24);
-  if (query.length > 200 || !['updated', 'created', 'followers'].includes(sort) ||
+  if (query.length > 200 || !Object.hasOwn(DIRECTORY_ORDER, sort) ||
       !Number.isSafeInteger(offset) || offset < 0 || offset > 10000 || !Number.isSafeInteger(limit) || limit < 1 || limit > 100)
     return json({ error: 'bad_query' }, 400);
   const where = " WHERE l.visibility = 'public' AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1)" + (query
     ? " AND instr(lower(l.title || char(10) || l.description || char(10) || COALESCE(p.display_name, l.byline)), lower(?)) > 0" : '');
   const bindings = query ? [query] : [];
-  const order = { updated: 'l.updated_at DESC, l.id', created: 'l.created_at DESC, l.id', followers: 'follower_count DESC, l.updated_at DESC, l.id' }[sort];
+  const order = DIRECTORY_ORDER[sort];
   const [count, page] = await env.DB.batch([
     env.DB.prepare('SELECT COUNT(*) AS total' + FROM + where).bind(...bindings),
     env.DB.prepare(SUMMARY + where + ' ORDER BY ' + order + ' LIMIT ? OFFSET ?').bind(...bindings, limit, offset),
@@ -97,6 +114,7 @@ export async function following(env, method, path, user) {
       "WHERE id = ? AND user_id <> ? AND visibility IN ('unlisted', 'public') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1) ON CONFLICT(user_id, list_id) DO NOTHING").bind(user.id, id, user.id),
     env.DB.prepare('SELECT user_id, visibility FROM curated_lists WHERE id = ? AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)').bind(id),
     env.DB.prepare("INSERT OR IGNORE INTO list_follow_titles (user_id, list_id, title) SELECT f.user_id, f.list_id, l.title FROM list_follows f JOIN curated_lists l ON l.id=f.list_id WHERE f.user_id=? AND f.list_id=? AND l.visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1)").bind(user.id, id),
+    rememberFirstFollow(env, user.id, id),
   ]);
   const row = check.results[0];
   if (row && row.user_id === user.id) return json({ error: 'own_list' }, 400);
@@ -114,6 +132,7 @@ export async function pinning(env, method, path, user) {
     env.DB.prepare("INSERT INTO list_pins(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND (user_id=? OR visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)) ON CONFLICT(user_id,list_id) DO UPDATE SET title=excluded.title RETURNING list_id").bind(user.id,id,user.id),
     env.DB.prepare("INSERT OR IGNORE INTO list_follows(user_id,list_id) SELECT ?,id FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)").bind(user.id,id,user.id),
     env.DB.prepare("INSERT OR IGNORE INTO list_follow_titles(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)").bind(user.id,id,user.id),
+    rememberFirstFollow(env, user.id, id),
   ]);
   return results[0].results.length ? empty() : json({error:'not_found'},404);
 }
@@ -231,8 +250,8 @@ export async function moderateLists(request, env, method, path, user, url) {
     const offset = Number(url.searchParams.get('offset') || 0);
     const hidden = url.searchParams.get('hidden') === '1';
     const sort = url.searchParams.get('sort') || 'updated';
-    if (!['updated', 'created', 'followers'].includes(sort)) return json({error:'bad_query'},400);
-    const order = {updated:'l.updated_at DESC, l.id',created:'l.created_at DESC, l.id',followers:'follower_count DESC, l.updated_at DESC, l.id'}[sort];
+    if (!Object.hasOwn(DIRECTORY_ORDER, sort)) return json({error:'bad_query'},400);
+    const order = DIRECTORY_ORDER[sort];
     if (query.length > 200 || !Number.isSafeInteger(offset) || offset < 0 || offset > 10000)
       return json({error: 'bad_query'}, 400);
     const where = ' WHERE instr(lower(l.id || char(10) || l.title || char(10) || l.description || char(10) || COALESCE(p.display_name, l.byline)), lower(?)) > 0' +

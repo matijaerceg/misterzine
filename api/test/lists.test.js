@@ -3,6 +3,7 @@ import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import schema from '../schema.sql?raw';
 import migration from '../migrations/2026-10-22-list-community.sql?raw';
 import titlesMigration from '../migrations/2026-10-27-followed-list-titles.sql?raw';
+import trendingMigration from '../migrations/2026-10-28-list-trending.sql?raw';
 
 const API = 'https://api.misterzine.fyi';
 const SITE = 'https://misterzine.fyi';
@@ -304,7 +305,7 @@ describe('public discovery and curator privacy', () => {
     // Equal timestamps must still produce deterministic pages.
     await env.DB.prepare("UPDATE curated_lists SET created_at = '2020-01-01T00:00:00Z', updated_at = '2020-01-02T00:00:00Z'").run();
     const ids = [a.id, b.id, c.id].sort();
-    for (const sort of ['updated', 'created', 'followers']) {
+    for (const sort of ['updated', 'created', 'followers', 'trending']) {
       const first = await directory('?sort=' + sort + '&limit=2');
       const second = await directory('?sort=' + sort + '&offset=2&limit=2');
       expect(first).toMatchObject({ total: 3, has_more: true });
@@ -322,6 +323,68 @@ describe('public discovery and curator privacy', () => {
     for (const query of ['?sort=bogus', '?offset=-1', '?offset=10001', '?offset=x', '?limit=0', '?limit=101', '?limit=1.5', '?q=' + 'x'.repeat(201)])
       expect((await call('/public/lists' + query, 'GET', undefined, null)).status).toBe(400);
     expect(await directory('?offset=10000')).toEqual({ lists: [], total: 3, has_more: false });
+  });
+});
+
+describe('trending lists', () => {
+  it('uses a smooth seven-day half-life, independent of list age and edits, with normal privacy filtering', async () => {
+    const fresh = await save(await create({title:'Fresh interest'}), {visibility:'public'});
+    const older = await save(await create({title:'Older interest'}), {visibility:'public'});
+    const empty = await save(await create({title:'No follows'}), {visibility:'public'});
+    const privateList = await create();
+    const unlisted = await save(await create(), {visibility:'unlisted'});
+    await env.DB.prepare("INSERT INTO users(id,provider,provider_user_id) VALUES (3,'github','third')").run();
+    // One new follow beats two follows just over a week old.
+    for (const [id, user, age] of [[fresh.id,2,0],[older.id,2,8],[older.id,3,8],[privateList.id,2,0],[unlisted.id,2,0]]) {
+      await env.DB.prepare("INSERT INTO list_follows(user_id,list_id,created_at) VALUES (?,?,datetime('now',?))")
+        .bind(user,id,'-' + age + ' days').run();
+    }
+    await apply(trendingMigration);
+    await apply(trendingMigration);
+    await env.DB.prepare("UPDATE curated_lists SET created_at='2000-01-01',updated_at='2000-01-01' WHERE id=?").bind(fresh.id).run();
+    expect((await directory('?sort=trending')).lists.map(l=>l.id)).toEqual([fresh.id,older.id,empty.id]);
+    // Two follows just under a week old beat one new follow: no weekly cutoff.
+    await env.DB.prepare("UPDATE list_follow_history SET first_followed_at=datetime('now','-6 days') WHERE list_id=?").bind(older.id).run();
+    expect((await directory('?sort=trending')).lists.map(l=>l.id)).toEqual([older.id,fresh.id,empty.id]);
+    const first=await directory('?sort=trending&limit=1');
+    const next=await directory('?sort=trending&limit=1&offset=1');
+    expect(first).toMatchObject({total:3,has_more:true});
+    expect(next.lists[0].id).toBe(fresh.id);
+    expect((await directory('?sort=trending&q=Fresh')).lists.map(l=>l.id)).toEqual([fresh.id]);
+    expect(first.lists[0]).not.toHaveProperty('first_followed_at');
+    await env.DB.prepare("INSERT INTO list_moderation(list_id,hidden,reason,moderated_by) VALUES (?,1,'test',2)").bind(older.id).run();
+    expect((await directory('?sort=trending')).lists.map(l=>l.id)).toEqual([fresh.id,empty.id]);
+    await env.DB.prepare("UPDATE users SET provider='google',email='matija.erceg@gmail.com' WHERE id=2").run();
+    const hidden=await call('/admin/lists?sort=trending&hidden=1&shared=1','GET',undefined,1);
+    expect(hidden.status).toBe(200);
+    expect((await hidden.json()).lists.map(l=>l.id)).toEqual([older.id]);
+  });
+
+  it('keeps the first date through repeated follows and pinning, counts only active follows, and deletes history with its account or list', async () => {
+    const a=await save(await create(),{visibility:'public'});
+    const b=await save(await create(),{visibility:'public'});
+    expect((await call('/following/'+a.id,'PUT',undefined,1)).status).toBe(204);
+    await env.DB.prepare("UPDATE list_follow_history SET first_followed_at=datetime('now','-28 days') WHERE list_id=?").bind(a.id).run();
+    const firstDate=()=>env.DB.prepare('SELECT first_followed_at FROM list_follow_history WHERE list_id=?').bind(a.id).first('first_followed_at');
+    const originalDate=await firstDate();
+    await call('/following/'+a.id,'PUT',undefined,1);
+    await call('/following/'+a.id,'DELETE',undefined,1);
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM list_follows WHERE list_id=?').bind(a.id).first('n')).toBe(0);
+    expect(await firstDate()).toBe(originalDate);
+    await call('/following/'+a.id,'PUT',undefined,1);
+    expect(await firstDate()).toBe(originalDate);
+    await call('/following/'+a.id,'DELETE',undefined,1);
+    await call('/pins/'+a.id,'PUT',undefined,1);
+    await call('/pins/'+b.id,'PUT',undefined,1);
+    await apply(trendingMigration);
+    expect(await firstDate()).toBe(originalDate);
+    expect((await directory('?sort=trending')).lists[0].id).toBe(b.id);
+    await call('/following/'+b.id,'DELETE',undefined,1);
+    expect((await directory('?sort=trending')).lists[0].id).toBe(a.id);
+    await env.DB.prepare('DELETE FROM curated_lists WHERE id=?').bind(a.id).run();
+    expect(await firstDate()).toBeNull();
+    await env.DB.prepare('DELETE FROM users WHERE id=2').run();
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM list_follow_history').first('n')).toBe(0);
   });
 });
 

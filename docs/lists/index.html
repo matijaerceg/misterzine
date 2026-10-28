@@ -16,7 +16,7 @@
 <script>var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css">
 <link rel="stylesheet" href="../nav.css?v=7">
-<link rel="stylesheet" href="lists.css?v=20261028">
+<link rel="stylesheet" href="lists.css?v=20261028d">
 </head>
 <body>
 <div class="wrap">
@@ -65,7 +65,7 @@
   <p class="lead">Lists made public by their authors.</p>
   <form id="search-form" class="search-form" role="search">
     <label class="field"><span>Search public lists</span><input id="search" type="search" maxlength="200" placeholder="List name, topic or curator" autocomplete="off"></label>
-    <label class="field"><span>Sort by</span><select id="sort"><option value="updated">Recently updated</option><option value="created">Newest lists</option><option value="followers">Most followed</option></select></label>
+    <label class="field"><span>Sort by</span><select id="sort"><option value="updated">Recently updated</option><option value="created">Newest lists</option><option value="trending">Trending</option></select></label>
     <button class="btn" type="submit">Search</button>
   </form>
   <p id="results-count" class="muted" role="status"></p>
@@ -122,6 +122,6 @@
 </div>
 <script src="../theme.js?v=7"></script>
 <script src="../feedback.js?v=1"></script>
-<script src="lists.js?v=20261028"></script>
+<script src="lists.js?v=20261028b"></script>
 </body>
 </html>

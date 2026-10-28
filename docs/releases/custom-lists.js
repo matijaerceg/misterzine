@@ -1027,7 +1027,6 @@ window.MZLists = (() => {
       const value = event.target.value;
       if (validID(value)) navigate('/releases/?list=' + encodeURIComponent(value));
     };
-    $('collection-menubrowse').onclick = event => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) { event.preventDefault(); navigate(event.currentTarget.href); } };
     $('collection-create').onclick = showCreate;
     $('clcopylist').onclick = () => {
       if (!list || editing) return;

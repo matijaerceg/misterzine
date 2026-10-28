@@ -6,6 +6,15 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-28
 
+- A thin 1px selection outline encloses expanded group headers and their children. Group count badges show larger numbers, with details in their tooltips. The Core Type column is now Type.
+
+- Browse search fields, sort dropdowns and Search buttons now have matching heights, including on narrow screens.
+
+- Table group arrows are larger. Row hover uses a faint outline, and Share this view is an icon button at the right of the filters. Removed the redundant Custom lists menu link and shortened the heading to MiSTer Core Tracker.
+
+- Browse lists replaces Most followed with Trending, based on recent follows with a seven-day half-life. Refollowing does not renew a follow's weight. Recently updated remains the default.
+- Selected table rows use an outline instead of a colored fill. Game rows now have the shaded background and core group headers have the plain background.
+
 - Added basic list spam limits: 200 owned lists, 20 new-list attempts per hour and 120 list-related writes per minute per account.
 
 - Favorites actions, import-banner actions and export-dialog buttons now match the clearer borders and hover styling used by list controls.

@@ -245,13 +245,20 @@ window.MZLists = (() => {
     return res.status === 204 ? null : res.json();
   }
   function errorText(err) { return err instanceof TypeError ? 'Could not reach the list service. ' + (editing && dirty ? 'Your unsaved changes are still here; please try again.' : 'Check your connection and try again.') : err.message; }
+  // Pins that did not fit in the tab strip and live in the Your lists menu instead (see fitStrip).
+  let foldedPins = new Set();
   function updatePicker() {
     if (!started) return;
+    buildPicker();
+    renderPins();
+  }
+  function buildPicker() {
     const picker = $('collection-select'); picker.replaceChildren();
-    const mobile = matchMedia('(max-width: 650px)').matches;
     const pinIDs = new Set((collections.pins || []).map(p => p.id));
     const pinnedRows = (collections.pins || []).map(p => [...collections.owned, ...collections.following].find(r => r.id === p.id) || {...p, unavailable: true});
-    const groups = mobile ? [['Pinned', pinnedRows], ['Your lists', collections.owned.filter(r => !pinIDs.has(r.id))], ['Following', collections.following.filter(r => !pinIDs.has(r.id))]] : [['Your lists', collections.owned], ['Following', collections.following]];
+    const groups = [['Pinned', pinnedRows.filter(r => foldedPins.has(r.id))],
+      ['Your lists', collections.owned.filter(r => !pinIDs.has(r.id) || !foldedPins.has(r.id))],
+      ['Following', collections.following.filter(r => !pinIDs.has(r.id) || !foldedPins.has(r.id))]];
     for (const [label, rows] of groups) {
       if (!rows.length) continue;
       const group = document.createElement('optgroup'); group.label = label;
@@ -264,7 +271,7 @@ window.MZLists = (() => {
     const showCurrent = list && (owner || !editing && visibility() !== 'private') || loadState === 'unavailable' && rememberedList();
     if (mode === 'list' && showCurrent && ![...picker.options].some(o => o.value === id)) picker.append(new Option(list?.title || rememberedList()?.title || 'Unavailable list', id));
     if (!picker.options.length) picker.append(new Option('No saved lists yet', 'empty'));
-    const pinned = !mobile && (collections.pins || []).some(p => p.id === id);
+    const pinned = !foldedPins.has(id) && (collections.pins || []).some(p => p.id === id);  // the current list has its own tab in the strip
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
     $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
     $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? (list?.title || rememberedList()?.title || 'Unavailable list') : 'Your lists';
@@ -282,10 +289,27 @@ window.MZLists = (() => {
         menu.append(button);
       }
     }
-    picker.classList.toggle('active', mode === 'list' && !(collections.pins || []).some(p => p.id === id));
-    renderPins();
+    picker.classList.toggle('active', mode === 'list' && !pinned);
   }
-  matchMedia('(max-width: 650px)').addEventListener('change', () => updatePicker());
+  // Priority+ tab strip: nothing scrolls or wraps. Try full labels, then short labels, then a bare "+" for
+  // Create, then fold pinned tabs from the right into the Your lists menu until the row fits its container.
+  function fitStrip() {
+    const nav = document.querySelector('nav.collections'), strip = nav.querySelector('.collection-tabs');
+    if (!strip.clientWidth) return;
+    const overflow = () => strip.scrollWidth > strip.clientWidth;
+    const pins = [...$('collection-pins').children];
+    const before = [...foldedPins].join();
+    nav.dataset.labels = 'full'; nav.dataset.create = 'full'; nav.dataset.pins = 'wide'; nav.dataset.fit = 'ok';
+    for (const pin of pins) pin.hidden = false;
+    foldedPins = new Set(); buildPicker();
+    if (overflow()) nav.dataset.pins = 'tight';  // long list titles give way before the fixed tabs do
+    if (overflow()) nav.dataset.labels = 'short';
+    if (overflow()) nav.dataset.create = 'icon';
+    for (let i = pins.length - 1; i >= 0 && overflow(); i--) { pins[i].hidden = true; foldedPins.add(pins[i].dataset.id); buildPicker(); }
+    if (overflow()) nav.dataset.fit = 'overflow';  // even the fixed tabs do not fit: let the strip scroll rather than clip
+    if (before !== [...foldedPins].join()) buildPicker();
+  }
+  new ResizeObserver(() => { if (started) fitStrip(); }).observe(document.querySelector('nav.collections'));
   async function refreshCollections() {
     const generation = ++collectionsVersion, token = hooks.token();
     if (!token) { collections = {owned: [], following: []}; following = false; updatePicker(); sync(); return; }
@@ -771,19 +795,14 @@ window.MZLists = (() => {
       tab.textContent = row?.title || pin.title;
       tab.setAttribute('aria-current', mode === 'list' && id === pin.id ? 'page' : 'false');
       tab.title = row && !row.unavailable ? tab.textContent : tab.textContent + ' (unavailable)';
+      tab.dataset.id = pin.id;
       host.append(tab);
       if (!row || row.unavailable) {
         tab.textContent = (row?.title || pin.title || 'List') + ' · Unavailable';
         tab.classList.add('collection-unavailable');
       }
     }
-    requestAnimationFrame(() => {
-      const strip = document.querySelector('.collection-tabs'), active = strip.querySelector('a[aria-current=page], #collection-summary.active');
-      if (!active) return;
-      const tabRect = active.getBoundingClientRect(), stripRect = strip.getBoundingClientRect();
-      if (tabRect.right > stripRect.right) strip.scrollLeft += tabRect.right - stripRect.right;
-      else if (tabRect.left < stripRect.left) strip.scrollLeft -= stripRect.left - tabRect.left;
-    });
+    fitStrip();
   }
   async function switchView(url, fromHistory = false) {
     const target = new URL(url, location.href);

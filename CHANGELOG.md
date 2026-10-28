@@ -4,6 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Collection tabs above the Tracker now fit the window instead of scrolling off the edge: long pinned titles shorten first, then the tab labels, then Create shrinks to a plus sign, and pinned lists that still do not fit move into the Your lists menu under Pinned. The row adjusts live as the window is resized.
 - List editing on phones leaves more room for games, with larger selection targets and secondary tools under More. Unsaved list edits can be recovered on the same device after reloading, bulk selection changes can be undone, and followed lists can be removed directly from My Lists.
 - Game detail panels now have Add to list: choose one of your lists or create a private list with that exact game and core. Adding to the list currently being edited stays in its pending selection until you save.
 - Collections now have a permanent home above the Tracker: switch between all entries, favorites, and your own or followed lists. The Tracker remembers your last collection, while shared links open the collection they specify.

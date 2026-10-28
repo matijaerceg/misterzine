@@ -308,7 +308,7 @@ body:not(.cl-editor) #clbar .clmorebody { left: 0; right: auto; }
 
 /* Folder tabs share the tracker background across their open bottom edge. */
 .collections { padding-bottom: 0; margin-bottom: 0; gap: .4rem; }
-.collection-tabs { flex-wrap: nowrap; min-width: 0; overflow-x: auto; padding-top: 2px; }
+.collection-tabs { flex-wrap: nowrap; min-width: 0; overflow: hidden; padding-top: 2px; }
 .collection-tabs > a, .collection-tabs select, #collection-pins > a { padding: .32rem .65rem; white-space: nowrap; border: 1px solid var(--hair); border-radius: .5rem .5rem 0 0; background: var(--surface); }
 .collection-tabs a[aria-current=page], .collection-tabs select.active { border-bottom: 1px solid var(--surface); background: var(--surface); font-weight: 600; position: relative; z-index: 1; }
 .collection-tabs { margin-bottom: -1px; }
@@ -408,11 +408,16 @@ body.cl-library .controls, body.cl-library #resizer { display: none !important; 
 #collection-picker > summary { max-width: 15rem; }
 #collection-create { color: var(--accent); border: 0; background: transparent; white-space: nowrap; font-weight: 600; }
 #collection-create:hover { border: 0; background: color-mix(in srgb,var(--accent) 10%,transparent); }
+/* Label length, the Create button and which pins stay in the strip are decided by measurement (fitStrip), not by viewport. */
 .collection-short { display: none; }
+.collections[data-labels=short] .collection-full { display: none; }
+.collections[data-labels=short] .collection-short { display: inline; }
+.collections[data-labels=short] #collection-picker summary { max-width: 9rem; }
+.collections[data-create=icon] #collection-create .collection-full, .collections[data-create=icon] #collection-create .collection-short { display: none; }
+#collection-pins > a[hidden] { display: none; }
+.collections[data-pins=tight] #collection-pins > a { max-width: 9rem; }
+.collections[data-fit=overflow] .collection-tabs { overflow-x: auto; }
 @media(max-width:650px) {
- .collection-full { display: none; }
- .collection-short { display: inline; }
- #collection-pins { display: none; }
  .collections .collection-tabs { flex: 1 1 auto; }
  .collection-tabs > a, #collection-picker > summary { padding: .55rem .5rem; font-size: .85rem; }
  #collection-picker > summary { max-width: 9rem; }

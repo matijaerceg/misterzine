@@ -17,8 +17,7 @@ import custom_lists_preview as preview
 
 
 def more(page):
-    if not page.locator("#cldetailsbtn").is_visible() and not page.locator("#clmore").evaluate("element => element.open"):
-        page.locator("#clmoresummary").click()
+    pass  # every editor control is in the open now
 
 
 def bulk(page):
@@ -27,11 +26,8 @@ def bulk(page):
 
 
 def change_title(page, value):
-    more(page)
-    page.locator("#cldetailsbtn").click()
-    expect(page.locator("#cldetails")).to_be_visible()
     page.locator("#cltitle").fill(value)
-    page.locator('#cldetailsform button[type="submit"]').click()
+    page.locator("#cltitle").blur()
     expect(page.locator("#clstate")).to_contain_text("Unsaved")
 
 
@@ -206,7 +202,7 @@ def mobile_tests(browser, base, api, token, prefix, screenshots):
         page.goto(base + "/releases/?editList=" + list_id)
         expect(page.locator("#clname")).to_have_text(fixture["title"])
         page.evaluate("document.fonts.ready")
-        expect(page.locator("#cldetailsbtn")).to_be_visible()
+        expect(page.locator("#cltitle")).to_be_visible()
         expect(page.locator("#clsave")).to_be_visible()
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         header = page.locator("#hrow").bounding_box()
@@ -255,18 +251,13 @@ def mobile_tests(browser, base, api, token, prefix, screenshots):
         assert context.request.get(api + "/lists/" + list_id, headers=auth).json()["keys"] == []
         print("PASS filter-aware bulk counts and one-step add/remove undo restore the exact prior selection without saving")
 
-        if page.locator("#clmore").evaluate("element => element.open"):
-            page.locator("#clmoresummary").tap()
         page.locator("#clsave").tap()
         expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
         page.set_viewport_size({"width": 390, "height": 460})
-        more(page)
-        page.locator("#cldetailsbtn").tap()
         page.locator("#cldescription").fill("A description entered while the keyboard leaves a short viewport.")
-        reachable("#cldetails", '#cldetailsform button[type="submit"]')
+        page.locator("#cldescription").blur()
+        expect(page.locator("#clstate")).to_contain_text("Unsaved")
         capture("details-short-viewport.png")
-        page.locator('#cldetailsform button[type="submit"]').tap()
-        more(page)
         page.locator("#clpublish").tap()
         reachable("#clconfirm", "#clconfirmyes")
         capture("visibility-short-viewport.png")

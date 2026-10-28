@@ -1,3 +1,4 @@
+import re
 """Exercise Browse/Manage as tracker tabs, including responsive layouts."""
 import json
 from pathlib import Path
@@ -17,8 +18,8 @@ def main():
    page.goto(base+'/__preview__/tester');page.goto(base+'/releases/?collection=all');page.wait_for_function('booted');page.evaluate('window.noReload = 123');page.locator('#q').fill('1942')
    page.locator('#collection-browse').click();expect(page.locator('#lib-directory')).to_be_visible();expect(page.locator('#cllayout')).to_be_hidden();expect(page.locator('#cols')).to_be_hidden();expect(page.locator('#resizer')).to_be_hidden()
    page.locator('#lib-search').fill('Library tab workflow');expect(page.locator('#lib-directory-cards')).to_contain_text(row['title']);page.locator('#lib-directory-cards .list-card').filter(has=page.get_by_role('heading',name=row['title'],exact=True)).get_by_role('link',name='View games',exact=True).click();expect(page.locator('#clname')).to_have_text(row['title']);assert page.evaluate('window.noReload')==123
-   expect(page.locator('#collection-summary')).to_have_text(row['title']);assert page.locator('#collection-summary').evaluate("e=>getComputedStyle(e).borderBottomColor == getComputedStyle(e).backgroundColor")
-   page.locator('#clpin').click();expect(page.locator('#collection-summary')).to_have_text('Your lists')
+   expect(page.locator('#collection-summary')).to_have_text('Your lists');expect(page.locator('#collection-summary')).to_have_class(re.compile('(^| )active( |$)'));assert page.locator('#collection-summary').evaluate("e=>getComputedStyle(e).borderBottomColor == getComputedStyle(e).backgroundColor")
+   page.locator('#clpin').click();expect(page.locator('#collection-summary')).to_have_text('Your lists');expect(page.locator('#collection-summary')).not_to_have_class(re.compile('(^| )active( |$)'))
    page.locator('#collection-browse').click();expect(page.locator('#lib-search')).to_have_value('Library tab workflow');expect(page.locator('#lib-directory-cards')).to_contain_text(row['title'])
    page.locator('#lib-directory-cards').get_by_role('link',name='Preview curator',exact=True).click();expect(page.locator('#lib-curator-view')).to_be_visible();page.locator('#collection-browse').click();expect(page.locator('#lib-directory')).to_be_visible();
    page.locator('#collection-manage').click();expect(page.locator('#lib-library')).to_be_visible();page.locator('#lib-owned-cards').get_by_role('heading',name=row['title']).wait_for();assert page.evaluate('window.noReload')==123

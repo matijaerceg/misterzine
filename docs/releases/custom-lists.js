@@ -207,7 +207,7 @@ window.MZLists = (() => {
       hit.append(check);
       li.className = 'clmember'; li.classList.toggle('clnewmember', addedKeys.has(key)); title.textContent = row?.title || 'Unavailable entry';
       detail.textContent = row ? [row.core, row.src && hooks.source(row.src)].filter(Boolean).join(' · ') : key + ' · No longer in the catalogue';
-      text.append(title, detail); remove.type = 'button'; remove.textContent = 'Remove'; remove.dataset.clremove = key;
+      text.append(title, detail); remove.type = 'button'; remove.textContent = 'x'; remove.className = 'clremovebtn'; remove.dataset.clremove = key;
       remove.setAttribute('aria-label', 'Remove ' + (row?.title || key) + (row && detail.textContent ? ' (' + detail.textContent + ')' : '') + ' from this list'); remove.disabled = busy;
       li.append(hit, text, remove); fragment.append(li);
     }
@@ -247,6 +247,7 @@ window.MZLists = (() => {
   function errorText(err) { return err instanceof TypeError ? 'Could not reach the list service. ' + (editing && dirty ? 'Your unsaved changes are still here; please try again.' : 'Check your connection and try again.') : err.message; }
   // Pins that did not fit in the tab strip and live in the Your lists menu instead (see fitStrip).
   let foldedPins = new Set();
+  let syncFields = () => {};
   function updatePicker() {
     if (!started) return;
     buildPicker();
@@ -274,9 +275,9 @@ window.MZLists = (() => {
     const pinned = !foldedPins.has(id) && (collections.pins || []).some(p => p.id === id);  // the current list has its own tab in the strip
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
     $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
-    const brief = document.querySelector('nav.collections').dataset.summary === 'brief';  // fitStrip: no room for the title in the tab
-    $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? (brief ? 'Lists' : list?.title || rememberedList()?.title || 'Unavailable list') : brief ? 'Lists' : 'Your lists';
-    $('collection-summary').title = $('collection-summary').textContent;
+    // The tab keeps a fixed label so it always reads as the list switcher; the bar below names the open list.
+    $('collection-summary').textContent = document.querySelector('nav.collections').dataset.labels === 'short' ? 'Lists' : 'Your lists';
+    $('collection-summary').removeAttribute('title');
     const menu = $('collection-menu'); menu.replaceChildren();
     for (const child of picker.children) {
       if (child.tagName === 'OPTGROUP') {
@@ -300,14 +301,13 @@ window.MZLists = (() => {
     const overflow = () => strip.scrollWidth > strip.clientWidth;
     const pins = [...$('collection-pins').children];
     const before = [...foldedPins].join();
-    nav.dataset.labels = 'full'; nav.dataset.create = 'full'; nav.dataset.pins = 'wide'; nav.dataset.fit = 'ok'; nav.dataset.summary = 'full';
+    nav.dataset.labels = 'full'; nav.dataset.create = 'full'; nav.dataset.pins = 'wide'; nav.dataset.fit = 'ok';
     for (const pin of pins) pin.hidden = false;
     foldedPins = new Set(); buildPicker();
     if (overflow()) nav.dataset.pins = 'tight';  // long list titles give way before the fixed tabs do
-    if (overflow()) nav.dataset.labels = 'short';
+    if (overflow()) { nav.dataset.labels = 'short'; buildPicker(); }
     if (overflow()) nav.dataset.create = 'icon';
     for (let i = pins.length - 1; i >= 0 && overflow(); i--) { pins[i].hidden = true; foldedPins.add(pins[i].dataset.id); buildPicker(); }
-    if (overflow()) { nav.dataset.summary = 'brief'; buildPicker(); }  // the current list's title leaves the tab; the bar below still names it
     if (overflow()) nav.dataset.fit = 'overflow';  // even the fixed tabs do not fit: let the strip scroll rather than clip
     if (before !== [...foldedPins].join()) buildPicker();
   }
@@ -356,6 +356,7 @@ window.MZLists = (() => {
       return;
     }
     $('clname').textContent = list.title;
+    syncFields();
     $('clstate').textContent = visibilityLabel(visibility()) + (editing ? dirty ? ' · Unsaved changes' : ' · Saved' : following && !owner ? ' · Following' : '');
     $('cledit').hidden = !editing || !owner; $('cldone').hidden = !editing;
     $('clsecondary').hidden = !editing || !owner;
@@ -581,10 +582,6 @@ window.MZLists = (() => {
       if (err.status === 401) { $('clsignin').href = signIn(listPath() + '&follow=1'); $('clsignin').hidden = false; }
     } finally { if (session === sessionVersion) { followBusy = false; sync(); } }
   }
-  function showDetails() {
-    if (!list || busy) return;
-    $('cltitle').value = list.title; $('cldescription').value = list.description; $('cldetails').showModal();
-  }
   function showMissing() {
     if (busy || !list) return;
     $('clmissingrows').replaceChildren();
@@ -799,6 +796,24 @@ window.MZLists = (() => {
   }
   const viewMemory = new Map();
   const viewKey = () => mode === 'list' ? id : mode;
+  // Drag the divider to resize the list column; the width is remembered per device.
+  function splitter() {
+    const layout = $('cllayout'), split = $('clsplit');
+    try { const saved = +localStorage.getItem('mz-clws'); if (saved) layout.style.setProperty('--clws', saved + 'px'); } catch (e) {}
+    let dragging = false;
+    split.onpointerdown = event => { dragging = true; split.setPointerCapture(event.pointerId); document.body.classList.add('cl-resizing'); };
+    split.onpointermove = event => {
+      if (!dragging) return;
+      const box = layout.getBoundingClientRect();
+      const width = Math.max(260, Math.min(box.right - event.clientX, box.width * 0.7));
+      layout.style.setProperty('--clws', width + 'px');
+    };
+    split.onpointerup = split.onpointercancel = () => {
+      if (!dragging) return; dragging = false; document.body.classList.remove('cl-resizing');
+      try { localStorage.setItem('mz-clws', parseInt(layout.style.getPropertyValue('--clws')) || ''); } catch (e) {}
+    };
+    split.ondblclick = () => { layout.style.removeProperty('--clws'); try { localStorage.removeItem('mz-clws'); } catch (e) {} };
+  }
   function renderPins() {
     const host = $('collection-pins'); host.replaceChildren();
     for (const pin of collections.pins || []) {
@@ -851,6 +866,10 @@ window.MZLists = (() => {
       $('clworkspace').prepend($('clbar'), $('clmobiletabs'));
       $('clworkspace').append($('panel'));
       $('cljumps').append(document.querySelector('.jumps'));
+      $('clcatalogue').prepend(document.querySelector('.controls'));  // the filters belong to the catalogue, not the list
+      $('cledit').insertBefore($('clpublish'), $('cldiscard'));  // one row of actions
+      $('clsplit').hidden = false;
+      splitter();
     }
     $('clmembers').onclick = event => {
       const check = event.target.closest('input[data-clmark]');
@@ -1006,13 +1025,28 @@ window.MZLists = (() => {
     $('clpublish').onclick = showSharing;
     $('clvisibilityform').onsubmit = submitSharing;
     $('clvisibility').onchange = visibilityInputs;
-    $('cldetailsbtn').onclick = showDetails;
-    $('cldetailsform').onsubmit = event => {
-      event.preventDefault(); const title = $('cltitle').value.trim();
-      if (!title) { $('cltitle').setCustomValidity('Enter a list title.'); $('cltitle').reportValidity(); return; }
-      list.title = title; list.description = $('cldescription').value.trim(); $('cldetails').close(); changed();
+    // In-place title and description: a change commits when the field settles (blur, or Enter in the title).
+    const grow = area => { area.style.height = 'auto'; area.style.height = Math.min(area.scrollHeight, 160) + 'px'; };
+    $('cltitle').onchange = () => {
+      if (!list || !editing || !owner || busy) return;
+      const title = $('cltitle').value.trim();
+      if (!title) { $('cltitle').value = list.title; status('A list needs a title.', true); return; }
+      if (title !== list.title) { list.title = title; changed(); }
     };
-    $('cltitle').oninput = () => $('cltitle').setCustomValidity('');
+    $('cltitle').onkeydown = event => { if (event.key === 'Enter') { event.preventDefault(); $('cltitle').blur(); } };
+    $('cldescription').onchange = () => {
+      if (!list || !editing || !owner || busy) return;
+      const description = $('cldescription').value.trim();
+      if (description !== (list.description || '')) { list.description = description; changed(); }
+    };
+    $('cldescription').oninput = () => grow($('cldescription'));
+    syncFields = () => {
+      $('cleditfields').hidden = !(editing && owner && list);
+      $('clname').hidden = !$('cleditfields').hidden;
+      if (!list) return;
+      if (document.activeElement !== $('cltitle')) $('cltitle').value = list.title;
+      if (document.activeElement !== $('cldescription')) { $('cldescription').value = list.description || ''; grow($('cldescription')); }
+    };
     $('clmissing').onclick = showMissing;
     $('clfollow').onclick = () => setFollowing(!following);
     $('cldescmore').onclick = () => { const d = $('cldesctext'), open = d.classList.toggle('clamped'); $('cldescmore').textContent = open ? 'Show more' : 'Show less'; };

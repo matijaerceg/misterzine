@@ -17,21 +17,18 @@ import custom_lists_preview as preview
 
 
 def reveal(page, selector):
-    if not page.locator(selector).is_visible():
-        page.locator("#clmoresummary").click()
     expect(page.locator(selector)).to_be_visible()
 
 
 def details(page, title=None, description=None):
-    reveal(page, "#cldetailsbtn")
-    page.locator("#cldetailsbtn").click()
-    expect(page.locator("#cldetails")).to_be_visible()
+    # the title and description are edited in place; a change commits when the field loses focus
+    expect(page.locator("#cltitle")).to_be_visible()
     if title is not None:
         page.locator("#cltitle").fill(title)
+        page.locator("#cltitle").blur()
     if description is not None:
         page.locator("#cldescription").fill(description)
-    if title is not None or description is not None:
-        page.locator('#cldetailsform button[type="submit"]').click()
+        page.locator("#cldescription").blur()
 
 
 def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False):
@@ -309,19 +306,18 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
         page.locator("#clundo").click()
         expect_members([first, second, third, missing])
         changed_title = title + " edited"
-        details(page, changed_title, "Pending description")
+        details(page, changed_title, "Pending description")  # two in-place edits: each field commit is its own undo step
         expect(page.locator("#clname")).to_have_text(changed_title)
         expect(page.locator("#clredo")).to_be_disabled()
         page.locator("#clundo").click()
-        expect(page.locator("#clname")).to_have_text(title)
-        details(page)
         expect(page.locator("#cldescription")).to_have_value("Saved description")
-        page.locator("#cldetails [data-clclose]").click()
+        expect(page.locator("#clname")).to_have_text(changed_title)
+        page.locator("#clundo").click()
+        expect(page.locator("#clname")).to_have_text(title)
         page.locator("#clredo").click()
         expect(page.locator("#clname")).to_have_text(changed_title)
-        details(page)
+        page.locator("#clredo").click()
         expect(page.locator("#cldescription")).to_have_value("Pending description")
-        page.locator("#cldetails [data-clclose]").click()
         assert read() == baseline and not puts
         capture("workspace-desktop.png")
         print("PASS desktop full-membership sidepane stays independent of filters; exact selection and title/description undo/redo do not write")
@@ -395,7 +391,6 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
         expect(page.locator("#clredo")).to_be_disabled()
         details(page)
         expect(page.locator("#cldescription")).to_have_value(remote["description"])
-        page.locator("#cldetails [data-clclose]").click()
         assert read() == remote and not puts
         print("PASS current-editor quick-add participates in history; discard cancellation preserves edits and accepted discard loads latest saved revision")
 

@@ -287,8 +287,6 @@ def main():
             expect(page.locator("#clstate")).not_to_contain_text("Unsaved")
 
         def set_visibility(visibility, name=None):
-            if not page.locator("#clpublish").is_visible() and not page.locator("#clmore").evaluate("element => element.open"):
-                page.locator("#clmoresummary").click()
             page.locator("#clpublish").click()
             expect(page.locator("#clconfirm")).to_be_visible()
             page.locator(f'#clvisibility input[value="{visibility}"]').check()

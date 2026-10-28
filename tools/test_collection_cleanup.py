@@ -95,9 +95,8 @@ def main():
             expect(page.locator('.cleditorlabel')).to_be_visible()
             page.screenshot(path=str(shots / 'contained-editor.png'))
             # A normal departure discards; server data is never changed implicitly.
-            page.locator('#cldetailsbtn').click()
             page.locator('#cltitle').fill(prefix + ' unsaved')
-            page.locator('#cldetailsform button[type=submit]').click()
+            page.locator('#cltitle').blur()
             page.reload()
             expect(page.locator('#clname')).to_have_text(copied['title'])
             expect(page.locator('#clsave')).to_be_disabled()

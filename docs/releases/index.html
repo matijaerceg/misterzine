@@ -1275,8 +1275,8 @@
   <div class="collection-tabs">
     <a id="collection-all" href="?collection=all"><span class="collection-full">All entries</span><span class="collection-short">All</span></a>
     <a id="collection-favorites" href="?collection=favorites"><span class="collection-full">Favorites</span><span class="collection-short">Favs</span></a>
-    <span id="collection-pins"></span>
     <details class="cols" id="collection-picker"><summary id="collection-summary">Your lists</summary><div class="menu" id="collection-menu"></div></details>
+    <span id="collection-pins"></span>
     <a id="collection-browse" href="?collection=browse"><span class="collection-full">Browse lists</span><span class="collection-short">Browse</span></a>
     <a id="collection-manage" href="?collection=manage"><span class="collection-full">Manage lists</span><span class="collection-short">Manage</span></a>
 
@@ -1303,6 +1303,11 @@
 <section id="clbar" class="clbar" aria-label="Current collection" hidden>
   <div class="clrow clheading">
     <span class="cleditorlabel">Editing list</span><strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span><span id="clby" class="clby"></span>
+  </div>
+  <!-- editor only: the title and description are edited in place; a change commits when the field loses focus -->
+  <div id="cleditfields" class="cleditfields" hidden>
+    <input id="cltitle" class="cltitle" maxlength="100" placeholder="List title" aria-label="List title" autocomplete="off">
+    <textarea id="cldescription" class="cldescription" maxlength="2000" rows="1" placeholder="Add a description (optional)" aria-label="List description"></textarea>
   </div>
   <!-- view mode only: the list's facts and description sit in the open, above the actions (the editor keeps them under More) -->
   <div id="clabout" class="clabout">
@@ -1336,7 +1341,6 @@
     </details>
   </div>
   <div id="clsecondary" class="clrow" hidden>
-    <button id="cldetailsbtn" type="button">List details</button>
     <button id="clpublish" type="button">Sharing...</button>
   </div>
   <p id="cldraftnote" class="clnote" role="status" hidden></p>
@@ -1552,6 +1556,7 @@
 </div>
 </div>
 </section>
+<div id="clsplit" class="clsplit" role="separator" aria-orientation="vertical" aria-label="Resize the list column" hidden></div>
 <aside id="clworkspace" class="clworkspace" aria-label="List editor" hidden>
   <div class="clmemberarea">
     <div class="clmembershead">
@@ -1561,7 +1566,7 @@
     </div>
     <div id="clmembertools" class="clmembertools">
       <span id="clmarkcount" aria-live="polite">0 selected</span>
-      <button id="clmarkall" type="button" title="Select every entry matching this list search, including entries below Show more">Select all shown</button>
+      <button id="clmarkall" type="button" data-tip="Selects every entry matching this list search, including entries below Show more. Shift-click a box to select a range. Remove can be undone.">Select all shown</button>
       <button id="clmarkremove" type="button" disabled>Remove selected</button>
       <button id="clmarkclear" type="button" disabled>Clear selection</button>
       <button id="clclearsearch" type="button" hidden>Clear search</button>
@@ -1592,15 +1597,6 @@
     <button id="clleavediscard" type="button">Discard &amp; leave</button>
     <button id="clleavekeep" type="button">Keep editing</button>
   </div>
-</dialog>
-<dialog id="cldetails" class="cldialog">
-  <form id="cldetailsform">
-    <h2>List details</h2>
-    <label>Title<input id="cltitle" maxlength="100" required></label>
-    <label>Description <small>(optional)</small><textarea id="cldescription" maxlength="2000"></textarea></label>
-    <p class="clnote">Changes are kept in the editor until you save the list.</p>
-    <div class="clactions"><button type="button" data-clclose>Cancel</button><button class="clprimary" type="submit">Use these details</button></div>
-  </form>
 </dialog>
 <dialog id="clconfirm" class="cldialog" aria-labelledby="clconfirmtitle">
   <form id="clvisibilityform">
@@ -4708,9 +4704,10 @@ for (const dd of document.querySelectorAll('details.cols')) {
 // scrolls). Re-placed on resize while open (orientation flip, soft keyboard).
 function placeSheet() {
   const body = document.getElementById('fbody');
-  const bar = document.querySelector('.topbar').getBoundingClientRect();
+  // the containing block is .topbar on the tracker, but the controls row itself inside the list editor
+  const host = (body.offsetParent || document.querySelector('.topbar')).getBoundingClientRect();
   const ctl = document.querySelector('.controls').getBoundingClientRect();
-  body.style.top = (ctl.bottom - bar.top) + 'px';
+  body.style.top = (ctl.bottom - host.top) + 'px';
   body.style.maxHeight = (document.documentElement.clientHeight - ctl.bottom - 8) + 'px';
 }
 // opening places the sheet; closing also shuts whichever accordion row was open

@@ -23,7 +23,18 @@
 .cldescmore { font: inherit; font-size: .85rem; color: var(--accent); background: none; border: 0; padding: 0; margin: .15rem 0 0; cursor: pointer; }
 .clbar .cldescmore { border: 0; background: none; padding: 0; }
 .clabout .clnote { margin-top: .3rem; }
-body.cl-editor #clabout, body:not(.cl-editor) #clmore { display: none; }
+body.cl-editor #clabout, #clmore { display: none; }
+.cleditfields { display: flex; flex-direction: column; gap: .2rem; flex: 1 1 100%; min-width: 0; }
+.cleditfields[hidden] { display: none; }
+.cltitle, .cleditfields .cldescription { display: block; width: 100%; box-sizing: border-box; font: inherit; color: var(--fg); background: transparent; border: 1px solid transparent; border-radius: .3rem; padding: .15rem .35rem; margin: 0 -.35rem; resize: none; overflow: hidden; }
+.cltitle { font-weight: 600; font-size: 1.05rem; }
+.cleditfields .cldescription { font-size: .88rem; line-height: 1.35; max-height: 160px; overflow: auto; }
+.cltitle:hover, .cleditfields .cldescription:hover { border-color: var(--hair); }
+.cltitle:focus, .cleditfields .cldescription:focus { outline: none; border-color: var(--accent); background: var(--surface); }
+.cltitle::placeholder, .cleditfields .cldescription::placeholder { color: var(--muted); font-weight: 400; }
+.clsplit { display: none; }
+body.cl-resizing { cursor: col-resize; user-select: none; }
+body.cl-resizing .cllayout * { pointer-events: none; }
 .clbar .clspacer { flex: 1; }
 .clworkrow { display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
 #cledit { flex: 1; }
@@ -123,8 +134,7 @@ body.cl-editor #clabout, body:not(.cl-editor) #clmore { display: none; }
   .clname { flex: 1 1 100%; line-height: 1.2; }
   .clstate { font-size: .78rem; }
   .clworkrow, #cledit { gap: .35rem; }
-  #cledit { flex-wrap: nowrap; }
-  #clselected, #clsave, .clmore > summary { white-space: nowrap; font-size: .85rem; }
+  #clselected, #clsave { white-space: nowrap; font-size: .85rem; }
   .clmorebody { width: min(26rem, calc(100vw - 2rem)); }
   .clstatus { font-size: .8rem; }
 }
@@ -137,7 +147,9 @@ body.cl-editor #clabout, body:not(.cl-editor) #clmore { display: none; }
 #clworkspace[hidden], #clbulkbar[hidden], #clmobiletabs[hidden], .clmemberarea [hidden] { display: none !important; }
 .clworkspace, .clmobiletabs { display: none; }
 .cl-editor main { container: clmain / inline-size; }
-.cl-editor .cllayout { display: grid; grid-template-columns: minmax(0, 57fr) minmax(20rem, 43fr); }
+.cl-editor .cllayout { display: grid; grid-template-columns: minmax(0, 1fr) 7px minmax(0, var(--clws, 43%)); }
+.cl-editor .clsplit { display: block; cursor: col-resize; background: linear-gradient(var(--hair), var(--hair)) center / 1px 100% no-repeat; }
+.cl-editor .clsplit:hover, body.cl-resizing .clsplit { background: color-mix(in srgb, var(--accent) 35%, transparent); }
 .cl-editor .clworkspace { display: flex; flex-direction: column; min-width: 0; min-height: 0; border-left: 1px solid var(--hair); background: var(--bg); }
 /* Compact left dock on roomy screens; a separate details view when three
    usable columns cannot fit. Never cover the catalogue or replace the list. */
@@ -164,6 +176,7 @@ body.cl-editor #panel .close { min-width: 44px; min-height: 44px; background: va
    requested, then show an explicit full-width details view with return tabs. */
 @media (min-width: 897px) and (max-width: 1199px) {
   .cl-editor.cl-detail-view .cllayout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
+  .cl-editor.cl-detail-view .clsplit { display: none; }
   .cl-editor.cl-detail-view .clworkspace { display: contents; }
   .cl-editor.cl-detail-view #clbar { grid-column: 1; grid-row: 1; }
   .cl-editor.cl-detail-view .clmobiletabs { display: flex; grid-column: 1; grid-row: 2; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); }
@@ -187,40 +200,44 @@ body.cl-editor #resizer, body.cl-editor .fbtab { display: none; }
 .cl-editor .jumps { position: static; display: flex; gap: .4rem; }
 .cl-editor .jumps button { margin: 0; border-radius: .35rem; box-shadow: none; }
 
-/* A shared editor toolbar remains above the member list on desktop and above
-   either tab on phones. Metadata controls remain visible below the main actions. */
-.cl-editor #clbar { position: relative; flex: none; padding: .65rem .75rem; border-top: 0; border-bottom: 1px solid var(--hair); background: var(--surface); }
-.cl-editor .clheading { min-width: 0; padding-right: 4.5rem; gap: .15rem .5rem; }
+/* The editor toolbar sits above the member list on desktop and above either tab on phones:
+   label + state, the title and description edited in place, then one row of actions. */
+.cl-editor #clbar { position: relative; flex: none; padding: .5rem .75rem .55rem; border-top: 0; border-bottom: 1px solid var(--hair); background: var(--surface); }
+.cl-editor .clheading { min-width: 0; gap: .1rem .5rem; align-items: baseline; }
+.cl-editor .cleditorlabel { flex: none; }
+.cl-editor .clstate { font-size: .78rem; margin-left: auto; }
 .cl-editor .clname { flex: 1 1 100%; font-size: 1rem; line-height: 1.25; }
-.cl-editor .clstate { font-size: .8rem; }
-.cl-editor .clworkrow { display: block; margin-top: .55rem; }
-.cl-editor #cledit { display: flex; flex-wrap: wrap; gap: .35rem; }
+.cl-editor .clworkrow { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin-top: .45rem; }
+.cl-editor #cledit { display: contents; }
+.cl-editor #clsecondary { display: contents; }
+.cl-editor #clbar button, .cl-editor #clbar .cllink { padding: .3rem .55rem; font-size: .88rem; }
 .cl-editor #clsave { margin-left: 0; }
 .cl-editor #clsave, .cl-editor #cldone { font-weight: 600; }
 .cl-editor #cldone { border-color: var(--accent); }
-.cl-editor #cldiscard, .cl-editor #clundo, .cl-editor #clredo { margin: 0; }
 .cl-editor #cldiscard { margin-left: auto; }
-.cl-editor #clsecondary { gap: .4rem; padding: 0; margin: .5rem 0 0; border: 0; }
-.cl-editor #clsecondary button { font-size: .85rem; }
-.cl-editor #cldraftnote { margin: .45rem 0 0; font-size: .78rem; }
-.cl-editor .clmore { position: absolute; top: .65rem; right: .75rem; margin: 0; }
-.cl-editor .clmore > summary { font-size: .8rem; }
-.cl-editor .clmorebody { max-width: calc(100vw - 2rem); width: min(28rem, calc(100vw - 2rem)); }
+.cl-editor #cldraftnote { margin: .35rem 0 0; font-size: .78rem; }
 .cl-editor .clviewactions { margin-top: .35rem; }
+/* The catalogue column keeps the filters. It is a "topbar" container of its own, so the controls fold
+   into the Filters sheet by the column's width, exactly as they do by the header's width elsewhere. */
+.cl-editor .clcatalogue { container: topbar / inline-size; position: relative; }  /* also the Filters sheet's containing block */
+.cl-editor .clcatalogue > .controls { position: relative; flex-wrap: wrap; padding: .45rem .75rem; margin: 0; border-bottom: 1px solid var(--hair); }
+.cl-editor .clcatalogue > .controls > * { flex-shrink: 1; }
+.cl-editor .clcatalogue > .controls .filters { flex: 1 1 0; min-width: 0; }
 .clrecovery:not(:has(> :not([hidden]))) { display: none; }
 
 .clmemberarea { flex: 1 1 auto; min-height: 0; min-width: 0; display: flex; flex-direction: column; }
-.clmembershead { flex: none; padding: .65rem .75rem; border-bottom: 1px solid var(--hair); }
-.clmembershead h2 { margin: 0 0 .4rem; font-size: 1rem; font-weight: 600; }
+.clmembershead { flex: none; display: flex; align-items: center; gap: .6rem; padding: .4rem .75rem; border-bottom: 1px solid var(--hair); }
+.clmembershead h2 { margin: 0; font-size: .95rem; font-weight: 600; white-space: nowrap; }
 .clmemberlabel { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-#clmembersearch { display: block; width: 100%; padding: .4rem .55rem; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; }
+#clmembersearch { display: block; flex: 1 1 auto; min-width: 0; width: auto; padding: .3rem .5rem; font: inherit; font-size: .9rem; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; }
 .clmemberscroll { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; scroll-padding: .5rem; }
 .clmembers { margin: 0; padding: 0; list-style: none; }
-.clmember { display: flex; align-items: center; gap: .7rem; padding: .65rem .75rem; border-bottom: 1px solid var(--hair); }
-.clmember > div { flex: 1 1 auto; min-width: 0; }
-.clmember strong { display: block; font-weight: 500; overflow-wrap: anywhere; }
-.clmember small { display: block; margin-top: .15rem; color: var(--muted); overflow-wrap: anywhere; }
-.clmember button { flex: none; font-size: .85rem; }
+.clmember { display: flex; align-items: center; gap: .4rem; padding: .1rem .5rem .1rem .25rem; border-bottom: 1px solid var(--hair); }
+.clmember > div { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .5rem; }
+.clmember strong { font-weight: 500; overflow-wrap: anywhere; }
+.clmember small { color: var(--muted); font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: .85rem; overflow-wrap: anywhere; }
+.clmember .clremovebtn { flex: none; width: 1.6rem; height: 1.6rem; padding: 0; line-height: 1; font-size: .9rem; color: var(--muted); background: transparent; border-color: transparent; }
+.clmember .clremovebtn:hover, .clmember .clremovebtn:focus-visible { color: var(--fg); border-color: var(--accent); background: var(--surface); }
 .clmemberempty { margin: 0; padding: 1rem .75rem; color: var(--muted); overflow-wrap: anywhere; }
 #clmembersmore { display: block; margin: .75rem auto; }
 
@@ -240,6 +257,7 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
   .cl-editor .collections, .cl-editor .collection-intro, .cl-editor .masthead .updated { display: none; }
   .cl-editor.cl-mobile-list .controls, .cl-editor.cl-detail-view .controls { display: none; }
   .cl-editor .cllayout { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
+  .cl-editor .clsplit { display: none; }
   .cl-editor .clworkspace { display: contents; }
   .cl-editor #clbar { grid-column: 1; grid-row: 1; padding: .45rem .65rem; }
   .cl-editor .clcatalogue, .cl-editor .clmemberarea { grid-column: 1; grid-row: 3; }
@@ -250,13 +268,11 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
   .cl-editor.cl-mobile-list .clcatalogue, .cl-editor.cl-detail-view .clcatalogue { display: none; }
   .cl-editor.cl-mobile-list .clmemberarea { display: flex; }
   body.cl-editor #panel { grid-column: 1; grid-row: 3; }
-  .cl-editor .clheading { padding-right: 4.2rem; }
   .cl-editor .clname { font-size: .95rem; }
-  .cl-editor #cledit { gap: .3rem; }
-  .cl-editor #cledit button, .cl-editor #cledit .cllink { padding: .3rem .45rem; font-size: .85rem; }
+  .cl-editor .cleditfields .cldescription:not(:focus) { max-height: calc(2.7em + .3rem + 2px); overflow: hidden; }  /* two lines on a phone; focus opens it */
+  .cl-editor .clworkrow { gap: .3rem; }
+  .cl-editor #clbar button, .cl-editor #clbar .cllink { padding: .3rem .45rem; font-size: .85rem; }
   .cl-editor #cldiscard { margin-left: 0; }
-  .cl-editor .clmore { top: .45rem; right: .65rem; }
-  .cl-editor .clmore > summary { padding: .3rem .45rem; }
   .cl-editor .clbulkbar { gap: .35rem; padding: .4rem .65rem; }
   .cl-editor .clbulkbar button, .cl-editor .clbulktools > summary { padding: .3rem .45rem; font-size: .8rem; }
   .cl-editor .clbulktools { position: static; }
@@ -285,11 +301,12 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
   body.cl-editor main { height: 44rem; }
 }
 
-.clmembertools { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; padding: .4rem .65rem; border-bottom: 1px solid var(--hair); }
-.clmembertools small { flex-basis: 100%; color: var(--muted); }
+.clmembertools { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; padding: .3rem .65rem; border-bottom: 1px solid var(--hair); font-size: .85rem; }
+.clmembertools small { display: none; }  /* the hint lives on Select all shown as a hover tip */
 .clmembertools button { font: inherit; font-size: .8rem; padding: .35rem .5rem; color: var(--fg); background: var(--surface); border: 1px solid var(--hair); border-radius: .35rem; cursor: pointer; }
 .clmembertools button:disabled { opacity: .5; cursor: default; }
-.clmarkhit { display: flex; align-items: center; justify-content: center; min-width: 32px; min-height: 44px; cursor: pointer; }
+.clmarkhit { display: flex; align-items: center; justify-content: center; min-width: 32px; min-height: 30px; cursor: pointer; }
+@media (pointer: coarse) { .clmarkhit { min-height: 44px; } .clmember .clremovebtn { width: 2.4rem; height: 2.4rem; } }
 .clmarkhit input { width: 18px; height: 18px; accent-color: var(--accent); }
 .clnewmember { box-shadow: inset 3px 0 var(--accent); }
 @container (max-width: 54rem) { .clmembertools button { min-height: 44px; } .clmembertools small { font-size: .75rem; } }
@@ -303,7 +320,7 @@ body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, 
 #favmanagement summary { border: 1px solid var(--hair); border-radius: .35rem; }
 #favcopy[hidden], #favlegacy[hidden], #favlegacyinfo[hidden] { display: none !important; }
 .cleditorlabel { display: none; }
-.cl-editor .cleditorlabel { display: block; flex-basis: 100%; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+.cl-editor .cleditorlabel { display: block; flex: 1 1 auto; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
 .cl-editor .clworkspace { margin: .4rem; border: 1px solid var(--accent); border-radius: .6rem; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 8%, transparent); }
 .cl-editor #clbar { border-radius: .6rem .6rem 0 0; }
 body:not(.cl-editor) #clbar .clheading { flex: 0 1 auto; }
@@ -354,7 +371,7 @@ body:not(.cl-editor) #clbar { border-top: 0; }
 .collections { border-bottom-color: var(--accent); }
 #collection-pins > a[aria-current=page], .collection-tabs > a[aria-current=page] { color: var(--accent); border-color: var(--accent); border-bottom-color: var(--surface); background: var(--surface); font-weight: 600; }
 #collection-picker { align-self: center; order: 1; margin-bottom: .3rem; flex: none; }
-#collection-picker summary { max-width: min(20rem, 65vw); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#collection-picker summary { white-space: nowrap; }
 #collection-menu { min-width: 15rem; max-width: min(25rem, calc(100vw - 2rem)); }
 #collection-menu button { display: block; width: 100%; text-align: left; white-space: normal; }
 #collection-menu button[aria-current=page] { color: var(--accent); font-weight: 600; }
@@ -420,11 +437,12 @@ body.cl-library .controls, body.cl-library #resizer { display: none !important; 
 #collection-picker > summary { max-width: 15rem; }
 #collection-create { color: var(--accent); border: 0; background: transparent; white-space: nowrap; font-weight: 600; }
 #collection-create:hover { border: 0; background: color-mix(in srgb,var(--accent) 10%,transparent); }
+/* The strip is set in the condensed face: room there is scarce. */
+.collection-tabs > a, #collection-pins > a, #collection-picker > summary, #collection-create { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; font-size: 1rem; letter-spacing: .01em; }
 /* Label length, the Create button and which pins stay in the strip are decided by measurement (fitStrip), not by viewport. */
 .collection-short { display: none; }
 .collections[data-labels=short] .collection-full { display: none; }
 .collections[data-labels=short] .collection-short { display: inline; }
-.collections[data-labels=short] #collection-picker summary { max-width: 9rem; }
 .collections[data-create=icon] #collection-create .collection-full, .collections[data-create=icon] #collection-create .collection-short { display: none; }
 #collection-pins > a[hidden] { display: none; }
 .collections[data-pins=tight] #collection-pins > a { max-width: 9rem; }

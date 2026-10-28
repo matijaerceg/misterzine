@@ -528,7 +528,7 @@ body.cl-library .collection-tabs > a[aria-current=page] { background: var(--bg);
 #collection-library .is-following { border-color: var(--accent); color: var(--accent); }
 
 /* A little more definition for controls, without changing divider lines. */
-.controls button, .controls select, .controls input, .controls details.cols > summary,
+/* the tracker's own toolbar controls (.ctl in releases/index.html) carry this border themselves */
 .clbar button, .clbar .cllink, .cldialog button, .clbulkbar button, .clmembertools button,
 #favmanagement button, #favbanner button, #favexp .fx-in button, #iniexp .fx-in button {
  border-color: color-mix(in srgb, var(--hair) 78%, var(--fg));

@@ -47,6 +47,9 @@
      hues, status colors, shadow/watermark tokens) live in ../theme.css — the
      single source of truth for every theme. This block speaks only in tokens. */
   * { box-sizing: border-box; }
+  /* one keyboard focus ring for every control, the same as the other pages
+     (nav.css, landing, lists); rules that need another offset (.cf) override */
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   /* app shell: the page itself never scrolls — .tablewrap is the only scroll
      container. This keeps the fixed detail panel and every native scroll
      behavior (scrollbars, scrollIntoView, find-in-page) framed to the table
@@ -111,17 +114,42 @@
   /* the Patches menu made the one-line filter bar ~110px wider; between the
      phone layout and ~1500px of topbar tighten the gaps and summary padding so
      it still fits one line down to 1366px (search keeps its 12rem floor) */
+  /* ---- .ctl: the ONE chrome every control in the row wears (filter summaries,
+     Filters, Clear, the favorites and Group batches segments, the view-link
+     icon). Size steps are the --ctl-* knobs on .controls, set once per layout
+     here and in the 867px container block, so a new control only needs
+     class="ctl" to match its neighbours: no per-element font/padding lists.
+     The border is a notch darker than --hair (78% hair over fg, the
+     "definition" the lists work added) so the outlines read on every theme.
+     Variants below keep what differs on purpose: Clear's armed solid fill,
+     the favorites/batches group border, the square icon button. Outside the
+     row (the tab strip's "Your lists" summary) the fallbacks give the plain
+     --hair chrome the strip's own rules then reshape. */
+  .controls { --ctl-fs: .85rem; --ctl-lh: 1.26rem; --ctl-py: .4rem; --ctl-px: .7rem;
+              --ctl-border: color-mix(in srgb, var(--hair) 78%, var(--fg)); }
   @container topbar (min-width: 868px) and (max-width: 1468px) {
     .controls, .filters { gap: .3rem; }
-    .controls details.cols > summary { padding-left: .5rem; padding-right: .5rem; }
+    .controls { --ctl-px: .5rem; }
   }
-  #shareview { display: inline-flex; align-items: center; justify-content: center; flex: none; order: 5;
-    width: 2rem; height: 2rem; padding: .35rem; border: 1px solid var(--hair); border-radius: 4px;
-    background: transparent; color: var(--fg); cursor: pointer; }
-  #shareview span { width: 1rem; height: 1rem; background: currentColor;
-    mask: url(../lists/icons/share.svg) center / contain no-repeat; }
-  #shareview:hover { background: var(--hover-bg); }
-  #shareview:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ctl { font: inherit; font-size: var(--ctl-fs, .9rem); line-height: var(--ctl-lh, normal);
+         padding: var(--ctl-py, .4rem) var(--ctl-px, .7rem); border: 1px solid var(--ctl-border, var(--hair)); border-radius: 4px;
+         background: transparent; color: inherit; cursor: pointer; }
+  .ctl:hover { background: var(--hover-bg); }
+  /* narrowing state: the accent2 tint (falls back to the accent), the same
+     glow a non-empty search box gets */
+  .ctl.active { border-color: var(--accent2, var(--accent));
+                background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
+  .ctl.active:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
+  /* square icon button: as tall as the text controls (same line-height and
+     vertical padding), square via aspect-ratio, the glyph a currentColor mask
+     set per button through --ico */
+  .ctl.icon { display: inline-flex; align-items: center; justify-content: center; flex: none;
+              padding: var(--ctl-py, .4rem); height: calc(var(--ctl-lh, 1.26rem) + 2 * var(--ctl-py, .4rem) + 2px); aspect-ratio: 1; }
+  .ctl.icon .ico { width: 1.15em; height: 1.15em; background: currentColor;
+                   -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+  /* "copy a link to this view": last in the row. The id avoids the word
+     "share" on purpose: ad blockers hide elements named like share widgets. */
+  #viewlink { order: 5; --ico: url(../lists/icons/share.svg); }
   .ctrlsep { flex: none; align-self: center; width: 1px; height: 1.5rem; background: var(--hair); }
   /* the divider before Columns spans the full row height (stretches down with any
      wrapped filter rows); Columns itself top-aligns with the filters, not centered */
@@ -176,42 +204,31 @@
      solid accent fill with --accent-on text (the pair with a contrast floor,
      as on the panel's Launch button) and a small x in front, so "press me to
      undo" stands apart from the filters' accent tint. */
-  button.clear { --clx: .75rem; --clpad: .7rem;
-                 font: inherit; font-size: .9rem; padding: .4rem var(--clpad); cursor: pointer;
-                 border: 1px solid var(--hair); border-radius: 4px; background: transparent; color: inherit;
-                 opacity: .75; }
+  .ctl.clear { --clx: .75rem; opacity: .75; }
   /* pointer-events: none so a click on the ghost still reaches the document
      and light-dismisses an open dropdown (a disabled button swallows clicks) */
-  button.clear:disabled { opacity: .4; cursor: default; pointer-events: none; }
-  button.clear:not(:disabled):hover { background: var(--hover-bg); }
-  button.clear .clx { display: inline-block; width: var(--clx); font-size: .85em; font-weight: 700; }
-  button.clear.active { opacity: 1; border-color: var(--accent); background: var(--accent); color: var(--accent-on); }
-  button.clear.active:hover { background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
+  .ctl.clear:disabled { opacity: .4; cursor: default; pointer-events: none; }
+  .ctl.clear .clx { display: inline-block; width: var(--clx); font-size: .85em; font-weight: 700; }
+  .ctl.clear.active { opacity: 1; border-color: var(--accent); background: var(--accent); color: var(--accent-on); }
+  .ctl.clear.active:hover { background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
   /* the phone "Filters" fold (.fsheet): on wide layouts the wrapper and its
      body dissolve (display: contents), so the five dropdowns + Clear stay direct
      flex items of .filters exactly as before, and the Filters button is not
      rendered. The narrow container block further down turns it into a single
-     button with a drop-down sheet. The button's own reset sits BEFORE the
-     summary chrome below so the shared font-size/padding win over it. */
+     button with a drop-down sheet. Chrome, caret and glow come from .ctl and
+     the summary rules below (the button carries class="ctl"). */
   .fsheet, .fsheet .fbody { display: contents; }
-  #filterssum { display: none; font: inherit; background: transparent; color: inherit; }
-  /* "Columns" dropdown: opt-in arcade metadata columns (default all off); the
-     Filters button borrows the summaries' chrome, caret and glow */
+  #filterssum { display: none; }
+  /* "Columns" dropdown: opt-in arcade metadata columns (default all off).
+     Every details.cols summary is a .ctl in the markup; this rule adds only
+     what a disclosure needs on top: no marker, the caret, and the open state
+     holding the hover tint. (A narrowing filter's .active tint is .ctl's.) */
   details.cols { position: relative; }
-  details.cols summary, #filterssum { list-style: none; cursor: pointer; user-select: none; font-size: .9rem;
-                         padding: .4rem .7rem; border: 1px solid var(--hair); border-radius: 4px; }
+  details.cols summary { list-style: none; user-select: none; }
   details.cols summary::-webkit-details-marker { display: none; }
   details.cols summary::after, #filterssum::after { content: " ▾"; color: var(--muted); }
-  details.cols summary:hover, details.cols[open] summary,
-  #filterssum:hover, .fsheet.open #filterssum { background: var(--hover-bg); }
-  /* a Types/Year filter that's narrowing results tints its summary with the same
-     accent as a non-empty search box, so an active filter stays obvious with the
-     menu closed (Columns is a display pref, not a filter, so it never glows).
-     Filters glows the same way while anything inside it narrows. */
-  details.cols summary.active, #filterssum.active { border-color: var(--accent2, var(--accent));
-                                background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
-  details.cols summary.active:hover, details.cols[open] summary.active,
-  #filterssum.active:hover, .fsheet.open #filterssum.active {
+  details.cols[open] summary, .fsheet.open #filterssum { background: var(--hover-bg); }
+  details.cols[open] summary.active, .fsheet.open #filterssum.active {
                                 background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
   details.cols .menu { position: absolute; top: calc(100% + 4px); left: 0; z-index: 30;
                        background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
@@ -261,15 +278,13 @@
      sit in the filter row. Growing counts push right into the row's own gap, so
      unlike the theme summary this needs no measured width lock — just a floor
      wide enough that 0->9 doesn't twitch, and tabular digits so 10->11 doesn't. */
-  .favctl { display: inline-flex; align-self: center; border: 1px solid var(--hair); border-radius: 4px; }
-  .favctl > button { font: inherit; font-size: .9rem; padding: .4rem .55rem;
-                     border: 0; border-radius: 3px 0 0 3px; background: transparent; color: inherit;
-                     cursor: pointer; min-width: 3.4em; text-align: center;
-                     font-variant-numeric: tabular-nums; }
-  .favctl > button:disabled { color: var(--muted); cursor: default; }
-  .favctl > button:not(:disabled):hover { background: var(--hover-bg); }
-  .favctl details.cols summary { border: 0; border-left: 1px solid var(--hair);
-                                 border-radius: 0 3px 3px 0; padding: .4rem .45rem; }
+  .favctl { display: inline-flex; align-self: center; border: 1px solid var(--ctl-border, var(--hair)); border-radius: 4px;
+            --ctl-px: .55rem; }
+  .favctl > .ctl { border: 0; border-radius: 3px 0 0 3px; min-width: 3.4em; text-align: center;
+                   font-variant-numeric: tabular-nums; }
+  .favctl > .ctl:disabled { color: var(--muted); cursor: default; background: transparent; }
+  .favctl details.cols summary { border: 0; border-left: 1px solid var(--ctl-border, var(--hair));
+                                 border-radius: 0 3px 3px 0; padding-inline: .45rem; }
   /* narrowing state wears the same accent as the other filters' summaries; it's
      the group that glows, since the border is the group's, not the segment's */
   .favctl.active { border-color: var(--accent2, var(--accent)); }
@@ -560,8 +575,9 @@
            letter-spacing: 0; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; }
   /* since-visit dot: the row was added to the site, or got a new build, since
-     the previous visit (see isUnseen). One accent-colored dot before the title
-     under ANY sort, where the old divider line only worked under the default
+     the previous visit (see isUnseen). One accent-colored dot AFTER the title
+     (before any pills; 2026-10-28, it used to lead the title and indented
+     every dotted row's text against its undotted neighbours) under ANY sort, where the old divider line only worked under the default
      order and fenced in unchanged rows that merely sorted above the last
      changed one. Hover explains which kind via the shared popover. The dot
      is drawn small (.36em) inside a transparent padding ring, so the hover
@@ -569,7 +585,7 @@
      under the page's border-box the padding would eat the dot instead. */
   td .sv { display: inline-block; box-sizing: content-box; width: .36em; height: .36em; padding: .07em; border-radius: 50%;
            background: var(--accent); background-clip: content-box;
-           margin-right: .35rem; vertical-align: middle;
+           margin-left: .3rem; vertical-align: middle;
            position: relative; top: -.05em; }
   /* Patreon-beta chip: the NEW badge's pill, but dashed and muted — "not fully
      here yet" rather than "look at me". Hover explains via the shared popover. */
@@ -1122,12 +1138,11 @@
     #filterssum { display: inline-block; order: 2; flex: none; }
     .favctl { order: 3; }
     #cols { order: 4; align-self: center; }
-    /* a notch tighter so the row fits a ~390px phone. Only the HORIZONTAL padding
-       is trimmed (.7 -> .45): the vertical stays .35rem, so the tap targets keep
-       their height. */
-    details.cols summary, #filterssum, button.clear, .favctl > button { font-size: .85rem; padding: .35rem .45rem; }
-    button.clear { --clpad: .45rem; }
-    .favctl > button { min-width: 3em; }
+    /* a notch tighter so the row fits a ~390px phone: smaller type, the
+       HORIZONTAL padding trimmed (.7 -> .45) and the vertical to .35rem. One
+       set of knobs for every .ctl (the favorites group drops its own .55). */
+    .controls, .favctl { --ctl-fs: .8rem; --ctl-lh: 1.19rem; --ctl-py: .35rem; --ctl-px: .45rem; }
+    .favctl > .ctl { min-width: 3em; }
     /* the fold: closed, the body is gone; open, it drops under the controls row
        as a full-width sheet and scrolls inside itself (the page never scrolls).
        top and max-height are set per open by placeSheet(), since the row above
@@ -1201,17 +1216,9 @@
     .tablezone::after { display: none; }
     .tablewrap { overflow: visible; }
   }
-  /* Slightly quieter toolbar text; retain the controls' original line-box height. */
-  .controls input[type=search], .controls details.cols > summary,
-  .controls #filterssum, .controls button.clear, .controls .favctl > button {
-    font-size: .85rem; line-height: 1.26rem;
-  }
-  @container topbar (max-width: 867px) {
-    .controls details.cols > summary, .controls #filterssum,
-    .controls button.clear, .controls .favctl > button {
-      font-size: .8rem; line-height: 1.19rem;
-    }
-  }
+  /* the search box keeps the wide text size on every layout (its line box
+     matches the .ctl row on desktop; phones leave it a touch taller) */
+  .controls input[type=search] { font-size: .85rem; line-height: 1.26rem; }
 </style>
 <!-- GoatCounter analytics (privacy-friendly, no cookies). Views from the
      installed app have no referrer of their own, so label them "pwa" --
@@ -1295,7 +1302,7 @@
   <div class="collection-tabs">
     <a id="collection-all" href="?collection=all"><span class="collection-full">All entries</span><span class="collection-short">All</span></a>
     <a id="collection-favorites" href="?collection=favorites"><span class="collection-full">Favorites</span><span class="collection-short">Favs</span></a>
-    <details class="cols" id="collection-picker"><summary id="collection-summary">Your lists</summary><div class="menu" id="collection-menu"></div></details>
+    <details class="cols" id="collection-picker"><summary id="collection-summary" class="ctl">Your lists</summary><div class="menu" id="collection-menu"></div></details>
     <span id="collection-pins"></span>
     <a id="collection-browse" href="?collection=browse"><span class="collection-full">Browse lists</span><span class="collection-short">Browse</span></a>
     <a id="collection-manage" href="?collection=manage"><span class="collection-full">Manage lists</span><span class="collection-short">Manage</span></a>
@@ -1393,22 +1400,22 @@
          whatever their display, and this wrapper is NOT details.cols, so the
          dropdown light-dismiss logic never sees it. -->
     <div class="fsheet" id="filtersdd">
-      <button type="button" id="filterssum" aria-expanded="false" aria-controls="fbody">Filters</button>
+      <button type="button" id="filterssum" class="ctl" aria-expanded="false" aria-controls="fbody">Filters</button>
       <div class="fbody" id="fbody">
         <details class="cols" id="typedd">
-          <summary id="typesummary">Type</summary>
+          <summary id="typesummary" class="ctl">Type</summary>
           <div class="menu" id="typemenu"></div>
         </details>
         <details class="cols" id="srcdd">
-          <summary id="srcsummary">Source</summary>
+          <summary id="srcsummary" class="ctl">Source</summary>
           <div class="menu" id="srcmenu"></div>
         </details>
         <details class="cols" id="genredd">
-          <summary id="genresummary">Genre</summary>
+          <summary id="genresummary" class="ctl">Genre</summary>
           <div class="menu" id="genremenu"></div>
         </details>
         <details class="cols" id="yeardd">
-          <summary id="yearsummary">Year</summary>
+          <summary id="yearsummary" class="ctl">Year</summary>
           <div class="menu" id="yearmenu"></div>
         </details>
         <!-- "Group batches" (core batches): games that shipped an update together
@@ -1419,17 +1426,17 @@
              Lives in the filter cluster so it rides the phone Filters sheet too
              (as its own button in the row, it crushed the search box at 390px). -->
         <div class="favctl" id="batchctl">
-          <button type="button" id="batchtoggle" aria-pressed="true"
+          <button type="button" id="batchtoggle" class="ctl" aria-pressed="true"
                   data-tip="Fold games that shipped an update together into one row per core. Under the MiSTer Debut sort, games that debuted together instead. Applies to the Build Date, Changed on MZ and MiSTer Debut sorts. Remembered between visits.">Group batches</button>
         </div>
-        <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
+        <button type="button" id="clear" class="ctl clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
       </div>
     </div>
     <!-- favorites: the left segment filters the list down to starred rows, the
          caret opens the housekeeping (backup link, clear). Same split shape as
          the theme toggle in the header. -->
     <div class="favctl" id="favctl">
-      <button type="button" id="favtoggle" aria-pressed="false" disabled
+      <button type="button" id="favtoggle" class="ctl" aria-pressed="false" disabled
               data-tip="Star an entry to save it here">&#9733; 0</button>
 
     </div>
@@ -1439,10 +1446,10 @@
        them. The tally lives inside .searchwrap above. -->
   <span class="ctrlsep tall" aria-hidden="true"></span>
   <details class="cols" id="cols">
-    <summary data-tip="Columns">Col.</summary>
+    <summary class="ctl" data-tip="Columns">Col.</summary>
     <div class="menu" id="colsmenu"></div>
   </details>
-  <button type="button" id="shareview" aria-label="Share this view" data-tip="Copy a link to this view: search, filters, sort and open game"><span aria-hidden="true"></span></button>
+  <button type="button" id="viewlink" class="ctl icon" aria-label="Copy a link to this view" data-tip="Copy a link to this view: search, filters, sort and open game"><span class="ico" aria-hidden="true"></span></button>
 </div>
 <!-- shown only when the URL carries a ?fav= list: someone opening a shared link
      is here to look, so the list is filtered to it and adopting it stays a choice -->
@@ -2711,7 +2718,7 @@ function titleCell(d) {
     const debut = batchIsDebut(d);
     const when = d.by === 'date' ? d.date : d.updated;  // the date the pile shares
     // <wbr> lets the chip wrap to the next line instead of splitting a word
-    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + batchLabel(d, debut) +
+    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + batchLabel(d, debut) + dot +
       '<wbr><span class="gc" role="img" aria-label="' + (n === t ? n : n + ' of ' + t) + ' games" data-tip="' + escA(n === t
         ? n + ' games on this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped an update together') +
           ' (' + when + '). Select the row to list them.'
@@ -2725,7 +2732,7 @@ function titleCell(d) {
     // d.split = every build of the game when some of them sit
     // under their core's batch row instead ("N of M cores")
     const n = d.members.length, t = d.split || n;
-    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + dot + esc(d.title) +
+    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + esc(d.title) + dot +
       '<span class="gc" role="img" aria-label="' + (n === t ? n : n + ' of ' + t) + ' cores" data-tip="' + escA(n === t ? 'This game ships on ' + n + ' cores. Select the row to list them.'
         : 'This game ships on ' + t + ' cores. ' + n + ' are listed here; the other builds sit under their core update rows. Select the row to list these ' + n + '.') + '">' +
       n + '</span>' + newBadge(d) + matBadge(d);
@@ -2734,7 +2741,7 @@ function titleCell(d) {
   const fav = !d.k ? ''
     : CAN_HOVER ? favBtnHTML(d)
     : isFav(d) ? '<span class="fav on" aria-hidden="true">★</span>' : '';
-  return fav + dotHTML(d) + esc(d.title) + newBadge(d) + betaBadge(d) + matBadge(d) + dep;
+  return fav + esc(d.title) + dotHTML(d) + newBadge(d) + betaBadge(d) + matBadge(d) + dep;
 }
 
 function repoURL(d) { return d.repo ? 'https://github.com/' + d.repo : ''; }
@@ -4452,7 +4459,7 @@ function shareView(e) {
   else if (canSheet) sheet();
   else showChip(b, 'Copy failed');
 }
-document.getElementById('shareview').addEventListener('click', shareView);
+document.getElementById('viewlink').addEventListener('click', shareView);
 
 // --- favorites -> update_all export dialog -----------------------------------
 // Terms come from each row's `ft` (stamped by export-web from the live

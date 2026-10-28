@@ -150,7 +150,7 @@
   /* "copy a link to this view": last in the row. The id avoids the word
      "share" on purpose: ad blockers hide elements named like share widgets. */
   #viewlink { order: 5; --ico: url(../lists/icons/share.svg); }
-  .ctrlsep { flex: none; align-self: center; width: 1px; height: 1.5rem; background: var(--hair); }
+  .ctrlsep { flex: none; align-self: center; width: 1px; height: 1.5rem; background: var(--ctl-border, var(--hair)); }  /* same tone as the controls' borders */
   /* the divider before Columns spans the full row height (stretches down with any
      wrapped filter rows); Columns itself top-aligns with the filters, not centered */
   .ctrlsep.tall { align-self: stretch; height: auto; }
@@ -224,6 +224,7 @@
      what a disclosure needs on top: no marker, the caret, and the open state
      holding the hover tint. (A narrowing filter's .active tint is .ctl's.) */
   details.cols { position: relative; }
+  #cols summary .n { display: none; }   /* the phone spelling; the 867px block swaps it in */
   details.cols summary { list-style: none; user-select: none; }
   details.cols summary::-webkit-details-marker { display: none; }
   details.cols summary::after, #filterssum::after { content: " ▾"; color: var(--muted); }
@@ -1135,6 +1136,8 @@
     .filters { display: contents; }
     .searchwrap { order: 1; flex: 1 1 7rem; min-width: 0; }
     .ctrlsep.tall { display: none; }   /* no room for the divider on one row */
+    #cols summary .w { display: none; }   /* "Columns" -> "Col." on phones, like the status line's .w/.n swap */
+    #cols summary .n { display: inline; }
     #filterssum { display: inline-block; order: 2; flex: none; }
     .favctl { order: 3; }
     #cols { order: 4; align-self: center; }
@@ -1446,7 +1449,7 @@
        them. The tally lives inside .searchwrap above. -->
   <span class="ctrlsep tall" aria-hidden="true"></span>
   <details class="cols" id="cols">
-    <summary class="ctl" data-tip="Columns">Col.</summary>
+    <summary class="ctl" data-tip="Choose which columns to show"><span class="w">Columns</span><span class="n">Col.</span></summary>
     <div class="menu" id="colsmenu"></div>
   </details>
   <button type="button" id="viewlink" class="ctl icon" aria-label="Copy a link to this view" data-tip="Copy a link to this view: search, filters, sort and open game"><span class="ico" aria-hidden="true"></span></button>

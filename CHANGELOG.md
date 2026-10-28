@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- The Columns button in the tracker toolbar is spelled out on desktop (Col. stays on phones), and the divider beside it matches the buttons' outlines.
+
 - The tracker's toolbar controls share one look again: the copy-link button is the same height and outline as its neighbours, and every control gets the same keyboard focus ring.
 
 - The since-your-last-visit dot now follows each title instead of leading it, so dotted and undotted rows line up.

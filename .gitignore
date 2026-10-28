@@ -41,6 +41,7 @@ __pycache__/
 
 # account service (Cloudflare Worker): local secrets + wrangler state
 api/.dev.vars
+.wrangler/
 api/.wrangler/
 api/node_modules/
 

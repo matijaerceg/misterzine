@@ -34,6 +34,7 @@
     }catch(e){if(dialog===d)message.textContent=e.message;}
   }
   function paint(){
+    if(session!==token()){states.clear();check();return;}
     var menu=document.querySelector('#menudd > .mlist')||document.querySelector('#menudd .mlist'), toggle=document.getElementById('mz-admin-toggle');
     if(admin&&menu&&!toggle){toggle=node('button');toggle.id='mz-admin-toggle';toggle.type='button';menu.append(toggle);toggle.onclick=()=>{enabled=!enabled;try{localStorage.setItem('mz-admin-mode',enabled?'1':'0');}catch(e){}close();paint();notify();};}
     if(toggle&&!admin){toggle.remove();toggle=null;}

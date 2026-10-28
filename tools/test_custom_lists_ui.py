@@ -359,8 +359,9 @@ def main():
             assert public_list()["follower_count"] == 1
             following.goto(base + "/lists/?view=mine")
             followed_card = following.locator("#following-cards .list-card").filter(has=following.get_by_role("heading", name=title, exact=True))
-            followed_card.get_by_role("button", name="Stop following " + title, exact=True).click()
-            expect(followed_card).to_have_count(0)
+            followed_card.get_by_role("button", name="Following", exact=True).click()
+            expect(followed_card).to_be_visible()
+            expect(followed_card.get_by_role("button", name="Follow list", exact=True)).to_be_visible()
             assert public_list()["follower_count"] == 0
             following.goto(base + "/releases/?list=" + list_id)
             following.locator("#clfollow").click()

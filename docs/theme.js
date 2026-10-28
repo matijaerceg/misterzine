@@ -68,9 +68,16 @@
     return a && !a.closest('td') ? a : null;
   }
   function leaveTip(e) { var a = tipTarget(e); if (a && !a.contains(e.relatedTarget)) closeTip(); }
+  // data-tip-delay="900" holds a hover tip back for that many ms (a glance across the element shows nothing)
+  var tipTimer = null;
   if (matchMedia('(hover: hover)').matches) {
-    document.addEventListener('mouseover', function (e) { var a = tipTarget(e); if (a) openTip(a); });
-    document.addEventListener('mouseout', leaveTip);
+    document.addEventListener('mouseover', function (e) {
+      var a = tipTarget(e); if (!a) return;
+      var delay = +a.getAttribute('data-tip-delay') || 0;
+      clearTimeout(tipTimer);
+      if (delay) tipTimer = setTimeout(function () { if (a.matches(':hover')) openTip(a); }, delay); else openTip(a);
+    });
+    document.addEventListener('mouseout', function (e) { if (tipTarget(e)) clearTimeout(tipTimer); leaveTip(e); });
   }
   document.addEventListener('focusin', function (e) { var a = tipTarget(e); if (a) openTip(a); });
   document.addEventListener('focusout', leaveTip);

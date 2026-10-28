@@ -13,6 +13,17 @@
 .clbar button:disabled, .cldialog button:disabled { opacity: .5; cursor: default; }
 .clbar .clprimary, .cldialog .clprimary { color: var(--accent-on); background: var(--accent); border-color: var(--accent); }
 .clbar button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
+/* View-mode header: title · state · credit, then facts, then the description in the open, then plain actions. */
+.clby { color: var(--muted); font-size: .85rem; }
+.clby a { color: inherit; }
+.clabout { flex: 1 1 100%; min-width: 0; }
+.clabout .clmeta { margin: 0; }
+.cldescription { margin: .3rem 0 0; font-size: .9rem; white-space: pre-wrap; overflow-wrap: anywhere; max-width: 60rem; }
+.cldescription.clamped { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: normal; }
+.cldescmore { font: inherit; font-size: .85rem; color: var(--accent); background: none; border: 0; padding: 0; margin: .15rem 0 0; cursor: pointer; }
+.clbar .cldescmore { border: 0; background: none; padding: 0; }
+.clabout .clnote { margin-top: .3rem; }
+body.cl-editor #clabout, body:not(.cl-editor) #clmore { display: none; }
 .clbar .clspacer { flex: 1; }
 .clworkrow { display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
 #cledit { flex: 1; }
@@ -219,6 +230,7 @@ body:not(.cl-editor) #clbar { display: flex; flex-wrap: wrap; align-items: cente
 body:not(.cl-editor) #clbar .clheading { flex: 1 1 auto; gap: .3rem .5rem; }
 body:not(.cl-editor) #clbar .clname { flex: initial; }
 body:not(.cl-editor) #clbar .clviewactions, body:not(.cl-editor) #clbar .clworkrow { margin: 0; }
+body:not(.cl-editor) #clbar .clviewactions { flex: 1 1 100%; margin-top: .15rem; }
 body:not(.cl-editor) #clbar .clmore { margin: 0; }
 body:not(.cl-editor) #clbar > .clstatus, body:not(.cl-editor) #clbar > .clnote, body:not(.cl-editor) #clbar > .clrecovery { flex: 1 1 100%; margin-top: 0; }
 
@@ -422,8 +434,9 @@ body.cl-library .controls, body.cl-library #resizer { display: none !important; 
  .collection-tabs > a, #collection-picker > summary { padding: .55rem .5rem; font-size: .85rem; }
  #collection-picker > summary { max-width: 9rem; }
  #collection-create { min-height: 44px; padding-inline: .3rem; }
- body:not(.cl-editor) #clbar .clviewactions, #favmanagement .fav-actions { flex-wrap: nowrap; overflow-x: auto; padding-bottom: .25rem; }
- body:not(.cl-editor) #clbar .clviewactions > *, #favmanagement .fav-actions > * { flex-shrink: 0; white-space: nowrap; }
+ #favmanagement .fav-actions { flex-wrap: nowrap; overflow-x: auto; padding-bottom: .25rem; }
+ #favmanagement .fav-actions > * { flex-shrink: 0; white-space: nowrap; }
+ body:not(.cl-editor) #clbar .clviewactions > * { white-space: nowrap; }
 }
 body.cl-library .collection-tabs > a[aria-current=page] { background: var(--bg); border-bottom-color: var(--bg); }
 /* Draw the shared baseline above inactive tab corners, not behind them. */

@@ -274,7 +274,8 @@ window.MZLists = (() => {
     const pinned = !foldedPins.has(id) && (collections.pins || []).some(p => p.id === id);  // the current list has its own tab in the strip
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
     $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
-    $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? (list?.title || rememberedList()?.title || 'Unavailable list') : 'Your lists';
+    const brief = document.querySelector('nav.collections').dataset.summary === 'brief';  // fitStrip: no room for the title in the tab
+    $('collection-summary').textContent = picker.value && picker.value !== 'manage' ? (brief ? 'Lists' : list?.title || rememberedList()?.title || 'Unavailable list') : brief ? 'Lists' : 'Your lists';
     $('collection-summary').title = $('collection-summary').textContent;
     const menu = $('collection-menu'); menu.replaceChildren();
     for (const child of picker.children) {
@@ -299,13 +300,14 @@ window.MZLists = (() => {
     const overflow = () => strip.scrollWidth > strip.clientWidth;
     const pins = [...$('collection-pins').children];
     const before = [...foldedPins].join();
-    nav.dataset.labels = 'full'; nav.dataset.create = 'full'; nav.dataset.pins = 'wide'; nav.dataset.fit = 'ok';
+    nav.dataset.labels = 'full'; nav.dataset.create = 'full'; nav.dataset.pins = 'wide'; nav.dataset.fit = 'ok'; nav.dataset.summary = 'full';
     for (const pin of pins) pin.hidden = false;
     foldedPins = new Set(); buildPicker();
     if (overflow()) nav.dataset.pins = 'tight';  // long list titles give way before the fixed tabs do
     if (overflow()) nav.dataset.labels = 'short';
     if (overflow()) nav.dataset.create = 'icon';
     for (let i = pins.length - 1; i >= 0 && overflow(); i--) { pins[i].hidden = true; foldedPins.add(pins[i].dataset.id); buildPicker(); }
+    if (overflow()) { nav.dataset.summary = 'brief'; buildPicker(); }  // the current list's title leaves the tab; the bar below still names it
     if (overflow()) nav.dataset.fit = 'overflow';  // even the fixed tabs do not fit: let the strip scroll rather than clip
     if (before !== [...foldedPins].join()) buildPicker();
   }
@@ -347,14 +349,14 @@ window.MZLists = (() => {
     }
     if (!list || editing && !owner) {
       $('clname').textContent = editing ? 'Edit list' : rememberedList()?.title || (loadState === 'unavailable' ? 'Unavailable list' : loadState === 'error' ? 'Could not load list' : 'Loading collection...');
-      $('clstate').textContent = ''; $('clattribution').replaceChildren();
-      $('cldescriptionview').textContent = '';
+      $('clstate').textContent = ''; $('clattribution').replaceChildren(); $('clby').replaceChildren();
+      $('cldescriptionview').textContent = ''; $('clmeta').textContent = ''; $('cldesctext').textContent = ''; $('cldesctext').hidden = $('cldescmore').hidden = $('clhint').hidden = true;
       $('clnote').textContent = '';
       for (const element of ['cldescriptionfold', 'cledit', 'clsecondary', 'cldone', 'cleditlink', 'cllinkcopy', 'clcopylist', 'clfollow', 'clmissing', 'cllatest', 'cldraftnote', 'cldiscard', 'clempty']) $(element).hidden = true;
       return;
     }
     $('clname').textContent = list.title;
-    $('clstate').textContent = visibilityLabel(visibility()) + (editing ? dirty ? ' · Unsaved changes' : ' · Saved' : '');
+    $('clstate').textContent = visibilityLabel(visibility()) + (editing ? dirty ? ' · Unsaved changes' : ' · Saved' : following && !owner ? ' · Following' : '');
     $('cledit').hidden = !editing || !owner; $('cldone').hidden = !editing;
     $('clsecondary').hidden = !editing || !owner;
     $('clmoresummary').textContent = editing ? 'More' : 'About this list';
@@ -368,30 +370,40 @@ window.MZLists = (() => {
     $('clfollow').hidden = editing || owner || visibility() === 'private';
     $('clfollow').disabled = followBusy;
     $('clfollow').textContent = following ? (collections.pins || []).some(p => p.id === id) ? 'Unfollow & unpin' : 'Unfollow' : 'Follow list';
-    $('clfollow').setAttribute('aria-pressed', String(following));
     $('clselected').textContent = selectedOnly ? 'Show all games' : 'Show only list entries';
     $('clselected').setAttribute('aria-pressed', selectedOnly);
     $('clsave').textContent = 'Save changes';
     $('clsave').disabled = busy || !dirty;
     $('clpublish').textContent = 'Visibility…';
     const attribution = $('clattribution'); attribution.replaceChildren();
+    const by = $('clby'); by.replaceChildren();
     const name = list.curator && list.curator.name || list.byline;
-    if (name) {
-      attribution.append(document.createTextNode('By '));
+    const credit = () => {
+      const frag = document.createDocumentFragment(); frag.append('by ');
       if (list.curator && list.curator.id) {
-        const link = document.createElement('a'); link.textContent = name; link.href = '?collection=browse&curator=' + encodeURIComponent(list.curator.id); link.onclick = event => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && !event.button) { event.preventDefault(); navigate(link.href); } }; attribution.append(link);
-      } else attribution.append(document.createTextNode(name));
-      attribution.append(document.createTextNode(' · '));
-    }
+        const link = document.createElement('a'); link.textContent = name; link.href = '?collection=browse&curator=' + encodeURIComponent(list.curator.id); link.onclick = event => { if (!event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && !event.button) { event.preventDefault(); navigate(link.href); } }; frag.append(link);
+      } else frag.append(name);
+      return frag;
+    };
+    if (name) { by.append(credit()); attribution.append(credit(), ' · '); }
     const followers = list.follower_count || 0;
-    attribution.append(document.createTextNode(selected.size + (selected.size === 1 ? ' entry' : ' entries') + ' · ' + followers + (followers === 1 ? ' follower' : ' followers') + ' · Updated ' + new Date(list.updated_at).toLocaleDateString()));
+    const stamp = new Date(list.updated_at), updated = isNaN(stamp) ? '' : stamp.toISOString().slice(0, 10);  // the site's date spelling, not the locale's
+    const facts = selected.size + (selected.size === 1 ? ' entry' : ' entries') + (visibility() === 'private' ? '' : ' · ' + followers + (followers === 1 ? ' follower' : ' followers')) + (updated ? ' · updated ' + updated : '');  // a private list cannot have followers
+    attribution.append(document.createTextNode(facts));
+    $('clmeta').textContent = facts;
     $('cldescriptionfold').hidden = !list.description;
     $('cldescriptionview').textContent = list.description;
+    const description = $('cldesctext');
+    if (description.textContent !== (list.description || '')) { description.textContent = list.description || ''; description.classList.add('clamped'); }
+    description.hidden = !list.description;
+    $('cldescmore').hidden = true;
+    if (list.description && description.classList.contains('clamped') && !editing) requestAnimationFrame(() => { $('cldescmore').hidden = description.scrollHeight <= description.clientHeight + 1; });
     $('clnote').textContent = editing
       ? 'Tick games in the catalogue to add them. Your list stays visible here as you search and filter. ' + (visibility() === 'private' ? 'Your list is private unless you change its visibility.' : 'Saving updates the same shared list.')
       : !selected.size ? (owner ? 'This list is empty. Choose Edit list to start adding entries.' : 'This list has no entries yet. Its owner can add them later.')
       : !hooks.visible().length ? 'No saved entries are visible with your current filters and visibility settings. Try clearing filters or review entries not shown below.'
-      : 'Search and filters apply within this collection.';
+      : '';
+    $('clhint').textContent = editing ? '' : $('clnote').textContent; $('clhint').hidden = !$('clhint').textContent;
     const n = missing().length;
     $('clmissing').hidden = !n; $('clmissing').disabled = busy;
     $('clmissing').textContent = n + (n === 1 ? ' saved entry is' : ' saved entries are') + ' not shown in the Tracker · Review';
@@ -1003,6 +1015,7 @@ window.MZLists = (() => {
     $('cltitle').oninput = () => $('cltitle').setCustomValidity('');
     $('clmissing').onclick = showMissing;
     $('clfollow').onclick = () => setFollowing(!following);
+    $('cldescmore').onclick = () => { const d = $('cldesctext'), open = d.classList.toggle('clamped'); $('cldescmore').textContent = open ? 'Show more' : 'Show less'; };
     $('cllinkcopy').onclick = async () => {
       const url = location.origin + listPath();
       try { await navigator.clipboard.writeText(url); status('Share link copied.'); } catch (_) { status('Copy this link: ' + url); }

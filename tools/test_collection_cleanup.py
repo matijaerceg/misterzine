@@ -32,7 +32,7 @@ def main():
             page.evaluate("key => localStorage.setItem('mz-favs', JSON.stringify([key]))", first)
             page.goto(base + '/releases/?collection=all#' + second)
             page.reload()
-            expect(page.locator('#collection-favorites')).to_have_text('Favorites (1)')
+            expect(page.locator('#collection-favorites .collection-full')).to_have_text('Favorites (1)')
             expect(page.locator('#favlegacyinfo')).to_be_visible()
             page.locator('#panel button.fav').first.click()
             expect(page.locator('#favsignin')).to_be_visible()

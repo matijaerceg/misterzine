@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- A list's header now shows its description in the open, under the title, instead of two clicks away behind About this list. The curator credit sits beside the title, the entry count, follower count and update date (in the site's date spelling) on the line below, and the actions last. Follow is a plain button with the Following state shown as a word next to Public, Copy to my lists is now Save a copy, and the action row wraps on phones instead of scrolling.
+- The "Updated N hours ago" tooltip in the header waits almost a second before appearing and shows only the exact local time.
 - Collection tabs above the Tracker now fit the window instead of scrolling off the edge: long pinned titles shorten first, then the tab labels, then Create shrinks to a plus sign, and pinned lists that still do not fit move into the Your lists menu under Pinned. The row adjusts live as the window is resized.
 - List editing on phones leaves more room for games, with larger selection targets and secondary tools under More. Unsaved list edits can be recovered on the same device after reloading, bulk selection changes can be undone, and followed lists can be removed directly from My Lists.
 - Game detail panels now have Add to list: choose one of your lists or create a private list with that exact game and core. Adding to the list currently being edited stays in its pending selection until you save.

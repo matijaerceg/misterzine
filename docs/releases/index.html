@@ -1211,7 +1211,7 @@
       <div class="titleblock">
         <h1><a href="?collection=all" id="brandlink" class="titlelink" data-tip="Back to a fresh list (reloads /releases/: clears filters, sort and the deep link)"><span class="long">MiSTer Core Tracker &amp; Launcher</span><span class="short">Core Tracker &amp; Launcher</span></a></h1>
         <!-- status line: data clock + since-visit tallies, filled by stampMeta / syncStatus -->
-        <p class="updated" id="updated"></p>
+        <p class="updated" id="updated" data-tip-delay="900"></p>
       </div>
     </div>
     <div class="hctl">
@@ -1302,13 +1302,20 @@
 <p id="collection-notice" class="clstatus" role="status" hidden></p>
 <section id="clbar" class="clbar" aria-label="Current collection" hidden>
   <div class="clrow clheading">
-    <span class="cleditorlabel">Editing list</span><strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span>
+    <span class="cleditorlabel">Editing list</span><strong id="clname" class="clname"></strong><span id="clstate" class="clstate"></span><span id="clby" class="clby"></span>
+  </div>
+  <!-- view mode only: the list's facts and description sit in the open, above the actions (the editor keeps them under More) -->
+  <div id="clabout" class="clabout">
+    <p id="clmeta" class="clnote clmeta"></p>
+    <p id="cldesctext" class="cldescription" hidden></p>
+    <button id="cldescmore" type="button" class="cldescmore" hidden>Show more</button>
+    <p id="clhint" class="clnote" hidden></p>
   </div>
   <div class="clrow clviewactions">
-    <button id="clpin" type="button" hidden>Pin as tab</button>
-    <button id="clfollow" type="button" hidden>Follow list</button>
     <a id="cleditlink" class="cllink" href="#" hidden>Edit list</a>
-    <button id="clcopylist" type="button" hidden>Copy to my lists</button>
+    <button id="clfollow" type="button" hidden>Follow list</button>
+    <button id="clpin" type="button" hidden>Pin as tab</button>
+    <button id="clcopylist" type="button" hidden>Save a copy</button>
     <button id="cllinkcopy" type="button" hidden>Copy share link</button>
   </div>
   <div class="clworkrow">
@@ -2096,7 +2103,7 @@ function syncStatus() {
   // behind the relative "Updated 3 hours ago". The visit sentence is already
   // under the cursor in full, so repeating it there was pure noise.
   const p = document.getElementById('updated');
-  if (metaFull) p.dataset.tip = 'Updated ' + metaFull + '.'; else p.removeAttribute('data-tip');
+  if (metaFull) p.dataset.tip = metaFull; else p.removeAttribute('data-tip');  // the line already says "Updated"; the tip adds only the exact time
 }
 
 // Human-friendly names for the FPGA core (rbf) values. Keyed on the raw rbf;

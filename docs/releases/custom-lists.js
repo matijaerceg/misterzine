@@ -279,17 +279,22 @@ window.MZLists = (() => {
     $('collection-summary').textContent = document.querySelector('nav.collections').dataset.labels === 'short' ? 'Lists' : 'Your lists';
     $('collection-summary').removeAttribute('title');
     const menu = $('collection-menu'); menu.replaceChildren();
+    const item = option => {
+      const button = document.createElement('button'); button.type = 'button'; button.className = 'reset';
+      button.textContent = option.textContent; button.disabled = option.disabled || option.value === 'empty';
+      button.setAttribute('aria-current', option.value === picker.value ? 'page' : 'false');
+      button.onclick = () => { $('collection-picker').open = false; picker.value = option.value; picker.dispatchEvent(new Event('change')); };
+      return button;
+    };
+    const current = picker.value ? [...picker.options].find(o => o.value === picker.value) : null;
+    if (current) { const lead = item(current); lead.classList.add('collection-current'); menu.append(lead); }  // the open list leads, with a check
     for (const child of picker.children) {
+      const options = [...(child.tagName === 'OPTGROUP' ? child.children : [child])].filter(o => o !== current);
+      if (!options.length) continue;
       if (child.tagName === 'OPTGROUP') {
         const heading = document.createElement('strong'); heading.className = 'collection-group'; heading.textContent = child.label; menu.append(heading);
       }
-      for (const option of child.tagName === 'OPTGROUP' ? child.children : [child]) {
-        const button = document.createElement('button'); button.type = 'button'; button.className = 'reset';
-        button.textContent = option.textContent; button.disabled = option.disabled || option.value === 'empty';
-        button.setAttribute('aria-current', option.value === picker.value ? 'page' : 'false');
-        button.onclick = () => { $('collection-picker').open = false; picker.value = option.value; picker.dispatchEvent(new Event('change')); };
-        menu.append(button);
-      }
+      for (const option of options) menu.append(item(option));
     }
     picker.classList.toggle('active', mode === 'list' && !pinned);
   }
@@ -349,7 +354,7 @@ window.MZLists = (() => {
     }
     if (!list || editing && !owner) {
       $('clname').textContent = editing ? 'Edit list' : rememberedList()?.title || (loadState === 'unavailable' ? 'Unavailable list' : loadState === 'error' ? 'Could not load list' : 'Loading collection...');
-      $('clstate').textContent = ''; $('clattribution').replaceChildren(); $('clby').replaceChildren();
+      $('clstate').textContent = ''; $('clattribution').replaceChildren();
       $('cldescriptionview').textContent = ''; $('clmeta').textContent = ''; $('cldesctext').textContent = ''; $('cldesctext').hidden = $('cldescmore').hidden = $('clhint').hidden = true;
       $('clnote').textContent = '';
       for (const element of ['cldescriptionfold', 'cledit', 'clsecondary', 'cldone', 'cleditlink', 'cllinkcopy', 'clcopylist', 'clfollow', 'clmissing', 'cllatest', 'cldraftnote', 'cldiscard', 'clempty']) $(element).hidden = true;
@@ -357,7 +362,8 @@ window.MZLists = (() => {
     }
     $('clname').textContent = list.title;
     syncFields();
-    $('clstate').textContent = visibilityLabel(visibility()) + (editing ? dirty ? ' · Unsaved changes' : ' · Saved' : following && !owner ? ' · Following' : '');
+    $('clstate').textContent = editing ? visibilityLabel(visibility()) + (dirty ? ' · Unsaved changes' : ' · Saved')
+      : visibility() === 'unlisted' || visibility() === 'private' && owner ? visibilityLabel(visibility()) : '';  // public is the default and needs no badge
     $('cledit').hidden = !editing || !owner; $('cldone').hidden = !editing;
     $('clsecondary').hidden = !editing || !owner;
     $('clmoresummary').textContent = editing ? 'More' : 'About this list';
@@ -377,7 +383,6 @@ window.MZLists = (() => {
     $('clsave').disabled = busy || !dirty;
     $('clpublish').textContent = 'Visibility…';
     const attribution = $('clattribution'); attribution.replaceChildren();
-    const by = $('clby'); by.replaceChildren();
     const name = list.curator && list.curator.name || list.byline;
     const credit = () => {
       const frag = document.createDocumentFragment(); frag.append('by ');
@@ -386,12 +391,15 @@ window.MZLists = (() => {
       } else frag.append(name);
       return frag;
     };
-    if (name) { by.append(credit()); attribution.append(credit(), ' · '); }
+    if (name) attribution.append(credit(), ' · ');
     const followers = list.follower_count || 0;
     const stamp = new Date(list.updated_at), updated = isNaN(stamp) ? '' : stamp.toISOString().slice(0, 10);  // the site's date spelling, not the locale's
-    const facts = selected.size + (selected.size === 1 ? ' entry' : ' entries') + (visibility() === 'private' ? '' : ' · ' + followers + (followers === 1 ? ' follower' : ' followers')) + (updated ? ' · updated ' + updated : '');  // a private list cannot have followers
+    // One line: who, when, and how many follow. The entry count is the search box's job; a private list has no followers.
+    const facts = (updated ? 'updated ' + updated : '') + (followers && visibility() !== 'private' ? ' · ' + followers + (followers === 1 ? ' follower' : ' followers') : '');
     attribution.append(document.createTextNode(facts));
-    $('clmeta').textContent = facts;
+    const meta = $('clmeta'); meta.replaceChildren();
+    if (name) meta.append(credit(), facts ? ' · ' : '');
+    meta.append(facts);
     $('cldescriptionfold').hidden = !list.description;
     $('cldescriptionview').textContent = list.description;
     const description = $('cldesctext');
@@ -1049,6 +1057,13 @@ window.MZLists = (() => {
     };
     $('clmissing').onclick = showMissing;
     $('clfollow').onclick = () => setFollowing(!following);
+    // The menu is a folder: it opens flush under the Your lists tab (the shared positionMenu leaves a 4px gap).
+    $('collection-picker').addEventListener('toggle', () => {
+      const dd = $('collection-picker'), menu = $('collection-menu'); if (!dd.open) return;
+      const rect = $('collection-summary').getBoundingClientRect();
+      menu.style.top = (rect.bottom - 1) + 'px';
+      if (Math.abs(parseFloat(menu.style.left) - rect.left) < 2) menu.style.left = rect.left + 'px';
+    });
     $('cldescmore').onclick = () => { const d = $('cldesctext'), open = d.classList.toggle('clamped'); $('cldescmore').textContent = open ? 'Show more' : 'Show less'; };
     $('cllinkcopy').onclick = async () => {
       const url = location.origin + listPath();

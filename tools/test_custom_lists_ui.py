@@ -387,7 +387,7 @@ def main():
             saved()
             assert public_list()["keys"] == keys
             following.reload()
-            expect(following.locator("#clmeta")).to_contain_text("3")
+            expect(following.locator("#count")).to_contain_text("3")  # the entry count lives in the search tally, not the list header
             before = get_list()
             response = owner.request.put(api + "/lists/" + list_id, headers=auth(), data={
                 key: before[key] for key in ["title", "description", "keys", "visibility", "version"]

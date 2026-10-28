@@ -14,8 +14,7 @@
 .clbar .clprimary, .cldialog .clprimary { color: var(--accent-on); background: var(--accent); border-color: var(--accent); }
 .clbar button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
 /* View-mode header: title · state · credit, then facts, then the description in the open, then plain actions. */
-.clby { color: var(--muted); font-size: .85rem; }
-.clby a { color: inherit; }
+.clmeta a { color: inherit; }
 .clabout { flex: 1 1 100%; min-width: 0; }
 .clabout .clmeta { margin: 0; }
 .cldescription { margin: .3rem 0 0; font-size: .9rem; white-space: pre-wrap; overflow-wrap: anywhere; max-width: 60rem; }
@@ -391,6 +390,12 @@ body:not(.cl-editor) .jumps button:disabled { display: none; }
 #collection-picker > summary { border-radius: .5rem .5rem 0 0; border-bottom-color: var(--accent); padding: .32rem .65rem; font-size: inherit; background: var(--surface); }
 #collection-picker > summary.active { border-color: var(--accent); border-bottom-color: var(--surface); background: var(--surface); color: var(--accent); font-weight: 600; }
 #collection-menu { position: fixed; z-index: 50; }
+/* Open, the tab becomes the top of its menu: same surface, no bottom edge, corner over the menu's border. */
+#collection-picker[open] > summary { position: relative; z-index: 51; background: var(--surface); border-color: var(--hair); border-bottom-color: var(--surface); }
+#collection-picker[open] > summary.active { border-color: var(--accent); border-bottom-color: var(--surface); }
+#collection-picker[open] > #collection-menu { border-top-left-radius: 0; margin: 0; }
+#collection-menu > .collection-current { padding-bottom: .4rem; margin-bottom: .2rem; border-bottom: 1px solid var(--hair); }
+#collection-menu button[aria-current=page]::before { content: '\2713\00a0'; }
 .collection-tabs { flex: 0 1 auto; max-width: 100%; }
 body.cl-library #cllayout, body.cl-library .filters, body.cl-library #favlegacyinfo, body.cl-library .favbanner, body.cl-library #panel { display: none !important; }
 body.cl-library main { margin-left: 0 !important; transition: none; }

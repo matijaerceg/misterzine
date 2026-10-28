@@ -415,8 +415,9 @@ def main():
             set_visibility("private")
             assert anonymous.request.get(api + "/public/lists/" + list_id).status == 404
             following.goto(base + "/releases/")
-            expect(following.locator("#collection-notice")).to_be_visible()
-            expect(following.locator("#clbar")).to_be_hidden()
+            # a followed list that went private keeps its title and offers Remove from your lists, instead of bouncing to All
+            expect(following.locator("#clname")).to_have_text(title)
+            expect(following.locator("#clremoveunavailable")).to_be_visible()
             following.goto(base + "/lists/?view=mine")
             expect(following.locator("#following-cards")).to_contain_text("no longer available")
             print("PASS mobile fit, private withdrawal, remembered fallback and followed tombstone")
@@ -432,7 +433,9 @@ def main():
             expect(card).to_have_count(0)
             assert anonymous.request.get(api + "/public/lists/" + list_id).status == 404
             following.goto(base + "/releases/")
-            expect(following.locator("#collection-notice")).to_be_visible()
+            # a deleted followed list stays selected with its remembered title and the Remove from your lists action
+            expect(following.locator("#clname")).to_have_text(title)
+            expect(following.locator("#clremoveunavailable")).to_be_visible()
             assert not errors, "Browser errors: " + json.dumps(errors)
             print("PASS confirmed delete, deleted-view fallback; no JavaScript errors")
             quick_add_tests(owner, anonymous, base, api, token, title, args.screenshots)

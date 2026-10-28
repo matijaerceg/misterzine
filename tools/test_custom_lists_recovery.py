@@ -235,10 +235,10 @@ def mobile_tests(browser, base, api, token, prefix, screenshots):
         print("PASS compact mobile editor leaves game space; 44px edge tap selects while title tap opens panel independently")
 
         page.locator("#q").fill("194")
-        expect(page.locator(".clpick").first).to_have_attribute("aria-label", re.compile("1942"))
+        expect(page.locator(".clpick").first).to_have_attribute("aria-label", re.compile("194"))  # which 194x game sorts first depends on live update dates
         more(page)
         bulk(page)
-        expect(page.locator("#cladd")).to_have_text(re.compile(r"Add \d+ matching"))
+        expect(page.locator("#cladd")).to_have_text(re.compile(r"Add [1-9]\d* matching"))  # a transient "Add 0" paints before the search settles
         count = int(re.search(r"\d+", page.locator("#cladd").inner_text()).group(0))
         assert count > 0
         page.locator("#cladd").tap()

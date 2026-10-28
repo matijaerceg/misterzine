@@ -140,7 +140,7 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
             assert page.url == editor
             page.locator("#collection-browse").click()
             page.locator("#clleavediscard").click()
-            page.wait_for_url("**/lists/")
+            page.wait_for_url("**/releases/?collection=browse")  # Browse is an in-place Tracker tab now
             assert read() == baseline
             page.goto(editor)
             expect(page.locator("#clname")).to_have_text(title)
@@ -327,11 +327,13 @@ def workspace_tests(browser, base, api, token, prefix, screenshots, mobile=False
         print("PASS desktop full-membership sidepane stays independent of filters; exact selection and title/description undo/redo do not write")
 
         search("194")
-        expect(page.locator(".clpick").first).to_have_attribute("aria-label", re.compile("1942|1941"))
-        matches = set(page.locator(".clpick").evaluate_all("boxes => boxes.map(box => box.dataset.listKey)"))
+        expect(page.locator(".clpick").first).to_have_attribute("aria-label", re.compile("194"))  # which 194x game sorts first depends on live update dates
+        expect(page.locator("#cladd")).to_have_text(re.compile(r"Add [1-9]\d* matching"))  # the search is debounced: wait for the new view
+        # count like the editor does: every matching entry, including games folded under a collapsed core umbrella row
+        matches = set(page.evaluate("view.flatMap(d => d.grp ? d.members : [d]).map(d => d.k)"))
         before_bulk = members()
         affected = len(matches - before_bulk)
-        assert affected > 0
+        assert affected > 0, json.dumps({"matches": sorted(matches), "members": sorted(before_bulk)})
         confirm_action("#cladd", accept=False, count=affected)
         expect_members(before_bulk)
         confirm_action("#cladd", count=affected)

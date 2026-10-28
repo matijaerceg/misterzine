@@ -6,6 +6,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## 2026-10-28
 
+- Renamed the grouping toggle to Group batches.
+
 - A thin 1px selection outline encloses expanded group headers and their children. Group count badges show larger numbers, with details in their tooltips. The Core Type column is now Type.
 
 - Browse search fields, sort dropdowns and Search buttons now have matching heights, including on narrow screens.

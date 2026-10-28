@@ -275,7 +275,7 @@
   .favctl.active { border-color: var(--accent2, var(--accent)); }
   .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
-  /* "Group by core" borrows the group look but has no dropdown segment, so its
+  /* "Group batches" borrows the group look but has no dropdown segment, so its
      button rounds both ends (the left-only radius showed square corners when
      lit). It is a remembered on/off setting, not a command, so it reads as a
      checkbox: a drawn box in front (::before) that fills with the accent and
@@ -1400,7 +1400,7 @@
           <summary id="yearsummary">Year</summary>
           <div class="menu" id="yearmenu"></div>
         </details>
-        <!-- "Group by core" (core batches): games that shipped an update together
+        <!-- "Group batches" (core batches): games that shipped an update together
              fold into one row per core under the date sorts, games that debuted
              together under the MiSTer Debut sort (see foldBatches, batchField). A
              display pref like Columns, not a filter: it persists and Clear filters
@@ -1409,7 +1409,7 @@
              (as its own button in the row, it crushed the search box at 390px). -->
         <div class="favctl" id="batchctl">
           <button type="button" id="batchtoggle" aria-pressed="true"
-                  data-tip="Fold games that shipped an update together into one row per core. Under the MiSTer Debut sort, games that debuted together instead. Applies to the Build Date, Changed on MZ and MiSTer Debut sorts. Remembered between visits.">Group by core</button>
+                  data-tip="Fold games that shipped an update together into one row per core. Under the MiSTer Debut sort, games that debuted together instead. Applies to the Build Date, Changed on MZ and MiSTer Debut sorts. Remembered between visits.">Group batches</button>
         </div>
         <button type="button" id="clear" class="clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
       </div>

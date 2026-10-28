@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 28 Oct 2026 05:22:44 +0000</lastBuildDate>
+<lastBuildDate>Wed, 28 Oct 2026 09:00:39 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arabian (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Arabian_20261027.rbf:2026-10-28T09:00:39+00:00</guid>
+<pubDate>Wed, 28 Oct 2026 09:00:39 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arabian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arabian&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] BluePrint (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#blueprnt</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/BluePrint_20261027.rbf:2026-10-28T09:00:39+00:00</guid>
+<pubDate>Wed, 28 Oct 2026 09:00:39 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Blue Print, Grasspin, Saturn (Zilec).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BluePrint_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] VideoBrain (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#VideoBrain</link>
+<guid isPermaLink="false">distribution_mister:_Computer/VideoBrain_20261027.rbf:2026-10-28T09:00:39+00:00</guid>
+<pubDate>Wed, 28 Oct 2026 09:00:39 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VideoBrain_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Legend of Makai (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#lomakai</link>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/stadhr96.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1996 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: ppriest_DecoMLC156&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Suhoseong (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#suhoseong-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Suhoseong (Korea).mra:2026-10-27T06:23:41+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 06:23:41 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/suhosong.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1997 / SemiCom&lt;/p&gt;&lt;p&gt;Core: ppriest_Pandora&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Sutjaro Haeyo Deluxe (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sutjaro-haeyo-deluxe-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Sutjaro Haeyo Deluxe (Korea).mra:2026-10-27T06:23:41+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 06:23:41 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sutjarod.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1996 / SemiCom&lt;/p&gt;&lt;p&gt;Core: ppriest_Pandora&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Toppy &amp; Rappy (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#toppy-rappy-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Toppy &amp; Rappy.mra:2026-10-27T06:23:41+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 06:23:41 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toppyrap.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1996 / SemiCom&lt;/p&gt;&lt;p&gt;Core: ppriest_Pandora&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

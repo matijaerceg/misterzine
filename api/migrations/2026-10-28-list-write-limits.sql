@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS list_write_limits (
+  user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  minute INTEGER NOT NULL,
+  writes INTEGER NOT NULL,
+  hour INTEGER NOT NULL,
+  creates INTEGER NOT NULL
+);

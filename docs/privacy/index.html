@@ -16,7 +16,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css?v=6"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -129,7 +129,7 @@ in, the account service stores:</p>
 <table>
   <tr><th>What</th><th>Why</th></tr>
   <tr><td>Your user ID at Google or GitHub</td><td>To recognise you next time. It is a number, not your name.</td></tr>
-  <tr><td>The email address your sign-in provider passes along</td><td>Only so a support request can be matched to an account. It is never displayed, never used to send mail, never shared.</td></tr>
+  <tr><td>The email address your sign-in provider passes along</td><td>To match a support request to an account and verify the site administrator's access to list moderation. It is never displayed, never used to send mail, never shared.</td></tr>
   <tr><td>When the account was created</td><td>Housekeeping.</td></tr>
   <tr><td>Your favorites</td><td>The list of starred entries, as the tracker's own entry keys.</td></tr>
   <tr><td>Your custom lists</td><td>The titles, descriptions, selected Tracker entry keys, visibility settings, list IDs and creation/update times. You choose Private, Unlisted or Public for each list.</td></tr>
@@ -146,11 +146,13 @@ It restores that copy only after confirming that your signed-in account owns the
 this device; editing a draft does not upload those changes until you save the list. Saving or discarding
 the changes removes the recovery copy. Clearing this site's browser data also removes it.</p>
 
+<p>To limit spam, the service keeps short per-account counters of list-related writes and new-list attempts. These counters store no IP addresses and are deleted with the account.</p>
 <h2>Sharing custom lists</h2>
+<p>The site administrator can review any list and hide it from browsing and shared links. A hidden list remains editable by its author, who can see the moderation reason. The latest moderation action, reason, administrator account ID and time are stored with the list and removed when the list is deleted.</p>
 <p>Your account is private. Making or following a list does not create a public profile. You choose how each
 of your own lists is shared:</p>
 <ul>
-  <li><strong>Private:</strong> only your signed-in account can read it.</li>
+  <li><strong>Private:</strong> visible to your signed-in account and the site administrator for moderation.</li>
   <li><strong>Unlisted:</strong> anyone with the link can read and follow it. It is excluded from the public
     directory and your curator page. Its link can be passed on, so it is not private.</li>
   <li><strong>Public:</strong> anyone can read and follow it, and it can appear in the searchable list
@@ -273,7 +275,7 @@ The site's code and this page are public there, so any change to this policy sho
 </footer>
 
 </div>
-<script src="../theme.js?v=6"></script>
+<script src="../theme.js?v=7"></script>
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 </body>
 </html>

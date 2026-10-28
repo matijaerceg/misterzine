@@ -268,3 +268,10 @@ body:has(#menudd[open]) .fbtab, body:has(dialog.fbdlg[open]) .fbtab { visibility
               padding-right: 3.2rem; padding-bottom: calc(.35rem + env(safe-area-inset-bottom, 0px)); }
   .sitenote .snx { width: 2.75rem; height: 2.75rem; font-size: 1.9rem; }  /* a full fingertip target */
 }
+
+.mz-moderation { width: min(32rem, calc(100vw - 2rem)); box-sizing: border-box; padding: 1.25rem; color: var(--fg); background: var(--surface, var(--bg)); border: 1px solid var(--hair); border-radius: .5rem; }
+.mz-moderation::backdrop { background: #0008; }
+.mz-moderation textarea { display: block; box-sizing: border-box; width: 100%; margin: .5rem 0 1rem; padding: .5rem; font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--hair); }
+.mz-moderation button { font: inherit; color: inherit; background: var(--bg); border: 1px solid color-mix(in srgb, var(--hair) 78%, var(--fg)); padding: .4rem .7rem; border-radius: .3rem; margin-right: .5rem; cursor: pointer; }
+.mz-moderation button:hover { border-color: var(--accent); }
+#menudd #mz-admin-toggle[aria-pressed=true] { color: var(--accent); }

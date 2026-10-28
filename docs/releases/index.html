@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MiSTer FPGA Cores &amp; Arcade Games Tracker - MisterZine</title>
+<title>MisterZine - MiSTer FPGA Cores &amp; Arcade Games Tracker</title>
 <meta name="description" content="A searchable, sortable tracker of every public MiSTer core (console, computer and arcade) with specs, release dates, arcade screenshots and links to each core's GitHub. Updated daily.">
 <!-- favicon lives at the project root (explicit links required: a GitHub
      Pages project site doesn't own the domain root) -->
@@ -32,8 +32,8 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="custom-lists.css">
-<link rel="stylesheet" href="../nav.css?v=6"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="custom-lists.css?v=20261028">
+<link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -1464,8 +1464,8 @@
 </dialog>
 </div>
 <section id="collection-library" aria-label="List library" hidden><section id="lib-directory" hidden aria-labelledby="lib-directory-heading">
-  <h2 id="lib-directory-heading">Browse lists</h2>
-  <p class="lead">Collections made by the MiSTer community. Choose a list to explore its games, and follow it to keep it in your account.</p>
+  <h2 id="lib-directory-heading">Browse all public lists</h2>
+  <p class="lead">Lists made public by their authors.</p>
   <form id="lib-search-form" class="search-form" role="search">
     <label class="field"><span>Search public lists</span><input id="lib-search" type="search" maxlength="200" placeholder="List name, topic or curator" autocomplete="off"></label>
     <label class="field"><span>Sort by</span><select id="lib-sort"><option value="updated">Recently updated</option><option value="created">Newest lists</option><option value="followers">Most followed</option></select></label>
@@ -1478,7 +1478,7 @@
 </section>
 <section id="lib-mine-intro" hidden>
   <h2>Manage lists</h2>
-  <p class="lead">Your own collections and the lists you follow, all in one place. Your favorites stay separate.</p>
+  <p class="lead">Your lists and your followed lists.</p>
 </section>
 <p id="lib-message" class="msg" role="status" aria-live="polite"></p>
 <section id="lib-loading"><p class="lead">Loading lists...</p></section>
@@ -1502,8 +1502,8 @@
   <p id="lib-owned-empty" class="muted" hidden>No lists yet. Choose Create a list to make your first private collection.</p>
   <ul id="lib-owned-cards" class="list-cards"></ul>
   <div class="section-heading"><h2>Following <span id="lib-following-count" class="muted"></span></h2></div>
-  <p class="muted">Only you can see which lists you follow. Open a list in the Tracker to follow or unfollow it.</p>
-  <p id="lib-following-empty" class="muted" hidden>No followed lists yet. <a href="?collection=browse">Discover a collection</a> and choose Follow in the Tracker.</p>
+  <p class="muted">Only you can see which lists you follow.</p>
+  <p id="lib-following-empty" class="muted" hidden>No followed lists yet. <a href="?collection=browse">Discover a collection</a> and choose Follow list.</p>
   <ul id="lib-following-cards" class="list-cards"></ul>
 </section>
 <section id="lib-curator-view" hidden aria-labelledby="lib-curator-name">
@@ -1661,11 +1661,11 @@
   <div class="clactions"><button id="clentryreload" type="button" hidden>Reload your lists</button><button type="button" data-clclose>Done</button></div>
   <p class="clnote"><a href="?collection=manage" target="_blank" rel="noopener">Manage your lists</a> · <a href="../account/#public-name" target="_blank" rel="noopener">Account</a></p>
 </dialog>
-<script src="../lists/lists.js"></script>
-<script src="custom-lists.js"></script>
+<script src="../lists/lists.js?v=20261028"></script>
+<script src="custom-lists.js?v=20261028"></script>
 <script src="./source-visibility.js?v=9"></script>
 <script src="../mask.js?v=4"></script>
-<script src="../theme.js?v=6"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
+<script src="../theme.js?v=7"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first

@@ -58,6 +58,13 @@ textarea { resize: vertical; min-height: 5rem; }
 .description { white-space: pre-wrap; overflow-wrap: anywhere; }
 .list-card .description { margin: .5rem 0; }
 .list-card .actions { margin-top: .7rem; }
+.list-preview { margin-top: .8rem; border-top: 1px solid var(--hair); }
+.list-preview > summary { padding: .5rem 0; color: var(--accent); cursor: pointer; }
+.list-preview-entries { list-style: none; margin: 0; padding: 0; }
+.list-preview-entries li { padding: .35rem 0; border-top: 1px solid var(--hair); overflow-wrap: anywhere; }
+.list-preview-entries span, .list-preview-entries small { display: block; }
+.list-preview-entries small { color: var(--muted); font-size: .8rem; }
+@media (pointer: coarse), (max-width: 36rem) { .list-preview > summary { min-height: 44px; align-content: center; } }
 .public-title { font-size: 2rem; }
 footer { margin-top: 2.5rem; padding-top: .8rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .82rem; }
 dialog { color: var(--fg); background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 1.2rem; width: min(28rem, calc(100% - 2rem)); }
@@ -79,3 +86,45 @@ dialog strong { overflow-wrap: anywhere; }
   .masthead { gap: .6rem; }
   .top .brand svg { height: 40px; }
 }
+
+/* Library cards and saved-list tools. */
+.list-cards { align-items: start; }
+.list-card .card-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; max-height: none; overflow: hidden; margin-bottom: .2rem; }
+.list-card .card-description.expanded { display: block; }
+.description-toggle { color: var(--accent); border: 0; background: transparent; font: inherit; font-size: .85rem; padding: .25rem 0; cursor: pointer; align-self: flex-start; }
+.description-toggle[hidden] { display: none; }
+.list-preview > summary { display: list-item; border: 0; border-radius: 0; background: transparent; }
+.manage-tools { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .6rem 0 1rem; }
+.manage-tools input { flex: 1 1 14rem; min-width: 0; width: auto; }
+.manage-tools select { flex: 0 1 auto; width: auto; max-width: 100%; }
+.manage-tools .btn { flex: none; }
+.card-meta { font-size: .82rem; }
+
+.list-card .card-description { display: block; -webkit-line-clamp: unset; max-height: none; overflow: visible; }
+.actions .list-preview { margin: 0; border: 0; }
+.actions .list-preview > summary { display: inline-flex; align-items: center; gap: .35rem; padding: .4rem .65rem; border: 1px solid var(--hair); border-radius: 4px; color: var(--fg); }
+.actions .list-preview > summary::marker { content: ""; }
+.list-preview-body:popover-open { display: block; position: fixed; inset: 0; margin: auto; width: min(28rem, calc(100vw - 2rem)); max-height: calc(100dvh - 3rem); overflow: auto; box-sizing: border-box; padding: 1rem; background: var(--surface); color: var(--fg); border: 1px solid var(--hair); border-radius: .5rem; box-shadow: 0 .5rem 2rem #0006; }
+.list-preview-body h2 { margin: 0 0 .5rem; }
+.list-preview-body > button { margin-bottom: .6rem; }
+.list-icon { display: inline-block; width: 1em; height: 1em; margin-right: .35em; vertical-align: -.1em; background: currentColor; mask: var(--icon) center / contain no-repeat; }
+.is-following { color: var(--accent); border-color: var(--accent); }
+.icon-checkmark { --icon: url(icons/checkmark.svg); }
+.icon-eye { --icon: url(icons/eye.svg); }
+.icon-list { --icon: url(icons/list.svg); }
+
+/* Consistent action states and aligned search controls. */
+.search-form .field { margin: 0; }
+.search-form { align-items: end; }
+.actions { align-items: center; }
+.icon-edit { --icon: url(icons/edit.svg); }
+.btn { border-color: color-mix(in srgb, var(--hair) 78%, var(--fg)); }
+.btn:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.actions .list-preview > summary { border-color: color-mix(in srgb, var(--hair) 78%, var(--fg)); }
+.actions .list-preview > summary:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+.actions .list-preview > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.is-following { border-color: var(--accent); color: var(--accent); }
+
+.icon-share { --icon: url(icons/share.svg); }
+input[type=search], .search-form select, .manage-tools select { border-color: color-mix(in srgb, var(--hair) 78%, var(--fg)); }

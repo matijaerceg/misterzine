@@ -44,9 +44,10 @@
 // together by a signed, short-lived cookie (state + PKCE verifier + return
 // path), so no server-side state is needed for sign-in.
 
+import { limitListWrites } from './list-limits.js';
 import { reports } from './reports.js';
 import { feedback } from './feedback.js';
-import { lists, publicLists, collections, following, pinning, getProfile, updateProfile } from './lists.js';
+import { lists, publicLists, collections, following, pinning, getProfile, updateProfile, moderateLists, isListAdmin } from './lists.js';
 
 const KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;      // release tracker row keys (data.json `k`)
 const MAX_FAVORITES = 5000;
@@ -96,6 +97,13 @@ async function route(request, env, url) {
   const user = await authenticate(request, env);
   if (!user) return json({ error: 'unauthorized' }, 401);
 
+  if (['POST','PUT','DELETE'].includes(m) && (p === '/lists' || p.startsWith('/lists/') || p.startsWith('/pins/') || p.startsWith('/following/') || p === '/me/profile' || p.startsWith('/admin/lists/'))) {
+    const limited = await limitListWrites(env, user.id, p === '/lists' && m === 'POST');
+    if (limited) return limited;
+  }
+
+  if (p === '/admin/lists' || p.startsWith('/admin/lists/')) return moderateLists(request, env, m, p, user, url);
+
   if (p === '/lists' || p.startsWith('/lists/')) return lists(request, env, m, p, user);
   if (p === '/collections' && m === 'GET') return collections(env, user);
   if (p.startsWith('/pins/')) return pinning(env, m, p, user);
@@ -105,7 +113,7 @@ async function route(request, env, url) {
   if (p === '/me' && m === 'GET') {
     const n = await env.DB.prepare('SELECT COUNT(*) AS n FROM favorites WHERE user_id = ?').bind(user.id).first('n');
     return json({ provider: user.provider, created_at: user.created_at, favorites: n, notice: user.notice_seen || null,
-      profile: await getProfile(env, user.id) });
+      list_admin: isListAdmin(user), profile: await getProfile(env, user.id) });
   }
   if (p === '/me/notice' && m === 'PUT') {
     const body = await readJSON(request);
@@ -119,6 +127,7 @@ async function route(request, env, url) {
     // Delete explicitly so cleanup does not depend on foreign_keys being on.
     // Other accounts' follows remain as unavailable IDs, never list content.
     await env.DB.batch([
+      env.DB.prepare('DELETE FROM list_write_limits WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM list_follows WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM public_profiles WHERE user_id = ?').bind(user.id),
       env.DB.prepare('DELETE FROM curated_lists WHERE user_id = ?').bind(user.id),
@@ -177,7 +186,7 @@ async function authenticate(request, env) {
   if (!/^[A-Za-z0-9_-]{40,}$/.test(token)) return null;
   const hash = await sha256hex(token);
   const row = await env.DB.prepare(
-    'SELECT s.token_hash, s.last_seen_at, u.id, u.provider, u.created_at, u.notice_seen FROM sessions s ' +
+    'SELECT s.token_hash, s.last_seen_at, u.id, u.provider, u.email, u.created_at, u.notice_seen FROM sessions s ' +
     'JOIN users u ON u.id = s.user_id WHERE s.token_hash = ?').bind(hash).first();
   if (!row) return null;
   const last = Date.parse(row.last_seen_at), now = Date.now();
@@ -287,7 +296,7 @@ async function finishOAuth(provider, env, url, request) {
     try { claims = JSON.parse(new TextDecoder().decode(b64urlDecode(parts[1]))); } catch (e) {}
     if (!claims || !['https://accounts.google.com', 'accounts.google.com'].includes(claims.iss) ||
         claims.aud !== id || !claims.sub || claims.exp * 1000 < Date.now()) return fail('idtoken');
-    ident = { sub: String(claims.sub), email: claims.email_verified ? claims.email : null };
+    ident = { sub: String(claims.sub), email: claims.email_verified === true && typeof claims.email === 'string' ? claims.email : null };
   } else {
     const ur = await fetch('https://api.github.com/user', {
       headers: { Authorization: 'Bearer ' + tj.access_token, Accept: 'application/vnd.github+json',
@@ -307,8 +316,8 @@ async function finishOAuth(provider, env, url, request) {
       .bind(provider, ident.sub, ident.email).run();
     user = { id: ins.meta.last_row_id };
     isNew = true;
-  } else if (ident.email) {
-    await env.DB.prepare('UPDATE users SET email = ? WHERE id = ? AND (email IS NULL OR email <> ?)')
+  } else {
+    await env.DB.prepare('UPDATE users SET email = ? WHERE id = ? AND email IS NOT ?')
       .bind(ident.email, user.id, ident.email).run();
   }
   const token = await createSession(env, user.id);

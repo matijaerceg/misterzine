@@ -7,7 +7,7 @@ const ID_RE = /^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{12}$/;
 const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 const BODY_MAX = 384 * 1024;
 const VISIBILITY = ['private', 'unlisted', 'public'];
-const META = 'l.id, l.title, l.description, l.byline, l.visibility, l.version, l.created_at, l.updated_at, ' +
+const META = '(SELECT hidden FROM list_moderation m WHERE m.list_id=l.id) AS moderation_hidden, (SELECT reason FROM list_moderation m WHERE m.list_id=l.id) AS moderation_reason, l.id, l.title, l.description, l.byline, l.visibility, l.version, l.created_at, l.updated_at, ' +
   'p.id AS curator_id, p.display_name AS curator_name, ' +
   '(SELECT COUNT(*) FROM list_follows f WHERE f.list_id = l.id) AS follower_count';
 const FROM = ' FROM curated_lists l LEFT JOIN public_profiles p ON p.user_id = l.user_id';
@@ -41,7 +41,7 @@ export async function publicLists(env, path, method, url) {
     if (!id) return json({ error: 'not_found' }, 404);
     const [profile, items] = await env.DB.batch([
       env.DB.prepare('SELECT id, display_name FROM public_profiles WHERE id = ?').bind(id),
-      env.DB.prepare(SUMMARY + " WHERE p.id = ? AND l.visibility = 'public' ORDER BY l.updated_at DESC, l.id").bind(id),
+      env.DB.prepare(SUMMARY + " WHERE p.id = ? AND l.visibility = 'public' AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1) ORDER BY l.updated_at DESC, l.id").bind(id),
     ]);
     if (!profile.results.length || !items.results.length) return json({ error: 'not_found' }, 404);
     return json({ profile: profile.results[0], lists: items.results.map(present) });
@@ -49,7 +49,7 @@ export async function publicLists(env, path, method, url) {
   match = path.match(/^\/public\/lists\/([^/]+)$/);
   const id = match && normalizeId(match[1]);
   if (!id) return json({ error: 'not_found' }, 404);
-  const row = await env.DB.prepare(FULL + " WHERE l.id = ? AND l.visibility IN ('unlisted', 'public')").bind(id).first();
+  const row = await env.DB.prepare(FULL + " WHERE l.id = ? AND l.visibility IN ('unlisted', 'public') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1)").bind(id).first();
   return row ? json(present(row)) : json({ error: 'not_found' }, 404);
 }
 async function directory(env, params) {
@@ -59,7 +59,7 @@ async function directory(env, params) {
   if (query.length > 200 || !['updated', 'created', 'followers'].includes(sort) ||
       !Number.isSafeInteger(offset) || offset < 0 || offset > 10000 || !Number.isSafeInteger(limit) || limit < 1 || limit > 100)
     return json({ error: 'bad_query' }, 400);
-  const where = " WHERE l.visibility = 'public'" + (query
+  const where = " WHERE l.visibility = 'public' AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1)" + (query
     ? " AND instr(lower(l.title || char(10) || l.description || char(10) || COALESCE(p.display_name, l.byline)), lower(?)) > 0" : '');
   const bindings = query ? [query] : [];
   const order = { updated: 'l.updated_at DESC, l.id', created: 'l.created_at DESC, l.id', followers: 'follower_count DESC, l.updated_at DESC, l.id' }[sort];
@@ -76,12 +76,12 @@ async function owned(env, userId) {
 export async function collections(env, user) {
   const mine = await owned(env, user.id);
   // Remember accessible titles, but never retain keys or private content.
-  await env.DB.prepare("INSERT INTO list_follow_titles (user_id, list_id, title) SELECT f.user_id, f.list_id, l.title FROM list_follows f JOIN curated_lists l ON l.id = f.list_id WHERE f.user_id = ? AND l.visibility IN ('public', 'unlisted') ON CONFLICT(user_id, list_id) DO UPDATE SET title = excluded.title").bind(user.id).run();
-  const { results } = await env.DB.prepare('SELECT ' + META + ', json_array_length(l.keys_json) AS count, f.list_id AS followed_id, t.title AS remembered_title ' +
-    "FROM list_follows f LEFT JOIN curated_lists l ON l.id = f.list_id AND l.visibility IN ('unlisted', 'public') " +
+  await env.DB.prepare("INSERT INTO list_follow_titles (user_id, list_id, title) SELECT f.user_id, f.list_id, l.title FROM list_follows f JOIN curated_lists l ON l.id = f.list_id WHERE f.user_id = ? AND l.visibility IN ('public', 'unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1) ON CONFLICT(user_id, list_id) DO UPDATE SET title = excluded.title").bind(user.id).run();
+  const { results } = await env.DB.prepare('SELECT ' + META + ', json_array_length(l.keys_json) AS count, f.list_id AS followed_id, CASE WHEN EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=f.list_id AND m.hidden=1) THEN NULL ELSE t.title END AS remembered_title ' +
+    "FROM list_follows f LEFT JOIN curated_lists l ON l.id = f.list_id AND l.visibility IN ('unlisted', 'public') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1) " +
     'LEFT JOIN list_follow_titles t ON t.user_id = f.user_id AND t.list_id = f.list_id LEFT JOIN public_profiles p ON p.user_id = l.user_id WHERE f.user_id = ? ORDER BY f.created_at DESC, f.list_id').bind(user.id).all();
-  await env.DB.prepare("UPDATE list_pins SET title=(SELECT title FROM curated_lists WHERE id=list_pins.list_id) WHERE user_id=? AND list_id IN (SELECT id FROM curated_lists WHERE user_id=? OR visibility IN ('public','unlisted'))").bind(user.id,user.id).run();
-  const pins = (await env.DB.prepare('SELECT list_id AS id, title FROM list_pins WHERE user_id = ? ORDER BY created_at, list_id').bind(user.id).all()).results;
+  await env.DB.prepare("UPDATE list_pins SET title=(SELECT title FROM curated_lists WHERE id=list_pins.list_id) WHERE user_id=? AND list_id IN (SELECT id FROM curated_lists WHERE user_id=? OR visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1))").bind(user.id,user.id).run();
+  const pins = (await env.DB.prepare("SELECT list_id AS id, CASE WHEN EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=list_pins.list_id AND m.hidden=1) AND NOT EXISTS (SELECT 1 FROM curated_lists l WHERE l.id=list_pins.list_id AND l.user_id=list_pins.user_id) THEN 'Unavailable list' ELSE title END AS title FROM list_pins WHERE user_id = ? ORDER BY created_at, list_id").bind(user.id).all()).results;
   return json({ pins, owned: mine, following: results.map(row => row.id ? present(row) : { id: row.followed_id, title: row.remembered_title || 'Unavailable list', unavailable: true }) });
 }
 export async function following(env, method, path, user) {
@@ -94,9 +94,9 @@ export async function following(env, method, path, user) {
   // Unique (user_id,list_id) and a transaction prevent follow/access races.
   const [, check] = await env.DB.batch([
     env.DB.prepare('INSERT INTO list_follows (user_id, list_id) SELECT ?, id FROM curated_lists ' +
-      "WHERE id = ? AND user_id <> ? AND visibility IN ('unlisted', 'public') ON CONFLICT(user_id, list_id) DO NOTHING").bind(user.id, id, user.id),
-    env.DB.prepare('SELECT user_id, visibility FROM curated_lists WHERE id = ?').bind(id),
-    env.DB.prepare("INSERT OR IGNORE INTO list_follow_titles (user_id, list_id, title) SELECT f.user_id, f.list_id, l.title FROM list_follows f JOIN curated_lists l ON l.id=f.list_id WHERE f.user_id=? AND f.list_id=? AND l.visibility IN ('public','unlisted')").bind(user.id, id),
+      "WHERE id = ? AND user_id <> ? AND visibility IN ('unlisted', 'public') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1) ON CONFLICT(user_id, list_id) DO NOTHING").bind(user.id, id, user.id),
+    env.DB.prepare('SELECT user_id, visibility FROM curated_lists WHERE id = ? AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)').bind(id),
+    env.DB.prepare("INSERT OR IGNORE INTO list_follow_titles (user_id, list_id, title) SELECT f.user_id, f.list_id, l.title FROM list_follows f JOIN curated_lists l ON l.id=f.list_id WHERE f.user_id=? AND f.list_id=? AND l.visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1)").bind(user.id, id),
   ]);
   const row = check.results[0];
   if (row && row.user_id === user.id) return json({ error: 'own_list' }, 400);
@@ -111,9 +111,9 @@ export async function pinning(env, method, path, user) {
   }
   // Capture only accessible content; the same transaction follows another curator.
   const results = await env.DB.batch([
-    env.DB.prepare("INSERT INTO list_pins(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND (user_id=? OR visibility IN ('public','unlisted')) ON CONFLICT(user_id,list_id) DO UPDATE SET title=excluded.title RETURNING list_id").bind(user.id,id,user.id),
-    env.DB.prepare("INSERT OR IGNORE INTO list_follows(user_id,list_id) SELECT ?,id FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted')").bind(user.id,id,user.id),
-    env.DB.prepare("INSERT OR IGNORE INTO list_follow_titles(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted')").bind(user.id,id,user.id),
+    env.DB.prepare("INSERT INTO list_pins(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND (user_id=? OR visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)) ON CONFLICT(user_id,list_id) DO UPDATE SET title=excluded.title RETURNING list_id").bind(user.id,id,user.id),
+    env.DB.prepare("INSERT OR IGNORE INTO list_follows(user_id,list_id) SELECT ?,id FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)").bind(user.id,id,user.id),
+    env.DB.prepare("INSERT OR IGNORE INTO list_follow_titles(user_id,list_id,title) SELECT ?,id,title FROM curated_lists WHERE id=? AND user_id<>? AND visibility IN ('public','unlisted') AND NOT EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=curated_lists.id AND m.hidden=1)").bind(user.id,id,user.id),
   ]);
   return results[0].results.length ? empty() : json({error:'not_found'},404);
 }
@@ -127,10 +127,11 @@ export async function lists(request, env, method, path, user) {
     for (let attempt = 0; attempt < 5; attempt++) {
       const id = newId();
       const row = await env.DB.prepare('INSERT INTO curated_lists (id, user_id, title, description, keys_json) ' +
-        'SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM list_follows WHERE list_id = ?) ' +
+        'SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT 1 FROM list_follows WHERE list_id = ?) AND (SELECT COUNT(*) FROM curated_lists WHERE user_id=?) < 200 ' +
         'ON CONFLICT(id) DO NOTHING RETURNING *'
-      ).bind(id, user.id, value.title, value.description, JSON.stringify(value.keys), id).first();
+      ).bind(id, user.id, value.title, value.description, JSON.stringify(value.keys), id, user.id).first();
       if (row) return json(await enrich(env, row), 201);
+      if (await env.DB.prepare('SELECT COUNT(*) FROM curated_lists WHERE user_id=?').bind(user.id).first('COUNT(*)') >= 200) return json({error:'list_limit'},409);
     }
     return json({ error: 'unavailable' }, 503);
   }
@@ -191,7 +192,7 @@ async function body(request, max = BODY_MAX) {
   return { value };
 }
 async function enrich(env, row) {
-  const meta = await env.DB.prepare('SELECT (SELECT id FROM public_profiles WHERE user_id = ?1) AS curator_id, ' +
+  const meta = await env.DB.prepare('SELECT (SELECT hidden FROM list_moderation WHERE list_id=?2) AS moderation_hidden, (SELECT reason FROM list_moderation WHERE list_id=?2) AS moderation_reason, (SELECT id FROM public_profiles WHERE user_id = ?1) AS curator_id, ' +
     '(SELECT display_name FROM public_profiles WHERE user_id = ?1) AS curator_name, ' +
     '(SELECT COUNT(*) FROM list_follows WHERE list_id = ?2) AS follower_count').bind(row.user_id, row.id).first();
   return present({ ...row, ...meta });
@@ -203,6 +204,7 @@ function present(row) {
     visibility: row.visibility, published: row.visibility !== 'private',
     curator: { name, id: row.visibility === 'public' ? row.curator_id || null : null },
     follower_count: row.follower_count || 0, version: row.version, created_at: row.created_at, updated_at: row.updated_at };
+  if (row.moderation_hidden) { value.moderation_hidden = true; value.moderation_reason = row.moderation_reason || ''; }
   if (row.keys_json !== undefined) value.keys = JSON.parse(row.keys_json);
   else value.count = row.count;
   return value;
@@ -214,4 +216,49 @@ function json(value, status = 200) {
   return new Response(JSON.stringify(value), { status, headers: {
     'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store',
   } });
+}
+
+// Google emails are stored only from verified OAuth claims. Never trust a
+// GitHub profile email or any client-supplied role/name for this permission.
+export function isListAdmin(user) {
+  return user.provider === 'google' && typeof user.email === 'string' &&
+    user.email.toLowerCase() === 'matija.erceg@gmail.com';
+}
+export async function moderateLists(request, env, method, path, user, url) {
+  if (!isListAdmin(user)) return json({error: 'forbidden'}, 403);
+  if (path === '/admin/lists' && method === 'GET') {
+    const query = (url.searchParams.get('q') || '').trim();
+    const offset = Number(url.searchParams.get('offset') || 0);
+    const hidden = url.searchParams.get('hidden') === '1';
+    const sort = url.searchParams.get('sort') || 'updated';
+    if (!['updated', 'created', 'followers'].includes(sort)) return json({error:'bad_query'},400);
+    const order = {updated:'l.updated_at DESC, l.id',created:'l.created_at DESC, l.id',followers:'follower_count DESC, l.updated_at DESC, l.id'}[sort];
+    if (query.length > 200 || !Number.isSafeInteger(offset) || offset < 0 || offset > 10000)
+      return json({error: 'bad_query'}, 400);
+    const where = ' WHERE instr(lower(l.id || char(10) || l.title || char(10) || l.description || char(10) || COALESCE(p.display_name, l.byline)), lower(?)) > 0' +
+      (hidden ? ' AND EXISTS (SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND m.hidden=1)' : '') +
+      (url.searchParams.get('shared') === '1' ? " AND l.visibility <> 'private'" : '');
+    const rows = (await env.DB.prepare(SUMMARY + where + ' ORDER BY ' + order + ' LIMIT 25 OFFSET ?').bind(query, offset).all()).results;
+    return json({lists: rows.slice(0,24).map(present), has_more: rows.length > 24});
+  }
+  const match = path.match(/^\/admin\/lists\/([^/]+)$/), id = match && normalizeId(match[1]);
+  if (!id) return json({error: 'not_found'}, 404);
+  if (method === 'GET') {
+    const row = await env.DB.prepare(FULL + ' WHERE l.id=?').bind(id).first();
+    return row ? json(present(row)) : json({error:'not_found'},404);
+  }
+  if (method !== 'PUT') return json({error: 'not_found'}, 404);
+  const parsed = await body(request,4096);
+  if (parsed.error) return json({error:parsed.error},parsed.status);
+  const {hidden, reason, version} = parsed.value;
+  if (typeof hidden !== 'boolean' || typeof reason !== 'string' || reason.trim().length > 500 ||
+      (hidden && !reason.trim()) || !Number.isSafeInteger(version) || version < 1)
+    return json({error:'bad_moderation'},400);
+  // Version check and override update are a single SQL statement. The author
+  // can continue editing, but cannot undo the moderation override.
+  const row = await env.DB.prepare("INSERT INTO list_moderation(list_id,hidden,reason,moderated_by) SELECT id,?,?,? FROM curated_lists WHERE id=? AND version=? ON CONFLICT(list_id) DO UPDATE SET hidden=excluded.hidden, reason=excluded.reason, moderated_by=excluded.moderated_by, updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now') RETURNING list_id")
+    .bind(hidden ? 1 : 0, reason.trim(), user.id, id, version).first();
+  if (row) return empty();
+  const exists = await env.DB.prepare('SELECT id FROM curated_lists WHERE id=?').bind(id).first();
+  return json({error:exists ? 'conflict' : 'not_found'},exists ? 409 : 404);
 }

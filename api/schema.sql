@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
   id               INTEGER PRIMARY KEY AUTOINCREMENT,
   provider         TEXT    NOT NULL,            -- 'google' | 'github'
   provider_user_id TEXT    NOT NULL,            -- the provider's stable user id (Google sub / GitHub id)
-  email            TEXT,                        -- support lookups only; never displayed or mailed
+  email            TEXT,                        -- support/admin identity checks; never displayed or mailed
   created_at       TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
   notice_seen      TEXT,                        -- id of the last site notice this account closed (added 2026-10-20;
                                                 --   existing databases: see migrations/2026-10-20-notice-seen.sql)
@@ -122,4 +122,22 @@ CREATE TABLE IF NOT EXISTS list_pins (
  title TEXT NOT NULL,
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY(user_id, list_id)
+);
+
+-- Reversible administrator override, independent of author visibility.
+CREATE TABLE IF NOT EXISTS list_moderation (
+  list_id TEXT PRIMARY KEY REFERENCES curated_lists(id) ON DELETE CASCADE,
+  hidden INTEGER NOT NULL CHECK (hidden IN (0,1)),
+  reason TEXT NOT NULL DEFAULT '',
+  moderated_by INTEGER NOT NULL,
+  updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+);
+
+-- Bounded per-account spam counters; deleted with the account.
+CREATE TABLE IF NOT EXISTS list_write_limits (
+  user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  minute INTEGER NOT NULL,
+  writes INTEGER NOT NULL,
+  hour INTEGER NOT NULL,
+  creates INTEGER NOT NULL
 );

@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Custom Lists - MisterZine</title>
+<title>MisterZine - Custom Lists</title>
 <meta name="description" content="Make your own collections of MiSTer games and discover collections from the MiSTer community.">
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="canonical" href="https://misterzine.fyi/lists/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MisterZine">
-<meta property="og:title" content="Custom Lists - MisterZine">
+<meta property="og:title" content="MisterZine - Custom Lists">
 <meta property="og:description" content="Make your own collections of MiSTer games and discover collections from the MiSTer community.">
 <meta property="og:url" content="https://misterzine.fyi/lists/">
 <script>var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css">
-<link rel="stylesheet" href="../nav.css?v=6">
-<link rel="stylesheet" href="lists.css?v=2">
+<link rel="stylesheet" href="../nav.css?v=7">
+<link rel="stylesheet" href="lists.css?v=20261028">
 </head>
 <body>
 <div class="wrap">
@@ -61,8 +61,8 @@
   <a href="../account/">Account</a>
 </nav>
 <section id="directory" hidden aria-labelledby="directory-heading">
-  <h2 id="directory-heading">Discover lists</h2>
-  <p class="lead">Collections made by the MiSTer community. Open a list in the Tracker to explore its games, and follow it to keep it in your account.</p>
+  <h2 id="directory-heading">Browse all public lists</h2>
+  <p class="lead">Lists made public by their authors.</p>
   <form id="search-form" class="search-form" role="search">
     <label class="field"><span>Search public lists</span><input id="search" type="search" maxlength="200" placeholder="List name, topic or curator" autocomplete="off"></label>
     <label class="field"><span>Sort by</span><select id="sort"><option value="updated">Recently updated</option><option value="created">Newest lists</option><option value="followers">Most followed</option></select></label>
@@ -75,7 +75,7 @@
 </section>
 <section id="mine-intro" hidden>
   <h2>My lists</h2>
-  <p class="lead">Your own collections and the lists you follow, all in one place. Your favorites stay separate.</p>
+  <p class="lead">Your lists and your followed lists.</p>
 </section>
 <p id="message" class="msg" role="status" aria-live="polite"></p>
 <section id="loading"><p class="lead">Loading lists...</p></section>
@@ -99,8 +99,8 @@
   <p id="owned-empty" class="muted" hidden>No lists yet. Make your first private list above.</p>
   <ul id="owned-cards" class="list-cards"></ul>
   <div class="section-heading"><h2>Following <span id="following-count" class="muted"></span></h2></div>
-  <p class="muted">Only you can see which lists you follow. Open a list in the Tracker to follow or unfollow it.</p>
-  <p id="following-empty" class="muted" hidden>No followed lists yet. <a href="./">Discover a collection</a> and choose Follow in the Tracker.</p>
+  <p class="muted">Only you can see which lists you follow.</p>
+  <p id="following-empty" class="muted" hidden>No followed lists yet. <a href="./">Discover a collection</a> and choose Follow list.</p>
   <ul id="following-cards" class="list-cards"></ul>
 </section>
 <section id="curator-view" hidden aria-labelledby="curator-name">
@@ -120,8 +120,8 @@
 </dialog>
 <footer><p>Your account and the lists you follow are private. You choose whether to share your own collections. Read the <a href="../privacy/">privacy page</a> for details.</p></footer>
 </div>
-<script src="../theme.js?v=6"></script>
+<script src="../theme.js?v=7"></script>
 <script src="../feedback.js?v=1"></script>
-<script src="lists.js?v=2"></script>
+<script src="lists.js?v=20261028"></script>
 </body>
 </html>

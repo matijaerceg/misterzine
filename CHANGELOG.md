@@ -4,6 +4,27 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+## 2026-10-28
+
+- Added basic list spam limits: 200 owned lists, 20 new-list attempts per hour and 120 list-related writes per minute per account.
+
+- Favorites actions, import-banner actions and export-dialog buttons now match the clearer borders and hover styling used by list controls.
+
+- An administrator-only Menu toggle shows moderation controls on list cards and the full list view. Browse includes a Hidden lists filter for restoring access; the separate admin page has been removed. The toggle is remembered across pages and browser tabs.
+
+- List moderation is available to the site administrator: hide sharing with a reason and restore access. Authors retain editing access and can see the reason.
+- Save a copy and share-link buttons use the supplied icons. Search fields now match button border contrast.
+
+- List actions share hover/focus styling and clearer borders. Previews anchor beside their buttons, followed by Full table view. Manage retains unfollowed cards until leaving, with the same following toggle as Browse. List ownership is labelled explicitly, dropdown items stay in their groups, and page introductions are shorter.
+
+- List previews open in a popup beside icon-labelled View and Preview actions. Browse has a checked Following toggle; dropdown pins sit before titles. Card descriptions expand only when truncation hides a substantial amount of text.
+
+- Tracker and list pages put MisterZine first in the browser tab title.
+
+- List cards have compact facts and expandable descriptions; previews expand without stretching neighboring cards. Manage lists adds search and alphabetical/recently updated sorting, plus previews of owned and followed lists. Browse and curator cards let you follow directly and identify your own and already-followed lists.
+
+- Your lists has a pin button beside each list: pin or unpin its tab without leaving the menu. Filled pins mark pinned lists, including tabs folded into the menu on narrow windows.
+- Browse lists and curator pages can preview up to eight games and their cores inside each card, without leaving the directory. Reopening a preview fetches the latest shared contents.
 - List editor: the title and description are edited in place at the top of the list column, no dialog or More menu. Save, Done, Undo, Redo, Visibility and Discard sit in one row. The search and filters sit above the catalogue only, since they do not apply to the list. Entries take one line each, and the divider between the catalogue and the list can be dragged to resize (double-click resets).
 - Collection tabs are set in the condensed face. Your lists sits before the pinned tabs and always reads "Your lists", lit when the open list came from it; the list header underneath names the list.
 - A list's header now shows its description in the open, under the title, instead of two clicks away behind About this list. One line under the title reads "by curator - updated date - N followers" (entry count stays in the search tally, zero followers is not shown), then the actions. Public lists carry no badge; Unlisted shows one, and Private only on your own lists. Follow is a plain button, Copy to my lists is now Save a copy, and the action row wraps on phones instead of scrolling.

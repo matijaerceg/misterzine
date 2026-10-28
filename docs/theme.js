@@ -358,3 +358,11 @@
   try { saved = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {}
   applyTheme(saved);
 })();
+
+// Account-gated moderation toggle shared by every site menu.
+(function () {
+  if (!document.getElementById('menudd')) return;
+  var script = document.createElement('script');
+  script.src = new URL('lists/admin-access.js?v=20261028', document.currentScript.src).href;
+  document.body.append(script);
+})();

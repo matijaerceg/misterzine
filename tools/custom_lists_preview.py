@@ -96,6 +96,13 @@ def prepare(directory, state):
             f"'{token_hash}', id FROM users WHERE provider='github' AND provider_user_id='{account}';",
             f"UPDATE users SET notice_seen='{current_notice()}' WHERE provider='github' AND provider_user_id='{account}';",
         ])
+    admin_hash = hashlib.sha256(state["admin_token"].encode()).hexdigest()
+    statements.extend([
+        "INSERT OR IGNORE INTO users (provider,provider_user_id,email) VALUES ('google','local-custom-lists-admin','matija.erceg@gmail.com');",
+        "INSERT OR REPLACE INTO sessions (token_hash,user_id) SELECT "
+        f"'{admin_hash}',id FROM users WHERE provider='google' AND provider_user_id='local-custom-lists-admin';",
+        f"UPDATE users SET notice_seen='{current_notice()}' WHERE provider='google' AND provider_user_id='local-custom-lists-admin';",
+    ])
     seed.write_text("\n".join(statements), encoding="utf-8")
     for sql in [ROOT / "api/schema.sql", ROOT / "api/migrations/2026-10-22-custom-lists.sql",
                 ROOT / "api/migrations/2026-10-22-list-community.sql", seed]:
@@ -154,6 +161,7 @@ def ready(state):
 
 def print_status(directory, state):
     print("Local preview account: " + state["site"] + "/__preview__/owner")
+    print("Local admin account: " + state["site"] + "/__preview__/admin")
     print("Second local account: " + state["site"] + "/__preview__/follower")
     print("Signed-out preview (use another browser or private window): " + state["site"] + "/__preview__/anonymous")
     print("Local API: " + state["api"])
@@ -183,8 +191,8 @@ def serve(directory, state):
                 self.end_headers()
                 self.wfile.write(body)
                 return
-            if path in ["/__preview__/owner", "/__preview__/follower", "/__preview__/tester", "/__preview__/anonymous"]:
-                token_key = {"owner": "token", "follower": "follower_token", "tester": "tester_token"}.get(path.rsplit("/", 1)[-1])
+            if path in ["/__preview__/owner", "/__preview__/follower", "/__preview__/tester", "/__preview__/admin", "/__preview__/anonymous"]:
+                token_key = {"owner": "token", "follower": "follower_token", "tester": "tester_token", "admin": "admin_token"}.get(path.rsplit("/", 1)[-1])
                 account = f"localStorage.setItem('mz-token', {json.dumps(state[token_key])});" if token_key else "localStorage.removeItem('mz-token');"
                 target = "/releases/" if token_key else "/releases/?collection=all"
                 body = (
@@ -234,6 +242,7 @@ def main():
     # Add test accounts without replacing the owner's session or saved lists.
     state.setdefault("follower_token", secrets.token_urlsafe(32))
     state.setdefault("tester_token", secrets.token_urlsafe(32))
+    state.setdefault("admin_token", secrets.token_urlsafe(32))
     save_state(directory, state)
     if args.command == "serve":
         serve(directory, state)

@@ -375,3 +375,48 @@ The report, feedback, notice and custom-list routes are tested with `npm test`
 themselves). List coverage includes account isolation, explicit public fields,
 publication and withdrawal, simultaneous saves, stale-delete protection,
 validation/body limits, profile names, visibility, public directory pagination, following races and withdrawal, no-op saves, migration reruns, account deletion and existing CORS behavior.
+
+
+## List moderation
+
+Apply `migrations/2026-10-28-list-moderation.sql` before deploying this Worker.
+It is idempotent; `schema.sql` includes it for new databases. No production
+migration or deployment is performed by the local preview tooling.
+
+`GET /me` returns `list_admin`. Every `/admin/lists` request checks the Google
+OAuth account with verified email `matija.erceg@gmail.com`. GitHub emails and
+client-supplied fields never grant access. Login refreshes or clears the stored email.
+
+- `GET /admin/lists?q=...&offset=0&hidden=1`: 24 summaries plus `has_more`;
+  includes private/unlisted lists; optional hidden-only filter and literal search.
+- `GET /admin/lists/:id`: inspect a list regardless of visibility.
+- `PUT /admin/lists/:id`: `{hidden, reason, version}`. Hiding requires a reason
+  (up to 500 characters). A stale content version returns 409.
+
+The override is independent of author visibility: editing or republishing cannot
+remove it. Public reads, discovery, curator pages, follows and pins exclude hidden
+content. Owners can edit/delete their hidden lists and see the reason. Restore
+honors current visibility; it does not automatically publish. The latest action
+records moderator ID, reason and time; deletion cascades this record. This is
+reversible moderation, not an immutable audit log or account ban.
+
+The preview has a separate `/__preview__/admin` fixture login, seeded only in
+local D1. Production has no preview bypass.
+
+Moderation UI lives in Browse and the full list view, enabled by the admin-only
+Menu toggle. Its local preference synchronizes between tabs; it never grants
+server permission. Browse's hidden-only mode requests `hidden=1&shared=1` to omit
+private drafts, with normal search/pagination/sort. There is no separate admin page.
+
+
+## List abuse limits
+
+Apply `migrations/2026-10-28-list-write-limits.sql` before deploying this version
+(or apply the complete idempotent schema for a database without lists yet).
+Accounts can own up to 200 lists (atomic quota, 409 `list_limit`). Creating,
+copying, editing, deleting, following, pinning, profile edits and moderation share
+120 writes/minute/account. New-list attempts also have a 20/hour/account limit.
+Durable D1 fixed-window counters return 429 `rate_limited` with Retry-After.
+Reads and favorites are unaffected. Counters contain no IP addresses and cascade
+on account deletion. These are initial per-account safeguards, not protection
+against coordinated multi-account abuse.

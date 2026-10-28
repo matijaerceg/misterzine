@@ -236,6 +236,8 @@ window.MZLists = (() => {
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
       const text = res.status === 401 ? 'Your sign-in has expired. Sign in again to continue.'
+        : data.error === 'list_limit' ? 'You can own up to 200 lists. Delete an unused list before creating another.'
+        : res.status === 429 ? 'Too many changes in a short time. Try again in ' + Math.ceil((data.retry_after || 60) / 60) + ' minute(s). Your edits are still here.'
         : data.error === 'profile_required' ? 'Choose a public display name before sharing this list.'
         : res.status === 404 ? 'This list is no longer available.'
         : res.status === 409 ? 'This list changed elsewhere. Your edits are still here; review the latest saved version before continuing.'
@@ -247,6 +249,7 @@ window.MZLists = (() => {
   function errorText(err) { return err instanceof TypeError ? 'Could not reach the list service. ' + (editing && dirty ? 'Your unsaved changes are still here; please try again.' : 'Check your connection and try again.') : err.message; }
   // Pins that did not fit in the tab strip and live in the Your lists menu instead (see fitStrip).
   let foldedPins = new Set();
+  const pinPending = new Set();
   let syncFields = () => {};
   function updatePicker() {
     if (!started) return;
@@ -278,18 +281,33 @@ window.MZLists = (() => {
     // The tab keeps a fixed label so it always reads as the list switcher; the bar below names the open list.
     $('collection-summary').textContent = document.querySelector('nav.collections').dataset.labels === 'short' ? 'Lists' : 'Your lists';
     $('collection-summary').removeAttribute('title');
-    const menu = $('collection-menu'); menu.replaceChildren();
+    const menu = $('collection-menu'), focus = document.activeElement;
+    const focusID = menu.contains(focus) ? focus.dataset.pin || focus.dataset.collection : null;
+    const focusKind = focus?.dataset.pin ? 'pin' : 'collection', scrollTop = menu.scrollTop;
+    menu.replaceChildren();
     const item = option => {
+      const row = document.createElement('div'); row.className = 'collection-item';
       const button = document.createElement('button'); button.type = 'button'; button.className = 'reset';
       button.textContent = option.textContent; button.disabled = option.disabled || option.value === 'empty';
-      button.setAttribute('aria-current', option.value === picker.value ? 'page' : 'false');
+      button.dataset.collection = option.value;
+      button.setAttribute('aria-current', mode === 'list' && option.value === id ? 'page' : 'false');
       button.onclick = () => { $('collection-picker').open = false; picker.value = option.value; picker.dispatchEvent(new Event('change')); };
-      return button;
+      row.append(button);
+      if (validID(option.value)) {
+        const pin = document.createElement('button'), on = pinIDs.has(option.value);
+        pin.type = 'button'; pin.className = 'reset collection-pin'; pin.dataset.pin = option.value;
+        pin.setAttribute('aria-pressed', String(on));
+        pin.setAttribute('aria-label', (on ? 'Unpin ' : 'Pin ') + option.textContent + (on ? '' : ' as tab'));
+        pin.dataset.tip = on ? 'Unpin tab' : 'Pin as tab';
+        pin.setAttribute('aria-disabled', String(pinPending.has(option.value)));
+        pin.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path class="pin-head" d="M9 3h6v6l3 4v2H6v-2l3-4z"/><path d="M12 15v6"/></svg>';
+        pin.onclick = () => togglePin(option.value, true);
+        row.prepend(pin);
+      }
+      return row;
     };
-    const current = picker.value ? [...picker.options].find(o => o.value === picker.value) : null;
-    if (current) { const lead = item(current); lead.classList.add('collection-current'); menu.append(lead); }  // the open list leads, with a check
     for (const child of picker.children) {
-      const options = [...(child.tagName === 'OPTGROUP' ? child.children : [child])].filter(o => o !== current);
+      const options = [...(child.tagName === 'OPTGROUP' ? child.children : [child])];
       if (!options.length) continue;
       if (child.tagName === 'OPTGROUP') {
         const heading = document.createElement('strong'); heading.className = 'collection-group'; heading.textContent = child.label; menu.append(heading);
@@ -297,6 +315,44 @@ window.MZLists = (() => {
       for (const option of options) menu.append(item(option));
     }
     picker.classList.toggle('active', mode === 'list' && !pinned);
+    if (focusID) [...menu.querySelectorAll('button')].find(button => button.dataset[focusKind] === focusID)?.focus({preventScroll: true});
+    menu.scrollTop = scrollTop;
+  }
+  async function togglePin(target, inMenu = false) {
+    if (!hooks.token()) { location.assign(signIn('/releases/?list=' + target)); return; }
+    if (pinPending.has(target)) return;
+    const session = sessionVersion, token = hooks.token(), pinned = (collections.pins || []).some(p => p.id === target);
+    pinPending.add(target);
+    // Keep the clicked control in place while saving, including its keyboard focus.
+    for (const button of $('collection-menu').querySelectorAll('[data-pin]')) if (button.dataset.pin === target) button.setAttribute('aria-disabled', 'true');
+    $('clpin').disabled = pinPending.has(id);
+    if (inMenu) notice('');
+    try {
+      await request('/pins/' + target, {method: pinned ? 'DELETE' : 'PUT'}, true);
+      if (session !== sessionVersion || token !== hooks.token()) return;
+      const refreshed = await refreshCollections();
+      if (session !== sessionVersion || token !== hooks.token()) return;
+      if (!refreshed) return;
+      if (inMenu) notice(pinned ? 'Tab unpinned.' : foldedPins.has(target) ? 'Pinned. Available under Pinned in Your lists.' : 'Pinned as tab.');
+      else if (id === target) status(pinned ? 'Unpinned. The list is still in Your lists.' : 'Pinned.');
+    } catch (err) {
+      if (session === sessionVersion && token === hooks.token()) {
+        if (inMenu) notice(errorText(err)); else if (id === target) status(errorText(err), true);
+      }
+    } finally {
+      if (session === sessionVersion && token === hooks.token()) {
+        pinPending.delete(target); buildPicker(); positionPicker(); $('clpin').disabled = pinPending.has(id);
+      }
+    }
+  }
+  function positionPicker() {
+    const dd = $('collection-picker'), menu = $('collection-menu');
+    if (!dd.open) return;
+    const rect = $('collection-summary').getBoundingClientRect();
+    const left = Math.max(8, Math.min(rect.left, document.documentElement.clientWidth - menu.offsetWidth - 8));
+    menu.style.left = left + 'px'; dd._pinLeft = left;
+    menu.style.top = (rect.bottom - 1) + 'px';
+    menu.style.maxHeight = Math.max(0, document.documentElement.clientHeight - rect.bottom - 7) + 'px';
   }
   // Priority+ tab strip: nothing scrolls or wraps. Try full labels, then short labels, then a bare "+" for
   // Create, then fold pinned tabs from the right into the Your lists menu until the row fits its container.
@@ -315,6 +371,7 @@ window.MZLists = (() => {
     for (let i = pins.length - 1; i >= 0 && overflow(); i--) { pins[i].hidden = true; foldedPins.add(pins[i].dataset.id); buildPicker(); }
     if (overflow()) nav.dataset.fit = 'overflow';  // even the fixed tabs do not fit: let the strip scroll rather than clip
     if (before !== [...foldedPins].join()) buildPicker();
+    positionPicker();
   }
   new ResizeObserver(() => { if (started) fitStrip(); }).observe(document.querySelector('nav.collections'));
   async function refreshCollections() {
@@ -326,6 +383,7 @@ window.MZLists = (() => {
       collections = value;
       following = collections.following.some(row => row.id === id && !row.unavailable);
       updatePicker(); sync();
+      return true;
     } catch (err) {
       if (generation !== collectionsVersion || token !== hooks.token()) return;
       if (err.status === 401) collections = {owned: [], following: []}; updatePicker();
@@ -341,6 +399,7 @@ window.MZLists = (() => {
     $('clpin').hidden = editing || !list;
     $('clmore').hidden = !list;
     $('clpin').textContent = (collections.pins || []).some(p => p.id === id) ? 'Unpin tab' : 'Pin as tab';
+    $('clpin').disabled = pinPending.has(id);
     $('collection-all').setAttribute('aria-current', mode === 'all' ? 'page' : 'false');
     $('collection-favorites').setAttribute('aria-current', mode === 'favorites' ? 'page' : 'false');
     $('collection-browse').setAttribute('aria-current', mode === 'browse' ? 'page' : 'false');
@@ -364,6 +423,8 @@ window.MZLists = (() => {
     syncFields();
     $('clstate').textContent = editing ? visibilityLabel(visibility()) + (dirty ? ' · Unsaved changes' : ' · Saved')
       : visibility() === 'unlisted' || visibility() === 'private' && owner ? visibilityLabel(visibility()) : '';  // public is the default and needs no badge
+    if (owner && !editing) $('clstate').textContent = 'Your list - ' + visibilityLabel(visibility());
+    if (owner && list.moderation_hidden) $('clstate').textContent += ' - Hidden by admin: ' + list.moderation_reason;
     $('cledit').hidden = !editing || !owner; $('cldone').hidden = !editing;
     $('clsecondary').hidden = !editing || !owner;
     $('clmoresummary').textContent = editing ? 'More' : 'About this list';
@@ -376,6 +437,8 @@ window.MZLists = (() => {
     $('clcopylist').hidden = editing;
     $('clfollow').hidden = editing || owner || visibility() === 'private';
     $('clfollow').disabled = followBusy;
+    $('clfollow').setAttribute('aria-pressed', String(following));
+    $('clfollow').classList.toggle('is-following', following);
     $('clfollow').textContent = following ? (collections.pins || []).some(p => p.id === id) ? 'Unfollow & unpin' : 'Unfollow' : 'Follow list';
     $('clselected').textContent = selectedOnly ? 'Show all games' : 'Show only list entries';
     $('clselected').setAttribute('aria-pressed', selectedOnly);
@@ -398,15 +461,21 @@ window.MZLists = (() => {
     const facts = (updated ? 'updated ' + updated : '') + (followers && visibility() !== 'private' ? ' · ' + followers + (followers === 1 ? ' follower' : ' followers') : '');
     attribution.append(document.createTextNode(facts));
     const meta = $('clmeta'); meta.replaceChildren();
-    if (name) meta.append(credit(), facts ? ' · ' : '');
+    if (name) meta.append(credit(), owner ? ' (you)' : '', facts ? ' · ' : '');
     meta.append(facts);
     $('cldescriptionfold').hidden = !list.description;
     $('cldescriptionview').textContent = list.description;
     const description = $('cldesctext');
-    if (description.textContent !== (list.description || '')) { description.textContent = list.description || ''; description.classList.add('clamped'); }
-    description.hidden = !list.description;
-    $('cldescmore').hidden = true;
-    if (list.description && description.classList.contains('clamped') && !editing) requestAnimationFrame(() => { $('cldescmore').hidden = description.scrollHeight <= description.clientHeight + 1; });
+    const full = list.description || '';
+    if (description.dataset.full !== full) {
+      let cut = full.lastIndexOf(' ', 240); if (cut < 160) cut = 240;
+      const shorten = full.length - cut >= 60 && full.slice(cut).trim().split(/\s+/).length >= 10;
+      description.dataset.full = full; description.dataset.short = shorten ? full.slice(0, cut).trimEnd() + '...' : full; description.dataset.expanded = 'false';
+    }
+    description.classList.remove('clamped'); description.textContent = description.dataset.expanded === 'true' ? full : description.dataset.short; description.hidden = !full;
+    $('cldescmore').hidden = editing || description.dataset.short === full;
+    $('cldescmore').textContent = description.dataset.expanded === 'true' ? 'Show less' : 'Show more';
+    $('cldescmore').setAttribute('aria-expanded', description.dataset.expanded);
     $('clnote').textContent = editing
       ? 'Tick games in the catalogue to add them. Your list stays visible here as you search and filter. ' + (visibility() === 'private' ? 'Your list is private unless you change its visibility.' : 'Saving updates the same shared list.')
       : !selected.size ? (owner ? 'This list is empty. Choose Edit list to start adding entries.' : 'This list has no entries yet. Its owner can add them later.')
@@ -626,7 +695,7 @@ window.MZLists = (() => {
       location.assign('/releases/?editList=' + encodeURIComponent(created.id));
     } catch (err) {
       if (session !== sessionVersion) return;
-      $('clcreatestatus').textContent = err.status === 404 && copySource ? 'The original list is no longer available. No copy was created.' : err.status === 401 ? errorText(err) : 'Could not confirm creation. Check My lists before trying again.';
+      $('clcreatestatus').textContent = err.status === 404 && copySource ? 'The original list is no longer available. No copy was created.' : [401,429].includes(err.status) || err.code === 'list_limit' ? errorText(err) : 'Could not confirm creation. Check My lists before trying again.';
       createBusy = false; $('clcreateyes').disabled = false;
     }
   }
@@ -747,7 +816,7 @@ window.MZLists = (() => {
     } catch (err) {
       if (attempt !== entryVersion || session !== sessionVersion) return;
       $('clentrysignin').hidden = err.status !== 401;
-      const text = err.code === 'profile_required' ? 'Choose a display name on your account page before updating this shared list.'
+      const text = err.status === 429 ? errorText(err) : err.code === 'profile_required' ? 'Choose a display name on your account page before updating this shared list.'
         : err.status === 409 ? 'This list changed elsewhere. Nothing was overwritten. Choose Add again to use its latest saved version.'
         : err.status === 404 ? 'This list is no longer available to your account. Reload your lists to choose another.'
         : err.status === 401 ? 'Your sign-in expired. Sign in again, then reopen Add to list.'
@@ -775,8 +844,9 @@ window.MZLists = (() => {
     } catch (err) {
       if (attempt !== entryVersion || session !== sessionVersion) return;
       $('clentrysignin').hidden = err.status !== 401;
-      entryCreateBlocked = ![400,401,413].includes(err.status);
+      entryCreateBlocked = ![400,401,413,429].includes(err.status) && err.code !== 'list_limit';
       entryStatus(err.status === 401 ? 'Your sign-in expired. Sign in again, then reopen Add to list.'
+        : err.status === 429 || err.code === 'list_limit' ? errorText(err)
         : [400,413].includes(err.status) ? 'Use a name up to 100 characters and a description up to 2,000.'
         : 'Could not confirm creation. Reload your lists and check for the new list before creating another.', true);
     } finally { if (attempt === entryVersion && session === sessionVersion) { entryBusy = false; entryControls(); } }
@@ -785,6 +855,7 @@ window.MZLists = (() => {
     if (!started) return;
     libraryMode = null;
     sessionVersion++; collectionsVersion++; loadVersion++; profile = null; profileLoaded = false;
+    pinPending.clear();
     collections = {owned: [], following: []}; following = false; owner = false;
     followBusy = false; createBusy = false; entryVersion++; entryRow = null; entryBusy = false;
     for (const dialog of document.querySelectorAll('dialog.cldialog[open]')) dialog.close();
@@ -829,7 +900,7 @@ window.MZLists = (() => {
       const tab = document.createElement('a'); tab.href = '/releases/?list=' + pin.id;
       tab.textContent = row?.title || pin.title;
       tab.setAttribute('aria-current', mode === 'list' && id === pin.id ? 'page' : 'false');
-      tab.title = row && !row.unavailable ? tab.textContent : tab.textContent + ' (unavailable)';
+      tab.dataset.tip = row && !row.unavailable ? tab.textContent : tab.textContent + ' (unavailable)';
       tab.dataset.id = pin.id;
       host.append(tab);
       if (!row || row.unavailable) {
@@ -867,7 +938,7 @@ window.MZLists = (() => {
   }
   function start(bridge) {
     hooks = bridge;
-    libraryUI = window.MZListLibrary($('collection-library'), {navigate, changed: refreshCollections});
+    libraryUI = window.MZListLibrary($('collection-library'), {navigate, changed: refreshCollections, catalogue: hooks.catalogue, source: hooks.source});
     if (started) return;
     started = true;
     if (editing) {
@@ -951,14 +1022,7 @@ window.MZLists = (() => {
       event.preventDefault(); navigate(link.href);
     });
     window.addEventListener('popstate', () => { if (!editing) switchView(location.href, true); });
-    $('clpin').onclick = async () => {
-      if (!hooks.token()) { location.assign(signIn(listPath())); return; }
-      const target = id, pinned = (collections.pins || []).some(p => p.id === target);
-      $('clpin').disabled = true;
-      try { await request('/pins/' + target, {method: pinned ? 'DELETE' : 'PUT'}, true); await refreshCollections(); status(pinned ? 'Unpinned. The list is still in Your lists.' : 'Pinned.'); }
-      catch (err) { status(errorText(err), true); }
-      finally { $('clpin').disabled = false; }
-    };
+    $('clpin').onclick = () => togglePin(id);
     $('collection-select').onchange = event => {
       const value = event.target.value;
       if (validID(value)) navigate('/releases/?list=' + encodeURIComponent(value));
@@ -1058,13 +1122,14 @@ window.MZLists = (() => {
     $('clmissing').onclick = showMissing;
     $('clfollow').onclick = () => setFollowing(!following);
     // The menu is a folder: it opens flush under the Your lists tab (the shared positionMenu leaves a 4px gap).
-    $('collection-picker').addEventListener('toggle', () => {
-      const dd = $('collection-picker'), menu = $('collection-menu'); if (!dd.open) return;
-      const rect = $('collection-summary').getBoundingClientRect();
-      menu.style.top = (rect.bottom - 1) + 'px';
-      if (Math.abs(parseFloat(menu.style.left) - rect.left) < 2) menu.style.left = rect.left + 'px';
+    $('collection-picker').addEventListener('toggle', positionPicker);
+    window.addEventListener('resize', positionPicker);
+    $('collection-menu').addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault(); event.stopPropagation();
+      $('collection-picker').open = false; $('collection-summary').focus();
     });
-    $('cldescmore').onclick = () => { const d = $('cldesctext'), open = d.classList.toggle('clamped'); $('cldescmore').textContent = open ? 'Show more' : 'Show less'; };
+    $('cldescmore').onclick = () => { const d = $('cldesctext'); d.dataset.expanded = String(d.dataset.expanded !== 'true'); sync(); };
     $('cllinkcopy').onclick = async () => {
       const url = location.origin + listPath();
       try { await navigator.clipboard.writeText(url); status('Share link copied.'); } catch (_) { status('Copy this link: ' + url); }

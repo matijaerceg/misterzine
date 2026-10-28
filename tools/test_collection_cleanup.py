@@ -76,7 +76,7 @@ def main():
             created = context.request.post(api + '/lists', headers=auth, data={'title': prefix, 'description': 'Independent copy test', 'keys': [first, second]}).json()
             fixtures.append((created['id'], auth))
             page.goto(base + '/releases/?list=' + created['id'])
-            expect(page.locator('#clstate')).to_have_text('Private')
+            expect(page.locator('#clstate')).to_have_text('Your list - Private')
             assert 'Saved' not in page.locator('#clbar').inner_text()
             if not page.locator('#srcsummary').is_visible(): page.locator('#filterssum').click()
             page.locator('#srcsummary').click()

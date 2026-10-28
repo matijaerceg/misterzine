@@ -13,7 +13,7 @@
 .clbar button:disabled, .cldialog button:disabled { opacity: .5; cursor: default; }
 .clbar .clprimary, .cldialog .clprimary { color: var(--accent-on); background: var(--accent); border-color: var(--accent); }
 .clbar button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
-/* View-mode header: title · state · credit, then facts, then the description in the open, then plain actions. */
+/* View-mode header: title Â· state Â· credit, then facts, then the description in the open, then plain actions. */
 .clmeta a { color: inherit; }
 .clabout { flex: 1 1 100%; min-width: 0; }
 .clabout .clmeta { margin: 0; }
@@ -364,16 +364,27 @@ body:not(.cl-editor) #clbar { border-top: 0; }
 .collection-picker.placeholder select { color: transparent; min-width: 8rem; }
 .collection-picker.placeholder select option, .collection-picker.placeholder select optgroup { color: var(--fg); }
 
-.collection-picker.placeholder::after { content: '▾'; position: absolute; right: .65rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--fg); }
+.collection-picker.placeholder::after { content: 'â–¾'; position: absolute; right: .65rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--fg); }
 
 /* Match the existing filter dropdowns; reserve folder styling for actual tabs. */
 .collections { border-bottom-color: var(--accent); }
 #collection-pins > a[aria-current=page], .collection-tabs > a[aria-current=page] { color: var(--accent); border-color: var(--accent); border-bottom-color: var(--surface); background: var(--surface); font-weight: 600; }
 #collection-picker { align-self: center; order: 1; margin-bottom: .3rem; flex: none; }
 #collection-picker summary { white-space: nowrap; }
-#collection-menu { min-width: 15rem; max-width: min(25rem, calc(100vw - 2rem)); }
+#collection-menu { width: max-content; box-sizing: border-box; min-width: 15rem; max-width: min(25rem, calc(100vw - 2rem)); }
 #collection-menu button { display: block; width: 100%; text-align: left; white-space: normal; }
 #collection-menu button[aria-current=page] { color: var(--accent); font-weight: 600; }
+.collection-item { display: flex; align-items: stretch; gap: .2rem; }
+#collection-menu .collection-item > [data-collection] { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+#collection-menu .collection-pin { display: flex; align-items: center; justify-content: center; flex: 0 0 2.25rem; width: 2.25rem; padding: .4rem; color: var(--muted); }
+#collection-menu .collection-pin svg { width: 1.1rem; height: 1.1rem; }
+#collection-menu .collection-pin[aria-pressed=true] { color: var(--accent); }
+#collection-menu .collection-pin[aria-pressed=true] .pin-head { fill: currentColor; }
+#collection-menu .collection-pin[aria-disabled=true] { opacity: .5; cursor: wait; }
+@media (pointer: coarse), (max-width: 36rem) {
+  #collection-menu .collection-item > button { min-height: 44px; }
+  #collection-menu .collection-pin { flex-basis: 44px; width: 44px; }
+}
 .collection-group { display: block; color: var(--muted); font-size: .8rem; padding: .4rem .5rem; }
 #favmanagement .favnote { flex-basis: auto; margin: 0 0 0 .35rem; }
 #collection-select[hidden] { display: none !important; }
@@ -419,6 +430,14 @@ body.cl-library main { margin-left: 0 !important; transition: none; }
 #collection-library .danger { color: var(--danger); }
 #collection-library .list-cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(min(100%,22rem),1fr)); gap: .8rem; list-style: none; padding: 0; margin: .8rem 0; }
 #collection-library .list-card { border: 1px solid var(--hair); border-radius: .4rem; padding: .8rem; background: var(--surface); overflow-wrap: anywhere; }
+#collection-library .list-preview { margin-top: .8rem; border-top: 1px solid var(--hair); }
+#collection-library .list-preview > summary { padding: .5rem 0; color: var(--accent); cursor: pointer; }
+#collection-library .list-preview > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#collection-library .list-preview-entries { list-style: none; margin: 0; padding: 0; }
+#collection-library .list-preview-entries li { padding: .35rem 0; border-top: 1px solid var(--hair); overflow-wrap: anywhere; }
+#collection-library .list-preview-entries span, #collection-library .list-preview-entries small { display: block; }
+#collection-library .list-preview-entries small { color: var(--muted); font-size: .8rem; }
+@media (pointer: coarse), (max-width: 36rem) { #collection-library .list-preview > summary { min-height: 44px; align-content: center; } }
 #collection-library .description { white-space: pre-wrap; max-height: 8rem; overflow: auto; }
 #collection-library .card-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
 #collection-library .state { color: var(--muted); font-size: .8rem; }
@@ -468,3 +487,67 @@ body.cl-library .collection-tabs > a[aria-current=page] { background: var(--bg);
 .collection-tabs > a[aria-current=page], #collection-pins > a[aria-current=page], #collection-picker > summary.active { position: relative; z-index: 2; }
 
 #collection-pins > a.collection-unavailable { color: var(--muted); max-width: 22rem; }
+
+/* Library cards and saved-list tools. */
+#collection-library .list-cards { align-items: start; }
+#collection-library .list-card .card-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; max-height: none; overflow: hidden; margin-bottom: .2rem; }
+#collection-library .list-card .card-description.expanded { display: block; }
+#collection-library .description-toggle { color: var(--accent); border: 0; background: transparent; font: inherit; font-size: .85rem; padding: .25rem 0; cursor: pointer; align-self: flex-start; }
+#collection-library .description-toggle[hidden] { display: none; }
+#collection-library .list-preview > summary { display: list-item; border: 0; border-radius: 0; background: transparent; }
+#collection-library .manage-tools { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .6rem 0 1rem; }
+#collection-library .manage-tools input { flex: 1 1 14rem; min-width: 0; width: auto; }
+#collection-library .manage-tools select { flex: 0 1 auto; width: auto; max-width: 100%; }
+#collection-library .manage-tools .btn { flex: none; }
+#collection-library .card-meta { font-size: .82rem; }
+
+#collection-library .list-card .card-description { display: block; -webkit-line-clamp: unset; max-height: none; overflow: visible; }
+#collection-library .actions .list-preview { margin: 0; border: 0; }
+#collection-library .actions .list-preview > summary { display: inline-flex; align-items: center; gap: .35rem; padding: .4rem .65rem; border: 1px solid var(--hair); border-radius: 4px; color: var(--fg); }
+#collection-library .actions .list-preview > summary::marker { content: ""; }
+#collection-library .list-preview-body:popover-open { display: block; position: fixed; inset: 0; margin: auto; width: min(28rem, calc(100vw - 2rem)); max-height: calc(100dvh - 3rem); overflow: auto; box-sizing: border-box; padding: 1rem; background: var(--surface); color: var(--fg); border: 1px solid var(--hair); border-radius: .5rem; box-shadow: 0 .5rem 2rem #0006; }
+#collection-library .list-preview-body h2 { margin: 0 0 .5rem; }
+#collection-library .list-preview-body > button { margin-bottom: .6rem; }
+#collection-library .list-icon { display: inline-block; width: 1em; height: 1em; margin-right: .35em; vertical-align: -.1em; background: currentColor; mask: var(--icon) center / contain no-repeat; }
+#collection-library .is-following { color: var(--accent); border-color: var(--accent); }
+#collection-library .icon-checkmark { --icon: url(../lists/icons/checkmark.svg); }
+#collection-library .icon-eye { --icon: url(../lists/icons/eye.svg); }
+#collection-library .icon-list { --icon: url(../lists/icons/list.svg); }
+
+/* Consistent action states and aligned search controls. */
+#collection-library .search-form .field { margin: 0; }
+#collection-library .search-form { align-items: end; }
+#collection-library .actions { align-items: center; }
+#collection-library .icon-edit { --icon: url(../lists/icons/edit.svg); }
+#collection-library .btn { border-color: color-mix(in srgb, var(--hair) 78%, var(--fg)); }
+#collection-library .btn:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+#collection-library .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#collection-library .actions .list-preview > summary { border-color: color-mix(in srgb, var(--hair) 78%, var(--fg)); }
+#collection-library .actions .list-preview > summary:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+#collection-library .actions .list-preview > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#collection-library .is-following { border-color: var(--accent); color: var(--accent); }
+
+/* A little more definition for controls, without changing divider lines. */
+.controls button, .controls select, .controls input, .controls details.cols > summary,
+.clbar button, .clbar .cllink, .cldialog button, .clbulkbar button, .clmembertools button,
+#favmanagement button, #favbanner button, #favexp .fx-in button, #iniexp .fx-in button {
+ border-color: color-mix(in srgb, var(--hair) 78%, var(--fg));
+}
+#favmanagement button:hover:not(:disabled), #favbanner button:hover:not(:disabled),
+#favexp .fx-in button:hover:not(:disabled), #iniexp .fx-in button:hover:not(:disabled),
+.clbar button:hover:not(:disabled), .clbar .cllink:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
+#clcopylist::before, #cllinkcopy::before, #clpin::before, #cleditlink::before, #clfollow::before { content: ''; display: inline-block; width: 1em; height: 1em; margin-right: .35em; vertical-align: -.1em; background: currentColor; mask: var(--action-icon) center / contain no-repeat; }
+#clpin { --action-icon: url(../lists/icons/pin.svg); }
+#cleditlink { --action-icon: url(../lists/icons/edit.svg); }
+#clfollow { --action-icon: url(../lists/icons/eye.svg); }
+
+.controls button[aria-pressed=true], .controls details.cols > summary.active { border-color: var(--accent); }
+
+#clfollow.is-following { color: var(--accent); border-color: var(--accent); }
+
+#clcopylist { --action-icon: url(../lists/icons/copy.svg); }
+#cllinkcopy { --action-icon: url(../lists/icons/share.svg); }
+#collection-library .icon-share { --icon: url(../lists/icons/share.svg); }
+.controls input[type=search], #collection-library input[type=search], #collection-library select, #clmembersearch {
+ border-color: color-mix(in srgb, var(--hair) 78%, var(--fg));
+}

@@ -472,3 +472,82 @@ describe('revision and migration semantics', () => {
     expect((await call('/pins/' + mine.id, 'DELETE', undefined, 1)).status).toBe(204);
   });
  });
+
+
+describe('list moderation', () => {
+  const admin = async () => env.DB.prepare("UPDATE users SET provider='google',email='matija.erceg@gmail.com' WHERE id=2").run();
+  const moderate = (list, hidden=true, extra={}) => call('/admin/lists/'+list.id,'PUT',{hidden,reason:'Review needed',version:list.version,...extra},1);
+  it('restricts reads and writes to the verified Google identity, including forged profile email', async () => {
+    const list=await create();
+    expect((await call('/admin/lists','GET',undefined,null)).status).toBe(401);
+    await env.DB.prepare("UPDATE users SET email='matija.erceg@gmail.com' WHERE id=2").run();
+    expect((await call('/admin/lists','GET',undefined,1)).status).toBe(403);
+    expect((await moderate(list)).status).toBe(403);
+    expect((await (await call('/me','GET',undefined,1)).json()).list_admin).toBe(false);
+    await admin();
+    expect((await (await call('/me','GET',undefined,1)).json()).list_admin).toBe(true);
+    expect((await call('/admin/lists/'+list.id,'GET',undefined,1)).status).toBe(200);
+    await env.DB.prepare("UPDATE users SET email=NULL WHERE id=2").run();
+    expect((await moderate(list)).status).toBe(403);
+  });
+  it('hides shared access everywhere, keeps owner editing, and restores the current visibility', async () => {
+    let list=await save(await create(),{visibility:'public'});
+    await call('/pins/'+list.id,'PUT',undefined,1);
+    await admin();
+    expect((await moderate(list)).status).toBe(204);
+    expect((await publicRead(list.id)).status).toBe(404);
+    expect((await directory()).lists).toEqual([]);
+    expect((await call('/public/curators/'+list.curator.id,'GET',undefined,null)).status).toBe(404);
+    expect((await call('/following/'+list.id,'PUT',undefined,1)).status).toBe(404);
+    expect((await call('/pins/'+list.id,'PUT',undefined,1)).status).toBe(404);
+    const c=await collection(1);
+    expect(c.following).toEqual([{id:list.id,title:'Unavailable list',unavailable:true}]);
+    expect(c.pins[0].title).toBe('Unavailable list');
+    expect((await read(list.id)).moderation_hidden).toBe(true);
+    list=await save(list,{title:'Edited while hidden',visibility:'unlisted'});
+    expect(list.moderation_hidden).toBe(true);
+    expect((await publicRead(list.id)).status).toBe(404);
+    expect((await (await call('/admin/lists?hidden=1','GET',undefined,1)).json()).lists).toHaveLength(1);
+    expect((await moderate(list,false)).status).toBe(204);
+    expect((await publicRead(list.id)).status).toBe(200);
+    expect((await directory()).lists).toEqual([]);
+    expect((await collection(1)).following[0].title).toBe('Edited while hidden');
+  });
+  it('requires a reason and current content revision; private lists remain private on restore', async () => {
+    const list=await create(); await admin();
+    expect((await moderate(list,true,{reason:''})).status).toBe(400);
+    expect((await moderate(list,true,{version:99})).status).toBe(409);
+    expect((await moderate(list)).status).toBe(204);
+    expect((await moderate(list,false)).status).toBe(204);
+    expect((await publicRead(list.id)).status).toBe(404);
+    expect((await call('/admin/lists?offset=-1','GET',undefined,1)).status).toBe(400);
+    await call('/lists/'+list.id,'DELETE',{version:list.version});
+    expect((await moderate(list)).status).toBe(404);
+    expect(await env.DB.prepare('SELECT COUNT(*) AS n FROM list_moderation').first('n')).toBe(0);
+  });
+});
+
+
+it('caps owned lists atomically and still permits editing and deletion at the cap',async()=>{
+  const list=await create();
+  await env.DB.prepare("WITH RECURSIVE n(x) AS (VALUES(1) UNION ALL SELECT x+1 FROM n WHERE x<198) INSERT INTO curated_lists(id,user_id,title) SELECT printf('%012d',x),1,'Quota fixture' FROM n").run();
+  const results=await Promise.all([call('/lists','POST',{title:'Last slot'}),call('/lists','POST',{title:'Overflow'})]);
+  expect(results.map(r=>r.status).sort()).toEqual([201,409]);expect(await savedCount()).toBe(200);
+  expect(await (await call('/lists','POST',{title:'Overflow'})).json()).toEqual({error:'list_limit'});
+  await save(list,{title:'Still editable'});
+  const current=await read(list.id);expect((await call('/lists/'+list.id,'DELETE',{version:current.version})).status).toBe(204);
+  expect((await call('/lists','POST',{title:'Slot freed'})).status).toBe(201);
+});
+
+
+it('paginates a thousand-list dataset without exposing private, unlisted or hidden entries',async()=>{
+  await env.DB.prepare("INSERT INTO users(id,provider,provider_user_id) VALUES (3,'github','scale3'),(4,'github','scale4'),(5,'github','scale5'),(6,'github','scale6')").run();
+  await env.DB.prepare("WITH RECURSIVE n(x) AS (VALUES(1) UNION ALL SELECT x+1 FROM n WHERE x<1000) INSERT INTO curated_lists(id,user_id,title,visibility) SELECT printf('%012d',x),1+((x-1)/200),printf('Scale %04d',x),CASE WHEN x%4=0 THEN 'private' WHEN x%4=1 THEN 'unlisted' ELSE 'public' END FROM n").run();
+  await env.DB.prepare("INSERT INTO list_moderation(list_id,hidden,reason,moderated_by) SELECT id,1,'Scale hidden',1 FROM curated_lists WHERE CAST(id AS INTEGER)%10=2").run();
+  const expected=(await env.DB.prepare("SELECT id FROM curated_lists l WHERE visibility='public' AND NOT EXISTS(SELECT 1 FROM list_moderation m WHERE m.list_id=l.id AND hidden=1) ORDER BY updated_at DESC,id").all()).results.map(r=>r.id);
+  const ids=[];let page;
+  do {page=await directory('?q=Scale&limit=100&offset='+ids.length);expect(page.total).toBe(expected.length);ids.push(...page.lists.map(r=>r.id));} while(page.has_more);
+  expect(ids).toEqual(expected);expect(new Set(ids).size).toBe(ids.length);
+  expect((await directory('?q=Scale%200002')).lists).toEqual([]);
+  expect((await publicRead('000000000002')).status).toBe(404);
+});

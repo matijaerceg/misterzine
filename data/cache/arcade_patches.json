@@ -4496,7 +4496,8 @@
      "your own Strider Hiryuu (Japan) PC Engine CD as a complete Redump split-bin CUE rip or ZIP/7z archive",
      "your own unheadered Japanese Super CD-ROM System v3.0 BIOS",
      "your own Strider Hiryuu X68000 disk archive, used to restore the Aerial Battleship intro and ending music",
-     "Python 3.11 or later with NumPy, Pillow and SciPy; MAME 0.288 with Lua; 7-Zip for 7z inputs"
+     "Python 3.11 or later with NumPy, Pillow and SciPy; 7-Zip for 7z inputs",
+     "Linux: included MAME replay helper for Ubuntu 24.04 or compatible glibc 2.39 systems; Windows and macOS: MAME 0.288 with Lua"
     ]
    },
    "related": [

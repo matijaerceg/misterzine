@@ -3296,14 +3296,15 @@
     "Sixteen stages and Random to choose from after you pick a fighter",
     "The Ultra title and intro, and ULTRA on the VS, Continue and Game Over screens",
     "The Switch edition's sound effects, and its arranged music on MiSTer; MODERN or CLASSIC options",
+    "MODERN command inputs with more forgiving motions, or CLASSIC inputs, selected in ULTRA CONFIGURATION",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-10-23",
+   "date": "2026-10-28",
    "description": [
     "Ultra Street Fighter II: The Final Challengers is the 2017 Nintendo Switch edition of Super Street Fighter II Turbo, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "Akuma has his own select cell, and Evil Ryu and Violent Ken join the original sixteen fighters with their Ultra moves, colors and endings. Shin Akuma stays hidden, for twenty fighters in all.",
     "Ultra's presentation comes with them: the Ultra title and intro, \"The Final Challengers\" lettering, a color select for the new fighters, and a choice of sixteen stages or Random once you have picked a fighter.",
-    "The Switch edition's sound effects play in every build, and on MiSTer its arranged music plays too. Choose MODERN or CLASSIC sound effects in ULTRA CONFIGURATION; on MiSTer you can choose the music there too.",
+    "The Switch edition's sound effects play in every build, and on MiSTer its arranged music plays too. Choose MODERN or CLASSIC sound effects in ULTRA CONFIGURATION; on MiSTer you can choose the music there too. MODERN controls are the default; choose CLASSIC in ULTRA CONFIGURATION to retain the earlier command inputs.",
     "The USA build is in English; the Japan build keeps the Japanese.",
     "This is a release candidate."
    ],
@@ -3361,6 +3362,30 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-10-28",
+     "items": [
+      "Improved: A new 30th-anniversary logo in the intro.",
+      "Fix: Sky details stay stable during Evil Ryu and Violent Ken’s intro fight.",
+      "Fix: Throw breaks now use the correct poses, recovery, invincibility and separation for both players.",
+      "Fix: Player 2 can start a solo game correctly.",
+      "New: MODERN controls add the Switch command shortcuts and input windows across the roster. CLASSIC preserves the previous command behavior; MODERN is the default.",
+      "Fix: Violent Ken’s fireballs use their purple colors.",
+      "Fix: Corrected background details in Honda, Guile, Blanka, Chun-Li, Zangief, Ryu, Ken, Cammy and Boxer stages.",
+      "Fix: Cammy’s aurora stays aligned during throw screen shake.",
+      "Fix: Honda’s HUD mouth keeps its red color across costumes.",
+      "Fix: Corrected Blanka, Dee Jay, Dictator and Akuma portrait colors, with character-select icons matching their large portraits.",
+      "Fix: Color 2 now appears correctly in large portraits on character select, VS, defeat and Continue screens across the roster.",
+      "Fix: Corrected a video-memory conflict during the service-menu Memory Test.",
+      "Improved: The VS screen hides the speed caption, matching the Switch presentation.",
+      "Fix: Dhalsim's Modern Yoga Fire and defeat voices play the correct phrases.",
+      "Improved: The hidden Shin Akuma button chord accepts overlapping presses across the six attack buttons.",
+      "Fix: Demon finishes keep the fighters grounded and restore the background and effects correctly.",
+      "Fix: Player-select cursors stay visible over the selection heading.",
+      "Improved: Ending illustrations keep their pixel-art detail and corrected proportions on a 4:3 display."
+     ],
+     "version": "rc5"
+    },
     {
      "date": "2026-10-23",
      "items": [
@@ -3449,7 +3474,7 @@
    "summary": "Ultra Street Fighter II: The Final Challengers as a CPS-2 game: Akuma gets his own select cell, Evil Ryu and Violent Ken join the roster, and the Switch edition's title, color select and sound come along. USA and Japan builds.",
    "thumbnail_build": "us",
    "title": "Ultra Street Fighter II",
-   "version": "rc4"
+   "version": "rc5"
   },
   {
    "artifact": {

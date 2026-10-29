@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Thu, 29 Oct 2026 03:45:49 +0000</lastBuildDate>
+<lastBuildDate>Thu, 29 Oct 2026 09:40:34 +0000</lastBuildDate>
+<item>
+<title>[New] Nintendo Super System BIOS (TomSVR) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#nintendo-super-system-bios-tomsvr</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Nintendo Super System (3 games) [TomSVR].mra:2026-10-29T09:40:34+00:00</guid>
+<pubDate>Thu, 29 Oct 2026 09:40:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/nss.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1991 / Nintendo&lt;/p&gt;&lt;p&gt;Core: TomSVR_nss&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Tecmo Bowl (World, set 1) [TomSVR] (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tbowl</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Tecmo Bowl (World, set 1) [TomSVR].mra:2026-10-29T09:40:34+00:00</guid>
+<pubDate>Thu, 29 Oct 2026 09:40:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tbowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Tecmo&lt;/p&gt;&lt;p&gt;Core: TomSVR_tbowl&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Air Buster: Trouble Specialty Raid Unit (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#airbustr</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_moglf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Nintendo&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Mega Man III (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_mman3</link>
-<guid isPermaLink="false">ongo:_Arcade/Mega Man III (PlayChoice-10).mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_mman3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1990 / Capcom USA (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Metroid (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_mtoid</link>
-<guid isPermaLink="false">ongo:_Arcade/Metroid (PlayChoice-10).mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_mtoid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

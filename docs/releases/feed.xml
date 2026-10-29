@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 29 Oct 2026 03:45:49 +0000</lastBuildDate>
+<lastBuildDate>Thu, 29 Oct 2026 09:40:34 +0000</lastBuildDate>
+<item>
+<title>[New] Nintendo Super System BIOS (TomSVR) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#nintendo-super-system-bios-tomsvr</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Nintendo Super System (3 games) [TomSVR].mra:2026-10-29T09:40:34+00:00</guid>
+<pubDate>Thu, 29 Oct 2026 09:40:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/nss.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 1991 / Nintendo&lt;/p&gt;&lt;p&gt;Core: TomSVR_nss&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Tecmo Bowl (World, set 1) [TomSVR] (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tbowl</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Tecmo Bowl (World, set 1) [TomSVR].mra:2026-10-29T09:40:34+00:00</guid>
+<pubDate>Thu, 29 Oct 2026 09:40:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tbowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1987 / Tecmo&lt;/p&gt;&lt;p&gt;Core: TomSVR_tbowl&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TomSVR_nss (Arcade core, 13 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#nss_actr</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_nss_20261029.rbf:2026-10-29T09:40:34+00:00</guid>
+<pubDate>Thu, 29 Oct 2026 09:40:34 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Act Raiser, Contra 3: The Alien Wars, David Crane's Amazing Tennis, F-Zero, Lethal Weapon, NCAA Basketball, Nintendo Super System BIOS (TomSVR), Robocop 3, Skins Game, Super Mario World, Super Soccer, Super Tennis, The Addams Family.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Air Buster: Trouble Specialty Raid Unit (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#airbustr</link>
@@ -593,7 +620,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/agress.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Palco&lt;/p&gt;&lt;p&gt;Core: bazset_Agress&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Nintendo Super System BIOS (Arcade)</title>
+<title>[Updated] Nintendo Super System BIOS (Ongo) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#nss</link>
 <guid isPermaLink="false">ongo:_Arcade/Nintendo Super System.mra:2026-10-28T03:17:37+00:00</guid>
 <pubDate>Wed, 28 Oct 2026 03:17:37 +0000</pubDate>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Athena no Hatena? (Ongo), Blandia (Ongo), Block Carnival (Ongo), Daioh (Ongo), Dragon Unit (Ongo), Eight Forces (Ongo), Extreme Downhill (Ongo), Gundhara (Ongo), J. J. Squawkers (Ongo), Mad Shark (Ongo), Magical Speed (Ongo), Masked Riders Club Battle Race (Ongo), Mobile Suit Gundam (Ongo), Oishii Puzzle Ha Irimasenka (Ongo), Pairs Love (Ongo), Quiz Kokology (Ongo), Quiz Kokology 2 (Ongo), Rezon (Ongo), SD Gundam Neo Battling (Ongo), Sokonuke Taisen Game (Ongo), Strike Gunner S.T.G (Ongo), Thunder &amp;amp; Lightning (Ongo), Ultraman Club - Tatakae! Ultraman Kyoudai!! (Ongo), War of Aero - Project MEIOU (Ongo), Wit's (Ongo), Zing Zing Zip (Ongo), Zombie Raid (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Armed Police Batrider (Europe) (Fri Feb 13 1998) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#batrider</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Armed Police Batrider (Europe) (Fri Feb 13 1998).mra:2026-10-27T22:12:09+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 22:12:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/batrider.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1998 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Battle Bakraid - Unlimited Version Special Ver. (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#battle-bakraid-unlimited-version-special-ver</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Battle Bakraid - Unlimited Version Special Ver. (USA) (Tue Jun 8 1999).mra:2026-10-27T22:12:09+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 22:12:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/battle-bakraid-unlimited-version-special-ver.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Battle Garegga (Europe - USA - Japan - Asia) (Sat Feb 3 1996) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#battle-garegga-europe-usa-japan-asia-sat-feb-3-1996</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Battle Garegga (Europe - USA - Japan - Asia) (Sat Feb 3 1996).mra:2026-10-27T22:12:09+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 22:12:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bgaregga.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1996 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-27 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

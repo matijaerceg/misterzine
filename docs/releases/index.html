@@ -115,7 +115,7 @@
      phone layout and ~1500px of topbar tighten the gaps and summary padding so
      it still fits one line down to 1366px (search keeps its 12rem floor) */
   /* ---- .ctl: the ONE chrome every control in the row wears (filter summaries,
-     Filters, Clear, the favorites and Group batches segments, the view-link
+     Filters, Clear, the favorites and Group updates segments, the view-link
      icon). Size steps are the --ctl-* knobs on .controls, set once per layout
      here and in the 867px container block, so a new control only needs
      class="ctl" to match its neighbours: no per-element font/padding lists.
@@ -291,7 +291,7 @@
   .favctl.active { border-color: var(--accent2, var(--accent)); }
   .favctl.active > button { background: color-mix(in srgb, var(--accent2, var(--accent)) 10%, var(--surface)); }
   .favctl.active > button:hover { background: color-mix(in srgb, var(--accent2, var(--accent)) 18%, var(--surface)); }
-  /* "Group batches" borrows the group look but has no dropdown segment, so its
+  /* "Group updates" borrows the group look but has no dropdown segment, so its
      button rounds both ends (the left-only radius showed square corners when
      lit). It is a remembered on/off setting, not a command, so it reads as a
      checkbox: a drawn box in front (::before) that fills with the accent and
@@ -1421,7 +1421,7 @@
           <summary id="yearsummary" class="ctl">Year</summary>
           <div class="menu" id="yearmenu"></div>
         </details>
-        <!-- "Group batches" (core batches): games that shipped an update together
+        <!-- "Group updates" (core batches): games that shipped an update together
              fold into one row per core under the date sorts, games that debuted
              together under the MiSTer Debut sort (see foldBatches, batchField). A
              display pref like Columns, not a filter: it persists and Clear filters
@@ -1430,7 +1430,7 @@
              (as its own button in the row, it crushed the search box at 390px). -->
         <div class="favctl" id="batchctl">
           <button type="button" id="batchtoggle" class="ctl" aria-pressed="true"
-                  data-tip="Fold games that shipped an update together into one row per core. Under the MiSTer Debut sort, games that debuted together instead. Applies to the Build Date, Changed on MZ and MiSTer Debut sorts. Remembered between visits.">Group batches</button>
+                  data-tip="Fold games that shipped an update together into one row per core. Under the MiSTer Debut sort, games that debuted together instead. Applies to the Build Date, Changed on MZ and MiSTer Debut sorts. Remembered between visits.">Group updates</button>
         </div>
         <button type="button" id="clear" class="ctl clear"><span class="clx" aria-hidden="true">x</span><span class="cll">Clear filters</span></button>
       </div>

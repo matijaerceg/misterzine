@@ -4319,6 +4319,8 @@ CONSOLE_MANUFACTURER = {
     "GameKing": "Timetop",  # designer/brand; built by Guangzhou Panyu Gaoming Electronics
     "PocketStation": "Sony",
     "Marty": "Fujitsu",
+    # a home computer, but Distribution ships its rbf in _Console/
+    "BasicMasterJr": "Hitachi",
 }
 
 # Hardware maker per computer core (keyed by core_name); same rationale as above.
@@ -4346,6 +4348,7 @@ COMPUTER_MANUFACTURER = {
     "SunSparcStation20": "Sun Microsystems",
     "Cray-XMP": "Cray Research",
     "JR100": "Panasonic",  # sold as the National JR-100 in Japan (Matsushita)
+    "BasicMasterJr": "Hitachi",  # also in CONSOLE_MANUFACTURER: Distribution files it under _Console/
     "Ti994a": "Texas Instruments",
     "ColecoAdam": "Coleco", "Aquarius": "Mattel", "TomyTutor": "Tomy",
     "Casio_PV-2000": "Casio", "SordM5": "Sord", "Svi328": "Spectravideo",
@@ -4401,6 +4404,7 @@ CORE_YEAR = {
     "SunSparcStation20": "1994",  # SPARCstation 20 announced May 1994
     "Cray-XMP": "1982",
     "JR100": "1981",
+    "BasicMasterJr": "1981",  # Hitachi MB-6885
     "ZX-Spectrum": "1982", "ZX81": "1981", "QL": "1984", "ZXNext": "2017", "SAMCoupe": "1989",
     "AcornAtom": "1980", "AcornElectron": "1983", "BBCMicro": "1981", "Archie": "1987",
     "Amstrad": "1984", "Amstrad-PCW": "1985", "Atari800": "1979", "AtariST": "1985",
@@ -4524,6 +4528,7 @@ SYSTEM_TITLES = {
     "Ondra_SPO186": "Ondra SPO 186",
     "ORAO": "Orao",
     "JR100": "JR-100",
+    "BasicMasterJr": "Basic Master Jr",
     "PC88": "PC-8801",
     "PCXT": "PC/XT",
     "PCXT-EGA": "PC/XT (EGA)",

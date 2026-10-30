@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 30 Oct 2026 09:02:43 +0000</lastBuildDate>
+<lastBuildDate>Fri, 30 Oct 2026 16:00:16 +0000</lastBuildDate>
+<item>
+<title>[Updated] TomSVR_snesb (Arcade core, 13 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ffight2b</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_snesb_20261030.rbf:2026-10-30T16:00:16+00:00</guid>
+<pubDate>Fri, 30 Oct 2026 16:00:16 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Final Fight 2, Final Fight 3, Ghost Chaser Densei, Gundam Wing: Endless Duel, International Superstar Soccer Deluxe, Iron, Killer Instinct [TomSVR], Legend [TomSVR], Rushing Beat Shura, Sonic Blast Man II Special Turbo, Teenage Mutant Ninja Turtles - Mutant Warriors, Venom &amp;amp; Spider-Man - Separation Anxiety, Wild Guns.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-30 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Knuckle Joe (Ongo) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#knuckle-joe-ongo</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aoh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 2001 / Unico&lt;/p&gt;&lt;p&gt;Core: ppriest_Vamphalf&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Athena no Hatena? (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#atehate</link>
-<guid isPermaLink="false">ongo:_Arcade/Athena no Hatena.mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/atehate.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1993 / Athena&lt;/p&gt;&lt;p&gt;Core: ppriest_Seta&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

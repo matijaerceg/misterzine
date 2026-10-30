@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 30 Oct 2026 09:02:43 +0000</lastBuildDate>
+<lastBuildDate>Fri, 30 Oct 2026 16:00:16 +0000</lastBuildDate>
+<item>
+<title>[New] International Superstar Soccer Deluxe (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#issdxb</link>
+<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/International Superstar Soccer Deluxe [TomSVR].mra:2026-10-30T16:00:16+00:00</guid>
+<pubDate>Fri, 30 Oct 2026 16:00:16 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/issdxb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1997 / bootleg&lt;/p&gt;&lt;p&gt;Core: TomSVR_snesb&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-30 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TomSVR_snesb (Arcade core, 13 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ffight2b</link>
+<guid isPermaLink="false">tomsvr:_Arcade/cores/TomSVR_snesb_20261030.rbf:2026-10-30T16:00:16+00:00</guid>
+<pubDate>Fri, 30 Oct 2026 16:00:16 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Final Fight 2, Final Fight 3, Ghost Chaser Densei, Gundam Wing: Endless Duel, International Superstar Soccer Deluxe, Iron, Killer Instinct [TomSVR], Legend [TomSVR], Rushing Beat Shura, Sonic Blast Man II Special Turbo, Teenage Mutant Ninja Turtles - Mutant Warriors, Venom &amp;amp; Spider-Man - Separation Anxiety, Wild Guns.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-30 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Stinger (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#stinger</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Stinger.mra:2026-10-30T15:44:20+00:00</guid>
+<pubDate>Fri, 30 Oct 2026 15:44:20 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/stinger.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1983 / Seibu Denshi&lt;/p&gt;&lt;p&gt;Core: Arcade-Stinger&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-30 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] B.Rap Boys Special (Ongo) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#b-rap-boys-special-ongo</link>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1993 / Silicon Graphics&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SGIIndy_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arabian (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Arabian_20261027.rbf:2026-10-28T09:00:39+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 09:00:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arabian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arabian&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] BluePrint (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#blueprnt</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/BluePrint_20261027.rbf:2026-10-28T09:00:39+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 09:00:39 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Blue Print, Grasspin, Saturn (Zilec).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BluePrint_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] VideoBrain (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#VideoBrain</link>
-<guid isPermaLink="false">distribution_mister:_Computer/VideoBrain_20261027.rbf:2026-10-28T09:00:39+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 09:00:39 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1978 / Umtech&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/VideoBrain_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

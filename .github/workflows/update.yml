@@ -43,9 +43,6 @@ jobs:
       - name: Check feed field exports
         run: python -m unittest test_controls test_card_status test_arcade_specs test_family test_seed_r2 test_supporters test_mature test_genre test_optin_dbs test_app_tables test_build_dates test_flyers
 
-      - name: Check website source visibility
-        run: node --test tools/source_visibility.test.js
-
       - name: Enrich new arcade titles (year/manufacturer/rbf/setname)
         run: python misterzine.py enrich-mra
 
@@ -107,6 +104,12 @@ jobs:
 
       - name: Regenerate the static site
         run: python misterzine.py export-web
+
+      # Runs on the data.json just written, so it checks what is about to ship.
+      # Rules only (fixtures + invariants), never facts about particular games:
+      # a catalogue change must not be able to stop the refresh on its own.
+      - name: Check website source visibility
+        run: node --test tools/source_visibility.test.js
 
       - name: Commit and publish if anything changed
         run: |

@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { siteSourceRows } = require('../docs/releases/source-visibility');
+const { siteSourceRows, SITE_SOURCE_LABELS } = require('../docs/releases/source-visibility');
 const row = (src, sn, title = 'Game', family = sn, extra = {}) =>
   ({ src, sn, title, family, base: 'Arcade', ...extra });
 
@@ -48,27 +48,36 @@ test('cleanup retains multiple implementations, unknown labels and meaningful qu
   assert.deepEqual(siteSourceRows([unknown]), [unknown]);
 });
 
-test('published Aqua Jack and Meta Fox: one build drops its label, two builds keep theirs', () => {
-  const rows = require('../docs/releases/data.json');
-  const visible = siteSourceRows(rows);
-  const shown = (src, sn) => visible.find(r => r.k === rows.find(o => o.src === src && o.sn === sn).k);
-  // bazset's Aqua Jack is the only build listed; Ongo's copy of it folds in
-  const aqua = shown('bazset', 'aquajack');
-  assert.equal(aqua.title, 'Aqua Jack');
-  assert.ok(aqua.alsoOngo);
-  assert.ok(aqua.siteAliases.includes(rows.find(r => r.src === 'ongo' && r.sn === 'aquajack').k));
-  // (Meta Fox used to be the second example; ppriest dropped it from his db
-  // on 2026-10-25, leaving Ongo's copy alone.)
-  // Power Spikes: asturur's own db folds Ongo's earlier build of his core,
-  // a different file under another core name, so no alsoOngo note
-  const spikes = shown('asturur', 'pspikes');
-  assert.equal(spikes.title, 'Power Spikes');
-  assert.ok(!spikes.alsoOngo);
-  assert.ok(spikes.siteAliases.includes(rows.find(r => r.src === 'ongo' && r.sn === 'pspikes').k));
-  assert.ok(!visible.some(r => r.src === 'ongo' && r.sn === 'pspikes'));
+test('one listed build drops its label, two builds keep theirs', () => {
+  // Power Spikes: asturur's own db folds Ongo's earlier build of his core
+  // (a different file under another core name, so no alsoOngo note)
+  const asturur = row('asturur', 'pspikes', 'Power Spikes (asturur)', 'pspikes',
+    { g: 'pspikes', k: 'power-spikes-asturur', core: 'jtpspike', bh: 'aaa', mt: 'Power Spikes (World)' });
+  const copy = row('ongo', 'pspikes', 'Power Spikes (Ongo)', 'pspikes',
+    { g: 'pspikes', k: 'pspikes', core: 'pspike', bh: 'bbb', mt: 'Power Spikes (World)' });
+  const alone = siteSourceRows([copy, asturur]);
+  assert.deepEqual(alone, [{ ...asturur, title: 'Power Spikes', siteAliases: ['pspikes'] }]);
+  // rmCores ships its own Power Spikes core (2026-10-29): two builds listed,
+  // both named after their source, Ongo's copy still folded into asturur's
+  const rm = row('rmcores', 'pspikes', 'Power Spikes (rmCores)', 'pspikes',
+    { g: 'pspikes', k: 'power-spikes-rmcores', core: 'rmPowerSpikes', bh: 'ccc', mt: 'rm Power Spikes (World)' });
+  const both = siteSourceRows([copy, asturur, rm]);
+  assert.deepEqual(both, [{ ...asturur, siteAliases: ['pspikes'] }, rm]);
+  assert.ok(!both.some(r => r.alsoOngo));
   // Night Slashers ships on two different cores: both stay, each named
-  assert.equal(shown('blahm1d', 'nslashers').title, 'Night Slashers (blahm1d)');
-  assert.equal(shown('distribution_mister', 'nslasher').title, 'Night Slashers (rmonic79)');
+  const blahm1d = row('blahm1d', 'nslashers', 'Night Slashers (blahm1d)', 'nslasher',
+    { g: 'nslasher', k: 'nslashers-blahm1d', core: 'NightSlashers' });
+  const rmonic = row('distribution_mister', 'nslasher', 'Night Slashers (rmonic79)', 'nslasher',
+    { g: 'nslasher', k: 'nslasher', core: 'NightSlashers79' });
+  assert.deepEqual(siteSourceRows([blahm1d, rmonic]), [blahm1d, rmonic]);
+  // Aqua Jack: bazset's build is the only one listed and Ongo ships that
+  // same core under bazset's name, so the row says Ongo has it too
+  const aqua = row('bazset', 'aquajack', 'Aqua Jack (bazset)', 'aquajack',
+    { g: 'aquajack', k: 'aquajack', core: 'AquaJack', bh: 'ddd', mt: 'Aqua Jack (World)' });
+  const mirror = row('ongo', 'aquajack', 'Aqua Jack (Ongo)', 'aquajack',
+    { g: 'aquajack', k: 'aquajack-ongo', core: 'bazset_AquaJack', bh: 'eee' });
+  assert.deepEqual(siteSourceRows([mirror, aqua]),
+    [{ ...aqua, title: 'Aqua Jack', siteAliases: ['aquajack-ongo'], alsoOngo: true }]);
 });
 
 test('renamed mirrors need game identity plus core evidence', () => {
@@ -86,15 +95,58 @@ test('renamed mirrors need game identity plus core evidence', () => {
   assert.equal(JSON.stringify([copy, direct]), before);
 });
 
-test('catalogue audit hides renamed copies but retains distinct implementations and games', () => {
+// The published export is checked against the rules above, never against
+// facts about particular games: developers ship and drop games every day,
+// and a catalogue change alone must not be able to stop the site refresh.
+test('published data: every source is labelled, keys survive folding, lone builds drop their label', () => {
   const rows = require('../docs/releases/data.json');
-  const visible = new Set(siteSourceRows(rows).map(r => r.k));
-  // otwalls: Ongo's Off the Wall (Sente) gives way to ppriest's own build
-  for (const key of ['narc_blahm1d', 'otwalls']) assert.ok(!visible.has(key), key);
-  for (const key of ['narc-blahm1d', 'mk_wolf', 'mk2_wolf', 'off-the-wall-sente-10-16-84', 'swa', 'nbajamtese']) assert.ok(visible.has(key), key);
-  // MeatCores is delisted (misterzine.py DELISTED_SOURCES): neither its rows
-  // nor Ongo's copies of its cores reach the site
-  assert.ok(!rows.some(r => r.src === 'meathax' || /^meathax_/i.test(r.core || '')));
+  const arcade = rows.filter(r => r.base === 'Arcade');
+  const norm = title => (title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+  // every arcade source has a label entry (the Distributions label per core,
+  // never per source, so they need none)
+  const unbranded = new Set(['distribution_mister', 'theypsilon_unofficial_distribution']);
+  const sources = [...new Set(arcade.map(r => r.src).filter(src => src && !unbranded.has(src)))];
+  for (const src of sources) assert.ok(SITE_SOURCE_LABELS[src], `source ${src} missing from SITE_SOURCE_LABELS`);
+  const visible = siteSourceRows(rows);
+  // every deep-link key either stays visible or is carried as an alias by
+  // exactly one visible row, so links and stars made on a hidden copy land
+  const seen = new Map();
+  for (const r of visible) for (const k of [r.k, ...(r.siteAliases || [])]) {
+    assert.ok(k, `visible row without a key: ${r.title}`);
+    assert.ok(!seen.has(k), `key ${k} reachable twice: ${seen.get(k)} and ${r.title}`);
+    seen.set(k, r.title);
+  }
+  for (const r of rows) assert.ok(seen.has(r.k), `key ${r.k} (${r.src} ${r.title}) lost from the site`);
+  assert.equal(seen.size, rows.length);
+  // a hidden row is always an Ongo copy of a listed arcade game, or the
+  // English-named twin of bazset's Meikyu Jima launcher
+  const shown = new Set(visible.map(r => r.k));
+  for (const r of rows.filter(r => !shown.has(r.k))) {
+    const twin = r.src === 'bazset' && r.sn === 'kikcubic';
+    assert.ok(r.src === 'ongo' || twin, `${r.src} ${r.title} hidden`);
+    assert.equal(r.base, 'Arcade', `${r.title} hidden`);
+  }
+  // no visible Ongo row duplicates a listed game's set name
+  const listedSets = new Set(visible.filter(r => r.src !== 'ongo' && r.base === 'Arcade' && !r.deprecated && r.sn)
+    .map(r => r.sn.toLowerCase()));
+  const ongoHome = r => /^kyledlester\//i.test(r.repo || '');
+  for (const r of visible.filter(r => r.src === 'ongo' && r.base === 'Arcade' && r.sn && !ongoHome(r)))
+    assert.ok(!listedSets.has(r.sn.toLowerCase()), `Ongo copy of ${r.sn} still visible`);
+  // the only listed build of a game carries no source brand, unless the
+  // plain name already belongs to another game (two builds reading the same
+  // is misterzine.py's warn-only DUPLICATE TITLE tripwire, not a gate here)
+  const counts = new Map();
+  for (const r of visible.filter(r => r.base === 'Arcade')) {
+    const id = r.g || r.family || r.sn;
+    if (id) counts.set(id, (counts.get(id) || 0) + 1);
+  }
+  const titles = new Set(visible.map(r => norm(r.title)));
+  for (const r of visible.filter(r => r.base === 'Arcade' && counts.get(r.g || r.family || r.sn) === 1)) {
+    const suffix = SITE_SOURCE_LABELS[r.src] && ` (${SITE_SOURCE_LABELS[r.src]})`;
+    if (!suffix || !r.title.endsWith(suffix)) continue;
+    const plain = norm(r.title.slice(0, -suffix.length));
+    assert.ok(titles.has(plain), `${r.title} keeps its label though ${plain} is free`);
+  }
 });
 
 test('Meikyu Jima name aliases share one stable launcher without changing app data', () => {

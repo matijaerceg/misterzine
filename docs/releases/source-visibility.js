@@ -39,14 +39,20 @@ function siteSameBuild(copy, original) {
   return c.startsWith(norm(original.src) + '_') || c === core(original.core);
 }
 
+// Source-brand suffixes the export adds when a game ships on several cores,
+// "Power Spikes (asturur)". Every source whose rows can carry one must be
+// listed, or its singleton rows keep the label after Ongo's copy folds in
+// (tools/source_visibility.test.js checks the published data for that).
+const SITE_SOURCE_LABELS = { coinop: 'Coin-Op Collection', jtbindb: 'Jotego', meathax: 'Meathax',
+  rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
+  blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
+  tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk',
+  jlrh: 'jlrh', shmupfan: 'shmupfan', asturur: 'asturur' };
+
 function siteSingletonTitles(rows) {
   // Only known source-brand suffixes are disposable. Never strip arbitrary
   // parentheses (player count, hardware, region, bootleg, etc.).
-  const labels = { coinop: 'Coin-Op Collection', jtbindb: 'Jotego', meathax: 'Meathax',
-    rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
-    blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
-    tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk',
-    jlrh: 'jlrh', shmupfan: 'shmupfan', asturur: 'asturur' };
+  const labels = SITE_SOURCE_LABELS;
   const norm = title => (title || '').trim().toLowerCase().replace(/[^a-z0-9]/g, '');
   const identity = row => row.g || row.family || row.sn;
   const counts = new Map(), names = new Map();
@@ -144,4 +150,4 @@ function siteSourceRows(rows) {
     : row));
 }
 
-if (typeof module !== 'undefined') module.exports = { siteSourceRows, siteGameTitle, siteRenamedMirror, siteSameBuild };
+if (typeof module !== 'undefined') module.exports = { siteSourceRows, siteGameTitle, siteRenamedMirror, siteSameBuild, SITE_SOURCE_LABELS };

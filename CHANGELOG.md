@@ -4,6 +4,10 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Favorites only is now a small star toggle immediately after Search, instead of an option inside Source.
+
+- The Source menu groups sources under Included in update_all and Requires manual setup, with an Access section: All, Public only, or Early access only (supporter-key alpha and beta entries). It works with shared views, Clear filters and collection tabs.
+
 - Renamed the grouping toggle to Group updates.
 
 - The Columns button in the tracker toolbar is spelled out on desktop (Col. stays on phones), and the divider beside it matches the buttons' outlines.

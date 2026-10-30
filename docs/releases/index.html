@@ -33,7 +33,7 @@
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);
 </script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="custom-lists.css?v=8e087d0373">
+<link rel="stylesheet" href="custom-lists.css?v=20261030-star">
 <link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
@@ -145,6 +145,10 @@
      set per button through --ico */
   .ctl.icon { display: inline-flex; align-items: center; justify-content: center; flex: none;
               padding: var(--ctl-py, .4rem); height: calc(var(--ctl-lh, 1.26rem) + 2 * var(--ctl-py, .4rem) + 2px); aspect-ratio: 1; }
+  #favchip { align-self: center; }
+  #favchip.active { background: var(--accent); border-color: var(--accent); color: var(--accent-on); }
+  #favchip.active:hover { background: color-mix(in srgb, var(--accent) 86%, var(--fg)); }
+  #favchip[aria-pressed="true"] svg { fill: currentColor; }
   .ctl.icon .ico { width: 1.15em; height: 1.15em; background: currentColor;
                    -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
   /* "copy a link to this view": last in the row. The id avoids the word
@@ -261,6 +265,10 @@
   #typemenu .tsub .tsubh { font-size: .75rem; opacity: .6; margin-top: .1rem; }
   #typemenu .tsub hr { border: 0; border-top: 1px solid var(--hair); margin: .15rem 0; }
   #typemenu .tsub.off { opacity: .45; }
+  #srcmenu .source-group { margin: 0 0 .6rem; }
+  #srcmenu .source-group h3 { font-size: .78rem; color: var(--muted); margin: .4rem 0 .2rem; }
+  #srcmenu .source-group label { padding-left: .5rem; }
+  #srcmenu .source-note { max-width: 19rem; white-space: normal; font-size: .75rem; color: var(--muted); margin: .5rem 0; }
   #srcmenu .resets { flex-wrap: wrap; gap: .35rem 1rem; }
   /* Source: the downloader.ini lines opener under the picks. A real button, not
      a link-style pick like the ones above it: it opens a popup, it filters nothing */
@@ -1138,6 +1146,7 @@
     .ctrlsep.tall { display: none; }   /* no room for the divider on one row */
     #cols summary .w { display: none; }   /* "Columns" -> "Col." on phones, like the status line's .w/.n swap */
     #cols summary .n { display: inline; }
+    #favchip { order: 1; }
     #filterssum { display: inline-block; order: 2; flex: none; }
     .favctl { order: 3; }
     #cols { order: 4; align-self: center; }
@@ -1394,7 +1403,7 @@
       <button type="button" id="qx" class="qx" data-tip="Clear search" tabindex="-1">x</button>
       <span class="count" id="count"></span>
     </div>
-    <button id="favchip" type="button" hidden>Favorites only ×</button>
+    <button id="favchip" type="button" class="ctl icon" aria-label="Show only my favorites" aria-pressed="false" data-tip="Show only my favorites"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.8 5.7 6.3.9-4.55 4.43 1.07 6.27L12 17.34l-5.62 2.96 1.07-6.27L2.9 9.6l6.3-.9Z"/></svg></button>
     <!-- the five filter dropdowns + Clear. On wide layouts the .fsheet wrapper
          and its body dissolve (display: contents) and the Filters button is not
          rendered; on narrow ones (see the 867px container block) the button is
@@ -3174,6 +3183,7 @@ function render() {
       pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
       pickMsg(PATCH_KEYS, enabledPatches, k => PATCH_LABELS[k], 'patch type') +
       pickMsg(MAT_KEYS, enabledMat, k => MAT_LABELS[k], 'mature option') +
+      (accessMode !== 'all' ? ' (' + esc(ACCESS_LABELS[accessMode]) + ')' : '') +
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
       (q && matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -3468,6 +3478,7 @@ function apply() {
   // nothing (see pickNarrows and the menus below).
   view = DATA.filter(d => {
     if (!MZLists.matches(d)) return false;
+    if (accessMode === 'public' && d.beta || accessMode === 'early' && !d.beta) return false;
     // favorites: someone else's shared link (favView) and your own toggle are
     // separate narrowers — a shared link is a view of THEIR list, and starring
     // things while reading it mustn't change what the link shows
@@ -3747,6 +3758,7 @@ function clearAllFilters() {
   const q = document.getElementById('q');
   q.value = '';
   resetTypes(); resetSrcs(); resetGenres(); resetYear();
+  accessMode = 'all'; syncAccess();
   // both favorites narrowers go too (the saved list itself is untouched) — a
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
@@ -3803,11 +3815,17 @@ let enabledSrcs = new Set();
 let enabledGenres = new Set();
 let enabledPatches = new Set();
 let enabledMat = new Set();
+let accessMode = 'all';
+const ACCESS_LABELS = {all: 'All', public: 'Public only', early: 'Early access only'};
+function syncAccess() {
+  for (const input of document.querySelectorAll('#accessmenu input')) input.checked = input.value === accessMode;
+  syncSrcSummary();
+}
 let yearFrom = null, yearTo = null, YEAR_MIN = null, YEAR_MAX = null;
 // true while any multi-select is narrowing (some box unchecked). A menu that has no
 // keys yet (data not landed) cannot narrow.
 function pickNarrows() {
-  return enabledTypes.size < TYPES.length
+  return accessMode !== 'all' || enabledTypes.size < TYPES.length
     || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length)
     || (GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length)
     || arcadeSubNarrows();
@@ -4112,7 +4130,13 @@ const UPDATE_ALL_INCLUDED = new Set([
 const srcMenu = document.getElementById('srcmenu');
 const srcSummary = document.getElementById('srcsummary');
 let SRC_KEYS = [];  // menu order, filled by buildSrcMenu; empty until data lands
-function syncSrcSummary() { syncPick(srcSummary, srcMenu, 'Source', enabledSrcs, SRC_KEYS.length); if (favOnly && !MZLists.isFavorites()) srcSummary.textContent += ' · Favorites'; }
+function syncSrcSummary() {
+  syncPick(srcSummary, srcMenu, 'Source', enabledSrcs, SRC_KEYS.length);
+  if (accessMode !== 'all') {
+    srcSummary.textContent += accessMode === 'public' ? ' · Public' : ' · Early access';
+    srcSummary.classList.add('active');
+  }
+}
 function buildSrcMenu() {
   const counts = {};
   for (const d of DATA) if (d.src) counts[d.src] = (counts[d.src] || 0) + 1;
@@ -4128,12 +4152,21 @@ function buildSrcMenu() {
   const untouched = !SRC_KEYS.length || SRC_KEYS.every(s => enabledSrcs.has(s));
   SRC_KEYS = srcs;
   enabledSrcs = new Set(untouched ? srcs : srcs.filter(s => enabledSrcs.has(s)));
-  srcMenu.innerHTML = '<label class="source-favorites"><input type="checkbox" id="srcfavorites"> Favorites only</label>' + srcs.map(s =>
-    '<label><input type="checkbox" data-s="' + escA(s) + '"' +
-    (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
-    '<span class="gcount">' + counts[s] + '</span></label>').join('') + pickButtons('src',
-      '<button type="button" class="reset" data-src-preset="inside" data-tip="Select only sources included in update_all\'s curated built-in selection. You may need to enable a source in update_all settings to receive its cores.">Inside update_all</button>' +
-      '<button type="button" class="reset" data-src-preset="outside" data-tip="Select only sources not included in update_all\'s curated built-in selection. Add these sources manually to downloader.ini to receive their cores through update_all.">Outside update_all</button>') +
+  const group = (included, heading) => {
+    const sources = srcs.filter(s => UPDATE_ALL_INCLUDED.has(s) === included);
+    if (!sources.length) return '';
+    return '<section class="source-group"><h3>' + heading + '</h3>' + sources.map(s =>
+      '<label><input type="checkbox" data-s="' + escA(s) + '"' +
+      (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
+      '<span class="gcount">' + counts[s] + '</span></label>').join('') + '</section>';
+  };
+  srcMenu.innerHTML = '<section class="source-group"><h3 id="accessheading">Access</h3>' +
+    '<div id="accessmenu" role="radiogroup" aria-labelledby="accessheading">' +
+    Object.entries(ACCESS_LABELS).map(([value, label]) => '<label><input type="radio" name="access" value="' + value + '"' +
+      (accessMode === value ? ' checked' : '') + '> ' + label + '</label>').join('') + '</div></section>' +
+    group(true, 'Included in update_all') + group(false, 'Requires manual setup') +
+    '<p class="source-note">Included sources may need enabling in update_all. Early access releases require a supporter key.</p>' +
+    pickButtons('src') +
     // a window glyph: this one opens a popup
     '<button type="button" class="menubtn" id="iniexpbtn" aria-haspopup="dialog" data-tip="Ready-made downloader.ini lines for every source outside update_all, with notes to read first.">' +
       '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">' +
@@ -4143,7 +4176,9 @@ function buildSrcMenu() {
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
 srcMenu.addEventListener('change', e => {
-  if (e.target.id === 'srcfavorites') { favOnly = e.target.checked; syncFavSummary(); apply(); recenterOpen(); return; }
+  if (e.target.name === 'access' && Object.hasOwn(ACCESS_LABELS, e.target.value)) {
+    accessMode = e.target.value; syncAccess(); apply(); recenterOpen(); return;
+  }
   const s = e.target.dataset.s;
   if (!s) return;
   if (e.target.checked) enabledSrcs.add(s); else enabledSrcs.delete(s);
@@ -4159,13 +4194,11 @@ function resetSrcs() {
 }
 srcMenu.addEventListener('click', e => {
   if (e.target.closest('#iniexpbtn')) { openIniExp(); return; }
-  const preset = e.target.closest('[data-src-preset]');
-  if (preset) {
-    const inside = preset.dataset.srcPreset === 'inside';
-    enabledSrcs.clear();
-    for (const s of SRC_KEYS) if (UPDATE_ALL_INCLUDED.has(s) === inside) enabledSrcs.add(s);
-    for (const cb of srcMenu.querySelectorAll('input[data-s]')) cb.checked = enabledSrcs.has(cb.dataset.s);
-  } else if (!pickAllNone(srcMenu, enabledSrcs, SRC_KEYS, e)) return;
+  const button = e.target.closest('[data-pick]');
+  if (!button) return;
+  enabledSrcs.clear();
+  if (button.dataset.pick === 'all') for (const s of SRC_KEYS) enabledSrcs.add(s);
+  for (const cb of srcMenu.querySelectorAll('input[data-s]')) cb.checked = enabledSrcs.has(cb.dataset.s);
   syncSrcSummary(); apply(); recenterOpen();
 });
 syncSrcSummary();  // initial state before data loads (reads "Source" / no glow)
@@ -4239,9 +4272,12 @@ function syncFavSummary() {
   favToggle.innerHTML = '<span class="favfilterfull">★ Favorites only</span><span class="favfiltershort" aria-hidden="true">★ only</span>';
   favToggle.setAttribute('aria-label', 'Favorites only');
   favctl.hidden = true;
-  const checkbox = document.getElementById('srcfavorites');
-  if (checkbox) { checkbox.checked = favOnly || MZLists.isFavorites(); checkbox.disabled = MZLists.isFavorites(); }
-  document.getElementById('favchip').hidden = !favOnly || MZLists.isFavorites();
+  const star = document.getElementById('favchip');
+  const active = favOnly || MZLists.isFavorites();
+  star.classList.toggle('active', active);
+  star.setAttribute('aria-pressed', active);
+  star.disabled = MZLists.isFavorites();
+  star.dataset.tip = MZLists.isFavorites() ? 'This view already shows only your favorites' : 'Show only my favorites';
   document.getElementById('favmanagement').hidden = !MZLists.isFavorites();
   syncSrcSummary();
   document.querySelector('#collection-favorites .collection-full').textContent = 'Favorites (' + n + ')';
@@ -4257,7 +4293,10 @@ function syncFavSummary() {
   // a wider count nudges the caret this menu is anchored under
   if (favdd.open) positionMenu(favdd);
 }
-document.getElementById('favchip').onclick = () => { resetFavOnly(); apply(); };
+document.getElementById('favchip').onclick = () => {
+  if (MZLists.isFavorites()) return;
+  favOnly = !favOnly; syncFavSummary(); apply(); recenterOpen();
+};
 favToggle.addEventListener('click', () => {
   if (MZLists.isFavorites()) return;
   favOnly = !favOnly;
@@ -4342,7 +4381,7 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 // a ?fav= list being viewed stays in. On arrival the link wins wherever it says
 // something; the columns fall back to their remembered state. hv (the retired
 // Hardware Verified filter, 2026-10-14) is still stripped so old links come out clean.
-const VIEW_KEYS = ['q', 't', 'src', 'g', 'p', 'm', 'y', 's', 'hv', 'f'];
+const VIEW_KEYS = ['access', 'q', 't', 'src', 'g', 'p', 'm', 'y', 's', 'hv', 'f'];
 const patchSlug = k => k === NO_PATCH ? 'none' : k;
 const typeSlug = t => t.toLowerCase();
 const srcSlug = s => s;
@@ -4360,6 +4399,7 @@ function pickParam(set, keys, slug) {
 }
 function viewParams() {
   const out = [];
+  if (accessMode !== 'all') out.push(['access', accessMode]);
   const q = document.getElementById('q').value.trim();
   if (q) out.push(['q', encodeURIComponent(q).replace(/%20/g, '+')]);
   for (const [k, v] of [['t', pickParam(enabledTypes, TYPES, typeSlug)],
@@ -4411,6 +4451,8 @@ function adoptPick(raw, set, keys, slug, menu, attr) {
 // from the data). A ?fav= list has its own reader (adoptFavParam).
 function adoptViewParams() {
   const p = new URLSearchParams(location.search);
+  if (Object.hasOwn(ACCESS_LABELS, p.get('access'))) accessMode = p.get('access');
+  syncAccess();
   if (MZLists.isListView()) { sortKey = 'title'; sortDir = 1; buildHeader(); }
   const q = p.get('q');
   if (q) document.getElementById('q').value = q;
@@ -4765,7 +4807,7 @@ addEventListener('resize', () => { if (filtersDD.classList.contains('open')) pla
 function syncFilterCount() {
   const n = [
     typeNarrows(),
-    SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length,
+    accessMode !== 'all' || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length),
     GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length,
     yearFrom != null || yearTo != null,
   ].filter(Boolean).length;
@@ -6746,7 +6788,7 @@ function boot() {
       },
       captureView: () => ({query: document.getElementById('q').value,
         types: [...enabledTypes], patches: [...enabledPatches], maturity: [...enabledMat], sources: [...enabledSrcs], genres: [...enabledGenres],
-        yearFrom, yearTo, sortKey, sortDir, favOnly, expanded: [...expanded], searchShut: [...searchShut], libraryTop: document.getElementById('collection-library').scrollTop, top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
+        accessMode, yearFrom, yearTo, sortKey, sortDir, favOnly, expanded: [...expanded], searchShut: [...searchShut], libraryTop: document.getElementById('collection-library').scrollTop, top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
       restoreView: saved => {
         favView = null; document.getElementById('favbanner').hidden = true;
         expanded.clear(); (saved?.expanded || []).forEach(k => expanded.add(k));
@@ -6761,6 +6803,7 @@ function boot() {
           set.clear(); values.forEach(v => set.add(v));
           for (const cb of menu.querySelectorAll('input[' + attr + ']')) cb.checked = set.has(cb.getAttribute(attr));
         }
+        accessMode = Object.hasOwn(ACCESS_LABELS, saved?.accessMode) ? saved.accessMode : 'all'; syncAccess();
         yearFrom = saved?.yearFrom ?? null; yearTo = saved?.yearTo ?? null;
         const from = yearMenu.querySelector('.yfrom'), to = yearMenu.querySelector('.yto');
         if (from) from.value = yearFrom ?? ''; if (to) to.value = yearTo ?? '';

@@ -1655,7 +1655,8 @@ def _sparse_arcade_clone(full_name, branch, mradir="_Arcade", sparse_paths=None)
     repodir = DATA / "repos" / name
     if not (repodir / ".git").exists():
         repodir.parent.mkdir(parents=True, exist_ok=True)
-        log(f"cloning {full_name} (blobless, sparse {mradir}/*.mra) ...")
+        scope = f"{mradir}/*.mra" if sparse_paths is None else f"{len(sparse_paths)} db MRAs"
+        log(f"cloning {full_name} (blobless, sparse {scope}) ...")
         subprocess.check_call([
             "git", "clone", "--filter=blob:none", "--no-checkout", "--depth", "1",
             "--single-branch", "-b", branch,
@@ -1696,28 +1697,37 @@ def _sparse_checkout_patterns(paths):
             for p in paths]
 
 
+# Git-cloned sources whose MRAs sit in subfolders of their MRA folder. The
+# others clone and read one level only (Distribution's nested
+# _alternatives/_M.I.A./ is illegal on NTFS); these check out exactly the MRAs
+# their db ships, read every level, and join by full path, since Slop Cores
+# ships "Sorcer Striker.mra" both in _Slop Cores/ and in its _alternatives/.
+# A one-level read leaves the rows with no core (UNREAD MRA in the log):
+# bazset's _CVS/ games (2026-10-31), Slop Cores' move into _Slop Cores/ (2026-10-27).
+NESTED_MRA_SOURCES = {"ongo", "bazset", "slopcore"}
+
+
 def _mra_metadata_key(source_id, repo_path):
     path = repo_path.replace("\\", "/")
-    return path if source_id == "ongo" else Path(path).name
+    return path if source_id in NESTED_MRA_SOURCES else Path(path).name
 
 
 def _mra_catalog_key(source_id, catalog_path):
     path = catalog_path.replace("\\", "/")
-    return path if source_id == "ongo" else Path(path).name
+    return path if source_id in NESTED_MRA_SOURCES else Path(path).name
 
 
 def _mra_specs_key(source_id, repo_path, mradir):
     path = repo_path.replace("\\", "/")
-    return path if source_id == "ongo" else f"{mradir}/{Path(path).name}"
+    return path if source_id in NESTED_MRA_SOURCES else f"{mradir}/{Path(path).name}"
 
 
-def _ongo_mra_paths():
-    """Current Ongo MRA paths included by its source-specific scope."""
-    source = next(s for s in SOURCES if s["id"] == "ongo")
-    z = zipfile.ZipFile(BytesIO(http_get(source["db_url"])))
-    d = json.loads(z.read(z.namelist()[0]))
+def _db_mra_paths(source_id):
+    """A source's current MRA paths from its db, within its tracked scope."""
+    source = next(s for s in SOURCES if s["id"] == source_id)
+    d = _db_json(http_get(source["db_url"]))
     return sorted(p for p in d.get("files", {})
-                  if p.lower().endswith(".mra") and tracked_path("ongo", p))
+                  if p.lower().endswith(".mra") and tracked_path(source_id, p))
 
 
 # MAME BIOS sets an MRA may name as its <setname> while the game's own set
@@ -1775,13 +1785,14 @@ def cmd_enrich_mra(args):
                 log(f"  {source_id}: MRA download failed ({e}); rows keep their last enrichment")
                 continue
         else:
-            sparse_paths = _ongo_mra_paths() if source_id == "ongo" else None
+            sparse_paths = _db_mra_paths(source_id) if source_id in NESTED_MRA_SOURCES else None
             repodir, mra_urls = _sparse_arcade_clone(
                 full_name, branch, mradir, sparse_paths=sparse_paths), {}
         meta = {}
         source_specs = {}
         mra_folder = repodir / mradir
-        mras = mra_folder.rglob("*.mra") if source_id == "ongo" else mra_folder.glob("*.mra")
+        mras = (mra_folder.rglob("*.mra") if source_id in NESTED_MRA_SOURCES
+                else mra_folder.glob("*.mra"))
         for mra in mras:
             relpath = mra.relative_to(repodir).as_posix()
             key = _mra_metadata_key(source_id, relpath)
@@ -1826,6 +1837,15 @@ def cmd_enrich_mra(args):
                 )
                 n += 1
         log(f"  {source_id}: enriched {n} titles from {len(meta)} MRAs")
+        # A row with no rbf shows no core and never folds into a core batch on
+        # the site. Alternatives drop at export and a delisted source is hidden.
+        unread = [r["path"] for r in con.execute(
+            "SELECT path FROM catalog WHERE system='arcade' AND source_id=? "
+            "AND (rbf IS NULL OR rbf='') AND lower(path) LIKE '%.mra' ORDER BY path",
+            (source_id,)) if "/_alternatives/" not in r["path"].replace("\\", "/").lower()]
+        if unread and source_id not in DELISTED_SOURCES:
+            log(f"  UNREAD MRA: {source_id}: {len(unread)} rows got no core from an MRA "
+                f"(e.g. {unread[0]}) - MRAs in a subfolder? see NESTED_MRA_SOURCES")
         grand += n
         mra_specs[source_id] = source_specs
         # Persist completed sources independently if a later clone fails.

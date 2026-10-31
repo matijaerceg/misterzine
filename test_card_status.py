@@ -274,7 +274,7 @@ class OngoSourceTests(unittest.TestCase):
             specpath = root / "mra_specs.json"
             with mock.patch.object(mz, "DBPATH", dbpath), \
                  mock.patch.object(mz, "MRA_SPECS_JSON", specpath), \
-                 mock.patch.object(mz, "_ongo_mra_paths", return_value=paths), \
+                 mock.patch.object(mz, "_db_mra_paths", return_value=paths), \
                  mock.patch.object(mz, "_sparse_arcade_clone", return_value=repo):
                 con = mz.connect()
                 for i, rel in enumerate(paths):
@@ -303,6 +303,44 @@ class OngoSourceTests(unittest.TestCase):
         shipped = {"ongo": {"core_20261018": ("core_20261018.rbf", "core")}}
         self.assertTrue(mz._source_row_visible(arcade(source_id="ongo", rbf="core"), shipped))
         self.assertFalse(mz._source_row_visible(arcade(source_id="ongo", rbf="other"), shipped))
+
+    def test_nested_source_reads_subfolder_mras_and_flags_rows_left_without_core(self):
+        # bazset's _CVS/ games sat one folder below _Arcade/_BAZSET, and the
+        # one-level read left all 16 with no core (2026-10-31)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            repo = root / "repo"
+            read = ["_Arcade/_BAZSET/Top.mra", "_Arcade/_BAZSET/_CVS/Cosmos (CVS).mra"]
+            for i, rel in enumerate(read):
+                file = repo / rel
+                file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_text(f"<mister><rbf>Core{i}</rbf><setname>set{i}</setname></mister>",
+                                encoding="utf-8")
+            missing = "_Arcade/_BAZSET/_Gone/Missing.mra"
+            alt = "_Arcade/_BAZSET/_alternatives/_Top/Top (Japan).mra"
+            logs = []
+            with mock.patch.object(mz, "DBPATH", root / "catalog.sqlite"), \
+                 mock.patch.object(mz, "MRA_SPECS_JSON", root / "mra_specs.json"), \
+                 mock.patch.object(mz, "_db_mra_paths", return_value=read), \
+                 mock.patch.object(mz, "_sparse_arcade_clone", return_value=repo), \
+                 mock.patch.object(mz, "log", lambda *a: logs.append(" ".join(map(str, a)))):
+                con = mz.connect()
+                for rel in read + [missing, alt]:
+                    con.execute("INSERT INTO catalog(source_id,path,system,kind,title) "
+                                "VALUES('bazset',?,'arcade','mra',?)", (rel, Path(rel).stem))
+                con.commit()
+                con.close()
+                mz.cmd_enrich_mra(type("Args", (), {"source": "bazset"})())
+
+                con = mz.connect()
+                rbf = dict(con.execute("SELECT path,rbf FROM catalog").fetchall())
+                con.close()
+        self.assertEqual([rbf[p] for p in read], ["Core0", "Core1"])
+        self.assertIsNone(rbf[missing])
+        unread = [line for line in logs if "UNREAD MRA" in line]
+        self.assertEqual(len(unread), 1)
+        self.assertIn("bazset: 1 rows", unread[0])
+        self.assertIn(missing, unread[0])
 
     def test_ongo_core_identifier_keeps_install_key_and_original_repo(self):
         row = mz._web_row(

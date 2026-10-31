@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 30 Oct 2026 16:00:16 +0000</lastBuildDate>
+<lastBuildDate>Sat, 31 Oct 2026 08:29:29 +0000</lastBuildDate>
+<item>
+<title>[Updated] KillerInstinct (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#kinst</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/KillerInstinct_20261030.rbf:2026-10-31T08:29:29+00:00</guid>
+<pubDate>Sat, 31 Oct 2026 08:29:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Killer Instinct (v1.5d), Killer Instinct 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-KillerInstinct_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] TomSVR_snesb (Arcade core, 13 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ffight2b</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/avengrgs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1995 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: DecoMLC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-27 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Age Of Heroes - Silkroad 2 (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#aoh</link>
-<guid isPermaLink="false">ongo:_Arcade/Age Of Heroes - Silkroad 2 (v0.63 - 2001-02-07).mra:2026-10-26T23:54:29+00:00</guid>
-<pubDate>Mon, 26 Oct 2026 23:54:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aoh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 2001 / Unico&lt;/p&gt;&lt;p&gt;Core: ppriest_Vamphalf&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

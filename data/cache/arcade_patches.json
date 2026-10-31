@@ -1339,6 +1339,35 @@
     "stock_zip": "../capcom/roms/mame0260/ssf2xj.zip",
     "variants": [
      {
+      "fbneo": {
+       "renames": {
+        "sfx.01": "sfx.01",
+        "sfx.02": "sfx.02",
+        "sfx.09": "sfxuc.09",
+        "sfx.11m": "sfx.11m",
+        "sfx.12m": "sfx.12m",
+        "sfx.13m": "sfxuc.13m",
+        "sfx.14m": "sfxuc.14m",
+        "sfx.15m": "sfxuc.15m",
+        "sfx.16m": "sfxuc.16m",
+        "sfx.17m": "sfxuc.17m",
+        "sfx.18m": "sfxuc.18m",
+        "sfx.19m": "sfxuc.19m",
+        "sfx.20m": "sfxuc.20m",
+        "sfx.21m": "sfxuc.21m",
+        "sfx.23m": "sfxuc.23m",
+        "sfx.25m": "sfxuc.25m",
+        "sfx.27m": "sfxuc.27m",
+        "sfxj.03d": "sfxuc.03d",
+        "sfxj.04a": "sfxuc.04a",
+        "sfxj.05": "sfxuc.05",
+        "sfxj.06b": "sfxuc.06b",
+        "sfxj.07a": "sfxuc.07a",
+        "sfxj.08": "sfxuc.08",
+        "ssf2xj.key": "ssf2xj.key"
+       },
+       "setname": "ssf2tuc"
+      },
       "hbmame": {
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
@@ -1377,6 +1406,35 @@
       "patched_zip": "../capcom/translations/ssf2x/out/enhanced/us/ssf2tuc.zip"
      },
      {
+      "fbneo": {
+       "renames": {
+        "sfx.01": "sfx.01",
+        "sfx.02": "sfx.02",
+        "sfx.09": "sfxuc.09",
+        "sfx.11m": "sfx.11m",
+        "sfx.12m": "sfx.12m",
+        "sfx.13m": "sfxucj.13m",
+        "sfx.14m": "sfxuc.14m",
+        "sfx.15m": "sfxucj.15m",
+        "sfx.16m": "sfxuc.16m",
+        "sfx.17m": "sfxucj.17m",
+        "sfx.18m": "sfxuc.18m",
+        "sfx.19m": "sfxucj.19m",
+        "sfx.20m": "sfxuc.20m",
+        "sfx.21m": "sfxuc.21m",
+        "sfx.23m": "sfxuc.23m",
+        "sfx.25m": "sfxuc.25m",
+        "sfx.27m": "sfxuc.27m",
+        "sfxj.03d": "sfxucj.03d",
+        "sfxj.04a": "sfxucj.04a",
+        "sfxj.05": "sfxuc.05",
+        "sfxj.06b": "sfxucj.06b",
+        "sfxj.07a": "sfxucj.07a",
+        "sfxj.08": "sfxuc.08",
+        "ssf2xj.key": "ssf2xj.key"
+       },
+       "setname": "ssf2xucj"
+      },
       "hbmame": {
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
@@ -3956,6 +4014,24 @@
     "stock_zip": "../capcom/roms/mame0260/sfzj.zip",
     "variants": [
      {
+      "fbneo": {
+       "renames": {
+        "sfz.01": "sfzex.01",
+        "sfz.02": "sfz.02",
+        "sfz.04b": "sfzre.04b",
+        "sfz.05a": "sfzre.05a",
+        "sfz.06": "sfzex.06",
+        "sfz.11m": "sfz.11m",
+        "sfz.12m": "sfz.12m",
+        "sfz.14m": "sfzex.14m",
+        "sfz.16m": "sfzex.16m",
+        "sfz.18m": "sfzex.18m",
+        "sfz.20m": "sfzex.20m",
+        "sfzj.03c": "sfzex.03c",
+        "sfzj.key": "sfzj.key"
+       },
+       "setname": "sfaex"
+      },
       "hbmame": {
        "complete": true,
        "renames": {
@@ -3987,6 +4063,24 @@
       "patched_zip": "../capcom/backports/sfa/out/ex_release/usa/sfzj.zip"
      },
      {
+      "fbneo": {
+       "renames": {
+        "sfz.01": "sfzex.01",
+        "sfz.02": "sfz.02",
+        "sfz.04b": "sfzex.04b",
+        "sfz.05a": "sfzrej.05a",
+        "sfz.06": "sfzexj.06",
+        "sfz.11m": "sfz.11m",
+        "sfz.12m": "sfz.12m",
+        "sfz.14m": "sfzexj.14m",
+        "sfz.16m": "sfzexj.16m",
+        "sfz.18m": "sfzexj.18m",
+        "sfz.20m": "sfzexj.20m",
+        "sfzj.03c": "sfzexj.03c",
+        "sfzj.key": "sfzj.key"
+       },
+       "setname": "sfzexj"
+      },
       "hbmame": {
        "complete": true,
        "renames": {
@@ -4019,6 +4113,24 @@
       "patched_zip": "../capcom/backports/sfa/out/ex_release/japan/sfzj.zip"
      },
      {
+      "fbneo": {
+       "renames": {
+        "sfz.01": "sfzex.01",
+        "sfz.02": "sfz.02",
+        "sfz.04b": "sfzre.04b",
+        "sfz.05a": "sfzre.05a",
+        "sfz.06": "sfzexa.06",
+        "sfz.11m": "sfz.11m",
+        "sfz.12m": "sfz.12m",
+        "sfz.14m": "sfzexa.14m",
+        "sfz.16m": "sfzexa.16m",
+        "sfz.18m": "sfzexa.18m",
+        "sfz.20m": "sfzexa.20m",
+        "sfzj.03c": "sfzexa.03c",
+        "sfzj.key": "sfzj.key"
+       },
+       "setname": "sfzexa"
+      },
       "hbmame": {
        "complete": true,
        "renames": {

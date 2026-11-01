@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 01 Nov 2026 02:11:50 +0000</lastBuildDate>
+<lastBuildDate>Sun, 01 Nov 2026 11:26:52 +0000</lastBuildDate>
+<item>
+<title>[Updated] DecoMLC156 (Arcade core, 4 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hoops96</link>
+<guid isPermaLink="false">ppriest:_Arcade/cores/DecoMLC156_20261031.rbf:2026-11-01T11:26:52+00:00</guid>
+<pubDate>Sun, 01 Nov 2026 11:26:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Hoops '96 (ppriest), Janken Game Acchi Muite Hoi! (ppriest), Skull Fang (ppriest), Stadium Hero '96 (ppriest).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-01 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Avengers In Galactic Storm (ppriest) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#avengrgs</link>
+<guid isPermaLink="false">ppriest:_Arcade/cores/DecoMLC_20261031.rbf:2026-11-01T11:26:52+00:00</guid>
+<pubDate>Sun, 01 Nov 2026 11:26:52 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/avengrgs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1995 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: DecoMLC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-01 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/MiSTer_ppriest/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Jetpac (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#jetpac</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_TaitoLSystem/_homebrew/Jetpac.mra:2026-11-01T06:30:06+00:00</guid>
+<pubDate>Sun, 01 Nov 2026 06:30:06 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;2026 / Tardis Remakes&lt;/p&gt;&lt;p&gt;Core: taitol&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-01 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-TaitoLSystem_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] taitol (Arcade core, 17 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#horshoes</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/taitol_20261031.rbf:2026-11-01T06:30:06+00:00</guid>
+<pubDate>Sun, 01 Nov 2026 06:30:06 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: American Horseshoes, Champion Wrestler, Cuby Bop, Evil Stone, Fighting Hawk, Jetpac, Kuri Kinton, Palamedes, Play Girls, Play Girls 2, Plotting, Puzznic, Raimais, SQIJ 2018, Sokoban LE, The Speccies 2, Tube-It.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-01 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-TaitoLSystem_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] 1941 - Counter Attack (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#1941-counter-attack</link>
@@ -870,42 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/slapshot.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1994 / Taito&lt;/p&gt;&lt;p&gt;Core: slapshot&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Mystic Warriors (decoryah) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mystic-warriors</link>
-<guid isPermaLink="false">decoryah:_Arcade/cores/mysticwarriors_20261029.rbf:2026-10-29T22:53:19+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 22:53:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mystwarr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: mysticwarriors&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] All American Football (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#aafb</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/All American Football (rev C) [TomSVR].mra:2026-10-29T20:47:57+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 20:47:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aafb.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Leland Corporation&lt;/p&gt;&lt;p&gt;Core: TomSVR_leland&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Final Fight 2 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ffight2b</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Final Fight 2 [TomSVR].mra:2026-10-29T20:47:57+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 20:47:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ffight2b.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1996 / bootleg&lt;/p&gt;&lt;p&gt;Core: TomSVR_snesb&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Final Fight 3 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ffight3b</link>
-<guid isPermaLink="false">tomsvr:_Arcade/_TomSVR/Final Fight 3 (set 1) [TomSVR].mra:2026-10-29T20:47:57+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 20:47:57 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ffight3b.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 199? / bootleg&lt;/p&gt;&lt;p&gt;Core: TomSVR_snesb&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-29 (source: tomsvr).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TomSVR-Mister/TomSVR-Arcade-Cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

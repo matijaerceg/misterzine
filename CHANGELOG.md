@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Coin-Op Collection's 27 CPS1 games now show their Patreon beta status and stay out of public-release feeds. The tracker checks their supporter-key requirement as well as upstream status labels, which were missing from this release (issue #15).
+
 - Favorites only is now a small star toggle immediately after Search, instead of an option inside Source.
 
 - The Source menu groups sources under Included in update_all and Requires manual setup, with an Access section: All, Public only, or Early access only (supporter-key alpha and beta entries). It works with shared views, Clear filters and collection tabs.

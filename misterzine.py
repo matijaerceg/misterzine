@@ -39,6 +39,7 @@ import urllib.parse
 import zipfile
 import zlib
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 from pathlib import Path
 from arcade_specs import merge_specs, parse_mra_specs, parse_current_specs
@@ -737,6 +738,56 @@ def _db_json(raw):
     return json.loads(raw)
 
 
+def _coinop_key_gates(d, tagged):
+    """Catch Coin-Op MRAs that load a supporter key but lack the db gate tag.
+
+    Read the exact files named by the db (its base URL pins a commit), before
+    snapshot records events. Cache by path + content hash, including negative
+    results, so CI only downloads changed MRAs. A failed download, bad XML or
+    hash mismatch aborts the snapshot: unknown access must not become public.
+    Explicit db tags retain their alpha/beta stage; this fallback is beta.
+    """
+    import xml.etree.ElementTree as ET
+
+    cache_path = CACHEDIR / "coinop_access.json"
+    cache = json.loads(cache_path.read_text(encoding="utf-8")) if cache_path.exists() else {}
+    wanted = {p: m for p, m in d.get("files", {}).items()
+              if classify(p)[:2] == ("arcade", "title") and p not in tagged}
+
+    def inspect(item):
+        path, meta = item
+        digest = meta.get("hash")
+        previous = cache.get(path, {})
+        if digest and previous.get("hash") == digest and isinstance(previous.get("key_required"), bool):
+            return path, previous
+        url = meta.get("url")
+        if not url and d.get("base_files_url"):
+            url = d["base_files_url"].rstrip("/") + "/" + urllib.parse.quote(path, safe="/")
+        if not url or not digest:
+            raise ValueError(f"Coin-Op access check: missing URL or hash for {path}")
+        raw = http_get(url)
+        if hashlib.md5(raw).hexdigest() != digest:
+            raise ValueError(f"Coin-Op access check: content hash mismatch for {path}")
+        try:
+            root = ET.fromstring(raw)
+        except ET.ParseError as e:
+            raise ValueError(f"Coin-Op access check: invalid MRA {path}") from e
+        # Parse active XML, not comments or mentions in descriptions. Other
+        # sources' keys and filenames containing 'beta' imply nothing here.
+        required = any(name.strip().lower() == "coinopkey.zip"
+                       for rom in root.iter("rom")
+                       for name in rom.get("zip", "").split("|"))
+        return path, {"hash": digest, "key_required": required}
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        checked = dict(pool.map(inspect, wanted.items()))
+    # Only publish the new cache after every required file has been checked.
+    CACHEDIR.mkdir(parents=True, exist_ok=True)
+    cache_path.write_text(json.dumps(checked, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                          encoding="utf-8")
+    return {path: "coinop-collection-beta" for path, meta in checked.items() if meta["key_required"]}
+
+
 def fetch_db(source):
     """Download a db.json.zip, return (ts, {path: {hash,size}}, {path: gate}, gates).
 
@@ -751,7 +802,7 @@ def fetch_db(source):
     effectively paywalled. Since 2026-07-16 these are INGESTED and listed
     (labeled on the site) rather than dropped - the returned map tells
     cmd_snapshot which rows to flag. When a core graduates to free, the
-    source removes the tag; the row's flag clears, its gated-debut date stays
+    source removes the tag (and Coin-Op's key requirement); the row's flag clears, its gated-debut date stays
     (no recency inflation), and the graduation logs a 'new' event so the
     feeds announce it going public."""
     log(f"  fetching {source['name']} ...")
@@ -766,6 +817,8 @@ def fetch_db(source):
                 gated[path] = by_id[tid]
                 break
         files[path] = {"hash": meta.get("hash"), "size": meta.get("size")}
+    if source["id"] == "coinop":
+        gated.update(_coinop_key_gates(d, gated))
     for path, meta in _archived_orphans(source["id"], d).items():
         files[path] = meta and {"hash": meta.get("hash"), "size": meta.get("size")}
     if gated:
@@ -948,6 +1001,16 @@ def cmd_snapshot(args):
 
         # upsert catalog rows for everything currently present
         upsert_catalog(con, source["id"], files, ts_iso, seed, gated)
+        # A missing access label may have announced this exact keyed MRA in
+        # an earlier crawl (Coin-Op CPS1, #15). Retract those false events so
+        # they cannot reappear when the game later becomes public. Preserve
+        # older, different revisions: a public game can genuinely enter beta.
+        if source["id"] == "coinop":
+            con.executemany(
+                "DELETE FROM events WHERE source_id=? AND path=? AND hash=? "
+                "AND event_type IN ('new','updated')",
+                [(source["id"], p, files[p]["hash"]) for p in gated if p in files],
+            )
         events += upsert_core_files(con, source["id"], files, ts_iso)
 
         # A core rebuild renames its rbf (PDP1_20190101.rbf -> PDP1_20260702.rbf),

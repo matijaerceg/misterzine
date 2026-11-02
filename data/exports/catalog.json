@@ -22737,7 +22737,7 @@
     "manufacturer": null,
     "rbf": "jttwin16",
     "repo": null,
-    "release_date": "2024-12-31",
+    "release_date": "2025-01-24",
     "last_update": null,
     "first_seen": "2026-06-28T20:01:12+00:00",
     "last_seen": "2026-10-26T09:16:37+00:00",
@@ -43901,7 +43901,7 @@
     "manufacturer": "Capcom",
     "rbf": "jtcps3",
     "repo": null,
-    "release_date": "2026-06-10",
+    "release_date": "2026-06-21",
     "last_update": null,
     "first_seen": "2026-07-14T13:42:36+00:00",
     "last_seen": "2026-10-26T09:16:37+00:00",
@@ -43967,7 +43967,7 @@
     "manufacturer": "Capcom",
     "rbf": "jtcps3",
     "repo": null,
-    "release_date": "2026-06-10",
+    "release_date": "2026-06-12",
     "last_update": null,
     "first_seen": "2026-07-14T13:42:36+00:00",
     "last_seen": "2026-10-26T09:16:37+00:00",
@@ -43989,7 +43989,7 @@
     "manufacturer": "Capcom",
     "rbf": "jtcps3",
     "repo": null,
-    "release_date": "2026-06-10",
+    "release_date": "2026-06-28",
     "last_update": null,
     "first_seen": "2026-07-14T13:42:36+00:00",
     "last_seen": "2026-10-26T09:16:37+00:00",
@@ -44011,7 +44011,7 @@
     "manufacturer": "Capcom",
     "rbf": "jtcps3",
     "repo": null,
-    "release_date": "2026-06-10",
+    "release_date": "2026-06-12",
     "last_update": null,
     "first_seen": "2026-07-14T13:42:36+00:00",
     "last_seen": "2026-10-26T09:16:37+00:00",
@@ -121656,8 +121656,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "1941",
     "genre": "Shoot 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121678,8 +121678,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "cworld2j",
     "genre": "Tabletop & quiz",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121700,8 +121700,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "captcomm",
     "genre": "Beat 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121722,8 +121722,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "cawing",
     "genre": "Shoot 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121744,8 +121744,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "dynwar",
     "genre": "Beat 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121766,8 +121766,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "ffight",
     "genre": "Beat 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121788,8 +121788,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "forgottn",
     "genre": "Shoot 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121810,8 +121810,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "ghouls",
     "genre": "Platformer",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121832,8 +121832,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "knights",
     "genre": "Beat 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121854,8 +121854,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "msword",
     "genre": "Platformer",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121876,8 +121876,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "megaman",
     "genre": "Fighting",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121898,8 +121898,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "mtwins",
     "genre": "Platformer",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121920,8 +121920,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "mercs",
     "genre": "Run 'n gun",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121942,8 +121942,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "nemo",
     "genre": "Platformer",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121964,8 +121964,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "pang3",
     "genre": "Fixed shooter",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -121986,8 +121986,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "pnickj",
     "genre": "Puzzle",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122008,8 +122008,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "qad",
     "genre": "Tabletop & quiz",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122030,8 +122030,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "qtono2j",
     "genre": "Tabletop & quiz",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122052,8 +122052,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "sf2ce",
     "genre": "Fighting",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122074,8 +122074,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "sf2hf",
     "genre": "Fighting",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122096,8 +122096,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "sf2",
     "genre": "Fighting",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122118,8 +122118,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "strider",
     "genre": "Platformer",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122140,8 +122140,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "kod",
     "genre": "Beat 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122162,8 +122162,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "3wonders",
     "genre": "Other",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122184,8 +122184,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "unsquad",
     "genre": "Shoot 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122206,8 +122206,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "varth",
     "genre": "Shoot 'em up",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122228,8 +122228,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": "willow",
     "genre": "Platformer",
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122250,8 +122250,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122272,8 +122272,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122294,8 +122294,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122316,8 +122316,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122338,8 +122338,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122360,8 +122360,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122382,8 +122382,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122404,8 +122404,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122426,8 +122426,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122448,8 +122448,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122470,8 +122470,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122492,8 +122492,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122514,8 +122514,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122536,8 +122536,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122558,8 +122558,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122580,8 +122580,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122602,8 +122602,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122624,8 +122624,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122646,8 +122646,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122668,8 +122668,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122690,8 +122690,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122712,8 +122712,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122734,8 +122734,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122756,8 +122756,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122778,8 +122778,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122800,8 +122800,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122822,8 +122822,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122844,8 +122844,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122866,8 +122866,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122888,8 +122888,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122910,8 +122910,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122932,8 +122932,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122954,8 +122954,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122976,8 +122976,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -122998,8 +122998,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123020,8 +123020,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123042,8 +123042,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123064,8 +123064,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123086,8 +123086,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123108,8 +123108,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123130,8 +123130,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123152,8 +123152,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123174,8 +123174,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123196,8 +123196,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123218,8 +123218,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123240,8 +123240,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123262,8 +123262,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123284,8 +123284,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123306,8 +123306,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123328,8 +123328,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123350,8 +123350,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123372,8 +123372,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123394,8 +123394,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123416,8 +123416,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123438,8 +123438,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123460,8 +123460,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123482,8 +123482,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123504,8 +123504,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123526,8 +123526,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123548,8 +123548,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123570,8 +123570,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123592,8 +123592,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123614,8 +123614,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123636,8 +123636,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123658,8 +123658,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123680,8 +123680,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123702,8 +123702,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123724,8 +123724,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123746,8 +123746,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123768,8 +123768,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123790,8 +123790,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123812,8 +123812,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123834,8 +123834,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123856,8 +123856,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123878,8 +123878,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123900,8 +123900,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123922,8 +123922,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123944,8 +123944,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123966,8 +123966,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -123988,8 +123988,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124010,8 +124010,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124032,8 +124032,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124054,8 +124054,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124076,8 +124076,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124098,8 +124098,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124120,8 +124120,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124142,8 +124142,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124164,8 +124164,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124186,8 +124186,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124208,8 +124208,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124230,8 +124230,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124252,8 +124252,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124274,8 +124274,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124296,8 +124296,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124318,8 +124318,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124340,8 +124340,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124362,8 +124362,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124384,8 +124384,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124406,8 +124406,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124428,8 +124428,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124450,8 +124450,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124472,8 +124472,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124494,8 +124494,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124516,8 +124516,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124538,8 +124538,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124560,8 +124560,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124582,8 +124582,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124604,8 +124604,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124626,8 +124626,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124648,8 +124648,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "coinop",
@@ -124670,8 +124670,8 @@
     "last_changed": "2026-11-01T02:11:50+00:00",
     "setname": null,
     "genre": null,
-    "beta": 0,
-    "gate": null
+    "beta": 1,
+    "gate": "coinop-collection-beta"
   },
   {
     "source_id": "decoryah",

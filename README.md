@@ -372,11 +372,15 @@ jlrh's).
 All nineteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
-Note: jtbindb also lists cores that are still Patreon betas; their MRA ships publicly but
-the core needs the `beta.bin` key, so they're effectively paywalled. Jotego tags these
-`jtbeta` in the db's `tag_dictionary`; `fetch_db()` drops any file carrying that tag (and
-purges rows ingested before the filter existed). When a core graduates to free, the tag
-is removed upstream and it flows back in on its own.
+Jotego and Coin-Op also publish Patreon early-access entries in their databases.
+The tracker lists them with alpha/beta badges and excludes them from public-release
+feeds. Access normally follows the database's default exclusion tags. For Coin-Op,
+`snapshot` also checks untagged launch files for an active `coinopkey.zip` requirement:
+the October 2026 CPS1 batch omitted the upstream status tags (issue #15). These checks
+use the database's exact file URLs and content hashes; results are cached in
+`data/cache/coinop_access.json`. Unreadable or mismatched files stop the snapshot
+instead of being treated as public. When both the tag and key requirement disappear,
+the entry becomes public and is announced without changing its original debut date.
 
 ## Why it's built this way (important)
 

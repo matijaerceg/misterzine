@@ -214,10 +214,6 @@
       "since": "2026-11"
     },
     {
-      "name": "Fran",
-      "since": "2026-10"
-    },
-    {
       "name": "GASQBDUV",
       "since": "2026-10"
     },
@@ -642,7 +638,13 @@
       "since": "2026-10"
     }
   ],
-  "past": [],
+  "past": [
+    {
+      "name": "Fran",
+      "since": "2026-10",
+      "until": "2026-11"
+    }
+  ],
   "early_adopters": [
     "ac3",
     "akeley",

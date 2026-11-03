@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 01 Nov 2026 22:50:08 +0000</lastBuildDate>
+<lastBuildDate>Tue, 03 Nov 2026 01:07:29 +0000</lastBuildDate>
+<item>
+<title>[Updated] Block Hole (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#blockhl</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/blockhl_20261103.rbf:2026-11-03T01:07:29+00:00</guid>
+<pubDate>Tue, 03 Nov 2026 01:07:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blockhl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1989 / Konami&lt;/p&gt;&lt;p&gt;Core: blockhl&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Shanghai III (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#shangha3j</link>
+<guid isPermaLink="false">ongo:_Arcade/Shanghai III (Japan).mra:2026-11-03T00:51:08+00:00</guid>
+<pubDate>Tue, 03 Nov 2026 00:51:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shangha3j.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Tabletop &amp;amp; quiz / 1993 / Sunsoft&lt;/p&gt;&lt;p&gt;Core: SunsoftGA9201&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Zooo (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#zooo</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hidctch3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 2000 / Eolith&lt;/p&gt;&lt;p&gt;Core: Eolith&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-27 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Eolith_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Iron Fortress (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#iron-fortress-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Iron Fortress.mra:2026-10-27T17:18:16+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 17:18:16 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ironfort.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1998 / Eolith&lt;/p&gt;&lt;p&gt;Core: Eolith&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-27 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Eolith_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Land Breaker (ppriest) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#land-breaker-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/Land Breaker (World) - Miss Tang Ja Ru Gi (Korea) (pcb ver 3.02).mra:2026-10-27T17:18:16+00:00</guid>
-<pubDate>Tue, 27 Oct 2026 17:18:16 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/landbrk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1999 / Eolith&lt;/p&gt;&lt;p&gt;Core: Eolith&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-27 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Eolith_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

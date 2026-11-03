@@ -5137,6 +5137,42 @@ def _same_game_base(r, arcade_meta):
     return _ideal_arcade_title(_arcade_base(r["title"]), r["setname"], arcade_meta)
 
 
+def _label_gated_arcade_titles(rows, arcade_titles, arcade_meta, fork_info, repo_maps):
+    """Label only the gated counterpart of an existing public game.
+
+    Match exact ROM sets, or a parent/clone family with the same base name
+    ignoring punctuation. A family alone can contain distinct games. Keep
+    the exact-title fallback for rows whose ROM metadata is still missing.
+    """
+    def game_keys(r):
+        sn = (r["setname"] or "").lower()
+        if not sn:
+            return set()
+        root = (arcade_meta.get(sn) or {}).get("parent") or sn
+        return {("sn", sn), ("family", root, norm_key(_arcade_base(r["title"])))}
+
+    public_games, public_titles = set(), set()
+    for r in rows:
+        if r["system"] == "arcade" and not r["beta"]:
+            public_games.update(game_keys(r))
+            public_titles.add(arcade_titles[(r["source_id"], r["path"])][0])
+    for r in rows:
+        if r["system"] != "arcade" or not r["beta"]:
+            continue
+        key = (r["source_id"], r["path"])
+        title, _ = arcade_titles[key]
+        same_game = bool(game_keys(r) & public_games)
+        if not same_game and title not in public_titles:
+            continue
+        label = _core_label(r, fork_info, repo_maps)
+        base = _same_game_base(r, arcade_meta) if same_game else title
+        if not label or norm_key(label) == norm_key(base):
+            log(f"  duplicate title {title!r}: gated row kept it (label {label!r}) [{r['source_id']}]")
+            continue
+        arcade_titles[key] = (f"{base} ({label})", r["title"])
+        log(f"  gated-row retitle: {r['title']} -> {base} ({label}) [{r['source_id']}]")
+
+
 def _ideal_arcade_title(raw, sn, arcade_meta):
     """Human-ideal display title for an arcade row, derived from the MAME DAT
     description (which carries the colons/punctuation/caps that MRA filenames
@@ -6064,11 +6100,9 @@ def cmd_export_web(args):
     # raw MRA title must survive as mt on retitled rows — it is the image-
     # manifest join key, the feeds' event-matching key and the search alias.
     arcade_titles = {}
-    beta_by_key = {}
     for r in rows:
         if r["system"] == "arcade":
             b = _arcade_base(r["title"])
-            beta_by_key[(r["source_id"], r["path"])] = bool(r["beta"])
             label = same_game_labels.get((r["source_id"], r["path"]))
             if label:
                 arcade_titles[(r["source_id"], r["path"])] = (
@@ -6089,30 +6123,10 @@ def cmd_export_web(args):
                 else:
                     clean = counts[b] == 1
                 arcade_titles[(r["source_id"], r["path"])] = (b if clean else r["title"], None)
-    # A gated row may still end up with the exact title of a public row: the
-    # same-game gate skips betas, and the clean-base rule lets a beta keep the
-    # base when the public row kept its own raw title, or when both raw titles
-    # are already bare (Coin-Op's beta Black Heart next to kuzecores' public
-    # Black Heart). Two identical rows is worse than a qualifier, so the GATED
-    # row alone takes its database's label -- "Black Heart (Coin-Op
-    # Collection)" -- and the public row is never touched, which keeps the
-    # rule above intact. When the beta graduates its flag clears and the
-    # ordinary both-labeled gate takes over.
-    public_titles = {t for (sid, p), (t, _) in arcade_titles.items()
-                     if not beta_by_key[(sid, p)]}
-    for r in rows:
-        if r["system"] != "arcade" or not r["beta"]:
-            continue
-        key = (r["source_id"], r["path"])
-        title, _ = arcade_titles[key]
-        if title not in public_titles:
-            continue
-        label = _core_label(r, fork_info, repo_maps)
-        if not label or norm_key(label) == norm_key(title):
-            log(f"  duplicate title {title!r}: gated row kept it (label {label!r}) [{r['source_id']}]")
-            continue
-        arcade_titles[key] = (f"{title} ({label})", r["title"])
-        log(f"  gated-row retitle: {r['title']} -> {title} ({label}) [{r['source_id']}]")
+    # Recognize the game even when sources spell it differently (1941's
+    # hyphen used to strip [CoC], while Willow kept its raw filename). Only
+    # the gated row takes a source label; public names stay stable.
+    _label_gated_arcade_titles(rows, arcade_titles, arcade_meta, fork_info, repo_maps)
     family_members = arcade_family_members(arcade_meta)
     data = [_web_row(r, arcade_titles, arcade_meta, arcade_cats, arcade_setnames, repo_maps,
                      arcade_mad, dat_desc_index, arcade_specs, core_files, ft_map,

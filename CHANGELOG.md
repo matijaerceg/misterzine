@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Early-access versions of games already available on another core now consistently include their source in the title, such as “1941: Counter Attack (Coin-Op Collection)”, even when the sources use different punctuation. Existing public titles and saved links stay unchanged.
+
 - Type, Source, Genre and Year each have an optional Remember these filters checkbox, off by default. Choices are saved only in the current browser; Clear filters resets saved choices without turning remembering off. Shared views temporarily pause saving, survive refreshes, and offer Revert to my saved filters. New sources are included automatically.
 
 - The Source menu's Included in update_all and Requires manual setup headers now have checkboxes that toggle their whole group and show a partial state when only some children are selected.

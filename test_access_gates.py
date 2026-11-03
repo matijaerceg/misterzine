@@ -166,5 +166,69 @@ class AccessGateTests(unittest.TestCase):
             self.assertTrue(items[0].findtext("guid").startswith("jtbindb:"))
 
 
+class GatedTitleTests(unittest.TestCase):
+    def row(self, title, sn, beta=False, source=None):
+        return {"title": title, "setname": sn, "beta": beta, "system": "arcade",
+                "source_id": source or ("coinop" if beta else "jtbindb"),
+                "path": f"_Arcade/{title}.mra", "rbf": "beta_core" if beta else "public_core",
+                "repo": ""}
+
+    def label(self, rows, titles, meta):
+        chosen = {(r["source_id"], r["path"]): (t, None) for r, t in zip(rows, titles)}
+        mz._label_gated_arcade_titles(rows, chosen, meta, {}, {})
+        # Exercise the later title cleanup too: it must retain the source label.
+        data = []
+        for r in rows:
+            title, alias = chosen[(r["source_id"], r["path"])]
+            data.append({"title": title, "mt": alias, "sn": r["setname"],
+                         "src": r["source_id"], "base": "Arcade", "beta": r["beta"]})
+        mz._humanize_arcade_titles(data, meta)
+        return data
+
+    def test_same_set_labels_beta_despite_punctuation_or_retained_filename(self):
+        for public, beta, sn, desc, beta_display in [
+            ("1941 Counter Attack", "1941 - Counter Attack (World 900227) [CoC]", "1941",
+             "1941: Counter Attack (World 900227)", "1941 - Counter Attack"),
+            ("Willow", "Willow (World) [CoC]", "willow", "Willow (World)", "Willow (World) [CoC]"),
+        ]:
+            with self.subTest(sn=sn):
+                rows = [self.row(public, sn), self.row(beta, sn, beta=True)]
+                data = self.label(rows, [public, beta_display], {sn: {"desc": desc}})
+                base = mz._strip_trailing_parens(desc)
+                self.assertEqual(data[0]["title"], base)
+                self.assertEqual(data[1]["title"], base + " (Coin-Op Collection)")
+                self.assertEqual(data[1]["mt"], beta)
+
+    def test_clone_matches_same_name_ignoring_punctuation(self):
+        rows = [self.row("Game: Subtitle (World)", "game"),
+                self.row("Game - Subtitle (Japan) [CoC]", "gamej", beta=True)]
+        meta = {"game": {"desc": "Game: Subtitle (World)"},
+                "gamej": {"parent": "game", "desc": "Game: Subtitle (Japan)"}}
+        data = self.label(rows, ["Game: Subtitle", "Game - Subtitle"], meta)
+        self.assertEqual(data[1]["title"], "Game: Subtitle (Coin-Op Collection)")
+
+    def test_shared_family_or_core_alone_does_not_label_another_game(self):
+        rows = [self.row("Sprint 2", "sprint2"),
+                self.row("Sprint 1", "sprint1", beta=True),
+                self.row("Unrelated", "other", beta=True)]
+        meta = {"sprint1": {"parent": "sprint2"}}
+        data = self.label(rows, [r["title"] for r in rows], meta)
+        self.assertEqual([d["title"] for d in data], [r["title"] for r in rows])
+
+    def test_existing_exact_title_fallback_without_set_metadata(self):
+        rows = [self.row("Black Heart", ""), self.row("Black Heart", "", beta=True)]
+        data = self.label(rows, [r["title"] for r in rows], {})
+        self.assertEqual([d["title"] for d in data],
+                         ["Black Heart", "Black Heart (Coin-Op Collection)"])
+
+    def test_public_titles_stay_stable_and_other_sources_get_their_own_label(self):
+        rows = [self.row("Game", "game", source="coinop"),
+                self.row("Game [JT]", "game", beta=True, source="jtbindb")]
+        data = self.label(rows, ["Game", "Game [JT]"], {"game": {"desc": "Game"}})
+        alone = self.label(rows[:1], ["Game"], {"game": {"desc": "Game"}})
+        self.assertEqual(data[0], alone[0])
+        self.assertEqual(data[1]["title"], "Game (Jotego)")
+
+
 if __name__ == "__main__":
     unittest.main()

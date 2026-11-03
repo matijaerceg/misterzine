@@ -4,6 +4,10 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Type, Source, Genre and Year each have an optional Remember these filters checkbox, off by default. Choices are saved only in the current browser; Clear filters resets saved choices without turning remembering off. Shared views temporarily pause saving, survive refreshes, and offer Revert to my saved filters. New sources are included automatically.
+
+- The Source menu's Included in update_all and Requires manual setup headers now have checkboxes that toggle their whole group and show a partial state when only some children are selected.
+
 - Coin-Op Collection's 27 CPS1 games now show their Patreon beta status and stay out of public-release feeds. The tracker checks their supporter-key requirement as well as upstream status labels, which were missing from this release (issue #15).
 
 - Favorites only is now a small star toggle immediately after Search, instead of an option inside Source.

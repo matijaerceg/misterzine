@@ -257,6 +257,9 @@
   details.cols .menu .reset:disabled { opacity: .4; cursor: default; }
   /* the All / None pair closing each multi-select menu (Type, Source, Genre) */
   details.cols .menu .resets { display: flex; gap: 1rem; }
+  details.cols .menu .filter-memory { border-top: 1px solid var(--hair); margin-top: .4rem; padding-top: .5rem; }
+  details.cols .menu .filter-memory label { font-size: .8rem; }
+  .filter-memory-note { display: block; max-width: 19rem; white-space: normal; font-size: .75rem; color: var(--muted); margin: .3rem 0 0; }
   /* Type: Arcade's sub-filters (Patches, then Mature / Non-mature), indented
      under its row; a small dim heading or a hairline opens each section, and
      the block dims while Arcade itself is unchecked (its boxes keep their
@@ -268,6 +271,7 @@
   #srcmenu .source-group { margin: 0 0 .6rem; }
   #srcmenu .source-group h3 { font-size: .78rem; color: var(--muted); margin: .4rem 0 .2rem; }
   #srcmenu .source-group label { padding-left: .5rem; }
+  #srcmenu .source-group h3 label { font: inherit; padding-left: 0; }
   #srcmenu .source-note { max-width: 19rem; white-space: normal; font-size: .75rem; color: var(--muted); margin: .5rem 0; }
   #srcmenu .resets { flex-wrap: wrap; gap: .35rem 1rem; }
   /* Source: the downloader.ini lines opener under the picks. A real button, not
@@ -1463,6 +1467,10 @@
   </details>
   <button type="button" id="viewlink" class="ctl icon" aria-label="Copy a link to this view" data-tip="Copy a link to this view: search, filters, sort and open game"><span class="ico" aria-hidden="true"></span></button>
 </div>
+<div class="favbanner" id="sharedfilters" role="status" hidden>
+  <span>Temporary shared view. Your saved filters are unchanged.</span>
+  <button type="button" id="restoresavedfilters">Revert to my saved filters</button>
+</div>
 <!-- shown only when the URL carries a ?fav= list: someone opening a shared link
      is here to look, so the list is filtered to it and adopting it stays a choice -->
 <div class="favbanner" id="favbanner" hidden>
@@ -1704,6 +1712,7 @@
 <script src="../lists/lists.js?v=c7502c4e44"></script>
 <script src="custom-lists.js?v=aa1878eddb"></script>
 <script src="./source-visibility.js?v=9"></script>
+<script src="./filter-memory.js?v=1"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=7"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
@@ -3459,6 +3468,7 @@ const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 function apply() {
   clearTimeout(qTimer);
+  if (booted && filterMemory.temporary) persistTemporaryFilters();
   const qEl = document.getElementById('q');
   // whitespace splits the query into AND terms ("horizontal 4-way" = rows
   // matching both, in any field, in any order); each term is an independent
@@ -3770,6 +3780,7 @@ function clearAllFilters() {
   // "Clear filters" that left the table still hiding rows would be lying
   resetFavOnly();
   if (favView) dismissFavView();
+  saveRememberedFilters(null, true);
   // the sort stays: it hides nothing, so "Clear filters" has no business with
   // it (columns, theme, grouping and the favorites list are prefs, not filters)
   apply();
@@ -3781,8 +3792,8 @@ document.getElementById('clear').addEventListener('click', clearAllFilters);
 // (and its tooltip) went with the 2026-10-15 rework.
 // the brand/URL in the title is a plain link to "./": clicking it does a real
 // navigation to a bare /releases/, exactly like typing that URL and hitting
-// Enter. That's a full fresh load (panel/hash, filters, sort and scroll all
-// reset; theme, columns, saved devices and panel width persist via localStorage).
+// Enter. Remembered or temporary filters are restored; display preferences
+// (theme, columns, saved devices and panel width) persist via localStorage too.
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {
   const th = e.target.closest('th');
@@ -3808,10 +3819,14 @@ document.getElementById('hrow').addEventListener('click', e => {
 // so the menu always means exactly "show what is ticked". Source and Genre below
 // follow the same model, sharing the helpers defined here.
 const TYPES = ['Arcade', 'Console', 'Computer', 'Other'];
-// The Type/Source/Genre/Year filters deliberately do NOT persist across reloads — a
-// page refresh starts unfiltered (only the Columns display pref survives, see mz-cols2).
-// A "Share this view" link applies them once on arrival (adoptViewParams), then
-// leaves the address bar, so a refresh after it resets too.
+// Each dropdown can opt into browser-local memory. Shared views temporarily
+// override those choices without writing them, including across tab refreshes.
+const filterMemory = createFilterMemory();
+const rememberControl = group => '<div class="filter-memory"><label><input type="checkbox" data-remember="' + group + '"' +
+  (Object.hasOwn(filterMemory.saved(), group) ? ' checked' : '') +
+  (filterMemory.temporary ? ' disabled' : '') + '> Remember these filters</label>' +
+  '<span class="filter-memory-note">' + (filterMemory.temporary
+    ? 'Saving is paused for this shared view.' : 'On this browser only.') + '</span></div>';
 // Type's option list is fixed, so it starts fully checked right here. Source and Genre
 // are data-seeded (databases present; arcade genres from MAME's catver.ini), so their
 // sets start empty and buildSrcMenu()/buildGenreMenu() fill them fully checked once
@@ -3858,7 +3873,7 @@ function pickAllNone(menu, set, keys, e) {
   if (!b) return false;
   set.clear();
   if (b.dataset.pick === 'all') for (const k of keys) set.add(k);
-  for (const cb of menu.querySelectorAll('input')) cb.checked = set.size > 0;
+  for (const cb of menu.querySelectorAll('input[data-g]')) cb.checked = set.size > 0;
   return true;
 }
 
@@ -3916,7 +3931,7 @@ function buildTypeMenu() {
     (PATCH_KEYS.length && MAT_KEYS.length ? '<hr>' : '') +
     MAT_KEYS.map(k => box('data-m', k, enabledMat, MAT_LABELS[k], mc[k])).join('');
   typeMenu.innerHTML = TYPES.map(t => typeRow(t) +
-    (t === 'Arcade' && sub ? '<div class="tsub">' + sub + '</div>' : '')).join('') + pickButtons('type');
+    (t === 'Arcade' && sub ? '<div class="tsub">' + sub + '</div>' : '')).join('') + pickButtons('type') + rememberControl('type');
   syncTypeSummary();
 }
 function syncTypeSummary() {
@@ -3946,7 +3961,7 @@ function resetTypes() {
   for (const t of TYPES) enabledTypes.add(t);
   for (const k of PATCH_KEYS) enabledPatches.add(k);
   for (const k of MAT_KEYS) enabledMat.add(k);
-  for (const cb of typeMenu.querySelectorAll('input')) cb.checked = true;
+  for (const cb of typeMenu.querySelectorAll('input[data-t], input[data-p], input[data-m]')) cb.checked = true;
   syncTypeSummary();
 }
 // None unchecks the four types only: Arcade's section picks stay (dimmed), so
@@ -4081,7 +4096,7 @@ function buildYearMenu() {
   const chips = '<div class="decades">' + decs.map(d =>
     '<button type="button" class="dchip" data-d="' + d + '">' + ('' + d).slice(2) + 's</button>').join('') + '</div>';
   yearMenu.innerHTML = row('from', 'From', YEAR_MIN, yearFrom) + row('to', 'To', YEAR_MAX, yearTo) + chips +
-    '<button class="reset" id="yearreset">Reset</button>';
+    '<button class="reset" id="yearreset">Reset</button>' + rememberControl('year');
   syncYear();  // re-marks the summary, clear-x's and decade chips from the live state
 }
 // state-only reset (no apply/recenter) shared by the in-menu Reset and "Clear filters"
@@ -4138,6 +4153,12 @@ const srcMenu = document.getElementById('srcmenu');
 const srcSummary = document.getElementById('srcsummary');
 let SRC_KEYS = [];  // menu order, filled by buildSrcMenu; empty until data lands
 function syncSrcSummary() {
+  for (const cb of srcMenu.querySelectorAll('input[data-src-group]')) {
+    const children = [...cb.closest('.source-group').querySelectorAll('input[data-s]')];
+    const selected = children.filter(child => enabledSrcs.has(child.dataset.s)).length;
+    cb.checked = selected === children.length;
+    cb.indeterminate = selected > 0 && selected < children.length;
+  }
   syncPick(srcSummary, srcMenu, 'Source', enabledSrcs, SRC_KEYS.length);
   if (accessMode !== 'all') {
     srcSummary.textContent += accessMode === 'public' ? ' · Public' : ' · Early access';
@@ -4153,16 +4174,15 @@ function buildSrcMenu() {
     .concat(Object.keys(counts).filter(s => !SRC_NAMES[s]).sort());
   // one database (or none) leaves nothing to choose between
   document.getElementById('srcdd').hidden = false; // Favorites only remains useful with a single source.
-  // a live data swap keeps the visitor's picks: an untouched menu (everything
-  // checked, or never built) checks any newcomer too; a narrowed one leaves new
-  // databases unchecked and drops retired ones
-  const untouched = !SRC_KEYS.length || SRC_KEYS.every(s => enabledSrcs.has(s));
+  // Keep existing picks and include newly introduced sources, even in a subset.
+  const previous = new Set(SRC_KEYS);
+  enabledSrcs = new Set(srcs.filter(s => !previous.has(s) || enabledSrcs.has(s)));
   SRC_KEYS = srcs;
-  enabledSrcs = new Set(untouched ? srcs : srcs.filter(s => enabledSrcs.has(s)));
   const group = (included, heading) => {
     const sources = srcs.filter(s => UPDATE_ALL_INCLUDED.has(s) === included);
     if (!sources.length) return '';
-    return '<section class="source-group"><h3>' + heading + '</h3>' + sources.map(s =>
+    return '<section class="source-group"><h3><label><input type="checkbox" data-src-group> ' +
+      heading + '</label></h3>' + sources.map(s =>
       '<label><input type="checkbox" data-s="' + escA(s) + '"' +
       (enabledSrcs.has(s) ? ' checked' : '') + '> ' + esc(SRC_NAMES[s] || s) +
       '<span class="gcount">' + counts[s] + '</span></label>').join('') + '</section>';
@@ -4178,7 +4198,7 @@ function buildSrcMenu() {
     '<button type="button" class="menubtn" id="iniexpbtn" aria-haspopup="dialog" data-tip="Ready-made downloader.ini lines for every source outside update_all, with notes to read first.">' +
       '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">' +
       '<rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M1.5 5.5h13M4 8.5h5M4 11h7"/></svg>' +
-      'downloader.ini lines...</button>';
+      'downloader.ini lines...</button>' + rememberControl('src');
   syncSrcSummary(); syncFavSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
@@ -4186,9 +4206,17 @@ srcMenu.addEventListener('change', e => {
   if (e.target.name === 'access' && Object.hasOwn(ACCESS_LABELS, e.target.value)) {
     accessMode = e.target.value; syncAccess(); apply(); recenterOpen(); return;
   }
-  const s = e.target.dataset.s;
-  if (!s) return;
-  if (e.target.checked) enabledSrcs.add(s); else enabledSrcs.delete(s);
+  const cb = e.target;
+  if (cb.hasAttribute('data-src-group')) {
+    for (const child of cb.closest('.source-group').querySelectorAll('input[data-s]')) {
+      child.checked = cb.checked;
+      if (cb.checked) enabledSrcs.add(child.dataset.s); else enabledSrcs.delete(child.dataset.s);
+    }
+  } else {
+    const s = cb.dataset.s;
+    if (!s) return;
+    if (cb.checked) enabledSrcs.add(s); else enabledSrcs.delete(s);
+  }
   syncSrcSummary();
   apply();
   recenterOpen();  // adding/removing whole databases moves the selected row — follow it
@@ -4240,7 +4268,7 @@ function buildGenreMenu() {
   genreMenu.innerHTML = genres.map(g =>
     '<label><input type="checkbox" data-g="' + escA(g) + '"' +
     (enabledGenres.has(g) ? ' checked' : '') + '> ' + (g === NO_GENRE ? 'No genre' : esc(g)) +
-    '<span class="gcount">' + counts[g] + '</span></label>').join('') + pickButtons('genre');
+    '<span class="gcount">' + counts[g] + '</span></label>').join('') + pickButtons('genre') + rememberControl('genre');
   syncGenreSummary();
 }
 // delegated so the listeners survive buildGenreMenu() rebuilding the innerHTML
@@ -4255,7 +4283,7 @@ genreMenu.addEventListener('change', e => {
 // state-only reset (no apply/recenter) shared by the in-menu All and "Clear filters"
 function resetGenres() {
   for (const g of GENRE_KEYS) enabledGenres.add(g);
-  for (const cb of genreMenu.querySelectorAll('input')) cb.checked = true;
+  for (const cb of genreMenu.querySelectorAll('input[data-g]')) cb.checked = true;
   syncGenreSummary();
 }
 genreMenu.addEventListener('click', e => {
@@ -4263,6 +4291,93 @@ genreMenu.addEventListener('click', e => {
   syncGenreSummary(); apply(); recenterOpen();
 });
 syncGenreSummary();  // initial state before data loads (reads "Genre" / no glow)
+
+// --- optional browser-local memory for each filter dropdown -------------------
+const filterMenus = { type: typeMenu, src: srcMenu, genre: genreMenu, year: yearMenu };
+function captureDropdownFilters(previous = filterMemory.temporary?.filters || filterMemory.saved()) {
+  // Retain excluded options currently absent from the catalogue (for example,
+  // maturity options while mature games are hidden by the separate site setting).
+  const off = (keys, set, old = []) => [...old.filter(k => !keys.includes(k)), ...keys.filter(k => !set.has(k))];
+  return {
+    type: { off: off(TYPES, enabledTypes, previous.type?.off),
+      patchesOff: off(PATCH_KEYS, enabledPatches, previous.type?.patchesOff),
+      maturityOff: off(MAT_KEYS, enabledMat, previous.type?.maturityOff) },
+    src: { off: off(SRC_KEYS, enabledSrcs, previous.src?.off), access: accessMode },
+    genre: { off: off(GENRE_KEYS, enabledGenres, previous.genre?.off) },
+    year: { from: yearFrom, to: yearTo },
+  };
+}
+function restoreDropdownFilters(values) {
+  const restore = (keys, set, off, menu, attr) => {
+    set.clear(); rememberedFilterKeys(keys, off).forEach(k => set.add(k));
+    for (const cb of menu.querySelectorAll('input[' + attr + ']')) cb.checked = set.has(cb.getAttribute(attr));
+  };
+  restore(TYPES, enabledTypes, values.type?.off, typeMenu, 'data-t');
+  restore(PATCH_KEYS, enabledPatches, values.type?.patchesOff, typeMenu, 'data-p');
+  restore(MAT_KEYS, enabledMat, values.type?.maturityOff, typeMenu, 'data-m');
+  restore(SRC_KEYS, enabledSrcs, values.src?.off, srcMenu, 'data-s');
+  restore(GENRE_KEYS, enabledGenres, values.genre?.off, genreMenu, 'data-g');
+  accessMode = values.src?.access || 'all';
+  const clamp = value => value == null || YEAR_MIN == null ? null : Math.min(Math.max(value, YEAR_MIN), YEAR_MAX);
+  yearFrom = clamp(values.year?.from); yearTo = clamp(values.year?.to);
+  const from = yearMenu.querySelector('.yfrom'), to = yearMenu.querySelector('.yto');
+  if (from) from.value = yearFrom ?? '';
+  if (to) to.value = yearTo ?? '';
+  syncTypeSummary(); syncAccess(); syncGenreSummary(); syncYear();
+}
+function syncFilterMemoryControls() {
+  const saved = filterMemory.saved(), temporary = !!filterMemory.temporary;
+  document.getElementById('sharedfilters').hidden = !temporary;
+  for (const [group, menu] of Object.entries(filterMenus)) {
+    const cb = menu.querySelector('[data-remember]');
+    if (!cb) continue;
+    cb.checked = Object.hasOwn(saved, group);
+    cb.disabled = temporary;
+    menu.querySelector('.filter-memory-note').textContent = temporary
+      ? 'Saving is paused for this shared view.' : 'On this browser only.';
+  }
+}
+function persistTemporaryFilters() {
+  // Dropdown state is stored in full; only the remaining shared-view controls
+  // need URL syntax. Neither the session nor its edits touch local preferences.
+  const params = viewParams().filter(([key]) => ['q', 's', 'f'].includes(key))
+    .map(([key, value]) => key + '=' + value).join('&');
+  filterMemory.startTemporary(captureDropdownFilters(), params);
+}
+function saveRememberedFilters(group, reset = false) {
+  if (filterMemory.temporary) { persistTemporaryFilters(); return; }
+  const values = captureDropdownFilters();
+  // Clear filters also forgets exclusions for options absent from today's data.
+  if (reset) for (const value of Object.values(values))
+    for (const key of ['off', 'patchesOff', 'maturityOff']) if (key in value) value[key] = [];
+  for (const key of group ? [group] : Object.keys(filterMenus)) {
+    if (!filterMemory.save(key, values[key]))
+      showChip(filterMenus[key].querySelector('[data-remember]'), 'Could not save in this browser');
+  }
+}
+// Registered after the filter handlers so committed values are already current.
+// Saving happens only on user filter actions, never on catalogue or list restores.
+for (const [group, menu] of Object.entries(filterMenus)) {
+  menu.addEventListener('change', e => {
+    if (e.target.matches('[data-remember]')) {
+      const ok = e.target.checked ? filterMemory.remember(group, captureDropdownFilters()[group]) : filterMemory.forget(group);
+      if (!ok) showChip(e.target, 'Could not save in this browser');
+      syncFilterMemoryControls();
+    } else saveRememberedFilters(group);
+  });
+  menu.addEventListener('click', e => {
+    if (e.target.closest('[data-pick], .xclr, .dchip, #yearreset')) saveRememberedFilters(group);
+  });
+}
+document.getElementById('restoresavedfilters').addEventListener('click', e => {
+  if (!filterMemory.endTemporary()) { showChip(e.currentTarget, 'Could not leave the shared view'); return; }
+  restoreDropdownFilters(filterMemory.saved());
+  document.getElementById('q').value = '';
+  resetFavOnly();
+  if (favView) dismissFavView();
+  [sortKey, sortDir] = defaultSort(); buildHeader();
+  syncFilterMemoryControls(); apply(); recenterOpen();
+});
 
 // --- favorites control: filter toggle + housekeeping menu ---------------------
 const favctl = document.getElementById('favctl');
@@ -4370,10 +4485,10 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 // --- shareable view links ------------------------------------------------------
 // One-shot links: the Menu's "Share this view" builds a URL from the current
 // view and copies it (the address bar itself never follows the filters). An
-// arriving link applies its view once (adoptViewParams) and the keys are then
-// stripped with replaceState (stripViewParams), like ?fav=, so a
-// refresh starts over as it always has. Anything at its default is left out,
-// so sharing the default view gives a bare /releases/. The keys:
+// arriving link applies its view (adoptViewParams), then the keys leave the
+// address bar. A tab-local snapshot preserves the temporary view across refreshes
+// until the visitor reverts. view=1 identifies even a completely unfiltered link.
+// Anything at its default is otherwise left out. The keys:
 //   q    search text                           q=street+fighter
 //   t    Type menu                             t=arcade,console   t=-other
 //   src  Source menu (database ids)            src=-distribution_mister
@@ -4388,7 +4503,7 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 // a ?fav= list being viewed stays in. On arrival the link wins wherever it says
 // something; the columns fall back to their remembered state. hv (the retired
 // Hardware Verified filter, 2026-10-14) is still stripped so old links come out clean.
-const VIEW_KEYS = ['access', 'q', 't', 'src', 'g', 'p', 'm', 'y', 's', 'hv', 'f'];
+const VIEW_KEYS = ['view', 'access', 'q', 't', 'src', 'g', 'p', 'm', 'y', 's', 'hv', 'f'];
 const patchSlug = k => k === NO_PATCH ? 'none' : k;
 const typeSlug = t => t.toLowerCase();
 const srcSlug = s => s;
@@ -4430,7 +4545,7 @@ function viewParams() {
 // the RSS ref tag) describes the view, so it stays behind.
 function shareURL() {
   const fav = location.search.slice(1).split('&').filter(pr => ['fav', 'list', 'collection'].includes(paramName(pr)));
-  const parts = viewParams().map(([k, v]) => k + '=' + v).concat(fav);
+  const parts = ['view=1', ...viewParams().map(([k, v]) => k + '=' + v), ...fav];
   return location.origin + location.pathname + (parts.length ? '?' + parts.join('&') : '') + location.hash;
 }
 // after arrival: the view keys come out of the address bar (everything else,
@@ -4456,8 +4571,7 @@ function adoptPick(raw, set, keys, slug, menu, attr) {
 }
 // Runs once, after the first data load (the Source/Genre/Year menus are built
 // from the data). A ?fav= list has its own reader (adoptFavParam).
-function adoptViewParams() {
-  const p = new URLSearchParams(location.search);
+function adoptViewParams(p = new URLSearchParams(location.search)) {
   if (Object.hasOwn(ACCESS_LABELS, p.get('access'))) accessMode = p.get('access');
   syncAccess();
   if (MZLists.isListView()) { sortKey = 'title'; sortDir = 1; buildHeader(); }
@@ -6777,7 +6891,23 @@ function boot() {
     ingest(d);
     booted = true;
     hidePill();       // a retry just succeeded; don't leave its failure pill up
-    adoptViewParams();  // a shared view: search, menus, year, sort, favorites-only
+    const arrival = new URLSearchParams(location.search);
+    const shared = VIEW_KEYS.some(key => arrival.has(key)) || arrival.has('fav');
+    if (shared) {
+      // Omitted settings in a shared view mean defaults, regardless of this
+      // browser's remembered preferences. Even an unfiltered share is faithful.
+      restoreDropdownFilters({});
+      filterMemory.startTemporary(captureDropdownFilters({}));
+      adoptViewParams(arrival);
+    } else if (filterMemory.temporary) {
+      const temporary = filterMemory.temporary;
+      restoreDropdownFilters(temporary.filters);
+      adoptViewParams(new URLSearchParams(temporary.params));
+    } else {
+      restoreDropdownFilters(filterMemory.saved());
+      adoptViewParams(arrival);
+    }
+    syncFilterMemoryControls();
     adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
     stripViewParams();  // one-shot: the view is applied, the address bar goes back to plain
     MZLists.start({

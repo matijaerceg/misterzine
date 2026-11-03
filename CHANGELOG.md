@@ -4,6 +4,10 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- When an early-access core goes public, both public versions of the same game now receive source labels even if their filenames use different punctuation. Matching uses ROM identity, preserving saved links and launch paths.
+
+- Game-title qualifiers now use the shorter “(Coin-Op)”; the source menu keeps the full “Coin-Op Collection” name.
+
 - Early-access versions of games already available on another core now consistently include their source in the title, such as “1941: Counter Attack (Coin-Op Collection)”, even when the sources use different punctuation. Existing public titles and saved links stay unchanged.
 
 - Type, Source, Genre and Year each have an optional Remember these filters checkbox, off by default. Choices are saved only in the current browser; Clear filters resets saved choices without turning remembering off. Shared views temporarily pause saving, survive refreshes, and offer Revert to my saved filters. New sources are included automatically.

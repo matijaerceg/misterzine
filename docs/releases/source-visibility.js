@@ -43,7 +43,7 @@ function siteSameBuild(copy, original) {
 // "Power Spikes (asturur)". Every source whose rows can carry one must be
 // listed, or its singleton rows keep the label after Ongo's copy folds in
 // (tools/source_visibility.test.js checks the published data for that).
-const SITE_SOURCE_LABELS = { coinop: 'Coin-Op Collection', jtbindb: 'Jotego', meathax: 'Meathax',
+const SITE_SOURCE_LABELS = { coinop: 'Coin-Op', jtbindb: 'Jotego', meathax: 'Meathax',
   rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
   blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
   tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk',

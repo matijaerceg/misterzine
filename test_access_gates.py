@@ -175,6 +175,11 @@ class GatedTitleTests(unittest.TestCase):
 
     def label(self, rows, titles, meta):
         chosen = {(r["source_id"], r["path"]): (t, None) for r, t in zip(rows, titles)}
+        labels = mz._public_arcade_labels(rows, meta, {}, {})
+        for r in rows:
+            key = (r["source_id"], r["path"])
+            if key in labels:
+                chosen[key] = (f"{mz._same_game_base(r, meta)} ({labels[key]})", r["title"])
         mz._label_gated_arcade_titles(rows, chosen, meta, {}, {})
         # Exercise the later title cleanup too: it must retain the source label.
         data = []
@@ -196,7 +201,7 @@ class GatedTitleTests(unittest.TestCase):
                 data = self.label(rows, [public, beta_display], {sn: {"desc": desc}})
                 base = mz._strip_trailing_parens(desc)
                 self.assertEqual(data[0]["title"], base)
-                self.assertEqual(data[1]["title"], base + " (Coin-Op Collection)")
+                self.assertEqual(data[1]["title"], base + " (Coin-Op)")
                 self.assertEqual(data[1]["mt"], beta)
 
     def test_clone_matches_same_name_ignoring_punctuation(self):
@@ -205,7 +210,7 @@ class GatedTitleTests(unittest.TestCase):
         meta = {"game": {"desc": "Game: Subtitle (World)"},
                 "gamej": {"parent": "game", "desc": "Game: Subtitle (Japan)"}}
         data = self.label(rows, ["Game: Subtitle", "Game - Subtitle"], meta)
-        self.assertEqual(data[1]["title"], "Game: Subtitle (Coin-Op Collection)")
+        self.assertEqual(data[1]["title"], "Game: Subtitle (Coin-Op)")
 
     def test_shared_family_or_core_alone_does_not_label_another_game(self):
         rows = [self.row("Sprint 2", "sprint2"),
@@ -219,7 +224,7 @@ class GatedTitleTests(unittest.TestCase):
         rows = [self.row("Black Heart", ""), self.row("Black Heart", "", beta=True)]
         data = self.label(rows, [r["title"] for r in rows], {})
         self.assertEqual([d["title"] for d in data],
-                         ["Black Heart", "Black Heart (Coin-Op Collection)"])
+                         ["Black Heart", "Black Heart (Coin-Op)"])
 
     def test_public_titles_stay_stable_and_other_sources_get_their_own_label(self):
         rows = [self.row("Game", "game", source="coinop"),
@@ -228,6 +233,84 @@ class GatedTitleTests(unittest.TestCase):
         alone = self.label(rows[:1], ["Game"], {"game": {"desc": "Game"}})
         self.assertEqual(data[0], alone[0])
         self.assertEqual(data[1]["title"], "Game (Jotego)")
+
+    def test_graduation_labels_both_versions_and_preserves_saved_keys(self):
+        rows = [self.row("1941 Counter Attack (World 900227)", "1941"),
+                self.row("1941 - Counter Attack (World 900227) [CoC]", "1941", beta=True)]
+        titles = [mz._arcade_base(r["title"]) for r in rows]
+        meta = {"1941": {"desc": "1941: Counter Attack (World 900227)"}}
+        beta = self.label(rows, titles, meta)
+        self.assertEqual([r["title"] for r in beta],
+                         ["1941: Counter Attack", "1941: Counter Attack (Coin-Op)"])
+        rows[1]["beta"] = False
+        public = self.label(rows, titles, meta)
+        self.assertEqual([r["title"] for r in public],
+                         ["1941: Counter Attack (Jotego)", "1941: Counter Attack (Coin-Op)"])
+        self.assertEqual([r["mt"] for r in public], [r["title"] for r in rows])
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(mz, "DBPATH", Path(tmp) / "test.sqlite"):
+            # Seed the same persisted links that existed before the beta fix.
+            con = mz.connect()
+            for r, key in zip(rows, ["1941", "1941-counter-attack"]):
+                con.execute("INSERT INTO row_keys(source_id,path,k,assigned_at) VALUES(?,?,?,?)",
+                            (r["source_id"], r["path"], key, "2026-11-01"))
+            con.commit()
+            con.close()
+            for r, d in zip(rows, public):
+                d.update(_src=r["source_id"], _path=r["path"], mra=r["path"])
+            self.assertEqual(mz._assign_row_keys(public), [])
+            self.assertEqual([r["k"] for r in public], ["1941", "1941-counter-attack"])
+            self.assertEqual([r["mra"] for r in public], [r["path"] for r in rows])
+
+    def test_public_exact_set_and_punctuation_clone_share_labels(self):
+        rows = [self.row("Game: Subtitle", "game"),
+                self.row("Alternate Name", "game", source="coinop"),
+                self.row("Game - Subtitle (Japan)", "gamej", source="blahm1d")]
+        meta = {"game": {"desc": "Game: Subtitle"},
+                "gamej": {"parent": "game", "desc": "Game: Subtitle (Japan)"}}
+        expected = [f"Game: Subtitle ({source})" for source in ["Jotego", "Coin-Op", "blahm1d"]]
+        data = self.label(rows, [r["title"] for r in rows], meta)
+        self.assertEqual([r["title"] for r in data], expected)
+        reversed_data = self.label(rows[::-1], [r["title"] for r in rows[::-1]], meta)
+        self.assertEqual(reversed_data, data[::-1])
+
+    def test_public_matching_keeps_distinct_games_and_single_source_variants(self):
+        fixtures = [
+            ([self.row("Sprint 2", "sprint2"), self.row("Sprint 1", "sprint1", source="coinop")],
+             {"sprint1": {"parent": "sprint2"}}),
+            ([self.row("Squash", "squash"), self.row("Squash", "squaitsa", source="coinop")], {}),
+            ([self.row("Game (World)", "game"), self.row("Game (Japan)", "gamej")],
+             {"gamej": {"parent": "game"}}),
+            # Several intentional variants from one source cannot all take the
+            # same source label when another database carries the game too.
+            ([self.row("Game (World)", "game"), self.row("Game (Japan)", "gamej"),
+              self.row("Game", "game", source="coinop")], {"gamej": {"parent": "game"}}),
+        ]
+        for rows, meta in fixtures:
+            with self.subTest(titles=[r["title"] for r in rows]):
+                self.assertEqual(mz._public_arcade_labels(rows, meta, {}, {}), {})
+
+    def test_public_pinned_variants_keep_their_full_identity(self):
+        rows = [self.row("Game", "wide"), self.row("Game", "narrow", source="coinop")]
+        with mock.patch.dict(mz.ARCADE_TITLES, {"wide": "Game (Wide)", "narrow": "Game (Narrow)"}):
+            self.assertEqual(mz._public_arcade_labels(rows, {"narrow": {"parent": "wide"}}, {}, {}), {})
+
+    def test_distinct_editions_keep_qualifiers_when_source_labels_would_collide(self):
+        rows = [self.row(f"Quiz (Edition {edition})", f"quiz{edition}", source=source)
+                for edition in (1, 2) for source in ("jtbindb", "coinop")]
+        self.assertEqual(mz._public_arcade_labels(rows, {}, {}, {}), {})
+
+    def test_same_set_alias_does_not_remove_existing_name_pair_labels(self):
+        rows = [self.row("Meikyu Jima (Japan)", "kikcubic", source="bazset"),
+                self.row("Kickle Cubicle (English title)", "kikcubic", source="bazset"),
+                self.row("Meikyu Jima (Japan)", "kikcubic", source="ongo")]
+        labels = mz._public_arcade_labels(rows, {}, {}, {})
+        self.assertEqual(labels, {("bazset", rows[0]["path"]): "bazset", ("ongo", rows[2]["path"]): "Ongo"})
+
+    def test_mirror_alone_does_not_strip_hardware_qualifiers(self):
+        rows = [self.row("1942 (Revision B)", "1942"),
+                self.row("1942 (PlayChoice-10)", "pc_1942", source="ppriest"),
+                self.row("1942 (PlayChoice-10)", "pc_1942", source="ongo")]
+        self.assertEqual(mz._public_arcade_labels(rows, {}, {}, {}), {})
 
 
 if __name__ == "__main__":

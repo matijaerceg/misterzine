@@ -5025,7 +5025,7 @@ ARCADE_TITLES = {
                                            # MRA and the US name are Bonk's Adventure
     "gforce2": "Galaxy Force II",          # DAT says "Galaxy Force 2"; the marquee and the
                                            # MRA use the numeral
-    "edfp": "E.D.F.: Earth Defense Force (Coin-Op Collection)",  # the prototype on Coin-Op's
+    "edfp": "E.D.F.: Earth Defense Force (Coin-Op)",  # the prototype on Coin-Op's
                                            # Mega System 1 core; kuzecores' edf keeps the bare
                                            # name (the Black Heart convention)
     # TomSVR: two unrelated games MAME both calls "Jumping Pop" (ESD 2001,
@@ -5048,7 +5048,7 @@ CORE_LABELS = {}
 
 def _core_label(r, fork_info, repo_maps):
     """How the community refers to a catalog row's core, for the same-game
-    qualifier ("Caveman Ninja (Coin-Op Collection)" vs "(Deco16)"). Chain,
+    qualifier ("Caveman Ninja (Coin-Op)" vs "(Deco16)"). Chain,
     first hit wins: CORE_LABELS pin; the source's brand for third-party dbs
     (their rows are all that team's work); for Distribution rows, the fork
     parent's owner when the MiSTer-devel repo is a fork (the actual author,
@@ -5059,7 +5059,7 @@ def _core_label(r, fork_info, repo_maps):
     if rbf.lower() in CORE_LABELS:
         return CORE_LABELS[rbf.lower()]
     if r["source_id"] == "coinop":
-        return "Coin-Op Collection"
+        return "Coin-Op"
     if r["source_id"] == "jtbindb":
         return "Jotego"
     if r["source_id"] == "meathax":
@@ -5137,31 +5137,116 @@ def _same_game_base(r, arcade_meta):
     return _ideal_arcade_title(_arcade_base(r["title"]), r["setname"], arcade_meta)
 
 
+def _arcade_title_game_keys(r, arcade_meta):
+    """Exact ROM identity, or family plus a punctuation-insensitive name.
+
+    Preserve full pinned titles in the family key: their qualifiers can
+    distinguish hardware variants. A family alone can contain distinct games.
+    """
+    sn = (r["setname"] or "").lower()
+    if not sn:
+        return set()
+    root = (arcade_meta.get(sn) or {}).get("parent") or sn
+    name = ARCADE_TITLES.get(sn) or _arcade_base(r["title"])
+    name = re.sub(r"[^a-z0-9]+", "", name.casefold())
+    keys = {("sn", sn)}
+    if name:
+        keys.add(("family", root, name))
+    return keys
+
+
+def _public_arcade_labels(rows, arcade_meta, fork_info, repo_maps):
+    """Label public implementations using the same identity rule as betas.
+
+    Join exact sets and same-name clones transitively. Single-source variants
+    and groups whose source/core labels would collide keep their raw names.
+    """
+    public = [r for r in rows if r["system"] == "arcade" and not r["beta"] and r["setname"]]
+    parents = list(range(len(public)))
+
+    def find(i):
+        while parents[i] != i:
+            parents[i] = parents[parents[i]]
+            i = parents[i]
+        return i
+
+    seen = {}
+    for i, r in enumerate(public):
+        for key in _arcade_title_game_keys(r, arcade_meta):
+            j = seen.setdefault(key, i)
+            parents[find(i)] = find(j)
+    groups = {}
+    for i, r in enumerate(public):
+        groups.setdefault(find(i), []).append(r)
+
+    # Preserve existing name-based matches, including intentional aliases
+    # (Kickle Cubicle / Meikyu Jima) and Ongo mirrors. Expand identity matches
+    # only when two independent databases besides Ongo carry the game: Ongo
+    # also distributes copies, so a shared set there alone does not establish
+    # another implementation or justify dropping hardware qualifiers.
+    named = {}
+    for r in public:
+        pin = ARCADE_TITLES.get((r["setname"] or "").lower())
+        name = pin.casefold() if pin else _same_game_key(r["title"])
+        named.setdefault(name, []).append(r)
+    split_groups = [grp for grp in named.values() if len({
+        (arcade_meta.get(r["setname"].lower()) or {}).get("parent") or r["setname"].lower()
+        for r in grp}) == 1]
+    for grp in groups.values():
+        labels = [_core_label(r, fork_info, repo_maps) for r in grp]
+        if (len({r["source_id"] for r in grp if r["source_id"] != "ongo"}) >= 2
+                and len(set(labels)) == len(labels)):
+            split_groups.append(grp)
+
+    candidates = []
+    for grp in split_groups:
+        if len({r["source_id"] for r in grp}) < 2:
+            continue
+        labels = [_core_label(r, fork_info, repo_maps) for r in grp]
+        if (any(not label for label in labels) or len(set(labels)) != len(labels)
+                or any(norm_key(label) == norm_key(_same_game_base(r, arcade_meta))
+                       for r, label in zip(grp, labels))):
+            log(f"  same-game group {grp[0]['title']!r} kept raw titles (labels {labels})")
+            continue
+        candidates.append([(r, label, f"{_same_game_base(r, arcade_meta)} ({label})")
+                           for r, label in zip(grp, labels)])
+    # Separate games/editions can have the same cleaned name (Trivial
+    # Pursuit, Puzzle King). Keep their distinguishing qualifiers whenever
+    # source labels alone would make those rows indistinguishable.
+    proposed = {(r["source_id"], r["path"]): title
+                for group in candidates for r, _, title in group}
+    counts = Counter(proposed.values())
+    out = {}
+    for group in candidates:
+        if any(counts[title] > 1 for _, _, title in group):
+            continue
+        for r, label, title in group:
+            if (r["source_id"], r["path"]) in out:
+                continue
+            out[(r["source_id"], r["path"])] = label
+            log(f"  same-game retitle: {r['title']} -> {title} "
+                f"[{r['source_id']}]")
+    return out
+
+
 def _label_gated_arcade_titles(rows, arcade_titles, arcade_meta, fork_info, repo_maps):
     """Label only the gated counterpart of an existing public game.
 
-    Match exact ROM sets, or a parent/clone family with the same base name
-    ignoring punctuation. A family alone can contain distinct games. Keep
-    the exact-title fallback for rows whose ROM metadata is still missing.
+    Use the public naming rule's game identity, with an exact-title fallback
+    for rows whose ROM metadata is still missing.
     """
-    def game_keys(r):
-        sn = (r["setname"] or "").lower()
-        if not sn:
-            return set()
-        root = (arcade_meta.get(sn) or {}).get("parent") or sn
-        return {("sn", sn), ("family", root, norm_key(_arcade_base(r["title"])))}
 
     public_games, public_titles = set(), set()
     for r in rows:
         if r["system"] == "arcade" and not r["beta"]:
-            public_games.update(game_keys(r))
+            public_games.update(_arcade_title_game_keys(r, arcade_meta))
             public_titles.add(arcade_titles[(r["source_id"], r["path"])][0])
     for r in rows:
         if r["system"] != "arcade" or not r["beta"]:
             continue
         key = (r["source_id"], r["path"])
         title, _ = arcade_titles[key]
-        same_game = bool(game_keys(r) & public_games)
+        same_game = bool(_arcade_title_game_keys(r, arcade_meta) & public_games)
         if not same_game and title not in public_titles:
             continue
         label = _core_label(r, fork_info, repo_maps)
@@ -6054,48 +6139,10 @@ def cmd_export_web(args):
                           if r["system"] == "arcade" and r["beta"])
     orphan_counts = Counter(_arcade_base(r["title"]) for r in rows
                             if r["system"] == "arcade" and not r["beta"] and orphan(r))
-    # Same-game pairs from different databases (official Deco16 vs Coin-Op's
-    # dedicated core) read better labeled by core than by ROM-set qualifier:
-    # "Caveman Ninja (Deco16)" vs "Caveman Ninja (Coin-Op Collection)". A
-    # colliding-base group qualifies only when every row has a setname, all
-    # setnames share one parent/clone root (same GAME — not different games
-    # sharing a name, like the three Tetrises), and the rows span >= 2 sources
-    # (single-source groups like Darius II / Burger Time are deliberate variant
-    # listings whose qualifiers carry the meaning). Betas never participate: a
-    # beta arriving or leaving must not change what a public row displays (a
-    # beta that would duplicate a public title gets its own label further
-    # down, alone). Any
-    # doubt — missing setname, unresolvable/duplicate/degenerate labels —
-    # keeps today's raw titles for the whole group, with a log line.
-    same_game_labels = {}  # (source_id, path) -> qualifier label
-    groups = {}
-    for r in rows:
-        if r["system"] == "arcade" and not r["beta"]:
-            # case-blind: MRA names disagree on acronyms (Meathax's "NARC",
-            # blahm1d's "Narc (rev 7.00)"); the setname check below still
-            # decides whether it is one game. A pinned ARCADE_TITLES name
-            # keeps its qualifier, which is there to part it from another
-            # game: "Squash (Gaelco 1992)" (Jotego, jlrh) is not Itisa's Squash
-            pin = ARCADE_TITLES.get((r["setname"] or "").lower())
-            groups.setdefault(pin.casefold() if pin else _same_game_key(r["title"]), []).append(r)
-    for b, grp in groups.items():
-        if len(grp) < 2:
-            continue
-        sns = [(r["setname"] or "").lower() for r in grp]
-        if not all(sns):
-            continue
-        roots = {(arcade_meta.get(s) or {}).get("parent") or s for s in sns}
-        if len(roots) != 1 or len({r["source_id"] for r in grp}) < 2:
-            continue
-        labels = [_core_label(r, fork_info, repo_maps) for r in grp]
-        if (any(not l for l in labels) or len(set(labels)) != len(labels)
-                or any(norm_key(l) == norm_key(b) for l in labels)):
-            log(f"  same-game group {b!r} kept raw titles (labels {labels})")
-            continue
-        for r, l in zip(grp, labels):
-            same_game_labels[(r["source_id"], r["path"])] = l
-            log(f"  same-game retitle: {r['title']} -> {_same_game_base(r, arcade_meta)} ({l}) "
-                f"[{r['source_id']}]")
+    # Public implementations get source/core labels using the same ROM-set
+    # identity as gated rows. Betas stay outside this pass, so their arrival
+    # cannot rename a public title; graduation labels both public versions.
+    same_game_labels = _public_arcade_labels(rows, arcade_meta, fork_info, repo_maps)
     # arcade_titles: (display title, raw title to keep as `mt` or None). The
     # raw MRA title must survive as mt on retitled rows — it is the image-
     # manifest join key, the feeds' event-matching key and the search alias.

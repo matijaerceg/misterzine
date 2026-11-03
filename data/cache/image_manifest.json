@@ -26747,5 +26747,41 @@
   "snap_img": "ingames/surfplnt.png",
   "third_img": null,
   "third_pack": null
+ },
+ {
+  "title": "Donkey Kong (US, Set 1)",
+  "setname": "dkong",
+  "source": "psnaps",
+  "title_img": "titles/dkong.png",
+  "snap_img": "snap/dkong.png",
+  "third_img": "gameover/dkong.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Donkey Kong Junior (US, Set F-2)",
+  "setname": "dkongjr",
+  "source": "psnaps",
+  "title_img": "titles/dkongjr.png",
+  "snap_img": "snap/dkongjr.png",
+  "third_img": "gameover/dkongjr.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Donkey Kong 3 (US)",
+  "setname": "dkong3",
+  "source": "psnaps",
+  "title_img": "titles/dkong3.png",
+  "snap_img": "snap/dkong3.png",
+  "third_img": "gameover/dkong3.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "The Berlin Wall",
+  "setname": "berlwall",
+  "source": "adb",
+  "title_img": "titles/berlwall.png",
+  "snap_img": "ingames/berlwall.png",
+  "third_img": null,
+  "third_pack": null
  }
 ]

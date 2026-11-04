@@ -173,21 +173,24 @@ class GatedTitleTests(unittest.TestCase):
                 "path": f"_Arcade/{title}.mra", "rbf": "beta_core" if beta else "public_core",
                 "repo": ""}
 
-    def label(self, rows, titles, meta):
+    def label(self, rows, titles, meta, fork_info=None, repo_maps=None):
+        fork_info, repo_maps = fork_info or {}, repo_maps or {}
         chosen = {(r["source_id"], r["path"]): (t, None) for r, t in zip(rows, titles)}
-        labels = mz._public_arcade_labels(rows, meta, {}, {})
+        labels = mz._public_arcade_labels(rows, meta, fork_info, repo_maps)
         for r in rows:
             key = (r["source_id"], r["path"])
             if key in labels:
                 chosen[key] = (f"{mz._same_game_base(r, meta)} ({labels[key]})", r["title"])
-        mz._label_gated_arcade_titles(rows, chosen, meta, {}, {})
+        mz._label_gated_arcade_titles(rows, chosen, meta, fork_info, repo_maps)
         # Exercise the later title cleanup too: it must retain the source label.
         data = []
         for r in rows:
             title, alias = chosen[(r["source_id"], r["path"])]
             data.append({"title": title, "mt": alias, "sn": r["setname"],
-                         "src": r["source_id"], "base": "Arcade", "beta": r["beta"]})
+                         "src": r["source_id"], "core": r["rbf"],
+                         "base": "Arcade", "beta": r["beta"]})
         mz._humanize_arcade_titles(data, meta)
+        mz.attach_same_game_groups(data, meta)
         return data
 
     def test_same_set_labels_beta_despite_punctuation_or_retained_filename(self):
@@ -211,6 +214,7 @@ class GatedTitleTests(unittest.TestCase):
                 "gamej": {"parent": "game", "desc": "Game: Subtitle (Japan)"}}
         data = self.label(rows, ["Game: Subtitle", "Game - Subtitle"], meta)
         self.assertEqual(data[1]["title"], "Game: Subtitle (Coin-Op)")
+        self.assertEqual([d["g"] for d in data], ["game", "game"])
 
     def test_shared_family_or_core_alone_does_not_label_another_game(self):
         rows = [self.row("Sprint 2", "sprint2"),
@@ -231,7 +235,8 @@ class GatedTitleTests(unittest.TestCase):
                 self.row("Game [JT]", "game", beta=True, source="jtbindb")]
         data = self.label(rows, ["Game", "Game [JT]"], {"game": {"desc": "Game"}})
         alone = self.label(rows[:1], ["Game"], {"game": {"desc": "Game"}})
-        self.assertEqual(data[0], alone[0])
+        self.assertEqual((data[0]["title"], data[0]["mt"]),
+                         (alone[0]["title"], alone[0]["mt"]))
         self.assertEqual(data[1]["title"], "Game (Jotego)")
 
     def test_graduation_labels_both_versions_and_preserves_saved_keys(self):
@@ -270,6 +275,7 @@ class GatedTitleTests(unittest.TestCase):
         expected = [f"Game: Subtitle ({source})" for source in ["Jotego", "Coin-Op", "blahm1d"]]
         data = self.label(rows, [r["title"] for r in rows], meta)
         self.assertEqual([r["title"] for r in data], expected)
+        self.assertEqual([d["g"] for d in data], ["game"] * 3)
         reversed_data = self.label(rows[::-1], [r["title"] for r in rows[::-1]], meta)
         self.assertEqual(reversed_data, data[::-1])
 
@@ -293,6 +299,60 @@ class GatedTitleTests(unittest.TestCase):
         rows = [self.row("Game", "wide"), self.row("Game", "narrow", source="coinop")]
         with mock.patch.dict(mz.ARCADE_TITLES, {"wide": "Game (Wide)", "narrow": "Game (Narrow)"}):
             self.assertEqual(mz._public_arcade_labels(rows, {"narrow": {"parent": "wide"}}, {}, {}), {})
+            data = self.label(rows, [r["title"] for r in rows], {"narrow": {"parent": "wide"}})
+        self.assertTrue(all("g" not in d for d in data))
+
+    def test_distribution_fallback_labels_public_and_gated_counterparts(self):
+        meta = {"example": {"desc": "Example: Game (World)"},
+                "examplej": {"parent": "example", "desc": "Example: Game (Japan)"}}
+        for beta in (False, True):
+            with self.subTest(beta=beta):
+                rows = [self.row("Example: Game (World)", "example", beta=beta,
+                                 source="distribution_mister"),
+                        self.row("Example - Game (Japan)", "examplej", source="bazset")]
+                rows[0]["repo"] = "MiSTer-devel/Arcade-ExampleGame_MiSTer"
+                data = self.label(rows, [mz._arcade_base(r["title"]) for r in rows], meta)
+                self.assertEqual([d["title"] for d in data],
+                                 ["Example: Game (MiSTer-devel)",
+                                  "Example: Game" + ("" if beta else " (bazset)")])
+                self.assertEqual([d["g"] for d in data], ["example", "example"])
+                self.assertEqual(data[0]["mt"], rows[0]["title"])
+
+    def test_distribution_fallback_respects_label_provenance_and_empty_labels(self):
+        r = self.row("Example Game", "example", source="distribution_mister")
+        r.update(rbf="ExampleGame", repo="MiSTer-devel/Arcade-ExampleGame")
+        self.assertEqual(mz._same_game_label(r, {}, {}, {}), "MiSTer-devel")
+        with mock.patch.dict(mz.CORE_LABELS, {"examplegame": "ExampleGame"}):
+            self.assertEqual(mz._same_game_label(r, {}, {}, {}), "ExampleGame")
+        for owner in ("ExampleGame", "AnAuthor"):
+            forks = {r["repo"].lower(): {"is_fork": True, "parent_owner": owner}}
+            self.assertEqual(mz._same_game_label(r, {}, forks, {}), owner)
+            via_map = dict(r, repo="")
+            self.assertEqual(mz._same_game_label(via_map, {}, forks,
+                             {"arcade": {"examplegame": r["repo"]}}), owner)
+        self.assertEqual(mz._same_game_label(dict(r, repo="MiSTer-devel/Arcade-Board16"),
+                                           {}, {}, {}), "Board16")
+        self.assertEqual(mz._same_game_label(dict(r, source_id="other"), {}, {}, {}), "ExampleGame")
+        self.assertEqual(mz._same_game_label(dict(r, rbf="", repo=""), {}, {}, {}), "")
+
+    def test_duplicate_distribution_fallbacks_keep_variant_names(self):
+        rows = [self.row("Example Game (World)", "example", source="distribution_mister"),
+                self.row("Example Game (Japan)", "examplej", source="distribution_mister"),
+                self.row("Example Game", "example", source="bazset")]
+        for r in rows[:2]:
+            r["repo"] = "MiSTer-devel/Arcade-ExampleGame"
+        self.assertEqual(mz._public_arcade_labels(rows, {"examplej": {"parent": "example"}}, {}, {}), {})
+
+    def test_unpinned_prototype_pair_labels_groups_and_keeps_raw_search_name(self):
+        rows = [self.row("Example.- Game (set 1)", "example", source="kuzecores"),
+                self.row("Example. - Game (Japan, Prototype)", "examplep", source="coinop")]
+        meta = {"example": {"desc": "Example: Game (set 1)"},
+                "examplep": {"parent": "example", "desc": "Example: Game (Japan, Prototype)"}}
+        data = self.label(rows, [mz._arcade_base(r["title"]) for r in rows], meta)
+        self.assertEqual([d["title"] for d in data],
+                         ["Example: Game (kuzearcade)", "Example: Game (Coin-Op)"])
+        self.assertEqual([d["g"] for d in data], ["example", "example"])
+        self.assertEqual([d["mt"] for d in data], [r["title"] for r in rows])
 
     def test_distinct_editions_keep_qualifiers_when_source_labels_would_collide(self):
         rows = [self.row(f"Quiz (Edition {edition})", f"quiz{edition}", source=source)

@@ -43,7 +43,8 @@ function siteSameBuild(copy, original) {
 // "Power Spikes (asturur)". Every source whose rows can carry one must be
 // listed, or its singleton rows keep the label after Ongo's copy folds in
 // (tools/source_visibility.test.js checks the published data for that).
-const SITE_SOURCE_LABELS = { coinop: 'Coin-Op', jtbindb: 'Jotego', meathax: 'Meathax',
+const SITE_SOURCE_LABELS = { distribution_mister: 'MiSTer-devel',
+  coinop: 'Coin-Op', jtbindb: 'Jotego', meathax: 'Meathax',
   rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
   blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
   tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk',
@@ -150,4 +151,19 @@ function siteSourceRows(rows) {
     : row));
 }
 
-if (typeof module !== 'undefined') module.exports = { siteSourceRows, siteGameTitle, siteRenamedMirror, siteSameBuild, SITE_SOURCE_LABELS };
+function siteUpdateChanges(before, after, hideMature = false) {
+  // Apply the same permanent visibility rules to both snapshots. Saved-link
+  // aliases are navigation targets, not row identity: a hidden mirror's build
+  // date must never be compared with the original that inherits its link.
+  const visible = rows => siteSourceRows(rows).filter(r => r.k && !(hideMature && r.mat));
+  const previous = new Map(visible(before).map(r => [r.k, r]));
+  const fresh = [], built = [], keys = [];
+  for (const r of visible(after)) {
+    const old = previous.get(r.k);
+    if (!old) { fresh.push(r.title); keys.push(r.k); }
+    else if ((old.updated || '') !== (r.updated || '')) { built.push(r.title); keys.push(r.k); }
+  }
+  return { fresh, built, keys };
+}
+
+if (typeof module !== 'undefined') module.exports = { siteSourceRows, siteGameTitle, siteRenamedMirror, siteSameBuild, siteUpdateChanges, SITE_SOURCE_LABELS };

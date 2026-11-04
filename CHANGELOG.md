@@ -4,6 +4,10 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Live refresh alerts now compare visible entries consistently, preventing hidden mirror copies from being falsely announced as updated. Real new entries and build-date changes still produce alerts.
+
+- Games available on several cores now use “(MiSTer-devel)” when the Distribution core's name merely repeats the game title. Naming and grouping share the same matching rule, including punctuation differences and meaningful variants; E.D.F.'s two implementations now appear together.
+
 - When an early-access core goes public, both public versions of the same game now receive source labels even if their filenames use different punctuation. Matching uses ROM identity, preserving saved links and launch paths.
 
 - Game-title qualifiers now use the shorter “(Coin-Op)”; the source menu keeps the full “Coin-Op Collection” name.

@@ -1,8 +1,81 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { siteSourceRows, SITE_SOURCE_LABELS } = require('../docs/releases/source-visibility');
+const { siteSourceRows, siteUpdateChanges, SITE_SOURCE_LABELS } = require('../docs/releases/source-visibility');
 const row = (src, sn, title = 'Game', family = sn, extra = {}) =>
   ({ src, sn, title, family, base: 'Arcade', ...extra });
+
+const noChanges = { fresh: [], built: [], keys: [] };
+
+test('update alerts ignore hidden mirrors with different dates, additions and removals', () => {
+  const original = row('ppriest', 'game', 'Game (ppriest)', 'game',
+    { k: 'original', core: 'Board', updated: '2026-01-01' });
+  const copy = { ...original, src: 'ongo', k: 'mirror', title: 'Game (Ongo)', updated: '2026-01-02' };
+  const before = [original, copy], serialized = JSON.stringify(before);
+  assert.deepEqual(siteUpdateChanges(before, before), noChanges);
+  assert.deepEqual(siteUpdateChanges(before, [original, { ...copy, updated: '2026-01-03' }]), noChanges);
+  assert.deepEqual(siteUpdateChanges(before, [original]), noChanges);
+  assert.deepEqual(siteUpdateChanges([original], before), noChanges);
+  assert.deepEqual(siteUpdateChanges([...before].reverse(), before), noChanges);
+  assert.equal(JSON.stringify(before), serialized);
+});
+
+test('a real visible update is counted once and targets the original row key', () => {
+  const original = row('ppriest', 'game', 'Game (ppriest)', 'game',
+    { k: 'original', core: 'Board', updated: '2026-01-01' });
+  const copy = { ...original, src: 'ongo', k: 'mirror', title: 'Game (Ongo)', updated: '2026-01-02' };
+  const after = [{ ...original, updated: '2026-01-03' }, { ...copy, updated: '2026-01-04' }];
+  assert.deepEqual(siteUpdateChanges([original, copy], after),
+    { fresh: [], built: ['Game'], keys: ['original'] });
+  assert.deepEqual(siteUpdateChanges([], after),
+    { fresh: ['Game'], built: [], keys: ['original'] });
+});
+
+test('a newly visible fallback is new, not an update to the row its link formerly targeted', () => {
+  const original = row('ppriest', 'game', 'Game (ppriest)', 'game',
+    { k: 'original', updated: '2026-01-01' });
+  const copy = { ...original, src: 'ongo', k: 'mirror', title: 'Game (Ongo)', updated: '2026-01-02' };
+  assert.deepEqual(siteUpdateChanges([original, copy], [copy]),
+    { fresh: ['Game'], built: [], keys: ['mirror'] });
+});
+
+test('cosmetic names, aliases and grouping changes do not produce release alerts', () => {
+  const original = row('distribution_mister', 'game', 'Game (World)', 'game',
+    { k: 'original', updated: '2026-01-01' });
+  const other = row('bazset', 'game', 'Game', 'game', { k: 'other', updated: '2026-01-02' });
+  const after = [{ ...original, title: 'Game (MiSTer-devel)', mt: original.title, g: 'game' },
+    { ...other, title: 'Game (bazset)', mt: other.title, g: 'game' }];
+  assert.deepEqual(siteUpdateChanges([original, other], after), noChanges);
+});
+
+test('update alerts honor mature visibility after mirror folding', () => {
+  const adult = row('ppriest', 'adult', 'Adult Game', 'adult',
+    { k: 'adult', mat: true, updated: '2026-01-01' });
+  const copy = { ...adult, src: 'ongo', k: 'copy', mat: false };
+  const after = [{ ...adult, updated: '2026-01-02' }, { ...copy, updated: '2026-01-03' }];
+  assert.deepEqual(siteUpdateChanges([adult, copy], after, true), noChanges);
+  assert.deepEqual(siteUpdateChanges([adult, copy], after, false),
+    { fresh: [], built: ['Adult Game'], keys: ['adult'] });
+  assert.deepEqual(siteUpdateChanges([], after, true), noChanges);
+});
+
+test('Ongo-only originals and standalone cores still announce real releases', () => {
+  const primary = row('ongo', 'game', 'Game (Ongo)', 'game',
+    { k: 'primary', repo: 'kyledlester/Game', updated: '2026-01-01' });
+  const other = row('ppriest', 'game', 'Game (ppriest)', 'game', { k: 'other', updated: '2026-01-01' });
+  const console = { k: 'console', title: 'Console', base: 'Console', updated: '2026-01-01' };
+  const after = [{ ...primary, updated: '2026-01-02' }, other, console];
+  assert.deepEqual(siteUpdateChanges([primary, other], after),
+    { fresh: ['Console'], built: ['Game (Ongo)'], keys: ['primary', 'console'] });
+});
+
+test('update comparison ignores unlinked rows and treats absent dates consistently', () => {
+  const unknown = { title: 'Unlinked', updated: '2026-01-01' };
+  const core = { k: 'core', title: 'Core', base: 'Computer' };
+  assert.deepEqual(siteUpdateChanges([unknown, core], [{ ...unknown, updated: '2026-01-02' },
+    { ...core, updated: '' }]), noChanges);
+  assert.deepEqual(siteUpdateChanges([core], [{ ...core, updated: '2026-01-02' }]),
+    { fresh: [], built: ['Core'], keys: ['core'] });
+});
 
 test('Meathax Simpsons launchers show their player counts without changing launch identity', () => {
   const variants = [row('meathax', 'simpsons2p', 'The Simpsons', 'simpsons',
@@ -46,6 +119,32 @@ test('cleanup retains multiple implementations, unknown labels and meaningful qu
   assert.deepEqual(siteSourceRows([a, collision]), [a, collision]);
   const unknown = { ...a, sn: '', family: '' };
   assert.deepEqual(siteSourceRows([unknown]), [unknown]);
+});
+
+test('Distribution fallback suffix follows mirror removal and preserves saved aliases', () => {
+  const original = row('distribution_mister', 'game', 'Game (MiSTer-devel)', 'game',
+    { g: 'game', mt: 'Game (World)', core: 'GameCore', k: 'original', mra: '_Arcade/Game.mra' });
+  const mirror = { ...original, src: 'ongo', title: 'Game (Ongo)', k: 'mirror' };
+  const input = [original, mirror], before = JSON.stringify(input);
+  const result = siteSourceRows(input);
+  assert.deepEqual(result, [{ ...original, title: 'Game', siteAliases: ['mirror'], alsoOngo: true }]);
+  assert.deepEqual(siteSourceRows([...input].reverse()), result);
+  assert.deepEqual(siteSourceRows(result), result);
+  assert.equal(JSON.stringify(input), before);
+  const other = row('bazset', 'game', 'Game (bazset)', 'game', { core: 'OtherCore', k: 'other' });
+  assert.deepEqual(siteSourceRows([...input, other]),
+    [{ ...original, siteAliases: ['mirror'], alsoOngo: true }, other]);
+});
+
+test('Distribution suffix cleanup leaves useful core and creator labels intact', () => {
+  for (const label of ['rmonic79', 'Deco16']) {
+    const original = row('distribution_mister', 'game', `Game (${label})`, 'game',
+      { k: 'original', core: 'GameCore' });
+    const mirror = { ...original, src: 'ongo', title: 'Game (Ongo)', k: 'mirror' };
+    assert.deepEqual(siteSourceRows([original]), [original]);
+    assert.deepEqual(siteSourceRows([original, mirror]),
+      [{ ...original, siteAliases: ['mirror'], alsoOngo: true }]);
+  }
 });
 
 test('one listed build drops its label, two builds keep theirs', () => {

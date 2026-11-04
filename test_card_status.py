@@ -443,3 +443,34 @@ class SameGameGroupTests(unittest.TestCase):
         mz.attach_same_game_groups(b, self.META)
         self.assertEqual(sorted((d["title"], d.get("g")) for d in a),
                          sorted((d["title"], d.get("g")) for d in b))
+
+    def test_pinned_variants_get_distinct_group_ids_in_either_order(self):
+        pins = {"wide": "Game (Wide)", "narrow": "Game (Narrow)"}
+        rows = [self.web("Game", sn, src, src + "_core")
+                for sn in pins for src in ("jtbindb", "coinop")]
+        for ordered in (rows, list(reversed(rows))):
+            with mock.patch.dict(mz.ARCADE_TITLES, pins):
+                self.assertEqual(mz.attach_same_game_groups(ordered, {"narrow": {"parent": "wide"}}), 2)
+            self.assertEqual({(d["sn"], d["g"]) for d in ordered},
+                             {("wide", "wide-game-wide"), ("narrow", "wide-game-narrow")})
+
+    def test_group_id_tiebreaker_preserves_other_unambiguous_group_links(self):
+        pins = {"wide": "Game (Wide)", "narrow": "Game (Narrow)"}
+        reserved = "wide-game-narrow"
+        rows = [self.web("Game", sn, src, src + "_core")
+                for sn in (*pins, reserved) for src in ("jtbindb", "coinop")]
+        expected = {("wide", "wide-game-wide"), ("narrow", "wide-game-narrow-narrow"),
+                    (reserved, reserved)}
+        for ordered in (rows, list(reversed(rows))):
+            with mock.patch.dict(mz.ARCADE_TITLES, pins):
+                self.assertEqual(mz.attach_same_game_groups(ordered, {"narrow": {"parent": "wide"}}), 3)
+            self.assertEqual({(d["sn"], d["g"]) for d in ordered}, expected)
+
+    def test_unambiguous_legacy_group_slugs_stay_stable(self):
+        rows = [self.web(title, sn, src, src + "_core")
+                for sn, title in (("wide", "Original Wide"), ("narrow", "Original Narrow"))
+                for src in ("jtbindb", "coinop")]
+        with mock.patch.dict(mz.ARCADE_TITLES, {"wide": "Game (Wide)", "narrow": "Game (Narrow)"}):
+            self.assertEqual(mz.attach_same_game_groups(rows, {"narrow": {"parent": "wide"}}), 2)
+        self.assertEqual({(d["sn"], d["g"]) for d in rows},
+                         {("wide", "wide-original-wide"), ("narrow", "wide-original-narrow")})

@@ -1711,7 +1711,7 @@
 </dialog>
 <script src="../lists/lists.js?v=c7502c4e44"></script>
 <script src="custom-lists.js?v=aa1878eddb"></script>
-<script src="./source-visibility.js?v=10"></script>
+<script src="./source-visibility.js?v=12"></script>
 <script src="./filter-memory.js?v=1"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=7"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
@@ -6773,18 +6773,12 @@ function check() {
 window.mzCheck = check;  // hook for testing a swap without waiting for a publish
 
 // What just landed: { text } for the pill and { keys } for its jump, or null if
-// there's nothing a visitor would care about. Compares against the rows on screen (KEY2ROW) — this
-// answers "what changed just now", where the divider answers "what's new since
-// you last looked".
+// there's nothing a visitor would care about. Compare the previous and incoming
+// catalogues through the same site visibility rules, independent of temporary
+// search/source filters. This answers "what changed just now", where the divider
+// answers "what's new since you last looked".
 function diffNews(d) {
-  const fresh = [], built = [], keys = [];
-  for (const r of d) {
-    // a row Mature games -> Hide keeps out of the list is no news here
-    if (!r.k || (r.mat && matMode === 'hide')) continue;
-    const old = KEY2ROW[r.k];
-    if (!old) { fresh.push(r.title); keys.push(r.k); }
-    else if ((old.updated || '') !== (r.updated || '')) { built.push(r.title); keys.push(r.k); }
-  }
+  const { fresh, built, keys } = siteUpdateChanges(RAW, d, matMode === 'hide');
   if (!fresh.length && !built.length) return null;
   // both kinds at once: counts only. Naming two sets in one pill is a mouthful,
   // and the divider is about to show exactly which rows they are.

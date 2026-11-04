@@ -4056,14 +4056,14 @@ def attach_arcade_patches(data, meta, doc=None):
 def attach_same_game_groups(data, meta):
     """Stamp `g` on arcade rows that are one game shipped on several cores,
     so the site can fold them under one umbrella row. Same game = same MAME
-    setname, or same one-hop MAME parent AND same base title (the rule
-    distribution_takeovers already uses; family alone would merge G-LOC with
-    its R360 clone, base title alone would merge Squash on Gaelco with Squash
-    on Bagman hardware). A group must span two distinct (source, core) pairs:
+    setname, or same one-hop MAME parent AND same punctuation-insensitive name,
+    preserving meaningful title pins just as the labeler does. Family alone
+    would merge G-LOC with its R360 clone; name alone would merge unrelated
+    games. A group must span two distinct (source, core) pairs:
     a single core listing two revisions of one set (Asteroids Deluxe green and
     orange, Kickle Cubicle and Meikyu Jima) is a deliberate variant listing,
     not a game on several cores. `g` is the shared parent setname; two groups
-    under one parent (none today) get the base title slugged on. Deterministic
+    under one parent get distinct title slugs. Deterministic
     from sorted inputs, so data.json bytes do not churn between quiet runs."""
     def root(sn):
         return (meta.get(sn) or {}).get("parent") or sn
@@ -4081,7 +4081,7 @@ def attach_same_game_groups(data, meta):
     seen = {}
     for i, d in enumerate(rows):
         sn = d["sn"].lower()
-        for key in (("sn", sn), ("fam", root(sn), _same_game_key(d.get("mt") or d["title"]))):
+        for key in _arcade_title_game_keys(d.get("mt") or d["title"], sn, meta):
             j = seen.setdefault(key, i)
             if j != i:
                 parent[find(i)] = find(j)
@@ -4094,12 +4094,33 @@ def attach_same_game_groups(data, meta):
             continue
         kept.append((root(grp[0]["sn"].lower()), grp))
     by_root = Counter(r for r, _ in kept)
-    n = 0
-    for r, grp in sorted(kept, key=lambda t: t[0]):
+    # Keep established identifiers wherever their old raw-title slug is unique.
+    # Full pinned names can split groups whose raw titles are identical; their
+    # IDs must preserve that distinction too, or the browser merges them again.
+    proposed = []
+    for r, grp in sorted(kept, key=lambda t: (t[0], t[1][0]["sn"].lower())):
         g = r
         if by_root[r] > 1:
             base = _arcade_base(grp[0].get("mt") or grp[0]["title"]).casefold()
             g = r + "-" + re.sub(r"[^a-z0-9]+", "-", base).strip("-")
+        proposed.append((r, g, grp))
+    counts = Counter(g for _, g, _ in proposed)
+    used = {g for g, count in counts.items() if count == 1}
+    n = 0
+    for r, g, grp in proposed:
+        if counts[g] > 1:
+            first = grp[0]
+            sn = first["sn"].lower()
+            name = _arcade_identity_title(first.get("mt") or first["title"], sn)
+            slug = re.sub(r"[^a-z0-9]+", "-", name.casefold()).strip("-") or sn
+            g = r + "-" + slug
+            if g in used:
+                stem = g + "-" + sn
+                g, suffix = stem, 2
+                while g in used:
+                    g = f"{stem}-{suffix}"
+                    suffix += 1
+            used.add(g)
         for d in grp:
             d["g"] = g
         n += len(grp)
@@ -5025,9 +5046,6 @@ ARCADE_TITLES = {
                                            # MRA and the US name are Bonk's Adventure
     "gforce2": "Galaxy Force II",          # DAT says "Galaxy Force 2"; the marquee and the
                                            # MRA use the numeral
-    "edfp": "E.D.F.: Earth Defense Force (Coin-Op)",  # the prototype on Coin-Op's
-                                           # Mega System 1 core; kuzecores' edf keeps the bare
-                                           # name (the Black Heart convention)
     # TomSVR: two unrelated games MAME both calls "Jumping Pop" (ESD 2001,
     # Nics 1992), and Miss Puzzle on its own board and on Gumbo's. Left to
     # the collision rule they kept raw MRA names with a " [TomSVR]" suffix.
@@ -5137,17 +5155,38 @@ def _same_game_base(r, arcade_meta):
     return _ideal_arcade_title(_arcade_base(r["title"]), r["setname"], arcade_meta)
 
 
-def _arcade_title_game_keys(r, arcade_meta):
+def _same_game_label(r, arcade_meta, fork_info, repo_maps):
+    """Use a Distribution fallback only for a redundant automatic repo/core name."""
+    label = _core_label(r, fork_info, repo_maps)
+    if (r["source_id"] != "distribution_mister" or not label
+            or norm_key(label) != norm_key(_same_game_base(r, arcade_meta))):
+        return label
+    if (r["rbf"] or "").strip().lower() in CORE_LABELS:
+        return label  # an explicit override wins, even when it repeats the name
+    repo = (r["repo"] or "").strip() or (repo_maps.get("arcade") or {}).get(
+        (r["rbf"] or "").strip().lower(), "")
+    fi = (fork_info or {}).get(repo.lower())
+    if fi is not None and fi["is_fork"] and fi["parent_owner"]:
+        return label  # retain actual fork-owner attribution
+    return "MiSTer-devel"
+
+
+def _arcade_identity_title(title, sn):
+    """Keep hardware/edition pins intact when identifying a game."""
+    return ARCADE_TITLES.get((sn or "").lower()) or _arcade_base(title)
+
+
+def _arcade_title_game_keys(title, sn, arcade_meta):
     """Exact ROM identity, or family plus a punctuation-insensitive name.
 
     Preserve full pinned titles in the family key: their qualifiers can
     distinguish hardware variants. A family alone can contain distinct games.
     """
-    sn = (r["setname"] or "").lower()
+    sn = (sn or "").lower()
     if not sn:
         return set()
     root = (arcade_meta.get(sn) or {}).get("parent") or sn
-    name = ARCADE_TITLES.get(sn) or _arcade_base(r["title"])
+    name = _arcade_identity_title(title, sn)
     name = re.sub(r"[^a-z0-9]+", "", name.casefold())
     keys = {("sn", sn)}
     if name:
@@ -5172,7 +5211,7 @@ def _public_arcade_labels(rows, arcade_meta, fork_info, repo_maps):
 
     seen = {}
     for i, r in enumerate(public):
-        for key in _arcade_title_game_keys(r, arcade_meta):
+        for key in _arcade_title_game_keys(r["title"], r["setname"], arcade_meta):
             j = seen.setdefault(key, i)
             parents[find(i)] = find(j)
     groups = {}
@@ -5193,7 +5232,7 @@ def _public_arcade_labels(rows, arcade_meta, fork_info, repo_maps):
         (arcade_meta.get(r["setname"].lower()) or {}).get("parent") or r["setname"].lower()
         for r in grp}) == 1]
     for grp in groups.values():
-        labels = [_core_label(r, fork_info, repo_maps) for r in grp]
+        labels = [_same_game_label(r, arcade_meta, fork_info, repo_maps) for r in grp]
         if (len({r["source_id"] for r in grp if r["source_id"] != "ongo"}) >= 2
                 and len(set(labels)) == len(labels)):
             split_groups.append(grp)
@@ -5202,7 +5241,7 @@ def _public_arcade_labels(rows, arcade_meta, fork_info, repo_maps):
     for grp in split_groups:
         if len({r["source_id"] for r in grp}) < 2:
             continue
-        labels = [_core_label(r, fork_info, repo_maps) for r in grp]
+        labels = [_same_game_label(r, arcade_meta, fork_info, repo_maps) for r in grp]
         if (any(not label for label in labels) or len(set(labels)) != len(labels)
                 or any(norm_key(label) == norm_key(_same_game_base(r, arcade_meta))
                        for r, label in zip(grp, labels))):
@@ -5239,17 +5278,17 @@ def _label_gated_arcade_titles(rows, arcade_titles, arcade_meta, fork_info, repo
     public_games, public_titles = set(), set()
     for r in rows:
         if r["system"] == "arcade" and not r["beta"]:
-            public_games.update(_arcade_title_game_keys(r, arcade_meta))
+            public_games.update(_arcade_title_game_keys(r["title"], r["setname"], arcade_meta))
             public_titles.add(arcade_titles[(r["source_id"], r["path"])][0])
     for r in rows:
         if r["system"] != "arcade" or not r["beta"]:
             continue
         key = (r["source_id"], r["path"])
         title, _ = arcade_titles[key]
-        same_game = bool(_arcade_title_game_keys(r, arcade_meta) & public_games)
+        same_game = bool(_arcade_title_game_keys(r["title"], r["setname"], arcade_meta) & public_games)
         if not same_game and title not in public_titles:
             continue
-        label = _core_label(r, fork_info, repo_maps)
+        label = _same_game_label(r, arcade_meta, fork_info, repo_maps)
         base = _same_game_base(r, arcade_meta) if same_game else title
         if not label or norm_key(label) == norm_key(base):
             log(f"  duplicate title {title!r}: gated row kept it (label {label!r}) [{r['source_id']}]")

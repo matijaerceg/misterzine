@@ -3085,7 +3085,7 @@
       "hbmame_set"
      ]
     ],
-    "how": "A small tool combines your Collection disc image and arcade romsets, and writes the finished HBMAME sets and MiSTer files, including the CPS+ core.",
+    "how": "A small tool combines your Collection disc image and arcade romsets, and writes the finished HBMAME sets and MiSTer files, including the CPS+ core. The same set ZIPs also run in FBNeo.",
     "kit_command": "python3 apply.py --iso collection.iso --rompath roms --out-dir out",
     "kit_dir": "tools/vsa_arrange_builder",
     "requires": [
@@ -3160,7 +3160,7 @@
      "label": "About CPS-2+ hardware",
      "url": "../cps2-plus/"
     },
-    "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver. They don't run on the standard jtCPS2 core or in stock MAME."
+    "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver, or a current FBNeo, which has these sets built in. They don't run on the standard jtCPS2 core or in stock MAME."
    },
    "screenshots": [
     {
@@ -3232,7 +3232,7 @@
       "hbmame_set"
      ]
     ],
-    "how": "A small tool reads the Arrange edition from your PlayStation 2 disc image, combines it with your arcade romsets, and writes out the finished sets for MiSTer and HBMAME, with the CPS+ core for MiSTer. It also builds the shared Vampire Arrange music pack for MiSTer.",
+    "how": "A small tool reads the Arrange edition from your PlayStation 2 disc image, combines it with your arcade romsets, and writes out the finished sets for MiSTer and HBMAME, with the CPS+ core for MiSTer. The same set ZIPs also run in FBNeo. It also builds the shared Vampire Arrange music pack for MiSTer.",
     "kit_command": "python3 apply.py --iso \"Vampire Darkstalkers Collection.iso\" \\\n                 --rompath roms --out-dir out",
     "kit_dir": "tools/vamparrange_builder",
     "requires": [
@@ -3288,7 +3288,7 @@
      "label": "About CPS-2+ hardware",
      "url": "../cps2-plus/"
     },
-    "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver. They don't run on the standard jtCPS2 core or in stock MAME."
+    "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver, or a current FBNeo, which has these sets built in. They don't run on the standard jtCPS2 core or in stock MAME."
    },
    "screenshots": [
     {
@@ -3362,7 +3362,7 @@
       "hbmame_set"
      ]
     ],
-    "how": "A small tool reads the Arrange edition from your PlayStation 2 disc image, combines it with your arcade romsets, and writes out the finished sets for MiSTer and HBMAME, with the CPS+ core for MiSTer. It also builds the shared Vampire Arrange music pack for MiSTer.",
+    "how": "A small tool reads the Arrange edition from your PlayStation 2 disc image, combines it with your arcade romsets, and writes out the finished sets for MiSTer and HBMAME, with the CPS+ core for MiSTer. The same set ZIPs also run in FBNeo. It also builds the shared Vampire Arrange music pack for MiSTer.",
     "kit_command": "python3 apply.py --iso \"Vampire Darkstalkers Collection.iso\" \\\n                 --rompath roms --out-dir out",
     "kit_dir": "tools/vamparrange_builder",
     "requires": [
@@ -3421,7 +3421,7 @@
      "label": "About CPS-2+ hardware",
      "url": "../cps2-plus/"
     },
-    "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver. They don't run on the standard jtCPS2 core or in stock MAME."
+    "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver, or a current FBNeo, which has these sets built in. They don't run on the standard jtCPS2 core or in stock MAME."
    },
    "screenshots": [
     {

@@ -1346,7 +1346,7 @@
       "fbneo": {
        "renames": {
         "sfx.01": "sfxuc.01",
-        "sfx.02": "sfx.02",
+        "sfx.02": "sfxuc.02",
         "sfx.09": "sfxuc.09",
         "sfx.11m": "sfx.11m",
         "sfx.12m": "sfx.12m",
@@ -1376,6 +1376,7 @@
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
         "sfx.01": "sfx.01",
+        "sfx.02": "sfx.02",
         "sfx.09": "sfx.09",
         "sfx.13m": "sfx.13m",
         "sfx.14m": "sfx.14m",
@@ -1413,7 +1414,7 @@
       "fbneo": {
        "renames": {
         "sfx.01": "sfxuc.01",
-        "sfx.02": "sfx.02",
+        "sfx.02": "sfxuc.02",
         "sfx.09": "sfxuc.09",
         "sfx.11m": "sfx.11m",
         "sfx.12m": "sfx.12m",
@@ -1443,6 +1444,7 @@
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
         "sfx.01": "sfx.01",
+        "sfx.02": "sfx.02",
         "sfx.09": "sfx.09",
         "sfx.13m": "sfx.13m",
         "sfx.14m": "sfx.14m",
@@ -1489,8 +1491,8 @@
     "Console mode with Arcade, Versus, Training and Options on the title screen; GAME MODE in EX CONFIGURATION selects Console or Arcade",
     "Versus against another player or a computer, with handicaps, stage selection, win counts and match results",
     "Training with computer actions, guard and Super gauge settings, delayed health recovery, Restart and Change Character",
-    "Option Mode for difficulty, game speed, round count and stereo or mono sound; Coin pauses play in Console mode",
-    "EX CONFIGURATION in the operator menu: Console or Arcade mode; Japanese or international names; ORIGINAL, 30TH ANNIVERSARY or ULTRA SF2 artwork; and BONUS STAGE on or off. 30TH ANNIVERSARY, the default, uses the 30th Anniversary Collection's Hong Kong flag, Chun-Li's storefront signs and Guile's stage, with the red-winged runway emblem. Settings are saved between sessions. On EXIT, press 1P Start to save and return",
+    "Option Mode for difficulty, time limit on or off, game speed (including NORMAL, slower than Turbo 1), round count and stereo or mono sound; Coin pauses play in Console mode",
+    "EX CONFIGURATION in the operator menu: Console or Arcade mode; Japanese or international names; ORIGINAL, 30TH ANNIVERSARY or ULTRA SF2 artwork; BONUS STAGE on or off; and TIME LIMIT on or off. 30TH ANNIVERSARY, the default, uses the 30th Anniversary Collection's Hong Kong flag, Chun-Li's storefront signs and Guile's stage, with the red-winged runway emblem. Settings are saved between sessions. On EXIT, press 1P Start to save and return",
     "ULTRA SF2 artwork follows Ultra Street Fighter II's stages: its runway emblem and a gold can on Guile's stage, Chun-Li's storefront without its signs, a red sun on E. Honda's bathhouse mural and a plain floor on Zangief's stage, with the 30th Anniversary Hong Kong flag and RUSSIA for Zangief's country",
     "Tournament Battle: with the link adapter, eight players and three matches across linked cabinets, with the Akuma and random-select cells on its select screen; without it, the game plays normally",
     "A new title screen with an EX mark",
@@ -1587,7 +1589,7 @@
      ]
     ]
    },
-   "date": "2026-10-30",
+   "date": "2026-11-03",
    "description": [
     "Super Turbo is the version competitive players swear by, but it left things behind. The bonus stages from Super Street Fighter II were gone. Shin Akuma was a hidden boss you had to earn, and Ten Akuma only turned up years later at home. Tournament Battle, the eight-player linked-cabinet mode, stayed with the earlier Super Street Fighter II.",
     "EX puts it together on the arcade game. Akuma has his own select-screen cell, with Shin and Ten available through codes there; the original Ryu codes still work. A random-select cell sits opposite him. The car, the falling barrels and the oil drums are back between fights. Link cabinets with the adapter and it runs Tournament Battle; without it, it plays as normal. Every fighter gets two more colors, Akuma and Shin Akuma get their colors from Ultra Street Fighter II, the move names are the modern ones, and the title screen carries an EX mark.",
@@ -1639,6 +1641,25 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-03",
+     "items": [
+      "TIME LIMIT in Option Mode and EX CONFIGURATION. With it off, the clock shows ∞ and rounds end only by KO.",
+      "A NORMAL game speed, slower than Turbo 1, in Option Mode, Training and the operator menu.",
+      "Two-player Versus has no countdown on the select screen.",
+      "Versus and Training play the Arcade select theme, and the theme loops its main section instead of restarting.",
+      "LP confirms on the Console title screen as well as Start.",
+      "The first fighter preview shows the EX colors straight away, and the attract-mode previews follow the color setting.",
+      "Player 1’s cursor appears in Training when SPEED SELECT is on.",
+      "Start works again after leaving the operator menu.",
+      "M. Bison’s defeated portrait in Versus uses his own colors.",
+      "Flags no longer cover Fei Long’s and Zangief’s select portraits with the 30th Anniversary and Ultra artwork.",
+      "Versus skips the arcade score tally after a KO.",
+      "Fast music plays at low health in one-round matches.",
+      "Background tiles no longer blink in on Blanka’s and Boxer’s stages."
+     ],
+     "version": "rc13"
+    },
     {
      "date": "2026-10-30",
      "items": [
@@ -1799,7 +1820,7 @@
    "subtitle": "Enhanced version",
    "summary": "Japan's Super Turbo with Shin and Ten Akuma, the bonus stages, Tournament Battle, extra colors, and Console modes for Versus and Training. In English or Japanese.",
    "title": "Super Street Fighter II EX",
-   "version": "rc12"
+   "version": "rc13"
   },
   {
    "artifact": {
@@ -2035,9 +2056,11 @@
       "hbmame": {
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
+        "mvs.01": "mvs.01",
         "mvs.05h": "mvs.05h",
         "mvs.06a": "mvs.06a",
         "mvs.07b": "mvs.07b",
+        "mvs.09b": "mvs.09b",
         "mvs.10b": "mvs.10b",
         "mvs.13m": "mvs.13m",
         "mvs.15m": "mvs.15m",
@@ -2051,6 +2074,7 @@
       "key": "usa",
       "label": "USA",
       "mra": {
+       "base": "data/mra/mshvsf-ex-usa.mra",
        "filename": "Marvel Super Heroes Vs. Street Fighter EX (USA).mra",
        "name": "Marvel Super Heroes Vs. Street Fighter EX (USA)",
        "region": "USA",
@@ -2062,9 +2086,11 @@
       "hbmame": {
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
+        "mvs.01": "mvs.01",
         "mvs.05h": "mvs.05h",
         "mvs.06a": "mvs.06a",
         "mvs.07b": "mvs.07b",
+        "mvs.09b": "mvs.09b",
         "mvs.10b": "mvs.10b",
         "mvs.13m": "mvs.13m",
         "mvs.15m": "mvs.15m",
@@ -2078,6 +2104,7 @@
       "key": "japan",
       "label": "Japan",
       "mra": {
+       "base": "data/mra/mshvsf-ex-japan.mra",
        "filename": "Marvel Super Heroes Vs. Street Fighter EX (Japan).mra",
        "name": "Marvel Super Heroes Vs. Street Fighter EX (Japan)",
        "region": "Japan",
@@ -2090,7 +2117,7 @@
    },
    "changes": [
     "Norimaro in both builds, with his own ending",
-    "Cyber-Akuma and Apocalypse playable: hold Start on Akuma, or on Norimaro. Their special moves work on the Easy control setting too",
+    "Cyber-Akuma and Apocalypse playable, each with a spot on the select screen. Their special moves work on the Easy control setting too",
     "Hidden characters with a two-second Start hold; the old codes still work",
     "Any team, including the same fighter twice, in a different color (one Apocalypse per match, so his stage stays intact)",
     "Every ending in both languages, including Mech-Zangief's, Shadow's and Dark Sakura's",
@@ -2099,8 +2126,13 @@
     "U.S. Agent, Mephisto and Shadow get their names in the fight HUD, which the original game leaves blank",
     "M. Bison's Hyper Combo is Knee Press Nightmare in every region, the name Capcom has used since Alpha 3",
     "Two extra colors per fighter from the Saturn version: pick your fighter with HP or HK; the selected color appears in portraits, intros, special moves and hypers",
-    "Versus names are centered and spaced, with two lines for long hidden names; selected names stay visible above the fighters",
+    "Versus names in the arcade lettering, centered, with two lines when long names would crowd the middle; selected names stay visible above the fighters",
     "Eight game speeds instead of three",
+    "Console mode with Arcade, Versus, Training and Options on the title screen; MiSTer starts in Console mode, and GAME MODE in the service menu's EX page selects Console or Arcade",
+    "Versus: against a friend or the computer, with a stage choice, then Rematch or Change Characters with the wins kept",
+    "Training: set the computer's action and guard, both gauges, speed and stage; restart or change characters from the pause menu",
+    "Options: difficulty, speed, damage, sound, and a time limit of 25, 50, 75 or 99 seconds, or none",
+    "Pause any Console fight with Coin, or by holding Start",
     "USA and Japan builds, both with Free Play",
     "Gameplay untouched"
    ],
@@ -2151,13 +2183,19 @@
       "Cyber-Akuma",
       "Boss only",
       "Boss only",
-      "Playable, hold Start on Akuma"
+      "Playable, on the select screen"
      ],
      [
       "Apocalypse",
       "Boss only",
       "Boss only",
-      "Playable, hold Start on Norimaro"
+      "Playable, on the select screen"
+     ],
+     [
+      "Versus and Training modes",
+      "No",
+      "No",
+      "Yes, in Console mode"
      ],
      [
       "Same fighter twice",
@@ -2197,17 +2235,18 @@
      ]
     ]
    },
-   "date": "2026-10-11",
+   "date": "2026-11-03",
    "description": [
     "Marvel Super Heroes vs. Street Fighter kept a lot from you. Outside Japan there was no Norimaro. Nowhere could you play as Cyber-Akuma or Apocalypse, or put the same fighter on a team twice. The console ports later added extra colors and more speeds, but only at home.",
-    "EX gives the arcade game all of it. Norimaro is on the select screen in both builds, with his own ending. Hold Start on any fighter for two seconds and their hidden version appears, no codes needed, though the old codes still work. Any two fighters make a team. Cyber-Akuma and Apocalypse are playable too: hold Start on Akuma for one, on Norimaro for the other. Every fighter gets the Saturn version's two extra colors, on the HP and HK buttons, and the service menu goes from three speeds to eight.",
+    "EX gives the arcade game all of it. Norimaro is on the select screen in both builds, with his own ending. Hold Start on any fighter for two seconds and their hidden version appears, no codes needed, though the old codes still work. Any two fighters make a team. Cyber-Akuma and Apocalypse are playable too, each with a spot on the select screen. Every fighter gets the Saturn version's two extra colors, on the HP and HK buttons, and the service menu goes from three speeds to eight.",
+    "Console mode gives the game a home-style title menu: Arcade, Versus against a friend or the computer, Training, and Options with a time limit setting. The MiSTer MRAs start in Console mode; MAME and HBMAME start in Arcade mode, and GAME MODE in the service menu's EX page switches between them.",
     "The fighting itself is untouched: no changes to moves, damage, hitboxes or the computer. The USA build also gets a new translation, straight from the Japanese: sixteen win quotes per fighter instead of eight, and every ending retold. It comes in two builds, USA and Japan, both with Free Play, and runs in MAME, HBMAME and on MiSTer.",
     "This is a release candidate."
    ],
    "game": "Marvel Super Heroes vs. Street Fighter (Japan 970707)",
    "hardware": "Capcom CPS-2",
    "mra": {
-    "base": "data/mra/mshvsfj.mra",
+    "base": "data/mra/mshvsf-ex-usa.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "mraauthor": "jotego,strygo",
@@ -2215,7 +2254,7 @@
     "zip_dir": "_Arcade/_Arcade Patches/_Enhanced Versions"
    },
    "notes": [
-    "MAME shows checksum warnings for the ten patched files. That's expected; the game plays normally. HBMAME with the matching set definitions loads them without them.",
+    "MAME shows checksum warnings for the twelve patched files. That's expected; the game plays normally. HBMAME with the matching set definitions loads them without them.",
     "Fan work, unaffiliated with Capcom or Marvel. The patch contains no ROM data; you need your own dump of the Japanese set."
    ],
    "patch_intro": "An unofficial fan edition of Marvel Super Heroes vs. Street Fighter (Japan 970707): the regional restoration plus the EX extensions, in USA and Japan builds.",
@@ -2244,6 +2283,16 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-03",
+     "items": [
+      "Cyber-Akuma and Apocalypse now have their own spots on the select screen, instead of a Start hold on Akuma or Norimaro.",
+      "New Console mode: a title menu with Arcade, Versus, Training and Options, and a pause menu in every fight. MiSTer starts in Console mode; GAME MODE in the service menu's EX page switches it.",
+      "Versus names now use the arcade's own lettering, centered, and wrap to two lines when long names would crowd the middle.",
+      "Both kits have new checksums, so rebuild them with the rc5 downloads."
+     ],
+     "version": "rc5"
+    },
     {
      "date": "2026-10-11",
      "items": [
@@ -2297,8 +2346,20 @@
      "caption": "Hold Start for two seconds and the hidden version appears before you pick."
     },
     {
-     "caption": "Cyber-Akuma, from a two-second Start hold on Akuma. Japanese build, where he's Mech-Gouki.",
-     "single": "data/screenshots/mshvsf-ex/cyber_akuma_reveal_japan.png"
+     "caption": "Cyber-Akuma and Apocalypse have their own spots on the select screen.",
+     "single": "data/screenshots/mshvsf-ex/cyber_akuma_select_usa.png"
+    },
+    {
+     "caption": "Console mode's title menu.",
+     "single": "data/screenshots/mshvsf-ex/console_title_usa.png"
+    },
+    {
+     "caption": "Versus setup: a friend or the computer on either side, and the stage.",
+     "single": "data/screenshots/mshvsf-ex/console_versus_usa.png"
+    },
+    {
+     "caption": "Console options, including the time limit.",
+     "single": "data/screenshots/mshvsf-ex/console_options_usa.png"
     }
    ],
    "section": "enhanced",
@@ -2308,7 +2369,7 @@
    "subtitle": "Enhanced version",
    "summary": "The arcade game with everything it held back: Norimaro in the US game, Cyber-Akuma and Apocalypse on your side, extra colors and eight speeds. USA and Japan builds.",
    "title": "Marvel Super Heroes vs. Street Fighter EX",
-   "version": "rc4"
+   "version": "rc5"
   },
   {
    "artifact": {
@@ -3669,13 +3730,13 @@
     "Biographies, rival and boss dialogue, and endings that follow the Japanese script, keeping Capcom's wording where it was accurate",
     "Japanese Regulation OFF by default, with its operator switch and uncensored effects",
     "Japanese 980904 gameplay, difficulty, Turbo 1 defaults and secret-character access",
-    "Alpha branding in the intro, selection, player introductions and win screens; English A/X/V-ISM descriptions and score rankings, Western names, title and entry announcements, and operator menus",
+    "Alpha branding in the intro, selection, player introductions and win screens; English A/X/V-ISM descriptions and score rankings with Capcom’s USA default initials, Western names, title and entry announcements, and operator menus",
     "Corrected ending backgrounds, framing and colors, including cleaner picture edges and character placement in E. Honda’s ending",
-    "Corrected Sodom portrait colors, including a blue X-ISM mask and the original gray V-ISM mask in the rankings",
+    "Corrected Sodom portrait colors, including black eyes on his small select portrait, a blue X-ISM mask and the original gray V-ISM mask in the rankings",
     "An optional Japanese edition with original Japanese text and names, Zero branding and Z-ISM, and the same ending corrections"
    ],
    "collection_api": 1,
-   "date": "2026-10-21",
+   "date": "2026-11-03",
    "description": [
     "Street Fighter Alpha 3's US arcade version cut each character's win quotes down to eight generic lines. The Japanese game also has a quote for each opponent. This restoration brings back all 625 opponent-specific quotes, with all 825 of the Japanese game's win quotes in English.",
     "Detailed stage locations return in English, in the original stage panels. Biographies, rival dialogue and endings follow the Japanese script in natural English that fits each character. Capcom's English stays where it was accurate, and Alpha 3 MAX's official wording is used where it fits.",
@@ -3714,6 +3775,15 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-03",
+     "items": [
+      "Set the default score-ranking initials for Charlie, M. Bison, Akuma, Vega and Balrog to Capcom’s USA defaults in the English edition.",
+      "Gave Sodom black eyes on his small character-select portrait in both editions.",
+      "The test menu’s MEMORY CHECK now reports OK for every program ROM bank."
+     ],
+     "version": "rc5"
+    },
     {
      "date": "2026-10-21",
      "items": [
@@ -3765,7 +3835,7 @@
    "subtitle": "English restoration",
    "summary": "The Japanese arcade game in English, with all 625 opponent-specific win quotes restored, detailed stage locations and the original Regulation setting.",
    "title": "Street Fighter Alpha 3",
-   "version": "rc4"
+   "version": "rc5"
   },
   {
    "artifact": {
@@ -4542,11 +4612,14 @@
     "EX settings in the test menu: BONUS STAGE on or off, CUT SCENES SEGA CD or ARCADE, ARTWORK ORIGINAL or ARCADE STADIUM",
     "REGULATION: Jessica on Haggar's TV in the US disc's red dress or the Japanese disc's lingerie; in the Japan and English restoration builds it also turns blood white",
     "A hidden stage select with an ENDING option: hold attack and jump and press Start on the title screen",
+    "Console mode: a title menu with Arcade, Time Attack and Options (difficulty, lives and extra lives), play without coins, and a pause menu on Coin with Continue and Quit; MiSTer starts in Console mode, and GAME MODE in the test menu's EX page switches it",
+    "Time Attack from the Sega CD: 99 counts in your character's Sega CD arena, with its enemy waves, results screen and record; a second player can join on the select screen",
+    "On MiSTer, the Sega CD's Time Attack music, and the pause menu holds the arranged music",
     "A CPS-2 test menu in place of the DIP switches: coins, continues, difficulty, lives and extends",
     "GRENADE spelled right on the HUD, and the USA story's typos fixed",
     "USA (ffex2u), Japan (ffex2j) and English restoration (ffex2r) builds"
    ],
-   "date": "2026-10-25",
+   "date": "2026-11-03",
    "description": [
     "This kit brings Final Fight EX to Capcom's CPS-2 with every enhancement from the CPS-1 version. It includes a restored English version with added scenes, an improved translation and uncensored content. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
     "The 1993 Sega CD port of Final Fight opened with a fully animated cutscene and closed with new ending scenes, over a soundtrack with spoken dialogue. Final Fight EX brings them to the arcade game. On the CPS-2 the arcade's music and sound effects play through QSound.",
@@ -4554,6 +4627,7 @@
     "On MiSTer the Sega CD's arranged soundtrack plays and the cutscenes are voiced: the USA build with the US disc's voices, the Japan build with the Japanese disc's, and the English restoration with a new English voice track. MUSIC switches back to the arcade music. In HBMAME the game plays the arcade music, and the cutscenes keep their captions.",
     "The English restoration is the Japanese version in English: the Japanese disc's cutscenes, translated from the Japanese, with captions that follow the English voices and mouths that move with the lines.",
     "The test menu's EX page can also turn the bonus stages off and switch the artwork to Capcom Arcade Stadium's revised soda can and Uptown sign. REGULATION chooses Jessica's outfit on Haggar's TV in the opening. A hidden stage select on the title screen can jump to any round or straight to the ending.",
+    "Console mode adds a title menu with Arcade, Time Attack and Options, play without coins, and a pause menu. Time Attack is the Sega CD's own mode: one fight against the clock in your character's arena from the Sega CD, scoring a point for every enemy defeated. On MiSTer it plays the Sega CD's Time Attack music. MiSTer starts in Console mode; GAME MODE in the test menu's EX page switches between Console and Arcade.",
     "This is a release candidate."
    ],
    "game": "Final Fight (arcade, Capcom CPS-1)",
@@ -4598,6 +4672,16 @@
    ],
    "release_history": [
     {
+     "date": "2026-11-03",
+     "items": [
+      "New Console mode: a title menu with Arcade, Time Attack and Options, and a pause menu during play. MiSTer starts in Console mode; GAME MODE in the test menu's EX page switches it.",
+      "New Time Attack mode from the Sega CD, with its arenas, enemy waves and results screen, and on MiSTer its music.",
+      "Fixed a freeze in the Industrial Area.",
+      "The sets have new checksums, so rebuild them with the rc3 kit."
+     ],
+     "version": "rc3"
+    },
+    {
      "date": "2026-10-25",
      "items": [
       "The service switch opens the test menu directly, including brief button presses.",
@@ -4639,16 +4723,20 @@
     {
      "caption": "Cody and Guy in the mansion hall, in English.",
      "single": "data/screenshots/final-fight-ex-cps2/scene_hall_en.png"
+    },
+    {
+     "caption": "Time Attack on Guy's bridge arena.",
+     "single": "data/screenshots/final-fight-ex-cps2/time_attack.png"
     }
    ],
    "section": "enhanced",
    "slug": "final-fight-ex-cps2",
    "status": "release-candidate",
    "subtitle": "Enhanced version",
-   "summary": "Final Fight EX on Capcom's CPS-2, with every enhancement from the CPS-1 version and a restored English version with added scenes, an improved translation and uncensored content. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
+   "summary": "Final Fight EX on Capcom's CPS-2, with every enhancement from the CPS-1 version and a restored English version with added scenes, an improved translation and uncensored content. It adds the Sega CD's Time Attack mode and a Console mode with a title menu and pause. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
    "thumbnail_build": "en",
    "title": "Final Fight EX (CPS-2)",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "changes": [

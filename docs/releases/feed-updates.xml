@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 03 Nov 2026 23:59:08 +0000</lastBuildDate>
+<lastBuildDate>Wed, 04 Nov 2026 03:19:54 +0000</lastBuildDate>
+<item>
+<title>[Updated] Donkey Kong 3 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#donkey-kong-3</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Donkey Kong 3.mra:2026-11-04T03:19:54+00:00</guid>
+<pubDate>Wed, 04 Nov 2026 03:19:54 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dkong3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1983 / Nintendo&lt;/p&gt;&lt;p&gt;Core: Arcade-DonkeyKong3CRT&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-04 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Armed Police Batrider (TheJesusFish) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#batrider</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/puzzlekg.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1998 / Eolith&lt;/p&gt;&lt;p&gt;Core: ppriest_Eolith&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Raccoon World (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#raccoon</link>
-<guid isPermaLink="false">ongo:_Arcade/Raccoon World.mra:2026-10-28T00:18:21+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 00:18:21 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raccoon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1998 / Eolith&lt;/p&gt;&lt;p&gt;Core: ppriest_Eolith&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

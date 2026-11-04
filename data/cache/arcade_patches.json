@@ -4210,7 +4210,7 @@
     "USA, Japan and Asia builds, with the regional restoration underneath"
    ],
    "collection_api": 1,
-   "date": "2026-10-29",
+   "date": "2026-11-03",
    "description": [
     "Street Fighter Alpha EX aims to be the definitive version of the first Alpha, bringing together features from its console releases and the CPS-1 Changer version. It builds on the regional restoration, with Akuma, Dan and M. Bison on the visible select screen and six colors per fighter: the original two plus four from Alpha 2.",
     "CONSOLE mode adds a green title and a cycling mode menu: Arcade, Versus, Training, Dramatic Battle, Survival, Akuma and Options. Versus returns to fighter selection after each match. Training has recording and replay, computer behavior, stage and gauge controls, and health that refills after a combo while stopping at 1 HP.",
@@ -4267,6 +4267,13 @@
    ],
    "release_history": [
     {
+     "date": "2026-11-03",
+     "items": [
+      "Fixed the corrupted SCORE RANKING heading, and set the default ranking initials to CHN for Chun-Li and to CHL for Charlie in the USA and Asia builds."
+     ],
+     "version": "rc3"
+    },
+    {
      "date": "2026-10-29",
      "items": [
       "Character-select and victory portraits now match your chosen fighter color, including the extra Alpha 2 colors.",
@@ -4310,7 +4317,7 @@
    "subtitle": "Enhanced version",
    "summary": "Alpha with all thirteen fighters on the select screen, six colors each, a console mode menu, Training with recording, Survival and cooperative Dramatic Battle.",
    "title": "Street Fighter Alpha EX",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "artifact": {

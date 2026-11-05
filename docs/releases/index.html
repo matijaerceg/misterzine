@@ -489,7 +489,7 @@
      dimmed - the user asked for a stable stack over appearing/vanishing pills.
      The arrow on the two "find it" buttons says which way the target lies and
      drops off while disabled. Buttons stretch to one shared width. */
-  .jumps { position: absolute; z-index: 17; top: calc(var(--theadh, 2.2rem) + .6rem); right: .9rem;
+  .jumps { position: absolute; z-index: 17; top: calc(var(--theadh, 2.2rem) + var(--section-height, 0px) + .6rem); right: .9rem;
     display: flex; flex-direction: column; align-items: stretch; gap: .4rem; }
   .jumps button { cursor: pointer; padding: .45rem .85rem; white-space: nowrap;
     transition: opacity .15s; }
@@ -654,20 +654,20 @@
      title stays at the top of the header on mobile instead of being pushed down. */
   .hrow { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
           gap: .35rem .9rem; }
-  /* the logo is sized to span the title block exactly: h1 line box + its
-     bottom margin + the status line's top margin + the status line box (all
-     explicit line-heights, so the sum is exact for a one-line title). theme.js
-     then keeps --titleh equal to the block's measured height, so a title that
-     wraps at tablet widths grows the logo with it instead of leaving it short. */
-  .masthead { display: flex; align-items: flex-start; gap: .7rem; flex: 1 1 auto; min-width: 0;
+  /* Scale the logo against the title and status block measured by theme.js. */
+  .masthead { display: flex; align-items: center; gap: .6rem; flex: 1 1 0; min-width: 0;
               --titleh: calc(clamp(1.4rem, 4.2vw, 1.75rem) * 1.15 + .25rem + .15rem + 1.2rem); }
   .masthead .brand { display: block; flex: 0 0 auto; color: var(--fg); }
-  .masthead .brand svg { display: block; height: var(--titleh); width: auto; }
+  .masthead .brand svg { display: block; height: calc(var(--titleh) * .85); width: auto; }
   .masthead .brand:hover { color: var(--brand-hover); }
   .masthead .titleblock { min-width: 0; flex: 1 1 auto; }
   /* flex-wrap + shrink lets the theme pill drop below the nav when the row is
      too narrow (phones); without shrink the group keeps its max width and clips */
   .hctl { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; flex: 0 1 auto; min-width: 0; }
+  .header-patreon { display: inline-flex; align-items: center; gap: .3em; }
+  .header-patreon svg { width: 1em; height: 1em; fill: currentColor; }
+  .sitemenu .mlist > .nv { display: flex; }
+  .sitemenu .mlist > hr.nv { display: block; }
   /* site nav (.segnav + .pill), the site Menu (.sitemenu, #menusum, .mlist) and
      the theme picker nested inside it (.theme .menu*) all live in the shared
      nav.css. Both are plain <details> (NOT details.cols): theme.js gives them
@@ -1194,17 +1194,9 @@
      not inside .topbar, so this keys off html.narrow, which the narrowMQ shim in
      the script toggles from the same measurement as the container block above. */
   html.narrow th[aria-sort]::after { content: none; }
-  /* phones (and the header beside a docked panel on a laptop): the site links
-     fold into the Menu (nav.css .nv rows; the flip is repeated here because
-     nav.css can only key it off the viewport) and the controls that are left
-     (Sign in, Menu) sit on the wordmark's row, right-aligned, instead of
-     taking a row of their own above the masthead. The pill/menu mobile SIZING
-     is shared (nav.css @media max-width:36rem). */
+  /* Phones and narrow docked panes keep Patreon, account and Menu beside the title. */
   @container topbar (max-width: 34rem) {
-    .segnav { display: none; }
-    .sitemenu .mlist > .nv { display: flex; }
-    .sitemenu .mlist > hr.nv { display: block; }
-    .hrow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: .55rem; align-items: center; }
+    .hrow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; column-gap: .4rem; align-items: center; }
     .hctl { grid-area: 1 / 3; flex-wrap: nowrap; gap: .4rem; }
     /* masthead on phones: the title keeps to one line (the short wording, then
        an ellipsis as a last resort) and the status line drops below BOTH the
@@ -1221,7 +1213,13 @@
     h1 { font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .masthead, .masthead .titleblock { display: contents; }
     .masthead .updated { grid-column: 1 / -1; margin-top: .2rem; }
-    .masthead .brand svg { height: calc(1.2rem * 1.15); }
+    .masthead .brand svg { height: 1.2rem; }
+  }
+  @container topbar (max-width: 19rem) {
+    .hrow { column-gap: .25rem; }
+    .hctl { gap: .3rem; }
+    h1 { font-size: 1rem; }
+    .hctl .pill, .hctl #acct, .hctl #menusum { font-size: .72rem; }
   }
   /* printing: undo the fixed-height app shell so the full row list paginates
      instead of clipping to one screen of the scroller */
@@ -1236,6 +1234,7 @@
      matches the .ctl row on desktop; phones leave it a touch taller) */
   .controls input[type=search] { font-size: .85rem; line-height: 1.26rem; }
 </style>
+<link rel="stylesheet" href="view-presets.css?v=2">
 <!-- GoatCounter analytics (privacy-friendly, no cookies). Views from the
      installed app have no referrer of their own, so label them "pwa" --
      count.js reads window.goatcounter overrides when it fires. -->
@@ -1260,13 +1259,11 @@
       </div>
     </div>
     <div class="hctl">
-      <nav class="segnav">
-        <span class="pill" aria-current="page"><span class="long">Core Tracker</span><span class="short">Cores</span></span>
-        <a class="pill" href="../frontend/"><span class="long">Arcade </span>Frontend</a>
-        <a class="pill" href="../plex/">Plex</a>
-      <a class="pill" href="../jellyfin/">Jellyfin</a>
-        <a class="pill" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="nav" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
-      </nav>
+      <a class="pill header-patreon" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="nav" aria-haspopup="dialog" aria-expanded="false">
+        <!-- Patreon mark from Simple Icons (CC0). The text supplies its accessible name. -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.957 7.21c-.004-3.064-2.391-5.576-5.191-6.482-3.478-1.125-8.064-.962-11.384.604C2.357 3.231 1.093 7.391 1.046 11.54c-.039 3.411.302 12.396 5.369 12.46 3.765.047 4.326-4.804 6.068-7.141 1.24-1.662 2.836-2.132 4.801-2.618 3.376-.836 5.678-3.501 5.673-7.031Z"/></svg>
+        Patreon
+      </a>
       <!-- accounts: "Sign in" when signed out, "Account" when signed in; both
            go to /account/ (the sign-in buttons live there). Text set by syncAcct. -->
       <a id="acct" href="../account/" data-tip="Sign in to keep favorites across devices">Sign in</a>
@@ -1276,13 +1273,6 @@
       <details class="sitemenu" id="menudd">
         <summary id="menusum">Menu</summary>
         <div class="mlist">
-      <!-- the site links, shown only where the nav row is folded away (nav.css .nv) -->
-      <span class="nv" aria-current="page">Core Tracker</span>
-      <a class="nv" href="../frontend/">Arcade Frontend</a>
-      <a class="nv" href="../plex/">Plex</a>
-      <a class="nv" href="../jellyfin/">Jellyfin</a>
-      <a class="nv" href="https://www.patreon.com/MisterZine" target="_blank" rel="noopener" data-patreon="menu" aria-haspopup="dialog" aria-expanded="false">Patreon</a>
-      <hr class="msep nv">
       <button type="button" id="mymisters" data-tip="Your saved MiSTers">My MiSTer(s)</button>
           <div class="theme" id="theme">
             <details id="themedd">
@@ -1306,9 +1296,15 @@
       <a href="https://github.com/matijaerceg/misterzine/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog<span class="ext">↗</span></a>
       <a href="https://discord.com/channels/647909397477195803/1524449604354052166" target="_blank" rel="noopener" data-tip="The MisterZine thread on the official MiSTer Discord: the tracker, the site and the Arcade Frontend.">Discord<span class="ext">↗</span></a>
       <a href="https://misterzine.goatcounter.com/" target="_blank" rel="noopener">Traffic<span class="ext">↗</span></a>
-      <a href="../hardware-landscape/">Hardware Landscape</a>
       <a href="../credits/">Credits</a>
       <a href="../privacy/">Privacy</a>
+      <!-- Site destinations at every width. -->
+      <hr class="msep nv">
+      <span class="nv" aria-current="page">Core Tracker</span>
+      <a class="nv" href="../frontend/">Arcade Frontend</a>
+      <a class="nv" href="../plex/">Plex</a>
+      <a class="nv" href="../jellyfin/">Jellyfin</a>
+      <a class="nv" href="../hardware-landscape/">Hardware Landscape</a>
         </div>
       </details>
     </div>
@@ -1461,15 +1457,34 @@
        right and never wrap; the filter cluster (left) grows and wraps against
        them. The tally lives inside .searchwrap above. -->
   <span class="ctrlsep tall" aria-hidden="true"></span>
+  <div class="display-controls">
+  <details class="cols" id="presets">
+    <summary class="ctl" aria-label="View preset" data-tip="Apply a ready-made combination of columns, sorting and grouping"><span class="preset-prefix"><span class="preset-view-word">View </span>preset:</span> <span id="presetname">Build date</span></summary>
+    <div class="menu" id="presetmenu">
+      <div id="presetoptions"></div>
+      <div class="preset-actions">
+        <button class="ctl" type="button" id="presetreset" disabled>Reset preset</button>
+        <button class="ctl" type="button" id="presetedit">Available presets…</button>
+      </div>
+      <p class="colnote">Presets set columns, sorting and grouping. Genre presets also select their genre.</p>
+    </div>
+  </details>
   <details class="cols" id="cols">
     <summary class="ctl" data-tip="Choose which columns to show"><span class="w">Columns</span><span class="n">Col.</span></summary>
     <div class="menu" id="colsmenu"></div>
   </details>
-  <button type="button" id="viewlink" class="ctl icon" aria-label="Copy a link to this view" data-tip="Copy a link to this view: search, filters, sort and open game"><span class="ico" aria-hidden="true"></span></button>
+  <button type="button" id="viewlink" class="ctl icon" aria-label="Copy a link to this view" data-tip="Copy a link to this view: preset, columns, grouping, filters and open game"><span class="ico" aria-hidden="true"></span></button>
+  </div>
 </div>
+<dialog id="presetavailable" class="cldialog" aria-labelledby="presetavailabletitle">
+  <h2 id="presetavailabletitle">Available presets</h2>
+  <p>Choose which presets appear in the menu. Saved on this browser. The active preset stays visible until you switch.</p>
+  <div id="presetchoices"></div>
+  <div class="clactions"><button id="presetavailabledone" type="button">Done</button></div>
+</dialog>
 <div class="favbanner" id="sharedfilters" role="status" hidden>
-  <span>Temporary shared view. Your saved filters are unchanged.</span>
-  <button type="button" id="restoresavedfilters">Revert to my saved filters</button>
+  <span>Temporary shared view. Your saved filters and display are unchanged.</span>
+  <button type="button" id="restoresavedfilters">Revert to my saved view</button>
 </div>
 <!-- shown only when the URL carries a ?fav= list: someone opening a shared link
      is here to look, so the list is filtered to it and adopting it stays a choice -->
@@ -1596,6 +1611,7 @@
 </div>
 <div id="newspill" class="newspill"><span class="txt"></span><button type="button" class="x" data-tip="Dismiss">x</button></div>
 <div class="tablewrap">
+<div id="sectionpin" aria-hidden="true" hidden><div class="pin-clip"><span></span></div></div>
 <table>
   <colgroup id="cg"></colgroup>
   <thead><tr id="hrow"></tr></thead>
@@ -1713,11 +1729,20 @@
 <script src="custom-lists.js?v=aa1878eddb"></script>
 <script src="./source-visibility.js?v=12"></script>
 <script src="./filter-memory.js?v=1"></script>
+<script src="./view-presets.js?v=3"></script>
 <script src="../mask.js?v=4"></script>
 <script src="../theme.js?v=7"></script><!-- shared theme picker: builds the menu, applies + persists, freezes the summary -->
 <script src="../feedback.js?v=1"></script><!-- shared feedback form: Menu row, edge tab, dialog (styled in nav.css) -->
 <script>
 let DATA = [], view = [], sortKey = 'updated', sortDir = -1;  // default: most recently updated first
+let presetId = '', sectionMode = MZViewPresets.sectionForSort(sortKey), foldSameGames = true;
+let sectionCalendar = MZViewPresets.dateSections(MZViewPresets.localDay());
+let presetCatalogue = null, presetReady = false, presetRemember = false;
+const presetSectionRows = new Map();
+const sectionStarts = [];  // indexes of real section headings in the full list, including unmounted rows
+const sectionPin = document.getElementById('sectionpin');
+const pinnedLabel = sectionPin.querySelector('span');
+let pinnedHeight = 0;
 // the last data.json as loaded; DATA is it minus mature rows while Mature games
 // is set to Hide (see ingest and syncMature)
 let RAW = [];
@@ -3046,11 +3071,41 @@ function dragifyThumb(t, horiz) {
 // write a style variable only when its value changes: a repeat write still
 // dirties the element's style, and this runs on every scroll frame
 function setVar(el, k, v) { if (el.style.getPropertyValue(k) !== v) el.style.setProperty(k, v); }
+function syncSectionPin(header) {
+  pinnedHeight = 0;
+  if (!header || !vTop || vAll || !sectionStarts.length || WRAP.scrollTop <= 0) {
+    sectionPin.hidden = true;
+    return;
+  }
+  // The heading can be hundreds of rows above the mounted window. Search its
+  // indexes and use actual screen positions at the boundary, where an estimated
+  // height could otherwise switch labels a row too early after a long jump.
+  const topOf = index => {
+    if (index < vwA) return -Infinity;
+    if (index >= vwB) return Infinity;
+    return ROWS.rows[index - vwA + 1].getBoundingClientRect().top;
+  };
+  let lo = 0, hi = sectionStarts.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >>> 1;
+    if (topOf(sectionStarts[mid]) < header.bottom) lo = mid + 1;
+    else hi = mid;
+  }
+  if (!lo) { sectionPin.hidden = true; return; }
+  const label = flat[sectionStarts[lo - 1]].title;
+  const room = lo < sectionStarts.length ? topOf(sectionStarts[lo]) - header.bottom : Infinity;
+  if (pinnedLabel.textContent !== label) pinnedLabel.textContent = label;
+  setVar(sectionPin, 'top', header.height + 'px');
+  sectionPin.hidden = false;
+  const height = pinnedLabel.getBoundingClientRect().height;
+  pinnedHeight = Math.min(height, room);
+  // The incoming in-table heading pushes the outgoing label under the columns.
+  setVar(pinnedLabel, 'transform', 'translateY(' + (pinnedHeight - height) + 'px)');
+}
 function syncScrollHints() {
   const w = document.querySelector('.tablewrap'), z = document.querySelector('.tablezone');
   z.classList.toggle('more-l', w.scrollLeft > 0);
   z.classList.toggle('more-r', w.scrollLeft + w.clientWidth < w.scrollWidth - 1);
-  syncJumps(w, z);
   // taper both hints near their end of the scroll range: each one's width
   // tracks the distance to its edge (full width until the last ~6% / 48px
   // minimum, then shrinking to 0), so they grow/shrink with scroll position
@@ -3070,7 +3125,10 @@ function syncScrollHints() {
   if (th) setVar(z, '--titlew',
     (th.getBoundingClientRect().right - z.getBoundingClientRect().left) + 'px');
   // sticky header height anchors the "Scroll to top" button just below it
-  if (th) setVar(z, '--theadh', th.getBoundingClientRect().height + 'px');
+  const header = th?.getBoundingClientRect();
+  if (header) setVar(z, '--theadh', header.height + 'px');
+  syncSectionPin(header);
+  syncJumps(w, z);
   // floating thumbs: length ∝ visible fraction, position ∝ scroll progress
   if (vThumb) {
     const canV = w.scrollHeight > w.clientHeight + 1;
@@ -3120,11 +3178,12 @@ document.querySelector('.tablewrap').addEventListener('scroll', () => {
 // honest; markOpenRow/closePanel call it too since a highlight moves no pixels.
 function syncJumps(w, z) {
   const tt = document.getElementById('totop');
+  setVar(tt.parentElement, '--section-height', (sectionPin.hidden ? 0 : pinnedLabel.offsetHeight) + 'px');
   if (tt.disabled !== !(w.scrollTop > 30)) tt.disabled = !(w.scrollTop > 30);
   // rows outside the rendered window have no <tr>, so judge from the height
   // model, in tbody px: the sticky header covers the top of the scrollport
   const p = vTop ? vPositions() : null, body = vTop ? vBodyTop() : 0;
-  const top = w.scrollTop - body + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0);
+  const top = w.scrollTop - body + (parseFloat(getComputedStyle(z).getPropertyValue('--theadh')) || 0) + pinnedHeight;
   const bottom = w.scrollTop - body + w.clientHeight;
   const sync = (id, i, label) => {
     const btn = document.getElementById(id);
@@ -3172,6 +3231,8 @@ function scrollTableTop() {
 document.getElementById('totop').addEventListener('click', scrollTableTop);
 
 function render() {
+  sectionStarts.length = 0;
+  syncPresetStatus();
   MZLists.sync();
   syncStatus();  // counts run over DATA, not the view, so no early return below can skip this
   const tb = document.getElementById('rows');
@@ -3184,6 +3245,7 @@ function render() {
   // active type/source/genre filter (an invisible narrower is the sneaky way to get here)
   if (!view.length && DATA.length) {
     vTop = vBot = null; vwA = vwB = 0; flat = []; flatCls = []; vDot = -1;
+    syncSectionPin(null);
     ROWS.parentElement.removeAttribute('aria-rowcount');
     const q = document.getElementById('q').value.trim();
     // a multi-select reads as a narrower only while boxes are unchecked: a partial
@@ -3218,7 +3280,16 @@ function render() {
   vSettle();  // square the old window first, so a redraw in place lands rows where they were
   flat = [];
   flatCls = [];
+  let lastSection = null;
   for (const d of view) {
+    const section = currentPresetSection(d);
+    if (section && section.key !== lastSection) {
+      lastSection = section.key;
+      const key = sectionMode + ':' + section.key;
+      if (!presetSectionRows.has(key)) presetSectionRows.set(key, { section: true, title: section.label });
+      sectionStarts.push(flat.length);
+      flat.push(presetSectionRows.get(key)); flatCls.push('preset-section');
+    }
     flat.push(d); flatCls.push(d.grp ? 'grp' + (isOpen(d) ? ' x' : '') + (d.bat ? ' bat' : '') : '');
     if (d.grp && isOpen(d)) for (const m of d.members) { flat.push(m); flatCls.push('member'); }
   }
@@ -3228,7 +3299,7 @@ function render() {
   ROWS.parentElement.setAttribute('aria-rowcount', flat.length + 1);  // + the header row
   vWindow(true);
   // the tally counts releases, not umbrellas, so "N of M" keeps meaning rows
-  setCount(view.reduce((n, d) => n + (d.grp ? d.members.length : 1), 0));
+  setCount();
   syncScrollHints();  // the jump stack re-reads its targets; a same-height re-render escapes the ResizeObserver
 }
 // one <tr>: cls is its group role ('grp', 'grp x', 'member' or ''), and data-i
@@ -3241,6 +3312,7 @@ function selectionClass(d) {
   return '';
 }
 function rowHTML(d, i, cls, cols) {
+  if (d.section) return '<tr class="preset-section" aria-rowindex="' + (i + 2) + '"><th colspan="' + cols.length + '"><span>' + esc(d.title) + '</span></th></tr>';
   const c = (cls + ' ' + selectionClass(d)).trim();
   return '<tr' + (c ? ' class="' + c + '"' : '') + ' data-i="' + i + '" aria-rowindex="' + (i + 2) + '">' +
     cols.map(x => x.cell(d)).join('') + '</tr>';
@@ -3258,7 +3330,7 @@ function markExpanded(u, on) {
   else if (on) expanded.add(u.g); else expanded.delete(u.g);
 }
 // does this row show the since-visit dot? (mirrors titleCell / dotHTML)
-const hasDot = d => d.grp ? d.members.some(isUnseen) : isUnseen(d);
+const hasDot = d => !d.section && (d.grp ? d.members.some(isUnseen) : isUnseen(d));
 
 // ---- Virtualized rows ----
 // Only the rows near the scrollport are in the DOM: flat[vwA..vwB) between two
@@ -3414,7 +3486,7 @@ function revealIndex(i, block, smooth, again = true) {
   if (i < 0 || i >= flat.length || !vTop) return;
   vSettle();  // the model is exact once the top spacer is squared
   const p = vPositions(), top = vBodyTop() + p[i], h = p[i + 1] - p[i];
-  const thead = parseFloat(getComputedStyle(document.querySelector('.tablezone')).getPropertyValue('--theadh')) || 0;
+  const thead = (parseFloat(getComputedStyle(document.querySelector('.tablezone')).getPropertyValue('--theadh')) || 0) + pinnedHeight;
   let y;
   if (block === 'park') y = top - thead - WRAP.clientHeight * .4;
   else if (block === 'center') y = top + h / 2 - WRAP.clientHeight / 2;
@@ -3448,7 +3520,7 @@ if (document.fonts) document.fonts.ready.then(vRemeasure);  // a late webfont re
 // the list is narrowed; just the bare total when everything shows, since
 // "1025 of 1025" says nothing. The measured width feeds --countw, which the
 // input's right padding reserves so typed text never runs under the tally.
-function setCount(shown) {
+function setCount(shown = view.reduce((n, d) => n + (d.grp ? d.members.length : 1), 0)) {
   const el = document.getElementById('count');
   // narrow: the search box shares one row with three buttons, so the filtered
   // tally drops " of " for a slash and the placeholder shortens to match
@@ -3467,6 +3539,7 @@ function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
 const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 function apply() {
+  refreshSectionCalendar();
   clearTimeout(qTimer);
   if (booted && filterMemory.temporary) persistTemporaryFilters();
   const qEl = document.getElementById('q');
@@ -3563,13 +3636,22 @@ function apply() {
     view = left;
   }
   const buckets = {}, top = [];
+  // Keep each implementation under the core or source which actually ships it.
+  const groupGames = foldSameGames && sectionMode !== 'core' && sectionMode !== 'src';
   for (const d of view) {
-    if (!d.g) { top.push(d); continue; }
+    if (!groupGames || !d.g) { top.push(d); continue; }
     let b = buckets[d.g];
     if (!b) { b = buckets[d.g] = []; top.push(b); }
     b.push(d);
   }
-  view = top.map(x => Array.isArray(x) ? (x.length > 1 ? makeUmbrella(x) : x[0]) : x);
+  view = top.flatMap(entry => {
+    if (!Array.isArray(entry)) return [entry];
+    if (entry.length === 1) return entry;
+    // If two implementations have different genre credits, each belongs
+    // in its own section. Other same-game rows can keep their usual umbrella.
+    if (sectionMode === 'genre' && entry.some(row => row.genre !== entry[0].genre)) return entry;
+    return [makeUmbrella(entry)];
+  });
   if (uw) {  // the leftover umbrellas name their missing builds, then the batches join
     for (const u of view) if (u.grp && split[u.g]) u.split = ALLG[u.g].length;
     view = view.concat(bats);
@@ -3620,6 +3702,16 @@ function apply() {
       : sortKey === 'src' ? (x.grp ? x.srcs : x.src ? SRC_NAMES[x.src] || x.src : '')
       : (x[sortKey] || '');
     const cmp = (a, b) => {
+      // Calendar headings partition the existing chronological order. Preserve
+      // exact dates, arrival batches, core order and their tiebreaks below.
+      if (sectionMode !== 'none' && !MZViewPresets.isDateSort(sortKey)) {
+        const as = currentPresetSection(a), bs = currentPresetSection(b);
+        const rank = as.rank - bs.rank;
+        if (rank) return sectionMode === 'letter' ? sortDir * rank : rank;
+        const group = sortDir * COLL.compare(as.key, bs.key) || (as.key === bs.key ? 0 : as.key < bs.key ? -sortDir : sortDir);
+        if (group) return group;
+        return (sectionMode === 'letter' ? sortDir : 1) * COLL.compare(a.title, b.title);
+      }
       const av = keyOf(a), bv = keyOf(b);
       // Blank cells always sink to the bottom, regardless of sort direction, so
       // "no data" never heads the list (e.g. sorting Players ascending still
@@ -3728,7 +3820,7 @@ function makeBatch(ms, field) {
 }
 document.getElementById('batchtoggle').addEventListener('click', () => {
   foldBatches = !foldBatches;
-  try { localStorage.setItem('mz-batches', foldBatches ? '1' : '0'); } catch (e) {}
+  if (!filterMemory.temporary) try { localStorage.setItem('mz-batches', foldBatches ? '1' : '0'); } catch (e) {}
   syncBatchToggle(); apply(); recenterOpen();
 });
 function syncBatchToggle() {
@@ -3794,6 +3886,11 @@ document.getElementById('clear').addEventListener('click', clearAllFilters);
 // navigation to a bare /releases/, exactly like typing that URL and hitting
 // Enter. Remembered or temporary filters are restored; display preferences
 // (theme, columns, saved devices and panel width) persist via localStorage too.
+function setTableSort(key, direction) {
+  sortKey = key;
+  sortDir = direction;
+  sectionMode = MZViewPresets.sectionForSort(key);
+}
 // delegated: the header row is rebuilt whenever columns are toggled
 document.getElementById('hrow').addEventListener('click', e => {
   const th = e.target.closest('th');
@@ -3803,8 +3900,7 @@ document.getElementById('hrow').addEventListener('click', e => {
   // every other column defaults to ascending. A click on the already-active
   // column always just flips the current direction.
   const DATE_COLS = new Set(['date', 'updated', 'mz']);
-  sortDir = (sortKey === k) ? -sortDir : (DATE_COLS.has(k) ? -1 : 1);
-  sortKey = k;
+  setTableSort(k, sortKey === k ? -sortDir : (DATE_COLS.has(k) ? -1 : 1));
   buildHeader();  // re-stamps aria-sort from sortKey/sortDir
   apply();
   // With a row selected, follow it to its new position; with nothing selected,
@@ -4004,7 +4100,7 @@ function defaultSort() {
 // sorting by a column that was just hidden would be invisible: fall back to the
 // default sort for the columns still shown
 function fixSortThenRebuild() {
-  if (!activeColumns().some(c => c.k === sortKey)) [sortKey, sortDir] = defaultSort();
+  if (!activeColumns().some(c => c.k === sortKey)) setTableSort(...defaultSort());
   buildHeader();
   apply();
   // adding/removing columns changes row heights (in-cell wrapping), which can
@@ -4016,7 +4112,7 @@ colsMenu.addEventListener('change', e => {
   if (!k) return;
   if (e.target.checked) enabledCols.add(k); else enabledCols.delete(k);
   // tolerated failure: blocked storage loses the pref, not the toggle
-  try {
+  if (!filterMemory.temporary) try {
     localStorage.setItem('mz-cols2', JSON.stringify([...enabledCols]));
     localStorage.setItem('mz-cols-seen', JSON.stringify(COLUMNS.map(c => c.k)));
   } catch (e) {}
@@ -4027,9 +4123,11 @@ colsReset.addEventListener('click', () => {
   enabledCols = defaultCols();
   // remove both keys (incl. the legacy pre-2026-07 one, or the migration path
   // would resurrect the old picks on next load) — reset means "never customized"
-  localStorage.removeItem('mz-cols2');
-  localStorage.removeItem('mz-cols');
-  localStorage.removeItem('mz-cols-seen');
+  if (!filterMemory.temporary) try {
+    localStorage.removeItem('mz-cols2');
+    localStorage.removeItem('mz-cols');
+    localStorage.removeItem('mz-cols-seen');
+  } catch (e) {}
   for (const cb of colsMenu.querySelectorAll('input:not(:disabled)'))
     cb.checked = enabledCols.has(cb.dataset.k);
   syncColsReset();
@@ -4340,7 +4438,7 @@ function syncFilterMemoryControls() {
 function persistTemporaryFilters() {
   // Dropdown state is stored in full; only the remaining shared-view controls
   // need URL syntax. Neither the session nor its edits touch local preferences.
-  const params = viewParams().filter(([key]) => ['q', 's', 'f'].includes(key))
+  const params = viewParams().filter(([key]) => ['q', 's', 'f', ...PRESET_VIEW_KEYS].includes(key))
     .map(([key, value]) => key + '=' + value).join('&');
   filterMemory.startTemporary(captureDropdownFilters(), params);
 }
@@ -4375,7 +4473,9 @@ document.getElementById('restoresavedfilters').addEventListener('click', e => {
   document.getElementById('q').value = '';
   resetFavOnly();
   if (favView) dismissFavView();
-  [sortKey, sortDir] = defaultSort(); buildHeader();
+  restorePresetDisplay(savedPresetDisplay);
+  restorePresetFilter(savedPresetFilter);
+  buildHeader();
   syncFilterMemoryControls(); apply(); recenterOpen();
 });
 
@@ -4503,7 +4603,149 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 // a ?fav= list being viewed stays in. On arrival the link wins wherever it says
 // something; the columns fall back to their remembered state. hv (the retired
 // Hardware Verified filter, 2026-10-14) is still stripped so old links come out clean.
-const VIEW_KEYS = ['view', 'access', 'q', 't', 'src', 'g', 'p', 'm', 'y', 's', 'hv', 'f'];
+const PRESET_VIEW_KEYS = ['preset', 'cols', 'batches', 'sections', 'samegames'];
+const VIEW_KEYS = ['view', 'access', 'q', 't', 'src', 'g', 'p', 'm', 'y', 's', 'hv', 'f', ...PRESET_VIEW_KEYS];
+
+// Presets own only display state, plus the explicitly named genre
+// filter. All catalogue filtering and same-game identity still use apply().
+const presetDD = document.getElementById('presets');
+const presetMenu = document.getElementById('presetmenu');
+const presetAvailable = document.getElementById('presetavailable');
+let availablePresets = new Set(MZViewPresets.standard.map(p => p.id));
+try {
+  const off = JSON.parse(localStorage.getItem('mz-presets-off') || '[]');
+  const on = JSON.parse(localStorage.getItem('mz-presets-genres') || '[]');
+  if (Array.isArray(off)) for (const id of off) availablePresets.delete(id);
+  if (Array.isArray(on)) for (const id of on) if (MZViewPresets.byId.get(id)?.genre) availablePresets.add(id);
+  if (!availablePresets.size) availablePresets.add('updated');
+} catch (e) {}
+function capturePresetDisplay() {
+  return { preset: presetId, sort: [sortKey, sortDir], columns: activeColumns().map(c => c.k),
+    batches: foldBatches, section: sectionMode, sameGames: foldSameGames };
+}
+function presetFilterActive(p) {
+  return !!p && (!p.genre || enabledGenres.size === 1 && enabledGenres.has(p.genre));
+}
+function restorePresetFilter(active) {
+  const p = MZViewPresets.byId.get(presetId);
+  if (!active || !p) return;
+  if (p.genre && GENRE_KEYS.includes(p.genre)) {
+    enabledGenres = new Set([p.genre]);
+    for (const cb of genreMenu.querySelectorAll('input[data-g]')) cb.checked = cb.dataset.g === p.genre;
+    syncGenreSummary();
+  }
+}
+function restorePresetDisplay(value) {
+  const state = MZViewPresets.validate(value, COLUMNS.map(c => c.k));
+  if (!state) return false;
+  presetId = state.preset; [sortKey, sortDir] = state.sort;
+  enabledCols = new Set(state.columns); foldBatches = state.batches;
+  sectionMode = state.section; foldSameGames = state.sameGames;
+  for (const cb of colsMenu.querySelectorAll('input[data-k]')) cb.checked = enabledCols.has(cb.dataset.k);
+  syncColsReset(); syncBatchToggle();
+  buildPresetOptions();
+  return true;
+}
+let savedPresetDisplay = capturePresetDisplay(), savedPresetFilter = false;
+try {
+  const stored = JSON.parse(localStorage.getItem('mz-view-preset') || 'null');
+  if (restorePresetDisplay(stored)) { savedPresetDisplay = capturePresetDisplay(); savedPresetFilter = stored.filterActive === true; }
+} catch (e) {}
+if (!presetId) {
+  const match = MZViewPresets.presets.find(p => !p.genre && MZViewPresets.matches(p, capturePresetDisplay()));
+  if (match) { presetId = match.id; savedPresetDisplay = capturePresetDisplay(); }
+}
+function refreshSectionCalendar() {
+  const today = MZViewPresets.localDay();
+  if (today === sectionCalendar.today) return false;
+  sectionCalendar = MZViewPresets.dateSections(today);
+  presetSectionRows.clear();
+  return true;
+}
+function currentPresetSection(d) {
+  if (MZViewPresets.sections[sectionMode] !== sortKey) return null;
+  return MZViewPresets.sectionOf(d, sectionMode, presetCatalogue, sectionCalendar);
+}
+function buildPresetOptions() {
+  let genre = false;
+  document.getElementById('presetoptions').innerHTML = MZViewPresets.presets.filter(p => availablePresets.has(p.id) || p.id === presetId).map(p => {
+    const heading = p.genre && !genre ? '<p class="preset-heading">Genres</p>' : '';
+    if (p.genre) genre = true;
+    return heading + '<button type="button" class="preset-option" data-preset="' + p.id + '" aria-pressed="false">' +
+      '<span class="preset-check" aria-hidden="true"></span><span>' + esc(p.label) + '</span><span class="preset-desc">' + esc(p.description) + '</span></button>';
+  }).join('');
+}
+function syncPresetStatus() {
+  if (!presetReady) return;
+  const state = capturePresetDisplay(), p = MZViewPresets.byId.get(presetId);
+  const modified = p && (!MZViewPresets.matches(p, state) || !presetFilterActive(p));
+  const label = p ? p.label + (modified ? ' · modified' : '') : 'Custom';
+  document.getElementById('presetname').textContent = label;
+  presetDD.querySelector('summary').setAttribute('aria-label', 'View preset: ' + label);
+  document.getElementById('presetreset').disabled = !modified;
+  for (const button of presetMenu.querySelectorAll('[data-preset]')) {
+    const selected = button.dataset.preset === presetId;
+    button.setAttribute('aria-pressed', selected);
+    button.querySelector('.preset-check').textContent = selected ? '✓' : '';
+  }
+  if (presetRemember && !filterMemory.temporary) {
+    savedPresetDisplay = state; savedPresetFilter = presetFilterActive(p);
+    try { localStorage.setItem('mz-view-preset', JSON.stringify({ ...state, filterActive: savedPresetFilter })); } catch (e) {}
+  }
+}
+function applyPreset(id) {
+  const p = MZViewPresets.byId.get(id);
+  if (!p) return;
+  restorePresetDisplay(MZViewPresets.display(p));
+  restorePresetFilter(true);
+  if (p.genre) saveRememberedFilters('genre');
+  buildHeader(); apply();
+  WRAP.scrollTop = 0; WRAP.scrollLeft = 0;
+  presetDD.open = false;
+  presetDD.querySelector('summary').focus({ preventScroll: true });
+}
+presetMenu.addEventListener('click', e => {
+  const button = e.target.closest('[data-preset]');
+  if (button) applyPreset(button.dataset.preset);
+});
+document.getElementById('presetreset').onclick = () => applyPreset(presetId);
+document.getElementById('presetedit').onclick = () => {
+  presetDD.open = false;
+  let genre = false;
+  document.getElementById('presetchoices').innerHTML = '<p class="preset-heading">Standard presets</p>' + MZViewPresets.presets.map(p => {
+    const heading = p.genre && !genre ? '<p class="preset-heading">Genres</p>' : '';
+    if (p.genre) genre = true;
+    return heading + '<label><input type="checkbox" data-available="' + p.id + '"' + (availablePresets.has(p.id) ? ' checked' : '') + '> ' + esc(p.label) + '</label>';
+  }).join('');
+  syncAvailablePresets(); presetAvailable.showModal();
+};
+function syncAvailablePresets() {
+  for (const cb of presetAvailable.querySelectorAll('[data-available]')) cb.disabled = availablePresets.size === 1 && cb.checked;
+}
+presetAvailable.addEventListener('change', e => {
+  const id = e.target.dataset.available;
+  if (!id) return;
+  if (e.target.checked) availablePresets.add(id); else availablePresets.delete(id);
+  try {
+    localStorage.setItem('mz-presets-off', JSON.stringify(MZViewPresets.standard.filter(p => !availablePresets.has(p.id)).map(p => p.id)));
+    localStorage.setItem('mz-presets-genres', JSON.stringify(MZViewPresets.genres.filter(p => availablePresets.has(p.id)).map(p => p.id)));
+  } catch (e) {}
+  syncAvailablePresets(); buildPresetOptions(); syncPresetStatus();
+});
+document.getElementById('presetavailabledone').onclick = () => presetAvailable.close();
+presetAvailable.addEventListener('close', () => presetDD.querySelector('summary').focus({ preventScroll: true }));
+// Keep keyboard interaction in this chooser; the table's type-anywhere and
+// arrow navigation must not select a game underneath it.
+presetDD.addEventListener('keydown', e => {
+  if (!presetDD.open || !['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) return;
+  e.preventDefault(); e.stopPropagation();
+  const choices = [...presetMenu.querySelectorAll('button:not(:disabled)')];
+  const at = choices.indexOf(document.activeElement);
+  const next = e.key === 'Home' ? 0 : e.key === 'End' ? choices.length - 1
+    : (at + (e.key === 'ArrowDown' ? 1 : -1) + choices.length) % choices.length;
+  choices[next]?.focus();
+});
+buildPresetOptions(); presetReady = true; syncPresetStatus();
 const patchSlug = k => k === NO_PATCH ? 'none' : k;
 const typeSlug = t => t.toLowerCase();
 const srcSlug = s => s;
@@ -4521,6 +4763,11 @@ function pickParam(set, keys, slug) {
 }
 function viewParams() {
   const out = [];
+  // A share includes the actual display, including adjustments to a preset.
+  // Recipients can reset the named preset without losing their own saved view.
+  if (presetId) out.push(['preset', presetId]);
+  out.push(['cols', activeColumns().map(c => c.k).join(',')], ['batches', foldBatches ? '1' : '0'],
+    ['samegames', foldSameGames ? '1' : '0']);
   if (accessMode !== 'all') out.push(['access', accessMode]);
   const q = document.getElementById('q').value.trim();
   if (q) out.push(['q', encodeURIComponent(q).replace(/%20/g, '+')]);
@@ -4572,9 +4819,30 @@ function adoptPick(raw, set, keys, slug, menu, attr) {
 // Runs once, after the first data load (the Source/Genre/Year menus are built
 // from the data). A ?fav= list has its own reader (adoptFavParam).
 function adoptViewParams(p = new URLSearchParams(location.search)) {
+  const preset = MZViewPresets.byId.get(p.get('preset'));
+  if (filterMemory.temporary && !preset && !p.has('cols')) {
+    // Old links predate display presets. Keep their canonical default order
+    // instead of inheriting a newly remembered Core/Manufacturer order.
+    presetId = ''; foldSameGames = true;
+    setTableSort('updated', -1);
+  }
+  if (preset) restorePresetDisplay(MZViewPresets.display(preset));
+  if (p.has('cols')) {
+    const state = capturePresetDisplay();
+    state.preset = preset?.id || '';
+    state.columns = p.get('cols').split(',');
+    const sv = p.get('s');
+    // New shared links carry explicit columns; omitted sort is the canonical
+    // default, not the recipient's saved order or the preset's default.
+    state.sort = sv ? [sv.replace(/^-/, ''), sv.startsWith('-') ? -1 : 1]
+      : MZLists.isListView() ? ['title', 1] : ['updated', -1];
+    state.batches = p.get('batches') === '1';
+    state.sameGames = p.get('samegames') !== '0';
+    restorePresetDisplay(state);
+  }
   if (Object.hasOwn(ACCESS_LABELS, p.get('access'))) accessMode = p.get('access');
   syncAccess();
-  if (MZLists.isListView()) { sortKey = 'title'; sortDir = 1; buildHeader(); }
+  if (MZLists.isListView() && !preset && !p.has('cols')) setTableSort('title', 1);
   const q = p.get('q');
   if (q) document.getElementById('q').value = q;
   adoptPick(p.get('t'), enabledTypes, TYPES, typeSlug, typeMenu, 'data-t');
@@ -4596,7 +4864,8 @@ function adoptViewParams(p = new URLSearchParams(location.search)) {
   if (sv) {
     const desc = sv.startsWith('-'), k = desc ? sv.slice(1) : sv;
     if (COLUMNS.some(c => c.k === k)) {
-      sortKey = k; sortDir = desc ? -1 : 1;
+      // Full display snapshots already restored their sort and columns.
+      if (!p.has('cols')) setTableSort(k, desc ? -1 : 1);
       // a sort on a column this visitor keeps hidden would be invisible: show
       // it for this visit (not saved unless they change the columns themselves)
       if (!activeColumns().some(c => c.k === k)) {
@@ -4609,6 +4878,10 @@ function adoptViewParams(p = new URLSearchParams(location.search)) {
     }
   }
   if (p.has('f') && p.get('f') !== '0') { favOnly = true; syncFavSummary(); }
+  // A simple ?preset= link applies that preset's named filter. Full shares
+  // already encode the precise current filters (including a modified preset).
+  if (preset && !p.has('cols')) restorePresetFilter(true);
+  buildHeader();
   apply();
 }
 // The filter-row share button copies this view; feedback anchors to the button.
@@ -6015,7 +6288,7 @@ function firstVisibleRowIdx(fromBottom) {
   // negative every row in the list passes the test and row 0 always wins.
   const wrap = document.querySelector('.tablewrap').getBoundingClientRect();
   const th = document.querySelector('#hrow th');
-  const top = th ? th.getBoundingClientRect().bottom : wrap.top;
+  const top = (th ? th.getBoundingClientRect().bottom : wrap.top) + pinnedHeight;
   for (const tr of rows) {
     const r = tr.getBoundingClientRect();
     if (r.bottom > top && r.top < wrap.bottom) return +tr.dataset.i;  // first row inside the visible scroll area
@@ -6033,6 +6306,8 @@ function navigate(dir) {  // dir: +1 down, -1 up
     target = cur + dir;
     if (target < 0 || target >= flat.length) return;  // clamp at the ends
   }
+  while (target >= 0 && target < flat.length && flat[target].section) target += dir;
+  if (target < 0 || target >= flat.length) return;
   openPanel(flat[target]);
   revealIndex(target, 'center');  // keep the selected row centered as you arrow through
 }
@@ -6042,6 +6317,7 @@ document.addEventListener('keydown', e => {
   // the Esc ladder, arrow-nav, or type-anywhere while it's up (q.focus() on an
   // inert page would misfire anyway)
   if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open], dialog.cldialog[open]')) return;  // modal fields own their keyboard input
+  if (presetDD.open && presetDD.contains(e.target) && e.key !== 'Escape') return;
   if (e.key === 'Escape') {
     const jumpTools = document.getElementById('cljumptools');
     if (jumpTools.open) { e.preventDefault(); jumpTools.open = false; jumpTools.querySelector('summary').focus(); return; }
@@ -6217,7 +6493,7 @@ narrowMQ.addEventListener('change', e => {
   syncGenreSummary();
   syncYear();
   syncFilterCount();
-  setCount(view.length);  // short tally + placeholder while narrow
+  setCount();  // short tally + placeholder while narrow
   if (!e.matches) setSheet(false);  // widening unfolds the filters into the row
 });
 
@@ -6278,6 +6554,7 @@ function stampMeta(m) {
 // whenever the tab regains focus, so "2 minutes ago" doesn't silently rot.
 // Armed once, outside stampMeta: a re-stamp must not stack a second interval.
 function tickMeta() {
+  if (refreshSectionCalendar() && booted && MZViewPresets.isDateSort(sortKey)) render();
   const s = document.getElementById('updated-rel'), n = document.getElementById('updated-rel-n');
   if (s && metaDt) s.textContent = relUpdated(metaDt);
   if (n && metaDt) n.textContent = relUpdated(metaDt, true);
@@ -6635,6 +6912,8 @@ function ingest(d) {
   // KEY2ROW or its stale object would still answer deep links
   for (const c in coreSoleTitle) delete coreSoleTitle[c];
   for (const c in seen) if (seen[c]) coreSoleTitle[c] = seen[c];
+  presetCatalogue = MZViewPresets.catalogue(DATA, coreLabel, key => SRC_NAMES[key] || key);
+  presetSectionRows.clear();
   for (const k in KEY2ROW) delete KEY2ROW[k];
   for (const r of DATA) if (r.k) KEY2ROW[r.k] = r;
   for (const r of DATA) for (const k of r.siteAliases || []) KEY2ROW[k] = r;
@@ -6899,8 +7178,11 @@ function boot() {
       adoptViewParams(new URLSearchParams(temporary.params));
     } else {
       restoreDropdownFilters(filterMemory.saved());
+      restorePresetFilter(savedPresetFilter);
       adoptViewParams(arrival);
     }
+    presetRemember = true;
+    syncPresetStatus();
     syncFilterMemoryControls();
     adoptFavParam();  // a ?fav= link in the arrival URL (needs KEY2ROW, so after ingest)
     stripViewParams();  // one-shot: the view is applied, the address bar goes back to plain
@@ -6919,7 +7201,7 @@ function boot() {
       },
       captureView: () => ({query: document.getElementById('q').value,
         types: [...enabledTypes], patches: [...enabledPatches], maturity: [...enabledMat], sources: [...enabledSrcs], genres: [...enabledGenres],
-        accessMode, yearFrom, yearTo, sortKey, sortDir, favOnly, expanded: [...expanded], searchShut: [...searchShut], libraryTop: document.getElementById('collection-library').scrollTop, top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
+        accessMode, yearFrom, yearTo, sortKey, sortDir, favOnly, display: capturePresetDisplay(), expanded: [...expanded], searchShut: [...searchShut], libraryTop: document.getElementById('collection-library').scrollTop, top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
       restoreView: saved => {
         favView = null; document.getElementById('favbanner').hidden = true;
         expanded.clear(); (saved?.expanded || []).forEach(k => expanded.add(k));
@@ -6938,7 +7220,10 @@ function boot() {
         yearFrom = saved?.yearFrom ?? null; yearTo = saved?.yearTo ?? null;
         const from = yearMenu.querySelector('.yfrom'), to = yearMenu.querySelector('.yto');
         if (from) from.value = yearFrom ?? ''; if (to) to.value = yearTo ?? '';
-        sortKey = saved?.sortKey || (MZLists.isListView() ? 'title' : 'updated'); sortDir = saved?.sortDir || (MZLists.isListView() ? 1 : -1);
+        if (!restorePresetDisplay(saved?.display)) {
+          presetId = ''; foldSameGames = true;
+          setTableSort(saved?.sortKey || (MZLists.isListView() ? 'title' : 'updated'), saved?.sortDir || (MZLists.isListView() ? 1 : -1));
+        }
         favOnly = saved?.favOnly || false;
         syncTypeSummary(); syncSrcSummary(); syncGenreSummary(); syncYear(); syncFavSummary(); buildHeader(); apply();
       },

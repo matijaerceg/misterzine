@@ -52,6 +52,36 @@ dashboard is public, linked as "Traffic Stats" in the header).
   ("Pac-Man", "Street Fighter II: The World Warrior"), not raw MRA filenames; discarded
   alternate names stay searchable.
 
+### View presets
+
+The **View preset** menu beside Columns applies sorting, columns and grouping
+together. Standard presets follow MZ Arcade's browsing names: Build date, MiSTer
+debut, A–Z, Manufacturer, Original year and Core. Cabinet setup brings
+rotation, video signal, players and controls together. **Available presets** lets
+each browser hide standard choices and opt into genre shortcuts.
+
+Sorting Title, Manufacturer, Original Year, FPGA Core, Source or Genre shows the
+corresponding sections. Build Date, MiSTer Debut and Changed on MZ group by the
+selected date, using today, yesterday, Monday-based weeks, calendar months and
+older years. The current heading stays beneath the column labels while scrolling.
+Manufacturer sections combine first-company credits and corporate suffixes using
+the app's rules. Core sections show implementations individually under multi-game
+cores, with single-game cores and non-arcade systems gathered separately. These
+sections are display headings; they never change catalogue identities or links.
+
+Search and filters remain in place when applying a display preset. Genre presets
+also select their named genre. The Favorites tab and star filter show saved entries. Manual display changes show
+**modified**; **Reset preset** reapplies that preset. Presets and their adjustments
+are remembered locally. Shared links carry the actual columns and grouping, remain
+temporary across reloads, and can revert to the recipient's saved view. Collection
+tabs retain their own display during in-page navigation.
+
+Definitions and grouping helpers live in `docs/releases/view-presets.js`, with
+presentation in `view-presets.css` and integration in `index.html`. Run
+`node --test tools/view_presets.test.js` for grouping/validation checks and
+`python tools/test_view_presets.py --url http://127.0.0.1:11176/releases/` against
+a local static preview for Firefox interaction and responsive checks.
+
 ### Provisional arcade metadata
 
 MAD remains authoritative per field. Before MAD covers a game, current MAME

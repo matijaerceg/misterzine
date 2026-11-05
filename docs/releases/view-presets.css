@@ -1,0 +1,48 @@
+.display-controls { display: flex; align-items: flex-start; align-self: flex-start; gap: .4rem; flex: none; }
+#presets { min-width: 0; }
+#presets > summary { display: flex; align-items: center; gap: .3em; max-width: 24rem; }
+#presetname { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.preset-prefix { color: var(--muted); white-space: nowrap; }
+#presetmenu { width: 21rem; min-width: 0; max-width: calc(100vw - 2rem); box-sizing: border-box; gap: .2rem; }
+#presetmenu .preset-option { width: 100%; text-align: left; display: grid; grid-template-columns: 1rem 1fr;
+  gap: .1rem .4rem; border: 1px solid transparent; border-radius: 4px; padding: .45rem .35rem;
+  color: var(--fg); background: transparent; font: inherit; cursor: pointer; }
+#presetmenu .preset-option:hover, #presetmenu .preset-option:focus-visible { background: var(--hover-bg); border-color: var(--hair); }
+#presetmenu .preset-option[aria-pressed="true"] { background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.preset-check { grid-row: span 2; color: var(--accent); }
+.preset-desc { grid-column: 2; color: var(--muted); font-size: .78rem; line-height: 1.35; }
+.preset-heading { font-size: .8rem; color: var(--muted); margin: .45rem 0 .15rem; }
+#presetmenu .preset-actions { border-top: 1px solid var(--hair); display: grid; gap: .25rem; margin-top: .4rem; padding-top: .4rem; }
+#presetmenu .preset-actions button { text-align: left; }
+#presetmenu button:disabled { opacity: .45; cursor: default; }
+#presetmenu .colnote { margin-bottom: 0; white-space: normal; }
+#presetavailable { max-width: min(32rem, calc(100vw - 2rem)); }
+#presetavailable h2 { margin-top: 0; }
+#presetchoices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem 1rem; }
+#presetchoices .preset-heading { grid-column: 1 / -1; }
+#presetchoices label { display: flex; gap: .4rem; align-items: baseline; }
+#rows tr.preset-section th, #sectionpin span { padding: .5rem .6rem; cursor: default;
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface)); color: var(--accent);
+  border-top: 1px solid var(--hair); border-bottom: 1px solid var(--rule);
+  font-size: .85rem; line-height: 1.3; font-weight: 600; }
+#rows tr.preset-section th { position: static; z-index: auto; }
+#rows tr.preset-section th > span { position: sticky; left: .6rem; }
+/* The visual copy occupies no table space. Keeping it in the scroller lets
+   the wheel and touch gestures work over the label, including on narrow screens. */
+#sectionpin { position: sticky; left: 0; height: 0; z-index: 12; }
+#sectionpin .pin-clip { overflow: clip; pointer-events: none; }
+#sectionpin span { display: block; pointer-events: auto; }
+@media print { #sectionpin { display: none; } }
+@container topbar (max-width: 867px) {
+  .controls { flex-wrap: wrap; }
+  .display-controls { order: 4; flex: 1 0 100%; min-width: 0; align-items: center; margin-top: .1rem; }
+  #presets { flex: 1; }
+  #presets > summary { max-width: none; }
+  #presets > summary::after { margin-left: auto; }
+  .display-controls #cols summary .w { display: inline; }
+  .display-controls #cols summary .n { display: none; }
+}
+@media (max-width: 360px) {
+  .preset-prefix .preset-view-word { display: none; }
+  #presetchoices { grid-template-columns: 1fr; }
+}

@@ -4,6 +4,14 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- The tracker header keeps Patreon visible with its icon on desktop and mobile, uses a smaller MisterZine logo and groups site destinations, including Hardware Landscape, at the bottom of Menu at every width.
+
+- Sorting Title, Manufacturer, Original Year, FPGA Core, Source or Genre shows section headings. Build Date, MiSTer Debut and Changed on MZ show recent days, weeks, months and older years. The current heading stays visible while scrolling.
+
+- View presets beside Columns apply ready-made combinations of sorting, grouping and columns. Choose Build date, MiSTer debut, A–Z, Manufacturer, Original year, Core or Cabinet setup. Optional genre presets can be enabled in Available presets. Adjustments show “modified” and can be reset without clearing search or unrelated filters.
+
+- Shared views now include columns and grouping as well as filters and sorting. They remain temporary and offer Revert to my saved view; preset choices and adjustments are remembered in the current browser.
+
 - Live refresh alerts now compare visible entries consistently, preventing hidden mirror copies from being falsely announced as updated. Real new entries and build-date changes still produce alerts.
 
 - Games available on several cores now use “(MiSTer-devel)” when the Distribution core's name merely repeats the game title. Naming and grouping share the same matching rule, including punctuation differences and meaningful variants; E.D.F.'s two implementations now appear together.

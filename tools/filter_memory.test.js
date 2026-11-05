@@ -86,3 +86,26 @@ test('malformed and blocked browser storage cannot break the filters', () => {
   assert.equal(blocked.endTemporary(), true);
   assert.equal(blocked.temporary, null);
 });
+
+test('Source remembers mature filtering and blur and isolates shared changes', () => {
+  const local = storage(), session = storage();
+  const memory = createFilterMemory(() => local, () => session);
+  const src = { off: [], access: 'all', maturity: 'only', blur: false };
+  assert.equal(memory.remember('src', src), true);
+  const temporary = filters();
+  temporary.src = { ...src, maturity: 'hide', blur: true };
+  memory.startTemporary(temporary);
+  const reloaded = createFilterMemory(() => local, () => session);
+  assert.deepEqual(reloaded.saved().src, src);
+  assert.deepEqual(reloaded.temporary.filters.src, temporary.src);
+  reloaded.save('src', temporary.src);
+  assert.deepEqual(reloaded.saved().src, src);
+});
+
+test('Source rejects malformed mature choices without dropping legacy preferences', () => {
+  const memory = createFilterMemory(() => storage(), () => storage());
+  const src = { off: [], access: 'all' };
+  assert.equal(memory.remember('src', src), true);
+  assert.equal(memory.remember('src', { ...src, maturity: 'unknown' }), false);
+  assert.equal(memory.remember('src', { ...src, blur: 'false' }), false);
+});

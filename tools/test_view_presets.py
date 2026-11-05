@@ -227,6 +227,21 @@ def main():
         assert state(recipient) == {k: v for k, v in json.loads(saved).items() if k != 'filterActive'}
         checks.append('Modified presets persist; shared display survives reload without replacing saved settings')
 
+        # A maturity change rebuilds the catalogue during Revert. That render
+        # must not replace the saved preset with the shared view being dismissed.
+        saved_display = state(recipient)
+        saved_preference = recipient.evaluate("localStorage.getItem('mz-view-preset')")
+        load(recipient, args.url + '?preset=cabinet&m=all')
+        assert recipient.evaluate("presetId === 'cabinet' && matureChoice === 'include'")
+        recipient.reload(wait_until='domcontentloaded')
+        recipient.wait_for_function('booted && presetRemember')
+        assert recipient.evaluate("localStorage.getItem('mz-view-preset')") == saved_preference
+        recipient.locator('#restoresavedfilters').click()
+        assert recipient.evaluate("matureChoice === 'hide'")
+        assert state(recipient) == saved_display
+        assert recipient.evaluate("localStorage.getItem('mz-view-preset')") == saved_preference
+        checks.append('Reverting a shared view restores saved display even when mature visibility rebuilds the catalogue')
+
         # Old shares still mean the canonical date order, even for someone
         # whose own view is now remembered as Manufacturer.
         load(recipient, args.url + '?view=1&q=donkey+kong')
@@ -279,7 +294,7 @@ def main():
         expect(page.locator('#rows .nomatch')).to_be_visible()
         page.evaluate('clearAllFilters()')
         expect(page.locator('#presetname')).to_have_text('Core')
-        assert keys(page) == baseline, page.evaluate('({types:[...enabledTypes], genres:[...enabledGenres], patches:[...enabledPatches], maturity:[...enabledMat], sources:[...enabledSrcs], yearFrom, yearTo, accessMode, favOnly, rows:view.length})')
+        assert keys(page) == baseline, page.evaluate('({types:[...enabledTypes], genres:[...enabledGenres], patches:[...enabledPatches], matureChoice, matureBlur, sources:[...enabledSrcs], yearFrom, yearTo, accessMode, favOnly, rows:view.length})')
         checks.append('Favorites retain independent core entries and empty state can be cleared')
 
         # Tablet, narrow docked pane and phone: controls and menus stay within

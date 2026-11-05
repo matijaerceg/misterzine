@@ -260,7 +260,7 @@
   details.cols .menu .filter-memory { border-top: 1px solid var(--hair); margin-top: .4rem; padding-top: .5rem; }
   details.cols .menu .filter-memory label { font-size: .8rem; }
   .filter-memory-note { display: block; max-width: 19rem; white-space: normal; font-size: .75rem; color: var(--muted); margin: .3rem 0 0; }
-  /* Type: Arcade's sub-filters (Patches, then Mature / Non-mature), indented
+  /* Type: Arcade's patch filters, indented
      under its row; a small dim heading or a hairline opens each section, and
      the block dims while Arcade itself is unchecked (its boxes keep their
      state but filter nothing then) */
@@ -273,6 +273,16 @@
   #srcmenu .source-group label { padding-left: .5rem; }
   #srcmenu .source-group h3 label { font: inherit; padding-left: 0; }
   #srcmenu .source-note { max-width: 19rem; white-space: normal; font-size: .75rem; color: var(--muted); margin: .5rem 0; }
+  #srcmenu .mature-row { display: flex; align-items: center; gap: .6rem; }
+  #srcmenu #maturemenu { display: inline-flex; flex: none; border: 1px solid var(--hair); border-radius: 4px; overflow: hidden; }
+  #srcmenu #maturemenu label { position: relative; flex: 1; justify-content: center; min-width: 3.5rem; padding: .2rem .45rem; font-size: .8rem; }
+  #srcmenu #maturemenu label + label { border-left: 1px solid var(--hair); }
+  #srcmenu #maturemenu input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  #srcmenu #maturemenu label:hover { background: var(--hover-bg); }
+  #srcmenu #maturemenu label:has(input:checked) { background: var(--rule); font-weight: 600; }
+  #srcmenu #maturemenu label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+  #srcmenu .mature-blur { padding-left: 0; font-size: .8rem; }
+  #srcmenu .mature-blur:has(input:disabled) { opacity: .45; }
   #srcmenu .resets { flex-wrap: wrap; gap: .35rem 1rem; }
   /* Source: the downloader.ini lines opener under the picks. A real button, not
      a link-style pick like the ones above it: it opens a popup, it filters nothing */
@@ -975,7 +985,7 @@
      underneath -- same presentation as the CORS-taint fallback */
   html[data-mask="off"] #panel .frame canvas,
   html[data-mask="off"] #panel .sysframe canvas { display: none; }
-  /* Mature games: Blur (site Menu) covers a mature row's screenshots until a
+  /* Mature games: Blur (Source menu) covers a mature row's screenshots until a
      click reveals that one frame. filter, not a transform: the mask canvas is
      sized from the img's box, which a scale would change. */
   #panel .frame.mat { overflow: hidden; }
@@ -985,16 +995,6 @@
   html[data-mature="blur"] #panel .frame.mat:not(.reveal)::after {
     content: "Mature: click to show"; position: absolute; inset: 0; display: grid; place-items: center;
     color: #fff; font-size: .8rem; letter-spacing: .03em; text-shadow: 0 1px 3px #000; pointer-events: none; }
-  /* the Menu's three-way Mature games switch, styled like the theme rows */
-  .sitemenu .matrow { display: flex; align-items: center; gap: .6rem; padding: .35rem .6rem;
-                      font-size: .85rem; white-space: nowrap; }
-  .sitemenu .matseg { display: inline-flex; margin-left: auto; border: 1px solid var(--hair);
-                      border-radius: 4px; overflow: hidden; }
-  .sitemenu .matseg button { font: inherit; font-size: .78rem; padding: .2rem .5rem; border: 0;
-                             background: transparent; color: inherit; cursor: pointer; }
-  .sitemenu .matseg button + button { border-left: 1px solid var(--hair); }
-  .sitemenu .matseg button:hover { background: var(--hover-bg); }
-  .sitemenu .matseg button[aria-pressed="true"] { background: var(--rule); font-weight: 600; }
   #flyer-lightbox { border: 0; padding: 16px; margin: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; box-sizing: border-box; background: transparent; cursor: zoom-out; overflow: hidden; }
   #flyer-lightbox[open] { display: flex; align-items: center; justify-content: center; }
   #flyer-lightbox::backdrop { background: rgba(0, 0, 0, .78); }
@@ -1282,13 +1282,6 @@
                 <label class="mask" data-tip="A CRT phosphor pattern drawn over screenshots; off shows them plain."><input type="checkbox" id="maskbox" checked> Shadow mask</label>
               </div>
             </details>
-          </div>
-          <!-- mature content (data.json mat): show, blur the screenshots, or hide
-               the rows. Remembered per browser (mz-mature); wired by syncMature. -->
-          <div class="matrow" role="group" aria-labelledby="matlbl"
-               data-tip="Games MAME marks as mature, mostly strip puzzle and mahjong games. Hide (the default) removes them from the list; Blur covers their screenshots (click one to reveal it).">
-            <span id="matlbl">Mature games</span>
-            <span class="matseg" id="matseg"><button type="button" data-mat="show">Show</button><button type="button" data-mat="blur">Blur</button><button type="button" data-mat="hide">Hide</button></span>
           </div>
           <hr class="msep">
       <a href="#" id="pub-note">What's listed<span class="ext">ⓘ</span></a>
@@ -1746,9 +1739,20 @@ let pinnedHeight = 0;
 // the last data.json as loaded; DATA is it minus mature rows while Mature games
 // is set to Hide (see ingest and syncMature)
 let RAW = [];
-const MAT_KEY = 'mz-mature', MAT_MODES = ['show', 'blur', 'hide'];
-let matMode = 'hide';  // the default until a visitor picks another mode
-try { const m = localStorage.getItem(MAT_KEY); if (MAT_MODES.includes(m)) matMode = m; } catch (e) {}
+const MAT_KEY = 'mz-mature', MAT_BLUR_KEY = 'mz-mature-blur';
+const MATURE_CHOICES = { hide: 'Hide', include: 'Include', only: 'Only' };
+function readMaturePreference() {
+  let choice = 'hide', blur = true;
+  try {
+    const old = localStorage.getItem(MAT_KEY);
+    if (old === 'show' || old === 'blur') { choice = 'include'; blur = old === 'blur'; }
+    const savedBlur = localStorage.getItem(MAT_BLUR_KEY);
+    if (savedBlur === 'true' || savedBlur === 'false') blur = savedBlur === 'true';
+  } catch (_) {}
+  return { choice, blur };
+}
+let { choice: matureChoice, blur: matureBlur } = readMaturePreference();
+let matMode = matureChoice === 'hide' ? 'hide' : matureBlur ? 'blur' : 'show';
 document.documentElement.setAttribute('data-mature', matMode);
 let openRow = null;  // the selected data object (unique & stable; d.img is NOT — clones share it)
 // deep links: every row carries a stable key (d.k, stamped by export-web);
@@ -2699,7 +2703,7 @@ function betaBadge(d) {
 // slash is cut away around the 18 (the 18's strokes widened by 1.2 in the mask)
 // so the line passes behind the number instead of smearing into it. The owner
 // picked this cut (2026-10-21) over cutting the 18 and over no gap at all.
-const MAT_TIP = 'Mature (adult content). Menu > Mature games can show, blur or hide these.';
+const MAT_TIP = 'Mature (adult content). Source > Mature content can include, blur or hide these.';
 function matBadge(d) {
   return d.mat ? '<span class="ms" data-tip="' + MAT_TIP + '" role="img" aria-label="Mature"></span>' : '';
 }
@@ -3260,7 +3264,7 @@ function render() {
       pickMsg(SRC_KEYS, enabledSrcs, s => SRC_NAMES[s] || s, 'source') +
       pickMsg(GENRE_KEYS, enabledGenres, g => g === NO_GENRE ? 'No genre' : g, 'genre') +
       pickMsg(PATCH_KEYS, enabledPatches, k => PATCH_LABELS[k], 'patch type') +
-      pickMsg(MAT_KEYS, enabledMat, k => MAT_LABELS[k], 'mature option') +
+      (matureChoice === 'only' ? ' (only mature games)' : '') +
       (accessMode !== 'all' ? ' (' + esc(ACCESS_LABELS[accessMode]) + ')' : '') +
       (favView ? ' in this favorites link' : favOnly ? ' in your favorites' : '') +
       (yearLabel() ? ' (years ' + yearLabel() + ')' : '') +
@@ -3568,6 +3572,7 @@ function apply() {
   // nothing (see pickNarrows and the menus below).
   view = DATA.filter(d => {
     if (!MZLists.matches(d)) return false;
+    if (matureChoice === 'only' && !d.mat) return false;
     if (accessMode === 'public' && d.beta || accessMode === 'early' && !d.beta) return false;
     // favorites: someone else's shared link (favView) and your own toggle are
     // separate narrowers — a shared link is a view of THEIR list, and starring
@@ -3582,12 +3587,11 @@ function apply() {
     // "No genre" box, so unchecking a real genre never hides a console core
     if (GENRE_KEYS.length && !enabledGenres.has(d.genre || NO_GENRE)) return false;
     // Arcade's sub-filters (Type menu): Patches passes a game while any of its
-    // patch types (or, with none, the "No patches" box) is checked; Mature /
-    // Non-mature by the mat marker. Non-arcade rows are never judged by them.
+    // patch types (or, with none, the "No patches" box) is checked.
+    // Non-arcade rows are never judged by the patch filters.
     if (d.base === 'Arcade') {
       if (PATCH_KEYS.length && enabledPatches.size < PATCH_KEYS.length &&
           !patchKeysOf(d).some(k => enabledPatches.has(k))) return false;
-      if (MAT_KEYS.length && !enabledMat.has(matKeyOf(d))) return false;
     }
     // Year range: rows with no numeric Original Year drop out while a bound is set
     if (yearFrom != null || yearTo != null) {
@@ -3867,6 +3871,7 @@ function clearAllFilters() {
   const q = document.getElementById('q');
   q.value = '';
   resetTypes(); resetSrcs(); resetGenres(); resetYear();
+  if (matureChoice === 'only') setMature('include', matureBlur);
   accessMode = 'all'; syncAccess();
   // both favorites narrowers go too (the saved list itself is untouched) — a
   // "Clear filters" that left the table still hiding rows would be lying
@@ -3932,7 +3937,6 @@ let enabledTypes = new Set(TYPES);
 let enabledSrcs = new Set();
 let enabledGenres = new Set();
 let enabledPatches = new Set();
-let enabledMat = new Set();
 let accessMode = 'all';
 const ACCESS_LABELS = {all: 'All', public: 'Public only', early: 'Early access only'};
 function syncAccess() {
@@ -3943,7 +3947,7 @@ let yearFrom = null, yearTo = null, YEAR_MIN = null, YEAR_MAX = null;
 // true while any multi-select is narrowing (some box unchecked). A menu that has no
 // keys yet (data not landed) cannot narrow.
 function pickNarrows() {
-  return accessMode !== 'all' || enabledTypes.size < TYPES.length
+  return matureChoice === 'only' || accessMode !== 'all' || enabledTypes.size < TYPES.length
     || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length)
     || (GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length)
     || arcadeSubNarrows();
@@ -3975,28 +3979,15 @@ function pickAllNone(menu, set, keys, e) {
 
 const typeMenu = document.getElementById('typemenu');
 const typeSummary = document.getElementById('typesummary');
-// Arcade carries two sub-filters, indented under its row, both on the same
-// all-checked model and both judging arcade rows only (no console core has a
-// fan patch or MAME's mature marker):
-//  - Patches: one box per patch type present plus a closing "No patches" box,
-//    so unchecking a type never hides unpatched games; a game with several
-//    patch types shows while any of them is checked.
-//  - Mature / Non-mature: data.json's mat marker and its opposite. Absent
-//    while the Menu's Mature games switch is on Hide (DATA has no mature rows).
-// Both are data-seeded by buildTypeMenu (ingest); a section with nothing to
-// tell apart is left out. Unchecking Arcade keeps their picks but dims them.
+// Arcade's patch filters are data-seeded and dim when Arcade is unchecked.
 const NO_PATCH = '__none__';
 const PATCH_LABELS = { translation: 'Translation', restoration: 'Restoration',
   enhanced: 'Enhanced', arrange: 'Arranged soundtrack', [NO_PATCH]: 'No patches' };
 const PATCH_ORDER = ['translation', 'restoration', 'enhanced', 'arrange'];
 let PATCH_KEYS = [];  // menu order, filled by buildTypeMenu; empty until data lands
 const patchKeysOf = d => d.pt && d.pt.length ? [...new Set(d.pt.map(p => p.t))] : [NO_PATCH];
-const MAT_LABELS = { mature: 'Mature', clean: 'Non-mature' };
-let MAT_KEYS = [];
-const matKeyOf = d => d.mat ? 'mature' : 'clean';
 function arcadeSubNarrows() {
-  return (PATCH_KEYS.length > 0 && enabledPatches.size < PATCH_KEYS.length)
-    || (MAT_KEYS.length > 0 && enabledMat.size < MAT_KEYS.length);
+  return PATCH_KEYS.length > 0 && enabledPatches.size < PATCH_KEYS.length;
 }
 function typeNarrows() { return enabledTypes.size < TYPES.length || arcadeSubNarrows(); }
 // each type row is prefixed with its colour-coded type icon (decorative here,
@@ -4006,26 +3997,21 @@ const typeRow = t => '<label><input type="checkbox" data-t="' + t + '"' +
   '<span class="tico t-' + t.toLowerCase() + ' ' + icoClass(t) + '" aria-hidden="true"></span>' +
   t + '</label>';
 function buildTypeMenu() {
-  const pc = {}, mc = {};
+  const pc = {};
   for (const d of DATA) {
     if (d.base !== 'Arcade') continue;
     for (const k of patchKeysOf(d)) pc[k] = (pc[k] || 0) + 1;
-    mc[matKeyOf(d)] = (mc[matKeyOf(d)] || 0) + 1;
   }
   const pkeys = PATCH_ORDER.filter(k => pc[k]);
   if (pkeys.length && pc[NO_PATCH]) pkeys.push(NO_PATCH);
-  const mkeys = mc.mature && mc.clean ? ['mature', 'clean'] : [];
   // live data swap keeps picks, exactly like buildGenreMenu
   const keep = (keys, set, old) => new Set(!old.length || old.every(k => set.has(k))
     ? keys : keys.filter(k => set.has(k)));
   enabledPatches = keep(pkeys, enabledPatches, PATCH_KEYS); PATCH_KEYS = pkeys;
-  enabledMat = keep(mkeys, enabledMat, MAT_KEYS); MAT_KEYS = mkeys;
   const box = (attr, k, set, label, n) => '<label><input type="checkbox" ' + attr + '="' + k + '"' +
     (set.has(k) ? ' checked' : '') + '> ' + label + '<span class="gcount">' + n + '</span></label>';
   const sub = (PATCH_KEYS.length ? '<span class="tsubh">Patches</span>' +
-      PATCH_KEYS.map(k => box('data-p', k, enabledPatches, PATCH_LABELS[k], pc[k])).join('') : '') +
-    (PATCH_KEYS.length && MAT_KEYS.length ? '<hr>' : '') +
-    MAT_KEYS.map(k => box('data-m', k, enabledMat, MAT_LABELS[k], mc[k])).join('');
+      PATCH_KEYS.map(k => box('data-p', k, enabledPatches, PATCH_LABELS[k], pc[k])).join('') : '');
   typeMenu.innerHTML = TYPES.map(t => typeRow(t) +
     (t === 'Arcade' && sub ? '<div class="tsub">' + sub + '</div>' : '')).join('') + pickButtons('type') + rememberControl('type');
   syncTypeSummary();
@@ -4043,10 +4029,10 @@ function syncTypeSummary() {
   if (sub) sub.classList.toggle('off', !enabledTypes.has('Arcade'));
 }
 typeMenu.addEventListener('change', e => {
-  const { t, p, m } = e.target.dataset;
-  const set = t ? enabledTypes : p ? enabledPatches : m ? enabledMat : null;
+  const { t, p } = e.target.dataset;
+  const set = t ? enabledTypes : p ? enabledPatches : null;
   if (!set) return;
-  if (e.target.checked) set.add(t || p || m); else set.delete(t || p || m);
+  if (e.target.checked) set.add(t || p); else set.delete(t || p);
   syncTypeSummary();
   apply();
   recenterOpen();  // adding/removing whole types moves the selected row — follow it
@@ -4056,8 +4042,7 @@ typeMenu.addEventListener('change', e => {
 function resetTypes() {
   for (const t of TYPES) enabledTypes.add(t);
   for (const k of PATCH_KEYS) enabledPatches.add(k);
-  for (const k of MAT_KEYS) enabledMat.add(k);
-  for (const cb of typeMenu.querySelectorAll('input[data-t], input[data-p], input[data-m]')) cb.checked = true;
+  for (const cb of typeMenu.querySelectorAll('input[data-t], input[data-p]')) cb.checked = true;
   syncTypeSummary();
 }
 // None unchecks the four types only: Arcade's section picks stay (dimmed), so
@@ -4262,6 +4247,10 @@ function syncSrcSummary() {
     srcSummary.textContent += accessMode === 'public' ? ' · Public' : ' · Early access';
     srcSummary.classList.add('active');
   }
+  if (matureChoice === 'only') {
+    srcSummary.textContent += ' · Mature';
+    srcSummary.classList.add('active');
+  }
 }
 function buildSrcMenu() {
   const counts = {};
@@ -4289,6 +4278,7 @@ function buildSrcMenu() {
     '<div id="accessmenu" role="radiogroup" aria-labelledby="accessheading">' +
     Object.entries(ACCESS_LABELS).map(([value, label]) => '<label><input type="radio" name="access" value="' + value + '"' +
       (accessMode === value ? ' checked' : '') + '> ' + label + '</label>').join('') + '</div></section>' +
+    matureControls() +
     group(true, 'Included in update_all') + group(false, 'Requires manual setup') +
     '<p class="source-note">Included sources may need enabling in update_all. Early access releases require a supporter key.</p>' +
     pickButtons('src') +
@@ -4297,10 +4287,19 @@ function buildSrcMenu() {
       '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">' +
       '<rect x="1.5" y="2.5" width="13" height="11" rx="1.5"/><path d="M1.5 5.5h13M4 8.5h5M4 11h7"/></svg>' +
       'downloader.ini lines...</button>' + rememberControl('src');
-  syncSrcSummary(); syncFavSummary();
+  syncMature(); syncSrcSummary(); syncFavSummary();
 }
 // delegated so the listeners survive buildSrcMenu() rebuilding the innerHTML
 srcMenu.addEventListener('change', e => {
+  if (e.target.name === 'maturity' && Object.hasOwn(MATURE_CHOICES, e.target.value)) {
+    const choice = e.target.value;
+    setMature(choice, matureBlur, true);
+    srcMenu.querySelector('input[name="maturity"][value="' + choice + '"]')?.focus({ preventScroll: true });
+    apply(); recenterOpen(); return;
+  }
+  if (e.target.id === 'matureblur') {
+    setMature(matureChoice, e.target.checked, true); apply(); return;
+  }
   if (e.target.name === 'access' && Object.hasOwn(ACCESS_LABELS, e.target.value)) {
     accessMode = e.target.value; syncAccess(); apply(); recenterOpen(); return;
   }
@@ -4393,26 +4392,32 @@ syncGenreSummary();  // initial state before data loads (reads "Genre" / no glow
 // --- optional browser-local memory for each filter dropdown -------------------
 const filterMenus = { type: typeMenu, src: srcMenu, genre: genreMenu, year: yearMenu };
 function captureDropdownFilters(previous = filterMemory.temporary?.filters || filterMemory.saved()) {
-  // Retain excluded options currently absent from the catalogue (for example,
-  // maturity options while mature games are hidden by the separate site setting).
+  // Retain excluded options currently absent from the catalogue.
   const off = (keys, set, old = []) => [...old.filter(k => !keys.includes(k)), ...keys.filter(k => !set.has(k))];
   return {
     type: { off: off(TYPES, enabledTypes, previous.type?.off),
       patchesOff: off(PATCH_KEYS, enabledPatches, previous.type?.patchesOff),
-      maturityOff: off(MAT_KEYS, enabledMat, previous.type?.maturityOff) },
-    src: { off: off(SRC_KEYS, enabledSrcs, previous.src?.off), access: accessMode },
+      maturityOff: [] }, // accepted for compatibility with older saved filters
+    src: { off: off(SRC_KEYS, enabledSrcs, previous.src?.off), access: accessMode,
+      maturity: matureChoice, blur: matureBlur },
     genre: { off: off(GENRE_KEYS, enabledGenres, previous.genre?.off) },
     year: { from: yearFrom, to: yearTo },
   };
 }
 function restoreDropdownFilters(values) {
+  const pref = readMaturePreference();
+  // Carry old Type-filter choices forward; the former Hide preference took priority.
+  const legacyOff = values.type?.maturityOff || [];
+  const legacy = pref.choice === 'hide' ? 'hide' : legacyOff.includes('mature') ? 'hide'
+    : legacyOff.includes('clean') ? 'only' : pref.choice;
+  setMature(values.src?.maturity || legacy, values.src?.blur ?? pref.blur);
+
   const restore = (keys, set, off, menu, attr) => {
     set.clear(); rememberedFilterKeys(keys, off).forEach(k => set.add(k));
     for (const cb of menu.querySelectorAll('input[' + attr + ']')) cb.checked = set.has(cb.getAttribute(attr));
   };
   restore(TYPES, enabledTypes, values.type?.off, typeMenu, 'data-t');
   restore(PATCH_KEYS, enabledPatches, values.type?.patchesOff, typeMenu, 'data-p');
-  restore(MAT_KEYS, enabledMat, values.type?.maturityOff, typeMenu, 'data-m');
   restore(SRC_KEYS, enabledSrcs, values.src?.off, srcMenu, 'data-s');
   restore(GENRE_KEYS, enabledGenres, values.genre?.off, genreMenu, 'data-g');
   accessMode = values.src?.access || 'all';
@@ -4469,12 +4474,15 @@ for (const [group, menu] of Object.entries(filterMenus)) {
 }
 document.getElementById('restoresavedfilters').addEventListener('click', e => {
   if (!filterMemory.endTemporary()) { showChip(e.currentTarget, 'Could not leave the shared view'); return; }
+  // Restoring mature visibility can rebuild and render the catalogue. Keep the
+  // saved display and genre choice before that render updates remembered state.
+  const display = savedPresetDisplay, filterActive = savedPresetFilter;
   restoreDropdownFilters(filterMemory.saved());
   document.getElementById('q').value = '';
   resetFavOnly();
   if (favView) dismissFavView();
-  restorePresetDisplay(savedPresetDisplay);
-  restorePresetFilter(savedPresetFilter);
+  restorePresetDisplay(display);
+  restorePresetFilter(filterActive);
   buildHeader();
   syncFilterMemoryControls(); apply(); recenterOpen();
 });
@@ -4594,7 +4602,7 @@ syncFavSummary();  // a returning visitor's count is already known before data l
 //   src  Source menu (database ids)            src=-distribution_mister
 //   g    Genre menu (slugs; none = No genre)   g=shooter,maze
 //   p    Type > Arcade > Patches (none = No patches)   p=translation,enhanced
-//   m    Type > Arcade > Mature / Non-mature   m=clean
+//   m    Source > Mature content             m=clean / m=mature / m=all
 //   y    Original Year range                   y=1980-1989  y=1990-  y=-1985  y=1987
 //   s    sort column, leading - = descending   s=title  s=-date  (-updated, the default, is left out)
 //   f    favorites only (the VISITOR'S own)    f=1
@@ -4769,13 +4777,13 @@ function viewParams() {
   out.push(['cols', activeColumns().map(c => c.k).join(',')], ['batches', foldBatches ? '1' : '0'],
     ['samegames', foldSameGames ? '1' : '0']);
   if (accessMode !== 'all') out.push(['access', accessMode]);
+  out.push(['m', matureChoice === 'hide' ? 'clean' : matureChoice === 'only' ? 'mature' : 'all']);
   const q = document.getElementById('q').value.trim();
   if (q) out.push(['q', encodeURIComponent(q).replace(/%20/g, '+')]);
   for (const [k, v] of [['t', pickParam(enabledTypes, TYPES, typeSlug)],
                         ['src', pickParam(enabledSrcs, SRC_KEYS, srcSlug)],
                         ['g', pickParam(enabledGenres, GENRE_KEYS, genreSlug)],
-                        ['p', pickParam(enabledPatches, PATCH_KEYS, patchSlug)],
-                        ['m', pickParam(enabledMat, MAT_KEYS, k => k)]])
+                        ['p', pickParam(enabledPatches, PATCH_KEYS, patchSlug)]])
     if (v != null) out.push([k, v]);
   if (yearFrom != null || yearTo != null)
     out.push(['y', yearFrom != null && yearFrom === yearTo ? '' + yearFrom
@@ -4840,6 +4848,10 @@ function adoptViewParams(p = new URLSearchParams(location.search)) {
     state.sameGames = p.get('samegames') !== '0';
     restorePresetDisplay(state);
   }
+  const maturity = { clean: 'hide', '-mature': 'hide', mature: 'only', '-clean': 'only',
+    all: 'include', 'mature,clean': 'include', 'clean,mature': 'include' }[p.get('m')];
+  if (maturity) setMature(maturity, matureBlur);
+
   if (Object.hasOwn(ACCESS_LABELS, p.get('access'))) accessMode = p.get('access');
   syncAccess();
   if (MZLists.isListView() && !preset && !p.has('cols')) setTableSort('title', 1);
@@ -4847,7 +4859,7 @@ function adoptViewParams(p = new URLSearchParams(location.search)) {
   if (q) document.getElementById('q').value = q;
   adoptPick(p.get('t'), enabledTypes, TYPES, typeSlug, typeMenu, 'data-t');
   adoptPick(p.get('p'), enabledPatches, PATCH_KEYS, patchSlug, typeMenu, 'data-p');
-  adoptPick(p.get('m'), enabledMat, MAT_KEYS, k => k, typeMenu, 'data-m'); syncTypeSummary();
+  syncTypeSummary();
   adoptPick(p.get('src'), enabledSrcs, SRC_KEYS, srcSlug, srcMenu, 'data-s'); syncSrcSummary();
   adoptPick(p.get('g'), enabledGenres, GENRE_KEYS, genreSlug, genreMenu, 'data-g'); syncGenreSummary();
   const y = /^(\d{1,4})?(-)?(\d{1,4})?$/.exec((p.get('y') || '').trim());
@@ -5201,7 +5213,7 @@ addEventListener('resize', () => { if (filtersDD.classList.contains('open')) pla
 function syncFilterCount() {
   const n = [
     typeNarrows(),
-    accessMode !== 'all' || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length),
+    matureChoice === 'only' || accessMode !== 'all' || (SRC_KEYS.length > 0 && enabledSrcs.size < SRC_KEYS.length),
     GENRE_KEYS.length > 0 && enabledGenres.size < GENRE_KEYS.length,
     yearFrom != null || yearTo != null,
   ].filter(Boolean).length;
@@ -6852,30 +6864,44 @@ document.getElementById('mymisters').addEventListener('click', e => {
   document.getElementById('menudd').open = false;  // the row sits in the site Menu; the popover replaces it
 });
 
-// --- Mature games (site Menu): show / blur / hide ---
-// Rows data.json marks mat (MAME's catver "Mature" marker plus the site's own
-// pins). Blur is pure CSS on html[data-mature]; Hide re-ingests without those
-// rows. Like a theme pick, choosing leaves the Menu open (live preview).
-const matSeg = document.getElementById('matseg');
-function syncMature() {
-  for (const b of matSeg.querySelectorAll('button')) b.setAttribute('aria-pressed', b.dataset.mat === matMode);
+// --- Mature content: one Source section for visibility, filtering and blur ---
+function matureControls() {
+  return '<section class="source-group"><h3 id="matureheading">Mature content</h3>' +
+    '<div class="mature-row"><div id="maturemenu" role="radiogroup" aria-labelledby="matureheading">' +
+    Object.entries(MATURE_CHOICES).map(([value, label]) => '<label><input type="radio" name="maturity" value="' + value + '"' +
+      (matureChoice === value ? ' checked' : '') + '> ' + label + '</label>').join('') + '</div>' +
+    '<label class="mature-blur"><input type="checkbox" id="matureblur" aria-label="Blur mature images"> Blur</label></div></section>';
 }
-matSeg.addEventListener('click', e => {
-  const b = e.target.closest('[data-mat]');
-  if (!b || b.dataset.mat === matMode) return;
-  const hideChanged = (matMode === 'hide') !== (b.dataset.mat === 'hide');
-  matMode = b.dataset.mat;
+function syncMature() {
+  for (const input of srcMenu.querySelectorAll('input[name="maturity"]')) input.checked = input.value === matureChoice;
+  const blur = document.getElementById('matureblur');
+  if (blur) { blur.checked = matureBlur; blur.disabled = matureChoice === 'hide'; }
+}
+function setMature(choice, blur, persist = false) {
+  if (!Object.hasOwn(MATURE_CHOICES, choice)) return;
+  const hideChanged = (matureChoice === 'hide') !== (choice === 'hide');
+  matureChoice = choice;
+  matureBlur = blur;
+  matMode = choice === 'hide' ? 'hide' : blur ? 'blur' : 'show';
   document.documentElement.setAttribute('data-mature', matMode);
-  try { localStorage.setItem(MAT_KEY, matMode); } catch (e) {}
-  syncMature();
-  if (!hideChanged) return;
-  // an open panel on a row that is now hidden would describe a row the list
-  // no longer has: close it
-  if (matMode === 'hide' && openRow && openRow.mat && document.body.classList.contains('panel-open')) closePanel();
-  if (RAW.length) ingest(RAW);
-  recenterOpen();
-});
-syncMature();
+  if (persist && !filterMemory.temporary) {
+    // A choice here supersedes the old Type-menu maturity filter, even when
+    // Source's optional filter memory is off.
+    const oldType = filterMemory.saved().type;
+    if (oldType?.maturityOff?.length) filterMemory.save('type', { ...oldType, maturityOff: [] });
+    try {
+      // Only mature is an optional remembered filter; Hide/Include and blur
+      // retain the always-remembered behavior of the former site-menu setting.
+      localStorage.setItem(MAT_KEY, matMode);
+      localStorage.setItem(MAT_BLUR_KEY, String(blur));
+    } catch (_) {}
+  }
+  syncMature(); syncSrcSummary();
+  if (hideChanged) {
+    if (choice === 'hide' && openRow?.mat && document.body.classList.contains('panel-open')) closePanel();
+    if (RAW.length) ingest(RAW);
+  }
+}
 // Blur: a click on a covered screenshot shows that one frame (until the panel
 // redraws). The panel's mouse drag-to-scroll captures the pointer on press, so
 // a mouse click arrives targeted at #panel itself: the frame comes from the
@@ -6893,7 +6919,7 @@ panel.addEventListener('click', e => {
 // re-derives the view from module state, so the visitor's sort, search and
 // filters all survive without any reconciling of their own.
 function ingest(d) {
-  // Mature games -> Hide drops those rows here, before anything counts them, so
+  // Mature content -> Hide drops those rows here, before anything counts them, so
   // the tally, the menus' counts, the since-visit line and deep links all agree
   // with the list. RAW keeps the full set for switching the mode back.
   RAW = d;
@@ -7090,7 +7116,7 @@ function restoreAnchor(a) {
 }
 
 function swapIn(d, m) {
-  const prev = RAW;  // the unfiltered set: ingest re-applies Mature games -> Hide
+  const prev = RAW;  // the unfiltered set: ingest re-applies Mature content -> Hide
   try {
     // diffNews INSIDE the try: unknown-shaped data throws right here, and this
     // is the very failure the catch below exists to surface
@@ -7200,9 +7226,10 @@ function boot() {
         return url.pathname + url.search.replace(/\+/g, '%20').replace(/\*/g, '%2A').replace(/,/g, '%2C') + url.hash;
       },
       captureView: () => ({query: document.getElementById('q').value,
-        types: [...enabledTypes], patches: [...enabledPatches], maturity: [...enabledMat], sources: [...enabledSrcs], genres: [...enabledGenres],
+        types: [...enabledTypes], patches: [...enabledPatches], matureChoice, matureBlur, sources: [...enabledSrcs], genres: [...enabledGenres],
         accessMode, yearFrom, yearTo, sortKey, sortDir, favOnly, display: capturePresetDisplay(), expanded: [...expanded], searchShut: [...searchShut], libraryTop: document.getElementById('collection-library').scrollTop, top: document.querySelector('.tablewrap').scrollTop, left: document.querySelector('.tablewrap').scrollLeft}),
       restoreView: saved => {
+        setMature(saved?.matureChoice || (matureChoice === 'only' ? 'include' : matureChoice), saved?.matureBlur ?? matureBlur);
         favView = null; document.getElementById('favbanner').hidden = true;
         expanded.clear(); (saved?.expanded || []).forEach(k => expanded.add(k));
         searchShut.clear(); (saved?.searchShut || []).forEach(k => searchShut.add(k));
@@ -7210,7 +7237,6 @@ function boot() {
         for (const [set, values, menu, attr] of [
           [enabledTypes, saved?.types || TYPES, typeMenu, 'data-t'],
           [enabledPatches, saved?.patches || PATCH_KEYS, typeMenu, 'data-p'],
-          [enabledMat, saved?.maturity || MAT_KEYS, typeMenu, 'data-m'],
           [enabledSrcs, saved?.sources || SRC_KEYS, srcMenu, 'data-s'],
           [enabledGenres, saved?.genres || GENRE_KEYS, genreMenu, 'data-g']]) {
           set.clear(); values.forEach(v => set.add(v));

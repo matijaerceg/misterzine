@@ -3478,7 +3478,7 @@
    "game": "Ultra Street Fighter II: The Final Challengers (Nintendo Switch)",
    "hardware": "Capcom CPS-2 with the CPS+ core",
    "notes": [
-    "MAME: RC4 replaces the previous default 4 MB, Modern-only audio build with an 8 MB audio build containing both Modern and Classic sound effects. It still runs in unmodified MAME as hsf2 (USA) or hsf2j (Japan); no custom MAME build is needed. Choose MODERN or CLASSIC in ULTRA CONFIGURATION. Use the newly generated ZIPs and keep them separate from original Hyper Street Fighter II ROMs. Checksum warnings are expected. HBMAME still needs the included set definitions compiled in.",
+    "MAME: RC4 replaces the previous default 4 MB, Modern-only audio build with an 8 MB audio build containing both Modern and Classic sound effects. It still runs in unmodified MAME as hsf2 (USA) or hsf2j (Japan); no custom MAME build is needed. Choose MODERN or CLASSIC in ULTRA CONFIGURATION. Use the newly generated ZIPs and keep them separate from original Hyper Street Fighter II ROMs. Checksum warnings are expected. HBMAME needs a build that includes the Ultra Street Fighter II sets.",
     "Installation: install Python 3.10 or newer, extract the kit and run apply.py with your arcade ROMs, Switch game files and prod.keys. The region follows the game files you supply. Scratch and output folders are selected automatically unless you specify them. The installer checks paths before downloading tools, reports setup errors without a traceback, and groups the finished files and instructions by target. No compiler, Git, CMake, NumPy or separate FFmpeg installation is needed. For offline setup, keep cpsplus-tools-v2-offline.zip zipped and add --tools-bundle cpsplus-tools-v2-offline.zip --offline. Optional 7z inputs still need 7-Zip.",
     "Credits: Akuma's imported artwork is Tyrone's, from Super Street Fighter II Turbo: New Legacy.",
     "Special thanks to Gachichan! for bug reports and improvements to the Evil Ryu and Violent Ken profile pictures.",
@@ -3618,7 +3618,7 @@
      "label": "About CPS-2+ hardware",
      "url": "../cps2-plus/"
     },
-    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. The MAME sets run in unmodified MAME using its Hyper Street Fighter II loader. HBMAME needs the set definitions the kit writes compiled in."
+    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. The MAME sets run in unmodified MAME using its Hyper Street Fighter II loader. HBMAME needs a build that includes the Ultra Street Fighter II sets."
    },
    "screenshots": [
     {
@@ -4518,10 +4518,6 @@
    "feedback": true,
    "game": "Street Fighter Zero (Japan 950727)",
    "hardware": "Capcom CPS-2",
-   "hbmame_driver": {
-    "filename": "hbmame/sfarest.cpp.inc",
-    "source": "data/hbmame/sfa-restoration.cpp.inc"
-   },
    "mra": {
     "auxiliary_zips": [
      "../capcom/roms/mame0260/qsound.zip"
@@ -4534,7 +4530,7 @@
     "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
    },
    "notes": [
-    "MAME shows checksum warnings for the patched files. HBMAME with the included set definitions loads the three regional builds.",
+    "MAME shows checksum warnings for the patched files. An HBMAME build that includes the three regional sets loads them.",
     "Fan work, unaffiliated with Capcom. You need your own dump of the Japanese arcade set; the downloads contain patches, not complete game ROMs."
    ],
    "patch_intro": "An unofficial fan restoration of Street Fighter Alpha: the Japanese game's dialogue and gameplay in USA and Asia builds, plus a Japanese build.",
@@ -4705,7 +4701,7 @@
      "label": "About CPS-2+ hardware",
      "url": "../cps2-plus/"
     },
-    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. Stock MAME uses the separate sfa3ud.zip written for each edition. HBMAME needs the set definitions the kit writes compiled in."
+    "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. Stock MAME uses the separate sfa3ud.zip written for each edition. HBMAME needs a build that includes the Final Fight EX sets."
    },
    "screenshots": [
     {
@@ -4834,6 +4830,97 @@
    "subtitle": "Enhanced version",
    "summary": "Strider EX is the definitive version of Strider, combining the best of the arcade and PC Engine releases with English voices and text for the first time.",
    "title": "Strider EX",
+   "version": "rc1"
+  },
+  {
+   "changes": [
+    "Guile, Fei Long, Dee Jay, T. Hawk, Evil Ryu and Shin Akuma join the playable roster",
+    "The boxer, Juli and Juni have their own select cells",
+    "Added stages, arcade endings, voices and QSound music",
+    "USA (English) and Japan versions"
+   ],
+   "date": "2026-11-04",
+   "description": [
+    "Street Fighter Alpha 3 Upper comes to CPS-2 with Guile, Fei Long, Dee Jay, T. Hawk, Evil Ryu and Shin Akuma. The boxer, Juli and Juni have their own cells on the select screen.",
+    "Guile, Fei Long, Dee Jay and T. Hawk bring their stages, music and arcade endings. The USA build includes the Street Fighter Alpha 3 English restoration; the Japan build keeps Japanese text and names.",
+    "This version includes Arcade mode and its two-player challenge. World Tour, Dramatic Battle and the other console modes are not included.",
+    "On MiSTer, it requires the included CPS+ core and 128 MB SDRAM. Computer play requires an HBMAME or FBNeo build that includes the Upper sets. This is a release candidate."
+   ],
+   "game": "Street Fighter Alpha / Zero 3 Upper",
+   "hardware": "Capcom CPS-2 with the CPS+ core",
+   "hidden": false,
+   "mister_hbmame": true,
+   "mra": {
+    "category": "Fighting",
+    "catver": "Fighter / Versus",
+    "filename": "Street Fighter Alpha 3 Upper (USA) [Backport].mra",
+    "mraauthor": "jotego,strygo",
+    "name": "Street Fighter Alpha 3 Upper (USA) [Backport]",
+    "platform": "CPS-2",
+    "region": "USA",
+    "setname": "sfa3up",
+    "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
+   },
+   "reconstruction": {
+    "how": "Reconstructs the USA and Japan versions from your original game files and writes the HBMAME and FBNeo sets and MiSTer card folders.",
+    "kit_command": "python3 apply.py --rompath /path/to/roms --ps2-us /path/to/us.chd --ps2-jp /path/to/jp.chd --naomi-chd /path/to/gdl-0002.chd --naomi-pic /path/to/sfz3ugd.zip --chdman /path/to/chdman --work /external/fresh-work --out-dir /external/fresh-output",
+    "requires": [
+     "Your own arcade ROM sets sfa3, sfa3u, sfz3j and qsound in canonical MAME format.",
+     "Your own USA Street Fighter Alpha Anthology and Japanese Street Fighter Zero: Fighter’s Generation PS2 disc images.",
+     "Your own Street Fighter Zero 3 Upper NAOMI GD-ROM CHD and sfz3ugd.zip PIC archive.",
+     "The Arcade Patches builder app prepares Python and its dependencies. To build by hand: Python 3.12 or newer, NumPy 2.2.6, SciPy 1.15.3 and chdman."
+    ],
+    "sizes_note": "Use new work and output directories with at least 8 GiB of free storage."
+   },
+   "related": [
+    {
+     "label": "Street Fighter Alpha 3",
+     "note": "English restoration",
+     "url": "../sfa3-restoration/"
+    },
+    {
+     "label": "Street Fighter Alpha 3 Upper (NAOMI)",
+     "note": "The original NAOMI game",
+     "url": "../sfz3ugd-multiregion/"
+    }
+   ],
+   "release_history": [
+    {
+     "date": "2026-11-04",
+     "items": [
+      "First release candidate."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "requirements": {
+    "text": "Reconstruction requires your own Alpha 3 / Zero 3 arcade ROMs, the USA Alpha Anthology and Japanese Zero Fighter’s Generation PS2 disc images, and the Zero 3 Upper NAOMI GD-ROM and PIC. MiSTer play requires the CPS+ core and 128 MB SDRAM."
+   },
+   "screenshots": [
+    {
+     "after": "data/screenshots/sfa3-upper-cps2/title_us_sfa3up.png",
+     "after_label": "USA",
+     "before": "data/screenshots/sfa3-upper-cps2/title_jp_sfz3up.png",
+     "before_label": "Japan",
+     "caption": "The Japanese and USA title screens."
+    },
+    {
+     "caption": "Choose from the expanded Upper roster.",
+     "single": "data/screenshots/sfa3-upper-cps2/character-select.png"
+    },
+    {
+     "caption": "Guile and Fei Long on Guile’s stage.",
+     "single": "data/screenshots/sfa3-upper-cps2/guile-fei-long.png"
+    }
+   ],
+   "section": "restorations",
+   "set": "sfa3up / sfz3up",
+   "slug": "sfa3-upper-cps2",
+   "sort_title": "Street Fighter Alpha 3 Upper CPS-2",
+   "status": "release-candidate",
+   "subtitle": "Arcade backport",
+   "summary": "Upper on CPS-2, with Guile, Fei Long, Dee Jay, T. Hawk, Evil Ryu and Shin Akuma, in USA (English) and Japan builds.",
+   "title": "Street Fighter Alpha 3 Upper (CPS-2)",
    "version": "rc1"
   }
  ],

@@ -6,7 +6,133 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 04 Nov 2026 22:28:19 +0000</lastBuildDate>
+<lastBuildDate>Thu, 05 Nov 2026 05:39:34 +0000</lastBuildDate>
+<item>
+<title>[New] Round Up 5 - Super Delta Force (bazset) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#round-up-5-super-delta-force-bazset</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Round Up 5 - Super Delta Force.mra:2026-11-05T05:39:34+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 05:39:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/roundup5.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: Arcade-RoundUp5&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Gyruss (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gyruss</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Gyruss_20261029.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gyruss.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1983 / Konami&lt;/p&gt;&lt;p&gt;Core: Gyruss&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Gyruss_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] PrimalRage (Arcade core, 2 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#primrage</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/PrimalRage_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Primal Rage, T-MEK.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] SNK6502 (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasyu</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/SNK6502_20261103.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Apple IIGS (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261104.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Basic Master Jr (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#BasicMasterJr</link>
+<guid isPermaLink="false">distribution_mister:_Computer/BasicMasterJr_20261031.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1981 / Hitachi&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/BasicMasterJr_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] FM-7 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
+<guid isPermaLink="false">distribution_mister:_Computer/FM-7_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1982 / Fujitsu&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/FM-7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Macintosh IIcx (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacIIcx_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Macintosh SE/30 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] PC/XT (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PCXT</link>
+<guid isPermaLink="false">distribution_mister:_Computer/PCXT_20261103.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / IBM&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PCXT_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Sharp MZ (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SharpMZ</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SharpMZ_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1978 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] SharpX1 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SharpX1</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SharpX1_20261103.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpX1_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] SonySMC777 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SonySMC777</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SonySMC777_20261103.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SonySMC777_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Vectrex (Console core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Vectrex</link>
+<guid isPermaLink="false">distribution_mister:_Console/Vectrex_20261103.rbf:2026-11-05T01:48:44+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
+<category>updated</category>
+<category>Console core</category>
+<description>&lt;p&gt;1982 / GCE&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Vectrex_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Bomb Jack (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bomb-jack-bazset</link>
@@ -780,132 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Hoops '96 (Ongo), Janken Game Acchi Muite Hoi! (Ongo), Skull Fang (Ongo), Stadium Hero '96 (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Avengers In Galactic Storm (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#avengers-in-galactic-storm-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/ppriest_DecoMLC_20261031.rbf:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/avengrgs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1995 / Data East Corporation&lt;/p&gt;&lt;p&gt;Core: ppriest_DecoMLC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ppriest_KonamiGXT34 (Arcade core, 4 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#rungun2</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/ppriest_KonamiGXT34_20261030.rbf:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Run and Gun 2 (Ongo), Rushing Heroes (Ongo), Soccer Superstars (Ongo), Versus Net Soccer (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Armed Police Batrider (TheJesusFish) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#batrider</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/Batrider_20261030.rbf:2026-10-31T15:18:33+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 15:18:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/batrider.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1998 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: Batrider&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Battle Bakraid - Unlimited Version Special Ver. (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#battle-bakraid-unlimited-version-special-ver</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/BattleBakraid_20261030.rbf:2026-10-31T15:18:33+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 15:18:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/battle-bakraid-unlimited-version-special-ver.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1999 / Eighting&lt;/p&gt;&lt;p&gt;Core: BattleBakraid&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Battle Garegga (TheJesusFish) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#battle-garegga-europe-usa-japan-asia-sat-feb-3-1996</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/BattleGaregga_20261030.rbf:2026-10-31T15:18:33+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 15:18:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bgaregga.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1996 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: BattleGaregga&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kingdom Grandprix (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kingdmgp</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/KingdomGrandprix_20261030.rbf:2026-10-31T15:18:33+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 15:18:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kingdmgp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1994 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: KingdomGrandprix&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sorcer Striker (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sstriker</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/SorcerStriker_20261030.rbf:2026-10-31T15:18:33+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 15:18:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sstriker.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Raizing&lt;/p&gt;&lt;p&gt;Core: SorcerStriker&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] KillerInstinct (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kinst</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/KillerInstinct_20261030.rbf:2026-10-31T08:29:29+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 08:29:29 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Killer Instinct (v1.5d), Killer Instinct 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-KillerInstinct_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Cosmos (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#cosmos</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/_CVS/Cosmos (CVS).mra:2026-10-31T00:17:00+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 00:17:00 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/cosmos.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1981 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: BAZSET_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Dark Warrior (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#darkwar</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/_CVS/Dark Warrior (CVS).mra:2026-10-31T00:17:00+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 00:17:00 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/darkwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1981 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: BAZSET_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Dazzler (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#dazzler</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/_CVS/Dazzler (CVS).mra:2026-10-31T00:17:00+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 00:17:00 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dazzler.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: BAZSET_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Digger (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#diggerc</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/_CVS/Digger (CVS).mra:2026-10-31T00:17:00+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 00:17:00 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/diggerc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: BAZSET_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Gold Bug (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#goldbug</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/_CVS/Gold Bug (CVS).mra:2026-10-31T00:17:00+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 00:17:00 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/goldbug.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: BAZSET_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Heart Attack (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#heartatk</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/_CVS/Heart Attack (CVS).mra:2026-10-31T00:17:00+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 00:17:00 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heartatk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1983 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: BAZSET_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

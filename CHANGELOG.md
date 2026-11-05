@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Available presets now uses aligned checkbox rows, one column on phones and a scrolling options area that keeps Done visible.
+
 - The tracker header keeps Patreon visible with its icon on desktop and mobile, uses a smaller MisterZine logo and groups site destinations, including Hardware Landscape, at the bottom of Menu at every width.
 
 - Sorting Title, Manufacturer, Original Year, FPGA Core, Source or Genre shows section headings. Build Date, MiSTer Debut and Changed on MZ show recent days, weeks, months and older years. The current heading stays visible while scrolling.

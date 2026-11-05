@@ -16,11 +16,27 @@
 #presetmenu .preset-actions button { text-align: left; }
 #presetmenu button:disabled { opacity: .45; cursor: default; }
 #presetmenu .colnote { margin-bottom: 0; white-space: normal; }
-#presetavailable { max-width: min(32rem, calc(100vw - 2rem)); }
-#presetavailable h2 { margin-top: 0; }
-#presetchoices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem 1rem; }
-#presetchoices .preset-heading { grid-column: 1 / -1; }
-#presetchoices label { display: flex; gap: .4rem; align-items: baseline; }
+#presetavailable { box-sizing: border-box; width: min(34rem, calc(100vw - 2rem)); max-width: none;
+  max-height: calc(var(--clviewport-height, 100dvh) - 2rem); padding: 1.25rem; overflow: hidden; }
+#presetavailable[open] { display: flex; flex-direction: column; }
+#presetavailable h2 { flex: none; margin: 0 0 .6rem; }
+#presetavailable > p { flex: none; margin: 0 0 .85rem; color: var(--muted); line-height: 1.45; }
+#presetchoices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start;
+  gap: .15rem .75rem; min-height: 0; overflow: auto; overscroll-behavior: contain; scroll-padding: .25rem;
+  padding: .2rem; }
+#presetchoices .preset-heading { grid-column: 1 / -1; margin: .1rem 0 .25rem; padding: 0 .5rem; }
+#presetchoices .preset-heading:not(:first-child) { margin-top: .65rem; padding-top: .85rem; border-top: 1px solid var(--hair); }
+#presetchoices label { display: grid; grid-template-columns: 1.125rem minmax(0, 1fr); align-items: center;
+  gap: .65rem; min-height: 2.5rem; margin: 0; padding: .45rem .5rem; border-radius: .3rem;
+  line-height: 1.35; cursor: pointer; }
+/* Shared dialog inputs are full-width text fields; these stay native checkboxes. */
+#presetchoices input[type=checkbox] { width: 1.125rem; height: 1.125rem; min-height: 0;
+  padding: 0; margin: 0; accent-color: var(--accent); }
+#presetchoices label:hover { background: var(--hover-bg); }
+#presetchoices label:focus-within { outline: 2px solid var(--accent); outline-offset: -2px; }
+#presetchoices label:has(input:disabled) { opacity: .6; cursor: default; }
+#presetavailable > .clactions { flex: none; position: static; margin-top: .85rem; padding: .85rem 0 0;
+  border-top: 1px solid var(--hair); }
 #rows tr.preset-section th, #sectionpin span { padding: .5rem .6rem; cursor: default;
   background: color-mix(in srgb, var(--accent) 8%, var(--surface)); color: var(--accent);
   border-top: 1px solid var(--hair); border-bottom: 1px solid var(--rule);
@@ -44,5 +60,11 @@
 }
 @media (max-width: 360px) {
   .preset-prefix .preset-view-word { display: none; }
+}
+@media (max-width: 30rem) {
+  #presetavailable { padding: 1rem; }
   #presetchoices { grid-template-columns: 1fr; }
+}
+@media (pointer: coarse), (max-width: 36rem) {
+  #presetchoices label { min-height: 44px; }
 }

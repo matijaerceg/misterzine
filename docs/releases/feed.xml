@@ -6,7 +6,106 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 05 Nov 2026 05:39:34 +0000</lastBuildDate>
+<lastBuildDate>Thu, 05 Nov 2026 10:54:47 +0000</lastBuildDate>
+<item>
+<title>[Updated] SNK6502 (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#fantasyu</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/SNK6502_20261104.rbf:2026-11-05T10:54:47+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 10:54:47 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] SharpMZ2500 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SharpMZ2500</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SharpMZ2500_20261104.rbf:2026-11-05T10:54:47+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 10:54:47 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ2500_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Mustache Boy (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#mustache-boy-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/Mustache Boy (Japan).mra:2026-11-05T09:53:01+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:53:01 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mustache.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Seibu Kaihatsu (March license)&lt;/p&gt;&lt;p&gt;Core: bazset_MustacheBoy&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Round Up 5 - Super Delta Force (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#round-up-5-super-delta-force-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/Round Up 5 - Super Delta Force.mra:2026-11-05T09:53:01+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:53:01 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/roundup5.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: bazset_RoundUp5&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] The Berlin Wall (Ongo) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#the-berlin-wall-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/The Berlin Wall.mra:2026-11-05T09:53:01+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:53:01 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/berlwall.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Kaneko&lt;/p&gt;&lt;p&gt;Core: bazset_BerlinWall&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] bazset_CVS (Arcade core, 32 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cosmos-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/bazset_CVS_20261102.rbf:2026-11-05T09:53:01+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:53:01 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Cosmos (Ongo), Cosmos (bazset), Dark Warrior (Ongo), Dark Warrior (bazset), Dazzler (Ongo), Dazzler (bazset), Digger (Ongo), Digger (bazset), Gold Bug (Ongo), Gold Bug (bazset), Heart Attack (Ongo), Heart Attack (bazset), Hero (Ongo), Hero (bazset), Hunchback (Ongo), Hunchback (bazset), Hunchback Olympic (Ongo), Hunchback Olympic (bazset), Logger (Ongo), Logger (bazset), Radar Zone (Ongo), Radar Zone (bazset), Raiders (Ongo), Raiders (bazset), Space Fortress (Ongo), Space Fortress (bazset), Superbike (Ongo), Superbike (bazset), Video Eight Ball (Ongo), Video Eight Ball (bazset), Wall Street (Ongo), Wall Street (bazset).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Operation Thunder Hurricane (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#operation-thunder-hurricane</link>
+<guid isPermaLink="false">jlrh:_Arcade/Operation Thunder Hurricane (FF, Konami, 1997).mra:2026-11-05T09:07:56+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:07:56 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thunderh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: ffgticlub&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Operation Thunder Hurricane CRT 480i (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#operation-thunder-hurricane-crt-480i</link>
+<guid isPermaLink="false">jlrh:_Arcade/Operation Thunder Hurricane CRT 480i (FF, Konami, 1997).mra:2026-11-05T09:07:56+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:07:56 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/thunderh.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: ffgticlubsd&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Solar Assault CRT 480i (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#solar-assault-crt-480i</link>
+<guid isPermaLink="false">jlrh:_Arcade/Solar Assault CRT 480i (FF, Konami, 1997).mra:2026-11-05T09:07:56+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:07:56 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/slrasslt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: ffgticlubsd&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261105.rbf:2026-11-05T09:07:56+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:07:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ffgticlubsd (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gti-club-crt-480i</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlubsd_20261105.rbf:2026-11-05T09:07:56+00:00</guid>
+<pubDate>Thu, 05 Nov 2026 09:07:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: GTI Club CRT 480i, Operation Thunder Hurricane CRT 480i, Solar Assault CRT 480i.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Round Up 5 - Super Delta Force (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#round-up-5-super-delta-force-bazset</link>
@@ -33,15 +132,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Primal Rage, T-MEK.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SNK6502 (Arcade core, 6 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#fantasyu</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/SNK6502_20261103.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Apple IIGS (Computer core)</title>
@@ -179,13 +269,13 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/slrasslt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: ffgticlub&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-04 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] ffgticlub (Arcade core, 2 games)</title>
+<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
 <guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261104.rbf:2026-11-04T20:13:15+00:00</guid>
 <pubDate>Wed, 04 Nov 2026 20:13:15 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: GTI Club, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-04 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-04 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Armed Police Batrider (TheJesusFish) (Arcade)</title>
@@ -341,13 +431,13 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gticlub.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1996 / Konami&lt;/p&gt;&lt;p&gt;Core: ffgticlubsd&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] ffgticlub (Arcade core, 2 games)</title>
+<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
 <guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261103.rbf:2026-11-03T18:37:37+00:00</guid>
 <pubDate>Tue, 03 Nov 2026 18:37:37 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: GTI Club, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Moto Frenzy (Arcade)</title>
@@ -431,7 +521,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dkong.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1981 / Nintendo&lt;/p&gt;&lt;p&gt;Core: Arcade-DonkeyKongCRT&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-02 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] The Berlin Wall (Arcade)</title>
+<title>[New] The Berlin Wall (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#berlwall</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/The Berlin Wall (World).mra:2026-11-02T22:31:03+00:00</guid>
 <pubDate>Mon, 02 Nov 2026 22:31:03 +0000</pubDate>
@@ -602,7 +692,7 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/crshrace.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1993 / Video System Co.&lt;/p&gt;&lt;p&gt;Core: jtcrshrc&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-01 (source: asturur).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/asturur/Mister-cores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Mustache Boy (Arcade)</title>
+<title>[New] Mustache Boy (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#mustache</link>
 <guid isPermaLink="false">bazset:_Arcade/_BAZSET/Mustache Boy (Japan).mra:2026-11-01T16:25:43+00:00</guid>
 <pubDate>Sun, 01 Nov 2026 16:25:43 +0000</pubDate>
@@ -816,96 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/8ball.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Virtua Fighter (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vf</link>
-<guid isPermaLink="false">ongo:_Arcade/Virtua Fighter.mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1993 / Sega&lt;/p&gt;&lt;p&gt;Core: Model1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Wall Street (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wall-street-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Wall Street.mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wallst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Wing War (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#wingwar</link>
-<guid isPermaLink="false">ongo:_Arcade/Wing War (World).mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wingwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: Model1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Virtua Formula (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vformula</link>
-<guid isPermaLink="false">ongo:_Arcade/_alternatives/_Virtua Formula/Virtua Formula [15kHz CRT].mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vformula.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1993 / Sega&lt;/p&gt;&lt;p&gt;Core: Model1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Virtua Racing (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#vr</link>
-<guid isPermaLink="false">ongo:_Arcade/_alternatives/_Virtua Racing/Virtua Racing [15kHz CRT].mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/vr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: Model1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model1 (Arcade core, 6 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#netmerc</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model1_20261030.rbf:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Sega NetMerc, Star Wars Arcade (Sega, US), Virtua Fighter, Virtua Formula, Virtua Racing, Wing War.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2A (Arcade core, 11 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#doaab</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2A_20261031.rbf:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2C (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#overrev</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2C_20261031.rbf:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Over Rev, Sega Touring Car Championship, The House of the Dead.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2 (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261030.rbf:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ppriest_DecoMLC156 (Arcade core, 4 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hoops-96-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/ppriest_DecoMLC156_20261031.rbf:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Hoops '96 (Ongo), Janken Game Acchi Muite Hoi! (Ongo), Skull Fang (Ongo), Stadium Hero '96 (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

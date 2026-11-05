@@ -10,7 +10,9 @@ function createFilterMemory(local = () => localStorage, session = () => sessionS
     if (group === 'year') return bound(value.from) && bound(value.to);
     if (!strings(value.off)) return false;
     if (group === 'type') return strings(value.patchesOff) && strings(value.maturityOff);
-    return group !== 'src' || ['all', 'public', 'early'].includes(value.access);
+    return group !== 'src' || (['all', 'public', 'early'].includes(value.access)
+      && (value.maturity === undefined || ['hide', 'include', 'only'].includes(value.maturity))
+      && (value.blur === undefined || typeof value.blur === 'boolean'));
   };
   const clean = values => Object.fromEntries(groups.filter(g => valid(g, values?.[g])).map(g => [g, values[g]]));
   const read = (storage, key) => {

@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Source now has one Mature content section: a compact Hide / Include / Only row, plus Blur mature images. It replaces the separate Menu switch and Type checkboxes. Existing visibility preferences carry over; Clear filters leaves Hide and blur preferences intact.
+
 - Live refresh alerts now compare visible entries consistently, preventing hidden mirror copies from being falsely announced as updated. Real new entries and build-date changes still produce alerts.
 
 - Games available on several cores now use “(MiSTer-devel)” when the Distribution core's name merely repeats the game title. Naming and grouping share the same matching rule, including punctuation differences and meaningful variants; E.D.F.'s two implementations now appear together.

@@ -4,7 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
-- Source now has one Mature content section: a compact Hide / Include / Only row, plus Blur mature images. It replaces the separate Menu switch and Type checkboxes. Existing visibility preferences carry over; Clear filters leaves Hide and blur preferences intact.
+- Source now has one Mature content section: a compact Hide / Include / Only row with a Blur checkbox alongside. It replaces the separate Menu switch and Type checkboxes. Existing visibility preferences carry over; Clear filters leaves Hide and blur preferences intact.
 
 - Live refresh alerts now compare visible entries consistently, preventing hidden mirror copies from being falsely announced as updated. Real new entries and build-date changes still produce alerts.
 

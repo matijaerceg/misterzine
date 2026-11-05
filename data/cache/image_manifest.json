@@ -27116,5 +27116,32 @@
   "snap_img": "ingames/edf.png",
   "third_img": null,
   "third_pack": null
+ },
+ {
+  "title": "Time Pilot '84 (Set 1)",
+  "setname": "tp84",
+  "source": "psnaps",
+  "title_img": "titles/tp84.png",
+  "snap_img": "snap/tp84.png",
+  "third_img": "gameover/tp84.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Commando (World)",
+  "setname": "commando",
+  "source": "psnaps",
+  "title_img": "titles/commando.png",
+  "snap_img": "snap/commando.png",
+  "third_img": "gameover/commando.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Solar Assault",
+  "setname": "slrasslt",
+  "source": "adb",
+  "title_img": "titles/slrasslt.png",
+  "snap_img": "ingames/slrasslt.png",
+  "third_img": null,
+  "third_pack": null
  }
 ]

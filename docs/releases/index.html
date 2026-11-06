@@ -710,16 +710,6 @@
   .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid var(--rule);
              font-size: .8rem; line-height: 1.35; color: var(--muted); max-width: 15rem; }
   .colnote .prov { font-style: italic; }
-  /* every row opens the detail panel (arrow cursor on purpose: rows are
-     app-style select targets, not links — the hover outline signals clickability) */
-  /* Hover keeps the game/core background unchanged. Selection stays stronger.
-     Gate hover to pointing devices so touch taps cannot leave a sticky outline. */
-  @media (hover: hover) {
-    #rows tr[data-i]:hover:not(.open) { --row-edge: color-mix(in srgb, var(--fg) 28%, transparent); }
-    #rows tr[data-i]:hover:not(.open) td { box-shadow: inset 0 1px var(--row-edge), inset 0 -1px var(--row-edge); }
-    #rows tr[data-i]:hover:not(.open) td:first-child { box-shadow: inset 1px 0 var(--row-edge), inset 0 1px var(--row-edge), inset 0 -1px var(--row-edge); }
-    #rows tr[data-i]:hover:not(.open) td:last-child { box-shadow: inset -1px 0 var(--row-edge), inset 0 1px var(--row-edge), inset 0 -1px var(--row-edge); }
-  }
   /* One 1px frame around a selection, including an expanded group's children.
      Overlays span the cell divider without changing table layout; the sticky
      title cell keeps the left edge visible while scrolling horizontally. */

@@ -43,6 +43,12 @@ def main():
         assert not errors, errors
         baseline = keys(page)
         expect(page.locator('#presetname')).to_have_text('Build date')
+        section_band = page.locator('#rows .preset-section th').first.evaluate('el => getComputedStyle(el).backgroundColor')
+        group_band = page.locator('#rows .grp td').first.evaluate('el => getComputedStyle(el).backgroundColor')
+        plain = page.locator('#rows tr[data-i]:not(.grp) td').first.evaluate('el => getComputedStyle(el).backgroundColor')
+        assert len({section_band, group_band, plain}) == 3
+        expect(page.locator('#sectionpin span')).to_have_css('background-color', section_band)
+        checks.append('Section, group and release backgrounds are distinct; the pinned heading matches its section')
 
         # A group's arrow acts independently of row selection, including on
         # phones where a second tap on the title opens the overlay panel.
@@ -55,6 +61,11 @@ def main():
             assert index >= 0
             controls.evaluate("i => revealIndex(i, 'center')", index)
             row = controls.locator(f'#rows tr.grp[data-i="{index}"]')
+            for cell in row.locator('td').all():
+                expect(cell).to_have_css('background-color', group_band)
+            count = controls.evaluate('i => flat[i].members.length', index)
+            unit = 'game' if batch else 'core'
+            expect(row.locator('.gc')).to_have_text(f"{count} {unit}{'s' if count != 1 else ''}")
             arrow = row.get_by_role('button', expanded=False)
             bounds = arrow.bounding_box()
             height = row.bounding_box()['height']
@@ -72,6 +83,7 @@ def main():
             expect(arrow).to_have_attribute('aria-expanded', 'true')
             expect(arrow.locator('svg')).to_have_css('transform', 'matrix(0, 1, -1, 0, 0, 0)')
             assert controls.locator('#rows tr.member').count() > 0
+            expect(controls.locator('#rows tr.member td').first).to_have_css('background-color', plain)
             assert controls.evaluate('openRow === null')
             arrow.click(position={'x': bounds['width'] - 2, 'y': height - 2})
             expect(arrow).to_have_attribute('aria-expanded', 'false')

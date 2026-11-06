@@ -423,7 +423,12 @@
      (see td:first-child) so its text still lines up with the h1 above. */
   .tablezone { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column;
                margin-left: -1rem; margin-right: -1rem; }
-  .tablewrap { flex: 1 1 auto; min-height: 0; overflow: auto; }
+  .tablewrap { flex: 1 1 auto; min-height: 0; overflow: auto;
+    /* One scale for the table ground, both kinds of group and the section above them. */
+    --group-band: color-mix(in srgb, var(--line) 20%, var(--bg));
+    --section-band: color-mix(in srgb, var(--line) 48%, var(--bg));
+    --table-secondary: color-mix(in srgb, var(--fg) 50%, var(--muted));
+    --table-accent: color-mix(in srgb, var(--accent) 78%, var(--fg)); }
   /* floating scrollbars: browsers whose native element scrollbars are classic
      (they reserve a blank rail between table and viewport edge — Chrome on
      Windows; overflow:overlay is gone since 114 and fluent OVERLAY bars are
@@ -545,22 +550,19 @@
   table { min-width: 49rem; }
   th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid var(--rule); vertical-align: top;
            overflow-wrap: break-word; }
-  th { position: sticky; top: 0; z-index: 10; background: var(--surface); cursor: pointer; user-select: none;
+  th { position: sticky; top: 0; z-index: 10; background: var(--bg); cursor: pointer; user-select: none;
        overflow-wrap: normal;  /* headers wrap at spaces, never mid-word */
        border-top: 1px solid var(--rule); }  /* a divider so the header row reads apart from the filters above */
-  /* clicking a header re-sorts, so it hover-reacts like every other control.
-     --hover-bg's strength, but mixed opaquely over --surface: a sticky cell
-     with a translucent background lets scrolling content bleed through.
-     hover:hover gate: a phone's emulated hover sticks after the sorting tap. */
+  #hrow { color: var(--table-secondary); font-size: .8125rem; }
   @media (hover: hover) {
-    th:hover { background: color-mix(in srgb, var(--line) 13.33%, var(--surface)); }
+    #hrow th:hover { background: color-mix(in srgb, var(--line) 13.33%, var(--bg)); }
   }
   /* the sorted column's header is marked by the accent color on its label +
      arrow alone (no background fill). The space before the arrow is a NO-BREAK
      one: a plain space lets the arrow wrap to a second line at the min-width
      floor, which re-talls the whole sticky header exactly when a column is
      sorted (i.e. always — the default sort is Last Updated). */
-  th[aria-sort] { color: var(--accent2, var(--accent)); }
+  th[aria-sort] { color: var(--table-accent); }
   th[aria-sort=ascending]::after { content: "\00a0\2191"; }
   th[aria-sort=descending]::after { content: "\00a0\2193"; }
   /* every column after Title is condensed — denser metadata, more room for titles */
@@ -584,16 +586,12 @@
   .tico::before { content: ""; display: block; width: 1rem; height: 1rem; background: currentColor;
                   -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat;
                   -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  td .dep { color: var(--muted); font-size: .82em; margin-left: .35rem; }
-  /* DEBUT badge (was NEW until 2026-09-17): our own pill, where the NEW emoji
-     it replaced was a fixed blue that ignored every theme. Outlined in
-     --accent, which is already vetted against the surface in each theme, so
-     there's no second fill/text token to keep legible; age fades the whole
-     pill via an inline opacity. Set in Roboto Condensed (already loaded for
-     every column after Title) so the longer word stays a small pill. */
+  td .dep { color: var(--table-secondary); font-size: .82em; margin-left: .35rem; }
+  /* DEBUT uses the table accent for its text and outline. Age fades the
+     whole badge via the inline opacity from newBadge(). */
   td .nb { display: inline-block; margin-left: .3rem; padding: 0 .18rem;
-           border: 1px solid var(--accent); border-radius: .2rem;
-           color: var(--accent); font-size: .6em; font-weight: 600;
+           border: 1px solid currentColor; border-radius: .2rem;
+           color: var(--table-accent); font-size: .6em; font-weight: 600;
            font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;
            letter-spacing: 0; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; }
@@ -638,12 +636,11 @@
      keeps "date batch" on one line where the fixed column has room and drops the
      badge to a second line only where it doesn't — instead of always breaking or
      overflowing into the next column. .xb stays nowrap so "batch" never splits. */
-  td .xb { display: inline; white-space: nowrap; color: var(--muted);
+  td .xb { display: inline; white-space: nowrap; color: var(--table-secondary);
            font-size: .75em; font-style: italic; cursor: help; }
-  td.core { color: var(--fg); font-size: .92em; cursor: default; }
-  /* repo links keep the column's muted look; underline only on hover */
-  td.core a { color: var(--accent); text-decoration: none; }
-  td.core a:hover .lbl { text-decoration: underline; }
+  td.core { font-size: .92em; cursor: default; }
+  td.core a { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: .16em; }
+  td.core a:is(:hover, :focus-visible) { color: var(--table-accent); text-decoration-color: currentColor; }
   /* Glyph-tailed links are two spans: <a><span class=lbl>label</span><span
      class=ext>↗</span></a>. The .ext glyph is plain inline text, NOT inline-block:
      an atomic inline gets a break opportunity on BOTH sides, which stranded the
@@ -689,9 +686,9 @@
      hyphens — its own .dv span carries the nowrap the cell used to. */
   td.date { font-variant-numeric: tabular-nums; }
   td.date .dv { white-space: nowrap; }
-  .build { color: var(--muted); }
+  td.build { font-style: italic; }
   /* provisional spec cells (pending the curated Arcade Database) */
-  td.prov, .prov { color: var(--muted); font-style: italic; }
+  .prov { color: var(--table-secondary, var(--muted)); font-style: italic; }
   .prov em { font-style: normal; opacity: .7; font-size: .85em; }
   /* boot-rotation pill: rides the Rotation value like the NEW/beta badges when
      the core is hardware-verified to boot the opposite way with no working flip
@@ -741,7 +738,7 @@
   /* Title column pins to the scroller's left edge. It needs its own opaque
      paint: row backgrounds do not travel with a sticky cell. All game and
      core-row backgrounds below are opaque so scrolling content cannot bleed through. */
-  td:first-child { position: sticky; left: 0; z-index: 2; background: var(--bg); }
+  td:first-child { position: sticky; left: 0; z-index: 2; background: var(--bg); color: var(--fg); }
   th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
   td:first-child, th:first-child { border-right: 1px solid var(--rule); }
   /* 1.7rem: 1rem re-absorbs the table's full-rem bleed past main's padding
@@ -767,19 +764,15 @@
     #rows tr:hover td:first-child .fav { visibility: visible; }
     td:first-child .fav:hover { color: var(--accent); }
   }
-  /* same-game groups: the umbrella row (tr.grp, .x while expanded) and the
-     member rows listed under it (tr.member). The chevron sits where the star
-     gutter would put a star (an umbrella has none); members step in behind a
-     quiet rail in the theme's line colour so the tree reads at a glance. Not
-     the accent: that stays for signals like the since-visit dot, and a rail
-     in it competed with them. Chip chrome copies .bb (muted pill): a count,
-     not a novelty. */
-  tr.grp td:first-child { padding-left: 0; border-bottom: 0; font-weight: 600; overflow-x: auto; scrollbar-width: none; }
+  #rows tr[data-i] { color: var(--table-secondary); }
+  #rows tr[data-i] td { background: var(--bg); }
+  #rows tr.grp td { background: var(--group-band); }
+  tr.grp td:first-child { padding-left: 0; border-bottom: 0; font-weight: 650; overflow-x: auto; scrollbar-width: none; }
   tr.grp td:first-child::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0;
                                   border-bottom: 1px solid var(--rule); pointer-events: none; }
   tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: 100%; aspect-ratio: 1;
                margin: 0; padding: 0; border: 0; appearance: none;
-               background: transparent; color: var(--muted); cursor: pointer; }
+               background: transparent; color: var(--table-secondary); cursor: pointer; }
   /* The target follows the row height. The icon lines up with the first line of
      the title on both game and batch rows, including when another column wraps. */
   tr.grp .tw svg { position: absolute; top: .75rem; left: .75rem; width: .5rem; height: .5rem;
@@ -791,21 +784,11 @@
   .group-label { display: block; margin-left: calc(var(--group-start, 0px) + var(--group-gutter, 2rem) + .15rem);
                  min-width: min(48%, 8rem); }
   td .gc { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
-           border: 1px solid var(--muted); border-radius: .2rem;
-           color: var(--muted); font-size: .75em; font-weight: 700;
+           border: 1px solid var(--line); border-radius: .2rem;
+           color: var(--table-secondary); font-size: .6875rem; font-weight: 500;
            font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;
            letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; cursor: help; }
-  /* Trial palette: game rows use the shaded surface; core batch labels use
-     the plain table ground. Opaque cells keep horizontal sticky scrolling clean. */
-  #rows tr:not(.bat):not(.vpad):not(.nomatch) td { background: color-mix(in srgb, var(--line) 15%, var(--bg)); }
-  #rows tr.bat td { background: var(--bg); }
-  #rows tr.bat td:first-child { font-weight: 400; font-size: .85em; letter-spacing: .06em;
-    text-transform: uppercase; font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
-  tr.bat .bk, tr.bat .bc, #panel h2 .bk, #panel h2 .bc { color: var(--muted); font-weight: normal; }
-  tr.bat .bn { color: var(--fg); font-weight: 600; }
-  /* Keep the count chip as legible as on a game group. */
-  #rows tr.bat .gc { font-size: calc(.75em / .85); text-transform: none; letter-spacing: .04em; }
   /* the batch panel's game list: one line per game, star at the end */
   #panel ul.blist { list-style: none; margin: .4rem 0 0; padding: 0; }
   #panel ul.blist li { display: flex; align-items: baseline; gap: .35rem; padding: .25rem 0;
@@ -813,9 +796,9 @@
   #panel ul.blist li .openm { color: var(--accent); text-decoration: none; flex: 1 1 auto; min-width: 0; }
   #panel ul.blist li .openm:hover { text-decoration: underline; }
   #panel ul.blist li .fav { visibility: visible; position: static; font-size: 1rem; }
-  tr.member td:first-child { padding-left: 2.6rem; }
-  tr.member td:first-child::before { content: ''; position: absolute; left: 1.75rem; top: 0; bottom: 0;
-                                     border-left: 2px solid var(--line); }
+  tr.member td:first-child { padding-left: 3.5rem; }
+  tr.member td:first-child::before { content: ''; position: absolute; left: 2.5rem; top: 0; bottom: 0;
+                                     border-left: 1px solid var(--line); }
   /* the group panel: a note under the title, then one card per member build */
   #panel .grpnote { color: var(--muted); font-size: .85rem; margin: 0 0 .8rem; }
   #panel .corecard { border-top: 1px solid var(--rule); padding-top: .6rem; margin-top: .4rem; }
@@ -1247,7 +1230,7 @@
      matches the .ctl row on desktop; phones leave it a touch taller) */
   .controls input[type=search] { font-size: .85rem; line-height: 1.26rem; }
 </style>
-<link rel="stylesheet" href="view-presets.css?v=3">
+<link rel="stylesheet" href="view-presets.css?v=4">
 <!-- GoatCounter analytics (privacy-friendly, no cookies). Views from the
      installed app have no referrer of their own, so label them "pwa" --
      count.js reads window.goatcounter overrides when it fires. -->
@@ -2762,12 +2745,17 @@ function batchIsDebut(u) {
     return m.date && gap >= 0 && gap < NEW_DAYS;
   });
 }
-// The batch's name, for its row and its panel heading: "Debut: Pandora core",
-// "Update: XNSUPER22 core" (the row's CSS sets it in caps). "core" rides a
-// no-break space so a narrow column never strands it on a line of its own.
+// Keep the core name first in both the table and the detail panel.
 function batchLabel(u, debut) {
-  return '<span class="bk">' + (debut ? 'Debut:' : 'Update:') + '</span> <span class="bn">' +
-    esc(u.title) + '</span><span class="bc">&nbsp;core</span>';
+  return esc(u.title) + (debut ? ' debut' : ' update');
+}
+
+// The chip counts the children available here. The tooltip and accessible
+// label also give the full count when a search or another batch hides some.
+function groupCountChip(count, total, unit, tip) {
+  const visible = count + ' ' + unit + (count === 1 ? '' : 's');
+  const label = count === total ? visible : count + ' of ' + total + ' ' + unit + 's';
+  return '<wbr><span class="gc" role="img" aria-label="' + label + '" data-tip="' + escA(tip) + '">' + visible + '</span>';
 }
 
 // The star sits out of flow in the sticky cell's left padding (see the .fav CSS),
@@ -2776,27 +2764,20 @@ function batchLabel(u, debut) {
 // marker on favorited rows and does its starring in the detail panel; a live
 // button there would only compete with the row's own tap target.
 function titleCell(d) {
-  // umbrella: the game's base title, a count chip, and
-  // the dot/DEBUT pill speaking for the group (any member unseen; the game's
-  // own debut). No star: favorites live on the member builds.
-  // batch umbrella: its label ("Update: XNSUPER22 core", batchLabel),
-  // a visible-game count chip (the tooltip retains the total when filtered); the dot speaks for the batch. A debut batch (batchIsDebut) says
-  // "Debut:". No DEBUT pill on the header: the word says it, and each member
-  // keeps its own.
+  // Favorites belong to individual builds. Each parent counts its children
+  // and carries the since-visit dot if any of them changed.
   if (d.bat) {
     const n = d.members.length, t = d.total || n;
     const dot = d.members.some(isUnseen)
       ? '<span class="sv" data-tip="A game in this batch was added or updated since your last visit." role="img" aria-label="Changed since your last visit"></span>' : '';
     const debut = batchIsDebut(d);
     const when = d.by === 'date' ? d.date : d.updated;  // the date the pile shares
-    // <wbr> lets the chip wrap to the next line instead of splitting a word
-    return batchLabel(d, debut) + dot +
-      '<wbr><span class="gc" role="img" aria-label="' + (n === t ? n : n + ' of ' + t) + ' games" data-tip="' + escA(n === t
-        ? n + ' games on this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped an update together') +
-          ' (' + when + '). Select the row to list them.'
-        : n + ' of the ' + t + ' games this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped in one update') +
-          ' (' + when + ') ' + (n === 1 ? 'matches' : 'match') + ' your search. Select the row to list all ' + t + '.') + '">' +
-      n + '</span>';
+    const tip = n === t
+      ? n + ' games on this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped an update together') +
+        ' (' + when + '). Select the row to list them.'
+      : n + ' of the ' + t + ' games this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped in one update') +
+        ' (' + when + ') ' + (n === 1 ? 'matches' : 'match') + ' your search. Select the row to list all ' + t + '.';
+    return batchLabel(d, debut) + dot + groupCountChip(n, t, 'game', tip);
   }
   if (d.grp) {
     const dot = d.members.some(isUnseen)
@@ -2804,10 +2785,9 @@ function titleCell(d) {
     // d.split = every build of the game when some of them sit
     // under their core's batch row instead ("N of M cores")
     const n = d.members.length, t = d.split || n;
-    return esc(d.title) + dot +
-      '<span class="gc" role="img" aria-label="' + (n === t ? n : n + ' of ' + t) + ' cores" data-tip="' + escA(n === t ? 'This game ships on ' + n + ' cores. Select the row to list them.'
-        : 'This game ships on ' + t + ' cores. ' + n + ' are listed here; the other builds sit under their core update rows. Select the row to list these ' + n + '.') + '">' +
-      n + '</span>' + newBadge(d) + matBadge(d);
+    const tip = n === t ? 'This game ships on ' + n + ' cores. Select the row to list them.'
+      : 'This game ships on ' + t + ' cores. ' + n + ' are listed here; the other builds sit under their core update rows. Select the row to list these ' + n + '.';
+    return esc(d.title) + dot + groupCountChip(n, t, 'core', tip) + newBadge(d) + matBadge(d);
   }
   const dep = d.deprecated ? '<span class="dep">deprecated</span>' : '';
   const fav = !d.k ? ''

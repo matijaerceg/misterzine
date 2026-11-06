@@ -37,12 +37,12 @@
 #presetchoices label:has(input:disabled) { opacity: .6; cursor: default; }
 #presetavailable > .clactions { flex: none; position: static; margin-top: .85rem; padding: .85rem 0 0;
   border-top: 1px solid var(--hair); }
-#rows tr.preset-section th, #sectionpin span { padding: .5rem .6rem; cursor: default;
-  background: color-mix(in srgb, var(--accent) 8%, var(--surface)); color: var(--accent);
+#rows tr.preset-section th, #sectionpin span { padding: .5rem 1rem; cursor: default;
+  background: var(--section-band); color: var(--fg);
   border-top: 1px solid var(--hair); border-bottom: 1px solid var(--rule);
-  font-size: .85rem; line-height: 1.3; font-weight: 600; }
+  font-size: .9375rem; line-height: 1.3; font-weight: 700; }
 #rows tr.preset-section th { position: static; z-index: auto; }
-#rows tr.preset-section th > span { position: sticky; left: .6rem; }
+#rows tr.preset-section th > span { position: sticky; left: 1rem; }
 /* The visual copy occupies no table space. Keeping it in the scroller lets
    the wheel and touch gestures work over the label, including on narrow screens. */
 #sectionpin { position: sticky; left: 0; height: 0; z-index: 12; }

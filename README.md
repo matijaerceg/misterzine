@@ -304,9 +304,9 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    the core repo, named `Arcade-NMK16_<family>_<date>.rbf` against `<rbf>NMK16_<family>`
    in the MRAs (MiSTer's prefix rule resolves them).
 8. **blahm1d**: `https://mister.blahm1d.com/db.json.zip` (opt-in like MeatCores, section
-   `[blahm1d]`). The one db with no GitHub behind it: the db and every file it lists are
+   `[blahm1d]`). The db and every file it lists are
    served from a Cloudflare R2 bucket, so `enrich-mra` downloads his MRAs by the db's own
-   file urls and his rows carry no repo link. Midway Y, T, X and Wolf Unit, Cruis'n USA,
+   file URLs. Its releases and source archives are in `blahm1d/MiSTer-cores`. Midway Y, T, X and Wolf Unit, Cruis'n USA,
    NARC, Exidy 440, Gladiator, The Legend of Kage (bootleg) and Night Slashers, all in
    `_Arcade/_blahm1d/` with the extra region sets under its `_alternatives`. Each game
    first shipped as a free-tier Patreon post, which is where the frozen debut dates come
@@ -405,6 +405,8 @@ handles them.
 Jotego and Coin-Op also publish Patreon early-access entries in their databases.
 The tracker lists them with alpha/beta badges and excludes them from public-release
 feeds. Access normally follows the database's default exclusion tags. For Coin-Op,
+`snapshot` matches official core files to the release folders of the projects and branches on the MiSTer wiki. It caches the results by file and hash, retries unresolved matches, and flags competing matches for review. Community feeds can identify a publisher's core project directly in the binary's download URL.
+
 `snapshot` also checks untagged launch files for an active `coinopkey.zip` requirement:
 the October 2026 CPS1 batch omitted the upstream status tags (issue #15). These checks
 use the database's exact file URLs and content hashes; results are cached in

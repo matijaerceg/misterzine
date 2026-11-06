@@ -6,6 +6,13 @@ const row = (src, sn, title = 'Game', family = sn, extra = {}) =>
 
 const noChanges = { fresh: [], built: [], keys: [] };
 
+test('correcting a historical date in its original batch does not announce a build', () => {
+  const before = row('jtbindb', 'game', 'Game', 'game', { k: 'game', b: 1, updated: '2020-01-08' });
+  const after = { ...before, updated: '2026-11-03' };
+  assert.deepEqual(siteUpdateChanges([before], [after]), noChanges);
+  assert.deepEqual(siteUpdateChanges([before], [{ ...after, b: 2 }]).built, ['Game']);
+});
+
 test('update alerts ignore hidden mirrors with different dates, additions and removals', () => {
   const original = row('ppriest', 'game', 'Game (ppriest)', 'game',
     { k: 'original', core: 'Board', updated: '2026-01-01' });

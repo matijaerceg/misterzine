@@ -27,6 +27,7 @@ data/cache/*
 # Hash-verified Coin-Op key checks keep scheduled snapshots incremental.
 !data/cache/coinop_access.json
 !data/cache/arcade_patches.json
+!data/cache/official_core_projects.json
 __pycache__/
 *.pyc
 

@@ -161,7 +161,10 @@ function siteUpdateChanges(before, after, hideMature = false) {
   for (const r of visible(after)) {
     const old = previous.get(r.k);
     if (!old) { fresh.push(r.title); keys.push(r.k); }
-    else if ((old.updated || '') !== (r.updated || '')) { built.push(r.title); keys.push(r.k); }
+    // A corrected historical date can keep its original publication batch.
+    else if ((old.updated || '') !== (r.updated || '') && (!old.b || !r.b || old.b !== r.b)) {
+      built.push(r.title); keys.push(r.k);
+    }
   }
   return { fresh, built, keys };
 }

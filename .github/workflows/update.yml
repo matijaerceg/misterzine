@@ -41,7 +41,7 @@ jobs:
         run: python misterzine.py snapshot
 
       - name: Check feed field exports
-        run: python -m unittest test_controls test_card_status test_arcade_specs test_family test_seed_r2 test_supporters test_mature test_genre test_optin_dbs test_app_tables test_build_dates test_flyers test_access_gates
+        run: python -m unittest test_controls test_card_status test_arcade_specs test_family test_seed_r2 test_supporters test_mature test_genre test_optin_dbs test_app_tables test_build_dates test_flyers test_access_gates test_core_projects
 
       - name: Enrich new arcade titles (year/manufacturer/rbf/setname)
         run: python misterzine.py enrich-mra
@@ -120,6 +120,8 @@ jobs:
           # quiet day. Only when exports/site actually change do we also commit
           # the DB (which then carries the new events/dates worth persisting).
           git add data/exports data/supporters.json docs
+          # Persist changed match evidence even when the visible links stay the same.
+          git add data/cache/official_core_projects.json
           if git diff --cached --quiet; then
             echo "No new or updated releases today — nothing to publish."
           else

@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Core debut groups and games now link to the project that ships their build, including Sega System 32, Aleck64 and blahm1d's cores. The tracker checks official release files and reads project links supplied by community feeds.
+
 - The MisterZine header logo now matches the page title color in every theme.
 
 - Manage lists is now at the bottom of the Your lists dropdown, leaving more room for pinned lists in the tab bar.

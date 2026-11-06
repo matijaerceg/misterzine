@@ -43,6 +43,7 @@ from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 from pathlib import Path
 from arcade_specs import merge_specs, parse_mra_specs, parse_current_specs
+from core_projects import refresh_official
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
@@ -130,11 +131,9 @@ SOURCES = [
         # blahm1d's cores: the Midway boards (Y Unit, T Unit, X Unit, Wolf
         # Unit, Cruis'n USA), Williams' NARC, Exidy 440, Taito's Gladiator,
         # The Legend of Kage (bootleg) and Data East's Night Slashers. The
-        # one db here with no GitHub behind it: db.json.zip and every file
-        # are served from a Cloudflare R2 bucket (his GitHub account, which
-        # held wolf-unit, gladiator and MiSTer-cores, is gone), so enrich-mra
-        # downloads the MRAs by the db's own file urls (MRA_REPOS, no repo),
-        # and his rows carry no repo link. Tags are plain strings with no
+        # db.json.zip and its files are served from Cloudflare R2, so enrich-mra
+        # downloads the MRAs by the db's own URLs. The same builds and sources
+        # are published in blahm1d/MiSTer-cores. Tags are plain strings with no
         # tag_dictionary; the per-core one ('wolfunit') is the filter term.
         # Same opt-in model as MeatCores: users hand-add the [blahm1d]
         # section to downloader.ini.
@@ -566,6 +565,7 @@ def _ensure_columns(con):
                              ("catalog", "genre", "TEXT"),
                              ("catalog", "beta", "INTEGER DEFAULT 0"),
                              ("catalog", "gate", "TEXT"),
+                             ("core_files", "download_repo", "TEXT"),
                              ("arcade_repos", "is_fork", "INTEGER"),
                              ("arcade_repos", "parent_owner", "TEXT")]:
         try:
@@ -788,6 +788,15 @@ def _coinop_key_gates(d, tagged):
     return {path: "coinop-collection-beta" for path, meta in checked.items() if meta["key_required"]}
 
 
+def core_download_repo(url):
+    """A project explicitly named in a binary download URL from the publisher."""
+    match = re.fullmatch(
+        r"https://(?:raw\.githubusercontent\.com/([\w.-]+/[\w.-]+)/[^?#]+|"
+        r"github\.com/([\w.-]+/[\w.-]+)/(?:raw/|releases/download/)[^?#]+)\.rbf(?:\?[^#]*)?",
+        url or "", re.I)
+    return (match[1] or match[2]) if match else None
+
+
 def fetch_db(source):
     """Download a db.json.zip, return (ts, {path: {hash,size}}, {path: gate}, gates).
 
@@ -807,6 +816,13 @@ def fetch_db(source):
     feeds announce it going public."""
     log(f"  fetching {source['name']} ...")
     d = _db_json(http_get(source["db_url"]))
+    if source["id"] == "distribution_mister":
+        try:
+            refresh_official(d, CACHEDIR / "official_core_projects.json", http_get, log)
+        except Exception as exc:
+            # Publish releases during an upstream outage. Export only reuses
+            # cached project matches whose file path AND hash still agree.
+            log(f"::warning::Official project lookup incomplete; keeping previous evidence: {exc}")
     gates = _gate_terms(d)
     by_id = {tid: term for term, tid in gates.items()}
     files = {}
@@ -817,6 +833,10 @@ def fetch_db(source):
                 gated[path] = by_id[tid]
                 break
         files[path] = {"hash": meta.get("hash"), "size": meta.get("size")}
+        if path.lower().startswith("_arcade/cores/") and path.lower().endswith(".rbf"):
+            repo = core_download_repo(meta.get("url"))
+            if repo:
+                files[path]["download_repo"] = repo
     if source["id"] == "coinop":
         gated.update(_coinop_key_gates(d, gated))
     for path, meta in _archived_orphans(source["id"], d).items():
@@ -1170,7 +1190,7 @@ def upsert_core_files(con, source_id, files, ts_iso):
         seen.add(path)
         stem = title_from_path(path)
         row = con.execute(
-            "SELECT hash FROM core_files WHERE source_id=? AND path=?",
+            "SELECT hash, download_repo FROM core_files WHERE source_id=? AND path=?",
             (source_id, path)).fetchone()
         if row is None:
             rbf, bdate = core_name(stem).lower(), core_build_date(stem)
@@ -1182,12 +1202,13 @@ def upsert_core_files(con, source_id, files, ts_iso):
                 events.append((ts_iso, source_id, path, stem, "arcade",
                                "updated", meta.get("hash")))
             con.execute(
-                "INSERT INTO core_files(source_id,path,rbf,build_date,hash,changed) VALUES(?,?,?,?,?,?)",
-                (source_id, path, rbf, bdate, meta.get("hash"), None))
-        elif row["hash"] != meta.get("hash"):
+                "INSERT INTO core_files(source_id,path,rbf,build_date,hash,download_repo) VALUES(?,?,?,?,?,?)",
+                (source_id, path, rbf, bdate, meta.get("hash"), meta.get("download_repo")))
+        elif row["hash"] != meta.get("hash") or row["download_repo"] != meta.get("download_repo"):
             con.execute(
-                "UPDATE core_files SET hash=?, changed=? WHERE source_id=? AND path=?",
-                (meta.get("hash"), ts_iso, source_id, path))
+                "UPDATE core_files SET changed=CASE WHEN hash IS NOT ? THEN ? ELSE changed END, "
+                "hash=?, download_repo=? WHERE source_id=? AND path=?",
+                (meta.get("hash"), ts_iso, meta.get("hash"), meta.get("download_repo"), source_id, path))
     stale = [r["path"] for r in con.execute(
         "SELECT path FROM core_files WHERE source_id=?", (source_id,)) if r["path"] not in seen]
     con.executemany("DELETE FROM core_files WHERE source_id=? AND path=?",
@@ -1648,7 +1669,7 @@ MRA_REPOS = [
     ("rmcores", "rmonic79/rmcores", "main", "_Arcade/_rmCores"),
     ("slopcore", "TheJesusFish/Slop-Core", "main", "_Arcade"),
     ("kuzecores", "kuzearcade/kuzecores", "main", "_Arcade"),
-    # No repo: blahm1d's MRAs exist only as files of his db, all in
+    # Read blahm1d's MRAs directly from the downloader feed, all in
     # _Arcade/_blahm1d/ since his 2026-09-25 rebuild (it seeded with a
     # subfolder per core; _db_hosted_mras flattens either layout). Matched
     # case-blind: the folder became _Blahm1d on 2026-10-09.
@@ -1995,7 +2016,7 @@ def join_jt_to_catalog(con):
     jt = {r["folder"]: r for r in con.execute("SELECT * FROM jt_cores").fetchall()}
     n = m = 0
     for row in con.execute(
-        "SELECT source_id, path, rbf, release_date, repo FROM catalog "
+        "SELECT source_id, path, rbf, release_date, last_update, repo FROM catalog "
         "WHERE system='arcade' AND rbf IS NOT NULL"
     ).fetchall():
         rbf = row["rbf"].lower()
@@ -2011,6 +2032,23 @@ def join_jt_to_catalog(con):
                  row["source_id"], row["path"]),
             )
             n += 1
+        elif (row["source_id"] == "jtbindb" and rbf == (r["rbf"] or "").lower()
+              and (row["repo"] or "").lower().startswith("mister-devel/")):
+            # An old title match can point a dated Jotego row at another port.
+            # Keep its per-game debut; only the maintainer's current folder dates activity.
+            if row["last_update"]:
+                # The displayed date came from the other port. Correct that baseline
+                # without marking the repair as a newly shipped build.
+                con.execute(
+                    "UPDATE row_batches SET updated=?, stamped_at=MAX(stamped_at, ?) "
+                    "WHERE updated=? AND k IN "
+                    "(SELECT k FROM row_keys WHERE source_id=? AND path=?)",
+                    (r["last_commit"][:10], r["last_commit"], row["last_update"][:10],
+                     row["source_id"], row["path"]))
+            con.execute(
+                "UPDATE catalog SET repo=?, last_update=? WHERE source_id=? AND path=?",
+                (JT_REPO + f" (cores/{folder})", r["last_commit"], row["source_id"], row["path"]))
+            m += 1
         elif (row["repo"] or "").startswith(JT_REPO):
             con.execute(
                 "UPDATE catalog SET last_update=? WHERE source_id=? AND path=?",
@@ -2107,6 +2145,8 @@ def apply_jt_frozen_dates(con):
 # catalog path so the pin survives graduation (row and path persist; only the
 # tag comes off). Future betas need no entry — detection day IS their debut.
 JT_BETA_FROZEN_DATES = {
+    # Jotego's first 1942 MiSTer beta, 2019-02-07 UTC (Patreon post 24512580).
+    "_Arcade/1942 (Revision B).mra": "2019-02-07",
     "_Arcade/Caliber 50 (Ver. 1.01).mra": "2026-03-13",
     "_Arcade/Double Dribble.mra": "2026-07-05",
     "_Arcade/Golfing Greats (World, version L).mra": "2025-09-12",
@@ -2377,6 +2417,7 @@ RMCORES_REPO = "rmonic79/rmcores"
 # rm_<Title>_MiSTer or rm-<Title>_MiSTer for his arcade cores; his builds of
 # Distribution console cores are GitHub forks named rm<Core>_MiSTer.
 RMCORES_CORE_REPOS = {
+    "rmpowerspikes": "rmonic79/rm_PowerSpikes_MiSTer",
     "rmnightslashers": "rmonic79/rm_NightSlashers_MiSTer",
     "rmseibucupsoccer": "rmonic79/rm-SeibuCupSoccer_MiSTer",
     "rmgalivan": "rmonic79/rm-Galivan_MiSTer",
@@ -2474,7 +2515,7 @@ KUZECORES_FROZEN_DATES = {
 }
 
 # Debut dates for the blahm1d initial import (2026-09-25 seed). The db went
-# up on 2026-09-14 and his GitHub is gone, but every game was a download
+# up on 2026-09-14, but every game was a download
 # before that: each one first shipped as an attachment to a free-tier post on
 # his Patreon (patreon.com/blahm1d, the posts API's published_at plus the
 # attachment upload time), UTC date. Commits of OngoGablogian/MiSTer_Ongo,
@@ -3334,6 +3375,8 @@ JLRH_FROZEN_DATES = {
 
 # MRA <rbf> tag (lowercased) -> the family repo holding that core's sources
 JLRH_CORE_REPOS = {
+    "ffgticlub": "jlrh/konami-fpga",
+    "ffgticlubsd": "jlrh/konami-fpga",
     "ffaerofgt": "jlrh/videosystem-fpga",
     "ffaligator": "jlrh/gaelco-fpga",
     "ffaltair": "jlrh/cidelsa-fpga",
@@ -3478,8 +3521,8 @@ OPTIN_DB_SOURCES = {
     "rmcores": (RMCORES_REPO, RMCORES_CORE_REPOS, RMCORES_FROZEN_DATES),
     "slopcore": (SLOPCORE_REPO, SLOPCORE_CORE_REPOS, SLOPCORE_FROZEN_DATES),
     "kuzecores": (KUZECORES_REPO, KUZECORES_CORE_REPOS, KUZECORES_FROZEN_DATES),
-    # no repo to link: his GitHub is gone and the db lives on R2
-    "blahm1d": (None, {}, BLAHM1D_FROZEN_DATES),
+    # The R2 feed ships the binaries and launchers catalogued in this project.
+    "blahm1d": ("blahm1d/MiSTer-cores", {}, BLAHM1D_FROZEN_DATES),
     "bazset": (BAZSET_REPO, BAZSET_CORE_REPOS, BAZSET_FROZEN_DATES),
     # db and core share one repo, so the fallback link is already the core
     "rossops": (ROSSOPS_REPO, {}, ROSSOPS_FROZEN_DATES),
@@ -4324,11 +4367,17 @@ def cmd_specs(args):
 def cmd_export(args):
     con = connect()
     EXPORTDIR.mkdir(parents=True, exist_ok=True)
+    join_optin_db_rows(con)
+    con.commit()
 
     # full catalog (deduped by normalized title, preferring rows with a release date)
     rows = [dict(r) for r in con.execute("SELECT * FROM catalog").fetchall()]
     shipped_rbfs = _shipped_rbf_index(con)
     rows = [r for r in rows if _source_row_visible(r, shipped_rbfs)]
+    projects = verified_project_links(con, rows, shipped_rbfs)
+    for r in rows:
+        if (r["source_id"], r["path"]) in projects:
+            r["repo"] = projects[r["source_id"], r["path"]]
     (EXPORTDIR / "catalog.json").write_text(json.dumps(rows, indent=2), encoding="utf-8")
 
     arcade = [r for r in rows if r["system"] == "arcade"]
@@ -5854,7 +5903,7 @@ FROZEN_REPOS = {
     "jtngp": "jotego/jtcores/tree/master/cores/ngp",
     "neogeopocket": "jotego/jtcores/tree/master/cores/ngp",
     "neogeopocket-color": "jotego/jtcores/tree/master/cores/ngpc",
-    "skysmasher": "rmonic79/Arcade_SkySmasher_MiSTer",  # third-party, no MiSTer-devel repo
+    "skysmasher": "rmonic79/Arcade_SkySmasher_MiSTer",  # original project; official fork ships identical bytes
     "atari5200": "MiSTer-devel/Atari800_MiSTer",   # 5200 rbf is built from the Atari800 repo
     "intellivision": "MiSTer-devel/Intv_MiSTer",
     "ay-3-8500": "MiSTer-devel/AY-3-8500-MiSTer",
@@ -5873,13 +5922,77 @@ FROZEN_TITLE_REPOS = {
 }
 
 
+def verified_project_links(con, rows, shipped):
+    """Public links are resolved separately from the repo used for dating and naming.
+    Match only the current binary from the row's own source. An external project
+    in a community feed must belong to its publisher; redistributors may mirror cores.
+    """
+    cache = CACHEDIR / "official_core_projects.json"
+    official = json.loads(cache.read_text(encoding="utf-8"))["files"] if cache.exists() else {}
+
+    def official_link(path, digest):
+        saved = official.get(path)
+        if saved and saved[0] == digest:
+            if len(saved[1]) == 1:
+                return saved[1][0]
+            if len(saved[1]) > 1:
+                return ""  # explicit conflict: suppress an unverified name/title guess
+
+    by_core = {}
+    by_filename = {}
+    for f in con.execute("SELECT source_id,path,rbf,hash,download_repo FROM core_files ORDER BY path COLLATE NOCASE"):
+        sid, path = f["source_id"], f["path"]
+        repo = f["download_repo"]
+        if sid == "distribution_mister":
+            repo = official_link(path, f["hash"])
+        else:
+            publisher = OPTIN_DB_SOURCES.get(sid, (None,))[0]
+            if not (repo and publisher and repo.lower() != publisher.lower()
+                    and repo.split("/")[0].lower() == publisher.split("/")[0].lower()):
+                repo = None
+        # A date-pinned launcher selects that exact file; an undated name selects
+        # the newest build. Include misses so an older file cannot supply its link.
+        by_filename[sid, title_from_path(path).lower()] = repo
+        by_core[sid, f["rbf"]] = repo
+
+    links = {}
+    for r in rows:
+        sid, path = r["source_id"], r["path"]
+        if r["system"] == "arcade":
+            tag = (r["rbf"] or "").strip()
+            if sid == "distribution_mister" and tag.lower() in FROZEN_REPOS:
+                continue  # retain explicitly curated original projects
+            match = _resolve_shipped_rbf(sid, tag, shipped)
+            if not match:
+                continue
+            if tag.lower() in shipped[sid]:
+                repo = by_filename.get((sid, tag.lower()))
+            else:
+                repo = by_core.get((sid, match[1]))
+        elif sid == "distribution_mister":
+            repo = official_link(path, r["hash"])
+        else:
+            continue
+        if repo is not None:
+            existing = r["repo"] or ""
+            # GitHub ignores repository-name casing. Keep a valid spelling in the
+            # catalogue; branch names, on the other hand, are case sensitive.
+            if repo.count("/") == 1 and existing.lower() == repo.lower():
+                repo = existing
+            links[sid, path] = repo
+    return links
+
+
 def _repo_for(r, core, repo_maps):
     """GitHub path (after github.com/) for a catalog row's core repo, or ''.
 
-    catalog.repo (set by the DB snapshot / repo crawls) wins; arcade rows it
-    missed fall back on the rbf: Jotego rbfs deep-link into the jtcores
-    monorepo, others match arcade_repos by core name, then the frozen maps.
+    Prefer verified shipped-file evidence, then the existing date-source
+    repo and core-specific fallbacks. A verified conflict has an empty link.
     """
+    projects = repo_maps.get("projects", {})
+    key = (r["source_id"], r["path"])
+    if key in projects:
+        return projects[key]
     repo = (r["repo"] or "").strip() if "repo" in r.keys() else ""
     if repo:
         # catalog stores Jotego rows as 'jotego/jtcores (cores/<x>)' — turn the
@@ -6133,6 +6246,7 @@ def cmd_export_web(args):
     # every shipped _Arcade/cores file per db, for resolving MRA <rbf> tags
     # that name a core by prefix rather than by filename (_resolve_shipped_rbf)
     shipped_rbfs = _shipped_rbf_index(con)
+    repo_maps["projects"] = verified_project_links(con, rows, shipped_rbfs)
     # fork parentage for _core_label: who really authored a MiSTer-devel fork
     fork_info = {r["repo"].lower(): r for r in con.execute(
         "SELECT repo, is_fork, parent_owner FROM arcade_repos")}

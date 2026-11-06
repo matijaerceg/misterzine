@@ -1,0 +1,2219 @@
+{
+  "signature": "4b89d4f4b133735061c6b7ba8932671ca422db4e52500a450f1ff013c831cdfc",
+  "files": {
+    "_Arcade/cores/ActFancer_20260708.rbf": [
+      "cbf83337687f168e4a3dbdc3a251932c",
+      [
+        "MiSTer-devel/Arcade-ActFancer_MISTer"
+      ]
+    ],
+    "_Arcade/cores/Aleck64_20260917.rbf": [
+      "12ec250ea1d2417e7241de253b5a2a0b",
+      [
+        "MiSTer-devel/N64_MiSTer/tree/Aleck64"
+      ]
+    ],
+    "_Arcade/cores/Arabian_20261029.rbf": [
+      "a7d346df396b90ff701d35cb83d7cf4d",
+      [
+        "MiSTer-devel/Arcade-Arabian_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Arkanoid_20240525.rbf": [
+      "2f9b66c2274e95ea96dca26cbf6c0a0a",
+      [
+        "MiSTer-devel/Arcade-Arkanoid_MISTer"
+      ]
+    ],
+    "_Arcade/cores/Asteroids_20260810.rbf": [
+      "57cfa1157bcd16f58bd150b9ca6e44eb",
+      [
+        "MiSTer-devel/Arcade-Asteroids_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Astrocade_20260318.rbf": [
+      "8861d43b7a75a1b8f053df24a30dd9b3",
+      [
+        "MiSTer-devel/Arcade-Astrocade_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/AtariTetris_20240525.rbf": [
+      "5a245f0c7450c6c884277861a3058c1a",
+      [
+        "MiSTer-devel/Arcade-ATetris_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Athena_20240525.rbf": [
+      "ba7b0f6713fe26bf221564e97ef19998",
+      [
+        "MiSTer-devel/Arcade-Athena_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Badlands_20261016.rbf": [
+      "f3b9f097d8a39d4c2047afc20fb1c9d0",
+      [
+        "MiSTer-devel/Arcade-Badlands_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Bagman_20260713.rbf": [
+      "c4e1423521adda97c125dbcd8df91642",
+      [
+        "MiSTer-devel/Arcade-Bagman_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BankPanic_20240525.rbf": [
+      "eba5c6a1fa1238cfc4191ff20d3aa6a7",
+      [
+        "MiSTer-devel/Arcade-BankPanic_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Batman_20261016.rbf": [
+      "106d18bec8895c0299379ef7de8bf41f",
+      [
+        "MiSTer-devel/Arcade-Batman_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BattleZone_20240525.rbf": [
+      "22cd0b44dc7c369dbdcc99fe21ac9b65",
+      [
+        "MiSTer-devel/Arcade-BattleZone_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Berzerk_20240714.rbf": [
+      "589a0cf0c9854e935c5ad2f608cea6da",
+      [
+        "MiSTer-devel/Arcade-Berzerk_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BlackWidow_20260717.rbf": [
+      "02802b10faeffb431917a3f29f2af970",
+      [
+        "MiSTer-devel/Arcade-BlackWidow_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Blasteroids_20261016.rbf": [
+      "829caeb0f1861d0832314b91de55cff2",
+      [
+        "MiSTer-devel/Arcade-Blasteroids_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Blockade_20250105.rbf": [
+      "46a6313a9c1f058832fcddcf9c7ec679",
+      [
+        "MiSTer-devel/Arcade-Blockade_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BloodBros_20260609.rbf": [
+      "8bd1be312f1ebc32cae2b9c048804cb8",
+      [
+        "MiSTer-devel/Arcade-BloodBros_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BluePrint_20261028.rbf": [
+      "95d28b1a7a116dda6464bb9f111e269c",
+      [
+        "MiSTer-devel/Arcade-BluePrint_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BombJack_20240804.rbf": [
+      "90464a25f9fb7239257b4d39eeae2fa2",
+      [
+        "MiSTer-devel/Arcade-BombJack_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BoogieWings_20260925.rbf": [
+      "06e60f3147e9caa946ff891bd6894aa7",
+      [
+        "MiSTer-devel/Arcade-BoogieWings_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Bosconian_20240525.rbf": [
+      "bc101e73f21473e0ad31b319819a2219",
+      [
+        "MiSTer-devel/Arcade-Bosconian_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Breakout_20260714.rbf": [
+      "cedc885b1585df6d7ad3f9edbeaccbdd",
+      [
+        "MiSTer-devel/Arcade-Breakout_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BubSysROM_20250107.rbf": [
+      "5af875d6f03362f73fa8c62aa9773258",
+      [
+        "MiSTer-devel/Arcade-BubSysROM_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BubSys_20250107.rbf": [
+      "d7372963ac8b47b000d9d55d763b104a",
+      [
+        "MiSTer-devel/Arcade-BubSys_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BurgerTime_20240525.rbf": [
+      "fa6e1733ed974c2b3e0e04bbf891703a",
+      [
+        "MiSTer-devel/Arcade-BurgerTime_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/BurningRubber_20260713.rbf": [
+      "fa5b4cc789bfbbb63eb468a2492b4361",
+      [
+        "MiSTer-devel/Arcade-BurningRubber_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CanyonBomber_20240525.rbf": [
+      "e62e2892c1a39e1924949c6fa45cbb60",
+      [
+        "MiSTer-devel/Arcade-CanyonBomber_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CaveBanpresto_20260825.rbf": [
+      "fd1f9ae9698331031d5038f20e2fe0de",
+      [
+        "MiSTer-devel/Arcade-CaveBanpresto_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Cave_20260825.rbf": [
+      "fb7846df5778f9d585fbdb509ad27412",
+      [
+        "MiSTer-devel/Arcade-Cave_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Centipede_20240525.rbf": [
+      "64054d820d771e8c2facacaf7aee1ee5",
+      [
+        "MiSTer-devel/Arcade-Centipede_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Chameleon_20240525.rbf": [
+      "49d3a75df6e4c008aaf57e2395633fed",
+      [
+        "MiSTer-devel/Arcade-Chameleon_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ChampionBaseball_20261028.rbf": [
+      "3a885c9d151e5842d101a6d49165325f",
+      [
+        "MiSTer-devel/Arcade-ChampionBaseball_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ChinaGate_20260506.rbf": [
+      "756fecd1bf3498a47e369730638ee591",
+      [
+        "MiSTer-devel/Arcade-ChinaGate_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CityConnection_20260503.rbf": [
+      "7aa629a3a0de7db3398b6ff759d1c7ea",
+      [
+        "MiSTer-devel/Arcade-CityConnection_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ComputerSpace_20240525.rbf": [
+      "38b3610cad2a5de25d6cae72b228bb52",
+      [
+        "MiSTer-devel/Arcade-ComputerSpace_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CongoBongo_20240525.rbf": [
+      "0ffd690cfb15fde6e4a5fb56278ad67b",
+      [
+        "MiSTer-devel/Arcade-CongoBongo_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CosmicGuerilla_20251127.rbf": [
+      "328743b161e49e9268bfb24a1e53969e",
+      [
+        "MiSTer-devel/Arcade-CosmicGuerilla_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Cosmic_20241217.rbf": [
+      "920c89f6d88f8262551d53ee8386c655",
+      [
+        "MiSTer-devel/Arcade-Cosmic_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CrazyBalloon_20251127.rbf": [
+      "a0c6094ba33c38d628fc81fdca5204af",
+      [
+        "MiSTer-devel/Arcade-CrazyBalloon_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CrazyClimber_20260520.rbf": [
+      "7c8011a94008da875fb0ef0803a7a3fa",
+      [
+        "MiSTer-devel/Arcade-CrazyClimber_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CrazyKong_20240526.rbf": [
+      "77105076c093a68edb0dfd11174ab985",
+      [
+        "MiSTer-devel/Arcade-CrazyKong_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/CrystalCastles_20240526.rbf": [
+      "169d759525e38bfff57c783064411d47",
+      [
+        "MiSTer-devel/Arcade-CrystalCastles_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DCon_20260530.rbf": [
+      "02eda1e9d359121b5ddda3a621f1ec00",
+      [
+        "MiSTer-devel/Arcade-Dcon_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DECOCassette_20261025.rbf": [
+      "2224b706a2e2d7935559f5f266ec5c4f",
+      [
+        "MiSTer-devel/Arcade-DECOCassette_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Darius2NinjaWarriors_20260523.rbf": [
+      "34e3a72452a209b73e576377849dc7c2",
+      [
+        "MiSTer-devel/Arcade-Darius2NinjaWarriors_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Darius2WarriorBlade_20260619.rbf": [
+      "0f2f447f1d03a2e040c054bc7935afc9",
+      [
+        "MiSTer-devel/Arcade-Darius2WarriorBlade_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Darius_20260730.rbf": [
+      "21419ff508a784aaa6d1bc06d1ef375c",
+      [
+        "MiSTer-devel/Arcade-Darius_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Deco16_20260826.rbf": [
+      "be80024b6c84c1b2987db278e0389d94",
+      [
+        "MiSTer-devel/Arcade-Deco16_Mister"
+      ]
+    ],
+    "_Arcade/cores/Defender_20260714.rbf": [
+      "67ea97c104d07316f31726fe91c96b5b",
+      [
+        "MiSTer-devel/Arcade-Defender_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DenjinMakai_20260819.rbf": [
+      "207a60598c139cd7b49629f37a4345e4",
+      [
+        "MiSTer-devel/Arcade-DenjinMakai_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DigDug_20240526.rbf": [
+      "ce7de9e76ce2c7b0e3640450d155ec6a",
+      [
+        "MiSTer-devel/Arcade-DigDug_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Dominos_20240526.rbf": [
+      "b6a6eac8a8b46caca8800c2729a47fc7",
+      [
+        "MiSTer-devel/Arcade-Dominos_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DonkeyKong3_20240526.rbf": [
+      "8bd544bbcb7da3f5fb760fc4acdd1ca2",
+      [
+        "MiSTer-devel/Arcade-DonkeyKong3_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DonkeyKongJunior_20240526.rbf": [
+      "2e6c9aaea75f7e6fd1a8c19cfa8dc327",
+      [
+        "MiSTer-devel/Arcade-DonkeyKongJunior_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DonkeyKong_20240526.rbf": [
+      "5a5e9bc8490e09d174c098f9f5981482",
+      [
+        "MiSTer-devel/Arcade-DonkeyKong_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/DottoriKun_20250105.rbf": [
+      "4b9b8dbd55cfd02fb67902af6ae15557",
+      [
+        "MiSTer-devel/Arcade-DottoriKun_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Druaga_20240525.rbf": [
+      "790d6f8d593b1cbd0910b28a92eb2624",
+      [
+        "MiSTer-devel/Arcade-Druaga_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Escape_20261019.rbf": [
+      "89ee9e2ef8d2a92fc6cd7a6babc6972f",
+      [
+        "MiSTer-devel/Arcade-Escape_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Exerion_20240914.rbf": [
+      "fd24fff97c0df9d6af8ad810a5d907a6",
+      [
+        "MiSTer-devel/Arcade-Exerion_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Exidy2_20240526.rbf": [
+      "b10e824c508293c7eca77cd7c0a87431",
+      [
+        "MiSTer-devel/Arcade-Exidy2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ExpressRaider_20240526.rbf": [
+      "02a092f8f62f7d8c61416075739fbad6",
+      [
+        "MiSTer-devel/Arcade-ExpressRaider_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Finalizer_20240526.rbf": [
+      "a72d1742da98a4e2640b1922b378edef",
+      [
+        "MiSTer-devel/Arcade-Finalizer_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/FoodFight_20240526.rbf": [
+      "0714401709f56276a0509860ea2f5998",
+      [
+        "MiSTer-devel/Arcade-FoodFight_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Frenzy_20240526.rbf": [
+      "c3ba11748d0642bda3d12cc9b43131aa",
+      [
+        "MiSTer-devel/Arcade-Frenzy_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Fuuki_20260916.rbf": [
+      "a5c261ae292ddd455a2cba9ae0790768",
+      [
+        "MiSTer-devel/Arcade-Fuuki_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Galaga_20240526.rbf": [
+      "b3b161bf5642e6b969b7c36ab6fd37b4",
+      [
+        "MiSTer-devel/Arcade-Galaga_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Galaxian_20240526.rbf": [
+      "81f21b5ef9330c2c3efe95ecf62b6ce2",
+      [
+        "MiSTer-devel/Arcade-Galaxian_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Galivan_20240526.rbf": [
+      "2d11be19b3bcf5db8db2a0e11c4d5fa7",
+      [
+        "MiSTer-devel/Arcade-Galivan_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Gaplus_20260807.rbf": [
+      "14592673331437aba283883bb6bcb88a",
+      [
+        "MiSTer-devel/Arcade-Gaplus_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Gauntlet_20250425.rbf": [
+      "5f9929ae5f73687cc280dfe493dae465",
+      [
+        "MiSTer-devel/Arcade-Gauntlet_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Godzilla_20260808.rbf": [
+      "1bc73ab4e892c8dac25919124168a732",
+      [
+        "MiSTer-devel/Arcade-Godzilla_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Guardians_20261005.rbf": [
+      "d39ce1026f768ba7047650faee11fa2b",
+      [
+        "MiSTer-devel/Arcade-Guardians_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/GulfWarII_20260918.rbf": [
+      "3becf45d21660df6d17b0d4397c14af4",
+      [
+        "MiSTer-devel/Arcade-GulfWarII_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Gyruss_20261029.rbf": [
+      "5122355a6ac3a33a981dc63d09ea60f1",
+      [
+        "MiSTer-devel/Arcade-Gyruss_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/HeatedBarrel_20260715.rbf": [
+      "eacbd3d9d0517d9cf038854614f79ed2",
+      [
+        "MiSTer-devel/Arcade-HeatedBarrel_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Hyprduel_20261004.rbf": [
+      "69b75bf9feadc529cd886ee28bf67935",
+      [
+        "MiSTer-devel/Arcade-HyperDuel_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IGSPGM_20260823.rbf": [
+      "a9cc5d760bc9c05ef7937c133e004ad6",
+      [
+        "MiSTer-devel/Arcade-IGSPGM_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IkariWarriors_20260714.rbf": [
+      "c45a290be82c6d2f5ac21b4577811b1b",
+      [
+        "MiSTer-devel/Arcade-IkariWarriors_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Inferno_20260104.rbf": [
+      "b8ee7c11116c117bc4881005c6f4ef99",
+      [
+        "MiSTer-devel/Arcade-Inferno_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IremM107_20240519.rbf": [
+      "3f5edabfd3b99ffb448ad8726b1e237f",
+      [
+        "MiSTer-devel/Arcade-IremM107_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IremM62_20240527.rbf": [
+      "0d8796d72a179af63a7ce57f5d8d1d5f",
+      [
+        "MiSTer-devel/Arcade-IremM62_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IremM72_20260824.rbf": [
+      "e1afd76d57eed1e129fe105082de00f8",
+      [
+        "MiSTer-devel/Arcade-IremM72_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IremM90_20241107.rbf": [
+      "928a0f9a27fab961050001a65e3a28ef",
+      [
+        "MiSTer-devel/Arcade-IremM90_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IremM92_20250222.rbf": [
+      "6c7df662be642f604e278af29e505706",
+      [
+        "MiSTer-devel/Arcade-IremM92_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/IronHorse_20240527.rbf": [
+      "ad8a1db271d6457360a8488c15f22235",
+      [
+        "MiSTer-devel/Arcade-IronHorse_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Jackal_20240527.rbf": [
+      "4b736ebab6a273611d9e3702cbff622b",
+      [
+        "MiSTer-devel/Arcade-Jackal_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Jailbreak_20240527.rbf": [
+      "f31a96a86b5c871ae00bc707144a0b76",
+      [
+        "MiSTer-devel/Arcade-Jailbreak_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Joust2_20260104.rbf": [
+      "e0b2ad3ea6a0ecdf4907066cade21607",
+      [
+        "MiSTer-devel/Arcade-Joust2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/JunoFirst_20261025.rbf": [
+      "3bfd5fcfcfec97f82093d3dd95fc45d1",
+      [
+        "MiSTer-devel/Arcade-JunoFirst_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Kangaroo_20261028.rbf": [
+      "c3a0e84b51117d4f4a28bad6b03e76aa",
+      [
+        "MiSTer-devel/Arcade-Kangaroo_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/KickAndRun_20240730.rbf": [
+      "944e448b122494eb02bd9907d9955999",
+      [
+        "MiSTer-devel/Arcade-KickAndRun_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Klax_20261105.rbf": [
+      "c890831cc03346d87e10b750e71bbf78",
+      [
+        "MiSTer-devel/Arcade-Klax_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Kyugo_20261025.rbf": [
+      "31e8df1ce5b86051fc5cae08a3333185",
+      [
+        "MiSTer-devel/Arcade-Kyugo_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/LadyBug_20240529.rbf": [
+      "3530a42a99528bc43e06e19b3c1a102f",
+      [
+        "MiSTer-devel/Arcade-LadyBug_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/LaserdiscGames_20261025.rbf": [
+      "65354d82ce9f4e7a1d934a8c8a6997ff",
+      [
+        "MiSTer-devel/Arcade-LaserdiscGames_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Legionnaire_20260715.rbf": [
+      "bafbcc6a2cb710d71c1b9a28ceb3be14",
+      [
+        "MiSTer-devel/Arcade-Legionnaire_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Leland_20261003.rbf": [
+      "0daa913ac5952914c45a0052d9515954",
+      [
+        "MiSTer-devel/Arcade-Leland_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MCR1_20260418.rbf": [
+      "54ab02152569b7284db0ec40b39731ba",
+      [
+        "MiSTer-devel/Arcade-MCR1_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MCR2_20260418.rbf": [
+      "0bb70c89796a237a187d9f5b1056b08e",
+      [
+        "MiSTer-devel/Arcade-MCR2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MCR3Mono_20240525.rbf": [
+      "f32cca9da6db30f7a09f9f734b81ef72",
+      [
+        "MiSTer-devel/Arcade-MCR3Mono_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MCR3Scroll_20240525.rbf": [
+      "6ea33b0bf55e8aff51630e4e356365c5",
+      [
+        "MiSTer-devel/Arcade-MCR3Scroll_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MCR3_20260417.rbf": [
+      "2a3dbb3299f5cebca35f2cbe71bf4f5f",
+      [
+        "MiSTer-devel/Arcade-MCR3_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MajorHavoc_20260730.rbf": [
+      "d228188c84b56259be86200a075f4ef0",
+      [
+        "MiSTer-devel/Arcade-MajorHavoc_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MarbleMadness2_20260904.rbf": [
+      "f174c5be1960eef1cb6cc331de81828e",
+      [
+        "MiSTer-devel/Arcade-MarbleMadness2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MarioBros_20240802.rbf": [
+      "ed2567ae4cd0b8c0fccf5e35f4fc958f",
+      [
+        "MiSTer-devel/Arcade-MarioBros_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MissileCommand_20240530.rbf": [
+      "8d36ed30311f183eb7bed106dae35c42",
+      [
+        "MiSTer-devel/Arcade-MissileCommand_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MoonPatrol_20260911.rbf": [
+      "f63be0abab1dc56cd33abf2b38f60b93",
+      [
+        "MiSTer-devel/Arcade-MoonPatrol_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MrDo_20240530.rbf": [
+      "e026be41a0f61af8dd52d543ec4e8d04",
+      [
+        "MiSTer-devel/Arcade-MrDo_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MrJong_20240530.rbf": [
+      "d914c3a00954b6674b85b3d1ab22c2cb",
+      [
+        "MiSTer-devel/Arcade-MrJong_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MysticMarathon_20240530.rbf": [
+      "e4aae5a58d7f4cf1be6e353cf90fbe3e",
+      [
+        "MiSTer-devel/Arcade-MysticMarathon_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/NaughtyBoy_20260714.rbf": [
+      "f21fdbe8b3b1ea685a46ca6159c7b320",
+      [
+        "MiSTer-devel/Arcade-NaughtyBoy_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/NightSlashers_20260901.rbf": [
+      "a91c949c1aa2a45c636b017c92e5777f",
+      [
+        "MiSTer-devel/Arcade-NightSlashers_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/NinjaKun_20240530.rbf": [
+      "80a65198df8f343e061635887055a7bb",
+      [
+        "MiSTer-devel/Arcade-NinjaKun_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/OffTheWall_20261016.rbf": [
+      "e0180e1b9e28b82d9babe6c540a707fc",
+      [
+        "MiSTer-devel/Arcade-OffTheWall_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Pacman_20260625.rbf": [
+      "4dc28d7ebc5f583f33ce8f048b2f5ebe",
+      [
+        "MiSTer-devel/Arcade-Pacman_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Pengo_20240530.rbf": [
+      "ce703ac9a6bfda03b0000b79a28d2743",
+      [
+        "MiSTer-devel/Arcade-Pengo_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/PenguinKunWars_20240531.rbf": [
+      "3352f1fbff04454fafdf8a453d6cbf4c",
+      [
+        "MiSTer-devel/Arcade-PenguinKunWars_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Performan_20260714.rbf": [
+      "26da6aa4a384c18f93c14294aa3839db",
+      [
+        "MiSTer-devel/Arcade-Performan_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Phoenix_20240601.rbf": [
+      "5a727df8eb17169e1cd0e035d482af57",
+      [
+        "MiSTer-devel/Arcade-Phoenix_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/PinballAction_20260819.rbf": [
+      "00f66e248f3ce8ada8508c1c2be42ebc",
+      [
+        "MiSTer-devel/Arcade-PinballAction"
+      ]
+    ],
+    "_Arcade/cores/Pleiads_20240601.rbf": [
+      "3b9707b4fbd91820747725ad7cd00381",
+      [
+        "MiSTer-devel/Arcade-Pleiads_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/PolePosition_20261027.rbf": [
+      "1ccff4c0c3656b7f79abd4307d9f4f4a",
+      [
+        "MiSTer-devel/Arcade-PolePosition_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/PolyPlay_20240601.rbf": [
+      "12ed403f4aeaf2b33a0736c12a4f94cd",
+      [
+        "MiSTer-devel/Arcade-PolyPlay_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Pong_20240601.rbf": [
+      "43d5ac686a8e60b09e64b545b594b71c",
+      [
+        "MiSTer-devel/Arcade-Pong_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Pooyan_20260710.rbf": [
+      "cd5b78cdfbefdeac4aad48dda2e5a379",
+      [
+        "MiSTer-devel/Arcade-Pooyan_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Popeye_20240601.rbf": [
+      "f1c74d41d15731debef461aeff1ec958",
+      [
+        "MiSTer-devel/Arcade-Popeye_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/PrimalRage_20261102.rbf": [
+      "e52b652731ba26dc8923b7a63b60bd31",
+      [
+        "MiSTer-devel/Arcade-PrimalRage_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/PsikyoSH2_20260817.rbf": [
+      "04a46dd54f7c93152f5bc37eb2c1ff76",
+      [
+        "MiSTer-devel/Arcade-PsikyoSH2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Psikyo_20260926.rbf": [
+      "ae14e44c196179b8e68897ce702876e9",
+      [
+        "MiSTer-devel/Arcade-Psikyo_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Psychic5_20240827.rbf": [
+      "d467efdf24490ef5fa5b41d66016086e",
+      [
+        "MiSTer-devel/Arcade-Psychic5_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/QBert_20260715.rbf": [
+      "ec73113251d7892f170efef5bf0f6146",
+      [
+        "MiSTer-devel/Arcade-QBert_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Qix_20261105.rbf": [
+      "c4c1b2cca8369b379e6e250657751792",
+      [
+        "MiSTer-devel/Arcade-Qix_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Raiden2_20260825.rbf": [
+      "39fbceeee36e85ec61e900ff5df02007",
+      [
+        "MiSTer-devel/Arcade-Raiden2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Raiden_20260823.rbf": [
+      "bfce8d21292021cd4a627fd10e3e79c4",
+      [
+        "MiSTer-devel/Arcade-Raiden_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/RallyX_20260531.rbf": [
+      "89694a30945ce3b2a690f91ca0f45678",
+      [
+        "MiSTer-devel/Arcade-RallyX_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Rampart_20261016.rbf": [
+      "895a3ccc3322b23b43aab64af36e9fc5",
+      [
+        "MiSTer-devel/Arcade-Rampart_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ReliefPitcher_20261016.rbf": [
+      "b6214f3327b5e5d1473c896163a23998",
+      [
+        "MiSTer-devel/Arcade-ReliefPitcher_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/RingKing_20260903.rbf": [
+      "737cc0476ba6ac568d7741fa836a9b9b",
+      [
+        "MiSTer-devel/Arcade-RingKing_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/RiverPatrol_20240602.rbf": [
+      "a7c7f9f3806682fb8e7322005f5cbeec",
+      [
+        "MiSTer-devel/Arcade-RiverPatrol_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Robotron_20261003.rbf": [
+      "3e5df95d44b424c9dc6dd33f5b751ebc",
+      [
+        "MiSTer-devel/Arcade-Robotron_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/RshnAtk_20240602.rbf": [
+      "e4453d9c9e8a805b3fe64a4e1202fd38",
+      [
+        "MiSTer-devel/Arcade-RushnAttack_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/S32_20261105.rbf": [
+      "e7e76b90e706f9f00f34184c52b67741",
+      [
+        "MiSTer-devel/Arcade-SegaSystem32_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SDGundamPS_20260714.rbf": [
+      "8c769f1f8ae56212af34ed6e8797b0cd",
+      [
+        "MiSTer-devel/Arcade-GundamSD_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SDGundamRainbow_20260809.rbf": [
+      "275514fa1f93986018253b6f73169706",
+      [
+        "MiSTer-devel/Arcade-SDGundamRainbow_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SEGASYS1_20260714.rbf": [
+      "8677a6bd8b60fea92052156b249cf336",
+      [
+        "MiSTer-devel/Arcade-SEGASYS1_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SMS_20260823.rbf": [
+      "148b75236f3ab1bc96ca1f16c05f1ec9",
+      [
+        "MiSTer-devel/SMS_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SNK6502_20261104.rbf": [
+      "14b8c14973699363cd6f506515abc493",
+      [
+        "MiSTer-devel/Arcade-SNK6502_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SNK_TripleZ80_20260109.rbf": [
+      "3c56beee05457d3f89f00d0070699e4d",
+      [
+        "MiSTer-devel/Arcade-SNK_TripleZ80_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ST-V_20251003.rbf": [
+      "be9bffd1b64242fed5aaf2debe979604",
+      [
+        "MiSTer-devel/Saturn_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Salamander_20260828.rbf": [
+      "f609e53894269d3e6522618d39f8a930",
+      [
+        "MiSTer-devel/Arcade-Salamander_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ScooterShooter_20240602.rbf": [
+      "6ec452ec2397c5390c50892dbcdc8e65",
+      [
+        "MiSTer-devel/Arcade-ScooterShooter_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Scramble_20261024.rbf": [
+      "dccb9ab881961d9cc57fd2d1140b3db0",
+      [
+        "MiSTer-devel/Arcade-Scramble_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SegaG80V_20260908.rbf": [
+      "5168da5f84b39b8ad26aa11265e61347",
+      [
+        "MiSTer-devel/Arcade-SegaG80V_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SegaVCO_20261002.rbf": [
+      "9ff733ceefbfe704cfe89049084a8029",
+      [
+        "MiSTer-devel/Arcade-SegaVCO_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SegaVICZ80_20240602.rbf": [
+      "c47962c33bf40225f6ea1d550cfadd79",
+      [
+        "MiSTer-devel/Arcade-SegaVICZ80_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SegaXBoard_20261004.rbf": [
+      "26796313c0314113f5bb78ffb1fbd92c",
+      [
+        "MiSTer-devel/Arcade-SegaXBoard_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SeibuCupSoccer_20260910.rbf": [
+      "048adc5a62856d571a274af45be3e5e8",
+      [
+        "MiSTer-devel/Arcade-SeibuCupSoccer_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Shuuz_20261016.rbf": [
+      "eb7935ed60990e05d5265601c9f97068",
+      [
+        "MiSTer-devel/Arcade-Shuuz_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SilverLand_20240602.rbf": [
+      "1fee17bbbf93f87282d5eceb0140692f",
+      [
+        "MiSTer-devel/Arcade-SilverLand_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SkullXBones_20261017.rbf": [
+      "ae31f357a58722ff8da724e2239015dd",
+      [
+        "MiSTer-devel/Arcade-SkullXBones_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SkySmasher_20260608.rbf": [
+      "0970f57fbd956d7f13ce2e378a99503e",
+      [
+        "MiSTer-devel/Arcade_SkySmasher_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SlapFight_20260713.rbf": [
+      "72021461943340cb774ccfd0c8e2b178",
+      [
+        "MiSTer-devel/Arcade-SlapFight_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SolomonsKey_20240527.rbf": [
+      "69f13d2b522c02459fa4995c99b8e135",
+      [
+        "MiSTer-devel/Arcade-SolomonsKey_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Sonson_20240527.rbf": [
+      "276ecbb1bf8d8e77588ba0a516b09f45",
+      [
+        "MiSTer-devel/Arcade-Sonson_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SpaceFirebird_20260617.rbf": [
+      "177b74d0db2e81e309164c6233c387ae",
+      [
+        "MiSTer-devel/Arcade-SpaceFirebird_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SpaceInvaders_20260622.rbf": [
+      "4660f18cfa9d39ec1b17a8e9d68dc27a",
+      [
+        "MiSTer-devel/Arcade-SpaceInvaders_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SpaceRace_20240527.rbf": [
+      "f85a96ad29ce1e43c487644202fdb332",
+      [
+        "MiSTer-devel/Arcade-SpaceRace_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Sprint1_20240527.rbf": [
+      "aa2d316c4e6b2ab2d7b78ee6233dd481",
+      [
+        "MiSTer-devel/Arcade-Sprint1_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Sprint2_20240527.rbf": [
+      "d1bf8a25aa531f8f5206fc85d7ae02c7",
+      [
+        "MiSTer-devel/Arcade-Sprint2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/StarCastle_20261015.rbf": [
+      "b07481ff733133d6fddbdc1215f53832",
+      [
+        "MiSTer-devel/Arcade-StarCastle_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/StarWars_20260816.rbf": [
+      "988d4dc12f50905523d691613b03cb78",
+      [
+        "MiSTer-devel/Arcade-StarWars_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Starforce_20260418.rbf": [
+      "6e220f3b23fc4aa26aa52d41fc0cea17",
+      [
+        "MiSTer-devel/Arcade-StarForce_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Subs_20240527.rbf": [
+      "7bf61869cc0da8503f91b8876e1e7b98",
+      [
+        "MiSTer-devel/Arcade-Subs_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SuperBreakout_20240525.rbf": [
+      "833231bef455cc41e479dae056d8b450",
+      [
+        "MiSTer-devel/Arcade-SuperBreakout_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/SuprLoco_20240616.rbf": [
+      "6830fedc7fae019a8555467c184e49b9",
+      [
+        "MiSTer-devel/Arcade-SuprLoco_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TIAMC1_20240525.rbf": [
+      "b1150c49682117c1bdefffe961238b9b",
+      [
+        "MiSTer-devel/Arcade-TIAMC1_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TNKIII_20240615.rbf": [
+      "9db7b796d4191006b2532be3fa861fdb",
+      [
+        "MiSTer-devel/Arcade-TNKIII_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TaitoAsuka_20260924.rbf": [
+      "c8253e92e0853cc0dc5128b5582f2f69",
+      [
+        "MiSTer-devel/Arcade-TaitoAsuka_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TaitoF2_20251027.rbf": [
+      "13d56745169a7f4abc10004ab79ca9d8",
+      [
+        "MiSTer-devel/Arcade-TaitoF2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TaitoSJ_20260321.rbf": [
+      "ddeb1e96bfd8456968f152bc3d4a789d",
+      [
+        "MiSTer-devel/Arcade-TaitoSystemSJ_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TankBattalion_20261005.rbf": [
+      "cdb855b5eb9e7f7c5695e3d8f9232b14",
+      [
+        "MiSTer-devel/Arcade-TankBattalion_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Tank_20261012.rbf": [
+      "9e39b5ec8415358ccd8c6320005703d3",
+      [
+        "MiSTer-devel/Arcade-Tank_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Tecmo_20260307.rbf": [
+      "5201999fd0a055bb56633322c955cfb7",
+      [
+        "MiSTer-devel/Arcade-Tecmo_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Tempest_20260720.rbf": [
+      "d3e16192e8ff45d32881546258f5d82b",
+      [
+        "MiSTer-devel/Arcade-Tempest_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TimePilot84_20240604.rbf": [
+      "d542c991e7ae4f65aaaaa0658027d875",
+      [
+        "MiSTer-devel/Arcade-TimePilot84_MISTer"
+      ]
+    ],
+    "_Arcade/cores/TimePilot_20240525.rbf": [
+      "db07383368b4da9b40dac951c5365cf7",
+      [
+        "MiSTer-devel/Arcade-TimePilot_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Toobin_20261105.rbf": [
+      "1e5c8ed088039ce4214d1bb38052e294",
+      [
+        "MiSTer-devel/Arcade-Toobin_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TraverseUSA_20240525.rbf": [
+      "330b7d776f11a211ad6b6e543986cce1",
+      [
+        "MiSTer-devel/Arcade-TraverseUSA_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TrioThePunch_20260708.rbf": [
+      "282d601ec5cd2809c32371e8247583a2",
+      [
+        "MiSTer-devel/Arcade-TrioThePunch_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TropicalAngel_20240410.rbf": [
+      "38b67d6a22cf66b843cafb9438688955",
+      [
+        "MiSTer-devel/Arcade-TropicalAngel_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/TurkeyShoot_20240525.rbf": [
+      "82960b9efa7be9820e4333bcd3367aed",
+      [
+        "MiSTer-devel/Arcade-TurkeyShoot_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Tutankham_20261025.rbf": [
+      "31aac100217513b20d1708e7b01047eb",
+      [
+        "MiSTer-devel/Arcade-Tutankham_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/UPLFramebuffer_20261025.rbf": [
+      "48a1da00a7c2fe5c973e5194959f60fc",
+      [
+        "MiSTer-devel/Arcade-UPLFramebuffer_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Ultratank_20240525.rbf": [
+      "f85c98c6375355a01328bd68ced0f806",
+      [
+        "MiSTer-devel/Arcade-Ultratank_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/VBall_20240525.rbf": [
+      "41c1f00a83108c757acc92cac7c774be",
+      [
+        "MiSTer-devel/Arcade-VBall_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Vastar_20261028.rbf": [
+      "b605957478474da8541ae4a160b2d0ac",
+      [
+        "MiSTer-devel/Arcade-Vastar_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Victory_20261005.rbf": [
+      "f82ac093297566660a536312af0c24d5",
+      [
+        "MiSTer-devel/Arcade-Victory_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Vindicators_20261017.rbf": [
+      "a083b8c0c6be890ffc02b63721b0cd55",
+      [
+        "MiSTer-devel/Arcade-Vindicators_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/XSleena_20250123.rbf": [
+      "c5dd70bed6fee0589069d0606a4f343d",
+      [
+        "MiSTer-devel/Arcade-XSleena_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Xevious_20240525.rbf": [
+      "bf68950e00d5cb2fe55569bef5f37062",
+      [
+        "MiSTer-devel/Arcade-Xevious_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Xybots_20261017.rbf": [
+      "977a67e9d4af466921d49713d8871153",
+      [
+        "MiSTer-devel/Arcade-Xybots_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/Zaxxon_20240525.rbf": [
+      "9202308fd1432e4a36ce17523ecd6d17",
+      [
+        "MiSTer-devel/Arcade-Zaxxon_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/ZigZag_20260710.rbf": [
+      "44e12940e63e6a437d1eb095a4b7e681",
+      [
+        "MiSTer-devel/Arcade-ZigZag_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/atarisys1_20240410.rbf": [
+      "6091b1c6717a906f623e9b5f00efb08c",
+      [
+        "MiSTer-devel/Arcade-Atari-system1_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/atarisys2_20261104.rbf": [
+      "b642812e9ac310c20f797353f734aacd",
+      [
+        "MiSTer-devel/Arcade-AtariSystem2_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/freeze_20240526.rbf": [
+      "a676fd222b1eead2e5e1c86924cfa4da",
+      [
+        "MiSTer-devel/Arcade-Freeze_MiSTer"
+      ]
+    ],
+    "_Computer/AcornAtom_20251001.rbf": [
+      "20c3ba866c40142b9a97bd6b82c0aed1",
+      [
+        "MiSTer-devel/AcornAtom_MiSTer"
+      ]
+    ],
+    "_Computer/AcornElectron_20250930.rbf": [
+      "b48c3577463bdf02964096a3922ba933",
+      [
+        "MiSTer-devel/AcornElectron_MiSTer"
+      ]
+    ],
+    "_Computer/AliceMC10_20210116.rbf": [
+      "9ac9681a659b227eb39b7ea06a5be454",
+      [
+        "MiSTer-devel/AliceMC10_MiSTer"
+      ]
+    ],
+    "_Computer/Altair8800_20241230.rbf": [
+      "ce91474e605bb7d9ad536c5e99583149",
+      [
+        "MiSTer-devel/Altair8800_Mister"
+      ]
+    ],
+    "_Computer/Amstrad-PCW_20261025.rbf": [
+      "1aa38405bedd31aa7c4931f08c883ddf",
+      [
+        "MiSTer-devel/Amstrad-PCW_MiSTer"
+      ]
+    ],
+    "_Computer/Amstrad_20260603.rbf": [
+      "c6f2e1a187f679f7167d73113ff2b52a",
+      [
+        "MiSTer-devel/Amstrad_MiSTer"
+      ]
+    ],
+    "_Computer/Apogee_20260603.rbf": [
+      "6904e6ef8646a819be3d4bbbf93e56f3",
+      [
+        "MiSTer-devel/Apogee_MiSTer"
+      ]
+    ],
+    "_Computer/Apple-III_20261024.rbf": [
+      "5427ca731b034dfca045b8fcb59d219c",
+      [
+        "MiSTer-devel/Apple-III_MiSTer"
+      ]
+    ],
+    "_Computer/Apple-II_20261013.rbf": [
+      "1779afc8fd76a0790c42721df1597019",
+      [
+        "MiSTer-devel/Apple-II_MiSTer"
+      ]
+    ],
+    "_Computer/Apple-IIgs_20261105.rbf": [
+      "132256ee55e738384f844497a1529e06",
+      [
+        "MiSTer-devel/Apple-IIgs_MiSTer"
+      ]
+    ],
+    "_Computer/Apple-I_20251001.rbf": [
+      "fa0f38d4e30c861129352a9946d988ef",
+      [
+        "MiSTer-devel/Apple-I_MiSTer"
+      ]
+    ],
+    "_Computer/Apple-Lisa_20260721.rbf": [
+      "a648247c8c0c858be7a8b8019862b7c9",
+      [
+        "MiSTer-devel/Apple-Lisa_MiSTer"
+      ]
+    ],
+    "_Computer/Aquarius_20260603.rbf": [
+      "b60e19483d562c7d808e58de3df1ec75",
+      [
+        "MiSTer-devel/Aquarius_MISTer"
+      ]
+    ],
+    "_Computer/Archie_20260603.rbf": [
+      "9a91d7a3312b6843bb59731d93817ae6",
+      [
+        "MiSTer-devel/Archie_MiSTer"
+      ]
+    ],
+    "_Computer/Atari800_20260823.rbf": [
+      "7bcbbcef45687e37d9b2087a7800ee6a",
+      [
+        "MiSTer-devel/Atari800_MiSTer"
+      ]
+    ],
+    "_Computer/AtariST_20260603.rbf": [
+      "e9bf1cf47efd7cbd4769debda60dd421",
+      [
+        "MiSTer-devel/AtariST_MiSTer"
+      ]
+    ],
+    "_Computer/BBCMicro_20260603.rbf": [
+      "e9d70c6ddc809d30e150f58166abc751",
+      [
+        "MiSTer-devel/BBCMicro_MiSTer"
+      ]
+    ],
+    "_Computer/BK0011M_20260603.rbf": [
+      "f0ffa7ac75200f88e65112a59e5dcb78",
+      [
+        "MiSTer-devel/BK0011M_MiSTer"
+      ]
+    ],
+    "_Computer/BasicMasterJr_20261031.rbf": [
+      "576e5cbd1560429b8cb59b486a404b3c",
+      [
+        "MiSTer-devel/BasicMasterJr_MiSTer"
+      ]
+    ],
+    "_Computer/BasicMasterL3_20261104.rbf": [
+      "1c78d761a933618f9ce87572bd645e86",
+      [
+        "MiSTer-devel/BasicMasterL3_MiSTer"
+      ]
+    ],
+    "_Computer/C128_20260830.rbf": [
+      "8ef30110b47cebd8531078b5eb273f83",
+      [
+        "MiSTer-devel/C128_MiSTer"
+      ]
+    ],
+    "_Computer/C16_20260603.rbf": [
+      "c682b5a7278ee6bbe7927c36a19dca9e",
+      [
+        "MiSTer-devel/C16_MiSTer"
+      ]
+    ],
+    "_Computer/C64_20260823.rbf": [
+      "cf6dc349fc8854bf33b7d322a97f3815",
+      [
+        "MiSTer-devel/C64_MiSTer"
+      ]
+    ],
+    "_Computer/CBM-II_20260906.rbf": [
+      "57637974b2f45861b0c483d5a5fbd179",
+      [
+        "MiSTer-devel/CBM-II_MiSTer"
+      ]
+    ],
+    "_Computer/Casio_PV-2000_20250622.rbf": [
+      "8f0ebe64d7418b98800359de19ad6196",
+      [
+        "MiSTer-devel/Casio_PV-2000_MiSTer"
+      ]
+    ],
+    "_Computer/CoCo2_20250312.rbf": [
+      "18ba1fc0d599900ccb5682cb91ae7f18",
+      [
+        "MiSTer-devel/CoCo2_MiSTer"
+      ]
+    ],
+    "_Computer/CoCo3_20260927.rbf": [
+      "574a5c379baa30746bc3bfd9b94d6213",
+      [
+        "MiSTer-devel/CoCo3_MiSTer"
+      ]
+    ],
+    "_Computer/ColecoAdam_20260922.rbf": [
+      "d06c748cfec60b315e1198c40f69eef2",
+      [
+        "MiSTer-devel/ColecoAdam_MiSTer"
+      ]
+    ],
+    "_Computer/Cray-XMP_20261025.rbf": [
+      "39e65c4b6fe59108bbc34ca698fe88bc",
+      [
+        "MiSTer-devel/Cray-XMP_MiSTer"
+      ]
+    ],
+    "_Computer/EDSAC_20250904.rbf": [
+      "fbd8a941327b16bf93cfca7d0baa4e5c",
+      [
+        "MiSTer-devel/EDSAC_MiSTer"
+      ]
+    ],
+    "_Computer/Enterprise_20251125.rbf": [
+      "241e64c6759bc47e0f1ba20d1a73f9b7",
+      [
+        "MiSTer-devel/Enterprise_MiSTer"
+      ]
+    ],
+    "_Computer/FM-7_20261102.rbf": [
+      "56a1dc66b482062278030eba0c697f40",
+      [
+        "MiSTer-devel/FM-7_MiSTer"
+      ]
+    ],
+    "_Computer/Galaksija_20251007.rbf": [
+      "8720bb6c61eba1ac34a08c1e7d6e000b",
+      [
+        "MiSTer-devel/Galaksija_MiSTer"
+      ]
+    ],
+    "_Computer/Homelab_20250906.rbf": [
+      "e0d0ccf9406fb0c3b2836c0a42cca868",
+      [
+        "MiSTer-devel/Homelab-MiSTer"
+      ]
+    ],
+    "_Computer/IQ151_20261028.rbf": [
+      "159a0a9585cfd23561a1d697f61debfa",
+      [
+        "MiSTer-devel/IQ151_MiSTer"
+      ]
+    ],
+    "_Computer/Interact_20251005.rbf": [
+      "a4796da9b9be84606829af4565b28b59",
+      [
+        "MiSTer-devel/Interact_MiSTer"
+      ]
+    ],
+    "_Computer/JR100_20260801.rbf": [
+      "f2f6a0eaa427dac6992522d909108554",
+      [
+        "MiSTer-devel/JR100_MiSTer"
+      ]
+    ],
+    "_Computer/Jupiter_20260603.rbf": [
+      "96807e701d69ac766a6ed9e89d8101e5",
+      [
+        "MiSTer-devel/Jupiter_MiSTer"
+      ]
+    ],
+    "_Computer/Laser310_20250907.rbf": [
+      "24edaafc2a226db15fdb495731edc052",
+      [
+        "MiSTer-devel/Laser310_MiSTer"
+      ]
+    ],
+    "_Computer/Lynx48_20250907.rbf": [
+      "3d5cd90d1efad46765767449a95a78fa",
+      [
+        "MiSTer-devel/Lynx48_MiSTer"
+      ]
+    ],
+    "_Computer/MSX1_20250108.rbf": [
+      "0c2def7f3d8da9567b269978cd0d1564",
+      [
+        "MiSTer-devel/MSX1_MiSTer"
+      ]
+    ],
+    "_Computer/MSX_20260603.rbf": [
+      "8d10afb89a9849eaf11b02b349e7ee1a",
+      [
+        "MiSTer-devel/MSX_MiSTer"
+      ]
+    ],
+    "_Computer/MacIIcx_20261102.rbf": [
+      "aa37a8b1624ac84395bad3a7504cfe3d",
+      [
+        "MiSTer-devel/MacSE30_MiSTer"
+      ]
+    ],
+    "_Computer/MacLC_20260920.rbf": [
+      "4eee6a51f00b775db7f7989c9b9a3367",
+      [
+        "MiSTer-devel/MacLC_MiSTer"
+      ]
+    ],
+    "_Computer/MacPlus_20260603.rbf": [
+      "40a9d019e27b8ef574b1b76bcf6ff35c",
+      [
+        "MiSTer-devel/MacPlus_MiSTer"
+      ]
+    ],
+    "_Computer/MacQuadra800_20261002.rbf": [
+      "1928f231dd9ac9ef5935e69272d305a4",
+      [
+        "MiSTer-devel/MacQuadra800_MiSTer"
+      ]
+    ],
+    "_Computer/MacSE30_20261102.rbf": [
+      "f82f06addf8bff8462d4b4c36e9c453b",
+      [
+        "MiSTer-devel/MacSE30_MiSTer"
+      ]
+    ],
+    "_Computer/Minimig_20260907.rbf": [
+      "cc55fa86c11f691f3c15521d8cc38017",
+      [
+        "MiSTer-devel/Minimig-AGA_MiSTer"
+      ]
+    ],
+    "_Computer/MultiComp_20260809.rbf": [
+      "1089bb958572497047a19f4a9222679b",
+      [
+        "MiSTer-devel/MultiComp_MiSTer"
+      ]
+    ],
+    "_Computer/NeXT-Color_20261010.rbf": [
+      "264728c056b7a854f583cf7000d0b0ac",
+      [
+        "MiSTer-devel/NeXT-Color_MiSTer"
+      ]
+    ],
+    "_Computer/NeXT_20260924.rbf": [
+      "9c8ea44735550bca8c871627d11b285f",
+      [
+        "MiSTer-devel/NeXT_MiSTer"
+      ]
+    ],
+    "_Computer/Neon_20261025.rbf": [
+      "6676f2da439fb0c486d65f8492cb61c3",
+      [
+        "MiSTer-devel/Neon_MiSTer"
+      ]
+    ],
+    "_Computer/ORAO_20240729.rbf": [
+      "f3d0a56da55c894a4692b8f257eea5ff",
+      [
+        "MiSTer-devel/Orao_MiSTer"
+      ]
+    ],
+    "_Computer/Ondra_SPO186_20251219.rbf": [
+      "40b5086b40b9dac015c60ea67955d96d",
+      [
+        "MiSTer-devel/OndraSPO186_MiSTer"
+      ]
+    ],
+    "_Computer/Oric_20260603.rbf": [
+      "1d3541e97878492508dec4bf6f2096b2",
+      [
+        "MiSTer-devel/Oric_MiSTer"
+      ]
+    ],
+    "_Computer/PC88_20261020.rbf": [
+      "f97718269104277b21e3968e48c6a611",
+      [
+        "MiSTer-devel/PC88_MiSTer"
+      ]
+    ],
+    "_Computer/PCXT-EGA_20260830.rbf": [
+      "ce83d669010273f274390f793cc31b9f",
+      [
+        "MiSTer-devel/PCXT-EGA_MiSTer"
+      ]
+    ],
+    "_Computer/PCXT_20261103.rbf": [
+      "5c24d765338849bc3d4688e68cbb5084",
+      [
+        "MiSTer-devel/PCXT_MiSTer"
+      ]
+    ],
+    "_Computer/PCjr_20260313.rbf": [
+      "f6b6c85673997a07fa7796328766898f",
+      [
+        "MiSTer-devel/PCjr_MiSTer"
+      ]
+    ],
+    "_Computer/PDP1_20260702.rbf": [
+      "1adad346cb1923624b8251534fd053a2",
+      [
+        "MiSTer-devel/PDP1_MiSTer"
+      ]
+    ],
+    "_Computer/PET2001_20260603.rbf": [
+      "0767c7d6579dcaed0671aebdb9eb9422",
+      [
+        "MiSTer-devel/PET2001_MiSTer"
+      ]
+    ],
+    "_Computer/PMD85_20251219.rbf": [
+      "81e9249a382166f5f88d63f0c89c50ff",
+      [
+        "MiSTer-devel/PMD85_MiSTer"
+      ]
+    ],
+    "_Computer/QL_20260603.rbf": [
+      "049d963df76b3aa5984868f8c8421275",
+      [
+        "MiSTer-devel/QL_MiSTer"
+      ]
+    ],
+    "_Computer/RX78_20250717.rbf": [
+      "459267782a51e05c6a06c057af70b1e5",
+      [
+        "MiSTer-devel/RX-78_MiSTer"
+      ]
+    ],
+    "_Computer/SAMCoupe_20260603.rbf": [
+      "b5cc11a5358b022a1e65953618c4060c",
+      [
+        "MiSTer-devel/SAM-Coupe_MiSTer"
+      ]
+    ],
+    "_Computer/SGIIndy_20261023.rbf": [
+      "4dabb5c6524a5354d72394b9572356b1",
+      [
+        "MiSTer-devel/SGIIndy_MiSTer"
+      ]
+    ],
+    "_Computer/SharpMZ2500_20261104.rbf": [
+      "dfcc694c6004fa2da2397aa4b7641ca0",
+      [
+        "MiSTer-devel/SharpMZ2500_MiSTer"
+      ]
+    ],
+    "_Computer/SharpMZ_20261102.rbf": [
+      "2c2b175520ade3e5235e952103ca5447",
+      [
+        "MiSTer-devel/SharpMZ_MiSTer"
+      ]
+    ],
+    "_Computer/SharpX1_20261103.rbf": [
+      "abcddcca595b10fa31aaaa81e1c3325c",
+      [
+        "MiSTer-devel/SharpX1_Mister"
+      ]
+    ],
+    "_Computer/SonySMC777_20261103.rbf": [
+      "6650272c5dd3a627c786023e3a80fe1f",
+      [
+        "MiSTer-devel/SonySMC777_MiSTer"
+      ]
+    ],
+    "_Computer/SordM5_20250903.rbf": [
+      "c30b142167626239f5b47ce2f057e661",
+      [
+        "MiSTer-devel/SordM5_MiSTer"
+      ]
+    ],
+    "_Computer/Specialist_20260603.rbf": [
+      "c96e003df97537e593b4e65b3ebd3a65",
+      [
+        "MiSTer-devel/Specialist_MiSTer"
+      ]
+    ],
+    "_Computer/Sun-2_20261022.rbf": [
+      "0ce8a33507a772861b410598428ea67b",
+      [
+        "MiSTer-devel/Sun-2_MiSTer"
+      ]
+    ],
+    "_Computer/Sun-3_20261024.rbf": [
+      "36ccaad3b821604d28b6b83cbde16ad1",
+      [
+        "MiSTer-devel/Sun-3_MiSTer"
+      ]
+    ],
+    "_Computer/SunSparcStation20_20261019.rbf": [
+      "14ea4dfeb521719476382f84aa01fedb",
+      [
+        "MiSTer-devel/SunSparcStation20_MiSTer"
+      ]
+    ],
+    "_Computer/Svi328_20241016.rbf": [
+      "5ae19d7a14a0926f41aebf8666e35057",
+      [
+        "MiSTer-devel/SVI328_MiSTer"
+      ]
+    ],
+    "_Computer/TK2000_20251124.rbf": [
+      "1f4c511c95f053edb43f221bef3d07c4",
+      [
+        "MiSTer-devel/TK2000_MiSTer"
+      ]
+    ],
+    "_Computer/TRS-80_20251209.rbf": [
+      "2a722e8205014e3f426bca30c3dce2ec",
+      [
+        "MiSTer-devel/TRS-80_MiSTer"
+      ]
+    ],
+    "_Computer/TSConf_20260603.rbf": [
+      "628c0c1a5d822de7c9697d56b818883a",
+      [
+        "MiSTer-devel/TSConf_MiSTer"
+      ]
+    ],
+    "_Computer/Tandy1000_20260312.rbf": [
+      "d964055fe6fa88ff9354c64face71665",
+      [
+        "MiSTer-devel/Tandy1000_MiSTer"
+      ]
+    ],
+    "_Computer/TatungEinstein_20250907.rbf": [
+      "06e9fc3b361a5015c14e42229998b80c",
+      [
+        "MiSTer-devel/TatungEinstein_MiSTer"
+      ]
+    ],
+    "_Computer/Ti994a_20251203.rbf": [
+      "15ca2e01dd2818f370fbe0063e701e3d",
+      [
+        "MiSTer-devel/TI-99_4A_MiSTer"
+      ]
+    ],
+    "_Computer/TomyTutor_20250622.rbf": [
+      "fb12bf3212873ae3e4113036c0fa0bfc",
+      [
+        "MiSTer-devel/TomyTutor_MiSTer"
+      ]
+    ],
+    "_Computer/UK101_20260801.rbf": [
+      "6b56d179ab0b64a2318d03c3ffe4dc90",
+      [
+        "MiSTer-devel/UK101_MiSTer"
+      ]
+    ],
+    "_Computer/UKNC_20261025.rbf": [
+      "736fc7ea8eb63bae7d9784be1819e06c",
+      [
+        "MiSTer-devel/UKNC_MiSTer"
+      ]
+    ],
+    "_Computer/VIC20_20260603.rbf": [
+      "b78b7b500c359c50f9dcee65c156f081",
+      [
+        "MiSTer-devel/VIC20_MiSTer"
+      ]
+    ],
+    "_Computer/VT52_20241120.rbf": [
+      "4b49cb400e4c5007f15c6b22bab94efb",
+      [
+        "MiSTer-devel/VT52_MiSTer"
+      ]
+    ],
+    "_Computer/Vector-06C_20260603.rbf": [
+      "4c6d8e43d849eedf02bd7f96a29cc4fe",
+      [
+        "MiSTer-devel/Vector-06C_MiSTer"
+      ]
+    ],
+    "_Computer/VideoBrain_20261027.rbf": [
+      "d6881c56c22c401428eeb6d9c8e1ddf2",
+      [
+        "MiSTer-devel/VideoBrain_MiSTer"
+      ]
+    ],
+    "_Computer/X68000_20260823.rbf": [
+      "68904fecec885e153572e2887188262e",
+      [
+        "MiSTer-devel/X68000_MiSTer"
+      ]
+    ],
+    "_Computer/ZX-Spectrum_20260823.rbf": [
+      "ccb6ba60dc0505509cbe41c67fbb9d11",
+      [
+        "MiSTer-devel/ZX-Spectrum_MISTer"
+      ]
+    ],
+    "_Computer/ZX81_20260603.rbf": [
+      "2e4cab9ce9ab653b01f153257065e54a",
+      [
+        "MiSTer-devel/ZX81_MiSTer"
+      ]
+    ],
+    "_Computer/ZXNext_20260603.rbf": [
+      "4ed2e7e29d4093de1a6106baa3eda236",
+      [
+        "MiSTer-devel/ZXNext_MISTer"
+      ]
+    ],
+    "_Computer/ao486_20260603.rbf": [
+      "d5f21126b0572cd633725729be54d762",
+      [
+        "MiSTer-devel/ao486_MiSTer"
+      ]
+    ],
+    "_Computer/eg2000_20220930.rbf": [
+      "19a1b465f3f43498e0d9d7dda671b5dd",
+      [
+        "MiSTer-devel/EG2000_MiSTer"
+      ]
+    ],
+    "_Console/3DO_20260717.rbf": [
+      "85520af995519761c06d5ac3c70e6adc",
+      [
+        "MiSTer-devel/3DO_MiSTer"
+      ]
+    ],
+    "_Console/AY-3-8500_20260823.rbf": [
+      "294d6c45eed9789182cbe83674a2dfc0",
+      [
+        "MiSTer-devel/AY-3-8500-MiSTer"
+      ]
+    ],
+    "_Console/AdventureVision_20260322.rbf": [
+      "9a7c8b6153d694bb2d91103120016a42",
+      [
+        "MiSTer-devel/AdventureVision_MiSTer"
+      ]
+    ],
+    "_Console/Arcadia_20260816.rbf": [
+      "d8050c1754629476092c0f15f34aad31",
+      [
+        "MiSTer-devel/Arcadia_MiSTer"
+      ]
+    ],
+    "_Console/Astrocade_20260603.rbf": [
+      "8aab97fde8efa67170a7c7345f4fa3a4",
+      [
+        "MiSTer-devel/Astrocade_MiSTer"
+      ]
+    ],
+    "_Console/Atari5200_20260823.rbf": [
+      "539259fe22d097d290b86232e683f2eb",
+      [
+        "MiSTer-devel/Atari800_MiSTer"
+      ]
+    ],
+    "_Console/Atari7800_20260530.rbf": [
+      "c41b07d2f3306d9a74fbc8834abbaf46",
+      [
+        "MiSTer-devel/Atari7800_MiSTer"
+      ]
+    ],
+    "_Console/AtariLynx2P_20260713.rbf": [
+      "cb08b6563c473c77ca2394975fe07c86",
+      [
+        "MiSTer-devel/AtariLynx_MiSTer/tree/Lynx2P"
+      ]
+    ],
+    "_Console/AtariLynx_20260129.rbf": [
+      "4fbf483b7335f91bd8290facecc747f7",
+      [
+        "MiSTer-devel/AtariLynx_MiSTer"
+      ]
+    ],
+    "_Console/BBCBridgeCompanion_20250101.rbf": [
+      "1ebe43ebbc1c8639d40cc6a533787d48",
+      [
+        "MiSTer-devel/BBCBridgeCompanion_MiSTer"
+      ]
+    ],
+    "_Console/CDi_20260502.rbf": [
+      "d61b1a3e35723efba184e8ceff963630",
+      [
+        "MiSTer-devel/CDi_MiSTer"
+      ]
+    ],
+    "_Console/Casio_PV-1000_20250622.rbf": [
+      "8668b1d7e2fe9077492b2c17e76f274d",
+      [
+        "MiSTer-devel/Casio_PV-1000_MiSTer"
+      ]
+    ],
+    "_Console/ChannelF_20250907.rbf": [
+      "7518c1f83837c736797083793b39bcc8",
+      [
+        "MiSTer-devel/ChannelF_MiSTer"
+      ]
+    ],
+    "_Console/ColecoVision_20260603.rbf": [
+      "699ecd25b7dabd49963ed9f345cb3b1c",
+      [
+        "MiSTer-devel/ColecoVision_MiSTer"
+      ]
+    ],
+    "_Console/CreatiVision_20260303.rbf": [
+      "81a74e448f324e597ed276f5b2291ca2",
+      [
+        "MiSTer-devel/CreatiVision_MiSTer"
+      ]
+    ],
+    "_Console/GBA2P_20250916.rbf": [
+      "1154b450224aafa44604807e8963da61",
+      [
+        "MiSTer-devel/GBA_MiSTer/tree/GBA2P"
+      ]
+    ],
+    "_Console/GBA_20260530.rbf": [
+      "183eae20bca44d5310c83f866c75a8a6",
+      [
+        "MiSTer-devel/GBA_MiSTer"
+      ]
+    ],
+    "_Console/Gamate_20260530.rbf": [
+      "2134bf4823a06d2b645f867e9de1e477",
+      [
+        "MiSTer-devel/Gamate_MiSTer"
+      ]
+    ],
+    "_Console/GameAndWatch_20260814.rbf": [
+      "b6baefdc045afd9e719eab9347c49884",
+      [
+        "MiSTer-devel/GameAndWatch_MiSTer"
+      ]
+    ],
+    "_Console/GameCom_20260903.rbf": [
+      "d3088bbbe0185343f7831f26c80aefd1",
+      [
+        "MiSTer-devel/GameCom_MiSTer"
+      ]
+    ],
+    "_Console/GameGear2P_20260526.rbf": [
+      "70c08083e35338ca6026a1f3c25efcab",
+      [
+        "MiSTer-devel/SMS_MiSTer/tree/GameGear2P"
+      ]
+    ],
+    "_Console/GameKing_20260903.rbf": [
+      "6dfe4132d3b3345e3de013328d0ebc50",
+      [
+        "MiSTer-devel/GameKing_MiSTer"
+      ]
+    ],
+    "_Console/Gameboy2P_20250621.rbf": [
+      "8678e2110def280b6aec80c2d07f8024",
+      [
+        "MiSTer-devel/Gameboy_MiSTer/tree/Gameboy2P"
+      ]
+    ],
+    "_Console/Gameboy_20260603.rbf": [
+      "9c98aae6d2981da6d1603c6c7fbedfe5",
+      [
+        "MiSTer-devel/Gameboy_MiSTer"
+      ]
+    ],
+    "_Console/GnW_20250717.rbf": [
+      "6e3fd7d7ab262bf925e9f97101bdd6e9",
+      [
+        "MiSTer-devel/GnW_MiSTer"
+      ]
+    ],
+    "_Console/Intellivision_20261001.rbf": [
+      "ce982c93c88a8868fef59453659ae02c",
+      [
+        "MiSTer-devel/Intv_MiSTer"
+      ]
+    ],
+    "_Console/Jaguar_20260811.rbf": [
+      "aa72b98e8bd3f69ddf4809fd3c3b7fdb",
+      [
+        "MiSTer-devel/Jaguar_MiSTer"
+      ]
+    ],
+    "_Console/Loopy_20261002.rbf": [
+      "278f8c268394488265f7217bd7b32800",
+      [
+        "MiSTer-devel/Loopy_MiSTer"
+      ]
+    ],
+    "_Console/Marty_20260929.rbf": [
+      "7b4d3ca8fe3155228260e850fae62ecc",
+      [
+        "MiSTer-devel/Marty_MiSTer"
+      ]
+    ],
+    "_Console/MegaCD_20260603.rbf": [
+      "faa950ae05d02fb45e5311bffd50a438",
+      [
+        "MiSTer-devel/MegaCD_MiSTer"
+      ]
+    ],
+    "_Console/MegaDrive_20260603.rbf": [
+      "621ef85ee0645661b77314d59bdff374",
+      [
+        "MiSTer-devel/MegaDrive_MiSTer"
+      ]
+    ],
+    "_Console/MyVision_20250622.rbf": [
+      "f93d7d38f6931bb9e13cd06d7f7dabf8",
+      [
+        "MiSTer-devel/MyVision_MiSTer"
+      ]
+    ],
+    "_Console/N64_20260726.rbf": [
+      "0b5922d922737758201aad7d1c1b7c7b",
+      [
+        "MiSTer-devel/N64_MiSTer"
+      ]
+    ],
+    "_Console/NES_20260823.rbf": [
+      "9da940348fce60146975e97ad4deeb9e",
+      [
+        "MiSTer-devel/NES_MiSTer"
+      ]
+    ],
+    "_Console/NGPC_20260824.rbf": [
+      "38e6cb691d9b17c0cd82bf99440f73d2",
+      [
+        "MiSTer-devel/NGPC_MiSTer"
+      ]
+    ],
+    "_Console/NeoGeo_20260603.rbf": [
+      "d630681b2626e9151662c22e22dcc818",
+      [
+        "MiSTer-devel/NeoGeo_MiSTer"
+      ]
+    ],
+    "_Console/Odyssey2_20250717.rbf": [
+      "c386e0fed9f944c265f1810ad20ce082",
+      [
+        "MiSTer-devel/Odyssey2_MiSTer"
+      ]
+    ],
+    "_Console/PSX_20260807.rbf": [
+      "5c67a2d7dbd01f723a4cf9125460c095",
+      [
+        "MiSTer-devel/PSX_MiSTer"
+      ]
+    ],
+    "_Console/PocketStation_20260903.rbf": [
+      "332f2a559e51ac01ba629b54772da7bb",
+      [
+        "MiSTer-devel/PocketStation_MiSTer"
+      ]
+    ],
+    "_Console/PokemonMini_20250903.rbf": [
+      "fecbbf18135daa4e16280d99b496efb5",
+      [
+        "MiSTer-devel/PokemonMini_MiSTer"
+      ]
+    ],
+    "_Console/S32X_20260603.rbf": [
+      "54353e6e3706143afcb307ecc0709be2",
+      [
+        "MiSTer-devel/S32X_MiSTer"
+      ]
+    ],
+    "_Console/SCV_20250906.rbf": [
+      "b7d7d45442eec995ead2e8dcf713b88a",
+      [
+        "MiSTer-devel/SuperCassetteVision_MiSTer"
+      ]
+    ],
+    "_Console/SGB_20260802.rbf": [
+      "acc50a4bc7efa111dc90d16bec2560d7",
+      [
+        "MiSTer-devel/SGB_MiSTer"
+      ]
+    ],
+    "_Console/SMS_20260823.rbf": [
+      "148b75236f3ab1bc96ca1f16c05f1ec9",
+      [
+        "MiSTer-devel/SMS_MiSTer"
+      ]
+    ],
+    "_Console/SNES_20260823.rbf": [
+      "4ec431e9d26009ee0d446d6336b65a63",
+      [
+        "MiSTer-devel/SNES_MiSTer"
+      ]
+    ],
+    "_Console/Saturn_20251003.rbf": [
+      "af5b538abf8d8ad78e0bb08db4a08f37",
+      [
+        "MiSTer-devel/Saturn_MiSTer"
+      ]
+    ],
+    "_Console/Studio-II_20261016.rbf": [
+      "fcabcf42b8ada6b2aab1033ed58ddc0f",
+      [
+        "MiSTer-devel/StudioII_MiSTer"
+      ]
+    ],
+    "_Console/SuperAcan_20260911.rbf": [
+      "0151b5fdb477a099624302e77be41a7e",
+      [
+        "MiSTer-devel/SuperACan_MiSTer"
+      ]
+    ],
+    "_Console/SuperVision_20250708.rbf": [
+      "16ef96d1f0ff822a55094af13880c92a",
+      [
+        "MiSTer-devel/SuperVision_MiSTer"
+      ]
+    ],
+    "_Console/Super_Vision_8000_20250622.rbf": [
+      "4a09992905fa5f958a31d6b8962c7384",
+      [
+        "MiSTer-devel/Super_Vision_8000_MiSTer"
+      ]
+    ],
+    "_Console/TurboGrafx16_20260603.rbf": [
+      "904f85c16d2b3f8b4346935c3038c530",
+      [
+        "MiSTer-devel/TurboGrafx16_MiSTer"
+      ]
+    ],
+    "_Console/VC4000_20250907.rbf": [
+      "251e9a49ec62ae2672b4e8674466c658",
+      [
+        "MiSTer-devel/VC4000_MiSTer"
+      ]
+    ],
+    "_Console/Vectrex_20261103.rbf": [
+      "e0fb77988f8bd0c200f03d73eececc72",
+      [
+        "MiSTer-devel/Vectrex_MiSTer"
+      ]
+    ],
+    "_Console/VirtualBoy_20260804.rbf": [
+      "79a0eb601faea8a130d38ad500de0b68",
+      [
+        "MiSTer-devel/VirtualBoy_MiSTer"
+      ]
+    ],
+    "_Console/WonderSwan_20260129.rbf": [
+      "e2c6f633181207e29f44402f8dc7f0cd",
+      [
+        "MiSTer-devel/WonderSwan_MiSTer"
+      ]
+    ],
+    "_Other/Arduboy_20260823.rbf": [
+      "19fc54c40f178102c0165a0b2afd8b04",
+      [
+        "MiSTer-devel/Arduboy_MiSTer"
+      ]
+    ],
+    "_Other/Chess_20240410.rbf": [
+      "e9f2605826ddd4dafffc5ac353ce0d65",
+      [
+        "MiSTer-devel/Chess_MiSTer"
+      ]
+    ],
+    "_Other/Chip8_20250905.rbf": [
+      "fda536d4de337fa224a1f0b2eb74147e",
+      [
+        "MiSTer-devel/Chip8_MiSTer"
+      ]
+    ],
+    "_Other/Donut_20250217.rbf": [
+      "46a2c684c3fca527eea8d3f91d23afb3",
+      [
+        "MiSTer-devel/Donut_MiSTer"
+      ]
+    ],
+    "_Other/EpochGalaxyII_20260529.rbf": [
+      "5b2f1af2a5388408299a51e1b7298fc4",
+      [
+        "MiSTer-devel/EpochGalaxy2_MiSTer"
+      ]
+    ],
+    "_Other/FlappyBird_20250708.rbf": [
+      "a33e83d8cefb4196ae049501b9c4a4af",
+      [
+        "MiSTer-devel/FlappyBird_MiSTer"
+      ]
+    ],
+    "_Other/GBMidi_20240811.rbf": [
+      "3e10abec4bce25684c675a7b03dd0758",
+      [
+        "MiSTer-devel/GBMidi_MiSTer"
+      ]
+    ],
+    "_Other/GameOfLife_20260702.rbf": [
+      "1b04a8cf7eabdb08d1b1cd3a5733b117",
+      [
+        "MiSTer-devel/Life_MiSTer"
+      ]
+    ],
+    "_Other/GenMidi_20240817.rbf": [
+      "b1c021b1d680d8f009df9d7ae65c86da",
+      [
+        "MiSTer-devel/GenMidi_MiSTer"
+      ]
+    ],
+    "_Other/SlugCross_20240727.rbf": [
+      "8d3b0b6f6da66788b39f9d3c3d4a2daa",
+      [
+        "MiSTer-devel/SlugCross_MiSTer"
+      ]
+    ],
+    "_Other/Tamagotchi_20260515.rbf": [
+      "31bf2e4f73c834df85c605252dcd522f",
+      [
+        "MiSTer-devel/Tamagotchi_MiSTer"
+      ]
+    ],
+    "_Other/TomyScramble_20250823.rbf": [
+      "756efb8109ed65ca2a47b0c47031c51c",
+      [
+        "MiSTer-devel/TomyScramble_MiSTer"
+      ]
+    ]
+  }
+}

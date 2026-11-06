@@ -6,7 +6,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - Manage lists is now at the bottom of the Your lists dropdown, leaving more room for pinned lists in the tab bar.
 
-- Section headings have a shaded band. Game groups, core batches and standalone releases share a background and title alignment. Only expanded children are indented. Arrows and counts such as “8 games” or “2 cores” identify expandable rows.
+- Section headings have a subtle tint, including when pinned while scrolling. Game groups, core batches and standalone releases share a background and title alignment. Only expanded children are indented. Arrows and counts such as “8 games” or “2 cores” identify expandable rows.
 
 - Game groups and core batches use regular-weight titles, with labels such as “Midway Y-Unit core update.” Group arrows have a fixed-width click area that spans the full row height. Only the current selection is outlined, including across the sticky Title column when a group is collapsed.
 

@@ -618,7 +618,7 @@
      ]
     ]
    },
-   "date": "2026-10-12",
+   "date": "2026-11-06",
    "description": [
     "Street Fighter Alpha 2 Gold, known as Zero 2 Dash in Japan, was the console revision of Alpha 2 that added Cammy as a playable fighter, first on PlayStation and Saturn and in final form in Capcom's 2006 PlayStation 2 anthology. It was never released on arcade hardware. This project rebuilds the anthology's edition as a real CPS-2 game.",
     "The rebuild restores the anthology's Cammy, her graphics and audio, and the regional titles and endings. Four regional builds are provided, shown below. The English builds carry the full Japanese script in English: every story and ending page, Evil Ryu's own ending, and all 452 win quotes.",
@@ -654,6 +654,19 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-06",
+     "items": [
+      "Corrected Cammy's crouching collision and her poses and positioning when thrown by the rest of the roster.",
+      "Cammy can taunt once per round with START.",
+      "Fixed Ryu and his alternate forms breaking apart incorrectly as the VS screen ends in the English builds.",
+      "Jessica reacts to Cody looking at Cammy on Guy's stage.",
+      "Charlie and Chun-Li now use CHL and CHN as their default score initials in the USA and English Asia builds.",
+      "Corrected the program-ROM results in MEMORY CHECK.",
+      "Every set has new checksums, so rebuild them with the rc8 kit."
+     ],
+     "version": "rc8"
+    },
     {
      "date": "2026-10-12",
      "items": [
@@ -753,7 +766,7 @@
    "summary": "Capcom's 2006 PlayStation 2 anthology carried the final revision of Alpha 2 Gold, the console edition of Alpha 2 that brought Cammy into the roster. It was never released on arcade hardware. This rebuilds it as a real CPS-2 game, in four regional builds, for emulators, MiSTer, and real hardware.",
    "thumbnail_build": "us",
    "title": "Street Fighter Alpha 2 Gold",
-   "version": "rc7"
+   "version": "rc8"
   },
   {
    "artifact": {
@@ -2844,7 +2857,7 @@
    ],
    "changes": [
     "In CONSOLE game mode, free play and a title-screen mode menu: Arcade, Versus, Survival, Dramatic Battle, Akuma, Training and Options",
-    "Training, as on the Saturn: recording and replay, computer settings, and action, speed and gauge options",
+    "Training: recording and replay, computer settings, and action, speed and gauge options",
     "Coin opens Pause/Back in CONSOLE mode, including character selection; Quit asks for confirmation",
     "Cammy and Random cells on the select screen, and Cammy as a CPU opponent in Arcade",
     "EX Akuma (EX Gouki in Japan) and EX Cammy, under Capcom's EX rules with no Super Combos and distinct name colors on the select screen",
@@ -2938,13 +2951,13 @@
      ]
     ]
    },
-   "date": "2026-10-15",
+   "date": "2026-11-06",
    "description": [
     "Street Fighter Alpha 2 EX builds on our Street Fighter Alpha 2 Gold backport. Every Gold fighter plays exactly as in Gold. EX adds the menus, modes and forms the arcade game kept behind codes or never had, and every secret starts unlocked.",
     "In CONSOLE game mode the game plays free, and START at the title opens a mode menu: Arcade, Versus, Survival, Dramatic Battle, Akuma, Training and Options. Versus matches go straight back to the select screen, and Coin opens Pause/Back on selection screens and during fights, with a confirmed Quit to the title menu. Training offers recording and replay, computer behavior and guard settings, input history and attack data. Cammy and a Random cell sit on the select screen, Cammy turns up as a CPU opponent in the other fighters' Arcade runs, and alternate forms take a START press or two instead of five.",
     "Two EX forms join the roster, each one START press away on its fighter's cell: EX Akuma and EX Cammy. Both follow Capcom's own EX rules, with classic moves and no Super Combos.",
     "OPTIONS opens an OPTION MODE page with difficulty, time limit, rounds, damage, turbo and sound. The operator menu adds GAME MODE, REGULATION for red or white blood, eight GAME SPEED levels and a TIME LIMIT of 25, 50, 75, 99 or infinity, and the title has a new EX mark. The USA build is in English; the Japan build, Street Fighter Zero 2 EX, keeps the Japanese. EX CONFIGURATION selects JAPAN or INTERNATIONAL backgrounds and ORIGINAL or 30TH ANNIVERSARY artwork.",
-    "The MiSTer MRAs start in CONSOLE mode. MAME and HBMAME start in ARCADE mode, which keeps Gold's arcade title; set GAME MODE to CONSOLE on the operator menu's SYSTEM page for the mode menu. It runs in MAME and HBMAME and on MiSTer.",
+    "The MiSTer MRAs start in CONSOLE mode. MAME and HBMAME start in ARCADE mode, which keeps Gold's arcade title; set GAME MODE to CONSOLE on the operator menu's EX page for the mode menu. It runs in MAME and HBMAME and on MiSTer.",
     "This is a release candidate."
    ],
    "game": "Street Fighter Alpha 2 Gold / Zero 2 Dash (2006 PlayStation 2 anthology revision)",
@@ -2974,6 +2987,26 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-06",
+     "items": [
+      "Training restores lost health after a short pause and keeps fighters at 1 HP instead of ending the round.",
+      "Training begins directly in practice; its pause menu opens SETUP for practice settings.",
+      "Corrected Cammy's crouching collision and her poses and positioning when thrown by the rest of the roster.",
+      "Cammy can taunt once per round with START.",
+      "Pausing silences game audio until play resumes.",
+      "GAME MODE is the first EX CONFIGURATION setting, and the EX page is third in the operator menu.",
+      "The named game speeds are NORMAL and TURBO 1–7.",
+      "Localized the Japanese EX settings and corrected operator-menu headings, return prompts and bottom help text.",
+      "The USA build names Evil Ryu on the select, VS, fight and map screens, and gives his map portrait distinct colors.",
+      "Fixed Ryu and his alternate forms breaking apart incorrectly as the VS screen ends in the English builds.",
+      "Jessica reacts to Cody looking at Cammy on Guy's stage.",
+      "Charlie and Chun-Li now use CHL and CHN as their default score initials in the USA build.",
+      "Corrected the program-ROM results in MEMORY CHECK.",
+      "Every set has new checksums, so rebuild them with the rc4 kit."
+     ],
+     "version": "rc4"
+    },
     {
      "date": "2026-10-15",
      "items": [
@@ -3033,7 +3066,7 @@
    "summary": "Our Alpha 2 Gold backport with a console-style mode menu, Training with recording and replay, Cammy and Random on the select screen, EX Akuma and EX Cammy, and more speed and time settings. In USA and Japan builds.",
    "thumbnail_build": "us",
    "title": "Street Fighter Alpha 2 EX",
-   "version": "rc3"
+   "version": "rc4"
   },
   {
    "builds": [

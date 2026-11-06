@@ -21,7 +21,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="../nav.css?v=8"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -48,9 +48,7 @@
      summed in --titleh), the shared header layout since 2026-09-17 */
   .masthead { display: flex; align-items: flex-start; gap: .95rem; min-width: 0;
               --titleh: calc(1.75rem * 1.15 + .15rem + 1.2rem); }
-  .top .brand { display: block; flex: 0 0 auto; color: var(--fg); }
   .top .brand svg { display: block; height: var(--titleh); width: auto; }
-  .top .brand:hover { color: var(--brand-hover); }
   /* the freshness stamp IS the subtitle: plain muted text, not a chip (user ruling) */
   .vchip { display: inline-block; }
   .top h1 { font-size: 1.75rem; margin: 0; line-height: 1.15; letter-spacing: .01em; }

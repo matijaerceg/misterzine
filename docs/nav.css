@@ -17,6 +17,11 @@
    (#themesum, identical on all three pages): the id beats the release tracker's
    details.cols summary filter-base styling, so the shared rule wins there too. */
 
+/* Header wordmarks use the same theme accent as page titles. */
+.masthead .brand, .top .home > .logo { color: var(--accent); }
+.masthead .brand { display: block; flex: 0 0 auto; }
+.masthead .brand:hover { color: var(--brand-hover); }
+
 /* site-nav: plain text links since Plex arrived. The bordered pill group
    needed ~258px for four labels, which no longer fit a 360px phone beside the
    Menu control; bare words need no padding or dividers. The class names

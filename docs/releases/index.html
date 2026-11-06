@@ -34,7 +34,7 @@
 </script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
 <link rel="stylesheet" href="custom-lists.css?v=eec1b5f3b3">
-<link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="../nav.css?v=8"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
      every weight in use (400 body, 600 badges, 700 headings/th). swap keeps
@@ -662,9 +662,7 @@
   /* Scale the logo against the title and status block measured by theme.js. */
   .masthead { display: flex; align-items: center; gap: .6rem; flex: 1 1 0; min-width: 0;
               --titleh: calc(clamp(1.4rem, 4.2vw, 1.75rem) * 1.15 + .25rem + .15rem + 1.2rem); }
-  .masthead .brand { display: block; flex: 0 0 auto; color: var(--fg); }
   .masthead .brand svg { display: block; height: calc(var(--titleh) * .85); width: auto; }
-  .masthead .brand:hover { color: var(--brand-hover); }
   .masthead .titleblock { min-width: 0; flex: 1 1 auto; }
   /* flex-wrap + shrink lets the theme pill drop below the nav when the row is
      too narrow (phones); without shrink the group keeps its max width and clips */

@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- The MisterZine header logo now matches the page title color in every theme.
+
 - Manage lists is now at the bottom of the Your lists dropdown, leaving more room for pinned lists in the tab bar.
 
 - Section headings have a subtle tint, including when pinned while scrolling. Game groups, core batches and standalone releases share a background and title alignment. Only expanded children are indented. Arrows and counts such as “8 games” or “2 cores” identify expandable rows.

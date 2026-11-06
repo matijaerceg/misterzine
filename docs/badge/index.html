@@ -11,7 +11,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=8"><!-- shared segmented-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -29,9 +29,7 @@
   .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
          padding: .35rem 0 .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.25rem; }
   .masthead { display: flex; align-items: center; gap: .95rem; min-width: 0; }
-  .top .brand { display: block; flex: 0 0 auto; color: var(--fg); }
   .top .brand svg { display: block; height: 48px; width: auto; }
-  .top .brand:hover { color: var(--brand-hover); }
   .top h1 { font-size: 1.75rem; margin: 0; line-height: 1.15; letter-spacing: .01em; }
   .top h1 .cd { color: var(--accent); }
   .top nav { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }

@@ -31,7 +31,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
+<link rel="stylesheet" href="nav.css?v=8"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   @font-face { font-family: Roboto; src: url(fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -89,7 +89,7 @@
      of it; positioned, both share a paint step, DOM order wins, and the wordmark
      laps over him the way it should. */
   .top .logo { position: relative; height: var(--logoh); width: auto;
-               aspect-ratio: 532.4 / 354.2; display: block; color: var(--fg); }
+               aspect-ratio: 532.4 / 354.2; display: block; }
   /* --logoh is the wordmark height, shared so kun can size/place himself off it in
      px (see .kun) rather than as a % of .peek, whose box we grow downward below. */
   /* --lean is kun's leaned-out transform, shared by all three triggers below so the

@@ -21,7 +21,7 @@
 <script>/* apply saved theme before first paint to avoid a flash */
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);</script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes -->
-<link rel="stylesheet" href="../nav.css?v=7"><!-- shared site-nav + closed theme-control chrome -->
+<link rel="stylesheet" href="../nav.css?v=8"><!-- shared site-nav + closed theme-control chrome -->
 <style>
   @font-face { font-family: Roboto; src: url(../fonts/roboto-latin-var.woff2) format('woff2');
                font-weight: 100 900; font-display: swap; }
@@ -40,9 +40,7 @@
          padding: .35rem 0 .75rem; border-bottom: 1px solid var(--rule); margin-bottom: 1.25rem; }
   .masthead { display: flex; align-items: flex-start; gap: .95rem; min-width: 0;
               --titleh: calc(1.75rem * 1.15 + .15rem + 1.2rem); }
-  .top .brand { display: block; flex: 0 0 auto; color: var(--fg); }
   .top .brand svg { display: block; height: var(--titleh); width: auto; }
-  .top .brand:hover { color: var(--brand-hover); }
   .top h1 { font-size: 1.75rem; margin: 0; line-height: 1.15; letter-spacing: .01em; }
   .top h1 .cd { color: var(--accent); }
   .top .scope { display: block; font-family: Roboto, system-ui, sans-serif; font-size: .78rem; font-weight: 400;

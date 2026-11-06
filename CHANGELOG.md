@@ -6,7 +6,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - The release table uses a stronger shade for section headings and a lighter band for expandable groups. Counts such as “8 games” and “2 cores” show what each arrow opens.
 
-- Game groups and core batches use the same small arrow beside the first line of the title. Clicking or tapping its row-height square expands or collapses the children on desktop and phone.
+- Game groups and core batches line up even when a title or core list wraps. Their small arrows have a fixed-width click area that spans the full row height on desktop and phone.
 
 - Gm0rk games show their core names and build dates again after a folder move. Games from the same core build group together, and titles like Golden Tee Golf use their short names again.
 

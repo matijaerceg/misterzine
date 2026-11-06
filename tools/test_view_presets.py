@@ -61,6 +61,14 @@ def main():
             assert index >= 0
             controls.evaluate("i => revealIndex(i, 'center')", index)
             row = controls.locator(f'#rows tr.grp[data-i="{index}"]')
+            # Wrapping in Title or FPGA Core must not move a group title sideways.
+            insets = controls.locator('#rows tr.grp').evaluate_all("""rows => rows.map(r => {
+                const label = r.querySelector('.group-label').getBoundingClientRect();
+                const button = r.querySelector('.tw').getBoundingClientRect();
+                if (button.right > label.left + .5) throw Error('Arrow overlaps the group title');
+                return label.left - r.cells[0].getBoundingClientRect().left;
+            })""")
+            assert max(insets) - min(insets) < 1, insets
             for cell in row.locator('td').all():
                 expect(cell).to_have_css('background-color', group_band)
             count = controls.evaluate('i => flat[i].members.length', index)
@@ -69,11 +77,10 @@ def main():
             arrow = row.get_by_role('button', expanded=False)
             bounds = arrow.bounding_box()
             height = row.bounding_box()['height']
-            assert abs(bounds['width'] - height) < 1 and abs(bounds['height'] - height) < 1
-            # Both header styles use the same compact icon and first-line inset,
-            # even when the row (and hence the clickable square) is taller.
-            icon = arrow.locator('svg').bounding_box()
             rem = controls.evaluate('parseFloat(getComputedStyle(document.documentElement).fontSize)')
+            assert abs(bounds['width'] - 2 * rem) < 1 and abs(bounds['height'] - height) < 1
+            # Both header styles use the same compact icon and first-line inset.
+            icon = arrow.locator('svg').bounding_box()
             assert abs(icon['width'] - .5 * rem) < 1 and abs(icon['height'] - .5 * rem) < 1
             assert abs(icon['x'] - bounds['x'] - .75 * rem) < 1
             assert abs(icon['y'] - bounds['y'] - .75 * rem) < 1
@@ -105,7 +112,7 @@ def main():
                 row.locator('.group-label').click()
                 expect(arrow).to_have_attribute('aria-expanded', 'false')
             controls.close()
-        checks.append('Game and core-batch headers share a small aligned arrow and independently toggle from the full square on desktop and phone')
+        checks.append('Game and core-batch titles align and the fixed-width, full-height arrows toggle independently on desktop and phone')
         # Every catalogue-wide preset must preserve the complete visible catalogue.
         for preset in ['updated', 'debut', 'alphabetical', 'maker', 'year', 'core', 'cabinet']:
             choose(page, preset)

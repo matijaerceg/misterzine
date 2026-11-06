@@ -767,10 +767,13 @@
   #rows tr[data-i] { color: var(--table-secondary); }
   #rows tr[data-i] td { background: var(--bg); }
   #rows tr.grp td { background: var(--group-band); }
-  tr.grp td:first-child { padding-left: 0; border-bottom: 0; font-weight: 650; overflow-x: auto; scrollbar-width: none; }
+  /* Reserve one arrow lane for both kinds of header, even when another cell wraps. */
+  tr.grp td:first-child { --arrow-width: 2rem;
+                          padding-left: calc(var(--group-start, 0px) + var(--arrow-width) + .15rem);
+                          border-bottom: 0; font-weight: 650; }
   tr.grp td:first-child::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0;
                                   border-bottom: 1px solid var(--rule); pointer-events: none; }
-  tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: 100%; aspect-ratio: 1;
+  tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: 100%; width: var(--arrow-width);
                margin: 0; padding: 0; border: 0; appearance: none;
                background: transparent; color: var(--table-secondary); cursor: pointer; }
   /* The target follows the row height. The icon lines up with the first line of
@@ -780,9 +783,7 @@
   tr.grp .tw[aria-expanded="true"] svg { transform: rotate(90deg); }
   tr.grp .tw:focus-visible { outline-offset: -2px; }
   @media (hover: hover) { tr.grp .tw:hover { color: var(--accent); } }
-  /* Keep a readable strip of title even in a narrow sticky column with a tall row. */
-  .group-label { display: block; margin-left: calc(var(--group-start, 0px) + var(--group-gutter, 2rem) + .15rem);
-                 min-width: min(48%, 8rem); }
+  .group-label { display: block; }
   td .gc { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
            border: 1px solid var(--line); border-radius: .2rem;
            color: var(--table-secondary); font-size: .6875rem; font-weight: 500;
@@ -3446,16 +3447,6 @@ function vSettle() {
 // Record the rendered rows' heights and size the spacers to the rest.
 function vMeasure() {
   if (!vTop) return;
-  // The title shares its cell with a square disclosure button. Reserve its
-  // actual width, including when wrapping or another column makes a row taller.
-  // Batch layout reads before writes. Only rows that rewrap need another pass.
-  let groups = [...ROWS.querySelectorAll('tr.grp')];
-  while (groups.length) {
-    const changed = groups.map(tr => [tr, Math.ceil(tr.getBoundingClientRect().height) + 'px'])
-      .filter(([tr, size]) => tr.style.getPropertyValue('--group-gutter') !== size);
-    for (const [tr, size] of changed) tr.style.setProperty('--group-gutter', size);
-    groups = changed.map(([tr]) => tr);
-  }
   const hs = [];
   for (let tr = vTop.nextElementSibling, k = vwA; tr && tr !== vBot; tr = tr.nextElementSibling, k++) {
     const h = tr.getBoundingClientRect().height;

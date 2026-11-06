@@ -708,7 +708,7 @@
   .colnote { margin: .5rem .1rem 0; padding-top: .5rem; border-top: 1px solid var(--rule);
              font-size: .8rem; line-height: 1.35; color: var(--muted); max-width: 15rem; }
   .colnote .prov { font-style: italic; }
-  /* One 1px frame around a selection, including an expanded group's children.
+  /* One 1px dotted frame around a selection, including an expanded group's children.
      Overlays span the cell divider without changing table layout; the sticky
      title cell keeps the left edge visible while scrolling horizontally. */
   #rows tr.selection-range { --selection-top: 0px; --selection-bottom: 0px; }
@@ -717,7 +717,7 @@
   #rows tr.selection-range td { position: relative; }
   #rows tr.selection-range td:first-child { position: sticky; }
   #rows tr.selection-range td::after { content: ''; position: absolute; inset: 0 0 -1px;
-    border: 0 solid var(--accent); border-top-width: var(--selection-top); border-bottom-width: var(--selection-bottom);
+    border: 0 dotted var(--accent); border-top-width: var(--selection-top); border-bottom-width: var(--selection-bottom);
     pointer-events: none; z-index: 1; }
   #rows tr.selection-range td:first-child::after { border-left-width: 1px; right: -1px; }
   #rows tr.selection-range td:last-child::after { border-right-width: 1px; right: 0; }

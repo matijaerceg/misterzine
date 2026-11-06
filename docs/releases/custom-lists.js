@@ -277,14 +277,14 @@ window.MZLists = (() => {
     if (!picker.options.length) picker.append(new Option('No saved lists yet', 'empty'));
     const pinned = !foldedPins.has(id) && (collections.pins || []).some(p => p.id === id);  // the current list has its own tab in the strip
     picker.value = mode === 'list' && showCurrent && !pinned ? id : '';
-    $('collection-summary').classList.toggle('active', mode === 'list' && !pinned);
+    $('collection-summary').classList.toggle('active', mode === 'manage' || mode === 'list' && !pinned);
     // The tab keeps a fixed label so it always reads as the list switcher; the bar below names the open list.
     $('collection-summary').textContent = document.querySelector('nav.collections').dataset.labels === 'short' ? 'Lists' : 'Your lists';
     $('collection-summary').removeAttribute('title');
-    const menu = $('collection-menu'), focus = document.activeElement;
-    const focusID = menu.contains(focus) ? focus.dataset.pin || focus.dataset.collection : null;
+    const menu = $('collection-menu'), choices = $('collection-options'), focus = document.activeElement;
+    const focusID = choices.contains(focus) ? focus.dataset.pin || focus.dataset.collection : null;
     const focusKind = focus?.dataset.pin ? 'pin' : 'collection', scrollTop = menu.scrollTop;
-    menu.replaceChildren();
+    choices.replaceChildren();
     const item = option => {
       const row = document.createElement('div'); row.className = 'collection-item';
       const button = document.createElement('button'); button.type = 'button'; button.className = 'reset';
@@ -310,9 +310,9 @@ window.MZLists = (() => {
       const options = [...(child.tagName === 'OPTGROUP' ? child.children : [child])];
       if (!options.length) continue;
       if (child.tagName === 'OPTGROUP') {
-        const heading = document.createElement('strong'); heading.className = 'collection-group'; heading.textContent = child.label; menu.append(heading);
+        const heading = document.createElement('strong'); heading.className = 'collection-group'; heading.textContent = child.label; choices.append(heading);
       }
-      for (const option of options) menu.append(item(option));
+      for (const option of options) choices.append(item(option));
     }
     picker.classList.toggle('active', mode === 'list' && !pinned);
     if (focusID) [...menu.querySelectorAll('button')].find(button => button.dataset[focusKind] === focusID)?.focus({preventScroll: true});
@@ -1019,6 +1019,10 @@ window.MZLists = (() => {
     document.querySelector('.collection-tabs').addEventListener('click', event => {
       const link = event.target.closest('a');
       if (!link || event.button || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      if (link.closest('#collection-picker')) {
+        $('collection-picker').open = false;
+        $('collection-summary').focus();
+      }
       event.preventDefault(); navigate(link.href);
     });
     window.addEventListener('popstate', () => { if (!editing) switchView(location.href, true); });

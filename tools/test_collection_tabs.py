@@ -20,7 +20,9 @@ def main():
    page.locator('#collection-summary').click(); page.locator('#collection-menu').get_by_role('button', name=fixture['title'], exact=True).click(); expect(page.locator('#clname')).to_have_text(fixture['title']); expect(page.locator('#q')).to_have_value(''); assert page.evaluate('sortKey')=='title'
    page.locator('#clpin').click(); expect(page.locator('#collection-pins a')).to_have_text(fixture['title'])
    page.locator('#collection-all').click(); expect(page.locator('#q')).to_have_value('194'); page.locator('#collection-pins a').click(); expect(page.locator('#clname')).to_have_text(fixture['title'])
-   page.locator('#srcsummary').click(); page.locator('#srcfavorites').check(); page.locator('#srcsummary').click(); expect(page.locator('#favchip')).to_be_visible(); page.locator('#favchip').click(); expect(page.locator('#favchip')).to_be_hidden()
+   favorites_filter = page.get_by_role('button', name='Show only my favorites')
+   favorites_filter.click(); expect(favorites_filter).to_have_attribute('aria-pressed','true')
+   favorites_filter.click(); expect(favorites_filter).to_have_attribute('aria-pressed','false')
    page.locator('#collection-all').click(); page.locator('#q').fill(''); page.wait_for_timeout(150); page.locator('.tablewrap').evaluate('(e)=>e.scrollTop=1000'); top=page.locator('.tablewrap').evaluate('(e)=>e.scrollTop'); assert top>100
    page.locator('#collection-favorites').click(); page.locator('#collection-all').click(); page.wait_for_timeout(150); assert abs(page.locator('.tablewrap').evaluate('(e)=>e.scrollTop')-top)<2
    # Quick switches must ignore responses from a previous collection.
@@ -45,9 +47,9 @@ def main():
    for width in [1280,390]:
     page.set_viewport_size({'width':width,'height':800}); page.screenshot(path=str(shots/f'list-unavailable-{width}.png'))
    page.locator('#clremoveunavailable').click(); expect(page.locator('#collection-pins a')).to_have_count(0); expect(page.locator('#collection-all')).to_have_attribute('aria-current','page'); expect(page.locator('#collection-notice')).to_contain_text('removed from your lists')
-   page.locator('#collection-manage').click(); page.wait_for_url('**/releases/?collection=manage'); expect(page.locator('#lib-library')).to_be_visible()
+   page.locator('#collection-summary').click(); page.locator('#collection-manage').click(); page.wait_for_url('**/releases/?collection=manage'); expect(page.locator('#lib-library')).to_be_visible()
    assert not errors,errors
-   print('PASS in-place tabs, Back/Forward, per-view search/sort/scroll, visit-only memory, account pins, Source filter, mobile overflow')
+   print('PASS in-place tabs, Back/Forward, per-view search/sort/scroll, visit-only memory, account pins, favorites filter, mobile overflow')
   finally:
    request.delete(api+'/pins/'+fixture['id'],headers=auth)
    latest=request.get(api+'/lists/'+fixture['id'],headers=auth).json();

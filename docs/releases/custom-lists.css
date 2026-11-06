@@ -376,7 +376,9 @@ body:not(.cl-editor) #clbar { border-top: 0; }
 #collection-picker summary { white-space: nowrap; }
 #collection-menu { width: max-content; box-sizing: border-box; min-width: 15rem; max-width: min(25rem, calc(100vw - 2rem)); }
 #collection-menu button { display: block; width: 100%; text-align: left; white-space: normal; }
-#collection-menu button[aria-current=page] { color: var(--accent); font-weight: 600; }
+#collection-menu [aria-current=page] { color: var(--accent); font-weight: 600; }
+#collection-options { display: grid; gap: inherit; padding-bottom: .35rem; border-bottom: 1px solid var(--hair); }
+#collection-manage { display: flex; align-items: center; }
 .collection-item { display: flex; align-items: stretch; gap: .2rem; }
 #collection-menu .collection-item > [data-collection] { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 #collection-menu .collection-pin { display: flex; align-items: center; justify-content: center; flex: 0 0 2.25rem; width: 2.25rem; padding: .4rem; color: var(--muted); }
@@ -385,7 +387,7 @@ body:not(.cl-editor) #clbar { border-top: 0; }
 #collection-menu .collection-pin[aria-pressed=true] .pin-head { fill: currentColor; }
 #collection-menu .collection-pin[aria-disabled=true] { opacity: .5; cursor: wait; }
 @media (pointer: coarse), (max-width: 36rem) {
-  #collection-menu .collection-item > button { min-height: 44px; }
+  #collection-menu .collection-item > button, #collection-manage { min-height: 44px; }
   #collection-menu .collection-pin { flex-basis: 44px; width: 44px; }
 }
 .collection-group { display: block; color: var(--muted); font-size: .8rem; padding: .4rem .5rem; }
@@ -409,7 +411,7 @@ body:not(.cl-editor) .jumps button:disabled { display: none; }
 #collection-picker[open] > summary.active { border-color: var(--accent); border-bottom-color: var(--surface); }
 #collection-picker[open] > #collection-menu { border-top-left-radius: 0; margin: 0; }
 #collection-menu > .collection-current { padding-bottom: .4rem; margin-bottom: .2rem; border-bottom: 1px solid var(--hair); }
-#collection-menu button[aria-current=page]::before { content: '\2713\00a0'; }
+#collection-menu [aria-current=page]::before { content: '\2713\00a0' / ''; }
 .collection-tabs { flex: 0 1 auto; max-width: 100%; }
 body.cl-library #cllayout, body.cl-library .filters, body.cl-library #favlegacyinfo, body.cl-library .favbanner, body.cl-library #panel { display: none !important; }
 body.cl-library main { margin-left: 0 !important; transition: none; }
@@ -483,7 +485,7 @@ body.cl-library .controls, body.cl-library #resizer { display: none !important; 
  #favmanagement .fav-actions > * { flex-shrink: 0; white-space: nowrap; }
  body:not(.cl-editor) #clbar .clviewactions > * { white-space: nowrap; }
 }
-body.cl-library .collection-tabs > a[aria-current=page] { background: var(--bg); border-bottom-color: var(--bg); }
+body.cl-library .collection-tabs > a[aria-current=page], body.cl-library #collection-picker:not([open]) > summary.active { background: var(--bg); border-bottom-color: var(--bg); }
 /* Draw the shared baseline above inactive tab corners, not behind them. */
 .collections { position: relative; background: none; }
 .collections::after { content: ''; position: absolute; inset: auto 0 0; height: 1px; background: var(--accent); z-index: 1; pointer-events: none; }

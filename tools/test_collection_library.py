@@ -1,5 +1,5 @@
 import re
-"""Exercise Browse/Manage as tracker tabs, including responsive layouts."""
+"""Exercise Browse and the Manage lists dropdown link, including responsive layouts."""
 import json
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
@@ -22,18 +22,24 @@ def main():
    page.locator('#clpin').click();expect(page.locator('#collection-summary')).to_have_text('Your lists');expect(page.locator('#collection-summary')).not_to_have_class(re.compile('(^| )active( |$)'))
    page.locator('#collection-browse').click();expect(page.locator('#lib-search')).to_have_value('Library tab workflow');expect(page.locator('#lib-directory-cards')).to_contain_text(row['title'])
    page.locator('#lib-directory-cards').get_by_role('link',name='Preview curator',exact=True).click();expect(page.locator('#lib-curator-view')).to_be_visible();page.locator('#collection-browse').click();expect(page.locator('#lib-directory')).to_be_visible();
-   page.locator('#collection-manage').click();expect(page.locator('#lib-library')).to_be_visible();page.locator('#lib-owned-cards').get_by_role('heading',name=row['title']).wait_for();assert page.evaluate('window.noReload')==123
+   summary = page.locator('#collection-summary')
+   manage = page.locator('#collection-menu').get_by_role('link',name='Manage lists',exact=True)
+   expect(manage).to_be_hidden()
+   summary.click(); manage.press('Enter')
+   expect(page.locator('#collection-menu')).to_be_hidden(); expect(summary).to_be_focused()
+   expect(page.locator('#lib-library')).to_be_visible();page.locator('#lib-owned-cards').get_by_role('heading',name=row['title']).wait_for();assert page.evaluate('window.noReload')==123
    card=page.locator('#lib-owned-cards .list-card').filter(has=page.get_by_role('heading',name=row['title'],exact=True));card.get_by_role('button',name='Delete',exact=True).click();expect(page.locator('#lib-delete-dialog')).to_be_visible();page.locator('#lib-delete-cancel').click();expect(card).to_be_visible()
    page.go_back();expect(page.locator('#lib-directory')).to_be_visible();page.go_forward();expect(page.locator('#lib-library')).to_be_visible()
    for width,height in [(1440,900),(1024,768),(390,844),(320,700)]:
-    page.set_viewport_size({'width':width,'height':height});page.locator('#collection-manage').click();expect(page.locator('#collection-library')).to_be_visible();assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
+    page.set_viewport_size({'width':width,'height':height});summary.click(); manage.click();expect(page.locator('#collection-library')).to_be_visible();assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'),width
     page.locator('#collection-summary').click();expect(page.locator('#collection-menu')).to_be_visible();page.wait_for_function("(()=>{const b=document.getElementById('collection-menu').getBoundingClientRect();return b.left>=0 && b.right<=innerWidth+1})()")
-    assert page.locator('#collection-menu').get_by_text('Manage your lists...',exact=True).count()==0
+    expect(manage).to_have_attribute('aria-current','page')
+    expect(summary).to_have_class(re.compile(r'\bactive\b'))
     page.locator('#collection-summary').click();page.screenshot(path=str(shots/f'library-manage-{width}.png'))
     page.locator('#collection-browse').click();page.screenshot(path=str(shots/f'library-browse-{width}.png'))
     print('PASS library tabs and dropdown bounds',width,height)
    page.locator('#collection-all').click();expect(page.locator('#q')).to_have_value('1942')
-   page.locator('#collection-manage').click();card.get_by_role('button',name='Delete',exact=True).click();page.locator('#lib-delete-confirm').click();expect(card).to_have_count(0);expect(page.locator('#lib-message')).to_contain_text('List deleted');
+   summary.click(); manage.click();card.get_by_role('button',name='Delete',exact=True).click();page.locator('#lib-delete-confirm').click();expect(card).to_have_count(0);expect(page.locator('#lib-message')).to_contain_text('List deleted');
    page.goto(base+'/__preview__/anonymous');page.goto(base+'/releases/?collection=manage');expect(page.locator('#lib-out')).to_be_visible();page.locator('#collection-browse').click();expect(page.locator('#lib-directory')).to_be_visible()
    assert not errors,errors
    print('PASS no reload, card navigation, history, table search retention, pinned dropdown and signed-out management')

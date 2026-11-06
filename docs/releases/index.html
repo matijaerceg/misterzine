@@ -33,7 +33,7 @@
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);
 </script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="custom-lists.css?v=20261105-alignment">
+<link rel="stylesheet" href="custom-lists.css?v=eec1b5f3b3">
 <link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
@@ -1284,11 +1284,15 @@
   <div class="collection-tabs">
     <a id="collection-all" href="?collection=all"><span class="collection-full">All entries</span><span class="collection-short">All</span></a>
     <a id="collection-favorites" href="?collection=favorites"><span class="collection-full">Favorites</span><span class="collection-short">Favs</span></a>
-    <details class="cols" id="collection-picker"><summary id="collection-summary" class="ctl">Your lists</summary><div class="menu" id="collection-menu"></div></details>
+    <details class="cols" id="collection-picker">
+      <summary id="collection-summary" class="ctl">Your lists</summary>
+      <div class="menu" id="collection-menu">
+        <div id="collection-options"></div>
+        <a id="collection-manage" class="reset" href="?collection=manage">Manage lists</a>
+      </div>
+    </details>
     <span id="collection-pins"></span>
     <a id="collection-browse" href="?collection=browse"><span class="collection-full">Browse lists</span><span class="collection-short">Browse</span></a>
-    <a id="collection-manage" href="?collection=manage"><span class="collection-full">Manage lists</span><span class="collection-short">Manage</span></a>
-
   </div>
   <select id="collection-select" aria-label="Your lists" hidden></select>
   <div class="collection-actions">
@@ -1696,7 +1700,7 @@
   <p class="clnote"><a href="?collection=manage" target="_blank" rel="noopener">Manage your lists</a> · <a href="../account/#public-name" target="_blank" rel="noopener">Account</a></p>
 </dialog>
 <script src="../lists/lists.js?v=c7502c4e44"></script>
-<script src="custom-lists.js?v=aa1878eddb"></script>
+<script src="custom-lists.js?v=3fc5a24b7b"></script>
 <script src="./source-visibility.js?v=12"></script>
 <script src="./filter-memory.js?v=1"></script>
 <script src="./view-presets.js?v=3"></script>

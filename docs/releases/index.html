@@ -741,12 +741,8 @@
   td:first-child { position: sticky; left: 0; z-index: 2; background: var(--bg); color: var(--fg); }
   th:first-child { left: 0; z-index: 11; }  /* corner cell: sticks both axes, above the other th */
   td:first-child, th:first-child { border-right: 1px solid var(--rule); }
-  /* 1.7rem: 1rem re-absorbs the table's full-rem bleed past main's padding
-     (.tablezone) — which used to put this column's text exactly on the h1's
-     edge — and the extra .7rem airs out the favorites star gutter (user-picked
-     over the alignment; the star was wedged against the viewport edge at 1rem) */
   td:first-child, th:first-child { padding-left: 1.7rem; }
-  /* the favorites star lives in the 1.7rem gutter above, absolutely positioned
+  /* The favorites star sits inside the title gutter, absolutely positioned
      against the sticky cell: out of flow, so revealing it on hover moves no
      title text and costs the column no width. Full row height, so it's a target
      you can hit without aiming. Hidden (not absent) when idle — visibility
@@ -764,13 +760,13 @@
     #rows tr:hover td:first-child .fav { visibility: visible; }
     td:first-child .fav:hover { color: var(--accent); }
   }
+  #rows { --arrow-width: 2rem; --group-indent: calc(var(--group-start, 0px) + var(--arrow-width) + .15rem); }
   #rows tr[data-i] { color: var(--table-secondary); }
   #rows tr[data-i] td { background: var(--bg); }
+  /* Standalone releases and children share the same title inset. */
+  tr[data-i]:not(.grp) td:first-child { padding-left: calc(var(--group-indent) + 1rem); }
   #rows tr.grp td { background: var(--group-band); }
-  /* Reserve one arrow lane for both kinds of header, even when another cell wraps. */
-  tr.grp td:first-child { --arrow-width: 2rem;
-                          padding-left: calc(var(--group-start, 0px) + var(--arrow-width) + .15rem);
-                          border-bottom: 0; font-weight: 650; }
+  tr.grp td:first-child { padding-left: var(--group-indent); border-bottom: 0; }
   tr.grp td:first-child::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0;
                                   border-bottom: 1px solid var(--rule); pointer-events: none; }
   tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: 100%; width: var(--arrow-width);
@@ -786,7 +782,7 @@
   .group-label { display: block; }
   td .gc { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
            border: 1px solid var(--line); border-radius: .2rem;
-           color: var(--table-secondary); font-size: .6875rem; font-weight: 500;
+           color: var(--table-secondary); font-size: .6875rem;
            font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif;
            letter-spacing: .04em; line-height: 1.5; vertical-align: middle;
            white-space: nowrap; cursor: help; }
@@ -796,9 +792,7 @@
                        border-top: 1px solid var(--rule); }
   #panel ul.blist li .openm { color: var(--accent); text-decoration: none; flex: 1 1 auto; min-width: 0; }
   #panel ul.blist li .openm:hover { text-decoration: underline; }
-  #panel ul.blist li .fav { visibility: visible; position: static; font-size: 1rem; }
-  tr.member td:first-child { padding-left: 3.5rem; }
-  tr.member td:first-child::before { content: ''; position: absolute; left: 2.5rem; top: 0; bottom: 0;
+  tr.member td:first-child::before { content: ''; position: absolute; left: var(--group-indent); top: 0; bottom: 0;
                                      border-left: 1px solid var(--line); }
   /* the group panel: a note under the title, then one card per member build */
   #panel .grpnote { color: var(--muted); font-size: .85rem; margin: 0 0 .8rem; }
@@ -807,9 +801,7 @@
                         font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
   #panel .corecard h3 .openm { color: var(--accent); text-decoration: none; }
   #panel .corecard h3 .openm:hover { text-decoration: underline; }
-  #panel .corecard h3 .fav { font: inherit; font-size: 1.1rem; line-height: 1; flex: none; border: 0; padding: 0;
-                             margin-left: auto; background: none; color: var(--muted); cursor: pointer; }
-  #panel .corecard h3 .fav.on { color: var(--accent); }
+  #panel .corecard h3 .fav { margin-left: auto; }
   #panel .corecard .launchrow { margin-bottom: .5rem; }
 
   /* --- detail panel: slides in from the left --- */
@@ -891,10 +883,12 @@
      (negative margin above). */
   #panel h2.starred { display: flex; align-items: baseline; }
   #panel h2.starred .cf { min-width: 0; flex: 0 1 auto; }
-  #panel h2 .fav { font: inherit; font-size: 1.2rem; line-height: 1; vertical-align: baseline;
-                   flex: none; border: 0; padding: 0; margin-left: .75rem; background: none;
-                   color: var(--muted); cursor: pointer; }
-  #panel h2 .fav.on, #panel h2 .fav:hover { color: var(--accent); }
+  #panel .fav { flex: none; min-width: 1.5rem; min-height: 1.5rem; padding: 0; border: 0;
+                background: transparent; color: var(--muted); font: 400 1.1rem/1 Roboto, system-ui, sans-serif; cursor: pointer; }
+  #panel .fav.on, #panel .fav:focus-visible { color: var(--accent); }
+  @media (hover: hover) { #panel .fav:hover { color: var(--accent); } }
+  @media (pointer: coarse) { #panel .fav { min-width: 2.75rem; min-height: 2.75rem; } }
+  #panel h2 .fav { font-size: 1.2rem; margin-left: .75rem; }
   /* flat yellow bolt after the ZapScript field label */
   #panel .zapbolt { width: .8em; height: .8em; fill: var(--warn); vertical-align: -.08em; margin-left: .25rem; }
   /* the ZapScript token takes a jolt on hover/copy (zapJolt, below). position:
@@ -1968,7 +1962,7 @@ function adoptServerFavs(keys) {
   syncFavSummary();
   if (!booted) return;   // the first render (after data arrives) reads FAVS itself
   apply(); recenterOpen();
-  if (openRow) syncFavStars(openRow);
+  if (openRow) syncFavStars();
 }
 // pull the account's list; also finishes a first-sign-in import that /auth/
 // could not confirm (the flag it leaves behind)
@@ -2040,17 +2034,18 @@ function toggleFav(d, anchor) {
   if (favOnly || favView || MZLists.isFavorites()) { apply(); recenterOpen(); }
   favWrite(d, on, anchor);
 }
-// repaint the two stars that can show one row's state, without rebuilding the
-// tbody under the pointer (a full render() would drop the hover the star is
-// riding on). Touch has no hover star to update in place, so it re-renders.
+// A single change updates the table star and its copy in any detail panel.
+// Bulk callers rebuild the table and only need to refresh the open panel.
 function syncFavStars(d) {
-  const on = isFav(d);
-  const rb = document.querySelector('#rows .fav[data-k="' + CSS.escape(d.k) + '"]');
-  if (rb) setFavBtn(rb, on);
-  else if (!CAN_HOVER) render();  // passive marker appears/disappears
-  if (openRow === d) {
-    const pb = panel.querySelector('h2 .fav');
-    if (pb) setFavBtn(pb, on);
+  const selector = d ? '.fav[data-k="' + CSS.escape(d.k) + '"]' : '.fav[data-k]';
+  if (d) {
+    const rb = ROWS.querySelector(selector);
+    if (rb) setFavBtn(rb, isFav(d));
+    else if (!CAN_HOVER) render();  // passive marker appears/disappears
+  }
+  for (const button of panel.querySelectorAll(selector)) {
+    const item = d || KEY2ROW[button.dataset.k];
+    if (item) setFavBtn(button, isFav(item));
   }
 }
 function setFavBtn(b, on) {
@@ -2748,7 +2743,7 @@ function batchIsDebut(u) {
 }
 // Keep the core name first in both the table and the detail panel.
 function batchLabel(u, debut) {
-  return esc(u.title) + (debut ? ' debut' : ' update');
+  return esc(u.title) + (debut ? ' core debut' : ' core update');
 }
 
 // The chip counts the children available here. The tooltip and accessible
@@ -4575,7 +4570,7 @@ favdd.querySelector('.menu').addEventListener('click', e => {
     FAVS.clear(); favSave(); disarmFavClear();
     resetFavOnly();   // an empty favorites-only list is a dead end to strand anyone in
     syncFavSummary();
-    if (openRow) syncFavStars(openRow);
+    if (openRow) syncFavStars();
     apply(); recenterOpen();   // rebuilds every row's star from the now-empty set
     // signed in: the service has no bulk delete, so one DELETE per key, a few
     // at a time; whatever it still holds afterwards comes back via the resync
@@ -5098,7 +5093,7 @@ document.getElementById('favadd').addEventListener('click', () => {
   for (const k of favView) FAVS.add(k);
   const saved = favSave();
   syncFavSummary();
-  if (openRow) syncFavStars(openRow);
+  if (openRow) syncFavStars();
   dismissFavView();
   apply(); recenterOpen();
   if (TOKEN) {

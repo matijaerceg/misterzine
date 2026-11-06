@@ -61,6 +61,7 @@ def main():
             assert index >= 0
             controls.evaluate("i => revealIndex(i, 'center')", index)
             row = controls.locator(f'#rows tr.grp[data-i="{index}"]')
+            expect(row.locator('.group-label')).to_have_css('font-weight', '400')
             # Wrapping in Title or FPGA Core must not move a group title sideways.
             insets = controls.locator('#rows tr.grp').evaluate_all("""rows => rows.map(r => {
                 const label = r.querySelector('.group-label').getBoundingClientRect();
@@ -90,7 +91,11 @@ def main():
             expect(arrow).to_have_attribute('aria-expanded', 'true')
             expect(arrow.locator('svg')).to_have_css('transform', 'matrix(0, 1, -1, 0, 0, 0)')
             assert controls.locator('#rows tr.member').count() > 0
-            expect(controls.locator('#rows tr.member td').first).to_have_css('background-color', plain)
+            member = controls.locator('#rows tr.member td:first-child').first
+            expect(member).to_have_css('background-color', plain)
+            item_indent = member.evaluate('el => getComputedStyle(el).paddingLeft')
+            expect(controls.locator('#rows tr[data-i]:not(.grp):not(.member) td:first-child').first).to_have_css('padding-left', item_indent)
+            assert float(item_indent.removesuffix('px')) > max(insets)
             assert controls.evaluate('openRow === null')
             arrow.click(position={'x': bounds['width'] - 2, 'y': height - 2})
             expect(arrow).to_have_attribute('aria-expanded', 'false')
@@ -109,6 +114,14 @@ def main():
                 assert controls.evaluate("document.body.classList.contains('panel-open')")
             else:
                 assert controls.evaluate('openRow?.grp')
+                if batch:
+                    star = controls.locator('#panel .blist .fav').first
+                    expect(star).to_have_css('border-top-style', 'none')
+                    key = star.get_attribute('data-k')
+                    controls.evaluate('k => adoptServerFavs([k])', key)
+                    expect(star).to_have_attribute('aria-pressed', 'true')
+                    controls.evaluate('adoptServerFavs([])')
+                    expect(star).to_have_attribute('aria-pressed', 'false')
                 row.locator('.group-label').click()
                 expect(arrow).to_have_attribute('aria-expanded', 'false')
             controls.close()

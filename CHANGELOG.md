@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Gm0rk games show their core names and build dates again after a folder move. Games from the same core build group together, and titles like Golden Tee Golf use their short names again.
+
 - Available presets now uses aligned checkbox rows, one column on phones and a scrolling options area that keeps Done visible.
 
 - The tracker header keeps Patreon visible with its icon on desktop and mobile, uses a smaller MisterZine logo and groups site destinations, including Hardware Landscape, at the bottom of Menu at every width.

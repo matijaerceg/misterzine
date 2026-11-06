@@ -369,8 +369,8 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
    `_alternatives`. No tags. MiSTer-devel adopted his Fuuki and Psikyo cores, so it is in
    `DISTRIBUTION_TAKES_OVER` (as are decoryah and Gm0rk).
 16. **Gm0rk**: `Gm0rk/Gm0rkCores` `db` branch (opt-in, section `[Gm0rk/Gm0rkCores]`), since
-   2026-10-19. Atari G1, Atari G42 and Incredible Technologies 8-bit cores; MRAs in
-   `_Arcade/_Gm0rkCores/` with `_alternatives`, real tags.
+   2026-10-19. Atari G1, Atari G42, Incredible Technologies 8-bit, Midway Y-Unit and
+   Midway T-Unit. Each core has its own MRA folder under `_Arcade/_Gm0rkCores/`.
 17. **jlrh**: `jlrh/jlrh-misterfpga-db` `db` branch (opt-in, section
    `[jlrh/jlrh-misterfpga-db]`), since 2026-10-21. His "FF" cores from 11 family repos:
    Konami, Gaelco, Seibu, SNK, Tecfri, Technos, Cidelsa, Video System, Inder/Dinamic and

@@ -221,7 +221,7 @@ SOURCES = [
         # Fighter), Atari G42 (Road Riot 4WD, Guardians of the 'Hood) and
         # Incredible Technologies 8-bit (Golden Tee Golf, Capcom Bowling,
         # Hot Shots Tennis, ...). Classic downloader db: base_files_url into
-        # Gm0rk/Gm0rkCores, MRAs in _Arcade/_Gm0rkCores/ with _alternatives,
+        # Gm0rk/Gm0rkCores, MRAs in per-core folders under _Arcade/_Gm0rkCores/,
         # real tags. Each core repo published GitHub releases before the db
         # existed (2026-10-11). Opt-in: [Gm0rk/Gm0rkCores].
         "id": "gm0rk",
@@ -1767,7 +1767,7 @@ def _sparse_checkout_patterns(paths):
 # ships "Sorcer Striker.mra" both in _Slop Cores/ and in its _alternatives/.
 # A one-level read leaves the rows with no core (UNREAD MRA in the log):
 # bazset's _CVS/ games (2026-10-31), Slop Cores' move into _Slop Cores/ (2026-10-27).
-NESTED_MRA_SOURCES = {"ongo", "bazset", "slopcore"}
+NESTED_MRA_SOURCES = {"ongo", "bazset", "slopcore", "gm0rk"}
 
 
 def _mra_metadata_key(source_id, repo_path):
@@ -3270,6 +3270,8 @@ GM0RK_CORE_REPOS = {
     "atari-g1": "Gm0rk/Arcade-Atari-G1_MiSTer",
     "arcade-atari-g42": "Gm0rk/Arcade-Atari-G42_MiSTer",
     "arcade-itech8": "Gm0rk/ITech8_MiSTer",
+    "arcade-midway-t-unit": "Gm0rk/Arcade-Midway-T-Unit_MiSTer",
+    "arcade-midway-y-unit": "Gm0rk/Arcade-Midway-Y-Unit_MiSTer",
 }
 
 JLRH_REPO = "jlrh/jlrh-misterfpga-db"

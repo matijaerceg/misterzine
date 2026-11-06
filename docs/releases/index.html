@@ -778,11 +778,15 @@
   tr.grp td:first-child::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0;
                                   border-bottom: 1px solid var(--rule); pointer-events: none; }
   tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: 100%; aspect-ratio: 1;
-               display: grid; place-items: center; margin: 0; padding: 0; border: 0;
-               background: transparent; color: var(--muted); font: inherit; font-size: 1.4rem;
-               line-height: 1; cursor: pointer; }
+               margin: 0; padding: 0; border: 0; appearance: none;
+               background: transparent; color: var(--muted); cursor: pointer; }
+  /* The target follows the row height. The icon lines up with the first line of
+     the title on both game and batch rows, including when another column wraps. */
+  tr.grp .tw svg { position: absolute; top: .75rem; left: .75rem; width: .5rem; height: .5rem;
+                   fill: currentColor; pointer-events: none; }
+  tr.grp .tw[aria-expanded="true"] svg { transform: rotate(90deg); }
   tr.grp .tw:focus-visible { outline-offset: -2px; }
-  @media (hover: hover) { tr.grp .tw:hover { color: var(--accent); background: var(--hover-bg); } }
+  @media (hover: hover) { tr.grp .tw:hover { color: var(--accent); } }
   /* Keep a readable strip of title even in a narrow sticky column with a tall row. */
   .group-label { display: block; margin-left: calc(var(--group-start, 0px) + var(--group-gutter, 2rem) + .15rem);
                  min-width: min(48%, 8rem); }
@@ -2772,10 +2776,10 @@ function batchLabel(u, debut) {
 // marker on favorited rows and does its starring in the detail panel; a live
 // button there would only compete with the row's own tap target.
 function titleCell(d) {
-  // umbrella: disclosure chevron, the game's base title, a count chip, and
+  // umbrella: the game's base title, a count chip, and
   // the dot/DEBUT pill speaking for the group (any member unseen; the game's
   // own debut). No star: favorites live on the member builds.
-  // batch umbrella: chevron, its label ("Update: XNSUPER22 core", batchLabel),
+  // batch umbrella: its label ("Update: XNSUPER22 core", batchLabel),
   // a visible-game count chip (the tooltip retains the total when filtered); the dot speaks for the batch. A debut batch (batchIsDebut) says
   // "Debut:". No DEBUT pill on the header: the word says it, and each member
   // keeps its own.
@@ -2868,7 +2872,8 @@ const COLUMNS = [
     if (d.grp) {
       const open = isOpen(d);
       return '<td><button type="button" class="tw" aria-expanded="' + open + '" aria-label="' +
-        escA((open ? 'Collapse ' : 'Expand ') + d.title) + '">' + (open ? '▾' : '▸') +
+        escA((open ? 'Collapse ' : 'Expand ') + d.title) + '">' +
+        '<svg viewBox="0 0 8 8" aria-hidden="true" focusable="false"><path d="M1 0 8 4 1 8Z"/></svg>' +
         '</button><span class="group-label">' + titleCell(d) + '</span></td>';
     }
     const pick = MZLists.checkbox(d);

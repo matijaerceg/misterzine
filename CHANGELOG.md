@@ -4,7 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
-- In the release tracker, the arrow beside a group now expands or collapses its games directly. Its square click or tap target fills the row height on desktop and phone.
+- Game groups and core batches use the same small arrow beside the first line of the title. Clicking or tapping its row-height square expands or collapses the children on desktop and phone.
 
 - Gm0rk games show their core names and build dates again after a folder move. Games from the same core build group together, and titles like Golden Tee Golf use their short names again.
 

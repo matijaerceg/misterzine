@@ -46,20 +46,31 @@ def main():
 
         # A group's arrow acts independently of row selection, including on
         # phones where a second tap on the title opens the overlay panel.
-        for phone in (False, True):
+        for phone, batch in [(False, False), (False, True), (True, False), (True, True)]:
             controls = ctx.new_page()
             if phone:
                 controls.set_viewport_size({'width': 390, 'height': 844})
             load(controls)
-            row = controls.locator('#rows tr.grp').first
-            arrow = row.get_by_role('button', name='Expand', exact=False).first
+            index = controls.evaluate('batch => flat.findIndex(r => r.grp && Boolean(r.bat) === batch)', batch)
+            assert index >= 0
+            controls.evaluate("i => revealIndex(i, 'center')", index)
+            row = controls.locator(f'#rows tr.grp[data-i="{index}"]')
+            arrow = row.get_by_role('button', expanded=False)
             bounds = arrow.bounding_box()
             height = row.bounding_box()['height']
             assert abs(bounds['width'] - height) < 1 and abs(bounds['height'] - height) < 1
+            # Both header styles use the same compact icon and first-line inset,
+            # even when the row (and hence the clickable square) is taller.
+            icon = arrow.locator('svg').bounding_box()
+            rem = controls.evaluate('parseFloat(getComputedStyle(document.documentElement).fontSize)')
+            assert abs(icon['width'] - .5 * rem) < 1 and abs(icon['height'] - .5 * rem) < 1
+            assert abs(icon['x'] - bounds['x'] - .75 * rem) < 1
+            assert abs(icon['y'] - bounds['y'] - .75 * rem) < 1
             # Activate opposite corners well outside the glyph.
             arrow.click(position={'x': 1, 'y': 1})
             arrow = row.locator('.tw')
             expect(arrow).to_have_attribute('aria-expanded', 'true')
+            expect(arrow.locator('svg')).to_have_css('transform', 'matrix(0, 1, -1, 0, 0, 0)')
             assert controls.locator('#rows tr.member').count() > 0
             assert controls.evaluate('openRow === null')
             arrow.click(position={'x': bounds['width'] - 2, 'y': height - 2})
@@ -82,7 +93,7 @@ def main():
                 row.locator('.group-label').click()
                 expect(arrow).to_have_attribute('aria-expanded', 'false')
             controls.close()
-        checks.append('Square group arrows toggle children independently on desktop and phone')
+        checks.append('Game and core-batch headers share a small aligned arrow and independently toggle from the full square on desktop and phone')
         # Every catalogue-wide preset must preserve the complete visible catalogue.
         for preset in ['updated', 'debut', 'alphabetical', 'maker', 'year', 'core', 'cabinet']:
             choose(page, preset)

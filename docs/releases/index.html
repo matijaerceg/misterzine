@@ -33,7 +33,7 @@
   var t = 'eva'; try { t = localStorage.getItem('mz-theme') || 'eva'; } catch (e) {} if (/^[a-z]+$/.test(t)) document.documentElement.setAttribute('data-theme', t);
 </script>
 <link rel="stylesheet" href="../theme.css"><!-- palette tokens for all themes; render-blocking on purpose so tokens exist before first paint -->
-<link rel="stylesheet" href="custom-lists.css?v=20261030-star">
+<link rel="stylesheet" href="custom-lists.css?v=20261105-alignment">
 <link rel="stylesheet" href="../nav.css?v=7"><!-- shared segmented-nav + closed theme-control chrome (single source across all three pages) -->
 <style>
   /* self-hosted variable fonts (latin subset) — one file per family covers
@@ -424,8 +424,6 @@
   .tablezone { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column;
                margin-left: -1rem; margin-right: -1rem; }
   .tablewrap { flex: 1 1 auto; min-height: 0; overflow: auto;
-    /* One scale for the table ground, both kinds of group and the section above them. */
-    --group-band: color-mix(in srgb, var(--line) 20%, var(--bg));
     --section-band: color-mix(in srgb, var(--line) 48%, var(--bg));
     --table-secondary: color-mix(in srgb, var(--fg) 50%, var(--muted));
     --table-accent: color-mix(in srgb, var(--accent) 78%, var(--fg)); }
@@ -763,13 +761,11 @@
   #rows { --arrow-width: 2rem; --group-indent: calc(var(--group-start, 0px) + var(--arrow-width) + .15rem); }
   #rows tr[data-i] { color: var(--table-secondary); }
   #rows tr[data-i] td { background: var(--bg); }
-  /* Standalone releases and children share the same title inset. */
-  tr[data-i]:not(.grp) td:first-child { padding-left: calc(var(--group-indent) + 1rem); }
-  #rows tr.grp td { background: var(--group-band); }
-  tr.grp td:first-child { padding-left: var(--group-indent); border-bottom: 0; }
-  tr.grp td:first-child::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-                                  border-bottom: 1px solid var(--rule); pointer-events: none; }
-  tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: 100%; width: var(--arrow-width);
+  /* Top-level titles share an edge. Only the children of an open group step in. */
+  tr[data-i] td:first-child { padding-left: var(--group-indent); }
+  tr.member td:first-child { padding-left: calc(var(--group-indent) + 1rem); }
+  /* Include the cell's 1px bottom border in the arrow's hit area. */
+  tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: calc(100% + 1px); width: var(--arrow-width);
                margin: 0; padding: 0; border: 0; appearance: none;
                background: transparent; color: var(--table-secondary); cursor: pointer; }
   /* The target follows the row height. The icon lines up with the first line of

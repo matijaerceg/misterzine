@@ -50,7 +50,11 @@ body.cl-resizing .cllayout * { pointer-events: none; }
 #cldiscard, #clundo { margin-top: .4rem; }
 .clcell { display: flex; align-items: center; }
 .cltitletext { min-width: 0; }
-.clpickhit { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 1.5rem; min-height: 1.5rem; margin-right: .3rem; vertical-align: middle; border-radius: .3rem; cursor: pointer; }
+.cl-editor { --clpick-width: 1.5rem; --clpick-gap: .3rem; }
+/* Standalone titles follow a checkbox in the list editor. Reserve its space
+   before the group arrow and label so these top-level titles still align. */
+.cl-editor tr.grp :is(.group-label, .tw) { margin-left: calc(var(--clpick-width) + var(--clpick-gap)); }
+.clpickhit { display: inline-flex; align-items: center; justify-content: center; flex: none; width: var(--clpick-width); min-height: var(--clpick-width); margin-right: var(--clpick-gap); vertical-align: middle; border-radius: .3rem; cursor: pointer; }
 .clpickhit:focus-within { outline: 2px solid var(--accent); outline-offset: -2px; }
 .clpick { margin: 0; width: 1rem; height: 1rem; }
 .cldialog { position: fixed; inset: auto 0; top: calc(var(--clviewport-top, 0px) + var(--clviewport-height, 100dvh) * .5); transform: translateY(-50%); margin: 0 auto; color: var(--fg); background: var(--bg); border: 1px solid var(--hair); border-radius: .65rem; width: min(32rem, calc(100vw - 2rem)); max-height: calc(var(--clviewport-height, 100dvh) - 1rem); padding: 1.25rem; overflow: auto; overscroll-behavior: contain; scroll-padding: 1rem 0 5rem; }
@@ -119,7 +123,7 @@ body.cl-resizing .cllayout * { pointer-events: none; }
   .clbar button, .clbar .cllink, .clmore > summary, .cldialog button, #panel .clentryadd { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
   .clbar .cllink { box-sizing: border-box; }
   .clmore > summary { display: list-item; align-content: center; }
-  .clpickhit { width: 44px; min-height: 44px; margin-right: .2rem; }
+  .cl-editor { --clpick-width: 44px; --clpick-gap: .2rem; }
   .clpick { width: 1.15rem; height: 1.15rem; }
   .cldialog { width: calc(100vw - 1rem); padding: 1rem; }
   .cldialog input, .cldialog textarea, .cldialog select { font-size: 16px; min-height: 44px; }

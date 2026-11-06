@@ -4,9 +4,9 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
-- The release table uses a stronger shade for section headings and a lighter band for expandable groups. Counts such as “8 games” and “2 cores” show what each arrow opens.
+- Section headings have a shaded band. Game groups, core batches and standalone releases share a background and title alignment. Only expanded children are indented. Arrows and counts such as “8 games” or “2 cores” identify expandable rows.
 
-- Game groups and core batches use regular-weight titles, with labels such as “Midway Y-Unit core update.” Standalone releases and expanded children line up one level deeper. Group arrows have a fixed-width click area that spans the full row height on desktop and phone.
+- Game groups and core batches use regular-weight titles, with labels such as “Midway Y-Unit core update.” Group arrows have a fixed-width click area that spans the full row height. The selection outline runs across the sticky Title column when a group is collapsed.
 
 - Favorites in a core batch use the same star as individual game details. The star fills or clears as soon as you toggle it.
 

@@ -44,11 +44,10 @@ def main():
         baseline = keys(page)
         expect(page.locator('#presetname')).to_have_text('Build date')
         section_band = page.locator('#rows .preset-section th').first.evaluate('el => getComputedStyle(el).backgroundColor')
-        group_band = page.locator('#rows .grp td').first.evaluate('el => getComputedStyle(el).backgroundColor')
         plain = page.locator('#rows tr[data-i]:not(.grp) td').first.evaluate('el => getComputedStyle(el).backgroundColor')
-        assert len({section_band, group_band, plain}) == 3
+        assert section_band != plain
         expect(page.locator('#sectionpin span')).to_have_css('background-color', section_band)
-        checks.append('Section, group and release backgrounds are distinct; the pinned heading matches its section')
+        checks.append('Only section headings have a band; the pinned heading matches its section')
 
         # A group's arrow acts independently of row selection, including on
         # phones where a second tap on the title opens the overlay panel.
@@ -71,7 +70,7 @@ def main():
             })""")
             assert max(insets) - min(insets) < 1, insets
             for cell in row.locator('td').all():
-                expect(cell).to_have_css('background-color', group_band)
+                expect(cell).to_have_css('background-color', plain)
             count = controls.evaluate('i => flat[i].members.length', index)
             unit = 'game' if batch else 'core'
             expect(row.locator('.gc')).to_have_text(f"{count} {unit}{'s' if count != 1 else ''}")
@@ -93,9 +92,10 @@ def main():
             assert controls.locator('#rows tr.member').count() > 0
             member = controls.locator('#rows tr.member td:first-child').first
             expect(member).to_have_css('background-color', plain)
-            item_indent = member.evaluate('el => getComputedStyle(el).paddingLeft')
-            expect(controls.locator('#rows tr[data-i]:not(.grp):not(.member) td:first-child').first).to_have_css('padding-left', item_indent)
-            assert float(item_indent.removesuffix('px')) > max(insets)
+            single = controls.locator('#rows tr[data-i]:not(.grp):not(.member) td:first-child').first
+            group_indent = row.locator('td').first.evaluate('el => getComputedStyle(el).paddingLeft')
+            expect(single).to_have_css('padding-left', group_indent)
+            assert member.evaluate('el => parseFloat(getComputedStyle(el).paddingLeft)') > max(insets)
             assert controls.evaluate('openRow === null')
             arrow.click(position={'x': bounds['width'] - 2, 'y': height - 2})
             expect(arrow).to_have_attribute('aria-expanded', 'false')
@@ -124,6 +124,13 @@ def main():
                     expect(star).to_have_attribute('aria-pressed', 'false')
                 row.locator('.group-label').click()
                 expect(arrow).to_have_attribute('aria-expanded', 'false')
+                # The selection frame is positioned from each cell's padding box.
+                # Its bottom edge must land on the row divider in the sticky title, too.
+                assert row.evaluate("""r => [...r.cells].every(cell => {
+                    const frame = getComputedStyle(cell, '::after');
+                    return parseFloat(frame.borderBottomWidth) > 0 &&
+                        parseFloat(frame.bottom) === -parseFloat(getComputedStyle(cell).borderBottomWidth);
+                })""")
             controls.close()
         checks.append('Game and core-batch titles align and the fixed-width, full-height arrows toggle independently on desktop and phone')
         # Every catalogue-wide preset must preserve the complete visible catalogue.

@@ -774,10 +774,18 @@
      the accent: that stays for signals like the since-visit dot, and a rail
      in it competed with them. Chip chrome copies .bb (muted pill): a count,
      not a novelty. */
-  tr.grp td:first-child { font-weight: 600; }
-  tr.grp .tw { position: absolute; left: .3rem; top: .35rem; height: 1.25rem; width: 1.25rem;
-               display: flex; align-items: center; justify-content: center;
-               color: var(--muted); font-size: 1.4rem; line-height: 1; }
+  tr.grp td:first-child { padding-left: 0; border-bottom: 0; font-weight: 600; overflow-x: auto; scrollbar-width: none; }
+  tr.grp td:first-child::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+                                  border-bottom: 1px solid var(--rule); pointer-events: none; }
+  tr.grp .tw { position: absolute; top: 0; left: var(--group-start, 0px); height: 100%; aspect-ratio: 1;
+               display: grid; place-items: center; margin: 0; padding: 0; border: 0;
+               background: transparent; color: var(--muted); font: inherit; font-size: 1.4rem;
+               line-height: 1; cursor: pointer; }
+  tr.grp .tw:focus-visible { outline-offset: -2px; }
+  @media (hover: hover) { tr.grp .tw:hover { color: var(--accent); background: var(--hover-bg); } }
+  /* Keep a readable strip of title even in a narrow sticky column with a tall row. */
+  .group-label { display: block; margin-left: calc(var(--group-start, 0px) + var(--group-gutter, 2rem) + .15rem);
+                 min-width: min(48%, 8rem); }
   td .gc { display: inline-block; margin-left: .35rem; padding: 0 .25rem;
            border: 1px solid var(--muted); border-radius: .2rem;
            color: var(--muted); font-size: .75em; font-weight: 700;
@@ -1080,8 +1088,8 @@
   /* draggable edge: resize the panel / flick left to close (reflow mode only).
      --hit-l/--hit-r set how far the (invisible) hit box reaches to each side of
      the seam; the painted ribs/nub stay a 12px strip on the seam regardless. */
-  #resizer { --hit-l: 6px; --hit-r: 6px;
-             position: fixed; top: 0; height: 100vh; height: 100dvh; z-index: 101;
+  body { --hit-l: 6px; --hit-r: 6px; }
+  #resizer { position: fixed; top: 0; height: 100vh; height: 100dvh; z-index: 101;
              width: calc(var(--hit-l) + var(--hit-r));
              left: var(--pw, round(calc(100vw / 3), 1px)); margin-left: calc(-1 * var(--hit-l));
              cursor: col-resize; display: none; touch-action: none;
@@ -1116,7 +1124,7 @@
      earlier 28/8 bias made the right side noticeably harder to grab. Touches
      starting on the strip go to the drag (touch-action: none), never to
      scroll or taps underneath. */
-  @media (pointer: coarse) { #resizer { --hit-l: 28px; --hit-r: 28px; } }
+  @media (pointer: coarse) { body { --hit-l: 28px; --hit-r: 28px; } }
   body.resizing { cursor: col-resize; user-select: none; }
   /* #resizer included: the ghost drag drives its transform inline, and the
      commit on release must not animate the seam (see endResize) */
@@ -1124,6 +1132,7 @@
   body.no-anim #panel, body.no-anim main, body.no-anim #resizer { transition: none; }
 
   @media (min-aspect-ratio: 3/5) {   /* wide → reflow table into the right two-thirds */
+    body.panel-open { --group-start: var(--hit-r); } /* leave the panel's resize grip clear */
     main { transition: margin-left .28s ease; }
     #resizer { display: block; }  /* always rendered here; visibility/transform gate it */
     body.panel-open main { margin-left: var(--pw, round(calc(100vw / 3), 1px)); }
@@ -2777,7 +2786,7 @@ function titleCell(d) {
     const debut = batchIsDebut(d);
     const when = d.by === 'date' ? d.date : d.updated;  // the date the pile shares
     // <wbr> lets the chip wrap to the next line instead of splitting a word
-    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + batchLabel(d, debut) + dot +
+    return batchLabel(d, debut) + dot +
       '<wbr><span class="gc" role="img" aria-label="' + (n === t ? n : n + ' of ' + t) + ' games" data-tip="' + escA(n === t
         ? n + ' games on this core ' + (d.by === 'date' ? 'debuted together' : debut ? 'shipped together' : 'shipped an update together') +
           ' (' + when + '). Select the row to list them.'
@@ -2791,7 +2800,7 @@ function titleCell(d) {
     // d.split = every build of the game when some of them sit
     // under their core's batch row instead ("N of M cores")
     const n = d.members.length, t = d.split || n;
-    return '<span class="tw" aria-hidden="true">' + (isOpen(d) ? '▾' : '▸') + '</span>' + esc(d.title) + dot +
+    return esc(d.title) + dot +
       '<span class="gc" role="img" aria-label="' + (n === t ? n : n + ' of ' + t) + ' cores" data-tip="' + escA(n === t ? 'This game ships on ' + n + ' cores. Select the row to list them.'
         : 'This game ships on ' + t + ' cores. ' + n + ' are listed here; the other builds sit under their core update rows. Select the row to list these ' + n + '.') + '">' +
       n + '</span>' + newBadge(d) + matBadge(d);
@@ -2856,6 +2865,12 @@ function coreCell(d) {
 // Columns menu always shows the full label.
 const COLUMNS = [
   { k: 'title', label: 'Title', w: 21, mw: 11, lock: true, cell: d => {
+    if (d.grp) {
+      const open = isOpen(d);
+      return '<td><button type="button" class="tw" aria-expanded="' + open + '" aria-label="' +
+        escA((open ? 'Collapse ' : 'Expand ') + d.title) + '">' + (open ? '▾' : '▸') +
+        '</button><span class="group-label">' + titleCell(d) + '</span></td>';
+    }
     const pick = MZLists.checkbox(d);
     return '<td>' + (pick ? '<span class="clcell">' + pick + '<span class="cltitletext">' + titleCell(d) + '</span></span>' : titleCell(d)) + '</td>';
   } },
@@ -3446,6 +3461,16 @@ function vSettle() {
 // Record the rendered rows' heights and size the spacers to the rest.
 function vMeasure() {
   if (!vTop) return;
+  // The title shares its cell with a square disclosure button. Reserve its
+  // actual width, including when wrapping or another column makes a row taller.
+  // Batch layout reads before writes. Only rows that rewrap need another pass.
+  let groups = [...ROWS.querySelectorAll('tr.grp')];
+  while (groups.length) {
+    const changed = groups.map(tr => [tr, Math.ceil(tr.getBoundingClientRect().height) + 'px'])
+      .filter(([tr, size]) => tr.style.getPropertyValue('--group-gutter') !== size);
+    for (const [tr, size] of changed) tr.style.setProperty('--group-gutter', size);
+    groups = changed.map(([tr]) => tr);
+  }
   const hs = [];
   for (let tr = vTop.nextElementSibling, k = vwA; tr && tr !== vBot; tr = tr.nextElementSibling, k++) {
     const h = tr.getBoundingClientRect().height;
@@ -6139,9 +6164,17 @@ document.getElementById('rows').addEventListener('click', e => {
   const tr = e.target.closest('tr[data-i]');
   if (!tr) return;
   const d = flat[+tr.dataset.i];
+  const arrow = e.target.closest('button.tw');
+  if (arrow && d && d.grp) {
+    const i = +tr.dataset.i, focused = document.activeElement === arrow;
+    setExpanded(d, !isOpen(d));
+    // Rendering replaces the button. Keep it reachable for repeated key presses.
+    if (focused) rowEl(i)?.querySelector('.tw')?.focus({ preventScroll: true });
+    return;
+  }
   // on phones the overlay panel would cover the expansion a first tap just
   // revealed, so a tap on a closed umbrella only expands it; a tap on an open
-  // one opens the game's panel. There is no collapse on phones, on purpose.
+  // one opens the game's panel. The dedicated arrow above handles either state.
   if (d && d.grp && matchMedia('(max-aspect-ratio: 3/5)').matches) {
     if (!isOpen(d)) setExpanded(d, true);
     else openPanel(d);

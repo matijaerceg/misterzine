@@ -43,6 +43,46 @@ def main():
         assert not errors, errors
         baseline = keys(page)
         expect(page.locator('#presetname')).to_have_text('Build date')
+
+        # A group's arrow acts independently of row selection, including on
+        # phones where a second tap on the title opens the overlay panel.
+        for phone in (False, True):
+            controls = ctx.new_page()
+            if phone:
+                controls.set_viewport_size({'width': 390, 'height': 844})
+            load(controls)
+            row = controls.locator('#rows tr.grp').first
+            arrow = row.get_by_role('button', name='Expand', exact=False).first
+            bounds = arrow.bounding_box()
+            height = row.bounding_box()['height']
+            assert abs(bounds['width'] - height) < 1 and abs(bounds['height'] - height) < 1
+            # Activate opposite corners well outside the glyph.
+            arrow.click(position={'x': 1, 'y': 1})
+            arrow = row.locator('.tw')
+            expect(arrow).to_have_attribute('aria-expanded', 'true')
+            assert controls.locator('#rows tr.member').count() > 0
+            assert controls.evaluate('openRow === null')
+            arrow.click(position={'x': bounds['width'] - 2, 'y': height - 2})
+            expect(arrow).to_have_attribute('aria-expanded', 'false')
+            assert controls.locator('#rows tr.member').count() == 0
+            arrow.focus()
+            controls.keyboard.press('Enter')
+            expect(arrow).to_be_focused()
+            expect(arrow).to_have_attribute('aria-expanded', 'true')
+            controls.keyboard.press('Space')
+            expect(arrow).to_have_attribute('aria-expanded', 'false')
+            row.locator('.group-label').click()
+            expect(arrow).to_have_attribute('aria-expanded', 'true')
+            if phone:
+                assert controls.evaluate('openRow === null')
+                row.locator('.group-label').click()
+                assert controls.evaluate("document.body.classList.contains('panel-open')")
+            else:
+                assert controls.evaluate('openRow?.grp')
+                row.locator('.group-label').click()
+                expect(arrow).to_have_attribute('aria-expanded', 'false')
+            controls.close()
+        checks.append('Square group arrows toggle children independently on desktop and phone')
         # Every catalogue-wide preset must preserve the complete visible catalogue.
         for preset in ['updated', 'debut', 'alphabetical', 'maker', 'year', 'core', 'cabinet']:
             choose(page, preset)

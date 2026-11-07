@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 07 Nov 2026 05:15:00 +0000</lastBuildDate>
+<lastBuildDate>Sat, 07 Nov 2026 09:39:56 +0000</lastBuildDate>
+<item>
+<title>[Updated] Klax (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#klax</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Klax.mra:2026-11-07T09:39:56+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 09:39:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/klax.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Klax&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Klax_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Toobin' (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#toobin</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Toobin.mra:2026-11-07T09:39:56+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 09:39:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toobin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Toobin&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Toobin_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Batman (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#batman</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Batman_20261107.rbf:2026-11-07T09:39:56+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 09:39:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/batman.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1991 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Batman&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Batman_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model1 (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#netmerc</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model1_20261106.rbf:2026-11-07T07:00:02+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 07:00:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Sega NetMerc, Star Wars Arcade (Sega, US), Virtua Fighter, Virtua Formula, Virtua Racing, Wing War.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Gm0rk_Midway-T-Unit (Arcade core, 6 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#judge-dredd-ongo</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: 64th. Street: A Detective Story, Avenging Spirit, Big Striker, Chimera Beast, Cybattler, E.D.F.: Earth Defense Force (kuzearcade), Hayaoshi Quiz Ouza Ketteisen: The King Of Quiz, Peek-a-Boo!.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-JalecoMS1BCD_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-NMK16_Afega (Arcade core, 6 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#bubl2000</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NMK16_Afega_20261028.rbf:2026-10-28T22:26:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 22:26:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Bubble 2000, Guardian Storm, Mang-Chi, Pop's Pop's, Spectrum 2000, Stagger I.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NMK16_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Lucky &amp; Wild (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#luckywld</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_LW_20261028.rbf:2026-10-28T22:26:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 22:26:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/luckywld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1992 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_LW&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NamcoSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Metal Hawk (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#metlhawk</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_MH_20261028.rbf:2026-10-28T22:26:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 22:26:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/metlhawk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1988 / Namco&lt;/p&gt;&lt;p&gt;Core: Arcade-NamcoS2_MH&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NamcoSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-NamcoS2_SG (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sgunner</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_SG_20261028.rbf:2026-10-28T22:26:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 22:26:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Steel Gunner, Steel Gunner 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NamcoSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

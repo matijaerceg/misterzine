@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 06 Nov 2026 23:17:35 +0000</lastBuildDate>
+<lastBuildDate>Sat, 07 Nov 2026 05:15:00 +0000</lastBuildDate>
+<item>
+<title>[Updated] Gm0rk_Midway-T-Unit (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#judge-dredd-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Gm0rk_Midway-T-Unit_20261106.rbf:2026-11-07T05:15:00+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 05:15:00 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Judge Dredd (Ongo), Mortal Kombat (rev 5.0 T-Unit 03-19-93), Mortal Kombat II (Ongo), NBA Jam (Ongo), NBA Jam Tournament Edition (Ongo), NBA Jam Tournament Edition SE.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Bad Lands (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#badlands</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Badlands_20261106.rbf:2026-11-07T02:55:14+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 02:55:14 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/badlands.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Badlands&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Badlands_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Blasteroids (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#blstroid</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Blasteroids_20261106.rbf:2026-11-07T02:55:14+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 02:55:14 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blstroid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1987 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Blasteroids&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Blasteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] S32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261106.rbf:2026-11-07T02:55:14+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 02:55:14 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Vindicators (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#vindictr</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Steel Gunner, Steel Gunner 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NamcoSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-NamcoS2_STD (Arcade core, 22 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#assault</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_STD_20261028.rbf:2026-10-28T22:26:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 22:26:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Assault, Bubble Trouble - Golly! Ghost! 2, Burning Force, Cosmo Gang the Video, Dirt Fox, Dragon Saber, Final Lap, Final Lap 2, Final Lap 3, Finest Hour, Four Trax, Golly! Ghost!, Kyuukai Douchuuki, Marvel Land, Mirai Ninja, Ordyne (kuzearcade), Phelios, Rolling Thunder 2, Super World Stadium, Super World Stadium '92, Super World Stadium '93, Valkyrie no Densetsu.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NamcoSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-NamcoS2_SZ (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#suzuka8h</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-NamcoS2_SZ_20261028.rbf:2026-10-28T22:26:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 22:26:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Suzuka 8 Hours, Suzuka 8 Hours 2.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-NamcoSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sauro (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sauro-bazset</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Sauro (Tecfri 1987).mra:2026-10-28T17:51:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 17:51:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sauro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Tecfri&lt;/p&gt;&lt;p&gt;Core: Arcade-Sauro&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Spy Hunter (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#spyhunt</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Spy Hunter.mra:2026-10-28T15:51:57+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 15:51:57 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/spyhunt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1983 / Bally&lt;/p&gt;&lt;p&gt;Core: mcr3scroll&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MCR3Scroll_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

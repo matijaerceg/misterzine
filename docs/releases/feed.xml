@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 06 Nov 2026 23:17:35 +0000</lastBuildDate>
+<lastBuildDate>Sat, 07 Nov 2026 05:15:00 +0000</lastBuildDate>
+<item>
+<title>[Updated] Gm0rk_Midway-T-Unit (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#judge-dredd-ongo</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Gm0rk_Midway-T-Unit_20261106.rbf:2026-11-07T05:15:00+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 05:15:00 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Judge Dredd (Ongo), Mortal Kombat (rev 5.0 T-Unit 03-19-93), Mortal Kombat II (Ongo), NBA Jam (Ongo), NBA Jam Tournament Edition (Ongo), NBA Jam Tournament Edition SE.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Bad Lands (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#badlands</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Badlands_20261106.rbf:2026-11-07T02:55:14+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 02:55:14 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/badlands.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Badlands&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Badlands_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Blasteroids (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#blstroid</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Blasteroids_20261106.rbf:2026-11-07T02:55:14+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 02:55:14 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/blstroid.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1987 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Blasteroids&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Blasteroids_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] S32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261106.rbf:2026-11-07T02:55:14+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 02:55:14 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Vindicators (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#vindictr</link>
@@ -870,42 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/popnanm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_popn&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Pop'n Music Mickey Tunes (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#popnmt</link>
-<guid isPermaLink="false">ppriest:_Arcade/Pop'n Music Mickey Tunes.mra:2026-11-03T23:47:04+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:47:04 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/popnmt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_popn&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] GTI Club CRT 480i (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gti-club-crt-480i</link>
-<guid isPermaLink="false">jlrh:_Arcade/GTI Club CRT 480i (FF, Konami, 1996).mra:2026-11-03T18:37:37+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 18:37:37 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gticlub.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1996 / Konami&lt;/p&gt;&lt;p&gt;Core: ffgticlubsd&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
-<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261103.rbf:2026-11-03T18:37:37+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 18:37:37 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Moto Frenzy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#motofren</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_AtariGX2/Moto Frenzy.mra:2026-11-03T01:07:29+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 01:07:29 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/motofren.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1992 / Atari Games&lt;/p&gt;&lt;p&gt;Core: atarigx2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-AtariGX2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

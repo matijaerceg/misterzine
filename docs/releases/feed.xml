@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 07 Nov 2026 09:39:56 +0000</lastBuildDate>
+<lastBuildDate>Sat, 07 Nov 2026 15:51:25 +0000</lastBuildDate>
+<item>
+<title>[New] Darius (rmCores) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#darius-rmcores</link>
+<guid isPermaLink="false">rmcores:_Arcade/_rmCores/rm Darius (World).mra:2026-11-07T15:51:25+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 15:51:25 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/darius.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: rmDarius&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-07 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Darius Extra Version (rmCores) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#dariuse</link>
+<guid isPermaLink="false">rmcores:_Arcade/_rmCores/rm Darius Extra Version (Japan).mra:2026-11-07T15:51:25+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 15:51:25 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dariuse.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1986 / Taito Corporation&lt;/p&gt;&lt;p&gt;Core: rmDarius&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-07 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Tattoo Assassins (rmCores) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tattass</link>
+<guid isPermaLink="false">rmcores:_Arcade/_rmCores/rm Tattoo Assassins (US prototype).mra:2026-11-07T15:51:25+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 15:51:25 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tattass.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1994 / Data East Pinball&lt;/p&gt;&lt;p&gt;Core: rmTattooAssassins&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-07 (source: rmcores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/rmonic79/rmcores/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Klax (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#klax</link>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ppp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_ppp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Pop'n Music 4 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#popn4</link>
-<guid isPermaLink="false">ppriest:_Arcade/Pop'n Music 4.mra:2026-11-03T23:47:04+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:47:04 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/popn4.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_popn&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Pop'n Music 5 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#popn5</link>
-<guid isPermaLink="false">ppriest:_Arcade/Pop'n Music 5.mra:2026-11-03T23:47:04+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:47:04 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/popn5.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_popn&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Pop'n Music 6 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#popn6</link>
-<guid isPermaLink="false">ppriest:_Arcade/Pop'n Music 6.mra:2026-11-03T23:47:04+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:47:04 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/popn6.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2001 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_popn&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

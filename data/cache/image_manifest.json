@@ -27224,5 +27224,41 @@
   "snap_img": "ingames/f1lap.png",
   "third_img": null,
   "third_pack": null
+ },
+ {
+  "title": "Darius (World)",
+  "setname": "darius",
+  "source": "psnaps",
+  "title_img": "titles/darius.png",
+  "snap_img": "snap/darius.png",
+  "third_img": "gameover/darius.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "rm Darius (World)",
+  "setname": "darius",
+  "source": "psnaps",
+  "title_img": "titles/darius.png",
+  "snap_img": "snap/darius.png",
+  "third_img": "gameover/darius.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "rm Darius Extra Version (Japan)",
+  "setname": "dariuse",
+  "source": "adb",
+  "title_img": "titles/dariuse.png",
+  "snap_img": "ingames/dariuse.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "rm Tattoo Assassins (US prototype)",
+  "setname": "tattass",
+  "source": "adb",
+  "title_img": "titles/tattass.png",
+  "snap_img": "ingames/tattass.png",
+  "third_img": null,
+  "third_pack": null
  }
 ]

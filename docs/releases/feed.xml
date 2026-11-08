@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 08 Nov 2026 00:15:39 +0000</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 02:43:13 +0000</lastBuildDate>
+<item>
+<title>[Updated] S32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261107.rbf:2026-11-08T02:43:13+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 02:43:13 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Lemmings (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#lemmings</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/batrider.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1998 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: Batrider&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Battle Bakraid - Unlimited Version Special Ver. (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#battle-bakraid-unlimited-version-special-ver</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/BattleBakraid_20261103.rbf:2026-11-03T23:59:08+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:59:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/battle-bakraid-unlimited-version-special-ver.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1999 / Eighting&lt;/p&gt;&lt;p&gt;Core: BattleBakraid&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

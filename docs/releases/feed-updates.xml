@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 07 Nov 2026 23:27:34 +0000</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 02:43:13 +0000</lastBuildDate>
+<item>
+<title>[Updated] S32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261107.rbf:2026-11-08T02:43:13+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 02:43:13 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Apple IIGS (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] TaitoB (Arcade core, 15 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ashura</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/TaitoB_20261005.rbf:2026-10-29T00:30:02+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 00:30:02 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Ashura Blaster, Crime City, Hit the Ice, Master of Weapon, Nastar, Puzzle Bobble, Quiz Sekai wa SHOW by shobai, Rambo III, Real Puncher, Ryu Jin, Sel Feena, Silent Dragon, Sonic Blast Man, Space Invaders DX, Violence Fight.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

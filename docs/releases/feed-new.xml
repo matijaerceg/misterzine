@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sat, 07 Nov 2026 15:51:25 +0000</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 00:15:39 +0000</lastBuildDate>
+<item>
+<title>[New] Lemmings (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#lemmings</link>
+<guid isPermaLink="false">ppriest:_Arcade/Lemmings (US prototype).mra:2026-11-08T00:15:39+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 00:15:39 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/lemmings.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Data East USA&lt;/p&gt;&lt;p&gt;Core: Lemmings&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Lemmings_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Tattoo Assassins (rmonic79) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tattoo-assassins-rmonic79</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Tattoo Assassins (US prototype).mra:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tattass.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1994 / Data East Pinball&lt;/p&gt;&lt;p&gt;Core: TattooAssassins&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TattooAssassins_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Darius (rmCores) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#darius-rmcores</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/logger.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Radar Zone (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#radar-zone-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Radar Zone.mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/radarzon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Raiders (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#raiders-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Raiders.mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/raiders.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1983 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

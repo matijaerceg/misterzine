@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 07 Nov 2026 09:39:56 +0000</lastBuildDate>
+<lastBuildDate>Sat, 07 Nov 2026 23:27:34 +0000</lastBuildDate>
+<item>
+<title>[Updated] Apple IIGS (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261108.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Macintosh IIcx (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacIIcx_20261107.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Macintosh SE/30 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261107.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TK2000 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#TK2000</link>
+<guid isPermaLink="false">distribution_mister:_Computer/TK2000_20261107.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1984 / Microdigital&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/TK2000_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Klax (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#klax</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Ashura Blaster, Crime City, Hit the Ice, Master of Weapon, Nastar, Puzzle Bobble, Quiz Sekai wa SHOW by shobai, Rambo III, Real Puncher, Ryu Jin, Sel Feena, Silent Dragon, Sonic Blast Man, Space Invaders DX, Violence Fight.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Chack'n Pop (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#chack-n-pop-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/bazset_ChacknPop_20261028.rbf:2026-10-29T00:30:02+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 00:30:02 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/chaknpop.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Taito&lt;/p&gt;&lt;p&gt;Core: bazset_ChacknPop&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sauro (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sauro-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/bazset_Sauro_20261028.rbf:2026-10-29T00:30:02+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 00:30:02 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sauro.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1987 / Tecfri&lt;/p&gt;&lt;p&gt;Core: bazset_Sauro&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ppriest_KonamiGX (Arcade core, 11 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#crzcross</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/ppriest_KonamiGX_20261028.rbf:2026-10-29T00:30:02+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 00:30:02 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Crazy Cross (Ongo), Daisu-Kiss (Ongo), Dragoon Might (Ongo), Fantastic Journey (Ongo), Lethal Enforcers II - Gun Fighters, Salamander 2 (Ongo), Sexy Parodius (Ongo), Taisen Tokkae-dama (Ongo), Tokimeki Memorial Taisen Puzzle-dama (Ongo), Twin Bee Yahhoo! (Ongo), Winning Spike (Ongo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-JalecoMS1BCD (Arcade core, 8 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#64street</link>
-<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-JalecoMS1BCD_20261028.rbf:2026-10-28T22:26:59+00:00</guid>
-<pubDate>Wed, 28 Oct 2026 22:26:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: 64th. Street: A Detective Story, Avenging Spirit, Big Striker, Chimera Beast, Cybattler, E.D.F.: Earth Defense Force (kuzearcade), Hayaoshi Quiz Ouza Ketteisen: The King Of Quiz, Peek-a-Boo!.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-28 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-JalecoMS1BCD_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,61 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 07 Nov 2026 15:51:25 +0000</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 00:15:39 +0000</lastBuildDate>
+<item>
+<title>[New] Lemmings (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#lemmings</link>
+<guid isPermaLink="false">ppriest:_Arcade/Lemmings (US prototype).mra:2026-11-08T00:15:39+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 00:15:39 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/lemmings.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1991 / Data East USA&lt;/p&gt;&lt;p&gt;Core: Lemmings&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Lemmings_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Tattoo Assassins (rmonic79) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tattoo-assassins-rmonic79</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Tattoo Assassins (US prototype).mra:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tattass.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1994 / Data East Pinball&lt;/p&gt;&lt;p&gt;Core: TattooAssassins&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TattooAssassins_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Apple IIGS (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261108.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Macintosh IIcx (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacIIcx_20261107.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Macintosh SE/30 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacSE30</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacSE30_20261107.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TK2000 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#TK2000</link>
+<guid isPermaLink="false">distribution_mister:_Computer/TK2000_20261107.rbf:2026-11-07T23:27:34+00:00</guid>
+<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1984 / Microdigital&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/TK2000_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Darius (rmCores) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#darius-rmcores</link>
@@ -852,60 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/battle-bakraid-unlimited-version-special-ver.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1999 / Eighting&lt;/p&gt;&lt;p&gt;Core: BattleBakraid&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Battle Garegga (TheJesusFish) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#battle-garegga-europe-usa-japan-asia-sat-feb-3-1996</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/BattleGaregga_20261103.rbf:2026-11-03T23:59:08+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:59:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bgaregga.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1996 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: BattleGaregga&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kingdom Grandprix (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kingdmgp</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/KingdomGrandprix_20261103.rbf:2026-11-03T23:59:08+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:59:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kingdmgp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1994 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: KingdomGrandprix&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sorcer Striker (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sstriker</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/SorcerStriker_20261103.rbf:2026-11-03T23:59:08+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:59:08 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sstriker.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Raizing&lt;/p&gt;&lt;p&gt;Core: SorcerStriker&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ParaParaDancing (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ppd</link>
-<guid isPermaLink="false">ppriest:_Arcade/ParaParaDancing.mra:2026-11-03T23:47:04+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:47:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ppd.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_ppp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ParaParaParadise v1.1 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ppp11</link>
-<guid isPermaLink="false">ppriest:_Arcade/ParaParaParadise v1.1.mra:2026-11-03T23:47:04+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:47:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ppp11.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_ppp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ParaParaParadise (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ppp</link>
-<guid isPermaLink="false">ppriest:_Arcade/ParaParaParadise.mra:2026-11-03T23:47:04+00:00</guid>
-<pubDate>Tue, 03 Nov 2026 23:47:04 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ppp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Other / 2000 / Konami&lt;/p&gt;&lt;p&gt;Core: Firebeat_ppp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-03 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-Firebeat_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

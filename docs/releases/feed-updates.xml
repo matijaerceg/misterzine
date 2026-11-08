@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sun, 08 Nov 2026 02:43:13 +0000</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 16:33:15 +0000</lastBuildDate>
+<item>
+<title>[Updated] atarisys2 (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#720</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/atarisys2_20261107.rbf:2026-11-08T16:33:15+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 16:33:15 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: 720 Degrees, APB - All Points Bulletin, Championship Sprint, Paperboy, Super Sprint.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-AtariSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] S32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2 (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261028.rbf:2026-10-29T00:30:02+00:00</guid>
-<pubDate>Thu, 29 Oct 2026 00:30:02 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-29 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

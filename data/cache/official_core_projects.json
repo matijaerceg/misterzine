@@ -1,5 +1,5 @@
 {
-  "signature": "19de7009892cc233ec31c7bd3fe07139e51820ecc83041f1d74f85f97bdf68d7",
+  "signature": "fde45680da24c580dc254bbabb218a9ecf59c96402cbbeae0dbcca16ce79383e",
   "files": {
     "_Arcade/cores/ActFancer_20260708.rbf": [
       "cbf83337687f168e4a3dbdc3a251932c",
@@ -1237,9 +1237,11 @@
         "MiSTer-devel/Arcade-Atari-system1_MiSTer"
       ]
     ],
-    "_Arcade/cores/atarisys2_20261105.rbf": [
-      "a5dad2fbaea1f707b745002a1f9fef65",
-      []
+    "_Arcade/cores/atarisys2_20261107.rbf": [
+      "e2971e73fee55baad8a4547d0b45a055",
+      [
+        "MiSTer-devel/Arcade-AtariSystem2_MiSTer"
+      ]
     ],
     "_Arcade/cores/freeze_20240526.rbf": [
       "a676fd222b1eead2e5e1c86924cfa4da",

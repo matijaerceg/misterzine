@@ -677,6 +677,20 @@
      their own outside-click + Escape (capture phase, so it wins over the Esc
      ladder) and caps the open list to the room below it. theme.js builds the
      theme buttons, mask.js wires the shadow-mask row. */
+  /* The Screenshots fold is this page's alone, so its chrome lives here: one
+     more inline fold under Theme, same row and arrow, holding checkbox rows. */
+  .sitemenu .mfold > summary { list-style: none; cursor: pointer; user-select: none; display: flex;
+                               align-items: center; font-size: .85rem; padding: .35rem .6rem;
+                               border-radius: 4px; white-space: nowrap; }
+  .sitemenu .mfold > summary::-webkit-details-marker { display: none; }
+  .sitemenu .mfold > summary::after { content: " \25BE"; color: var(--muted); margin-left: auto; padding-left: .4em; }
+  .sitemenu .mfold[open] > summary::after { content: " \25B4"; }
+  .sitemenu .mfold > summary:hover, .sitemenu .mfold[open] > summary { background: var(--hover-bg); }
+  .sitemenu .mfold .menu { display: grid; gap: 2px; padding: .2rem 0 .2rem .8rem; }
+  .sitemenu .mfold .menu label { display: flex; align-items: center; gap: .5em; padding: .3rem .5rem;
+                                 border-radius: 4px; font-size: .85rem; white-space: nowrap; cursor: pointer; }
+  .sitemenu .mfold .menu label:hover { background: var(--hover-bg); }
+  .sitemenu .mfold .menu input[type="checkbox"] { accent-color: var(--accent); cursor: pointer; margin: 0; }
   /* the cell wraps (so the batch badge can drop to a second line when the fixed
      column is too narrow), but the date value never breaks mid-string at its
      hyphens — its own .dv span carries the nowrap the cell used to. */
@@ -959,6 +973,11 @@
      underneath -- same presentation as the CORS-taint fallback */
   html[data-mask="off"] #panel .frame canvas,
   html[data-mask="off"] #panel .sysframe canvas { display: none; }
+  /* Menu > Screenshots: screenshots and flyers can each be left out of the
+     panel. Hidden, their lazy images are never fetched, so off also saves the
+     downloads; the markup stays, so switching back on needs no redraw. */
+  html[data-shots="off"] #panel .frame,
+  html[data-flyers="off"] #panel .flyer { display: none; }
   /* Mature games: Blur (Source menu) covers a mature row's screenshots until a
      click reveals that one frame. filter, not a transform: the mask canvas is
      sized from the img's box, which a scale would change. */
@@ -1252,12 +1271,20 @@
           <div class="theme" id="theme">
             <details id="themedd">
               <summary id="themesum">Theme</summary>
-              <div class="menu"><!-- theme.js prepends the theme buttons here -->
-                <hr class="msep">
-                <label class="mask" data-tip="A CRT phosphor pattern drawn over screenshots; off shows them plain."><input type="checkbox" id="maskbox" checked> Shadow mask</label>
-              </div>
+              <div class="menu"><!-- theme.js builds the theme buttons here --></div>
             </details>
           </div>
+          <!-- Screenshots fold: opens inline like Theme. The first two switches are
+               wired in this page's script (mz-shots / mz-flyers); the shadow mask
+               one is mask.js's (#maskbox), moved here from the Theme fold. -->
+          <details class="mfold" id="shotsdd">
+            <summary>Screenshots</summary>
+            <div class="menu">
+              <label data-tip="Show screenshots when you open a game."><input type="checkbox" id="shotsbox" checked> Screenshots</label>
+              <label data-tip="Show the arcade flyer when you open a game."><input type="checkbox" id="flyersbox" checked> Flyers</label>
+              <label data-tip="A CRT phosphor pattern drawn over screenshots; off shows them plain."><input type="checkbox" id="maskbox" checked> Shadow mask</label>
+            </div>
+          </details>
           <hr class="msep">
       <a href="#" id="pub-note">What's listed<span class="ext">ⓘ</span></a>
       <a href="feed.xml" id="rss-link">RSS feeds<span class="ext">ⓘ</span></a>
@@ -6478,6 +6505,46 @@ resizer.addEventListener('pointercancel', endResize);
 // the Esc ladder below), and the shared .theme .menu max-height replaces the
 // positionMenu height cap it used to borrow. Both files are linked at the end of
 // the body; the pre-paint theme guard stays inline in <head>.
+
+// Menu > Screenshots: the panel's screenshots and flyers can each be switched
+// off. Stored like the shadow mask next to them (mask.js, mz-mask): '0' = off,
+// anything else or nothing = on. CSS does the hiding (html[data-shots="off"],
+// html[data-flyers="off"]) and the panel markup never changes, so a switch
+// takes effect on the open panel at once and, like a theme pick, leaves the
+// menu open. Hardware photos on console and computer rows are not screenshots
+// and stay.
+{
+  const shotsdd = document.getElementById('shotsdd');
+  const menudd = document.getElementById('menudd'), mlist = menudd.querySelector('.mlist');
+  for (const [key, attr, id] of [['mz-shots', 'data-shots', 'shotsbox'], ['mz-flyers', 'data-flyers', 'flyersbox']]) {
+    const box = document.getElementById(id);
+    const apply = on => {
+      if (on) document.documentElement.removeAttribute(attr);
+      else document.documentElement.setAttribute(attr, 'off');
+      box.checked = on;
+    };
+    let on = true;
+    try { on = localStorage.getItem(key) !== '0'; } catch (_) {}
+    apply(on);
+    box.addEventListener('change', () => {
+      apply(box.checked);
+      try { localStorage.setItem(key, box.checked ? '1' : '0'); } catch (_) {}
+      // a shot that finished loading while hidden had no box to draw its mask into
+      if (box.checked && id === 'shotsbox') panel.querySelectorAll('.frame img').forEach(img => {
+        if (img.complete && img.naturalWidth) maskShot(img);
+      });
+    });
+  }
+  // The fold behaves as the Theme one does in theme.js: opening it re-caps the
+  // menu's list to the room below, and closing the menu folds it away again.
+  shotsdd.addEventListener('toggle', () => {
+    if (!shotsdd.open || !menudd.open) return;
+    mlist.style.maxHeight = '';
+    const room = document.documentElement.clientHeight - mlist.getBoundingClientRect().top - 8;
+    if (mlist.scrollHeight > room) mlist.style.maxHeight = room + 'px';
+  });
+  menudd.addEventListener('toggle', () => { if (!menudd.open) shotsdd.open = false; });
+}
 
 // wide screens: dock the panel with the empty state by default (no slide-in on
 // first paint). Only from 1200px up: below that the docked panel takes a third

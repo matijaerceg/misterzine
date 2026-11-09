@@ -4,6 +4,10 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Menu has a new Screenshots section under Theme with three switches: Screenshots, Flyers and Shadow mask (moved from Theme). Switch screenshots or flyers off and game details leave them out and skip the downloads.
+
+- Arcade originals such as Alien Storm, Golden Axe and Out Run use their short names again next to their PlayChoice-10, Mega-Tech and console-port versions.
+
 - Core debut groups and games now link to the project that ships their build, including Sega System 32, Aleck64 and blahm1d's cores. The tracker checks official release files and reads project links supplied by community feeds.
 
 - The MisterZine header logo now matches the page title color in every theme.

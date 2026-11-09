@@ -729,7 +729,12 @@
   #rows tr.selection-start { --selection-top: 1px; }
   #rows tr.selection-end { --selection-bottom: 1px; }
   #rows tr.selection-range td { position: relative; }
-  #rows tr.selection-range td:first-child { position: sticky; }
+  /* The overlay reaches a whole CSS px below the cell, while the cell's own rule
+     is snapped to device pixels. At a fractional scale (browser zoom on a HiDPI
+     screen, for one) the bottom edge then lands on the next row's first pixel row.
+     The other columns already paint it over that row; the title cell has to outrank
+     the next row's sticky title cell (z-index 2) or the edge disappears under it. */
+  #rows tr.selection-range td:first-child { position: sticky; z-index: 3; }
   #rows tr.selection-range td::after { content: ''; position: absolute; inset: 0 0 -1px;
     border: 0 dotted var(--accent); border-top-width: var(--selection-top); border-bottom-width: var(--selection-bottom);
     pointer-events: none; z-index: 1; }

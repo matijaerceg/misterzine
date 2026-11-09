@@ -186,10 +186,7 @@
  ],
  "patches": [
   {
-   "artifact": {
-    "patched_zip": "../capcom/translations/vhunt2/out/vhunt2_combined_english/vhunt2.zip",
-    "stock_zip": "../capcom/roms/mame0260/vhunt2.zip"
-   },
+   "artifact": {},
    "changes": [
     "Night Warriors 2 title screen, finished from the unused Western title inside the original game",
     "USA region presentation",
@@ -223,7 +220,6 @@
     "setname": "vhunt2s01"
    },
    "mra": {
-    "base": "data/mra/vhunt2.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Night Warriors 2 (USA) [English Translation].mra",
@@ -266,30 +262,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "after": "data/screenshots/vhunt2/title_english.png",
-     "before": "data/screenshots/vhunt2/title_stock.png",
-     "caption": "Title screen. The arcade-native Night Warriors 2 logo, completed from the unused Western title path in the original ROM."
-    },
-    {
-     "after": "data/screenshots/vhunt2/select_huitzil_english.png",
-     "before": "data/screenshots/vhunt2/select_phobos_stock.png",
-     "caption": "Character select. Phobos becomes Huitzil, his official Western name."
-    },
-    {
-     "caption": "Capcom's hidden English name art spelled him \"L.Rapter\". It now reads L.Raptor everywhere it appears.",
-     "single": "data/screenshots/vhunt2/raptor_select.png"
-    },
-    {
-     "caption": "Post-fight quotes in English (Anakaris shown).",
-     "single": "data/screenshots/vhunt2/quote_anakaris.png"
-    },
-    {
-     "caption": "Ending narration in English (Pyron's ending shown).",
-     "single": "data/screenshots/vhunt2/ending_pyron.png"
-    }
-   ],
    "section": "restorations",
    "set": "vhunt2",
    "slug": "vhunt2-english",
@@ -300,10 +272,7 @@
    "version": "rc3"
   },
   {
-   "artifact": {
-    "patched_zip": "../capcom/translations/vsav2/out/vsav2_english/vsav2.zip",
-    "stock_zip": "../capcom/roms/mame0260/vsav2.zip"
-   },
+   "artifact": {},
    "changes": [
     "USA region presentation",
     "Western character names on character select, route map, and fight HUD: Bulleta → Baby Bonnie Hood, Zabel → L.Raptor, Lei-Lei → Hsien-Ko, Phobos → Huitzil",
@@ -336,7 +305,6 @@
     "setname": "vsav2s04"
    },
    "mra": {
-    "base": "data/mra/vsav2.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Vampire Savior 2 (USA) [English Translation].mra",
@@ -380,34 +348,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "after": "data/screenshots/vsav2/select_lei_lei_english.png",
-     "before": "data/screenshots/vsav2/select_lei_lei_stock.png",
-     "caption": "Character select. Lei-Lei becomes Hsien-Ko."
-    },
-    {
-     "caption": "Bulleta under her Western name, Baby Bonnie Hood.",
-     "single": "data/screenshots/vsav2/select_bulleta.png"
-    },
-    {
-     "caption": "Capcom's hidden English name art spelled him \"L.Rapter\". It now reads L.Raptor everywhere it appears.",
-     "single": "data/screenshots/vsav2/raptor_select.png"
-    },
-    {
-     "caption": "Post-fight quotes in English (B.B. Hood shown).",
-     "single": "data/screenshots/vsav2/quote_bb_hood.png"
-    },
-    {
-     "after": "data/screenshots/vsav2/ending_english.png",
-     "before": "data/screenshots/vsav2/ending_stock.png",
-     "caption": "The same ending page before and after."
-    },
-    {
-     "caption": "The title art is intentionally unchanged. The official U.S. arcade release of the previous game also used Vampire Savior branding.",
-     "single": "data/screenshots/vsav2/title.png"
-    }
-   ],
    "section": "restorations",
    "set": "vsav2",
    "slug": "vsav2-english",
@@ -423,9 +363,7 @@
     "Nothing else. This is a region unlock only, and it does not translate or otherwise modify the game"
    ],
    "chd_patch": {
-    "chd": "gdl-0002.chd",
-    "patched_chd": "../capcom/arc/chd_build/jp_us_export_mask/sfz3ugd/gdl-0002.chd",
-    "stock_chd": "../capcom/arc/sfz3ugd/gdl-0002.chd"
+    "chd": "gdl-0002.chd"
    },
    "date": "2026-07-10",
    "description": [
@@ -440,20 +378,6 @@
     "MAME reports a checksum warning for the patched CHD. This is expected; the game boots and plays normally.",
     "For optical drive emulators on real hardware, the patched CHD can be unpacked to GDI with chdman extractcd.",
     "You still need the unchanged sfz3ugd.zip (security PIC) alongside the CHD."
-   ],
-   "screenshots": [
-    {
-     "after": "data/screenshots/sfz3ugd/title_usa_alpha3.png",
-     "after_label": "USA region",
-     "before": "data/screenshots/sfz3ugd/title_japan_zero3.png",
-     "before_label": "Japan region",
-     "caption": "The same patched disc on two BIOS regions. The game's own region-dependent title art shows Street Fighter Zero 3 on a Japanese machine and Street Fighter Alpha 3 on a USA machine. Note the U.S. copyright line under the American title."
-    },
-    {
-     "after": "data/screenshots/sfz3ugd/usa_bios_patched_loading.png",
-     "before": "data/screenshots/sfz3ugd/usa_bios_stock_refused.png",
-     "caption": "A USA-region NAOMI BIOS: the original Japanese GD-ROM is refused; the patched image is accepted and loads."
-    }
    ],
    "section": "restorations",
    "set": "sfz3ugd",
@@ -478,7 +402,6 @@
    "notes": [
     "This will ship as a conversion tool, not a binary patch: it works from a GD-ROM image of the arcade game you own."
    ],
-   "screenshots": [],
    "set": "sfz3ugd",
    "slug": "sfz3-upper-gdrom",
    "status": "in-development",
@@ -538,86 +461,6 @@
     "Four regional builds: USA (Alpha 2 Gold), Europe (Alpha 2 Dash), Japan (Zero 2 Dash), and an English Asia (Zero 2 Dash)",
     "4 MB builds for real hardware and stock MAME, with all of Cammy's voices, some compressed to fit, plus 8 MB builds with every sound uncompressed for HBMAME and MiSTer"
    ],
-   "comparison": {
-    "columns": [
-     "",
-     "Zero 2 Alpha (arcade)",
-     "Alpha 2 Gold",
-     "Alpha 2 EX"
-    ],
-    "heading": "Compared with Zero 2 Alpha and EX",
-    "intro": [
-     "How Gold compares with the arcade Zero 2 Alpha it builds on and with Alpha 2 EX."
-    ],
-    "rows": [
-     [
-      "Cammy",
-      "No",
-      "Two Start presses on M. Bison",
-      "Her own select cell"
-     ],
-     [
-      "Cammy as a CPU opponent in Arcade",
-      "—",
-      "No",
-      "Yes"
-     ],
-     [
-      "EX Akuma and EX Cammy",
-      "No",
-      "No",
-      "Yes"
-     ],
-     [
-      "Shin Akuma",
-      "Boss only",
-      "Five Start presses on Akuma",
-      "Two Start presses on Akuma"
-     ],
-     [
-      "Start presses for alternate forms",
-      "Up to five",
-      "Up to five",
-      "One or two"
-     ],
-     [
-      "Survival, Dramatic Battle, Akuma mode",
-      "Title-screen button codes",
-      "Title-screen button codes",
-      "Title menu in CONSOLE mode; codes in ARCADE mode"
-     ],
-     [
-      "Options page",
-      "No",
-      "No",
-      "OPTION MODE from the title menu"
-     ],
-     [
-      "Game speeds",
-      "3",
-      "3",
-      "8"
-     ],
-     [
-      "Time limit",
-      "99",
-      "99",
-      "25, 50, 75, 99 or infinity"
-     ],
-     [
-      "English story and endings",
-      "Some pages cut (Asia)",
-      "All, translated from the Japanese",
-      "All, translated from the Japanese"
-     ],
-     [
-      "Builds",
-      "Japan, Asia",
-      "USA, Europe, Japan, Asia",
-      "USA, Japan"
-     ]
-    ]
-   },
    "date": "2026-11-06",
    "description": [
     "Street Fighter Alpha 2 Gold, known as Zero 2 Dash in Japan, was the console revision of Alpha 2 that added Cammy as a playable fighter, first on PlayStation and Saturn and in final form in Capcom's 2006 PlayStation 2 anthology. It was never released on arcade hardware. This project rebuilds the anthology's edition as a real CPS-2 game.",
@@ -633,14 +476,6 @@
     "The 8 MB builds hold more QSound audio than the original CPS-2 hardware supports, so they run only on HBMAME and MiSTer.",
     "This is a fan reconstruction, unaffiliated with Capcom. The sets are built from discs and roms you already own, and the kit ships no code or data from the anthology or the arcade game, with one exception: Cammy's stage music uses about 4 KB of her theme's score from X-Men vs. Street Fighter (Capcom, 1996), which the kit carries."
    ],
-   "reconstruction": {
-    "kit_command": "python3 apply.py --iso \"Street Fighter Alpha Anthology.iso\" \\\n                 --romset sfz2al.zip --region us --out-dir out",
-    "kit_dir": "tools/sfa2gold_builder",
-    "requires": [
-     "your own PlayStation 2 anthology disc image: Street Fighter Alpha Anthology, or Street Fighter Zero — Fighter's Generation for the Japan set",
-     "your own arcade Street Fighter Zero 2 Alpha romset: sfz2al, plus sfz2alj for the Japan set"
-    ]
-   },
    "related": [
     {
      "label": "Street Fighter Zero 2 Alpha",
@@ -744,35 +579,17 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "Cammy joins the roster on the character-select screen.",
-     "single": "data/screenshots/sfa2-gold/cammy_select.png"
-    },
-    {
-     "caption": "Cammy in action, landing a jumping kick on Guy.",
-     "single": "data/screenshots/sfa2-gold/cammy_fight.png"
-    },
-    {
-     "caption": "Shin Akuma is selectable too: press Start five times on Akuma.",
-     "single": "data/screenshots/sfa2-gold/shin_akuma_select.png"
-    }
-   ],
    "screenshots_heading": "New to the roster",
    "section": "restorations",
    "slug": "sfa2-gold",
    "status": "release-candidate",
    "subtitle": "Arcade backport",
    "summary": "Capcom's 2006 PlayStation 2 anthology carried the final revision of Alpha 2 Gold, the console edition of Alpha 2 that brought Cammy into the roster. It was never released on arcade hardware. This rebuilds it as a real CPS-2 game, in four regional builds, for emulators, MiSTer, and real hardware.",
-   "thumbnail_build": "us",
    "title": "Street Fighter Alpha 2 Gold",
    "version": "rc8"
   },
   {
-   "artifact": {
-    "patched_zip": "../capcom/backports/sfa2gold/out/english_restoration/sfz2al.zip",
-    "stock_zip": "../capcom/roms/mame0260/sfz2al.zip"
-   },
+   "artifact": {},
    "changes": [
     "Every story page from the Japanese game, in the Japanese order, including the scenes the English script cut short",
     "Evil Ryu's own ending, with his narration, instead of Ryu's",
@@ -789,80 +606,6 @@
     "Computer opponents and two-player damage as in the Japanese version"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "Japan",
-     "Asia (English)",
-     "English Restoration"
-    ],
-    "heading": "Compared with the arcade versions",
-    "intro": [
-     "How the English Restoration compares with the Japanese and Asian versions."
-    ],
-    "rows": [
-     [
-      "Language",
-      "Japanese",
-      "English",
-      "English"
-     ],
-     [
-      "Story and ending pages",
-      "All",
-      "Some cut",
-      "All"
-     ],
-     [
-      "Evil Ryu's ending",
-      "His own",
-      "Ryu's",
-      "His own"
-     ],
-     [
-      "Evil Ryu's scene with Akuma",
-      "Yes",
-      "Cut",
-      "Yes"
-     ],
-     [
-      "Win quotes",
-      "452, by opponent and health",
-      "Four per fighter, at random",
-      "452, by opponent and health"
-     ],
-     [
-      "Blood",
-      "Red",
-      "White",
-      "Red"
-     ],
-     [
-      "Birdie's third victory pose",
-      "Yes",
-      "Swapped",
-      "Yes"
-     ],
-     [
-      "Next-stage place names",
-      "Yes",
-      "Country only",
-      "Yes, in English"
-     ],
-     [
-      "Pick your win quote",
-      "Yes",
-      "No",
-      "Yes"
-     ],
-     [
-      "Computer opponents and two-player damage",
-      "Japanese",
-      "Export",
-      "Japanese"
-     ]
-    ]
-   },
    "date": "2026-10-11",
    "description": [
     "Street Fighter Zero 2 Alpha is the updated Alpha 2, and its Asian version plays in English. But that English script was a shortened one. Story scenes lost pages, Evil Ryu borrowed Ryu's ending, and each fighter picked from four random win quotes instead of the hundreds the Japanese game has.",
@@ -890,7 +633,6 @@
     "setname": "sfz2alr"
    },
    "mra": {
-    "base": "data/mra/sfz2al.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Street Fighter Zero 2 Alpha (Asia) [English Restoration].mra",
@@ -938,35 +680,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "Evil Ryu's own ending, back in English.",
-     "single": "data/screenshots/sfz2al-restoration/ending_evil_ryu.png"
-    },
-    {
-     "caption": "Ryu faces Akuma, in the scene the English script cut.",
-     "single": "data/screenshots/sfz2al-restoration/story_ryu_akuma.png"
-    },
-    {
-     "caption": "Evil Ryu has his own win quotes, like every fighter in the Japanese game.",
-     "single": "data/screenshots/sfz2al-restoration/quote_evil_ryu.png"
-    },
-    {
-     "caption": "All 452 Japanese win quotes, in English, picked by who you beat and how you did.",
-     "single": "data/screenshots/sfz2al-restoration/quote_ryu.png"
-    },
-    {
-     "after": "data/screenshots/sfz2al-restoration/blood_restoration.png",
-     "after_label": "English Restoration",
-     "before": "data/screenshots/sfz2al-restoration/blood_stock.png",
-     "before_label": "Asian version",
-     "caption": "Red blood on hits, as in Japan."
-    },
-    {
-     "caption": "The Manual guard panel now tells you what it means.",
-     "single": "data/screenshots/sfz2al-restoration/select_manual.png"
-    }
-   ],
    "section": "restorations",
    "set": "sfz2al",
    "slug": "sfz2al-restoration",
@@ -999,39 +712,6 @@
     "Runs in HBMAME and on MiSTer with jtcps1 or the included CPS+ core. Stock MAME is not supported.",
     "The cutscene art and audio derive from Capcom's Final Fight CD. This is an unofficial fan project, unaffiliated with Capcom or Sega."
    ],
-   "reconstruction": {
-    "kit_command": "python3 apply.py --disc-jp \"Final Fight CD (JP).cue\" \\\n                 --disc-us \"Final Fight CD (USA).cue\" \\\n                 --romset /path/to/roms --out-dir out",
-    "kit_dir": "tools/ffightcd_builder",
-    "kit_include": [
-     "apply.py",
-     "README.txt",
-     "rom_sources.py",
-     "rom_inputs.json",
-     "ffcd/*.py",
-     "build/*.py",
-     "data/ending/*",
-     "data/captions/*",
-     "data/audio/*",
-     "data/stage0/*/retime_patches.mra.xml",
-     "assets/native_ex/*",
-     "assets/arcade_ex_alternative/*",
-     "control/*.key",
-     "mras/*.mra",
-     "cpsplus_audio.py",
-     "outputs.json",
-     "kit.json",
-     "TOOLS.md",
-     "sound/**/*.py",
-     "sound/manifests/*",
-     "sound/tools/ffmpeg_helpers.json",
-     "core/*"
-    ],
-    "requires": [
-     "your own complete Final Fight CD disc rip for each region you build, including its cue and audio tracks: USA for ffightus01, Japan for ffightjs01",
-     "your own canonical arcade Final Fight ROMs: ffight, ffightu and ffightj (MAME 0.260-era, ZIP or 7z)",
-     "Python on a supported system; guided setup prepares required numerical packages and media helpers privately"
-    ]
-   },
    "redirect_from": [
     "final-fight-cd"
    ],
@@ -1083,32 +763,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "The Final Fight EX title, with the EX settled beside FIGHT.",
-     "single": "data/screenshots/final-fight-ex/title_ex_usa.png"
-    },
-    {
-     "caption": "The opening cutscene sets the scene in Metro City, with the added English narration rendered natively on CPS-1.",
-     "single": "data/screenshots/final-fight-ex/scene_map.png"
-    },
-    {
-     "caption": "Damnd's sketch of his victims, the knife driven in, over the opening's English caption.",
-     "single": "data/screenshots/final-fight-ex/scene_sketch.png"
-    },
-    {
-     "caption": "Haggar takes the kidnappers' call, their threat shown as an English caption.",
-     "single": "data/screenshots/final-fight-ex/scene_phone.png"
-    },
-    {
-     "caption": "Cody and Guy resolve to take on Mad Gear, English dialogue captions and all.",
-     "single": "data/screenshots/final-fight-ex/scene_codyguy.png"
-    },
-    {
-     "caption": "The ending's new scene: Haggar and Jessica's reunion, redrawn from the Sega CD, with the English dialogue as a caption.",
-     "single": "data/screenshots/final-fight-ex/scene_ending.png"
-    }
-   ],
    "section": "enhanced",
    "set": "—",
    "slug": "final-fight-ex",
@@ -1119,10 +773,7 @@
    "version": "rc4"
   },
   {
-   "artifact": {
-    "patched_zip": "../capcom/translations/ssf2x/out/release/ssf2tgmc.zip",
-    "stock_zip": "../capcom/roms/mame0260/ssf2xj.zip"
-   },
+   "artifact": {},
    "changes": [
     "Japan's game, exactly as it plays in Japan",
     "The Grand Master Challenge title, and a US region",
@@ -1133,80 +784,6 @@
     "Akuma's intro dialogue, cut from the export game"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "US Super Turbo",
-     "Japan",
-     "Grand Master Challenge"
-    ],
-    "heading": "Compared with the US Super Turbo",
-    "intro": [
-     "How the three compare."
-    ],
-    "rows": [
-     [
-      "Gameplay",
-      "Export version",
-      "Japanese version",
-      "Japanese version"
-     ],
-     [
-      "Language",
-      "English",
-      "Japanese",
-      "English"
-     ],
-     [
-      "Title",
-      "Super Street Fighter II Turbo",
-      "Super Street Fighter II X: Grand Master Challenge",
-      "Super Street Fighter II Turbo: Grand Master Challenge"
-     ],
-     [
-      "Character names",
-      "Balrog, Vega, M. Bison, Akuma",
-      "M. Bison, Balrog, Vega, Gouki",
-      "Balrog, Vega, M. Bison, Akuma"
-     ],
-     [
-      "Win quotes",
-      "20",
-      "136",
-      "136"
-     ],
-     [
-      "Continue screen tips",
-      "None",
-      "Yes",
-      "Yes"
-     ],
-     [
-      "Endings",
-      "Shortened",
-      "Full",
-      "Full"
-     ],
-     [
-      "Akuma's ending",
-      "Blank",
-      "Yes",
-      "Yes"
-     ],
-     [
-      "Akuma's intro dialogue",
-      "Cut",
-      "Yes",
-      "Yes"
-     ],
-     [
-      "Free Play",
-      "Yes",
-      "No",
-      "Yes"
-     ]
-    ]
-   },
    "date": "2026-10-25",
    "description": [
     "Super Turbo came in two versions. Japan got Super Street Fighter II X, the one competitive players swear by. The rest of the world got a slightly different game: it plays differently, the continue screen is bare, most of the win quotes are gone, the endings are shorter, and Akuma's story is missing. Japan's version, of course, was in Japanese.",
@@ -1240,7 +817,6 @@
    },
    "mister_hbmame": true,
    "mra": {
-    "base": "data/mra/ssf2xj.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Super Street Fighter II Turbo Grand Master Challenge (USA) [English Restoration].mra",
@@ -1307,41 +883,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "Super Turbo, Grand Master Challenge: Japan's version of the game, under the US name.",
-     "single": "data/screenshots/ssf2t-gmc/title_gmc.png"
-    },
-    {
-     "after": "data/screenshots/ssf2t-gmc/title_jp.png",
-     "after_label": "Japanese Super Turbo X",
-     "before": "data/screenshots/ssf2t-gmc/title_usa.png",
-     "before_label": "US Super Turbo",
-     "caption": "Where it comes from. The US version on the left, the Japanese version on the right."
-    },
-    {
-     "after": "data/screenshots/ssf2t-gmc/continue_gmc.png",
-     "after_label": "Grand Master Challenge",
-     "before": "data/screenshots/ssf2t-gmc/continue_usa.png",
-     "before_label": "US Super Turbo",
-     "caption": "Lost a round? The US game just counts down. Japan's game gives you a tip, now in English."
-    },
-    {
-     "after": "data/screenshots/ssf2t-gmc/quote_gmc.png",
-     "after_label": "Grand Master Challenge",
-     "before": "data/screenshots/ssf2t-gmc/quote_usa.png",
-     "before_label": "US Super Turbo",
-     "caption": "Every win quote from the Japanese game, in English. The US game only had twenty short ones."
-    },
-    {
-     "caption": "Akuma's intro dialogue, cut from the export game, back in English.",
-     "single": "data/screenshots/ssf2t-gmc/akuma_dialogue.png"
-    },
-    {
-     "caption": "The endings play out as they do in Japan: Jane and Amy arrive in Guile's ending, a scene the US game skips.",
-     "single": "data/screenshots/ssf2t-gmc/ending_guile_jane.png"
-    }
-   ],
    "section": "restorations",
    "set": "ssf2xj",
    "slug": "ssf2t-gmc",
@@ -1353,7 +894,6 @@
   },
   {
    "artifact": {
-    "stock_zip": "../capcom/roms/mame0260/ssf2xj.zip",
     "variants": [
      {
       "fbneo": {
@@ -1415,13 +955,11 @@
       "key": "usa",
       "label": "USA (English)",
       "mra": {
-       "base": "data/mra/ssf2-ex-usa.mra",
        "filename": "Super Street Fighter II EX (USA).mra",
        "name": "Super Street Fighter II EX (USA)",
        "region": "USA",
        "setname": "ssf2tuc"
-      },
-      "patched_zip": "../capcom/translations/ssf2x/out/enhanced/us/ssf2tuc.zip"
+      }
      },
      {
       "fbneo": {
@@ -1483,14 +1021,12 @@
       "key": "japan",
       "label": "Japan (Japanese)",
       "mra": {
-       "base": "data/mra/ssf2-ex-japan.mra",
        "filename": "Super Street Fighter II EX (Japan).mra",
        "name": "Super Street Fighter II EX (Japan)",
        "region": "Japan",
        "setname": "ssf2xuc",
        "subdir": "_Japan"
-      },
-      "patched_zip": "../capcom/translations/ssf2x/out/enhanced/jp/ssf2xuc.zip"
+      }
      }
     ]
    },
@@ -1516,92 +1052,6 @@
     "The existing fighters play exactly as in Japan's Super Turbo"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "Japan",
-     "Grand Master Challenge",
-     "EX"
-    ],
-    "heading": "Compared with Super Turbo",
-    "intro": [
-     "How EX compares with Japan's Super Turbo and with Grand Master Challenge."
-    ],
-    "rows": [
-     [
-      "Gameplay",
-      "Japanese version",
-      "Japanese version",
-      "Japanese version"
-     ],
-     [
-      "Game modes",
-      "Arcade",
-      "Arcade",
-      "Arcade, Versus and Training"
-     ],
-     [
-      "Pause",
-      "No",
-      "No",
-      "Coin in Console mode"
-     ],
-     [
-      "Language",
-      "Japanese",
-      "English",
-      "English (USA build) or Japanese (Japan build)"
-     ],
-     [
-      "Artwork",
-      "Original",
-      "Original",
-      "30th Anniversary flag, signs and Guile stage by default, Ultra Street Fighter II stages, or Original"
-     ],
-     [
-      "Shin Akuma",
-      "Hidden boss",
-      "Hidden boss",
-      "Playable from the start"
-     ],
-     [
-      "Ten Akuma",
-      "No",
-      "No",
-      "Playable, with the Raging Demon"
-     ],
-     [
-      "Bonus stages",
-      "No",
-      "No",
-      "Car, barrels, oil drums"
-     ],
-     [
-      "Tournament Battle",
-      "No",
-      "No",
-      "Yes, with the link adapter"
-     ],
-     [
-      "Colors per fighter",
-      "8",
-      "8",
-      "10"
-     ],
-     [
-      "Free Play",
-      "No",
-      "Yes",
-      "Yes"
-     ],
-     [
-      "Runs in stock MAME",
-      "Yes",
-      "Yes",
-      "Yes"
-     ]
-    ]
-   },
    "date": "2026-11-03",
    "description": [
     "Super Turbo is the version competitive players swear by, but it left things behind. The bonus stages from Super Street Fighter II were gone. Shin Akuma was a hidden boss you had to earn, and Ten Akuma only turned up years later at home. Tournament Battle, the eight-player linked-cabinet mode, stayed with the earlier Super Street Fighter II.",
@@ -1616,7 +1066,6 @@
    "hardware": "Capcom CPS-2",
    "mister_hbmame": true,
    "mra": {
-    "base": "data/mra/ssf2-ex-usa.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "mraauthor": "jotego,strygo",
@@ -1785,47 +1234,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "Console mode opens on ARCADE. USA build.",
-     "single": "data/screenshots/ssf2-ex/title_usa.png"
-    },
-    {
-     "caption": "The Japan build keeps the big X.",
-     "single": "data/screenshots/ssf2-ex/title_japan.png"
-    },
-    {
-     "caption": "Akuma has his own cell on the select screen, with a random-select roulette opposite him.",
-     "single": "data/screenshots/ssf2-ex/select_akuma.png"
-    },
-    {
-     "caption": "Ten Akuma's Raging Demon finish, with the 天 as in the Dreamcast version.",
-     "single": "data/screenshots/ssf2-ex/ten_finish.png"
-    },
-    {
-     "after": "data/screenshots/ssf2-ex/portrait_fight_ryu.png",
-     "after_label": "In the fight",
-     "before": "data/screenshots/ssf2-ex/portrait_vs_ryu.png",
-     "before_label": "VS screen",
-     "caption": "Portraits follow the color you picked, including the two new ones. Ryu is shown in his tenth color."
-    },
-    {
-     "caption": "The car is back, along with the barrels and the oil drums.",
-     "single": "data/screenshots/ssf2-ex/bonus_car.png"
-    },
-    {
-     "caption": "Choose a computer opponent in Training.",
-     "single": "data/screenshots/ssf2-ex/training_computer.png"
-    },
-    {
-     "caption": "The oil drums, after nine fights.",
-     "single": "data/screenshots/ssf2-ex/bonus_oil.png"
-    },
-    {
-     "caption": "Link cabinets and the title turns into The Tournament Battle.",
-     "single": "data/screenshots/ssf2-ex/title_tournament.png"
-    }
-   ],
    "section": "enhanced",
    "set": "ssf2xj",
    "slug": "ssf2-ex",
@@ -1837,7 +1245,6 @@
   },
   {
    "artifact": {
-    "stock_zip": "../capcom/roms/mame0260/mshvsfj.zip",
     "variants": [
      {
       "hbmame": {
@@ -1857,8 +1264,7 @@
        "name": "Marvel Super Heroes Vs. Street Fighter (USA) [English Restoration]",
        "region": "USA",
        "setname": "mshvsfru"
-      },
-      "patched_zip": "../capcom/backports/mshvsf/out/regional_restoration/hbmame/mshvsfru.zip"
+      }
      },
      {
       "hbmame": {
@@ -1879,8 +1285,7 @@
        "region": "Japan",
        "setname": "mshvsfrj",
        "subdir": "_Japan"
-      },
-      "patched_zip": "../capcom/backports/mshvsf/out/regional_restoration/hbmame/mshvsfrj.zip"
+      }
      }
     ]
    },
@@ -1894,105 +1299,6 @@
     "Title, codes, team rules, bosses and gameplay untouched"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "Japan",
-     "USA",
-     "English Restoration",
-     "EX"
-    ],
-    "heading": "Compared with the arcade versions",
-    "intro": [
-     "How the English Restoration compares with the Japanese and US versions, and with EX."
-    ],
-    "rows": [
-     [
-      "Language",
-      "Japanese",
-      "English",
-      "English",
-      "English"
-     ],
-     [
-      "Norimaro",
-      "Yes",
-      "No",
-      "Yes",
-      "Yes"
-     ],
-     [
-      "Norimaro's ending",
-      "His own",
-      "None",
-      "His own",
-      "His own"
-     ],
-     [
-      "Mech-Zangief, Shadow, Dark Sakura endings",
-      "Their own",
-      "Generic",
-      "Their own",
-      "Their own"
-     ],
-     [
-      "Win quotes per fighter",
-      "16",
-      "8",
-      "16, translated from the Japanese",
-      "16, translated from the Japanese"
-     ],
-     [
-      "Secret fighter's name on the select screen",
-      "Base fighter's",
-      "Base fighter's",
-      "Base fighter's",
-      "Their own"
-     ],
-     [
-      "Hidden characters",
-      "Codes",
-      "Codes",
-      "Codes",
-      "Two-second hold, or codes"
-     ],
-     [
-      "Cyber-Akuma and Apocalypse",
-      "Boss only",
-      "Boss only",
-      "Boss only",
-      "Playable"
-     ],
-     [
-      "Same fighter twice",
-      "No",
-      "No",
-      "No",
-      "Yes"
-     ],
-     [
-      "Colors per fighter",
-      "2",
-      "2",
-      "2",
-      "4"
-     ],
-     [
-      "Game speeds",
-      "3",
-      "3",
-      "3",
-      "8"
-     ],
-     [
-      "Gameplay",
-      "Original",
-      "Original",
-      "Original",
-      "Original"
-     ]
-    ]
-   },
    "date": "2026-09-17",
    "description": [
     "Marvel Super Heroes vs. Street Fighter wasn't the same game everywhere. The Japanese version has Norimaro on the select screen with his own ending, real endings for Mech-Zangief, Shadow and Dark Sakura, and sixteen win quotes per fighter. The US version dropped Norimaro entirely, gave the secret fighters a generic ending, and cut the win quotes to eight.",
@@ -2005,7 +1311,6 @@
    "game": "Marvel Super Heroes vs. Street Fighter (Japan 970707)",
    "hardware": "Capcom CPS-2",
    "mra": {
-    "base": "data/mra/mshvsfj.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "mraauthor": "jotego,strygo",
@@ -2031,27 +1336,6 @@
      "url": "https://rq87.flyingomelette.com/RQ/Marvel/MSHSF/nor.html"
     }
    ],
-   "screenshots": [
-    {
-     "after": "data/screenshots/mshvsf-restoration/select_restoration_usa.png",
-     "after_label": "English Restoration",
-     "before": "data/screenshots/mshvsf-restoration/select_stock_usa.png",
-     "before_label": "US version",
-     "caption": "The US version puts the game's logo where Norimaro should be. He's back."
-    },
-    {
-     "caption": "Norimaro's own ending, in English.",
-     "single": "data/screenshots/mshvsf-restoration/ending_norimaro_usa.png"
-    },
-    {
-     "caption": "Shadow gets his real ending, not the generic one.",
-     "single": "data/screenshots/mshvsf-restoration/ending_shadow_usa.png"
-    },
-    {
-     "caption": "Every standard ending is translated fresh from the Japanese.",
-     "single": "data/screenshots/mshvsf-restoration/ending_ryu_translated.png"
-    }
-   ],
    "section": "restorations",
    "set": "mshvsfj",
    "slug": "mshvsf-restoration",
@@ -2063,7 +1347,6 @@
   },
   {
    "artifact": {
-    "stock_zip": "../capcom/roms/mame0260/mshvsfj.zip",
     "variants": [
      {
       "hbmame": {
@@ -2087,13 +1370,11 @@
       "key": "usa",
       "label": "USA",
       "mra": {
-       "base": "data/mra/mshvsf-ex-usa.mra",
        "filename": "Marvel Super Heroes Vs. Street Fighter EX (USA).mra",
        "name": "Marvel Super Heroes Vs. Street Fighter EX (USA)",
        "region": "USA",
        "setname": "mshvsfex"
-      },
-      "patched_zip": "../capcom/backports/mshvsf/out/ex_edition/hbmame/mshvsfex.zip"
+      }
      },
      {
       "hbmame": {
@@ -2117,14 +1398,12 @@
       "key": "japan",
       "label": "Japan",
       "mra": {
-       "base": "data/mra/mshvsf-ex-japan.mra",
        "filename": "Marvel Super Heroes Vs. Street Fighter EX (Japan).mra",
        "name": "Marvel Super Heroes Vs. Street Fighter EX (Japan)",
        "region": "Japan",
        "setname": "mshvsfej",
        "subdir": "_Japan"
-      },
-      "patched_zip": "../capcom/backports/mshvsf/out/ex_edition/hbmame/mshvsfej.zip"
+      }
      }
     ]
    },
@@ -2150,104 +1429,6 @@
     "The other fighters retain their original moves, damage, hitboxes and computer behavior"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "Japan",
-     "USA",
-     "EX"
-    ],
-    "heading": "Compared with the original",
-    "intro": [
-     "How EX compares with the original Japanese and US releases."
-    ],
-    "rows": [
-     [
-      "Norimaro",
-      "Yes",
-      "No",
-      "Yes"
-     ],
-     [
-      "Norimaro's ending",
-      "His own",
-      "None",
-      "His own"
-     ],
-     [
-      "Mech-Zangief, Shadow, Dark Sakura endings",
-      "Yes, Japanese",
-      "Generic",
-      "Yes, in both languages"
-     ],
-     [
-      "English win quotes per fighter",
-      "None",
-      "8",
-      "16, translated from the Japanese"
-     ],
-     [
-      "Hidden characters",
-      "Codes",
-      "Codes",
-      "Two-second hold, or codes"
-     ],
-     [
-      "Cyber-Akuma",
-      "Boss only",
-      "Boss only",
-      "Playable, on the select screen"
-     ],
-     [
-      "Apocalypse",
-      "Boss only",
-      "Boss only",
-      "Playable, on the select screen"
-     ],
-     [
-      "Versus and Training modes",
-      "No",
-      "No",
-      "Yes, in Console mode"
-     ],
-     [
-      "Same fighter twice",
-      "No",
-      "No",
-      "Yes"
-     ],
-     [
-      "Colors per fighter",
-      "2",
-      "2",
-      "4"
-     ],
-     [
-      "HUD names for U.S. Agent, Mephisto, Shadow",
-      "Blank",
-      "Blank",
-      "Yes"
-     ],
-     [
-      "Game speeds",
-      "3",
-      "3",
-      "8"
-     ],
-     [
-      "Free Play",
-      "Yes",
-      "Some regions",
-      "Yes"
-     ],
-     [
-      "Gameplay",
-      "Original",
-      "Original",
-      "Original, plus Norimaro’s restored moves"
-     ]
-    ]
-   },
    "date": "2026-11-07",
    "description": [
     "Marvel Super Heroes vs. Street Fighter kept a lot from you. Outside Japan there was no Norimaro. Nowhere could you play as Cyber-Akuma or Apocalypse, or put the same fighter on a team twice. The console ports later added extra colors and more speeds, but only at home.",
@@ -2259,7 +1440,6 @@
    "game": "Marvel Super Heroes vs. Street Fighter (Japan 970707)",
    "hardware": "Capcom CPS-2",
    "mra": {
-    "base": "data/mra/mshvsf-ex-usa.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "mraauthor": "jotego,strygo",
@@ -2354,39 +1534,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "The EX title screen.",
-     "single": "data/screenshots/mshvsf-ex/title_ex_usa.png"
-    },
-    {
-     "caption": "Norimaro is now selectable.",
-     "single": "data/screenshots/mshvsf-ex/select_usa.png"
-    },
-    {
-     "after": "data/screenshots/mshvsf-ex/reveal_after.png",
-     "after_label": "After a two-second Start hold",
-     "before": "data/screenshots/mshvsf-ex/reveal_before.png",
-     "before_label": "Cursor on Zangief",
-     "caption": "Hold Start for two seconds and the hidden version appears before you pick."
-    },
-    {
-     "caption": "Cyber-Akuma and Apocalypse have their own spots on the select screen.",
-     "single": "data/screenshots/mshvsf-ex/cyber_akuma_select_usa.png"
-    },
-    {
-     "caption": "Console mode's title menu.",
-     "single": "data/screenshots/mshvsf-ex/console_title_usa.png"
-    },
-    {
-     "caption": "Versus setup: a friend or the computer on either side, and the stage.",
-     "single": "data/screenshots/mshvsf-ex/console_versus_usa.png"
-    },
-    {
-     "caption": "Console options, including the time limit.",
-     "single": "data/screenshots/mshvsf-ex/console_options_usa.png"
-    }
-   ],
    "section": "enhanced",
    "set": "mshvsfj",
    "slug": "mshvsf-ex",
@@ -2397,10 +1544,7 @@
    "version": "rc6"
   },
   {
-   "artifact": {
-    "patched_zip": "../capcom/backports/vsav/out/regional_restoration/hbmame/vsavru.zip",
-    "stock_zip": "../capcom/roms/mame0260/vsavj.zip"
-   },
+   "artifact": {},
    "changes": [
     "All 241 win quotes from the Japanese game, in English, including the fourteen the US version dropped",
     "Every ending page from the Japanese game, in English, including the 47 the US version dropped, with Japan's page timing",
@@ -2412,86 +1556,6 @@
     "Lord Raptor's name spelled right"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "Japan",
-     "USA",
-     "English Restoration"
-    ],
-    "heading": "Compared with the arcade versions",
-    "intro": [
-     "How the English Restoration compares with the Japanese and US versions."
-    ],
-    "rows": [
-     [
-      "Language",
-      "Japanese",
-      "English",
-      "English"
-     ],
-     [
-      "Win quotes",
-      "241",
-      "227",
-      "241, translated from the Japanese"
-     ],
-     [
-      "Ending pages",
-      "All",
-      "47 dropped",
-      "All, translated from the Japanese"
-     ],
-     [
-      "Hit blood out of the box",
-      "Blood",
-      "Sweat",
-      "Blood"
-     ],
-     [
-      "Jedah's blood",
-      "Red",
-      "Purple",
-      "Red"
-     ],
-     [
-      "Forever Torment's blood",
-      "Red",
-      "Green",
-      "Red"
-     ],
-     [
-      "Lord Raptor's bite-throw spray",
-      "Yes",
-      "No",
-      "Yes"
-     ],
-     [
-      "Auto guard at the select screen",
-      "On",
-      "Off until the operator enables it",
-      "On"
-     ],
-     [
-      "Damage values",
-      "Japan's",
-      "Higher in places",
-      "Japan's"
-     ],
-     [
-      "Computer difficulty",
-      "Japan's",
-      "Export's",
-      "Japan's"
-     ],
-     [
-      "Character names",
-      "Japanese",
-      "Western",
-      "Western"
-     ]
-    ]
-   },
    "date": "2026-10-11",
    "description": [
     "Vampire Savior wasn't the same game everywhere. The export versions recolored Jedah's blood purple and Forever Torment's green, cut a few gory touches entirely, and defaulted to sweat instead of blood. Their English script dropped fourteen win quotes and 47 ending pages. Even the damage values differ: in places the export versions hit a little harder.",
@@ -2517,7 +1581,6 @@
     "setname": "vsavru"
    },
    "mra": {
-    "base": "data/mra/vsavj.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Vampire Savior The Lord of Vampire (USA) [English Restoration].mra",
@@ -2564,37 +1627,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "after": "data/screenshots/vsav-restoration/blood_restoration_usa.png",
-     "after_label": "English Restoration",
-     "before": "data/screenshots/vsav-restoration/blood_stock_usa.png",
-     "before_label": "US version",
-     "caption": "Forever Torment's blood is green in the US version. It's red again, as in Japan."
-    },
-    {
-     "caption": "Hsien-Ko's ending, with the seven pages the US version dropped back in.",
-     "single": "data/screenshots/vsav-restoration/ending_hsienko_usa.png"
-    },
-    {
-     "caption": "One of the win quotes the US version dropped, in English.",
-     "single": "data/screenshots/vsav-restoration/quote_demitri_usa.png"
-    },
-    {
-     "after": "data/screenshots/vsav-restoration/mode_select_restoration_usa.png",
-     "after_label": "English Restoration",
-     "before": "data/screenshots/vsav-restoration/mode_select_stock_usa.png",
-     "before_label": "US version",
-     "caption": "Auto guard is there from the start, as on a Japanese cabinet. The US version hides it until the operator turns it on."
-    },
-    {
-     "after": "data/screenshots/vsav-restoration/select_raptor_restoration_usa.png",
-     "after_label": "English Restoration",
-     "before": "data/screenshots/vsav-restoration/select_raptor_stock_usa.png",
-     "before_label": "US version",
-     "caption": "L.Rapter becomes L.Raptor."
-    }
-   ],
    "section": "restorations",
    "set": "vsavj",
    "slug": "vsav-restoration",
@@ -2612,9 +1644,7 @@
       "sha256": "524a25bcd153be24594d37c0dbd334fe4f384f77da73c2058dc60fc1f581cf18",
       "size": 24576
      }
-    ],
-    "patched_zip": "../capcom/backports/dstlk/out/restoration/vampj.zip",
-    "stock_zip": "../capcom/roms/mame0260/vampj.zip"
+    ]
    },
    "changes": [
     "Japanese win-quote pools in English, with the Japanese result-panel border",
@@ -2666,10 +1696,6 @@
     "setname": "vamprest"
    },
    "mra": {
-    "auxiliary_zips": [
-     "../capcom/roms/mame0260/qsound.zip"
-    ],
-    "base": "data/mra/vampj.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Darkstalkers The Night Warriors (USA) [English Restoration].mra",
@@ -2703,20 +1729,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "Japan's win quotes are back, in English, in the bordered result panel.",
-     "single": "data/screenshots/dstlk-restoration/quote_morrigan.png"
-    },
-    {
-     "caption": "Every fighter draws from a pool of quotes again, with the Japanese hearts.",
-     "single": "data/screenshots/dstlk-restoration/quote_felicia.png"
-    },
-    {
-     "caption": "After a loss, the continue screen offers one of 85 tips, here Morrigan's Vector Drain.",
-     "single": "data/screenshots/dstlk-restoration/advice_morrigan.png"
-    }
-   ],
    "section": "restorations",
    "set": "vampj",
    "slug": "dstlk-restoration",
@@ -2727,10 +1739,7 @@
    "version": "rc1"
   },
   {
-   "artifact": {
-    "patched_zip": "../capcom/backports/nwarr/out/restoration/vhuntj.zip",
-    "stock_zip": "../capcom/roms/mame0260/vhuntj.zip"
-   },
+   "artifact": {},
    "changes": [
     "All 14 epilogues after the endings, in English; every export version skipped them",
     "The 112 Japanese ending pages in English, with the Japanese scenes and pacing",
@@ -2780,7 +1789,6 @@
     "setname": "nwarrru"
    },
    "mra": {
-    "base": "data/mra/vhuntj.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Night Warriors Darkstalkers' Revenge (USA) [English Restoration].mra",
@@ -2822,20 +1830,6 @@
       "First public release."
      ],
      "version": "rc1"
-    }
-   ],
-   "screenshots": [
-    {
-     "caption": "Morrigan's epilogue, one of the 14 that every export version skipped.",
-     "single": "data/screenshots/nwarr-restoration/epilogue_morrigan.png"
-    },
-    {
-     "caption": "Japan's win quotes are back, in English.",
-     "single": "data/screenshots/nwarr-restoration/quote_morrigan.png"
-    },
-    {
-     "caption": "Every fighter draws from the full Japanese pool again, Donovan included.",
-     "single": "data/screenshots/nwarr-restoration/quote_donovan.png"
     }
    ],
    "section": "restorations",
@@ -2883,86 +1877,6 @@
     "EX CONFIGURATION offers JAPAN or INTERNATIONAL backgrounds, with JAPAN as the default, and ORIGINAL or 30TH ANNIVERSARY artwork",
     "START on Gen switches between his two starting stances"
    ],
-   "comparison": {
-    "columns": [
-     "",
-     "Zero 2 Alpha (arcade)",
-     "Alpha 2 Gold",
-     "Alpha 2 EX"
-    ],
-    "heading": "Compared with Gold",
-    "intro": [
-     "How EX compares with Alpha 2 Gold and with the arcade Zero 2 Alpha both build on."
-    ],
-    "rows": [
-     [
-      "Cammy",
-      "No",
-      "Two Start presses on M. Bison",
-      "Her own select cell"
-     ],
-     [
-      "Cammy as a CPU opponent in Arcade",
-      "—",
-      "No",
-      "Yes"
-     ],
-     [
-      "EX Akuma and EX Cammy",
-      "No",
-      "No",
-      "Yes"
-     ],
-     [
-      "Shin Akuma",
-      "Boss only",
-      "Five Start presses on Akuma",
-      "Two Start presses on Akuma"
-     ],
-     [
-      "Start presses for alternate forms",
-      "Up to five",
-      "Up to five",
-      "One or two"
-     ],
-     [
-      "Survival, Dramatic Battle, Akuma mode",
-      "Title-screen button codes",
-      "Title-screen button codes",
-      "Title menu in CONSOLE mode; codes in ARCADE mode"
-     ],
-     [
-      "Options page",
-      "No",
-      "No",
-      "OPTION MODE from the title menu"
-     ],
-     [
-      "Game speeds",
-      "3",
-      "3",
-      "8"
-     ],
-     [
-      "Time limit",
-      "99",
-      "99",
-      "25, 50, 75, 99 or infinity"
-     ],
-     [
-      "English story and endings",
-      "Some pages cut (Asia)",
-      "All, translated from the Japanese",
-      "All, translated from the Japanese"
-     ],
-     [
-      "Builds",
-      "Japan, Asia",
-      "USA, Europe, Japan, Asia",
-      "USA, Japan"
-     ]
-    ]
-   },
    "date": "2026-11-06",
    "description": [
     "Street Fighter Alpha 2 EX builds on our Street Fighter Alpha 2 Gold backport. Every Gold fighter plays exactly as in Gold. EX adds the menus, modes and forms the arcade game kept behind codes or never had, and every secret starts unlocked.",
@@ -2982,15 +1896,6 @@
     "The 4 MB builds use the same arcade set names as Street Fighter Alpha 2 Gold's 4 MB builds (sfz2al, sfz2alj), so keep one or the other in your MAME ROM path.",
     "This is a fan edition, unaffiliated with Capcom. The sets are built from discs and roms you already own, and the kit ships no code or data from the anthology or the arcade game beyond EX's mirrored and recolored versions of some of the game's own art. It also carries a few small pieces of other Capcom games: about 4 KB of Cammy's theme score from X-Men vs. Street Fighter (1996), for her stage music; the infinity and star symbols from Street Fighter Zero 2 Dash for the Sega Saturn; a few bytes of projectile data from Super Street Fighter II Turbo; and the altered billboard artwork from Street Fighter 30th Anniversary Collection."
    ],
-   "reconstruction": {
-    "how": "A small tool reads Alpha 2 Gold from your PlayStation 2 disc image, combines it with your arcade Zero 2 Alpha romset, adds EX, and writes out the finished CPS-2 build.",
-    "kit_command": "python3 apply.py --iso \"Street Fighter Alpha Anthology.iso\" \\\n                 --romset sfz2al.zip --region us --out-dir out",
-    "kit_dir": "tools/sfa2ex_builder",
-    "requires": [
-     "your own PlayStation 2 anthology disc image: Street Fighter Alpha Anthology for the USA set, or Street Fighter Zero — Fighter's Generation for the Japan set",
-     "your own arcade Street Fighter Zero 2 Alpha romset: sfz2al for the USA set, sfz2alj for the Japan set"
-    ]
-   },
    "related": [
     {
      "label": "Street Fighter Alpha 2 Gold",
@@ -3053,30 +1958,11 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "Cammy and a Random cell take the bottom corners of the select screen.",
-     "single": "data/screenshots/sfa2-ex/select.png"
-    },
-    {
-     "caption": "EX Akuma: one START press on Akuma's cell.",
-     "single": "data/screenshots/sfa2-ex/ex_akuma_select.png"
-    },
-    {
-     "caption": "EX Cammy, one START press on Cammy's cell, against Sagat.",
-     "single": "data/screenshots/sfa2-ex/ex_cammy_fight.png"
-    },
-    {
-     "caption": "OPTIONS on the title menu opens OPTION MODE.",
-     "single": "data/screenshots/sfa2-ex/option_mode.png"
-    }
-   ],
    "section": "enhanced",
    "slug": "sfa2-ex",
    "status": "release-candidate",
    "subtitle": "Enhanced version",
    "summary": "Our Alpha 2 Gold backport with a console-style mode menu, Training with recording and replay, Cammy and Random on the select screen, EX Akuma and EX Cammy, and more speed and time settings. In USA and Japan builds.",
-   "thumbnail_build": "us",
    "title": "Street Fighter Alpha 2 EX",
    "version": "rc4"
   },
@@ -3123,22 +2009,6 @@
     "Special thanks to Cerulean for their detailed notes, testing and deep knowledge of Vampire Savior.",
     "This is a fan backport, unaffiliated with Capcom. The kit reconstructs the sets and music from the disc and romsets you already own."
    ],
-   "reconstruction": {
-    "columns": [
-     [
-      "HBMAME / MiSTer",
-      "hbmame_set"
-     ]
-    ],
-    "how": "A small tool combines your Collection disc image and arcade romsets, and writes the finished HBMAME sets and MiSTer files, including the CPS+ core. The same set ZIPs also run in FBNeo.",
-    "kit_command": "python3 apply.py --iso collection.iso --rompath roms --out-dir out",
-    "kit_dir": "tools/vsa_arrange_builder",
-    "requires": [
-     "your own PlayStation 2 disc image: Vampire: Darkstalkers Collection (Japan)",
-     "your own Japanese arcade romsets: vsavj (Vampire Savior) and vsav2 (Vampire Savior 2)"
-    ],
-    "sizes_note": ""
-   },
    "related": [
     {
      "label": "Vampire Savior",
@@ -3218,23 +2088,12 @@
     },
     "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver, or a current FBNeo, which has these sets built in. They don't run on the standard jtCPS2 core or in stock MAME."
    },
-   "screenshots": [
-    {
-     "caption": "Dee in battle.",
-     "single": "data/screenshots/vsav-arrange/dee_fight.png"
-    },
-    {
-     "caption": "The Arrange's character select.",
-     "single": "data/screenshots/vsav-arrange/select.png"
-    }
-   ],
    "section": "restorations",
    "slug": "vsav-arrange",
    "sort_title": "Vampire Savior 1 Arrange",
    "status": "release-candidate",
    "subtitle": "Arcade backport",
    "summary": "The Arrange edition of Vampire Savior from Capcom’s PlayStation 2 collection, as a CPS-2 game: Donovan, Huitzil and Pyron return, and Dee joins the roster. USA and Japan builds.",
-   "thumbnail_build": "us",
    "title": "Vampire Savior Arrange",
    "version": "rc5"
   },
@@ -3281,22 +2140,6 @@
     "On MiSTer each game image is about 92 MB, so it takes longer to load than the original game.",
     "This is a fan backport, unaffiliated with Capcom. The sets are built from the disc and romsets you already own; the kit ships only our own code, translated text and layout, plus the CPS+ core with its source and licenses."
    ],
-   "reconstruction": {
-    "columns": [
-     [
-      "HBMAME / MiSTer",
-      "hbmame_set"
-     ]
-    ],
-    "how": "A small tool reads the Arrange edition from your PlayStation 2 disc image, combines it with your arcade romsets, and writes out the finished sets for MiSTer and HBMAME, with the CPS+ core for MiSTer. The same set ZIPs also run in FBNeo. It also builds the shared Vampire Arrange music pack for MiSTer.",
-    "kit_command": "python3 apply.py --iso \"Vampire Darkstalkers Collection.iso\" \\\n                 --rompath roms --out-dir out",
-    "kit_dir": "tools/vamparrange_builder",
-    "requires": [
-     "your own PlayStation 2 disc image: Vampire: Darkstalkers Collection (Japan)",
-     "your own arcade romsets, all Japanese: vhunt2 (Vampire Hunter 2), vsav2 (Vampire Savior 2) and vsavj (Vampire Savior)"
-    ],
-    "sizes_note": ""
-   },
    "related": [
     {
      "label": "Vampire Savior 2",
@@ -3359,22 +2202,11 @@
     },
     "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver, or a current FBNeo, which has these sets built in. They don't run on the standard jtCPS2 core or in stock MAME."
    },
-   "screenshots": [
-    {
-     "caption": "One select screen for every fighter, Jon Talbain, Rikuo and Sasquatch included.",
-     "single": "data/screenshots/vsav2-arrange/select.png"
-    },
-    {
-     "caption": "Dee, the fighter Capcom made for the Arrange, on his own cell.",
-     "single": "data/screenshots/vsav2-arrange/dee_select.png"
-    }
-   ],
    "section": "restorations",
    "slug": "vsav2-arrange",
    "status": "release-candidate",
    "subtitle": "Arcade backport",
    "summary": "The Arrange edition of Vampire Savior 2 from Capcom's PlayStation 2 collection, as a CPS-2 game: Jon Talbain, Rikuo and Sasquatch return, Dee joins the roster, and NIGHTMARE difficulty hides a fight with him. USA and Japan builds.",
-   "thumbnail_build": "us",
    "title": "Vampire Savior 2 Arrange",
    "version": "rc4"
   },
@@ -3424,22 +2256,6 @@
     "On MiSTer each game image is about 92 MB, so it takes longer to load than the original game.",
     "This is a fan backport, unaffiliated with Capcom. The sets are built from the disc and romsets you already own; the kit ships only our own code, translated text and layout, plus the CPS+ core with its source and licenses."
    ],
-   "reconstruction": {
-    "columns": [
-     [
-      "HBMAME / MiSTer",
-      "hbmame_set"
-     ]
-    ],
-    "how": "A small tool reads the Arrange edition from your PlayStation 2 disc image, combines it with your arcade romsets, and writes out the finished sets for MiSTer and HBMAME, with the CPS+ core for MiSTer. The same set ZIPs also run in FBNeo. It also builds the shared Vampire Arrange music pack for MiSTer.",
-    "kit_command": "python3 apply.py --iso \"Vampire Darkstalkers Collection.iso\" \\\n                 --rompath roms --out-dir out",
-    "kit_dir": "tools/vamparrange_builder",
-    "requires": [
-     "your own PlayStation 2 disc image: Vampire: Darkstalkers Collection (Japan)",
-     "your own arcade romsets, all Japanese: vhunt2 (Vampire Hunter 2), vsav2 (Vampire Savior 2) and vsavj (Vampire Savior)"
-    ],
-    "sizes_note": ""
-   },
    "related": [
     {
      "label": "Night Warriors 2",
@@ -3505,18 +2321,11 @@
     },
     "text": "These games need CPS-2+, an extended CPS-2 system with more memory. On MiSTer they need a 128 MB SDRAM module (a smaller one is not enough) and the CPS+ core, which the kit includes. On a computer they need HBMAME with the CPS+ driver, or a current FBNeo, which has these sets built in. They don't run on the standard jtCPS2 core or in stock MAME."
    },
-   "screenshots": [
-    {
-     "caption": "Jedah, Lilith, Q-Bee and B.B. Hood join the roster on Savior's select screen.",
-     "single": "data/screenshots/vhunt2-arrange/select.png"
-    }
-   ],
    "section": "restorations",
    "slug": "vhunt2-arrange",
    "status": "release-candidate",
    "subtitle": "Arcade backport",
    "summary": "The Arrange edition of Vampire Hunter 2 from Capcom's PlayStation 2 collection, as a CPS-2 game: Jedah, Lilith, Q-Bee, B.B. Hood and Dee join the roster, with the Arrange's game system and NIGHTMARE difficulty. USA and Japan builds.",
-   "thumbnail_build": "us",
    "title": "Night Warriors 2 Arrange",
    "version": "rc4"
   },
@@ -3566,28 +2375,6 @@
     "Special thanks to Gachichan! for bug reports and improvements to the Evil Ryu and Violent Ken profile pictures.",
     "This is a fan backport, unaffiliated with Capcom. The sets are built from game files you already own; the kit contains patches and tools, plus the CPS+ core and its license information."
    ],
-   "reconstruction": {
-    "columns": [
-     [
-      "MAME",
-      "mame_set"
-     ],
-     [
-      "HBMAME / MiSTer",
-      "hbmame_set"
-     ]
-    ],
-    "how": "A small tool opens your Switch game files with your own keys, combines them with your arcade romsets, and writes out the finished MAME and HBMAME sets, the MiSTer files, and the music pack.",
-    "kit_command": "python3 apply.py",
-    "kit_dir": "backports/usf2/kit",
-    "requires": [
-     "your own Nintendo Switch base game files: a supported USA or Japanese NSP or XCI matching the selected region",
-     "your own Switch prod.keys",
-     "your own arcade romset ssf2xj (with its parent ssf2t if yours is a split set) and the QSound firmware (qsound)",
-     "Python 3.10 or newer; extraction and audio tools download automatically"
-    ],
-    "sizes_note": ""
-   },
    "related": [
     {
      "label": "Super Street Fighter II Turbo: Grand Master Challenge",
@@ -3726,26 +2513,11 @@
     },
     "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. The MAME sets run in unmodified MAME using its Hyper Street Fighter II loader. HBMAME needs a build that includes the Ultra Street Fighter II sets."
    },
-   "screenshots": [
-    {
-     "caption": "Evil Ryu in the intro.",
-     "single": "data/screenshots/usf2-backport/attract_evil_ryu.png"
-    },
-    {
-     "caption": "Evil Ryu on the select screen.",
-     "single": "data/screenshots/usf2-backport/select_evil_ryu.png"
-    },
-    {
-     "caption": "Evil Ryu's ending.",
-     "single": "data/screenshots/usf2-backport/ending_evil_ryu.png"
-    }
-   ],
    "section": "restorations",
    "slug": "usf2-backport",
    "status": "release-candidate",
    "subtitle": "Arcade backport",
    "summary": "Ultra Street Fighter II: The Final Challengers as a CPS-2 game: Akuma gets his own select cell, Evil Ryu and Violent Ken join the roster, and the Switch edition's title, color select and sound come along. USA and Japan builds.",
-   "thumbnail_build": "us",
    "title": "Ultra Street Fighter II",
    "version": "rc6"
   },
@@ -3761,7 +2533,6 @@
     "parents": [
      "sfa3"
     ],
-    "stock_zip": "../capcom/roms/mame0260/sfz3j.zip",
     "variants": [
      {
       "hbmame": {
@@ -3785,7 +2556,6 @@
       "key": "english",
       "label": "English restoration",
       "mra": {
-       "base": "data/mra/sfz3j.mra",
        "category": "Fighting",
        "catver": "Fighter / Versus",
        "filename": "Street Fighter Alpha 3 (USA) [Restoration].mra",
@@ -3795,8 +2565,7 @@
        "region": "USA",
        "setname": "sfa3r",
        "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
-      },
-      "patched_zip": "../capcom/backports/sfa3/out/release/roms/sfz3j.zip"
+      }
      },
      {
       "hbmame": {
@@ -3815,7 +2584,6 @@
       "key": "japanese",
       "label": "Japanese restoration",
       "mra": {
-       "base": "data/mra/sfz3j.mra",
        "category": "Fighting",
        "catver": "Fighter / Versus",
        "filename": "Street Fighter Zero 3 (Japan) [Restoration].mra",
@@ -3825,8 +2593,7 @@
        "region": "Japan",
        "setname": "sfz3jr",
        "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
-      },
-      "patched_zip": "../capcom/backports/sfa3/out/release/japanese/roms/sfz3j.zip"
+      }
      }
     ]
    },
@@ -3855,7 +2622,6 @@
    "game": "Street Fighter Zero 3 (Japan 980904)",
    "hardware": "Capcom CPS-2",
    "mra": {
-    "base": "data/mra/sfz3j.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Street Fighter Alpha 3 (USA) [Restoration].mra",
@@ -3924,16 +2690,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "An opponent-specific win quote.",
-     "single": "data/screenshots/sfa3-restoration/opponent_quote.png"
-    },
-    {
-     "caption": "English A/X/V-ISM selection.",
-     "single": "data/screenshots/sfa3-restoration/ism_selection.png"
-    }
-   ],
    "section": "restorations",
    "set": "sfz3j",
    "slug": "sfa3-restoration",
@@ -3948,7 +2704,6 @@
     "parents": [
      "sfa2"
     ],
-    "stock_zip": "../capcom/roms/mame0260/sfz2j.zip",
     "variants": [
      {
       "hbmame": {
@@ -3970,8 +2725,7 @@
        "name": "Street Fighter Alpha 2 (USA) [English Restoration]",
        "region": "USA",
        "setname": "sfa2ru"
-      },
-      "patched_zip": "../capcom/backports/sfa2/out/regional_restoration/hbmame/sfa2ru.zip"
+      }
      },
      {
       "hbmame": {
@@ -3994,8 +2748,7 @@
        "region": "Asia",
        "setname": "sfz2ra",
        "subdir": "_Asia"
-      },
-      "patched_zip": "../capcom/backports/sfa2/out/regional_restoration/hbmame/sfz2ra.zip"
+      }
      },
      {
       "hbmame": {
@@ -4018,8 +2771,7 @@
        "region": "Japan",
        "setname": "sfz2rj",
        "subdir": "_Japan"
-      },
-      "patched_zip": "../capcom/backports/sfa2/out/regional_restoration/hbmame/sfz2rj.zip"
+      }
      }
     ]
    },
@@ -4035,68 +2787,6 @@
     "USA, Asia and Japan builds"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "Japan",
-     "USA",
-     "English Restoration"
-    ],
-    "heading": "Compared with the arcade versions",
-    "intro": [
-     "How the USA build of the English Restoration compares with the Japanese and US versions."
-    ],
-    "rows": [
-     [
-      "Language",
-      "Japanese",
-      "English",
-      "English"
-     ],
-     [
-      "Win quotes",
-      "By opponent and health",
-      "A few, at random",
-      "By opponent and health"
-     ],
-     [
-      "Pick a win quote by holding buttons",
-      "Yes",
-      "No",
-      "Yes"
-     ],
-     [
-      "Story and ending pages",
-      "All",
-      "Some cut or merged",
-      "All, with Japan's timing"
-     ],
-     [
-      "Next-stage map",
-      "Place name",
-      "Country only",
-      "Place name"
-     ],
-     [
-      "Blood",
-      "Red",
-      "White",
-      "Red (white by operator setting)"
-     ],
-     [
-      "Evil Ryu, EX Dhalsim, EX Zangief",
-      "No",
-      "By code",
-      "By code"
-     ],
-     [
-      "Computer opponents and two-player damage",
-      "Japan's",
-      "Export's",
-      "Japan's"
-     ]
-    ]
-   },
    "date": "2026-10-13",
    "description": [
     "Street Fighter Alpha 2 wasn't the same game everywhere. In Japan, each fighter's win quote depends on who they beat and how much health they had left, and you can pick one by holding buttons. The English versions draw a few quotes at random. They also trimmed some story and ending pages, show only the country on the next-stage map, turned the blood white and left the Manual guard panel blank.",
@@ -4109,10 +2799,6 @@
    "game": "Street Fighter Zero 2 (Japan 960430)",
    "hardware": "Capcom CPS-2",
    "mra": {
-    "auxiliary_zips": [
-     "../capcom/roms/mame0260/qsound.zip"
-    ],
-    "base": "data/mra/sfz2j.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "mraauthor": "jotego,strygo",
@@ -4160,24 +2846,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "The next-stage map names the place you're headed, as in Japan.",
-     "single": "data/screenshots/sfa2-restoration/next_stage_map.png"
-    },
-    {
-     "caption": "Win quotes from the Japanese game, in English.",
-     "single": "data/screenshots/sfa2-restoration/win_quote.png"
-    },
-    {
-     "caption": "Red blood on hits, as in Japan.",
-     "single": "data/screenshots/sfa2-restoration/red_blood.png"
-    },
-    {
-     "caption": "The Manual guard panel explains itself.",
-     "single": "data/screenshots/sfa2-restoration/manual_panel.png"
-    }
-   ],
    "section": "restorations",
    "set": "sfz2j",
    "slug": "sfa2-restoration",
@@ -4199,7 +2867,6 @@
     "parents": [
      "sfa"
     ],
-    "stock_zip": "../capcom/roms/mame0260/sfzj.zip",
     "variants": [
      {
       "fbneo": {
@@ -4242,13 +2909,11 @@
       "key": "usa",
       "label": "USA (English)",
       "mra": {
-       "base": "data/mra/sfa-ex-usa.mra",
        "filename": "Street Fighter Alpha EX (USA).mra",
        "name": "Street Fighter Alpha EX (USA)",
        "region": "USA",
        "setname": "sfaexu"
-      },
-      "patched_zip": "../capcom/backports/sfa/out/ex_release/usa/sfzj.zip"
+      }
      },
      {
       "fbneo": {
@@ -4291,14 +2956,12 @@
       "key": "japan",
       "label": "Japan (Japanese)",
       "mra": {
-       "base": "data/mra/sfa-ex-japan.mra",
        "filename": "Street Fighter Zero EX (Japan).mra",
        "name": "Street Fighter Zero EX (Japan)",
        "region": "Japan",
        "setname": "sfzexj",
        "subdir": "_Japan"
-      },
-      "patched_zip": "../capcom/backports/sfa/out/ex_release/japan/sfzj.zip"
+      }
      },
      {
       "fbneo": {
@@ -4341,14 +3004,12 @@
       "key": "asia",
       "label": "Asia (English)",
       "mra": {
-       "base": "data/mra/sfa-ex-asia.mra",
        "filename": "Street Fighter Zero EX (Asia).mra",
        "name": "Street Fighter Zero EX (Asia)",
        "region": "Asia",
        "setname": "sfzexa",
        "subdir": "_Asia"
-      },
-      "patched_zip": "../capcom/backports/sfa/out/ex_release/asia/sfzj.zip"
+      }
      }
     ]
    },
@@ -4399,10 +3060,6 @@
    "hardware": "Capcom CPS-2",
    "hidden": false,
    "mra": {
-    "auxiliary_zips": [
-     "../capcom/roms/mame0260/qsound.zip"
-    ],
-    "base": "data/mra/sfa-ex-usa.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "mraauthor": "jotego,strygo",
@@ -4417,23 +3074,6 @@
    "patch_intro": "An unofficial enhanced edition of Street Fighter Zero, with USA, Japan and Asia builds.",
    "patch_kind": "EX edition patch",
    "patch_noun": "edition",
-   "reconstruction": {
-    "columns": [
-     [
-      "HBMAME",
-      "hbmame_set"
-     ],
-     [
-      "MAME",
-      "mame_set"
-     ]
-    ],
-    "how": "The patch tool verifies your original ROMs, applies the selected EX edition, and writes the MAME and HBMAME archives and MiSTer MRAs. No console disc is needed.",
-    "requires": [
-     "Your own original Street Fighter Zero (Japan 950727) arcade romset: sfzj."
-    ],
-    "sizes_note": ""
-   },
    "related": [
     {
      "label": "Street Fighter Alpha regional restoration",
@@ -4467,24 +3107,6 @@
      "version": "rc1"
     }
    ],
-   "screenshots": [
-    {
-     "caption": "All thirteen fighters and Random on character select.",
-     "single": "data/screenshots/sfa-ex/select.png"
-    },
-    {
-     "caption": "Ryu and Ken team up against Adon in EX Dramatic Battle.",
-     "single": "data/screenshots/sfa-ex/dramatic.png"
-    },
-    {
-     "caption": "Difficulty, timer, rounds, damage, speed and sound in OPTIONS.",
-     "single": "data/screenshots/sfa-ex/options.png"
-    },
-    {
-     "caption": "Training with computer controls and recording.",
-     "single": "data/screenshots/sfa-ex/training.png"
-    }
-   ],
    "section": "enhanced",
    "set": "sfzj",
    "slug": "sfa-ex",
@@ -4507,7 +3129,6 @@
     "parents": [
      "sfa"
     ],
-    "stock_zip": "../capcom/roms/mame0260/sfzj.zip",
     "variants": [
      {
       "hbmame": {
@@ -4536,8 +3157,7 @@
        "name": "Street Fighter Alpha (USA) [English Restoration]",
        "region": "USA",
        "setname": "sfaru"
-      },
-      "patched_zip": "../capcom/backports/sfa/out/regional_restoration/usa/sfzj.zip"
+      }
      },
      {
       "hbmame": {
@@ -4567,8 +3187,7 @@
        "region": "Asia",
        "setname": "sfzra",
        "subdir": "_Asia"
-      },
-      "patched_zip": "../capcom/backports/sfa/out/regional_restoration/asia/sfzj.zip"
+      }
      },
      {
       "hbmame": {
@@ -4598,8 +3217,7 @@
        "region": "Japan",
        "setname": "sfzrj",
        "subdir": "_Japan"
-      },
-      "patched_zip": "../capcom/backports/sfa/out/regional_restoration/japan/sfzj.zip"
+      }
      }
     ]
    },
@@ -4625,10 +3243,6 @@
    "game": "Street Fighter Zero (Japan 950727)",
    "hardware": "Capcom CPS-2",
    "mra": {
-    "auxiliary_zips": [
-     "../capcom/roms/mame0260/qsound.zip"
-    ],
-    "base": "data/mra/sfzj.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "mraauthor": "jotego,strygo",
@@ -4649,24 +3263,6 @@
       "First release candidate with USA, Asia and Japan builds."
      ],
      "version": "rc1"
-    }
-   ],
-   "screenshots": [
-    {
-     "caption": "Win quotes from the Japanese game, in English, in a wider centered box.",
-     "single": "data/screenshots/sfa-restoration/win_quote.png"
-    },
-    {
-     "caption": "Story dialogue follows the Japanese script.",
-     "single": "data/screenshots/sfa-restoration/story_dialogue.png"
-    },
-    {
-     "caption": "Endings follow the Japanese script too.",
-     "single": "data/screenshots/sfa-restoration/ending_page.png"
-    },
-    {
-     "caption": "The Manual guard panel explains itself.",
-     "single": "data/screenshots/sfa-restoration/manual_panel.png"
     }
    ],
    "section": "restorations",
@@ -4738,23 +3334,6 @@
     "The MiSTer builds start with the arranged soundtrack; MUSIC in the test menu's EX page switches to the arcade music. HBMAME plays the arcade music, with the cutscenes captioned.",
     "The cutscene art and audio derive from Capcom's Final Fight CD. This is an unofficial fan project, unaffiliated with Capcom or Sega. The sets are built from discs and romsets you already own; the kit ships only our own code and patches, the English voice track, and the CPS+ core with its source and licenses."
    ],
-   "reconstruction": {
-    "columns": [
-     [
-      "HBMAME / MiSTer",
-      "hbmame_set"
-     ]
-    ],
-    "how": "A small tool reads the cutscenes and soundtrack from your Final Fight CD discs, combines them with your arcade romsets, and writes out the finished MAME and HBMAME sets, the MiSTer files and the music packs. Give it either disc on its own to build just that disc's builds.",
-    "kit_command": "python3 apply.py --disc-jp \"Final Fight CD (JP).cue\" \\\n                 --disc-us \"Final Fight CD (USA).cue\" \\\n                 --romset /path/to/roms --out-dir out",
-    "kit_dir": "tools/ffightcps2_builder",
-    "requires": [
-     "your own Final Fight CD disc for each build you make, as its .cue sheet, a CD .chd, or a .zip or .7z holding one: the USA disc for ffex2u, the Japan disc for ffex2j and ffex2r",
-     "your own arcade Final Fight romset: ffight, ffightu and ffightj (MAME 0.260-era, .zip or .7z)",
-     "your own arcade Street Fighter Alpha 3 romset, sfa3u, for the CPS-2 sound (and qsound, if your sfa3u leaves out the QSound firmware)"
-    ],
-    "sizes_note": ""
-   },
    "related": [
     {
      "label": "Final Fight EX",
@@ -4809,34 +3388,11 @@
     },
     "text": "On MiSTer these need a 128 MB SDRAM module and the CPS+ core, which the kit includes. Stock MAME uses the separate sfa3ud.zip written for each edition. HBMAME needs a build that includes the Final Fight EX sets."
    },
-   "screenshots": [
-    {
-     "caption": "The opening's Metro City map.",
-     "single": "data/screenshots/final-fight-ex-cps2/scene_map.png"
-    },
-    {
-     "caption": "Haggar takes Damnd's call.",
-     "single": "data/screenshots/final-fight-ex-cps2/scene_phone.png"
-    },
-    {
-     "caption": "Haggar and Jessica's reunion in the ending.",
-     "single": "data/screenshots/final-fight-ex-cps2/scene_reunion.png"
-    },
-    {
-     "caption": "Cody and Guy in the mansion hall, in English.",
-     "single": "data/screenshots/final-fight-ex-cps2/scene_hall_en.png"
-    },
-    {
-     "caption": "Time Attack on Guy's bridge arena.",
-     "single": "data/screenshots/final-fight-ex-cps2/time_attack.png"
-    }
-   ],
    "section": "enhanced",
    "slug": "final-fight-ex-cps2",
    "status": "release-candidate",
    "subtitle": "Enhanced version",
    "summary": "Final Fight EX on Capcom's CPS-2, with every enhancement from the CPS-1 version and a restored English version with added scenes, an improved translation and uncensored content. It adds the Sega CD's Time Attack mode and a Console mode with a title menu and pause. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
-   "thumbnail_build": "en",
    "title": "Final Fight EX (CPS-2)",
    "version": "rc3"
   },
@@ -4867,35 +3423,6 @@
     "HBMAME uses native audio. Stock MAME does not run the enhanced arcade sets.",
     "This is an unofficial fan project, unaffiliated with Capcom or NEC. Original game media is not included."
    ],
-   "reconstruction": {
-    "kit_command": "python3 apply.py",
-    "kit_dir": "tools/striderex_builder",
-    "kit_include": [
-     "apply.py",
-     "verify.py",
-     "README.txt",
-     "TOOLS.md",
-     "LICENSES.txt",
-     "kit.json",
-     "outputs.json",
-     "rom_inputs.json",
-     "disc_inputs.json",
-     "hbmame_parents.json",
-     "release-material.json",
-     "builder/**/*",
-     "data/**/*",
-     "core/*",
-     "hash/*"
-    ],
-    "requires": [
-     "your own canonical MAME USA (striderua) and Japan (striderjr) arcade ROMs (ZIP, 7z or loose files); split sets also need the shared files in their strider parent archive",
-     "your own complete Strider Hiryuu (Japan) PC Engine CD, as matching split or merged CUE/BIN tracks or a supported ZIP/7z archive; filenames may differ",
-     "Python on a supported system; guided setup prepares required NumPy, SciPy and verified media helpers privately",
-     "your own matching Strider Hiryuu X68000 System disk, as a loose image or ZIP",
-     "For the full guided workflow, use Python 3.12 on an Apple Silicon Mac or x64 Python 3.13 on Windows",
-     "MAME, the PC Engine System Card BIOS, Pillow and an assembler are not required"
-    ]
-   },
    "related": [
     {
      "label": "CPS+",
@@ -4910,23 +3437,6 @@
       "First release candidate of Strider EX for CPS-1, with the PC Engine CD scenes, extra desert stage, native audio and optional CPS+ soundtrack."
      ],
      "version": "rc1"
-    }
-   ],
-   "screenshots": [
-    {
-     "after": "data/screenshots/strider-ex/title-jp.png",
-     "after_label": "Japan",
-     "before": "data/screenshots/strider-ex/title-us.png",
-     "before_label": "USA",
-     "caption": "USA and Japanese title screens"
-    },
-    {
-     "caption": "The extra Kyzylkum Desert stage",
-     "single": "data/screenshots/strider-ex/desert.png"
-    },
-    {
-     "caption": "Grandmaster in the opening cinematic",
-     "single": "data/screenshots/strider-ex/grandmaster-intro.png"
     }
    ],
    "section": "enhanced",
@@ -4967,17 +3477,6 @@
     "setname": "sfa3up",
     "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
    },
-   "reconstruction": {
-    "how": "Reconstructs the USA and Japan versions from your original game files and writes the HBMAME and FBNeo sets and MiSTer card folders.",
-    "kit_command": "python3 apply.py --rompath /path/to/roms --ps2-us /path/to/us.chd --ps2-jp /path/to/jp.chd --naomi-chd /path/to/gdl-0002.chd --naomi-pic /path/to/sfz3ugd.zip --chdman /path/to/chdman --work /external/fresh-work --out-dir /external/fresh-output",
-    "requires": [
-     "Your own arcade ROM sets sfa3, sfa3u, sfz3j and qsound in canonical MAME format.",
-     "Your own USA Street Fighter Alpha Anthology and Japanese Street Fighter Zero: Fighter’s Generation PS2 disc images.",
-     "Your own Street Fighter Zero 3 Upper NAOMI GD-ROM CHD and sfz3ugd.zip PIC archive.",
-     "The Arcade Patches builder app prepares Python and its dependencies. To build by hand: Python 3.12 or newer, NumPy 2.2.6, SciPy 1.15.3 and chdman."
-    ],
-    "sizes_note": "Use new work and output directories with at least 8 GiB of free storage."
-   },
    "related": [
     {
      "label": "Street Fighter Alpha 3",
@@ -5002,23 +3501,6 @@
    "requirements": {
     "text": "Reconstruction requires your own Alpha 3 / Zero 3 arcade ROMs, the USA Alpha Anthology and Japanese Zero Fighter’s Generation PS2 disc images, and the Zero 3 Upper NAOMI GD-ROM and PIC. MiSTer play requires the CPS+ core and 128 MB SDRAM."
    },
-   "screenshots": [
-    {
-     "after": "data/screenshots/sfa3-upper-cps2/title_us_sfa3up.png",
-     "after_label": "USA",
-     "before": "data/screenshots/sfa3-upper-cps2/title_jp_sfz3up.png",
-     "before_label": "Japan",
-     "caption": "The Japanese and USA title screens."
-    },
-    {
-     "caption": "Choose from the expanded Upper roster.",
-     "single": "data/screenshots/sfa3-upper-cps2/character-select.png"
-    },
-    {
-     "caption": "Guile and Fei Long on Guile’s stage.",
-     "single": "data/screenshots/sfa3-upper-cps2/guile-fei-long.png"
-    }
-   ],
    "section": "restorations",
    "set": "sfa3up / sfz3up",
    "slug": "sfa3-upper-cps2",
@@ -5033,9 +3515,7 @@
    "artifact": {
     "parents": [
      "hsf2"
-    ],
-    "patched_zip": "../capcom/translations/ssf2x/out/hsf2-release/hsf2en.zip",
-    "stock_zip": "../capcom/roms/mame0260/hsf2j.zip"
+    ]
    },
    "changes": [
     "Japanese 040202 gameplay and classic fighter versions",
@@ -5046,34 +3526,6 @@
     "Native operator Free Play with saved settings and no-coin starts"
    ],
    "collection_api": 1,
-   "comparison": {
-    "columns": [
-     "",
-     "Japan and this restoration",
-     "Original US release"
-    ],
-    "heading": "Japanese gameplay, English presentation",
-    "intro": [
-     "The restoration preserves the Japanese release’s speed, CPU difficulty, damage and stun rules, with English text, Western fighter names and official US regional move voices."
-    ],
-    "rows": [
-     [
-      "Free Select speed",
-      "Japanese speeds",
-      "One speed step faster at the same Turbo label"
-     ],
-     [
-      "Factory speed setting",
-      "Fixed Turbo 2",
-      "Free Select"
-     ],
-     [
-      "Factory coin setting",
-      "1 coin / 1 credit",
-      "2 coins / 1 credit"
-     ]
-    ]
-   },
    "date": "2026-11-05",
    "description": [
     "Play the Japanese version of Hyper Street Fighter II in English, with its original balance and the classic versions of each fighter. Western fighter names and the official US regional move voices accompany English win quotes, full endings, illustrated Continue tips and all 28 Start messages.",
@@ -5133,7 +3585,6 @@
    "mister_hbmame": true,
    "mister_hbmame_note": "out/mister/games/hbmame/hsf2re.zip is a complete copy of the emulator set. The supplied MRA uses the stock Japanese set; that extra ZIP is optional.",
    "mra": {
-    "base": "data/mra/hsf2j.mra",
     "category": "Fighting",
     "catver": "Fighter / Versus",
     "filename": "Hyper Street Fighter II The Anniversary Edition (USA) [English Restoration].mra",
@@ -5151,16 +3602,6 @@
    "patch_intro": "An unofficial English restoration of Hyper Street Fighter II: The Anniversary Edition (Japan 040202).",
    "patch_kind": "English restoration patch",
    "patch_noun": "restoration",
-   "readme_sections": [
-    {
-     "heading": "Start messages",
-     "paragraphs": [
-      "Solo: use Free Play, or start with exactly one credit so no spare credits remain. Spare credits keep PRESS START above the vacant seat and suppress the message, as in the Japanese game.",
-      "Hold the active player's Start while the VS screen is showing, keep it held until the fight begins, then release. With no attack held, Challenger / wanted! alternates with the normal join prompt. Hold LP, MP, HP, LK, MK or HK with Start for the other six choices. Pressing Start again during the fight cancels the stored notice.",
-      "Two-player HUD messages require a completed round: hold Start through the transition into the next round. The two sets belong to the previous round winner and loser. For the result-screen set, hold the match winner's Start through the result transition. Longer messages appear in two consecutive parts."
-     ]
-    }
-   ],
    "release_history": [
     {
      "date": "2026-11-05",
@@ -5168,16 +3609,6 @@
       "First public release."
      ],
      "version": "rc1"
-    }
-   ],
-   "screenshots": [
-    {
-     "caption": "Illustrated Continue tips in English.",
-     "single": "data/screenshots/hsf2-restoration/continue-tip.png"
-    },
-    {
-     "caption": "Cammy’s win quotes in English.",
-     "single": "data/screenshots/hsf2-restoration/win-quote.png"
     }
    ],
    "section": "restorations",
@@ -6050,10 +4481,6 @@
    "status": "released",
    "subtitle": "Arranged CD-era soundtracks for CPS-1 & CPS-2 arcade games on MiSTer",
    "summary": "When Capcom brought its arcade games home on CD, it sent the music back to the studio and re-recorded it. Those versions never made it back to the arcade. CPS+ puts them there. Pick a game on your MiSTer and the arranged soundtrack is just playing, while every punch, voice and jingle still comes from the arcade game itself.",
-   "tech_spec": [
-    "Community packs are a first-class goal, so the format is documented and the tools ship in the kit. build_pack.py init <game> starts a project; you supply the tracks and say which sound command triggers each one; build_pack.py build produces the pack, which you can listen through, check, and point an MRA at.",
-    "Any QSound CPS-2 title is a potential target, and CPS-1 and CPS-1.5 games work too. PACK_FORMAT.md in the kit covers the trigger contract, the pack layout, and how to author one."
-   ],
    "title": "CPS+",
    "version": "1.8"
   },
@@ -6560,6 +4987,7 @@
    "version": "1.1"
   }
  ],
+ "publication_schema": 1,
  "site": {
   "author": "Steve Gordon",
   "author_url": "https://x.com/strygo",

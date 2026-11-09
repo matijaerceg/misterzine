@@ -168,6 +168,20 @@ def do_adb(manifest):
                 print(f"    adb miss {e['title']}: {ex}")
 
 
+def glow_vector_shots():
+    """A fetch writes the raw upstream capture over a vector game's shot;
+    put the glow treatment back on (tools/vector_glow.py, which needs Pillow
+    and skips anything already treated)."""
+    try:
+        import vector_glow
+        done, _ = vector_glow.apply()
+    except ImportError as ex:
+        print(f"    WARNING: vector glow not applied ({ex}); run tools/vector_glow.py")
+        return
+    if done:
+        print(f"vector glow: treated {len(done)} shots")
+
+
 def update_data(manifest):
     by_title = {e["title"]: e for e in manifest}
     rows = json.load(open(DATA, encoding="utf-8"))
@@ -203,13 +217,16 @@ def main():
         do_psnaps(manifest)
         do_libretro(manifest)
         do_adb(manifest)
+        glow_vector_shots()
         update_data(manifest)
     elif arg.startswith("pack="):
         do_psnaps(manifest, only_pack=arg.split("=", 1)[1])
+        glow_vector_shots()
     elif arg == "libretro":
         do_libretro(manifest)
     elif arg == "adb":
         do_adb(manifest)
+        glow_vector_shots()
     elif arg == "data":
         update_data(manifest)
 

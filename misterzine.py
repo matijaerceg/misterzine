@@ -4978,6 +4978,28 @@ def _arcade_base(title):
     return re.sub(r"\s*[\(\[].*$", "", title).strip()
 
 
+# Console games sold in an arcade cabinet (Nintendo PlayChoice-10 and Super
+# System, Sega Mega-Tech and Mega Play), which MAME files under fixed setname
+# prefixes, and bootleg boards built from a console port, which MAME describes
+# as "(bootleg of <console> version)".
+CONSOLE_CONVERSION_PREFIXES = ("pc_", "mt_", "mp_", "nss_")
+_CONSOLE_BOOTLEG_RE = re.compile(r"\bbootleg of [\w .-]+ version\b", re.I)
+
+
+def _console_conversion(r):
+    """A console conversion that names its platform in its own title. Such a
+    row yields the clean name to the arcade original (export-web's clean-base
+    pass), the way an orphan alternative does: when ppriest's PlayChoice-10
+    and TomSVR's Mega-Tech libraries arrived in October 2026 they knocked
+    thirty-odd long-listed originals back to raw MRA names ("Alien Storm
+    (World, 2 Players) (FD1094 317-0154)"). A conversion whose title has no
+    qualifier of its own does not yield: both rows would then read alike."""
+    if r["title"].strip() == _arcade_base(r["title"]):
+        return False
+    return ((r["setname"] or "").lower().startswith(CONSOLE_CONVERSION_PREFIXES)
+            or bool(_CONSOLE_BOOTLEG_RE.search(r["title"])))
+
+
 def _same_game_key(title):
     """_arcade_base for same-game matching: case-blind, and blind to a trailing
     period MRA names disagree on (TomSVR's "Pocket Gals V.I.P." vs bazset's
@@ -6294,8 +6316,11 @@ def cmd_export_web(args):
     # same way, for the same reason: listing an old game late must not retitle
     # a row already on the site (Midway's "Space Invaders Part II (Midway,
     # Cocktail)" would otherwise strip Taito's row back to its raw MRA name).
+    # A console conversion (PlayChoice-10, Mega-Tech...) yields likewise: it
+    # keeps its own platform qualifier and the arcade original keeps its name.
     def orphan(r):
-        return (r["source_id"], r["path"]) in ORPHAN_ALTERNATIVES
+        return ((r["source_id"], r["path"]) in ORPHAN_ALTERNATIVES
+                or _console_conversion(r))
     counts = Counter(_arcade_base(r["title"]) for r in rows
                      if r["system"] == "arcade" and not r["beta"] and not orphan(r))
     beta_counts = Counter(_arcade_base(r["title"]) for r in rows
@@ -7188,8 +7213,15 @@ def _backfill_arcade_images(data):
             # every game on that board. Drop that art so the game's own set
             # is inherited or fetched below.
             sn = (r.get("sn") or "").lower()
-            rebased = bool(sn and sn not in BIOS_SETNAMES
-                           and (entry.get("setname") or "").lower() in BIOS_SETNAMES)
+            esn = (entry.get("setname") or "").lower()
+            rebased = bool(sn and sn not in BIOS_SETNAMES and esn in BIOS_SETNAMES)
+            # Likewise an entry recorded while a console conversion was the
+            # only row with this clean title (PlayChoice-10 "Tecmo Bowl"):
+            # once the arcade original takes the name, the title-keyed entry
+            # would hand it the conversion's screenshots.
+            rebased = rebased or bool(
+                sn and esn.startswith(CONSOLE_CONVERSION_PREFIXES)
+                and not sn.startswith(CONSOLE_CONVERSION_PREFIXES))
             if rebased:
                 for key in ("source", "title_img", "snap_img", "third_img", "third_pack"):
                     entry[key] = None

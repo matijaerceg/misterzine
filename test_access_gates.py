@@ -372,6 +372,25 @@ class GatedTitleTests(unittest.TestCase):
                 self.row("1942 (PlayChoice-10)", "pc_1942", source="ongo")]
         self.assertEqual(mz._public_arcade_labels(rows, {}, {}, {}), {})
 
+    def test_console_conversion_yields_only_with_its_own_qualifier(self):
+        for title, sn in [
+            ("1942 (PlayChoice-10)", "pc_1942"),
+            ("Alien Storm (Mega-Tech) [TomSVR]", "mt_astrm"),
+            ("Sonic The Hedgehog (Mega Play) [TomSVR]", "mp_sonic"),
+            ("F-Zero (Nintendo Super System) [TomSVR]", "nss_fzer"),
+            ("Contra (Conny bootleg of Mega Drive version) [TomSVR]", "contrambc"),
+        ]:
+            self.assertTrue(mz._console_conversion(self.row(title, sn)), title)
+        for title, sn in [
+            ("1942 (Revision B)", "1942"),
+            ("Tecmo Bowl (World, set 1) [TomSVR]", "tbowl"),
+            ("Tiger-Heli (Bootleg)", "tigerhb1"),
+            ("Mortal Kombat (rev 5.0 T-Unit 03-19-93)", "mk"),
+            # no qualifier of its own: yielding would make two rows read alike
+            ("Contra", "pc_cntra"),
+        ]:
+            self.assertFalse(mz._console_conversion(self.row(title, sn)), title)
+
 
 if __name__ == "__main__":
     unittest.main()

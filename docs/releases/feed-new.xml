@@ -6,7 +6,25 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Sun, 08 Nov 2026 00:15:39 +0000</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 20:46:59 +0000</lastBuildDate>
+<item>
+<title>[New] Aztarac (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#aztarac</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Aztarac.mra:2026-11-08T20:46:59+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 20:46:59 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aztarac.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1983 / Centuri&lt;/p&gt;&lt;p&gt;Core: Aztarac&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Aztarac_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Beyond Kung-Fu (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bkungfu</link>
+<guid isPermaLink="false">jlrh:_Arcade/Beyond Kung-Fu (FF, Irem, 1987) (location test).mra:2026-11-08T19:08:05+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 19:08:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bkungfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1987 / Irem&lt;/p&gt;&lt;p&gt;Core: ffbkungfu&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Lemmings (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#lemmings</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hero.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1984 / Seatongrove UK, Ltd.&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Hunchback Olympic (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hunchback-olympic-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Hunchback Olympic.mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/huncholy.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1984 / Seatongrove UK, Ltd.&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Logger (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#logger-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Logger (Rev.3).mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/logger.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

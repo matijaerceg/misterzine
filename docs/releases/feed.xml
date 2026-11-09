@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 08 Nov 2026 16:33:15 +0000</lastBuildDate>
+<lastBuildDate>Sun, 08 Nov 2026 20:46:59 +0000</lastBuildDate>
+<item>
+<title>[New] Aztarac (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#aztarac</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Aztarac.mra:2026-11-08T20:46:59+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 20:46:59 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aztarac.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1983 / Centuri&lt;/p&gt;&lt;p&gt;Core: Aztarac&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Aztarac_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Beyond Kung-Fu (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bkungfu</link>
+<guid isPermaLink="false">jlrh:_Arcade/Beyond Kung-Fu (FF, Irem, 1987) (location test).mra:2026-11-08T19:08:05+00:00</guid>
+<pubDate>Sun, 08 Nov 2026 19:08:05 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bkungfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1987 / Irem&lt;/p&gt;&lt;p&gt;Core: ffbkungfu&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] atarisys2 (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#720</link>
@@ -888,24 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tp84.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1984 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-TimePilot84CRT&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-04 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Solar Assault (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#slrasslt</link>
-<guid isPermaLink="false">jlrh:_Arcade/Solar Assault (FF, Konami, 1997).mra:2026-11-04T20:13:15+00:00</guid>
-<pubDate>Wed, 04 Nov 2026 20:13:15 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/slrasslt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: ffgticlub&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-04 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
-<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261104.rbf:2026-11-04T20:13:15+00:00</guid>
-<pubDate>Wed, 04 Nov 2026 20:13:15 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-04 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

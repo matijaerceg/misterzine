@@ -1029,7 +1029,7 @@
     "requires": [
      "your own complete Final Fight CD disc rip for each region you build, including its cue and audio tracks: USA for ffightus01, Japan for ffightjs01",
      "your own canonical arcade Final Fight ROMs: ffight, ffightu and ffightj (MAME 0.260-era, ZIP or 7z)",
-     "Python 3.10 or later with NumPy and Pillow; media helpers are downloaded automatically for CPS+ audio"
+     "Python on a supported system; guided setup prepares required numerical packages and media helpers privately"
     ]
    },
    "redirect_from": [
@@ -3578,10 +3578,10 @@
      ]
     ],
     "how": "A small tool opens your Switch game files with your own keys, combines them with your arcade romsets, and writes out the finished MAME and HBMAME sets, the MiSTer files, and the music pack.",
-    "kit_command": "python3 apply.py --rompath roms --source-us usa.nsp --keys prod.keys --platform mame",
+    "kit_command": "python3 apply.py",
     "kit_dir": "backports/usf2/kit",
     "requires": [
-     "your own Nintendo Switch base game files: a USA NSP or XCI for the USA set, or a Japanese NSP for the Japan set",
+     "your own Nintendo Switch base game files: a supported USA or Japanese NSP or XCI matching the selected region",
      "your own Switch prod.keys",
      "your own arcade romset ssf2xj (with its parent ssf2t if yours is a split set) and the QSound firmware (qsound)",
      "Python 3.10 or newer; extraction and audio tools download automatically"
@@ -4868,7 +4868,7 @@
     "This is an unofficial fan project, unaffiliated with Capcom or NEC. Original game media is not included."
    ],
    "reconstruction": {
-    "kit_command": "python3 apply.py --disc /path/to/strider-pce.cue --romset /path/to/roms --bios /path/to/system-card.pce --x68k /path/to/strider-x68000.zip --out-dir out",
+    "kit_command": "python3 apply.py",
     "kit_dir": "tools/striderex_builder",
     "kit_include": [
      "apply.py",
@@ -4889,11 +4889,11 @@
     ],
     "requires": [
      "your own canonical MAME USA (striderua) and Japan (striderjr) arcade ROMs (ZIP, 7z or loose files); split sets also need the shared files in their strider parent archive",
-     "your own Strider Hiryuu (Japan) PC Engine CD as a complete Redump split-bin CUE rip or ZIP/7z archive",
-     "your own unheadered Japanese Super CD-ROM System v3.0 BIOS",
-     "your own Strider Hiryuu X68000 disk archive, used to restore the Aerial Battleship intro and ending music",
-     "Python 3.11 or later with NumPy, Pillow and SciPy; 7-Zip for 7z inputs",
-     "Linux: included MAME replay helper for Ubuntu 24.04 or compatible glibc 2.39 systems; Windows and macOS: MAME 0.288 with Lua"
+     "your own complete Strider Hiryuu (Japan) PC Engine CD, as matching split or merged CUE/BIN tracks or a supported ZIP/7z archive; filenames may differ",
+     "Python on a supported system; guided setup prepares required NumPy, SciPy and verified media helpers privately",
+     "your own matching Strider Hiryuu X68000 System disk, as a loose image or ZIP",
+     "For the full guided workflow, use Python 3.12 on an Apple Silicon Mac or x64 Python 3.13 on Windows",
+     "MAME, the PC Engine System Card BIOS, Pillow and an assembler are not required"
     ]
    },
    "related": [
@@ -5608,15 +5608,15 @@
    "faq": [
     {
      "a": [
-      "Python 3.11 or newer, numpy, and ffmpeg on your PATH. On a Mac: brew install python ffmpeg, then pip3 install numpy. On Linux, use your package manager. 7-Zip is only needed if your rips are .7z archives. The X68000 packs, the rendered MS-DOS packs (FM, Sound Canvas and MT-32) and the USF2 Remix pack additionally need git, cmake and a C/C++ compiler (see the X68000 and USF2 questions below, and the kit's MSDOS.md). The Strider pack and the X68000 FM pack need MAME as well (see the Strider and X68000 questions). Strider PC Engine also needs scipy (python3 -m pip install scipy).",
+      "For guided builds, use Python 3.12 on an Apple Silicon Mac or x64 Python 3.13 on Windows. Run apply.py; required numerical packages, FFmpeg and supported prebuilt helpers are prepared privately. Those helper paths need no compiler. Some recording paths still need MAME and your own BIOS files, as described below. The readme retains advanced command-line examples and manual setup options.",
       "Nothing is installed on the MiSTer itself. The kit is plain files copied to the SD card, and a stock MiSTer runs them as-is."
      ],
      "q": "What do I need installed to build the packs?"
     },
     {
      "a": [
-      "A .cue sheet with its .bin files beside it, a .mds/.mdf pair, or a .zip/.7z archive containing exactly one cue sheet. For the PlayStation 2 sources, point it at the .iso, a zip containing it, or a .chd. The two CD-audio sources (the Final Fight OST and the Area 88 soundtrack) are folders of .flac or .wav files instead of a disc image. The X68000 games are a zip of their .dim or .xdf floppy images. The two album sources are the downloads themselves: Capcom's Double Impact zip, as downloaded or unpacked, and the OC ReMix folder holding the FLACs. The MS-DOS game is its installed folder, or a .zip/.7z of it; the disc image alone (.cue or .chd) builds the CD soundtrack, but the FM, Sound Canvas and MT-32 packs need the installed game. The USF2 Remix pack reads the Switch game's .nsp.",
-      "Most CD sources also take a .chd, which the builder turns back into a cue sheet and image with MAME's chdman. The PlayStation 2 discs are read from their DVD .chd the same way. Strider PC Engine uses the original Strider Hiryuu (Japan).7z archive so its source identity can be checked exactly."
+      "A .cue sheet with its .bin files beside it, a .mds/.mdf pair, or a .zip/.7z archive containing exactly one cue sheet. For the PlayStation 2 sources, point it at the .iso, a zip containing it, or a .chd. The two CD-audio sources (the Final Fight OST and the Area 88 soundtrack) are folders of .flac or .wav files instead of a disc image. The X68000 games are a zip of their .dim or .xdf floppy images. The two album sources are the downloads themselves: Capcom's Double Impact zip, as downloaded or unpacked, and the OC ReMix folder holding the FLACs. The MS-DOS game is its installed folder, or a .zip/.7z of it; the disc image alone (.cue or .chd) builds the CD soundtrack, but the FM, Sound Canvas and MT-32 packs need the installed game. The USF2 Remix pack reads a supported USA base-game NSP or XCI; the required Program content is verified independently of its outer container.",
+      "Most CD sources also take a .chd, which the builder turns back into a cue sheet and image with MAME's chdman. The PlayStation 2 discs are read from their DVD .chd the same way. Strider PC Engine accepts the matching Japanese disc as a CUE/BIN rip or repacked archive, including renamed tracks and equivalent split or merged images. The required track contents are verified."
      ],
      "q": "What disc rip formats does the builder accept?"
     },
@@ -5630,8 +5630,8 @@
     {
      "a": [
       "The X68000 ports of Ghouls'n Ghosts, Street Fighter II' Champion Edition and Super Street Fighter II shipped their music as MIDI, meant for a Roland SC-55 on the desk next to the computer. There is no recording to copy, so the kit renders one on your machine, the same way the published packs were made: your disk images, your SC-55 ROM set, and a cycle-accurate SC-55 emulator built from source at a pinned revision.",
-      "That means git, cmake and a C/C++ compiler (Xcode's command-line tools on a Mac, build-essential and cmake on Debian or Ubuntu), a one-time build of a few minutes, and then ten minutes to an hour of rendering per game. The result is hash-checked like every other pack. The kit's X68000.md walks through it.",
-      "The published packs were rendered and rebuilt byte-for-byte on a Mac. Whether the emulator's output is bit-identical on every CPU has not been proven; if it isn't on yours, the builder stops at the hash check rather than staging different audio.",
+      "The supported prebuilt renderers are downloaded and verified privately, so no compiler is needed for those paths. Rendering can take ten minutes to an hour per game. The finished pack is checked against its published hash. The kit's X68000.md covers the required disk images, instrument firmware and advanced source-build options.",
+      "If a renderer produces different audio, the builder stops at the pack hash check rather than staging it.",
       "The Super Street Fighter II FM soundtrack is the other half of that port's music: what the X68000's own FM chip played. The kit records it by booting your disk images in MAME, opening the game's music test and playing each of its songs. It needs the same disk images, MAME, and MAME's x68000 BIOS set (x68000.zip), but no SC-55 ROMs. A few GB of disk and under an hour; the result is hash-checked like the rest. The kit's X68000.md has the details."
      ],
      "q": "What do the X68000 soundtracks need, and why are they different?"
@@ -5646,7 +5646,7 @@
     },
     {
      "a": [
-      "Your copy of Ultra Street Fighter II: The Final Challengers for Nintendo Switch: the USA base game's .nsp, not an update, extracted from any archive. The builder checks it against the verified file and refuses any other. It also needs your own prod.keys, which it reads where they are and never copies, and git, cmake and a C/C++ compiler: the first run builds NSTool, which reads Switch packages, and an Opus decoder.",
+      "Your USA base copy of Ultra Street Fighter II: The Final Challengers for Nintendo Switch, as a supported NSP or XCI, plus your own prod.keys. Updates and other Program content are rejected. The complete required Program is authenticated independently of the outer container. Verified extraction and decoding helpers are prepared privately; the supported prebuilt paths need no compiler.",
       "The decoder works in fixed point, so every computer, Mac, Windows or Linux, produces the same pack and the builder can check it against one published hash. Plan on about 4 GB of free space while it runs. The kit's SWITCH.md has the details."
      ],
      "q": "What does the USF2 Remix pack need?"
@@ -5813,10 +5813,10 @@
     "Sound effects and the announcer play live through the arcade audio path. Final Fight EX also plays its arranged voiced scenes; other cues deliberately retain the arcade music."
    ],
    "quickstart": [
-    "Download and unzip the kit.",
-    "Edit builder/discs.toml and point it at the disc rips you own (each entry is optional), or pass them on the command line with --disc mtwins_pce_disc=/discs/chiki.7z. make_packs.py --list shows every pack and the disc it wants.",
-    "Run python3 builder/make_packs.py (Python 3.11+, numpy, ffmpeg; scipy for Strider PC Engine). It builds out/mister/, laid out like your SD card. The X68000 packs also need git, cmake and a C/C++ compiler, and take up to an hour each to render (the FM pack records in MAME instead); the USF2 Remix pack needs the same three tools. The Strider pack needs MAME and your PlayStation BIOS set, and takes about five minutes to record.",
-    "Copy the contents of out/mister/ to your MiSTer SD card, merging with what's there. Arcade ROM zips go where they always do."
+    "Download and extract the kit, then run python3 apply.py in its folder (Windows: py -3.13 apply.py).",
+    "Choose Build or update and point it at your existing media folders. Select the available packs and regions; your choices are remembered.",
+    "Required Python packages and verified prebuilt helpers are prepared privately on supported systems. The PlayStation Strider and X68000 FM recording paths still need MAME and your own BIOS files; see the questions below.",
+    "Read INSTALL.txt in the completed output and copy the MiSTer folders to your SD card. Arcade ROMs stay in their normal locations. Run apply.py again to update."
    ],
    "release_history": [
     {
@@ -6029,7 +6029,7 @@
     {
      "disc": "Ultra Street Fighter II: The Final Challengers",
      "platform": "Nintendo Switch",
-     "variants": "USA, the base game's .nsp (not an update), plus your own prod.keys; the kit's SWITCH.md explains what it reads"
+     "variants": "USA base game, as a supported NSP or XCI with matching Program content"
     },
     {
      "disc": "Strider Hiryuu",
@@ -6397,10 +6397,10 @@
     "Sound effects and voices always play live through the game's own sound hardware; the images replace the music only."
    ],
    "quickstart": [
-    "Download and unzip the kit.",
-    "Edit builder/titles.toml and point it at your Neo Geo BIOS set and, for each game you want, its cartridge ROM set and Neo Geo CD rip (each game is optional). Or pass them on the command line, for example --rom samsho2=samsho2.zip --disc samsho2=ssii.cue. make_ngplus.py --list shows every game and the disc it wants.",
-    "Run python3 builder/make_ngplus.py (Python 3.11+ and ffmpeg). It builds out/mister/, laid out like your SD card, and checks every ROM, disc track and finished image against its published checksum.",
-    "Copy the contents of out/mister/ to your MiSTer SD card, merging with what's there. The games appear under Arcade > Arcade Patches > Arrangements > NG+."
+    "Download and extract the kit, then run python3 apply.py in its folder (Windows: py -3.13 apply.py).",
+    "Choose Build or update and point it at your existing arcade ROM, Neo Geo CD and BIOS folders. Choose the available games; your folders and selections are remembered.",
+    "Required supported helpers are prepared privately. The readme retains advanced TOML and command-line workflows for scripts and manual setup.",
+    "Read INSTALL.txt in the completed output and copy its MiSTer folders to your SD card. Run apply.py again to update."
    ],
    "release_history": [
     {

@@ -21,6 +21,10 @@ SETNAME_ALIASES = {
     # `popflamen` (clone of parent `popflame`). Only the parent carries a
     # gameover shot, so alias to the parent for a consistent full trio.
     "popflamn": "popflame",
+    # Virtua Cop ships as `vcopa` (Revision A), whose title capture is an
+    # emulator error screen ("memory destried") in progettoSNAPS and ADB
+    # alike. The parent `vcop` has the real title screen and the same game.
+    "vcopa": "vcop",
 }
 # Hand-pinned libretro filename stems where the canonical pick is a different
 # machine: the site's Devil Fish row is the Galaxian-hardware bootleg
@@ -31,6 +35,34 @@ LIBRETRO_OVERRIDES = {
 }
 # Order of preference for the third (in-game) shot.
 THIRD = ["gameover", "scores", "select", "bosses", "versus", "howto"]
+# Slots deliberately left off the site because the upstream capture is
+# unusable, keyed by the entry's (post-alias) setname and applied after
+# resolution so a rebuild never resurrects them.
+#   third_img: the "gameover" pack frame is nothing but end-of-game text
+#     ("GAME OVER", "THE END", maybe a score line) on an empty background.
+#     Hand-verified from contact sheets 2026-11-09; frames that show the
+#     playfield or scenery behind the text were left alone.
+#   snap_img: blank frame.
+DROP_SHOTS = {sn: {"third_img"} for sn in """
+    1944 19xx actfancr ajax amidars arkanoid arknoid2 armwar astrass avengers
+    avsp azurian bankp batcir bbmanw bigfghtr bioatack blockgal blueshrk boxyboy
+    brubber btime bublbobl bwidow cameltry captavenu captcomm cawing cbdash
+    cburnrub cbuster cgraplop citycon clapapa2 combatsc combh coozumou cosmicg
+    cosmo cppicf cprobowl cptennis cscrtry csdtenis ddonpach ddp2 desertbr
+    dokaben dokaben2 dondokod donpachi dotron driftout drtoppel dspirit dynablst
+    eeekkp eggor elevator espgal esprade euroch92 exprraid eyes f1dream fastlane
+    feversos finalizr footchmp frontlin gbusters grasspin gravitar grobda
+    gunfight gunforc2 gunfront hamaway horekid hwrace inyourfa jin jitsupro
+    kageki kick lizwiz lwings mappy megablst metalb motos mrtnt mwalk naughtyb
+    ninjaw nspiritj oscar pacland passsht phoenix pistoldm ponpoko pooyan popeye
+    pprobe psychic5 pulirula qtono2j qtorimon quester riotcity rocnrope rodland
+    roishtar rompers rthunder sailormn sasuke schaser scontra seawolf sectionz
+    sf shtrider skyadvnt skyskipr skysoldr snapjack solarfox solfigtr sosterm
+    spectar splatter sprglbpg srumbler starjack strider svg targ timetunl tmnt2
+    todruaga tokio tp84 tricktrp triothep troangel tron turtles tutankhm uccops
+    varth vastar warofbug wndrmomo ws wwestern zigzagb
+""".split()}
+DROP_SHOTS["ctsttape"] = {"snap_img"}  # DECO Test Tape: pure black frame
 MACHINE = re.compile(r'<machine\s+name="([^"]+)"[^>]*?(?:\scloneof="([^"]+)")?[^>]*>')
 
 
@@ -148,6 +180,10 @@ def main():
             entry = prev_keep[title]
         if title in NO_TITLE_TITLES:
             entry["title_img"] = None
+        for field in DROP_SHOTS.get(entry["setname"], ()):
+            entry[field] = None
+            if field == "third_img":
+                entry["third_pack"] = None
         if entry["title_img"]:
             n_title += 1
         if entry["snap_img"]:

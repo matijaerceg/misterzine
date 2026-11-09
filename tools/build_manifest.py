@@ -63,6 +63,16 @@ DROP_SHOTS = {sn: {"third_img"} for sn in """
     varth vastar warofbug wndrmomo ws wwestern zigzagb
 """.split()}
 DROP_SHOTS["ctsttape"] = {"snap_img"}  # DECO Test Tape: pure black frame
+# Shots the owner supplied by hand for a set the packs DO carry, keyed by
+# setname -> the slots supplied. Without the pin a rebuild resolves the
+# upstream capture again and fetch_images extracts it over the owner's file
+# (the manual carry-over in main() only covers titles no source has). The
+# files are keyed by the title's slug, like every manual shot.
+OWNER_SHOTS = {
+    # Aztarac: title and gameplay captured with the cabinet's bezel art and
+    # real glow (2026-11-09), in place of MAME's hairline frames.
+    "aztarac": ("title_img", "snap_img"),
+}
 MACHINE = re.compile(r'<machine\s+name="([^"]+)"[^>]*?(?:\scloneof="([^"]+)")?[^>]*>')
 
 
@@ -173,6 +183,11 @@ def main():
                 entry["snap_img"] = res["Named_Snaps"] and f"Named_Snaps/{res['Named_Snaps']}.png"
                 n_libfallback += 1
 
+        if sn in OWNER_SHOTS:
+            entry.update(source="manual", title_img=None, snap_img=None,
+                         third_img=None, third_pack=None)
+            for field in OWNER_SHOTS[sn]:
+                entry[field] = "manual"
         if title in NO_IMAGE_TITLES:
             entry = {"title": title, "setname": entry["setname"], "source": None,
                      "title_img": None, "snap_img": None, "third_img": None, "third_pack": None}

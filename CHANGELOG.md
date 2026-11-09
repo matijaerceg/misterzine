@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Pressing Esc while a screenshot is enlarged now closes only the enlarged view; press Esc again to close the game details.
+
 - Menu has a new Screenshots section under Theme with three switches: Screenshots, Flyers and Shadow mask (moved from Theme). Switch screenshots or flyers off and game details leave them out and skip the downloads.
 
 - Arcade originals such as Alien Storm, Golden Axe and Out Run use their short names again next to their PlayChoice-10, Mega-Tech and console-port versions.

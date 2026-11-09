@@ -5760,6 +5760,7 @@ let shotLbT;
 new ResizeObserver(() => { clearTimeout(shotLbT); shotLbT = setTimeout(maskLightboxShot, 100); }).observe(shotLbFrame);
 shotLightbox.addEventListener('click', () => shotLightbox.close());
 shotLightbox.addEventListener('keydown', e => {
+  e.stopPropagation();  // like the flyer's: Esc closes the enlarged shot only, never the panel behind it
   if (e.key === 'Escape') { e.preventDefault(); shotLightbox.close(); }
 });
 shotLightbox.addEventListener('close', () => {
@@ -6355,6 +6356,11 @@ document.addEventListener('keydown', e => {
   // the Esc ladder, arrow-nav, or type-anywhere while it's up (q.focus() on an
   // inert page would misfire anyway)
   if (favExpDlg.open || iniDlg.open || document.querySelector('dialog.fbdlg[open], dialog.cldialog[open]')) return;  // modal fields own their keyboard input
+  // an enlarged screenshot or flyer is modal too: its Esc closes it alone (a
+  // second Esc then reaches the ladder below and closes the panel), and arrows
+  // or typing must not act on the page behind it. The dialogs stop their own
+  // keydowns; this also covers a key that lands outside them.
+  if (shotLightbox.open || flyerLightbox.open) return;
   if (presetDD.open && presetDD.contains(e.target) && e.key !== 'Escape') return;
   if (e.key === 'Escape') {
     const jumpTools = document.getElementById('cljumptools');

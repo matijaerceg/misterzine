@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 08 Nov 2026 20:46:59 +0000</lastBuildDate>
+<lastBuildDate>Mon, 09 Nov 2026 07:10:15 +0000</lastBuildDate>
+<item>
+<title>[Updated] TK2000 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#TK2000</link>
+<guid isPermaLink="false">distribution_mister:_Computer/TK2000_20261108.rbf:2026-11-09T07:10:15+00:00</guid>
+<pubDate>Mon, 09 Nov 2026 07:10:15 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1984 / Microdigital&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/TK2000_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Aztarac (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#aztarac</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dkong3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1983 / Nintendo&lt;/p&gt;&lt;p&gt;Core: Arcade-DonkeyKong3CRT&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-04 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Time Pilot '84 (bazset) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#time-pilot-84-bazset</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Time Pilot '84.mra:2026-11-04T22:28:19+00:00</guid>
-<pubDate>Wed, 04 Nov 2026 22:28:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tp84.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1984 / Konami&lt;/p&gt;&lt;p&gt;Core: Arcade-TimePilot84CRT&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-04 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

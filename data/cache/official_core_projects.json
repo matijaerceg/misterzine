@@ -1,5 +1,5 @@
 {
-  "signature": "6f22ecb8e830fdebc8861e6b5dcdce72d1c520bbf477ba320814b08b68ec9d34",
+  "signature": "a744bfb4b0eb692532342ca6999a0281f3ce69f76fb047112a61813625d2bff7",
   "files": {
     "_Arcade/cores/ActFancer_20260708.rbf": [
       "cbf83337687f168e4a3dbdc3a251932c",
@@ -861,9 +861,7 @@
     ],
     "_Arcade/cores/S32_20261107.rbf": [
       "2db72b9b1743840dc46ee0a34084784e",
-      [
-        "MiSTer-devel/Arcade-SegaSystem32_MiSTer"
-      ]
+      []
     ],
     "_Arcade/cores/SDGundamPS_20260714.rbf": [
       "8c769f1f8ae56212af34ed6e8797b0cd",
@@ -1253,6 +1251,12 @@
       "a676fd222b1eead2e5e1c86924cfa4da",
       [
         "MiSTer-devel/Arcade-Freeze_MiSTer"
+      ]
+    ],
+    "_Computer/3B1_20261109.rbf": [
+      "67ce0e50b80eb69c2b9bc6a310c67ae4",
+      [
+        "MiSTer-devel/3B1"
       ]
     ],
     "_Computer/AcornAtom_20251001.rbf": [

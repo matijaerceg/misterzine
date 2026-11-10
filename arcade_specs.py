@@ -131,6 +131,11 @@ def parse_current_specs(stream, release):
             source = machine.get("sourcefile", "")
             entry["_source"] = f"https://github.com/mamedev/mame/blob/{release}/src/mame/{source}"
             entry = merge_specs(entry)
+            # The original monitor draws strokes, not a raster. A plain fact
+            # about the cabinet, kept outside FIELDS: it is never provisional
+            # and no curated source overrides it.
+            if any(d.get("type") == "vector" for d in machine.findall("display")):
+                entry["vec"] = True
             if machine.get("cloneof"):
                 entry["_parent"] = machine.get("cloneof")
             out[machine.get("name").lower()] = entry

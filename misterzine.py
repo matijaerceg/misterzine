@@ -4288,6 +4288,11 @@ def local_specs():
                     **{k: "\n".join(group["sources"]) for k in group["values"]}}}
                 out[sn] = {**merge_specs(out.get(sn), reviewed), "_reviewed": reviewed,
                            "_legacy": out.get(sn, {}).get("_legacy", {})}
+    # Vector monitor: only current MAME says so, and merge_specs keeps FIELDS
+    # alone, so it is stamped on after every merge above.
+    for sn, entry in current.items():
+        if entry.get("vec") and sn in out:
+            out[sn]["vec"] = True
     return out
 
 
@@ -4320,7 +4325,8 @@ def specs_for(setname, specs, dat):
     if fix:
         driver = "seibu/legionna.cpp" if sl == "godzilla" else "snk/snk6502.cpp"
         reviewed = {**fix, "_source": "https://github.com/mamedev/mame/blob/master/src/mame/" + driver}
-        return {**merge_specs(e, reviewed), "_reviewed": reviewed}
+        return {**merge_specs(e, reviewed), "_reviewed": reviewed,
+                **({"vec": True} if e.get("vec") else {})}
     return e
 
 
@@ -4342,7 +4348,7 @@ def cmd_specs(args):
         release = gh_api("/repos/mamedev/mame/releases/latest")
         tag = release["tag_name"]
         cached = json.loads(gzip.decompress(CURRENT_SPECS_GZ.read_bytes())) if CURRENT_SPECS_GZ.exists() else {}
-        if cached.get("release") != tag or cached.get("schema") != 1:
+        if cached.get("release") != tag or cached.get("schema") != 2:  # 2: adds `vec`
             asset = next(a for a in release["assets"] if a["name"] == tag + "lx.zip")
             log(f"  fetching official {tag} listxml ...")
             with zipfile.ZipFile(BytesIO(http_get(asset["browser_download_url"]))) as archive:
@@ -4350,7 +4356,7 @@ def cmd_specs(args):
                     specs = parse_current_specs(xml, tag)
             if len(specs) < 1000:
                 raise ValueError("incomplete current MAME specs response")
-            blob = json.dumps({"schema": 1, "release": tag, "specs": specs}, ensure_ascii=False,
+            blob = json.dumps({"schema": 2, "release": tag, "specs": specs}, ensure_ascii=False,
                               sort_keys=True, separators=(",", ":")).encode("utf-8")
             CURRENT_SPECS_GZ.write_bytes(gzip.compress(blob, mtime=0))
             log(f"specs: {len(specs)} current MAME entries")
@@ -5878,6 +5884,11 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # and they self-heal — once MAD has the value, the cell is no longer
         # blank so no provisional fill happens.
         sp = specs_for(sn, arcade_specs or {}, arcade_meta or {})
+        # Vector monitor (current MAME's display type). Its own flag, not a
+        # Resolution value: `res` is what the MiSTer core outputs (31kHz for
+        # these), which CRT owners need. Omitted for raster games.
+        if sp.get("vec"):
+            row["vec"] = 1
         # Keep previously hand-reviewed descriptions when modern MAME adds a
         # generic input layout for the same game.
         pin = arcade_specs_pin(sn, title)

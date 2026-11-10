@@ -6,6 +6,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - The new 3B1 core is listed as AT&T UNIX PC, with its year (1985), maker and a hardware photo. Heat of Eleven '98 shows its title screen, gameplay and team select in place of the board's boot test pattern.
 
+- The tracker now knows which arcade games used a vector monitor (Asteroids, Tempest, Star Wars and about two dozen more). Search "vector" to list them all; their game details say "vector original" on the Resolution line.
+
 - New Listing policy page: which databases the tracker follows and what takes a source off it. The Menu's What's listed note is shorter and links there, and the What's listed and RSS popups no longer close when the pointer crosses the gap to them slowly.
 
 - Pressing Esc while a screenshot is enlarged now closes only the enlarged view; press Esc again to close the game details.

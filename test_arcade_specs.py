@@ -92,6 +92,17 @@ class ArcadeSpecsTests(unittest.TestCase):
         self.assertNotIn("res", spec)
         self.assertIn("mame0289/src/mame/sega/unit.cpp", spec["_sources"]["ctl"])
 
+    def test_vector_monitor_is_flagged_and_survives_the_merge(self):
+        xml = b'''<mame><machine name="strokes" sourcefile="atari/unit.cpp"><display type="vector" rotate="0"/>
+          <input players="1"><control type="joy" ways="8" buttons="1"/></input></machine>
+          <machine name="pixels"><display type="raster" rotate="0"/><input players="1"/></machine></mame>'''
+        current = parse_current_specs(io.BytesIO(xml), "mame0289")
+        self.assertIs(current["strokes"]["vec"], True)
+        self.assertNotIn("vec", current["pixels"])
+        merged = local_specs({"strokes": {"ctl": "8-way · 2 buttons", "buttons": 2}}, current)
+        self.assertIs(merged["strokes"]["vec"], True)
+        self.assertNotIn("vec", merged["pixels"])
+
     def test_missing_button_attribute_is_not_zero_and_mahjong_is_special(self):
         xml = b'''<mame><machine name="unit"><input players="1"><control type="mahjong" buttons="21"/></input></machine>
           <machine name="joy"><input players="1"><control type="joy" ways="4"/></input></machine>

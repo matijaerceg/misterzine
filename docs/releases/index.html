@@ -3625,6 +3625,7 @@ function apply() {
             (d.rot || '') + ' ' + (d.brot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
             (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
             (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
+            (d.vec ? 'vector' : '') + ' ' +
             (d.beta ? gateStage(d) + ' patreon' : '') + ' ' +
             (SRC_SEARCH[d.src] || ''));
     return terms.every(t => hay.includes(t));
@@ -3796,7 +3797,7 @@ function makeUmbrella(ms) {
     date: min('date'), updated: max('updated'), mz: max('mz'), b: Math.max(...ms.map(m => m.b || 0)),
     date_kind: ms.every(m => m.date_kind === 'debut') ? 'debut' : 'build', core: '', src: '',
     mat: ms.some(m => m.mat) };
-  for (const k of ['genre', 'year', 'manufacturer', 'reg', 'rot', 'res', 'plr', 'ctl', 'spc', 'flip', 'sn', 'scr']) {
+  for (const k of ['genre', 'year', 'manufacturer', 'reg', 'rot', 'res', 'plr', 'ctl', 'spc', 'flip', 'sn', 'scr', 'vec']) {
     const v = same(k); if (v !== undefined && v !== '') u[k] = v;
   }
   const pic = ms.find(m => m.img);
@@ -5620,6 +5621,9 @@ function updateLaunchRow() {
   for (const lr of panel.querySelectorAll('.launchrow')) lr.innerHTML = launchRowHTML(lr.dataset);
 }
 
+// Resolution line of a vector-monitor game: the core's scan class, then the fact.
+const vecRes = res => res ? res + ', vector original' : 'Vector original';
+
 // The umbrella panel: one game, several cores. The shared facts once, then a
 // card per member build in the table's order, each with its own permalink,
 // star, launch row and dates — so everything about the game sits in one
@@ -5633,7 +5637,8 @@ function groupHTML(u) {
   specRow('Region', 'reg');
   specRow('Rotation', 'rot');
   if (u.scr) rows.push(['Screens', u.scr === 3 ? 'Triple screen (3)' : 'Dual screen (2)']);
-  specRow('Resolution', 'res');
+  if (u.vec) rows.push(['Resolution', vecRes(u.res)]);
+  else specRow('Resolution', 'res');
   specRow('Players', 'plr');
   specRow('Controls', 'ctl');
   specRow('Special controls', 'spc');
@@ -5865,7 +5870,13 @@ function detailHTML(d) {
   else specRow('Rotation', 'rot');
   // multi-monitor cabinets only (pipeline `scr` field); single screen is implied
   if (d.scr) rows.push(['Screens', d.scr === 3 ? 'Triple screen (3)' : 'Dual screen (2)']);
-  specRow('Resolution', 'res');
+  // vector-monitor games (pipeline `vec`): the value stays what the MiSTer core
+  // outputs, with the original monitor named after it. Only a provisional scan
+  // class is grayed, never the vector fact.
+  if (d.vec) rows.push(['Resolution', d.res && d.prov && d.prov.includes('res')
+    ? '<span class="prov" data-tip="' + PROV_TITLE + '">' + esc(d.res) + ' <em>(provisional)</em></span>, vector original'
+    : esc(vecRes(d.res)), true]);
+  else specRow('Resolution', 'res');
   specRow('Players', 'plr');
   specRow('Controls', 'ctl');
   specRow('Special controls', 'spc');

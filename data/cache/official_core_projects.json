@@ -1,5 +1,5 @@
 {
-  "signature": "a744bfb4b0eb692532342ca6999a0281f3ce69f76fb047112a61813625d2bff7",
+  "signature": "b9ec28d8af4a51efd172243972158f41d13873920da1c3786820a43cc74b03f6",
   "files": {
     "_Arcade/cores/ActFancer_20260708.rbf": [
       "cbf83337687f168e4a3dbdc3a251932c",
@@ -859,9 +859,11 @@
         "MiSTer-devel/Arcade-RushnAttack_MiSTer"
       ]
     ],
-    "_Arcade/cores/S32_20261107.rbf": [
-      "2db72b9b1743840dc46ee0a34084784e",
-      []
+    "_Arcade/cores/S32_20261109.rbf": [
+      "a7143327a364a8ac4532ff26983923d6",
+      [
+        "MiSTer-devel/Arcade-SegaSystem32_MiSTer"
+      ]
     ],
     "_Arcade/cores/SDGundamPS_20260714.rbf": [
       "8c769f1f8ae56212af34ed6e8797b0cd",

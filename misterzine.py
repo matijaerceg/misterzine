@@ -4503,6 +4503,7 @@ COMPUTER_MANUFACTURER = {
     "Sun-3": "Sun Microsystems",
     "SunSparcStation20": "Sun Microsystems",
     "Cray-XMP": "Cray Research",
+    "3B1": "AT&T",  # UNIX PC (PC 7300 / 3B1); designed and built by Convergent Technologies
     "JR100": "Panasonic",  # sold as the National JR-100 in Japan (Matsushita)
     "BasicMasterJr": "Hitachi",  # also in CONSOLE_MANUFACTURER: Distribution files it under _Console/
     "BasicMasterL3": "Hitachi",
@@ -4560,6 +4561,7 @@ CORE_YEAR = {
     "Sun-3": "1985",
     "SunSparcStation20": "1994",  # SPARCstation 20 announced May 1994
     "Cray-XMP": "1982",
+    "3B1": "1985",  # AT&T UNIX PC (PC 7300), 1985; the 3B1 revision followed in 1986
     "JR100": "1981",
     "BasicMasterJr": "1981",  # Hitachi MB-6885
     "BasicMasterL3": "1980",  # Hitachi MB-6890
@@ -4681,6 +4683,7 @@ SYSTEM_TITLES = {
     "MacQuadra800": "Macintosh Quadra 800",
     "MacIIcx": "Macintosh IIcx",
     "Cray-XMP": "Cray X-MP",
+    "3B1": "AT&T UNIX PC",
     "Minimig": "Amiga (Minimig)",
     "MSX": "MSX2",  # this core is the MSX2/2+/3 machine; the separate MSX1 core is first-gen
     "Neon": "Soyuz-Neon PK-11/16",

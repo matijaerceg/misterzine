@@ -72,6 +72,10 @@ OWNER_SHOTS = {
     # Aztarac: title and gameplay captured with the cabinet's bezel art and
     # real glow (2026-11-09), in place of MAME's hairline frames.
     "aztarac": ("title_img", "snap_img"),
+    # Heat of Eleven '98: MAME's stock capture (Arcade Database) is the M2
+    # board's boot colour bars in both slots. Title, gameplay and team select
+    # are native 512x384 MAME captures from MyAbandonware (2026-11-09).
+    "heatof11": ("title_img", "snap_img", "third_img"),
 }
 MACHINE = re.compile(r'<machine\s+name="([^"]+)"[^>]*?(?:\scloneof="([^"]+)")?[^>]*>')
 

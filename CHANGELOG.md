@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- New Listing policy page: which databases the tracker follows and what takes a source off it. The Menu's What's listed note is shorter and links there.
+
 - Pressing Esc while a screenshot is enlarged now closes only the enlarged view; press Esc again to close the game details.
 
 - Menu has a new Screenshots section under Theme with three switches: Screenshots, Flyers and Shadow mask (moved from Theme). Switch screenshots or flyers off and game details leave them out and skip the downloads.

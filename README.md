@@ -277,6 +277,10 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 
 ## The nineteen sources (all public)
 
+What the tracker lists and what takes a source off it is stated on the site's
+[listing policy](https://misterzine.fyi/listing-policy/) page (`docs/listing-policy/`); the
+"Currently off the tracker" list there is hand-maintained alongside `DELISTED_SOURCES`.
+
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
    are listed but labeled, see below)

@@ -4,7 +4,7 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
-- New Listing policy page: which databases the tracker follows and what takes a source off it. The Menu's What's listed note is shorter and links there.
+- New Listing policy page: which databases the tracker follows and what takes a source off it. The Menu's What's listed note is shorter and links there, and the What's listed and RSS popups no longer close when the pointer crosses the gap to them slowly.
 
 - Pressing Esc while a screenshot is enlarged now closes only the enlarged view; press Esc again to close the game details.
 

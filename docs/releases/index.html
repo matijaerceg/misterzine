@@ -919,7 +919,8 @@
   .rsspop.hoverpop::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
   /* beside the site menu (opened from one of its rows): the bridge moves to the
      right edge, where the pointer crosses from the row into the popover */
-  .rsspop.hoverpop.sidepop::before { left: auto; right: -8px; top: 0; bottom: 0; width: 8px; height: auto; }
+  .rsspop.hoverpop.sidepop::before { left: auto; right: calc(-1 * var(--bridge, 8px)); top: 0; bottom: 0;
+                                     width: var(--bridge, 8px); height: auto; }
   /* it can reach over the docked detail panel (z 100 + its resizer 101) */
   .rsspop.sidepop { z-index: 102; }
   /* the NEW badge's age tip is read-only, so it never needs to be travelled
@@ -6691,21 +6692,29 @@ const META_SEL = '#rss-link, #pub-note';
 const HOVER_SEL = META_SEL + ', td .nb, td .bb, td .ms, td .br, td .xb, td .sv, td[data-tip], td [data-tip]';  // td-level tips are ours too (theme.js skips td)
 const CAN_HOVER = matchMedia('(hover: hover)').matches;
 let hoverPop = null, hoverPopFor = null;   // hoverPopFor: the trigger element
+let hoverCloseT = 0;   // pending grace-period close (see closeIfOut)
+function cancelHoverClose() { if (hoverCloseT) { clearTimeout(hoverCloseT); hoverCloseT = 0; } }
 function closeHoverPop() {
+  cancelHoverClose();
   if (hoverPop) { hideChip(); hoverPop.remove(); hoverPop = null; hoverPopFor = null; return true; }
   return false;
 }
-// close the instant the pointer/focus leaves BOTH the trigger and the popover;
-// the .hoverpop::before bridge spans the gap so a link->popover move keeps the
-// pointer within the popover and doesn't trip this
+// close when the pointer/focus leaves BOTH the trigger and the popover. The
+// .hoverpop::before bridge spans the gap so a straight link->popover move
+// never leaves the pair, and a popover you can travel into (feeds, the policy
+// link) also gets a grace period, so a slow or diagonal path across the gap,
+// or a brush over the menu's padding, doesn't lose it. A read-only tip has
+// nothing to travel into and closes at once.
 function closeIfOut(e) {
   if (!hoverPop) return;
   if (hoverPop.contains(e.relatedTarget) ||
-      (hoverPopFor && hoverPopFor.contains(e.relatedTarget))) return;
-  closeHoverPop();
+      (hoverPopFor && hoverPopFor.contains(e.relatedTarget))) { cancelHoverClose(); return; }
+  if (hoverPop.classList.contains('tippop')) { closeHoverPop(); return; }
+  cancelHoverClose();
+  hoverCloseT = setTimeout(closeHoverPop, 450);
 }
 function openHoverPop(a) {
-  if (hoverPopFor === a) return;  // already showing this one
+  if (hoverPopFor === a) { cancelHoverClose(); return; }  // already showing this one
   closeHoverPop();
   hoverPopFor = a;
   hoverPop = document.createElement('div');
@@ -6728,6 +6737,9 @@ function openHoverPop(a) {
     if (m.left - w - 6 >= 8) {
       hoverPop.classList.add('sidepop');
       hoverPop.style.left = (m.left - w - 6) + 'px';
+      // the bridge reaches all the way to the row's own left edge (across the
+      // 6px gap AND the menu's padding), so the pointer is never over nothing
+      hoverPop.style.setProperty('--bridge', Math.max(8, r.left - (m.left - 6)) + 'px');
       hoverPop.style.top = Math.max(8, Math.min(r.top, innerHeight - hoverPop.offsetHeight - 8)) + 'px';
     } else {
       hoverPop.style.left = Math.max(8, m.right - w) + 'px';
@@ -6742,7 +6754,11 @@ function openHoverPop(a) {
 document.addEventListener('focusin', e => { const a = e.target.closest(META_SEL); if (a) openHoverPop(a); });
 document.addEventListener('focusout', e => { if (hoverPop && (e.target.closest(META_SEL) || hoverPop.contains(e.target))) closeIfOut(e); });
 if (CAN_HOVER) {
-  document.addEventListener('mouseover', e => { const a = e.target.closest(HOVER_SEL); if (a) openHoverPop(a); });
+  document.addEventListener('mouseover', e => {
+    const a = e.target.closest(HOVER_SEL);
+    if (a) openHoverPop(a);
+    else if (hoverPop && hoverPop.contains(e.target)) cancelHoverClose();  // made it into the popover
+  });
   document.addEventListener('mouseout', e => { if (hoverPop && (e.target.closest(HOVER_SEL) || hoverPop.contains(e.target))) closeIfOut(e); });
 }
 let metapop = null, metapopFor = null;

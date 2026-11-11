@@ -3455,7 +3455,7 @@
     "Added stages, arcade endings, voices and QSound music",
     "USA (English) and Japan versions"
    ],
-   "date": "2026-11-04",
+   "date": "2026-11-10",
    "description": [
     "Street Fighter Alpha 3 Upper comes to CPS-2 with Guile, Fei Long, Dee Jay, T. Hawk, Evil Ryu and Shin Akuma. The boxer, Juli and Juni have their own cells on the select screen.",
     "Guile, Fei Long, Dee Jay and T. Hawk bring their stages, music and arcade endings. The USA build includes the Street Fighter Alpha 3 English restoration; the Japan build keeps Japanese text and names.",
@@ -3491,6 +3491,34 @@
    ],
    "release_history": [
     {
+     "date": "2026-11-10",
+     "items": [
+      "Fixed a freeze when the computer-controlled Shin Akuma throws you.",
+      "Fixed Shin Akuma’s Raging Demon grabbing the opponent but never finishing, leaving them stuck.",
+      "Fixed Shin Akuma’s air super spending meter without firing, and his recovery when he lands from it.",
+      "Fixed T. Hawk’s throw holding a knocked-out opponent too long, and his missed Condor Dive landing late.",
+      "Fixed Evil Ryu’s and Shin Akuma’s teleports, which moved the wrong distance and ran punch teleports at kick speed.",
+      "Restored the label card and arrows on the ISM selection screen, and the FIGHTING STYLE SELECT side bands in the USA version.",
+      "The USA select screen reads SELECT PLAYER again, and the added fighters’ portraits have their grey boxes with the cursor glow showing.",
+      "Fixed Balrog’s Gigaton Blow and Shin M. Bison’s Final Psycho Crusher drawing broken graphics.",
+      "Balrog, Juli and Juni play their own opening stories instead of Bison’s.",
+      "Fixed M. Bison lingering beside Juni during the Ryu scene, and restored Juni’s victory pose.",
+      "Fixed Evil Ryu’s match portrait showing Ryu’s face.",
+      "Restored the added fighters’ rival and boss encounters and special intros, including Guile versus Charlie and Dee Jay versus Sakura.",
+      "Dizzy stars appear above fighters’ heads again, including Shin Akuma’s.",
+      "Evil Ryu fights in his cave and Karin on her ship, with their location names, and Balrog’s map reads LAS VEGAS in the USA version.",
+      "Guile’s ending close-up shows his face instead of Ryu’s, Fei Long’s final ending background has its correct colors, and Balrog’s laboratory ending scene is layered correctly.",
+      "Fixed the victory backgrounds for Balrog, Juli and Juni, which used Bison’s, and Sakura’s bow colors on the versus screen.",
+      "The small fighters on the select screen show the color of the button you pressed, and Vega has his mask and claw.",
+      "Fixed ranking colors for every ISM, including Shin Akuma’s eyes and Sodom’s X-ISM mask, and the colors on the character biography buttons.",
+      "Attract mode shows the original fighter poses, Vega’s mask and claw, Blanka’s electric shock and Sodom’s black face ink.",
+      "Fixed garbled characters in T. Hawk’s Japanese opening.",
+      "Free Play now works on the NAOMI title, and title copyrights, registered marks and fades match each region.",
+      "Updated nine USA win quotes, restored forest stage shading and the English attract website address."
+     ],
+     "version": "rc2"
+    },
+    {
      "date": "2026-11-04",
      "items": [
       "First release candidate."
@@ -3509,7 +3537,7 @@
    "subtitle": "Arcade backport",
    "summary": "Upper on CPS-2, with Guile, Fei Long, Dee Jay, T. Hawk, Evil Ryu and Shin Akuma, in USA (English) and Japan builds.",
    "title": "Street Fighter Alpha 3 Upper (CPS-2)",
-   "version": "rc1"
+   "version": "rc2"
   },
   {
    "artifact": {

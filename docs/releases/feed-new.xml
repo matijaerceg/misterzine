@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Mon, 09 Nov 2026 22:34:26 +0000</lastBuildDate>
+<lastBuildDate>Wed, 11 Nov 2026 04:02:44 +0000</lastBuildDate>
+<item>
+<title>[New] Buggy Boy Junior/Speed Buggy (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#buggyboyjr</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Buggy Boy Junior.mra:2026-11-11T04:02:44+00:00</guid>
+<pubDate>Wed, 11 Nov 2026 04:02:44 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/buggyboyjr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1985 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: Arcade-BuggyBoyJunior&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-11 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Heat of Eleven '98 (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#heatof11</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/diggerc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Gold Bug (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gold-bug-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Gold Bug.mra:2026-10-31T20:48:19+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 20:48:19 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/goldbug.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1982 / Century Electronics&lt;/p&gt;&lt;p&gt;Core: bazset_CVS&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-10-31 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

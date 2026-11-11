@@ -6,7 +6,43 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Tue, 10 Nov 2026 23:25:54 +0000</lastBuildDate>
+<lastBuildDate>Wed, 11 Nov 2026 04:02:44 +0000</lastBuildDate>
+<item>
+<title>[New] Buggy Boy Junior/Speed Buggy (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#buggyboyjr</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Buggy Boy Junior.mra:2026-11-11T04:02:44+00:00</guid>
+<pubDate>Wed, 11 Nov 2026 04:02:44 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/buggyboyjr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1985 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: Arcade-BuggyBoyJunior&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-11 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Meikyu Jima (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#kickle-cubicle</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Kickle Cubicle (English title).mra:2026-11-11T04:02:44+00:00</guid>
+<pubDate>Wed, 11 Nov 2026 04:02:44 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kikcubic.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Irem&lt;/p&gt;&lt;p&gt;Core: kickle&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] S32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261110.rbf:2026-11-11T01:45:33+00:00</guid>
+<pubDate>Wed, 11 Nov 2026 01:45:33 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Apple IIGS (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261110.rbf:2026-11-11T01:45:33+00:00</guid>
+<pubDate>Wed, 11 Nov 2026 01:45:33 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Model2A (Arcade core, 11 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#doaab</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Primal Rage, T-MEK.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Apple IIGS (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261104.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Basic Master Jr (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#BasicMasterJr</link>
-<guid isPermaLink="false">distribution_mister:_Computer/BasicMasterJr_20261031.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1981 / Hitachi&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/BasicMasterJr_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] FM-7 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
-<guid isPermaLink="false">distribution_mister:_Computer/FM-7_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1982 / Fujitsu&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/FM-7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Macintosh IIcx (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacIIcx_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

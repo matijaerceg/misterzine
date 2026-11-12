@@ -1,5 +1,5 @@
 {
-  "signature": "89a744892c7433fc083b7d91f148129842c34a92d4e2e286855816dfe7a6417d",
+  "signature": "72fb30cecc83eaffe91c519f4a704250eef225e07d4eccd761a9df0f065580ea",
   "files": {
     "_Arcade/cores/ActFancer_20260708.rbf": [
       "cbf83337687f168e4a3dbdc3a251932c",
@@ -860,7 +860,7 @@
       ]
     ],
     "_Arcade/cores/S32_20261111.rbf": [
-      "8530898ef6b0943a1497c62203033233",
+      "d13cbec8c7f9a6af8081dbe4d80afdcc",
       [
         "MiSTer-devel/Arcade-SegaSystem32_MiSTer"
       ]
@@ -1513,8 +1513,8 @@
         "MiSTer-devel/MSX_MiSTer"
       ]
     ],
-    "_Computer/MacIIcx_20261107.rbf": [
-      "85a4cc64de8248fffdd459452eed1e79",
+    "_Computer/MacIIcx_20261110.rbf": [
+      "8cac4f28c7cb1a74e013b618b3bfc3b7",
       [
         "MiSTer-devel/MacSE30_MiSTer"
       ]
@@ -1537,8 +1537,8 @@
         "MiSTer-devel/MacQuadra800_MiSTer"
       ]
     ],
-    "_Computer/MacSE30_20261107.rbf": [
-      "7ab28c4ff9fe6331076cf9fdb6928929",
+    "_Computer/MacSE30_20261110.rbf": [
+      "df1e13147a8ba19c1ad9b5692843b8d5",
       [
         "MiSTer-devel/MacSE30_MiSTer"
       ]
@@ -1589,6 +1589,12 @@
       "1d3541e97878492508dec4bf6f2096b2",
       [
         "MiSTer-devel/Oric_MiSTer"
+      ]
+    ],
+    "_Computer/PC6001_20261111.rbf": [
+      "cee36fea75b157c4e12d0cc029130622",
+      [
+        "MiSTer-devel/PC-6001_MiSTer"
       ]
     ],
     "_Computer/PC88_20261020.rbf": [

@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 12 Nov 2026 03:57:02 +0000</lastBuildDate>
+<lastBuildDate>Thu, 12 Nov 2026 12:13:24 +0000</lastBuildDate>
+<item>
+<title>[Updated] Acorn Atom (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#AcornAtom</link>
+<guid isPermaLink="false">distribution_mister:_Computer/AcornAtom_20261112.rbf:2026-11-12T12:13:24+00:00</guid>
+<pubDate>Thu, 12 Nov 2026 12:13:24 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1980 / Acorn&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/AcornAtom_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] KonamiM2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#evilngt</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2_20261112.rbf:2026-11-12T07:28:14+00:00</guid>
+<pubDate>Thu, 12 Nov 2026 07:28:14 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Evil Night, Tobe! Polystars, Total Vice.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] PolePosition (Arcade core, 2 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#polepos</link>
@@ -15,15 +33,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Pole Position, Pole Position II.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PolePosition_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Acorn Atom (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#AcornAtom</link>
-<guid isPermaLink="false">distribution_mister:_Computer/AcornAtom_20261111.rbf:2026-11-12T03:57:02+00:00</guid>
-<pubDate>Thu, 12 Nov 2026 03:57:02 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1980 / Acorn&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/AcornAtom_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] PC-6001 (Computer core)</title>
@@ -134,13 +143,13 @@
 <description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-10 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Tobe! Polystars (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#polystar</link>
+<title>[Updated] KonamiM2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#evilngt</link>
 <guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2_20261110.rbf:2026-11-10T19:53:34+00:00</guid>
 <pubDate>Tue, 10 Nov 2026 19:53:34 +0000</pubDate>
 <category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/polystar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-10 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Evil Night, Tobe! Polystars, Total Vice.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-10 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Darius (rmonic79) (Arcade)</title>
@@ -341,13 +350,13 @@
 <description>&lt;p&gt;Serves: Judge Dredd (Gm0rk), Mortal Kombat (rev 5.0 T-Unit 03-19-93), Mortal Kombat II (Gm0rk), NBA Jam (Gm0rk), NBA Jam Tournament Edition (Gm0rk).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-T-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Tobe! Polystars (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#polystar</link>
+<title>[Updated] KonamiM2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#evilngt</link>
 <guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2_20261106.rbf:2026-11-06T19:36:26+00:00</guid>
 <pubDate>Fri, 06 Nov 2026 19:36:26 +0000</pubDate>
 <category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/polystar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Evil Night, Tobe! Polystars, Total Vice.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Klax (Arcade)</title>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gradius4.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiHornet&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-30 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-KonamiHornet_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] KonamiGXT34 (Arcade core, 4 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#run-and-gun-2-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/cores/KonamiGXT34_20261030.rbf:2026-10-30T01:10:49+00:00</guid>
-<pubDate>Fri, 30 Oct 2026 01:10:49 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Run and Gun 2 (ppriest), Rushing Heroes (ppriest), Soccer Superstars (ppriest), Versus Net Soccer (ppriest).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-30 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-KonamiGX_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

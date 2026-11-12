@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 12 Nov 2026 12:13:24 +0000</lastBuildDate>
+<lastBuildDate>Thu, 12 Nov 2026 15:35:50 +0000</lastBuildDate>
+<item>
+<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261112.rbf:2026-11-12T15:35:50+00:00</guid>
+<pubDate>Thu, 12 Nov 2026 15:35:50 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Acorn Atom (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#AcornAtom</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: High Impact Football (Ongo), Mortal Kombat (rev 4.0 09-28-92), Smash T.V. (Ongo), Strike Force (Ongo), Super High Impact (Ongo), Terminator 2 - Judgment Day (Ongo), Total Carnage (Ongo), Trog (Ongo), Y-Unit Test ROM.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-30 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Gradius IV: Fukkatsu (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gradius4</link>
-<guid isPermaLink="false">ppriest:_Arcade/Gradius IV Fukkatsu (ver JAC).mra:2026-10-30T01:10:49+00:00</guid>
-<pubDate>Fri, 30 Oct 2026 01:10:49 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gradius4.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiHornet&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-30 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-KonamiHornet_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

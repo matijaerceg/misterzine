@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 12 Nov 2026 12:13:24 +0000</lastBuildDate>
+<lastBuildDate>Thu, 12 Nov 2026 15:35:50 +0000</lastBuildDate>
+<item>
+<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261112.rbf:2026-11-12T15:35:50+00:00</guid>
+<pubDate>Thu, 12 Nov 2026 15:35:50 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Acorn Atom (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#AcornAtom</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/polystar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1997 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Judge Dredd (Gm0rk) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#judge-dredd-gm0rk</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/Judge Dredd (rev TA1 7-12-92, location test).mra:2026-11-05T18:06:55+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 18:06:55 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jdreddp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-T-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-T-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

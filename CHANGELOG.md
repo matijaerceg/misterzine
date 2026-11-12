@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- The new PC-6001 entry now shows NEC, its original release year (1981), a hardware photo, and a note about the later models supported by the core.
+
 - The new 3B1 core is listed as AT&T UNIX PC, with its year (1985), maker and a hardware photo. Heat of Eleven '98 shows its title screen, gameplay and team select in place of the board's boot test pattern.
 
 - The tracker now knows which arcade games used a vector monitor (Asteroids, Tempest, Star Wars and about two dozen more). Search "vector" to list them all; their game details say "vector original" on the Resolution line.

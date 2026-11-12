@@ -1479,6 +1479,7 @@ CORE_REPO_OVERRIDES = {
     "Minimig": "Minimig-AGA",  # Amiga
     "Ti994a": "TI-99_4A",
     "RX78": "RX-78",
+    "PC6001": "PC-6001",
     "GameOfLife": "Life",
     "Studio-II": "StudioII",  # rbf is Studio-II, repo is StudioII_MiSTer
     "MacIIcx": "MacSE30",      # IIcx and SE/30 cores build from one source tree
@@ -4502,7 +4503,7 @@ COMPUTER_MANUFACTURER = {
     "PDP1": "DEC", "VT52": "DEC",
     "SharpMZ": "Sharp", "SharpMZ2500": "Sharp", "SharpX1": "Sharp", "X68000": "Sharp",
     "SonySMC777": "Sony",
-    "PC88": "NEC",
+    "PC88": "NEC", "PC6001": "NEC",
     "FM-7": "Fujitsu",
     "SGIIndy": "Silicon Graphics",
     "Sun-2": "Sun Microsystems",
@@ -4577,7 +4578,7 @@ CORE_YEAR = {
     "CoCo2": "1983", "CoCo3": "1986", "TRS-80": "1977", "Tandy1000": "1984", "AliceMC10": "1983",
     "PCXT": "1983", "PCXT-EGA": "1984", "PCjr": "1984", "PDP1": "1959", "VT52": "1975", "SharpMZ": "1978",
     "SharpMZ2500": "1985", "SharpX1": "1982", "SonySMC777": "1983",
-    "X68000": "1987", "PC88": "1981", "FM-7": "1982", "Ti994a": "1981", "ColecoAdam": "1983", "Aquarius": "1983",
+    "X68000": "1987", "PC88": "1981", "PC6001": "1981", "FM-7": "1982", "Ti994a": "1981", "ColecoAdam": "1983", "Aquarius": "1983",
     "TomyTutor": "1982", "Casio_PV-2000": "1983", "SordM5": "1982", "Svi328": "1983",
     "Laser310": "1983", "eg2000": "1982", "RX78": "1983", "TatungEinstein": "1984",
     "Lynx48": "1983", "Oric": "1983", "Jupiter": "1982", "Enterprise": "1985",
@@ -4699,6 +4700,7 @@ SYSTEM_TITLES = {
     "BasicMasterJr": "Basic Master Jr",
     "BasicMasterL3": "Basic Master Level 3",
     "PC88": "PC-8801",
+    "PC6001": "PC-6001",
     "PCXT": "PC/XT",
     "PCXT-EGA": "PC/XT (EGA)",
     "PDP1": "PDP-1",
@@ -4740,6 +4742,7 @@ CORE_NOTES = {
     "AtariLynx": "A 2-player ComLynx link variant core (AtariLynx2P) is also available.",
     "PCXT": "A separate EGA-video variant core (PCXT-EGA) is also available.",
     "PCXT-EGA": "EGA-video variant of the PC/XT core (which is CGA-based).",
+    "PC6001": "Also supports the PC-6001mkII, PC-6601 and PC-6001mkIISR (beta). Choose the model under Machine > Model, then Apply and reset.",
 }
 
 # Cores their author has withdrawn while the distributing db still ships the

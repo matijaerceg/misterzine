@@ -1,5 +1,5 @@
 {
-  "signature": "46d15bad83a873f71b5f94612ee51c0f18dc442d7af51255da1ed9b3b778a1ca",
+  "signature": "b9b32a7bd8eb869cda7570840a38d8ced7caa675faed0ae47ca2eae5a64ab96a",
   "files": {
     "_Arcade/cores/ActFancer_20260708.rbf": [
       "cbf83337687f168e4a3dbdc3a251932c",
@@ -859,9 +859,11 @@
         "MiSTer-devel/Arcade-RushnAttack_MiSTer"
       ]
     ],
-    "_Arcade/cores/S32_20261111.rbf": [
-      "d13cbec8c7f9a6af8081dbe4d80afdcc",
-      []
+    "_Arcade/cores/S32_20261112.rbf": [
+      "7876a9f8134e6f40c503d4a8c095a525",
+      [
+        "MiSTer-devel/Arcade-SegaSystem32_MiSTer"
+      ]
     ],
     "_Arcade/cores/SDGundamPS_20260714.rbf": [
       "8c769f1f8ae56212af34ed6e8797b0cd",
@@ -1509,6 +1511,12 @@
       "8d10afb89a9849eaf11b02b349e7ee1a",
       [
         "MiSTer-devel/MSX_MiSTer"
+      ]
+    ],
+    "_Computer/MTX512_20261108.rbf": [
+      "19430e90ec8ee4dca21bd5a9e66a1ee7",
+      [
+        "MiSTer-devel/Memotech_MiSTer"
       ]
     ],
     "_Computer/MacIIcx_20261110.rbf": [

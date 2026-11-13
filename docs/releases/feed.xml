@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Fri, 13 Nov 2026 01:13:12 +0000</lastBuildDate>
+<lastBuildDate>Fri, 13 Nov 2026 08:08:39 +0000</lastBuildDate>
+<item>
+<title>[Updated] DECOCassette (Arcade core, 39 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#cadanglr</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/DECOCassette_20261112.rbf:2026-11-13T08:08:39+00:00</guid>
+<pubDate>Fri, 13 Nov 2026 08:08:39 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Angler Dangler, Astro Fantasia, Boulder Dash, Burger Time (DECO), Burnin' Rubber (DECO), Cluster Buster, DECO Darksoft Multigame, DECO Test Tape, DECO Widel Multigame, DS Telejan, Explorer, Fighting Ice Hockey, Flash Boy, Flying Ball, Highway Chase, Lock'n'Chase, Lucky Poker, Manhattan, Mission-X, Nebula, Night Star, Ocean to Ocean, Oozumou - The Grand Sumo, Peter Pepper's Ice Cream Factory, Pro Bowling, Pro Soccer, Pro Tennis, Rootin' Tootin', Scrum Try, Skater, Super Astro Fighter, Super Doubles Tennis, Sweet Heart, Terranean, The Tower, Tornado, Tournament Pro Golf, Treasure Island, Zeroize.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-13 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] S32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/strkforc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1991 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-Y-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super High Impact (Gm0rk) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#super-high-impact-gm0rk</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/_Midway-Y-Unit/Super High Impact (rev LA2 10-22-91).mra:2026-11-05T21:57:14+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 21:57:14 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shimpact.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-Y-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

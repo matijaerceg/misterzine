@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- The new MTX512 core is listed as Memotech MTX512, with its year (1983), maker and a hardware photo.
+
 - The new PC-6001 entry now shows NEC, its original release year (1981), a hardware photo, and a note about the later models supported by the core.
 
 - The new 3B1 core is listed as AT&T UNIX PC, with its year (1985), maker and a hardware photo. Heat of Eleven '98 shows its title screen, gameplay and team select in place of the board's boot test pattern.

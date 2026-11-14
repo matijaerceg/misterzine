@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 13 Nov 2026 22:11:34 +0000</lastBuildDate>
+<lastBuildDate>Sat, 14 Nov 2026 08:21:31 +0000</lastBuildDate>
+<item>
+<title>[Updated] Blood Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bloodstm</link>
+<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/BloodStorm (v2.22).mra:2026-11-14T08:21:31+00:00</guid>
+<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bloodstm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1994 / Strata / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Time Killers (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#timekill</link>
+<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Time Killers (v1.32).mra:2026-11-14T08:21:31+00:00</guid>
+<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/timekill.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1992 / Strata / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] S32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/battle-bakraid-unlimited-version-special-ver.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1999 / Eighting&lt;/p&gt;&lt;p&gt;Core: BattleBakraid&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Battle Garegga (TheJesusFish) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#battle-garegga-europe-usa-japan-asia-sat-feb-3-1996</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/BattleGaregga_20261030.rbf:2026-10-31T15:18:33+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 15:18:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bgaregga.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1996 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: BattleGaregga&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Kingdom Grandprix (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#kingdmgp</link>
-<guid isPermaLink="false">slopcore:_Arcade/cores/KingdomGrandprix_20261030.rbf:2026-10-31T15:18:33+00:00</guid>
-<pubDate>Sat, 31 Oct 2026 15:18:33 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kingdmgp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1994 / Raizing / Eighting&lt;/p&gt;&lt;p&gt;Core: KingdomGrandprix&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-10-31 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Slop-Core/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

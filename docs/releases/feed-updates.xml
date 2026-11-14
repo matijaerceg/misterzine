@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Fri, 13 Nov 2026 16:34:07 +0000</lastBuildDate>
+<lastBuildDate>Fri, 13 Nov 2026 22:11:34 +0000</lastBuildDate>
+<item>
+<title>[Updated] S32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261113.rbf:2026-11-13T22:11:34+00:00</guid>
+<pubDate>Fri, 13 Nov 2026 22:11:34 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-13 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Acorn Atom (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#AcornAtom</link>
@@ -24,15 +33,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Angler Dangler, Astro Fantasia, Boulder Dash, Burger Time (DECO), Burnin' Rubber (DECO), Cluster Buster, DECO Darksoft Multigame, DECO Test Tape, DECO Widel Multigame, DS Telejan, Explorer, Fighting Ice Hockey, Flash Boy, Flying Ball, Highway Chase, Lock'n'Chase, Lucky Poker, Manhattan, Mission-X, Nebula, Night Star, Ocean to Ocean, Oozumou - The Grand Sumo, Peter Pepper's Ice Cream Factory, Pro Bowling, Pro Soccer, Pro Tennis, Rootin' Tootin', Scrum Try, Skater, Super Astro Fighter, Super Doubles Tennis, Sweet Heart, Terranean, The Tower, Tornado, Tournament Pro Golf, Treasure Island, Zeroize.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-13 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-DECOCassette_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] S32 (Arcade core, 18 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261112.rbf:2026-11-13T01:13:12+00:00</guid>
-<pubDate>Fri, 13 Nov 2026 01:13:12 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-13 (source: distribution_mister).&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Model1 (Arcade core, 6 games)</title>
@@ -149,7 +149,7 @@
 <pubDate>Wed, 11 Nov 2026 16:57:59 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] KonamiGX (Arcade core, 11 games)</title>
@@ -230,7 +230,7 @@
 <pubDate>Tue, 10 Nov 2026 00:53:30 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-10 (source: distribution_mister).&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-10 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] TaitoGNET (Arcade core, 22 games)</title>
@@ -266,7 +266,7 @@
 <pubDate>Sun, 08 Nov 2026 02:43:13 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Apple IIGS (Computer core)</title>
@@ -374,7 +374,7 @@
 <pubDate>Sat, 07 Nov 2026 02:55:14 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Vindicators (Arcade)</title>

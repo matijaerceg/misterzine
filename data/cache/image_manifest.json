@@ -650,9 +650,9 @@
  {
   "title": "Devil Fish",
   "setname": "devilfsh",
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "source": "adb",
+  "title_img": "titles/devilfsh.png",
+  "snap_img": "ingames/devilfsh.png",
   "third_img": null,
   "third_pack": null
  },
@@ -12692,9 +12692,9 @@
  {
   "title": "Argus",
   "setname": "argusg",
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "source": "adb",
+  "title_img": "titles/argusg.png",
+  "snap_img": "ingames/argusg.png",
   "third_img": null,
   "third_pack": null
  },
@@ -19119,9 +19119,9 @@
  {
   "title": "Cannon Ball",
   "setname": "cannonbp",
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "source": "adb",
+  "title_img": "titles/cannonbp.png",
+  "snap_img": "ingames/cannonbp.png",
   "third_img": null,
   "third_pack": null
  },
@@ -22827,9 +22827,9 @@
  {
   "title": "Speed Ball",
   "setname": "spdball",
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "source": "adb",
+  "title_img": "titles/spdball.png",
+  "snap_img": "ingames/spdball.png",
   "third_img": null,
   "third_pack": null
  },
@@ -25896,9 +25896,9 @@
  {
   "title": "Digger",
   "setname": "digger",
-  "source": null,
-  "title_img": null,
-  "snap_img": null,
+  "source": "adb",
+  "title_img": "titles/digger.png",
+  "snap_img": "ingames/digger.png",
   "third_img": null,
   "third_pack": null
  },
@@ -27744,6 +27744,1554 @@
   "source": "adb",
   "title_img": "titles/terraf.png",
   "snap_img": "ingames/terraf.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Devil Fish (Galaxian Hardware)",
+  "setname": "devilfsg",
+  "source": "adb",
+  "title_img": "titles/devilfsg.png",
+  "snap_img": "ingames/devilfsg.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Circus Charlie (level select, set 1)",
+  "setname": "circusc",
+  "source": "psnaps",
+  "title_img": "titles/circusc.png",
+  "snap_img": "snap/circusc.png",
+  "third_img": "gameover/circusc.png",
+  "third_pack": "gameover"
+ },
+ {
+  "title": "Astro Blaster",
+  "setname": "astrob",
+  "source": "adb",
+  "title_img": "titles/astrob.png",
+  "snap_img": "ingames/astrob.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "005",
+  "setname": "005",
+  "source": "adb",
+  "title_img": "titles/005.png",
+  "snap_img": "ingames/005.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Monster Bash",
+  "setname": "monsterb",
+  "source": "adb",
+  "title_img": "titles/monsterb.png",
+  "snap_img": "ingames/monsterb.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Pig Newton",
+  "setname": "pignewt",
+  "source": "adb",
+  "title_img": "titles/pignewt.png",
+  "snap_img": "ingames/pignewt.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Sindbad Mystery",
+  "setname": "sindbadm",
+  "source": "adb",
+  "title_img": "titles/sindbadm.png",
+  "snap_img": "ingames/sindbadm.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Odyssey",
+  "setname": "spaceod",
+  "source": "adb",
+  "title_img": "titles/spaceod.png",
+  "snap_img": "ingames/spaceod.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Au",
+  "setname": "au",
+  "source": "adb",
+  "title_img": "titles/au.png",
+  "snap_img": "ingames/au.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Guzzler",
+  "setname": "guzzler",
+  "source": "adb",
+  "title_img": "titles/guzzler.png",
+  "snap_img": "ingames/guzzler.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Swimmer",
+  "setname": "swimmer",
+  "source": "adb",
+  "title_img": "titles/swimmer.png",
+  "snap_img": "ingames/swimmer.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Tangram Q",
+  "setname": "tangramq",
+  "source": "adb",
+  "title_img": "titles/tangramq.png",
+  "snap_img": "ingames/tangramq.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Top Roller",
+  "setname": "toprollr",
+  "source": "adb",
+  "title_img": "titles/toprollr.png",
+  "snap_img": "ingames/toprollr.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Yamato",
+  "setname": "yamato",
+  "source": "adb",
+  "title_img": "titles/yamato.png",
+  "snap_img": "ingames/yamato.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Big Bucks",
+  "setname": "bigbucks",
+  "source": "adb",
+  "title_img": "titles/bigbucks.png",
+  "snap_img": "ingames/bigbucks.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Boardwalk Casino",
+  "setname": "bwcasino",
+  "source": "adb",
+  "title_img": "titles/bwcasino.png",
+  "snap_img": "ingames/bwcasino.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Bongo",
+  "setname": "bongo",
+  "source": "adb",
+  "title_img": "titles/bongo.png",
+  "snap_img": "ingames/bongo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Check Man",
+  "setname": "checkman",
+  "source": "adb",
+  "title_img": "titles/checkman.png",
+  "snap_img": "ingames/checkman.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Defend The Terra Attack On The Red UFO",
+  "setname": "redufo",
+  "source": "adb",
+  "title_img": "titles/redufo.png",
+  "snap_img": "ingames/redufo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Dingo",
+  "setname": "dingo",
+  "source": "adb",
+  "title_img": "titles/dingo.png",
+  "snap_img": "ingames/dingo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Driving Force",
+  "setname": "drivfrcp",
+  "source": "adb",
+  "title_img": "titles/drivfrcp.png",
+  "snap_img": "ingames/drivfrcp.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Fantastic",
+  "setname": "fantastc",
+  "source": "adb",
+  "title_img": "titles/fantastc.png",
+  "snap_img": "ingames/fantastc.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Jump Bug",
+  "setname": "jumpbug",
+  "source": "adb",
+  "title_img": "titles/jumpbug.png",
+  "snap_img": "ingames/jumpbug.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Kong",
+  "setname": "kong",
+  "source": "adb",
+  "title_img": "titles/kong.png",
+  "snap_img": "ingames/kong.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Levers",
+  "setname": "levers",
+  "source": "adb",
+  "title_img": "titles/levers.png",
+  "snap_img": "ingames/levers.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Moon Alien Part 2",
+  "setname": "moonal2",
+  "source": "adb",
+  "title_img": "titles/moonal2.png",
+  "snap_img": "ingames/moonal2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Ms Pac Man Twin",
+  "setname": "mspactwin",
+  "source": "adb",
+  "title_img": "titles/mspactwin.png",
+  "snap_img": "ingames/mspactwin.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "MTV Rock-N-Roll Trivia",
+  "setname": "rocktrv2",
+  "source": "adb",
+  "title_img": "titles/rocktrv2.png",
+  "snap_img": "ingames/rocktrv2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Naughty Mouse",
+  "setname": "nmouse",
+  "source": "adb",
+  "title_img": "titles/nmouse.png",
+  "snap_img": "ingames/nmouse.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Porky",
+  "setname": "porky",
+  "source": "adb",
+  "title_img": "titles/porky.png",
+  "snap_img": "ingames/porky.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Shoot The Bull",
+  "setname": "shootbul",
+  "source": "adb",
+  "title_img": "titles/shootbul.png",
+  "snap_img": "ingames/shootbul.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Sky Base",
+  "setname": "skybase",
+  "source": "adb",
+  "title_img": "titles/skybase.png",
+  "snap_img": "ingames/skybase.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Super ABC",
+  "setname": "superabc",
+  "source": "adb",
+  "title_img": "titles/superabc.png",
+  "snap_img": "ingames/superabc.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Super Chick",
+  "setname": "schick",
+  "source": "adb",
+  "title_img": "titles/schick.png",
+  "snap_img": "ingames/schick.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Time Fighter",
+  "setname": "timefgtr",
+  "source": "adb",
+  "title_img": "titles/timefgtr.png",
+  "snap_img": "ingames/timefgtr.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Triple Draw Poker",
+  "setname": "tdpgal",
+  "source": "adb",
+  "title_img": "titles/tdpgal.png",
+  "snap_img": "ingames/tdpgal.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Hot Shocker",
+  "setname": "hotshock",
+  "source": "adb",
+  "title_img": "titles/hotshock.png",
+  "snap_img": "ingames/hotshock.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Mariner",
+  "setname": "mariner",
+  "source": "adb",
+  "title_img": "titles/mariner.png",
+  "snap_img": "ingames/mariner.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Mr. Kougar",
+  "setname": "mrkougar",
+  "source": "adb",
+  "title_img": "titles/mrkougar.png",
+  "snap_img": "ingames/mrkougar.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "New Sinbad 7",
+  "setname": "newsin7",
+  "source": "adb",
+  "title_img": "titles/newsin7.png",
+  "snap_img": "ingames/newsin7.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Streaking",
+  "setname": "streakng",
+  "source": "adb",
+  "title_img": "titles/streakng.png",
+  "snap_img": "ingames/streakng.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Triple Punch",
+  "setname": "triplep",
+  "source": "adb",
+  "title_img": "titles/triplep.png",
+  "snap_img": "ingames/triplep.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Video Hustler",
+  "setname": "hustler",
+  "source": "adb",
+  "title_img": "titles/hustler.png",
+  "snap_img": "ingames/hustler.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "BMX Stunts",
+  "setname": "bmxstunts",
+  "source": "adb",
+  "title_img": "titles/bmxstunts.png",
+  "snap_img": "ingames/bmxstunts.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Moon Shuttle",
+  "setname": "mshuttle",
+  "source": "adb",
+  "title_img": "titles/mshuttle.png",
+  "snap_img": "ingames/mshuttle.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Ozon I",
+  "setname": "ozon1",
+  "source": "adb",
+  "title_img": "titles/ozon1.png",
+  "snap_img": "ingames/ozon1.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Scorpion",
+  "setname": "scorpion",
+  "source": "adb",
+  "title_img": "titles/scorpion.png",
+  "snap_img": "ingames/scorpion.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Battle",
+  "setname": "sbhoei",
+  "source": "adb",
+  "title_img": "titles/sbhoei.png",
+  "snap_img": "ingames/sbhoei.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Astropal",
+  "setname": "astropal",
+  "source": "adb",
+  "title_img": "titles/astropal.png",
+  "snap_img": "ingames/astropal.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Bowling Alley",
+  "setname": "bowler",
+  "source": "adb",
+  "title_img": "titles/bowler.png",
+  "snap_img": "ingames/bowler.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Cane",
+  "setname": "cane",
+  "source": "adb",
+  "title_img": "titles/cane.png",
+  "snap_img": "ingames/cane.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Checkmate",
+  "setname": "checkmat",
+  "source": "adb",
+  "title_img": "titles/checkmat.png",
+  "snap_img": "ingames/checkmat.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Claybuster",
+  "setname": "claybust",
+  "source": "adb",
+  "title_img": "titles/claybust.png",
+  "snap_img": "ingames/claybust.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Desert Gun",
+  "setname": "desertgu",
+  "source": "adb",
+  "title_img": "titles/desertgu.png",
+  "snap_img": "ingames/desertgu.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Dodgem",
+  "setname": "dodgem",
+  "source": "adb",
+  "title_img": "titles/dodgem.png",
+  "snap_img": "ingames/dodgem.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Dog Patch",
+  "setname": "dogpatch",
+  "source": "adb",
+  "title_img": "titles/dogpatch.png",
+  "snap_img": "ingames/dogpatch.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Double Play",
+  "setname": "dplay",
+  "source": "adb",
+  "title_img": "titles/dplay.png",
+  "snap_img": "ingames/dplay.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Extra Inning - Ball Park II",
+  "setname": "einning",
+  "source": "adb",
+  "title_img": "titles/einning.png",
+  "snap_img": "ingames/einning.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Galactica - Batalha Espacial",
+  "setname": "galactic",
+  "source": "adb",
+  "title_img": "titles/galactic.png",
+  "snap_img": "ingames/galactic.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Guided Missile",
+  "setname": "gmissile",
+  "source": "adb",
+  "title_img": "titles/gmissile.png",
+  "snap_img": "ingames/gmissile.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Gun Champ",
+  "setname": "gunchamp",
+  "source": "adb",
+  "title_img": "titles/gunchamp.png",
+  "snap_img": "ingames/gunchamp.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Indian Battle",
+  "setname": "indianbt",
+  "source": "adb",
+  "title_img": "titles/indianbt.png",
+  "snap_img": "ingames/indianbt.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "M-4",
+  "setname": "m4",
+  "source": "adb",
+  "title_img": "titles/m4.png",
+  "snap_img": "ingames/m4.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Moon Raker",
+  "setname": "mraker",
+  "source": "adb",
+  "title_img": "titles/mraker.png",
+  "snap_img": "ingames/mraker.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Orbite",
+  "setname": "orbite",
+  "source": "adb",
+  "title_img": "titles/orbite.png",
+  "snap_img": "ingames/orbite.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Ozma Wars",
+  "setname": "ozmawars",
+  "source": "adb",
+  "title_img": "titles/ozmawars.png",
+  "snap_img": "ingames/ozmawars.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Phantom II",
+  "setname": "phantom2",
+  "source": "adb",
+  "title_img": "titles/phantom2.png",
+  "snap_img": "ingames/phantom2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rolling Crash - Moon Base",
+  "setname": "rollingc",
+  "source": "adb",
+  "title_img": "titles/rollingc.png",
+  "snap_img": "ingames/rollingc.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Shuttle Invader",
+  "setname": "shuttlei",
+  "source": "adb",
+  "title_img": "titles/shuttlei.png",
+  "snap_img": "ingames/shuttlei.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Sky Kid (new version)",
+  "setname": "skykid",
+  "source": "adb",
+  "title_img": "titles/skykid.png",
+  "snap_img": "ingames/skykid.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Sky Love",
+  "setname": "skylove",
+  "source": "adb",
+  "title_img": "titles/skylove.png",
+  "snap_img": "ingames/skylove.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Invaders Multigame",
+  "setname": "invmulti",
+  "source": "adb",
+  "title_img": "titles/invmulti.png",
+  "snap_img": "ingames/invmulti.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Walk",
+  "setname": "spacwalk",
+  "source": "adb",
+  "title_img": "titles/spacwalk.png",
+  "snap_img": "ingames/spacwalk.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space War",
+  "setname": "spcewarl",
+  "source": "adb",
+  "title_img": "titles/spcewarl.png",
+  "snap_img": "ingames/spcewarl.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Steel Worker",
+  "setname": "steelwkr",
+  "source": "adb",
+  "title_img": "titles/steelwkr.png",
+  "snap_img": "ingames/steelwkr.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "The Invaders",
+  "setname": "tinv2650",
+  "source": "adb",
+  "title_img": "titles/tinv2650.png",
+  "snap_img": "ingames/tinv2650.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Tornado Baseball - Ball Park",
+  "setname": "tornbase",
+  "source": "adb",
+  "title_img": "titles/tornbase.png",
+  "snap_img": "ingames/tornbase.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Yosaku To Donbei",
+  "setname": "yosakdon",
+  "source": "adb",
+  "title_img": "titles/yosakdon.png",
+  "snap_img": "ingames/yosakdon.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Invader's Revenge",
+  "setname": "invrvnge",
+  "source": "adb",
+  "title_img": "titles/invrvnge.png",
+  "snap_img": "ingames/invrvnge.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "4 Fun In 1",
+  "setname": "4in1",
+  "source": "adb",
+  "title_img": "titles/4in1.png",
+  "snap_img": "ingames/4in1.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "A. D. 2083",
+  "setname": "ad2083",
+  "source": "adb",
+  "title_img": "titles/ad2083.png",
+  "snap_img": "ingames/ad2083.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Dambusters",
+  "setname": "dambustr",
+  "source": "adb",
+  "title_img": "titles/dambustr.png",
+  "snap_img": "ingames/dambustr.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Harem",
+  "setname": "harem",
+  "source": "adb",
+  "title_img": "titles/harem.png",
+  "snap_img": "ingames/harem.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rock Climber",
+  "setname": "rockclim",
+  "source": "adb",
+  "title_img": "titles/rockclim.png",
+  "snap_img": "ingames/rockclim.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Cheeky Mouse",
+  "setname": "cheekyms",
+  "source": "adb",
+  "title_img": "titles/cheekyms.png",
+  "snap_img": "ingames/cheekyms.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Magical Spot II",
+  "setname": "magspot2",
+  "source": "adb",
+  "title_img": "titles/magspot2.png",
+  "snap_img": "ingames/magspot2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Mrs. Dynamite",
+  "setname": "mrsdyna",
+  "source": "adb",
+  "title_img": "titles/mrsdyna.png",
+  "snap_img": "ingames/mrsdyna.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rack + Roll",
+  "setname": "racknrol",
+  "source": "adb",
+  "title_img": "titles/racknrol.png",
+  "snap_img": "ingames/racknrol.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Red Clash",
+  "setname": "redclash",
+  "source": "adb",
+  "title_img": "titles/redclash.png",
+  "snap_img": "ingames/redclash.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Raider",
+  "setname": "sraider",
+  "source": "adb",
+  "title_img": "titles/sraider.png",
+  "snap_img": "ingames/sraider.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Zero Hour",
+  "setname": "zerohour",
+  "source": "adb",
+  "title_img": "titles/zerohour.png",
+  "snap_img": "ingames/zerohour.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Bulls Eye Darts",
+  "setname": "bullsdrt",
+  "source": "adb",
+  "title_img": "titles/bullsdrt.png",
+  "snap_img": "ingames/bullsdrt.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Maze Invaders",
+  "setname": "mazeinv",
+  "source": "adb",
+  "title_img": "titles/mazeinv.png",
+  "snap_img": "ingames/mazeinv.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Multipede",
+  "setname": "multiped",
+  "source": "adb",
+  "title_img": "titles/multiped.png",
+  "snap_img": "ingames/multiped.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Warlords",
+  "setname": "warlords",
+  "source": "adb",
+  "title_img": "titles/warlords.png",
+  "snap_img": "ingames/warlords.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Speed Ball (FF, Tecfri, 1987)",
+  "setname": "speedbal",
+  "source": "adb",
+  "title_img": "titles/speedbal.png",
+  "snap_img": "ingames/speedbal.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Bikkuri Card",
+  "setname": "bikkuric",
+  "source": "adb",
+  "title_img": "titles/bikkuric.png",
+  "snap_img": "ingames/bikkuric.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Chance Kun",
+  "setname": "chkun",
+  "source": "adb",
+  "title_img": "titles/chkun.png",
+  "snap_img": "ingames/chkun.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Choplifter (unprotected)",
+  "setname": "chopliftu",
+  "source": "adb",
+  "title_img": "titles/chopliftu.png",
+  "snap_img": "ingames/chopliftu.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "FAX",
+  "setname": "fax",
+  "source": "adb",
+  "title_img": "titles/fax.png",
+  "snap_img": "ingames/fax.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Power Surge",
+  "setname": "psurge",
+  "source": "adb",
+  "title_img": "titles/psurge.png",
+  "snap_img": "ingames/psurge.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Side Trak",
+  "setname": "sidetrac",
+  "source": "adb",
+  "title_img": "titles/sidetrac.png",
+  "snap_img": "ingames/sidetrac.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Teeter Torture",
+  "setname": "teetert",
+  "source": "adb",
+  "title_img": "titles/teetert.png",
+  "snap_img": "ingames/teetert.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "UFO Senshi Yohko Chan (B13 EXPERIMENTAL)",
+  "setname": "ufosensi",
+  "source": "adb",
+  "title_img": "titles/ufosensi.png",
+  "snap_img": "ingames/ufosensi.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Wonder Boy in Monster Land (English VC Decrypted)",
+  "setname": "wbmlvcd",
+  "source": "adb",
+  "title_img": "titles/wbmlvcd.png",
+  "snap_img": "ingames/wbmlvcd.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Car Polo",
+  "setname": "carpolo",
+  "source": "adb",
+  "title_img": "titles/carpolo.png",
+  "snap_img": "ingames/carpolo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Circus - Acrobat TV",
+  "setname": "circus",
+  "source": "adb",
+  "title_img": "titles/circus.png",
+  "snap_img": "ingames/circus.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Crash",
+  "setname": "crash",
+  "source": "adb",
+  "title_img": "titles/crash.png",
+  "snap_img": "ingames/crash.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Fire One",
+  "setname": "fireone",
+  "source": "adb",
+  "title_img": "titles/fireone.png",
+  "snap_img": "ingames/fireone.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rip Cord",
+  "setname": "ripcord",
+  "source": "adb",
+  "title_img": "titles/ripcord.png",
+  "snap_img": "ingames/ripcord.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Robot Bowl",
+  "setname": "robotbwl",
+  "source": "adb",
+  "title_img": "titles/robotbwl.png",
+  "snap_img": "ingames/robotbwl.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Star Fire",
+  "setname": "starfire",
+  "source": "adb",
+  "title_img": "titles/starfire.png",
+  "snap_img": "ingames/starfire.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Star Fire 2",
+  "setname": "starfir2",
+  "source": "adb",
+  "title_img": "titles/starfir2.png",
+  "snap_img": "ingames/starfir2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Trapeze - Trampoline",
+  "setname": "trapeze",
+  "source": "adb",
+  "title_img": "titles/trapeze.png",
+  "snap_img": "ingames/trapeze.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Cannon Ball (Yun Sung, horizontal) [TomSVR]",
+  "setname": "cannball",
+  "source": "adb",
+  "title_img": "titles/cannball.png",
+  "snap_img": "ingames/cannball.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Conquest",
+  "setname": "conquest",
+  "source": "adb",
+  "title_img": "titles/conquest.png",
+  "snap_img": "ingames/conquest.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Curve Ball",
+  "setname": "curvebal",
+  "source": "adb",
+  "title_img": "titles/curvebal.png",
+  "snap_img": "ingames/curvebal.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Insector",
+  "setname": "insector",
+  "source": "adb",
+  "title_img": "titles/insector.png",
+  "snap_img": "ingames/insector.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Knightmare",
+  "setname": "kngtmare",
+  "source": "adb",
+  "title_img": "titles/kngtmare.png",
+  "snap_img": "ingames/kngtmare.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Lotto Fun",
+  "setname": "lottofun",
+  "source": "adb",
+  "title_img": "titles/lottofun.png",
+  "snap_img": "ingames/lottofun.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Screw Loose",
+  "setname": "screwloo",
+  "source": "adb",
+  "title_img": "titles/screwloo.png",
+  "snap_img": "ingames/screwloo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "The Three Stooges In Brides Is Brides",
+  "setname": "3stooges",
+  "source": "adb",
+  "title_img": "titles/3stooges.png",
+  "snap_img": "ingames/3stooges.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Tylz",
+  "setname": "tylz",
+  "source": "adb",
+  "title_img": "titles/tylz.png",
+  "snap_img": "ingames/tylz.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Wiz Warz",
+  "setname": "wizwarz",
+  "source": "adb",
+  "title_img": "titles/wizwarz.png",
+  "snap_img": "ingames/wizwarz.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Video Vince And The Game Factory",
+  "setname": "vidvince",
+  "source": "adb",
+  "title_img": "titles/vidvince.png",
+  "snap_img": "ingames/vidvince.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Brain",
+  "setname": "brain",
+  "source": "adb",
+  "title_img": "titles/brain.png",
+  "snap_img": "ingames/brain.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "DakkoChan House",
+  "setname": "dakkochn",
+  "source": "adb",
+  "title_img": "titles/dakkochn.png",
+  "snap_img": "ingames/dakkochn.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Gardia",
+  "setname": "gardia",
+  "source": "adb",
+  "title_img": "titles/gardia.png",
+  "snap_img": "ingames/gardia.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Heavy Metal",
+  "setname": "hvymetal",
+  "source": "adb",
+  "title_img": "titles/hvymetal.png",
+  "snap_img": "ingames/hvymetal.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Noboranka",
+  "setname": "nob",
+  "source": "adb",
+  "title_img": "titles/nob.png",
+  "snap_img": "ingames/nob.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Shooting Master",
+  "setname": "shtngmst",
+  "source": "libretro",
+  "title_img": "Named_Titles/Shooting Master (EVG, 8751 315-5159a).png",
+  "snap_img": "Named_Snaps/Shooting Master (EVG, 8751 315-5159a).png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Toki No Senshi - Chrono Soldier",
+  "setname": "tokisens",
+  "source": "adb",
+  "title_img": "titles/tokisens.png",
+  "snap_img": "ingames/tokisens.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Ufo Senshi Yohko Chan",
+  "setname": "ufosensi",
+  "source": "adb",
+  "title_img": "titles/ufosensi.png",
+  "snap_img": "ingames/ufosensi.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Wonder Boy Monster Land",
+  "setname": "wbml",
+  "source": "adb",
+  "title_img": "titles/wbml.png",
+  "snap_img": "ingames/wbml.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Draw Poker",
+  "setname": "dpoker",
+  "source": "adb",
+  "title_img": "titles/dpoker.png",
+  "snap_img": "ingames/dpoker.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Get A Way",
+  "setname": "getaway",
+  "source": "adb",
+  "title_img": "titles/getaway.png",
+  "snap_img": "ingames/getaway.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Germ Wars",
+  "setname": "germwars",
+  "source": "adb",
+  "title_img": null,
+  "snap_img": "ingames/germwars.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "10-Yard Fight",
+  "setname": "10yard",
+  "source": "adb",
+  "title_img": "titles/10yard.png",
+  "snap_img": "ingames/10yard.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Alpha One",
+  "setname": "alpha1v",
+  "source": "adb",
+  "title_img": "titles/alpha1v.png",
+  "snap_img": "ingames/alpha1v.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Phozon",
+  "setname": "phozon",
+  "source": "adb",
+  "title_img": "titles/phozon.png",
+  "snap_img": "ingames/phozon.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Drakton",
+  "setname": "drakton",
+  "source": "adb",
+  "title_img": "titles/drakton.png",
+  "snap_img": "ingames/drakton.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Street Heat",
+  "setname": "strtheat",
+  "source": "adb",
+  "title_img": "titles/strtheat.png",
+  "snap_img": "ingames/strtheat.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Pong Doubles",
+  "setname": "pongd",
+  "source": "adb",
+  "title_img": "titles/pongd.png",
+  "snap_img": "ingames/pongd.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Rebound",
+  "setname": "rebound",
+  "source": "adb",
+  "title_img": "titles/rebound.png",
+  "snap_img": "ingames/rebound.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Straight Flush",
+  "setname": "sflush",
+  "source": "adb",
+  "title_img": "titles/sflush.png",
+  "snap_img": "ingames/sflush.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Four Play",
+  "setname": "fourplay",
+  "source": "adb",
+  "title_img": "titles/fourplay.png",
+  "snap_img": "ingames/fourplay.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Ghostmuncher Galaxian",
+  "setname": "gmgalax",
+  "source": "adb",
+  "title_img": "titles/gmgalax.png",
+  "snap_img": "ingames/gmgalax.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Video Eight",
+  "setname": "videight",
+  "source": "adb",
+  "title_img": "titles/videight.png",
+  "snap_img": "ingames/videight.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Namennayo",
+  "setname": "namenayo",
+  "source": "adb",
+  "title_img": "titles/namenayo.png",
+  "snap_img": "ingames/namenayo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Alpha Fighter - Head On",
+  "setname": "alphaho",
+  "source": "adb",
+  "title_img": "titles/alphaho.png",
+  "snap_img": "ingames/alphaho.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Borderline",
+  "setname": "brdrline",
+  "source": "adb",
+  "title_img": "titles/brdrline.png",
+  "snap_img": "ingames/brdrline.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Car Hunt - Deep Scan",
+  "setname": "carhntds",
+  "source": "adb",
+  "title_img": "titles/carhntds.png",
+  "snap_img": "ingames/carhntds.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Depthcharge",
+  "setname": "depthch",
+  "source": "adb",
+  "title_img": "titles/depthch.png",
+  "snap_img": "ingames/depthch.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Frogs",
+  "setname": "frogs",
+  "source": "adb",
+  "title_img": "titles/frogs.png",
+  "snap_img": "ingames/frogs.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Head On",
+  "setname": "headon",
+  "source": "adb",
+  "title_img": "titles/headon.png",
+  "snap_img": "ingames/headon.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Head On 2",
+  "setname": "headon2",
+  "source": "adb",
+  "title_img": "titles/headon2.png",
+  "snap_img": "ingames/headon2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Heiankyo Alien",
+  "setname": "heiankyo",
+  "source": "adb",
+  "title_img": "titles/heiankyo.png",
+  "snap_img": "ingames/heiankyo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Invinco",
+  "setname": "invinco",
+  "source": "adb",
+  "title_img": "titles/invinco.png",
+  "snap_img": "ingames/invinco.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Invinco - Car Hunt",
+  "setname": "invcarht",
+  "source": "adb",
+  "title_img": "titles/invcarht.png",
+  "snap_img": "ingames/invcarht.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Invinco - Deep Scan",
+  "setname": "invds",
+  "source": "adb",
+  "title_img": "titles/invds.png",
+  "snap_img": "ingames/invds.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Invinco - Head On 2",
+  "setname": "invho2",
+  "source": "adb",
+  "title_img": "titles/invho2.png",
+  "snap_img": "ingames/invho2.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "N-Sub",
+  "setname": "nsub",
+  "source": "adb",
+  "title_img": "titles/nsub.png",
+  "snap_img": "ingames/nsub.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Nostromo",
+  "setname": "nostromo",
+  "source": "adb",
+  "title_img": "titles/nostromo.png",
+  "snap_img": "ingames/nostromo.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Safari",
+  "setname": "safari",
+  "source": "adb",
+  "title_img": "titles/safari.png",
+  "snap_img": "ingames/safari.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Samurai",
+  "setname": "samurai",
+  "source": "adb",
+  "title_img": "titles/samurai.png",
+  "snap_img": "ingames/samurai.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Attack",
+  "setname": "sspaceat",
+  "source": "adb",
+  "title_img": "titles/sspaceat.png",
+  "snap_img": "ingames/sspaceat.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Attack - Head On",
+  "setname": "sspacaho",
+  "source": "adb",
+  "title_img": "titles/sspacaho.png",
+  "snap_img": "ingames/sspacaho.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Space Trek",
+  "setname": "spacetrk",
+  "source": "adb",
+  "title_img": "titles/spacetrk.png",
+  "snap_img": "ingames/spacetrk.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Tranquillizer Gun",
+  "setname": "tranqgun",
+  "source": "adb",
+  "title_img": "titles/tranqgun.png",
+  "snap_img": "ingames/tranqgun.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Wanted",
+  "setname": "wantsega",
+  "source": "adb",
+  "title_img": "titles/wantsega.png",
+  "snap_img": "ingames/wantsega.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Punch-Out!! (Rev B)",
+  "setname": "punchout",
+  "source": "adb",
+  "title_img": "titles/punchout.png",
+  "snap_img": "ingames/punchout.png",
+  "third_img": null,
+  "third_pack": null
+ },
+ {
+  "title": "Super Punch-Out!! (Rev B)",
+  "setname": "spnchout",
+  "source": "adb",
+  "title_img": "titles/spnchout.png",
+  "snap_img": "ingames/spnchout.png",
   "third_img": null,
   "third_pack": null
  }

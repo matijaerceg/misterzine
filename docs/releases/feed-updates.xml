@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 16 Nov 2026 00:01:56 +0000</lastBuildDate>
+<lastBuildDate>Mon, 16 Nov 2026 06:09:59 +0000</lastBuildDate>
+<item>
+<title>[Updated] S32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261116.rbf:2026-11-16T06:09:59+00:00</guid>
+<pubDate>Mon, 16 Nov 2026 06:09:59 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-JalecoMS1BCD (Arcade core, 8 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#64street</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-JalecoMS1BCD_20261115.rbf:2026-11-16T01:42:09+00:00</guid>
+<pubDate>Mon, 16 Nov 2026 01:42:09 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: 64th. Street: A Detective Story, Avenging Spirit, Big Striker, Chimera Beast, Cybattler, E.D.F.: Earth Defense Force (kuzearcade), Hayaoshi Quiz Ouza Ketteisen: The King Of Quiz, Peek-a-Boo!.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-JalecoMS1BCD_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Macintosh LC (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#MacLC</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Primal Rage, T-MEK.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PrimalRage_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Apple IIGS (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261104.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] FM-7 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
-<guid isPermaLink="false">distribution_mister:_Computer/FM-7_20261102.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1982 / Fujitsu&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/FM-7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

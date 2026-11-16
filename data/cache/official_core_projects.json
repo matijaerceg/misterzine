@@ -1,5 +1,5 @@
 {
-  "signature": "53a585f3ae432477e49e75fda66a259d394013a6b6a89b7cd3a89579ff17c28a",
+  "signature": "a5f23b1db34694bf14da15f325e2d6df048c0b7a7c3fee03c774d35a974b2c78",
   "files": {
     "_Arcade/cores/ActFancer_20260708.rbf": [
       "cbf83337687f168e4a3dbdc3a251932c",
@@ -23,6 +23,12 @@
       "2f9b66c2274e95ea96dca26cbf6c0a0a",
       [
         "MiSTer-devel/Arcade-Arkanoid_MISTer"
+      ]
+    ],
+    "_Arcade/cores/ArmedFMD_20261115.rbf": [
+      "4940c31cae3d5ed75365cfa7718e2f23",
+      [
+        "MiSTer-devel/Arcade-ArmedF_MiSTer"
       ]
     ],
     "_Arcade/cores/Asteroids_20260810.rbf": [
@@ -865,8 +871,8 @@
         "MiSTer-devel/Arcade-RushnAttack_MiSTer"
       ]
     ],
-    "_Arcade/cores/S32_20261115.rbf": [
-      "3bd63ab7313b79294b27b48052fbf52a",
+    "_Arcade/cores/S32_20261116.rbf": [
+      "df49c4f0360090408b05c87f5860da33",
       [
         "MiSTer-devel/Arcade-SegaSystem32_MiSTer"
       ]

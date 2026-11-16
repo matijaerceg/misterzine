@@ -274,6 +274,25 @@ SOURCES = [
         "db_url": "https://raw.githubusercontent.com/asturur/Mister-cores/db/db.json.zip",
     },
     {
+        # RodimusFVC's cores, a db of his own since 2026-10-22 ("Rodimus
+        # Cores" forum thread): whole board families in one core each
+        # (Galaxian, Space Invaders, Sega VIC Dual, Exidy, Universal, Sega
+        # G80, Williams, ...), plus test builds of cores he also maintains
+        # in MiSTer-devel (BluePrint, Qix, DECO Cassette, Kyugo, Pole
+        # Position, SNK 6502, Vastar, UPL, Laserdisc), the Frotz
+        # interactive-fiction core and a VCR board game (Robots). Standard
+        # DB-Template db, every file carrying its own url pinned to a commit
+        # of one of ~35 core repos (releases/). It installs to a top folder
+        # of its own, _RodimusCores/, not _Arcade/: SOURCE_PATH_MAPS reads
+        # it in the _Arcade/ shape. Undated *_TestBuild.rbf files beside
+        # dated ones. No tags. Most of its games are Distribution games, so
+        # DISTRIBUTION_TAKES_OVER lists only the rest. Opt-in:
+        # [RodimusFVC/Rodimus_MiSTer_DB] (or his drop-in ini).
+        "id": "rodimus",
+        "name": "Rodimus Cores",
+        "db_url": "https://raw.githubusercontent.com/RodimusFVC/Rodimus_MiSTer_DB/db/db.json.zip",
+    },
+    {
         # Ongo's community database. It aggregates arcade MRAs and core builds
         # alongside other system databases, ROM payloads, scripts and extras;
         # only arcade MRA files and the shipped _Arcade/cores bitstreams are
@@ -349,7 +368,60 @@ SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr", "decoryah", "jlrh"}
 # (MiSTer-devel forked rossops' X Board core and ppriest's Fuuki and Psikyo
 # cores). Once the Distribution ships one of their games, export-web lists
 # only the Distribution's row (distribution_takeovers); nothing to do by hand.
-DISTRIBUTION_TAKES_OVER = {"rossops", "decoryah", "ppriest", "gm0rk"}
+# RodimusFVC commits to MiSTer-devel's own repos of nine of his cores, and
+# most of his db's games already ship there (owner's call 2026-11-16: the
+# Distribution's row wins).
+DISTRIBUTION_TAKES_OVER = {"rossops", "decoryah", "ppriest", "gm0rk", "rodimus"}
+
+# Dbs that install outside _Arcade/. RodimusFVC's lives in a top folder of
+# its own: _RodimusCores/_Arcade/ for the MRAs and _RodimusCores/cores/ for
+# their rbfs (MiSTer finds a game's core in the cores/ folder beside its
+# _Arcade/), plus _InteractiveFiction/ and _VCR/. Every reader of a db
+# (_load_db) maps his paths onto the _Arcade/ shape the pipeline knows, so
+# classify(), core_files, enrich-mra and the rename pairing all work
+# unchanged; the export maps an arcade row's path back (sd_path), because
+# the launch-on-MiSTer button opens the real file. Files that map to None
+# are not part of the catalogue: his _artwork/ folder (the same games again,
+# with artwork switched on), his "Not Working" folder, the Infocom MGLs that
+# launch Frotz and the VCR MRA that launches Robots. Frotz and Robots are
+# listed as Other cores, from their rbfs.
+SOURCE_INSTALL_ROOTS = {"rodimus": "_RodimusCores/"}
+RODIMUS_OTHER_CORES = {"frotz", "robots"}
+
+
+def _rodimus_path(path):
+    """RodimusFVC's install path in the pipeline's _Arcade/ shape, or None."""
+    root = SOURCE_INSTALL_ROOTS["rodimus"]
+    p = path.replace("\\", "/")
+    if not p.lower().startswith(root.lower()):
+        return None
+    rest = p[len(root):]
+    low = rest.lower()
+    if low.endswith(".rbf"):
+        name = rest.rsplit("/", 1)[-1]
+        if core_name(title_from_path(name)).lower() in RODIMUS_OTHER_CORES:
+            return "_Other/" + name
+        return "_Arcade/" + rest if low.startswith("cores/") else None
+    if low.startswith("_arcade/") and low.endswith(".mra"):
+        sub = low[len("_arcade/"):]
+        if sub.startswith(("_artwork/", "not working/")):
+            return None
+        return "_Arcade/" + rest[len("_arcade/"):]
+    return None
+
+
+SOURCE_PATH_MAPS = {"rodimus": _rodimus_path}
+
+
+def sd_path(source_id, path):
+    """The SD-card path a catalog path installs to: the catalog path itself,
+    except for a db that installs under a root of its own (SOURCE_INSTALL_ROOTS),
+    whose arcade paths were read in the _Arcade/ shape."""
+    root = SOURCE_INSTALL_ROOTS.get(source_id)
+    p = (path or "").replace("\\", "/")
+    if root and p.lower().startswith("_arcade/"):
+        return root + p
+    return path
 
 # Games MiSTer ships ONLY as an _Arcade/_alternatives MRA (the core authors
 # carry a regional set and no mainline one). export-web drops alternatives, so
@@ -738,6 +810,21 @@ def _db_json(raw):
     return json.loads(raw)
 
 
+def _load_db(source):
+    """A source's db, its file paths in the _Arcade/ shape every reader
+    expects (SOURCE_PATH_MAPS; files that map to None are dropped)."""
+    d = _db_json(http_get(source["db_url"]))
+    remap = SOURCE_PATH_MAPS.get(source["id"])
+    if remap:
+        files = {}
+        for path, meta in d.get("files", {}).items():
+            mapped = remap(path)
+            if mapped:
+                files[mapped] = meta
+        d["files"] = files
+    return d
+
+
 def _coinop_key_gates(d, tagged):
     """Catch Coin-Op MRAs that load a supporter key but lack the db gate tag.
 
@@ -815,7 +902,7 @@ def fetch_db(source):
     (no recency inflation), and the graduation logs a 'new' event so the
     feeds announce it going public."""
     log(f"  fetching {source['name']} ...")
-    d = _db_json(http_get(source["db_url"]))
+    d = _load_db(source)
     if source["id"] == "distribution_mister":
         try:
             refresh_official(d, CACHEDIR / "official_core_projects.json", http_get, log)
@@ -1693,6 +1780,9 @@ MRA_REPOS = [
     # per-file urls into five core repos' releases/, like ppriest's
     ("shmupfan", None, None, "_Arcade"),
     ("asturur", "asturur/Mister-cores", "main", "_Arcade"),
+    # per-file urls into ~35 core repos' releases/; paths read in the
+    # _Arcade/ shape (SOURCE_PATH_MAPS), alternatives included
+    ("rodimus", None, None, "_Arcade"),
 ]
 
 
@@ -1703,7 +1793,7 @@ def _db_hosted_mras(source_id, mradir):
     by file name). Files are kept by hash, so a warm cache refetches only
     what changed and a dropped MRA leaves the folder."""
     source = next(s for s in SOURCES if s["id"] == source_id)
-    d = _db_json(http_get(source["db_url"]))
+    d = _load_db(source)
     outdir = DATA / "repos" / source_id / mradir
     outdir.mkdir(parents=True, exist_ok=True)
     want, urls = {}, {}
@@ -1719,7 +1809,7 @@ def _db_hosted_mras(source_id, mradir):
     for old in outdir.glob("*.mra"):
         if old.name not in want:
             old.unlink()
-    got = 0
+    fetch = []
     for name, (path, meta) in want.items():
         dest = outdir / name
         urls[name] = meta.get("url") or ""
@@ -1728,9 +1818,13 @@ def _db_hosted_mras(source_id, mradir):
         if not urls[name]:
             log(f"  {source_id}: {path} has no url in the db; skipped")
             continue
-        dest.write_bytes(http_get(urls[name]))
-        got += 1
-    log(f"  {source_id}: {len(want)} MRAs from the db ({got} downloaded)")
+        fetch.append((dest, urls[name]))
+    # CI starts with an empty folder every run, and RodimusFVC's db alone
+    # serves ~1,600 MRAs (alternatives included): fetch in parallel
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        for dest, raw in zip((f[0] for f in fetch), pool.map(lambda f: http_get(f[1]), fetch)):
+            dest.write_bytes(raw)
+    log(f"  {source_id}: {len(want)} MRAs from the db ({len(fetch)} downloaded)")
     return DATA / "repos" / source_id, urls
 
 
@@ -1810,7 +1904,7 @@ def _mra_specs_key(source_id, repo_path, mradir):
 def _db_mra_paths(source_id):
     """A source's current MRA paths from its db, within its tracked scope."""
     source = next(s for s in SOURCES if s["id"] == source_id)
-    d = _db_json(http_get(source["db_url"]))
+    d = _load_db(source)
     return sorted(p for p in d.get("files", {})
                   if p.lower().endswith(".mra") and tracked_path(source_id, p))
 
@@ -3498,6 +3592,506 @@ ASTURUR_FROZEN_DATES = {
     "Round Up 5 - Super Delta Force.mra": "2026-10-23",
 }
 
+RODIMUS_REPO = "RodimusFVC/Rodimus_MiSTer_DB"
+# Debut dates for the RodimusFVC initial import (2026-11 seed), keyed by MRA
+# file name (core name for the two Other cores). The db dates from 2026-10-22,
+# but every core repo published its MRAs and builds first: each date is the
+# day (UTC) the MRA was first committed to its core repo's releases/ (where
+# the db's url points; exact renames followed), or the first committed build
+# of its core in that repo if that came later (38 games). His repos start
+# fresh in 2026 (no MiSTer-devel history in them). Games the Distribution
+# also ships are hidden (DISTRIBUTION_TAKES_OVER), and the Distribution row
+# keeps the earlier of the two debuts. Frotz and Robots: first committed
+# build (InteractiveFiction-Frotz_20261022.rbf, Robots_TestBuild.rbf).
+# Post-import titles need no entry.
+RODIMUS_FROZEN_DATES = {
+    "005.mra": "2026-05-10",
+    "10-Yard Fight.mra": "2026-10-25",
+    "280-ZZZAP.mra": "2026-10-02",
+    "4 Fun In 1.mra": "2026-10-10",
+    "4-D Warriors.mra": "2026-10-22",
+    "A. D. 2083.mra": "2026-10-10",
+    "Agent Super Bond.mra": "2026-09-30",
+    "Airwolf.mra": "2026-07-26",
+    "Ali Baba And 40 Thieves.mra": "2026-09-29",
+    "Alien Arena.mra": "2026-10-19",
+    "Alpha Fighter - Head On.mra": "2026-11-14",
+    "Alpha One.mra": "2026-10-25",
+    "Amazing Maze.mra": "2026-10-02",
+    "Amidar.mra": "2026-09-30",
+    "Angler Dangler (DECO).mra": "2026-06-29",
+    "Anteater.mra": "2026-09-30",
+    "Arabian.mra": "2026-08-23",
+    "Argus.mra": "2026-10-19",
+    "Ark Area.mra": "2026-08-30",
+    "Arm Wrestling.mra": "2026-10-27",
+    "Armored Car.mra": "2026-09-30",
+    "Astro Blaster.mra": "2026-04-19",
+    "Astro Fantasia (DECO).mra": "2026-06-29",
+    "Astropal.mra": "2026-10-02",
+    "Atomic Robo-Kid.mra": "2026-08-30",
+    "Attack Force.mra": "2026-10-02",
+    "Au.mra": "2026-09-28",
+    "Azurian Attack.mra": "2026-09-29",
+    "Balloon Bomber.mra": "2026-10-02",
+    "Battle Of Atlantis.mra": "2026-09-30",
+    "Big Bucks.mra": "2026-09-29",
+    "Bikkuri Card.mra": "2026-10-17",
+    "Birdiy.mra": "2026-09-29",
+    "Black Hole.mra": "2026-09-29",
+    "Blaster.mra": "2026-10-19",
+    "Block Gal.mra": "2026-10-22",
+    "Blue Print.mra": "2026-02-22",
+    "Blue Shark.mra": "2026-10-02",
+    "BMX Stunts.mra": "2026-10-01",
+    "Boardwalk Casino.mra": "2026-09-29",
+    "Bongo.mra": "2026-09-29",
+    "Boot Hill.mra": "2026-10-02",
+    "Borderline.mra": "2026-11-14",
+    "Bosconian - Star Destroyer.mra": "2026-10-04",
+    "Boulder Dash (DECO).mra": "2026-06-28",
+    "Bowling Alley.mra": "2026-10-02",
+    "Brain.mra": "2026-10-22",
+    "Breakout.mra": "2026-10-29",
+    "Bubbles.mra": "2026-10-19",
+    "Bullfight.mra": "2026-10-22",
+    "Bulls Eye Darts.mra": "2026-10-13",
+    "Burger Time (DECO).mra": "2026-05-19",
+    "Burnin Rubber (DECO).mra": "2026-06-29",
+    "Calipso.mra": "2026-09-30",
+    "Cane.mra": "2026-10-02",
+    "Cannon Ball.mra": "2026-09-29",
+    "Car Hunt - Deep Scan.mra": "2026-11-14",
+    "Car Polo.mra": "2026-10-18",
+    "Carnival.mra": "2026-11-14",
+    "Catacomb.mra": "2026-09-29",
+    "Cavelon.mra": "2026-09-30",
+    "Centipede.mra": "2026-10-13",
+    "Champion Base Ball Part-2.mra": "2026-07-31",
+    "Champion Base Ball.mra": "2026-07-31",
+    "Chance Kun.mra": "2026-10-17",
+    "Check Man.mra": "2026-09-29",
+    "Checkmate.mra": "2026-10-02",
+    "Cheeky Mouse.mra": "2026-10-12",
+    "Choplifter.mra": "2026-10-22",
+    "Circus - Acrobat TV.mra": "2026-10-18",
+    "Circus Charlie.mra": "2026-10-17",
+    "Claybuster.mra": "2026-10-02",
+    "Cliff Hanger.mra": "2026-09-07",
+    "Clowns.mra": "2026-10-02",
+    "Cluster Buster (DECO).mra": "2026-06-29",
+    "Colony 7.mra": "2026-10-19",
+    "Complex X.mra": "2026-04-10",
+    "Conquest.mra": "2026-10-19",
+    "Cosmic Alien.mra": "2026-10-12",
+    "Cosmic Avenger.mra": "2026-10-12",
+    "Cosmic Guerilla.mra": "2026-10-23",
+    "Cosmo.mra": "2026-10-02",
+    "Crash.mra": "2026-10-18",
+    "Crazy Climber.mra": "2026-09-28",
+    "Crazy Kong Part II.mra": "2026-09-28",
+    "Crazy Kong.mra": "2026-09-28",
+    "Crush Roller.mra": "2026-09-29",
+    "Crystal Castles.mra": "2026-10-13",
+    "Curve Ball.mra": "2026-10-19",
+    "DakkoChan House.mra": "2026-10-22",
+    "Dambusters.mra": "2026-10-10",
+    "Dark Planet.mra": "2026-11-06",
+    "DECO Darksoft Multigame (DECO).mra": "2026-06-11",
+    "DECO Test Tape (DECO).mra": "2026-06-29",
+    "DECO Widel Multigame (DECO).mra": "2026-08-24",
+    "Defend The Terra Attack On The Red UFO.mra": "2026-09-29",
+    "Defender.mra": "2026-10-19",
+    "Demolition Derby.mra": "2026-10-23",
+    "Depthcharge.mra": "2026-11-14",
+    "Desert Gun.mra": "2026-10-02",
+    "Devil Fish.mra": "2026-09-30",
+    "Devil Zone.mra": "2026-10-12",
+    "Dig Dug II.mra": "2026-10-25",
+    "Dig Dug.mra": "2026-10-04",
+    "Digger.mra": "2026-11-14",
+    "Dingo.mra": "2026-09-29",
+    "Discs Of Tron.mra": "2026-10-23",
+    "Do! Run Run.mra": "2026-10-12",
+    "Dodgem.mra": "2026-10-02",
+    "Dog Fight.mra": "2026-10-11",
+    "Dog Patch.mra": "2026-10-02",
+    "Domino Man.mra": "2026-10-23",
+    "Donkey Kong 3.mra": "2026-10-22",
+    "Donkey Kong Junior.mra": "2026-10-22",
+    "Donkey Kong.mra": "2026-10-22",
+    "Dorodon.mra": "2026-10-12",
+    "Double Play.mra": "2026-10-02",
+    "Dragon Buster.mra": "2026-10-26",
+    "Dragon's Lair II - Time Warp.mra": "2026-09-07",
+    "Dragon's Lair.mra": "2026-08-18",
+    "Drakton.mra": "2026-10-27",
+    "Draw Poker.mra": "2026-10-23",
+    "Dream Shopper.mra": "2026-09-29",
+    "Driving Force.mra": "2026-09-29",
+    "DS Telejan (DECO).mra": "2026-06-29",
+    "Eggor.mra": "2026-09-29",
+    "Exciting Soccer II.mra": "2026-07-31",
+    "Exciting Soccer.mra": "2026-07-31",
+    "Explorer (DECO).mra": "2026-08-24",
+    "Extra Inning - Ball Park II.mra": "2026-10-02",
+    "Eyes.mra": "2026-09-29",
+    "Fantastic.mra": "2026-09-29",
+    "Fantasy.mra": "2026-04-02",
+    "Faster, Harder, More Challenging Qbert.mra": "2026-10-19",
+    "FAX.mra": "2026-10-17",
+    "Fighting Ice Hockey (DECO).mra": "2026-06-29",
+    "Fire One.mra": "2026-10-18",
+    "Flash Boy (DECO).mra": "2026-06-29",
+    "Flashgal.mra": "2026-05-30",
+    "Flicky.mra": "2026-10-22",
+    "Flying Ball (DECO).mra": "2026-05-19",
+    "Four Play.mra": "2026-11-05",
+    "Frogger.mra": "2026-09-29",
+    "Frogs.mra": "2026-11-14",
+    "Frotz": "2026-10-22",
+    "Funky Fish.mra": "2026-05-31",
+    "Galactica - Batalha Espacial.mra": "2026-10-02",
+    "Galaga.mra": "2026-10-04",
+    "Galaxian.mra": "2026-09-29",
+    "Galaxy Wars.mra": "2026-10-02",
+    "Gaplus.mra": "2026-10-26",
+    "Gardia.mra": "2026-10-22",
+    "Germ Wars.mra": "2026-10-24",
+    "Get A Way.mra": "2026-10-23",
+    "Ghostmuncher Galaxian.mra": "2026-11-05",
+    "Grasspin.mra": "2026-02-22",
+    "Grobda.mra": "2026-10-25",
+    "Guided Missile.mra": "2026-10-02",
+    "Gun Champ.mra": "2026-10-02",
+    "Gun Fight.mra": "2026-10-02",
+    "Guzzler.mra": "2026-09-28",
+    "Gyrodine.mra": "2026-04-25",
+    "Gyruss.mra": "2026-10-17",
+    "Hard Hat.mra": "2026-10-17",
+    "Harem.mra": "2026-10-10",
+    "Head On 2.mra": "2026-11-14",
+    "Head On.mra": "2026-11-14",
+    "Heavy Metal.mra": "2026-10-22",
+    "Heiankyo Alien.mra": "2026-11-14",
+    "HeliFire.mra": "2026-10-24",
+    "Highway Chase (DECO).mra": "2026-06-29",
+    "Hot Shocker.mra": "2026-09-30",
+    "I'm Sorry.mra": "2026-10-22",
+    "Indian Battle.mra": "2026-10-02",
+    "Indoor Soccer.mra": "2026-10-12",
+    "Inferno.mra": "2026-10-19",
+    "Insector.mra": "2026-10-19",
+    "Invader's Revenge.mra": "2026-10-05",
+    "Invinco - Car Hunt.mra": "2026-11-14",
+    "Invinco - Deep Scan.mra": "2026-11-14",
+    "Invinco - Head On 2.mra": "2026-11-14",
+    "Invinco.mra": "2026-11-14",
+    "Jin.mra": "2026-10-19",
+    "Journey.mra": "2026-10-23",
+    "Joust 2 - Survival Of The Fittest.mra": "2026-10-26",
+    "Joust.mra": "2026-10-19",
+    "Jr. Pac-Man.mra": "2026-09-29",
+    "Jump Bug.mra": "2026-09-29",
+    "Jump Shot.mra": "2026-09-29",
+    "Jumping Jack.mra": "2026-10-12",
+    "Juno First.mra": "2026-10-17",
+    "Kangaroo.mra": "2026-03-29",
+    "Kick Rider.mra": "2026-10-12",
+    "Kick.mra": "2026-10-23",
+    "King & Balloon.mra": "2026-10-01",
+    "Knightmare.mra": "2026-10-19",
+    "Kong.mra": "2026-09-29",
+    "Kozmik Kroozr.mra": "2026-10-23",
+    "Kram.mra": "2026-04-10",
+    "Krull.mra": "2026-10-19",
+    "Lady Bug.mra": "2026-10-12",
+    "Laguna Racer.mra": "2026-10-02",
+    "Legend.mra": "2026-05-30",
+    "Levers.mra": "2026-09-29",
+    "Lizard Wizard.mra": "2026-09-29",
+    "Lock'n'Chase (DECO).mra": "2026-05-19",
+    "Lost Tomb.mra": "2026-09-30",
+    "Lotto Fun.mra": "2026-10-19",
+    "Lucky Poker (DECO).mra": "2026-06-29",
+    "Lucky Today.mra": "2026-09-29",
+    "Lunar Rescue.mra": "2026-10-02",
+    "Lupin III.mra": "2026-10-02",
+    "M-4.mra": "2026-10-02",
+    "Mad Planets.mra": "2026-10-19",
+    "Magical Spot II.mra": "2026-10-12",
+    "Magical Spot.mra": "2026-10-12",
+    "Manhattan (Japan) (DECO).mra": "2026-06-29",
+    "Mappy.mra": "2026-10-25",
+    "Mariner.mra": "2026-09-30",
+    "Mario Bros.mra": "2026-10-23",
+    "Mars.mra": "2026-09-30",
+    "Mayday.mra": "2026-10-19",
+    "Maze Invaders.mra": "2026-10-13",
+    "Mighty Monkey.mra": "2026-09-30",
+    "Millipede.mra": "2026-10-13",
+    "Minefield.mra": "2026-09-30",
+    "Mission-X (DECO).mra": "2026-06-28",
+    "Mister Viking.mra": "2026-10-22",
+    "Mogu Chan.mra": "2026-10-11",
+    "Monster Bash.mra": "2026-05-10",
+    "Moon Alien Part 2.mra": "2026-09-29",
+    "Moon Cresta.mra": "2026-09-29",
+    "Moon Patrol.mra": "2026-10-25",
+    "Moon Quasar.mra": "2026-09-29",
+    "Moon Raker.mra": "2026-10-02",
+    "Moon Shuttle.mra": "2026-10-01",
+    "Moonwar.mra": "2026-10-01",
+    "Motos.mra": "2026-10-25",
+    "Mouse Trap.mra": "2026-10-17",
+    "Mr. Do!.mra": "2026-10-12",
+    "Mr. Do's Castle.mra": "2026-10-12",
+    "Mr. Do's Wild Ride.mra": "2026-10-12",
+    "Mr. Kougar.mra": "2026-09-30",
+    "Mr. TNT.mra": "2026-09-29",
+    "Mrs. Dynamite.mra": "2026-10-12",
+    "Ms Pac Man Twin.mra": "2026-09-29",
+    "Ms. Pac-Man.mra": "2026-09-29",
+    "MTV Rock-N-Roll Trivia.mra": "2026-09-29",
+    "Multipede.mra": "2026-10-13",
+    "Mutant Night.mra": "2026-08-30",
+    "My Hero.mra": "2026-10-22",
+    "Mystic Marathon.mra": "2026-10-19",
+    "N-Sub.mra": "2026-11-14",
+    "Namennayo.mra": "2026-11-06",
+    "Naughty Mouse.mra": "2026-09-29",
+    "Nebula (DECO).mra": "2026-06-29",
+    "New Sinbad 7.mra": "2026-09-30",
+    "Nibbler.mra": "2026-04-02",
+    "Night Star (DECO).mra": "2026-06-29",
+    "Ninja-Kid II.mra": "2026-08-30",
+    "Ninjakun Majou No Bouken.mra": "2026-10-20",
+    "Noboranka.mra": "2026-10-22",
+    "Nostromo.mra": "2026-11-14",
+    "Nova 2001.mra": "2026-10-18",
+    "Number Crash.mra": "2026-09-29",
+    "Ocean To Ocean (DECO).mra": "2026-06-29",
+    "Omega Fighter.mra": "2026-08-30",
+    "Oozumou - Grand Sumo (DECO).mra": "2026-06-29",
+    "Orbite.mra": "2026-10-02",
+    "Orbitron.mra": "2026-09-29",
+    "Ozma Wars.mra": "2026-10-02",
+    "Ozon I.mra": "2026-10-01",
+    "Pac & Pal.mra": "2026-10-25",
+    "Pac-Man Plus.mra": "2026-09-29",
+    "Pac-Manic Miner.mra": "2026-09-29",
+    "Pacman Club - Club Lambada.mra": "2026-09-29",
+    "Pengo.mra": "2026-09-29",
+    "Penguin-Kun Wars.mra": "2026-10-18",
+    "Pepper II.mra": "2026-10-17",
+    "Peter Pepper's Ice Cream Factory (DECO).mra": "2026-06-29",
+    "Phantom II.mra": "2026-10-02",
+    "Phoenix.mra": "2026-10-24",
+    "Phozon.mra": "2026-10-26",
+    "Pig Newton.mra": "2026-05-10",
+    "Pioneer Balloon.mra": "2026-04-03",
+    "Pisces.mra": "2026-09-30",
+    "Pitfall II.mra": "2026-10-22",
+    "Planet Probe.mra": "2026-03-06",
+    "PlayBall.mra": "2026-10-19",
+    "Pleiads.mra": "2026-10-24",
+    "Polaris.mra": "2026-10-02",
+    "Pole Position II.mra": "2026-09-28",
+    "Pole Position.mra": "2026-07-29",
+    "Pong Doubles.mra": "2026-10-29",
+    "Pong.mra": "2026-10-29",
+    "Ponpoko.mra": "2026-09-29",
+    "Pooyan.mra": "2026-10-17",
+    "Popeye.mra": "2026-10-23",
+    "Porky.mra": "2026-09-29",
+    "Power Surge.mra": "2026-10-17",
+    "Pro Bowling (DECO).mra": "2026-06-29",
+    "Pro Soccer (DECO).mra": "2026-06-29",
+    "Pro Tennis (DECO).mra": "2026-06-29",
+    "Puck Man.mra": "2026-09-29",
+    "Pulsar.mra": "2026-11-14",
+    "Punch-Out!!.mra": "2026-10-27",
+    "Qbert's Qubes.mra": "2026-10-19",
+    "Qbert.mra": "2026-10-19",
+    "Qix II (Tournament).mra": "2026-04-10",
+    "Qix.mra": "2026-04-10",
+    "Rack + Roll.mra": "2026-10-12",
+    "Radar Scope.mra": "2026-10-24",
+    "Rafflesia.mra": "2026-10-22",
+    "Raiders5.mra": "2026-10-18",
+    "Reactor.mra": "2026-10-19",
+    "Rebound.mra": "2026-10-29",
+    "Red Clash.mra": "2026-10-12",
+    "Regulus.mra": "2026-10-22",
+    "Repulse.mra": "2026-05-30",
+    "Rescue.mra": "2026-09-30",
+    "Rip Cord.mra": "2026-10-18",
+    "River Patrol.mra": "2026-09-28",
+    "Robot Bowl.mra": "2026-10-18",
+    "Robotron 2084.mra": "2026-10-19",
+    "Robots": "2026-08-19",
+    "Roc'n Rope.mra": "2026-10-17",
+    "Rock Climber.mra": "2026-10-10",
+    "Rolling Crash - Moon Base.mra": "2026-10-02",
+    "Rootin' Tootin' (DECO).mra": "2026-06-29",
+    "Safari.mra": "2026-11-14",
+    "Samurai.mra": "2026-11-14",
+    "Sasuke Vs. Commander.mra": "2026-10-11",
+    "Satan Of Saturn.mra": "2026-04-28",
+    "Satan's Hollow.mra": "2026-10-23",
+    "Saturn.mra": "2026-02-22",
+    "Scorpion.mra": "2026-10-01",
+    "Scramble (Konami).mra": "2026-09-30",
+    "Screw Loose.mra": "2026-10-19",
+    "Scrum Try (DECO).mra": "2026-06-28",
+    "Sea Wolf.mra": "2026-10-02",
+    "Sega Ninja.mra": "2026-10-22",
+    "Sengoku No Jieitai.mra": "2026-10-12",
+    "SF-HiSplitter.mra": "2026-10-24",
+    "Sheriff.mra": "2026-10-24",
+    "Shoot The Bull.mra": "2026-09-29",
+    "Shooting Master.mra": "2026-10-22",
+    "Shot Rider.mra": "2026-10-25",
+    "Shuffleboard.mra": "2026-10-02",
+    "Shuttle Invader.mra": "2026-10-02",
+    "Side Trak.mra": "2026-10-17",
+    "Sindbad Mystery.mra": "2026-05-10",
+    "Sinistar.mra": "2026-10-19",
+    "Skater (DECO).mra": "2026-06-29",
+    "Sky Base.mra": "2026-09-29",
+    "Sky Kid.mra": "2026-10-26",
+    "Sky Love.mra": "2026-10-02",
+    "Sky Skipper.mra": "2026-10-24",
+    "Slither.mra": "2026-06-16",
+    "Snap Jack.mra": "2026-10-12",
+    "Solar Fox.mra": "2026-10-23",
+    "Space Ace.mra": "2026-08-18",
+    "Space Attack - Head On.mra": "2026-11-14",
+    "Space Attack.mra": "2026-11-14",
+    "Space Battle.mra": "2026-10-01",
+    "Space Chaser.mra": "2026-10-02",
+    "Space Dungeon.mra": "2026-04-10",
+    "Space Encounters.mra": "2026-10-02",
+    "Space Fever.mra": "2026-10-24",
+    "Space Firebird.mra": "2026-10-23",
+    "Space Invaders II.mra": "2026-10-02",
+    "Space Invaders Multigame.mra": "2026-10-02",
+    "Space Invaders Part II.mra": "2026-10-02",
+    "Space Invaders.mra": "2026-09-30",
+    "Space Launcher.mra": "2026-10-24",
+    "Space Odyssey.mra": "2026-05-10",
+    "Space Panic.mra": "2026-10-12",
+    "Space Raider.mra": "2026-10-12",
+    "Space Trek.mra": "2026-11-14",
+    "Space Walk.mra": "2026-10-02",
+    "Space War.mra": "2026-10-02",
+    "Spatter.mra": "2026-10-22",
+    "Spectar.mra": "2026-10-17",
+    "Speed Ball.mra": "2026-10-19",
+    "Speed Coin.mra": "2026-09-30",
+    "Splat.mra": "2026-10-19",
+    "SRD Mission.mra": "2026-05-30",
+    "Star Fire 2.mra": "2026-10-18",
+    "Star Fire.mra": "2026-10-18",
+    "Star Jacker.mra": "2026-10-22",
+    "Stargate.mra": "2026-10-19",
+    "Steel Worker.mra": "2026-10-02",
+    "Straight Flush.mra": "2026-11-03",
+    "Strategy X.mra": "2026-09-30",
+    "Streaking.mra": "2026-09-30",
+    "Street Heat.mra": "2026-10-27",
+    "Super ABC.mra": "2026-09-29",
+    "Super Astro Fighter (DECO).mra": "2026-06-29",
+    "Super Chick.mra": "2026-09-29",
+    "Super Cobra.mra": "2026-09-30",
+    "Super Don Quix-ote.mra": "2026-09-11",
+    "Super Doubles Tennis (DECO).mra": "2026-06-29",
+    "Super Pac-Man.mra": "2026-10-25",
+    "Super Punch-Out!!.mra": "2026-10-27",
+    "Super Xevious.mra": "2026-10-04",
+    "SWAT.mra": "2026-10-22",
+    "Sweet Heart (DECO).mra": "2026-06-29",
+    "Swimmer.mra": "2026-09-28",
+    "Talbot.mra": "2026-07-31",
+    "Tangram Q.mra": "2026-09-28",
+    "Tapper.mra": "2026-10-23",
+    "Targ.mra": "2026-10-17",
+    "Tazz-Mania.mra": "2026-09-30",
+    "TeddyBoy Blues.mra": "2026-10-22",
+    "Teeter Torture.mra": "2026-10-17",
+    "Terranean (DECO).mra": "2026-06-29",
+    "Thayer's Quest.mra": "2026-10-19",
+    "The Bounty.mra": "2026-10-11",
+    "The Electric Yo-Yo.mra": "2026-04-10",
+    "The End.mra": "2026-09-30",
+    "The Invaders.mra": "2026-10-02",
+    "The Percussor.mra": "2026-10-11",
+    "The Three Stooges In Brides Is Brides.mra": "2026-10-19",
+    "The Tower (DECO).mra": "2026-06-29",
+    "The Tower Of Druaga.mra": "2026-10-25",
+    "Timber.mra": "2026-10-23",
+    "Time Fighter.mra": "2026-09-29",
+    "Time Pilot '84.mra": "2026-10-17",
+    "Time Pilot.mra": "2026-10-17",
+    "Toki No Senshi - Chrono Soldier.mra": "2026-10-22",
+    "Top Roller.mra": "2026-09-28",
+    "Tornado (DECO).mra": "2026-06-29",
+    "Tornado Baseball - Ball Park.mra": "2026-10-02",
+    "Tournament Pro Golf (DECO).mra": "2026-08-02",
+    "Tranquillizer Gun.mra": "2026-11-14",
+    "Trapeze - Trampoline.mra": "2026-10-18",
+    "Traverse USA - Zippy Race.mra": "2026-10-25",
+    "Treasure Island (DECO).mra": "2026-08-24",
+    "Triple Draw Poker.mra": "2026-09-29",
+    "Triple Punch.mra": "2026-09-30",
+    "Tron.mra": "2026-10-23",
+    "Tropical Angel.mra": "2026-10-25",
+    "Turkey Shoot.mra": "2026-10-19",
+    "Turtles.mra": "2026-09-30",
+    "Tutankham.mra": "2026-10-17",
+    "Two Tigers.mra": "2026-10-23",
+    "Tylz.mra": "2026-10-19",
+    "Ufo Senshi Yohko Chan.mra": "2026-10-22",
+    "UniWar S.mra": "2026-09-30",
+    "Up'n Down.mra": "2026-10-22",
+    "Van-Van Car.mra": "2026-09-29",
+    "Vanguard.mra": "2026-04-02",
+    "Vastar.mra": "2026-02-25",
+    "Venture.mra": "2026-10-17",
+    "Victory (Comsoft).mra": "2026-09-30",
+    "Victory (Exidy).mra": "2026-10-18",
+    "Video Eight.mra": "2026-11-05",
+    "Video Hustler.mra": "2026-09-30",
+    "Video Vince And The Game Factory.mra": "2026-10-20",
+    "Vortex.mra": "2026-10-02",
+    "Wacko.mra": "2026-10-23",
+    "Wanted.mra": "2026-11-14",
+    "War Of The Bugs Or Monsterous Manouvers In A Mushroom Maze.mra": "2026-09-29",
+    "Warlords.mra": "2026-10-13",
+    "Water Match.mra": "2026-10-22",
+    "Wiz Warz.mra": "2026-10-19",
+    "Wonder Boy Monster Land.mra": "2026-10-22",
+    "Wonder Boy.mra": "2026-10-22",
+    "Woodpecker.mra": "2026-09-29",
+    "Xevious.mra": "2026-10-04",
+    "XX Mission.mra": "2026-10-20",
+    "Yamato.mra": "2026-09-28",
+    "Yosaku To Donbei.mra": "2026-10-02",
+    "Zero Hour.mra": "2026-10-12",
+    "Zeroize (DECO).mra": "2026-08-24",
+    "Zig Zag.mra": "2026-09-29",
+    "Zodiack.mra": "2026-10-11",
+    "Zoo Keeper.mra": "2026-05-02",
+}
+
+# MRA <rbf> tag / core name (lowercased) -> core repo, for the two Other
+# cores only: arcade rows link the repo their shipped rbf downloads from
+# (verified_project_links), so a new core of his needs no entry here.
+RODIMUS_CORE_REPOS = {
+    "frotz": "RodimusFVC/InteractiveFiction-Frotz_MiSTer",
+    "robots": "RodimusFVC/VCR_Robots",
+}
+
 ONGO_CORE_REPOS = {
     "namco_na1_na2": "kyledlester/Namco_NA1_NA2_MiSTer",
     "namco_nb1": "kyledlester/Namco_NB1_MiSTer",
@@ -3539,6 +4133,7 @@ OPTIN_DB_SOURCES = {
     "shmupfan": (SHMUPFAN_REPO, SHMUPFAN_CORE_REPOS, SHMUPFAN_FROZEN_DATES),
     # all four cores ship from the db repo; the source is a jtcores branch
     "asturur": (ASTURUR_REPO, {}, ASTURUR_FROZEN_DATES),
+    "rodimus": (RODIMUS_REPO, RODIMUS_CORE_REPOS, RODIMUS_FROZEN_DATES),
 }
 
 
@@ -3551,12 +4146,16 @@ def join_optin_db_rows(con):
     detection-day stamp, which IS their real debut."""
     for source_id, (dist_repo, core_repos, frozen_dates) in OPTIN_DB_SOURCES.items():
         for row in con.execute(
-            "SELECT path, title, rbf, release_date FROM catalog WHERE source_id=?", (source_id,)
+            "SELECT path, system, title, rbf, release_date FROM catalog WHERE source_id=?", (source_id,)
         ).fetchall():
             # console/computer rows carry no MRA rbf: the core name is the rbf
             rbf = row["rbf"] or core_name(row["title"])
             repo = core_repos.get(rbf.strip().lower(), dist_repo)
             frozen = frozen_dates.get(row["path"].replace("\\", "/").rsplit("/", 1)[-1])
+            if frozen is None and row["system"] != "arcade":
+                # a core's file name changes with every build; its debut
+                # may be keyed by core name instead (RodimusFVC's Frotz)
+                frozen = frozen_dates.get(core_name(row["title"]))
             con.execute(
                 "UPDATE catalog SET repo=?, release_date=COALESCE(?, release_date) "
                 "WHERE source_id=? AND path=?",
@@ -4731,6 +5330,9 @@ SYSTEM_TITLES = {
     "FlappyBird": "Flappy Bird",
     "GameOfLife": "Game of Life",
     "TomyScramble": "Tomy Scramble",
+    # RodimusFVC's db (Other rows read from his _RodimusCores/ folder)
+    "Frotz": "Frotz",
+    "Robots": "Isaac Asimov's Robots",
 }
 
 # Short per-core notes, keyed by core_name (the rbf). Stamped into data.json as
@@ -4744,6 +5346,8 @@ CORE_NOTES = {
     "PCXT": "A separate EGA-video variant core (PCXT-EGA) is also available.",
     "PCXT-EGA": "EGA-video variant of the PC/XT core (which is CGA-based).",
     "PC6001": "Also supports the PC-6001mkII, PC-6601 and PC-6001mkIISR (beta). Choose the model under Machine > Model, then Apply and reset.",
+    "Frotz": "A Z-machine interpreter for Infocom's interactive fiction (Zork and the rest). The story files are not included.",
+    "Robots": "Kodak's 1988 VCR board game. The game's video file is not included.",
 }
 
 # Cores their author has withdrawn while the distributing db still ships the
@@ -5147,6 +5751,21 @@ ARCADE_TITLES = {
     "jpopnics": "Jumping Pop (Nics)",
     "mspuzzle": "Miss Puzzle",
     "mspuzzleg": "Miss Puzzle (Clone of Gumbo)",
+    # RodimusFVC's db (2026-11) lists different games whose MRA names match
+    # games already on the site. The collision rule would strip the listed
+    # row back to its raw MRA name, so pin both sides: the listed row keeps
+    # the name it had, his takes MAME's distinguishing qualifier.
+    "speedbal": "Speed Ball",                        # jlrh: Tecfri 1987
+    "spdball": "Speed Ball - Contest at Neonworld",  # Williams 1985 prototype
+    "cannball": "Cannon Ball",                       # TomSVR: Yun Sung 1995
+    "cannonbp": "Cannon Ball (Pac-Man Hardware)",    # Novomatic 1985
+    "devilfsg": "Devil Fish",                        # Distribution: Galaxian-board bootleg
+    "devilfsh": "Devil Fish (Mars Hardware)",        # Artic's original board
+    "digger": "Digger (Sega)",                       # 1980; bazset and Ongo carry the CVS Digger
+    # His MRA drops the "in"; pinning both sets to MAME's name lets the
+    # same-game rule join his row with bazset's Virtual Console set.
+    "wbml": "Wonder Boy: Monster Land",
+    "wbmlvcd": "Wonder Boy: Monster Land",
 }
 
 # Escape hatch for the same-game qualifier labels below, keyed by lowercase
@@ -5207,6 +5826,10 @@ def _core_label(r, fork_info, repo_maps):
         return "shmupfan"
     if r["source_id"] == "asturur":
         return "asturur"
+    if r["source_id"] == "rodimus":
+        # NOT "RodimusFVC": MiSTer-devel repos he maintains may label the
+        # Distribution's builds by owner, and the two must differ
+        return "Rodimus Cores"
     repo =(r["repo"] or "").strip()
     if not repo and rbf:
         repo = (repo_maps.get("arcade") or {}).get(rbf.lower(), "")
@@ -5509,7 +6132,7 @@ def _filter_tag_map():
     rbf_core = re.compile(r"_(?:Console|Computer|Other|Utility)/([^/]+?)(?:_\d{6,8})?\.rbf$")
     for source in SOURCES:
         try:
-            d = _db_json(http_get(source["db_url"]))
+            d = _load_db(source)
         except Exception as e:
             log(f"  filter-tag join: {source['id']} fetch failed ({e}); its rows ship without ft")
             continue
@@ -5856,7 +6479,7 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         # the display title strips the qualifiers the filename carries, so the
         # site's launch-on-MiSTer button needs the real path shipped explicitly
         if "path" in r.keys() and r["path"]:
-            row["mra"] = r["path"]
+            row["mra"] = sd_path(r["source_id"], r["path"])
         # same-game retitles keep the raw MRA title as mt: manifest join key,
         # feeds event-matching key, and hidden search alias
         if forced_mt and forced_mt != title:
@@ -6743,7 +7366,8 @@ def _write_feeds(outdir):
       Plain 'removed' events make no items.
     Runs AFTER the image re-tag so data.json rows carry img/img_slots."""
     data = json.loads((outdir / "data.json").read_text(encoding="utf-8"))
-    orphan_listed = {k: v["listed"] for k, v in ORPHAN_ALTERNATIVES.items()}
+    orphan_listed = {(sid, sd_path(sid, path)): v["listed"]
+                     for (sid, path), v in ORPHAN_ALTERNATIVES.items()}
     by_path = {}    # arcade rows: (source, MRA path), the event's own identity
     by_title = {}   # arcade rows: (source, raw MRA title (mt when humanized) / display title)
     by_core = {}    # non-arcade rows: core token
@@ -6814,7 +7438,7 @@ def _write_feeds(outdir):
             # show the stripped/humanized base, so try raw (kept-qualifier
             # collision rows), then the stripped base.
             sid = e["source_id"]
-            row = (by_path.get((sid, e["path"]))
+            row = (by_path.get((sid, sd_path(sid, e["path"])))
                    or by_title.get((sid, e["title"])) or by_title.get((sid, _arcade_base(e["title"]))))
             rows = [row] if row else []
             if (rows and e["event_type"] == "updated"

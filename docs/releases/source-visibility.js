@@ -48,7 +48,8 @@ const SITE_SOURCE_LABELS = { distribution_mister: 'MiSTer-devel',
   rmcores: 'rmCores', slopcore: 'TheJesusFish', kuzecores: 'kuzearcade',
   blahm1d: 'blahm1d', bazset: 'bazset', rossops: 'rossops', ongo: 'Ongo',
   tomsvr: 'TomSVR', decoryah: 'decoryah', ppriest: 'ppriest', gm0rk: 'Gm0rk',
-  jlrh: 'jlrh', shmupfan: 'shmupfan', asturur: 'asturur' };
+  jlrh: 'jlrh', shmupfan: 'shmupfan', asturur: 'asturur',
+  rodimus: 'Rodimus Cores' };
 
 function siteSingletonTitles(rows) {
   // Only known source-brand suffixes are disposable. Never strip arbitrary

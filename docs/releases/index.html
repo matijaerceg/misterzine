@@ -1732,7 +1732,7 @@
 </dialog>
 <script src="../lists/lists.js?v=c7502c4e44"></script>
 <script src="custom-lists.js?v=3fc5a24b7b"></script>
-<script src="./source-visibility.js?v=12"></script>
+<script src="./source-visibility.js?v=13"></script>
 <script src="./filter-memory.js?v=1"></script>
 <script src="./view-presets.js?v=3"></script>
 <script src="../mask.js?v=4"></script>
@@ -2281,6 +2281,19 @@ const CORE_NAMES = {
   'TaitoGNET': 'Taito G-NET', 'tecmo16': 'Tecmo 16-bit (Final Star Force HW)',
   // asturur's multi-game cores (jtf1grpr and jtroundu read as the game)
   'jtpspike': 'Video System (Power Spikes HW)', 'jtsysfl': 'Namco System FL',
+  // RodimusFVC's board-family cores; his own _TestBuild rbf names say "test build".
+  // Pacman and CrazyClimber name his builds, not the Distribution's same-named cores.
+  'SegaVICDual_TestBuild': 'Sega VIC Dual (test build)', 'Galaxian_TestBuild': 'Galaxian HW (test build)',
+  'SpaceInvaders_TestBuild': 'Midway / Taito 8080 (test build)', 'Exidy_TestBuild': 'Exidy (test build)',
+  'Universal_TestBuild': 'Universal (test build)', 'Gottlieb_TestBuild': 'Gottlieb (test build)',
+  'Williams_TestBuild': 'Williams 6809 (test build)', 'Centipede_TestBuild': 'Atari (Centipede HW, test build)',
+  'BallyMidwayMCR_TestBuild': 'Bally Midway MCR (test build)', 'Irem1_TestBuild': 'Irem (test build)',
+  'Namco6809_TestBuild': 'Namco 6809 (test build)', 'Nintendo_TestBuild': 'Nintendo (test build)',
+  'Phoenix_TestBuild': 'Phoenix HW (test build)', 'Pong_TestBuild': 'Atari Pong HW (test build)',
+  'PunchOut_TestBuild': 'Nintendo (Punch-Out!! HW, test build)',
+  'SegaSystem1-2_TestBuild': 'Sega System 1 / 2 (test build)', 'SegaG80': 'Sega G80 raster',
+  'Konami82': 'Konami (early 80s boards)', 'Pacman': 'Pac-Man HW (Rodimus Cores)',
+  'CrazyClimber': 'Crazy Climber HW (Rodimus Cores)',
   // Irem
   'IremM92': 'Irem M92', 'IremM72': 'Irem M72', 'IremM90': 'Irem M90', 'IremM107': 'Irem M107', 'iremm62': 'Irem M62',
   'traverseusa': 'Irem (Traverse USA)',
@@ -2341,6 +2354,7 @@ const SRC_NAMES = {
   jlrh: 'jlrh',
   shmupfan: 'shmupfan',
   asturur: 'asturur',
+  rodimus: 'Rodimus Cores (RodimusFVC)',
   theypsilon_unofficial_distribution: 'theypsilon Unofficial Distribution',
 };
 const SRC_SEARCH = {
@@ -2362,6 +2376,7 @@ const SRC_SEARCH = {
   jlrh: 'jlrh jose_82 jose82 ff',
   shmupfan: 'shmupfan shmup fan',
   asturur: 'asturur andrea mister-cores',
+  rodimus: 'rodimus rodimusfvc rodimus cores',
   theypsilon_unofficial_distribution: 'theypsilon unofficial nemesis',
 };
 // Databases update_all has no settings toggle for: the visitor must hand-add
@@ -2473,6 +2488,15 @@ const OPTIN_DBS = {
       'Spikes, Turbo Force, Karate Blazers and Aero Fighters (one core), F-1 Grand Prix, Namco ' +
       'System FL (Final Lap R, Speed Racer) and Round Up 5. Written with AI assistance (his README ' +
       'says so). Ongo\'s database also carries most of these games as earlier builds.',
+  },
+  rodimus: {
+    section: 'RodimusFVC/Rodimus_MiSTer_DB',
+    url: 'https://raw.githubusercontent.com/RodimusFVC/Rodimus_MiSTer_DB/db/db.json.zip',
+    what: 'RodimusFVC\'s cores, many of them test builds: whole board families in one core (Galaxian, ' +
+      'Space Invaders, Sega VIC Dual, Exidy, Universal, Sega G80 and others), the Frotz interactive ' +
+      'fiction core and Kodak\'s VCR game Isaac Asimov\'s Robots, installed to their own _RodimusCores ' +
+      'folder. Most of its games also ship in the MiSTer Distribution, some on cores he also maintains ' +
+      'there; the website lists those under the Distribution.',
   },
 };
 
@@ -4957,6 +4981,7 @@ const FT_SECTIONS = {   // ini section name = each db's db_id
   jlrh: 'jlrh/jlrh-misterfpga-db',
   shmupfan: 'shmupfan',
   asturur: 'asturur/Mister-cores',
+  rodimus: 'RodimusFVC/Rodimus_MiSTer_DB',
   theypsilon_unofficial_distribution: 'theypsilon_unofficial_distribution',
 };
 function buildFavExport() {

@@ -29,9 +29,11 @@ SETNAME_ALIASES = {
 # Hand-pinned libretro filename stems where the canonical pick is a different
 # machine: the site's Devil Fish row is the Galaxian-hardware bootleg
 # (devilfsg), but the plain "Devil Fish.png" is the Mars-hardware original
-# (devilfsh) — different visuals entirely.
+# (devilfsh) — different visuals entirely. Keyed by the row's raw MRA title:
+# since RodimusFVC's db added the Mars original (whose MRA is "Devil Fish"),
+# the Distribution row keeps its raw "(Galaxian Hardware)" name as the key.
 LIBRETRO_OVERRIDES = {
-    "Devil Fish": "Devil Fish (Galaxian hardware, bootleg_)",
+    "Devil Fish (Galaxian Hardware)": "Devil Fish (Galaxian hardware, bootleg_)",
 }
 # Order of preference for the third (in-game) shot.
 THIRD = ["gameover", "scores", "select", "bosses", "versus", "howto"]

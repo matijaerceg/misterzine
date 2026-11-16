@@ -4,6 +4,8 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 ## Unreleased
 
+- Release tracker: now also tracks RodimusFVC's Rodimus Cores database (opt-in, section [RodimusFVC/Rodimus_MiSTer_DB]): about 175 arcade games new to the tracker, mostly early classics on his whole-board-family cores (Sega VIC Dual, Space Invaders, Galaxian, Exidy, Universal, Gottlieb, Williams and others) such as Head On, Frogs, Invinco, Mr. Do's Castle, Space Fever and Star Fire, plus the Frotz interactive fiction core and Kodak's VCR game Isaac Asimov's Robots. About 290 of his games are also in the MiSTer Distribution; those stay listed under the Distribution, and where his build came first (Nibbler, Pole Position, Gyrodine and about 20 more) the row now shows his earlier debut. Games another database also carries, such as Punch-Out!!, Millipede, Circus Charlie and Choplifter, are one row with every build.
+
 - The new MTX512 core is listed as Memotech MTX512, with its year (1983), maker and a hardware photo.
 
 - The new PC-6001 entry now shows NEC, its original release year (1981), a hardware photo, and a note about the later models supported by the core.

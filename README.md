@@ -371,7 +371,7 @@ What the tracker lists and what takes a source off it is stated on the site's
    PlayChoice-10, Konami GX, Bally/Sente, Jaleco Mega System 32, Eolith, Vamphalf/Limenko,
    Hyper Neo Geo 64 and others; same db layout as decoryah's, MRAs flat in `_Arcade/` with
    `_alternatives`. No tags. MiSTer-devel adopted his Fuuki and Psikyo cores, so it is in
-   `DISTRIBUTION_TAKES_OVER` (as are decoryah and Gm0rk).
+   `DISTRIBUTION_TAKES_OVER` (as are decoryah, Gm0rk and Rodimus Cores).
 16. **Gm0rk**: `Gm0rk/Gm0rkCores` `db` branch (opt-in, section `[Gm0rk/Gm0rkCores]`), since
    2026-10-19. Atari G1, Atari G42, Incredible Technologies 8-bit, Midway Y-Unit and
    Midway T-Unit. Each core has its own MRA folder under `_Arcade/_Gm0rkCores/`.
@@ -394,8 +394,9 @@ What the tracker lists and what takes a source off it is stated on the site's
    flat in `_Arcade/` with `_alternatives`, no tags. Ongo shipped the same games from
    2026-09-16 and 2026-09-23 under other core names, which is where their debuts come from;
    the site folds Ongo's copies into these rows.
+20. **Rodimus Cores**: `RodimusFVC/Rodimus_MiSTer_DB` `db` branch (opt-in, section `[RodimusFVC/Rodimus_MiSTer_DB]`), since 2026-11-16. RodimusFVC's own builds, many named `_TestBuild`: whole board families in one core (Galaxian, Space Invaders, Sega VIC Dual, Exidy, Universal, Gottlieb, Williams, Sega G80 and others), plus the Frotz interactive fiction core and Kodak's VCR game Isaac Asimov's Robots, one Other row each (the Infocom story MGLs are not listed). Everything installs under `_RodimusCores/` instead of the SD root: `SOURCE_PATH_MAPS` reads his paths in the usual `_Arcade/` shape and `sd_path` maps them back for the exported `mra` (the launch path). `_artwork` and `Not Working` MRAs are skipped. Every file entry carries its own url into a core repo, so the MRAs are fetched from the db. No tags. He also maintains Distribution cores, so it is in `DISTRIBUTION_TAKES_OVER`: about 290 of his 477 games are listed only under the Distribution, which keeps the earlier of the two debuts.
 
-Debuts for these six are frozen per MRA (`*_FROZEN_DATES`): the day the MRA was first
+Debuts for these seven are frozen per MRA (`*_FROZEN_DATES`): the day the MRA was first
 committed where it is served from, but not before the core's first public build (Gm0rk's
 core repos published GitHub releases two weeks before his db existed; jlrh's Gaelco games
 were public from 2026-06-20, a month before his current db). None of jlrh, shmupfan or asturur is
@@ -403,7 +404,7 @@ in `DISTRIBUTION_TAKES_OVER`: that rule hides a row whenever the Distribution sh
 same game, even on another core (the Distribution's own Detana!! Twin Bee would hide
 jlrh's).
 
-All nineteen publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
+All twenty publish the same `{timestamp, files{path:{hash,size}}}` format, so one parser
 handles them.
 
 Jotego and Coin-Op also publish Patreon early-access entries in their databases.

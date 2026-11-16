@@ -6,7 +6,61 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sun, 15 Nov 2026 07:35:38 +0000</lastBuildDate>
+<lastBuildDate>Mon, 16 Nov 2026 00:01:56 +0000</lastBuildDate>
+<item>
+<title>[Updated] Macintosh LC (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacLC</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacLC_20261115.rbf:2026-11-16T00:01:56+00:00</guid>
+<pubDate>Mon, 16 Nov 2026 00:01:56 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1990 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacLC_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] PC8001 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PC8001</link>
+<guid isPermaLink="false">distribution_mister:_Computer/PC8001_20261114.rbf:2026-11-16T00:01:56+00:00</guid>
+<pubDate>Mon, 16 Nov 2026 00:01:56 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PC-8001_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Battle Tryst (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btltryst</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_KonamiM2/Battle Tryst (ver JAC).mra:2026-11-15T18:59:56+00:00</guid>
+<pubDate>Sun, 15 Nov 2026 18:59:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/btltryst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Tryst&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Heat of Eleven '98 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#heatof11</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_KonamiM2/Heat of Eleven '98 (ver EAA).mra:2026-11-15T18:59:56+00:00</guid>
+<pubDate>Sun, 15 Nov 2026 18:59:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heat-of-eleven-98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Heat&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Hell Night (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hellngt</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_KonamiM2/Hell Night (ver EAA).mra:2026-11-15T18:59:56+00:00</guid>
+<pubDate>Sun, 15 Nov 2026 18:59:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hellngt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2HellNight&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] KonamiM2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#evilngt</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2_20261114.rbf:2026-11-15T18:59:56+00:00</guid>
+<pubDate>Sun, 15 Nov 2026 18:59:56 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Evil Night, Tobe! Polystars, Total Vice.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Armed Police Batrider (RaizingMD) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#batrider</link>
@@ -248,7 +302,7 @@
 <pubDate>Sat, 14 Nov 2026 22:37:36 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/btltryst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Tryst&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/btltryst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Tryst&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Heat of Eleven '98 (Arcade)</title>
@@ -257,7 +311,7 @@
 <pubDate>Sat, 14 Nov 2026 22:37:36 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heat-of-eleven-98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Heat&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heat-of-eleven-98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Heat&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Hell Night (Arcade)</title>
@@ -266,7 +320,7 @@
 <pubDate>Sat, 14 Nov 2026 22:37:36 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hellngt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2HellNight&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hellngt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2HellNight&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Gm0rk_Atari-G1 (Arcade core, 2 games)</title>
@@ -851,61 +905,7 @@
 <pubDate>Mon, 09 Nov 2026 22:34:26 +0000</pubDate>
 <category>new</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heat-of-eleven-98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Heat&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-09 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/MiSTer_decoryah/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] AT&amp;T UNIX PC (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#3B1</link>
-<guid isPermaLink="false">distribution_mister:_Computer/3B1_20261109.rbf:2026-11-09T17:39:27+00:00</guid>
-<pubDate>Mon, 09 Nov 2026 17:39:27 +0000</pubDate>
-<category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1985 / AT&amp;amp;T&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/3B1/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] TaitoGNET (Arcade core, 22 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#chaoshea</link>
-<guid isPermaLink="false">shmupfan:_Arcade/cores/TaitoGNET_20261102.rbf:2026-11-09T17:28:20+00:00</guid>
-<pubDate>Mon, 09 Nov 2026 17:28:20 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Chaos Heat, Flip Maze, Go By RC, Kollon, Mahjong Oh, Night Raid, Otenami Haiken, Otenami Haiken Final, Otenki Kororin, Psyvariar -Medium Unit-, Psyvariar -Revision-, Ray Crisis, Shanghai Sangokuhai Tougi, Shanghai Shoryu Sairin, Shikigami no Shiro, Soutenryu, Space Invaders Anniversary, Super Puzzle Bobble, Usagi, XII Stag, Zoku Otenamihaiken, Zooo.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-09 (source: shmupfan).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/shmupfan/Arcade-TaitoGNET_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] TK2000 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#TK2000</link>
-<guid isPermaLink="false">distribution_mister:_Computer/TK2000_20261108.rbf:2026-11-09T07:10:15+00:00</guid>
-<pubDate>Mon, 09 Nov 2026 07:10:15 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1984 / Microdigital&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-09 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/TK2000_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Aztarac (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#aztarac</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Aztarac.mra:2026-11-08T20:46:59+00:00</guid>
-<pubDate>Sun, 08 Nov 2026 20:46:59 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/aztarac.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1983 / Centuri&lt;/p&gt;&lt;p&gt;Core: Aztarac&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Aztarac_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Beyond Kung-Fu (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#bkungfu</link>
-<guid isPermaLink="false">jlrh:_Arcade/Beyond Kung-Fu (FF, Irem, 1987) (location test).mra:2026-11-08T19:08:05+00:00</guid>
-<pubDate>Sun, 08 Nov 2026 19:08:05 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bkungfu.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1987 / Irem&lt;/p&gt;&lt;p&gt;Core: ffbkungfu&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-08 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] atarisys2 (Arcade core, 5 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#720</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/atarisys2_20261107.rbf:2026-11-08T16:33:15+00:00</guid>
-<pubDate>Sun, 08 Nov 2026 16:33:15 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: 720 Degrees, APB - All Points Bulletin, Championship Sprint, Paperboy, Super Sprint.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-08 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-AtariSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heat-of-eleven-98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Heat&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-09 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

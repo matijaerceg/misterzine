@@ -2,13 +2,21 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
-## Unreleased
+## 2026-11-16
+
+- Search no longer depends on spacing or hyphens inside a name: megadrive, pacman and xmen find Mega Drive, Pac-Man and X-Men. Searching "tate" lists vertical-screen games.
 
 - Release tracker: now also tracks RodimusFVC's Rodimus Cores database (opt-in, section [RodimusFVC/Rodimus_MiSTer_DB]): about 175 arcade games new to the tracker, mostly early classics on his whole-board-family cores (Sega VIC Dual, Space Invaders, Galaxian, Exidy, Universal, Gottlieb, Williams and others) such as Head On, Frogs, Invinco, Mr. Do's Castle, Space Fever and Star Fire, plus the Frotz interactive fiction core and Kodak's VCR game Isaac Asimov's Robots. About 290 of his games are also in the MiSTer Distribution; those stay listed under the Distribution, and where his build came first (Nibbler, Pole Position, Gyrodine and about 20 more) the row now shows his earlier debut. Games another database also carries, such as Punch-Out!!, Millipede, Circus Charlie and Choplifter, are one row with every build.
 
+## 2026-11-14
+
 - The new MTX512 core is listed as Memotech MTX512, with its year (1983), maker and a hardware photo.
 
+## 2026-11-11
+
 - The new PC-6001 entry now shows NEC, its original release year (1981), a hardware photo, and a note about the later models supported by the core.
+
+## 2026-11-09
 
 - The new 3B1 core is listed as AT&T UNIX PC, with its year (1985), maker and a hardware photo. Heat of Eleven '98 shows its title screen, gameplay and team select in place of the board's boot test pattern.
 
@@ -22,15 +30,19 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - Arcade originals such as Alien Storm, Golden Axe and Out Run use their short names again next to their PlayChoice-10, Mega-Tech and console-port versions.
 
+## 2026-11-06
+
 - Core debut groups and games now link to the project that ships their build, including Sega System 32, Aleck64 and blahm1d's cores. The tracker checks official release files and reads project links supplied by community feeds.
+
+- Game groups and core batches use regular-weight titles, with labels such as “Midway Y-Unit core update.” Group arrows have a fixed-width click area that spans the full row height. Fine dots outline the current selection, including the sticky Title column and the children of an expanded group.
+
+## 2026-11-05
 
 - The MisterZine header logo now matches the page title color in every theme.
 
 - Manage lists is now at the bottom of the Your lists dropdown, leaving more room for pinned lists in the tab bar.
 
 - Section headings have a subtle tint, including when pinned while scrolling. Game groups, core batches and standalone releases share a background and title alignment. Only expanded children are indented. Arrows and counts such as “8 games” or “2 cores” identify expandable rows.
-
-- Game groups and core batches use regular-weight titles, with labels such as “Midway Y-Unit core update.” Group arrows have a fixed-width click area that spans the full row height. Fine dots outline the current selection, including the sticky Title column and the children of an expanded group.
 
 - Favorites in a core batch use the same star as individual game details. The star fills or clears as soon as you toggle it.
 
@@ -46,15 +58,21 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - Shared views now include columns and grouping as well as filters and sorting. They remain temporary and offer Revert to my saved view; preset choices and adjustments are remembered in the current browser.
 
+## 2026-11-04
+
 - Source now has one Mature content section: a compact Hide / Include / Only row with a Blur checkbox alongside. It replaces the separate Menu switch and Type checkboxes. Existing visibility preferences carry over; Clear filters leaves Hide and blur preferences intact.
 
 - Live refresh alerts now compare visible entries consistently, preventing hidden mirror copies from being falsely announced as updated. Real new entries and build-date changes still produce alerts.
 
 - Games available on several cores now use “(MiSTer-devel)” when the Distribution core's name merely repeats the game title. Naming and grouping share the same matching rule, including punctuation differences and meaningful variants; E.D.F.'s two implementations now appear together.
 
+## 2026-11-03
+
 - When an early-access core goes public, both public versions of the same game now receive source labels even if their filenames use different punctuation. Matching uses ROM identity, preserving saved links and launch paths.
 
 - Game-title qualifiers now use the shorter “(Coin-Op)”; the source menu keeps the full “Coin-Op Collection” name.
+
+## 2026-11-02
 
 - Early-access versions of games already available on another core now consistently include their source in the title, such as “1941: Counter Attack (Coin-Op Collection)”, even when the sources use different punctuation. Existing public titles and saved links stay unchanged.
 
@@ -64,19 +82,21 @@ User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
 - Coin-Op Collection's 27 CPS1 games now show their Patreon beta status and stay out of public-release feeds. The tracker checks their supporter-key requirement as well as upstream status labels, which were missing from this release (issue #15).
 
+## 2026-10-30
+
 - Favorites only is now a small star toggle immediately after Search, instead of an option inside Source.
 
 - The Source menu groups sources under Included in update_all and Requires manual setup, with an Access section: All, Public only, or Early access only (supporter-key alpha and beta entries). It works with shared views, Clear filters and collection tabs.
 
 - Renamed the grouping toggle to Group updates.
 
+## 2026-10-28
+
 - The Columns button in the tracker toolbar is spelled out on desktop (Col. stays on phones), and the divider beside it matches the buttons' outlines.
 
 - The tracker's toolbar controls share one look again: the copy-link button is the same height and outline as its neighbours, and every control gets the same keyboard focus ring.
 
 - The since-your-last-visit dot now follows each title instead of leading it, so dotted and undotted rows line up.
-
-## 2026-10-28
 
 - Renamed the grouping toggle to Group batches.
 

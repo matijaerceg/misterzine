@@ -6,7 +6,34 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 16 Nov 2026 16:02:19 +0000</lastBuildDate>
+<lastBuildDate>Mon, 16 Nov 2026 18:11:08 +0000</lastBuildDate>
+<item>
+<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261113.rbf:2026-11-16T18:11:08+00:00</guid>
+<pubDate>Mon, 16 Nov 2026 18:11:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] ffgticlubsd (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gti-club-crt-480i</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlubsd_20261116.rbf:2026-11-16T18:11:08+00:00</guid>
+<pubDate>Mon, 16 Nov 2026 18:11:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: GTI Club CRT 480i, Operation Thunder Hurricane CRT 480i, Solar Assault CRT 480i.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Jet Wave (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#jetwave</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffjetwave_20261116.rbf:2026-11-16T18:11:08+00:00</guid>
+<pubDate>Mon, 16 Nov 2026 18:11:08 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jetwave.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1996 / Konami&lt;/p&gt;&lt;p&gt;Core: ffjetwave&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/jlrh-misterfpga-db/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Studio II (Console core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Studio-II</link>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Cosmos (Ongo), Cosmos (bazset), Dark Warrior (Ongo), Dark Warrior (bazset), Dazzler (Ongo), Dazzler (bazset), Digger (Ongo), Digger (bazset), Gold Bug (Ongo), Gold Bug (bazset), Heart Attack (Ongo), Heart Attack (bazset), Hero (Ongo), Hero (bazset), Hunchback (Ongo), Hunchback (bazset), Hunchback Olympic (Ongo), Hunchback Olympic (bazset), Logger (Ongo), Logger (bazset), Radar Zone (Ongo), Radar Zone (bazset), Raiders (Ongo), Raiders (bazset), Space Fortress (Ongo), Space Fortress (bazset), Superbike (Ongo), Superbike (bazset), Video Eight Ball (Ongo), Video Eight Ball (bazset), Wall Street (Ongo), Wall Street (bazset).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ffgticlub (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gticlub</link>
-<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlub_20261105.rbf:2026-11-05T09:07:56+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 09:07:56 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: GTI Club, Operation Thunder Hurricane, Solar Assault.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ffgticlubsd (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gti-club-crt-480i</link>
-<guid isPermaLink="false">jlrh:_Arcade/cores/ffgticlubsd_20261105.rbf:2026-11-05T09:07:56+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 09:07:56 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: GTI Club CRT 480i, Operation Thunder Hurricane CRT 480i, Solar Assault CRT 480i.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/konami-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Gyruss (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gyruss</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Gyruss_20261029.rbf:2026-11-05T01:48:44+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 01:48:44 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gyruss.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1983 / Konami&lt;/p&gt;&lt;p&gt;Core: Gyruss&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Gyruss_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

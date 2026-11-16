@@ -186,6 +186,53 @@
  ],
  "patches": [
   {
+   "changes": [
+    "Playable Apocalypse with six native commands, a solo Arcade route and a new ending; visible Akuma and Apocalypse select spaces",
+    "Console mode with Arcade, Versus, Training and Options; MiSTer starts in Console mode",
+    "Versus against a friend or the computer, inline handicap and stage selection, and win totals retained through Rematch and Change Characters",
+    "Training with dummy action, guard, gauges, speed and stage settings; Restart and Change Characters from pause",
+    "Win quotes translated from the Japanese, restored Apocalypse dialogue, complete English endings and speaker labels",
+    "Two extra Saturn colors for the ordinary fighters, with matching portraits and effects; select with HP or HK",
+    "Hold Start on Chun-Li for about two seconds to preview her alternate outfit; release before confirming to cancel",
+    "Eight Turbo levels plus Normal, and Options for difficulty, time, speed, damage and sound",
+    "Pause Console selection with Coin, or pause matches with Coin or a Start hold; Continue resumes music and Quit returns to title"
+   ],
+   "date": "2026-11-16",
+   "description": [
+    "X-Men vs. Street Fighter EX keeps the arcade tag-team game and adds a home-style Console mode. Start opens a title menu with Arcade, Versus, Training and Options. Versus supports a friend or the computer, with handicap and stage choices and win totals that carry through rematches. Training offers dummy, guard, gauge, speed and stage controls.",
+    "Akuma and Apocalypse have visible places on character select. Apocalypse fights alone in his own arena, with his six native commands, a seven-fight Arcade route, Magneto and M. Bison as the final opponents, and a new ending. The other fighters get the Saturn version's two extra colors, carried through portraits and effects. Holding Start on Chun-Li previews her alternate outfit.",
+    "The USA edition includes the English Restoration: win quotes translated from the Japanese, restored Apocalypse conversations and complete endings. Eight Turbo levels and the original Normal speed are available. Console mode needs no credits; the service menu also retains ordinary Arcade operation.",
+    "This is a release candidate."
+   ],
+   "game": "X-Men vs. Street Fighter (Japan 970113)",
+   "hardware": "Capcom CPS-2",
+   "hidden": true,
+   "notes": [
+    "Requires the canonical Japan 970113 MAME set xmvsfj and shared parent xmvsf members. The patch download includes no original game ROMs.",
+    "Unofficial fan work, unaffiliated with Capcom or Marvel."
+   ],
+   "release_history": [
+    {
+     "date": "2026-11-16",
+     "items": [
+      "Adds playable Apocalypse with a solo Arcade route and ending, plus visible Akuma and Apocalypse select spaces.",
+      "Adds Console Arcade, Versus, Training and Options, including pause, rematches, stage selection and persistent settings.",
+      "Includes the English Restoration's Japanese win quotes, Apocalypse dialogue and complete endings.",
+      "Adds two extra Saturn colors, matching portraits and effects, Chun-Li's held-Start outfit preview and eight Turbo levels."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "section": "enhanced",
+   "set": "xmvsfj",
+   "slug": "xmvsf-ex",
+   "status": "release-candidate",
+   "subtitle": "Enhanced version",
+   "summary": "The tag-team arcade game with playable Apocalypse, extra colors, home-style modes and the Japanese stories in English.",
+   "title": "X-Men vs. Street Fighter EX",
+   "version": "rc1"
+  },
+  {
    "artifact": {},
    "changes": [
     "Night Warriors 2 title screen, finished from the unused Western title inside the original game",
@@ -461,7 +508,7 @@
     "Four regional builds: USA (Alpha 2 Gold), Europe (Alpha 2 Dash), Japan (Zero 2 Dash), and an English Asia (Zero 2 Dash)",
     "4 MB builds for real hardware and stock MAME, with all of Cammy's voices, some compressed to fit, plus 8 MB builds with every sound uncompressed for HBMAME and MiSTer"
    ],
-   "date": "2026-11-06",
+   "date": "2026-11-14",
    "description": [
     "Street Fighter Alpha 2 Gold, known as Zero 2 Dash in Japan, was the console revision of Alpha 2 that added Cammy as a playable fighter, first on PlayStation and Saturn and in final form in Capcom's 2006 PlayStation 2 anthology. It was never released on arcade hardware. This project rebuilds the anthology's edition as a real CPS-2 game.",
     "The rebuild restores the anthology's Cammy, her graphics and audio, and the regional titles and endings. Four regional builds are provided, shown below. The English builds carry the full Japanese script in English: every story and ending page, Evil Ryu's own ending, and all 452 win quotes.",
@@ -489,6 +536,14 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Corrected Cammy's throw voices.",
+      "Smoothed Cammy's defeated pose after a Raging Demon finish."
+     ],
+     "version": "rc9"
+    },
     {
      "date": "2026-11-06",
      "items": [
@@ -586,7 +641,7 @@
    "subtitle": "Arcade backport",
    "summary": "Capcom's 2006 PlayStation 2 anthology carried the final revision of Alpha 2 Gold, the console edition of Alpha 2 that brought Cammy into the roster. It was never released on arcade hardware. This rebuilds it as a real CPS-2 game, in four regional builds, for emulators, MiSTer, and real hardware.",
    "title": "Street Fighter Alpha 2 Gold",
-   "version": "rc8"
+   "version": "rc9"
   },
   {
    "artifact": {},
@@ -784,7 +839,7 @@
     "Akuma's intro dialogue, cut from the export game"
    ],
    "collection_api": 1,
-   "date": "2026-10-25",
+   "date": "2026-11-14",
    "description": [
     "Super Turbo came in two versions. Japan got Super Street Fighter II X, the one competitive players swear by. The rest of the world got a slightly different game: it plays differently, the continue screen is bare, most of the win quotes are gone, the endings are shorter, and Akuma's story is missing. Japan's version, of course, was in Japanese.",
     "Grand Master Challenge is Japan's game in English. The fighting is untouched. Everything you read is new: all 136 win quotes, the strategy tips on the continue screen, the full endings, and Akuma's dialogue, translated fresh from the Japanese with Capcom's own English as the style guide.",
@@ -794,9 +849,14 @@
    "game": "Super Street Fighter II X: Grand Master Challenge (Japan 940311)",
    "hardware": "Capcom CPS-2",
    "hbmame": {
+    "complete": true,
     "pr_url": "https://github.com/Robbbert/hbmame/pull/54",
     "renames": {
+     "sfx.01": "sfx.01",
+     "sfx.02": "sfx.02",
      "sfx.09": "sfx.09",
+     "sfx.11m": "sfx.11m",
+     "sfx.12m": "sfx.12m",
      "sfx.13m": "sfx.13m",
      "sfx.14m": "sfx.14m",
      "sfx.15m": "sfx.15m",
@@ -811,7 +871,11 @@
      "sfx.27m": "sfx.27m",
      "sfxj.03d": "sfxj.03d",
      "sfxj.04a": "sfxj.04a",
-     "sfxj.08": "sfxj.08"
+     "sfxj.05": "sfxj.05",
+     "sfxj.06b": "sfxj.06b",
+     "sfxj.07a": "sfxj.07a",
+     "sfxj.08": "sfxj.08",
+     "ssf2xj.key": "ssf2xj.key"
     },
     "setname": "ssf2tgmc"
    },
@@ -847,6 +911,18 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Fixed the opening Continue pose being partly erased before the countdown.",
+      "Fixed background distortion caused by stage scrolling.",
+      "Corrected Cammy’s stage edges and northern-lights details.",
+      "Kept the intro background, foreground and colors in step during scene changes.",
+      "Removed stray prompts and select-screen remnants during fully faded transitions.",
+      "Adjusted the casing and spacing of Chun-Li’s ending choices."
+     ],
+     "version": "rc5"
+    },
     {
      "date": "2026-10-25",
      "items": [
@@ -890,7 +966,7 @@
    "subtitle": "English restoration",
    "summary": "Japan's Super Turbo is the one the pros play, and it never came west. Now it does: the same game, with every quote, tip and ending in English.",
    "title": "Super Street Fighter II Turbo: Grand Master Challenge",
-   "version": "rc4"
+   "version": "rc5"
   },
   {
    "artifact": {
@@ -926,11 +1002,14 @@
        "setname": "ssf2tuc"
       },
       "hbmame": {
+       "complete": true,
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
         "sfx.01": "sfx.01",
         "sfx.02": "sfx.02",
         "sfx.09": "sfx.09",
+        "sfx.11m": "sfx.11m",
+        "sfx.12m": "sfx.12m",
         "sfx.13m": "sfx.13m",
         "sfx.14m": "sfx.14m",
         "sfx.15m": "sfx.15m",
@@ -948,7 +1027,8 @@
         "sfxj.05": "sfxj.05",
         "sfxj.06b": "sfxj.06b",
         "sfxj.07a": "sfxj.07a",
-        "sfxj.08": "sfxj.08"
+        "sfxj.08": "sfxj.08",
+        "ssf2xj.key": "ssf2xj.key"
        },
        "setname": "ssf2tuc"
       },
@@ -992,11 +1072,14 @@
        "setname": "ssf2xucj"
       },
       "hbmame": {
+       "complete": true,
        "pr_url": "https://github.com/Robbbert/hbmame/pull/56",
        "renames": {
         "sfx.01": "sfx.01",
         "sfx.02": "sfx.02",
         "sfx.09": "sfx.09",
+        "sfx.11m": "sfx.11m",
+        "sfx.12m": "sfx.12m",
         "sfx.13m": "sfx.13m",
         "sfx.14m": "sfx.14m",
         "sfx.15m": "sfx.15m",
@@ -1014,7 +1097,8 @@
         "sfxj.05": "sfxj.05",
         "sfxj.06b": "sfxj.06b",
         "sfxj.07a": "sfxj.07a",
-        "sfxj.08": "sfxj.08"
+        "sfxj.08": "sfxj.08",
+        "ssf2xj.key": "ssf2xj.key"
        },
        "setname": "ssf2xuc"
       },
@@ -1042,7 +1126,7 @@
     "Training with computer actions, guard and Super gauge settings, delayed health recovery, Restart and Change Character",
     "Option Mode for difficulty, time limit on or off, game speed (including NORMAL, slower than Turbo 1), round count and stereo or mono sound; Coin pauses play in Console mode",
     "EX CONFIGURATION in the operator menu: Console or Arcade mode; Japanese or international names; ORIGINAL, 30TH ANNIVERSARY or ULTRA SF2 artwork; BONUS STAGE on or off; and TIME LIMIT on or off. 30TH ANNIVERSARY, the default, uses the 30th Anniversary Collection's Hong Kong flag, Chun-Li's storefront signs and Guile's stage, with the red-winged runway emblem. Settings are saved between sessions. On EXIT, press 1P Start to save and return",
-    "ULTRA SF2 artwork follows Ultra Street Fighter II's stages: its runway emblem and a gold can on Guile's stage, Chun-Li's storefront without its signs, a red sun on E. Honda's bathhouse mural and a plain floor on Zangief's stage, with the 30th Anniversary Hong Kong flag and RUSSIA for Zangief's country",
+    "ULTRA SF2 artwork follows Ultra Street Fighter II's stages: its runway emblem and a gold can on Guile's stage, Chun-Li's storefront without its signs, a red sun on E. Honda's bathhouse mural and a plain floor on Zangief's stage, with China's flag and RUSSIA for Zangief's country",
     "Tournament Battle: with the link adapter, eight players and three matches across linked cabinets, with the Akuma and random-select cells on its select screen; without it, the game plays normally",
     "A new title screen with an EX mark",
     "Two more colors for every fighter: pick with two punches or two kicks, or hold Start as well for the Old version in those colors. The VS screen and the fight portrait show the color you picked",
@@ -1052,7 +1136,7 @@
     "The existing fighters play exactly as in Japan's Super Turbo"
    ],
    "collection_api": 1,
-   "date": "2026-11-03",
+   "date": "2026-11-14",
    "description": [
     "Super Turbo is the version competitive players swear by, but it left things behind. The bonus stages from Super Street Fighter II were gone. Shin Akuma was a hidden boss you had to earn, and Ten Akuma only turned up years later at home. Tournament Battle, the eight-player linked-cabinet mode, stayed with the earlier Super Street Fighter II.",
     "EX puts it together on the arcade game. Akuma has his own select-screen cell, with Shin and Ten available through codes there; the original Ryu codes still work. A random-select cell sits opposite him. The car, the falling barrels and the oil drums are back between fights. Link cabinets with the adapter and it runs Tournament Battle; without it, it plays as normal. Every fighter gets two more colors, Akuma and Shin Akuma get their colors from Ultra Street Fighter II, the move names are the modern ones, and the title screen carries an EX mark.",
@@ -1103,6 +1187,20 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Ryu's stage stays intact during Versus and Training, including jumps and the top edge of the picture.",
+      "Pausing and resuming on Cammy's stage no longer briefly corrupts the background.",
+      "Versus and Training accept the first direction as player select opens, and the opening portrait has the correct colors.",
+      "The USA build retains portraits, cursors and colors correctly on the select, VS and pause screens.",
+      "The defeated fighter's pose is preserved at the start of Continue.",
+      "Skipping Chun-Li's intro early no longer leaves its music playing over the title.",
+      "Country flags and names follow the selected ARTWORK setting throughout select and VS screens.",
+      "Moving around stage select in Versus and Training plays the player-select movement sound."
+     ],
+     "version": "rc14"
+    },
     {
      "date": "2026-11-03",
      "items": [
@@ -1241,7 +1339,7 @@
    "subtitle": "Enhanced version",
    "summary": "Japan's Super Turbo with Shin and Ten Akuma, the bonus stages, Tournament Battle, extra colors, and Console modes for Versus and Training. In English or Japanese.",
    "title": "Super Street Fighter II EX",
-   "version": "rc13"
+   "version": "rc14"
   },
   {
    "artifact": {
@@ -1429,7 +1527,7 @@
     "The other fighters retain their original moves, damage, hitboxes and computer behavior"
    ],
    "collection_api": 1,
-   "date": "2026-11-07",
+   "date": "2026-11-14",
    "description": [
     "Marvel Super Heroes vs. Street Fighter kept a lot from you. Outside Japan there was no Norimaro. Nowhere could you play as Cyber-Akuma or Apocalypse, or put the same fighter on a team twice. The console ports later added extra colors and more speeds, but only at home.",
     "EX gives the arcade game all of it. Norimaro is on the select screen in both builds, with his own ending and restored nosebleed attack and victory animation. Hold Start on any fighter for two seconds and their hidden version appears, no codes needed, though the old codes still work. Any two fighters make a team. Cyber-Akuma and Apocalypse are playable too, each with a spot on the select screen. Every fighter gets the Saturn version's two extra colors, on the HP and HK buttons, and the service menu goes from three speeds to eight.",
@@ -1476,6 +1574,17 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Fixes Console Versus rematches and character changes against the computer, including an unwanted Game Over, flickering win counts and incorrect player prompts.",
+      "Fixes extra-color effects for Cyclops, Norimaro and Shuma-Gorath, and Cyber-Akuma’s portraits and ending artwork. Both playable bosses now reach the staff roll correctly.",
+      "Restores the rare English victory quotes, with each line centered in the quote box.",
+      "Improves stage selection with scene previews, stage captions, a faster Random carousel and a confirmation sound. The animated backdrop stays visible after choosing a stage.",
+      "Removes the unused Arcade scores from Training."
+     ],
+     "version": "rc7"
+    },
     {
      "date": "2026-11-07",
      "items": [
@@ -1541,7 +1650,7 @@
    "subtitle": "Enhanced version",
    "summary": "The arcade game with everything it held back: Norimaro in the US game, Cyber-Akuma and Apocalypse on your side, extra colors and eight speeds. USA and Japan builds.",
    "title": "Marvel Super Heroes vs. Street Fighter EX",
-   "version": "rc6"
+   "version": "rc7"
   },
   {
    "artifact": {},
@@ -1868,7 +1977,7 @@
     "Cammy and Random cells on the select screen, and Cammy as a CPU opponent in Arcade",
     "EX Akuma (EX Gouki in Japan) and EX Cammy, under Capcom's EX rules with no Super Combos and distinct name colors on the select screen",
     "Alternate forms with one or two START presses, and every secret unlocked from the start",
-    "Versus matches return straight to the select screen",
+    "Versus against another player or a computer, with human-first fighter selection; matches return straight to the select screen",
     "An OPTION MODE page, and GAME MODE (CONSOLE or ARCADE), eight GAME SPEED levels and a TIME LIMIT with infinity in the operator menu",
     "A new title screen with an EX mark",
     "The USA build includes the Japanese story and endings in English, held-button win-quote selection and the next-stage place names",
@@ -1877,10 +1986,10 @@
     "EX CONFIGURATION offers JAPAN or INTERNATIONAL backgrounds, with JAPAN as the default, and ORIGINAL or 30TH ANNIVERSARY artwork",
     "START on Gen switches between his two starting stances"
    ],
-   "date": "2026-11-06",
+   "date": "2026-11-14",
    "description": [
     "Street Fighter Alpha 2 EX builds on our Street Fighter Alpha 2 Gold backport. Every Gold fighter plays exactly as in Gold. EX adds the menus, modes and forms the arcade game kept behind codes or never had, and every secret starts unlocked.",
-    "In CONSOLE game mode the game plays free, and START at the title opens a mode menu: Arcade, Versus, Survival, Dramatic Battle, Akuma, Training and Options. Versus matches go straight back to the select screen, and Coin opens Pause/Back on selection screens and during fights, with a confirmed Quit to the title menu. Training offers recording and replay, computer behavior and guard settings, input history and attack data. Cammy and a Random cell sit on the select screen, Cammy turns up as a CPU opponent in the other fighters' Arcade runs, and alternate forms take a START press or two instead of five.",
+    "In CONSOLE game mode the game plays free, and START at the title opens a mode menu: Arcade, Versus, Survival, Dramatic Battle, Akuma, Training and Options. Versus lets each side be Human or Computer, with at least one human, and humans choose their fighters first. Matches go straight back to the select screen, and Coin opens Pause/Back on selection screens and during fights, with a confirmed Quit to the title menu. Training offers recording and replay, computer behavior and guard settings, input history and attack data. Cammy and a Random cell sit on the select screen, Cammy turns up as a CPU opponent in the other fighters' Arcade runs, and alternate forms take a START press or two instead of five.",
     "Two EX forms join the roster, each one START press away on its fighter's cell: EX Akuma and EX Cammy. Both follow Capcom's own EX rules, with classic moves and no Super Combos.",
     "OPTIONS opens an OPTION MODE page with difficulty, time limit, rounds, damage, turbo and sound. The operator menu adds GAME MODE, REGULATION for red or white blood, eight GAME SPEED levels and a TIME LIMIT of 25, 50, 75, 99 or infinity, and the title has a new EX mark. The USA build is in English; the Japan build, Street Fighter Zero 2 EX, keeps the Japanese. EX CONFIGURATION selects JAPAN or INTERNATIONAL backgrounds and ORIGINAL or 30TH ANNIVERSARY artwork.",
     "The MiSTer MRAs start in CONSOLE mode. MAME and HBMAME start in ARCADE mode, which keeps Gold's arcade title; set GAME MODE to CONSOLE on the operator menu's EX page for the mode menu. It runs in MAME and HBMAME and on MiSTer.",
@@ -1904,6 +2013,20 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Versus setup lets each side be Human or Computer, with at least one human. Humans choose their fighters before choosing the computer’s fighter.",
+      "REGULATION now controls red or white blood correctly in Training.",
+      "Pause keeps fighters, menus and colors stable, holds the music and lets menu sounds play.",
+      "Fixed held confirmation inputs carrying through Continue screens and kept disabled Replay rows unavailable.",
+      "Kept control of Versus setup with the player who opened it until Begin, including when that player chooses Computer.",
+      "Removed the brief title-screen flash when leaving Versus setup and hid unused scores and join prompts.",
+      "Corrected Cammy’s throw voice calls and distinguished Shin Akuma and Shin Gouki names.",
+      "Corrected the Training map’s Alpha/Zero presentation and centered its PRESS START prompt."
+     ],
+     "version": "rc5"
+    },
     {
      "date": "2026-11-06",
      "items": [
@@ -1964,7 +2087,7 @@
    "subtitle": "Enhanced version",
    "summary": "Our Alpha 2 Gold backport with a console-style mode menu, Training with recording and replay, Cammy and Random on the select screen, EX Akuma and EX Cammy, and more speed and time settings. In USA and Japan builds.",
    "title": "Street Fighter Alpha 2 EX",
-   "version": "rc4"
+   "version": "rc5"
   },
   {
    "builds": [
@@ -1992,7 +2115,7 @@
     "The Collection’s music for the restored scenes and Dee’s boss fight, on MiSTer",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-11-07",
+   "date": "2026-11-14",
    "description": [
     "Vampire Savior Arrange is one of the arranged editions in Capcom’s 2005 PlayStation 2 Vampire: Darkstalkers Collection, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "It keeps Vampire Savior’s game system, with recoverable health and Dark Force, and brings back Donovan, Huitzil and Pyron (Donovan, Phobos and Pyron in Japan). Dee, the fighter Capcom made for the Arrange, joins them on his own cell at the bottom of the select screen.",
@@ -2027,6 +2150,18 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Corrected Huitzil’s rival encounter so the dialogue and opponent agree.",
+      "Corrected missing pictures, backgrounds, colors and animation in Dee, Oboro Bishamon, Huitzil and Donovan’s endings.",
+      "Restored Oboro Bishamon’s silent win quotes and all twenty entries in the Master of display.",
+      "Concrete Cave’s cat now reacts to EX moves.",
+      "Corrected the English names shown for Lord Raptor during Dark Force and for Dark Talbain.",
+      "Added Anita’s HUD and versus names and corrected the handoff to the staff roll."
+     ],
+     "version": "rc6"
+    },
     {
      "date": "2026-11-07",
      "items": [
@@ -2095,7 +2230,7 @@
    "subtitle": "Arcade backport",
    "summary": "The Arrange edition of Vampire Savior from Capcom’s PlayStation 2 collection, as a CPS-2 game: Donovan, Huitzil and Pyron return, and Dee joins the roster. USA and Japan builds.",
    "title": "Vampire Savior Arrange",
-   "version": "rc5"
+   "version": "rc6"
   },
   {
    "builds": [
@@ -2124,7 +2259,7 @@
     "The Collection’s Dee music on MiSTer, with the shared music pack built from your disc",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-11-07",
+   "date": "2026-11-14",
    "description": [
     "Vampire Savior 2 Arrange is one of the arranged editions in Capcom's 2005 PlayStation 2 Vampire: Darkstalkers Collection, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "It keeps Vampire Savior 2's game system, with Jedah as the final boss, and brings back Jon Talbain, Rikuo and Sasquatch (Gallon, Aulbath and Sasquatch in Japan) with their Vampire Hunter 2 move sets, so every fighter is selectable. Dee, the fighter Capcom made for the Arrange, has his own cell at the bottom of the select screen, and Pyron becomes an ordinary opponent.",
@@ -2158,6 +2293,14 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Restored the cats’ reactions to EX moves on Concrete Cave.",
+      "Corrected Lord Raptor’s name during Dark Force in the USA build."
+     ],
+     "version": "rc5"
+    },
     {
      "date": "2026-11-07",
      "items": [
@@ -2208,7 +2351,7 @@
    "subtitle": "Arcade backport",
    "summary": "The Arrange edition of Vampire Savior 2 from Capcom's PlayStation 2 collection, as a CPS-2 game: Jon Talbain, Rikuo and Sasquatch return, Dee joins the roster, and NIGHTMARE difficulty hides a fight with him. USA and Japan builds.",
    "title": "Vampire Savior 2 Arrange",
-   "version": "rc4"
+   "version": "rc5"
   },
   {
    "builds": [
@@ -2238,7 +2381,7 @@
     "The Collection’s Dee music on MiSTer, with the shared music pack built from your disc",
     "USA (Night Warriors 2 Arrange, English) and Japan (Vampire Hunter 2 Arrange) builds"
    ],
-   "date": "2026-11-07",
+   "date": "2026-11-14",
    "description": [
     "Night Warriors 2 Arrange (Vampire Hunter 2 Arrange in Japan) is one of the arranged editions in Capcom's 2005 PlayStation 2 Vampire: Darkstalkers Collection, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "It keeps Vampire Hunter 2's presentation, with Pyron as the final boss, and adds the four Vampire Savior fighters it lacked: Jedah, Lilith, Q-Bee and B.B. Hood (Bulleta in Japan). Dee, the fighter Capcom made for the Arrange, joins them on his own select cell.",
@@ -2274,6 +2417,14 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Restored the cats’ reactions to EX moves on Concrete Cave.",
+      "Corrected the English HUD names for Lord Raptor during Dark Force and Jon Talbain’s dark form."
+     ],
+     "version": "rc5"
+    },
     {
      "date": "2026-11-07",
      "items": [
@@ -2327,7 +2478,7 @@
    "subtitle": "Arcade backport",
    "summary": "The Arrange edition of Vampire Hunter 2 from Capcom's PlayStation 2 collection, as a CPS-2 game: Jedah, Lilith, Q-Bee, B.B. Hood and Dee join the roster, with the Arrange's game system and NIGHTMARE difficulty. USA and Japan builds.",
    "title": "Night Warriors 2 Arrange",
-   "version": "rc4"
+   "version": "rc5"
   },
   {
    "builds": [
@@ -2536,10 +2687,19 @@
     "variants": [
      {
       "hbmame": {
+       "complete": true,
        "renames": {
+        "sfz3j.key": "sfz3j.key",
+        "sz3.01": "sz3.01",
+        "sz3.02": "sz3.02",
+        "sz3.05c": "sz3.05c",
+        "sz3.06c": "sz3.06c",
+        "sz3.07c": "sz3.07c",
         "sz3.08c": "sz3.08c",
         "sz3.09c": "sz3.09c",
         "sz3.10b": "sz3.10b",
+        "sz3.11m": "sz3.11m",
+        "sz3.12m": "sz3.12m",
         "sz3.13m": "sz3.13m",
         "sz3.14m": "sz3.14m",
         "sz3.15m": "sz3.15m",
@@ -2569,13 +2729,27 @@
      },
      {
       "hbmame": {
+       "complete": true,
        "renames": {
+        "sfz3j.key": "sfz3j.key",
+        "sz3.01": "sz3.01",
+        "sz3.02": "sz3.02",
+        "sz3.05c": "sz3.05c",
+        "sz3.06c": "sz3.06c",
+        "sz3.07c": "sz3.07c",
+        "sz3.08c": "sz3.08c",
         "sz3.09c": "sz3.09c",
         "sz3.10b": "sz3.10b",
+        "sz3.11m": "sz3.11m",
+        "sz3.12m": "sz3.12m",
         "sz3.13m": "sz3.13m",
+        "sz3.14m": "sz3.14m",
         "sz3.15m": "sz3.15m",
+        "sz3.16m": "sz3.16m",
         "sz3.17m": "sz3.17m",
+        "sz3.18m": "sz3.18m",
         "sz3.19m": "sz3.19m",
+        "sz3.20m": "sz3.20m",
         "sz3j.03c": "sz3j.03c",
         "sz3j.04c": "sz3j.04c"
        },
@@ -2609,7 +2783,7 @@
     "An optional Japanese edition with original Japanese text and names, Zero branding and Z-ISM, and the same ending corrections"
    ],
    "collection_api": 1,
-   "date": "2026-11-03",
+   "date": "2026-11-14",
    "description": [
     "Street Fighter Alpha 3's US arcade version cut each character's win quotes down to eight generic lines. The Japanese game also has a quote for each opponent. This restoration brings back all 625 opponent-specific quotes, with all 825 of the Japanese game's win quotes in English.",
     "Detailed stage locations return in English, in the original stage panels. Biographies, rival dialogue and endings follow the Japanese script in natural English that fits each character. Capcom's English stays where it was accurate, and Alpha 3 MAX's official wording is used where it fits.",
@@ -2647,6 +2821,20 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Made the win-quote panel taller, centered every quote and rebalanced uneven or squeezed line breaks.",
+      "Fixed the win screen’s left column overlapping the quote panel and widened the translucent band to frame it evenly.",
+      "Kept the small scrolling player-select text clear of the large headings.",
+      "Corrected inconsistent bush shading in forest stages, including during weather and lightning changes.",
+      "Restored SELECT PLAYER and FIGHTING STYLE SELECT headings.",
+      "Centered character biographies vertically on the stage intro screens.",
+      "Improved nine character-specific win quotes for Akuma, Charlie, Chun-Li, Gen, Cody, Vega and Karin. Thanks to Lemongrwab for contributing the translations.",
+      "Updated the attract-mode Capcom address."
+     ],
+     "version": "rc6"
+    },
     {
      "date": "2026-11-03",
      "items": [
@@ -2697,7 +2885,7 @@
    "subtitle": "English restoration",
    "summary": "The Japanese arcade game in English, with all 625 opponent-specific win quotes restored, detailed stage locations and the original Regulation setting.",
    "title": "Street Fighter Alpha 3",
-   "version": "rc5"
+   "version": "rc6"
   },
   {
    "artifact": {
@@ -3047,7 +3235,7 @@
     "USA, Japan and Asia builds, with the regional restoration underneath"
    ],
    "collection_api": 1,
-   "date": "2026-11-03",
+   "date": "2026-11-14",
    "description": [
     "Street Fighter Alpha EX aims to be the definitive version of the first Alpha, bringing together features from its console releases and the CPS-1 Changer version. It builds on the regional restoration, with Akuma, Dan and M. Bison on the visible select screen and six colors per fighter: the original two plus four from Alpha 2.",
     "CONSOLE mode adds a green title and a cycling mode menu: Arcade, Versus, Training, Dramatic Battle, Survival, Akuma and Options. Versus returns to fighter selection after each match. Training has recording and replay, computer behavior, stage and gauge controls, and health that refills after a combo while stopping at 1 HP.",
@@ -3083,6 +3271,17 @@
    ],
    "release_history": [
     {
+     "date": "2026-11-14",
+     "items": [
+      "Fixed resets and corrected Console pause colors and fighter graphics.",
+      "Corrected CPU selection order and visibility, random selection, and duplicate names in Dramatic Battle.",
+      "Fixed missing music notes after unpausing and corrected the music timing when retrying the Akuma fight.",
+      "Light Kick returns from Training Setup and pause menus.",
+      "Added menu navigation sounds and corrected Options alignment, character-select headings, shadows and victory totals."
+     ],
+     "version": "rc4"
+    },
+    {
      "date": "2026-11-03",
      "items": [
       "Fixed the corrupted SCORE RANKING heading, and set the default ranking initials to CHN for Chun-Li and to CHL for Charlie in the USA and Asia builds."
@@ -3115,7 +3314,7 @@
    "subtitle": "Enhanced version",
    "summary": "Alpha with all thirteen fighters on the select screen, six colors each, a console mode menu, Training with recording, Survival and cooperative Dramatic Battle.",
    "title": "Street Fighter Alpha EX",
-   "version": "rc3"
+   "version": "rc4"
   },
   {
    "artifact": {
@@ -3554,7 +3753,7 @@
     "Native operator Free Play with saved settings and no-coin starts"
    ],
    "collection_api": 1,
-   "date": "2026-11-05",
+   "date": "2026-11-14",
    "description": [
     "Play the Japanese version of Hyper Street Fighter II in English, with its original balance and the classic versions of each fighter. Western fighter names and the official US regional move voices accompany English win quotes, full endings, illustrated Continue tips and all 28 Start messages.",
     "Stage and portrait artwork repairs, black backgrounds in affected ending and Ryu intro scenes, and a clearer ending-choice menu complete the restoration. Japan's factory speed and coin settings are retained, with native Free Play available in the operator menu.",
@@ -3632,6 +3831,13 @@
    "patch_noun": "restoration",
    "release_history": [
     {
+     "date": "2026-11-14",
+     "items": [
+      "No gameplay changes."
+     ],
+     "version": "rc2"
+    },
+    {
      "date": "2026-11-05",
      "items": [
       "First public release."
@@ -3646,7 +3852,7 @@
    "subtitle": "English restoration",
    "summary": "The Japanese Anniversary Edition in English, with its original balance, Western fighter names and the full stories and win quotes.",
    "title": "Hyper Street Fighter II: The Anniversary Edition",
-   "version": "rc1"
+   "version": "rc2"
   }
  ],
  "projects": [

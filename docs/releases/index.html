@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MisterZine - MiSTer FPGA Cores &amp; Arcade Games Tracker</title>
-<meta name="description" content="A searchable, sortable tracker of every public MiSTer core (console, computer and arcade) with specs, release dates, arcade screenshots and links to each core's GitHub. Updated daily.">
+<meta name="description" content="Search and sort every public MiSTer FPGA core and arcade game: release dates, specs, screenshots, GitHub links, and launching on your MiSTer. Updated four times a day.">
+<!-- one address for search engines: the tab strip rewrites a bare /releases/
+     to ?collection=all (so Back works between tabs), deep links add #<key> -->
+<link rel="canonical" href="https://misterzine.fyi/releases/">
 <!-- favicon lives at the project root (explicit links required: a GitHub
      Pages project site doesn't own the domain root) -->
 <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
@@ -20,7 +23,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MisterZine">
 <meta property="og:title" content="MiSTer FPGA Core &amp; Arcade Games Tracker">
-<meta property="og:description" content="1,000+ MiSTer cores and arcade games with screenshots, specs and release dates. Updated daily.">
+<meta property="og:description" content="2,500+ MiSTer cores and arcade games with screenshots, specs and release dates. Updated four times a day.">
 <meta property="og:url" content="https://misterzine.fyi/releases/">
 <meta property="og:image" content="https://misterzine.fyi/images/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -521,6 +524,10 @@
   }
   @media (max-width: 36rem) {
     .newspill { max-width: calc(100% - 8.5rem); }
+    /* room past the last row, so scrolling to the end lifts it clear of the
+       round feedback button (bottom .9rem + 2.9rem tall + a little air); an
+       in-flow block, since a table's bottom margin may not count as scrollable */
+    .tablewrap::after { content: ""; display: block; height: calc(4.3rem + env(safe-area-inset-bottom, 0px)); }
   }
   .newspill .txt { cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .newspill .x { flex: none; cursor: pointer; border: 0; background: none; color: var(--muted);
@@ -563,6 +570,9 @@
   th[aria-sort] { color: var(--table-accent); }
   th[aria-sort=ascending]::after { content: "\00a0\2191"; }
   th[aria-sort=descending]::after { content: "\00a0\2193"; }
+  /* keyboard focus ring drawn inside the cell: outside, the scroller clips its
+     top and the neighbouring sticky headers paint over its sides */
+  th:focus-visible { outline-offset: -2px; }
   /* every column after Title is condensed — denser metadata, more room for titles */
   th + th, td + td { font-family: 'Roboto Condensed', Roboto, system-ui, sans-serif; }
   .badge { display: inline-block; padding: .05em .5em; border-radius: 10px; font-size: .82em;
@@ -1404,7 +1414,7 @@
        upward against the right edge. Columns and Share stay pinned on the right, outside it. -->
   <div class="filters">
     <div class="searchwrap">
-      <input type="search" id="q" placeholder="Find anything">
+      <input type="search" id="q" placeholder="Find anything" aria-label="Search titles, cores, makers, years and specs">
       <button type="button" id="qx" class="qx" data-tip="Clear search" tabindex="-1">x</button>
       <span class="count" id="count"></span>
     </div>
@@ -1651,7 +1661,7 @@
 </aside>
 </div>
 </main>
-<aside id="panel" hidden></aside>
+<aside id="panel" aria-label="Details" hidden></aside>
 <dialog id="favsignin" class="cldialog" aria-labelledby="favsignintitle">
   <h2 id="favsignintitle">Sign in to save favorites</h2>
   <p>Browser-only favorites are being retired. Your existing favorites remain viewable; adding or removing favorites now requires an account.</p>
@@ -2919,8 +2929,13 @@ const COLUMNS = [
   // separates. Blank for rows tracked before the stamp existed (Sep 2026).
   { k: 'mz', label: 'Changed on MZ', sl: 'MZ Change', w: 10, mw: 5.5, opt: true,
     cell: d => '<td class="date"><span class="dv">' + esc(d.mz || '') + '</span></td>' },
+  // italic (td.build) = not this row's own debut: on a group row (in practice a
+  // core-update batch) the earliest debut among its games, on a plain row a
+  // build date standing in for an unknown debut. The tip says which
   { k: 'date', label: 'MiSTer Debut', sl: 'Debut', w: 10, mw: 5.5,
-    cell: d => '<td class="date' + (d.date_kind === 'build' ? ' build' : '') + '"><span class="dv">' + esc(d.date) + '</span></td>' },
+    cell: d => '<td class="date' + (d.date_kind === 'build' && d.date
+      ? ' build" data-tip="' + (d.grp ? 'Earliest MiSTer debut among these games' : 'Debut date unknown: this is the build date')
+      : '') + '"><span class="dv">' + esc(d.date) + '</span></td>' },
   { k: 'year', label: 'Original Year', sl: 'Year', w: 9, mw: 4.5, cell: d => '<td>' + esc(d.year) + '</td>' },
   { k: 'manufacturer', label: 'Manufacturer', w: 19, mw: 8.5, cell: d => '<td>' + esc(d.manufacturer) + '</td>' },
   { k: 'reg',  label: 'Region',     w: 8,  mw: 5, opt: true },
@@ -3044,8 +3059,10 @@ function buildHeader() {
   const total = cols.reduce((s, c) => s + (c.fixed ? 0 : c.w), 0);
   document.getElementById('cg').innerHTML = cols.map(c =>
     '<col style="width:' + (c.fixed || (c.w / total * 100).toFixed(2) + '%') + '">').join('');
+  // tabindex: every header sorts, so each is a keyboard stop (Enter/Space, see
+  // the #hrow keydown handler); a mouse click never shows the focus ring
   document.getElementById('hrow').innerHTML = cols.map(c =>
-    '<th data-k="' + c.k + '"' + (c.k === sortKey
+    '<th data-k="' + c.k + '" tabindex="0"' + (c.k === sortKey
       ? ' aria-sort="' + (sortDir === 1 ? 'ascending' : 'descending') + '"' : '') +
     (HEADER_TIPS[c.k] ? ' data-tip="' + escA(HEADER_TIPS[c.k]) + '"' : '') +
     '>' + (c.th || (narrowMQ.matches && c.sl) || c.label) + '</th>').join('');
@@ -3584,6 +3601,19 @@ function escA(s) { return esc(s).replace(/"/g, '&quot;'); }
 
 // diacritic-insensitive lowercase for search ("sam coupe" must match "SAM Coupé")
 const fold = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+// The second chance a search term gets, so spacing and punctuation inside a
+// name stop deciding what matches: "megadrive" finds "Mega Drive", "pacman"
+// "Pac-Man", "xmen" "X-Men", "mrdo" "Mr. Do". looseTerm() turns the term's
+// letters and digits into a pattern that allows separators between them, with
+// two guards against the false hits a plain squash gave ("star" inside "Altered
+// Beast" + "Arcade"): the match must START a word, and it may not cross from
+// one field into the next (fields are joined with \n, which the separator class
+// excludes). Terms under SQUASH_MIN letters and digits get no second chance.
+const SQUASH_MIN = 4;
+const looseTerm = t => {
+  const s = t.replace(/[^a-z0-9]+/g, '');
+  return s.length < SQUASH_MIN ? null : new RegExp('(?:^|[^a-z0-9])' + [...s].join('[^a-z0-9\\n]*'));
+};
 
 function apply() {
   refreshSectionCalendar();
@@ -3594,6 +3624,7 @@ function apply() {
   // matching both, in any field, in any order); each term is an independent
   // substring so multi-word values still match ("street fighter" hits the title)
   const terms = fold(qEl.value.trim()).split(/\s+/).filter(Boolean);
+  const looseTerms = terms.map(looseTerm);
   // a search opens every batch until the visitor closes one; a new query
   // forgets those closes (see searchShut)
   searchOn = terms.length > 0;
@@ -3644,15 +3675,17 @@ function apply() {
       if (yearTo != null && y > yearTo) return false;
     }
     if (!terms.length) return true;
-    const hay = fold(d.title + ' ' + (d.mt || '') + ' ' + typeLabel(d) + ' ' + (d.genre || '') + ' ' + d.manufacturer + ' ' +
-            d.year + ' ' + (d.core || '') + ' ' + coreLabel(d.core) + ' ' +
-            (d.rot || '') + ' ' + (d.brot || '') + ' ' + (d.res || '') + ' ' + (d.plr || '') + ' ' +
-            (d.ctl || '') + ' ' + (d.spc || '') + ' ' + (d.reg || '') + ' ' + (d.sn || '') + ' ' +
-            (d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '') + ' ' +
-            (d.vec ? 'vector' : '') + ' ' +
-            (d.beta ? gateStage(d) + ' patreon' : '') + ' ' +
-            (SRC_SEARCH[d.src] || ''));
-    return terms.every(t => hay.includes(t));
+    // one field per line: a term never holds whitespace, so includes() reads it
+    // as before, and looseTerm's patterns can't run from one field into the next
+    const hay = fold([d.title, d.mt, typeLabel(d), d.genre, d.manufacturer, d.year, d.core, coreLabel(d.core),
+            d.rot, d.brot, d.res, d.plr, d.ctl, d.spc, d.reg, d.sn,
+            d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '',
+            d.vec ? 'vector' : '',
+            // "tate": the MiSTer community's word for a vertical screen
+            /vertical/i.test(d.rot || '') ? 'tate' : '',
+            d.beta ? gateStage(d) + ' patreon' : '',
+            SRC_SEARCH[d.src]].join('\n'));
+    return terms.every((t, i) => hay.includes(t) || (looseTerms[i] !== null && looseTerms[i].test(hay)));
   });
   // fold same-game survivors under one umbrella (see makeUmbrella); a group the
   // filters cut to one member is promoted to a plain row. Umbrellas are minted
@@ -3957,6 +3990,16 @@ document.getElementById('hrow').addEventListener('click', e => {
   if (openRow && flat.includes(openRow)) recenterOpen();
   else document.querySelector('.tablewrap').scrollTop = 0;
 });
+// keyboard sorting: Enter or Space on a focused header acts as a click. The
+// click rebuilds the header row, so focus is put back on the same column
+document.getElementById('hrow').addEventListener('keydown', e => {
+  const th = e.target.closest('th');
+  if (!th || (e.key !== 'Enter' && e.key !== ' ') || e.ctrlKey || e.metaKey || e.altKey) return;
+  e.preventDefault();  // Space would otherwise scroll the table
+  const k = th.dataset.k;
+  th.click();
+  document.querySelector('#hrow th[data-k="' + k + '"]')?.focus();
+});
 
 // --- "Type" dropdown: multi-select filter over the four base types ---
 // enabledTypes holds the checked bases. Every box starts checked (= no filter);
@@ -4214,7 +4257,7 @@ function buildYearMenu() {
   // visitor who may have one, and blank boxes over a still-filtered table would lie.
   const row = (b, label, ph, val) =>
     '<div class="yearrow"><span class="ylbl">' + label + '</span>' +
-    '<input type="number" inputmode="numeric" class="y' + b + '" min="' + YEAR_MIN +
+    '<input type="number" inputmode="numeric" class="y' + b + '" aria-label="' + label + ' year" min="' + YEAR_MIN +
       '" max="' + YEAR_MAX + '" step="1" placeholder="' + ph + '"' +
       (val == null ? '' : ' value="' + val + '"') + '>' +
     '<button type="button" class="xclr" data-b="' + b + '" data-tip="Clear ' + label + '" hidden>x</button></div>';
@@ -6595,11 +6638,18 @@ resizer.addEventListener('pointercancel', endResize);
 }
 
 // wide screens: dock the panel with the empty state by default (no slide-in on
-// first paint). Only from 1200px up: below that the docked panel takes a third
-// of a laptop window and leaves the controls row ~650px, folding the filters
-// away before anyone has picked a title. Narrower screens get the panel when a
-// row is clicked and never auto-open it later.
-if (!MZLists.isEditing() && matchMedia('(min-aspect-ratio: 3/5)').matches && matchMedia('(min-width: 1200px)').matches) {
+// first paint), but only when the table beside it keeps its whole toolbar on
+// one row. Measured 2026-11-16: the controls (search, five filters, Group
+// updates, View preset, Columns, link) need about 1120px of <main>, so with the
+// default third-width panel that is a window of about 1700px; the visitor's own
+// dragged panel width counts instead when they have one. The old fixed 1200px
+// gate predated the tab strip and preset controls: at 1440x900 the empty panel
+// cost a second toolbar row and two-line titles (14 rows in view instead of
+// 18). Grow PLACEHOLDER_ROOM if the toolbar grows. Narrower screens get the
+// panel when a row is clicked and never auto-open it later.
+const PLACEHOLDER_ROOM = 1140;
+const dockW = committedW ? Math.min(committedW, maxW()) : Math.round(innerWidth / 3);
+if (!MZLists.isEditing() && matchMedia('(min-aspect-ratio: 3/5)').matches && innerWidth - dockW >= PLACEHOLDER_ROOM) {
   document.body.classList.add('no-anim');
   openPlaceholder();
   requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.remove('no-anim')));

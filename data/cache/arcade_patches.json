@@ -2492,23 +2492,24 @@
     "Ultra's classic colors for the new fighters, chosen on a color select screen",
     "Sixteen stages and Random to choose from after you pick a fighter",
     "The Ultra title and intro, and ULTRA on the VS, Continue and Game Over screens",
-    "The Switch edition's sound effects, and its arranged music on MiSTer; MODERN or CLASSIC options",
+    "ORIGINAL, CLASSIC and MODERN sound options, with the Switch edition's classic announcer in CLASSIC and arranged music on MiSTer",
     "MODERN command inputs with more forgiving motions, or CLASSIC inputs, selected in ULTRA CONFIGURATION",
+    "Configurable game speed, an optional player speed choice and a shared match-length setting for Arcade and Versus",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-11-07",
+   "date": "2026-11-14",
    "description": [
     "Ultra Street Fighter II: The Final Challengers is the 2017 Nintendo Switch edition of Super Street Fighter II Turbo, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "Akuma has his own select cell, and Evil Ryu and Violent Ken join the original sixteen fighters with their Ultra moves, colors and endings. Shin Akuma stays hidden, for twenty fighters in all.",
     "Ultra's presentation comes with them: the Ultra title and intro, \"The Final Challengers\" lettering, a color select for the new fighters, and a choice of sixteen stages or Random once you have picked a fighter.",
-    "The Switch edition's sound effects play in every build, and on MiSTer its arranged music plays too. Choose MODERN or CLASSIC sound effects in ULTRA CONFIGURATION; on MiSTer you can choose the music there too. MODERN controls are the default; choose CLASSIC in ULTRA CONFIGURATION to retain the earlier command inputs.",
+    "The Switch edition's sound effects play in every build, and on MiSTer its arranged music plays too. Choose ORIGINAL, CLASSIC or MODERN sound in ULTRA CONFIGURATION; MODERN is the default. CLASSIC adds the Switch edition's classic announcer, while ORIGINAL keeps the earlier arcade sound. On MiSTer you can choose the music there too. MODERN controls are the default; choose CLASSIC controls to retain the earlier command inputs.",
     "The USA build is in English; the Japan build keeps the Japanese.",
     "This is a release candidate."
    ],
    "game": "Ultra Street Fighter II: The Final Challengers (Nintendo Switch)",
    "hardware": "Capcom CPS-2 with the CPS+ core",
    "notes": [
-    "USA and Japan use the same game configuration with selectable MODERN and CLASSIC sound effects. In unmodified MAME they run as hsf2 (USA) and hsf2j (Japan); no custom MAME build is needed. Choose the sound effects in ULTRA CONFIGURATION. Keep the generated ZIPs separate from original Hyper Street Fighter II ROMs. Checksum warnings are expected. HBMAME needs a build that includes the Ultra Street Fighter II sets.",
+    "USA and Japan use the same game configuration with selectable ORIGINAL, CLASSIC and MODERN sound. In unmodified MAME they run as hsf2 (USA) and hsf2j (Japan); no custom MAME build is needed. Choose the sound in ULTRA CONFIGURATION. Keep the generated ZIPs separate from original Hyper Street Fighter II ROMs. Checksum warnings are expected. HBMAME needs a build that includes the Ultra Street Fighter II sets.",
     "Installation: install Python 3.10 or newer, extract the kit and run apply.py with your arcade ROMs, Switch game files and prod.keys. The region follows the game files you supply. Scratch and output folders are selected automatically unless you specify them. The installer checks paths before downloading tools, reports setup errors without a traceback, and groups the finished files and instructions by target. No compiler, Git, CMake, NumPy or separate FFmpeg installation is needed. For offline setup, keep cpsplus-tools-v2-offline.zip zipped and add --tools-bundle cpsplus-tools-v2-offline.zip --offline. Optional 7z inputs still need 7-Zip.",
     "Credits: Akuma's imported artwork is Tyrone's, from Super Street Fighter II Turbo: New Legacy.",
     "Special thanks to Gachichan! for bug reports and improvements to the Evil Ryu and Violent Ken profile pictures.",
@@ -2537,6 +2538,30 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Fix: Start responds immediately on the title screen and enters player select without palette corruption or resets.",
+      "Fix: Corrected ground-fireball damage for Ryu, Evil Ryu, Violent Ken, Akuma and Shin Akuma, including Shin Akuma’s multi-hit red fireballs.",
+      "Fix: Corrected Violent Ken’s super movement, animation completion and landing.",
+      "Fix: Claw's super combos report their three hits and award the earned bonus points, including knockouts.",
+      "Fix: Removed corrupt graphics from Akuma and Shin Akuma's crouching medium and heavy kicks.",
+      "New: GAME SPEED offers NORMAL, MODERN and TURBO 1–4, with MODERN as default. SPEED SELECT separately enables the player speed choice.",
+      "New: MAX ROUND sets the shared match length for Arcade and Versus.",
+      "New: ORIGINAL, CLASSIC and MODERN sound choices. CLASSIC adds the Switch edition’s classic announcer; ORIGINAL preserves the previous Classic sound, including saved preferences.",
+      "Improved: Balanced Classic and Modern voice levels, and corrected Evil Ryu and Violent Ken’s Classic voices and defeat cries.",
+      "Fix: Corrected electrical and fire hit sounds, and removed the stray blocking sound from Modern Yoga Fire.",
+      "Fix: Player colors follow the Switch Arcade rules and stay consistent between scenes, including the attract-mode HUD.",
+      "Fix: Removed ULTRA title flicker on MiSTer and synchronized the title lettering when inserting a coin.",
+      "Fix: Corrected Cammy’s stage edges and scrolling background updates.",
+      "Fix: Selected stage names remain visible until the transition to the VS screen, including two-player games.",
+      "Fix: Removed stage scenery left behind during high-score initials entry.",
+      "Improved: Updated country flags and restored Russia’s map caption.",
+      "Fix: The first intro fight ends with Ryu's intended combo and synchronized sound cues.",
+      "Improved: Start can end the credits, and Chun-Li’s ending choices appear together after their descriptions."
+     ],
+     "version": "rc7"
+    },
     {
      "date": "2026-11-07",
      "items": [
@@ -2658,7 +2683,7 @@
    "subtitle": "Arcade backport",
    "summary": "Ultra Street Fighter II: The Final Challengers as a CPS-2 game: Akuma gets his own select cell, Evil Ryu and Violent Ken join the roster, and the Switch edition's title, color select and sound come along. USA and Japan builds.",
    "title": "Ultra Street Fighter II",
-   "version": "rc6"
+   "version": "rc7"
   },
   {
    "artifact": {
@@ -3904,7 +3929,6 @@
     },
     "setname": "xmvsfre"
    },
-   "hidden": true,
    "mra": {
     "category": "Fighting",
     "catver": "Fighter / Versus",

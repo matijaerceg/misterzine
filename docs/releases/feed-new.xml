@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Tue, 17 Nov 2026 00:11:02 +0000</lastBuildDate>
+<lastBuildDate>Tue, 17 Nov 2026 08:06:10 +0000</lastBuildDate>
+<item>
+<title>[New] 10-Yard Fight (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#10yard</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/10-Yard Fight (World, set 1).mra:2026-11-17T08:06:10+00:00</guid>
+<pubDate>Tue, 17 Nov 2026 08:06:10 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/10yard.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1983 / Irem&lt;/p&gt;&lt;p&gt;Core: 10yardfight&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-10YardFight_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Kid no Hore Hore Daisakusen (TerraCrestaMD) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#kid-no-hore-hore-daisakusen-terracrestamd</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mustache.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Maze / 1987 / Seibu Kaihatsu (March license)&lt;/p&gt;&lt;p&gt;Core: bazset_MustacheBoy&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Round Up 5 - Super Delta Force (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#round-up-5-super-delta-force-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Round Up 5 - Super Delta Force.mra:2026-11-05T09:53:01+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 09:53:01 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/roundup5.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1989 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: bazset_RoundUp5&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

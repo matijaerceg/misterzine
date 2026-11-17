@@ -539,8 +539,8 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Corrected Cammy's throw voices.",
-      "Smoothed Cammy's defeated pose after a Raging Demon finish."
+      "Ensures Darksoft compatibility on original CPS-2 hardware through the 8 MiB native-audio version.",
+      "Small Cammy fixes: corrected throw voices and a smoother defeated pose after a Raging Demon finish."
      ],
      "version": "rc9"
     },
@@ -914,12 +914,9 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Fixed the opening Continue pose being partly erased before the countdown.",
-      "Fixed background distortion caused by stage scrolling.",
-      "Corrected Cammy’s stage edges and northern-lights details.",
-      "Kept the intro background, foreground and colors in step during scene changes.",
-      "Removed stray prompts and select-screen remnants during fully faded transitions.",
-      "Adjusted the casing and spacing of Chun-Li’s ending choices."
+      "Ensures Darksoft compatibility on original CPS-2 hardware: fixes scrolling background distortion, including moving rows and gaps at the edges of Cammy's stage.",
+      "The defeated fighter's pose is no longer partly erased as the Continue countdown opens.",
+      "Corrected Cammy's northern lights, intro scene changes and stray graphics during fades, and polished Chun-Li's ending-choice text."
      ],
      "version": "rc5"
     },
@@ -1190,14 +1187,11 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Ryu's stage stays intact during Versus and Training, including jumps and the top edge of the picture.",
-      "Pausing and resuming on Cammy's stage no longer briefly corrupts the background.",
-      "Versus and Training accept the first direction as player select opens, and the opening portrait has the correct colors.",
-      "The USA build retains portraits, cursors and colors correctly on the select, VS and pause screens.",
-      "The defeated fighter's pose is preserved at the start of Continue.",
-      "Skipping Chun-Li's intro early no longer leaves its music playing over the title.",
-      "Country flags and names follow the selected ARTWORK setting throughout select and VS screens.",
-      "Moving around stage select in Versus and Training plays the player-select movement sound."
+      "Ensures Darksoft compatibility on original CPS-2 hardware: corrects stage graphics and the USA build's character-selection portraits, cursors and pause-screen colors.",
+      "Ryu's stage stays intact during Versus and Training, including jumps and the top edge of the picture. Pausing and resuming on Cammy's stage no longer briefly corrupts the background.",
+      "Versus and Training respond to the first direction as character selection opens, and the opening portrait has the correct colors.",
+      "The defeated fighter's pose is preserved at the start of Continue. Skipping Chun-Li's intro early no longer leaves its music playing over the title.",
+      "Country flags and names follow the ARTWORK setting throughout character selection and VS screens. Stage selection now plays a sound when moving between stages."
      ],
      "version": "rc14"
     },
@@ -1577,11 +1571,11 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Fixes Console Versus rematches and character changes against the computer, including an unwanted Game Over, flickering win counts and incorrect player prompts.",
-      "Fixes extra-color effects for Cyclops, Norimaro and Shuma-Gorath, and Cyber-Akuma’s portraits and ending artwork. Both playable bosses now reach the staff roll correctly.",
-      "Restores the rare English victory quotes, with each line centered in the quote box.",
-      "Improves stage selection with scene previews, stage captions, a faster Random carousel and a confirmation sound. The animated backdrop stays visible after choosing a stage.",
-      "Removes the unused Arcade scores from Training."
+      "Ensures Darksoft compatibility on original CPS-2 hardware, including Console Versus rematches and character changes against the computer: fixes unwanted Game Over screens, flickering win counts and incorrect player prompts.",
+      "Both playable bosses now reach the credits correctly. Corrected Cyber-Akuma's portraits and ending artwork.",
+      "Stage selection now has scene previews, captions, a faster Random carousel and a confirmation sound. Its animated backdrop stays visible after choosing a stage.",
+      "Restored the rare English victory quotes, centered in the quote box.",
+      "Corrected extra-color effects for Cyclops, Norimaro and Shuma-Gorath, and removed unused Arcade scores from Training."
      ],
      "version": "rc7"
     },
@@ -2016,14 +2010,11 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Versus setup lets each side be Human or Computer, with at least one human. Humans choose their fighters before choosing the computer’s fighter.",
-      "REGULATION now controls red or white blood correctly in Training.",
-      "Pause keeps fighters, menus and colors stable, holds the music and lets menu sounds play.",
-      "Fixed held confirmation inputs carrying through Continue screens and kept disabled Replay rows unavailable.",
-      "Kept control of Versus setup with the player who opened it until Begin, including when that player chooses Computer.",
-      "Removed the brief title-screen flash when leaving Versus setup and hid unused scores and join prompts.",
-      "Corrected Cammy’s throw voice calls and distinguished Shin Akuma and Shin Gouki names.",
-      "Corrected the Training map’s Alpha/Zero presentation and centered its PRESS START prompt."
+      "Ensures Darksoft compatibility on original CPS-2 hardware: fixes Console and Training pause freezes, flickering fighters and incorrect pause-menu colors. Uses the 8 MiB native-audio version.",
+      "Choose human or computer opponents for either side in Versus, with human players choosing their fighters first. The player who opens setup keeps control until Begin.",
+      "Pause holds the music while keeping menu sounds available. Held confirmation buttons no longer carry through Continue screens, and disabled Replay choices stay unavailable.",
+      "Training now follows the REGULATION setting for red or white blood.",
+      "Corrected Cammy's throw voices and the Shin Akuma/Shin Gouki names. Polished the Training map and prompts, removed unused scores and join prompts, and removed a brief title flash when leaving Versus setup."
      ],
      "version": "rc5"
     },
@@ -2153,12 +2144,11 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Corrected Huitzil’s rival encounter so the dialogue and opponent agree.",
-      "Corrected missing pictures, backgrounds, colors and animation in Dee, Oboro Bishamon, Huitzil and Donovan’s endings.",
-      "Restored Oboro Bishamon’s silent win quotes and all twenty entries in the Master of display.",
-      "Concrete Cave’s cat now reacts to EX moves.",
-      "Corrected the English names shown for Lord Raptor during Dark Force and for Dark Talbain.",
-      "Added Anita’s HUD and versus names and corrected the handoff to the staff roll."
+      "Corrected missing pictures, backgrounds, colors and animation in Dee, Oboro Bishamon, Huitzil and Donovan's endings.",
+      "Corrected Huitzil's rival encounter so the dialogue and opponent agree.",
+      "Restored Oboro Bishamon's silent win quotes and all twenty entries in the Master of display.",
+      "Added Anita's names above the health bar and on the VS screen, and corrected the transition to the credits.",
+      "Corrected Lord Raptor's name during Dark Force and Dark Talbain's English name. Concrete Cave's cat now reacts to EX moves."
      ],
      "version": "rc6"
     },
@@ -2296,8 +2286,7 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Restored the cats’ reactions to EX moves on Concrete Cave.",
-      "Corrected Lord Raptor’s name during Dark Force in the USA build."
+      "Small presentation fixes: corrected Lord Raptor's name during Dark Force in the USA build and restored the Concrete Cave cats' reactions to EX moves."
      ],
      "version": "rc5"
     },
@@ -2420,8 +2409,7 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Restored the cats’ reactions to EX moves on Concrete Cave.",
-      "Corrected the English HUD names for Lord Raptor during Dark Force and Jon Talbain’s dark form."
+      "Small presentation fixes: corrected the English names above the health bars for Lord Raptor during Dark Force and Jon Talbain's dark form, and restored the Concrete Cave cats' reactions to EX moves."
      ],
      "version": "rc5"
     },
@@ -2824,14 +2812,11 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Made the win-quote panel taller, centered every quote and rebalanced uneven or squeezed line breaks.",
-      "Fixed the win screen’s left column overlapping the quote panel and widened the translucent band to frame it evenly.",
-      "Kept the small scrolling player-select text clear of the large headings.",
-      "Corrected inconsistent bush shading in forest stages, including during weather and lightning changes.",
-      "Restored SELECT PLAYER and FIGHTING STYLE SELECT headings.",
-      "Centered character biographies vertically on the stage intro screens.",
+      "Ensures Darksoft compatibility on original CPS-2 hardware.",
+      "Victory quotes are easier to read, with more room, cleaner line breaks and no overlapping screen elements.",
       "Improved nine character-specific win quotes for Akuma, Charlie, Chun-Li, Gen, Cody, Vega and Karin. Thanks to Lemongrwab for contributing the translations.",
-      "Updated the attract-mode Capcom address."
+      "Restored character and fighting-style selection headings, kept scrolling names clear of them, and centered stage-intro biographies.",
+      "Corrected forest-stage shading during weather and lightning changes, and updated the attract-mode Capcom address."
      ],
      "version": "rc6"
     },
@@ -3273,11 +3258,10 @@
     {
      "date": "2026-11-14",
      "items": [
-      "Fixed resets and corrected Console pause colors and fighter graphics.",
-      "Corrected CPU selection order and visibility, random selection, and duplicate names in Dramatic Battle.",
-      "Fixed missing music notes after unpausing and corrected the music timing when retrying the Akuma fight.",
-      "Light Kick returns from Training Setup and pause menus.",
-      "Added menu navigation sounds and corrected Options alignment, character-select headings, shadows and victory totals."
+      "Ensures Darksoft compatibility on original CPS-2 hardware: fixes pause freezes and resets, incorrect title and menu colors, and flickering fighter graphics.",
+      "Corrected computer fighter selection and duplicate names in Dramatic Battle.",
+      "Fixed missing music notes after unpausing and the music timing when retrying the Akuma fight.",
+      "Light Kick returns from Training Setup and pause menus. Added menu sounds and polished headings, shadows and victory totals."
      ],
      "version": "rc4"
     },
@@ -3516,7 +3500,7 @@
     "GRENADE spelled right on the HUD, and the USA story's typos fixed",
     "USA (ffex2u), Japan (ffex2j) and English restoration (ffex2r) builds"
    ],
-   "date": "2026-11-03",
+   "date": "2026-11-14",
    "description": [
     "This kit brings Final Fight EX to Capcom's CPS-2 with every enhancement from the CPS-1 version. It includes a restored English version with added scenes, an improved translation and uncensored content. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
     "The 1993 Sega CD port of Final Fight opened with a fully animated cutscene and closed with new ending scenes, over a soundtrack with spoken dialogue. Final Fight EX brings them to the arcade game. On the CPS-2 the arcade's music and sound effects play through QSound.",
@@ -3551,6 +3535,17 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-14",
+     "items": [
+      "Runs correctly on original CPS-2 hardware with a Darksoft kit, with reliable boot and saved settings.",
+      "Corrected cutscene fades and colors, title animation, and flickering objects during the opening.",
+      "Fixed long-idle Coin and Start transitions so the title and game remain responsive.",
+      "Corrected pause-menu sound and music recovery.",
+      "Removed the brief gray flash before the title appears on MiSTer."
+     ],
+     "version": "rc4"
+    },
     {
      "date": "2026-11-03",
      "items": [
@@ -3593,7 +3588,7 @@
    "subtitle": "Enhanced version",
    "summary": "Final Fight EX on Capcom's CPS-2, with every enhancement from the CPS-1 version and a restored English version with added scenes, an improved translation and uncensored content. It adds the Sega CD's Time Attack mode and a Console mode with a title menu and pause. The test menu switches between the arcade and Sega CD cutscenes, and on MiSTer between the arranged and arcade soundtracks.",
    "title": "Final Fight EX (CPS-2)",
-   "version": "rc3"
+   "version": "rc4"
   },
   {
    "changes": [
@@ -3833,6 +3828,13 @@
     {
      "date": "2026-11-14",
      "items": [
+      "Ensures Darksoft compatibility on original CPS-2 hardware: fixes the moving background row and gaps around the pillars and doorway on Cammy's stage."
+     ],
+     "version": "rc3"
+    },
+    {
+     "date": "2026-11-14",
+     "items": [
       "No gameplay changes."
      ],
      "version": "rc2"
@@ -3852,7 +3854,90 @@
    "subtitle": "English restoration",
    "summary": "The Japanese Anniversary Edition in English, with its original balance, Western fighter names and the full stories and win quotes.",
    "title": "Hyper Street Fighter II: The Anniversary Edition",
-   "version": "rc2"
+   "version": "rc3"
+  },
+  {
+   "artifact": {
+    "parents": [
+     "xmvsf"
+    ]
+   },
+   "changes": [
+    "All 288 win quotes in English, including Apocalypse’s sixteen quotes.",
+    "All 54 Apocalypse dialogue passages, 104 ending captions and seventeen tips in English.",
+    "Western fighter names and USA regional voices, with Japanese 970113 gameplay.",
+    "Centered English text and complete ending illustrations."
+   ],
+   "date": "2026-11-16",
+   "description": [
+    "X-Men vs. Street Fighter’s Japanese release has more to say. This restoration brings its full victory quotes, Apocalypse dialogue, endings and tips into English while keeping the Japanese fighting rules.",
+    "The USA presentation uses Western fighter names and regional voices. Text is centered in the game’s original dialogue and ending panels.",
+    "It runs on Darksoft CPS-2 hardware, on MiSTer, and in MAME. HBMAME and FBNeo outputs use the same game data.",
+    "This is a release candidate."
+   ],
+   "feedback": true,
+   "game": "X-Men vs. Street Fighter (Japan 970113)",
+   "hardware": "Capcom CPS-2",
+   "hbmame": {
+    "complete": true,
+    "renames": {
+     "xmvsfj.key": "xmvsfj.key",
+     "xvs.01": "xvs.01",
+     "xvs.02": "xvs.02",
+     "xvs.05a": "xvsre.05a",
+     "xvs.06a": "xvsre.06a",
+     "xvs.07": "xvs.07",
+     "xvs.08": "xvs.08",
+     "xvs.09": "xvsre.09",
+     "xvs.11m": "xvs.11m",
+     "xvs.12m": "xvs.12m",
+     "xvs.13m": "xvs.13m",
+     "xvs.14m": "xvs.14m",
+     "xvs.15m": "xvs.15m",
+     "xvs.16m": "xvs.16m",
+     "xvs.17m": "xvs.17m",
+     "xvs.18m": "xvs.18m",
+     "xvs.19m": "xvs.19m",
+     "xvs.20m": "xvs.20m",
+     "xvsj.03m": "xvsre.03m",
+     "xvsj.04m": "xvsre.04m"
+    },
+    "setname": "xmvsfre"
+   },
+   "hidden": true,
+   "mra": {
+    "category": "Fighting",
+    "catver": "Fighter / Versus",
+    "filename": "X-Men vs. Street Fighter (USA) [Restoration].mra",
+    "mraauthor": "jotego,strygo",
+    "name": "X-Men vs. Street Fighter (USA) [Restoration]",
+    "platform": "CPS-2",
+    "region": "USA",
+    "setname": "xmvsfre",
+    "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
+   },
+   "notes": [
+    "Supply your own canonical Japan 970113 arcade ROMs (xmvsfj and its xmvsf parent) and QSound firmware. No console disc is needed."
+   ],
+   "patch_kind": "English restoration patch",
+   "patch_noun": "restoration",
+   "release_history": [
+    {
+     "date": "2026-11-16",
+     "items": [
+      "First release candidate: the Japanese arcade game with complete English win quotes, dialogue, endings and tips."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "section": "restorations",
+   "set": "xmvsfj",
+   "slug": "xmvsf-restoration",
+   "status": "release-candidate",
+   "subtitle": "English restoration",
+   "summary": "The Japanese arcade game in English, with its full win quotes, dialogue, endings and tips.",
+   "title": "X-Men vs. Street Fighter",
+   "version": "rc1"
   }
  ],
  "projects": [

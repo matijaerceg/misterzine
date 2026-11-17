@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16",
+  "updated": "2026-11-17",
   "current": [
     {
       "name": "Aaron de Zeeuw",
@@ -56,10 +56,6 @@
     {
       "name": "Ben",
       "since": "2026-09"
-    },
-    {
-      "name": "Bert",
-      "since": "2026-10"
     },
     {
       "name": "Bob",
@@ -715,6 +711,11 @@
     }
   ],
   "past": [
+    {
+      "name": "Bert",
+      "since": "2026-10",
+      "until": "2026-11"
+    },
     {
       "name": "David",
       "since": "2026-10",

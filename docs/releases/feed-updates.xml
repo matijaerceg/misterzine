@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 18 Nov 2026 00:00:02 +0000</lastBuildDate>
+<lastBuildDate>Wed, 18 Nov 2026 06:45:42 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arabian (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/Arabian_20261117.rbf:2026-11-18T06:45:42+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 06:45:42 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arabian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arabian&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Penguin-Kun Wars (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#pkunwar</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Toobin' (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#toobin</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Toobin_20261105.rbf:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toobin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Toobin&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Toobin_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-11-17
+
+- The new PC-8001 core is listed as NEC PC-8001, with its year (1979), maker, a hardware photo and a note about the mkII and mkIISR models it also runs.
+
 ## 2026-11-16
 
 - Search no longer depends on spacing or hyphens inside a name: megadrive, pacman and xmen find Mega Drive, Pac-Man and X-Men. Searching "tate" lists vertical-screen games.

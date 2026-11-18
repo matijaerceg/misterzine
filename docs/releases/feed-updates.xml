@@ -6,7 +6,34 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 18 Nov 2026 06:45:42 +0000</lastBuildDate>
+<lastBuildDate>Wed, 18 Nov 2026 17:49:29 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arabian (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
+<guid isPermaLink="false">rodimus:_Arcade/cores/Arabian_20261117.rbf:2026-11-18T17:49:29+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 17:49:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arabian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arabian&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: rodimus).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Galaga (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#galagamw</link>
+<guid isPermaLink="false">rodimus:_Arcade/cores/Galaga_20261117.rbf:2026-11-18T17:49:29+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 17:49:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/galagamw.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1981 / Namco&lt;/p&gt;&lt;p&gt;Core: galaga&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: rodimus).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Galaga_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Pacman (Arcade core, 33 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#alibaba</link>
+<guid isPermaLink="false">rodimus:_Arcade/cores/Pacman_20261117.rbf:2026-11-18T17:49:29+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 17:49:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Ali Baba and 40 Thieves, Big Bucks, Birdiy, Boardwalk Casino, Cannon Ball (Pac-Man Hardware), Crush Roller, Dream Shopper, Driving Force, Eeekk!, Eggor, Eyes, Jr. Pac-Man, Jump Shot, Lizard Wizard, MTV Rock-N-Roll Trivia, Mr. TNT, Ms Pac Man Twin, Ms. Pac-Man, Naughty Mouse, Number Crash, Pac-Man, Pac-Man Club, Pac-Man Plus, Pac-Manic Miner, Pac-Manic Miner, Ponpoko, Porky, Shoot the Bull, Super ABC, Super Chick, Super Glob, Van-Van Car, Woodpecker.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: rodimus).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Pacman_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arabian (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Judge Dredd (Gm0rk), Mortal Kombat (rev 5.0 T-Unit 03-19-93), Mortal Kombat II (Gm0rk), NBA Jam (Gm0rk), NBA Jam Tournament Edition (Gm0rk).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-T-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] KonamiM2 (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#evilngt</link>
-<guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2_20261106.rbf:2026-11-06T19:36:26+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 19:36:26 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Evil Night, Tobe! Polystars, Total Vice.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Klax (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#klax</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Klax_20261105.rbf:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/klax.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1990 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Klax&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Klax_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Qix (Arcade core, 8 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#complexx</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/Qix_20261105.rbf:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Complex X, Kram, Qix, Qix II, Slither, Space Dungeon, The Electric Yo-Yo, Zoo Keeper.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Qix_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

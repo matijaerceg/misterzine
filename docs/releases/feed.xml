@@ -6,7 +6,34 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 18 Nov 2026 06:45:42 +0000</lastBuildDate>
+<lastBuildDate>Wed, 18 Nov 2026 17:49:29 +0000</lastBuildDate>
+<item>
+<title>[Updated] Arabian (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
+<guid isPermaLink="false">rodimus:_Arcade/cores/Arabian_20261117.rbf:2026-11-18T17:49:29+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 17:49:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arabian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arabian&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: rodimus).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Galaga (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#galagamw</link>
+<guid isPermaLink="false">rodimus:_Arcade/cores/Galaga_20261117.rbf:2026-11-18T17:49:29+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 17:49:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/galagamw.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1981 / Namco&lt;/p&gt;&lt;p&gt;Core: galaga&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: rodimus).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Galaga_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Pacman (Arcade core, 33 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#alibaba</link>
+<guid isPermaLink="false">rodimus:_Arcade/cores/Pacman_20261117.rbf:2026-11-18T17:49:29+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 17:49:29 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Ali Baba and 40 Thieves, Big Bucks, Birdiy, Boardwalk Casino, Cannon Ball (Pac-Man Hardware), Crush Roller, Dream Shopper, Driving Force, Eeekk!, Eggor, Eyes, Jr. Pac-Man, Jump Shot, Lizard Wizard, MTV Rock-N-Roll Trivia, Mr. TNT, Ms Pac Man Twin, Ms. Pac-Man, Naughty Mouse, Number Crash, Pac-Man, Pac-Man Club, Pac-Man Plus, Pac-Manic Miner, Pac-Manic Miner, Ponpoko, Porky, Shoot the Bull, Super ABC, Super Chick, Super Glob, Van-Van Car, Woodpecker.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: rodimus).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Pacman_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arabian (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
@@ -879,33 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hardyard.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1993 / Strata / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Hot Memory (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hotmemry</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Hot Memory (V1.2, Germany).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hotmemry.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Incredible Technologies (Tuning license)&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Must Shoot TV (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#shoottv</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Must Shoot TV (prototype).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/shoottv.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 199? / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Pairs (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pairs</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Pairs (V1.2).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pairs.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1994 / Strata / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

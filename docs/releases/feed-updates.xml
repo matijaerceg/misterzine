@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 17 Nov 2026 17:42:01 +0000</lastBuildDate>
+<lastBuildDate>Wed, 18 Nov 2026 00:00:02 +0000</lastBuildDate>
+<item>
+<title>[Updated] Penguin-Kun Wars (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#pkunwar</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Penguin-Kun Wars.mra:2026-11-18T00:00:02+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 00:00:02 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pkunwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / UPL&lt;/p&gt;&lt;p&gt;Core: UPLFramebuffer&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] SV-328 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Svi328</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Svi328_20261117.rbf:2026-11-18T00:00:02+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 00:00:02 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Spectravideo&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Svi328_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Arcade-JalecoMS1BCD (Arcade core, 8 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#64street</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-JalecoMS1BCD_20261118.rbf:2026-11-17T22:19:22+00:00</guid>
+<pubDate>Tue, 17 Nov 2026 22:19:22 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: 64th. Street: A Detective Story, Avenging Spirit, Big Striker, Chimera Beast, Cybattler, E.D.F.: Earth Defense Force (kuzearcade), Hayaoshi Quiz Ouza Ketteisen: The King Of Quiz, Peek-a-Boo!.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-17 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-JalecoMS1BCD_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Sand Scorpion (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sandscrp</link>
+<guid isPermaLink="false">kuzecores:_Arcade/cores/Arcade-SandScrp_20261117.rbf:2026-11-17T22:19:22+00:00</guid>
+<pubDate>Tue, 17 Nov 2026 22:19:22 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sandscrp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1992 / Face&lt;/p&gt;&lt;p&gt;Core: Arcade-SandScrp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-17 (source: kuzecores).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/kuzearcade/Arcade-SandScrp_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] PC/XT (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#PCXT</link>
@@ -41,7 +77,7 @@
 <pubDate>Tue, 17 Nov 2026 08:06:10 +0000</pubDate>
 <category>updated</category>
 <category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pkunwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / UPL&lt;/p&gt;&lt;p&gt;Core: PenguinKunWars&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PenguinKunWars_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pkunwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / UPL&lt;/p&gt;&lt;p&gt;Core: UPLFramebuffer&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-17 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Gm0rk_Midway-Y-Unit (Arcade core, 9 games)</title>
@@ -170,15 +206,6 @@
 <description>&lt;p&gt;Serves: Evil Night, Tobe! Polystars, Total Vice.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Penguin-Kun Wars (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pkunwar</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Penguin-Kun Wars.mra:2026-11-15T07:35:38+00:00</guid>
-<pubDate>Sun, 15 Nov 2026 07:35:38 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pkunwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / UPL&lt;/p&gt;&lt;p&gt;Core: PenguinKunWars&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-PenguinKunWars_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
 <title>[Updated] S32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261115.rbf:2026-11-15T07:35:38+00:00</guid>
@@ -197,13 +224,13 @@
 <description>&lt;p&gt;Serves: Fantasy, Nibbler, Pioneer Balloon, Sasuke vs. Commander, Satan of Saturn, Vanguard.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SNK6502_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] UPLFramebuffer (Arcade core, 9 games)</title>
+<title>[Updated] UPLFramebuffer (Arcade core, 10 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arkarea</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/cores/UPLFramebuffer_20261114.rbf:2026-11-15T07:35:38+00:00</guid>
 <pubDate>Sun, 15 Nov 2026 07:35:38 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Ninjakun Majou No Bouken, Nova 2001, Omega Fighter, Raiders5, XX Mission.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Ark Area, Atomic Robo-kid, Mutant Night, Ninja-Kid II, Ninjakun Majou No Bouken, Nova 2001, Omega Fighter, Penguin-Kun Wars, Raiders5, XX Mission.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-UPLFramebuffer_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Vastar (Arcade core, 7 games)</title>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/toobin.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Atari Games&lt;/p&gt;&lt;p&gt;Core: Toobin&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Toobin_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Apple IIGS (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261105.rbf:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Judge Dredd (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#judge-dredd-ongo</link>
-<guid isPermaLink="false">ongo:_Arcade/Judge Dredd (rev TA1 7-12-92, location test).mra:2026-11-05T23:09:05+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 23:09:05 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jdreddp.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1993 / Midway&lt;/p&gt;&lt;p&gt;Core: Gm0rk_Midway-T-Unit&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Mortal Kombat (rev 5.0 T-Unit 03-19-93) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mortal-kombat-rev-5-0-t-unit-03-19-93-2</link>
-<guid isPermaLink="false">ongo:_Arcade/Mortal Kombat (rev 5.0 T-Unit 03-19-93).mra:2026-11-05T23:09:05+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 23:09:05 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mk.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1992 / Midway&lt;/p&gt;&lt;p&gt;Core: Gm0rk_Midway-T-Unit&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

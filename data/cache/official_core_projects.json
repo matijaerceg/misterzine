@@ -1,5 +1,5 @@
 {
-  "signature": "75a42fd3c135c578c823212aa9ff985bfc5f5bdbb57297b25ab6d8dcee32bc27",
+  "signature": "1ce2acaba397f0bd4834963c6103b32a0592d1891944bca0e621a46975e37d99",
   "files": {
     "_Arcade/cores/10YardFight_20261026.rbf": [
       "bf3246352dee36c530be067fb7cbb2b3",
@@ -653,6 +653,12 @@
       "ed2567ae4cd0b8c0fccf5e35f4fc958f",
       [
         "MiSTer-devel/Arcade-MarioBros_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/MegaSys1_AMD_20261117.rbf": [
+      "a7be662ba0112f27aed24bbc2325c8fe",
+      [
+        "MiSTer-devel/Arcade-MegaSys1A_MiSTer"
       ]
     ],
     "_Arcade/cores/MissileCommand_20240530.rbf": [
@@ -1753,8 +1759,8 @@
         "MiSTer-devel/SunSparcStation20_MiSTer"
       ]
     ],
-    "_Computer/Svi328_20241016.rbf": [
-      "5ae19d7a14a0926f41aebf8666e35057",
+    "_Computer/Svi328_20261117.rbf": [
+      "83f34e32a0bb249448358e521e33a285",
       [
         "MiSTer-devel/SVI328_MiSTer"
       ]

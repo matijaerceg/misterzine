@@ -186,39 +186,125 @@
  ],
  "patches": [
   {
+   "artifact": {
+    "parents": [
+     "xmvsf"
+    ],
+    "variants": [
+     {
+      "hbmame": {
+       "complete": true,
+       "renames": {
+        "xmvsfj.key": "xmvsfj.key",
+        "xvs.01": "xvsex.01",
+        "xvs.02": "xvs.02",
+        "xvs.05a": "xvsex.05a",
+        "xvs.06a": "xvsex.06a",
+        "xvs.07": "xvsex.07",
+        "xvs.08": "xvs.08",
+        "xvs.09": "xvsex.09",
+        "xvs.11m": "xvs.11m",
+        "xvs.12m": "xvs.12m",
+        "xvs.13m": "xvsex.13m",
+        "xvs.14m": "xvs.14m",
+        "xvs.15m": "xvsex.15m",
+        "xvs.16m": "xvs.16m",
+        "xvs.17m": "xvsex.17m",
+        "xvs.18m": "xvs.18m",
+        "xvs.19m": "xvsex.19m",
+        "xvs.20m": "xvs.20m",
+        "xvsj.03m": "xvsex.03m",
+        "xvsj.04m": "xvsex.04m"
+       },
+       "setname": "xmvsfex"
+      },
+      "key": "usa",
+      "label": "USA",
+      "mra": {
+       "filename": "X-Men Vs. Street Fighter EX (USA).mra",
+       "name": "X-Men Vs. Street Fighter EX (USA)",
+       "region": "USA",
+       "setname": "xmvsfex"
+      }
+     },
+     {
+      "hbmame": {
+       "complete": true,
+       "renames": {
+        "xmvsfj.key": "xmvsfj.key",
+        "xvs.01": "xvsex.01",
+        "xvs.02": "xvs.02",
+        "xvs.05a": "xvsexj.05a",
+        "xvs.06a": "xvs.06a",
+        "xvs.07": "xvsexj.07",
+        "xvs.08": "xvs.08",
+        "xvs.09": "xvsex.09",
+        "xvs.11m": "xvs.11m",
+        "xvs.12m": "xvs.12m",
+        "xvs.13m": "xvsex.13m",
+        "xvs.14m": "xvs.14m",
+        "xvs.15m": "xvsex.15m",
+        "xvs.16m": "xvs.16m",
+        "xvs.17m": "xvsex.17m",
+        "xvs.18m": "xvs.18m",
+        "xvs.19m": "xvsex.19m",
+        "xvs.20m": "xvs.20m",
+        "xvsj.03m": "xvsexj.03m",
+        "xvsj.04m": "xvsexj.04m"
+       },
+       "setname": "xmvsfexj"
+      },
+      "key": "japan",
+      "label": "Japan",
+      "mra": {
+       "filename": "X-Men Vs. Street Fighter EX (Japan).mra",
+       "name": "X-Men Vs. Street Fighter EX (Japan)",
+       "region": "Japan",
+       "setname": "xmvsfexj"
+      }
+     }
+    ]
+   },
    "changes": [
-    "Playable Apocalypse with six native commands, a solo Arcade route and a new ending; visible Akuma and Apocalypse select spaces",
+    "Fully playable Apocalypse with his six native commands, a solo Arcade route with Magneto and M. Bison as the final opponents, and his own ending; visible Akuma and Apocalypse select spaces",
     "Console mode with Arcade, Versus, Training and Options; MiSTer starts in Console mode",
-    "Versus against a friend or the computer, inline handicap and stage selection, and win totals retained through Rematch and Change Characters",
-    "Training with dummy action, guard, gauges, speed and stage settings; Restart and Change Characters from pause",
-    "Win quotes translated from the Japanese, restored Apocalypse dialogue, complete English endings and speaker labels",
-    "Two extra Saturn colors for the ordinary fighters, with matching portraits and effects; select with HP or HK",
-    "Hold Start on Chun-Li for about two seconds to preview her alternate outfit; release before confirming to cancel",
-    "Eight Turbo levels plus Normal, and Options for difficulty, time, speed, damage and sound",
-    "Pause Console selection with Coin, or pause matches with Coin or a Start hold; Continue resumes music and Quit returns to title"
+    "Updated stage select in Versus and Training, with previews and inline handicap",
+    "Two extra Saturn colors for the ordinary fighters, with matching portraits and effects, and correct colors in mirror matches; select with HP or HK",
+    "Full English Restoration content in the USA build: win quotes translated from the Japanese, restored Apocalypse conversations, complete endings and speaker labels",
+    "Pause with Coin or a Start hold, immediate Quit to the title, and Options settings that persist",
+    "Japan build with the original Japanese text, a Japanese Apocalypse conversation and ending, and Japanese service menus",
+    "Hold Start on Chun-Li for about two seconds to preview her alternate outfit; eight Turbo levels plus Normal"
    ],
-   "date": "2026-11-16",
+   "date": "2026-11-18",
    "description": [
     "X-Men vs. Street Fighter EX keeps the arcade tag-team game and adds a home-style Console mode. Start opens a title menu with Arcade, Versus, Training and Options. Versus supports a friend or the computer, with handicap and stage choices and win totals that carry through rematches. Training offers dummy, guard, gauge, speed and stage controls.",
-    "Akuma and Apocalypse have visible places on character select. Apocalypse fights alone in his own arena, with his six native commands, a seven-fight Arcade route, Magneto and M. Bison as the final opponents, and a new ending. The other fighters get the Saturn version's two extra colors, carried through portraits and effects. Holding Start on Chun-Li previews her alternate outfit.",
-    "The USA edition includes the English Restoration: win quotes translated from the Japanese, restored Apocalypse conversations and complete endings. Eight Turbo levels and the original Normal speed are available. Console mode needs no credits; the service menu also retains ordinary Arcade operation.",
+    "Apocalypse is fully playable: he fights alone in his own arena with his six native commands, has a seven-fight Arcade route with Magneto and M. Bison as the final opponents, and gets his own ending. Akuma and Apocalypse have visible places on character select. The other fighters get the Saturn version's two extra colors, carried through portraits and effects, and mirror matches keep both sides' colors distinct. Holding Start on Chun-Li previews her alternate outfit.",
+    "The USA build includes the English Restoration: win quotes translated from the Japanese, restored Apocalypse conversations and complete endings. The Japan build keeps the original Japanese text and adds Japanese for Apocalypse's final conversation, his ending and the service menus. Both builds share the Japanese release's default settings, eight Turbo levels and the original Normal speed. Console mode needs no credits; the service menu also retains ordinary Arcade operation.",
     "This is a release candidate."
    ],
    "game": "X-Men vs. Street Fighter (Japan 970113)",
    "hardware": "Capcom CPS-2",
-   "hidden": true,
+   "mra": {
+    "category": "Fighting",
+    "catver": "Fighter / Versus",
+    "mraauthor": "jotego,strygo",
+    "platform": "CPS-2",
+    "zip_dir": "_Arcade/_Arcade Patches/_Enhanced Versions"
+   },
    "notes": [
     "Requires the canonical Japan 970113 MAME set xmvsfj and shared parent xmvsf members. The patch download includes no original game ROMs.",
     "Unofficial fan work, unaffiliated with Capcom or Marvel."
    ],
+   "patch_kind": "EX edition patch",
+   "patch_noun": "patch",
    "release_history": [
     {
-     "date": "2026-11-16",
+     "date": "2026-11-18",
      "items": [
-      "Adds playable Apocalypse with a solo Arcade route and ending, plus visible Akuma and Apocalypse select spaces.",
-      "Adds Console Arcade, Versus, Training and Options, including pause, rematches, stage selection and persistent settings.",
-      "Includes the English Restoration's Japanese win quotes, Apocalypse dialogue and complete endings.",
-      "Adds two extra Saturn colors, matching portraits and effects, Chun-Li's held-Start outfit preview and eight Turbo levels."
+      "Adds fully playable Apocalypse with a solo Arcade route and ending, plus visible Akuma and Apocalypse select spaces.",
+      "Adds Console Arcade, Versus, Training and Options, with an updated stage select.",
+      "Adds two extra Saturn colors with correct mirror-match colors, the English Restoration content in the USA build, and pause, immediate Quit and persistent settings.",
+      "USA and Japan builds."
      ],
      "version": "rc1"
     }
@@ -228,7 +314,7 @@
    "slug": "xmvsf-ex",
    "status": "release-candidate",
    "subtitle": "Enhanced version",
-   "summary": "The tag-team arcade game with playable Apocalypse, extra colors, home-style modes and the Japanese stories in English.",
+   "summary": "The tag-team arcade game with fully playable Apocalypse, extra colors, home-style modes and the Japanese stories in English. USA and Japan builds.",
    "title": "X-Men vs. Street Fighter EX",
    "version": "rc1"
   },
@@ -974,7 +1060,7 @@
         "sfx.01": "sfxuc.01",
         "sfx.02": "sfxuc.02",
         "sfx.09": "sfxuc.09",
-        "sfx.11m": "sfx.11m",
+        "sfx.11m": "sfxuc.11m",
         "sfx.12m": "sfx.12m",
         "sfx.13m": "sfxuc.13m",
         "sfx.14m": "sfxuc.14m",
@@ -1041,19 +1127,19 @@
      {
       "fbneo": {
        "renames": {
-        "sfx.01": "sfxuc.01",
+        "sfx.01": "sfxucj.01",
         "sfx.02": "sfxuc.02",
-        "sfx.09": "sfxuc.09",
-        "sfx.11m": "sfx.11m",
+        "sfx.09": "sfxucj.09",
+        "sfx.11m": "sfxuc.11m",
         "sfx.12m": "sfx.12m",
         "sfx.13m": "sfxucj.13m",
-        "sfx.14m": "sfxuc.14m",
+        "sfx.14m": "sfxucj.14m",
         "sfx.15m": "sfxucj.15m",
-        "sfx.16m": "sfxuc.16m",
+        "sfx.16m": "sfxucj.16m",
         "sfx.17m": "sfxucj.17m",
-        "sfx.18m": "sfxuc.18m",
+        "sfx.18m": "sfxucj.18m",
         "sfx.19m": "sfxucj.19m",
-        "sfx.20m": "sfxuc.20m",
+        "sfx.20m": "sfxucj.20m",
         "sfx.21m": "sfxuc.21m",
         "sfx.23m": "sfxuc.23m",
         "sfx.25m": "sfxuc.25m",
@@ -1123,7 +1209,7 @@
     "Training with computer actions, guard and Super gauge settings, delayed health recovery, Restart and Change Character",
     "Option Mode for difficulty, time limit on or off, game speed (including NORMAL, slower than Turbo 1), round count and stereo or mono sound; Coin pauses play in Console mode",
     "EX CONFIGURATION in the operator menu: Console or Arcade mode; Japanese or international names; ORIGINAL, 30TH ANNIVERSARY or ULTRA SF2 artwork; BONUS STAGE on or off; and TIME LIMIT on or off. 30TH ANNIVERSARY, the default, uses the 30th Anniversary Collection's Hong Kong flag, Chun-Li's storefront signs and Guile's stage, with the red-winged runway emblem. Settings are saved between sessions. On EXIT, press 1P Start to save and return",
-    "ULTRA SF2 artwork follows Ultra Street Fighter II's stages: its runway emblem and a gold can on Guile's stage, Chun-Li's storefront without its signs, a red sun on E. Honda's bathhouse mural and a plain floor on Zangief's stage, with China's flag and RUSSIA for Zangief's country",
+    "ULTRA SF2 artwork follows Ultra Street Fighter II's stages: its runway emblem and a gold can on Guile's stage, Chun-Li's storefront without its signs, a red sun on E. Honda's bathhouse mural and a plain floor on Zangief's stage, with China's flag and Russia's flag, RUSSIA caption and original-style Russia announcer call for Zangief's country",
     "Tournament Battle: with the link adapter, eight players and three matches across linked cabinets, with the Akuma and random-select cells on its select screen; without it, the game plays normally",
     "A new title screen with an EX mark",
     "Two more colors for every fighter: pick with two punches or two kicks, or hold Start as well for the Old version in those colors. The VS screen and the fight portrait show the color you picked",
@@ -1133,7 +1219,7 @@
     "The existing fighters play exactly as in Japan's Super Turbo"
    ],
    "collection_api": 1,
-   "date": "2026-11-14",
+   "date": "2026-11-18",
    "description": [
     "Super Turbo is the version competitive players swear by, but it left things behind. The bonus stages from Super Street Fighter II were gone. Shin Akuma was a hidden boss you had to earn, and Ten Akuma only turned up years later at home. Tournament Battle, the eight-player linked-cabinet mode, stayed with the earlier Super Street Fighter II.",
     "EX puts it together on the arcade game. Akuma has his own select-screen cell, with Shin and Ten available through codes there; the original Ryu codes still work. A random-select cell sits opposite him. The car, the falling barrels and the oil drums are back between fights. Link cabinets with the adapter and it runs Tournament Battle; without it, it plays as normal. Every fighter gets two more colors, Akuma and Shin Akuma get their colors from Ultra Street Fighter II, the move names are the modern ones, and the title screen carries an EX mark.",
@@ -1184,6 +1270,19 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-18",
+     "items": [
+      "Pressing LK or Coin to back out of the Versus player setup screen returns to the title instead of freezing the game.",
+      "Ryu's attract intro no longer shows displaced graphics, and completed screen fades stay black during transitions.",
+      "Ten Akuma's finishing glyph stays behind the fighters without hiding the burst effect.",
+      "ULTRA SF2 artwork uses Russia's flag, the RUSSIA caption and its original-style Russia announcer call in both regional builds. ORIGINAL and 30TH ANNIVERSARY retain their own flags and USSR call.",
+      "Chun-Li's English ending choices have consistent lettering and spacing. Japan's service menu is centered, its Option Mode shows PRESS START TO EXIT like the USA build, and its country flags follow the selected artwork throughout the game.",
+      "Console mode skips the FBI notice; Arcade mode keeps its normal regional opening.",
+      "Cleaned up the repeating spots in Blanka's clouds in both regional builds."
+     ],
+     "version": "rc15"
+    },
     {
      "date": "2026-11-14",
      "items": [
@@ -1333,7 +1432,7 @@
    "subtitle": "Enhanced version",
    "summary": "Japan's Super Turbo with Shin and Ten Akuma, the bonus stages, Tournament Battle, extra colors, and Console modes for Versus and Training. In English or Japanese.",
    "title": "Super Street Fighter II EX",
-   "version": "rc14"
+   "version": "rc15"
   },
   {
    "artifact": {
@@ -2497,7 +2596,7 @@
     "Configurable game speed, an optional player speed choice and a shared match-length setting for Arcade and Versus",
     "USA (English) and Japan builds"
    ],
-   "date": "2026-11-14",
+   "date": "2026-11-18",
    "description": [
     "Ultra Street Fighter II: The Final Challengers is the 2017 Nintendo Switch edition of Super Street Fighter II Turbo, and it never had an arcade release. This backport rebuilds it as a CPS-2 game.",
     "Akuma has his own select cell, and Evil Ryu and Violent Ken join the original sixteen fighters with their Ultra moves, colors and endings. Shin Akuma stays hidden, for twenty fighters in all.",
@@ -2538,6 +2637,21 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-18",
+     "items": [
+      "Fix: Akuma and Shin Akuma throw their fireballs again; RC7 had lost them.",
+      "Fix: After a Raging Demon, the opponent falls to the ground instead of standing beside the attacker.",
+      "Fix: Corrected air-fireball damage for Akuma and Shin Akuma.",
+      "Fix: Evil Ryu’s heavy red fireball deals its full damage on the final hit.",
+      "Fix: The fast low-health music starts at the right time for every MAX ROUND setting, including one-round matches.",
+      "Fix: M. Bison’s VS portrait keeps its colors when Akuma takes over the final fight.",
+      "Fix: Zangief’s Spinning Piledriver voice plays again with MODERN sound.",
+      "Changed: ORIGINAL sound uses the original Russia country call.",
+      "Polish: Removed stray marks from the clouds on Blanka’s stage, and the Ultra Configuration cursor no longer flickers on MiSTer."
+     ],
+     "version": "rc8"
+    },
     {
      "date": "2026-11-14",
      "items": [
@@ -2683,7 +2797,7 @@
    "subtitle": "Arcade backport",
    "summary": "Ultra Street Fighter II: The Final Challengers as a CPS-2 game: Akuma gets his own select cell, Evil Ryu and Violent Ken join the roster, and the Switch edition's title, color select and sound come along. USA and Japan builds.",
    "title": "Ultra Street Fighter II",
-   "version": "rc7"
+   "version": "rc8"
   },
   {
    "artifact": {
@@ -3674,7 +3788,7 @@
     "Added stages, arcade endings, voices and QSound music",
     "USA (English) and Japan versions"
    ],
-   "date": "2026-11-10",
+   "date": "2026-11-18",
    "description": [
     "Street Fighter Alpha 3 Upper comes to CPS-2 with Guile, Fei Long, Dee Jay, T. Hawk, Evil Ryu and Shin Akuma. The boxer, Juli and Juni have their own cells on the select screen.",
     "Guile, Fei Long, Dee Jay and T. Hawk bring their stages, music and arcade endings. The USA build includes the Street Fighter Alpha 3 English restoration; the Japan build keeps Japanese text and names.",
@@ -3709,6 +3823,26 @@
     }
    ],
    "release_history": [
+    {
+     "date": "2026-11-18",
+     "items": [
+      "Fixed the computer-controlled Fei Long sometimes flying across the stage and out of bounds during his Rekka.",
+      "Fixed the slowdown on the Las Vegas stage.",
+      "Fixed Guile’s Level 3 Sonic Hurricane dealing only a few tiny hits, and some fighters taking the wrong amount of damage.",
+      "Guile’s supers show their darkened startup with the gathering light and afterimages again.",
+      "Fixed Dee Jay’s throws holding the wrong pose and running at the wrong speed, and ground throws reading held buttons incorrectly.",
+      "Every winning ending was checked against the NAOMI original. Final scenes now use the original backgrounds and colors instead of moving fight stages, and Ken’s cave, Karin’s market, Evil Ryu’s cave, T. Hawk’s cockpit clouds and Rolento’s truck scene use their original artwork.",
+      "Ending colors match the original, including Ryu and Ken’s opening colors, the dialogue portraits, Chun-Li’s outfit, Akuma and Shin Akuma’s emblems, Evil Ryu’s gloves and gray clouds, and the orange aircraft.",
+      "Fixed ending glitches: stray lightning, Dee Jay’s musical notes, misplaced heads, Sagat facing the wrong way, backgrounds vanishing early, a magenta flash in Cody’s ending, Dhalsim’s mask, the Game Over logo after an ending and a gap in Sakura’s credits.",
+      "Endings close with a thank-you card.",
+      "Birdie, Blanka, Dan, R. Mika and Rolento fight Balrog on the evening Secret Point stage.",
+      "Restored the rival intros for Ryu and Evil Ryu, Cody and Dee Jay, and Gen and Shin Akuma, and the fighters’ stances in boss conversations.",
+      "Four stage themes play their instruments at higher quality, and Dee Jay’s victory claps sound correctly.",
+      "Fixed the X-ISM portraits on the world map, Chun-Li’s and Juli’s portrait colors, the boxer’s victory colors, the X-ISM costume on the select screen and the speaker names in story scenes.",
+      "The USA version uses the taller win-quote panel from the Street Fighter Alpha 3 English restoration."
+     ],
+     "version": "rc3"
+    },
     {
      "date": "2026-11-10",
      "items": [
@@ -3756,7 +3890,7 @@
    "subtitle": "Arcade backport",
    "summary": "Upper on CPS-2, with Guile, Fei Long, Dee Jay, T. Hawk, Evil Ryu and Shin Akuma, in USA (English) and Japan builds.",
    "title": "Street Fighter Alpha 3 Upper (CPS-2)",
-   "version": "rc2"
+   "version": "rc3"
   },
   {
    "artifact": {

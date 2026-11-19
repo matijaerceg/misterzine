@@ -6,7 +6,61 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Wed, 18 Nov 2026 17:49:29 +0000</lastBuildDate>
+<lastBuildDate>Wed, 18 Nov 2026 23:00:15 +0000</lastBuildDate>
+<item>
+<title>[Updated] atarisys2 (Arcade core, 5 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#720</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/atarisys2_20261117.rbf:2026-11-18T23:00:15+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 23:00:15 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: 720 Degrees, APB - All Points Bulletin, Championship Sprint, Paperboy, Super Sprint.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-AtariSystem2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Camputers Lynx (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Lynx48</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Lynx48_20261118.rbf:2026-11-18T23:00:15+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 23:00:15 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Camputers&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Lynx48_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] SV-328 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Svi328</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Svi328_20261118.rbf:2026-11-18T23:00:15+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 23:00:15 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Spectravideo&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Svi328_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] World Rally 2: Twin Racing (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#wrally2</link>
+<guid isPermaLink="false">jlrh:_Arcade/cores/ffwrally2_20261117.rbf:2026-11-18T22:48:26+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 22:48:26 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/wrally2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Gaelco&lt;/p&gt;&lt;p&gt;Core: ffwrally2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: jlrh).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jlrh/gaelco-fpga/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Poly-Net Warriors (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#polynetw</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_Polygonet/Poly-Net Warriors (ver JAA).mra:2026-11-18T20:46:07+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 20:46:07 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/polynetw.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fixed shooter / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Polygonet&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-18 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-Polygonet_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Polygonet Commanders (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#plygonet</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_Polygonet/Polygonet Commanders (ver UAA).mra:2026-11-18T20:46:07+00:00</guid>
+<pubDate>Wed, 18 Nov 2026 20:46:07 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/plygonet.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Konami&lt;/p&gt;&lt;p&gt;Core: Polygonet&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-18 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-Polygonet_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arabian (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arabian</link>
@@ -159,15 +213,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/astyanax.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1989 / Jaleco&lt;/p&gt;&lt;p&gt;Core: MegaSys1_AMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MegaSys1A_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] SV-328 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Svi328</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Svi328_20261117.rbf:2026-11-18T00:00:02+00:00</guid>
-<pubDate>Wed, 18 Nov 2026 00:00:02 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1983 / Spectravideo&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-18 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Svi328_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Arcade-JalecoMS1BCD (Arcade core, 8 games)</title>
@@ -861,51 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gt98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Golden Tee '99 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gt99</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Golden Tee '99 (v1.00).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gt99.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1999 / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Golden Tee 2K (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gt2k</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Golden Tee 2K (v1.00).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gt2k.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 2000 / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Golden Tee 3D Golf (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gt3d</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Golden Tee 3D Golf (v1.93N).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gt3d.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1995 / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Golden Tee Classic (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gtclassc</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Golden Tee Classic (v1.00).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gtclassc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 2001 / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Hard Yardage (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hardyard</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Hard Yardage (v1.20).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hardyard.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1993 / Strata / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

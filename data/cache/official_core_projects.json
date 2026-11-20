@@ -1,5 +1,5 @@
 {
-  "signature": "3f543f6194475dd244cd247e719667b1b8747528ba6917a77981f4f47a3a7c6a",
+  "signature": "d12e4eb326a29a93195df95e32f2bfb0586f6cf10bbac9555b322e374ac2cac4",
   "files": {
     "_Arcade/cores/10YardFight_20261026.rbf": [
       "bf3246352dee36c530be067fb7cbb2b3",
@@ -19,6 +19,12 @@
         "MiSTer-devel/N64_MiSTer/tree/Aleck64"
       ]
     ],
+    "_Arcade/cores/Alpha68kMD_20261120.rbf": [
+      "cf7c5a6acd81d65b894372d88a65580e",
+      [
+        "MiSTer-devel/Arcade-Alpha68k_MiSTer"
+      ]
+    ],
     "_Arcade/cores/Arabian_20261117.rbf": [
       "bb0e2f5d030bf87f7c9ce13cb7b36bbf",
       [
@@ -31,8 +37,8 @@
         "MiSTer-devel/Arcade-Arkanoid_MISTer"
       ]
     ],
-    "_Arcade/cores/ArmedFMD_20261115.rbf": [
-      "4940c31cae3d5ed75365cfa7718e2f23",
+    "_Arcade/cores/ArmedFMD_20261120.rbf": [
+      "067369df06cdc262a2f4cfc4167bf0cc",
       [
         "MiSTer-devel/Arcade-ArmedF_MiSTer"
       ]
@@ -655,8 +661,8 @@
         "MiSTer-devel/Arcade-MarioBros_MiSTer"
       ]
     ],
-    "_Arcade/cores/MegaSys1_AMD_20261117.rbf": [
-      "a7be662ba0112f27aed24bbc2325c8fe",
+    "_Arcade/cores/MegaSys1_AMD_20261120.rbf": [
+      "a415d01f25e0d81872b9baa88c5dbafc",
       [
         "MiSTer-devel/Arcade-MegaSys1A_MiSTer"
       ]
@@ -695,6 +701,12 @@
       "f21fdbe8b3b1ea685a46ca6159c7b320",
       [
         "MiSTer-devel/Arcade-NaughtyBoy_MiSTer"
+      ]
+    ],
+    "_Arcade/cores/NextSpaceMD_20261120.rbf": [
+      "93bbfa73096b63fa7632d99e74616676",
+      [
+        "MiSTer-devel/Arcade-NextSpace_MiSTer"
       ]
     ],
     "_Arcade/cores/NightSlashers_20260901.rbf": [
@@ -1147,8 +1159,8 @@
         "MiSTer-devel/Arcade-Tempest_MiSTer"
       ]
     ],
-    "_Arcade/cores/TerraCrestaMD_20261116.rbf": [
-      "f0142cc95c5aec8161d07282e0346309",
+    "_Arcade/cores/TerraCrestaMD_20261120.rbf": [
+      "ae7cb89efd165023611737e2090c483e",
       [
         "MiSTer-devel/Arcade-TerraCresta_MiSTer"
       ]
@@ -1679,6 +1691,12 @@
       "81e9249a382166f5f88d63f0c89c50ff",
       [
         "MiSTer-devel/PMD85_MiSTer"
+      ]
+    ],
+    "_Computer/Pasopia7_20261120.rbf": [
+      "b467f1a738b80e5c58181a784082bbc1",
+      [
+        "MiSTer-devel/Pasopia7_MiSTer"
       ]
     ],
     "_Computer/QL_20260603.rbf": [

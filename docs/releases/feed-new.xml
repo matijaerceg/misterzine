@@ -6,24 +6,87 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Fri, 20 Nov 2026 02:52:04 +0000</lastBuildDate>
+<lastBuildDate>Fri, 20 Nov 2026 19:00:02 +0000</lastBuildDate>
 <item>
-<title>[New] SunSparcStation20_55mhz (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SunSparcStation20_55mhz</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SunSparcStation20_55mhz_20261114.rbf:2026-11-20T02:52:04+00:00</guid>
-<pubDate>Fri, 20 Nov 2026 02:52:04 +0000</pubDate>
+<title>[New] Gang Wars (Alpha68kMD) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#gang-wars-alpha68kmd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Gang Wars [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
 <category>new</category>
-<category>Computer core</category>
-<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SunSparcStation20_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gangwars.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Alpha Denshi Co.&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] SunSparcStation20_60mhz (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SunSparcStation20_60mhz</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SunSparcStation20_60mhz_20261119.rbf:2026-11-20T02:52:04+00:00</guid>
-<pubDate>Fri, 20 Nov 2026 02:52:04 +0000</pubDate>
+<title>[New] Gold Medalist (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#goldmedl</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Gold Medalist (set 1, Alpha68k II PCB) [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/goldmedl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / SNK&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Paddle Mania (NextSpaceMD) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#paddle-mania-nextspacemd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Paddle Mania [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/paddlema.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / SNK&lt;/p&gt;&lt;p&gt;Core: NextSpaceMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-NextSpace_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Sky Adventure (Alpha68kMD) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sky-adventure-alpha68kmd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Sky Adventure (World) [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/skyadvnt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / Alpha Denshi Co.&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Sky Soldiers (Alpha68kMD) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sky-soldiers-alpha68kmd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Sky Soldiers (US) [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/skysoldr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1988 / Alpha Denshi Co. (SNK of America/Romstar license)&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Super Champion Baseball (Alpha68kMD) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#sbasebal</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Super Champion Baseball (US) [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sbasebal.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Alpha Denshi Co. (SNK of America license)&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] The Next Space (NextSpaceMD) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tnextspc</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/The Next Space [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tnextspc.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1989 / SNK&lt;/p&gt;&lt;p&gt;Core: NextSpaceMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-NextSpace_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Time Soldiers (Alpha68kMD) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#time-soldiers-alpha68kmd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/Time Soldiers (US Rev 3) [MD].mra:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/timesold.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1987 / Alpha Denshi Co. (SNK/Romstar license)&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Pasopia7 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Pasopia7</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Pasopia7_20261120.rbf:2026-11-20T19:00:02+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
 <category>new</category>
 <category>Computer core</category>
-<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SunSparcStation20_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Pasopia7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[New] Deroon DeroDero (Arcade)</title>
@@ -843,69 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jpark.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1993 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Rad Mobile (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#radm</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Rad Mobile.mra:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/radm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1990 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Rad Rally (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#radr</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Rad Rally.mra:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/radr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] SegaSonic The Hedgehog (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#sonic</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/SegaSonic The Hedgehog.mra:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sonic.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1992 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Slip Stream (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#slipstrm</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Slip Stream.mra:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/slipstrm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1995 / Capcom&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Spider-Man: The Videogame (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#spidman</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Spider-Man - The Videogame.mra:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/spidman.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Super Visual Football: European Sega Cup (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#svf</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Super Visual Football - European Sega Cup.mra:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/svf.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] The J.League 1994 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#jleague</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/The J.League 1994.mra:2026-11-06T11:06:09+00:00</guid>
-<pubDate>Fri, 06 Nov 2026 11:06:09 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jleagueo.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

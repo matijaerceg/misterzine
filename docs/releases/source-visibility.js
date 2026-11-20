@@ -84,6 +84,9 @@ function siteSingletonTitles(rows) {
 }
 
 function siteSourceRows(rows) {
+  rows = rows.filter(r => !r.build_parent).map(r => r.builds
+    ? { ...r, k: r.sys, title: r.build_title, siteAliases: r.build_aliases }
+    : r);
   const sets = new Map(), games = new Map();
   const titles = new Map();
   const norm = value => (value || '').trim().toLowerCase();
@@ -161,6 +164,9 @@ function siteUpdateChanges(before, after, hideMature = false) {
   const fresh = [], built = [], keys = [];
   for (const r of visible(after)) {
     const old = previous.get(r.k);
+    // A visitor who already saw this exact file under its speed-specific
+    // link hasn't received another release just because the rows now fold.
+    if (!old && r.builds && r.bh && previous.get(r.builds[0].k)?.bh === r.bh) continue;
     if (!old) { fresh.push(r.title); keys.push(r.k); }
     // A corrected historical date can keep its original publication batch.
     else if ((old.updated || '') !== (r.updated || '') && (!old.b || !r.b || old.b !== r.b)) {

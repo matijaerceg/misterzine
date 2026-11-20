@@ -1742,7 +1742,7 @@
 </dialog>
 <script src="../lists/lists.js?v=c7502c4e44"></script>
 <script src="custom-lists.js?v=3fc5a24b7b"></script>
-<script src="./source-visibility.js?v=13"></script>
+<script src="./source-visibility.js?v=14"></script>
 <script src="./filter-memory.js?v=1"></script>
 <script src="./view-presets.js?v=3"></script>
 <script src="../mask.js?v=4"></script>
@@ -2117,7 +2117,10 @@ let seenState = null;       // the stored record, held so a live swap can bank i
 
 const rowMap = rows => {
   const m = {};
-  for (const d of rows) if (d.k) m[d.k] = d.updated || '';
+  for (const d of rows) if (d.k) {
+    m[d.k] = d.updated || '';
+    if (d.builds) m[d.sys] = m[d.k];
+  }
   return m;
 };
 // private mode / quota: the divider simply never shows, which is why the reads
@@ -3677,7 +3680,7 @@ function apply() {
     if (!terms.length) return true;
     // one field per line: a term never holds whitespace, so includes() reads it
     // as before, and looseTerm's patterns can't run from one field into the next
-    const hay = fold([d.title, d.mt, typeLabel(d), d.genre, d.manufacturer, d.year, d.core, coreLabel(d.core),
+    const hay = fold([d.title, d.mt, ...(d.builds || []).map(b => b.core + ' ' + b.build_label), typeLabel(d), d.genre, d.manufacturer, d.year, d.core, coreLabel(d.core),
             d.rot, d.brot, d.res, d.plr, d.ctl, d.spc, d.reg, d.sn,
             d.scr === 3 ? 'triple screen' : d.scr === 2 ? 'dual screen' : '',
             d.vec ? 'vector' : '',
@@ -5034,10 +5037,12 @@ function buildFavExport() {
   for (const k of FAVS) {
     const d = KEY2ROW[k];
     if (!d) { gone++; continue; }
-    if (!d.ft || !d.src) { noTag.push(d.title); continue; }
+    const build = d.builds && d.builds.find(b => b.k === k);
+    const term = build ? build.ft : d.ft;
+    if (!term || !d.src) { noTag.push(d.title); continue; }
     let s = terms.get(d.src);
     if (!s) terms.set(d.src, s = new Set());
-    s.add(d.ft);
+    s.add(term);
   }
   let html = '';
   for (const src of Object.keys(FT_SECTIONS)) {
@@ -5886,10 +5891,20 @@ function batchHTML(u) {
     dl + list + '</div>' + hint;
 }
 
-function detailHTML(d) {
+function detailHTML(d, buildKey) {
   if (d.bat) return batchHTML(d);
   if (d.grp) return groupHTML(d);
   const rows = [];
+  const selected = d.builds && (d.builds.find(b => b.k === buildKey) || d.builds[0]);
+  if (selected) {
+    const options = d.builds.map((b, i) => '<option value="' + escA(b.k) + '"' +
+      (b === selected ? ' selected' : '') + '>' + esc(b.build_label + (i ? ' (older build)' : ' (current)')) + '</option>');
+    const file = 'https://raw.githubusercontent.com/MiSTer-devel/Distribution_MiSTer/main/' +
+      selected.rbf_path.split('/').map(encodeURIComponent).join('/');
+    rows.push(['Download', '<select aria-label="Build to download" id="core-build">' + options.join('') +
+      '</select> <a href="' + escA(file) + '">Download RBF</a>', true]);
+    d = { ...d, core: selected.core, updated: selected.bd, rbf_path: selected.rbf_path };
+  }
   // Patreon-beta rows lead with what the chip can only hint at: who gates it,
   // what unlocks it, and where to subscribe. First row so it reads before the
   // Launch button gets tried on a MiSTer without the key.
@@ -6084,7 +6099,7 @@ function detailHTML(d) {
   // press (why after and not before: see the #panel h2 .fav CSS)
   return '<div class="body"><button class="close" aria-label="Close">×</button>' +
     '<h2' + (d.k ? ' class="starred"' : '') + '>' +
-    (d.k ? cfield(rowURL(d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
+    (d.k ? cfield(rowURL(selected && selected.k === buildKey ? selected : d), titleHTML, 'Copy link to this entry') + favBtnHTML(d) : titleHTML) + '</h2>' +
     launcher + (d.k ? '<div class="clentryactions">' + MZLists.panelButton(d) + '</div>' : '') + sysphoto + flyerHTML(d) + shots + dl + prose + report + '</div>' + hint;
 }
 
@@ -6093,7 +6108,10 @@ function openPanel(d, fromHistory) {
   openRow = d;
   // the MiSTer device popover anchors to the outgoing panel DOM — drop it
   if (metapopFor === 'mister') closePop();
-  panel.innerHTML = detailHTML(d);
+  const savedBuild = d.builds && (favView || (favOnly || MZLists.isFavorites() ? FAVS : null));
+  const preferred = savedBuild && d.builds.find(b => savedBuild.has(b.k));
+  const buildKey = fromHistory ? hashKey() : preferred && preferred.k;
+  panel.innerHTML = detailHTML(d, buildKey);
   // always open at the top — re-assert after the reveal reflow too, since a
   // same-frame layout (or a touch that opened the panel) can nudge it
   const body = panel.querySelector('.body'); if (body) body.scrollTop = 0;
@@ -6108,7 +6126,7 @@ function openPanel(d, fromHistory) {
   markOpenRow();
   // history/Back navigations (and the initial #hash open) must not write
   // history themselves — the entry they came from already carries the hash
-  if (!fromHistory) pushPanelState();
+  if (!fromHistory) pushPanelState(buildKey);
 }
 
 function closePanel() {
@@ -6137,8 +6155,8 @@ function closePanel() {
 // screens: the panel is docked layout, not a modal — never push, just keep
 // the #key in the address bar via replaceState so every state is shareable.
 let panelHist = false;
-function pushPanelState() {
-  const url = openRow ? rowHash(openRow) || null : null;
+function pushPanelState(buildKey) {
+  const url = buildKey ? '#' + encodeURIComponent(buildKey) : openRow ? rowHash(openRow) || null : null;
   if (!panelHist && matchMedia('(max-aspect-ratio: 3/5)').matches) {
     if (url) history.pushState({ mzPanel: true }, '', url);
     else history.pushState({ mzPanel: true }, '');
@@ -6354,6 +6372,11 @@ function doCopy(f) {
 document.addEventListener('click', e => {
   const f = e.target.closest('.cf');
   if (f) { doCopy(f); zapJolt(f.querySelector('.rom.zap')); }
+});
+panel.addEventListener('change', e => {
+  if (e.target.id !== 'core-build') return;
+  history.replaceState(history.state, '', '#' + encodeURIComponent(e.target.value));
+  openPanel(openRow, true);
 });
 panel.addEventListener('click', e => {
   const add = e.target.closest('button.clentryadd');

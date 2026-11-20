@@ -1655,7 +1655,11 @@ def core_name(title):
     return _CORE_DATE_RE.sub("", title or "").rstrip("_ ")
 
 
-def core_repo_base(title):
+SPARCSTATION = "SunSparcStation20"
+SPARC_BUILD = re.compile(r"SunSparcStation20(?:_(\d+)mhz)?", re.I)
+
+
+def core_repo_base(title, source_id=None):
     """Repo base name for a console/computer/other core title.
 
     The catalog title is the .rbf stem (e.g. `C64_20260603`); strip the
@@ -1663,6 +1667,8 @@ def core_repo_base(title):
     per-core repo `MiSTer-devel/<core>_MiSTer`.
     """
     core = core_name(title)
+    if source_id == "distribution_mister" and SPARC_BUILD.fullmatch(core):
+        return SPARCSTATION
     return CORE_REPO_OVERRIDES.get(core, core)
 
 
@@ -1691,12 +1697,12 @@ def apply_frozen_core_dates(con):
 def cmd_core_repos(args):
     con = connect()
     rows = con.execute(
-        "SELECT DISTINCT title FROM catalog WHERE system IN ('console','computer','other')"
+        "SELECT DISTINCT title,source_id FROM catalog WHERE system IN ('console','computer','other')"
     ).fetchall()
     # de-dupe by repo base name (a core can appear under multiple sources)
     bases = {}
     for r in rows:
-        base = core_repo_base(r["title"])
+        base = core_repo_base(r["title"], r["source_id"])
         if base:
             bases.setdefault(base, r["title"])
     bases = dict(sorted(bases.items()))
@@ -1762,7 +1768,7 @@ def join_core_repos_to_catalog(con):
     for row in con.execute(
         "SELECT source_id, path, title FROM catalog WHERE system IN ('console','computer','other')"
     ).fetchall():
-        r = by_base.get(core_repo_base(row["title"]))
+        r = by_base.get(core_repo_base(row["title"], row["source_id"]))
         if r:
             con.execute(
                 "UPDATE catalog SET repo=?, release_date=?, last_update=? WHERE source_id=? AND path=?",
@@ -6468,6 +6474,14 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
     if system != "arcade" and r["source_id"] == "distribution_mister" and r["path"]:
         directory, _, filename = r["path"].rpartition("/")
         shipped_core = core_name(title_from_path(filename))
+        clock = SPARC_BUILD.fullmatch(shipped_core)
+        if directory == "_Computer" and clock and repo == "MiSTer-devel/SunSparcStation20_MiSTer":
+            row.update(sys=SPARCSTATION, year=CORE_YEAR[SPARCSTATION],
+                       manufacturer=COMPUTER_MANUFACTURER[SPARCSTATION], rbf_path=r["path"],
+                       build_label=f"{clock[1]} MHz" if clock[1] else "Standard")
+            row["title"] = SYSTEM_TITLES[SPARCSTATION]
+            if clock[1]:
+                row["title"] += f" ({row['build_label']})"
         if (directory, shipped_core) in SHARED_CORE_PROJECTS:
             row["rbf_path"] = r["path"]  # a system-name launch cannot distinguish these builds
             if shipped_core != core:
@@ -6960,6 +6974,9 @@ def cmd_export_web(args):
     # fork parentage for _core_label: who really authored a MiSTer-devel fork
     fork_info = {r["repo"].lower(): r for r in con.execute(
         "SELECT repo, is_fork, parent_owner FROM arcade_repos")}
+    sparc_keys = [r["k"] for r in con.execute(
+        "SELECT k,path FROM row_keys WHERE source_id='distribution_mister' AND path GLOB '_Computer/SunSparcStation20*.rbf'")
+        if SPARC_BUILD.fullmatch(core_name(title_from_path(r["path"])))]
     con.close()
     rows = [r for r in rows if _source_row_visible(r, shipped_rbfs)]
     # Drop arcade region/revision/bootleg variants (MiSTer files them under
@@ -7075,6 +7092,7 @@ def cmd_export_web(args):
     _check_key_stability(outdir / "data.json", data)  # hard gate: keys never move
     _flush_row_keys(pending_keys)
     _assign_update_batches(data)  # 'b': which refresh first shipped this row's Last Updated
+    attach_sparc_builds(data, sparc_keys)
     (outdir / "data.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     # NOTE: outdir/index.html is a hand-maintained static page and the single
     # source of truth. export-web deliberately does NOT regenerate it — it used
@@ -7147,6 +7165,21 @@ FEEDS = [
 def _rfc822(iso):
     return email.utils.format_datetime(
         dt.datetime.fromisoformat((iso or "").replace("Z", "+00:00")))
+
+
+def attach_sparc_builds(data, historical_keys):
+    """Keep physical rows for SD-card clients. The site and RSS show the machine once."""
+    builds = sorted((r for r in data if r.get("sys") == SPARCSTATION and r.get("build_label")),
+                    key=lambda r: (r.get("bd", ""), r["rbf_path"]), reverse=True)
+    if not builds:
+        return
+    lead = builds[0]
+    lead["build_title"] = SYSTEM_TITLES[SPARCSTATION]
+    lead["builds"] = [{key: r[key] for key in ("k", "core", "build_label", "rbf_path", "bd", "ft") if key in r}
+                      for r in builds]
+    lead["build_aliases"] = sorted((set(historical_keys) | {r["k"] for r in builds}) - {SPARCSTATION})
+    for r in builds[1:]:
+        r["build_parent"] = SPARCSTATION
 
 
 def _assign_row_keys(data, outdir=None):
@@ -7419,7 +7452,10 @@ def _write_feeds(outdir):
     by_title = {}   # arcade rows: (source, raw MRA title (mt when humanized) / display title)
     by_core = {}    # non-arcade rows: core token
     by_rbf = {}     # arcade rows grouped by core rbf token (core-rebuild events)
+    sparc = None
     for d in data:
+        if d.get("builds") and d.get("sys") == SPARCSTATION:
+            sparc = dict(d, k=SPARCSTATION, title=SYSTEM_TITLES[SPARCSTATION])
         if d.get("base") == "Arcade":
             if d.get("src") and d.get("mra"):
                 by_path[(d["src"], d["mra"])] = d
@@ -7441,9 +7477,14 @@ def _write_feeds(outdir):
     if not events:
         return
     renamed = set()
+    sparc_updates = {}
     for e in events:
         if e["event_type"] == "removed" and classify(e["path"])[1] == "core":
             renamed.add((e["ts"], e["source_id"], e["system"], core_name(e["title"])))
+        if (sparc and e["source_id"] == sparc["src"] and e["system"] == "computer"
+                and SPARC_BUILD.fullmatch(core_name(e["title"])) and e["event_type"] != "removed"):
+            build = (core_build_date(e["title"]) or "", e["path"])
+            sparc_updates[e["ts"]] = max(build, sparc_updates.get(e["ts"], build))
     cutoff = (dt.datetime.fromisoformat(events[0]["ts"]) - dt.timedelta(days=30)).isoformat()
     core_rebuilds = set()   # (source_id, date, rbf token) with a core-rebuild event
     for e in events:
@@ -7494,7 +7535,14 @@ def _write_feeds(outdir):
                 # the canonical announcement — don't repeat it per MRA
                 continue
         else:
-            row = by_core.get(core_name(e["title"]).lower())
+            core = core_name(e["title"])
+            row = by_core.get(core.lower())
+            if sparc and e["source_id"] == sparc["src"] and e["system"] == "computer" and SPARC_BUILD.fullmatch(core):
+                # One announcement per shipment. Select by the build date at
+                # the time, so a later release cannot rewrite an older guid.
+                if sparc_updates[e["ts"]][1] != e["path"]:
+                    continue
+                row = sparc
             rows = [row] if row else []
         # Patreon-beta rows are on the site (labeled) but never in the feeds:
         # most readers can't download them. Snapshot already logs no events
@@ -7509,6 +7557,8 @@ def _write_feeds(outdir):
         if not rows:
             continue
         etype = e["event_type"]
+        if rows[0] is sparc and etype == "new" and core_name(e["title"]) != SPARCSTATION:
+            etype = "updated"
         if etype == "new" and (e["ts"], e["source_id"], e["system"], core_name(e["title"])) in renamed:
             etype = "updated"
         # one item per game per day: alternative MRAs strip to the same base

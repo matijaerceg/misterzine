@@ -77,6 +77,41 @@ class CatalogueProjectTests(unittest.TestCase):
         self.con.executescript(mz.SCHEMA)
         mz._ensure_columns(self.con)
 
+    def test_sparc_clock_builds_share_machine_history_and_one_feed_item(self):
+        sid, core = "distribution_mister", mz.SPARCSTATION
+        repo = "MiSTer-devel/SunSparcStation20_MiSTer"
+        with patch.object(mz, "DATA", self.cache), patch.object(mz, "DBPATH", self.cache / "test.sqlite"):
+            con = mz.connect()
+            con.execute("INSERT INTO core_repos(repo,core,first_commit) VALUES(?,?,?)",
+                        (repo, core, "2026-10-19"))
+            for speed, stamp in [(55, "20261114"), (60, "20261119")]:
+                title = f"{core}_{speed}mhz_{stamp}"
+                path = f"_Computer/{title}.rbf"
+                mz.upsert_catalog(con, sid, {path: {"hash": stamp}}, "2026-11-20", False)
+                con.execute("INSERT INTO events(ts,source_id,path,title,system,event_type) VALUES(?,?,?,?,?,?)",
+                            ("2026-11-20T02:00:00+00:00", sid, path, title, "computer", "new"))
+            mz.join_core_repos_to_catalog(con)
+            rows = [mz._web_row(r) for r in con.execute("SELECT * FROM catalog")]
+            con.commit()
+            con.close()
+            for r in rows:
+                r["k"] = r["core"]
+            retired = core + "_65mhz"
+            mz.attach_sparc_builds(rows, [retired, core])
+            lead = next(r for r in rows if "builds" in r)
+            self.assertEqual((lead["build_title"], lead["date"], lead["updated"], lead["year"],
+                              lead["manufacturer"]), ("SPARCstation 20", "2026-10-19", "2026-11-19",
+                                                       "1994", "Sun Microsystems"))
+            self.assertEqual([b["build_label"] for b in lead["builds"]], ["60 MHz", "55 MHz"])
+            self.assertEqual(set(lead["build_aliases"]), {r["k"] for r in rows} | {retired})
+            (self.cache / "data.json").write_text(json.dumps(rows))
+            mz._write_feeds(self.cache)
+            updates = ET.parse(self.cache / "feed-updates.xml").findall(".//item")
+            self.assertEqual(len(updates), 1)
+            self.assertTrue(updates[0].findtext("link").endswith("#" + core))
+            self.assertIn("60mhz", updates[0].findtext("guid"))
+            self.assertEqual(ET.parse(self.cache / "feed-new.xml").findall(".//item"), [])
+
     def test_shared_msx_filename_preserves_both_projects_across_refreshes(self):
         sid = "distribution_mister"
         june = "_Computer/MSX_20260603.rbf"

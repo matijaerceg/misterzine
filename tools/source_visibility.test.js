@@ -223,11 +223,20 @@ test('published data: every source is labelled, keys survive folding, lone build
     seen.set(k, r.title);
   }
   for (const r of rows) assert.ok(seen.has(r.k), `key ${r.k} (${r.src} ${r.title}) lost from the site`);
-  assert.equal(seen.size, rows.length);
-  // a hidden row is always an Ongo copy of a listed arcade game, or the
-  // English-named twin of bazset's Meikyu Jima launcher
+  const expectedKeys = new Set(rows.map(r => r.k));
+  for (const r of rows.filter(r => r.builds)) {
+    expectedKeys.add(r.sys);
+    for (const k of r.build_aliases) expectedKeys.add(k);
+  }
+  assert.deepEqual(new Set(seen.keys()), expectedKeys);
   const shown = new Set(visible.map(r => r.k));
   for (const r of rows.filter(r => !shown.has(r.k))) {
+    if (r.builds || r.build_parent) {
+      const machine = visible.find(v => v.k === r.sys);
+      assert.equal(r.base, 'Computer');
+      assert.ok(machine.builds.some(b => b.k === r.k && b.rbf_path === r.rbf_path));
+      continue;
+    }
     const twin = r.src === 'bazset' && r.sn === 'kikcubic';
     assert.ok(r.src === 'ongo' || twin, `${r.src} ${r.title} hidden`);
     assert.equal(r.base, 'Arcade', `${r.title} hidden`);

@@ -5470,23 +5470,14 @@ const ZAP_SYS = Object.assign({}, MISTER_SYS, {
   'NeoGeoPocket': 'NeoGeoPocket', 'NeoGeoPocket-Color': 'NeoGeoPocketColor',
   'NGPC': 'NeoGeoPocketColor', 'VirtualBoy': 'VirtualBoy', 'ao486': 'DOS',
 });
-// what a row launches: arcade → its MRA's SD-card path; others → their system
-const launchScript = d => d.base === 'Arcade'
-  ? (d.mra ? '/media/fat/' + d.mra : null)
-  : (MISTER_SYS[d.core] ? '**system:' + MISTER_SYS[d.core] : null);
-// same row as a Zaparoo Online remote operation ({t: operation_type, v: value}):
-// arcade → `launch` with the MRA's absolute path; others → `launch.system`
-// with the system id. Null = Zaparoo can't launch this row.
-const zapLaunchOp = d => d.base === 'Arcade'
-  ? (d.mra ? { t: 'launch', v: '/media/fat/' + d.mra } : null)
-  : (ZAP_SYS[d.core] ? { t: 'launch.system', v: ZAP_SYS[d.core] } : null);
-// same row → its Zaparoo ZapScript token (to persist on an NFC tag / playlist,
-// not launch live): arcade → the bare SD-relative .mra (Zaparoo auto-launch, no
-// /media/fat/ prefix); others → **launch.system:<id> (ZapScript's dialect, vs
-// mrext's **system: above).
-const zapScript = d => d.base === 'Arcade'
-  ? (d.mra || null)
-  : (ZAP_SYS[d.core] ? '**launch.system:' + ZAP_SYS[d.core] : null);
+// Arcade games and systems with shared filenames launch their exact SD file.
+const launchPath = d => d.base === 'Arcade' ? d.mra : d.rbf_path;
+const launchScript = d => launchPath(d) ? '/media/fat/' + launchPath(d)
+  : (d.base !== 'Arcade' && MISTER_SYS[d.core] ? '**system:' + MISTER_SYS[d.core] : null);
+const zapLaunchOp = d => launchPath(d) ? { t: 'launch', v: '/media/fat/' + launchPath(d) }
+  : (d.base !== 'Arcade' && ZAP_SYS[d.core] ? { t: 'launch.system', v: ZAP_SYS[d.core] } : null);
+const zapScript = d => launchPath(d)
+  || (d.base !== 'Arcade' && ZAP_SYS[d.core] ? '**launch.system:' + ZAP_SYS[d.core] : null);
 
 // A saved device is one of two kinds, told apart by the `z` field:
 //   LAN (mrext Remote):  {n: name, h: 'host:8182'}

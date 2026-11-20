@@ -2,7 +2,9 @@ import json
 import sqlite3
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import core_projects as cp
@@ -74,6 +76,65 @@ class CatalogueProjectTests(unittest.TestCase):
         self.con.row_factory = sqlite3.Row
         self.con.executescript(mz.SCHEMA)
         mz._ensure_columns(self.con)
+
+    def test_shared_msx_filename_preserves_both_projects_across_refreshes(self):
+        sid = "distribution_mister"
+        june = "_Computer/MSX_20260603.rbf"
+        former = "_Computer/MSX1_20250108.rbf"
+        november = "_Computer/MSX_20261118.rbf"
+        following = "_Computer/MSX_20261201.rbf"
+        files = {june: {"hash": "original"}, former: {"hash": "previous"}}
+        owners = {june: ["original", ["MiSTer-devel/MSX_MiSTer"]]}
+        cache = self.cache / "official_core_projects.json"
+
+        def snapshot(stamp):
+            cache.write_text(json.dumps({"files": owners}))
+            with patch.object(mz, "fetch_db", return_value=(stamp, files, {}, {})):
+                mz.cmd_snapshot(SimpleNamespace(source=sid))
+
+        def publish():
+            con = mz.connect()
+            rows = []
+            for r in con.execute("SELECT * FROM catalog ORDER BY path"):
+                rows.append(dict(mz._web_row(r), _src=sid, _path=r["path"]))
+            con.close()
+            pending = mz._assign_row_keys(rows, self.cache)
+            data = self.cache / "data.json"
+            mz._check_key_stability(data, rows)
+            mz._flush_row_keys(pending)
+            data.write_text(json.dumps(rows))
+            return {r["k"]: r for r in rows}
+
+        with patch.object(mz, "DBPATH", self.cache / "catalog.sqlite"), \
+             patch.object(mz, "DATA", self.cache), patch.object(mz, "SNAPDIR", self.cache / "snapshots"), \
+             patch.object(mz, "latest_snapshot", return_value=None):
+            snapshot(1794000000)
+            con = mz.connect()
+            con.execute("UPDATE catalog SET release_date=CASE WHEN path=? THEN '2017-09-29' ELSE '2022-01-05' END", (june,))
+            con.commit()
+            con.close()
+            old = publish()
+            del files[former]
+            for i, (path, date) in enumerate([(november, "2026-11-18"), (following, "2026-12-01")]):
+                if i:
+                    del files[november]
+                files[path] = {"hash": date}
+                owners[path] = [date, ["MiSTer-devel/MSX1_MiSTer"]]
+                for _ in range(2):
+                    snapshot(1795200000 + i * 1200000)
+                    rows = publish()
+                    self.assertEqual(set(rows), {"MSX", "MSX1"})
+                    self.assertEqual(rows["MSX"], old["MSX"])
+                    row = rows["MSX1"]
+                    self.assertEqual((row["date"], row["updated"], row["rbf_path"], row["core"]),
+                                     (old["MSX1"]["date"], date, path, "MSX"))
+                mz._write_feeds(self.cache)
+                links = [el.text for el in ET.parse(self.cache / "feed-updates.xml").findall(".//item/link")]
+                self.assertTrue(links)
+                self.assertTrue(all(link.endswith("#MSX1") for link in links))
+            files[following]["hash"] = "unverified replacement"
+            with self.assertRaisesRegex(ValueError, "Cannot identify shared core"):
+                snapshot(1797000000)
 
     def test_source_filename_hash_and_url_only_changes(self):
         def row(sid, tag):

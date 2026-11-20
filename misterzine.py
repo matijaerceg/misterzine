@@ -934,6 +934,34 @@ def fetch_db(source):
     return d.get("timestamp"), files, gated, gates
 
 
+# These projects now ship the same filename stem. Keep the catalogue names that
+# their existing dates, feeds and favorites use. The SD path stays verbatim.
+SHARED_CORE_PROJECTS = {
+    ("_Computer", "MSX"): {
+        "MiSTer-devel/MSX_MiSTer": "MSX",
+        "MiSTer-devel/MSX1_MiSTer": "MSX1",
+    },
+}
+
+
+def identify_shared_cores(files):
+    cache = CACHEDIR / "official_core_projects.json"
+    official = json.loads(cache.read_text(encoding="utf-8"))["files"] if cache.exists() else {}
+    for path, meta in files.items():
+        directory, _, filename = path.rpartition("/")
+        if not filename.lower().endswith(".rbf"):
+            continue
+        title = title_from_path(filename)
+        stem = core_name(title)
+        projects = SHARED_CORE_PROJECTS.get((directory, stem))
+        if projects is None:
+            continue
+        digest, owners = official.get(path, (None, []))
+        if digest != meta.get("hash") or len(owners) != 1 or owners[0] not in projects:
+            raise ValueError(f"Cannot identify shared core file {path} from its upstream project")
+        meta["catalog_title"] = projects[owners[0]] + title[len(stem):]
+
+
 def latest_snapshot(source_id):
     sd = SNAPDIR / source_id
     if not sd.exists():
@@ -951,9 +979,9 @@ def catalog_files(con, source_id):
     last-seen hash per path) IS committed. Without this the diff engine would see
     no prior state, re-seed every run, and never log a going-forward event."""
     rows = con.execute(
-        "SELECT path, hash FROM catalog WHERE source_id=?", (source_id,)
+        "SELECT path, hash, title FROM catalog WHERE source_id=?", (source_id,)
     ).fetchall()
-    return {r["path"]: {"hash": r["hash"]} for r in rows}
+    return {r["path"]: {"hash": r["hash"], "catalog_title": r["title"]} for r in rows}
 
 
 def write_snapshot(source_id, timestamp, files):
@@ -984,6 +1012,8 @@ def cmd_snapshot(args):
             else:
                 del files[path]
         files = tracked_files(source["id"], files)
+        if source["id"] == "distribution_mister":
+            identify_shared_cores(files)
         swept = purge_untracked(con, source["id"])
         if swept:
             log(f"  {source['name']}: purged {swept} untracked row(s)")
@@ -1084,7 +1114,7 @@ def cmd_snapshot(args):
             else:
                 etype = None
             if etype:
-                events.append((ts_iso, source["id"], path, title_from_path(path), system, etype, meta.get("hash")))
+                events.append((ts_iso, source["id"], path, meta.get("catalog_title") or title_from_path(path), system, etype, meta.get("hash")))
 
         # removals (only meaningful after seed). Skip paths that were beta:
         # a vanished beta file is purged above, and a "removed" event for
@@ -1104,7 +1134,7 @@ def cmd_snapshot(args):
                         (source["id"], path)).fetchone()
                     if last and last["event_type"] == "removed":
                         continue
-                    events.append((ts_iso, source["id"], path, title_from_path(path), system, "removed", None))
+                    events.append((ts_iso, source["id"], path, old_files[path].get("catalog_title") or title_from_path(path), system, "removed", None))
 
         # upsert catalog rows for everything currently present
         upsert_catalog(con, source["id"], files, ts_iso, seed, gated)
@@ -1144,7 +1174,8 @@ def cmd_snapshot(args):
             for path in files:
                 system, kind, is_unit = classify(path)
                 if is_unit and kind == "core":
-                    current.setdefault((system, core_name(title_from_path(path))), path)
+                    title = files[path].get("catalog_title") or title_from_path(path)
+                    current.setdefault((system, core_name(title)), path)
                 elif is_unit and kind == "title" and path not in old_files:
                     new_titles.setdefault((system, _retitle_key(title_from_path(path))), path)
                     if files[path].get("hash"):
@@ -1156,7 +1187,8 @@ def cmd_snapshot(args):
                 if not is_unit:
                     continue
                 if kind == "core":
-                    new_path = current.get((system, core_name(title_from_path(path))))
+                    title = old_files[path].get("catalog_title") or title_from_path(path)
+                    new_path = current.get((system, core_name(title)))
                 elif kind == "title":
                     h = old_files[path].get("hash")
                     new_path = new_by_hash.get((system, h)) if h else None
@@ -1217,7 +1249,7 @@ def upsert_catalog(con, source_id, files, ts_iso, seed, gated=None):
         system, kind, is_unit = classify(path)
         if not is_unit:
             continue
-        title = title_from_path(path)
+        title = meta.get("catalog_title") or title_from_path(path)
         gate = gated.get(path)
         beta = 1 if gate else 0
         row = con.execute(
@@ -5294,7 +5326,7 @@ SYSTEM_TITLES = {
     "3B1": "AT&T UNIX PC",
     "Minimig": "Amiga (Minimig)",
     "MTX512": "Memotech MTX512",
-    "MSX": "MSX2",  # this core is the MSX2/2+/3 machine; the separate MSX1 core is first-gen
+    "MSX": "MSX2",
     "Neon": "Soyuz-Neon PK-11/16",
     "Ondra_SPO186": "Ondra SPO 186",
     "ORAO": "Orao",
@@ -6433,6 +6465,17 @@ def _web_row(r, arcade_titles=None, arcade_meta=None, arcade_cats=None, arcade_s
         "core": core,
         "deprecated": False,
     }
+    if system != "arcade" and r["source_id"] == "distribution_mister" and r["path"]:
+        directory, _, filename = r["path"].rpartition("/")
+        shipped_core = core_name(title_from_path(filename))
+        if (directory, shipped_core) in SHARED_CORE_PROJECTS:
+            row["rbf_path"] = r["path"]  # a system-name launch cannot distinguish these builds
+            if shipped_core != core:
+                row["core_id"] = core
+                row["core"] = shipped_core
+                row["sys"] = core
+                if core == "MSX1":
+                    row["title"] = "MSX (MSX1, MSX2, MSX2+ and turboR)"
     # updated == date just means "never touched since debut" — still worth a cell
     if updated:
         row["updated"] = updated
@@ -7172,7 +7215,7 @@ def _assign_row_keys(data, outdir=None):
                 or (not d.get("beta") and pub_sn_counts[sn] == 1)):
             k = sn
         elif d["base"] != "Arcade" and d.get("core"):
-            k = d["core"]
+            k = d.get("core_id") or d["core"]
         else:
             k = slug(d["title"])
         if k in taken:
@@ -7340,7 +7383,7 @@ def _check_key_stability(prev_path, data):
         if d.get("mra"):
             return ("mra", d.get("src"), d["mra"])
         if d.get("core"):
-            return ("core", d.get("src"), d.get("base"), d["core"])
+            return ("core", d.get("src"), d.get("base"), d.get("core_id") or d["core"])
         return ("title", d.get("title"))
     old = {}
     for d in json.loads(prev_path.read_text(encoding="utf-8")):
@@ -7388,7 +7431,7 @@ def _write_feeds(outdir):
                 # new dated stem, keyed the same way below)
                 by_rbf.setdefault(core_name(d["core"]).lower(), []).append(d)
         elif d.get("core"):
-            by_core.setdefault(d["core"].lower(), d)
+            by_core.setdefault((d.get("core_id") or d["core"]).lower(), d)
     con = connect()
     events = con.execute(
         "SELECT ts, source_id, path, title, system, event_type FROM events "

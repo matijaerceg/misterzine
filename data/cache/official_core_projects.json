@@ -1,5 +1,5 @@
 {
-  "signature": "124ab7a84c0a9c77080fcae8136b5d458974ade441dc7c417f84929176dd8002",
+  "signature": "2b5deed8361632deea6b7ce3eb92fd58cd5cd3d7eb2c7195530811b8e7858f7c",
   "files": {
     "_Arcade/cores/10YardFight_20261026.rbf": [
       "bf3246352dee36c530be067fb7cbb2b3",
@@ -1531,16 +1531,16 @@
         "MiSTer-devel/Lynx48_MiSTer"
       ]
     ],
-    "_Computer/MSX1_20250108.rbf": [
-      "0c2def7f3d8da9567b269978cd0d1564",
-      [
-        "MiSTer-devel/MSX1_MiSTer"
-      ]
-    ],
     "_Computer/MSX_20260603.rbf": [
       "8d10afb89a9849eaf11b02b349e7ee1a",
       [
         "MiSTer-devel/MSX_MiSTer"
+      ]
+    ],
+    "_Computer/MSX_20261118.rbf": [
+      "4859a5ed0c32612c41a457cf9728cca5",
+      [
+        "MiSTer-devel/MSX1_MiSTer"
       ]
     ],
     "_Computer/MTX512_20261108.rbf": [
@@ -1753,8 +1753,14 @@
         "MiSTer-devel/Sun-3_MiSTer"
       ]
     ],
-    "_Computer/SunSparcStation20_20261019.rbf": [
-      "14ea4dfeb521719476382f84aa01fedb",
+    "_Computer/SunSparcStation20_55mhz_20261114.rbf": [
+      "9fb8290e380aac5f226a10aa6456cfcf",
+      [
+        "MiSTer-devel/SunSparcStation20_MiSTer"
+      ]
+    ],
+    "_Computer/SunSparcStation20_60mhz_20261119.rbf": [
+      "521b4867acc3f6822c849fff982493c0",
       [
         "MiSTer-devel/SunSparcStation20_MiSTer"
       ]

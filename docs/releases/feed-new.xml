@@ -6,7 +6,43 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Wed, 18 Nov 2026 20:46:07 +0000</lastBuildDate>
+<lastBuildDate>Fri, 20 Nov 2026 02:52:04 +0000</lastBuildDate>
+<item>
+<title>[New] SunSparcStation20_55mhz (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SunSparcStation20_55mhz</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SunSparcStation20_55mhz_20261114.rbf:2026-11-20T02:52:04+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 02:52:04 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SunSparcStation20_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] SunSparcStation20_60mhz (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SunSparcStation20_60mhz</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SunSparcStation20_60mhz_20261119.rbf:2026-11-20T02:52:04+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 02:52:04 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SunSparcStation20_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Deroon DeroDero (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#deroon</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_TecmoSystem/Deroon DeroDero (earlier, set 1).mra:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/deroon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1995 / Tecmo&lt;/p&gt;&lt;p&gt;Core: tecmosys&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-TecmoSystem_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Toukidenshou - Angel Eyes (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tkdensho</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_TecmoSystem/Toukidenshou - Angel Eyes (VER. 960614).mra:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tkdensho.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1996 / Tecmo&lt;/p&gt;&lt;p&gt;Core: tecmosys&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-TecmoSystem_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] Poly-Net Warriors (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#polynetw</link>
@@ -870,42 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/jleagueo.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1994 / Sega&lt;/p&gt;&lt;p&gt;Core: S32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-06 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] NBA Jam Tournament Edition SE (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#nbajamtese</link>
-<guid isPermaLink="false">ongo:_Arcade/_alternatives/_NBA Jam Tournament Edition/NBA Jam Tournament Edition SE (rev 5.02) [blahm1d].mra:2026-11-05T23:09:05+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 23:09:05 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;1994 / Midway&lt;/p&gt;&lt;p&gt;Core: Gm0rk_Midway-T-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] High Impact Football (Gm0rk) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#high-impact-football-gm0rk</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/_Midway-Y-Unit/High Impact Football (rev LA5 02-15-91).mra:2026-11-05T21:57:14+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 21:57:14 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hiimpact.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1990 / Williams&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-Y-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Mortal Kombat (rev 4.0 09-28-92) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#mortal-kombat-rev-4-0-09-28-92</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/_Midway-Y-Unit/Mortal Kombat (rev 4.0 09-28-92).mra:2026-11-05T21:57:14+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 21:57:14 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/mkla4.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1992 / Midway&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-Y-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Smash T.V. (Gm0rk) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#smash-t-v-gm0rk</link>
-<guid isPermaLink="false">gm0rk:_Arcade/_Gm0rkCores/_Midway-Y-Unit/Smash T.V. (rev 8.00).mra:2026-11-05T21:57:14+00:00</guid>
-<pubDate>Thu, 05 Nov 2026 21:57:14 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/smashtv.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Arena shooter / 1990 / Williams&lt;/p&gt;&lt;p&gt;Core: Arcade-Midway-Y-Unit&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-05 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Midway-Y-Unit_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

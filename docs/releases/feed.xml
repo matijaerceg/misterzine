@@ -6,7 +6,88 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 19 Nov 2026 04:03:48 +0000</lastBuildDate>
+<lastBuildDate>Fri, 20 Nov 2026 02:52:04 +0000</lastBuildDate>
+<item>
+<title>[Updated] MSX (MSX1, MSX2, MSX2+ and turboR) (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MSX1</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MSX_20261118.rbf:2026-11-20T02:52:04+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 02:52:04 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / ASCII/Microsoft&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MSX1_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] SunSparcStation20_55mhz (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SunSparcStation20_55mhz</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SunSparcStation20_55mhz_20261114.rbf:2026-11-20T02:52:04+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 02:52:04 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SunSparcStation20_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] SunSparcStation20_60mhz (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#SunSparcStation20_60mhz</link>
+<guid isPermaLink="false">distribution_mister:_Computer/SunSparcStation20_60mhz_20261119.rbf:2026-11-20T02:52:04+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 02:52:04 +0000</pubDate>
+<category>new</category>
+<category>Computer core</category>
+<description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SunSparcStation20_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Deroon DeroDero (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#deroon</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_TecmoSystem/Deroon DeroDero (earlier, set 1).mra:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/deroon.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1995 / Tecmo&lt;/p&gt;&lt;p&gt;Core: tecmosys&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-TecmoSystem_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Toukidenshou - Angel Eyes (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#tkdensho</link>
+<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_TecmoSystem/Toukidenshou - Angel Eyes (VER. 960614).mra:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tkdensho.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1996 / Tecmo&lt;/p&gt;&lt;p&gt;Core: tecmosys&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-TecmoSystem_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Heat of Eleven '98 (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#heatof11</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2Heat_20261119.rbf:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heat-of-eleven-98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Heat&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Hell Night (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hellngt</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2HellNight_20261119.rbf:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/hellngt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2HellNight&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Battle Tryst (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#btltryst</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2Tryst_20261119.rbf:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/btltryst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Tryst&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] KonamiM2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#evilngt</link>
+<guid isPermaLink="false">decoryah:_Arcade/cores/KonamiM2_20261119.rbf:2026-11-19T20:50:48+00:00</guid>
+<pubDate>Thu, 19 Nov 2026 20:50:48 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Evil Night, Tobe! Polystars, Total Vice.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-19 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Laser 310 (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#Laser310</link>
@@ -825,87 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2C (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#overrev</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2C_20261113.rbf:2026-11-14T22:07:58+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 22:07:58 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Over Rev, Sega Touring Car Championship, The House of the Dead.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2 (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261113.rbf:2026-11-14T22:07:58+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 22:07:58 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] S32 (Arcade core, 18 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261114.rbf:2026-11-14T20:48:46+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 20:48:46 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] PC-6001 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#PC6001</link>
-<guid isPermaLink="false">distribution_mister:_Computer/PC6001_20261113.rbf:2026-11-14T20:48:46+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 20:48:46 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1981 / NEC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PC-6001_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Sharp MZ-2500 (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#SharpMZ2500</link>
-<guid isPermaLink="false">distribution_mister:_Computer/SharpMZ2500_20261113.rbf:2026-11-14T20:48:46+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 20:48:46 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1985 / Sharp&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/SharpMZ2500_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Arcade-Atari-G1 (Arcade core, 2 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#hydra</link>
-<guid isPermaLink="false">gm0rk:_Arcade/cores/Arcade-Atari-G1_20261114.rbf:2026-11-14T18:21:58+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 18:21:58 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Hydra (Gm0rk), Pit Fighter (Gm0rk).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: gm0rk).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/Gm0rk/Arcade-Atari-G1_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] TX-1 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#tx1</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/TX-1.mra:2026-11-14T14:55:27+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 14:55:27 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/tx1.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1983 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: Arcade-TX1&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Blood Storm (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#bloodstm</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/BloodStorm (v2.22).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/bloodstm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Fighting / 1994 / Strata / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Golden Tee '97 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#gt97</link>
-<guid isPermaLink="false">slopcore:_Arcade/_Slop Cores/Golden Tee '97 (v1.30).mra:2026-11-14T08:21:31+00:00</guid>
-<pubDate>Sat, 14 Nov 2026 08:21:31 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gt97.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1997 / Incredible Technologies&lt;/p&gt;&lt;p&gt;Core: ITech32&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-14 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-11-21
+
+- Release tracker: MeatCores (Meathax) is listed again, along with the games Ongo's database carries on Meathax's cores. The [listing policy](https://misterzine.fyi/listing-policy/) page now also shows who was previously off the tracker.
+
 ## 2026-11-17
 
 - The new PC-8001 core is listed as NEC PC-8001, with its year (1979), maker, a hardware photo and a note about the mkII and mkIISR models it also runs.

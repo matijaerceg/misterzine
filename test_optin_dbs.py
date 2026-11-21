@@ -93,5 +93,25 @@ class InstallRootTests(unittest.TestCase):
         self.assertEqual(plain["files"], db["files"])
 
 
+class MeathaxLayoutTests(unittest.TestCase):
+    def test_both_alternative_folder_spellings_count_as_alternatives(self):
+        self.assertTrue(mz._alternative_path("_Arcade/_alternatives/_Ikki/Ikki (Japan).mra"))
+        self.assertTrue(mz._alternative_path(
+            "_Arcade/_Meatcores/_TaitoF3/_alternative/_Gunlock/Gunlock (Ver 2.3O).mra"))
+        self.assertFalse(mz._alternative_path("_Arcade/_Meatcores/_TaitoF3/Gunlock.mra"))
+        self.assertFalse(mz._alternative_path("_Arcade/_Meatcores/_AnalogAim/Jackal (Twin Stick).mra"))
+
+    def test_every_core_links_the_shared_source_repo_unless_listed(self):
+        repos = mz.MEATHAX_CORE_REPOS
+        self.assertEqual(repos.get("arcade-taitof3", mz.MEATHAX_REPO), "meathax/meatsauce")
+        self.assertEqual(repos.get("arcade-battletoads", mz.MEATHAX_REPO), "meathax/BattletoadsMain")
+
+    def test_no_source_is_delisted(self):
+        row = {"source_id": "meathax", "rbf": "Arcade-NARC"}
+        copy = {"source_id": "ongo", "rbf": "Meathax_NARC"}
+        self.assertFalse(mz.delisted_row(row))
+        self.assertFalse(mz.delisted_row(copy))
+
+
 if __name__ == "__main__":
     unittest.main()

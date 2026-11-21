@@ -335,15 +335,22 @@ SOURCE_PATH_FILTERS = {
     ),
 }
 
-# Sources taken off the site (meathax since 2026-10-21). Snapshots keep
-# tracking them, so catalog, events and row_keys stay intact and only
-# export-web skips their rows. Reinstating is deleting the entry: keys, debut
-# dates and visitors' stars come back unchanged, and no feed item replays
-# (feeds only list exported rows). The value is the rbf prefix aggregator dbs
-# give this source's cores (Ongo ships Meathax_SegaSystem32 and friends):
-# those copies leave too, or the site would show them in place of the
-# hidden originals (source-visibility.js only hid them as duplicates).
-DELISTED_SOURCES = {"meathax": "meathax_"}
+# Sources taken off the site: {source id: rbf prefix}. None today (meathax
+# was off 2026-10-21 to 2026-11-21, as {"meathax": "meathax_"}). Snapshots keep
+# tracking a delisted source, so catalog, events and row_keys stay intact and
+# only export-web skips its rows. Reinstating is deleting the entry: keys,
+# debut dates and visitors' stars come back unchanged, and no feed item
+# replays (feeds only list exported rows). The value is the rbf prefix
+# aggregator dbs give the source's cores (Ongo ships Meathax_SegaSystem32 and
+# friends): those copies leave too, or the site would show them in place of
+# the hidden originals (source-visibility.js only hid them as duplicates).
+DELISTED_SOURCES = {}
+
+
+def _alternative_path(path):
+    """True for an MRA filed as a regional/revision alternative. MiSTer's
+    folder is _alternatives; meathax's Taito F3 set uses _alternative."""
+    return re.search(r"/_alternatives?/", path.replace("\\", "/"), re.I) is not None
 
 
 def delisted_row(row):
@@ -361,8 +368,10 @@ def delisted_row(row):
 # into _alternatives, which leaves the fold idle, but it stays in case a
 # later rebuild puts them back. TomSVR and decoryah ship every set side by
 # side; jlrh ships Sunset Riders' 2- and 4-player sets and two World Rally
-# checksum sets in _Arcade/.
-SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr", "decoryah", "jlrh"}
+# checksum sets in _Arcade/. meathax ships a second launcher of one game on
+# the same core (a Twin Stick or 15kHz variant of Ikari Warriors, Guerrilla
+# War, NARC and others) beside the plain one.
+SIBLING_VARIANT_SOURCES = {"blahm1d", "ongo", "tomsvr", "decoryah", "jlrh", "meathax"}
 
 # Opt-in dbs whose games may move into the MiSTer Distribution later
 # (MiSTer-devel forked rossops' X Board core and ppriest's Fuuki and Psikyo
@@ -1793,7 +1802,7 @@ MRA_REPOS = [
     # blank rbf was why their Core cell fell back to the repo-name label
     # "Distribution-MiSTerFPGA".
     ("coinop", "Coin-OpCollection/Distribution-MiSTerFPGA", "develop", "_Arcade"),
-    ("meathax", "meathax/meatcores", "main", "_Arcade/_MeatCores"),
+    ("meathax", "meathax/meatcores", "main", "_Arcade/_Meatcores"),
     ("rmcores", "rmonic79/rmcores", "main", "_Arcade/_rmCores"),
     ("slopcore", "TheJesusFish/Slop-Core", "main", "_Arcade"),
     ("kuzecores", "kuzearcade/kuzecores", "main", "_Arcade"),
@@ -1923,7 +1932,7 @@ def _sparse_checkout_patterns(paths):
 # ships "Sorcer Striker.mra" both in _Slop Cores/ and in its _alternatives/.
 # A one-level read leaves the rows with no core (UNREAD MRA in the log):
 # bazset's _CVS/ games (2026-10-31), Slop Cores' move into _Slop Cores/ (2026-10-27).
-NESTED_MRA_SOURCES = {"ongo", "bazset", "slopcore", "gm0rk"}
+NESTED_MRA_SOURCES = {"ongo", "bazset", "slopcore", "gm0rk", "meathax"}
 
 
 def _mra_metadata_key(source_id, repo_path):
@@ -2060,8 +2069,12 @@ def cmd_enrich_mra(args):
         # the site. Alternatives drop at export and a delisted source is hidden.
         unread = [r["path"] for r in con.execute(
             "SELECT path FROM catalog WHERE system='arcade' AND source_id=? "
-            "AND (rbf IS NULL OR rbf='') AND lower(path) LIKE '%.mra' ORDER BY path",
-            (source_id,)) if "/_alternatives/" not in r["path"].replace("\\", "/").lower()]
+            "AND (rbf IS NULL OR rbf='') AND lower(path) LIKE '%.mra' "
+            # a title the source has since dropped has no MRA left to read
+            "AND COALESCE(last_seen, '') >= COALESCE("
+            "(SELECT MAX(last_seen) FROM catalog WHERE source_id=?), '') "
+            "ORDER BY path",
+            (source_id, source_id)) if not _alternative_path(r["path"])]
         if unread and source_id not in DELISTED_SOURCES:
             log(f"  UNREAD MRA: {source_id}: {len(unread)} rows got no core from an MRA "
                 f"(e.g. {unread[0]}) - MRAs in a subfolder? see NESTED_MRA_SOURCES")
@@ -2481,17 +2494,24 @@ def join_coinop_to_catalog(con):
 # their games had already shipped (see MEATHAX_FROZEN_DATES for the recipe).
 
 MEATHAX_REPO = "meathax/meatcores"
-# Per-core source repos under github.com/meathax, keyed by lowercased MRA rbf.
-# Cores without a public per-core repo fall back to the distribution repo.
-MEATHAX_CORE_REPOS = {
-    "arcade-segasystem32": "meathax/s32",
-    "arcade-segasystem32multi": "meathax/s32multi",
-    "arcade-segas24": "meathax/s24",
-    "arcade-ssv": "meathax/SVV",
-    "arcade-narc": "meathax/narc",
-    "arcade-docastle": "meathax/mrdo",
-    "arcade-bucky": "meathax/Bucky",
-}
+class _SharedSourceRepo(dict):
+    """A core -> repo map whose misses resolve to one shared source repo."""
+
+    def __init__(self, shared, exceptions):
+        super().__init__(exceptions)
+        self.shared = shared
+
+    def get(self, key, default=None):
+        return super().get(key, self.shared)
+
+
+# Meathax publishes every core's source in one repo, a folder per core
+# (meathax/meatsauce/cores); the per-core repos linked here until 2026-10
+# (s32, s24, SVV, narc, mrdo, Bucky) are gone. Keyed by lowercased MRA rbf;
+# only a core whose source lives elsewhere needs an entry.
+MEATHAX_CORE_REPOS = _SharedSourceRepo("meathax/meatsauce", {
+    "arcade-battletoads": "meathax/BattletoadsMain",
+})
 
 # Debut dates for the meatcores initial import (2026-08-26 seed): the source
 # was added to misterzine after these games shipped, so their seed rows carry
@@ -5778,6 +5798,8 @@ ARCADE_TITLES = {
     "darius2d": "Darius II (Dual Screen)", # was "(Japan, dual screen, rev 2)"
     "polyplay": "Poly-Play",               # both Poly-Plays share one DAT desc
     "polyplay2": "Poly-Play 2",
+    "argusg": "Argus (Gottlieb)",        # 1984 Gottlieb prototype (Rodimus Cores); bare "Argus"
+                                         # is NMK's 1986 shooter (MeatCores)
     "saturnzi": "Saturn (Zilec)",        # 1983 maze game; bare "Saturn" collides with the
                                          # Sega Saturn console row (SYSTEM_TITLES drops makers,
                                          # so the console side stays). Matches the Distribution's
@@ -6984,7 +7006,7 @@ def cmd_export_web(args):
     # The exception is a game that ships with no mainline set at all
     # (ORPHAN_ALTERNATIVES): its alternative is the only row it can have.
     rows = [r for r in rows if not (
-        r["system"] == "arcade" and "/_alternatives/" in r["path"].replace("\\", "/")
+        r["system"] == "arcade" and _alternative_path(r["path"])
         and (r["source_id"], r["path"]) not in ORPHAN_ALTERNATIVES)]
     # Drop arcade BIOS/placeholder rows that aren't games (e.g. the IGS PGM BIOS,
     # which has no year/screenshot and just clutters the list).

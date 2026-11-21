@@ -279,7 +279,8 @@ daily run; the higher-quality progettoSNAPS pass is a manual local step (see
 
 What the tracker lists and what takes a source off it is stated on the site's
 [listing policy](https://misterzine.fyi/listing-policy/) page (`docs/listing-policy/`); the
-"Currently off the tracker" list there is hand-maintained alongside `DELISTED_SOURCES`.
+"Currently off the tracker" and "Previously off the tracker" lists there are hand-maintained
+alongside `DELISTED_SOURCES`.
 
 1. **MiSTer Distribution**: `Distribution_MiSTer/db.json.zip` (official, all systems)
 2. **JTcores (public)**: `jtcores_mister/jtbindb.json.zip` (Jotego's cores; Patreon betas
@@ -287,8 +288,7 @@ What the tracker lists and what takes a source off it is stated on the site's
 3. **Coin-Op Collection**: `Distribution-MiSTerFPGA` `db` branch (public arcade cores)
 4. **MeatCores (Meathax)**: `meathax/meatcores` `db` branch, arcade rows only (opt-in: no
    update_all toggle, users add the `[meathax/meatcores]` section to downloader.ini by hand).
-   Not listed on the site since 2026-10-21: still snapshotted, but `DELISTED_SOURCES` keeps
-   its rows, and other databases' copies of its cores, out of the export.
+   Off the site from 2026-10-21 to 2026-11-21. Source links point at `meathax/meatsauce`.
 5. **rmCores (rmonic79)**: `rmonic79/rmcores` `db` branch (opt-in like MeatCores, section
    `[rmonic79/rmcores]`). Not new games: rmonic79's cores ship upstream through
    MiSTer-devel, and this db carries the same cores rebuilt with CRT Adjust / V-Size on the

@@ -6,7 +6,25 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 21 Nov 2026 03:39:41 +0000</lastBuildDate>
+<lastBuildDate>Sat, 21 Nov 2026 16:33:55 +0000</lastBuildDate>
+<item>
+<title>[Updated] Commando (bazset) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#commando-bazset</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Commando.mra:2026-11-21T16:33:55+00:00</guid>
+<pubDate>Sat, 21 Nov 2026 16:33:55 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/commando.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1985 / Capcom&lt;/p&gt;&lt;p&gt;Core: Arcade-CommandoCRT&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-21 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Operation Thunderbolt (bazset) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#operation-thunderbolt-bazset</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Operation Thunderbolt (World).mra:2026-11-21T16:33:55+00:00</guid>
+<pubDate>Sat, 21 Nov 2026 16:33:55 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/othunder.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1988 / Taito&lt;/p&gt;&lt;p&gt;Core: Operation_Thunderbolt_b01&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-21 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arcade-Midway-T-Unit (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#judge-dredd-gm0rk</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/arabian.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1983 / Sun Electronics&lt;/p&gt;&lt;p&gt;Core: Arabian&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Arabian_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] BluePrint (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#blueprnt</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/BluePrint_20261114.rbf:2026-11-15T00:47:52+00:00</guid>
-<pubDate>Sun, 15 Nov 2026 00:47:52 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Blue Print, Grasspin, Saturn (Zilec).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-BluePrint_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] ChampionBaseball (Arcade core, 5 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#champbas</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/ChampionBaseball_20261114.rbf:2026-11-15T00:47:52+00:00</guid>
-<pubDate>Sun, 15 Nov 2026 00:47:52 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Champion Base Ball, Champion Base Ball Part-2, Exciting Soccer, Exciting Soccer II, Talbot.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-ChampionBaseball_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

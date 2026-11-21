@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 21 Nov 2026 03:39:41 +0000</lastBuildDate>
+<lastBuildDate>Sat, 21 Nov 2026 16:33:55 +0000</lastBuildDate>
+<item>
+<title>[Updated] Commando (bazset) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#commando-bazset</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Commando.mra:2026-11-21T16:33:55+00:00</guid>
+<pubDate>Sat, 21 Nov 2026 16:33:55 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/commando.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1985 / Capcom&lt;/p&gt;&lt;p&gt;Core: Arcade-CommandoCRT&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-21 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Arcade-Midway-T-Unit (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#judge-dredd-gm0rk</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Macintosh IIcx (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#MacIIcx</link>
-<guid isPermaLink="false">distribution_mister:_Computer/MacIIcx_20261107.rbf:2026-11-07T23:27:34+00:00</guid>
-<pubDate>Sat, 07 Nov 2026 23:27:34 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-07 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Sat, 21 Nov 2026 21:29:18 +0000</lastBuildDate>
+<lastBuildDate>Sun, 22 Nov 2026 02:18:48 +0000</lastBuildDate>
+<item>
+<title>[New] Enforce (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#enforce</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Enforce (World).mra:2026-11-22T02:18:48+00:00</guid>
+<pubDate>Sun, 22 Nov 2026 02:18:48 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/enforce.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1988 / Taito&lt;/p&gt;&lt;p&gt;Core: Arcade_Enforce&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-22 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] S32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
@@ -14,7 +23,7 @@
 <pubDate>Sat, 21 Nov 2026 21:29:18 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-21 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Air Rescue (S32), Alien3: The Gun (S32), Arabian Fight (S32), Burning Rival (S32), Dark Edge (S32), Dragon Ball Z: V.R. V.S. (S32), F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder (S32), Holosseum (S32), Jurassic Park (S32), Rad Mobile (S32), Rad Rally (S32), SegaSonic The Hedgehog (S32), Slip Stream (S32), Spider-Man: The Videogame (S32), Super Visual Football: European Sega Cup (S32), The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-21 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Rainbow Islands (bazset) (Arcade)</title>
@@ -143,15 +152,6 @@
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/gangwars.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Alpha Denshi Co.&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[New] Gold Medalist (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#goldmedl</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/Gold Medalist (set 1, Alpha68k II PCB) [MD].mra:2026-11-20T19:00:02+00:00</guid>
-<pubDate>Fri, 20 Nov 2026 19:00:02 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/goldmedl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / SNK&lt;/p&gt;&lt;p&gt;Core: Alpha68kMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-Alpha68k_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
 <title>[New] Paddle Mania (NextSpaceMD) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#paddle-mania-nextspacemd</link>
 <guid isPermaLink="false">distribution_mister:_Arcade/Paddle Mania [MD].mra:2026-11-20T19:00:02+00:00</guid>
@@ -240,6 +240,15 @@
 <category>new</category>
 <category>Computer core</category>
 <description>&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Pasopia7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[New] Galactic Storm (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#galastrm</link>
+<guid isPermaLink="false">meathax:_Arcade/_Meatcores/Galactic Storm.mra:2026-11-20T07:49:59+00:00</guid>
+<pubDate>Fri, 20 Nov 2026 07:49:59 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/galastrm.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Rail shooter / 1992 / Taito&lt;/p&gt;&lt;p&gt;Core: Arcade-GalacticStorm&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-20 (source: meathax).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/meathax/meatsauce/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] MSX (MSX1, MSX2, MSX2+ and turboR) (Computer core)</title>
@@ -797,7 +806,7 @@
 <pubDate>Mon, 16 Nov 2026 06:09:59 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Air Rescue (S32), Alien3: The Gun (S32), Arabian Fight (S32), Burning Rival (S32), Dark Edge (S32), Dragon Ball Z: V.R. V.S. (S32), F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder (S32), Holosseum (S32), Jurassic Park (S32), Rad Mobile (S32), Rad Rally (S32), SegaSonic The Hedgehog (S32), Slip Stream (S32), Spider-Man: The Videogame (S32), Super Visual Football: European Sega Cup (S32), The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-16 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Macintosh LC (Computer core)</title>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/sstriker.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Raizing&lt;/p&gt;&lt;p&gt;Core: RaizingMD&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-RaizingMD_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] S32 (Arcade core, 18 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261115.rbf:2026-11-15T07:35:38+00:00</guid>
-<pubDate>Sun, 15 Nov 2026 07:35:38 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue, Alien3: The Gun, Arabian Fight, Burning Rival, Dark Edge, Dragon Ball Z: V.R. V.S., F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder, Holosseum, Jurassic Park, Rad Mobile, Rad Rally, SegaSonic The Hedgehog, Slip Stream, Spider-Man: The Videogame, Super Visual Football: European Sega Cup, The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-15 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

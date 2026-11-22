@@ -6,7 +6,34 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Sat, 21 Nov 2026 21:29:18 +0000</lastBuildDate>
+<lastBuildDate>Sun, 22 Nov 2026 02:33:01 +0000</lastBuildDate>
+<item>
+<title>[Updated] Model2A (Arcade core, 11 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#doaab</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2A_20261120.rbf:2026-11-22T02:33:01+00:00</guid>
+<pubDate>Sun, 22 Nov 2026 02:33:01 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2C (Arcade core, 6 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#overrev</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2C_20261120.rbf:2026-11-22T02:33:01+00:00</guid>
+<pubDate>Sun, 22 Nov 2026 02:33:01 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Over Rev, Sega Ski Super G, Sega Touring Car Championship, Sega Water Ski, The House of the Dead, Wave Runner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Model2 (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#daytona-usa-revision-a</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/Model2_20261120.rbf:2026-11-22T02:33:01+00:00</guid>
+<pubDate>Sun, 22 Nov 2026 02:33:01 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Daytona USA, Desert Tank, Virtua Cop.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-22 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] S32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
@@ -647,13 +674,13 @@
 <description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Model2C (Arcade core, 3 games)</title>
+<title>[Updated] Model2C (Arcade core, 6 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#overrev</link>
 <guid isPermaLink="false">ongo:_Arcade/cores/Model2C_20261113.rbf:2026-11-14T22:07:58+00:00</guid>
 <pubDate>Sat, 14 Nov 2026 22:07:58 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Over Rev, Sega Touring Car Championship, The House of the Dead.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Over Rev, Sega Ski Super G, Sega Touring Car Championship, Sega Water Ski, The House of the Dead, Wave Runner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-14 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Model2 (Arcade core, 3 games)</title>
@@ -755,13 +782,13 @@
 <description>&lt;p&gt;Serves: Sega NetMerc, Star Wars Arcade (Sega, US), Virtua Fighter, Virtua Formula, Virtua Racing, Wing War.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
-<title>[Updated] Model2C (Arcade core, 3 games)</title>
+<title>[Updated] Model2C (Arcade core, 6 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#overrev</link>
 <guid isPermaLink="false">ongo:_Arcade/cores/Model2C_20261112.rbf:2026-11-12T23:17:08+00:00</guid>
 <pubDate>Thu, 12 Nov 2026 23:17:08 +0000</pubDate>
 <category>updated</category>
 <category>Arcade core</category>
-<description>&lt;p&gt;Serves: Over Rev, Sega Touring Car Championship, The House of the Dead.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+<description>&lt;p&gt;Serves: Over Rev, Sega Ski Super G, Sega Touring Car Championship, Sega Water Ski, The House of the Dead, Wave Runner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-12 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 <item>
 <title>[Updated] Acorn Electron (Computer core)</title>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/kikcubic.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Puzzle / 1988 / Irem&lt;/p&gt;&lt;p&gt;Core: kickle&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Apple IIGS (Computer core)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#Apple-IIgs</link>
-<guid isPermaLink="false">distribution_mister:_Computer/Apple-IIgs_20261110.rbf:2026-11-11T01:45:33+00:00</guid>
-<pubDate>Wed, 11 Nov 2026 01:45:33 +0000</pubDate>
-<category>updated</category>
-<category>Computer core</category>
-<description>&lt;p&gt;1986 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Apple-IIgs_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2A (Arcade core, 11 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#doaab</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2A_20261107.rbf:2026-11-10T23:25:54+00:00</guid>
-<pubDate>Tue, 10 Nov 2026 23:25:54 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Dead or Alive, Dynamite Cop, Hanguk Pro Yagu 98, Manx TT Superbike - DX/Twin, Motor Raid - Twin, Pilot Kids, Sega Rally Championship - Twin/DX, Sky Target, Virtua Cop 2, Virtua Fighter 2, Zero Gunner.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-10 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Model2C (Arcade core, 3 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#overrev</link>
-<guid isPermaLink="false">ongo:_Arcade/cores/Model2C_20261107.rbf:2026-11-10T23:25:54+00:00</guid>
-<pubDate>Tue, 10 Nov 2026 23:25:54 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Over Rev, Sega Touring Car Championship, The House of the Dead.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-10 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

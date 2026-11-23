@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-11-23
+
+- The new VG5000 core is listed with its year (1984), maker (Philips), a hardware photo and a note about the ROM it needs to start.
+
 ## 2026-11-21
 
 - Release tracker: MeatCores (Meathax) is listed again, along with the games Ongo's database carries on Meathax's cores. The [listing policy](https://misterzine.fyi/listing-policy/) page now also shows who was previously off the tracker.

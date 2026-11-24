@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-11-24
+
+- The new Macintosh IIci and Laser 500 cores are listed under their full names, each with its year, maker and a hardware photo. The Laser 500 also has a note about the models it runs and the ROM it needs.
+
 ## 2026-11-23
 
 - The new VG5000 core is listed with its year (1984), maker (Philips), a hardware photo and a note about the ROM it needs to start.

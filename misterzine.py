@@ -1656,6 +1656,7 @@ CORE_FROZEN_DATES = {
     "Tamagotchi":    "2026-05-15",  # new core; repo had imported dev history from 2023
     "MacIIcx":       "2026-10-12",  # ships from the SE/30 repo; IIcx core itself arrived Oct 2026
     "PC8001":        "2026-11-16",  # repo carries private dev history from 2026-11-03; went public 2026-11-15, in Distribution 2026-11-16
+    "Laser500":      "2026-11-24",  # new core; repo (created 2026-11-24) carries the MiST core's history from 2022
 }
 
 
@@ -5150,7 +5151,7 @@ COMPUTER_MANUFACTURER = {
     "C64": "Commodore", "C128": "Commodore", "C16": "Commodore", "VIC20": "Commodore",
     "PET2001": "Commodore", "Minimig": "Commodore",
     "Apple-I": "Apple", "Apple-II": "Apple", "Apple-III": "Apple", "Apple-IIgs": "Apple", "Apple-Lisa": "Apple", "NeXT": "NeXT", "NeXT-Color": "NeXT", "MacPlus": "Apple",
-    "MacLC": "Apple", "MacSE30": "Apple", "MacQuadra800": "Apple", "MacIIcx": "Apple",
+    "MacLC": "Apple", "MacSE30": "Apple", "MacQuadra800": "Apple", "MacIIcx": "Apple", "MacIIci": "Apple",
     "ZX-Spectrum": "Sinclair", "ZX81": "Sinclair", "QL": "Sinclair",
     "ZXNext": "SpecNext", "SAMCoupe": "MGT", "TSConf": "TS-Labs",
     "AcornAtom": "Acorn", "AcornElectron": "Acorn", "BBCMicro": "Acorn", "Archie": "Acorn",
@@ -5176,7 +5177,7 @@ COMPUTER_MANUFACTURER = {
     "Ti994a": "Texas Instruments",
     "ColecoAdam": "Coleco", "Aquarius": "Mattel", "TomyTutor": "Tomy",
     "Casio_PV-2000": "Casio", "SordM5": "Sord", "Svi328": "Spectravideo",
-    "Laser310": "VTech", "eg2000": "EACA", "RX78": "Bandai",
+    "Laser310": "VTech", "Laser500": "VTech", "eg2000": "EACA", "RX78": "Bandai",
     "TatungEinstein": "Tatung", "MTX512": "Memotech", "Lynx48": "Camputers", "Oric": "Oric",
     "Jupiter": "Jupiter Cantab", "Enterprise": "Enterprise Computers", "VG5000": "Philips",
     "Interact": "Interact Electronics", "Altair8800": "MITS",
@@ -5221,7 +5222,7 @@ CORE_YEAR = {
     # computers
     "C64": "1982", "C128": "1985", "C16": "1984", "VIC20": "1980", "PET2001": "1977",
     "Minimig": "1985", "Apple-I": "1976", "Apple-II": "1977", "Apple-III": "1980", "Apple-IIgs": "1986",
-    "Apple-Lisa": "1983", "NeXT": "1988", "NeXT-Color": "1992", "MacPlus": "1986", "MacLC": "1990", "MacSE30": "1989", "MacQuadra800": "1993", "MacIIcx": "1989",
+    "Apple-Lisa": "1983", "NeXT": "1988", "NeXT-Color": "1992", "MacPlus": "1986", "MacLC": "1990", "MacSE30": "1989", "MacQuadra800": "1993", "MacIIcx": "1989", "MacIIci": "1989",
     "SGIIndy": "1993",  # SGI Indy announced 1993-07-12
     "Sun-2": "1983",
     "Sun-3": "1985",
@@ -5239,7 +5240,7 @@ CORE_YEAR = {
     "SharpMZ2500": "1985", "SharpX1": "1982", "SonySMC777": "1983",
     "X68000": "1987", "PC88": "1981", "PC6001": "1981", "PC8001": "1979", "FM-7": "1982", "Ti994a": "1981", "ColecoAdam": "1983", "Aquarius": "1983",
     "TomyTutor": "1982", "Casio_PV-2000": "1983", "SordM5": "1982", "Svi328": "1983",
-    "Laser310": "1983", "eg2000": "1982", "RX78": "1983", "TatungEinstein": "1984", "MTX512": "1983",
+    "Laser310": "1983", "Laser500": "1985", "eg2000": "1982", "RX78": "1983", "TatungEinstein": "1984", "MTX512": "1983",
     "Lynx48": "1983", "Oric": "1983", "Jupiter": "1982", "Enterprise": "1985", "VG5000": "1984",
     "Interact": "1978", "Altair8800": "1975", "UK101": "1979", "EDSAC": "1949",
     "MSX": "1985", "MSX1": "1983", "TK2000": "1984", "Galaksija": "1983", "Homelab": "1983",
@@ -5342,12 +5343,14 @@ SYSTEM_TITLES = {
     "IQ151": "IQ 151",
     "Jupiter": "Jupiter Ace",
     "Laser310": "Laser 310",
+    "Laser500": "Laser 500",
     "Lynx48": "Camputers Lynx",
     "MacLC": "Macintosh LC",
     "MacPlus": "Macintosh Plus",
     "MacSE30": "Macintosh SE/30",
     "MacQuadra800": "Macintosh Quadra 800",
     "MacIIcx": "Macintosh IIcx",
+    "MacIIci": "Macintosh IIci",
     "Cray-XMP": "Cray X-MP",
     "3B1": "AT&T UNIX PC",
     "Minimig": "Amiga (Minimig)",
@@ -5409,6 +5412,7 @@ CORE_NOTES = {
     "PC6001": "Also supports the PC-6001mkII, PC-6601 and PC-6001mkIISR (beta). Choose the model under Machine > Model, then Apply and reset.",
     "PC8001": "Also supports the PC-8001mkII and PC-8001mkIISR. Choose the model under Machine > Model, then Apply and reset.",
     "VG5000": "Also sold as the Radiola VG5000 and the Schneider VG5000. Needs the BASIC 1.1 ROM saved as games/VG5000/boot.rom to start; programs load from .k7 or .wav tape files.",
+    "Laser500": "Also runs as the Laser 350 and Laser 700. Choose the model under Machine > Model, then Apply and reset. Needs the system ROM saved as games/LASER500/boot.rom to start.",
     "Frotz": "A Z-machine interpreter for Infocom's interactive fiction (Zork and the rest). The story files are not included.",
     "Robots": "Kodak's 1988 VCR board game. The game's video file is not included.",
 }

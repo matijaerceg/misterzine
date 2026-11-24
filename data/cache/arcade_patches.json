@@ -199,6 +199,7 @@
    "game": "Marvel Super Heroes",
    "hardware": "CPS-2",
    "notes": [
+    "If ArcadePatches 0.1.9 skipped Marvel Super Heroes, run Update again to get the corrected export.",
     "The kit uses your stock Japan 951117 arcade ROMs. It supports MAME, MiSTer and Darksoft CPS-2 kits, plus HBMAME and FBNeo builds that recognize the mshrest set."
    ],
    "release_history": [

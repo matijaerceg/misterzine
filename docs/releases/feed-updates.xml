@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 23 Nov 2026 02:57:15 +0000</lastBuildDate>
+<lastBuildDate>Mon, 23 Nov 2026 19:13:51 +0000</lastBuildDate>
+<item>
+<title>[Updated] ITech32 (Arcade core, 18 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#bloodstm</link>
+<guid isPermaLink="false">slopcore:_Arcade/cores/ITech32_20261122.rbf:2026-11-23T19:13:51+00:00</guid>
+<pubDate>Mon, 23 Nov 2026 19:13:51 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Blood Storm, Golden Tee '97, Golden Tee '98, Golden Tee '99, Golden Tee 2K, Golden Tee 3D Golf, Golden Tee Classic, Hard Yardage, Hot Memory, Must Shoot TV, Pairs, Pairs Redemption, Power Up Baseball, Shuffleshot, Street Fighter: The Movie, Time Killers, World Class Bowling, World Class Bowling Deluxe.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-23 (source: slopcore).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/TheJesusFish/Arcade-ITech32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] S32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade core</category>
 <description>&lt;p&gt;Serves: Air Rescue (S32), Alien3: The Gun (S32), Arabian Fight (S32), Burning Rival (S32), Dark Edge (S32), Dragon Ball Z: V.R. V.S. (S32), F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder (S32), Holosseum (S32), Jurassic Park (S32), Rad Mobile (S32), Rad Rally (S32), SegaSonic The Hedgehog (S32), Slip Stream (S32), Spider-Man: The Videogame (S32), Super Visual Football: European Sega Cup (S32), The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] KonamiGX (Arcade core, 11 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#crazy-cross-ppriest</link>
-<guid isPermaLink="false">ppriest:_Arcade/cores/KonamiGX_20261110.rbf:2026-11-11T12:03:05+00:00</guid>
-<pubDate>Wed, 11 Nov 2026 12:03:05 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Crazy Cross (ppriest), Daisu-Kiss (ppriest), Dragoon Might (ppriest), Fantastic Journey (ppriest), Lethal Enforcers II Gun Fighters, Salamander 2 (ppriest), Sexy Parodius (ppriest), Taisen Tokkae-dama (ppriest), Tokimeki Memorial Taisen Puzzle-dama (ppriest), Twin Bee Yahhoo! (ppriest), Winning Spike (ppriest).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: ppriest).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/ppriest/Arcade-KonamiGX_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

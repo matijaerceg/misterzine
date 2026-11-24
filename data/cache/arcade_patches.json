@@ -186,6 +186,41 @@
  ],
  "patches": [
   {
+   "changes": [
+    "Read the Japanese revision’s victory quotes, continue prompts, Automode tips and endings in English.",
+    "Unlock Doctor Doom, Thanos and Anita with their original Japanese codes. Anita has a nameplate on both lifebars.",
+    "Both outcomes of Thanos’s ending retain their original timing."
+   ],
+   "collection_api": 1,
+   "date": "2026-11-23",
+   "description": [
+    "This USA edition brings the Japanese 951117 arcade script to English. Victory quotes, continue prompts, Automode tips and endings have been retranslated."
+   ],
+   "game": "Marvel Super Heroes",
+   "hardware": "CPS-2",
+   "notes": [
+    "The kit uses your stock Japan 951117 arcade ROMs. It supports MAME, MiSTer and Darksoft CPS-2 kits, plus HBMAME and FBNeo builds that recognize the mshrest set."
+   ],
+   "release_history": [
+    {
+     "date": "2026-11-23",
+     "items": [
+      "Retranslated victory quotes, continue prompts, Automode tips and endings from the Japanese arcade script.",
+      "Kept the original unlock codes for Doctor Doom, Thanos and Anita, and gave Anita a lifebar nameplate."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "section": "restorations",
+   "set": "mshj",
+   "slug": "msh-english-restoration",
+   "status": "release-candidate",
+   "subtitle": "English Restoration",
+   "summary": "Play the Japanese 951117 arcade revision in English, with its original secret-character codes.",
+   "title": "Marvel Super Heroes",
+   "version": "rc1"
+  },
+  {
    "artifact": {
     "parents": [
      "xmvsf"
@@ -520,28 +555,6 @@
    "summary": "Zero 3 Upper shipped locked to Japanese cabinets. One byte in the disc header says so. Change it, re-encrypt it, and the same disc boots on a USA or Export NAOMI.",
    "title": "Street Fighter Alpha 3 Upper",
    "version": "1.0"
-  },
-  {
-   "artifact": null,
-   "changes": [],
-   "date": null,
-   "description": [
-    "Street Fighter Zero 3 Upper shipped on NAOMI GD-ROM only in Japan. This project builds tooling that takes a GD-ROM image from your own copy of the arcade game and rebuilds it into a working multi-region image, including the converted character portraits the Western versions need.",
-    "In development. The container format work (Capcom ARC v7, IBIS payloads) and the GD-ROM DES tooling are done, and build and verification automation is in progress."
-   ],
-   "game": "Street Fighter Zero 3 Upper (Japan, NAOMI GD-ROM, sfz3ugd)",
-   "hardware": "Sega NAOMI GD-ROM",
-   "hidden": true,
-   "notes": [
-    "This will ship as a conversion tool, not a binary patch: it works from a GD-ROM image of the arcade game you own."
-   ],
-   "set": "sfz3ugd",
-   "slug": "sfz3-upper-gdrom",
-   "status": "in-development",
-   "subtitle": "NAOMI GD-ROM rebuild",
-   "summary": "Tooling that takes a GD-ROM image from your own copy of the Japan-only Zero 3 Upper and rebuilds it into multi-region Alpha 3 Upper builds.",
-   "title": "Street Fighter Alpha 3 Upper",
-   "version": null
   },
   {
    "builds": [
@@ -4095,6 +4108,92 @@
    "subtitle": "English restoration",
    "summary": "The Japanese arcade game in English, with its full win quotes, dialogue, endings and tips.",
    "title": "X-Men vs. Street Fighter",
+   "version": "rc1"
+  },
+  {
+   "artifact": {
+    "parents": [
+     "cybots"
+    ]
+   },
+   "changes": [
+    "Every story scene in all six campaigns and endings, in English that follows the Japanese script.",
+    "Chapter titles before each stage, which the English release never showed.",
+    "Every victory quote in English, including the distinct lines the English release merged into one per grade.",
+    "Devilotte’s servants keep their names, Jigoku Daishi and Dr. Stein.",
+    "Story text paced for reading, with page breaks, roomier line spacing and proper quotes and apostrophes.",
+    "English VA logos and name plates, English service menus and USA attract and copyright screens.",
+    "Japanese arcade gameplay, victory voices and stage signs."
+   ],
+   "date": "2026-11-23",
+   "description": [
+    "Cyberbots’ English release rewrote much of its story and left parts of it out. This restoration plays the Japanese arcade game in English that follows the Japanese script: every campaign and ending, the chapter titles shown before each stage, and the full set of victory quotes.",
+    "Devilotte’s servants keep their Japanese names. Story text is paced and spaced for English, and the VA logos and name plates appear in English. The Japanese release’s gameplay, victory voices and stage signs stay intact.",
+    "It runs on Darksoft CPS-2 hardware, on MiSTer, and in MAME. HBMAME and FBNeo outputs use the same game data.",
+    "This is a release candidate."
+   ],
+   "feedback": true,
+   "game": "Cyberbots: Fullmetal Madness (Japan 950420)",
+   "hardware": "Capcom CPS-2",
+   "hbmame": {
+    "complete": true,
+    "renames": {
+     "cyb.01": "cyb.01",
+     "cyb.02": "cyb.02",
+     "cyb.05": "cyb.05",
+     "cyb.06": "cyb.06",
+     "cyb.07": "cyb.07",
+     "cyb.08": "cyb.08",
+     "cyb.09": "cyb.09",
+     "cyb.10": "cybre.10",
+     "cyb.11m": "cyb.11m",
+     "cyb.12m": "cyb.12m",
+     "cyb.13m": "cybre.13m",
+     "cyb.14m": "cybre.14m",
+     "cyb.15m": "cybre.15m",
+     "cyb.16m": "cybre.16m",
+     "cyb.17m": "cybre.17m",
+     "cyb.18m": "cybre.18m",
+     "cyb.19m": "cybre.19m",
+     "cyb.20m": "cybre.20m",
+     "cybj.03": "cybre.03",
+     "cybj.04": "cybre.04",
+     "cybotsj.key": "cybotsj.key"
+    },
+    "setname": "cybotsru"
+   },
+   "mra": {
+    "category": "Fighting",
+    "catver": "Fighter / Versus",
+    "filename": "Cyberbots Fullmetal Madness (USA) [Restoration].mra",
+    "mraauthor": "jotego,strygo",
+    "name": "Cyberbots: Fullmetal Madness (USA) [Restoration]",
+    "platform": "CPS-2",
+    "region": "USA",
+    "setname": "cybotsru",
+    "zip_dir": "_Arcade/_Arcade Patches/_Restorations"
+   },
+   "notes": [
+    "Supply your own canonical Japan 950420 arcade ROMs (cybotsj, with its cybots parent if your set is split) and QSound firmware. No console disc is needed."
+   ],
+   "patch_kind": "English restoration patch",
+   "patch_noun": "restoration",
+   "release_history": [
+    {
+     "date": "2026-11-23",
+     "items": [
+      "First release candidate: the Japanese arcade game with its complete story, chapter titles and victory quotes in English."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "section": "restorations",
+   "set": "cybotsj",
+   "slug": "cybots-restoration",
+   "status": "release-candidate",
+   "subtitle": "English restoration",
+   "summary": "The Japanese arcade game in English, with its full story, chapter titles and victory quotes.",
+   "title": "Cyberbots: Fullmetal Madness",
    "version": "rc1"
   }
  ],

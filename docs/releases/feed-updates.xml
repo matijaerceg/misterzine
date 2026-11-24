@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Mon, 23 Nov 2026 19:13:51 +0000</lastBuildDate>
+<lastBuildDate>Tue, 24 Nov 2026 07:07:58 +0000</lastBuildDate>
+<item>
+<title>[Updated] MegaSys1_AMD (Arcade core, 12 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#hachoo-megasys1-amd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/MegaSys1_AMD_20261123.rbf:2026-11-24T07:07:58+00:00</guid>
+<pubDate>Tue, 24 Nov 2026 07:07:58 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Hachoo! (MegaSys1_AMD), In Your Face (MegaSys1_AMD), Jitsuryoku!! Pro Yakyuu (MegaSys1_AMD), Kick Off: Jaleco Cup, Ninja Kazan, P-47: The Phantom Fighter, Plus Alpha (MegaSys1_AMD), Rod-Land (MegaSys1_AMD), Saint Dragon (MegaSys1_AMD), Shingen Samurai-Fighter, Soldam (MegaSys1_AMD), The Astyanax.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-MegaSys1A_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TerraCrestaMD (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#kid-no-hore-hore-daisakusen-terracrestamd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/TerraCrestaMD_20261123.rbf:2026-11-24T07:07:58+00:00</guid>
+<pubDate>Tue, 24 Nov 2026 07:07:58 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Kid no Hore Hore Daisakusen (TerraCrestaMD), Soldier Girl Amazon, Terra Cresta (va7deo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TerraCresta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] ITech32 (Arcade core, 18 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bloodstm</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Computer core</category>
 <description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacSE30_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Buggy Boy Junior/Speed Buggy (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#buggyboyjr</link>
-<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Buggy Boy Junior.mra:2026-11-11T23:15:48+00:00</guid>
-<pubDate>Wed, 11 Nov 2026 23:15:48 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/buggyboyjr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1985 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: Arcade-BuggyBoyJunior&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] S32 (Arcade core, 18 games)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#arescue</link>
-<guid isPermaLink="false">distribution_mister:_Arcade/cores/S32_20261111.rbf:2026-11-11T16:57:59+00:00</guid>
-<pubDate>Wed, 11 Nov 2026 16:57:59 +0000</pubDate>
-<category>updated</category>
-<category>Arcade core</category>
-<description>&lt;p&gt;Serves: Air Rescue (S32), Alien3: The Gun (S32), Arabian Fight (S32), Burning Rival (S32), Dark Edge (S32), Dragon Ball Z: V.R. V.S. (S32), F1 Exhaust Note, F1 Super Lap, Golden Axe: The Revenge of Death Adder (S32), Holosseum (S32), Jurassic Park (S32), Rad Mobile (S32), Rad Rally (S32), SegaSonic The Hedgehog (S32), Slip Stream (S32), Spider-Man: The Videogame (S32), Super Visual Football: European Sega Cup (S32), The J.League 1994.&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-11 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-SegaSystem32_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

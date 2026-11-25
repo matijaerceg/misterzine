@@ -6,7 +6,16 @@
 <description>Cores and arcade games newly added to the public MiSTer databases. See feed.xml for updates too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-new.xml"/>
-<lastBuildDate>Tue, 24 Nov 2026 22:06:12 +0000</lastBuildDate>
+<lastBuildDate>Wed, 25 Nov 2026 03:24:38 +0000</lastBuildDate>
+<item>
+<title>[New] Space Gun (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#spacegun</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Space Gun (World).mra:2026-11-25T03:24:38+00:00</guid>
+<pubDate>Wed, 25 Nov 2026 03:24:38 +0000</pubDate>
+<category>new</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/spacegun.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Light gun / 1990 / Taito&lt;/p&gt;&lt;p&gt;Core: Space_Gun&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-25 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[New] NBA Jam Tournament Edition SE (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#nbajamtese</link>
@@ -897,15 +906,6 @@
 <category>new</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/buggyboyjr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Racing / 1985 / Tatsumi&lt;/p&gt;&lt;p&gt;Core: Arcade-BuggyBoyJunior&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-11 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[New] Heat of Eleven '98 (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#heatof11</link>
-<guid isPermaLink="false">decoryah:_Arcade/_Decoryah/_KonamiM2/Heat of Eleven '98 (ver EAA).mra:2026-11-09T22:34:26+00:00</guid>
-<pubDate>Mon, 09 Nov 2026 22:34:26 +0000</pubDate>
-<category>new</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/heat-of-eleven-98.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1998 / Konami&lt;/p&gt;&lt;p&gt;Core: KonamiM2Heat&lt;/p&gt;&lt;p&gt;New in the public MiSTer databases on 2026-11-09 (source: decoryah).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/decoryah/Arcade-KonamiM2_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

@@ -6,7 +6,34 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Tue, 24 Nov 2026 22:06:12 +0000</lastBuildDate>
+<lastBuildDate>Wed, 25 Nov 2026 03:24:38 +0000</lastBuildDate>
+<item>
+<title>[Updated] Rainbow Islands (bazset) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rainbow-islands-bazset</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Rainbow Islands (World, rev 2, set 1).mra:2026-11-25T03:24:38+00:00</guid>
+<pubDate>Wed, 25 Nov 2026 03:24:38 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/rbisland.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1987 / Taito&lt;/p&gt;&lt;p&gt;Core: Rainbow_Islands_B02&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Rainbow Islands - Extra Version (bazset) (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#rainbow-islands-extra-version-bazset</link>
+<guid isPermaLink="false">bazset:_Arcade/_BAZSET/Rainbow Islands - Extra Version.mra:2026-11-25T03:24:38+00:00</guid>
+<pubDate>Wed, 25 Nov 2026 03:24:38 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/rbislande.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Taito&lt;/p&gt;&lt;p&gt;Core: Rainbow_Islands_B02&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: bazset).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/bazset/MiSTer_BAZSET/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] TerraCrestaMD (Arcade core, 3 games)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#kid-no-hore-hore-daisakusen-terracrestamd</link>
+<guid isPermaLink="false">distribution_mister:_Arcade/cores/TerraCrestaMD_20261124.rbf:2026-11-25T03:00:05+00:00</guid>
+<pubDate>Wed, 25 Nov 2026 03:00:05 +0000</pubDate>
+<category>updated</category>
+<category>Arcade core</category>
+<description>&lt;p&gt;Serves: Kid no Hore Hore Daisakusen (TerraCrestaMD), Soldier Girl Amazon, Terra Cresta (va7deo).&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Arcade-TerraCresta_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Best Bout Boxing (Ongo) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#bbbxing</link>
@@ -879,33 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/esckids.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtsimson&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/simson"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Excite League (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#exctleag</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Excite League (FD1094 317-0079).mra:2026-11-24T14:10:14+00:00</guid>
-<pubDate>Tue, 24 Nov 2026 14:10:14 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/exctleag.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1988 / Sega&lt;/p&gt;&lt;p&gt;Core: jts16b&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/s16b"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Exed Exes (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#exedexes</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Exed Exes.mra:2026-11-24T14:10:14+00:00</guid>
-<pubDate>Tue, 24 Nov 2026 14:10:14 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/exedexes.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1985 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtexed&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/exed"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Extermination (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#extrmatn</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Extermination (World).mra:2026-11-24T14:10:14+00:00</guid>
-<pubDate>Tue, 24 Nov 2026 14:10:14 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/extrmatn.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Run 'n gun / 1987 / Taito Corporation Japan&lt;/p&gt;&lt;p&gt;Core: jtkiwi&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/kiwi"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

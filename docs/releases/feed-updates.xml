@@ -6,7 +6,25 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 25 Nov 2026 03:24:38 +0000</lastBuildDate>
+<lastBuildDate>Wed, 25 Nov 2026 12:19:10 +0000</lastBuildDate>
+<item>
+<title>[Updated] Macintosh IIci (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#MacIIci</link>
+<guid isPermaLink="false">distribution_mister:_Computer/MacIIci_20261125.rbf:2026-11-25T12:19:10+00:00</guid>
+<pubDate>Wed, 25 Nov 2026 12:19:10 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1989 / Apple&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/MacIIci_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] PC-8001 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PC8001</link>
+<guid isPermaLink="false">distribution_mister:_Computer/PC8001_20261118.rbf:2026-11-25T12:19:10+00:00</guid>
+<pubDate>Wed, 25 Nov 2026 12:19:10 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1979 / NEC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PC-8001_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Rainbow Islands (bazset) (Arcade)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#rainbow-islands-bazset</link>
@@ -888,24 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/dynwar.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtcps1&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cps1"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Eco Fighters (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#ecofghtr</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Eco Fighters (World 931203).mra:2026-11-24T14:10:14+00:00</guid>
-<pubDate>Tue, 24 Nov 2026 14:10:14 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/ecofghtr.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Shoot 'em up / 1993 / Capcom&lt;/p&gt;&lt;p&gt;Core: jtcps2&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/cps2"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Escape Kids (Jotego) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#escape-kids-asia-4-players</link>
-<guid isPermaLink="false">jtbindb:_Arcade/Escape Kids (Asia, 4 Players).mra:2026-11-24T14:10:14+00:00</guid>
-<pubDate>Tue, 24 Nov 2026 14:10:14 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/esckids.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1991 / Konami&lt;/p&gt;&lt;p&gt;Core: jtsimson&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-24 (source: jtbindb).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/jotego/jtcores/commits/master/cores/simson"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

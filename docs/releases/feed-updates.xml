@@ -6,7 +6,16 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Wed, 25 Nov 2026 21:53:17 +0000</lastBuildDate>
+<lastBuildDate>Thu, 26 Nov 2026 13:40:29 +0000</lastBuildDate>
+<item>
+<title>[Updated] PC-8001 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#PC8001</link>
+<guid isPermaLink="false">distribution_mister:_Computer/PC8001_20261125.rbf:2026-11-26T13:40:29+00:00</guid>
+<pubDate>Thu, 26 Nov 2026 13:40:29 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1979 / NEC&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/PC-8001_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Alpha68kMD (Arcade core, 5 games)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#gang-wars-alpha68kmd</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tmnt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Teenage Mutant Ninja Turtles II - The Arcade Game (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_tmnt2</link>
-<guid isPermaLink="false">ongo:_Arcade/Teenage Mutant Ninja Turtles II - The Arcade Game (PlayChoice-10).mra:2026-11-25T21:45:07+00:00</guid>
-<pubDate>Wed, 25 Nov 2026 21:45:07 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tmnt2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1990 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

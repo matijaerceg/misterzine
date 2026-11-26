@@ -222,6 +222,49 @@
    "version": "rc1"
   },
   {
+   "changes": [
+    "Open Versus, Training and Options from the Console mode title screen. Play Versus against a friend or the computer with handicap and stage selection.",
+    "Select all 13 fighters directly, including Doctor Doom, Thanos and Anita.",
+    "Choose from four colors for every fighter, including two extra colors.",
+    "Play the full English Restoration in the USA edition, including retranslated victory quotes, continue prompts, Automode tips and endings. The Japan edition retains the original Japanese text.",
+    "Practice without a time limit and adjust the dummy's behavior, guard, gauges, speed and Gems.",
+    "Choose Thanos's ending after clearing Arcade as Thanos."
+   ],
+   "collection_api": 1,
+   "date": "2026-11-25",
+   "description": [
+    "Marvel Super Heroes EX adds a free-play Console mode alongside the original Arcade mode. Choose from 13 fighters in both editions. The USA edition includes the full English Restoration."
+   ],
+   "game": "Marvel Super Heroes",
+   "hardware": "CPS-2",
+   "notes": [
+    "The RC1 kit supports MAME, HBMAME, FBNeo and MiSTer for both Japan and USA.",
+    "On MiSTer, find the USA edition under Arcade Patches / Enhanced Versions and the Japan edition in its Japan subfolder."
+   ],
+   "release_history": [
+    {
+     "date": "2026-11-25",
+     "items": [
+      "Play Versus, Training and Options in Console mode. Versus supports two players or a computer opponent, with handicap and stage selection.",
+      "Pick any of the 13 fighters from Player Select, including Doctor Doom, Thanos and Anita.",
+      "Choose two extra colors for every fighter, for four colors each.",
+      "Play the full English Restoration in the USA edition or the original Japanese text in the Japan edition.",
+      "Customize dummy behavior, guard, gauges, speed and Gems in untimed Training.",
+      "Choose Thanos's ending after clearing Arcade as Thanos."
+     ],
+     "version": "rc1"
+    }
+   ],
+   "section": "enhanced",
+   "set": "mshj",
+   "slug": "msh-ex",
+   "status": "release-candidate",
+   "subtitle": "Enhanced version",
+   "summary": "Choose from 13 fighters and play Arcade, Versus or Training in Japan and USA editions.",
+   "title": "Marvel Super Heroes EX",
+   "version": "rc1"
+  },
+  {
    "artifact": {
     "parents": [
      "xmvsf"

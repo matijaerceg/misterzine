@@ -6,7 +6,16 @@
 <description>New cores/games and shipped updates in the public MiSTer databases, from the daily tracker crawl. Filtered variants: feed-new.xml (new only), feed-updates.xml (updates only).</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed.xml"/>
-<lastBuildDate>Thu, 26 Nov 2026 22:37:00 +0000</lastBuildDate>
+<lastBuildDate>Fri, 27 Nov 2026 04:33:29 +0000</lastBuildDate>
+<item>
+<title>[Updated] Cray X-MP (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Cray-XMP</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Cray-XMP_20261126.rbf:2026-11-27T04:33:29+00:00</guid>
+<pubDate>Fri, 27 Nov 2026 04:33:29 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1982 / Cray Research&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-27 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Cray-XMP_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] Coleco Adam (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#ColecoAdam</link>
@@ -897,15 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwbld.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1991 / Taito (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Pro Wrestling (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_pwrst</link>
-<guid isPermaLink="false">ongo:_Arcade/Pro Wrestling (PlayChoice-10).mra:2026-11-25T21:45:07+00:00</guid>
-<pubDate>Wed, 25 Nov 2026 21:45:07 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_pwrst.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1986 / Nintendo&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>

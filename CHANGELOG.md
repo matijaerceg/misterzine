@@ -2,6 +2,10 @@
 
 User-visible changes to the [MisterZine site](https://misterzine.fyi/releases/).
 
+## 2026-11-27
+
+- The Sega SC-3000 listing now shows its maker, original release year (1983), a hardware photo, and how to start BASIC or a game.
+
 ## 2026-11-24
 
 - The new Macintosh IIci and Laser 500 cores are listed under their full names, each with its year, maker and a hardware photo. The Laser 500 also has a note about the models it runs and the ROM it needs.

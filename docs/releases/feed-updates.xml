@@ -6,7 +6,43 @@
 <description>Shipped updates to existing cores and arcade games in the public MiSTer databases. See feed.xml for new releases too.</description>
 <language>en</language>
 <atom:link rel="self" type="application/rss+xml" href="https://misterzine.fyi/releases/feed-updates.xml"/>
-<lastBuildDate>Thu, 26 Nov 2026 13:40:29 +0000</lastBuildDate>
+<lastBuildDate>Thu, 26 Nov 2026 22:37:00 +0000</lastBuildDate>
+<item>
+<title>[Updated] Coleco Adam (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#ColecoAdam</link>
+<guid isPermaLink="false">distribution_mister:_Computer/ColecoAdam_20261125.rbf:2026-11-26T22:37:00+00:00</guid>
+<pubDate>Thu, 26 Nov 2026 22:37:00 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Coleco&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/ColecoAdam_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] FM-7 (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#FM-7</link>
+<guid isPermaLink="false">distribution_mister:_Computer/FM-7_20261126.rbf:2026-11-26T22:37:00+00:00</guid>
+<pubDate>Thu, 26 Nov 2026 22:37:00 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1982 / Fujitsu&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/FM-7_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Camputers Lynx (Computer core)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#Lynx48</link>
+<guid isPermaLink="false">distribution_mister:_Computer/Lynx48_20261126.rbf:2026-11-26T22:37:00+00:00</guid>
+<pubDate>Thu, 26 Nov 2026 22:37:00 +0000</pubDate>
+<category>updated</category>
+<category>Computer core</category>
+<description>&lt;p&gt;1983 / Camputers&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-26 (source: distribution_mister).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/MiSTer-devel/Lynx48_MiSTer/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
+<item>
+<title>[Updated] Fix-It Felix Jr. (Arcade)</title>
+<link>https://misterzine.fyi/releases/?ref=rss#felixjr</link>
+<guid isPermaLink="false">ongo:_Arcade/cores/fifelix_20261116.rbf:2026-11-26T21:15:27+00:00</guid>
+<pubDate>Thu, 26 Nov 2026 21:15:27 +0000</pubDate>
+<category>updated</category>
+<category>Arcade</category>
+<description>&lt;p&gt;1982 / Tobikomi&lt;/p&gt;&lt;p&gt;Core: fifelix&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-26 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
+</item>
 <item>
 <title>[Updated] PC-8001 (Computer core)</title>
 <link>https://misterzine.fyi/releases/?ref=rss#PC8001</link>
@@ -870,42 +906,6 @@
 <category>updated</category>
 <category>Arcade</category>
 <description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb2.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Super Mario Bros. 3 (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_smb3</link>
-<guid isPermaLink="false">ongo:_Arcade/Super Mario Bros. 3 (PlayChoice-10).mra:2026-11-25T21:45:07+00:00</guid>
-<pubDate>Wed, 25 Nov 2026 21:45:07 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_smb3.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Platformer / 1988 / Nintendo&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Team Hat Trick (Ongo) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#teamht</link>
-<guid isPermaLink="false">ongo:_Arcade/Team Hat Trick (11-16-84).mra:2026-11-25T21:45:07+00:00</guid>
-<pubDate>Wed, 25 Nov 2026 21:45:07 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/teamht.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1985 / Bally/Sente&lt;/p&gt;&lt;p&gt;Core: ppriest_BallySente&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Tecmo Bowl (PlayChoice-10) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_tbowl</link>
-<guid isPermaLink="false">ongo:_Arcade/Tecmo Bowl (PlayChoice-10).mra:2026-11-25T21:45:07+00:00</guid>
-<pubDate>Wed, 25 Nov 2026 21:45:07 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tbowl.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Sports / 1989 / Tecmo (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
-</item>
-<item>
-<title>[Updated] Teenage Mutant Ninja Turtles (PlayChoice-10) (Arcade)</title>
-<link>https://misterzine.fyi/releases/?ref=rss#pc_tmnt</link>
-<guid isPermaLink="false">ongo:_Arcade/Teenage Mutant Ninja Turtles (PlayChoice-10).mra:2026-11-25T21:45:07+00:00</guid>
-<pubDate>Wed, 25 Nov 2026 21:45:07 +0000</pubDate>
-<category>updated</category>
-<category>Arcade</category>
-<description>&lt;p&gt;&lt;img src="https://misterzine.fyi/images/title/pc_tmnt.png" alt=""/&gt;&lt;/p&gt;&lt;p&gt;Beat 'em up / 1989 / Konami (Nintendo of America license)&lt;/p&gt;&lt;p&gt;Core: ppriest_PlayChoice10&lt;/p&gt;&lt;p&gt;Updated in the public MiSTer databases on 2026-11-25 (source: ongo).&lt;/p&gt;&lt;p&gt;&lt;a href="https://github.com/OngoGablogian/MiSTer_Ongo/commits"&gt;Commit history&lt;/a&gt;&lt;/p&gt;</description>
 </item>
 </channel>
 </rss>
